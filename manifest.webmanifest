@@ -1,0 +1,11 @@
+{
+  "name": "SNAPMON: Monsters Among Us",
+  "short_name": "SNAPMON",
+  "description": "Photograph real objects to reveal the monsters hiding inside them.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#110d1b",
+  "theme_color": "#110d1b",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
