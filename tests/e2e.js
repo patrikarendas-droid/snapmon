@@ -14,16 +14,22 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await p.goto(url); await p.waitForTimeout(600);
   await shot(p, '01-hunt');
   const S = () => p.evaluate(() => JSON.parse(JSON.stringify(window.__snapmon.S)));
+  // Gameplay test: the lens result is stubbed (tests/e2e-lens.js covers real recognition).
+  const fakeLens = (label, cat, sub = null, decision = 'auto') => p.evaluate(([label, cat, sub, decision]) => {
+    Lens.status.state = 'ready'; Lens.load = async () => true;
+    Lens.recognize = async img => { const c = document.createElement('canvas'); c.width = 320; c.height = 240; c.getContext('2d').drawImage(img, 0, 0, 320, 240);
+      return { decision, reason: decision === 'auto' ? 'confident' : 'low', candidates: decision === 'unknown' ? [] : [{ label, cat, sub, conf: 0.91, box: null, src: 'photo' }], image: c,
+        debug: { decision, reason: 'stub', thresholds: { min: .25, auto: .55, detMin: .45 }, times: { total: 1 }, sources: {}, backend: 'stub', full: [], detections: [], crops: [], candidates: [] } }; };
+  }, [label, cat, sub, decision]);
   ok((await S()).items.potion === 3 && (await S()).items.trap === 5, 'starts with 3 potions and 5 traps');
   ok(await p.evaluate(() => document.body.scrollWidth <= window.innerWidth), 'no horizontal scroll on hunt');
 
   // 1) first photo -> identify -> guaranteed first encounter
+  ok(!(await p.$('#objSearch')) && !(await p.$('#catGrid')), 'no manual object entry');
+  await fakeLens('coffee mug', 'mug', 'mug');
   await p.setInputFiles('#camInput', `${imgDir}/red_mug.jpg`);
-  await p.waitForSelector('#catGrid'); await p.waitForTimeout(300);
-  await p.fill('#objSearch', 'coffee mug'); await p.waitForTimeout(150);
-  await shot(p, '02-identify');
-  await p.click('#typedHint button');
-  await p.waitForTimeout(500); await shot(p, '03-scanning');
+  await p.waitForSelector('text=Object identified'); await shot(p, '02-identified');
+  await p.waitForSelector('text=Scanning for supernatural activity', { timeout: 4000 }); await p.waitForTimeout(300); await shot(p, '03-scanning');
   await p.waitForSelector('[data-act="fight"]', { timeout: 6000 }); await p.waitForTimeout(1500);
   await shot(p, '04-discovery');
   let st = await S();
@@ -57,18 +63,26 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
 
   // 2) no-encounter path: force RNG high
   await p.evaluate(() => window.__snapmon.setRNG(() => 0.999));
+  await fakeLens('running shoe', 'shoe', 'sneaker');
   await p.setInputFiles('#camInput', `${imgDir}/blue_thing.jpg`);
-  await p.waitForSelector('#catGrid'); await p.click('[data-act="pickCat"][data-arg="shoe"]');
   await p.waitForSelector('text=Snap another object', { timeout: 6000 }); await p.waitForTimeout(200);
   await shot(p, '09-no-encounter');
   ok((await S()).enc.miss === 1, 'no-encounter increments hidden pity counter');
   await p.click('button[data-act="closeOverlay"]');
 
+  // 2b) unrecognised photo: no scan, no monster
+  const ph = (await S()).stats.photos;
+  await fakeLens('', '', null, 'unknown');
+  await p.setInputFiles('#camInput', `${imgDir}/blue_thing.jpg`);
+  await p.waitForSelector('text=No supernatural signature detected.'); await shot(p, '09b-unknown');
+  ok((await S()).stats.photos === ph && (await S()).stats.unrecognized === 1, 'unknown object is not hunted');
+  await p.click('button[data-act="cancelPhoto"]');
+
   // 3) capture path: force low RNG (encounter + successful capture), weaken first
   await p.evaluate(() => window.__snapmon.setRNG(() => 0.01));
   const traps0 = (await S()).items.trap;
+  await fakeLens('daisy', 'plant', 'flower');
   await p.setInputFiles('#galInput', `${imgDir}/green_plant.jpg`);
-  await p.waitForSelector('#catGrid'); await p.click('[data-act="pickCat"][data-arg="plant"]');
   await p.waitForSelector('[data-act="fight"]', { timeout: 6000 }); await p.waitForTimeout(1300);
   await shot(p, '10-discovery-2');
   await p.click('[data-act="fight"]'); await p.waitForSelector('#actions');
@@ -78,6 +92,7 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await shot(p, '12-captured');
   st = await S();
   ok(st.monsters.length === 1 && st.items.trap === traps0 - 1, 'monster captured and trap consumed');
+  ok(st.monsters[0].label === 'daisy' && st.monsters[0].dna.sub === 'flower', 'captured monster keeps the recognised object and its flower shape');
   await p.evaluate(() => window.__snapmon.setRNG(Math.random));
   await p.click('[data-act="viewNew"]'); await p.waitForTimeout(400); await shot(p, '13-monster-detail');
   await p.fill('#nickInput', 'Sir Leafington'); await p.click('[data-act="rename"]'); await p.waitForTimeout(200);

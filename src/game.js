@@ -9,16 +9,16 @@ let RNG = Math.random; // swappable for tests
 
 function freshState() {
   return {
-    v: 1, created: Date.now(), level: 1, xp: 0, hp: 60, coins: 40, rp: 0,
+    v: 2, created: Date.now(), level: 1, xp: 0, hp: 60, coins: 40, rp: 0,
     mats: { scrap: 4, goo: 4, ecto: 0, prism: 0 },
     items: { potion: 3, greater: 0, strength: 0, defense: 0, antidote: 1, enhancer: 0, trap: 5, smoke: 1 },
     weapons: { sword: 0 }, equipped: 'sword', charms: {}, charmSlots: [null, null],
     research: {}, monsters: [], dex: {}, companion: null,
     questsClaimed: {}, achievements: {},
     stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {},
-             cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0 },
+             cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0, unrecognized: 0, labelsSeen: {} },
     enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [] },
-    settings: { muted: false, keepPhotos: false, aiLens: false },
+    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false },
     lastTick: Date.now(), nextId: 1, log: [],
   };
 }
@@ -31,6 +31,9 @@ function migrate(s) {
   if (!out.weapons || !Object.keys(out.weapons).length) out.weapons = { sword: 0 };
   if (!WEAPONS[out.equipped] || out.weapons[out.equipped] == null) out.equipped = Object.keys(out.weapons)[0];
   out.monsters = (out.monsters || []).filter(m => m && m.cat && CATEGORY[m.cat] && m.dna);
+  // v1 -> v2 (AI recognition update): manual-entry setting retired, new counters added. Monsters, dex and progress are kept as-is.
+  if ((s.v || 1) < 2) { delete out.settings.aiLens; out.v = 2; }
+  if (!out.stats.labelsSeen) out.stats.labelsSeen = {};
   return out;
 }
 let storageOK = true;
@@ -171,8 +174,12 @@ function pickWeighted(weights, rng) {
   for (const [k, v] of Object.entries(weights)) { if ((x -= v) < 0) return k; }
   return Object.keys(weights)[0];
 }
-/* Main photo resolution. Mutates S. Returns { encounter, monster?, line, ... } */
-function resolvePhoto(S, cat, photo, word, rng = RNG) {
+/* Main photo resolution for a RECOGNISED object. Mutates S. Returns { encounter, monster?, line, ... }
+   obj: the recognised object { label, sub, aspect, conf } (a plain string is accepted as the label). */
+function resolvePhoto(S, cat, photo, obj, rng = RNG) {
+  if (typeof obj === 'string' || obj == null) obj = { label: obj || '' };
+  const word = obj.label;
+  if (word) S.stats.labelsSeen[word] = (S.stats.labelsSeen[word] || 0) + 1;
   const first = S.stats.photos === 0 && S.stats.encounters === 0;
   const ch = encounterChance(S, cat, photo);
   S.stats.photos++;
@@ -195,7 +202,7 @@ function resolvePhoto(S, cat, photo, word, rng = RNG) {
     else if (has(S, 'mutagen') && rng() < 0.09) variant = 'mutated';
     if (has(S, 'chroma') && rng() < 1 / 12) variant = 'shiny';
   }
-  const m = createMonster(S, { cat, rarity, variant, word, photo, first, rng });
+  const m = createMonster(S, { cat, rarity, variant, word, photo, first, rng, sub: obj.sub, aspect: obj.aspect, conf: obj.conf });
   return { encounter: true, monster: m, first, chance: ch };
 }
 
@@ -247,20 +254,21 @@ function monsterStats(rarity, fam, L, seed, variant) {
   if (variant === 'mutated') st.atk = Math.round(st.atk * 1.1);
   return st;
 }
-function createMonster(S, { cat, rarity, variant, word, photo, first, rng = RNG }) {
+function createMonster(S, { cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
   const fam = monsterFamily(cat, word, variant);
   const r = RARITY[rarity];
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
   const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit } : null;
-  const base = { cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph };
+  const base = { cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
   const m = {
     ...base, id: null, fam, level,
     name: speciesName(cat, rarity, base.word, fam),
     stats: monsterStats(rarity, fam, level, seed, variant),
     abilities: monsterAbilities(cat, rarity, fam, base.word),
     dna: makeDNA(base), species: speciesKey(cat, rarity), seenAt: Date.now(),
+    label: word ? String(word).slice(0, 40) : null, conf: conf != null ? +(+conf).toFixed(2) : null,
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
   return m;

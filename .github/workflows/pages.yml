@@ -22,11 +22,16 @@ jobs:
         with:
           node-version: 20
       - run: node tests/sim.js > /dev/null
+      - run: node tests/labels.js
+      - run: node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json
       - run: node tools/build.js
       - name: Assemble site
         run: |
           mkdir -p _site
           cp -r index.html manifest.webmanifest icon.svg src dist _site/
+      - name: Mirror AI models onto the site (best effort)
+        continue-on-error: true
+        run: node tools/fetch-models.js _site/models
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
       - id: deployment

@@ -85,7 +85,7 @@ function huntScreen() {
     ${ghost && !live ? `<img class="vf-ghost px" alt="" src="${spriteURL(ghost, 3)}">` : ''}
     <i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
     ${live ? '' : `<div class="vf-center"><div><h1>Monsters hide <em>in plain sight</em></h1>
-      <p>${S.stats.photos === 0 ? 'Photograph any real object near you — a mug, a shoe, a plant — and see what lives inside it.' : 'Snap a new object. Different things attract different creatures.'}</p></div></div>`}
+      <p>${S.stats.photos === 0 ? 'Photograph a real object near you — a mug, a shoe, a plant — and the Spirit Lens will reveal what lives inside it.' : 'Explore. Unusual objects hide unusual monsters.'}</p></div></div>`}
     <div class="vf-hud"><span class="rec">SPIRIT CAM</span><span>${S.stats.photos} SNAPS · ${Object.keys(S.dex).length} SPECIES</span></div>
   </section>
   <div class="shutter-row">
@@ -95,6 +95,7 @@ function huntScreen() {
     ${live ? `<button class="side-btn" data-act="liveClose"><span class="ic">✕</span>Close</button>`
            : Photo.live.supported() ? `<button class="side-btn" data-act="liveOpen"><span class="ic">${ICON.live}</span>Live view</button>` : '<span></span>'}
   </div>
+  ${lensChipHTML()}
   ${low ? `<div class="card warn row"><div class="grow"><b>You're badly hurt.</b><div class="small muted">Monsters hit hard. Heal up before your next hunt — you also recover slowly over time.</div></div>
     ${S.items.potion ? `<button class="btn small" data-act="quickHeal">Drink potion (${S.items.potion})</button>` : `<button class="btn small" data-act="tab" data-arg="gear">Shop</button>`}</div>` : ''}
   <section class="card">
@@ -103,7 +104,7 @@ function huntScreen() {
   </section>
   ${ui.lastSightings.length ? `<section class="stack"><div class="section-title"><h2>Recent sightings</h2></div>
     <div class="sightings">${ui.lastSightings.map(s => `<div class="sighting"><img class="px" alt="" src="${spriteURL(s.dna, 3)}">${esc(s.name.split(',')[0])}<br><span style="color:${RARITY[s.rarity].color}">${s.outcome}</span></div>`).join('')}</div></section>` : ''}
-  <p class="notice">Your photos stay on this phone. SNAPMON reads only colours and a similarity fingerprint from each picture, then throws the image away.</p>`;
+  <p class="notice">Your photos stay on this phone. The Spirit Lens recognises objects on-device, then the image is thrown away.</p>`;
 }
 function questHTML(q) {
   const p = questProgress(S, q), done = p >= q.target;
@@ -137,75 +138,167 @@ function liveSnap() {
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
+function lensStatusLine() {
+  const L = Lens.status;
+  if (L.state === 'ready') return `Ready (${esc(L.backend)}${L.error ? '; ' + esc(L.error) : ''}).`;
+  if (L.state === 'loading') return esc(L.progress || 'Loading…');
+  if (L.state === 'failed') return `Could not load: ${esc(L.error)}.`;
+  return S.settings.lensCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet (about 30 MB, once). It downloads while your camera is open.';
+}
+function lensChipHTML() {
+  const L = Lens.status;
+  const dot = L.state === 'ready' ? 'var(--good)' : L.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
+  const txt = L.state === 'ready' ? 'Spirit Lens ready' : L.state === 'loading' ? 'Spirit Lens warming up…' : L.state === 'failed' ? 'Spirit Lens offline' : S.settings.lensCached ? 'Spirit Lens asleep' : 'Spirit Lens not downloaded';
+  const btn = L.state === 'failed' ? '<button class="btn small" data-act="lensPrepare">Retry</button>' : L.state === 'idle' && !S.settings.lensCached ? '<button class="btn small" data-act="lensPrepare">Download now (~30 MB)</button>' : '';
+  return `<div class="lens-chip" id="lensChip"><i style="background:${dot}" class="${L.state === 'loading' ? 'pulse' : ''}"></i><span class="grow">${txt}</span>${btn}</div>`;
+}
+Lens.onChange(() => {
+  const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
+  const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
+  if ($('#sheet').innerHTML.includes('Spirit Lens')) settingsSheet();
+});
+
+/* ---------- recognition flow: photo → Spirit Lens → (pick among detections) → encounter scan ----------
+   There is no manual entry: only objects the lens actually recognised can be hunted. */
 function beginIdentify(img, url) {
-  const photo = Photo.analyze(img);
-  const thumb = S.settings.keepPhotos ? Photo.thumbnail(img) : null;
-  ui.pending = { img, url, photo, thumb, cat: null, word: '', ai: null };
-  showIdentify();
-  if (S.settings.aiLens) runAI();
+  const hash = Photo.analyze(img).hash; // whole-photo similarity fingerprint (repeat-photo detection)
+  ui.pending = { img, url, hash, thumb: S.settings.keepPhotos ? Photo.thumbnail(img) : null, rec: null, t0: Date.now() };
+  recognizeFlow();
 }
-async function runAI() {
+function lensFrame(p, extra = '') {
+  return `<div class="photo-frame" id="lensFrame"><img alt="Your photo" src="${p.url}">${extra}<i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i></div>`;
+}
+function lensStatusText() {
+  const L = Lens.status;
+  if (L.state === 'loading') return `${esc(L.progress || 'Starting the Spirit Lens…')}${S.settings.lensCached ? '' : ' First time only: about 30 MB of AI models download and are then kept on this phone.'}`;
+  if (L.state === 'ready') return 'Looking for objects… (runs on this phone)';
+  return '';
+}
+async function recognizeFlow() {
   const p = ui.pending; if (!p) return;
-  p.ai = { state: 'loading' }; refreshAI();
-  const model = await Photo.ai.load();
+  $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
+    <div class="sheet-head"><h2>Spirit Lens</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    ${lensFrame(p, '<i class="vf-sweep"></i><div class="scan-hud"><div class="lens-tag"><i class="spin"></i> ANALYSING <span id="lensClock">0.0s</span></div></div>')}
+    <p class="muted" style="text-align:center" id="lensStatus">${lensStatusText()}</p></div></div>`;
+  const clock = setInterval(() => { const el = $('#lensClock'); if (!el || ui.pending !== p) return clearInterval(clock); el.textContent = ((Date.now() - p.t0) / 1000).toFixed(1) + 's'; }, 100);
+  if (Lens.status.state !== 'ready') {
+    const ok = await Lens.load();
+    if (ui.pending !== p) return clearInterval(clock);
+    if (!ok) { clearInterval(clock); return showLensFailed(p); }
+    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText();
+  }
+  let rec;
+  try { rec = await Lens.recognize(p.img); }
+  catch (e) { clearInterval(clock); return showLensFailed(p, e.message); }
+  clearInterval(clock);
   if (ui.pending !== p) return;
-  if (!model) { p.ai = { state: 'failed', error: Photo.ai.error }; refreshAI(); return; }
-  try { p.ai = { state: 'ready', preds: await Photo.ai.classify(p.img) }; } catch (e) { p.ai = { state: 'failed', error: String(e.message || e) }; }
-  refreshAI();
+  p.rec = rec;
+  if (!S.settings.lensCached) { S.settings.lensCached = true; persist(); }
+  if (rec.decision === 'unknown') return showUnknown(p);
+  if (rec.decision === 'auto') return showIdentified(p, 0);
+  showChoices(p);
 }
-function aiHTML() {
-  const p = ui.pending; if (!p || !S.settings.aiLens || !p.ai) return '';
-  if (p.ai.state === 'loading') return `<div class="ai-box">AI Lens is analysing your photo on this device… (the first run downloads the model)</div>`;
-  if (p.ai.state === 'failed') return `<div class="ai-box">AI Lens could not load here, so it can't suggest anything (${esc(p.ai.error)}). Pick the object yourself below — that always works.</div>`;
-  const preds = p.ai.preds.filter(x => x.prob > 0.04).slice(0, 3);
-  if (!preds.length) return `<div class="ai-box">AI Lens isn't sure what this is. Pick the object yourself below.</div>`;
-  return `<div class="ai-box">AI Lens guesses (on-device, can be wrong — confirm it):<br>${preds.map(x =>
-    `<button class="btn small" data-act="aiPick" data-arg="${x.cat || 'other'}" data-word="${esc(x.label)}">${esc(x.label)} · ${Math.round(x.prob * 100)}%${x.cat ? ' → ' + esc(CATEGORY[x.cat].name) : ''}</button>`).join('')}</div>`;
+function showLensFailed(p, msg) {
+  const L = Lens.status, err = msg || L.error;
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    <h2 style="font-size:26px">The Spirit Lens couldn't start</h2>
+    <p>Recognition runs on your phone, but the AI models have to be downloaded once (about 30 MB). Connect to the internet and try again.</p>
+    <p class="small muted">If you're playing inside a Claude Artifact page, that page blocks the model download. Play on the GitHub Pages version instead.</p>
+    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(err)}</p>` : ''}
+    <button class="btn primary block" data-act="lensRetry">Try again</button>
+    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
 }
-function refreshAI() { const el = $('#aiSlot'); if (el) el.innerHTML = aiHTML(); }
-function showIdentify() {
-  const p = ui.pending;
-  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner">
-    <div class="sheet-head"><h2>What did you photograph?</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
-    <div class="photo-frame"><img alt="Your photo" src="${p.url}"><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i></div>
-    <div class="row small muted"><span style="display:inline-block;width:14px;height:14px;border-radius:4px;background:${p.photo.swatch};border:1px solid var(--line)"></span>
-      Ecto-signature read from the photo's colours. ${S.settings.aiLens ? '' : 'Tell the camera what the object is:'}</div>
-    <div id="aiSlot">${aiHTML()}</div>
-    <input class="search" id="objSearch" type="text" inputmode="text" autocomplete="off" placeholder="Type it: “kettle”, “sock”, “umbrella”…" value="${esc(p.word)}">
-    <div id="typedHint"></div>
-    <div class="cat-grid" id="catGrid">${CATEGORIES.filter(c => c.id !== 'other').map(c => `<button class="cat-btn" data-act="pickCat" data-arg="${c.id}"><span class="e">${c.icon}</span>${esc(c.name)}</button>`).join('')}</div>
+function showUnknown(p) {
+  const reason = p.rec.reason;
+  S.stats.unrecognized = (S.stats.unrecognized || 0) + 1; persist();
+  SFX.nothing();
+  const msg = reason === 'person' ? ['Just a human', 'Humans are (mostly) not monsters. Point the lens at an object.']
+    : reason === 'scene' ? ['Too much going on', 'That looks like a place, not an object. Get closer to one thing.']
+    : ['Unknown object', 'No supernatural signature detected.'];
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    ${lensFrame(p)}
+    <h2 style="font-size:28px;color:var(--muted)">${msg[0]}</h2>
+    <p style="font-size:17px">${msg[1]}</p>
+    <p class="small muted">Tips: fill the frame with a single object, use good light, and hold steady. Everyday things work best: food, furniture, gadgets, pets, plants.</p>
+    ${debugHTML(p.rec)}
+    <label class="btn primary block" for="camInput" data-act="closeOverlay">Take another photo</label>
+    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
+}
+function candLine(c) {
+  const name = c.cat === 'other' ? 'Oddity' : CATEGORY[c.cat].name;
+  return `<b>${esc(c.label)}</b> <span class="muted">· ${esc(name)} · ${Math.round(c.conf * 100)}%</span>`;
+}
+function showIdentified(p, i) {
+  const c = p.rec.candidates[i];
+  SFX.click();
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+    <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <div class="photo-frame" id="lensFrame"></div>
+    <div class="card ident"><span class="e">${CATEGORY[c.cat].icon}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
+    ${debugHTML(p.rec)}
+    ${S.settings.debugLens ? `<button class="btn primary block" data-act="pickCand" data-arg="${i}">Scan for monsters</button>` : '<p class="muted small" style="text-align:center">Scanning for supernatural activity…</p>'}
   </div></div>`;
-  const inp = $('#objSearch');
-  inp.addEventListener('input', () => {
-    p.word = inp.value.trim();
-    const m = matchCategory(p.word), q = p.word.toLowerCase();
-    document.querySelectorAll('#catGrid .cat-btn').forEach(b => {
-      const c = CATEGORY[b.dataset.arg];
-      b.classList.toggle('hint', !!m && b.dataset.arg === m);
-      b.hidden = q.length > 1 && !m && !c.name.toLowerCase().includes(q);
-    });
-    $('#typedHint').innerHTML = p.word.length > 1 ? (m
-      ? `<button class="btn block ecto" data-act="pickCat" data-arg="${m}">Scan “${esc(p.word)}” as ${esc(CATEGORY[m].name)}</button>`
-      : `<button class="btn block ecto" data-act="pickCat" data-arg="other">Scan “${esc(p.word)}” as something new</button>`) : '';
+  drawDetections(p, i);
+  if (!S.settings.debugLens) setTimeout(() => { if (ui.pending === p && !p.scanning) scan(i); }, 1100);
+}
+function showChoices(p) {
+  const rec = p.rec, multi = rec.reason === 'multiple';
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="gap:12px">
+    <div class="sheet-head"><h2>${multi ? 'Several objects detected' : 'The lens has a few ideas'}</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <p class="muted small" style="margin:0">${multi ? 'Which one are you hunting?' : 'It is not completely sure. Which of these did you photograph?'} Every option comes from the lens's own analysis of your photo.</p>
+    <div class="photo-frame" id="lensFrame"></div>
+    <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${CATEGORY[c.cat].icon}</span></button>`).join('')}</div>
+    <label class="btn ghost block" for="camInput" data-act="closeOverlay">None of these: take another photo</label>
+    ${debugHTML(rec)}
+  </div></div>`;
+  drawDetections(p);
+}
+function drawDetections(p, only) {
+  const frame = $('#lensFrame'); if (!frame) return;
+  const img = p.rec.image, c = document.createElement('canvas');
+  c.width = img.width; c.height = img.height; c.className = 'det-canvas';
+  const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+  const lw = Math.max(2, img.width / 160);
+  p.rec.candidates.forEach((cd, i) => {
+    if (!cd.box || (only != null && i !== only)) return;
+    const [x, y, w, h] = cd.box.map((v, k) => v * (k % 2 ? img.height : img.width));
+    ctx.strokeStyle = '#7cf5d3'; ctx.lineWidth = lw; ctx.setLineDash([lw * 3, lw * 2]); ctx.strokeRect(x, y, w, h);
+    ctx.setLineDash([]); ctx.fillStyle = '#7cf5d3'; const s = Math.max(18, img.width / 18);
+    ctx.fillRect(x, y, s * 1.1, s * 1.1); ctx.fillStyle = '#062019'; ctx.font = `700 ${s * 0.8}px sans-serif`; ctx.fillText(String(i + 1), x + s * 0.3, y + s * 0.85);
   });
+  frame.appendChild(c);
+}
+function debugHTML(rec) {
+  if (!S.settings.debugLens || !rec) return '';
+  const d = rec.debug, pct = v => (v * 100).toFixed(1) + '%', T = d.times || {};
+  const rows = (arr, f) => arr.length ? arr.map(f).join('') : '<tr><td colspan="3" class="muted">none</td></tr>';
+  return `<details class="debug" open><summary>Recognition debug</summary>
+    <div class="small">Decision: <b>${esc(d.decision)}</b> (${esc(d.reason)}) · thresholds: recognise ≥ ${pct(d.thresholds.min)}, auto ≥ ${pct(d.thresholds.auto)}, boxes ≥ ${pct(d.thresholds.detMin)}</div>
+    <div class="small">Time: <b>${T.total} ms</b> total (lens start-up ${T.lensLoad} ms) · detect ${T.detect ?? '–'} ms · classify ${T.classify ?? '–'} ms · crops ${T.crops ?? '–'} ms · backend ${esc(d.backend)} · models: ${esc(Object.entries(d.sources).map(([k, v]) => k + '=' + v).join(', '))}</div>
+    <table><tr><th colspan="3">Whole photo (MobileNet top 5)</th></tr>${rows(d.full, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
+    <tr><th colspan="3">Detected objects (COCO-SSD)</th></tr>${rows(d.detections, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.score)}</td><td>${esc(r.map)}</td></tr>`)}
+    <tr><th colspan="3">Crop refinement</th></tr>${rows(d.crops, r => `<tr><td>${esc(r.box)} → ${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
+    <tr><th colspan="3">Merged candidates</th></tr>${rows(d.candidates, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.conf)}</td><td>${esc(r.cat + (r.sub ? ':' + r.sub : ''))} · ${esc(r.src)}</td></tr>`)}</table></details>`;
 }
 function cancelPhoto() {
   if (ui.pending && ui.pending.url && ui.pending.url.startsWith('blob:')) URL.revokeObjectURL(ui.pending.url);
-  ui.pending = null; $('#overlay').innerHTML = '';
+  ui.pending = null; $('#overlay').innerHTML = ''; render();
 }
 
-async function scan(cat, word) {
-  const p = ui.pending; if (!p) return;
-  if (cat !== 'other' && word && matchCategory(word) !== cat) word = ''; // the typed text was only a filter
-  if (cat === 'other' && !word) word = 'mystery object';
+async function scan(i) {
+  const p = ui.pending; if (!p || !p.rec || p.scanning) return;
+  const c = p.rec.candidates[+i]; if (!c) return;
+  p.scanning = true;
+  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash }; // colour from the chosen object, fingerprint from the whole photo
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
     <h2 style="text-align:center">Scanning for supernatural activity…</h2>
     <div class="photo-frame"><img alt="" src="${p.url}"><i class="vf-sweep"></i>
-      <div class="scan-hud">${SCAN_READOUTS.slice(0, 4).map((r, i) => `<div class="meter"><span>${r}</span><i><b id="mt${i}"></b></i><span id="mv${i}">0.0</span></div>`).join('')}</div></div>
-    <p class="muted" style="text-align:center">Object: <b style="color:var(--text)">${esc(word && cat === 'other' ? word : CATEGORY[cat].name)}</b></p>
+      <div class="scan-hud">${SCAN_READOUTS.slice(0, 4).map((r, k) => `<div class="meter"><span>${r}</span><i><b id="mt${k}"></b></i><span id="mv${k}">0.0</span></div>`).join('')}</div></div>
+    <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${Math.round(c.conf * 100)}% sure)</span></p>
   </div></div>`;
   SFX.scan();
-  const result = resolvePhoto(S, cat, p.photo, word);
+  const result = resolvePhoto(S, c.cat, photo, { label: c.label, sub: c.sub, aspect: c.aspect, conf: c.conf });
   const strength = result.encounter ? 0.55 + RARITY[result.monster.rarity].tier * 0.11 : 0.25;
   for (let step = 0; step < 6; step++) {
     await wait(220);
@@ -245,7 +338,7 @@ function showDiscovery(m, seen) {
       <div class="disc-sprite">${spriteHTML(m.dna, { size: 220, rarity: m.rarity, variant: m.variant })}</div>
       <div class="rarity-banner" style="color:${r.color}">${r.name.toUpperCase()}${m.variant ? ' · ' + variantLabel(m.variant).toUpperCase() : ''}</div>
       <h1 class="disc-name">${esc(m.name)}</h1>
-      <div class="row wrap" style="justify-content:center">${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${catLabel(m)}</span></div>
+      <div class="row wrap" style="justify-content:center">${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${m.label ? esc(m.label) : catLabel(m)}</span></div>
       ${seen.isNew ? `<span class="new-tag">NEW SPECIES · +${seen.rp} RP</span>` : ''}
       <p class="muted" style="max-width:34ch">${esc(CATEGORY[m.cat].flavor)}</p>
       ${analysis ? `<p class="small muted num">HP ${m.stats.hp} · ATK ${m.stats.atk} · DEF ${m.stats.def} · SPD ${m.stats.spd} · weak to ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</p>` : ''}
@@ -469,7 +562,7 @@ function showResult(B, sum) {
   const rewards = sum.rewards.map((r, i) => `<span class="reward" style="animation-delay:${i * 0.08}s">+${esc(rewardLabel(r.k, r.v))}${r.why ? ' <span class="muted">(' + esc(r.why) + ')</span>' : ''}</span>`).join('');
   const drops = sum.drops.map(d => `<div class="card row"><div class="item-ic">${d.kind === 'weapon' ? `<img class="px" alt="" src="${weaponIconURL(d.id)}">` : '✦'}</div><div class="grow"><b>${d.kind === 'weapon' ? 'Weapon found: ' + esc(WEAPONS[d.id].name) : 'Charm found: ' + esc(CHARMS[d.id].name)}</b><div class="small muted">${d.kind === 'weapon' ? esc(WEAPONS[d.id].desc) : esc(CHARMS[d.id].desc)} Equip it in Gear.</div></div></div>`).join('');
   const lines = {
-    victory: `${esc(m.name.split(',')[0])} dissolves back into an ordinary ${m.cat === 'other' && m.word ? esc(m.word) : esc(CATEGORY[m.cat].name.split(' /')[0].toLowerCase())}.`,
+    victory: `${esc(m.name.split(',')[0])} dissolves back into an ordinary ${m.label ? esc(m.label) : m.cat === 'other' && m.word ? esc(m.word) : esc(CATEGORY[m.cat].name.split(' /')[0].toLowerCase())}.`,
     captured: `${esc(m.name.split(',')[0])} joins your collection. ${sum.newCapture ? 'A new species for your encyclopedia!' : ''}`,
     defeat: `You wake up dazed. You dropped ${sum.lostCoins} coins, but your collection is safe.`,
     fled: 'You live to hunt another day.', escaped: 'It vanished back into the everyday world.',
@@ -568,7 +661,7 @@ function monsterSheet(id) {
     <div class="stat-grid">${statBars(m.stats)}</div>
     <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>
     <div class="card small stack" style="gap:4px">
-      <div><b>Origin object:</b> ${catLabel(m)}</div>
+      <div><b>Origin object:</b> ${catLabel(m)}${m.label ? ` · identified as “${esc(m.label)}”${m.conf ? ' (' + Math.round(m.conf * 100) + '% sure)' : ''}` : ''}</div>
       <div><b>Captured:</b> ${fmtDate(m.caughtAt)}</div>
       <div><b>Species first seen:</b> ${fmtDate(d.first)} · <b>Encounters:</b> ${d.seen || 1} · <b>Captures:</b> ${d.caught || 1}</div>
       <div><b>Weak to:</b> ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</div>
@@ -702,11 +795,12 @@ function labScreen() {
 
 /* ---------- settings ---------- */
 function settingsSheet() {
-  const ai = Photo.ai;
+  const L = Lens.status;
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
-      <div class="toggle"><div><b>AI Lens (experimental)</b><p>Suggests what your photo shows using MobileNet running in your browser. Downloads about 10 MB once; works only where the host allows it. ${ai.state === 'ready' ? 'Status: ready.' : ai.state === 'failed' ? 'Status: could not load here (' + esc(ai.error) + ').' : ai.state === 'loading' ? 'Status: loading…' : ''} You always confirm the object yourself.</p></div><button class="switch ${S.settings.aiLens ? 'on' : ''}" data-act="toggleAI" aria-label="Toggle AI lens"></button></div>
+      <div class="toggle"><div><b>Spirit Lens</b><p>${lensStatusLine()} Recognition runs entirely on this phone with open-source models (MobileNet + COCO-SSD). Photos are never uploaded.</p></div>${L.state === 'ready' ? '' : `<button class="btn small" data-act="lensPrepare">${L.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
+      <div class="toggle"><div><b>Recognition debug info</b><p>Shows what the lens saw: top predictions, detected objects, confidence and timing. Useful for testing accuracy on real objects.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
       <div class="toggle"><div><b>Keep photo thumbnails</b><p>Off by default. When on, a tiny 96 px copy of the photo is stored with monsters you capture, in this browser only.</p></div><button class="switch ${S.settings.keepPhotos ? 'on' : ''}" data-act="toggleKeep" aria-label="Toggle photo thumbnails"></button></div>
     </div>
     <div class="notice">${storageOK ? 'Progress saves automatically in this browser.' : 'This browser is blocking storage (private mode?), so progress will be lost when you close the page. Use the backup code below.'}</div>
@@ -732,8 +826,9 @@ const actions = {
   sheetBg(_, el, ev) { if (ev.target === el) closeSheet(); },
   liveOpen: openLive, liveClose: closeLive, liveSnap,
   cancelPhoto,
-  pickCat(cat) { const p = ui.pending; if (!p) return; scan(cat, cat === 'other' ? (p.word || 'mystery object') : p.word); },
-  aiPick(cat, el) { const p = ui.pending; if (!p) return; p.word = el.dataset.word; scan(cat, cat === 'other' ? p.word : ''); },
+  pickCand(i) { scan(i); },
+  lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
+  lensPrepare() { Lens.load(); },
   closeOverlay() { $('#overlay').innerHTML = ''; render(); },
   fight() { const m = ui.discovered; ui.discovered = null; if (m) startBattle(m); },
   ignore() {
@@ -774,7 +869,7 @@ const actions = {
   buy(id) { if (buyItem(S, id)) { SFX.coin(); persist(); render(); } },
   craft(id) { if (craftItem(S, id)) { SFX.coin(); toast(`Crafted ${ITEMS[id].name}.`); persist(); render(); } },
   research(id) { if (buyResearch(S, id)) { SFX.levelup(); toast(`Research complete: ${RESEARCH_BY_ID[id].name}`, 'gold'); persist(); render(); } },
-  toggleAI() { S.settings.aiLens = !S.settings.aiLens; persist(); if (S.settings.aiLens) Photo.ai.load().then(() => { if ($('#sheet').innerHTML) settingsSheet(); }); settingsSheet(); },
+  toggleDebug() { S.settings.debugLens = !S.settings.debugLens; persist(); settingsSheet(); },
   toggleKeep() { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); settingsSheet(); },
   copyExport() {
     const box = $('#exportBox'); box.value = exportSave(S);
@@ -792,6 +887,7 @@ const actions = {
 };
 document.addEventListener('click', ev => {
   SFX.unlock();
+  if (ev.target.closest('label[for="camInput"], label[for="galInput"], [data-act="liveOpen"]')) Lens.load(); // warm up while the camera is open
   const el = ev.target.closest('[data-act]'); if (!el) return;
   const fn = actions[el.dataset.act]; if (!fn) return;
   if (el.tagName === 'LABEL') { // labels open the camera via their `for` input; just run side effects
@@ -814,3 +910,4 @@ window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, se
 
 render();
 persist(true);
+if (S.settings.lensCached) setTimeout(() => Lens.load(), 1200); // models are cached on this phone: start them in the background

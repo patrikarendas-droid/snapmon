@@ -331,6 +331,24 @@ textarea.code { width: 100%; min-height: 86px; border-radius: 12px; border: 1px 
 .empty { text-align: center; padding: 26px 14px; color: var(--muted); }
 .empty h3 { color: var(--text); font-size: 18px; margin-bottom: 4px; }
 .notice { font-size: 12.5px; color: var(--muted); border-left: 3px solid var(--violet); padding: 4px 0 4px 10px; }
+.lens-chip { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 12px; background: var(--panel); border: 1px solid var(--line); font-size: 13px; font-weight: 600; }
+.lens-chip > i { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+.lens-chip > i.pulse { animation: blink 1s steps(2) infinite; }
+.lens-tag { display: inline-flex; align-items: center; gap: 8px; align-self: start; background: rgba(8,6,14,.7); padding: 6px 10px; border-radius: 8px; }
+.spin { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ecto); border-right-color: transparent; animation: spin .8s linear infinite; display: inline-block; }
+.det-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; z-index: 1; }
+.ident { display: flex; gap: 12px; align-items: center; border-color: var(--ecto); }
+.ident .e, .cand .e { font-size: 26px; }
+.ident .bar { margin-top: 6px; height: 7px; } .ident .bar > i { background: var(--ecto); }
+button.list-item { width: 100%; color: inherit; font: inherit; cursor: pointer; }
+.list-item.cand { grid-template-columns: auto 1fr auto; }
+.num-badge { width: 28px; height: 28px; border-radius: 8px; background: var(--ecto); color: #062019; display: grid; place-items: center; font-weight: 700; }
+details.debug { text-align: left; background: #0b0814; border: 1px dashed #5b4a8f; border-radius: 12px; padding: 10px 12px; font-size: 12px; overflow-x: auto; }
+details.debug summary { font-weight: 700; color: var(--violet); cursor: pointer; }
+details.debug > div { margin-top: 6px; color: #cfc6ee; }
+details.debug table { width: 100%; border-collapse: collapse; margin-top: 8px; font-variant-numeric: tabular-nums; }
+details.debug th { text-align: left; color: var(--ecto); padding: 8px 0 2px; font-size: 11px; letter-spacing: .06em; }
+details.debug td { padding: 2px 6px 2px 0; border-top: 1px solid #221a38; vertical-align: top; word-break: break-word; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; } }
 @media (max-width: 360px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dex-row { grid-template-columns: 70px repeat(5, minmax(0, 1fr)); } .shutter { width: 84px; height: 84px; } }
 </style>
@@ -454,7 +472,25 @@ const CATEGORIES = [
     sig: { name: 'Drip Torture', power: 0.4, hits: 3 }, flavor: 'Drip. Drip. Drip. It knows exactly how long you can take it.' },
   { id: 'tv',      name: 'TV / Screen',    icon: '📺', fam: 'mechanical', shape: 'tv',      hue: 260, sat: 12, lit: 30, acc: 170, names: ['Telly', 'Static', 'Channel', 'Tubey', 'Rerun'], kw: ['tv', 'television', 'screen', 'console', 'speaker', 'radio', 'projector', 'camera', 'stereo', 'router', 'modem', 'entertainment center'],
     sig: { name: 'Static Storm', power: 0.9, effect: 'stun', chance: 0.3 }, flavor: 'Channel 0 never shows anything. Unless you are alone.' },
-  { id: 'other',   name: 'Something else', icon: '❔', fam: null,        shape: null,      hue: -1,  sat: 55, lit: 52, acc: 0, names: [], kw: [],
+  { id: 'bird',    name: 'Bird',           icon: '🐦', fam: 'organic',    shape: 'bird',    hue: -1,  sat: 55, lit: 55, acc: 40, names: ['Tweet', 'Feather', 'Beak', 'Squawk', 'Plume'], kw: ['bird', 'parrot', 'pigeon', 'owl', 'duck', 'goose', 'chicken', 'crow', 'sparrow', 'penguin'],
+    sig: { name: 'Dive Bomb', power: 1.35 }, flavor: 'It is not singing at dawn. It is summoning.' },
+  { id: 'fish',    name: 'Fish / Sea life', icon: '🐟', fam: 'elemental', shape: 'fish',    hue: -1,  sat: 60, lit: 55, acc: 200, names: ['Gill', 'Fin', 'Splosh', 'Scale', 'Gulp'], kw: ['fish', 'shark', 'goldfish', 'whale', 'jellyfish', 'starfish', 'aquarium'],
+    sig: { name: 'Tidal Slap', power: 1.0, effect: 'defdown', chance: 0.45 }, flavor: 'The goldfish has been plotting for three seconds at a time, forever.' },
+  { id: 'bug',     name: 'Bug / Critter',  icon: '🐞', fam: 'mutated',    shape: 'bug',     hue: -1,  sat: 60, lit: 42, acc: 0, names: ['Skitter', 'Buzz', 'Crawl', 'Mandi', 'Chitin'], kw: ['bug', 'insect', 'beetle', 'spider', 'ant', 'bee', 'butterfly', 'crab', 'snail', 'ladybug'],
+    sig: { name: 'Venom Nip', power: 0.9, effect: 'poison', chance: 0.6 }, flavor: 'For every human there are a million of these. They have noticed.' },
+  { id: 'reptile', name: 'Reptile / Frog', icon: '🦎', fam: 'organic',    shape: 'reptile', hue: 110, sat: 50, lit: 42, acc: 60, names: ['Scaly', 'Croak', 'Hiss', 'Slither', 'Shell'], kw: ['lizard', 'snake', 'frog', 'turtle', 'tortoise', 'gecko', 'toad', 'crocodile'],
+    sig: { name: 'Cold-Blooded Bite', power: 1.1, effect: 'poison', chance: 0.35 }, flavor: 'Basks under your desk lamp. Dreams of when it was a dinosaur.' },
+  { id: 'umbrella', name: 'Umbrella',      icon: '☂️', fam: 'household',  shape: 'umbrella', hue: -1, sat: 65, lit: 48, acc: 30, names: ['Brolly', 'Canopy', 'Drizzle', 'Parasol', 'Spoke'], kw: ['umbrella', 'parasol', 'parachute'],
+    sig: { name: 'Spoke Jab', power: 0.45, hits: 3 }, flavor: 'Opens indoors on purpose. That is where the bad luck comes from.' },
+  { id: 'instrument', name: 'Instrument',  icon: '🎸', fam: 'spectral',   shape: 'instrument', hue: 28, sat: 60, lit: 45, acc: 45, names: ['Strum', 'Tuba', 'Chord', 'Drumm', 'Sonata'], kw: ['guitar', 'piano', 'drum', 'violin', 'trumpet', 'flute', 'saxophone', 'instrument', 'harp', 'ukulele'],
+    sig: { name: 'Haunting Chord', power: 0.85, effect: 'stun', chance: 0.35 }, flavor: 'Plays itself at midnight. Always slightly out of tune.' },
+  { id: 'ball',    name: 'Ball',           icon: '⚽', fam: 'household',  shape: 'ball',    hue: -1,  sat: 70, lit: 52, acc: 0, names: ['Bounce', 'Dribbl', 'Spinn', 'Kick', 'Lob'], kw: ['ball', 'football', 'soccer', 'basketball', 'tennis ball', 'baseball', 'volleyball', 'golf ball'],
+    sig: { name: 'Ricochet', power: 0.5, hits: 3 }, flavor: 'Rolls under the sofa on purpose. It likes the dark down there.' },
+  { id: 'pot',     name: 'Pot / Pan / Bowl', icon: '🍳', fam: 'household', shape: 'pot',    hue: 220, sat: 10, lit: 40, acc: 20, names: ['Simmer', 'Skillet', 'Wok', 'Ladle', 'Stew'], kw: ['pan', 'frying pan', 'wok', 'bowl', 'plate', 'saucepan', 'cauldron', 'dish', 'tray'],
+    sig: { name: 'Boiling Over', power: 1.0, effect: 'burn', chance: 0.5 }, flavor: 'A watched pot never boils. An unwatched one crawls away.' },
+  { id: 'cake',    name: 'Cake / Dessert', icon: '🍰', fam: 'food',       shape: 'cake',    hue: 330, sat: 60, lit: 72, acc: 30, names: ['Frost', 'Sprinkl', 'Gateau', 'Sugar', 'Fondant'], kw: ['cake', 'donut', 'doughnut', 'cupcake', 'ice cream', 'dessert', 'muffin', 'pie'],
+    sig: { name: 'Sugar Crash', power: 0.7, effect: 'stun', chance: 0.4 }, flavor: 'Every birthday wish ever made went into it. Most were selfish.' },
+  { id: 'other',   name: 'Oddity',         icon: '❔', fam: null,        shape: null,      hue: -1,  sat: 55, lit: 52, acc: 0, names: [], kw: [],
     sig: { name: 'Uncanny Strike', power: 1.15, effect: 'defdown', chance: 0.3 }, flavor: 'Even hunters are not sure what this one was pretending to be.' },
 ];
 const CATEGORY = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
@@ -593,6 +629,16 @@ const DUPLICATE_LINES = [
   'Same object, same angle. Monsters hate being photographed twice.',
 ];
 const SCAN_READOUTS = ['EMF', 'ECTO', 'PSI', 'HAUNT', 'GLOOM', 'WEIRD'];
+
+</script>
+<script>
+/* SNAPMON — generated by tools/gen-labels.js. Do not edit by hand.
+   Maps recogniser class names to "category:subtype". 0 = recognised but not a monster host (people, places, weapons). */
+'use strict';
+const LABEL_MAP = {
+  imagenet: {"tench, Tinca tinca":"fish:fish","goldfish, Carassius auratus":"fish:fish","great white shark, white shark, man-eater, man-eating shark, Carcharodon carcharias":"fish:shark","tiger shark, Galeocerdo cuvieri":"fish:shark","hammerhead, hammerhead shark":"fish:shark","electric ray, crampfish, numbfish, torpedo":"fish:fish","stingray":"fish:fish","cock":"bird:perch","hen":"bird:perch","ostrich, Struthio camelus":"bird:perch","brambling, Fringilla montifringilla":"bird:perch","goldfinch, Carduelis carduelis":"bird:perch","house finch, linnet, Carpodacus mexicanus":"bird:perch","junco, snowbird":"bird:perch","indigo bunting, indigo finch, indigo bird, Passerina cyanea":"bird:perch","robin, American robin, Turdus migratorius":"bird:perch","bulbul":"bird:perch","jay":"bird:perch","magpie":"bird:perch","chickadee":"bird:perch","water ouzel, dipper":"bird:perch","kite":"bird:perch","bald eagle, American eagle, Haliaeetus leucocephalus":"bird:perch","vulture":"bird:perch","great grey owl, great gray owl, Strix nebulosa":"bird:owl","European fire salamander, Salamandra salamandra":"reptile:lizard","common newt, Triturus vulgaris":"reptile:lizard","eft":"reptile:lizard","spotted salamander, Ambystoma maculatum":"reptile:lizard","axolotl, mud puppy, Ambystoma mexicanum":"reptile:lizard","bullfrog, Rana catesbeiana":"reptile:frog","tree frog, tree-frog":"reptile:frog","tailed frog, bell toad, ribbed toad, tailed toad, Ascaphus trui":"reptile:frog","loggerhead, loggerhead turtle, Caretta caretta":"reptile:turtle","leatherback turtle, leatherback, leathery turtle, Dermochelys coriacea":"reptile:turtle","mud turtle":"reptile:turtle","terrapin":"reptile:turtle","box turtle, box tortoise":"reptile:turtle","banded gecko":"reptile:lizard","common iguana, iguana, Iguana iguana":"reptile:lizard","American chameleon, anole, Anolis carolinensis":"reptile:lizard","whiptail, whiptail lizard":"reptile:lizard","agama":"reptile:lizard","frilled lizard, Chlamydosaurus kingi":"reptile:lizard","alligator lizard":"reptile:lizard","Gila monster, Heloderma suspectum":"reptile:lizard","green lizard, Lacerta viridis":"reptile:lizard","African chameleon, Chamaeleo chamaeleon":"reptile:lizard","Komodo dragon, Komodo lizard, dragon lizard, giant lizard, Varanus komodoensis":"reptile:lizard","African crocodile, Nile crocodile, Crocodylus niloticus":"reptile:lizard","American alligator, Alligator mississipiensis":"reptile:lizard","triceratops":"reptile:lizard","thunder snake, worm snake, Carphophis amoenus":"reptile:snake","ringneck snake, ring-necked snake, ring snake":"reptile:snake","hognose snake, puff adder, sand viper":"reptile:snake","green snake, grass snake":"reptile:snake","king snake, kingsnake":"reptile:snake","garter snake, grass snake":"reptile:snake","water snake":"reptile:snake","vine snake":"reptile:snake","night snake, Hypsiglena torquata":"reptile:snake","boa constrictor, Constrictor constrictor":"reptile:snake","rock python, rock snake, Python sebae":"reptile:snake","Indian cobra, Naja naja":"reptile:snake","green mamba":"reptile:snake","sea snake":"reptile:snake","horned viper, cerastes, sand viper, horned asp, Cerastes cornutus":"reptile:snake","diamondback, diamondback rattlesnake, Crotalus adamanteus":"reptile:snake","sidewinder, horned rattlesnake, Crotalus cerastes":"reptile:snake","trilobite":"bug:beetle","harvestman, daddy longlegs, Phalangium opilio":"bug:spider","scorpion":"bug:spider","black and gold garden spider, Argiope aurantia":"bug:spider","barn spider, Araneus cavaticus":"bug:spider","garden spider, Aranea diademata":"bug:spider","black widow, Latrodectus mactans":"bug:spider","tarantula":"bug:spider","wolf spider, hunting spider":"bug:spider","tick":"bug:spider","centipede":"bug:beetle","black grouse":"bird:perch","ptarmigan":"bird:perch","ruffed grouse, partridge, Bonasa umbellus":"bird:perch","prairie chicken, prairie grouse, prairie fowl":"bird:perch","peacock":"bird:perch","quail":"bird:perch","partridge":"bird:perch","African grey, African gray, Psittacus erithacus":"bird:perch","macaw":"bird:perch","sulphur-crested cockatoo, Kakatoe galerita, Cacatua galerita":"bird:perch","lorikeet":"bird:perch","coucal":"bird:perch","bee eater":"bird:perch","hornbill":"bird:perch","hummingbird":"bird:perch","jacamar":"bird:perch","toucan":"bird:perch","drake":"bird:water","red-breasted merganser, Mergus serrator":"bird:water","goose":"bird:water","black swan, Cygnus atratus":"bird:water","tusker":"animal:hoofed","echidna, spiny anteater, anteater":"animal:bear","platypus, duckbill, duckbilled platypus, duck-billed platypus, Ornithorhynchus anatinus":"animal:bear","wallaby, brush kangaroo":"animal:rabbit","koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus":"animal:bear","wombat":"animal:bear","jelly fish":"fish:jelly","sea anemone, anemone":"fish:jelly","brain coral":"fish:jelly","flatworm, platyhelminth":"bug:snail","nematode, nematode worm, roundworm":"bug:snail","conch":"bug:snail","snail":"bug:snail","slug":"bug:snail","sea slug, nudibranch":"bug:snail","chiton, coat-of-mail shell, sea cradle, polyplacophore":"bug:snail","chambered nautilus, pearly nautilus, nautilus":"bug:snail","Dungeness crab, Cancer magister":"bug:crab","rock crab, Cancer irroratus":"bug:crab","fiddler crab":"bug:crab","king crab, Alaska crab, Alaskan king crab, Alaska king crab, Paralithodes camtschatica":"bug:crab","American lobster, Northern lobster, Maine lobster, Homarus americanus":"bug:crab","spiny lobster, langouste, rock lobster, crawfish, crayfish, sea crawfish":"bug:crab","crayfish, crawfish, crawdad, crawdaddy":"bug:crab","hermit crab":"bug:crab","isopod":"bug:beetle","white stork, Ciconia ciconia":"bird:water","black stork, Ciconia nigra":"bird:water","spoonbill":"bird:water","flamingo":"bird:water","little blue heron, Egretta caerulea":"bird:water","American egret, great white heron, Egretta albus":"bird:water","bittern":"bird:water","crane":0,"limpkin, Aramus pictus":"bird:water","European gallinule, Porphyrio porphyrio":"bird:water","American coot, marsh hen, mud hen, water hen, Fulica americana":"bird:water","bustard":"bird:water","ruddy turnstone, Arenaria interpres":"bird:water","red-backed sandpiper, dunlin, Erolia alpina":"bird:water","redshank, Tringa totanus":"bird:water","dowitcher":"bird:water","oystercatcher, oyster catcher":"bird:water","pelican":"bird:water","king penguin, Aptenodytes patagonica":"bird:water","albatross, mollymawk":"bird:water","grey whale, gray whale, devilfish, Eschrichtius gibbosus, Eschrichtius robustus":"fish:shark","killer whale, killer, orca, grampus, sea wolf, Orcinus orca":"fish:shark","dugong, Dugong dugon":"fish:shark","sea lion":"fish:shark","Chihuahua":"animal:dog","Japanese spaniel":"animal:dog","Maltese dog, Maltese terrier, Maltese":"animal:dog","Pekinese, Pekingese, Peke":"animal:dog","Shih-Tzu":"animal:dog","Blenheim spaniel":"animal:dog","papillon":"animal:dog","toy terrier":"animal:dog","Rhodesian ridgeback":"animal:dog","Afghan hound, Afghan":"animal:dog","basset, basset hound":"animal:dog","beagle":"animal:dog","bloodhound, sleuthhound":"animal:dog","bluetick":"animal:dog","black-and-tan coonhound":"animal:dog","Walker hound, Walker foxhound":"animal:dog","English foxhound":"animal:dog","redbone":"animal:dog","borzoi, Russian wolfhound":"animal:dog","Irish wolfhound":"animal:dog","Italian greyhound":"animal:dog","whippet":"animal:dog","Ibizan hound, Ibizan Podenco":"animal:dog","Norwegian elkhound, elkhound":"animal:dog","otterhound, otter hound":"animal:dog","Saluki, gazelle hound":"animal:dog","Scottish deerhound, deerhound":"animal:dog","Weimaraner":"animal:dog","Staffordshire bullterrier, Staffordshire bull terrier":"animal:dog","American Staffordshire terrier, Staffordshire terrier, American pit bull terrier, pit bull terrier":"animal:dog","Bedlington terrier":"animal:dog","Border terrier":"animal:dog","Kerry blue terrier":"animal:dog","Irish terrier":"animal:dog","Norfolk terrier":"animal:dog","Norwich terrier":"animal:dog","Yorkshire terrier":"animal:dog","wire-haired fox terrier":"animal:dog","Lakeland terrier":"animal:dog","Sealyham terrier, Sealyham":"animal:dog","Airedale, Airedale terrier":"animal:dog","cairn, cairn terrier":"animal:dog","Australian terrier":"animal:dog","Dandie Dinmont, Dandie Dinmont terrier":"animal:dog","Boston bull, Boston terrier":"animal:dog","miniature schnauzer":"animal:dog","giant schnauzer":"animal:dog","standard schnauzer":"animal:dog","Scotch terrier, Scottish terrier, Scottie":"animal:dog","Tibetan terrier, chrysanthemum dog":"animal:dog","silky terrier, Sydney silky":"animal:dog","soft-coated wheaten terrier":"animal:dog","West Highland white terrier":"animal:dog","Lhasa, Lhasa apso":"animal:dog","flat-coated retriever":"animal:dog","curly-coated retriever":"animal:dog","golden retriever":"animal:dog","Labrador retriever":"animal:dog","Chesapeake Bay retriever":"animal:dog","German short-haired pointer":"animal:dog","vizsla, Hungarian pointer":"animal:dog","English setter":"animal:dog","Irish setter, red setter":"animal:dog","Gordon setter":"animal:dog","Brittany spaniel":"animal:dog","clumber, clumber spaniel":"animal:dog","English springer, English springer spaniel":"animal:dog","Welsh springer spaniel":"animal:dog","cocker spaniel, English cocker spaniel, cocker":"animal:dog","Sussex spaniel":"animal:dog","Irish water spaniel":"animal:dog","kuvasz":"animal:dog","schipperke":"animal:dog","groenendael":"animal:dog","malinois":"animal:dog","briard":"animal:dog","kelpie":"animal:dog","komondor":"animal:dog","Old English sheepdog, bobtail":"animal:dog","Shetland sheepdog, Shetland sheep dog, Shetland":"animal:dog","collie":"animal:dog","Border collie":"animal:dog","Bouvier des Flandres, Bouviers des Flandres":"animal:dog","Rottweiler":"animal:dog","German shepherd, German shepherd dog, German police dog, alsatian":"animal:dog","Doberman, Doberman pinscher":"animal:dog","miniature pinscher":"animal:dog","Greater Swiss Mountain dog":"animal:dog","Bernese mountain dog":"animal:dog","Appenzeller":"animal:dog","EntleBucher":"animal:dog","boxer":"animal:dog","bull mastiff":"animal:dog","Tibetan mastiff":"animal:dog","French bulldog":"animal:dog","Great Dane":"animal:dog","Saint Bernard, St Bernard":"animal:dog","Eskimo dog, husky":"animal:dog","malamute, malemute, Alaskan malamute":"animal:dog","Siberian husky":"animal:dog","dalmatian, coach dog, carriage dog":"animal:dog","affenpinscher, monkey pinscher, monkey dog":"animal:dog","basenji":"animal:dog","pug, pug-dog":"animal:dog","Leonberg":"animal:dog","Newfoundland, Newfoundland dog":"animal:dog","Great Pyrenees":"animal:dog","Samoyed, Samoyede":"animal:dog","Pomeranian":"animal:dog","chow, chow chow":"animal:dog","keeshond":"animal:dog","Brabancon griffon":"animal:dog","Pembroke, Pembroke Welsh corgi":"animal:dog","Cardigan, Cardigan Welsh corgi":"animal:dog","toy poodle":"animal:dog","miniature poodle":"animal:dog","standard poodle":"animal:dog","Mexican hairless":"animal:dog","timber wolf, grey wolf, gray wolf, Canis lupus":"animal:dog","white wolf, Arctic wolf, Canis lupus tundrarum":"animal:dog","red wolf, maned wolf, Canis rufus, Canis niger":"animal:dog","coyote, prairie wolf, brush wolf, Canis latrans":"animal:dog","dingo, warrigal, warragal, Canis dingo":"animal:dog","dhole, Cuon alpinus":"animal:dog","African hunting dog, hyena dog, Cape hunting dog, Lycaon pictus":"animal:dog","hyena, hyaena":"animal:dog","red fox, Vulpes vulpes":"animal:cat","kit fox, Vulpes macrotis":"animal:cat","Arctic fox, white fox, Alopex lagopus":"animal:cat","grey fox, gray fox, Urocyon cinereoargenteus":"animal:cat","tabby, tabby cat":"animal:cat","tiger cat":"animal:cat","Persian cat":"animal:cat","Siamese cat, Siamese":"animal:cat","Egyptian cat":"animal:cat","cougar, puma, catamount, mountain lion, painter, panther, Felis concolor":"animal:cat","lynx, catamount":"animal:cat","leopard, Panthera pardus":"animal:cat","snow leopard, ounce, Panthera uncia":"animal:cat","jaguar, panther, Panthera onca, Felis onca":"animal:cat","lion, king of beasts, Panthera leo":"animal:cat","tiger, Panthera tigris":"animal:cat","cheetah, chetah, Acinonyx jubatus":"animal:cat","brown bear, bruin, Ursus arctos":"animal:bear","American black bear, black bear, Ursus americanus, Euarctos americanus":"animal:bear","ice bear, polar bear, Ursus Maritimus, Thalarctos maritimus":"animal:bear","sloth bear, Melursus ursinus, Ursus ursinus":"animal:bear","mongoose":"animal:cat","meerkat, mierkat":"animal:cat","tiger beetle":"bug:beetle","ladybug, ladybeetle, lady beetle, ladybird, ladybird beetle":"bug:beetle","ground beetle, carabid beetle":"bug:beetle","long-horned beetle, longicorn, longicorn beetle":"bug:beetle","leaf beetle, chrysomelid":"bug:beetle","dung beetle":"bug:beetle","rhinoceros beetle":"bug:beetle","weevil":"bug:beetle","fly":"bug:beetle","bee":"bug:beetle","ant, emmet, pismire":"bug:beetle","grasshopper, hopper":"bug:beetle","cricket":"bug:beetle","walking stick, walkingstick, stick insect":"bug:beetle","cockroach, roach":"bug:beetle","mantis, mantid":"bug:beetle","cicada, cicala":"bug:beetle","leafhopper":"bug:beetle","lacewing, lacewing fly":"bug:beetle","dragonfly, darning needle, devil's darning needle, sewing needle, snake feeder, snake doctor, mosquito hawk, skeeter hawk":"bug:butterfly","damselfly":"bug:butterfly","admiral":"bug:butterfly","ringlet, ringlet butterfly":"bug:butterfly","monarch, monarch butterfly, milkweed butterfly, Danaus plexippus":"bug:butterfly","cabbage butterfly":"bug:butterfly","sulphur butterfly, sulfur butterfly":"bug:butterfly","lycaenid, lycaenid butterfly":"bug:butterfly","starfish, sea star":"fish:star","sea urchin":"fish:star","sea cucumber, holothurian":"bug:snail","wood rabbit, cottontail, cottontail rabbit":"animal:rabbit","hare":"animal:rabbit","Angora, Angora rabbit":"animal:rabbit","hamster":"animal:bear","porcupine, hedgehog":"animal:bear","fox squirrel, eastern fox squirrel, Sciurus niger":"animal:cat","marmot":"animal:bear","beaver":"animal:bear","guinea pig, Cavia cobaya":"animal:bear","sorrel":"animal:hoofed","zebra":"animal:hoofed","hog, pig, grunter, squealer, Sus scrofa":"animal:hoofed","wild boar, boar, Sus scrofa":"animal:hoofed","warthog":"animal:hoofed","hippopotamus, hippo, river horse, Hippopotamus amphibius":"animal:hoofed","ox":"animal:hoofed","water buffalo, water ox, Asiatic buffalo, Bubalus bubalis":"animal:hoofed","bison":"animal:hoofed","ram, tup":"animal:hoofed","bighorn, bighorn sheep, cimarron, Rocky Mountain bighorn, Rocky Mountain sheep, Ovis canadensis":"animal:hoofed","ibex, Capra ibex":"animal:hoofed","hartebeest":"animal:hoofed","impala, Aepyceros melampus":"animal:hoofed","gazelle":"animal:hoofed","Arabian camel, dromedary, Camelus dromedarius":"animal:hoofed","llama":"animal:hoofed","weasel":"animal:cat","mink":"animal:cat","polecat, fitch, foulmart, foumart, Mustela putorius":"animal:cat","black-footed ferret, ferret, Mustela nigripes":"animal:cat","otter":"animal:cat","skunk, polecat, wood pussy":"animal:cat","badger":"animal:cat","armadillo":"animal:bear","three-toed sloth, ai, Bradypus tridactylus":"animal:monkey","orangutan, orang, orangutang, Pongo pygmaeus":"animal:monkey","gorilla, Gorilla gorilla":"animal:monkey","chimpanzee, chimp, Pan troglodytes":"animal:monkey","gibbon, Hylobates lar":"animal:monkey","siamang, Hylobates syndactylus, Symphalangus syndactylus":"animal:monkey","guenon, guenon monkey":"animal:monkey","patas, hussar monkey, Erythrocebus patas":"animal:monkey","baboon":"animal:monkey","macaque":"animal:monkey","langur":"animal:monkey","colobus, colobus monkey":"animal:monkey","proboscis monkey, Nasalis larvatus":"animal:monkey","marmoset":"animal:monkey","capuchin, ringtail, Cebus capucinus":"animal:monkey","howler monkey, howler":"animal:monkey","titi, titi monkey":"animal:monkey","spider monkey, Ateles geoffroyi":"animal:monkey","squirrel monkey, Saimiri sciureus":"animal:monkey","Madagascar cat, ring-tailed lemur, Lemur catta":"animal:monkey","indri, indris, Indri indri, Indri brevicaudatus":"animal:monkey","Indian elephant, Elephas maximus":"animal:hoofed","African elephant, Loxodonta africana":"animal:hoofed","lesser panda, red panda, panda, bear cat, cat bear, Ailurus fulgens":"animal:cat","giant panda, panda, panda bear, coon bear, Ailuropoda melanoleuca":"animal:bear","barracouta, snoek":"fish:fish","eel":"fish:fish","coho, cohoe, coho salmon, blue jack, silver salmon, Oncorhynchus kisutch":"fish:fish","rock beauty, Holocanthus tricolor":"fish:fish","anemone fish":"fish:fish","sturgeon":"fish:fish","gar, garfish, garpike, billfish, Lepisosteus osseus":"fish:fish","lionfish":"fish:fish","puffer, pufferfish, blowfish, globefish":"fish:fish","abacus":"laptop","abaya":"cloth:shirt","academic gown, academic robe, judge's robe":"cloth:shirt","accordion, piano accordion, squeeze box":"instrument:piano","acoustic guitar":"instrument:guitar","aircraft carrier, carrier, flattop, attack aircraft carrier":0,"airliner":0,"airship, dirigible":0,"altar":0,"ambulance":"car:bus","amphibian, amphibious vehicle":"other","analog clock":"clock","apiary, bee house":0,"apron":"cloth:shirt","ashcan, trash can, garbage can, wastebin, ash bin, ash-bin, ashbin, dustbin, trash barrel, trash bin":"bottle:can","assault rifle, assault gun":0,"backpack, back pack, knapsack, packsack, rucksack, haversack":"bag","bakery, bakeshop, bakehouse":0,"balance beam, beam":0,"balloon":"toy","ballpoint, ballpoint pen, ballpen, Biro":"keys","Band Aid":"keys","banjo":"instrument:guitar","bannister, banister, balustrade, balusters, handrail":0,"barbell":"tool","barber chair":"chair:chair","barbershop":0,"barn":0,"barometer":"clock","barrel, cask":"bottle:can","barrow, garden cart, lawn cart, wheelbarrow":"car:car","baseball":"ball:plain","basketball":"ball:basket","bassinet":"pillow","bassoon":"instrument:horn","bathing cap, swimming cap":"cloth:hat","bath towel":"cloth:shirt","bathtub, bathing tub, bath, tub":"faucet","beach wagon, station wagon, wagon, estate car, beach waggon, station waggon, waggon":"car:car","beacon, lighthouse, beacon light, pharos":"lamp","beaker":"bottle:bottle","bearskin, busby, shako":"cloth:hat","beer bottle":"bottle:bottle","beer glass":"mug:glass","bell cote, bell cot":0,"bib":"cloth:shirt","bicycle-built-for-two, tandem bicycle, tandem":"car:bike","bikini, two-piece":"cloth:shirt","binder, ring-binder":"book","binoculars, field glasses, opera glasses":"tv:camera","birdhouse":"bag","boathouse":0,"bobsled, bobsleigh, bob":0,"bolo tie, bolo, bola tie, bola":"cloth:shirt","bonnet, poke bonnet":"cloth:hat","bookcase":"chair:cabinet","bookshop, bookstore, bookstall":0,"bottlecap":"bottle:bottle","bow":"cloth:shirt","bow tie, bow-tie, bowtie":"cloth:shirt","brass, memorial tablet, plaque":"other","brassiere, bra, bandeau":"cloth:shirt","breakwater, groin, groyne, mole, bulwark, seawall, jetty":0,"breastplate, aegis, egis":"cloth:shirt","broom":"tool","bucket, pail":"faucet","buckle":"keys","bulletproof vest":0,"bullet train, bullet":0,"butcher shop, meat market":0,"cab, hack, taxi, taxicab":"car:car","caldron, cauldron":"pot:pot","candle, taper, wax light":"candle","cannon":0,"canoe":0,"can opener, tin opener":"tool","cardigan":"cloth:shirt","car mirror":"mirror","carousel, carrousel, merry-go-round, roundabout, whirligig":0,"carpenter's kit, tool kit":"tool","carton":"bag","car wheel":"car:car","cash machine, cash dispenser, automated teller machine, automatic teller machine, automated teller, automatic teller, ATM":0,"cassette":"tv:speaker","cassette player":"tv:speaker","castle":0,"catamaran":0,"CD player":"tv:speaker","cello, violoncello":"instrument:guitar","cellular telephone, cellular phone, cellphone, cell, mobile phone":"phone","chain":"tool","chainlink fence":0,"chain mail, ring mail, mail, chain armor, chain armour, ring armor, ring armour":"cloth:shirt","chain saw, chainsaw":"tool","chest":"chair:cabinet","chiffonier, commode":"chair:cabinet","chime, bell, gong":"instrument:drum","china cabinet, china closet":"chair:cabinet","Christmas stocking":"cloth:sock","church, church building":0,"cinema, movie theater, movie theatre, movie house, picture palace":0,"cleaver, meat cleaver, chopper":"tool","cliff dwelling":0,"cloak":"cloth:shirt","clog, geta, patten, sabot":"shoe:sneaker","cocktail shaker":"mug:glass","coffee mug":"mug:mug","coffeepot":"mug:teapot","coil, spiral, volute, whorl, helix":"tool","combination lock":"keys","computer keyboard, keypad":"laptop","confectionery, confectionary, candy store":0,"container ship, containership, container vessel":0,"convertible":"car:car","corkscrew, bottle screw":"tool","cornet, horn, trumpet, trump":"instrument:horn","cowboy boot":"shoe:boot","cowboy hat, ten-gallon hat":"cloth:hat","cradle":"pillow","crash helmet":"cloth:hat","crate":"bag","crib, cot":"pillow","Crock Pot":"pot:pot","croquet ball":"ball:plain","crutch":"tool","cuirass":"cloth:shirt","dam, dike, dyke":0,"desk":"chair:table","desktop computer":"laptop","dial telephone, dial phone":"phone","diaper, nappy, napkin":"cloth:shirt","digital clock":"clock","digital watch":"clock","dining table, board":"chair:table","dishrag, dishcloth":"cloth:shirt","dishwasher, dish washer, dishwashing machine":"fridge","disk brake, disc brake":"car:car","dock, dockage, docking facility":0,"dogsled, dog sled, dog sleigh":0,"dome":0,"doormat, welcome mat":"cloth:shirt","drilling platform, offshore rig":0,"drum, membranophone, tympan":"instrument:drum","drumstick":"instrument:drum","dumbbell":"tool","Dutch oven":"pot:pot","electric fan, blower":"fridge","electric guitar":"instrument:guitar","electric locomotive":0,"entertainment center":"tv:tv","envelope":"book","espresso maker":"fridge","face powder":"keys","feather boa, boa":"cloth:shirt","file, file cabinet, filing cabinet":"tool","fireboat":0,"fire engine, fire truck":"car:bus","fire screen, fireguard":"mirror","flagpole, flagstaff":"tool","flute, transverse flute":"instrument:horn","folding chair":"chair:chair","football helmet":"cloth:hat","forklift":0,"fountain":0,"fountain pen":"keys","four-poster":"pillow","freight car":0,"French horn, horn":"instrument:horn","frying pan, frypan, skillet":"pot:pan","fur coat":"cloth:shirt","garbage truck, dustcart":"trash","gasmask, respirator, gas helmet":0,"gas pump, gasoline pump, petrol pump, island dispenser":"car:car","goblet":"mug:glass","go-kart":"car:car","golf ball":"ball:plain","golfcart, golf cart":"car:car","gondola":0,"gong, tam-tam":"instrument:drum","gown":"cloth:shirt","grand piano, grand":"instrument:piano","greenhouse, nursery, glasshouse":0,"grille, radiator grille":"car:car","grocery store, grocery, food market, market":0,"guillotine":0,"hair slide":"keys","hair spray":"bottle:bottle","half track":0,"hammer":"tool","hamper":"bag","hand blower, blow dryer, blow drier, hair dryer, hair drier":"fridge","hand-held computer, hand-held microcomputer":"laptop","handkerchief, hankie, hanky, hankey":"cloth:shirt","hard disc, hard disk, fixed disk":"laptop","harmonica, mouth organ, harp, mouth harp":"instrument:horn","harp":"instrument:guitar","harvester, reaper":0,"hatchet":"tool","holster":0,"home theater, home theatre":"tv:tv","honeycomb":0,"hook, claw":"tool","hoopskirt, crinoline":"cloth:shirt","horizontal bar, high bar":0,"horse cart, horse-cart":"car:car","hourglass":"clock","iPod":"phone","iron, smoothing iron":"fridge","jack-o'-lantern":"fruit:orange","jean, blue jean, denim":"cloth:shirt","jeep, landrover":"car:car","jersey, T-shirt, tee shirt":"cloth:shirt","jigsaw puzzle":"toy","jinrikisha, ricksha, rickshaw":"car:car","joystick":"phone","kimono":"cloth:shirt","knee pad":"cloth:sock","knot":"tool","lab coat, laboratory coat":"cloth:shirt","ladle":"tool","lampshade, lamp shade":"lamp","laptop, laptop computer":"laptop","lawn mower, mower":"car:car","lens cap, lens cover":"tv:camera","letter opener, paper knife, paperknife":"tool","library":0,"lifeboat":0,"lighter, light, igniter, ignitor":"candle","limousine, limo":"car:car","liner, ocean liner":0,"lipstick, lip rouge":"keys","Loafer":"shoe:sneaker","lotion":"bottle:bottle","loudspeaker, speaker, speaker unit, loudspeaker system, speaker system":"tv:speaker","loupe, jeweler's loupe":"tv:camera","lumbermill, sawmill":0,"magnetic compass":"clock","mailbag, postbag":"bag","mailbox, letter box":"bag","maillot":"cloth:shirt","maillot, tank suit":"cloth:shirt","manhole cover":"other","maraca":"instrument:drum","marimba, xylophone":"instrument:piano","mask":"toy","matchstick":"candle","maypole":0,"maze, labyrinth":0,"measuring cup":"mug:glass","medicine chest, medicine cabinet":"chair:cabinet","megalith, megalithic structure":0,"microphone, mike":"tv:speaker","microwave, microwave oven":"fridge","military uniform":0,"milk can":"bottle:can","minibus":"car:bus","miniskirt, mini":"cloth:shirt","minivan":"car:car","missile":0,"mitten":"cloth:sock","mixing bowl":"pot:bowl","mobile home, manufactured home":0,"Model T":"car:car","modem":"laptop","monastery":0,"monitor":"tv:tv","moped":"car:bike","mortar":"other","mortarboard":"cloth:hat","mosque":0,"mosquito net":"pillow","motor scooter, scooter":"car:bike","mountain bike, all-terrain bike, off-roader":"car:bike","mountain tent":"other","mouse, computer mouse":"phone","mousetrap":"tool","moving van":"car:bus","muzzle":"keys","nail":"tool","neck brace":0,"necklace":"keys","nipple":"bottle:bottle","notebook, notebook computer":"laptop","obelisk":0,"oboe, hautboy, hautbois":"instrument:horn","ocarina, sweet potato":"instrument:horn","odometer, hodometer, mileometer, milometer":"clock","oil filter":"tool","organ, pipe organ":"instrument:piano","oscilloscope, scope, cathode-ray oscilloscope, CRO":"laptop","overskirt":"cloth:shirt","oxcart":"car:car","oxygen mask":"keys","packet":"bag","paddle, boat paddle":"tool","paddlewheel, paddle wheel":0,"padlock":"keys","paintbrush":"tool","pajama, pyjama, pj's, jammies":"cloth:shirt","palace":0,"panpipe, pandean pipe, syrinx":"instrument:horn","paper towel":"cloth:shirt","parachute, chute":"umbrella","parallel bars, bars":0,"park bench":"chair:chair","parking meter":"clock","passenger car, coach, carriage":0,"patio, terrace":0,"pay-phone, pay-station":"phone","pedestal, plinth, footstall":"other","pencil box, pencil case":"bag","pencil sharpener":"tool","perfume, essence":"bottle:bottle","Petri dish":"pot:bowl","photocopier":"fridge","pick, plectrum, plectron":"tool","pickelhaube":0,"picket fence, paling":0,"pickup, pickup truck":"car:car","pier":0,"piggy bank, penny bank":"bag","pill bottle":"bottle:bottle","pillow":"pillow","ping-pong ball":"ball:plain","pinwheel":"toy","pirate, pirate ship":0,"pitcher, ewer":"mug:teapot","plane, carpenter's plane, woodworking plane":"tool","planetarium":0,"plastic bag":"trash","plate rack":"chair:cabinet","plow, plough":"car:car","plunger, plumber's helper":"toilet","Polaroid camera, Polaroid Land camera":"tv:camera","pole":"tool","police van, police wagon, paddy wagon, patrol wagon, wagon, black Maria":"car:bus","poncho":"cloth:shirt","pool table, billiard table, snooker table":"chair:table","pop bottle, soda bottle":"bottle:bottle","pot, flowerpot":"plant:potted","potter's wheel":"tool","power drill":"tool","prayer rug, prayer mat":0,"printer":"fridge","prison, prison house":0,"projectile, missile":0,"projector":"tv:camera","puck, hockey puck":"ball:plain","punching bag, punch bag, punching ball, punchball":"bag","purse":"bag","quill, quill pen":"keys","quilt, comforter, comfort, puff":"pillow","racer, race car, racing car":"car:car","racket, racquet":"tool","radiator":"fridge","radio, wireless":"tv:speaker","radio telescope, radio reflector":0,"rain barrel":"bottle:can","recreational vehicle, RV, R.V.":"car:bus","reel":"tool","reflex camera":"tv:camera","refrigerator, icebox":"fridge","remote control, remote":"phone","restaurant, eating house, eating place, eatery":0,"revolver, six-gun, six-shooter":0,"rifle":0,"rocking chair, rocker":"chair:chair","rotisserie":"fridge","rubber eraser, rubber, pencil eraser":"keys","rugby ball":"ball:plain","rule, ruler":"tool","running shoe":"shoe:sneaker","safe":"chair:cabinet","safety pin":"keys","saltshaker, salt shaker":"bottle:bottle","sandal":"shoe:sneaker","sarong":"cloth:shirt","sax, saxophone":"instrument:horn","scabbard":0,"scale, weighing machine":"clock","school bus":"car:bus","schooner":0,"scoreboard":0,"screen, CRT screen":"tv:tv","screw":"tool","screwdriver":"tool","seat belt, seatbelt":"car:car","sewing machine":"fridge","shield, buckler":"tool","shoe shop, shoe-shop, shoe store":0,"shoji":"mirror","shopping basket":"bag","shopping cart":"car:car","shovel":"tool","shower cap":"cloth:hat","shower curtain":"faucet","ski":"tool","ski mask":"cloth:hat","sleeping bag":"pillow","slide rule, slipstick":"laptop","sliding door":"mirror","slot, one-armed bandit":"other","snorkel":"keys","snowmobile":"car:car","snowplow, snowplough":0,"soap dispenser":"faucet","soccer ball":"ball:soccer","sock":"cloth:sock","solar dish, solar collector, solar furnace":0,"sombrero":"cloth:hat","soup bowl":"pot:bowl","space bar":"laptop","space heater":"fridge","space shuttle":0,"spatula":"pot:pan","speedboat":0,"spider web, spider's web":"bug:spider","spindle":"tool","sports car, sport car":"car:car","spotlight, spot":"lamp","stage":0,"steam locomotive":0,"steel arch bridge":0,"steel drum":"instrument:drum","stethoscope":"tv:speaker","stole":"cloth:shirt","stone wall":0,"stopwatch, stop watch":"clock","stove":"fridge","strainer":"pot:bowl","streetcar, tram, tramcar, trolley, trolley car":0,"stretcher":0,"studio couch, day bed":"sofa","stupa, tope":0,"submarine, pigboat, sub, U-boat":0,"suit, suit of clothes":"cloth:shirt","sundial":"clock","sunglass":"keys","sunglasses, dark glasses, shades":"keys","sunscreen, sunblock, sun blocker":"bottle:bottle","suspension bridge":0,"swab, swob, mop":"faucet","sweatshirt":"cloth:shirt","swimming trunks, bathing trunks":"cloth:shirt","swing":"tool","switch, electric switch, electrical switch":"phone","syringe":"tool","table lamp":"lamp","tank, army tank, armored combat vehicle, armoured combat vehicle":0,"tape player":"tv:speaker","teapot":"mug:teapot","teddy, teddy bear":"toy","television, television system":"tv:tv","tennis ball":"ball:tennis","thatch, thatched roof":0,"theater curtain, theatre curtain":"cloth:shirt","thimble":"mug:mug","thresher, thrasher, threshing machine":0,"throne":"chair:chair","tile roof":0,"toaster":"fridge","tobacco shop, tobacconist shop, tobacconist":0,"toilet seat":"toilet","torch":"lamp","totem pole":0,"tow truck, tow car, wrecker":"car:bus","toyshop":0,"tractor":"car:bus","trailer truck, tractor trailer, trucking rig, rig, articulated lorry, semi":"car:bus","tray":"pot:bowl","trench coat":"cloth:shirt","tricycle, trike, velocipede":"car:bike","trimaran":0,"tripod":"tool","triumphal arch":0,"trolleybus, trolley coach, trackless trolley":0,"trombone":"instrument:horn","tub, vat":"faucet","turnstile":"tool","typewriter keyboard":"laptop","umbrella":"umbrella","unicycle, monocycle":"car:bike","upright, upright piano":"instrument:piano","vacuum, vacuum cleaner":"fridge","vase":"bottle:vase","vault":0,"velvet":"cloth:shirt","vending machine":"fridge","vestment":"cloth:shirt","viaduct":0,"violin, fiddle":"instrument:guitar","volleyball":"ball:soccer","waffle iron":"fridge","wall clock":"clock","wallet, billfold, notecase, pocketbook":"bag","wardrobe, closet, press":"chair:cabinet","warplane, military plane":0,"washbasin, handbasin, washbowl, lavabo, wash-hand basin":"faucet","washer, automatic washer, washing machine":"fridge","water bottle":"bottle:bottle","water jug":"mug:teapot","water tower":0,"whiskey jug":"mug:teapot","whistle":"instrument:horn","wig":"toy","window screen":"mirror","window shade":"mirror","Windsor tie":"cloth:shirt","wine bottle":"bottle:bottle","wing":"other","wok":"pot:pan","wooden spoon":"tool","wool, woolen, woollen":"cloth:shirt","worm fence, snake fence, snake-rail fence, Virginia fence":0,"wreck":0,"yawl":0,"yurt":0,"web site, website, internet site, site":0,"comic book":"book","crossword puzzle, crossword":"book","street sign":"book","traffic light, traffic signal, stoplight":"lamp","book jacket, dust cover, dust jacket, dust wrapper":"book","menu":"book","plate":"pot:bowl","guacamole":"pot:bowl","consomme":"pot:bowl","hot pot, hotpot":"pot:bowl","trifle":"cake:cake","ice cream, icecream":"cake:icecream","ice lolly, lolly, lollipop, popsicle":"cake:icecream","French loaf":"food:bread","bagel, beigel":"food:bread","pretzel":"food:bread","cheeseburger":"food:burger","hotdog, hot dog, red hot":"food:hotdog","mashed potato":"pot:bowl","head cabbage":"fruit:veg","broccoli":"fruit:veg","cauliflower":"fruit:veg","zucchini, courgette":"fruit:lemon","spaghetti squash":"fruit:lemon","acorn squash":"fruit:orange","butternut squash":"fruit:orange","cucumber, cuke":"fruit:lemon","artichoke, globe artichoke":"fruit:pineapple","bell pepper":"fruit:apple","cardoon":"fruit:veg","mushroom":"plant:mushroom","Granny Smith":"fruit:apple","strawberry":"fruit:strawberry","orange":"fruit:orange","lemon":"fruit:lemon","fig":"fruit:apple","pineapple, ananas":"fruit:pineapple","banana":"banana","jackfruit, jak, jack":"fruit:pineapple","custard apple":"fruit:apple","pomegranate":"fruit:apple","hay":0,"carbonara":"pot:bowl","chocolate sauce, chocolate syrup":"cake:cake","dough":"food:bread","meat loaf, meatloaf":"food:burger","pizza, pizza pie":"food:pizza","potpie":"pot:pot","burrito":"food:burger","red wine":"mug:glass","espresso":"mug:mug","cup":"mug:mug","eggnog":"mug:glass","alp":0,"bubble":0,"cliff, drop, drop-off":0,"coral reef":0,"geyser":0,"lakeside, lakeshore":0,"promontory, headland, head, foreland":0,"sandbar, sand bar":0,"seashore, coast, seacoast, sea-coast":0,"valley, vale":0,"volcano":0,"ballplayer, baseball player":0,"groom, bridegroom":0,"scuba diver":0,"rapeseed":"plant:flower","daisy":"plant:flower","yellow lady's slipper, yellow lady-slipper, Cypripedium calceolus, Cypripedium parviflorum":"plant:flower","corn":"fruit:lemon","acorn":"tree","hip, rose hip, rosehip":"fruit:apple","buckeye, horse chestnut, conker":"tree","coral fungus":"plant:mushroom","agaric":"plant:mushroom","gyromitra":"plant:mushroom","stinkhorn, carrion fungus":"plant:mushroom","earthstar":"plant:mushroom","hen-of-the-woods, hen of the woods, Polyporus frondosus, Grifola frondosa":"plant:mushroom","bolete":"plant:mushroom","ear, spike, capitulum":"fruit:lemon","toilet tissue, toilet paper, bathroom tissue":"toilet"},
+  coco: {"person":0,"bicycle":"car:bike","car":"car:car","motorcycle":"car:bike","airplane":0,"bus":"car:bus","train":"car:bus","truck":"car:bus","boat":0,"traffic light":"lamp","fire hydrant":"faucet","stop sign":"book","parking meter":"clock","bench":"chair:chair","bird":"bird:perch","cat":"animal:cat","dog":"animal:dog","horse":"animal:hoofed","sheep":"animal:hoofed","cow":"animal:hoofed","elephant":"animal:hoofed","bear":"animal:bear","zebra":"animal:hoofed","giraffe":"animal:hoofed","backpack":"bag","umbrella":"umbrella","handbag":"bag","tie":"cloth:shirt","suitcase":"bag","frisbee":"ball:plain","skis":"tool","snowboard":"tool","sports ball":"ball:plain","kite":"toy","baseball bat":"tool","baseball glove":"cloth:sock","skateboard":"car:car","surfboard":"tool","tennis racket":"tool","bottle":"bottle:bottle","wine glass":"mug:glass","cup":"mug:mug","fork":"tool","knife":"tool","spoon":"tool","bowl":"pot:bowl","banana":"banana","apple":"fruit:apple","sandwich":"food:burger","orange":"fruit:orange","broccoli":"fruit:veg","carrot":"fruit:lemon","hot dog":"food:hotdog","pizza":"food:pizza","donut":"cake:donut","cake":"cake:cake","chair":"chair:chair","couch":"sofa","potted plant":"plant:potted","bed":"pillow","dining table":"chair:table","toilet":"toilet","tv":"tv:tv","laptop":"laptop","mouse":"phone","remote":"phone","keyboard":"laptop","cell phone":"phone","microwave":"fridge","oven":"fridge","toaster":"fridge","sink":"faucet","refrigerator":"fridge","book":"book","clock":"clock","vase":"bottle:vase","scissors":"tool","teddy bear":"toy","hair drier":"fridge","toothbrush":"keys"},
+};
 
 </script>
 <script>
@@ -929,6 +975,414 @@ const SHAPES = {
 };
 const GENERIC_SHAPES = ['blob', 'tall'];
 
+/* ---------- v2 shapes: new object categories and recognised sub-types ----------
+   Looked up as SHAPES[shape + '_' + sub] first, so the original shapes above stay untouched (saved monsters render identically). */
+const star = (cx, cy, R1, R2, n = 5, rot = -Math.PI / 2) => [...Array(n * 2)].map((_, i) => { const r = i % 2 ? R2 : R1, a = rot + i * Math.PI / n; return [cx + Math.cos(a) * r, cy + Math.sin(a) * r]; });
+Object.assign(SHAPES, {
+  wide(g) {
+    rrect(g, 4, 14, 32, 19, 6, P.BODY);
+    return { eyes: { x: 20, y: 20, span: 6 }, mouth: { x: 20, y: 26, w: 10 }, arms: [{ x: 4, y: 22, d: -1 }, { x: 36, y: 22, d: 1 }], legs: { y: 33, xs: [12, 28] }, top: { x: 20, y: 14 } };
+  },
+  /* animals */
+  beast_dog(g) {
+    ell(g, 31, 21, 3, 6, P.BODY); ell(g, 20, 25, 11, 8, P.BODY); ell(g, 20, 14, 9, 7, P.BODY);
+    ell(g, 11, 15, 3, 6.5, P.ACC); ell(g, 29, 15, 3, 6.5, P.ACC);
+    ell(g, 20, 17.5, 4.5, 3, P.ACC_L); rect(g, 19, 15, 3, 2, P.PUPIL);
+    return { eyes: { x: 20, y: 12, span: 4 }, mouth: { x: 20, y: 19, w: 6 }, arms: [{ x: 10, y: 24, d: -1 }, { x: 30, y: 24, d: 1 }], legs: { y: 32, xs: [13, 18, 22, 27] }, top: { x: 20, y: 7 } };
+  },
+  beast_bear(g) {
+    ell(g, 12, 7, 3.5, 3.5, P.BODY); ell(g, 28, 7, 3.5, 3.5, P.BODY); ell(g, 12, 7, 1.6, 1.6, P.ACC); ell(g, 28, 7, 1.6, 1.6, P.ACC);
+    ell(g, 20, 26, 12, 9, P.BODY); ell(g, 20, 14, 10, 8, P.BODY); ell(g, 20, 17, 4.5, 3, P.ACC_L); ell(g, 20, 27, 6, 5, P.ACC_L);
+    return { eyes: { x: 20, y: 12, span: 4 }, mouth: { x: 20, y: 18, w: 6 }, arms: [{ x: 9, y: 24, d: -1 }, { x: 31, y: 24, d: 1 }], legs: { y: 33, xs: [14, 26] }, top: { x: 20, y: 6 } };
+  },
+  beast_rabbit(g) {
+    ell(g, 15, 5, 2.5, 6, P.BODY); ell(g, 25, 5, 2.5, 6, P.BODY); ell(g, 15, 5, 1, 4, P.ACC); ell(g, 25, 5, 1, 4, P.ACC);
+    ell(g, 31, 28, 3, 3, P.PAPER); ell(g, 20, 26, 10, 8, P.BODY); ell(g, 20, 15, 8, 7, P.BODY); ell(g, 20, 18, 3, 2, P.ACC_L);
+    return { eyes: { x: 20, y: 14, span: 4 }, mouth: { x: 20, y: 19, w: 5 }, arms: [{ x: 10, y: 25, d: -1 }, { x: 30, y: 25, d: 1 }], legs: { y: 33, xs: [15, 25] }, top: { x: 20, y: 9 } };
+  },
+  beast_hoofed(g) {
+    poly(g, [[13, 7], [9, 1], [15, 5]], P.PAPER); poly(g, [[27, 7], [31, 1], [25, 5]], P.PAPER);
+    ell(g, 32, 22, 2, 5, P.BODY); ell(g, 20, 25, 12, 7, P.BODY); ell(g, 20, 13, 7, 8, P.BODY);
+    ell(g, 11, 10, 3, 1.5, P.BODY); ell(g, 29, 10, 3, 1.5, P.BODY); ell(g, 20, 19, 5, 3, P.ACC_L);
+    gset(g, 18, 19, P.PUPIL); gset(g, 22, 19, P.PUPIL);
+    return { eyes: { x: 20, y: 12, span: 4 }, mouth: { x: 20, y: 21, w: 5 }, arms: [], legs: { y: 31, xs: [12, 17, 23, 28] }, top: { x: 20, y: 5 } };
+  },
+  beast_monkey(g) {
+    ell(g, 9, 14, 4, 4, P.BODY); ell(g, 31, 14, 4, 4, P.BODY); ell(g, 9, 14, 2, 2, P.ACC_L); ell(g, 31, 14, 2, 2, P.ACC_L);
+    line(g, 29, 30, 35, 24, P.BODY, 2); line(g, 35, 24, 33, 20, P.BODY, 2);
+    ell(g, 20, 27, 9, 7, P.BODY); ell(g, 20, 14, 9, 8, P.BODY); ell(g, 20, 16, 6.5, 5.5, P.ACC_L);
+    return { eyes: { x: 20, y: 14, span: 3 }, mouth: { x: 20, y: 19, w: 6 }, arms: [{ x: 11, y: 25, d: -1 }, { x: 29, y: 25, d: 1 }], legs: { y: 33, xs: [15, 25] }, top: { x: 20, y: 6 } };
+  },
+  /* fruit & veg */
+  fruit_orange(g) {
+    ell(g, 20, 22, 12.5, 12.5, P.BODY); rect(g, 19, 8, 2, 3, P.METAL_D); ell(g, 23, 9, 3, 1.5, P.SEC);
+    for (let i = 0; i < 10; i++) gset(g, 12 + (i * 7) % 17, 15 + (i * 5) % 15, P.BODY_D);
+    return { eyes: { x: 20, y: 20, span: 4 }, mouth: { x: 20, y: 26, w: 7 }, arms: [{ x: 7, y: 23, d: -1 }, { x: 33, y: 23, d: 1 }], legs: { y: 34, xs: [16, 24] }, top: { x: 20, y: 10 } };
+  },
+  fruit_lemon(g) {
+    ell(g, 20, 22, 15, 10, P.BODY); ell(g, 5, 22, 2, 1.5, P.BODY); ell(g, 35, 22, 2, 1.5, P.BODY);
+    return { eyes: { x: 20, y: 20, span: 5 }, mouth: { x: 20, y: 26, w: 8 }, arms: [{ x: 6, y: 24, d: -1 }, { x: 34, y: 24, d: 1 }], legs: { y: 31, xs: [15, 25] }, top: { x: 20, y: 12 } };
+  },
+  fruit_strawberry(g) {
+    ell(g, 20, 17, 13, 9, P.BODY); poly(g, [[7, 18], [33, 18], [20, 36]], P.BODY);
+    for (let y = 13; y < 31; y += 4) for (let x = 10 + (y % 8 ? 2 : 0); x < 31; x += 5) gset(g, x, y, P.PAPER);
+    poly(g, [[10, 9], [16, 7], [20, 3], [24, 7], [30, 9], [24, 11], [20, 9], [16, 11]], P.SEC); rect(g, 19, 2, 2, 3, P.SEC);
+    return { eyes: { x: 20, y: 16, span: 4 }, mouth: { x: 20, y: 22, w: 7 }, arms: [{ x: 7, y: 18, d: -1 }, { x: 33, y: 18, d: 1 }], legs: { y: 34, xs: [17, 23] }, top: { x: 20, y: 4 } };
+  },
+  fruit_pineapple(g) {
+    for (let i = -2; i <= 2; i++) poly(g, [[20 + i * 3 - 2, 13], [20 + i * 3 + 2, 13], [20 + i * 4, 1 + Math.abs(i) * 2]], P.SEC);
+    ell(g, 20, 24, 10, 12, P.BODY);
+    paintOn(g, (x, y) => ((x + y) % 5 === 0 || (x - y + 40) % 5 === 0) ? P.BODY_D : null, [P.BODY]);
+    return { eyes: { x: 20, y: 22, span: 4 }, mouth: { x: 20, y: 28, w: 7 }, arms: [{ x: 10, y: 25, d: -1 }, { x: 30, y: 25, d: 1 }], legs: { y: 35, xs: [16, 24] }, top: { x: 20, y: 3 } };
+  },
+  fruit_veg(g) {
+    rect(g, 16, 22, 8, 13, P.ACC_L);
+    for (const [x, y, r] of [[11, 14, 6], [20, 10, 7], [29, 14, 6], [15, 19, 6], [25, 19, 6]]) ell(g, x, y, r, r - 1, P.BODY);
+    for (let i = 0; i < 12; i++) gset(g, 8 + (i * 13) % 25, 6 + (i * 7) % 16, P.BODY_D);
+    return { eyes: { x: 20, y: 14, span: 5 }, mouth: { x: 20, y: 27, w: 5 }, arms: [{ x: 16, y: 27, d: -1 }, { x: 24, y: 27, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 3 } };
+  },
+  /* plants */
+  plant_flower(g) {
+    line(g, 20, 24, 20, 36, P.SEC, 2); ell(g, 14, 30, 4, 2, P.SEC); ell(g, 26, 27, 4, 2, P.SEC);
+    for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; ell(g, 20 + Math.cos(a) * 10, 14 + Math.sin(a) * 10, 4.5, 4.5, P.ACC); }
+    ell(g, 20, 14, 8, 8, P.BODY);
+    return { eyes: { x: 20, y: 13, span: 3 }, mouth: { x: 20, y: 17, w: 5 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 1 } };
+  },
+  plant_mushroom(g) {
+    rrect(g, 13, 19, 14, 16, 4, P.PAPER);
+    ell(g, 20, 17, 16, 11, P.BODY); rect(g, 3, 19, 34, 12, P.EMPTY); rrect(g, 13, 19, 14, 16, 4, P.PAPER);
+    for (const [x, y, r] of [[12, 13, 2], [20, 9, 2.5], [28, 13, 2], [16, 16, 1.5], [25, 16, 1.5]]) ell(g, x, y, r, r, P.WHITE);
+    return { eyes: { x: 20, y: 24, span: 3 }, mouth: { x: 20, y: 29, w: 6 }, arms: [{ x: 13, y: 26, d: -1 }, { x: 27, y: 26, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 6 } };
+  },
+  /* vehicles */
+  car_bus(g) {
+    rrect(g, 3, 7, 34, 23, 3, P.BODY);
+    for (let x = 6; x < 33; x += 7) rect(g, x, 10, 5, 6, P.SEC);
+    rect(g, 3, 20, 34, 2, P.ACC);
+    ell(g, 10, 31, 4, 4, P.METAL_D); ell(g, 30, 31, 4, 4, P.METAL_D); ell(g, 10, 31, 1.5, 1.5, P.METAL); ell(g, 30, 31, 1.5, 1.5, P.METAL);
+    rect(g, 3, 24, 3, 2, P.GLOW); rect(g, 34, 24, 3, 2, P.GLOW);
+    return { eyes: { x: 20, y: 13, span: 7 }, mouth: { x: 20, y: 24, w: 14 }, arms: [{ x: 3, y: 18, d: -1 }, { x: 37, y: 18, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 7 } };
+  },
+  car_bike(g) {
+    for (const cx of [9, 31]) { ell(g, cx, 28, 7, 7, P.METAL_D); ell(g, cx, 28, 5, 5, P.EMPTY); gset(g, cx, 28, P.METAL); }
+    line(g, 9, 28, 17, 19, P.BODY, 2); line(g, 17, 19, 28, 19, P.BODY, 2); line(g, 28, 19, 31, 28, P.BODY, 2); line(g, 17, 19, 20, 28, P.BODY, 2); line(g, 20, 28, 9, 28, P.BODY, 2);
+    rect(g, 13, 15, 7, 2, P.PAPER); line(g, 16, 17, 17, 19, P.METAL_D);
+    ell(g, 29, 11, 6, 6, P.BODY); rect(g, 33, 6, 5, 2, P.METAL);
+    return { eyes: { x: 29, y: 10, span: 2 }, mouth: { x: 29, y: 14, w: 4 }, arms: [], legs: null, noLegs: true, top: { x: 29, y: 5 } };
+  },
+  /* meals */
+  burger_pizza(g) {
+    poly(g, [[6, 8], [34, 8], [20, 37]], P.BODY);
+    rrect(g, 4, 4, 32, 6, 3, P.ACC);
+    for (const [x, y] of [[13, 13], [26, 13], [20, 25], [16, 19], [24, 20]]) ell(g, x, y, 2.2, 2.2, P.SEC);
+    return { eyes: { x: 20, y: 14, span: 4 }, mouth: { x: 20, y: 20, w: 6 }, arms: [{ x: 9, y: 14, d: -1 }, { x: 31, y: 14, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 4 } };
+  },
+  burger_hotdog(g) {
+    ell(g, 20, 26, 16, 6, P.ACC);
+    ell(g, 20, 21, 17, 4, P.BODY);
+    for (let x = 7; x < 33; x++) gset(g, x, 20 + ((x >> 1) % 2), P.GOLD);
+    ell(g, 20, 27, 15, 4, P.ACC);
+    return { eyes: { x: 20, y: 17, span: 6 }, mouth: { x: 20, y: 26, w: 10 }, arms: [{ x: 4, y: 24, d: -1 }, { x: 36, y: 24, d: 1 }], legs: { y: 32, xs: [12, 28] }, top: { x: 20, y: 16 } };
+  },
+  burger_bread(g) {
+    rrect(g, 4, 13, 32, 19, 8, P.ACC);
+    for (let i = 0; i < 4; i++) line(g, 9 + i * 7, 15, 13 + i * 7, 19, P.ACC_D);
+    return { eyes: { x: 20, y: 22, span: 6 }, mouth: { x: 20, y: 27, w: 10 }, arms: [{ x: 4, y: 24, d: -1 }, { x: 36, y: 24, d: 1 }], legs: { y: 32, xs: [11, 29] }, top: { x: 20, y: 13 } };
+  },
+  /* drinks & containers */
+  mug_glass(g) {
+    poly(g, [[11, 5], [29, 5], [27, 35], [13, 35]], P.BODY);
+    poly(g, [[12, 13], [28, 13], [27, 33], [13, 33]], P.SEC);
+    rect(g, 12, 11, 16, 3, P.PAPER); line(g, 14, 15, 15, 30, P.SEC_L);
+    return { eyes: { x: 20, y: 19, span: 4 }, mouth: { x: 20, y: 26, w: 7 }, arms: [{ x: 12, y: 21, d: -1 }, { x: 28, y: 21, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 5 } };
+  },
+  mug_teapot(g) {
+    ell(g, 6, 22, 5, 6, P.BODY); ell(g, 6, 22, 2.5, 3.5, P.EMPTY);
+    poly(g, [[28, 22], [36, 12], [38, 14], [31, 28]], P.BODY);
+    ell(g, 19, 23, 12, 10, P.BODY); ell(g, 19, 13, 7, 2, P.ACC); ell(g, 19, 10, 2, 2, P.ACC);
+    for (let s = 0; s < 4; s++) gset(g, 37 + (s % 2), 10 - s, P.STEAM);
+    return { eyes: { x: 19, y: 21, span: 5 }, mouth: { x: 19, y: 27, w: 8 }, arms: [], legs: { y: 33, xs: [14, 24] }, top: { x: 19, y: 9 } };
+  },
+  bottle_vase(g) {
+    rrect(g, 15, 3, 10, 7, 1, P.BODY); ell(g, 20, 4, 6, 1.5, P.BODY);
+    ell(g, 20, 22, 11, 12, P.BODY); rect(g, 9, 16, 22, 3, P.ACC);
+    for (let x = 11; x < 30; x += 4) gset(g, x, 30, P.ACC);
+    return { eyes: { x: 20, y: 21, span: 4 }, mouth: { x: 20, y: 27, w: 7 }, arms: [{ x: 9, y: 22, d: -1 }, { x: 31, y: 22, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 3 } };
+  },
+  bottle_can(g) {
+    rrect(g, 11, 4, 18, 31, 2, P.BODY);
+    rect(g, 11, 4, 18, 2, P.METAL); rect(g, 11, 33, 18, 2, P.METAL); rect(g, 18, 2, 4, 2, P.METAL);
+    rect(g, 11, 13, 18, 11, P.ACC);
+    return { eyes: { x: 20, y: 17, span: 4 }, mouth: { x: 20, y: 28, w: 7 }, arms: [{ x: 11, y: 20, d: -1 }, { x: 29, y: 20, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 2 } };
+  },
+  /* furniture */
+  chair_table(g) {
+    rect(g, 6, 22, 3, 13, P.BODY_D); rect(g, 31, 22, 3, 13, P.BODY_D);
+    rect(g, 3, 12, 34, 11, P.BODY); rect(g, 3, 21, 34, 2, P.ACC);
+    for (let x = 4; x < 37; x += 3) gset(g, x, 23, P.ACC);
+    return { eyes: { x: 20, y: 15, span: 6 }, mouth: { x: 20, y: 19, w: 12 }, arms: [{ x: 3, y: 14, d: -1 }, { x: 37, y: 14, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 12 } };
+  },
+  chair_cabinet(g) {
+    rect(g, 8, 34, 3, 2, P.METAL_D); rect(g, 29, 34, 3, 2, P.METAL_D);
+    rrect(g, 7, 3, 26, 32, 1, P.BODY); rect(g, 6, 2, 28, 3, P.ACC);
+    line(g, 20, 6, 20, 33, P.BODY_D); rect(g, 17, 18, 2, 2, P.METAL); rect(g, 22, 18, 2, 2, P.METAL);
+    return { eyes: { x: 20, y: 11, span: 6 }, mouth: { x: 20, y: 26, w: 10 }, arms: [{ x: 7, y: 18, d: -1 }, { x: 33, y: 18, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 2 } };
+  },
+  /* electronics */
+  tv_speaker(g) {
+    rrect(g, 10, 3, 20, 32, 2, P.BODY);
+    ell(g, 20, 25, 7, 7, P.METAL_D); ell(g, 20, 25, 4, 4, P.METAL); ell(g, 20, 25, 1.5, 1.5, P.METAL_D);
+    ell(g, 20, 13, 3, 3, P.METAL_D);
+    return { eyes: { x: 20, y: 8, span: 5 }, mouth: { x: 20, y: 15, w: 8 }, arms: [{ x: 10, y: 18, d: -1 }, { x: 30, y: 18, d: 1 }], legs: { y: 35, xs: [14, 26] }, top: { x: 20, y: 3 } };
+  },
+  tv_camera(g) {
+    rect(g, 14, 8, 12, 5, P.BODY); rrect(g, 5, 12, 30, 20, 3, P.BODY);
+    rect(g, 28, 14, 4, 3, P.PAPER); rect(g, 8, 10, 4, 2, P.METAL);
+    ell(g, 20, 22, 8.5, 8.5, P.METAL_D); ell(g, 20, 22, 6.5, 6.5, P.SEC);
+    return { eyes: { x: 20, y: 22, span: 0, forceStyle: 'cyclops' }, mouth: { x: 20, y: 29, w: 6 }, arms: [{ x: 5, y: 20, d: -1 }, { x: 35, y: 20, d: 1 }], legs: { y: 33, xs: [12, 28] }, top: { x: 20, y: 8 } };
+  },
+  /* clothes & shoes */
+  shoe_boot(g) {
+    rect(g, 3, 31, 30, 3, P.METAL_D);
+    ell(g, 13, 27, 10, 5, P.BODY);
+    rrect(g, 17, 5, 14, 27, 2, P.BODY); rect(g, 17, 5, 14, 3, P.ACC);
+    for (let y = 11; y < 25; y += 4) line(g, 19, y, 23, y + 1, P.ACC);
+    return { eyes: { x: 11, y: 25, span: 3 }, mouth: { x: 11, y: 29, w: 6 }, arms: [{ x: 31, y: 16, d: 1 }], legs: null, noLegs: true, top: { x: 24, y: 5 } };
+  },
+  cloth_hat(g) {
+    ell(g, 20, 29, 18, 4, P.BODY);
+    rrect(g, 10, 9, 20, 20, 6, P.BODY); rect(g, 10, 22, 20, 3, P.ACC);
+    return { eyes: { x: 20, y: 15, span: 4 }, mouth: { x: 20, y: 19, w: 6 }, arms: [], legs: null, noLegs: true, float: true, top: { x: 20, y: 9 } };
+  },
+  cloth_sock(g) {
+    rrect(g, 6, 19, 22, 11, 5, P.BODY); rrect(g, 16, 3, 12, 24, 3, P.BODY);
+    rect(g, 16, 3, 12, 4, P.ACC); ell(g, 9, 24, 3.5, 4.5, P.ACC); for (let y = 10; y < 19; y += 4) rect(g, 16, y, 12, 1, P.ACC_L);
+    return { eyes: { x: 22, y: 12, span: 3 }, mouth: { x: 22, y: 17, w: 5 }, arms: [], legs: null, noLegs: true, float: true, top: { x: 22, y: 3 } };
+  },
+  /* birds */
+  bird(g) {
+    poly(g, [[26, 27], [37, 33], [35, 25]], P.ACC);
+    ell(g, 20, 24, 10, 9, P.BODY); ell(g, 20, 13, 7, 6, P.BODY); ell(g, 20, 26, 6, 6, P.ACC_L); ell(g, 27, 23, 4, 6, P.BODY_D);
+    poly(g, [[17, 15], [23, 15], [20, 20]], P.GOLD);
+    return { eyes: { x: 20, y: 12, span: 3 }, mouth: { x: 20, y: 16, w: 3 }, arms: [], legs: { y: 33, xs: [17, 23], bird: true }, top: { x: 20, y: 7 } };
+  },
+  bird_owl(g) {
+    poly(g, [[11, 9], [12, 2], [16, 7]], P.BODY); poly(g, [[29, 9], [28, 2], [24, 7]], P.BODY);
+    ell(g, 20, 21, 12, 13, P.BODY); ell(g, 20, 27, 7, 6, P.ACC_L);
+    ell(g, 14.5, 15, 5, 5, P.ACC_L); ell(g, 25.5, 15, 5, 5, P.ACC_L);
+    poly(g, [[18, 19], [22, 19], [20, 23]], P.GOLD);
+    for (let y = 25; y < 32; y += 3) for (let x = 15; x < 26; x += 4) gset(g, x + (y % 2), y, P.BODY_D);
+    return { eyes: { x: 20, y: 15, span: 5 }, mouth: { x: 20, y: 23, w: 3 }, arms: [{ x: 8, y: 22, d: -1 }, { x: 32, y: 22, d: 1 }], legs: { y: 34, xs: [16, 24], bird: true }, top: { x: 20, y: 8 } };
+  },
+  bird_water(g) {
+    ell(g, 20, 35, 18, 2, P.SEC);
+    ell(g, 23, 27, 13, 7, P.BODY); poly(g, [[33, 24], [38, 19], [36, 27]], P.BODY); ell(g, 25, 26, 7, 4, P.BODY_D);
+    line(g, 13, 26, 12, 13, P.BODY, 3); ell(g, 12, 11, 5, 4.5, P.BODY);
+    poly(g, [[3, 11], [8, 9], [8, 14]], P.GOLD);
+    return { eyes: { x: 12, y: 10, span: 2 }, mouth: { x: 8, y: 13, w: 3 }, arms: [], legs: null, noLegs: true, top: { x: 12, y: 7 } };
+  },
+  /* sea life */
+  fish(g) {
+    poly(g, [[29, 20], [38, 11], [38, 29]], P.ACC); poly(g, [[14, 12], [22, 6], [25, 12]], P.ACC);
+    ell(g, 19, 20, 13, 9, P.BODY); ell(g, 18, 24, 9, 4, P.ACC_L);
+    line(g, 15, 15, 15, 25, P.BODY_D);
+    return { eyes: { x: 11, y: 18, span: 2 }, mouth: { x: 8, y: 22, w: 4 }, arms: [{ x: 20, y: 27, d: -1 }], legs: null, noLegs: true, float: true, top: { x: 19, y: 11 } };
+  },
+  fish_shark(g) {
+    poly(g, [[31, 21], [39, 11], [37, 21], [39, 30]], P.BODY); poly(g, [[16, 16], [24, 4], [26, 16]], P.BODY);
+    ell(g, 19, 21, 15, 7, P.BODY); ell(g, 18, 25, 12, 3.5, P.PAPER);
+    poly(g, [[18, 26], [24, 26], [16, 33]], P.BODY);
+    for (let i = 0; i < 3; i++) line(g, 22 + i * 2, 18, 22 + i * 2, 22, P.BODY_D);
+    return { eyes: { x: 11, y: 19, span: 2 }, mouth: { x: 9, y: 24, w: 8 }, arms: [], legs: null, noLegs: true, float: true, top: { x: 20, y: 14 } };
+  },
+  fish_jelly(g) {
+    for (let x = 10; x <= 30; x += 4) for (let y = 17; y < 36; y++) gset(g, x + Math.round(Math.sin(y * 0.6 + x) * 1.2), y, P.ACC);
+    ell(g, 20, 14, 13, 11, P.BODY); rect(g, 6, 16, 28, 10, P.EMPTY);
+    for (let x = 10; x <= 30; x += 4) for (let y = 17; y < 36; y++) gset(g, x + Math.round(Math.sin(y * 0.6 + x) * 1.2), y, P.ACC);
+    rect(g, 7, 15, 26, 2, P.BODY);
+    return { eyes: { x: 20, y: 9, span: 4 }, mouth: { x: 20, y: 12, w: 6 }, arms: [], legs: null, noLegs: true, float: true, top: { x: 20, y: 3 } };
+  },
+  fish_star(g) {
+    poly(g, star(20, 21, 17, 7), P.BODY);
+    for (const [x, y] of [[20, 9], [9, 17], [31, 17], [13, 30], [27, 30], [20, 26]]) gset(g, x, y, P.PAPER);
+    return { eyes: { x: 20, y: 19, span: 3 }, mouth: { x: 20, y: 24, w: 5 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 4 } };
+  },
+  /* bugs & critters */
+  bug(g) {
+    for (let i = 0; i < 3; i++) { const y = 18 + i * 6; line(g, 10, y, 3, y - 3 + i * 3, P.METAL_D); line(g, 30, y, 37, y - 3 + i * 3, P.METAL_D); }
+    line(g, 17, 8, 13, 2, P.OUT); line(g, 23, 8, 27, 2, P.OUT);
+    ell(g, 20, 10, 6, 4, P.BODY_D); ell(g, 20, 24, 11, 11, P.BODY);
+    line(g, 20, 14, 20, 34, P.BODY_D);
+    return { eyes: { x: 20, y: 20, span: 5 }, mouth: { x: 20, y: 27, w: 7 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 6 } };
+  },
+  bug_spider(g) {
+    for (let i = 0; i < 4; i++) {
+      const y = 18 + i * 4;
+      line(g, 13, y, 5, y - 6, P.BODY_D); line(g, 5, y - 6, 2, y + 4, P.BODY_D);
+      line(g, 27, y, 35, y - 6, P.BODY_D); line(g, 35, y - 6, 38, y + 4, P.BODY_D);
+    }
+    ell(g, 20, 26, 10, 9, P.BODY); ell(g, 20, 15, 7, 6, P.BODY);
+    poly(g, [[17, 26], [23, 26], [20, 31]], P.TONGUE);
+    return { eyes: { x: 20, y: 14, span: 3 }, mouth: { x: 20, y: 19, w: 5 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 9 } };
+  },
+  bug_butterfly(g) {
+    ell(g, 10, 13, 9, 8, P.ACC); ell(g, 30, 13, 9, 8, P.ACC); ell(g, 11, 27, 7, 6, P.ACC); ell(g, 29, 27, 7, 6, P.ACC);
+    ell(g, 9, 12, 3, 3, P.ACC_L); ell(g, 31, 12, 3, 3, P.ACC_L); ell(g, 11, 28, 2, 2, P.BODY_L); ell(g, 29, 28, 2, 2, P.BODY_L);
+    line(g, 18, 8, 14, 2, P.OUT); line(g, 22, 8, 26, 2, P.OUT);
+    ell(g, 20, 21, 4, 13, P.BODY);
+    return { eyes: { x: 20, y: 13, span: 2 }, mouth: { x: 20, y: 17, w: 3 }, arms: [], legs: null, noLegs: true, float: true, top: { x: 20, y: 7 } };
+  },
+  bug_crab(g) {
+    for (let i = 0; i < 3; i++) { line(g, 10, 24 + i * 3, 3, 28 + i * 3, P.BODY_D); line(g, 30, 24 + i * 3, 37, 28 + i * 3, P.BODY_D); }
+    line(g, 10, 19, 6, 13, P.BODY, 2); line(g, 30, 19, 34, 13, P.BODY, 2);
+    ell(g, 5, 10, 4.5, 4.5, P.BODY); ell(g, 35, 10, 4.5, 4.5, P.BODY); rect(g, 4, 5, 2, 4, P.EMPTY); rect(g, 34, 5, 2, 4, P.EMPTY);
+    line(g, 16, 16, 16, 11, P.BODY); line(g, 24, 16, 24, 11, P.BODY);
+    ell(g, 20, 22, 13, 8, P.BODY);
+    return { eyes: { x: 20, y: 10, span: 4 }, mouth: { x: 20, y: 24, w: 8 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 8 } };
+  },
+  bug_snail(g) {
+    rrect(g, 3, 28, 33, 6, 3, P.BODY);
+    line(g, 6, 22, 4, 14, P.BODY); line(g, 10, 22, 12, 14, P.BODY);
+    ell(g, 8, 25, 4.5, 6, P.BODY);
+    ell(g, 24, 19, 11, 11, P.ACC);
+    for (let a = 0; a < 14; a += 0.2) { const r = a * 0.7; gset(g, 24 + Math.cos(a) * r, 19 + Math.sin(a) * r, P.ACC_D); }
+    return { eyes: { x: 8, y: 13, span: 4 }, mouth: { x: 8, y: 27, w: 4 }, arms: [], legs: null, noLegs: true, top: { x: 24, y: 8 } };
+  },
+  /* reptiles & amphibians */
+  reptile(g) {
+    for (let i = 0; i < 14; i++) rect(g, 28 + i * 0.7, 25 + Math.round(Math.sin(i * 0.5) * 3), 3, 3 - (i > 9 ? 1 : 0), P.BODY);
+    ell(g, 13, 31, 2.5, 3, P.BODY); ell(g, 27, 31, 2.5, 3, P.BODY);
+    ell(g, 20, 25, 11, 6, P.BODY); ell(g, 9, 20, 7, 6, P.BODY);
+    for (let x = 14; x < 30; x += 3) gset(g, x, 19, P.ACC);
+    return { eyes: { x: 9, y: 18, span: 3 }, mouth: { x: 7, y: 23, w: 6 }, arms: [], legs: null, noLegs: true, top: { x: 9, y: 14 } };
+  },
+  reptile_frog(g) {
+    ell(g, 7, 31, 5, 3, P.BODY); ell(g, 33, 31, 5, 3, P.BODY);
+    ell(g, 20, 26, 13, 8, P.BODY); ell(g, 20, 18, 12, 7, P.BODY);
+    ell(g, 13, 12, 4.5, 4.5, P.BODY); ell(g, 27, 12, 4.5, 4.5, P.BODY); ell(g, 20, 28, 8, 5, P.ACC_L);
+    return { eyes: { x: 20, y: 12, span: 7 }, mouth: { x: 20, y: 21, w: 14 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 8 } };
+  },
+  reptile_turtle(g) {
+    ell(g, 5, 25, 5, 4, P.BODY); ell(g, 11, 31, 3, 3, P.BODY); ell(g, 30, 31, 3, 3, P.BODY); poly(g, [[34, 27], [38, 29], [34, 30]], P.BODY);
+    rect(g, 8, 26, 26, 4, P.BODY);
+    ell(g, 21, 21, 13, 9, P.ACC); rect(g, 7, 27, 28, 3, P.ACC);
+    for (const [x, y] of [[16, 17], [26, 17], [21, 22], [13, 24], [29, 24]]) { line(g, x - 2, y, x + 2, y, P.ACC_D); line(g, x, y - 2, x, y + 2, P.ACC_D); }
+    return { eyes: { x: 21, y: 16, span: 5 }, mouth: { x: 21, y: 22, w: 8 }, arms: [], legs: null, noLegs: true, top: { x: 21, y: 12 } };
+  },
+  reptile_snake(g) {
+    ell(g, 20, 31, 16, 4, P.BODY); ell(g, 20, 25, 12, 4, P.BODY); ell(g, 20, 19, 8, 3.5, P.BODY);
+    rect(g, 17, 13, 6, 6, P.BODY); ell(g, 20, 10, 7, 5.5, P.BODY);
+    for (let x = 6; x < 35; x += 4) gset(g, x, 31, P.ACC); for (let x = 10; x < 31; x += 4) gset(g, x, 25, P.ACC);
+    line(g, 20, 16, 20, 18, P.TONGUE); gset(g, 19, 19, P.TONGUE); gset(g, 21, 19, P.TONGUE);
+    return { eyes: { x: 20, y: 9, span: 3 }, mouth: { x: 20, y: 13, w: 5 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 5 } };
+  },
+  /* household extras */
+  umbrella(g) {
+    line(g, 20, 16, 20, 32, P.METAL_D, 2); line(g, 20, 33, 22, 35, P.METAL_D, 2); line(g, 22, 35, 25, 33, P.METAL_D, 2);
+    ell(g, 20, 17, 18, 13, P.BODY); rect(g, 1, 18, 38, 16, P.EMPTY);
+    for (let x = 2; x < 38; x += 6) ell(g, x + 3, 18, 3, 1.6, P.BODY);
+    for (const x of [8, 14, 26, 32]) line(g, 20, 5, x, 18, P.ACC);
+    line(g, 20, 16, 20, 32, P.METAL_D, 2); rect(g, 19, 2, 2, 3, P.METAL_D);
+    return { eyes: { x: 20, y: 11, span: 5 }, mouth: { x: 20, y: 15, w: 8 }, arms: [{ x: 3, y: 17, d: -1 }, { x: 37, y: 17, d: 1 }], legs: null, noLegs: true, float: true, top: { x: 20, y: 3 } };
+  },
+  instrument(g) {
+    rect(g, 18, 3, 4, 14, P.ACC_D); rect(g, 17, 1, 6, 3, P.ACC);
+    ell(g, 20, 28, 11, 8, P.BODY); ell(g, 20, 19, 8, 6, P.BODY);
+    ell(g, 20, 25, 3, 3, P.SEC);
+    for (const x of [19, 21]) line(g, x, 3, x, 31, P.METAL);
+    rect(g, 16, 31, 8, 2, P.ACC_D);
+    return { eyes: { x: 20, y: 18, span: 4 }, mouth: { x: 20, y: 29, w: 7 }, arms: [{ x: 9, y: 27, d: -1 }, { x: 31, y: 27, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 1 } };
+  },
+  instrument_drum(g) {
+    line(g, 7, 3, 17, 12, P.METAL_D, 2); line(g, 33, 3, 23, 12, P.METAL_D, 2); ell(g, 7, 3, 1.6, 1.6, P.PAPER); ell(g, 33, 3, 1.6, 1.6, P.PAPER);
+    rrect(g, 6, 14, 28, 18, 2, P.BODY); ell(g, 20, 14, 14, 3.5, P.PAPER);
+    rect(g, 6, 16, 28, 2, P.ACC); rect(g, 6, 30, 28, 2, P.ACC);
+    for (let x = 8; x < 33; x += 4) { line(g, x, 18, x + 2, 29, P.ACC_D); }
+    return { eyes: { x: 20, y: 21, span: 6 }, mouth: { x: 20, y: 26, w: 10 }, arms: [{ x: 6, y: 22, d: -1 }, { x: 34, y: 22, d: 1 }], legs: { y: 33, xs: [12, 28] }, top: { x: 20, y: 11 } };
+  },
+  instrument_piano(g) {
+    rect(g, 7, 27, 3, 8, P.BODY_D); rect(g, 30, 27, 3, 8, P.BODY_D);
+    rrect(g, 5, 5, 30, 23, 1, P.BODY); rect(g, 5, 20, 30, 6, P.PAPER);
+    for (let x = 7; x < 34; x += 3) rect(g, x, 20, 1, 3, P.PUPIL);
+    rect(g, 12, 7, 16, 2, P.ACC);
+    return { eyes: { x: 20, y: 12, span: 6 }, mouth: { x: 20, y: 16, w: 10 }, arms: [{ x: 5, y: 14, d: -1 }, { x: 35, y: 14, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 5 } };
+  },
+  instrument_horn(g) {
+    rect(g, 1, 17, 5, 3, P.METAL);
+    poly(g, [[25, 13], [38, 4], [38, 33], [25, 24]], P.GOLD); ell(g, 38, 18, 1.5, 14, P.ACC_D);
+    rrect(g, 5, 11, 21, 15, 5, P.BODY);
+    for (const x of [12, 16, 20]) rect(g, x, 7, 2, 4, P.METAL);
+    return { eyes: { x: 15, y: 16, span: 4 }, mouth: { x: 15, y: 21, w: 7 }, arms: [], legs: { y: 26, xs: [10, 20] }, top: { x: 15, y: 7 } };
+  },
+  ball(g) {
+    ell(g, 20, 21, 13.5, 13.5, P.BODY);
+    for (let a = -1.1; a < 1.1; a += 0.08) { gset(g, 20 + Math.sin(a) * 6 - 6, 21 + Math.cos(a) * 12 - 0, P.TONGUE); gset(g, 20 - Math.sin(a) * 6 + 6, 21 - Math.cos(a) * 12, P.TONGUE); }
+    return { eyes: { x: 20, y: 19, span: 4 }, mouth: { x: 20, y: 25, w: 7 }, arms: [{ x: 7, y: 22, d: -1 }, { x: 33, y: 22, d: 1 }], legs: { y: 34, xs: [15, 25] }, top: { x: 20, y: 8 } };
+  },
+  ball_soccer(g) {
+    ell(g, 20, 21, 13.5, 13.5, P.PAPER);
+    poly(g, star(20, 21, 4, 4, 5), P.PUPIL);
+    for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * Math.PI * 2 / 5; poly(g, star(20 + Math.cos(a) * 11, 21 + Math.sin(a) * 11, 3.2, 3.2, 5, a), P.PUPIL); }
+    ell(g, 20, 21, 13.5, 13.5, P.BODY, [P.EMPTY]);
+    return { eyes: { x: 20, y: 18, span: 5 }, mouth: { x: 20, y: 26, w: 7 }, arms: [{ x: 7, y: 22, d: -1 }, { x: 33, y: 22, d: 1 }], legs: { y: 34, xs: [15, 25] }, top: { x: 20, y: 8 } };
+  },
+  ball_basket(g) {
+    ell(g, 20, 21, 13.5, 13.5, P.BODY);
+    line(g, 20, 8, 20, 34, P.OUT); line(g, 7, 21, 33, 21, P.OUT);
+    for (let a = -1.2; a < 1.2; a += 0.06) { gset(g, 9 + Math.cos(a) * 5, 21 + Math.sin(a) * 11, P.OUT); gset(g, 31 - Math.cos(a) * 5, 21 + Math.sin(a) * 11, P.OUT); }
+    return { eyes: { x: 20, y: 17, span: 5 }, mouth: { x: 20, y: 25, w: 7 }, arms: [{ x: 7, y: 22, d: -1 }, { x: 33, y: 22, d: 1 }], legs: { y: 34, xs: [15, 25] }, top: { x: 20, y: 8 } };
+  },
+  ball_tennis(g) {
+    ell(g, 20, 21, 13.5, 13.5, P.BODY);
+    for (let a = -1.3; a < 1.3; a += 0.06) { gset(g, 7 + Math.cos(a) * 7, 21 + Math.sin(a) * 10, P.PAPER); gset(g, 33 - Math.cos(a) * 7, 21 + Math.sin(a) * 10, P.PAPER); }
+    return { eyes: { x: 20, y: 18, span: 4 }, mouth: { x: 20, y: 25, w: 7 }, arms: [{ x: 7, y: 22, d: -1 }, { x: 33, y: 22, d: 1 }], legs: { y: 34, xs: [15, 25] }, top: { x: 20, y: 8 } };
+  },
+  pot(g) {
+    for (let i = 0; i < 3; i++) for (let s = 0; s < 4; s++) gset(g, 14 + i * 6 + (s % 2), 6 - s, P.STEAM);
+    rect(g, 2, 16, 6, 3, P.ACC); rect(g, 32, 16, 6, 3, P.ACC);
+    rrect(g, 7, 14, 26, 18, 3, P.BODY); rect(g, 5, 13, 30, 3, P.BODY);
+    ell(g, 20, 11, 13, 2.5, P.BODY); ell(g, 20, 8, 2.5, 2, P.ACC);
+    return { eyes: { x: 20, y: 20, span: 5 }, mouth: { x: 20, y: 26, w: 10 }, arms: [], legs: { y: 32, xs: [12, 28] }, top: { x: 20, y: 7 } };
+  },
+  pot_pan(g) {
+    rect(g, 28, 22, 11, 3, P.ACC);
+    ell(g, 16, 24, 14, 8, P.BODY); ell(g, 16, 23, 11, 5.5, P.METAL_D);
+    ell(g, 16, 23, 6, 3.5, P.PAPER); ell(g, 17, 23, 2.5, 2, P.GOLD);
+    return { eyes: { x: 16, y: 21, span: 4 }, mouth: { x: 16, y: 28, w: 8 }, arms: [], legs: { y: 32, xs: [10, 22] }, top: { x: 16, y: 16 } };
+  },
+  pot_bowl(g) {
+    ell(g, 20, 19, 14, 5, P.SEC);
+    for (let i = 0; i < 5; i++) gset(g, 12 + i * 4, 16 + (i % 2), P.SEC_L);
+    ell(g, 20, 21, 16, 10, P.BODY); rect(g, 3, 8, 34, 13, P.EMPTY); ell(g, 20, 19, 14, 4, P.SEC); rect(g, 4, 20, 32, 2, P.BODY_L);
+    rect(g, 15, 30, 10, 3, P.BODY);
+    return { eyes: { x: 20, y: 24, span: 5 }, mouth: { x: 20, y: 28, w: 8 }, arms: [{ x: 4, y: 22, d: -1 }, { x: 36, y: 22, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 14 } };
+  },
+  cake(g) {
+    ell(g, 20, 34, 17, 2.5, P.METAL);
+    rrect(g, 6, 14, 28, 20, 2, P.BODY); rect(g, 6, 23, 28, 2, P.PAPER);
+    ell(g, 20, 14, 14, 3, P.PAPER); for (let x = 8; x < 33; x += 5) rect(g, x, 16, 2, 2 + (x % 3), P.PAPER);
+    rect(g, 19, 5, 2, 7, P.ACC); ell(g, 20, 3, 1.5, 2, P.GLOW);
+    return { eyes: { x: 20, y: 20, span: 5 }, mouth: { x: 20, y: 28, w: 10 }, arms: [{ x: 6, y: 25, d: -1 }, { x: 34, y: 25, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 11 } };
+  },
+  cake_donut(g) {
+    ell(g, 20, 22, 15, 12, P.ACC);
+    ell(g, 20, 20, 13, 9, P.BODY); ell(g, 20, 21, 4.5, 3, P.EMPTY);
+    for (let i = 0; i < 14; i++) { const a = i * 0.45, r = 8.5 + (i % 3); gset(g, 20 + Math.cos(a) * r * 1.3, 20 + Math.sin(a) * r * 0.8, [P.PAPER, P.GOLD, P.TONGUE, P.SEC][i % 4]); }
+    return { eyes: { x: 20, y: 14, span: 5 }, mouth: { x: 20, y: 29, w: 8 }, arms: [{ x: 5, y: 22, d: -1 }, { x: 35, y: 22, d: 1 }], legs: { y: 34, xs: [14, 26] }, top: { x: 20, y: 10 } };
+  },
+  cake_icecream(g) {
+    poly(g, [[11, 21], [29, 21], [20, 37]], P.ACC);
+    for (let k = 0; k < 4; k++) { line(g, 12 + k * 4, 22, 20 + k * 2 - 3, 34, P.ACC_D); }
+    ell(g, 20, 17, 10, 7, P.BODY); ell(g, 20, 9, 7, 5.5, P.BODY);
+    ell(g, 20, 3, 2, 2, P.TONGUE);
+    return { eyes: { x: 20, y: 14, span: 4 }, mouth: { x: 20, y: 19, w: 6 }, arms: [{ x: 11, y: 23, d: -1 }, { x: 29, y: 23, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 4 } };
+  },
+});
+const SEC_COLOR_V2 = {
+  plant_flower: [110, 55, 38], fruit_strawberry: [110, 60, 38], fruit_pineapple: [110, 55, 35], car_bus: [195, 55, 78], burger_pizza: [5, 75, 45],
+  mug_glass: [40, 85, 55], instrument: [25, 50, 18], bird_water: [200, 70, 55], pot_bowl: [30, 65, 50], cake_donut: [190, 70, 60], tv_camera: [210, 60, 30],
+};
+
 /* ---------- features ---------- */
 function drawEyes(g, a, style, count, R, glow) {
   const { x, y, span } = a;
@@ -990,6 +1444,7 @@ function drawLegs(g, L, style, c = P.BODY) {
       case 'spider': line(g, lx, L.y - 1, lx + (lx < 20 ? -3 : 3), L.y + 1, c); line(g, lx + (lx < 20 ? -3 : 3), L.y + 1, lx + (lx < 20 ? -4 : 4), L.y + 4, c); break;
       case 'tentacles': for (let i = 0; i < 5; i++) gset(g, lx + Math.round(Math.sin(i * 1.2)), L.y + i, c); break;
       case 'roots': line(g, lx, L.y - 2, lx + (lx < 20 ? -4 : 4), L.y + 1, P.ACC, 2); break;
+      case 'birdfeet': line(g, lx, L.y - 1, lx, L.y + 2, P.GOLD); line(g, lx - 2, L.y + 3, lx + 2, L.y + 3, P.GOLD); break;
       default: rect(g, lx - 2, L.y - 1, 4, 3, c);
     }
   }
@@ -1103,7 +1558,8 @@ function makeDNA(m) {
   const tier = RARITY[m.rarity].tier;
   const SR = mulberry(hashStr('species:' + m.cat + ':' + m.rarity + ':' + (m.word || '')));
   const R = mulberry(m.seed);
-  const shape = cat.shape || GENERIC_SHAPES[hashStr(m.word || 'x') % GENERIC_SHAPES.length];
+  // v2: an unmapped (but genuinely recognised) object takes its silhouette from the detected box's proportions
+  const shape = cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : GENERIC_SHAPES[hashStr(m.word || 'x') % GENERIC_SHAPES.length]);
 
   const eyePool = [['round', 'dot', 'sleepy'], ['round', 'googly', 'angry'], ['angry', 'googly', 'cyclops', 'slit'], ['angry', 'slit', 'many', 'cyclops'], ['slit', 'angry', 'cyclops']][tier];
   const mouthPool = [['smile', 'o', 'grin'], ['grin', 'tongue', 'smile', 'zigzag'], ['fangs', 'grin', 'zigzag', 'tongue'], ['chomp', 'fangs', 'tongue'], ['chomp', 'fangs']][tier];
@@ -1132,16 +1588,17 @@ function makeDNA(m) {
     pattern: tier >= 2 || R.chance(0.35) ? R.pick(['spots', 'stripes', 'belly', 'none']) : 'none',
     spikes: tier >= 2 && SR.chance(0.5), wings: tier >= 3 && SR.chance(0.6),
     drips: m.variant === 'mutated', variant: m.variant || null, tier, featSeed: R.int(1, 1e9),
-    col: { h: Math.round(h), s, l, ah: Math.round(ah), as, al }, sec: SEC_COLOR[shape] || null,
+    col: { h: Math.round(h), s, l, ah: Math.round(ah), as, al }, sec: SEC_COLOR_V2[shape + '_' + m.sub] || SEC_COLOR[shape] || SEC_COLOR_V2[shape] || null,
     glow: tier >= 4 ? '#ffe45c' : m.variant === 'spectral' ? '#9ff7ff' : m.variant === 'mutated' ? '#c6ff4a' : null,
     glowEyes: tier >= 4 || m.variant === 'spectral',
   };
   if (m.variant === 'spectral' && tier >= 4) dna.top = 'halo';
+  if (m.sub && SHAPES[shape + '_' + m.sub]) dna.sub = m.sub; // recognised sub-type (dog, strawberry, bus…); absent on v1 monsters
   return dna;
 }
 
 function buildGrid(dna) {
-  const builder = SHAPES[dna.shape] || SHAPES.blob;
+  const builder = (dna.sub && SHAPES[dna.shape + '_' + dna.sub]) || SHAPES[dna.shape] || SHAPES.blob;
   const probe = makeGrid();
   const A = builder(probe, mulberry(dna.shapeSeed), dna);
   const R = mulberry(dna.featSeed);
@@ -1150,7 +1607,7 @@ function buildGrid(dna) {
   if (dna.wings) drawWings(g, 20, (A.eyes.y + A.mouth.y) / 2);
   for (const arm of A.arms || []) drawArm(g, arm, dna.arms, R);
   const ghost = dna.variant === 'spectral' || A.float;
-  if (!A.noLegs && !ghost) drawLegs(g, A.legs, A.legs && A.legs.roots ? 'roots' : dna.legs);
+  if (!A.noLegs && !ghost) drawLegs(g, A.legs, A.legs && A.legs.roots ? 'roots' : A.legs && A.legs.bird ? 'birdfeet' : dna.legs);
   // body
   builder(g, mulberry(dna.shapeSeed), dna);
   if (dna.pattern !== 'none') addPattern(g, dna.pattern, mulberry(dna.featSeed + 7));
@@ -1266,16 +1723,16 @@ let RNG = Math.random; // swappable for tests
 
 function freshState() {
   return {
-    v: 1, created: Date.now(), level: 1, xp: 0, hp: 60, coins: 40, rp: 0,
+    v: 2, created: Date.now(), level: 1, xp: 0, hp: 60, coins: 40, rp: 0,
     mats: { scrap: 4, goo: 4, ecto: 0, prism: 0 },
     items: { potion: 3, greater: 0, strength: 0, defense: 0, antidote: 1, enhancer: 0, trap: 5, smoke: 1 },
     weapons: { sword: 0 }, equipped: 'sword', charms: {}, charmSlots: [null, null],
     research: {}, monsters: [], dex: {}, companion: null,
     questsClaimed: {}, achievements: {},
     stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {},
-             cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0 },
+             cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0, unrecognized: 0, labelsSeen: {} },
     enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [] },
-    settings: { muted: false, keepPhotos: false, aiLens: false },
+    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false },
     lastTick: Date.now(), nextId: 1, log: [],
   };
 }
@@ -1288,6 +1745,9 @@ function migrate(s) {
   if (!out.weapons || !Object.keys(out.weapons).length) out.weapons = { sword: 0 };
   if (!WEAPONS[out.equipped] || out.weapons[out.equipped] == null) out.equipped = Object.keys(out.weapons)[0];
   out.monsters = (out.monsters || []).filter(m => m && m.cat && CATEGORY[m.cat] && m.dna);
+  // v1 -> v2 (AI recognition update): manual-entry setting retired, new counters added. Monsters, dex and progress are kept as-is.
+  if ((s.v || 1) < 2) { delete out.settings.aiLens; out.v = 2; }
+  if (!out.stats.labelsSeen) out.stats.labelsSeen = {};
   return out;
 }
 let storageOK = true;
@@ -1428,8 +1888,12 @@ function pickWeighted(weights, rng) {
   for (const [k, v] of Object.entries(weights)) { if ((x -= v) < 0) return k; }
   return Object.keys(weights)[0];
 }
-/* Main photo resolution. Mutates S. Returns { encounter, monster?, line, ... } */
-function resolvePhoto(S, cat, photo, word, rng = RNG) {
+/* Main photo resolution for a RECOGNISED object. Mutates S. Returns { encounter, monster?, line, ... }
+   obj: the recognised object { label, sub, aspect, conf } (a plain string is accepted as the label). */
+function resolvePhoto(S, cat, photo, obj, rng = RNG) {
+  if (typeof obj === 'string' || obj == null) obj = { label: obj || '' };
+  const word = obj.label;
+  if (word) S.stats.labelsSeen[word] = (S.stats.labelsSeen[word] || 0) + 1;
   const first = S.stats.photos === 0 && S.stats.encounters === 0;
   const ch = encounterChance(S, cat, photo);
   S.stats.photos++;
@@ -1452,7 +1916,7 @@ function resolvePhoto(S, cat, photo, word, rng = RNG) {
     else if (has(S, 'mutagen') && rng() < 0.09) variant = 'mutated';
     if (has(S, 'chroma') && rng() < 1 / 12) variant = 'shiny';
   }
-  const m = createMonster(S, { cat, rarity, variant, word, photo, first, rng });
+  const m = createMonster(S, { cat, rarity, variant, word, photo, first, rng, sub: obj.sub, aspect: obj.aspect, conf: obj.conf });
   return { encounter: true, monster: m, first, chance: ch };
 }
 
@@ -1504,20 +1968,21 @@ function monsterStats(rarity, fam, L, seed, variant) {
   if (variant === 'mutated') st.atk = Math.round(st.atk * 1.1);
   return st;
 }
-function createMonster(S, { cat, rarity, variant, word, photo, first, rng = RNG }) {
+function createMonster(S, { cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
   const fam = monsterFamily(cat, word, variant);
   const r = RARITY[rarity];
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
   const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit } : null;
-  const base = { cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph };
+  const base = { cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
   const m = {
     ...base, id: null, fam, level,
     name: speciesName(cat, rarity, base.word, fam),
     stats: monsterStats(rarity, fam, level, seed, variant),
     abilities: monsterAbilities(cat, rarity, fam, base.word),
     dna: makeDNA(base), species: speciesKey(cat, rarity), seenAt: Date.now(),
+    label: word ? String(word).slice(0, 40) : null, conf: conf != null ? +(+conf).toFixed(2) : null,
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
   return m;
@@ -1895,7 +2360,8 @@ const SFX = (() => {
 
 </script>
 <script>
-/* SNAPMON — real photo input, on-device image analysis, optional live viewfinder and optional AI lens.
+/* SNAPMON — real photo input, on-device colour/similarity analysis and the optional live viewfinder.
+   Object recognition lives in lens.js.
    Photos never leave the device. Pixels are reduced to a colour signature + 64-bit similarity hash, then discarded
    (unless the player opts in to keeping small thumbnails). */
 'use strict';
@@ -1912,13 +2378,19 @@ const Photo = (() => {
     });
   }
 
-  function analyze(src) {
+  // box: optional [x, y, w, h] as fractions of the image (a detected object). Colour is read from that region.
+  function analyze(src, box) {
     const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
     const c = document.createElement('canvas'); c.width = 64; c.height = 64;
     const ctx = c.getContext('2d', { willReadFrequently: true });
-    // centre crop: the object being photographed is usually in the middle
-    const side = Math.min(w, h) * 0.8, sx = (w - side) / 2, sy = (h - side) / 2;
-    ctx.drawImage(src, sx, sy, side, side, 0, 0, 64, 64);
+    if (box) {
+      const bx = box[0] * w, by = box[1] * h, bw = Math.max(4, box[2] * w), bh = Math.max(4, box[3] * h);
+      ctx.drawImage(src, bx + bw * 0.1, by + bh * 0.1, bw * 0.8, bh * 0.8, 0, 0, 64, 64);
+    } else {
+      // centre crop: the object being photographed is usually in the middle
+      const side = Math.min(w, h) * 0.8, sx = (w - side) / 2, sy = (h - side) / 2;
+      ctx.drawImage(src, sx, sy, side, side, 0, 0, 64, 64);
+    }
     const d = ctx.getImageData(0, 0, 64, 64).data;
     const bins = new Array(24).fill(0); let sumS = 0, sumL = 0, n = 0;
     for (let i = 0; i < d.length; i += 4) {
@@ -1973,34 +2445,224 @@ const Photo = (() => {
     isOpen: () => !!stream,
   };
 
-  /* Optional AI lens: MobileNet (ImageNet classes) running fully in the browser via TensorFlow.js.
-     Downloads ~10 MB the first time. Some hosts (e.g. the Claude artifact sandbox) block the model download — then it reports unavailable. */
-  const ai = { state: 'off', model: null, error: '' };
-  function addScript(src) {
-    return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.async = true; s.onload = res; s.onerror = () => rej(new Error('blocked: ' + src)); document.head.appendChild(s); });
-  }
-  ai.load = async function () {
-    if (ai.model) return ai.model;
-    if (ai.state === 'loading') return null;
-    ai.state = 'loading'; ai.error = '';
-    try {
-      const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timed out')), 45000));
-      await Promise.race([(async () => {
-        if (!window.tf) await addScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
-        if (!window.mobilenet) await addScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js');
-        ai.model = await window.mobilenet.load({ version: 2, alpha: 0.5 });
-      })(), timeout]);
-      ai.state = 'ready';
-    } catch (e) { ai.state = 'failed'; ai.error = String(e.message || e); ai.model = null; }
-    return ai.model;
-  };
-  ai.classify = async function (img) {
-    if (!ai.model) return [];
-    const preds = await ai.model.classify(img, 5);
-    return preds.map(p => ({ label: p.className.split(',')[0], prob: p.probability, cat: matchCategory(p.className.replace(/,/g, ' ')) }));
-  };
+  return { loadFile, analyze, thumbnail, live };
+})();
 
-  return { loadFile, analyze, thumbnail, live, ai };
+</script>
+<script>
+/* SNAPMON — Spirit Lens: on-device object recognition.
+   Two open-source TensorFlow.js models share one runtime (WebGL on Android Chrome):
+     • MobileNet v2 (ImageNet, 1000 classes) — what is this object, fine-grained ("coffee mug", "strawberry", "golden retriever").
+     • COCO-SSD lite (80 classes, bounding boxes) — where are the objects, so a photo with several things offers a choice.
+   Each detected box is cropped and re-classified with MobileNet for a more specific label.
+   Weights are downloaded once (~30 MB) and cached in IndexedDB. Photos never leave the device. */
+'use strict';
+
+const Lens = (() => {
+  const CFG = {
+    tfjs: 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
+    mobilenetLib: 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js',
+    cocoLib: 'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js',
+    cacheKeys: { classifier: 'indexeddb://snapmon-lens-mobilenet-v2-100', detector: 'indexeddb://snapmon-lens-cocossd-lite' },
+    localUrls: { classifier: 'models/mobilenet_v2_100/model.json', detector: 'models/ssdlite_mobilenet_v2/model.json' },
+    MIN_CONF: 0.25,      // below this nothing counts as recognised
+    AUTO_CONF: 0.55,     // at or above this (with a clear winner) the object is identified automatically
+    CLEAR_MARGIN: 0.7,   // runner-up must be below top × this for an automatic pick
+    DET_MIN: 0.45,       // detector boxes below this score are ignored
+    MAX_DET_CROPS: 3,
+    MAX_CHOICES: 4,
+    INPUT_MAX: 640,      // photos are downscaled to this before inference (memory + speed on phones)
+  };
+  const SURFACES = new Set(['dining table', 'bed', 'couch', 'bench']);
+  const st = { state: 'idle', error: '', classifier: null, detector: null, backend: '', loadMs: 0, sources: {}, progress: '' };
+  const listeners = new Set();
+  const emit = () => listeners.forEach(f => { try { f(st); } catch (e) {} });
+  let loading = null;
+
+  function addScript(src) {
+    return new Promise((res, rej) => {
+      if ([...document.scripts].some(s => s.src === src && s.dataset.loaded)) return res();
+      const s = document.createElement('script'); s.src = src; s.async = true; s.crossOrigin = 'anonymous';
+      s.onload = () => { s.dataset.loaded = '1'; res(); }; s.onerror = () => rej(new Error('could not download ' + src.split('/npm/')[1]));
+      document.head.appendChild(s);
+    });
+  }
+  const withTimeout = (p, ms, what) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(what + ' timed out')), ms))]);
+
+  // Try IndexedDB cache → same-origin copy (GitHub Pages build) → public model host. Cache on first network success.
+  async function loadModel(kind, loaders) {
+    const errs = [];
+    for (const [source, fn] of loaders) {
+      try {
+        const m = await fn();
+        st.sources[kind] = source;
+        if (source !== 'cache') { try { await m.model.save(CFG.cacheKeys[kind]); } catch (e) { /* storage full or blocked: fine, HTTP cache still helps */ } }
+        return m;
+      } catch (e) { errs.push(source + ': ' + (e.message || e)); }
+    }
+    throw new Error(kind + ' unavailable (' + errs.join('; ') + ')');
+  }
+
+  async function load() {
+    if (st.state === 'ready') return true;
+    if (loading) return loading;
+    loading = (async () => {
+      const t0 = performance.now();
+      st.state = 'loading'; st.error = ''; st.progress = 'Downloading the AI runtime…'; emit();
+      try {
+        await withTimeout(addScript(CFG.tfjs), 60000, 'AI runtime');
+        await Promise.all([addScript(CFG.mobilenetLib), addScript(CFG.cocoLib)].map(p => withTimeout(p, 60000, 'model library')));
+        try { await tf.setBackend('webgl'); } catch (e) { /* falls back to whatever is available */ }
+        await tf.ready();
+        st.backend = tf.getBackend();
+        try { tf.env().set('WEBGL_DELETE_TEXTURE_THRESHOLD', 0); } catch (e) {} // free GPU textures eagerly on low-memory phones
+        st.progress = 'Loading recognition models…'; emit();
+        const mnLocal = new URL(CFG.localUrls.classifier, location.href).href, coLocal = new URL(CFG.localUrls.detector, location.href).href;
+        const [cls, det] = await Promise.allSettled([
+          withTimeout(loadModel('classifier', [
+            ['cache', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: CFG.cacheKeys.classifier, inputRange: [0, 1] })],
+            ['site', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: mnLocal, inputRange: [0, 1] })],
+            ['tfhub', () => mobilenet.load({ version: 2, alpha: 1.0 })],
+            ['tfhub-lite', () => mobilenet.load({ version: 2, alpha: 0.5 })],
+          ]), 120000, 'classifier'),
+          withTimeout(loadModel('detector', [
+            ['cache', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: CFG.cacheKeys.detector })],
+            ['site', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: coLocal })],
+            ['google', () => cocoSsd.load({ base: 'lite_mobilenet_v2' })],
+          ]), 120000, 'detector'),
+        ]);
+        st.classifier = cls.status === 'fulfilled' ? cls.value : null;
+        st.detector = det.status === 'fulfilled' ? det.value : null;
+        if (!st.classifier && !st.detector) throw new Error((cls.reason && cls.reason.message) || 'models unavailable');
+        st.state = 'ready';
+        st.error = !st.detector ? 'multi-object detector unavailable: ' + det.reason.message : !st.classifier ? 'fine classifier unavailable: ' + cls.reason.message : '';
+        st.loadMs = Math.round(performance.now() - t0);
+        st.progress = '';
+      } catch (e) {
+        st.state = 'failed'; st.error = String(e.message || e); st.progress = '';
+      }
+      loading = null; emit();
+      return st.state === 'ready';
+    })();
+    return loading;
+  }
+
+  /* ---------- helpers ---------- */
+  const nextFrame = () => new Promise(r => requestAnimationFrame(() => r()));
+  function toCanvas(src, maxSide) {
+    const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
+    const s = Math.min(1, maxSide / Math.max(w, h));
+    const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * s)); c.height = Math.max(1, Math.round(h * s));
+    c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+    return c;
+  }
+  function crop(src, x, y, w, h, size = 224) {
+    // square crop around the box with 12% padding, clamped to the image
+    const W = src.width, H = src.height, side = Math.min(Math.max(w, h) * 1.12, Math.max(W, H));
+    let cx = x + w / 2 - side / 2, cy = y + h / 2 - side / 2;
+    cx = Math.max(0, Math.min(W - side, cx)); cy = Math.max(0, Math.min(H - side, cy));
+    const c = document.createElement('canvas'); c.width = size; c.height = size;
+    const ctx = c.getContext('2d'); ctx.fillStyle = '#808080'; ctx.fillRect(0, 0, size, size);
+    ctx.drawImage(src, cx, cy, Math.min(side, W), Math.min(side, H), 0, 0, size * Math.min(side, W) / side, size * Math.min(side, H) / side);
+    return c;
+  }
+  function parse(code) { if (!code) return null; const [cat, sub] = code.split(':'); return CATEGORY[cat] ? { cat, sub: sub || null } : null; }
+  function mapImagenet(className) {
+    const code = LABEL_MAP.imagenet[className];
+    if (code === 0) return 'excluded';
+    if (code) return parse(code);
+    const cat = matchCategory(className.replace(/,/g, ' ')); // safety net if a model ships different label text
+    return cat ? { cat, sub: null } : { cat: 'other', sub: null };
+  }
+  function mapCoco(name) { const code = LABEL_MAP.coco[name]; return code === 0 ? 'excluded' : code ? parse(code) : null; }
+  const pretty = s => s.split(',')[0].trim().replace(/^./, c => c.toLowerCase());
+
+  /* ---------- recognition ---------- */
+  async function recognize(src) {
+    if (st.state !== 'ready') throw new Error('Spirit Lens is not ready');
+    const T = { start: performance.now() }, dbg = { backend: st.backend, sources: { ...st.sources }, detections: [], full: [], crops: [] };
+    const img = toCanvas(src, CFG.INPUT_MAX);
+    await nextFrame();
+    let dets = [];
+    if (st.detector) {
+      const t = performance.now();
+      dets = (await st.detector.detect(img, 8, 0.3)).map(d => ({ ...d, map: mapCoco(d.class) }));
+      T.detect = Math.round(performance.now() - t);
+      // a table/bed/sofa under another object is usually just the background: let the object on top win
+      for (const d of dets) {
+        if (!SURFACES.has(d.class)) continue;
+        const [x, y, w, h] = d.bbox;
+        if (dets.some(o => o !== d && !SURFACES.has(o.class) && o.class !== 'person' && o.score >= CFG.DET_MIN && (() => { const cx = o.bbox[0] + o.bbox[2] / 2, cy = o.bbox[1] + o.bbox[3] / 2; return cx > x && cx < x + w && cy > y && cy < y + h; })())) { d.score *= 0.55; d.surface = true; }
+      }
+      dbg.detections = dets.map(d => ({ label: d.class, score: d.score, map: (d.map === 'excluded' ? 'excluded' : d.map ? d.map.cat + (d.map.sub ? ':' + d.map.sub : '') : '?') + (d.surface ? ' (background surface)' : '') }));
+      await nextFrame();
+    }
+    const cands = [];
+    if (st.classifier) {
+      // whole photo (centre 90% square)
+      const t = performance.now();
+      const W = img.width, H = img.height, side = Math.min(W, H) * 0.9;
+      const preds = await st.classifier.classify(crop(img, (W - side) / 2, (H - side) / 2, side, side), 5);
+      T.classify = Math.round(performance.now() - t);
+      dbg.full = preds.map(p => ({ label: pretty(p.className), prob: p.probability, map: fmtMap(mapImagenet(p.className)) }));
+      for (const p of preds) {
+        const m = mapImagenet(p.className);
+        if (m === 'excluded' || p.probability < 0.08) continue;
+        cands.push({ label: pretty(p.className), cat: m.cat, sub: m.sub, conf: p.probability, box: null, src: 'photo' });
+      }
+      await nextFrame();
+    }
+    // detected objects, most prominent first, refined by classifying each crop
+    const objects = dets.filter(d => d.map && d.map !== 'excluded' && d.score >= CFG.DET_MIN)
+      .sort((a, b) => b.score * Math.sqrt(b.bbox[2] * b.bbox[3]) - a.score * Math.sqrt(a.bbox[2] * a.bbox[3]));
+    const tc = performance.now();
+    for (const [i, d] of objects.entries()) {
+      const [x, y, w, h] = d.bbox;
+      let label = d.class, cat = d.map.cat, sub = d.map.sub, conf = d.score;
+      if (st.classifier && i < CFG.MAX_DET_CROPS) {
+        const p = (await st.classifier.classify(crop(img, x, y, w, h), 3))[0];
+        const m = p && mapImagenet(p.className);
+        dbg.crops.push({ box: d.class, label: p ? pretty(p.className) : '-', prob: p ? p.probability : 0, map: fmtMap(m) });
+        if (m && m !== 'excluded' && m.cat === cat && p.probability >= 0.2) { label = pretty(p.className); sub = m.sub || sub; conf = Math.min(0.99, Math.max(conf, p.probability) + 0.08); }
+        await nextFrame();
+      }
+      cands.push({ label, cat, sub, conf, box: [x / img.width, y / img.height, w / img.width, h / img.height], aspect: h / w, src: 'detector' });
+    }
+    T.crops = Math.round(performance.now() - tc);
+    // merge: one entry per category, keep the strongest; agreement between whole-photo and detector raises confidence
+    const byCat = new Map();
+    for (const c of cands) {
+      const prev = byCat.get(c.cat);
+      if (!prev) { byCat.set(c.cat, { ...c }); continue; }
+      const best = (c.box && !prev.box) || c.conf > prev.conf ? { ...c } : { ...prev };
+      if (c.src !== prev.src) best.conf = Math.min(0.99, Math.max(c.conf, prev.conf) + 0.1);
+      if (!best.box) { best.box = prev.box || c.box; best.aspect = prev.aspect || c.aspect; }
+      best.src = c.src !== prev.src ? 'both' : best.src;
+      byCat.set(c.cat, best);
+    }
+    const ranked = [...byCat.values()].sort((a, b) => b.conf - a.conf);
+    const valid = ranked.filter(c => c.conf >= CFG.MIN_CONF).slice(0, CFG.MAX_CHOICES);
+    const people = dets.filter(d => d.class === 'person' && d.score > 0.6).length;
+    const fullTop = dbg.full[0];
+    let decision, reason;
+    if (!valid.length) {
+      decision = 'unknown';
+      reason = people && !objects.length ? 'person' : fullTop && fullTop.map === 'excluded' && fullTop.prob > 0.3 ? 'scene' : 'low';
+    } else if (valid.filter(c => c.box && c.src !== 'photo').length >= 2) { decision = 'choose'; reason = 'multiple'; }
+    else if (valid[0].conf >= CFG.AUTO_CONF && (!valid[1] || valid[1].conf < valid[0].conf * CFG.CLEAR_MARGIN)) { decision = 'auto'; reason = 'confident'; }
+    else { decision = 'choose'; reason = 'unsure'; }
+    T.total = Math.round(performance.now() - T.start);
+    T.lensLoad = st.loadMs; dbg.times = T; dbg.decision = decision; dbg.reason = reason; dbg.candidates = ranked.map(c => ({ label: c.label, cat: c.cat, sub: c.sub, conf: c.conf, src: c.src }));
+    dbg.thresholds = { min: CFG.MIN_CONF, auto: CFG.AUTO_CONF, detMin: CFG.DET_MIN };
+    return { decision, reason, candidates: valid, image: img, debug: dbg };
+  }
+  function fmtMap(m) { return m === 'excluded' ? 'excluded' : m ? m.cat + (m.sub ? ':' + m.sub : '') : '?'; }
+
+  async function clearCache() {
+    for (const k of Object.values(CFG.cacheKeys)) { try { await tf.io.removeModel(k); } catch (e) {} }
+  }
+
+  return { load, recognize, clearCache, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
 })();
 
 </script>
@@ -2092,7 +2754,7 @@ function huntScreen() {
     ${ghost && !live ? `<img class="vf-ghost px" alt="" src="${spriteURL(ghost, 3)}">` : ''}
     <i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
     ${live ? '' : `<div class="vf-center"><div><h1>Monsters hide <em>in plain sight</em></h1>
-      <p>${S.stats.photos === 0 ? 'Photograph any real object near you — a mug, a shoe, a plant — and see what lives inside it.' : 'Snap a new object. Different things attract different creatures.'}</p></div></div>`}
+      <p>${S.stats.photos === 0 ? 'Photograph a real object near you — a mug, a shoe, a plant — and the Spirit Lens will reveal what lives inside it.' : 'Explore. Unusual objects hide unusual monsters.'}</p></div></div>`}
     <div class="vf-hud"><span class="rec">SPIRIT CAM</span><span>${S.stats.photos} SNAPS · ${Object.keys(S.dex).length} SPECIES</span></div>
   </section>
   <div class="shutter-row">
@@ -2102,6 +2764,7 @@ function huntScreen() {
     ${live ? `<button class="side-btn" data-act="liveClose"><span class="ic">✕</span>Close</button>`
            : Photo.live.supported() ? `<button class="side-btn" data-act="liveOpen"><span class="ic">${ICON.live}</span>Live view</button>` : '<span></span>'}
   </div>
+  ${lensChipHTML()}
   ${low ? `<div class="card warn row"><div class="grow"><b>You're badly hurt.</b><div class="small muted">Monsters hit hard. Heal up before your next hunt — you also recover slowly over time.</div></div>
     ${S.items.potion ? `<button class="btn small" data-act="quickHeal">Drink potion (${S.items.potion})</button>` : `<button class="btn small" data-act="tab" data-arg="gear">Shop</button>`}</div>` : ''}
   <section class="card">
@@ -2110,7 +2773,7 @@ function huntScreen() {
   </section>
   ${ui.lastSightings.length ? `<section class="stack"><div class="section-title"><h2>Recent sightings</h2></div>
     <div class="sightings">${ui.lastSightings.map(s => `<div class="sighting"><img class="px" alt="" src="${spriteURL(s.dna, 3)}">${esc(s.name.split(',')[0])}<br><span style="color:${RARITY[s.rarity].color}">${s.outcome}</span></div>`).join('')}</div></section>` : ''}
-  <p class="notice">Your photos stay on this phone. SNAPMON reads only colours and a similarity fingerprint from each picture, then throws the image away.</p>`;
+  <p class="notice">Your photos stay on this phone. The Spirit Lens recognises objects on-device, then the image is thrown away.</p>`;
 }
 function questHTML(q) {
   const p = questProgress(S, q), done = p >= q.target;
@@ -2144,75 +2807,167 @@ function liveSnap() {
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
+function lensStatusLine() {
+  const L = Lens.status;
+  if (L.state === 'ready') return `Ready (${esc(L.backend)}${L.error ? '; ' + esc(L.error) : ''}).`;
+  if (L.state === 'loading') return esc(L.progress || 'Loading…');
+  if (L.state === 'failed') return `Could not load: ${esc(L.error)}.`;
+  return S.settings.lensCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet (about 30 MB, once). It downloads while your camera is open.';
+}
+function lensChipHTML() {
+  const L = Lens.status;
+  const dot = L.state === 'ready' ? 'var(--good)' : L.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
+  const txt = L.state === 'ready' ? 'Spirit Lens ready' : L.state === 'loading' ? 'Spirit Lens warming up…' : L.state === 'failed' ? 'Spirit Lens offline' : S.settings.lensCached ? 'Spirit Lens asleep' : 'Spirit Lens not downloaded';
+  const btn = L.state === 'failed' ? '<button class="btn small" data-act="lensPrepare">Retry</button>' : L.state === 'idle' && !S.settings.lensCached ? '<button class="btn small" data-act="lensPrepare">Download now (~30 MB)</button>' : '';
+  return `<div class="lens-chip" id="lensChip"><i style="background:${dot}" class="${L.state === 'loading' ? 'pulse' : ''}"></i><span class="grow">${txt}</span>${btn}</div>`;
+}
+Lens.onChange(() => {
+  const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
+  const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
+  if ($('#sheet').innerHTML.includes('Spirit Lens')) settingsSheet();
+});
+
+/* ---------- recognition flow: photo → Spirit Lens → (pick among detections) → encounter scan ----------
+   There is no manual entry: only objects the lens actually recognised can be hunted. */
 function beginIdentify(img, url) {
-  const photo = Photo.analyze(img);
-  const thumb = S.settings.keepPhotos ? Photo.thumbnail(img) : null;
-  ui.pending = { img, url, photo, thumb, cat: null, word: '', ai: null };
-  showIdentify();
-  if (S.settings.aiLens) runAI();
+  const hash = Photo.analyze(img).hash; // whole-photo similarity fingerprint (repeat-photo detection)
+  ui.pending = { img, url, hash, thumb: S.settings.keepPhotos ? Photo.thumbnail(img) : null, rec: null, t0: Date.now() };
+  recognizeFlow();
 }
-async function runAI() {
+function lensFrame(p, extra = '') {
+  return `<div class="photo-frame" id="lensFrame"><img alt="Your photo" src="${p.url}">${extra}<i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i></div>`;
+}
+function lensStatusText() {
+  const L = Lens.status;
+  if (L.state === 'loading') return `${esc(L.progress || 'Starting the Spirit Lens…')}${S.settings.lensCached ? '' : ' First time only: about 30 MB of AI models download and are then kept on this phone.'}`;
+  if (L.state === 'ready') return 'Looking for objects… (runs on this phone)';
+  return '';
+}
+async function recognizeFlow() {
   const p = ui.pending; if (!p) return;
-  p.ai = { state: 'loading' }; refreshAI();
-  const model = await Photo.ai.load();
+  $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
+    <div class="sheet-head"><h2>Spirit Lens</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    ${lensFrame(p, '<i class="vf-sweep"></i><div class="scan-hud"><div class="lens-tag"><i class="spin"></i> ANALYSING <span id="lensClock">0.0s</span></div></div>')}
+    <p class="muted" style="text-align:center" id="lensStatus">${lensStatusText()}</p></div></div>`;
+  const clock = setInterval(() => { const el = $('#lensClock'); if (!el || ui.pending !== p) return clearInterval(clock); el.textContent = ((Date.now() - p.t0) / 1000).toFixed(1) + 's'; }, 100);
+  if (Lens.status.state !== 'ready') {
+    const ok = await Lens.load();
+    if (ui.pending !== p) return clearInterval(clock);
+    if (!ok) { clearInterval(clock); return showLensFailed(p); }
+    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText();
+  }
+  let rec;
+  try { rec = await Lens.recognize(p.img); }
+  catch (e) { clearInterval(clock); return showLensFailed(p, e.message); }
+  clearInterval(clock);
   if (ui.pending !== p) return;
-  if (!model) { p.ai = { state: 'failed', error: Photo.ai.error }; refreshAI(); return; }
-  try { p.ai = { state: 'ready', preds: await Photo.ai.classify(p.img) }; } catch (e) { p.ai = { state: 'failed', error: String(e.message || e) }; }
-  refreshAI();
+  p.rec = rec;
+  if (!S.settings.lensCached) { S.settings.lensCached = true; persist(); }
+  if (rec.decision === 'unknown') return showUnknown(p);
+  if (rec.decision === 'auto') return showIdentified(p, 0);
+  showChoices(p);
 }
-function aiHTML() {
-  const p = ui.pending; if (!p || !S.settings.aiLens || !p.ai) return '';
-  if (p.ai.state === 'loading') return `<div class="ai-box">AI Lens is analysing your photo on this device… (the first run downloads the model)</div>`;
-  if (p.ai.state === 'failed') return `<div class="ai-box">AI Lens could not load here, so it can't suggest anything (${esc(p.ai.error)}). Pick the object yourself below — that always works.</div>`;
-  const preds = p.ai.preds.filter(x => x.prob > 0.04).slice(0, 3);
-  if (!preds.length) return `<div class="ai-box">AI Lens isn't sure what this is. Pick the object yourself below.</div>`;
-  return `<div class="ai-box">AI Lens guesses (on-device, can be wrong — confirm it):<br>${preds.map(x =>
-    `<button class="btn small" data-act="aiPick" data-arg="${x.cat || 'other'}" data-word="${esc(x.label)}">${esc(x.label)} · ${Math.round(x.prob * 100)}%${x.cat ? ' → ' + esc(CATEGORY[x.cat].name) : ''}</button>`).join('')}</div>`;
+function showLensFailed(p, msg) {
+  const L = Lens.status, err = msg || L.error;
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    <h2 style="font-size:26px">The Spirit Lens couldn't start</h2>
+    <p>Recognition runs on your phone, but the AI models have to be downloaded once (about 30 MB). Connect to the internet and try again.</p>
+    <p class="small muted">If you're playing inside a Claude Artifact page, that page blocks the model download. Play on the GitHub Pages version instead.</p>
+    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(err)}</p>` : ''}
+    <button class="btn primary block" data-act="lensRetry">Try again</button>
+    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
 }
-function refreshAI() { const el = $('#aiSlot'); if (el) el.innerHTML = aiHTML(); }
-function showIdentify() {
-  const p = ui.pending;
-  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner">
-    <div class="sheet-head"><h2>What did you photograph?</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
-    <div class="photo-frame"><img alt="Your photo" src="${p.url}"><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i></div>
-    <div class="row small muted"><span style="display:inline-block;width:14px;height:14px;border-radius:4px;background:${p.photo.swatch};border:1px solid var(--line)"></span>
-      Ecto-signature read from the photo's colours. ${S.settings.aiLens ? '' : 'Tell the camera what the object is:'}</div>
-    <div id="aiSlot">${aiHTML()}</div>
-    <input class="search" id="objSearch" type="text" inputmode="text" autocomplete="off" placeholder="Type it: “kettle”, “sock”, “umbrella”…" value="${esc(p.word)}">
-    <div id="typedHint"></div>
-    <div class="cat-grid" id="catGrid">${CATEGORIES.filter(c => c.id !== 'other').map(c => `<button class="cat-btn" data-act="pickCat" data-arg="${c.id}"><span class="e">${c.icon}</span>${esc(c.name)}</button>`).join('')}</div>
+function showUnknown(p) {
+  const reason = p.rec.reason;
+  S.stats.unrecognized = (S.stats.unrecognized || 0) + 1; persist();
+  SFX.nothing();
+  const msg = reason === 'person' ? ['Just a human', 'Humans are (mostly) not monsters. Point the lens at an object.']
+    : reason === 'scene' ? ['Too much going on', 'That looks like a place, not an object. Get closer to one thing.']
+    : ['Unknown object', 'No supernatural signature detected.'];
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    ${lensFrame(p)}
+    <h2 style="font-size:28px;color:var(--muted)">${msg[0]}</h2>
+    <p style="font-size:17px">${msg[1]}</p>
+    <p class="small muted">Tips: fill the frame with a single object, use good light, and hold steady. Everyday things work best: food, furniture, gadgets, pets, plants.</p>
+    ${debugHTML(p.rec)}
+    <label class="btn primary block" for="camInput" data-act="closeOverlay">Take another photo</label>
+    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
+}
+function candLine(c) {
+  const name = c.cat === 'other' ? 'Oddity' : CATEGORY[c.cat].name;
+  return `<b>${esc(c.label)}</b> <span class="muted">· ${esc(name)} · ${Math.round(c.conf * 100)}%</span>`;
+}
+function showIdentified(p, i) {
+  const c = p.rec.candidates[i];
+  SFX.click();
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+    <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <div class="photo-frame" id="lensFrame"></div>
+    <div class="card ident"><span class="e">${CATEGORY[c.cat].icon}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
+    ${debugHTML(p.rec)}
+    ${S.settings.debugLens ? `<button class="btn primary block" data-act="pickCand" data-arg="${i}">Scan for monsters</button>` : '<p class="muted small" style="text-align:center">Scanning for supernatural activity…</p>'}
   </div></div>`;
-  const inp = $('#objSearch');
-  inp.addEventListener('input', () => {
-    p.word = inp.value.trim();
-    const m = matchCategory(p.word), q = p.word.toLowerCase();
-    document.querySelectorAll('#catGrid .cat-btn').forEach(b => {
-      const c = CATEGORY[b.dataset.arg];
-      b.classList.toggle('hint', !!m && b.dataset.arg === m);
-      b.hidden = q.length > 1 && !m && !c.name.toLowerCase().includes(q);
-    });
-    $('#typedHint').innerHTML = p.word.length > 1 ? (m
-      ? `<button class="btn block ecto" data-act="pickCat" data-arg="${m}">Scan “${esc(p.word)}” as ${esc(CATEGORY[m].name)}</button>`
-      : `<button class="btn block ecto" data-act="pickCat" data-arg="other">Scan “${esc(p.word)}” as something new</button>`) : '';
+  drawDetections(p, i);
+  if (!S.settings.debugLens) setTimeout(() => { if (ui.pending === p && !p.scanning) scan(i); }, 1100);
+}
+function showChoices(p) {
+  const rec = p.rec, multi = rec.reason === 'multiple';
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="gap:12px">
+    <div class="sheet-head"><h2>${multi ? 'Several objects detected' : 'The lens has a few ideas'}</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <p class="muted small" style="margin:0">${multi ? 'Which one are you hunting?' : 'It is not completely sure. Which of these did you photograph?'} Every option comes from the lens's own analysis of your photo.</p>
+    <div class="photo-frame" id="lensFrame"></div>
+    <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${CATEGORY[c.cat].icon}</span></button>`).join('')}</div>
+    <label class="btn ghost block" for="camInput" data-act="closeOverlay">None of these: take another photo</label>
+    ${debugHTML(rec)}
+  </div></div>`;
+  drawDetections(p);
+}
+function drawDetections(p, only) {
+  const frame = $('#lensFrame'); if (!frame) return;
+  const img = p.rec.image, c = document.createElement('canvas');
+  c.width = img.width; c.height = img.height; c.className = 'det-canvas';
+  const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+  const lw = Math.max(2, img.width / 160);
+  p.rec.candidates.forEach((cd, i) => {
+    if (!cd.box || (only != null && i !== only)) return;
+    const [x, y, w, h] = cd.box.map((v, k) => v * (k % 2 ? img.height : img.width));
+    ctx.strokeStyle = '#7cf5d3'; ctx.lineWidth = lw; ctx.setLineDash([lw * 3, lw * 2]); ctx.strokeRect(x, y, w, h);
+    ctx.setLineDash([]); ctx.fillStyle = '#7cf5d3'; const s = Math.max(18, img.width / 18);
+    ctx.fillRect(x, y, s * 1.1, s * 1.1); ctx.fillStyle = '#062019'; ctx.font = `700 ${s * 0.8}px sans-serif`; ctx.fillText(String(i + 1), x + s * 0.3, y + s * 0.85);
   });
+  frame.appendChild(c);
+}
+function debugHTML(rec) {
+  if (!S.settings.debugLens || !rec) return '';
+  const d = rec.debug, pct = v => (v * 100).toFixed(1) + '%', T = d.times || {};
+  const rows = (arr, f) => arr.length ? arr.map(f).join('') : '<tr><td colspan="3" class="muted">none</td></tr>';
+  return `<details class="debug" open><summary>Recognition debug</summary>
+    <div class="small">Decision: <b>${esc(d.decision)}</b> (${esc(d.reason)}) · thresholds: recognise ≥ ${pct(d.thresholds.min)}, auto ≥ ${pct(d.thresholds.auto)}, boxes ≥ ${pct(d.thresholds.detMin)}</div>
+    <div class="small">Time: <b>${T.total} ms</b> total (lens start-up ${T.lensLoad} ms) · detect ${T.detect ?? '–'} ms · classify ${T.classify ?? '–'} ms · crops ${T.crops ?? '–'} ms · backend ${esc(d.backend)} · models: ${esc(Object.entries(d.sources).map(([k, v]) => k + '=' + v).join(', '))}</div>
+    <table><tr><th colspan="3">Whole photo (MobileNet top 5)</th></tr>${rows(d.full, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
+    <tr><th colspan="3">Detected objects (COCO-SSD)</th></tr>${rows(d.detections, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.score)}</td><td>${esc(r.map)}</td></tr>`)}
+    <tr><th colspan="3">Crop refinement</th></tr>${rows(d.crops, r => `<tr><td>${esc(r.box)} → ${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
+    <tr><th colspan="3">Merged candidates</th></tr>${rows(d.candidates, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.conf)}</td><td>${esc(r.cat + (r.sub ? ':' + r.sub : ''))} · ${esc(r.src)}</td></tr>`)}</table></details>`;
 }
 function cancelPhoto() {
   if (ui.pending && ui.pending.url && ui.pending.url.startsWith('blob:')) URL.revokeObjectURL(ui.pending.url);
-  ui.pending = null; $('#overlay').innerHTML = '';
+  ui.pending = null; $('#overlay').innerHTML = ''; render();
 }
 
-async function scan(cat, word) {
-  const p = ui.pending; if (!p) return;
-  if (cat !== 'other' && word && matchCategory(word) !== cat) word = ''; // the typed text was only a filter
-  if (cat === 'other' && !word) word = 'mystery object';
+async function scan(i) {
+  const p = ui.pending; if (!p || !p.rec || p.scanning) return;
+  const c = p.rec.candidates[+i]; if (!c) return;
+  p.scanning = true;
+  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash }; // colour from the chosen object, fingerprint from the whole photo
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
     <h2 style="text-align:center">Scanning for supernatural activity…</h2>
     <div class="photo-frame"><img alt="" src="${p.url}"><i class="vf-sweep"></i>
-      <div class="scan-hud">${SCAN_READOUTS.slice(0, 4).map((r, i) => `<div class="meter"><span>${r}</span><i><b id="mt${i}"></b></i><span id="mv${i}">0.0</span></div>`).join('')}</div></div>
-    <p class="muted" style="text-align:center">Object: <b style="color:var(--text)">${esc(word && cat === 'other' ? word : CATEGORY[cat].name)}</b></p>
+      <div class="scan-hud">${SCAN_READOUTS.slice(0, 4).map((r, k) => `<div class="meter"><span>${r}</span><i><b id="mt${k}"></b></i><span id="mv${k}">0.0</span></div>`).join('')}</div></div>
+    <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${Math.round(c.conf * 100)}% sure)</span></p>
   </div></div>`;
   SFX.scan();
-  const result = resolvePhoto(S, cat, p.photo, word);
+  const result = resolvePhoto(S, c.cat, photo, { label: c.label, sub: c.sub, aspect: c.aspect, conf: c.conf });
   const strength = result.encounter ? 0.55 + RARITY[result.monster.rarity].tier * 0.11 : 0.25;
   for (let step = 0; step < 6; step++) {
     await wait(220);
@@ -2252,7 +3007,7 @@ function showDiscovery(m, seen) {
       <div class="disc-sprite">${spriteHTML(m.dna, { size: 220, rarity: m.rarity, variant: m.variant })}</div>
       <div class="rarity-banner" style="color:${r.color}">${r.name.toUpperCase()}${m.variant ? ' · ' + variantLabel(m.variant).toUpperCase() : ''}</div>
       <h1 class="disc-name">${esc(m.name)}</h1>
-      <div class="row wrap" style="justify-content:center">${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${catLabel(m)}</span></div>
+      <div class="row wrap" style="justify-content:center">${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${m.label ? esc(m.label) : catLabel(m)}</span></div>
       ${seen.isNew ? `<span class="new-tag">NEW SPECIES · +${seen.rp} RP</span>` : ''}
       <p class="muted" style="max-width:34ch">${esc(CATEGORY[m.cat].flavor)}</p>
       ${analysis ? `<p class="small muted num">HP ${m.stats.hp} · ATK ${m.stats.atk} · DEF ${m.stats.def} · SPD ${m.stats.spd} · weak to ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</p>` : ''}
@@ -2476,7 +3231,7 @@ function showResult(B, sum) {
   const rewards = sum.rewards.map((r, i) => `<span class="reward" style="animation-delay:${i * 0.08}s">+${esc(rewardLabel(r.k, r.v))}${r.why ? ' <span class="muted">(' + esc(r.why) + ')</span>' : ''}</span>`).join('');
   const drops = sum.drops.map(d => `<div class="card row"><div class="item-ic">${d.kind === 'weapon' ? `<img class="px" alt="" src="${weaponIconURL(d.id)}">` : '✦'}</div><div class="grow"><b>${d.kind === 'weapon' ? 'Weapon found: ' + esc(WEAPONS[d.id].name) : 'Charm found: ' + esc(CHARMS[d.id].name)}</b><div class="small muted">${d.kind === 'weapon' ? esc(WEAPONS[d.id].desc) : esc(CHARMS[d.id].desc)} Equip it in Gear.</div></div></div>`).join('');
   const lines = {
-    victory: `${esc(m.name.split(',')[0])} dissolves back into an ordinary ${m.cat === 'other' && m.word ? esc(m.word) : esc(CATEGORY[m.cat].name.split(' /')[0].toLowerCase())}.`,
+    victory: `${esc(m.name.split(',')[0])} dissolves back into an ordinary ${m.label ? esc(m.label) : m.cat === 'other' && m.word ? esc(m.word) : esc(CATEGORY[m.cat].name.split(' /')[0].toLowerCase())}.`,
     captured: `${esc(m.name.split(',')[0])} joins your collection. ${sum.newCapture ? 'A new species for your encyclopedia!' : ''}`,
     defeat: `You wake up dazed. You dropped ${sum.lostCoins} coins, but your collection is safe.`,
     fled: 'You live to hunt another day.', escaped: 'It vanished back into the everyday world.',
@@ -2575,7 +3330,7 @@ function monsterSheet(id) {
     <div class="stat-grid">${statBars(m.stats)}</div>
     <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>
     <div class="card small stack" style="gap:4px">
-      <div><b>Origin object:</b> ${catLabel(m)}</div>
+      <div><b>Origin object:</b> ${catLabel(m)}${m.label ? ` · identified as “${esc(m.label)}”${m.conf ? ' (' + Math.round(m.conf * 100) + '% sure)' : ''}` : ''}</div>
       <div><b>Captured:</b> ${fmtDate(m.caughtAt)}</div>
       <div><b>Species first seen:</b> ${fmtDate(d.first)} · <b>Encounters:</b> ${d.seen || 1} · <b>Captures:</b> ${d.caught || 1}</div>
       <div><b>Weak to:</b> ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</div>
@@ -2709,11 +3464,12 @@ function labScreen() {
 
 /* ---------- settings ---------- */
 function settingsSheet() {
-  const ai = Photo.ai;
+  const L = Lens.status;
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
-      <div class="toggle"><div><b>AI Lens (experimental)</b><p>Suggests what your photo shows using MobileNet running in your browser. Downloads about 10 MB once; works only where the host allows it. ${ai.state === 'ready' ? 'Status: ready.' : ai.state === 'failed' ? 'Status: could not load here (' + esc(ai.error) + ').' : ai.state === 'loading' ? 'Status: loading…' : ''} You always confirm the object yourself.</p></div><button class="switch ${S.settings.aiLens ? 'on' : ''}" data-act="toggleAI" aria-label="Toggle AI lens"></button></div>
+      <div class="toggle"><div><b>Spirit Lens</b><p>${lensStatusLine()} Recognition runs entirely on this phone with open-source models (MobileNet + COCO-SSD). Photos are never uploaded.</p></div>${L.state === 'ready' ? '' : `<button class="btn small" data-act="lensPrepare">${L.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
+      <div class="toggle"><div><b>Recognition debug info</b><p>Shows what the lens saw: top predictions, detected objects, confidence and timing. Useful for testing accuracy on real objects.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
       <div class="toggle"><div><b>Keep photo thumbnails</b><p>Off by default. When on, a tiny 96 px copy of the photo is stored with monsters you capture, in this browser only.</p></div><button class="switch ${S.settings.keepPhotos ? 'on' : ''}" data-act="toggleKeep" aria-label="Toggle photo thumbnails"></button></div>
     </div>
     <div class="notice">${storageOK ? 'Progress saves automatically in this browser.' : 'This browser is blocking storage (private mode?), so progress will be lost when you close the page. Use the backup code below.'}</div>
@@ -2739,8 +3495,9 @@ const actions = {
   sheetBg(_, el, ev) { if (ev.target === el) closeSheet(); },
   liveOpen: openLive, liveClose: closeLive, liveSnap,
   cancelPhoto,
-  pickCat(cat) { const p = ui.pending; if (!p) return; scan(cat, cat === 'other' ? (p.word || 'mystery object') : p.word); },
-  aiPick(cat, el) { const p = ui.pending; if (!p) return; p.word = el.dataset.word; scan(cat, cat === 'other' ? p.word : ''); },
+  pickCand(i) { scan(i); },
+  lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
+  lensPrepare() { Lens.load(); },
   closeOverlay() { $('#overlay').innerHTML = ''; render(); },
   fight() { const m = ui.discovered; ui.discovered = null; if (m) startBattle(m); },
   ignore() {
@@ -2781,7 +3538,7 @@ const actions = {
   buy(id) { if (buyItem(S, id)) { SFX.coin(); persist(); render(); } },
   craft(id) { if (craftItem(S, id)) { SFX.coin(); toast(`Crafted ${ITEMS[id].name}.`); persist(); render(); } },
   research(id) { if (buyResearch(S, id)) { SFX.levelup(); toast(`Research complete: ${RESEARCH_BY_ID[id].name}`, 'gold'); persist(); render(); } },
-  toggleAI() { S.settings.aiLens = !S.settings.aiLens; persist(); if (S.settings.aiLens) Photo.ai.load().then(() => { if ($('#sheet').innerHTML) settingsSheet(); }); settingsSheet(); },
+  toggleDebug() { S.settings.debugLens = !S.settings.debugLens; persist(); settingsSheet(); },
   toggleKeep() { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); settingsSheet(); },
   copyExport() {
     const box = $('#exportBox'); box.value = exportSave(S);
@@ -2799,6 +3556,7 @@ const actions = {
 };
 document.addEventListener('click', ev => {
   SFX.unlock();
+  if (ev.target.closest('label[for="camInput"], label[for="galInput"], [data-act="liveOpen"]')) Lens.load(); // warm up while the camera is open
   const el = ev.target.closest('[data-act]'); if (!el) return;
   const fn = actions[el.dataset.act]; if (!fn) return;
   if (el.tagName === 'LABEL') { // labels open the camera via their `for` input; just run side effects
@@ -2821,6 +3579,7 @@ window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, se
 
 render();
 persist(true);
+if (S.settings.lensCached) setTimeout(() => Lens.load(), 1200); // models are cached on this phone: start them in the background
 
 </script>
 <!--/SCRIPTS-->

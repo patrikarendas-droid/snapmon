@@ -334,6 +334,24 @@ textarea.code { width: 100%; min-height: 86px; border-radius: 12px; border: 1px 
 .empty { text-align: center; padding: 26px 14px; color: var(--muted); }
 .empty h3 { color: var(--text); font-size: 18px; margin-bottom: 4px; }
 .notice { font-size: 12.5px; color: var(--muted); border-left: 3px solid var(--violet); padding: 4px 0 4px 10px; }
+.lens-chip { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 12px; background: var(--panel); border: 1px solid var(--line); font-size: 13px; font-weight: 600; }
+.lens-chip > i { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+.lens-chip > i.pulse { animation: blink 1s steps(2) infinite; }
+.lens-tag { display: inline-flex; align-items: center; gap: 8px; align-self: start; background: rgba(8,6,14,.7); padding: 6px 10px; border-radius: 8px; }
+.spin { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ecto); border-right-color: transparent; animation: spin .8s linear infinite; display: inline-block; }
+.det-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; z-index: 1; }
+.ident { display: flex; gap: 12px; align-items: center; border-color: var(--ecto); }
+.ident .e, .cand .e { font-size: 26px; }
+.ident .bar { margin-top: 6px; height: 7px; } .ident .bar > i { background: var(--ecto); }
+button.list-item { width: 100%; color: inherit; font: inherit; cursor: pointer; }
+.list-item.cand { grid-template-columns: auto 1fr auto; }
+.num-badge { width: 28px; height: 28px; border-radius: 8px; background: var(--ecto); color: #062019; display: grid; place-items: center; font-weight: 700; }
+details.debug { text-align: left; background: #0b0814; border: 1px dashed #5b4a8f; border-radius: 12px; padding: 10px 12px; font-size: 12px; overflow-x: auto; }
+details.debug summary { font-weight: 700; color: var(--violet); cursor: pointer; }
+details.debug > div { margin-top: 6px; color: #cfc6ee; }
+details.debug table { width: 100%; border-collapse: collapse; margin-top: 8px; font-variant-numeric: tabular-nums; }
+details.debug th { text-align: left; color: var(--ecto); padding: 8px 0 2px; font-size: 11px; letter-spacing: .06em; }
+details.debug td { padding: 2px 6px 2px 0; border-top: 1px solid #221a38; vertical-align: top; word-break: break-word; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; } }
 @media (max-width: 360px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dex-row { grid-template-columns: 70px repeat(5, minmax(0, 1fr)); } .shutter { width: 84px; height: 84px; } }
 </style>
@@ -356,10 +374,12 @@ textarea.code { width: 100%; min-height: 86px; border-radius: 12px; border: 1px 
 
 <!--SCRIPTS-->
 <script src="src/data.js"></script>
+<script src="src/labels.js"></script>
 <script src="src/sprites.js"></script>
 <script src="src/game.js"></script>
 <script src="src/audio.js"></script>
 <script src="src/photo.js"></script>
+<script src="src/lens.js"></script>
 <script src="src/ui.js"></script>
 <!--/SCRIPTS-->
 <!--/ARTIFACT-BODY-->

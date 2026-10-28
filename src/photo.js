@@ -1,4 +1,5 @@
-/* SNAPMON — real photo input, on-device image analysis, optional live viewfinder and optional AI lens.
+/* SNAPMON — real photo input, on-device colour/similarity analysis and the optional live viewfinder.
+   Object recognition lives in lens.js.
    Photos never leave the device. Pixels are reduced to a colour signature + 64-bit similarity hash, then discarded
    (unless the player opts in to keeping small thumbnails). */
 'use strict';
@@ -15,13 +16,19 @@ const Photo = (() => {
     });
   }
 
-  function analyze(src) {
+  // box: optional [x, y, w, h] as fractions of the image (a detected object). Colour is read from that region.
+  function analyze(src, box) {
     const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
     const c = document.createElement('canvas'); c.width = 64; c.height = 64;
     const ctx = c.getContext('2d', { willReadFrequently: true });
-    // centre crop: the object being photographed is usually in the middle
-    const side = Math.min(w, h) * 0.8, sx = (w - side) / 2, sy = (h - side) / 2;
-    ctx.drawImage(src, sx, sy, side, side, 0, 0, 64, 64);
+    if (box) {
+      const bx = box[0] * w, by = box[1] * h, bw = Math.max(4, box[2] * w), bh = Math.max(4, box[3] * h);
+      ctx.drawImage(src, bx + bw * 0.1, by + bh * 0.1, bw * 0.8, bh * 0.8, 0, 0, 64, 64);
+    } else {
+      // centre crop: the object being photographed is usually in the middle
+      const side = Math.min(w, h) * 0.8, sx = (w - side) / 2, sy = (h - side) / 2;
+      ctx.drawImage(src, sx, sy, side, side, 0, 0, 64, 64);
+    }
     const d = ctx.getImageData(0, 0, 64, 64).data;
     const bins = new Array(24).fill(0); let sumS = 0, sumL = 0, n = 0;
     for (let i = 0; i < d.length; i += 4) {
@@ -76,32 +83,5 @@ const Photo = (() => {
     isOpen: () => !!stream,
   };
 
-  /* Optional AI lens: MobileNet (ImageNet classes) running fully in the browser via TensorFlow.js.
-     Downloads ~10 MB the first time. Some hosts (e.g. the Claude artifact sandbox) block the model download — then it reports unavailable. */
-  const ai = { state: 'off', model: null, error: '' };
-  function addScript(src) {
-    return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.async = true; s.onload = res; s.onerror = () => rej(new Error('blocked: ' + src)); document.head.appendChild(s); });
-  }
-  ai.load = async function () {
-    if (ai.model) return ai.model;
-    if (ai.state === 'loading') return null;
-    ai.state = 'loading'; ai.error = '';
-    try {
-      const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timed out')), 45000));
-      await Promise.race([(async () => {
-        if (!window.tf) await addScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
-        if (!window.mobilenet) await addScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js');
-        ai.model = await window.mobilenet.load({ version: 2, alpha: 0.5 });
-      })(), timeout]);
-      ai.state = 'ready';
-    } catch (e) { ai.state = 'failed'; ai.error = String(e.message || e); ai.model = null; }
-    return ai.model;
-  };
-  ai.classify = async function (img) {
-    if (!ai.model) return [];
-    const preds = await ai.model.classify(img, 5);
-    return preds.map(p => ({ label: p.className.split(',')[0], prob: p.probability, cat: matchCategory(p.className.replace(/,/g, ' ')) }));
-  };
-
-  return { loadFile, analyze, thumbnail, live, ai };
+  return { loadFile, analyze, thumbnail, live };
 })();
