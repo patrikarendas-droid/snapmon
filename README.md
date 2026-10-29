@@ -43,14 +43,13 @@ and decision rules. Only the speed depends on the phone.
 |---|---|---|---|
 | Detector | COCO-SSD lite (80 classes) | where are the objects (boxes, so a photo with several things offers a choice) | TF.js: WebGL, or CPU with the same weights |
 | Classifier | MobileNet v2 1.0 (ImageNet) | what is it, per photo and per box | TF.js: WebGL, or CPU |
-| Vocabulary model | TinyCLIP ViT-39M/16 (MIT), 2,940 labels | a second, zero-shot opinion over a much larger vocabulary | ONNX Runtime Web in a worker: WebGPU, or WebAssembly with the same weights |
+| Vocabulary model | TinyCLIP ViT-39M/16 (MIT), 2,940 labels | a second, zero-shot opinion over a much larger vocabulary | ONNX Runtime Web in a worker, on the CPU (WebAssembly) for every player so results match across devices |
 
 - The engine combines the two opinions with calibrated rules (`docs/RECOGNITION.md`):
   - agreement → identified automatically;
   - disagreement, uncertainty or a miss → you choose between the AI's own suggestions;
   - nothing recognisable → "Unknown object" and a retake.
-- **Download:** the first hunt shows a one-time notice and downloads the engine (up to about 96 MB, less on phones
-  without WebGPU). It is saved for next time and works offline afterwards. Downloads are checked for completeness
+- **Download:** the first hunt shows a one-time notice and downloads the engine (about 86 MB). It is saved for next time and works offline afterwards. Downloads are checked for completeness
   and against the deploy manifest's checksums; a broken download is never kept.
 - **Failures:** if the engine cannot download or run, you get an explanation and Try again. There is no weaker
   fallback recogniser, and the rest of the game (collection, gear, lab) keeps working.
@@ -117,7 +116,7 @@ src/photo.js            colour palette + perceptual hash of the captured frame
 src/engine.js           the standard Hybrid recognition engine: loading, progress, backends, decisions
 src/lens.js             detector + classifier part (TF.js COCO-SSD + MobileNet)
 src/lens-clip.js        TinyCLIP part: preprocessing, rejection, calibration, fusion rules
-src/workers/clip-worker.js  ONNX Runtime Web inference worker (WebGPU / WASM)
+src/workers/clip-worker.js  ONNX Runtime Web inference worker (WASM for players; WebGPU for developer comparison)
 src/ui.js               screens, camera, battle playback, developer tools
 tools/                  build, label/vocabulary generators, model mirror, sprite contact sheet
 lab/                    model export, labelled-photo fetcher and benchmark (run by .github/workflows/lab.yml)

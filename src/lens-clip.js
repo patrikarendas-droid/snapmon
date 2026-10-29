@@ -12,7 +12,8 @@ const ClipLens = (() => {
     base: 'models/clip/',          // packaged assets (Platform.assets)
     localOrt: 'vendor/ort/',
     workerPath: 'src/workers/clip-worker.js',
-    forceBackend: null,             // developer testing only: 'wasm' forces the CPU path (same model)
+    backend: 'wasm',                // standard for every player: CPU (WebAssembly), identical results on every device.
+                                    // 'webgpu' = developer comparison only (GPU, faster on some phones, ~4.5% of outcomes differ)
     expect: null,                   // { file: {bytes, sha256} } from the deploy manifest, checked by the worker
     test: null,                     // automated tests only: { failGPU, failCPU } simulates backend failures
     // fallback thresholds; replaced by the benchmark's calibration in vocab.json when present
@@ -45,7 +46,7 @@ const ClipLens = (() => {
         };
         // the worker process itself can die (Android reclaiming memory): reject whatever was waiting
         st.worker.onerror = e => { for (const p of st.pending.values()) p.reject(Object.assign(new Error('recognition worker stopped: ' + (e.message || 'unknown')), { kind: 'crash' })); st.pending.clear(); st.state = 'failed'; };
-        const ready = await call('init', { type: 'init', base, ortBase, preferGPU: true, forceBackend: CFG.forceBackend, expect: CFG.expect || {}, test: CFG.test || {} }, 240000);
+        const ready = await call('init', { type: 'init', base, ortBase, backend: CFG.backend, expect: CFG.expect || {}, test: CFG.test || {} }, 240000);
         st.info = ready.info;
         st.meta = await (await fetch(base + 'vocab.json')).json(); // served from the HTTP/Cache copy the worker just verified
         st.state = 'ready';

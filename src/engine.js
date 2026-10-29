@@ -3,11 +3,12 @@
    Parts (all on the device, nothing uploaded):
      • Lens (lens.js)      — COCO-SSD lite detector + MobileNet v2 classifier (TF.js; WebGL, CPU fallback)
      • ClipLens (lens-clip.js + workers/clip-worker.js) — TinyCLIP ViT-39M/16 image encoder over a 2,940-label
-                             vocabulary (ONNX Runtime Web; WebGPU, WASM/CPU fallback)
+                             vocabulary (ONNX Runtime Web; WebAssembly/CPU for everyone)
      • ClipLens.hybridDecision — the fusion and second-opinion rules (docs/RECOGNITION.md)
 
-   Every player gets the same model files, vocabulary, thresholds and rules (ENGINE_ID names that set). Hardware only
-   changes speed: GPU where it works, otherwise CPU with the same weights. If either part cannot load or run, hunting
+   Every player gets the same model files, vocabulary, thresholds and rules (ENGINE_ID names that set). TinyCLIP always
+   runs on the CPU (WASM, one thread) so its scores are identical on every device; the detector/classifier uses the
+   GPU (WebGL) where it works, otherwise the CPU with the same weights (measured differences ≤ 0.0001). If either part cannot load or run, hunting
    stops with an explanation and a Retry. There is no weaker fallback recogniser.
 
    Model files come from Platform.assets (the website today, the APK's bundled assets later). The deploy writes
@@ -17,11 +18,15 @@
 const ENGINE_ID = 'hybrid-1'; // bump whenever a model file, the vocabulary, a threshold or a decision rule changes
 
 const Engine = (() => {
-  const FALLBACK_SIZES = { lens: 32.6 * 1048576, clip: 63.4 * 1048576 }; // used if the manifest is missing (upper bounds)
+  const FALLBACK_SIZES = { lens: 32.6 * 1048576, clip: 53.5 * 1048576 }; // used if the manifest is missing (upper bounds)
   const st = { state: 'idle', stage: '', loaded: 0, total: 0, error: '', kind: '', loadMs: 0, manifest: null, backends: {} };
   const listeners = new Set();
   const emit = () => listeners.forEach(f => { try { f(st); } catch (e) {} });
   let loading = null;
+  // timing of every recognition (not only field tests), kept on this phone for the developer panel; never uploaded
+  const PERF_KEY = 'snapmon-perf', PERF_MAX = 200;
+  function perfLog() { try { return JSON.parse(Platform.storage.get(PERF_KEY) || '[]'); } catch (e) { return []; } }
+  function perfAdd(e) { try { const l = perfLog(); l.push(e); Platform.storage.set(PERF_KEY, JSON.stringify(l.slice(-PERF_MAX))); } catch (er) {} }
 
   async function manifest() {
     if (st.manifest) return st.manifest;
@@ -93,8 +98,10 @@ const Engine = (() => {
       const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
       rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
       rec.debug.decision = h.decision + (h.reason === 'disagree' ? ' (lenses disagree)' : h.reason === 'second-opinion' ? ' (second opinion)' : '');
-      rec.debug.engine = { id: ENGINE_ID, backends: { lens: Lens.status.backend, clip: ClipLens.status.info.backend }, totalMs: Math.round(performance.now() - t0) };
-      return { rec, prodOnly, clip, ms: Math.round(performance.now() - t0) };
+      const ms = Math.round(performance.now() - t0), backends = { lens: Lens.status.backend, clip: ClipLens.status.info.backend };
+      rec.debug.engine = { id: ENGINE_ID, backends, totalMs: ms };
+      perfAdd({ t: Date.now(), ms, lensMs: rec.debug.times && rec.debug.times.total, clipMs: clip.totalMs, clipInferMs: clip.inferMs, crops: clip.regions.length, backends });
+      return { rec, prodOnly, clip, ms };
     } catch (e) {
       // a crashed worker or a lost GPU context leaves the engine unusable: make the next attempt reload it
       if (ClipLens.status.state !== 'ready') { st.state = 'failed'; emit(); }
@@ -102,16 +109,17 @@ const Engine = (() => {
     }
   }
 
-  // developer testing: force the CPU path for both parts (same models) and reload
-  function setForceCPU(on) {
-    Lens.CFG.forceCPU = !!on; ClipLens.CFG.forceBackend = on ? 'wasm' : null;
-    ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit();
-  }
+  // developer testing only (same models, reloads the engine):
+  //   setForceCPU — the detector/classifier on TF.js's CPU backend instead of WebGL (TinyCLIP is on the CPU anyway)
+  //   setClipGPU  — TinyCLIP on WebGPU, to compare speed and results with the standard CPU path
+  const reload = () => { ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit(); };
+  function setForceCPU(on) { Lens.CFG.forceCPU = !!on; reload(); }
+  function setClipGPU(on) { ClipLens.CFG.backend = on ? 'webgpu' : 'wasm'; reload(); }
   async function clearCache() {
     try { await caches.delete('snapmon-models-v1'); } catch (e) {}
     try { await Lens.clearCache(); } catch (e) {}
-    ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit();
+    reload();
   }
 
-  return { load, recognize, downloadBytes, manifest, setForceCPU, clearCache, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
+  return { load, recognize, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
 })();

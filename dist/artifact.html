@@ -357,7 +357,7 @@ details.debug td { padding: 2px 6px 2px 0; border-top: 1px solid #221a38; vertic
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; } }
 @media (max-width: 360px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dex-row { grid-template-columns: 70px repeat(5, minmax(0, 1fr)); } .shutter { width: 84px; height: 84px; } }
 </style>
-<script>window.__SNAPMON_CLIP_WORKER = "/* SNAPMON — TinyCLIP worker (part of the standard Hybrid recogniser, see engine.js). Runs off the main thread.\n   Receives preprocessed 224×224 crops, returns vocabulary scores. Text embeddings for the whole vocabulary are\n   precomputed offline (lab/export_clip.py), so only the image encoder runs on the phone.\n\n   Same model everywhere, different hardware: WebGPU where an adapter exists and the session works, otherwise\n   WebAssembly (CPU) with the very same weights. Downloads stream with progress, are checked for completeness\n   (and against the deploy manifest's SHA-256 when one is given) before they are cached, and a cached file that fails\n   to load is purged so a retry downloads it again.\n\n   Messages: {type:'init', base, ortBase, preferGPU, forceBackend, expect} → progress* → {type:'ready', info}\n             {type:'run', id, crops:Float32Array, n} → {type:'result', id, top, ms} */\n'use strict';\nlet session = null, vocab = null, meta = null, dim = 0, nLabels = 0, backend = '';\nconst CACHE = 'snapmon-models-v1';\nconst progress = (file, loaded, total) => self.postMessage({ type: 'progress', file, loaded, total });\n\nasync function sha256(buf) {\n  if (!self.crypto || !crypto.subtle) return null;\n  const h = await crypto.subtle.digest('SHA-256', buf);\n  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('');\n}\n// Cache API keeps model files on the phone after the first complete download.\nasync function cachedFetch(url, file, expect) {\n  let cache = null;\n  try { cache = await caches.open(CACHE); } catch (e) { /* storage blocked: plain download every time */ }\n  if (cache) {\n    const hit = await cache.match(url);\n    if (hit) { const buf = await hit.arrayBuffer(); progress(file, buf.byteLength, buf.byteLength); return { buf, cached: true }; }\n  }\n  const r = await fetch(url);\n  if (!r.ok) throw Object.assign(new Error('download failed (' + r.status + ') ' + file), { kind: 'download' });\n  const total = +r.headers.get('content-length') || (expect && expect.bytes) || 0;\n  let buf;\n  if (r.body && r.body.getReader) {\n    const reader = r.body.getReader(), parts = []; let got = 0, last = 0;\n    for (;;) {\n      const { done, value } = await reader.read(); if (done) break;\n      parts.push(value); got += value.byteLength;\n      if (got - last > 262144) { last = got; progress(file, got, total); }\n    }\n    const u8 = new Uint8Array(got); let o = 0; for (const p of parts) { u8.set(p, o); o += p.byteLength; }\n    buf = u8.buffer;\n  } else buf = await r.arrayBuffer();\n  progress(file, buf.byteLength, total || buf.byteLength);\n  // an interrupted transfer must never be cached as if it were the model\n  if (total && buf.byteLength !== total && !r.headers.get('content-encoding')) throw Object.assign(new Error('download interrupted: ' + file), { kind: 'download' });\n  if (expect && expect.bytes && buf.byteLength !== expect.bytes) throw Object.assign(new Error('incomplete download: ' + file), { kind: 'download' });\n  if (expect && expect.sha256) { const h = await sha256(buf); if (h && h !== expect.sha256) throw Object.assign(new Error('corrupted download: ' + file), { kind: 'download' }); }\n  if (cache) { try { await cache.put(url, new Response(buf.slice(0), { headers: { 'content-type': 'application/octet-stream' } })); } catch (e) { /* quota: fine */ } }\n  return { buf, cached: false };\n}\nasync function purge(urls) { try { const c = await caches.open(CACHE); for (const u of urls) await c.delete(u); } catch (e) {} }\n\nfunction f16ToF32(u16) {\n  const out = new Float32Array(u16.length);\n  for (let i = 0; i < u16.length; i++) {\n    const h = u16[i], s = (h & 0x8000) ? -1 : 1, e = (h >> 10) & 0x1f, f = h & 0x3ff;\n    out[i] = e === 0 ? s * Math.pow(2, -14) * (f / 1024) : e === 31 ? (f ? NaN : s * Infinity) : s * Math.pow(2, e - 15) * (1 + f / 1024);\n  }\n  return out;\n}\nconst memoryError = e => /memory|allocation|RangeError|Aborted\\(\\)|OOM/i.test(String(e && (e.message || e)));\n\nasync function makeSession(modelBuf, which) {\n  const s = await ort.InferenceSession.create(new Uint8Array(modelBuf), { executionProviders: which === 'webgpu' ? ['webgpu'] : ['wasm'], graphOptimizationLevel: 'all' });\n  // warm-up (also proves the backend really runs this model) so the first photo is not slowed down by compilation\n  const sz = meta.image.size;\n  await s.run({ [s.inputNames[0]]: new ort.Tensor('float32', new Float32Array(3 * sz * sz), [1, 3, sz, sz]) });\n  return s;\n}\n\n// test: { failGPU, failCPU } lets automated tests simulate backend failures; never set by the game itself\nasync function init({ base, ortBase, preferGPU, forceBackend, expect = {}, test = {} }) {\n  const t0 = performance.now();\n  let gpu = !!test.failGPU && forceBackend !== 'wasm';\n  if (!gpu && forceBackend !== 'wasm' && preferGPU && navigator.gpu) { try { gpu = !!(await navigator.gpu.requestAdapter()); } catch (e) { gpu = false; } }\n  // the WebGPU bundle also contains the WASM backend, so one script serves both\n  importScripts(ortBase + (gpu ? 'ort.webgpu.min.js' : 'ort.min.js'));\n  ort.env.wasm.wasmPaths = ortBase;\n  ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;\n  const urls = { meta: base + 'vocab.json', vocab: base + 'vocab.bin' };\n  meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'])).buf));\n  urls.model = base + meta.model;\n  const [m, v] = await Promise.all([cachedFetch(urls.model, meta.model, expect[meta.model]), cachedFetch(urls.vocab, 'vocab.bin', expect['vocab.bin'])]);\n  dim = meta.dim; nLabels = meta.labels.length;\n  vocab = f16ToF32(new Uint16Array(v.buf));\n  if (vocab.length !== dim * nLabels) { await purge(Object.values(urls)); throw Object.assign(new Error('vocabulary file does not match the model'), { kind: 'download' }); }\n  let gpuError = null;\n  if (gpu) {\n    try { if (test.failGPU) throw new Error('simulated WebGPU failure'); session = await makeSession(m.buf, 'webgpu'); backend = 'webgpu'; }\n    catch (e) { gpuError = String(e.message || e); session = null; }\n  }\n  if (!session) {\n    try { if (test.failCPU) throw new Error(test.failCPU); session = await makeSession(m.buf, 'wasm'); backend = 'wasm'; }\n    catch (e) {\n      if (m.cached) await purge([urls.model]); // maybe a damaged cached copy: download it again next time\n      throw Object.assign(new Error('the model failed to run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });\n    }\n  }\n  return { backend, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,\n    name: meta.name, variant: meta.variant, fromCache: m.cached && v.cached };\n}\n\nasync function run({ crops, n, k = 8 }) {\n  const t0 = performance.now(), s = meta.image.size;\n  const out = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', crops, [n, 3, s, s]) });\n  const emb = out[session.outputNames[0]].data;\n  const scale = meta.scale, top = [];\n  for (let c = 0; c < n; c++) {\n    let norm = 0; for (let d = 0; d < dim; d++) norm += emb[c * dim + d] ** 2; norm = Math.sqrt(norm) || 1;\n    const cos = new Float32Array(nLabels);\n    let mx = -1e9;\n    for (let l = 0; l < nLabels; l++) { let dot = 0; const o = l * dim; for (let d = 0; d < dim; d++) dot += emb[c * dim + d] * vocab[o + d]; cos[l] = dot / norm; if (cos[l] > mx) mx = cos[l]; }\n    // softmax over the whole vocabulary (temperature = model's logit scale); summed per object later\n    let sum = 0; const p = new Float32Array(nLabels);\n    for (let l = 0; l < nLabels; l++) { p[l] = Math.exp(scale * (cos[l] - mx)); sum += p[l]; }\n    const idx = Array.from({ length: nLabels }, (_, i) => i).sort((a, b) => p[b] - p[a]).slice(0, k);\n    top.push(idx.map(i => ({ i, p: p[i] / sum, cos: +cos[i].toFixed(4) })));\n  }\n  return { top, ms: Math.round(performance.now() - t0) };\n}\n\nself.onmessage = async ev => {\n  const m = ev.data;\n  try {\n    if (m.type === 'init') self.postMessage({ type: 'ready', info: await init(m) });\n    else if (m.type === 'run') self.postMessage({ type: 'result', id: m.id, ...(await run(m)) });\n  } catch (e) { self.postMessage({ type: 'error', id: m.id, error: String(e && e.message || e), kind: (e && e.kind) || (memoryError(e) ? 'memory' : 'init') }); }\n};\n";</script>
+<script>window.__SNAPMON_CLIP_WORKER = "/* SNAPMON — TinyCLIP worker (part of the standard Hybrid recogniser, see engine.js). Runs off the main thread.\n   Receives preprocessed 224×224 crops, returns vocabulary scores. Text embeddings for the whole vocabulary are\n   precomputed offline (lab/export_clip.py), so only the image encoder runs on the phone.\n\n   Standard backend for every player: WebAssembly (CPU), single-threaded, so every device does the same arithmetic\n   and reaches the same decision (WebGPU gave a different outcome on ~4.5% of photos, docs/RECOGNITION.md). WebGPU is\n   kept only as a developer comparison option ('webgpu': tries the GPU, falls back to WASM with the same weights). Downloads stream with progress, are checked for completeness\n   (and against the deploy manifest's SHA-256 when one is given) before they are cached, and a cached file that fails\n   to load is purged so a retry downloads it again.\n\n   Messages: {type:'init', base, ortBase, backend:'wasm'|'webgpu', expect} → progress* → {type:'ready', info}\n             {type:'run', id, crops:Float32Array, n} → {type:'result', id, top, ms} */\n'use strict';\nlet session = null, vocab = null, meta = null, dim = 0, nLabels = 0, backend = '';\nconst CACHE = 'snapmon-models-v1';\nconst progress = (file, loaded, total) => self.postMessage({ type: 'progress', file, loaded, total });\n\nasync function sha256(buf) {\n  if (!self.crypto || !crypto.subtle) return null;\n  const h = await crypto.subtle.digest('SHA-256', buf);\n  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('');\n}\n// Cache API keeps model files on the phone after the first complete download.\nasync function cachedFetch(url, file, expect) {\n  let cache = null;\n  try { cache = await caches.open(CACHE); } catch (e) { /* storage blocked: plain download every time */ }\n  if (cache) {\n    const hit = await cache.match(url);\n    if (hit) { const buf = await hit.arrayBuffer(); progress(file, buf.byteLength, buf.byteLength); return { buf, cached: true }; }\n  }\n  const r = await fetch(url);\n  if (!r.ok) throw Object.assign(new Error('download failed (' + r.status + ') ' + file), { kind: 'download' });\n  const total = +r.headers.get('content-length') || (expect && expect.bytes) || 0;\n  let buf;\n  if (r.body && r.body.getReader) {\n    const reader = r.body.getReader(), parts = []; let got = 0, last = 0;\n    for (;;) {\n      const { done, value } = await reader.read(); if (done) break;\n      parts.push(value); got += value.byteLength;\n      if (got - last > 262144) { last = got; progress(file, got, total); }\n    }\n    const u8 = new Uint8Array(got); let o = 0; for (const p of parts) { u8.set(p, o); o += p.byteLength; }\n    buf = u8.buffer;\n  } else buf = await r.arrayBuffer();\n  progress(file, buf.byteLength, total || buf.byteLength);\n  // an interrupted transfer must never be cached as if it were the model\n  if (total && buf.byteLength !== total && !r.headers.get('content-encoding')) throw Object.assign(new Error('download interrupted: ' + file), { kind: 'download' });\n  if (expect && expect.bytes && buf.byteLength !== expect.bytes) throw Object.assign(new Error('incomplete download: ' + file), { kind: 'download' });\n  if (expect && expect.sha256) { const h = await sha256(buf); if (h && h !== expect.sha256) throw Object.assign(new Error('corrupted download: ' + file), { kind: 'download' }); }\n  if (cache) { try { await cache.put(url, new Response(buf.slice(0), { headers: { 'content-type': 'application/octet-stream' } })); } catch (e) { /* quota: fine */ } }\n  return { buf, cached: false };\n}\nasync function purge(urls) { try { const c = await caches.open(CACHE); for (const u of urls) await c.delete(u); } catch (e) {} }\n\nfunction f16ToF32(u16) {\n  const out = new Float32Array(u16.length);\n  for (let i = 0; i < u16.length; i++) {\n    const h = u16[i], s = (h & 0x8000) ? -1 : 1, e = (h >> 10) & 0x1f, f = h & 0x3ff;\n    out[i] = e === 0 ? s * Math.pow(2, -14) * (f / 1024) : e === 31 ? (f ? NaN : s * Infinity) : s * Math.pow(2, e - 15) * (1 + f / 1024);\n  }\n  return out;\n}\nconst memoryError = e => /memory|allocation|RangeError|Aborted\\(\\)|OOM/i.test(String(e && (e.message || e)));\n\nasync function makeSession(modelBuf, which) {\n  const s = await ort.InferenceSession.create(new Uint8Array(modelBuf), { executionProviders: which === 'webgpu' ? ['webgpu'] : ['wasm'], graphOptimizationLevel: 'all' });\n  // warm-up (also proves the backend really runs this model) so the first photo is not slowed down by compilation\n  const sz = meta.image.size;\n  await s.run({ [s.inputNames[0]]: new ort.Tensor('float32', new Float32Array(3 * sz * sz), [1, 3, sz, sz]) });\n  return s;\n}\n\n// test: { failGPU, failCPU } lets automated tests simulate backend failures; never set by the game itself\nasync function init({ base, ortBase, backend: want = 'wasm', expect = {}, test = {} }) {\n  const t0 = performance.now();\n  let gpu = false;\n  if (want === 'webgpu') {\n    gpu = !!test.failGPU;\n    if (!gpu && navigator.gpu) { try { gpu = !!(await navigator.gpu.requestAdapter()); } catch (e) { gpu = false; } }\n  }\n  // the WebGPU bundle also contains the WASM backend; the standard path loads only the smaller CPU build\n  importScripts(ortBase + (gpu ? 'ort.webgpu.min.js' : 'ort.min.js'));\n  ort.env.wasm.wasmPaths = ortBase;\n  // one thread on every device: the same WASM binary, the same operation order, the same result\n  ort.env.wasm.numThreads = 1;\n  const urls = { meta: base + 'vocab.json', vocab: base + 'vocab.bin' };\n  meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'])).buf));\n  urls.model = base + meta.model;\n  const [m, v] = await Promise.all([cachedFetch(urls.model, meta.model, expect[meta.model]), cachedFetch(urls.vocab, 'vocab.bin', expect['vocab.bin'])]);\n  dim = meta.dim; nLabels = meta.labels.length;\n  vocab = f16ToF32(new Uint16Array(v.buf));\n  if (vocab.length !== dim * nLabels) { await purge(Object.values(urls)); throw Object.assign(new Error('vocabulary file does not match the model'), { kind: 'download' }); }\n  let gpuError = null;\n  if (gpu) {\n    try { if (test.failGPU) throw new Error('simulated WebGPU failure'); session = await makeSession(m.buf, 'webgpu'); backend = 'webgpu'; }\n    catch (e) { gpuError = String(e.message || e); session = null; }\n  }\n  if (!session) {\n    try { if (test.failCPU) throw new Error(test.failCPU); session = await makeSession(m.buf, 'wasm'); backend = 'wasm'; }\n    catch (e) {\n      if (m.cached) await purge([urls.model]); // maybe a damaged cached copy: download it again next time\n      throw Object.assign(new Error('the model failed to run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });\n    }\n  }\n  return { backend, requested: want, threads: ort.env.wasm.numThreads, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,\n    name: meta.name, variant: meta.variant, fromCache: m.cached && v.cached };\n}\n\nasync function run({ crops, n, k = 8 }) {\n  const t0 = performance.now(), s = meta.image.size;\n  const out = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', crops, [n, 3, s, s]) });\n  const emb = out[session.outputNames[0]].data;\n  const scale = meta.scale, top = [];\n  for (let c = 0; c < n; c++) {\n    let norm = 0; for (let d = 0; d < dim; d++) norm += emb[c * dim + d] ** 2; norm = Math.sqrt(norm) || 1;\n    const cos = new Float32Array(nLabels);\n    let mx = -1e9;\n    for (let l = 0; l < nLabels; l++) { let dot = 0; const o = l * dim; for (let d = 0; d < dim; d++) dot += emb[c * dim + d] * vocab[o + d]; cos[l] = dot / norm; if (cos[l] > mx) mx = cos[l]; }\n    // softmax over the whole vocabulary (temperature = model's logit scale); summed per object later\n    let sum = 0; const p = new Float32Array(nLabels);\n    for (let l = 0; l < nLabels; l++) { p[l] = Math.exp(scale * (cos[l] - mx)); sum += p[l]; }\n    const idx = Array.from({ length: nLabels }, (_, i) => i).sort((a, b) => p[b] - p[a]).slice(0, k);\n    top.push(idx.map(i => ({ i, p: p[i] / sum, cos: +cos[i].toFixed(4) })));\n  }\n  return { top, ms: Math.round(performance.now() - t0) };\n}\n\nself.onmessage = async ev => {\n  const m = ev.data;\n  try {\n    if (m.type === 'init') self.postMessage({ type: 'ready', info: await init(m) });\n    else if (m.type === 'run') self.postMessage({ type: 'result', id: m.id, ...(await run(m)) });\n  } catch (e) { self.postMessage({ type: 'error', id: m.id, error: String(e && e.message || e), kind: (e && e.kind) || (memoryError(e) ? 'memory' : 'init') }); }\n};\n";</script>
 
 
 <div id="app">
@@ -3055,7 +3055,7 @@ const Platform = (() => {
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.0';
+const GAME_VERSION = '0.4.1';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -4262,7 +4262,8 @@ const ClipLens = (() => {
     base: 'models/clip/',          // packaged assets (Platform.assets)
     localOrt: 'vendor/ort/',
     workerPath: 'src/workers/clip-worker.js',
-    forceBackend: null,             // developer testing only: 'wasm' forces the CPU path (same model)
+    backend: 'wasm',                // standard for every player: CPU (WebAssembly), identical results on every device.
+                                    // 'webgpu' = developer comparison only (GPU, faster on some phones, ~4.5% of outcomes differ)
     expect: null,                   // { file: {bytes, sha256} } from the deploy manifest, checked by the worker
     test: null,                     // automated tests only: { failGPU, failCPU } simulates backend failures
     // fallback thresholds; replaced by the benchmark's calibration in vocab.json when present
@@ -4295,7 +4296,7 @@ const ClipLens = (() => {
         };
         // the worker process itself can die (Android reclaiming memory): reject whatever was waiting
         st.worker.onerror = e => { for (const p of st.pending.values()) p.reject(Object.assign(new Error('recognition worker stopped: ' + (e.message || 'unknown')), { kind: 'crash' })); st.pending.clear(); st.state = 'failed'; };
-        const ready = await call('init', { type: 'init', base, ortBase, preferGPU: true, forceBackend: CFG.forceBackend, expect: CFG.expect || {}, test: CFG.test || {} }, 240000);
+        const ready = await call('init', { type: 'init', base, ortBase, backend: CFG.backend, expect: CFG.expect || {}, test: CFG.test || {} }, 240000);
         st.info = ready.info;
         st.meta = await (await fetch(base + 'vocab.json')).json(); // served from the HTTP/Cache copy the worker just verified
         st.state = 'ready';
@@ -4448,11 +4449,12 @@ const ClipLens = (() => {
    Parts (all on the device, nothing uploaded):
      • Lens (lens.js)      — COCO-SSD lite detector + MobileNet v2 classifier (TF.js; WebGL, CPU fallback)
      • ClipLens (lens-clip.js + workers/clip-worker.js) — TinyCLIP ViT-39M/16 image encoder over a 2,940-label
-                             vocabulary (ONNX Runtime Web; WebGPU, WASM/CPU fallback)
+                             vocabulary (ONNX Runtime Web; WebAssembly/CPU for everyone)
      • ClipLens.hybridDecision — the fusion and second-opinion rules (docs/RECOGNITION.md)
 
-   Every player gets the same model files, vocabulary, thresholds and rules (ENGINE_ID names that set). Hardware only
-   changes speed: GPU where it works, otherwise CPU with the same weights. If either part cannot load or run, hunting
+   Every player gets the same model files, vocabulary, thresholds and rules (ENGINE_ID names that set). TinyCLIP always
+   runs on the CPU (WASM, one thread) so its scores are identical on every device; the detector/classifier uses the
+   GPU (WebGL) where it works, otherwise the CPU with the same weights (measured differences ≤ 0.0001). If either part cannot load or run, hunting
    stops with an explanation and a Retry. There is no weaker fallback recogniser.
 
    Model files come from Platform.assets (the website today, the APK's bundled assets later). The deploy writes
@@ -4462,11 +4464,15 @@ const ClipLens = (() => {
 const ENGINE_ID = 'hybrid-1'; // bump whenever a model file, the vocabulary, a threshold or a decision rule changes
 
 const Engine = (() => {
-  const FALLBACK_SIZES = { lens: 32.6 * 1048576, clip: 63.4 * 1048576 }; // used if the manifest is missing (upper bounds)
+  const FALLBACK_SIZES = { lens: 32.6 * 1048576, clip: 53.5 * 1048576 }; // used if the manifest is missing (upper bounds)
   const st = { state: 'idle', stage: '', loaded: 0, total: 0, error: '', kind: '', loadMs: 0, manifest: null, backends: {} };
   const listeners = new Set();
   const emit = () => listeners.forEach(f => { try { f(st); } catch (e) {} });
   let loading = null;
+  // timing of every recognition (not only field tests), kept on this phone for the developer panel; never uploaded
+  const PERF_KEY = 'snapmon-perf', PERF_MAX = 200;
+  function perfLog() { try { return JSON.parse(Platform.storage.get(PERF_KEY) || '[]'); } catch (e) { return []; } }
+  function perfAdd(e) { try { const l = perfLog(); l.push(e); Platform.storage.set(PERF_KEY, JSON.stringify(l.slice(-PERF_MAX))); } catch (er) {} }
 
   async function manifest() {
     if (st.manifest) return st.manifest;
@@ -4538,8 +4544,10 @@ const Engine = (() => {
       const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
       rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
       rec.debug.decision = h.decision + (h.reason === 'disagree' ? ' (lenses disagree)' : h.reason === 'second-opinion' ? ' (second opinion)' : '');
-      rec.debug.engine = { id: ENGINE_ID, backends: { lens: Lens.status.backend, clip: ClipLens.status.info.backend }, totalMs: Math.round(performance.now() - t0) };
-      return { rec, prodOnly, clip, ms: Math.round(performance.now() - t0) };
+      const ms = Math.round(performance.now() - t0), backends = { lens: Lens.status.backend, clip: ClipLens.status.info.backend };
+      rec.debug.engine = { id: ENGINE_ID, backends, totalMs: ms };
+      perfAdd({ t: Date.now(), ms, lensMs: rec.debug.times && rec.debug.times.total, clipMs: clip.totalMs, clipInferMs: clip.inferMs, crops: clip.regions.length, backends });
+      return { rec, prodOnly, clip, ms };
     } catch (e) {
       // a crashed worker or a lost GPU context leaves the engine unusable: make the next attempt reload it
       if (ClipLens.status.state !== 'ready') { st.state = 'failed'; emit(); }
@@ -4547,18 +4555,19 @@ const Engine = (() => {
     }
   }
 
-  // developer testing: force the CPU path for both parts (same models) and reload
-  function setForceCPU(on) {
-    Lens.CFG.forceCPU = !!on; ClipLens.CFG.forceBackend = on ? 'wasm' : null;
-    ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit();
-  }
+  // developer testing only (same models, reloads the engine):
+  //   setForceCPU — the detector/classifier on TF.js's CPU backend instead of WebGL (TinyCLIP is on the CPU anyway)
+  //   setClipGPU  — TinyCLIP on WebGPU, to compare speed and results with the standard CPU path
+  const reload = () => { ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit(); };
+  function setForceCPU(on) { Lens.CFG.forceCPU = !!on; reload(); }
+  function setClipGPU(on) { ClipLens.CFG.backend = on ? 'webgpu' : 'wasm'; reload(); }
   async function clearCache() {
     try { await caches.delete('snapmon-models-v1'); } catch (e) {}
     try { await Lens.clearCache(); } catch (e) {}
-    ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit();
+    reload();
   }
 
-  return { load, recognize, downloadBytes, manifest, setForceCPU, clearCache, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
+  return { load, recognize, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
 })();
 
 </script>
@@ -4833,7 +4842,7 @@ function showFieldTest(p) {
   const colour = colourDiagnostics(p);
   const clipTop = clip ? clip.regions[0].ranked.slice(0, 3).map(x => ({ obj: x.obj, label: x.label, p: +x.p.toFixed(3) })) : null;
   p.ft = { v: 2, t: Date.now(), prod: { decision: prodRec.decision, reason: prodRec.reason, top: prodTop, ms: rec.debug && rec.debug.times && rec.debug.times.total },
-    clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null,
+    clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, inferMs: clip.inferMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null,
     hybrid: hybrid ? { decision: rec.decision, reason: rec.reason, top: ftTop(rec), ms: rec.debug.engine && rec.debug.engine.totalMs } : null,
     engine: { id: Engine.ID, backends: Engine.status.backends }, colour: colour && colour.log, marks: {} };
   const nm = x => esc(x.obj && OBJECTS[x.obj] ? OBJECTS[x.obj].name : x.label);
@@ -4906,6 +4915,16 @@ function ftSummaryHTML() {
   const row = (k, l) => { const s = st[k], ms = s.ms; if (!s.n) return ''; return `<tr><td>${l}</td><td>${s.n}</td><td>${pct(s.right, s.answered)}</td><td>${pct(s.inList, s.answered)}</td><td>${s.unknownOk} / ${s.missed}</td><td>${ms.length ? ms.sort((a, b) => a - b)[ms.length >> 1] + ' / ' + ms[ms.length - 1] : '–'}</td></tr>`; };
   return `<div class="debug small"><table><tr><th></th><th>photos</th><th>right when it answered</th><th>right one in list</th><th>right unknown / missed</th><th>ms median / worst</th></tr>${row('prod', 'Production')}${row('clip', 'Experimental')}${row('hybrid', 'Hybrid')}</table></div>
     <p class="small muted" style="margin:0">${list.length} field-test photos logged on this phone.</p>`;
+}
+
+// recognition timings per backend combination (every hunt), so TinyCLIP's CPU time can be measured on a real phone
+function perfHTML() {
+  const log = Engine.perfLog(), groups = {};
+  for (const e of log) { const k = `${e.backends.lens === 'webgl' ? 'GPU' : 'CPU'} detector + ${e.backends.clip === 'webgpu' ? 'GPU' : 'CPU'} TinyCLIP`; (groups[k] = groups[k] || []).push(e); }
+  const q = (a, f) => { a = a.filter(x => x != null).sort((x, y) => x - y); return a.length ? a[Math.min(a.length - 1, Math.floor(a.length * f))] : '–'; };
+  const rows = Object.entries(groups).map(([k, l]) => `<tr><td>${k}</td><td>${l.length}</td><td>${q(l.map(e => e.clipInferMs), .5)} / ${q(l.map(e => e.clipInferMs), .9)}</td><td>${q(l.map(e => e.clipMs), .5)}</td><td>${q(l.map(e => e.ms), .5)} / ${q(l.map(e => e.ms), .9)}</td></tr>`).join('');
+  return `<div class="debug small"><b>Recognition timings (ms, every hunt)</b>${rows ? `<table><tr><th></th><th>photos</th><th>TinyCLIP model median / p90</th><th>TinyCLIP total median</th><th>whole engine median / p90</th></tr>${rows}</table>` : '<p class="muted" style="margin:4px 0 0">No photos recognised yet.</p>'}</div>
+    <div class="row wrap"><button class="btn small grow" data-act="perfExport">Copy timings (${log.length})</button><button class="btn small" data-act="perfClear">Clear timings</button></div>`;
 }
 
 const ENGINE_FAIL = "SnapMon's recognition engine couldn't run on this device. Please check for system updates or try again.";
@@ -5559,7 +5578,9 @@ function developerHTML() {
   return `<div class="card stack"><button class="row" data-act="devOpen" style="background:none;border:0;color:inherit;padding:0;text-align:left"><b class="grow">Developer &amp; testing</b><span class="muted">${open ? '▾' : '▸'}</span></button>
     ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what each part of the engine saw: predictions, boxes, scores, timing and backend.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
     <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdicts, side by side: Hybrid, detector + classifier alone, TinyCLIP alone, and the colour extraction. No monsters appear.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
-    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: runs the same models on the CPU instead of the GPU, to compare speed and results. Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
+    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: also runs the detector and classifier on the CPU instead of the GPU (TinyCLIP always runs on the CPU). Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
+    <div class="toggle"><div><b>TinyCLIP on GPU (comparison)</b><p>Testing only: runs TinyCLIP on WebGPU, like v0.4.0, to compare speed. Results can differ from what players get. Reloads the engine.</p></div><button class="switch ${S.settings.clipGPU ? 'on' : ''}" data-act="toggleClipGPU" aria-label="Toggle TinyCLIP on GPU"></button></div>
+    ${perfHTML()}
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
     <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow">Engine load: ${E.loadMs || '–'} ms</span></div>
@@ -5590,6 +5611,12 @@ const actions = {
     if (ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
   },
   toggleForceCPU() { S.settings.forceCPU = !S.settings.forceCPU; persist(); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); settingsSheet(); },
+  toggleClipGPU() { S.settings.clipGPU = !S.settings.clipGPU; persist(); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); settingsSheet(); },
+  perfExport() {
+    const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), timings: Engine.perfLog() });
+    try { navigator.clipboard.writeText(text).then(() => toast('Timings copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
+  },
+  perfClear() { Engine.clearPerf(); settingsSheet(); },
   async engineRedownload(_, el) {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to delete'; return; }
     await Engine.clearCache(); S.settings.engineCached = false; persist(); toast('Saved engine files deleted. They download again on the next hunt.'); settingsSheet();
@@ -5734,6 +5761,7 @@ if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFr
 // v0.4: Hybrid is the only recogniser; the old developer switch between recognisers is gone
 delete S.settings.expLens;
 if (S.settings.forceCPU && devOn()) Engine.setForceCPU(true);
+if (S.settings.clipGPU && devOn()) Engine.setClipGPU(true);
 if (S.settings.engineCached) setTimeout(() => Engine.load(), 1200); // engine saved on this phone: start it in the background
 
 </script>

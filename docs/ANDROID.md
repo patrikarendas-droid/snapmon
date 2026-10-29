@@ -25,9 +25,9 @@ and nothing is fetched from AI hosts during play.
 - **The file list already exists.** The deploy writes `models/manifest.json` with every file's path, size and SHA-256.
   A native build step can copy exactly those files into the app and verify them. The worker already checks TinyCLIP
   downloads against the manifest.
-- **Size.** Upper bound with the GPU runtime: about 32.6 MB (detector, classifier and TF.js) plus 63.7 MB (TinyCLIP
-  38.8 MB, vocabulary 2.9 MB, ONNX Runtime WebGPU/WASM build 22 MB), roughly 96 MB. The CPU-only runtime build is
-  11 MB instead of 22 MB.
+- **Size.** About 32.6 MB (detector, classifier and TF.js) plus about 53 MB (TinyCLIP 38.8 MB, vocabulary 2.9 MB,
+  ONNX Runtime CPU/WASM build 11 MB), roughly 86 MB. Since v0.4.1 the 22 MB WebGPU runtime build is used only by a
+  developer comparison switch and need not be bundled in the APK.
   - Google Play's limit for the base download is 200 MB (Android App Bundle), so the models fit. **Play Asset
     Delivery** with an *install-time* asset pack is the alternative if the base module needs to stay small. Install-time
     packs arrive with the app, are updated with each release, and need no in-game download screen.
@@ -43,18 +43,17 @@ and nothing is fetched from AI hosts during play.
 | Part | GPU path | CPU path | Same weights? |
 |---|---|---|---|
 | Detector + classifier (TF.js) | WebGL | TF.js CPU backend | yes (automatic fallback, also mid-session if WebGL is lost) |
-| TinyCLIP (ONNX Runtime Web, in a worker) | WebGPU | WebAssembly (multi-threaded only when cross-origin isolated) | yes (automatic fallback if the WebGPU session fails) |
+| TinyCLIP (ONNX Runtime Web, in a worker) | developer comparison only (WebGPU) | **standard for every player since v0.4.1**: WebAssembly, one thread | yes |
 
 - If both backends fail, the player gets "SnapMon's recognition engine couldn't run on this device. Please check for
   system updates or try again." with a Retry. Hunting never continues with a weaker model.
 - **WebView caveats.**
-  - WebGPU in the Android System WebView lags behind Chrome, so many devices will run TinyCLIP on WASM there. Expect
-    WASM to be slower than the 1.5 s median measured with WebGPU in Chrome.
-  - Multi-threaded WASM needs cross-origin isolation. A Capacitor app can enable it by serving
-    `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` from its local server.
-    This can be a large speed-up on the CPU path.
-- **Consistency.** Scores are rounded to 3 decimals before thresholds, and ties are broken by name. GPU vs CPU results
-  measured on the benchmark photos are in `docs/RECOGNITION.md`.
+  - TinyCLIP no longer depends on WebGPU, so WebView's patchy WebGPU support does not matter for it.
+  - TinyCLIP is pinned to one WASM thread so every device does the same arithmetic. Multi-threaded WASM (needs
+    cross-origin isolation: `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy:
+    require-corp`) could be faster, but should only be enabled after checking that it gives identical scores.
+- **Consistency.** TinyCLIP on WebGPU changed the outcome on ~4.5% of benchmark photos, which is why it runs on the
+  CPU for everyone. Remaining differences (WebGL detector, canvas preprocessing) are listed in `docs/RECOGNITION.md`.
 
 ## Camera
 - **Web build:** uses `getUserMedia` with the rear camera. It starts only after a tap and stops on capture, on close,

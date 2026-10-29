@@ -189,8 +189,10 @@ is the **only** recogniser for players (`src/engine.js`, `ENGINE_ID = 'hybrid-1'
   2,940-label vocabulary, and the calibration in `lab/calib/tinyclip-39m16.json`.
 - **No substitutes.** The old tfhub/MobileNet 0.5 fallbacks are gone, and the engine needs all three parts. If one
   cannot load or run, hunting stops with an explanation and a Retry.
-- **Backends.** GPU where it works (WebGL / WebGPU), otherwise CPU with the same weights (TF.js CPU / WASM). WebGPU
-  failures fall back automatically (also tested with simulated failures in `tests/e2e-engine.js`).
+- **Backends (since v0.4.1).** TinyCLIP runs on the CPU (ONNX Runtime WebAssembly, one thread) for every player, so
+  its scores do not depend on the phone's GPU (see "GPU vs CPU consistency" below). The detector/classifier keeps
+  WebGL where it works, otherwise TF.js CPU with the same weights (measured difference ≤ 0.0001). WebGPU for TinyCLIP
+  survives only as a hidden developer comparison switch; it falls back to WASM if the GPU fails.
 - **Consistency.** TinyCLIP scores and margins are rounded to 3 decimals before any threshold, and ties are broken by
   name, so last-digit float differences between backends cannot reorder results. Measured GPU vs CPU: see below.
 - **Downloads.** Downloads are checked against `models/manifest.json` (size and SHA-256) before they are cached.
@@ -225,6 +227,26 @@ this size.
 **Speed in this run** (software GPU, not representative of phones): TinyCLIP took 0.57 s on WASM (avg, p95 1.04 s) on
 the CI CPU, against 8.3 s on the software WebGPU adapter. On the developer's phone, real WebGPU took ~1.5 s median.
 WASM on the phone has not been measured.
+
+**Decision (v0.4.1).** Consistent decisions across devices take priority over speed, so TinyCLIP runs on WASM for every
+player. The remaining sources of device-to-device difference are listed under "Remaining differences" below.
+
+### Remaining differences after v0.4.1
+
+- **TinyCLIP itself: none expected.** Every device runs the same WASM binary (ONNX Runtime Web 1.20.1, SIMD build) with
+  one thread. WebAssembly arithmetic is deterministic by specification (apart from NaN bit patterns), so the same
+  224×224 input gives the same scores. Verified so far only between engine reloads on one machine
+  (`tests/e2e-engine.js`); not yet compared across real phones.
+- **Detector/classifier on WebGL.** Measured ≤ 0.0001 against the CPU on a software GPU. Real phone GPUs may use lower
+  float precision (some mobile GPUs only render to 16-bit float textures), so differences could be larger there and
+  could, rarely, move a score across the classifier's thresholds or change a box. Not measured on phones.
+- **Preprocessing.** The photo is scaled and cropped with canvas `drawImage`, which browsers may run on the GPU with
+  slightly different resampling. The same scene can therefore produce slightly different 224×224 inputs on two
+  phones. (Two phones never photograph exactly the same pixels anyway.)
+- **Ranking/softmax in JavaScript.** `Math.exp` may differ in the last bit between JavaScript engine versions; scores
+  are rounded to 3 decimals before thresholds, so this cannot change a decision except exactly on a boundary.
+- **Speed.** TinyCLIP's CPU time on the developer's phone is still to be measured (developer panel → "Recognition
+  timings").
 
 **Correction to earlier numbers.** Until this fix, `lab/fetch-photos.mjs` saved every out-of-vocabulary photo under the
 same two file names, so each category overwrote the previous one. The "out-of-vocabulary rejected" percentages in the

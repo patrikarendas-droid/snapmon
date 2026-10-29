@@ -21,6 +21,7 @@ Semantic versions, tagged on the production commit that shipped:
 | `v0.3.0` | Object registry, specific monsters, live-camera only, experimental CLIP lens, save format 3. |
 | `v0.3.1`–`v0.3.3` | Field-test follow-ups: second-opinion rules, fusion fixes, field-test tools. |
 | `v0.4.0` | Hybrid is the single standard recogniser; photo-derived monster colours; Android Back navigation. Save format 3 (unchanged). |
+| `v0.4.1` | TinyCLIP runs on the CPU (WASM, one thread) for every player, for identical decisions across devices; recognition timings in the developer panel. Same models, rules and saves. |
 
 `GAME_VERSION` and `SAVE_VERSION` live at the top of `src/game.js`. Settings shows both.
 
@@ -69,6 +70,7 @@ Either way the Pages workflow redeploys automatically.
 
 Rolling back from v0.4.0 to v0.3.x is save-compatible (same save format 3): monsters keep their stored colours, and
 older code simply ignores the extra palette data. v0.3.x would bring back the old recogniser switch for developers.
+Rolling back from v0.4.1 to v0.4.0 is fully save-compatible; it only returns TinyCLIP to WebGPU where available.
 
 ## ⚠️ A code rollback does not roll back save data
 
