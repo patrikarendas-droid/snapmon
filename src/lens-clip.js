@@ -137,9 +137,36 @@ const ClipLens = (() => {
       else if (prod) pick = prod;
       if (pick && !out.some(o => o.obj === pick.obj)) out.push({ ...pick, rule });
     }
+    // production's other ideas stay available as choices (rule 4), so fusing never removes a right answer
+    const replaced = new Set(clipRes.regions.map(prodFor).filter(Boolean));
+    for (const c of prodRec.candidates || []) if (!replaced.has(c) && !out.some(o => o.obj === c.obj)) out.push({ ...c, rule: 4 });
     return out.sort((a, b) => b.conf - a.conf);
   }
 
+  /* Hybrid decision for one photo (developer "Hybrid" mode): fuse per region, then re-decide with the production
+     lens's own thresholds (L = Lens.CFG). Rule 5, from the first phone field test: when production would identify the
+     photo automatically but CLIP's best object for the whole photo is a different object with some support
+     (score >= DISAGREE_P), the player chooses between them instead. Production was confidently wrong on 7 of 30 phone
+     photos, and in each of those CLIP's best guess differed. Choices still come only from the lenses, never typed input. */
+  const DISAGREE_P = 0.08;
+  function hybridDecision(rec, clip, L) {
+    const fused = fuse(rec, clip).filter(c => c.conf >= L.MIN_CONF).slice(0, L.MAX_CHOICES);
+    let decision, reason;
+    if (!fused.length) { decision = 'unknown'; reason = rec.reason === 'person' ? 'person' : 'low'; }
+    else if (fused.filter(c => c.box).length >= 2) { decision = 'choose'; reason = 'multiple'; }
+    else if (fused[0].conf >= L.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * L.CLEAR_MARGIN)) { decision = 'auto'; reason = 'confident'; }
+    else { decision = 'choose'; reason = 'unsure'; }
+    const whole = clip.regions.find(r => !r.box), alt = whole && whole.best;
+    if (decision === 'auto' && alt && alt.obj && OBJECTS[alt.obj] && alt.obj !== fused[0].obj && alt.p >= DISAGREE_P) {
+      if (!fused.some(c => c.obj === alt.obj)) {
+        if (fused.length >= L.MAX_CHOICES) fused.pop(); // keep the list short: the weakest production idea makes room
+        fused.push({ label: alt.label, obj: alt.obj, cat: OBJECTS[alt.obj].cat, conf: alt.p, box: null, src: 'clip', rule: 5 });
+      }
+      decision = 'choose'; reason = 'disagree';
+    }
+    return { candidates: fused, decision, reason };
+  }
+
   function reset() { if (st.worker) st.worker.terminate(); Object.assign(st, { state: 'off', error: '', info: null, worker: null, meta: null, busy: false, loading: null }); st.pending.clear(); }
-  return { load, recognize, fuse, judge, reset, status: st, CFG };
+  return { load, recognize, fuse, judge, hybridDecision, reset, status: st, CFG };
 })();

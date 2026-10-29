@@ -131,6 +131,37 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await p.click('[data-act="camClose"]'); await p.waitForTimeout(150);
   ok(await cam.live(p) === 0, 'closing the camera stops its tracks');
 
+  // 3c) developer hybrid mode: production says coffeepot, the experimental lens says kettle -> the player chooses;
+  //     field-test mode logs production alone, the experimental lens and the hybrid separately, and creates no monster
+  await p.evaluate(() => {
+    const S = window.__snapmon.S; S.settings.expLens = 'hybrid';
+    ClipLens.status.state = 'ready'; ClipLens.status.meta = { labels: [], calib: { accept: { p: 0.35, margin: 0.15 }, heldOut: { accepted: 28, precision: 0.75 } } };
+    ClipLens.status.info = { backend: 'stub', loadMs: 1, modelBytes: 0, vocabBytes: 0, name: 'stub' };
+    ClipLens.recognize = async () => ({ regions: [{ box: null, cls: 'whole photo', best: { obj: 'kettle', label: 'electric kettle', p: 0.267 }, accepted: false, why: 'low score', calibrated: null,
+      ranked: [{ obj: 'kettle', label: 'electric kettle', p: 0.267 }, { obj: 'teapot', label: 'coffeepot', p: 0.104 }], margin: 0.163 }], inferMs: 5, totalMs: 6, backend: 'stub' });
+  });
+  await fakeLens('coffeepot', 'teapot');
+  await snapPhoto('red_mug.jpg');
+  await p.waitForSelector('text=The lenses disagree'); await shot(p, '13c-lenses-disagree');
+  const cands = await p.evaluate(() => window.__snapmon.ui.pending.rec.candidates.map(c => c.obj));
+  ok(cands.join() === 'teapot,kettle', 'hybrid: lenses disagree -> choice between coffeepot and kettle (' + cands + ')');
+  ok(!!(await p.$('text=second opinion')), "the experimental lens's suggestion shows no fake percentage");
+  await p.click('[data-act="cancelPhoto"]');
+  const enc0 = (await S()).stats.encounters;
+  await p.evaluate(() => { window.__snapmon.S.settings.fieldTest = true; });
+  await snapPhoto('red_mug.jpg');
+  await p.waitForSelector('text=Hybrid result'); await shot(p, '13d-field-test');
+  ok(!!(await p.$('text=auto (confident)')), "field test shows production's own decision, not the hybrid's");
+  ok(!(await p.$('[data-arg="prod:rejected_ok"]')) && !!(await p.$('[data-arg="clip:missed_guess"]')), 'field test offers verdicts that match what each lens did');
+  await p.click('[data-arg="prod:wrong"]'); await p.click('[data-arg="clip:missed_guess"]'); await p.click('[data-arg="hybrid:top3"]');
+  await p.fill('#ftTruth', 'electric kettle'); await p.click('[data-act="ftSave"]'); await p.waitForTimeout(300);
+  const log = await p.evaluate(() => JSON.parse(localStorage.getItem('snapmon.fieldtest.v1')));
+  const e = log[log.length - 1];
+  ok(e.v === 2 && e.prod.decision === 'auto' && e.prod.top[0].obj === 'teapot' && e.hybrid.decision === 'choose' && e.marks.hybrid === 'top3' && e.truth === 'electric kettle', 'field-test log keeps production alone, the hybrid result and the verdicts');
+  ok((await S()).stats.encounters === enc0, 'field-test photos never create encounters');
+  await p.evaluate(() => { window.__snapmon.actions.camClose(); const S = window.__snapmon.S; S.settings.fieldTest = false; S.settings.expLens = 'off'; });
+  await p.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; });
+
   // 4) persistence: reload
   await p.waitForTimeout(400);
   await p.reload(); await p.waitForTimeout(600);
