@@ -3026,7 +3026,7 @@ const Platform = (() => {
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.3.1';
+const GAME_VERSION = '0.3.2';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -4169,7 +4169,11 @@ const ClipLens = (() => {
     else if (fused[0].conf >= L.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * L.CLEAR_MARGIN)) { decision = 'auto'; reason = 'confident'; }
     else { decision = 'choose'; reason = 'unsure'; }
     const whole = clip.regions.find(r => !r.box), alt = whole && whole.best;
-    if (decision === 'auto' && alt && alt.obj && OBJECTS[alt.obj] && alt.obj !== fused[0].obj && alt.p >= DISAGREE_P) {
+    // near-synonyms are not a disagreement: same category and CLIP rates production's object at least half as high
+    // (wall clock 0.075 vs clock 0.118 = agree; coffeepot 0.104 vs electric kettle 0.267 = disagree; second field test)
+    const backed = whole && fused[0] && OBJECTS[fused[0].obj] && alt && OBJECTS[alt.obj] && OBJECTS[alt.obj].cat === OBJECTS[fused[0].obj].cat &&
+      (whole.ranked || []).some(x => x.obj === fused[0].obj && x.p >= alt.p * 0.5);
+    if (decision === 'auto' && alt && alt.obj && OBJECTS[alt.obj] && alt.obj !== fused[0].obj && alt.p >= DISAGREE_P && !backed) {
       if (!fused.some(c => c.obj === alt.obj)) {
         if (fused.length >= L.MAX_CHOICES) fused.pop(); // keep the list short: the weakest production idea makes room
         fused.push({ label: alt.label, obj: alt.obj, cat: OBJECTS[alt.obj].cat, conf: alt.p, box: null, src: 'clip', rule: 5 });
@@ -4432,6 +4436,8 @@ function applyHybrid(rec, clip) {
    feeds back into recognition, and a field-test photo never creates an encounter. */
 const FT_KEY = 'snapmon.fieldtest.v1';
 const ftLoad = () => { try { return JSON.parse(Platform.storage.get(FT_KEY) || '[]'); } catch (e) { return []; } };
+// "new" = logged after the newest entry already copied out, so each field-test round can be sent on its own
+const ftNew = () => { const after = +(Platform.storage.get(FT_KEY + '.copied') || 0); return ftLoad().filter(e => e.t > after); };
 const ftSave = list => Platform.storage.set(FT_KEY, JSON.stringify(list.slice(-500)));
 function ftTop(rec) { return (rec.candidates || []).slice(0, 3).map(c => ({ obj: c.obj, label: c.label, conf: +c.conf.toFixed(3) })); }
 function showFieldTest(p) {
@@ -5133,7 +5139,7 @@ function developerHTML() {
       <p class="small muted" style="margin:0">Compare: production decides, experimental results appear in the debug panel. Hybrid: the experimental lens may refine the production answer (rules in docs/RECOGNITION.md).${C.state !== 'off' ? ` Status: ${esc(C.state)}${C.error ? ' · ' + esc(C.error) : ''}${C.info ? ` · ${esc(C.info.backend)} · loaded in ${C.info.loadMs} ms` : ''}.` : ''}</p></div>
     <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdict; no monsters appear. Runs both lenses when the experimental lens is on.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
     ${ftSummaryHTML()}
-    <div class="row"><button class="btn small grow" data-act="ftExport">Copy field-test log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
+    <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
     <p class="small muted" style="margin:0">Monster designs: ${counts.dedicated} specific, ${counts.composed} built from parts, ${counts.related} borrowed from a related object, ${counts.family} general family designs.</p>` : ''}
   </div>`;
 }
@@ -5210,13 +5216,16 @@ const actions = {
     const list = ftLoad(); list.push(p.ft); ftSave(list);
     toast(`Logged (${list.length} field-test photos).`); openCamera();
   },
-  ftExport() {
-    const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), entries: ftLoad() });
-    try { navigator.clipboard.writeText(text).then(() => toast('Field-test log copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
+  ftExport(which) {
+    const entries = which === 'new' ? ftNew() : ftLoad();
+    if (!entries.length) return toast('Nothing new since the last copy.');
+    const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), entries });
+    const done = () => { Platform.storage.set(FT_KEY + '.copied', String(entries[entries.length - 1].t)); toast(`${entries.length} field-test results copied.`); settingsSheet(); };
+    try { navigator.clipboard.writeText(text).then(done, () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
   },
   ftClear(_, el) {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again'; return; }
-    Platform.storage.remove(FT_KEY); settingsSheet();
+    Platform.storage.remove(FT_KEY); Platform.storage.remove(FT_KEY + '.copied'); settingsSheet();
   },
   toggleKeep() { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); settingsSheet(); },
   copyExport() {

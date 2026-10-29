@@ -126,6 +126,27 @@ result separate from the hybrid result.
 for no measured top-1 gain at the calibrated thresholds. Next field test: Hybrid with rule 5, to measure how often
 the player now gets the right object (automatically or in the choice list) and how many extra choices it causes.
 
+## Second phone field test (v0.3.1, 29 Oct 2026)
+
+11 photos with Hybrid on (log truncated in transit after the 11th). Production identified 9 photos automatically and
+was wrong on 3: stopwatch for a tape measure, suitcase for a speaker, cup for a trash can. Hybrid turned all 3 into
+choices; 2 of them offered the right object. Hybrid also asked once needlessly: production's "wall clock" was right,
+but CLIP's best was "clock".
+
+Fixed in v0.3.2: a same-category CLIP answer counts as agreement when CLIP scores production's object at least half
+as high (wall clock 0.075 vs clock 0.118 → agree; coffeepot 0.104 vs electric kettle 0.267 → still a disagreement).
+
+Replaying rule 5 (with that fix) on all 32 automatically identified photos from both tests:
+- 10 production answers were confidently wrong; all 10 became choices, and 6 of those offered the right object.
+- 0 correct answers turned into needless choices.
+- Again, this is measured on the photos that shaped the rule.
+
+Still open: in 3 photos production found nothing while CLIP's best guess was right (security camera twice, handsaw,
+scores 0.13–0.22). Offering CLIP's guess when production finds nothing is a candidate rule 6. There are too few cases
+to add it yet.
+
+Per-photo time with Hybrid stayed at a 1.5 s median for TinyCLIP (max 3.1 s, the first photo after loading).
+
 ## Reproducing
 
 Push to a `feature/**` branch touching `lab/**`, or run *Recognition lab* manually. Each job prints `EXPORT`, `BENCH`,

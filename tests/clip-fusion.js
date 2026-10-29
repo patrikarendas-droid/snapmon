@@ -57,9 +57,9 @@ f = ClipLens.fuse(prod([{ label: 'bowl', obj: 'bowl', cat: 'pot', conf: 0.733, b
 ok(f.map(c => c.obj).join() === 'bowl,trash_can', "fusion keeps production's runner-up (trash can) as a choice");
 // hybrid decision, rule 5 (replays cases from the first phone field test)
 const L = { MIN_CONF: 0.25, AUTO_CONF: 0.55, CLEAR_MARGIN: 0.7, MAX_CHOICES: 4 };
-const whole = (obj, p, accepted = false) => ({ regions: [{ box: null, cls: 'whole photo', best: { obj, label: obj, p }, accepted, calibrated: null, ranked: [], margin: 0.1 }] });
+const whole = (obj, p, accepted = false, ranked = []) => ({ regions: [{ box: null, cls: 'whole photo', best: { obj, label: obj, p }, accepted, calibrated: null, ranked: [{ obj, p }, ...ranked], margin: 0.1 }] });
 setMeta({ accept: { p: 0.35, margin: 0.15 }, heldOut: { accepted: 28, precision: 0.75 } });
-let h = ClipLens.hybridDecision({ reason: 'confident', candidates: [{ label: 'coffeepot', obj: 'teapot', cat: 'mug', conf: 0.99, box: null }] }, whole('kettle', 0.267), L);
+let h = ClipLens.hybridDecision({ reason: 'confident', candidates: [{ label: 'coffeepot', obj: 'teapot', cat: 'mug', conf: 0.99, box: null }] }, whole('kettle', 0.267, false, [{ obj: 'teapot', p: 0.104 }]), L);
 ok(h.decision === 'choose' && h.reason === 'disagree' && h.candidates.map(c => c.obj).join() === 'teapot,kettle', 'rule 5: production says coffeepot, CLIP says kettle -> the player chooses between them');
 h = ClipLens.hybridDecision({ reason: 'confident', candidates: [{ label: 'forklift', obj: 'forklift', cat: 'car', conf: 0.975, box: null }] }, whole('forklift', 0.444, true), L);
 ok(h.decision === 'auto' && h.candidates[0].obj === 'forklift', 'both lenses agree on the forklift -> identified automatically');
@@ -69,6 +69,8 @@ h = ClipLens.hybridDecision({ reason: 'person', candidates: [] }, whole(null, 0.
 ok(h.decision === 'unknown' && h.reason === 'person', 'a hand (background concept) stays unknown');
 h = ClipLens.hybridDecision({ reason: 'confident', candidates: ['mug', 'glass', 'bowl', 'vase'].map((o, i) => ({ label: o, obj: o, cat: OBJECTS[o].cat, conf: [0.9, 0.3, 0.28, 0.26][i], box: null })) }, whole('teapot', 0.2), L);
 ok(h.candidates.length === 4 && h.candidates[3].obj === 'teapot' && h.reason === 'disagree', 'rule 5 keeps the list at four choices, replacing the weakest');
+h = ClipLens.hybridDecision({ reason: 'confident', candidates: [{ label: 'wall clock', obj: 'wall_clock', cat: 'clock', conf: 0.99, box: null }] }, whole('clock', 0.118, false, [{ obj: 'wall_clock', p: 0.075 }]), L);
+ok(h.decision === 'auto' && h.candidates[0].obj === 'wall_clock', 'wall clock vs clock (CLIP backs both) is agreement, not a disagreement prompt');
 setMeta(null);
 console.log(bad ? `${bad} problem(s)` : 'ok: experimental lens decision rules behave as documented');
 process.exit(bad ? 1 : 0);
