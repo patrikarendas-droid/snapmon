@@ -69,8 +69,6 @@ function render() {
   const el = $('#screen');
   el.innerHTML = ({ hunt: huntScreen, dex: dexScreen, gear: gearScreen, lab: labScreen })[ui.tab]();
   el.classList.remove('screen-enter'); void el.offsetWidth; el.classList.add('screen-enter');
-  if (ui.tab === 'hunt' && Photo.live.isOpen()) Photo.live.attach($('#liveVideo'));
-  else if (ui.tab !== 'hunt' && Photo.live.isOpen()) { ui.liveWanted = false; Photo.live.close(); }
 }
 
 /* ---------- HUNT ---------- */
@@ -78,7 +76,7 @@ function huntScreen() {
   const hs = hunterStats(S), low = S.hp < hs.maxHp * 0.35;
   const quests = activeQuests(S);
   const ghost = S.monsters.length ? S.monsters[S.monsters.length - 1].dna : null;
-  const live = ui.liveWanted || Photo.live.isOpen();
+  const live = false;
   return `
   <section class="viewfinder" id="vf">
     ${live ? '<video id="liveVideo" autoplay playsinline muted></video>' : ''}
@@ -89,11 +87,9 @@ function huntScreen() {
     <div class="vf-hud"><span class="rec">SPIRIT CAM</span><span>${S.stats.photos} SNAPS · ${Object.keys(S.dex).length} SPECIES</span></div>
   </section>
   <div class="shutter-row">
-    <label class="side-btn" for="galInput"><span class="ic">${ICON.gallery}</span>Gallery</label>
-    ${live ? `<button class="shutter" data-act="liveSnap" aria-label="Take photo">SNAP</button>`
-           : `<label class="shutter" for="camInput" role="button" aria-label="Open camera and take a photo">SNAP</label>`}
-    ${live ? `<button class="side-btn" data-act="liveClose"><span class="ic">✕</span>Close</button>`
-           : Photo.live.supported() ? `<button class="side-btn" data-act="liveOpen"><span class="ic">${ICON.live}</span>Live view</button>` : '<span></span>'}
+    <button class="side-btn" data-act="tab" data-arg="dex"><span class="ic">${ICON.dex}</span>Monsters</button>
+    <button class="shutter" data-act="openCamera" aria-label="Open the Spirit Camera">SNAP</button>
+    <button class="side-btn" data-act="tab" data-arg="lab"><span class="ic">${ICON.lab}</span>Orders</button>
   </div>
   ${lensChipHTML()}
   ${low ? `<div class="card warn row"><div class="grow"><b>You're badly hurt.</b><div class="small muted">Monsters hit hard. Heal up before your next hunt — you also recover slowly over time.</div></div>
@@ -114,27 +110,38 @@ function questHTML(q) {
 }
 
 /* ---------- photo flow ---------- */
-async function onPhotoFile(file) {
-  SFX.shutter();
+/* ---------- live camera (the only way to hunt: no gallery, no file upload) ---------- */
+async function openCamera() {
+  closeSheet(); Lens.load(); // warm the recogniser up while the player frames the shot
+  $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
+    <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
+    <div class="cam-frame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
+      <div class="cam-status" id="camStatus">Starting camera…</div></div>
+    <p class="muted small" style="text-align:center;margin:0">Fill the frame with one real object. The photo is analysed on this phone and never saved.</p>
+    <div class="cam-controls"><button class="shutter" id="camShutter" data-act="camSnap" aria-label="Take photo" disabled>SNAP</button></div>
+  </div></div>`;
+  const v = $('#camVideo');
   try {
-    const { img, url } = await Photo.loadFile(file);
-    beginIdentify(img, url);
-  } catch (e) { toast(e.message, 'bad'); }
+    await Platform.camera.open(v);
+    if (!$('#camVideo')) { Platform.camera.close(v); return; } // closed while starting
+    const st = $('#camStatus'); if (st) st.hidden = true;
+    const btn = $('#camShutter'); if (btn) btn.disabled = false;
+  } catch (e) { Platform.camera.close(v); showCameraError(e); }
 }
-async function openLive() {
-  ui.tab = 'hunt'; ui.liveWanted = true; render();
-  try { await Photo.live.open($('#liveVideo')); }
-  catch (e) {
-    ui.liveWanted = false; Photo.live.close(); render();
-    toast(e && e.name === 'NotAllowedError' ? 'Camera permission was refused. The SNAP button still works — it opens your camera app.' : 'Live view is not available here. The SNAP button still opens your phone camera.', 'bad');
-  }
+function showCameraError(e) {
+  const d = Platform.camera.describe(e);
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    <h2 style="font-size:26px">${esc(d.title)}</h2><p>${esc(d.text)}</p>
+    <p class="small muted">Hunting needs the live camera. Saved photos cannot be used.</p>
+    <button class="btn primary block" data-act="openCamera">Try again</button>
+    <button class="btn ghost block" data-act="closeOverlay">Back</button></div></div>`;
 }
-function closeLive() { ui.liveWanted = false; Photo.live.close($('#liveVideo')); render(); }
-function liveSnap() {
-  const v = $('#liveVideo'); if (!v || !v.videoWidth) return;
+function closeCamera() { Platform.camera.close($('#camVideo')); $('#overlay').innerHTML = ''; render(); }
+function camSnap() {
+  const v = $('#camVideo'); if (!v || !v.videoWidth) return;
   SFX.shutter();
-  const canvas = Photo.live.snap(v);
-  ui.liveWanted = false; Photo.live.close(v); render();
+  const canvas = Platform.camera.capture(v);
+  Platform.camera.close(v);
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
@@ -174,6 +181,7 @@ function lensStatusText() {
   if (L.state === 'ready') return 'Looking for objects… (runs on this phone)';
   return '';
 }
+const withTimeout = (promise, ms, code) => Promise.race([promise, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error(code), { code })), ms))]);
 async function recognizeFlow() {
   const p = ui.pending; if (!p) return;
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
@@ -181,30 +189,61 @@ async function recognizeFlow() {
     ${lensFrame(p, '<i class="vf-sweep"></i><div class="scan-hud"><div class="lens-tag"><i class="spin"></i> ANALYSING <span id="lensClock">0.0s</span></div></div>')}
     <p class="muted" style="text-align:center" id="lensStatus">${lensStatusText()}</p></div></div>`;
   const clock = setInterval(() => { const el = $('#lensClock'); if (!el || ui.pending !== p) return clearInterval(clock); el.textContent = ((Date.now() - p.t0) / 1000).toFixed(1) + 's'; }, 100);
+  const fail = kind => { clearInterval(clock); if (ui.pending === p) showLensFailed(p, kind); };
+  if (!Platform.device.wasm() && !Platform.device.webgl()) return fail('unsupported');
   if (Lens.status.state !== 'ready') {
     const ok = await Lens.load();
     if (ui.pending !== p) return clearInterval(clock);
-    if (!ok) { clearInterval(clock); return showLensFailed(p); }
-    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText();
+    if (!ok) return fail(Platform.device.online() ? 'download' : 'offline');
+    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
   }
   let rec;
-  try { rec = await Lens.recognize(p.img); }
-  catch (e) { clearInterval(clock); return showLensFailed(p, e.message); }
-  clearInterval(clock);
-  if (ui.pending !== p) return;
+  try { rec = await withTimeout(Lens.recognize(p.img), 30000, 'timeout'); }
+  catch (e) { return fail(e.code === 'timeout' ? 'timeout' : e.code === 'busy' ? 'busy' : 'error'); }
+  if (ui.pending !== p) return clearInterval(clock);
   p.rec = rec;
   if (!S.settings.lensCached) { S.settings.lensCached = true; persist(); }
+  // developer-only experimental lens: compare side by side, or let it refine the result (hybrid)
+  const mode = S.settings.expLens || 'off';
+  if (mode !== 'off' || S.settings.fieldTest) {
+    const s = $('#lensStatus'); if (s) s.textContent = 'Experimental lens running…';
+    try {
+      if (ClipLens.status.state !== 'ready' && !(await ClipLens.load())) throw new Error(ClipLens.status.error || 'experimental lens unavailable');
+      p.clip = await withTimeout(ClipLens.recognize(rec.image, rec), 30000, 'timeout');
+      if (mode === 'hybrid') applyHybrid(rec, p.clip);
+    } catch (e) { p.clipError = String(e.message || e); }
+  }
+  clearInterval(clock);
+  if (ui.pending !== p) return;
+  if (S.settings.fieldTest) return showFieldTest(p);
   if (rec.decision === 'unknown') return showUnknown(p);
   if (rec.decision === 'auto') return showIdentified(p, 0);
   showChoices(p);
 }
-function showLensFailed(p, msg) {
-  const L = Lens.status, err = msg || L.error;
+// hybrid mode: replace the production candidates with the fused result and re-decide with the same rules
+function applyHybrid(rec, clip) {
+  const fused = ClipLens.fuse(rec, clip).filter(c => c.conf >= Lens.CFG.MIN_CONF).slice(0, Lens.CFG.MAX_CHOICES);
+  rec.candidates = fused;
+  if (!fused.length) { rec.decision = 'unknown'; rec.reason = rec.reason === 'person' ? 'person' : 'low'; }
+  else if (fused.filter(c => c.box).length >= 2) { rec.decision = 'choose'; rec.reason = 'multiple'; }
+  else if (fused[0].conf >= Lens.CFG.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * Lens.CFG.CLEAR_MARGIN)) { rec.decision = 'auto'; rec.reason = 'confident'; }
+  else { rec.decision = 'choose'; rec.reason = 'unsure'; }
+  rec.debug.decision = rec.decision + ' (hybrid)';
+}
+function showLensFailed(p, kind) {
+  const L = Lens.status;
+  const msg = {
+    download: ['The Spirit Lens could not download', 'Recognition runs on your phone, but its AI models (about 30 MB) must be downloaded once. The download failed. Check your connection and try again.'],
+    offline: ['You are offline', 'The Spirit Lens needs to download its AI models once (about 30 MB). Connect to the internet and try again. After that it works offline.'],
+    timeout: ['Recognition took too long', 'The Spirit Lens did not finish in time. Close other apps, then try again.'],
+    unsupported: ['This device cannot run the Spirit Lens', 'The browser lacks WebGL and WebAssembly, which on-device recognition needs. Try a recent version of Chrome.'],
+    busy: ['Still thinking', 'The lens was busy with another photo. Try again.'],
+    error: ['The Spirit Lens hit a problem', 'Something went wrong during recognition. Try again.'],
+  }[kind] || ['The Spirit Lens hit a problem', 'Try again.'];
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
-    <h2 style="font-size:26px">The Spirit Lens couldn't start</h2>
-    <p>Recognition runs on your phone, but the AI models have to be downloaded once (about 30 MB). Connect to the internet and try again.</p>
-    <p class="small muted">If you're playing inside a Claude Artifact page, that page blocks the model download. Play on the GitHub Pages version instead.</p>
-    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(err)}</p>` : ''}
+    <h2 style="font-size:26px">${msg[0]}</h2><p>${msg[1]}</p>
+    <p class="small muted">No monster was created. The photo was not stored.</p>
+    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(L.error || kind)}</p>` : ''}
     <button class="btn primary block" data-act="lensRetry">Try again</button>
     <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
 }
@@ -221,20 +260,22 @@ function showUnknown(p) {
     <p style="font-size:17px">${msg[1]}</p>
     <p class="small muted">Tips: fill the frame with a single object, use good light, and hold steady. Everyday things work best: food, furniture, gadgets, pets, plants.</p>
     ${debugHTML(p.rec)}
-    <label class="btn primary block" for="camInput" data-act="closeOverlay">Take another photo</label>
+    <button class="btn primary block" data-act="openCamera">Take another photo</button>
     <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
 }
 function candLine(c) {
-  const name = c.cat === 'other' ? 'Oddity' : CATEGORY[c.cat].name;
-  return `<b>${esc(c.label)}</b> <span class="muted">· ${esc(name)} · ${Math.round(c.conf * 100)}%</span>`;
+  const o = OBJECTS[c.obj], name = o ? o.name : CATEGORY[c.cat].name;
+  const same = o && o.name.toLowerCase() === String(c.label).toLowerCase();
+  return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${Math.round(c.conf * 100)}%</span>`;
 }
+const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
 function showIdentified(p, i) {
   const c = p.rec.candidates[i];
   SFX.click();
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
     <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <div class="photo-frame" id="lensFrame"></div>
-    <div class="card ident"><span class="e">${CATEGORY[c.cat].icon}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
+    <div class="card ident"><span class="e">${catIcon(c)}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
     ${debugHTML(p.rec)}
     ${S.settings.debugLens ? `<button class="btn primary block" data-act="pickCand" data-arg="${i}">Scan for monsters</button>` : '<p class="muted small" style="text-align:center">Scanning for supernatural activity…</p>'}
   </div></div>`;
@@ -248,8 +289,8 @@ function showChoices(p) {
     <p class="muted small" style="margin:0">${multi ? 'Which one are you hunting?' : 'It is not completely sure. Which of these did you photograph?'} Every option comes from the lens's own analysis of your photo.</p>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">
-      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${CATEGORY[c.cat].icon}</span></button>`).join('')}</div>
-    <label class="btn ghost block" for="camInput" data-act="closeOverlay">None of these: take another photo</label>
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
+    <button class="btn ghost block" data-act="openCamera">None of these: take another photo</button>
     ${debugHTML(rec)}
   </div></div>`;
   drawDetections(p);
@@ -279,11 +320,22 @@ function debugHTML(rec) {
     <table><tr><th colspan="3">Whole photo (MobileNet top 5)</th></tr>${rows(d.full, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
     <tr><th colspan="3">Detected objects (COCO-SSD)</th></tr>${rows(d.detections, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.score)}</td><td>${esc(r.map)}</td></tr>`)}
     <tr><th colspan="3">Crop refinement</th></tr>${rows(d.crops, r => `<tr><td>${esc(r.box)} → ${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
-    <tr><th colspan="3">Merged candidates</th></tr>${rows(d.candidates, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.conf)}</td><td>${esc(r.cat + (r.sub ? ':' + r.sub : ''))} · ${esc(r.src)}</td></tr>`)}</table></details>`;
+    <tr><th colspan="3">Merged candidates</th></tr>${rows(d.candidates, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.conf)}</td><td>${esc(r.obj || '?')} · ${esc(r.src)}</td></tr>`)}</table>${clipDebugHTML()}</details>`;
 }
 function cancelPhoto() {
   if (ui.pending && ui.pending.url && ui.pending.url.startsWith('blob:')) URL.revokeObjectURL(ui.pending.url);
   ui.pending = null; $('#overlay').innerHTML = ''; render();
+}
+
+// experimental lens comparison (developer mode). CLIP scores are raw similarities turned into vocabulary softmax shares;
+// the "calibrated" column comes from the benchmark's reliability table and is blank where none exists.
+function clipDebugHTML() {
+  const p = ui.pending; if (!p || (!p.clip && !p.clipError)) return '';
+  if (p.clipError) return `<div class="small" style="margin-top:8px;color:var(--danger)">Experimental lens: ${esc(p.clipError)}</div>`;
+  const c = p.clip, info = ClipLens.status.info || {}, pct = v => (v * 100).toFixed(1) + '%';
+  return `<table><tr><th colspan="4">Experimental lens (${esc(info.name || '')} · ${esc(c.backend)} · ${c.totalMs} ms · loaded in ${info.loadMs} ms · ${((info.modelBytes + info.vocabBytes) / 1048576).toFixed(1)} MB)</th></tr>
+    <tr><td class="muted">region</td><td class="muted">top object</td><td class="muted">score / margin</td><td class="muted">calibrated · verdict</td></tr>
+    ${c.regions.map(r => `<tr><td>${esc(r.cls)}</td><td>${esc(r.best.obj ? OBJECTS[r.best.obj].name : r.best.label)}<br><span class="muted">${r.ranked.slice(1, 3).map(x => esc(x.obj ? OBJECTS[x.obj].name : x.label) + ' ' + pct(x.p)).join(', ')}</span></td><td>${pct(r.best.p)} / ${pct(r.margin)}</td><td>${r.calibrated != null ? pct(r.calibrated) : 'n/a'} · ${r.accepted ? '<b style="color:var(--good)">accepted</b>' : esc(r.why)}</td></tr>`).join('')}</table>`;
 }
 
 async function scan(i) {
@@ -298,7 +350,7 @@ async function scan(i) {
     <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${Math.round(c.conf * 100)}% sure)</span></p>
   </div></div>`;
   SFX.scan();
-  const result = resolvePhoto(S, c.cat, photo, { label: c.label, sub: c.sub, aspect: c.aspect, conf: c.conf });
+  const result = resolvePhoto(S, c.obj, photo, { label: c.label, aspect: c.aspect, conf: c.conf });
   const strength = result.encounter ? 0.55 + RARITY[result.monster.rarity].tier * 0.11 : 0.25;
   for (let step = 0; step < 6; step++) {
     await wait(220);
@@ -316,7 +368,7 @@ async function scan(i) {
       <h2 style="font-size:28px;color:var(--muted)">${result.dup ? 'Already scanned' : 'All quiet'}</h2>
       <p style="font-size:18px">${esc(result.line)}</p>
       <p class="small muted">${result.dup ? 'Try a different object or a new angle.' : 'Keep hunting — every quiet snap builds up spirit pressure for the next one.'}</p>
-      <label class="btn primary block" for="camInput" data-act="closeOverlay">Snap another object</label>
+      <button class="btn primary block" data-act="openCamera">Snap another object</button>
       <button class="btn ghost" data-act="closeOverlay">Back</button></div></div>`;
     render(); return;
   }
@@ -576,7 +628,7 @@ function showResult(B, sum) {
     ${drops}
     ${(sum.achievements || []).map(a => `<div class="card" style="width:100%;border-color:var(--flash)"><b style="color:var(--flash)">Achievement: ${esc(a.name)}</b><div class="small muted">${esc(a.desc)} · ${Object.entries(a.reward).map(([k, v]) => esc(rewardLabel(k, v))).join(', ')}</div></div>`).join('')}
     <div class="stack" style="width:100%;max-width:340px;margin-top:6px">
-      <label class="btn primary block" for="camInput" data-act="closeOverlay" style="min-height:54px">Snap the next object</label>
+      <button class="btn primary block" data-act="openCamera" style="min-height:54px">Snap the next object</button>
       ${sum.result === 'captured' ? `<button class="btn block" data-act="viewNew" data-arg="${m.id}">View ${esc((m.name).split(',')[0])}</button>` : ''}
       <button class="btn ghost block" data-act="closeOverlay">Back to base</button>
     </div></div></div>`;
@@ -824,7 +876,7 @@ const actions = {
   mute() { S.settings.muted = !S.settings.muted; SFX.setMuted(S.settings.muted); persist(); renderTop(); if ($('#sheet').innerHTML) settingsSheet(); },
   settings: settingsSheet, closeSheet,
   sheetBg(_, el, ev) { if (ev.target === el) closeSheet(); },
-  liveOpen: openLive, liveClose: closeLive, liveSnap,
+  openCamera, camClose: closeCamera, camSnap,
   cancelPhoto,
   pickCand(i) { scan(i); },
   lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
@@ -887,21 +939,12 @@ const actions = {
 };
 document.addEventListener('click', ev => {
   SFX.unlock();
-  if (ev.target.closest('label[for="camInput"], label[for="galInput"], [data-act="liveOpen"]')) Lens.load(); // warm up while the camera is open
   const el = ev.target.closest('[data-act]'); if (!el) return;
   const fn = actions[el.dataset.act]; if (!fn) return;
-  if (el.tagName === 'LABEL') { // labels open the camera via their `for` input; just run side effects
-    if (el.dataset.act === 'closeOverlay') { $('#overlay').innerHTML = ''; setTimeout(render, 0); }
-    return;
-  }
   fn(el.dataset.arg, el, ev);
 });
-for (const id of ['camInput', 'galInput']) {
-  const inp = document.getElementById(id);
-  inp.addEventListener('click', () => { SFX.unlock(); });
-  inp.addEventListener('change', () => { const f = inp.files && inp.files[0]; inp.value = ''; if (f) onPhotoFile(f); });
-}
-document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Photo.live.isOpen()) closeLive(); } });
+// the camera never runs in the background: leaving the app closes it
+document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Platform.camera.isOpen()) closeCamera(); } });
 window.addEventListener('pagehide', () => persist(true));
 setInterval(() => { if (!ui.battle && !document.hidden) { const before = S.hp; regen(S); if (S.hp !== before) { renderTop(); persist(); } } }, 20000);
 

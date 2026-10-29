@@ -1,21 +1,10 @@
-/* SNAPMON — real photo input, on-device colour/similarity analysis and the optional live viewfinder.
+/* SNAPMON — on-device colour/similarity analysis of a captured camera frame.
    Object recognition lives in lens.js.
    Photos never leave the device. Pixels are reduced to a colour signature + 64-bit similarity hash, then discarded
    (unless the player opts in to keeping small thumbnails). */
 'use strict';
 
 const Photo = (() => {
-  function loadFile(file) {
-    return new Promise((resolve, reject) => {
-      if (!file) return reject(new Error('No photo was selected.'));
-      if (file.type && !file.type.startsWith('image/')) return reject(new Error('That file is not an image.'));
-      const url = URL.createObjectURL(file), img = new Image();
-      img.onload = () => resolve({ img, url });
-      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('This photo format could not be read by the browser. Try JPEG or PNG.')); };
-      img.src = url;
-    });
-  }
-
   // box: optional [x, y, w, h] as fractions of the image (a detected object). Colour is read from that region.
   function analyze(src, box) {
     const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
@@ -62,26 +51,6 @@ const Photo = (() => {
     return c.toDataURL('image/jpeg', 0.6);
   }
 
-  /* Live viewfinder (getUserMedia). Only opened on an explicit tap; stream is stopped as soon as the photo is taken or the viewfinder closes. */
-  let stream = null;
-  const live = {
-    supported: () => !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
-    async open(video) {
-      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 } }, audio: false });
-      video.srcObject = stream; video.setAttribute('playsinline', ''); video.muted = true;
-      await video.play();
-    },
-    snap(video) {
-      const c = document.createElement('canvas'); c.width = video.videoWidth; c.height = video.videoHeight;
-      c.getContext('2d').drawImage(video, 0, 0); return c;
-    },
-    close(video) {
-      if (stream) stream.getTracks().forEach(t => t.stop());
-      stream = null; if (video) video.srcObject = null;
-    },
-    attach(video) { if (stream && video) { video.srcObject = stream; video.play().catch(() => {}); } },
-    isOpen: () => !!stream,
-  };
+  return { analyze, thumbnail }; // the live camera lives in platform.js (Platform.camera)
 
-  return { loadFile, analyze, thumbnail, live };
 })();

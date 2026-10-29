@@ -18,8 +18,12 @@ mean, std = [0.48145466, 0.4578275, 0.40821073], [0.26862954, 0.26130258, 0.2757
 class Vision(torch.nn.Module):
     def __init__(self, m): super().__init__(); self.m = m
     def forward(self, pixel_values):
-        f = self.m.get_image_features(pixel_values=pixel_values)
+        # explicit submodules: get_image_features() returns a ModelOutput in newer transformers releases
+        f = self.m.visual_projection(self.m.vision_model(pixel_values=pixel_values).pooler_output)
         return f / f.norm(dim=-1, keepdim=True)
+
+def text_features(enc):
+    return model.text_projection(model.text_model(input_ids=enc['input_ids'], attention_mask=enc['attention_mask']).pooler_output)
 
 fp32 = os.path.join(out, 'vision_fp32.onnx')
 torch.onnx.export(Vision(model), torch.randn(1, 3, size, size), fp32, input_names=['pixel_values'], output_names=['image_embeds'],
@@ -44,7 +48,7 @@ with torch.no_grad():
         acc = None
         for t in templates:
             enc = tok([t.format(c) for c in chunk], padding=True, truncation=True, max_length=77, return_tensors='pt')
-            f = model.get_text_features(**enc); f = f / f.norm(dim=-1, keepdim=True)
+            f = text_features(enc); f = f / f.norm(dim=-1, keepdim=True)
             acc = f if acc is None else acc + f
         acc = acc / acc.norm(dim=-1, keepdim=True)
         embs.append(acc.numpy())
