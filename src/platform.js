@@ -4,7 +4,8 @@
 
    Platform.camera  : open(video) / capture(video) → canvas / close(video) / isOpen() / supported() / describe(error)
    Platform.storage : get(key) / set(key, value) / remove(key)   (synchronous; returns false when storage is blocked)
-   Platform.device  : online() / webgl() / webgpu() / wasm()                                                         */
+   Platform.device  : online() / webgl() / webgpu() / wasm()
+   Platform.assets  : url(path) → where packaged model/runtime files live (site on the web, APK assets natively)   */
 'use strict';
 
 const Platform = (() => {
@@ -60,6 +61,15 @@ const Platform = (() => {
     remove(key) { try { localStorage.removeItem(key); return true; } catch (e) { return false; } },
   };
 
+  /* ---------- packaged assets ----------
+     Every model, vocabulary and runtime file is addressed relative to one base. On GitHub Pages that is the site
+     itself; a native build (Capacitor) sets window.SNAPMON_ASSET_BASE before the scripts load, e.g. to the APK's
+     bundled asset folder, so the same code loads the same files from the app package instead of the network. */
+  const assets = {
+    base: (typeof window !== 'undefined' && window.SNAPMON_ASSET_BASE) || '',
+    url(path) { return new URL(assets.base + path, location.href).href; },
+  };
+
   /* ---------- device capabilities ---------- */
   const device = {
     online: () => navigator.onLine !== false,
@@ -68,5 +78,5 @@ const Platform = (() => {
     wasm: () => typeof WebAssembly === 'object',
   };
 
-  return { name: 'web', camera, storage, device };
+  return { name: 'web', camera, storage, device, assets };
 })();

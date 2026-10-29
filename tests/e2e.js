@@ -10,7 +10,8 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width: 412, height: 870 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36' });
   // the lens is stubbed in this test: keep the real model downloads (started in the background after a reload) out of it
-  await ctx.route(/\/models\/|tfhub\.dev|kaggle|storage\.googleapis\.com|cdn\.jsdelivr\.net\/npm\/@tensorflow/, r => r.abort());
+  await ctx.route(/\/models\/|\/vendor\/|tfhub\.dev|kaggle|storage\.googleapis\.com|cdn\.jsdelivr\.net\/npm\/@tensorflow/, r => r.abort());
+  await ctx.route(/\/models\/manifest\.json/, r => r.fulfill({ contentType: 'application/json', body: JSON.stringify({ engine: 'hybrid-1', groups: { lens: 32610304, clip: 43725619 }, files: [] }) }));
   const p = await ctx.newPage();
   await p.addInitScript(cam.init);
   p.on('pageerror', e => { errors.push('pageerror: ' + e.message); console.log('PAGEERROR', e.message); });
@@ -18,14 +19,22 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await p.goto(url); await p.waitForTimeout(600);
   await shot(p, '01-hunt');
   const S = () => p.evaluate(() => JSON.parse(JSON.stringify(window.__snapmon.S)));
-  // Gameplay test: the lens result is stubbed (tests/e2e-lens.js covers real recognition).
-  const fakeLens = (label, obj, decision = 'auto') => p.evaluate(([label, obj, decision]) => {
+  // Gameplay test: the two model parts are stubbed, but the REAL Engine (load, Hybrid decision rules, second opinions)
+  // runs on top of them. tests/e2e-engine.js runs the real TinyCLIP worker; tests/e2e-lens.js the real detector.
+  // clip: what the TinyCLIP part says for the whole photo ({ obj, label, p, accepted, ranked }); default: agrees.
+  const fakeLens = (label, obj, decision = 'auto', clip = null, box = null) => p.evaluate(([label, obj, decision, clip, box]) => {
     const cat = obj && OBJECTS[obj] ? OBJECTS[obj].cat : 'other';
-    Lens.status.state = 'ready'; Lens.load = async () => true;
+    Lens.status.state = 'ready'; Lens.status.backend = 'webgl'; Lens.load = async () => true;
     Lens.recognize = async img => { const c = document.createElement('canvas'); c.width = 320; c.height = 240; c.getContext('2d').drawImage(img, 0, 0, 320, 240);
-      return { decision, reason: decision === 'auto' ? 'confident' : 'low', candidates: decision === 'unknown' ? [] : [{ label, obj, cat, conf: 0.91, box: null, src: 'photo' }], image: c,
+      return { decision, reason: decision === 'auto' ? 'confident' : 'low', candidates: decision === 'unknown' ? [] : [{ label, obj, cat, conf: 0.91, box, src: 'photo' }], image: c,
         debug: { decision, reason: 'stub', thresholds: { min: .25, auto: .55, detMin: .45 }, times: { total: 1 }, sources: {}, backend: 'stub', full: [], detections: [], crops: [], candidates: [] } }; };
-  }, [label, obj, decision]);
+    const cl = clip || (decision === 'unknown' ? { obj: null, label: 'a grey wall', p: 0.4, accepted: false } : { obj, label, p: 0.5, accepted: true });
+    ClipLens.status.state = 'ready'; ClipLens.load = async () => true;
+    ClipLens.status.meta = { labels: [], calib: { accept: { p: 0.35, margin: 0.15 }, heldOut: { accepted: 28, precision: 0.75 } } };
+    ClipLens.status.info = { backend: 'webgpu', loadMs: 1, modelBytes: 0, vocabBytes: 0, name: 'stub' };
+    ClipLens.recognize = async () => ({ regions: [{ box: null, cls: 'whole photo', best: { obj: cl.obj, label: cl.label, p: cl.p }, accepted: !!cl.accepted, why: cl.accepted ? 'accepted' : 'low score',
+      calibrated: null, ranked: cl.ranked || [{ obj: cl.obj, label: cl.label, p: cl.p }], margin: 0.3 }], inferMs: 5, totalMs: 6, backend: 'webgpu' });
+  }, [label, obj, decision, clip, box]);
   const snapPhoto = async file => { await cam.show(p, `${imgDir}/${file}`); await cam.snap(p); };
   ok((await S()).items.potion === 3 && (await S()).items.trap === 5, 'starts with 3 potions and 5 traps');
   ok(await p.evaluate(() => document.body.scrollWidth <= window.innerWidth), 'no horizontal scroll on hunt');
@@ -34,7 +43,11 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   ok(!(await p.$('#objSearch')) && !(await p.$('#catGrid')), 'no manual object entry');
   ok((await p.$$('input[type=file]')).length === 0, 'no file / gallery input anywhere');
   await fakeLens('coffee mug', 'mug');
+  // first hunt on this phone: a one-time notice explains the engine download (no alternative recogniser is offered)
   await p.evaluate(() => window.__snapmon.actions.openCamera());
+  await p.waitForSelector('text=One-time download'); await shot(p, '01a-engine-notice');
+  ok(!!(await p.$('text=Download now (73 MB)')) && !(await p.$('text=/production|weaker|basic mode/i')), 'one-time engine notice states the size and offers no weaker recogniser');
+  await p.click('[data-act="engineDownload"]');
   await p.waitForSelector('#camShutter:not([disabled])'); await p.waitForTimeout(300); await shot(p, '01b-camera');
   ok(await cam.live(p) === 1, 'camera starts only after the player taps SNAP');
   await p.click('#camShutter');
@@ -131,16 +144,9 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await p.click('[data-act="camClose"]'); await p.waitForTimeout(150);
   ok(await cam.live(p) === 0, 'closing the camera stops its tracks');
 
-  // 3c) developer hybrid mode: production says coffeepot, the experimental lens says kettle -> the player chooses;
-  //     field-test mode logs production alone, the experimental lens and the hybrid separately, and creates no monster
-  await p.evaluate(() => {
-    const S = window.__snapmon.S; S.settings.expLens = 'hybrid';
-    ClipLens.status.state = 'ready'; ClipLens.status.meta = { labels: [], calib: { accept: { p: 0.35, margin: 0.15 }, heldOut: { accepted: 28, precision: 0.75 } } };
-    ClipLens.status.info = { backend: 'stub', loadMs: 1, modelBytes: 0, vocabBytes: 0, name: 'stub' };
-    ClipLens.recognize = async () => ({ regions: [{ box: null, cls: 'whole photo', best: { obj: 'kettle', label: 'electric kettle', p: 0.267 }, accepted: false, why: 'low score', calibrated: null,
-      ranked: [{ obj: 'kettle', label: 'electric kettle', p: 0.267 }, { obj: 'teapot', label: 'coffeepot', p: 0.104 }], margin: 0.163 }], inferMs: 5, totalMs: 6, backend: 'stub' });
-  });
-  await fakeLens('coffeepot', 'teapot');
+  // 3c) standard Hybrid: the detector/classifier says coffeepot, TinyCLIP says kettle -> the player chooses between them;
+  //     field-test mode (developer only) logs each part and the Hybrid result separately, and creates no monster
+  await fakeLens('coffeepot', 'teapot', 'auto', { obj: 'kettle', label: 'electric kettle', p: 0.267, accepted: false, ranked: [{ obj: 'kettle', label: 'electric kettle', p: 0.267 }, { obj: 'teapot', label: 'coffeepot', p: 0.104 }] });
   await snapPhoto('red_mug.jpg');
   await p.waitForSelector('text=The lenses disagree'); await shot(p, '13c-lenses-disagree');
   const cands = await p.evaluate(() => window.__snapmon.ui.pending.rec.candidates.map(c => c.obj));
@@ -148,9 +154,10 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   ok(!!(await p.$('text=second opinion')), "the experimental lens's suggestion shows no fake percentage");
   await p.click('[data-act="cancelPhoto"]');
   const enc0 = (await S()).stats.encounters;
-  await p.evaluate(() => { window.__snapmon.S.settings.fieldTest = true; });
+  await p.evaluate(() => { window.__snapmon.S.settings.fieldTest = true; window.__snapmon.S.settings.devUnlocked = true; });
   await snapPhoto('red_mug.jpg');
-  await p.waitForSelector('text=Hybrid result'); await shot(p, '13d-field-test');
+  await p.waitForSelector('text=Hybrid (what a player gets)'); await shot(p, '13d-field-test');
+  ok(!!(await p.$('text=/Colours \\((confident|fallback)/')) && !!(await p.$('.swatch')), 'field test shows the colour extraction: region preview, swatches and confidence');
   ok(!!(await p.$('text=auto (confident)')), "field test shows production's own decision, not the hybrid's");
   ok(!(await p.$('[data-arg="prod:rejected_ok"]')) && !!(await p.$('[data-arg="clip:missed_guess"]')), 'field test offers verdicts that match what each lens did');
   await p.click('[data-arg="prod:wrong"]'); await p.click('[data-arg="clip:missed_guess"]'); await p.click('[data-arg="hybrid:top3"]');
@@ -160,7 +167,7 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   ok(e.v === 2 && e.prod.decision === 'auto' && e.prod.top[0].obj === 'teapot' && e.hybrid.decision === 'choose' && e.marks.hybrid === 'top3' && e.truth === 'electric kettle', 'field-test log keeps production alone, the hybrid result and the verdicts');
   ok((await S()).stats.encounters === enc0, 'field-test photos never create encounters');
   ok(await p.evaluate(() => ftNew().length) === 1, 'the field-test round counts as new results until it is copied out');
-  await p.evaluate(() => { window.__snapmon.actions.camClose(); const S = window.__snapmon.S; S.settings.fieldTest = false; S.settings.expLens = 'off'; });
+  await p.evaluate(() => { window.__snapmon.actions.camClose(); const S = window.__snapmon.S; S.settings.fieldTest = false; S.settings.devUnlocked = false; });
   await p.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; });
 
   // 4) persistence: reload

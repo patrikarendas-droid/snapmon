@@ -24,7 +24,7 @@ function freshState() {
     stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {}, objsPhotographed: {},
              cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0, unrecognized: 0, labelsSeen: {} },
     enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [], recentObjs: [] },
-    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false, expLens: 'off', fieldTest: false },
+    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false, engineCached: false, fieldTest: false },
     lastTick: Date.now(), nextId: 1, log: [],
   };
 }
@@ -313,7 +313,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
-  const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}) } : null;
+  const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}), ...(photo.engine ? { engine: photo.engine } : {}) } : null; // engine: which recogniser identified it
   const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
   const abilities = monsterAbilities(cat, rarity, fam, base.word);
   const o = obj && OBJECTS[obj];

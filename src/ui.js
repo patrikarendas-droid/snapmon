@@ -125,7 +125,10 @@ function questHTML(q) {
 /* ---------- photo flow ---------- */
 /* ---------- live camera (the only way to hunt: no gallery, no file upload) ---------- */
 async function openCamera() {
-  closeSheet(); Lens.load(); // warm the recogniser up while the player frames the shot
+  closeSheet();
+  // first hunt on this phone: say once what will be downloaded (this is information, not a choice of recogniser)
+  if (Engine.status.state !== 'ready' && !S.settings.engineCached && !ui.engineNoticeOk) return showEngineNotice();
+  Engine.load(); // start (or resume) loading the engine while the player frames the shot
   $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
     <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
     <div class="cam-frame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
@@ -158,28 +161,57 @@ function camSnap() {
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
-function lensStatusLine() {
-  const L = Lens.status;
-  if (L.state === 'ready') return `Ready (${esc(L.backend)}${L.error ? '; ' + esc(L.error) : ''}).`;
-  if (L.state === 'loading') return esc(L.progress || 'Loading…');
-  if (L.state === 'failed') return `Could not load: ${esc(L.error)}.`;
-  return S.settings.lensCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet (about 30 MB, once). It downloads while your camera is open.';
+/* ---------- the recognition engine: one-time notice, progress, status ---------- */
+const MB = b => Math.max(1, Math.round(b / 1048576));
+async function showEngineNotice() {
+  const bytes = await Engine.downloadBytes();
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+    <h2 style="font-size:26px">One-time download</h2>
+    <p>SNAPMON recognises objects with AI that runs <b>on this phone</b>. Its recognition engine (about <b>${MB(bytes)} MB</b>) downloads once and stays saved for next time. Parts you already have are not downloaded again.</p>
+    <p class="small muted">Photos are never uploaded to any AI service. Wi-Fi is recommended. While it downloads you can keep using the rest of the game.</p>
+    <button class="btn primary block" data-act="engineDownload">Download now (${MB(bytes)} MB)</button>
+    <button class="btn ghost block" data-act="closeOverlay">Not now</button></div></div>`;
+}
+function engineProgressHTML() {
+  const E = Engine.status, pct = E.total ? Math.min(100, Math.round(E.loaded / E.total * 100)) : 0;
+  return `<div class="stack" id="engineProgress" style="gap:6px"><div class="bar xp"><i style="width:${pct}%"></i></div>
+    <div class="small muted">${E.state === 'ready' ? 'Recognition engine ready.' : esc(E.stage || 'Starting…')} ${E.total ? `· ${MB(E.loaded)} / ${MB(E.total)} MB` : ''}</div></div>`;
+}
+// loading screen used before the first hunt; continues with next() once the engine is ready
+async function showEngineLoading(next) {
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+    <h2 style="font-size:26px">Preparing the recognition engine</h2>
+    ${engineProgressHTML()}
+    <p class="small muted">Recognition runs on this phone. This happens once; next time it starts from the saved copy.</p>
+    <button class="btn ghost block" data-act="closeOverlay">Continue in the background</button></div></div>`;
+  const ok = await Engine.load();
+  if (!$('#engineProgress')) return; // player left the screen; loading carries on
+  if (ok) { S.settings.engineCached = true; persist(); next(); } else showEngineFailed(null, Engine.status.kind);
+}
+function engineStatusLine() {
+  const E = Engine.status;
+  if (E.state === 'ready') return `Ready · ${E.backends.lens === 'webgl' ? 'GPU' : 'CPU'} detector, ${E.backends.clip === 'webgpu' ? 'GPU' : 'CPU'} vocabulary model.`;
+  if (E.state === 'loading') return `Loading: ${esc(E.stage)}${E.total ? ` (${MB(E.loaded)} / ${MB(E.total)} MB)` : ''}.`;
+  if (E.state === 'failed') return `Could not start: ${esc(E.error)}.`;
+  return S.settings.engineCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet.';
 }
 function lensChipHTML() {
-  const L = Lens.status;
-  const dot = L.state === 'ready' ? 'var(--good)' : L.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
-  const txt = L.state === 'ready' ? 'Spirit Lens ready' : L.state === 'loading' ? 'Spirit Lens warming up…' : L.state === 'failed' ? 'Spirit Lens offline' : S.settings.lensCached ? 'Spirit Lens asleep' : 'Spirit Lens not downloaded';
-  const btn = L.state === 'failed' ? '<button class="btn small" data-act="lensPrepare">Retry</button>' : L.state === 'idle' && !S.settings.lensCached ? '<button class="btn small" data-act="lensPrepare">Download now (~30 MB)</button>' : '';
-  return `<div class="lens-chip" id="lensChip"><i style="background:${dot}" class="${L.state === 'loading' ? 'pulse' : ''}"></i><span class="grow">${txt}</span>${btn}</div>`;
+  const E = Engine.status;
+  const dot = E.state === 'ready' ? 'var(--good)' : E.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
+  const pct = E.total ? ' ' + Math.round(E.loaded / E.total * 100) + '%' : '';
+  const txt = E.state === 'ready' ? 'Spirit Lens ready' : E.state === 'loading' ? 'Spirit Lens loading' + pct : E.state === 'failed' ? 'Spirit Lens could not start' : S.settings.engineCached ? 'Spirit Lens asleep' : 'Spirit Lens not downloaded';
+  const btn = E.state === 'failed' ? '<button class="btn small" data-act="lensPrepare">Retry</button>' : '';
+  return `<div class="lens-chip" id="lensChip"><i style="background:${dot}" class="${E.state === 'loading' ? 'pulse' : ''}"></i><span class="grow">${txt}</span>${btn}</div>`;
 }
-Lens.onChange(() => {
+Engine.onChange(() => {
   const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
+  const pr = $('#engineProgress'); if (pr) pr.outerHTML = engineProgressHTML();
   const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
-  if ($('#sheet').innerHTML.includes('Spirit Lens')) settingsSheet();
+  if ($('#sheet').innerHTML.includes('Recognition engine')) settingsSheet();
 });
 
-/* ---------- recognition flow: photo → Spirit Lens → (pick among detections) → encounter scan ----------
-   There is no manual entry: only objects the lens actually recognised can be hunted. */
+/* ---------- recognition flow: photo → Hybrid engine → (pick among AI suggestions) → encounter scan ----------
+   There is no manual entry: only objects the engine actually recognised can be hunted. */
 function beginIdentify(img, url) {
   const hash = Photo.analyze(img).hash; // whole-photo similarity fingerprint (repeat-photo detection)
   ui.pending = { img, url, hash, thumb: S.settings.keepPhotos ? Photo.thumbnail(img) : null, rec: null, t0: Date.now() };
@@ -189,12 +221,12 @@ function lensFrame(p, extra = '') {
   return `<div class="photo-frame" id="lensFrame"><img alt="Your photo" src="${p.url}">${extra}<i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i></div>`;
 }
 function lensStatusText() {
-  const L = Lens.status;
-  if (L.state === 'loading') return `${esc(L.progress || 'Starting the Spirit Lens…')}${S.settings.lensCached ? '' : ' First time only: about 30 MB of AI models download and are then kept on this phone.'}`;
-  if (L.state === 'ready') return 'Looking for objects… (runs on this phone)';
+  const E = Engine.status;
+  if (E.state === 'loading') return `Starting the recognition engine: ${esc(E.stage)}${E.total ? ` (${MB(E.loaded)} / ${MB(E.total)} MB)` : ''}…`;
+  if (E.state === 'ready') return 'Looking for objects… (runs on this phone)';
   return '';
 }
-const withTimeout = (promise, ms, code) => Promise.race([promise, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error(code), { code })), ms))]);
+const devOn = () => !!S.settings.devUnlocked;
 async function recognizeFlow() {
   const p = ui.pending; if (!p) return;
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
@@ -202,43 +234,24 @@ async function recognizeFlow() {
     ${lensFrame(p, '<i class="vf-sweep"></i><div class="scan-hud"><div class="lens-tag"><i class="spin"></i> ANALYSING <span id="lensClock">0.0s</span></div></div>')}
     <p class="muted" style="text-align:center" id="lensStatus">${lensStatusText()}</p></div></div>`;
   const clock = setInterval(() => { const el = $('#lensClock'); if (!el || ui.pending !== p) return clearInterval(clock); el.textContent = ((Date.now() - p.t0) / 1000).toFixed(1) + 's'; }, 100);
-  const fail = kind => { clearInterval(clock); if (ui.pending === p) showLensFailed(p, kind); };
-  if (!Platform.device.wasm() && !Platform.device.webgl()) return fail('unsupported');
-  if (Lens.status.state !== 'ready') {
-    const ok = await Lens.load();
+  const fail = kind => { clearInterval(clock); if (ui.pending === p) showEngineFailed(p, kind); };
+  persist(true); // save progress before the memory-heavy part (Android may stop a page that runs out of memory)
+  if (Engine.status.state !== 'ready') {
+    const ok = await Engine.load();
     if (ui.pending !== p) return clearInterval(clock);
-    if (!ok) return fail(Platform.device.online() ? 'download' : 'offline');
-    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
+    if (!ok) return fail(Engine.status.kind);
   }
-  let rec;
-  try { rec = await withTimeout(Lens.recognize(p.img), 30000, 'timeout'); }
-  catch (e) { return fail(e.code === 'timeout' ? 'timeout' : e.code === 'busy' ? 'busy' : 'error'); }
-  if (ui.pending !== p) return clearInterval(clock);
-  p.rec = rec;
-  if (!S.settings.lensCached) { S.settings.lensCached = true; persist(); }
-  // developer-only experimental lens: compare side by side, or let it refine the result (hybrid)
-  const mode = S.settings.expLens || 'off';
-  if (mode !== 'off' || S.settings.fieldTest) {
-    const s = $('#lensStatus'); if (s) s.textContent = 'Experimental lens running…';
-    try {
-      if (ClipLens.status.state !== 'ready' && !(await ClipLens.load())) throw new Error(ClipLens.status.error || 'experimental lens unavailable');
-      p.clip = await withTimeout(ClipLens.recognize(rec.image, rec), 30000, 'timeout');
-      p.prodOnly = { decision: rec.decision, reason: rec.reason, top: ftTop(rec) }; // what production alone said (field test)
-      if (mode === 'hybrid') applyHybrid(rec, p.clip);
-    } catch (e) { p.clipError = String(e.message || e); }
-  }
+  let r;
+  try { r = await Engine.recognize(p.img); }
+  catch (e) { return fail(e.kind); }
   clearInterval(clock);
   if (ui.pending !== p) return;
-  if (S.settings.fieldTest) return showFieldTest(p);
-  if (rec.decision === 'unknown') return showUnknown(p);
-  if (rec.decision === 'auto') return showIdentified(p, 0);
+  p.rec = r.rec; p.clip = r.clip; p.prodOnly = { decision: r.prodOnly.decision, reason: r.prodOnly.reason, top: ftTop(r.prodOnly) };
+  if (!S.settings.engineCached) { S.settings.engineCached = true; persist(); }
+  if (devOn() && S.settings.fieldTest) return showFieldTest(p);
+  if (p.rec.decision === 'unknown') return showUnknown(p);
+  if (p.rec.decision === 'auto') return showIdentified(p, 0);
   showChoices(p);
-}
-// hybrid mode: replace the production candidates with the fused result and re-decide with the same rules
-function applyHybrid(rec, clip) {
-  const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
-  rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
-  rec.debug.decision = rec.decision + ' (hybrid' + (h.reason === 'disagree' ? ': lenses disagree' : '') + ')';
 }
 /* ---------- field test (developer mode) ----------
    Records what each model said and the tester's verdict in a SEPARATE store (snapmon.fieldtest.v1). Nothing here ever
@@ -250,12 +263,14 @@ const ftNew = () => { const after = +(Platform.storage.get(FT_KEY + '.copied') |
 const ftSave = list => Platform.storage.set(FT_KEY, JSON.stringify(list.slice(-500)));
 function ftTop(rec) { return (rec.candidates || []).slice(0, 3).map(c => ({ obj: c.obj, label: c.label, conf: +c.conf.toFixed(3) })); }
 function showFieldTest(p) {
-  const rec = p.rec, clip = p.clip, hybrid = (S.settings.expLens || 'off') === 'hybrid' && p.prodOnly;
+  const rec = p.rec, clip = p.clip, hybrid = true; // Hybrid is the standard; the other two are shown for comparison only
   const prodRec = p.prodOnly || { decision: rec.decision, reason: rec.reason, top: ftTop(rec) }, prodTop = prodRec.top;
+  const colour = colourDiagnostics(p);
   const clipTop = clip ? clip.regions[0].ranked.slice(0, 3).map(x => ({ obj: x.obj, label: x.label, p: +x.p.toFixed(3) })) : null;
   p.ft = { v: 2, t: Date.now(), prod: { decision: prodRec.decision, reason: prodRec.reason, top: prodTop, ms: rec.debug && rec.debug.times && rec.debug.times.total },
     clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null,
-    hybrid: hybrid ? { decision: rec.decision, reason: rec.reason, top: ftTop(rec) } : null, marks: {} };
+    hybrid: hybrid ? { decision: rec.decision, reason: rec.reason, top: ftTop(rec), ms: rec.debug.engine && rec.debug.engine.totalMs } : null,
+    engine: { id: Engine.ID, backends: Engine.status.backends }, colour: colour && colour.log, marks: {} };
   const nm = x => esc(x.obj && OBJECTS[x.obj] ? OBJECTS[x.obj].name : x.label);
   // verdict buttons match what the lens did: an answer is right / in the list / wrong; no answer is rightly unknown or a miss
   const ANSWERED = [['top1', 'Right'], ['top3', 'Right one is in the list'], ['wrong', 'Wrong']];
@@ -266,13 +281,15 @@ function showFieldTest(p) {
     <div class="sheet-head"><h2>Field test</h2><button class="btn small ghost" data-act="cancelPhoto">Close</button></div>
     <p class="small muted" style="margin:0">No monster is created in field-test mode. Your answers are stored separately and are never used for recognition.</p>
     <div class="photo-frame" id="lensFrame"></div>
-    <div class="card small stack" style="gap:4px"><b>Production lens</b> <span class="muted">${esc(prodRec.decision)} (${esc(prodRec.reason)}) · ${p.ft.prod.ms || '?'} ms</span>
+    <div class="card small stack" style="gap:4px"><b>Detector + classifier alone</b> <span class="muted">${esc(prodRec.decision)} (${esc(prodRec.reason)}) · ${p.ft.prod.ms || '?'} ms</span>
       <div>${prodTop.length ? prodTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">${Math.round(x.conf * 100)}%</span>`).join('<br>') : '<span class="muted">nothing accepted</span>'}</div></div>
-    ${clipTop ? `<div class="card small stack" style="gap:4px"><b>Experimental lens</b> <span class="muted">${clip.regions[0].accepted ? 'accepted' : 'rejected: ' + esc(clip.regions[0].why)} · ${clip.totalMs} ms · ${esc(clip.backend)}</span>
+    ${clipTop ? `<div class="card small stack" style="gap:4px"><b>TinyCLIP alone</b> <span class="muted">${clip.regions[0].accepted ? 'accepted' : 'rejected: ' + esc(clip.regions[0].why)} · ${clip.totalMs} ms · ${esc(clip.backend)}</span>
       <div>${clipTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">score ${(x.p * 100).toFixed(1)}</span>`).join('<br>')}</div></div>` : p.clipError ? `<div class="card small">Experimental lens failed: ${esc(p.clipError)}</div>` : ''}
-    ${hybrid ? `<div class="card small stack" style="gap:4px"><b>Hybrid result</b> <span class="muted">${esc(rec.decision)} (${esc(rec.reason)})</span>
+    ${hybrid ? `<div class="card small stack" style="gap:4px"><b>Hybrid (what a player gets)</b> <span class="muted">${esc(rec.decision)} (${esc(rec.reason)}) · ${p.ft.hybrid.ms || '?'} ms · ${esc(Object.values(Engine.status.backends).join(' + '))}</span>
       <div>${p.ft.hybrid.top.length ? p.ft.hybrid.top.map((x, i) => `${i + 1}. ${nm(x)}`).join('<br>') : '<span class="muted">nothing</span>'}</div></div>` : ''}
-    ${markRow('prod', 'Production verdict', prodRec.decision !== 'unknown')}${clipTop ? markRow('clip', 'Experimental verdict', clip.regions[0].accepted) : ''}${hybrid ? markRow('hybrid', 'Hybrid verdict', rec.decision !== 'unknown') : ''}
+    ${colour ? colour.html : ''}
+    ${hybrid ? markRow('hybrid', 'Hybrid verdict', rec.decision !== 'unknown') : ''}${markRow('prod', 'Detector + classifier verdict', prodRec.decision !== 'unknown')}${clipTop ? markRow('clip', 'TinyCLIP verdict', clip.regions[0].accepted) : ''}
+    ${colour ? `<div class="stack" style="gap:6px"><b class="small">Colour verdict</b><div class="row wrap">${[['right', 'Colours match the object'], ['background', 'Background leaked in'], ['wrong', 'Wrong colours']].map(([k, l]) => `<button class="fchip" data-act="ftMark" data-arg="colour:${k}">${l}</button>`).join('')}</div></div>` : ''}
     <input class="search" id="ftTruth" maxlength="60" placeholder="What was it really? (optional, for the test log only)" autocomplete="off">
     <button class="btn primary block" data-act="ftSave">Save result &amp; take another</button>
     ${debugHTML(rec)}
@@ -281,6 +298,33 @@ function showFieldTest(p) {
 }
 // Answered: right / list / wrong. Not answered: rightly unknown / missed. v1 entries (before the verdict fix) used
 // 'rejected_ok' for some wrong answers too, so those are counted from the logged decision, not the verdict.
+/* Colour diagnostics for the field test: which region was used, which pixels counted as the object (cyan) and which
+   were rejected as background (dimmed), the extracted swatches, and the monster those colours produce. */
+function colourDiagnostics(p) {
+  const c = p.rec.candidates[0]; if (!c) return null;
+  const pal = Photo.palette(p.img, c.box, { mask: true }); if (!pal) return null;
+  const o = OBJECTS[c.obj];
+  const dna = makeDNA({ obj: c.obj, cat: o ? o.cat : 'other', rarity: 'common', seed: 12345, photo: { hue: pal.primary[0], sat: pal.primary[1] / 100, lit: pal.primary[2] / 100, pal } });
+  // preview: the downscaled photo with the sampled object pixels highlighted
+  const w = p.img.width, h = p.img.height, k = Math.min(1, 160 / Math.max(w, h)), cv = document.createElement('canvas');
+  cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+  const g = cv.getContext('2d');
+  const sx = cv.width / pal.mask.w, sy = cv.height / pal.mask.h, st = pal.mask.step;
+  g.drawImage(p.img, 0, 0, w, h, 0, 0, cv.width, cv.height); g.fillStyle = 'rgba(0,0,0,0.6)'; g.fillRect(0, 0, cv.width, cv.height);
+  g.fillStyle = 'rgba(80,240,220,0.9)'; for (const [x, y] of pal.mask.obj) g.fillRect(x * sx, y * sy, st * sx, st * sy);
+  g.fillStyle = 'rgba(255,90,110,0.55)'; for (const [x, y] of pal.mask.bg) g.fillRect(x * sx, y * sy, st * sx, st * sy);
+  if (c.box) { g.strokeStyle = '#ffcf5a'; g.lineWidth = 2; g.strokeRect(c.box[0] * cv.width, c.box[1] * cv.height, c.box[2] * cv.width, c.box[3] * cv.height); }
+  const sw = (lab, hex) => hex ? `<span class="swatch" style="background:${hex}"></span>${lab}` : '';
+  const S_ = pal.swatches;
+  return {
+    log: { primary: S_.primary, secondary: S_.secondary, highlight: S_.highlight, shadow: S_.shadow, conf: pal.conf, method: pal.method, objectShare: pal.fgShare, ms: pal.ms },
+    html: `<div class="card small stack" style="gap:6px"><b>Colours (${esc(pal.conf)}, ${esc(pal.method)}, ${pal.ms} ms)</b>
+      <div class="row" style="align-items:flex-start;gap:10px"><img src="${cv.toDataURL()}" alt="colour sampling" style="width:55%;border-radius:8px;image-rendering:pixelated">
+        <div class="stack" style="gap:4px">${spriteHTML(dna, { size: 96 })}</div></div>
+      <div class="row wrap" style="gap:10px">${sw('primary', S_.primary)} ${sw('secondary', S_.secondary)} ${sw('highlight', S_.highlight)} ${sw('shadow', S_.shadow)}</div>
+      <span class="muted">Cyan: pixels used as the object · red: rejected as background · yellow: selected region. Object pixels ${Math.round(pal.fgShare * 100)}% of the region.</span></div>`,
+  };
+}
 function ftStats(list) {
   const blank = () => ({ n: 0, answered: 0, right: 0, inList: 0, unknownOk: 0, missed: 0, ms: [] }), m = { prod: blank(), clip: blank(), hybrid: blank() };
   for (const e of list) for (const k of ['prod', 'clip', 'hybrid']) {
@@ -299,22 +343,24 @@ function ftSummaryHTML() {
     <p class="small muted" style="margin:0">${list.length} field-test photos logged on this phone.</p>`;
 }
 
-function showLensFailed(p, kind) {
-  const L = Lens.status;
+const ENGINE_FAIL = "SnapMon's recognition engine couldn't run on this device. Please check for system updates or try again.";
+function showEngineFailed(p, kind) {
+  const E = Engine.status;
   const msg = {
-    download: ['The Spirit Lens could not download', 'Recognition runs on your phone, but its AI models (about 30 MB) must be downloaded once. The download failed. Check your connection and try again.'],
-    offline: ['You are offline', 'The Spirit Lens needs to download its AI models once (about 30 MB). Connect to the internet and try again. After that it works offline.'],
-    timeout: ['Recognition took too long', 'The Spirit Lens did not finish in time. Close other apps, then try again.'],
-    unsupported: ['This device cannot run the Spirit Lens', 'The browser lacks WebGL and WebAssembly, which on-device recognition needs. Try a recent version of Chrome.'],
-    busy: ['Still thinking', 'The lens was busy with another photo. Try again.'],
-    error: ['The Spirit Lens hit a problem', 'Something went wrong during recognition. Try again.'],
-  }[kind] || ['The Spirit Lens hit a problem', 'Try again.'];
+    download: ['The recognition engine could not download', 'SNAPMON recognises objects on your phone, but its models must be downloaded once. The download failed or was interrupted. Check your connection and try again; nothing broken is kept.'],
+    offline: ['You are offline', 'The recognition engine has to be downloaded once. Connect to the internet and try again. After that it works offline.'],
+    timeout: ['Recognition took too long', 'The recognition engine did not finish in time. Close other apps, then try again.'],
+    memory: ['Not enough memory', ENGINE_FAIL + ' Closing other apps may help.'],
+    unsupported: ['This browser cannot run the recognition engine', ENGINE_FAIL],
+    crash: ['The recognition engine stopped', ENGINE_FAIL],
+    busy: ['Still thinking', 'The engine was busy with another photo. Try again.'],
+  }[kind] || ['The recognition engine could not run', ENGINE_FAIL];
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
     <h2 style="font-size:26px">${msg[0]}</h2><p>${msg[1]}</p>
-    <p class="small muted">No monster was created. The photo was not stored.</p>
-    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(L.error || kind)}</p>` : ''}
-    <button class="btn primary block" data-act="lensRetry">Try again</button>
-    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
+    <p class="small muted">No monster was created${p ? ' and the photo was not stored' : ''}. Your collection, gear and settings still work.</p>
+    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(kind || '')} · ${esc(E.error || '')}</p>` : ''}
+    <button class="btn primary block" data-act="${p ? 'lensRetry' : 'engineDownload'}">Try again</button>
+    <button class="btn ghost block" data-act="${p ? 'cancelPhoto' : 'closeOverlay'}">Back</button></div></div>`;
 }
 function showUnknown(p) {
   const reason = p.rec.reason;
@@ -398,13 +444,13 @@ function cancelPhoto() {
   ui.pending = null; $('#overlay').innerHTML = ''; render();
 }
 
-// experimental lens comparison (developer mode). CLIP scores are raw similarities turned into vocabulary softmax shares;
+// TinyCLIP details (debug info). CLIP scores are raw similarities turned into vocabulary softmax shares;
 // the "calibrated" column comes from the benchmark's reliability table and is blank where none exists.
 function clipDebugHTML() {
   const p = ui.pending; if (!p || (!p.clip && !p.clipError)) return '';
-  if (p.clipError) return `<div class="small" style="margin-top:8px;color:var(--danger)">Experimental lens: ${esc(p.clipError)}</div>`;
+  if (p.clipError) return `<div class="small" style="margin-top:8px;color:var(--danger)">TinyCLIP: ${esc(p.clipError)}</div>`;
   const c = p.clip, info = ClipLens.status.info || {}, pct = v => (v * 100).toFixed(1) + '%';
-  return `<table><tr><th colspan="4">Experimental lens (${esc(info.name || '')} · ${esc(c.backend)} · ${c.totalMs} ms · loaded in ${info.loadMs} ms · ${((info.modelBytes + info.vocabBytes) / 1048576).toFixed(1)} MB)</th></tr>
+  return `<table><tr><th colspan="4">TinyCLIP (${esc(info.name || '')} · ${esc(c.backend)} · ${c.totalMs} ms · loaded in ${info.loadMs} ms · ${((info.modelBytes + info.vocabBytes) / 1048576).toFixed(1)} MB)</th></tr>
     <tr><td class="muted">region</td><td class="muted">top object</td><td class="muted">score / margin</td><td class="muted">calibrated · verdict</td></tr>
     ${c.regions.map(r => `<tr><td>${esc(r.cls)}</td><td>${esc(r.best.obj ? OBJECTS[r.best.obj].name : r.best.label)}<br><span class="muted">${r.ranked.slice(1, 3).map(x => esc(x.obj ? OBJECTS[x.obj].name : x.label) + ' ' + pct(x.p)).join(', ')}</span></td><td>${pct(r.best.p)} / ${pct(r.margin)}</td><td>${r.calibrated != null ? pct(r.calibrated) : 'n/a'} · ${r.accepted ? '<b style="color:var(--good)">accepted</b>' : esc(r.why)}</td></tr>`).join('')}</table>`;
 }
@@ -414,7 +460,7 @@ async function scan(i) {
   const c = p.rec.candidates[+i]; if (!c) return;
   p.scanning = true;
   // colour from the chosen object (palette with background suppression), fingerprint from the whole photo
-  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash, pal: Photo.palette(p.img, c.box) };
+  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash, pal: Photo.palette(p.img, c.box), engine: Engine.ID };
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
     <h2 style="text-align:center">Scanning for supernatural activity…</h2>
     <div class="photo-frame"><img alt="" src="${p.url}"><i class="vf-sweep"></i>
@@ -919,11 +965,11 @@ function labScreen() {
 
 /* ---------- settings ---------- */
 function settingsSheet() {
-  const L = Lens.status;
+  const E = Engine.status;
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
-      <div class="toggle"><div><b>Spirit Lens</b><p>${lensStatusLine()} Recognition runs entirely on this phone with open-source models (MobileNet + COCO-SSD). Photos are never uploaded.</p></div>${L.state === 'ready' ? '' : `<button class="btn small" data-act="lensPrepare">${L.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
+      <div class="toggle"><div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
       <div class="toggle"><div><b>Keep photo thumbnails</b><p>Off by default. When on, a tiny 96 px copy of the photo is stored with monsters you capture, in this browser only.</p></div><button class="switch ${S.settings.keepPhotos ? 'on' : ''}" data-act="toggleKeep" aria-label="Toggle photo thumbnails"></button></div>
     </div>
     ${saveBlocked ? `<div class="card warn stack"><b>Saved progress not loaded</b><p class="small" style="margin:0">${saveBlocked.reason === 'newer' ? `It was made by a newer SNAPMON (save format ${saveBlocked.version}).` : 'It could not be read.'} It is untouched. Copy this code before doing anything else; you can restore it once the newer version is back.</p>
@@ -936,20 +982,22 @@ function settingsSheet() {
       <div class="row"><input class="search grow" id="resetBox" placeholder="RESET" autocomplete="off"><button class="btn danger" data-act="reset">Erase</button></div></div>
     ${developerHTML()}
     <p class="small muted">SNAPMON never uploads your photos. There are no accounts, ads or purchases. Camera access is requested only when you tap SNAP, and the camera stops the moment you take the shot or leave the app.</p>
-    <p class="small muted">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION}</p>`);
+    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>`);
 }
 
+// Developer tools are hidden (tap the version line 7 times). They never change how hunting recognises objects:
+// the comparison views exist only inside Field-test mode, which never creates monsters.
 function developerHTML() {
-  const C = ClipLens.status, mode = S.settings.expLens || 'off', counts = objectCounts();
+  if (!devOn()) return '';
+  const counts = objectCounts(), E = Engine.status;
   const open = S.settings.devOpen;
   return `<div class="card stack"><button class="row" data-act="devOpen" style="background:none;border:0;color:inherit;padding:0;text-align:left"><b class="grow">Developer &amp; testing</b><span class="muted">${open ? '▾' : '▸'}</span></button>
-    ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what the lens saw: top predictions, boxes, scores, timing and which model produced each result.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
-    <div class="stack" style="gap:6px"><b>Experimental lens (CLIP)</b><p class="small muted" style="margin:0">A larger zero-shot model with a ${ClipLens.status.meta ? ClipLens.status.meta.labels.length : 'multi-thousand'}-label vocabulary, run on this phone. Turning it on downloads an extra model once (about 41 MB) and makes each photo slower. Scores are similarity shares, not probabilities.</p>
-      <div class="seg">${[['off', 'Off'], ['compare', 'Compare'], ['hybrid', 'Hybrid']].map(([k, l]) => `<button class="${mode === k ? 'on' : ''}" data-act="expLens" data-arg="${k}">${l}</button>`).join('')}</div>
-      <p class="small muted" style="margin:0">Compare: production decides, experimental results appear in the debug panel. Hybrid: the experimental lens may refine the production answer (rules in docs/RECOGNITION.md).${C.state !== 'off' ? ` Status: ${esc(C.state)}${C.error ? ' · ' + esc(C.error) : ''}${C.info ? ` · ${esc(C.info.backend)} · loaded in ${C.info.loadMs} ms` : ''}.` : ''}</p></div>
-    <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdict; no monsters appear. Runs both lenses when the experimental lens is on.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
+    ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what each part of the engine saw: predictions, boxes, scores, timing and backend.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
+    <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdicts, side by side: Hybrid, detector + classifier alone, TinyCLIP alone, and the colour extraction. No monsters appear.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
+    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: runs the same models on the CPU instead of the GPU, to compare speed and results. Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
+    <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow">Engine load: ${E.loadMs || '–'} ms</span></div>
     <p class="small muted" style="margin:0">Monster designs: ${counts.dedicated} specific, ${counts.composed} built from parts, ${counts.related} borrowed from a related object, ${counts.family} general family designs.</p>` : ''}
   </div>`;
 }
@@ -970,7 +1018,17 @@ const actions = {
   cancelPhoto,
   pickCand(i) { scan(i); },
   lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
-  lensPrepare() { Lens.load(); },
+  lensPrepare() { Engine.load().then(ok => { if (ok) { S.settings.engineCached = true; persist(); } }); },
+  engineDownload() { ui.engineNoticeOk = true; showEngineLoading(openCamera); },
+  devTap() {
+    ui.devTaps = (ui.devTaps || 0) + 1;
+    if (ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
+  },
+  toggleForceCPU() { S.settings.forceCPU = !S.settings.forceCPU; persist(); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); settingsSheet(); },
+  async engineRedownload(_, el) {
+    if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to delete'; return; }
+    await Engine.clearCache(); S.settings.engineCached = false; persist(); toast('Saved engine files deleted. They download again on the next hunt.'); settingsSheet();
+  },
   closeOverlay() { $('#overlay').innerHTML = ''; render(); },
   fight() { const m = ui.discovered; ui.discovered = null; if (m) startBattle(m); },
   ignore() {
@@ -1013,7 +1071,6 @@ const actions = {
   research(id) { if (buyResearch(S, id)) { SFX.levelup(); toast(`Research complete: ${RESEARCH_BY_ID[id].name}`, 'gold'); persist(); render(); } },
   toggleDebug() { S.settings.debugLens = !S.settings.debugLens; persist(); settingsSheet(); },
   devOpen() { S.settings.devOpen = !S.settings.devOpen; persist(); settingsSheet(); },
-  expLens(v) { S.settings.expLens = v; if (v === 'off') ClipLens.reset(); persist(); settingsSheet(); },
   toggleFieldTest() { S.settings.fieldTest = !S.settings.fieldTest; persist(); settingsSheet(); },
   ftMark(arg, el) {
     const p = ui.pending; if (!p || !p.ft) return;
@@ -1069,4 +1126,7 @@ window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, se
 render();
 persist(true);
 if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFrom} to ${SAVE_VERSION}. Your monsters were kept; a copy of the old save is stored too.`), 800);
-if (S.settings.lensCached) setTimeout(() => Lens.load(), 1200); // models are cached on this phone: start them in the background
+// v0.4: Hybrid is the only recogniser; the old developer switch between recognisers is gone
+delete S.settings.expLens;
+if (S.settings.forceCPU && devOn()) Engine.setForceCPU(true);
+if (S.settings.engineCached) setTimeout(() => Engine.load(), 1200); // engine saved on this phone: start it in the background

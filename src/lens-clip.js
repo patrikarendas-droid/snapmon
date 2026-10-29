@@ -1,5 +1,5 @@
-/* SNAPMON — EXPERIMENTAL Spirit Lens: CLIP-style zero-shot recognition over a large everyday-object vocabulary.
-   Developer-only (Settings → Developer). Never downloaded for normal players.
+/* SNAPMON — TinyCLIP half of the standard Hybrid recogniser (see engine.js): zero-shot recognition over a large
+   everyday-object vocabulary. Every player runs the same model, vocabulary and thresholds.
    Pipeline: production COCO-SSD boxes (if any) + the whole photo → 224 px crops → image encoder in a worker →
    cosine similarity against precomputed text embeddings → per-object probabilities → rejection rules.
    CLIP similarities are NOT probabilities: the shown "calibrated confidence" comes from a reliability table measured
@@ -9,22 +9,23 @@
 const ClipLens = (() => {
   const CFG = {
     variant: 'tinyclip-39m16',
-    base: 'models/clip/',
-    ortBase: 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',
+    base: 'models/clip/',          // packaged assets (Platform.assets)
     localOrt: 'vendor/ort/',
     workerPath: 'src/workers/clip-worker.js',
+    forceBackend: null,             // developer testing only: 'wasm' forces the CPU path (same model)
+    expect: null,                   // { file: {bytes, sha256} } from the deploy manifest, checked by the worker
+    test: null,                     // automated tests only: { failGPU, failCPU } simulates backend failures
     // fallback thresholds; replaced by the benchmark's calibration in vocab.json when present
     accept: { p: 0.35, margin: 0.12 },
     MAX_CROPS: 4,
     TIMEOUT_MS: 30000,
   };
-  const st = { state: 'off', error: '', info: null, worker: null, seq: 0, pending: new Map(), meta: null, busy: false };
+  const st = { state: 'off', error: '', errorKind: '', info: null, worker: null, seq: 0, pending: new Map(), meta: null, busy: false, progress: {} };
 
   function workerURL() {
     if (window.__SNAPMON_CLIP_WORKER) return URL.createObjectURL(new Blob([window.__SNAPMON_CLIP_WORKER], { type: 'text/javascript' }));
     return new URL(CFG.workerPath, location.href).href;
   }
-  async function exists(url) { try { const r = await fetch(url, { method: 'HEAD' }); return r.ok; } catch (e) { return false; } }
 
   async function load() {
     if (st.state === 'ready') return true;
@@ -32,21 +33,23 @@ const ClipLens = (() => {
     st.loading = (async () => {
       st.state = 'loading'; st.error = '';
       try {
-        const base = new URL(CFG.base + CFG.variant + '/', location.href).href;
-        if (!(await exists(base + 'vocab.json'))) throw Object.assign(new Error('experimental model files are not deployed on this site'), { code: 'model-missing' });
-        st.meta = await (await fetch(base + 'vocab.json')).json();
-        const ortBase = (await exists(new URL(CFG.localOrt + 'ort.min.js', location.href).href)) ? new URL(CFG.localOrt, location.href).href : CFG.ortBase;
+        const base = Platform.assets.url(CFG.base + CFG.variant + '/'), ortBase = Platform.assets.url(CFG.localOrt);
         st.worker = new Worker(workerURL());
         st.worker.onmessage = ev => {
-          const m = ev.data, pend = st.pending.get(m.id != null ? m.id : 'init');
+          const m = ev.data;
+          if (m.type === 'progress') { st.progress[m.file] = { loaded: m.loaded, total: m.total }; if (CFG.onProgress) CFG.onProgress(st.progress); return; }
+          const pend = st.pending.get(m.id != null ? m.id : 'init');
           if (!pend) return;
           st.pending.delete(m.id != null ? m.id : 'init'); clearTimeout(pend.timer);
-          m.type === 'error' ? pend.reject(new Error(m.error)) : pend.resolve(m);
+          m.type === 'error' ? pend.reject(Object.assign(new Error(m.error), { kind: m.kind })) : pend.resolve(m);
         };
-        st.worker.onerror = e => { for (const p of st.pending.values()) p.reject(new Error('worker crashed: ' + (e.message || 'unknown'))); st.pending.clear(); };
-        const ready = await call('init', { type: 'init', base, ortBase, preferGPU: true }, 180000);
-        st.info = ready.info; st.state = 'ready';
-      } catch (e) { st.state = 'failed'; st.error = String(e.message || e); if (st.worker) st.worker.terminate(); st.worker = null; }
+        // the worker process itself can die (Android reclaiming memory): reject whatever was waiting
+        st.worker.onerror = e => { for (const p of st.pending.values()) p.reject(Object.assign(new Error('recognition worker stopped: ' + (e.message || 'unknown')), { kind: 'crash' })); st.pending.clear(); st.state = 'failed'; };
+        const ready = await call('init', { type: 'init', base, ortBase, preferGPU: true, forceBackend: CFG.forceBackend, expect: CFG.expect || {}, test: CFG.test || {} }, 240000);
+        st.info = ready.info;
+        st.meta = await (await fetch(base + 'vocab.json')).json(); // served from the HTTP/Cache copy the worker just verified
+        st.state = 'ready';
+      } catch (e) { st.state = 'failed'; st.error = String(e.message || e); st.errorKind = e.kind || (e.code === 'timeout' ? 'timeout' : 'init'); if (st.worker) st.worker.terminate(); st.worker = null; }
       st.loading = null;
       return st.state === 'ready';
     })();
@@ -54,7 +57,7 @@ const ClipLens = (() => {
   }
   function call(id, msg, timeout = CFG.TIMEOUT_MS) {
     return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => { st.pending.delete(id); reject(Object.assign(new Error('recognition timed out'), { code: 'timeout' })); }, timeout);
+      const timer = setTimeout(() => { st.pending.delete(id); reject(Object.assign(new Error('recognition timed out'), { code: 'timeout', kind: 'timeout' })); }, timeout);
       st.pending.set(id, { resolve, reject, timer });
       st.worker.postMessage(msg, msg.crops ? [msg.crops.buffer] : []);
     });
@@ -78,13 +81,20 @@ const ClipLens = (() => {
   }
 
   // Aggregate label probabilities per object, apply rejection, attach calibrated confidence.
+  // Scores are rounded to 3 decimals before any threshold or comparison: WebGPU and the CPU produce float results
+  // that differ in the last digits, and rounding makes those differences flip a decision far less often (the
+  // remaining risk is a score sitting exactly on a boundary; measured in docs/RECOGNITION.md).
+  const r3 = x => Math.round(x * 1000) / 1000;
   function judge(top) {
     const labels = st.meta.labels, per = new Map();
+    top = top.map(t => ({ ...t, p: r3(t.p) }));
     for (const t of top) { const L = labels[t.i]; const key = L.o || '__none'; const e = per.get(key) || { obj: L.o || null, label: L.l, p: 0, cos: t.cos }; e.p += t.p; if (t.cos > e.cos) { e.cos = t.cos; } per.set(key, e); }
-    const ranked = [...per.values()].sort((a, b) => b.p - a.p);
+    for (const e of per.values()) e.p = r3(e.p);
+    // ties are broken by name so every device ranks equal scores the same way
+    const ranked = [...per.values()].sort((a, b) => b.p - a.p || String(a.obj || a.label).localeCompare(String(b.obj || b.label)));
     const best = ranked[0], second = ranked[1] || { p: 0 };
     const th = (st.meta.calib && st.meta.calib.accept) || CFG.accept;
-    const margin = best.p - second.p;
+    const margin = r3(best.p - second.p);
     let accepted = !!best.obj && best.p >= th.p && margin >= th.margin, why = accepted ? 'accepted' : !best.obj ? 'background or person' : best.p < th.p ? 'low score' : 'ambiguous';
     if (accepted && st.meta.calib && st.meta.calib.minCos && best.cos < st.meta.calib.minCos) { accepted = false; why = 'weak match'; }
     return { best, ranked: ranked.slice(0, 5), margin, accepted, why, calibrated: calibrate(best.p) };
