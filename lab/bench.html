@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><title>SnapMon recognition benchmark</title>
+<script src="/src/data.js"></script><script src="/src/sprites.js"></script><script src="/src/parts.js"></script>
+<script src="/src/objects.js"></script><script src="/src/labels.js"></script><script src="/src/game.js"></script>
+<script src="/src/lens.js"></script><script src="/src/lens-clip.js"></script>
+<script>
+// Benchmark page: runs the production lens and the experimental lens on each labelled photo. Ground truth is
+// only used by the scoring script afterwards; it never reaches either recogniser.
+Lens.CFG.localUrls = { classifier: '/models/mobilenet_v2_100/model.json', detector: '/models/ssdlite_mobilenet_v2/model.json' };
+ClipLens.CFG.base = '/models/clip/'; ClipLens.CFG.workerPath = '/src/workers/clip-worker.js'; ClipLens.CFG.localOrt = '/vendor/ort/';
+const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+window.runBench = async (labels, variant) => {
+  const out = { variant, prodLoad: null, clipLoad: null, results: [] };
+  let t = performance.now(); await Lens.load(); out.prodLoad = { ms: Math.round(performance.now() - t), state: Lens.status.state, error: Lens.status.error, sources: Lens.status.sources, backend: Lens.status.backend };
+  if (variant) { ClipLens.CFG.variant = variant; t = performance.now(); await ClipLens.load(); out.clipLoad = { ms: Math.round(performance.now() - t), state: ClipLens.status.state, error: ClipLens.status.error, info: ClipLens.status.info }; }
+  for (const L of labels) {
+    const r = { file: L.file };
+    try {
+      const img = await loadImg('/lab/data/photos/' + L.file);
+      const rec = await Lens.recognize(img);
+      r.prod = { decision: rec.decision, ms: rec.debug.times.total, cands: rec.candidates.map(c => ({ obj: c.obj, conf: +c.conf.toFixed(3), box: !!c.box })), boxes: rec.boxes.length,
+                 full: rec.debug.full.slice(0, 3).map(f => f.map) };
+      if (variant && ClipLens.status.state === 'ready') {
+        const cr = await ClipLens.recognize(rec.image, rec);
+        r.clip = { ms: cr.totalMs, infer: cr.inferMs, regions: cr.regions.map(g => ({ cls: g.cls, accepted: g.accepted, why: g.why, p: +g.best.p.toFixed(4), cos: g.best.cos, margin: +g.margin.toFixed(4), cal: g.calibrated,
+                   top: g.ranked.map(x => ({ obj: x.obj, p: +x.p.toFixed(4) })) })) };
+        const fused = ClipLens.fuse(rec, cr);
+        r.hybrid = fused.map(c => ({ obj: c.obj, conf: +(c.conf || 0).toFixed(3), rule: c.rule }));
+      }
+    } catch (e) { r.error = String(e.message || e); }
+    out.results.push(r);
+  }
+  return out;
+};
+</script>

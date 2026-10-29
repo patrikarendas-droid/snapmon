@@ -910,6 +910,7 @@ function buildPalette(dna) {
 /* ---------- DNA ---------- */
 // Species traits come from hash(cat+rarity) so a species keeps its silhouette; individual traits come from the seed.
 function makeDNA(m) {
+  if (m.obj && typeof OBJECTS !== 'undefined' && OBJECTS[m.obj]) return makeDNA3(m);
   const cat = CATEGORY[m.cat];
   const tier = RARITY[m.rarity].tier;
   const SR = mulberry(hashStr('species:' + m.cat + ':' + m.rarity + ':' + (m.word || '')));
@@ -953,21 +954,75 @@ function makeDNA(m) {
   return dna;
 }
 
+/* v3: monsters built from the object registry (objects.js + parts.js). Species traits come from the object,
+   individual traits (proportion jitter `var`, colours, face, limbs, pattern) from the monster's own seed. */
+const LEAFY_CATS = new Set(['fruit', 'plant', 'tree', 'food', 'cake', 'banana']);
+function makeDNA3(m) {
+  const own = OBJECTS[m.obj], o = visualSource(own), cat = CATEGORY[own.cat], tier = RARITY[m.rarity].tier;
+  const SR = mulberry(hashStr('species3:' + own.id + ':' + m.rarity)), R = mulberry(m.seed);
+  const vis = o.vis;
+  const shape = vis && vis.legacy ? vis.legacy : vis ? 'obj' : (cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : 'blob'));
+  const sub = vis && vis.legacy ? vis.sub || null : (!vis ? m.sub || null : null);
+  const eyePool = [['round', 'dot', 'sleepy'], ['round', 'googly', 'angry'], ['angry', 'googly', 'cyclops', 'slit'], ['angry', 'slit', 'many', 'cyclops'], ['slit', 'angry', 'cyclops']][tier];
+  const mouthPool = [['smile', 'o', 'grin'], ['grin', 'tongue', 'smile', 'zigzag'], ['fangs', 'grin', 'zigzag', 'tongue'], ['chomp', 'fangs', 'tongue'], ['chomp', 'fangs']][tier];
+  const topPool = [['none'], ['none', 'antennae', 'tuft'], ['horns', 'antennae', 'mohawk', 'tuft'], ['horns', 'mohawk', 'antennae'], ['crown']][tier];
+  const armPool = [['stub', 'none'], ['stub', 'noodle'], ['noodle', 'claw', 'stub'], ['claw', 'tentacle'], ['claw', 'tentacle']][tier];
+  const legPool = [['stub'], ['stub', 'tall'], ['tall', 'stub', 'spider'], ['spider', 'tall', 'tentacles'], ['tall', 'spider']][tier];
+  const baseHue = o.h >= 0 ? o.h : cat.hue, baseS = o.s != null ? o.s : cat.sat, baseL = o.l != null ? o.l : cat.lit;
+  let h, s = baseS + R.int(-8, 8), l = baseL + R.int(-6, 6);
+  const ph = m.photo;
+  if (baseHue < 0) h = ph && ph.sat > 0.18 ? ph.hue + R.int(-10, 10) : R.int(0, 359);
+  else h = baseHue + R.int(-8, 8);
+  if (ph && ph.sat > 0.18 && baseHue >= 0) h = h + ((((ph.hue - h) % 360) + 540) % 360 - 180) * 0.2;
+  let ah = cat.acc >= 0 ? cat.acc + R.int(-15, 15) : h + 150, as = 60 + R.int(-10, 15), al = 50 + R.int(-8, 8);
+  if (ph && ph.sat > 0.25 && baseHue < 0) ah = ph.hue + 20;
+  if (m.variant === 'shiny') { h += 150; ah += 150; s = Math.min(95, s + 25); }
+  if (m.variant === 'mutated') { ah = 85; as = 90; al = 52; }
+  if (tier >= 4) { as = 85; al = 55; }
+  const eyeStyle = SR.pick(eyePool);
+  const legacyKey = vis && vis.legacy ? vis.legacy + (vis.sub ? '_' + vis.sub : '') : '';
+  const dna = {
+    v: 3, obj: own.id, shape, sub, shapeSeed: SR.int(1, 1e9), var: +(R() * 2 - 1).toFixed(2),
+    eyes: m.variant === 'mutated' ? 'many' : eyeStyle,
+    eyeCount: eyeStyle === 'cyclops' ? 1 : (tier >= 3 && SR.chance(0.3) ? 3 : 2),
+    mouth: SR.pick(mouthPool), top: SR.pick(topPool),
+    arms: m.variant === 'mutated' ? 'tentacle' : R.pick(armPool), legs: SR.pick(legPool),
+    pattern: tier >= 2 || R.chance(0.35) ? R.pick(['spots', 'stripes', 'belly', 'none']) : 'none',
+    spikes: tier >= 2 && SR.chance(0.5), wings: tier >= 3 && SR.chance(0.6),
+    drips: m.variant === 'mutated', variant: m.variant || null, tier, featSeed: R.int(1, 1e9),
+    col: { h: Math.round(h), s, l, ah: Math.round(ah), as, al },
+    sec: (legacyKey && (SEC_COLOR_V2[legacyKey] || SEC_COLOR[vis.legacy])) || o.sec || (LEAFY_CATS.has(o.cat) ? [110, 55, 40] : [200, 55, 64]),
+    glow: tier >= 4 ? '#ffe45c' : m.variant === 'spectral' ? '#9ff7ff' : m.variant === 'mutated' ? '#c6ff4a' : null,
+    glowEyes: tier >= 4 || m.variant === 'spectral',
+  };
+  if (m.variant === 'spectral' && tier >= 4) dna.top = 'halo';
+  return dna;
+}
+const D_BUILDER_ALIAS = { fan: 'electric_fan', vacuum: 'vacuum_cleaner', smartwatch: 'wristwatch', robot_toy: 'robot' };
+function objectBuilder(dna) {
+  const o = typeof OBJECTS !== 'undefined' && OBJECTS[dna.obj] && visualSource(OBJECTS[dna.obj]);
+  if (!o || !o.vis) return null; // family tier: falls through to the category's legacy shape
+  if (o.vis === 'D') { const k = D_BUILDER_ALIAS[o.id] || o.id; return PARTS.D[k] ? (g, R, d) => PARTS.D[k](g, R, d) : null; }
+  if (o.vis.legacy) return null;    // original sprite: shape/sub already stored in the dna
+  if (o.vis.t && PARTS.T[o.vis.t]) return (g, R, d) => PARTS.T[o.vis.t](g, o.vis, d.var || 0, R);
+  return null;
+}
+
 function buildGrid(dna) {
-  const builder = (dna.sub && SHAPES[dna.shape + '_' + dna.sub]) || SHAPES[dna.shape] || SHAPES.blob;
+  const builder = (dna.v >= 3 && objectBuilder(dna)) || (dna.sub && SHAPES[dna.shape + '_' + dna.sub]) || SHAPES[dna.shape] || SHAPES.blob;
   const probe = makeGrid();
   const A = builder(probe, mulberry(dna.shapeSeed), dna);
   const R = mulberry(dna.featSeed);
   const g = makeGrid();
-  // back layer: wings, limbs
-  if (dna.wings) drawWings(g, 20, (A.eyes.y + A.mouth.y) / 2);
+  // back layer: wings, limbs. Rigid objects (machines, furniture…) keep their silhouette: no wings or spikes.
+  if (dna.wings && !A.rigid) drawWings(g, 20, (A.eyes.y + A.mouth.y) / 2);
   for (const arm of A.arms || []) drawArm(g, arm, dna.arms, R);
   const ghost = dna.variant === 'spectral' || A.float;
   if (!A.noLegs && !ghost) drawLegs(g, A.legs, A.legs && A.legs.roots ? 'roots' : A.legs && A.legs.bird ? 'birdfeet' : dna.legs);
   // body
   builder(g, mulberry(dna.shapeSeed), dna);
   if (dna.pattern !== 'none') addPattern(g, dna.pattern, mulberry(dna.featSeed + 7));
-  if (dna.spikes) addSpikes(g);
+  if (dna.spikes && !A.rigid) addSpikes(g);
   if (dna.top && dna.top !== 'none') drawTop(g, A.top, dna.top, R);
   if (dna.variant === 'spectral' && !A.float) addGhostTail(g);
   // face

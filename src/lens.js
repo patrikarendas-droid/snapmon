@@ -114,15 +114,14 @@ const Lens = (() => {
     ctx.drawImage(src, cx, cy, Math.min(side, W), Math.min(side, H), 0, 0, size * Math.min(side, W) / side, size * Math.min(side, H) / side);
     return c;
   }
-  function parse(code) { if (!code) return null; const [cat, sub] = code.split(':'); return CATEGORY[cat] ? { cat, sub: sub || null } : null; }
+  // v3: every recogniser label resolves to a specific object in the registry (objects.js / labels.js)
+  const asObj = id => (id && OBJECTS[id] ? { obj: id, cat: OBJECTS[id].cat } : null);
   function mapImagenet(className) {
-    const code = LABEL_MAP.imagenet[className];
-    if (code === 0) return 'excluded';
-    if (code) return parse(code);
-    const cat = matchCategory(className.replace(/,/g, ' ')); // safety net if a model ships different label text
-    return cat ? { cat, sub: null } : { cat: 'other', sub: null };
+    const id = LABEL_OBJECTS.imagenet[className];
+    if (id === 0) return 'excluded';
+    return asObj(id) || asObj(objectForLabel(className)); // safety net if a model ships different label text
   }
-  function mapCoco(name) { const code = LABEL_MAP.coco[name]; return code === 0 ? 'excluded' : code ? parse(code) : null; }
+  function mapCoco(name) { const id = LABEL_OBJECTS.coco[name]; return id === 0 ? 'excluded' : asObj(id); }
   const pretty = s => s.split(',')[0].trim().replace(/^./, c => c.toLowerCase());
 
   /* ---------- recognition ---------- */
@@ -142,7 +141,7 @@ const Lens = (() => {
         const [x, y, w, h] = d.bbox;
         if (dets.some(o => o !== d && !SURFACES.has(o.class) && o.class !== 'person' && o.score >= CFG.DET_MIN && (() => { const cx = o.bbox[0] + o.bbox[2] / 2, cy = o.bbox[1] + o.bbox[3] / 2; return cx > x && cx < x + w && cy > y && cy < y + h; })())) { d.score *= 0.55; d.surface = true; }
       }
-      dbg.detections = dets.map(d => ({ label: d.class, score: d.score, map: (d.map === 'excluded' ? 'excluded' : d.map ? d.map.cat + (d.map.sub ? ':' + d.map.sub : '') : '?') + (d.surface ? ' (background surface)' : '') }));
+      dbg.detections = dets.map(d => ({ label: d.class, score: d.score, map: fmtMap(d.map) + (d.surface ? ' (background surface)' : '') }));
       await nextFrame();
     }
     const cands = [];
@@ -155,8 +154,8 @@ const Lens = (() => {
       dbg.full = preds.map(p => ({ label: pretty(p.className), prob: p.probability, map: fmtMap(mapImagenet(p.className)) }));
       for (const p of preds) {
         const m = mapImagenet(p.className);
-        if (m === 'excluded' || p.probability < 0.08) continue;
-        cands.push({ label: pretty(p.className), cat: m.cat, sub: m.sub, conf: p.probability, box: null, src: 'photo' });
+        if (!m || m === 'excluded' || p.probability < 0.08) continue;
+        cands.push({ label: pretty(p.className), obj: m.obj, cat: m.cat, conf: p.probability, box: null, src: 'photo' });
       }
       await nextFrame();
     }
@@ -166,15 +165,15 @@ const Lens = (() => {
     const tc = performance.now();
     for (const [i, d] of objects.entries()) {
       const [x, y, w, h] = d.bbox;
-      let label = d.class, cat = d.map.cat, sub = d.map.sub, conf = d.score;
+      let label = d.class, cat = d.map.cat, obj = d.map.obj, conf = d.score;
       if (st.classifier && i < CFG.MAX_DET_CROPS) {
         const p = (await st.classifier.classify(crop(img, x, y, w, h), 3))[0];
         const m = p && mapImagenet(p.className);
         dbg.crops.push({ box: d.class, label: p ? pretty(p.className) : '-', prob: p ? p.probability : 0, map: fmtMap(m) });
-        if (m && m !== 'excluded' && m.cat === cat && p.probability >= 0.2) { label = pretty(p.className); sub = m.sub || sub; conf = Math.min(0.99, Math.max(conf, p.probability) + 0.08); }
+        if (m && m !== 'excluded' && m.cat === cat && p.probability >= 0.2) { label = pretty(p.className); obj = m.obj; conf = Math.min(0.99, Math.max(conf, p.probability) + 0.08); }
         await nextFrame();
       }
-      cands.push({ label, cat, sub, conf, box: [x / img.width, y / img.height, w / img.width, h / img.height], aspect: h / w, src: 'detector' });
+      cands.push({ label, obj, cat, conf, box: [x / img.width, y / img.height, w / img.width, h / img.height], aspect: h / w, src: 'detector' });
     }
     T.crops = Math.round(performance.now() - tc);
     // merge: one entry per category, keep the strongest; agreement between whole-photo and detector raises confidence
@@ -200,11 +199,13 @@ const Lens = (() => {
     else if (valid[0].conf >= CFG.AUTO_CONF && (!valid[1] || valid[1].conf < valid[0].conf * CFG.CLEAR_MARGIN)) { decision = 'auto'; reason = 'confident'; }
     else { decision = 'choose'; reason = 'unsure'; }
     T.total = Math.round(performance.now() - T.start);
-    T.lensLoad = st.loadMs; dbg.times = T; dbg.decision = decision; dbg.reason = reason; dbg.candidates = ranked.map(c => ({ label: c.label, cat: c.cat, sub: c.sub, conf: c.conf, src: c.src }));
+    T.lensLoad = st.loadMs; dbg.times = T; dbg.decision = decision; dbg.reason = reason; dbg.candidates = ranked.map(c => ({ label: c.label, obj: c.obj, cat: c.cat, conf: c.conf, src: c.src }));
     dbg.thresholds = { min: CFG.MIN_CONF, auto: CFG.AUTO_CONF, detMin: CFG.DET_MIN };
-    return { decision, reason, candidates: valid, image: img, debug: dbg };
+    // boxes: every usable detection (normalised), so the experimental lens can classify exactly the same crops
+    const boxes = objects.map(d => ({ cls: d.class, score: d.score, box: [d.bbox[0] / img.width, d.bbox[1] / img.height, d.bbox[2] / img.width, d.bbox[3] / img.height] }));
+    return { decision, reason, candidates: valid, image: img, debug: dbg, boxes, people };
   }
-  function fmtMap(m) { return m === 'excluded' ? 'excluded' : m ? m.cat + (m.sub ? ':' + m.sub : '') : '?'; }
+  function fmtMap(m) { return m === 'excluded' ? 'excluded' : m ? m.obj : '?'; }
 
   async function clearCache() {
     for (const k of Object.values(CFG.cacheKeys)) { try { await tf.io.removeModel(k); } catch (e) {} }
