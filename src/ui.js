@@ -40,7 +40,14 @@ const rarityChip = r => `<span class="chip r" style="color:${RARITY[r].color}">$
 const famChip = f => `<span class="chip" style="color:${FAMILIES[f].color}">${FAMILIES[f].glyph} ${FAMILIES[f].name}</span>`;
 const varChip = v => v ? `<span class="chip" style="color:var(--violet)">${variantLabel(v)}</span>` : '';
 function monsterTitle(m) { return m.nick ? esc(m.nick) : esc(m.name); }
-function catLabel(m) { return m.cat === 'other' && m.word ? `“${esc(m.word)}”` : esc(CATEGORY[m.cat].name); }
+function catLabel(m) { return m.obj && OBJECTS[m.obj] ? esc(OBJECTS[m.obj].name) : m.cat === 'other' && m.word ? `“${esc(m.word)}”` : esc(CATEGORY[m.cat].name); }
+// honest description of how specific a monster's look is (see objectTier in objects.js)
+function designLine(obj) {
+  const o = OBJECTS[obj], t = objectTier(o);
+  if (!o) return 'Generic oddity design.';
+  return { dedicated: `Specific ${esc(o.name.toLowerCase())} design.`, composed: `${esc(o.name)} design built from shared parts.`,
+    related: `Shares the ${esc(visualSource(o).name.toLowerCase())} design.`, family: `General ${esc(CATEGORY[o.cat].name.split(' /')[0].toLowerCase())} design (no specific ${esc(o.name.toLowerCase())} look yet).` }[t];
+}
 
 /* ---------- top bar & tabs ---------- */
 function renderTop() {
@@ -69,8 +76,6 @@ function render() {
   const el = $('#screen');
   el.innerHTML = ({ hunt: huntScreen, dex: dexScreen, gear: gearScreen, lab: labScreen })[ui.tab]();
   el.classList.remove('screen-enter'); void el.offsetWidth; el.classList.add('screen-enter');
-  if (ui.tab === 'hunt' && Photo.live.isOpen()) Photo.live.attach($('#liveVideo'));
-  else if (ui.tab !== 'hunt' && Photo.live.isOpen()) { ui.liveWanted = false; Photo.live.close(); }
 }
 
 /* ---------- HUNT ---------- */
@@ -78,22 +83,20 @@ function huntScreen() {
   const hs = hunterStats(S), low = S.hp < hs.maxHp * 0.35;
   const quests = activeQuests(S);
   const ghost = S.monsters.length ? S.monsters[S.monsters.length - 1].dna : null;
-  const live = ui.liveWanted || Photo.live.isOpen();
-  return `
+  const live = false;
+  return `${saveBlockedHTML()}
   <section class="viewfinder" id="vf">
     ${live ? '<video id="liveVideo" autoplay playsinline muted></video>' : ''}
     ${ghost && !live ? `<img class="vf-ghost px" alt="" src="${spriteURL(ghost, 3)}">` : ''}
     <i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
     ${live ? '' : `<div class="vf-center"><div><h1>Monsters hide <em>in plain sight</em></h1>
       <p>${S.stats.photos === 0 ? 'Photograph a real object near you — a mug, a shoe, a plant — and the Spirit Lens will reveal what lives inside it.' : 'Explore. Unusual objects hide unusual monsters.'}</p></div></div>`}
-    <div class="vf-hud"><span class="rec">SPIRIT CAM</span><span>${S.stats.photos} SNAPS · ${Object.keys(S.dex).length} SPECIES</span></div>
+    <div class="vf-hud"><span class="rec">SPIRIT CAM</span><span>${S.stats.photos} SNAPS · ${Object.keys(S.dex).length} OBJECTS</span></div>
   </section>
   <div class="shutter-row">
-    <label class="side-btn" for="galInput"><span class="ic">${ICON.gallery}</span>Gallery</label>
-    ${live ? `<button class="shutter" data-act="liveSnap" aria-label="Take photo">SNAP</button>`
-           : `<label class="shutter" for="camInput" role="button" aria-label="Open camera and take a photo">SNAP</label>`}
-    ${live ? `<button class="side-btn" data-act="liveClose"><span class="ic">✕</span>Close</button>`
-           : Photo.live.supported() ? `<button class="side-btn" data-act="liveOpen"><span class="ic">${ICON.live}</span>Live view</button>` : '<span></span>'}
+    <button class="side-btn" data-act="tab" data-arg="dex"><span class="ic">${ICON.dex}</span>Monsters</button>
+    <button class="shutter" data-act="openCamera" aria-label="Open the Spirit Camera">SNAP</button>
+    <button class="side-btn" data-act="tab" data-arg="lab"><span class="ic">${ICON.lab}</span>Orders</button>
   </div>
   ${lensChipHTML()}
   ${low ? `<div class="card warn row"><div class="grow"><b>You're badly hurt.</b><div class="small muted">Monsters hit hard. Heal up before your next hunt — you also recover slowly over time.</div></div>
@@ -106,6 +109,12 @@ function huntScreen() {
     <div class="sightings">${ui.lastSightings.map(s => `<div class="sighting"><img class="px" alt="" src="${spriteURL(s.dna, 3)}">${esc(s.name.split(',')[0])}<br><span style="color:${RARITY[s.rarity].color}">${s.outcome}</span></div>`).join('')}</div></section>` : ''}
   <p class="notice">Your photos stay on this phone. The Spirit Lens recognises objects on-device, then the image is thrown away.</p>`;
 }
+function saveBlockedHTML() {
+  if (!saveBlocked) return '';
+  const why = saveBlocked.reason === 'newer' ? `Your saved progress was made by a newer SNAPMON (save format ${saveBlocked.version}) than this one (format ${SAVE_VERSION}). This usually means the game was rolled back to an older version.`
+    : 'Your saved progress could not be read.';
+  return `<div class="card warn stack"><b>Saved progress not loaded</b><p class="small" style="margin:0">${why} It has <b>not</b> been changed or deleted: this session will not save over it. Open Settings to copy it as a backup code.</p></div>`;
+}
 function questHTML(q) {
   const p = questProgress(S, q), done = p >= q.target;
   const rw = Object.entries(q.reward).map(([k, v]) => rewardLabel(k, v)).join(', ');
@@ -114,27 +123,38 @@ function questHTML(q) {
 }
 
 /* ---------- photo flow ---------- */
-async function onPhotoFile(file) {
-  SFX.shutter();
+/* ---------- live camera (the only way to hunt: no gallery, no file upload) ---------- */
+async function openCamera() {
+  closeSheet(); Lens.load(); // warm the recogniser up while the player frames the shot
+  $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
+    <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
+    <div class="cam-frame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
+      <div class="cam-status" id="camStatus">Starting camera…</div></div>
+    <p class="muted small" style="text-align:center;margin:0">Fill the frame with one real object. The photo is analysed on this phone and never saved.</p>
+    <div class="cam-controls"><button class="shutter" id="camShutter" data-act="camSnap" aria-label="Take photo" disabled>SNAP</button></div>
+  </div></div>`;
+  const v = $('#camVideo');
   try {
-    const { img, url } = await Photo.loadFile(file);
-    beginIdentify(img, url);
-  } catch (e) { toast(e.message, 'bad'); }
+    await Platform.camera.open(v);
+    if (!$('#camVideo')) { Platform.camera.close(v); return; } // closed while starting
+    const st = $('#camStatus'); if (st) st.hidden = true;
+    const btn = $('#camShutter'); if (btn) btn.disabled = false;
+  } catch (e) { Platform.camera.close(v); showCameraError(e); }
 }
-async function openLive() {
-  ui.tab = 'hunt'; ui.liveWanted = true; render();
-  try { await Photo.live.open($('#liveVideo')); }
-  catch (e) {
-    ui.liveWanted = false; Photo.live.close(); render();
-    toast(e && e.name === 'NotAllowedError' ? 'Camera permission was refused. The SNAP button still works — it opens your camera app.' : 'Live view is not available here. The SNAP button still opens your phone camera.', 'bad');
-  }
+function showCameraError(e) {
+  const d = Platform.camera.describe(e);
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    <h2 style="font-size:26px">${esc(d.title)}</h2><p>${esc(d.text)}</p>
+    <p class="small muted">Hunting needs the live camera. Saved photos cannot be used.</p>
+    <button class="btn primary block" data-act="openCamera">Try again</button>
+    <button class="btn ghost block" data-act="closeOverlay">Back</button></div></div>`;
 }
-function closeLive() { ui.liveWanted = false; Photo.live.close($('#liveVideo')); render(); }
-function liveSnap() {
-  const v = $('#liveVideo'); if (!v || !v.videoWidth) return;
+function closeCamera() { Platform.camera.close($('#camVideo')); $('#overlay').innerHTML = ''; render(); }
+function camSnap() {
+  const v = $('#camVideo'); if (!v || !v.videoWidth) return;
   SFX.shutter();
-  const canvas = Photo.live.snap(v);
-  ui.liveWanted = false; Photo.live.close(v); render();
+  const canvas = Platform.camera.capture(v);
+  Platform.camera.close(v);
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
@@ -174,6 +194,7 @@ function lensStatusText() {
   if (L.state === 'ready') return 'Looking for objects… (runs on this phone)';
   return '';
 }
+const withTimeout = (promise, ms, code) => Promise.race([promise, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error(code), { code })), ms))]);
 async function recognizeFlow() {
   const p = ui.pending; if (!p) return;
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
@@ -181,30 +202,108 @@ async function recognizeFlow() {
     ${lensFrame(p, '<i class="vf-sweep"></i><div class="scan-hud"><div class="lens-tag"><i class="spin"></i> ANALYSING <span id="lensClock">0.0s</span></div></div>')}
     <p class="muted" style="text-align:center" id="lensStatus">${lensStatusText()}</p></div></div>`;
   const clock = setInterval(() => { const el = $('#lensClock'); if (!el || ui.pending !== p) return clearInterval(clock); el.textContent = ((Date.now() - p.t0) / 1000).toFixed(1) + 's'; }, 100);
+  const fail = kind => { clearInterval(clock); if (ui.pending === p) showLensFailed(p, kind); };
+  if (!Platform.device.wasm() && !Platform.device.webgl()) return fail('unsupported');
   if (Lens.status.state !== 'ready') {
     const ok = await Lens.load();
     if (ui.pending !== p) return clearInterval(clock);
-    if (!ok) { clearInterval(clock); return showLensFailed(p); }
-    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText();
+    if (!ok) return fail(Platform.device.online() ? 'download' : 'offline');
+    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
   }
   let rec;
-  try { rec = await Lens.recognize(p.img); }
-  catch (e) { clearInterval(clock); return showLensFailed(p, e.message); }
-  clearInterval(clock);
-  if (ui.pending !== p) return;
+  try { rec = await withTimeout(Lens.recognize(p.img), 30000, 'timeout'); }
+  catch (e) { return fail(e.code === 'timeout' ? 'timeout' : e.code === 'busy' ? 'busy' : 'error'); }
+  if (ui.pending !== p) return clearInterval(clock);
   p.rec = rec;
   if (!S.settings.lensCached) { S.settings.lensCached = true; persist(); }
+  // developer-only experimental lens: compare side by side, or let it refine the result (hybrid)
+  const mode = S.settings.expLens || 'off';
+  if (mode !== 'off' || S.settings.fieldTest) {
+    const s = $('#lensStatus'); if (s) s.textContent = 'Experimental lens running…';
+    try {
+      if (ClipLens.status.state !== 'ready' && !(await ClipLens.load())) throw new Error(ClipLens.status.error || 'experimental lens unavailable');
+      p.clip = await withTimeout(ClipLens.recognize(rec.image, rec), 30000, 'timeout');
+      if (mode === 'hybrid') applyHybrid(rec, p.clip);
+    } catch (e) { p.clipError = String(e.message || e); }
+  }
+  clearInterval(clock);
+  if (ui.pending !== p) return;
+  if (S.settings.fieldTest) return showFieldTest(p);
   if (rec.decision === 'unknown') return showUnknown(p);
   if (rec.decision === 'auto') return showIdentified(p, 0);
   showChoices(p);
 }
-function showLensFailed(p, msg) {
-  const L = Lens.status, err = msg || L.error;
+// hybrid mode: replace the production candidates with the fused result and re-decide with the same rules
+function applyHybrid(rec, clip) {
+  const fused = ClipLens.fuse(rec, clip).filter(c => c.conf >= Lens.CFG.MIN_CONF).slice(0, Lens.CFG.MAX_CHOICES);
+  rec.candidates = fused;
+  if (!fused.length) { rec.decision = 'unknown'; rec.reason = rec.reason === 'person' ? 'person' : 'low'; }
+  else if (fused.filter(c => c.box).length >= 2) { rec.decision = 'choose'; rec.reason = 'multiple'; }
+  else if (fused[0].conf >= Lens.CFG.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * Lens.CFG.CLEAR_MARGIN)) { rec.decision = 'auto'; rec.reason = 'confident'; }
+  else { rec.decision = 'choose'; rec.reason = 'unsure'; }
+  rec.debug.decision = rec.decision + ' (hybrid)';
+}
+/* ---------- field test (developer mode) ----------
+   Records what each model said and the tester's verdict in a SEPARATE store (snapmon.fieldtest.v1). Nothing here ever
+   feeds back into recognition, and a field-test photo never creates an encounter. */
+const FT_KEY = 'snapmon.fieldtest.v1';
+const ftLoad = () => { try { return JSON.parse(Platform.storage.get(FT_KEY) || '[]'); } catch (e) { return []; } };
+const ftSave = list => Platform.storage.set(FT_KEY, JSON.stringify(list.slice(-500)));
+function ftTop(rec) { return (rec.candidates || []).slice(0, 3).map(c => ({ obj: c.obj, label: c.label, conf: +c.conf.toFixed(3) })); }
+function showFieldTest(p) {
+  const rec = p.rec, clip = p.clip, prodTop = ftTop(rec);
+  const clipTop = clip ? clip.regions[0].ranked.slice(0, 3).map(x => ({ obj: x.obj, label: x.label, p: +x.p.toFixed(3) })) : null;
+  p.ft = { t: Date.now(), prod: { decision: rec.decision, reason: rec.reason, top: prodTop, ms: rec.debug && rec.debug.times && rec.debug.times.total },
+    clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null, marks: {} };
+  const nm = x => esc(x.obj && OBJECTS[x.obj] ? OBJECTS[x.obj].name : x.label);
+  const markRow = (model, label) => `<div class="stack" style="gap:6px"><b class="small">${label}</b><div class="row wrap">${[['top1', 'Top-1 right'], ['top3', 'In top 3'], ['wrong', 'Wrong'], ['rejected_ok', 'Rightly unknown'], ['rejected_bad', 'Wrongly unknown']]
+    .map(([k, l]) => `<button class="fchip" data-act="ftMark" data-arg="${model}:${k}">${l}</button>`).join('')}</div></div>`;
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="gap:12px">
+    <div class="sheet-head"><h2>Field test</h2><button class="btn small ghost" data-act="cancelPhoto">Close</button></div>
+    <p class="small muted" style="margin:0">No monster is created in field-test mode. Your answers are stored separately and are never used for recognition.</p>
+    <div class="photo-frame" id="lensFrame"></div>
+    <div class="card small stack" style="gap:4px"><b>Production lens</b> <span class="muted">${esc(rec.decision)} (${esc(rec.reason)}) · ${p.ft.prod.ms || '?'} ms</span>
+      <div>${prodTop.length ? prodTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">${Math.round(x.conf * 100)}%</span>`).join('<br>') : '<span class="muted">nothing accepted</span>'}</div></div>
+    ${clipTop ? `<div class="card small stack" style="gap:4px"><b>Experimental lens</b> <span class="muted">${clip.regions[0].accepted ? 'accepted' : 'rejected: ' + esc(clip.regions[0].why)} · ${clip.totalMs} ms · ${esc(clip.backend)}</span>
+      <div>${clipTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">score ${(x.p * 100).toFixed(1)}</span>`).join('<br>')}</div></div>` : p.clipError ? `<div class="card small">Experimental lens failed: ${esc(p.clipError)}</div>` : ''}
+    ${markRow('prod', 'Production verdict')}${clipTop ? markRow('clip', 'Experimental verdict') : ''}
+    <input class="search" id="ftTruth" maxlength="60" placeholder="What was it really? (optional, for the test log only)" autocomplete="off">
+    <button class="btn primary block" data-act="ftSave">Save result &amp; take another</button>
+    ${debugHTML(rec)}
+  </div></div>`;
+  drawDetections(p);
+}
+function ftStats(list) {
+  const m = { prod: { n: 0, top1: 0, top3: 0, rej: 0, rejOk: 0, ms: [] }, clip: { n: 0, top1: 0, top3: 0, rej: 0, rejOk: 0, ms: [] } };
+  for (const e of list) for (const k of ['prod', 'clip']) {
+    const v = e.marks && e.marks[k]; if (!v) continue; const s = m[k]; s.n++;
+    if (v === 'top1') { s.top1++; s.top3++; } if (v === 'top3') s.top3++;
+    if (v === 'rejected_ok' || v === 'rejected_bad') { s.rej++; if (v === 'rejected_ok') s.rejOk++; }
+    if (e[k] && e[k].ms) s.ms.push(e[k].ms);
+  }
+  return m;
+}
+function ftSummaryHTML() {
+  const list = ftLoad(), st = ftStats(list), pct = (a, b) => b ? Math.round(a / b * 100) + '%' : '–';
+  const row = (k, l) => { const s = st[k], ms = s.ms; return `<tr><td>${l}</td><td>${s.n}</td><td>${pct(s.top1, s.n - s.rej)}</td><td>${pct(s.top3, s.n - s.rej)}</td><td>${s.rejOk}/${s.rej}</td><td>${ms.length ? Math.round(ms.reduce((a, b) => a + b, 0) / ms.length) + ' / ' + Math.max(...ms) : '–'}</td></tr>`; };
+  return `<div class="debug small"><table><tr><th></th><th>marked</th><th>top-1</th><th>top-3</th><th>right unknowns</th><th>ms avg / worst</th></tr>${row('prod', 'Production')}${row('clip', 'Experimental')}</table></div>
+    <p class="small muted" style="margin:0">${list.length} field-test photos logged on this phone. Top-1/top-3 exclude photos marked "unknown".</p>`;
+}
+
+function showLensFailed(p, kind) {
+  const L = Lens.status;
+  const msg = {
+    download: ['The Spirit Lens could not download', 'Recognition runs on your phone, but its AI models (about 30 MB) must be downloaded once. The download failed. Check your connection and try again.'],
+    offline: ['You are offline', 'The Spirit Lens needs to download its AI models once (about 30 MB). Connect to the internet and try again. After that it works offline.'],
+    timeout: ['Recognition took too long', 'The Spirit Lens did not finish in time. Close other apps, then try again.'],
+    unsupported: ['This device cannot run the Spirit Lens', 'The browser lacks WebGL and WebAssembly, which on-device recognition needs. Try a recent version of Chrome.'],
+    busy: ['Still thinking', 'The lens was busy with another photo. Try again.'],
+    error: ['The Spirit Lens hit a problem', 'Something went wrong during recognition. Try again.'],
+  }[kind] || ['The Spirit Lens hit a problem', 'Try again.'];
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
-    <h2 style="font-size:26px">The Spirit Lens couldn't start</h2>
-    <p>Recognition runs on your phone, but the AI models have to be downloaded once (about 30 MB). Connect to the internet and try again.</p>
-    <p class="small muted">If you're playing inside a Claude Artifact page, that page blocks the model download. Play on the GitHub Pages version instead.</p>
-    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(err)}</p>` : ''}
+    <h2 style="font-size:26px">${msg[0]}</h2><p>${msg[1]}</p>
+    <p class="small muted">No monster was created. The photo was not stored.</p>
+    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(L.error || kind)}</p>` : ''}
     <button class="btn primary block" data-act="lensRetry">Try again</button>
     <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
 }
@@ -221,20 +320,22 @@ function showUnknown(p) {
     <p style="font-size:17px">${msg[1]}</p>
     <p class="small muted">Tips: fill the frame with a single object, use good light, and hold steady. Everyday things work best: food, furniture, gadgets, pets, plants.</p>
     ${debugHTML(p.rec)}
-    <label class="btn primary block" for="camInput" data-act="closeOverlay">Take another photo</label>
+    <button class="btn primary block" data-act="openCamera">Take another photo</button>
     <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
 }
 function candLine(c) {
-  const name = c.cat === 'other' ? 'Oddity' : CATEGORY[c.cat].name;
-  return `<b>${esc(c.label)}</b> <span class="muted">· ${esc(name)} · ${Math.round(c.conf * 100)}%</span>`;
+  const o = OBJECTS[c.obj], name = o ? o.name : CATEGORY[c.cat].name;
+  const same = o && o.name.toLowerCase() === String(c.label).toLowerCase();
+  return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${Math.round(c.conf * 100)}%</span>`;
 }
+const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
 function showIdentified(p, i) {
   const c = p.rec.candidates[i];
   SFX.click();
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
     <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <div class="photo-frame" id="lensFrame"></div>
-    <div class="card ident"><span class="e">${CATEGORY[c.cat].icon}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
+    <div class="card ident"><span class="e">${catIcon(c)}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
     ${debugHTML(p.rec)}
     ${S.settings.debugLens ? `<button class="btn primary block" data-act="pickCand" data-arg="${i}">Scan for monsters</button>` : '<p class="muted small" style="text-align:center">Scanning for supernatural activity…</p>'}
   </div></div>`;
@@ -248,8 +349,8 @@ function showChoices(p) {
     <p class="muted small" style="margin:0">${multi ? 'Which one are you hunting?' : 'It is not completely sure. Which of these did you photograph?'} Every option comes from the lens's own analysis of your photo.</p>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">
-      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${CATEGORY[c.cat].icon}</span></button>`).join('')}</div>
-    <label class="btn ghost block" for="camInput" data-act="closeOverlay">None of these: take another photo</label>
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
+    <button class="btn ghost block" data-act="openCamera">None of these: take another photo</button>
     ${debugHTML(rec)}
   </div></div>`;
   drawDetections(p);
@@ -279,11 +380,22 @@ function debugHTML(rec) {
     <table><tr><th colspan="3">Whole photo (MobileNet top 5)</th></tr>${rows(d.full, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
     <tr><th colspan="3">Detected objects (COCO-SSD)</th></tr>${rows(d.detections, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.score)}</td><td>${esc(r.map)}</td></tr>`)}
     <tr><th colspan="3">Crop refinement</th></tr>${rows(d.crops, r => `<tr><td>${esc(r.box)} → ${esc(r.label)}</td><td>${pct(r.prob)}</td><td>${esc(r.map)}</td></tr>`)}
-    <tr><th colspan="3">Merged candidates</th></tr>${rows(d.candidates, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.conf)}</td><td>${esc(r.cat + (r.sub ? ':' + r.sub : ''))} · ${esc(r.src)}</td></tr>`)}</table></details>`;
+    <tr><th colspan="3">Merged candidates</th></tr>${rows(d.candidates, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.conf)}</td><td>${esc(r.obj || '?')} · ${esc(r.src)}</td></tr>`)}</table>${clipDebugHTML()}</details>`;
 }
 function cancelPhoto() {
   if (ui.pending && ui.pending.url && ui.pending.url.startsWith('blob:')) URL.revokeObjectURL(ui.pending.url);
   ui.pending = null; $('#overlay').innerHTML = ''; render();
+}
+
+// experimental lens comparison (developer mode). CLIP scores are raw similarities turned into vocabulary softmax shares;
+// the "calibrated" column comes from the benchmark's reliability table and is blank where none exists.
+function clipDebugHTML() {
+  const p = ui.pending; if (!p || (!p.clip && !p.clipError)) return '';
+  if (p.clipError) return `<div class="small" style="margin-top:8px;color:var(--danger)">Experimental lens: ${esc(p.clipError)}</div>`;
+  const c = p.clip, info = ClipLens.status.info || {}, pct = v => (v * 100).toFixed(1) + '%';
+  return `<table><tr><th colspan="4">Experimental lens (${esc(info.name || '')} · ${esc(c.backend)} · ${c.totalMs} ms · loaded in ${info.loadMs} ms · ${((info.modelBytes + info.vocabBytes) / 1048576).toFixed(1)} MB)</th></tr>
+    <tr><td class="muted">region</td><td class="muted">top object</td><td class="muted">score / margin</td><td class="muted">calibrated · verdict</td></tr>
+    ${c.regions.map(r => `<tr><td>${esc(r.cls)}</td><td>${esc(r.best.obj ? OBJECTS[r.best.obj].name : r.best.label)}<br><span class="muted">${r.ranked.slice(1, 3).map(x => esc(x.obj ? OBJECTS[x.obj].name : x.label) + ' ' + pct(x.p)).join(', ')}</span></td><td>${pct(r.best.p)} / ${pct(r.margin)}</td><td>${r.calibrated != null ? pct(r.calibrated) : 'n/a'} · ${r.accepted ? '<b style="color:var(--good)">accepted</b>' : esc(r.why)}</td></tr>`).join('')}</table>`;
 }
 
 async function scan(i) {
@@ -298,7 +410,7 @@ async function scan(i) {
     <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${Math.round(c.conf * 100)}% sure)</span></p>
   </div></div>`;
   SFX.scan();
-  const result = resolvePhoto(S, c.cat, photo, { label: c.label, sub: c.sub, aspect: c.aspect, conf: c.conf });
+  const result = resolvePhoto(S, c.obj, photo, { label: c.label, aspect: c.aspect, conf: c.conf });
   const strength = result.encounter ? 0.55 + RARITY[result.monster.rarity].tier * 0.11 : 0.25;
   for (let step = 0; step < 6; step++) {
     await wait(220);
@@ -316,7 +428,7 @@ async function scan(i) {
       <h2 style="font-size:28px;color:var(--muted)">${result.dup ? 'Already scanned' : 'All quiet'}</h2>
       <p style="font-size:18px">${esc(result.line)}</p>
       <p class="small muted">${result.dup ? 'Try a different object or a new angle.' : 'Keep hunting — every quiet snap builds up spirit pressure for the next one.'}</p>
-      <label class="btn primary block" for="camInput" data-act="closeOverlay">Snap another object</label>
+      <button class="btn primary block" data-act="openCamera">Snap another object</button>
       <button class="btn ghost" data-act="closeOverlay">Back</button></div></div>`;
     render(); return;
   }
@@ -576,7 +688,7 @@ function showResult(B, sum) {
     ${drops}
     ${(sum.achievements || []).map(a => `<div class="card" style="width:100%;border-color:var(--flash)"><b style="color:var(--flash)">Achievement: ${esc(a.name)}</b><div class="small muted">${esc(a.desc)} · ${Object.entries(a.reward).map(([k, v]) => esc(rewardLabel(k, v))).join(', ')}</div></div>`).join('')}
     <div class="stack" style="width:100%;max-width:340px;margin-top:6px">
-      <label class="btn primary block" for="camInput" data-act="closeOverlay" style="min-height:54px">Snap the next object</label>
+      <button class="btn primary block" data-act="openCamera" style="min-height:54px">Snap the next object</button>
       ${sum.result === 'captured' ? `<button class="btn block" data-act="viewNew" data-arg="${m.id}">View ${esc((m.name).split(',')[0])}</button>` : ''}
       <button class="btn ghost block" data-act="closeOverlay">Back to base</button>
     </div></div></div>`;
@@ -624,8 +736,7 @@ function abilityHTML(a) { return `<div class="ability"><b>${esc(a.name)}${a.ulti
 
 /* ---------- DEX / collection ---------- */
 function dexScreen() {
-  const totalSpecies = CATEGORIES.length * RARITIES.length;
-  const seg = `<div class="seg"><button class="${ui.dexView === 'captured' ? 'on' : ''}" data-act="dexView" data-arg="captured">Captured (${S.monsters.length})</button><button class="${ui.dexView === 'encyclopedia' ? 'on' : ''}" data-act="dexView" data-arg="encyclopedia">Encyclopedia (${Object.keys(S.dex).length}/${totalSpecies})</button></div>`;
+  const seg = `<div class="seg"><button class="${ui.dexView === 'captured' ? 'on' : ''}" data-act="dexView" data-arg="captured">Captured (${S.monsters.length})</button><button class="${ui.dexView === 'encyclopedia' ? 'on' : ''}" data-act="dexView" data-arg="encyclopedia">Encyclopedia (${Object.keys(S.dex).length})</button></div>`;
   const rf = `<div class="chips-scroll">${['all', ...RARITIES.map(r => r.id)].map(r => `<button class="fchip ${ui.fR === r ? 'on' : ''}" data-act="fR" data-arg="${r}" ${r !== 'all' ? `style="${ui.fR === r ? '' : 'color:' + RARITY[r].color}"` : ''}>${r === 'all' ? 'All rarities' : RARITY[r].name}</button>`).join('')}</div>`;
   const ff = `<div class="chips-scroll">${['all', ...Object.keys(FAMILIES)].map(f => `<button class="fchip ${ui.fF === f ? 'on' : ''}" data-act="fF" data-arg="${f}">${f === 'all' ? 'All families' : FAMILIES[f].glyph + ' ' + FAMILIES[f].name}</button>`).join('')}</div>`;
   if (ui.dexView === 'captured') {
@@ -636,19 +747,17 @@ function dexScreen() {
       : `<div class="card empty"><h3>${S.monsters.length ? 'Nothing matches these filters' : 'No monsters captured yet'}</h3><p>${S.monsters.length ? 'Try another rarity or family.' : 'Weaken a monster in battle, then throw a Snap Trap. The lower its HP, the better your odds.'}</p></div>`;
     return `${seg}${rf}${ff}${grid}`;
   }
+  const entries = Object.values(S.dex).filter(d => (ui.fR === 'all' || (d.rarities || {})[ui.fR]) && (ui.fF === 'all' || d.fam === ui.fF));
   const done = Object.keys(S.dex).length;
-  const rows = CATEGORIES.map(c => {
-    const slots = RARITIES.map(r => {
-      const d = S.dex[speciesKey(c.id, r.id)];
-      if (ui.fR !== 'all' && ui.fR !== r.id) return `<span class="slot locked" style="--rc:${r.color};opacity:.25"></span>`;
-      if (!d || (ui.fF !== 'all' && d.fam !== ui.fF)) return `<span class="slot locked" style="--rc:${r.color}">?</span>`;
-      return `<button class="slot ${d.caught ? 'caught' : ''}" style="--rc:${r.color}" data-act="species" data-arg="${d.key}" aria-label="${esc(d.name)}"><img class="px" alt="" src="${spriteURL(d.dna, 2)}"></button>`;
-    }).join('');
-    return `<div class="dex-row"><div class="cat"><b>${c.icon} ${esc(c.name.split(' /')[0])}</b>${RARITIES.filter(r => S.dex[speciesKey(c.id, r.id)]).length}/5</div>${slots}</div>`;
-  }).join('');
-  const milestones = [5, 15, 40, 80, totalSpecies].map(n => `<span class="chip" style="${done >= n ? 'color:var(--ecto);border-color:var(--ecto)' : ''}">${n}</span>`).join('');
-  return `${seg}<div class="card stack"><div class="row"><div class="grow"><b>${done} of ${totalSpecies} species documented</b><div class="bar xp" style="margin-top:6px"><i style="width:${done / totalSpecies * 100}%"></i></div></div></div>
-    <div class="row wrap small muted">Milestones: ${milestones}</div></div>${rf}${ff}<div class="stack">${rows}</div>`;
+  const byCat = new Map();
+  for (const d of entries.sort((x, y) => x.name.localeCompare(y.name))) { const c = (OBJECTS[d.obj] || d).cat || 'other'; if (!byCat.has(c)) byCat.set(c, []); byCat.get(c).push(d); }
+  const groups = [...byCat.entries()].sort((x, y) => y[1].length - x[1].length).map(([c, list]) => `<section class="stack" style="gap:6px">
+    <div class="section-title"><h2 style="font-size:16px">${CATEGORY[c].icon} ${esc(CATEGORY[c].name.split(' /')[0])}</h2><span class="small muted">${list.length}</span></div>
+    <div class="mgrid">${list.map(d => `<button class="mcard ${d.caught ? '' : 'seen'}" data-act="species" data-arg="${esc(d.key)}"><img class="px" alt="" src="${spriteURL(d.dna, 3)}"><div class="nm">${esc(d.name)}</div>
+      <div class="sub">${RARITIES.map(r => `<i class="rdot" title="${r.name}" style="background:${(d.rarities || {})[r.id] ? r.color : 'transparent'};border-color:${r.color}"></i>`).join('')}</div></button>`).join('')}</div></section>`).join('');
+  const milestones = [5, 15, 40, 80, 150, 300].map(n => `<span class="chip" style="${done >= n ? 'color:var(--ecto);border-color:var(--ecto)' : ''}">${n}</span>`).join('');
+  return `${seg}<div class="card stack"><b>${done} kinds of object documented</b><div class="small muted">Every kind of object hides its own monster. Each dot is a rarity you have met.</div>
+    <div class="row wrap small muted">Milestones: ${milestones}</div></div>${rf}${ff}${groups || `<div class="card empty"><h3>${done ? 'Nothing matches these filters' : 'Nothing documented yet'}</h3><p>Photograph objects to fill your encyclopedia.</p></div>`}`;
 }
 function monsterSheet(id) {
   const m = S.monsters.find(x => x.id === id); if (!m) return;
@@ -662,6 +771,7 @@ function monsterSheet(id) {
     <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>
     <div class="card small stack" style="gap:4px">
       <div><b>Origin object:</b> ${catLabel(m)}${m.label ? ` · identified as “${esc(m.label)}”${m.conf ? ' (' + Math.round(m.conf * 100) + '% sure)' : ''}` : ''}</div>
+      <div><b>Look:</b> ${designLine(m.obj)}</div>
       <div><b>Captured:</b> ${fmtDate(m.caughtAt)}</div>
       <div><b>Species first seen:</b> ${fmtDate(d.first)} · <b>Encounters:</b> ${d.seen || 1} · <b>Captures:</b> ${d.caught || 1}</div>
       <div><b>Weak to:</b> ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</div>
@@ -676,17 +786,19 @@ function monsterSheet(id) {
 }
 function speciesSheet(key) {
   const d = S.dex[key]; if (!d) return;
-  const c = CATEGORY[d.cat], owned = S.monsters.filter(m => m.species === key);
+  const o = OBJECTS[d.obj], c = CATEGORY[o ? o.cat : d.cat] || CATEGORY.other, owned = S.monsters.filter(m => m.species === key);
+  const top = RARITIES.filter(r => (d.rarities || {})[r.id]).pop() || RARITY.common;
   openSheet(`<div class="grab"></div>
-    <div class="stage">${spriteHTML(d.dna, { size: 170, rarity: d.rarity })}<div class="shadow"></div></div>
-    <div class="sheet-head"><h2>${esc(d.name)}</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
-    <div class="row wrap">${rarityChip(d.rarity)}${famChip(d.fam)}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
+    <div class="stage">${spriteHTML(d.dna, { size: 170, rarity: top.id })}<div class="shadow"></div></div>
+    <div class="sheet-head"><div class="grow"><h2>${esc(d.name)}</h2>${d.monsterName && d.monsterName !== d.name ? `<div class="small muted">${esc(d.monsterName)}</div>` : ''}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <div class="row wrap">${RARITIES.filter(r => (d.rarities || {})[r.id]).map(r => rarityChip(r.id)).join('')}${famChip(d.fam)}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
     <p class="muted">${esc(c.flavor)}</p>
     <div class="card small stack" style="gap:4px">
-      <div><b>Hides in:</b> ${d.cat === 'other' && d.word ? '“' + esc(d.word) + '” and other unusual objects' : esc(c.name)}</div>
+      <div><b>Hides in:</b> ${o ? esc(o.name) : d.word ? '“' + esc(d.word) + '”' : esc(c.name)} <span class="muted">(${esc(c.name.split(' /')[0])})</span></div>
+      <div><b>Look:</b> ${designLine(d.obj)}</div>
       <div><b>First discovered:</b> ${fmtDate(d.first)}</div>
       <div><b>Encounters:</b> ${d.seen} · <b>Captures:</b> ${d.caught}</div>
-      <div><b>Signature move:</b> ${esc(c.sig.name)}</div>
+      <div><b>Signature move:</b> ${esc(((o && o.sig) || c.sig).name)}</div>
     </div>
     ${owned.length ? `<div class="mgrid">${owned.map(m => `<button class="mcard r-${m.rarity}" style="--rc:${RARITY[m.rarity].color}" data-act="mon" data-arg="${m.id}"><img class="px" alt="" src="${spriteURL(m.dna, 3)}"><div class="nm">${monsterTitle(m)}</div><div class="sub">Lv ${m.level}</div></button>`).join('')}</div>` : '<p class="small muted">You have not captured one of these yet.</p>'}`);
 }
@@ -790,7 +902,7 @@ function labScreen() {
   return `${seg}<div class="stack">${ACHIEVEMENTS.map(a => `<div class="list-item ${S.achievements[a.id] ? 'on' : 'locked'}" style="grid-template-columns:auto 1fr auto"><div class="item-ic" style="color:${S.achievements[a.id] ? 'var(--flash)' : 'var(--line)'}">★</div>
       <div><h3>${esc(a.name)}</h3><p>${esc(a.desc)} · ${Object.entries(a.reward).map(([k, v]) => esc(rewardLabel(k, v))).join(', ')}</p></div>${S.achievements[a.id] ? `<span class="small muted">${fmtDate(S.achievements[a.id])}</span>` : '<span></span>'}</div>`).join('')}</div>
     <section class="card"><div class="section-title"><h2>Hunter's log</h2></div>
-      <div class="wstats" style="font-size:13px"><span>Photos <b>${st.photos}</b></span><span>Encounters <b>${st.encounters}</b></span><span>Wins <b>${st.wins}</b></span><span>Captures <b>${st.captures}</b></span><span>Escapes <b>${st.flees}</b></span><span>Knockouts <b>${st.losses}</b></span><span>Object kinds <b>${Object.keys(st.catsPhotographed).length}</b></span></div></section>`;
+      <div class="wstats" style="font-size:13px"><span>Photos <b>${st.photos}</b></span><span>Encounters <b>${st.encounters}</b></span><span>Wins <b>${st.wins}</b></span><span>Captures <b>${st.captures}</b></span><span>Escapes <b>${st.flees}</b></span><span>Knockouts <b>${st.losses}</b></span><span>Object kinds <b>${Object.keys(st.objsPhotographed || {}).length}</b></span></div></section>`;
 }
 
 /* ---------- settings ---------- */
@@ -800,16 +912,34 @@ function settingsSheet() {
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
       <div class="toggle"><div><b>Spirit Lens</b><p>${lensStatusLine()} Recognition runs entirely on this phone with open-source models (MobileNet + COCO-SSD). Photos are never uploaded.</p></div>${L.state === 'ready' ? '' : `<button class="btn small" data-act="lensPrepare">${L.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
-      <div class="toggle"><div><b>Recognition debug info</b><p>Shows what the lens saw: top predictions, detected objects, confidence and timing. Useful for testing accuracy on real objects.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
       <div class="toggle"><div><b>Keep photo thumbnails</b><p>Off by default. When on, a tiny 96 px copy of the photo is stored with monsters you capture, in this browser only.</p></div><button class="switch ${S.settings.keepPhotos ? 'on' : ''}" data-act="toggleKeep" aria-label="Toggle photo thumbnails"></button></div>
     </div>
+    ${saveBlocked ? `<div class="card warn stack"><b>Saved progress not loaded</b><p class="small" style="margin:0">${saveBlocked.reason === 'newer' ? `It was made by a newer SNAPMON (save format ${saveBlocked.version}).` : 'It could not be read.'} It is untouched. Copy this code before doing anything else; you can restore it once the newer version is back.</p>
+      <textarea class="code" readonly>${esc('SNAPMON1:' + (() => { try { return btoa(unescape(encodeURIComponent(saveBlocked.raw))); } catch (e) { return ''; } })())}</textarea></div>` : ''}
     <div class="notice">${storageOK ? 'Progress saves automatically in this browser.' : 'This browser is blocking storage (private mode?), so progress will be lost when you close the page. Use the backup code below.'}</div>
     <div class="card stack"><b>Back up your progress</b><p class="small muted" style="margin:0">Copy this code somewhere safe (notes app, email to yourself). Paste it back below to restore on any device.</p>
       <textarea class="code" id="exportBox" readonly>${exportSave(S)}</textarea><button class="btn" data-act="copyExport">Copy backup code</button></div>
     <div class="card stack"><b>Restore from a backup code</b><textarea class="code" id="importBox" placeholder="Paste a SNAPMON1:… code here"></textarea><button class="btn ecto" data-act="importSave">Restore this backup</button></div>
     <div class="card stack" style="border-color:#6a2a3c"><b>Start over</b><p class="small muted" style="margin:0">Erases your hunter, monsters and encyclopedia from this browser. Type RESET to confirm.</p>
       <div class="row"><input class="search grow" id="resetBox" placeholder="RESET" autocomplete="off"><button class="btn danger" data-act="reset">Erase</button></div></div>
-    <p class="small muted">SNAPMON never uploads your photos. There are no accounts, ads or purchases. Camera access is requested only when you tap SNAP or Live view, and the live camera stops the moment you take the shot.</p>`);
+    ${developerHTML()}
+    <p class="small muted">SNAPMON never uploads your photos. There are no accounts, ads or purchases. Camera access is requested only when you tap SNAP, and the camera stops the moment you take the shot or leave the app.</p>
+    <p class="small muted">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION}</p>`);
+}
+
+function developerHTML() {
+  const C = ClipLens.status, mode = S.settings.expLens || 'off', counts = objectCounts();
+  const open = S.settings.devOpen;
+  return `<div class="card stack"><button class="row" data-act="devOpen" style="background:none;border:0;color:inherit;padding:0;text-align:left"><b class="grow">Developer &amp; testing</b><span class="muted">${open ? '▾' : '▸'}</span></button>
+    ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what the lens saw: top predictions, boxes, scores, timing and which model produced each result.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
+    <div class="stack" style="gap:6px"><b>Experimental lens (CLIP)</b><p class="small muted" style="margin:0">A larger zero-shot model with a ${ClipLens.status.meta ? ClipLens.status.meta.labels.length : 'multi-thousand'}-label vocabulary, run on this phone. Turning it on downloads an extra model once (about 41 MB) and makes each photo slower. Scores are similarity shares, not probabilities.</p>
+      <div class="seg">${[['off', 'Off'], ['compare', 'Compare'], ['hybrid', 'Hybrid']].map(([k, l]) => `<button class="${mode === k ? 'on' : ''}" data-act="expLens" data-arg="${k}">${l}</button>`).join('')}</div>
+      <p class="small muted" style="margin:0">Compare: production decides, experimental results appear in the debug panel. Hybrid: the experimental lens may refine the production answer (rules in docs/RECOGNITION.md).${C.state !== 'off' ? ` Status: ${esc(C.state)}${C.error ? ' · ' + esc(C.error) : ''}${C.info ? ` · ${esc(C.info.backend)} · loaded in ${C.info.loadMs} ms` : ''}.` : ''}</p></div>
+    <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdict; no monsters appear. Runs both lenses when the experimental lens is on.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
+    ${ftSummaryHTML()}
+    <div class="row"><button class="btn small grow" data-act="ftExport">Copy field-test log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
+    <p class="small muted" style="margin:0">Monster designs: ${counts.dedicated} specific, ${counts.composed} built from parts, ${counts.related} borrowed from a related object, ${counts.family} general family designs.</p>` : ''}
+  </div>`;
 }
 
 /* ---------- sheets ---------- */
@@ -824,7 +954,7 @@ const actions = {
   mute() { S.settings.muted = !S.settings.muted; SFX.setMuted(S.settings.muted); persist(); renderTop(); if ($('#sheet').innerHTML) settingsSheet(); },
   settings: settingsSheet, closeSheet,
   sheetBg(_, el, ev) { if (ev.target === el) closeSheet(); },
-  liveOpen: openLive, liveClose: closeLive, liveSnap,
+  openCamera, camClose: closeCamera, camSnap,
   cancelPhoto,
   pickCand(i) { scan(i); },
   lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
@@ -870,6 +1000,28 @@ const actions = {
   craft(id) { if (craftItem(S, id)) { SFX.coin(); toast(`Crafted ${ITEMS[id].name}.`); persist(); render(); } },
   research(id) { if (buyResearch(S, id)) { SFX.levelup(); toast(`Research complete: ${RESEARCH_BY_ID[id].name}`, 'gold'); persist(); render(); } },
   toggleDebug() { S.settings.debugLens = !S.settings.debugLens; persist(); settingsSheet(); },
+  devOpen() { S.settings.devOpen = !S.settings.devOpen; persist(); settingsSheet(); },
+  expLens(v) { S.settings.expLens = v; if (v === 'off') ClipLens.reset(); persist(); settingsSheet(); },
+  toggleFieldTest() { S.settings.fieldTest = !S.settings.fieldTest; persist(); settingsSheet(); },
+  ftMark(arg, el) {
+    const p = ui.pending; if (!p || !p.ft) return;
+    const [model, v] = arg.split(':'); p.ft.marks[model] = v;
+    el.parentNode.querySelectorAll('.fchip').forEach(b => b.classList.toggle('on', b === el));
+  },
+  ftSave() {
+    const p = ui.pending; if (!p || !p.ft) return;
+    p.ft.truth = ($('#ftTruth').value || '').trim().slice(0, 60) || null;
+    const list = ftLoad(); list.push(p.ft); ftSave(list);
+    toast(`Logged (${list.length} field-test photos).`); openCamera();
+  },
+  ftExport() {
+    const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), entries: ftLoad() });
+    try { navigator.clipboard.writeText(text).then(() => toast('Field-test log copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
+  },
+  ftClear(_, el) {
+    if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again'; return; }
+    Platform.storage.remove(FT_KEY); settingsSheet();
+  },
   toggleKeep() { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); settingsSheet(); },
   copyExport() {
     const box = $('#exportBox'); box.value = exportSave(S);
@@ -887,21 +1039,12 @@ const actions = {
 };
 document.addEventListener('click', ev => {
   SFX.unlock();
-  if (ev.target.closest('label[for="camInput"], label[for="galInput"], [data-act="liveOpen"]')) Lens.load(); // warm up while the camera is open
   const el = ev.target.closest('[data-act]'); if (!el) return;
   const fn = actions[el.dataset.act]; if (!fn) return;
-  if (el.tagName === 'LABEL') { // labels open the camera via their `for` input; just run side effects
-    if (el.dataset.act === 'closeOverlay') { $('#overlay').innerHTML = ''; setTimeout(render, 0); }
-    return;
-  }
   fn(el.dataset.arg, el, ev);
 });
-for (const id of ['camInput', 'galInput']) {
-  const inp = document.getElementById(id);
-  inp.addEventListener('click', () => { SFX.unlock(); });
-  inp.addEventListener('change', () => { const f = inp.files && inp.files[0]; inp.value = ''; if (f) onPhotoFile(f); });
-}
-document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Photo.live.isOpen()) closeLive(); } });
+// the camera never runs in the background: leaving the app closes it
+document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Platform.camera.isOpen()) closeCamera(); } });
 window.addEventListener('pagehide', () => persist(true));
 setInterval(() => { if (!ui.battle && !document.hidden) { const before = S.hp; regen(S); if (S.hp !== before) { renderTop(); persist(); } } }, 20000);
 
@@ -910,4 +1053,5 @@ window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, se
 
 render();
 persist(true);
+if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFrom} to ${SAVE_VERSION}. Your monsters were kept; a copy of the old save is stored too.`), 800);
 if (S.settings.lensCached) setTimeout(() => Lens.load(), 1200); // models are cached on this phone: start them in the background

@@ -1,0 +1,57 @@
+name: Recognition lab
+# Developer-only experiments: export CLIP-style models, benchmark them against the production lens on labelled
+# photos, and calibrate the experimental lens. Runs when lab files change on a feature branch, or manually.
+# Never deploys anything.
+on:
+  push:
+    branches: ['feature/**']
+    paths: ['lab/**', '.github/workflows/lab.yml', 'src/lens-clip.js', 'src/workers/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { variant: tinyclip-8m16,  hf: wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M }
+          - { variant: tinyclip-40m32, hf: wkcn/TinyCLIP-ViT-40M-32-Text-19M-LAION400M }
+          - { variant: tinyclip-39m16, hf: wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M }
+          - { variant: openai-b32,     hf: openai/clip-vit-base-patch32 }   # reference only (model card discourages deployment)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Python deps
+        run: |
+          pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --quiet transformers onnx onnxruntime onnxscript
+      - name: Export ${{ matrix.variant }}
+        run: python lab/export_clip.py ${{ matrix.hf }} ${{ matrix.variant }} lab/vocab-labels.json models/clip
+      - name: Production models + browser tooling
+        run: |
+          node tools/fetch-models.js models
+          npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1
+          npx playwright install --with-deps chromium > /dev/null
+          mkdir -p vendor/ort && cp node_modules/onnxruntime-web/dist/{ort.min.js,ort.webgpu.min.js,ort-wasm-simd-threaded.mjs,ort-wasm-simd-threaded.wasm,ort-wasm-simd-threaded.jsep.mjs,ort-wasm-simd-threaded.jsep.wasm} vendor/ort/
+      - name: Labelled photos (Wikimedia Commons, evaluation only)
+        run: node lab/fetch-photos.mjs lab/data/photos 3
+      - name: Benchmark
+        run: |
+          python -m http.server 8765 > /dev/null 2>&1 &
+          sleep 2
+          mkdir -p lab/out
+          node lab/bench.mjs http://localhost:8765 lab/data/photos ${{ matrix.variant }} lab/out/${{ matrix.variant }}.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bench-${{ matrix.variant }}
+          path: |
+            lab/out/
+            models/clip/${{ matrix.variant }}/vocab.json
+            lab/data/photos/labels.json
