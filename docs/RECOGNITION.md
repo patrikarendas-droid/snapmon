@@ -31,7 +31,11 @@ Models are downloaded once and cached.
    calibration rule 3 never fires.
 5. (v0.3.1) Production would identify the photo automatically, but CLIP's best whole-photo object differs and scores
    ≥ 0.08 → the player chooses between them ("The lenses disagree"). CLIP's suggestion shows no percentage, because
-   its score is not a confidence.
+   its score is not a confidence. (v0.3.2) Not for near-synonyms: same category and CLIP rates production's object
+   at least half as high.
+5b. (v0.3.3) Production unsure → CLIP's best object (≥ 0.08) is added to the choices.
+6. (v0.3.3) Production found nothing (and saw no person) → "Could it be this?" with CLIP's best object (≥ 0.08).
+Since v0.3.3 each production candidate belongs to one region, so one detected object is never counted twice.
 Rules are unit-tested in `tests/clip-fusion.js`.
 
 ## Models evaluated
@@ -146,6 +150,34 @@ scores 0.13–0.22). Offering CLIP's guess when production finds nothing is a ca
 to add it yet.
 
 Per-photo time with Hybrid stayed at a 1.5 s median for TinyCLIP (max 3.1 s, the first photo after loading).
+
+## Third phone field test (v0.3.2, 29 Oct 2026)
+
+29 photos with Hybrid on. The phone did not get warm. TinyCLIP took a median of 1.5 s per photo (max 3.1 s, the first
+photo after loading); production took 0.08–0.2 s.
+
+Out of sample: everything Hybrid did here used rules designed before this run.
+
+| | Production alone | Hybrid (v0.3.2, as logged) |
+|---|---|---|
+| Right object, automatically | 17 | 18 |
+| Right object in the choice list | 0 | 4 |
+| **Player can get the right object** | **17/29 (59%)** | **22/29 (76%)** |
+| Confidently wrong (automatic) | 5 | 2 |
+| Needless choices (production was right) | – | 2 (chair; wall clock, from a duplicate-box bug) |
+
+Examples: production named a bench, Hybrid a drink can (TinyCLIP accepted it); production offered soap dispenser or
+knife, Hybrid a tap (accepted); production stopwatch → choice that includes the tape measure; traffic cone in a
+"scene" photo production rejected.
+
+Changes in v0.3.3, designed on this run (in sample):
+- Fixed: one detected clock was counted twice ("wall clock" and "clock").
+- Rule 5b would have added the fire extinguisher and the pallet jack.
+- Rule 6 would have offered the kettle.
+
+Replaying all three field tests (69 photos) through the v0.3.3 rules gives: right object reachable 56/69 (81%) vs
+production 40/69 (58%), confidently wrong 3 vs 15, 1 needless choice. This includes in-sample photos, so the real gain
+is likely smaller; the out-of-sample run 3 table above is the fairest single number.
 
 ## Reproducing
 

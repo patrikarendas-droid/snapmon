@@ -336,7 +336,7 @@ function candLine(c) {
   const o = OBJECTS[c.obj], name = o ? o.name : CATEGORY[c.cat].name;
   const same = o && o.name.toLowerCase() === String(c.label).toLowerCase();
   // a rule-5 suggestion carries a raw CLIP share, not a confidence, so it shows no percentage
-  const score = c.rule === 5 ? 'second opinion' : Math.round(c.conf * 100) + '%';
+  const score = c.src === 'clip' && /^(5|5b|6)$/.test(String(c.rule)) ? 'second opinion' : Math.round(c.conf * 100) + '%';
   return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${score}</span>`;
 }
 const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
@@ -356,7 +356,7 @@ function showIdentified(p, i) {
 function showChoices(p) {
   const rec = p.rec, multi = rec.reason === 'multiple';
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="gap:12px">
-    <div class="sheet-head"><h2>${multi ? 'Several objects detected' : rec.reason === 'disagree' ? 'The lenses disagree' : 'The lens has a few ideas'}</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <div class="sheet-head"><h2>${multi ? 'Several objects detected' : rec.reason === 'disagree' ? 'The lenses disagree' : rec.reason === 'second-opinion' ? 'Could it be this?' : 'The lens has a few ideas'}</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <p class="muted small" style="margin:0">${multi ? 'Which one are you hunting?' : 'It is not completely sure. Which of these did you photograph?'} Every option comes from the lens's own analysis of your photo.</p>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">

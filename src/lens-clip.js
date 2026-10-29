@@ -126,10 +126,16 @@ const ClipLens = (() => {
     return h && h.precision != null && h.accepted >= 10 ? h.precision : 0;
   }
   function fuse(prodRec, clipRes) {
-    const out = [];
-    const prodFor = r => r.box ? (prodRec.candidates || []).find(c => c.box && Math.abs(c.box[0] - r.box[0]) < 0.02 && Math.abs(c.box[1] - r.box[1]) < 0.02) : (prodRec.candidates || []).find(c => !c.box) || (prodRec.candidates || [])[0];
-    for (const r of clipRes.regions) {
-      const prod = prodFor(r), c = r.best;
+    const out = [], cands = prodRec.candidates || [], claimed = new Map();
+    // each production candidate belongs to one region: boxed regions claim theirs first, the whole photo takes what is
+    // left (otherwise one detected clock was counted twice, as "wall clock" and "clock", in the third field test)
+    const sameBox = (c, r) => c.box && Math.abs(c.box[0] - r.box[0]) < 0.02 && Math.abs(c.box[1] - r.box[1]) < 0.02;
+    const regions = [...clipRes.regions].sort((a, b) => (a.box ? 0 : 1) - (b.box ? 0 : 1));
+    for (const r of regions) {
+      const free = cands.filter(c => !claimed.has(c));
+      const prod = r.box ? free.find(c => sameBox(c, r)) : free.find(c => !c.box) || free[0];
+      if (prod) claimed.set(prod, r);
+      const c = r.best;
       let pick = null, rule = 4;
       if (r.accepted && prod && prod.obj === c.obj) { pick = { ...prod, label: c.label, obj: c.obj, conf: Math.max(prod.conf, r.calibrated || c.p) }; rule = 1; }
       else if (r.accepted && prod && OBJECTS[c.obj] && OBJECTS[c.obj].cat === prod.cat) { pick = { ...prod, label: c.label, obj: c.obj, conf: Math.max(prod.conf, r.calibrated || c.p) }; rule = 2; }
@@ -138,17 +144,19 @@ const ClipLens = (() => {
       if (pick && !out.some(o => o.obj === pick.obj)) out.push({ ...pick, rule });
     }
     // production's other ideas stay available as choices (rule 4), so fusing never removes a right answer
-    const replaced = new Set(clipRes.regions.map(prodFor).filter(Boolean));
-    for (const c of prodRec.candidates || []) if (!replaced.has(c) && !out.some(o => o.obj === c.obj)) out.push({ ...c, rule: 4 });
+    for (const c of cands) if (!claimed.has(c) && !out.some(o => o.obj === c.obj)) out.push({ ...c, rule: 4 });
     return out.sort((a, b) => b.conf - a.conf);
   }
 
   /* Hybrid decision for one photo (developer "Hybrid" mode): fuse per region, then re-decide with the production
-     lens's own thresholds (L = Lens.CFG). Rule 5, from the first phone field test: when production would identify the
-     photo automatically but CLIP's best object for the whole photo is a different object with some support
-     (score >= DISAGREE_P), the player chooses between them instead. Production was confidently wrong on 7 of 30 phone
-     photos, and in each of those CLIP's best guess differed. Choices still come only from the lenses, never typed input. */
-  const DISAGREE_P = 0.08;
+     lens's own thresholds (L = Lens.CFG). Then CLIP's best whole-photo object (score >= SECOND_P) is offered as a
+     "second opinion" choice when:
+       5.  production would identify the photo automatically but CLIP names a different object (not a near-synonym);
+       5b. production is unsure (one object, low confidence) and CLIP's object is not among its ideas;
+       6.  production found nothing (not a person) but CLIP has an object.
+     Evidence from three phone field tests is in docs/RECOGNITION.md. The choices still come only from the two lenses:
+     no typed input, and "none of these" leads to a retake. */
+  const SECOND_P = 0.08;
   function hybridDecision(rec, clip, L) {
     const fused = fuse(rec, clip).filter(c => c.conf >= L.MIN_CONF).slice(0, L.MAX_CHOICES);
     let decision, reason;
@@ -157,18 +165,16 @@ const ClipLens = (() => {
     else if (fused[0].conf >= L.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * L.CLEAR_MARGIN)) { decision = 'auto'; reason = 'confident'; }
     else { decision = 'choose'; reason = 'unsure'; }
     const whole = clip.regions.find(r => !r.box), alt = whole && whole.best;
+    if (!alt || !alt.obj || !OBJECTS[alt.obj] || alt.p < SECOND_P || fused.some(c => c.obj === alt.obj)) return { candidates: fused, decision, reason };
     // near-synonyms are not a disagreement: same category and CLIP rates production's object at least half as high
     // (wall clock 0.075 vs clock 0.118 = agree; coffeepot 0.104 vs electric kettle 0.267 = disagree; second field test)
-    const backed = whole && fused[0] && OBJECTS[fused[0].obj] && alt && OBJECTS[alt.obj] && OBJECTS[alt.obj].cat === OBJECTS[fused[0].obj].cat &&
+    const backed = fused[0] && OBJECTS[fused[0].obj] && OBJECTS[alt.obj].cat === OBJECTS[fused[0].obj].cat &&
       (whole.ranked || []).some(x => x.obj === fused[0].obj && x.p >= alt.p * 0.5);
-    if (decision === 'auto' && alt && alt.obj && OBJECTS[alt.obj] && alt.obj !== fused[0].obj && alt.p >= DISAGREE_P && !backed) {
-      if (!fused.some(c => c.obj === alt.obj)) {
-        if (fused.length >= L.MAX_CHOICES) fused.pop(); // keep the list short: the weakest production idea makes room
-        fused.push({ label: alt.label, obj: alt.obj, cat: OBJECTS[alt.obj].cat, conf: alt.p, box: null, src: 'clip', rule: 5 });
-      }
-      decision = 'choose'; reason = 'disagree';
-    }
-    return { candidates: fused, decision, reason };
+    const offer = (decision === 'auto' && !backed) || (decision === 'choose' && reason === 'unsure') || (decision === 'unknown' && reason !== 'person');
+    if (!offer) return { candidates: fused, decision, reason };
+    if (fused.length >= L.MAX_CHOICES) fused.pop(); // keep the list short: the weakest production idea makes room
+    fused.push({ label: alt.label, obj: alt.obj, cat: OBJECTS[alt.obj].cat, conf: alt.p, box: null, src: 'clip', rule: decision === 'auto' ? 5 : decision === 'unknown' ? 6 : '5b' });
+    return { candidates: fused, decision: 'choose', reason: decision === 'auto' ? 'disagree' : decision === 'unknown' ? 'second-opinion' : 'unsure' };
   }
 
   function reset() { if (st.worker) st.worker.terminate(); Object.assign(st, { state: 'off', error: '', info: null, worker: null, meta: null, busy: false, loading: null }); st.pending.clear(); }
