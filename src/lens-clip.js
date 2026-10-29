@@ -116,8 +116,15 @@ const ClipLens = (() => {
      Rules (documented in docs/RECOGNITION.md and tested in tests/clip-fusion.js):
        1. A region where CLIP is accepted AND agrees with the production object → that object (both models agree).
        2. CLIP accepted, production names the same category → CLIP's object (more specific: truck → forklift).
-       3. CLIP accepted with calibrated confidence ≥ 0.8, production disagrees or found nothing → CLIP's object.
+       3. CLIP accepted and trusted, production disagrees or found nothing → CLIP's object. "Trusted" = the calibrated
+          confidence for its score bin, or (bins too sparse) the held-out precision of the calibrated thresholds, is ≥ 0.7.
+          Without deployed calibration this rule never fires.
        4. Otherwise → the production candidate for that region (or nothing). */
+  function trust(r) {
+    if (r.calibrated != null) return r.calibrated;
+    const h = st.meta && st.meta.calib && st.meta.calib.heldOut;
+    return h && h.precision != null && h.accepted >= 10 ? h.precision : 0;
+  }
   function fuse(prodRec, clipRes) {
     const out = [];
     const prodFor = r => r.box ? (prodRec.candidates || []).find(c => c.box && Math.abs(c.box[0] - r.box[0]) < 0.02 && Math.abs(c.box[1] - r.box[1]) < 0.02) : (prodRec.candidates || []).find(c => !c.box) || (prodRec.candidates || [])[0];
@@ -126,7 +133,7 @@ const ClipLens = (() => {
       let pick = null, rule = 4;
       if (r.accepted && prod && prod.obj === c.obj) { pick = { ...prod, label: c.label, obj: c.obj, conf: Math.max(prod.conf, r.calibrated || c.p) }; rule = 1; }
       else if (r.accepted && prod && OBJECTS[c.obj] && OBJECTS[c.obj].cat === prod.cat) { pick = { ...prod, label: c.label, obj: c.obj, conf: Math.max(prod.conf, r.calibrated || c.p) }; rule = 2; }
-      else if (r.accepted && r.calibrated != null && r.calibrated >= 0.8) { pick = { label: c.label, obj: c.obj, cat: OBJECTS[c.obj].cat, conf: r.calibrated, box: r.box, src: 'clip' }; rule = 3; }
+      else if (r.accepted && trust(r) >= 0.7) { pick = { label: c.label, obj: c.obj, cat: OBJECTS[c.obj].cat, conf: trust(r), box: r.box, src: 'clip' }; rule = 3; }
       else if (prod) pick = prod;
       if (pick && !out.some(o => o.obj === pick.obj)) out.push({ ...pick, rule });
     }

@@ -56,12 +56,23 @@ if (S.clip.length) {
   // re-score the experimental lens with the calibrated thresholds
   S.clipCal = rows.map(r => ({ ...r, accepted: !!r.bestObj && r.p >= bestT.p && r.margin >= bestT.margin, top: (r.bestObj && r.p >= bestT.p && r.margin >= bestT.margin) ? [r.bestObj, ...r.regions.flatMap(g => g.top.map(t => t.obj)).filter(o => o && o !== r.bestObj)] : [] }));
 }
+// "trusted" hybrid: when the experimental lens accepts under the calibrated thresholds its answer goes first, otherwise
+// production decides (this is fusion rule 3 in src/lens-clip.js once calibration is deployed). Scored on the held-out half
+// only, next to production on the same photos, so the thresholds are not judged on the photos that chose them.
+let trusted = null;
+if (S.clipCal) {
+  const held = S.clipCal.map((r, i) => ({ r, p: S.prod[i] })).filter(x => x.r.split === 1);
+  const rows = held.map(({ r, p }) => r.accepted ? { ...p, accepted: true, top: [r.bestObj, ...p.top.filter(o => o !== r.bestObj)], ms: p.ms + r.ms } : { ...p, ms: p.ms + r.ms });
+  trusted = { heldOutProduction: metrics(held.map(x => x.p)), heldOutTrustedHybrid: metrics(rows) };
+}
 // specific pairs from the brief: is a forklift told apart from a train, etc.?
 function pairCheck(rows, a, b) { const ra = rows.filter(r => r.truth === a), rb = rows.filter(r => r.truth === b); return { [a]: ra.map(r => r.top[0] || '-').join(','), [b]: rb.map(r => r.top[0] || '-').join(',') }; }
 const report = { variant, prodLoad: raw.prodLoad, clipLoad: raw.clipLoad, production: metrics(S.prod), experimental: metrics(S.clip), experimentalCalibrated: S.clipCal ? metrics(S.clipCal) : null, hybrid: metrics(S.hybrid), calib,
   pairs: [['forklift', 'train'], ['office_chair', 'sofa'], ['mug', 'teapot'], ['laptop', 'tv'], ['banana', 'cucumber']].map(([a, b]) => ({ prod: pairCheck(S.prod, a, b), exp: S.clipCal ? pairCheck(S.clipCal, a, b) : null })) };
 fs.writeFileSync(outFile, JSON.stringify({ report, raw }, null, 1));
 console.log('BENCH ' + JSON.stringify({ ...report, calib: calib && { accept: calib.accept, heldOut: calib.heldOut } }, null, 1));
+if (trusted) console.log('TRUSTED ' + JSON.stringify(trusted));
+if (calib) console.log('CALIB ' + JSON.stringify(calib));
 if (calib) fs.writeFileSync(outFile.replace(/\.json$/, '.calib.json'), JSON.stringify(calib));
 // per-object breakdown for the experimental lens
 if (S.clipCal) { const by = {}; for (const r of S.clipCal.filter(r => !r.unknown)) { (by[r.truth] = by[r.truth] || []).push(r.top[0] || 'rejected'); } console.log('PER-OBJECT experimental: ' + Object.entries(by).map(([k, v]) => `${k}=[${v.join(',')}]`).join(' ')); }

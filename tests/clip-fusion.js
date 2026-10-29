@@ -37,8 +37,17 @@ f = ClipLens.fuse(prod([{ label: 'mug', obj: 'mug', cat: 'mug', conf: 0.7, box: 
 ok(f[0].obj === 'mug' && f[0].rule === 1 && f[0].conf === 0.81, 'rule 1: both agree -> kept with the higher confidence');
 f = ClipLens.fuse(prod([]), { regions: [region('sofa', true, 0.85)] });
 ok(f[0] && f[0].obj === 'sofa' && f[0].rule === 3, 'rule 3: production found nothing, CLIP well-calibrated -> CLIP result');
+setMeta(null);
 f = ClipLens.fuse(prod([]), { regions: [region('sofa', true, null)] });
 ok(f.length === 0, 'uncalibrated CLIP alone never creates a result (stays unknown)');
+setMeta({ accept: { p: 0.35, margin: 0.15 }, heldOut: { accepted: 29, precision: 0.76 } });
+f = ClipLens.fuse(prod([{ label: 'van', obj: 'van', cat: 'car', conf: 0.6, box: null }]), { regions: [region('sofa', true, null)] });
+ok(f[0].obj === 'sofa' && f[0].rule === 3, 'rule 3 via held-out precision: a trusted CLIP answer overrides a disagreeing production answer');
+setMeta({ accept: { p: 0.35, margin: 0.15 }, heldOut: { accepted: 4, precision: 1 } });
+f = ClipLens.fuse(prod([{ label: 'van', obj: 'van', cat: 'car', conf: 0.6, box: null }]), { regions: [region('sofa', true, null)] });
+ok(f[0].obj === 'van', 'held-out precision from too few photos is not trusted');
+setMeta(null);
+setMeta(null);
 f = ClipLens.fuse(prod([{ label: 'banana', obj: 'banana', cat: 'banana', conf: 0.6, box: null }]), { regions: [region('train', true, 0.5)] });
 ok(f[0].obj === 'banana' && f[0].rule === 4, 'rule 4: weak CLIP disagreement in another category -> production kept');
 f = ClipLens.fuse(prod([{ label: 'cup', obj: 'mug', cat: 'mug', conf: 0.6, box: [0.1, 0.1, 0.3, 0.3] }, { label: 'chair', obj: 'dining_chair', cat: 'chair', conf: 0.55, box: [0.5, 0.4, 0.4, 0.5] }]),
