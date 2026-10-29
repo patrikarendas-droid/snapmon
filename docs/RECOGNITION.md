@@ -197,6 +197,40 @@ is the **only** recogniser for players (`src/engine.js`, `ENGINE_ID = 'hybrid-1'
 - **Developer comparison.** "Production only" and "Compare" survive only inside the hidden developer Field-test mode,
   which never creates monsters.
 
+## GPU vs CPU consistency (real models, lab run 40887992402)
+
+The same 155 distinct benchmark photos went through the full standard engine twice in headless Chromium: GPU pass
+(WebGL detector/classifier + WebGPU TinyCLIP, on a software SwiftShader adapter) and CPU pass (TF.js CPU + WASM).
+
+| | Result |
+|---|---|
+| Detector/classifier confidences, WebGL vs CPU | max difference 0.0001: effectively identical |
+| TinyCLIP scores, WebGPU vs WASM | median difference 0.007, 95th percentile 0.025, max 0.077 |
+| Same final result (decision and choice list) | 148 of 154 object photos; 1 out-of-vocabulary photo differed |
+| Photos whose outcome changed | 7 of 155 (≈ 4.5%) |
+
+What changed:
+- bulldozer: CPU auto "bulldozer", GPU a crane/excavator choice;
+- broccoli: CPU unknown, GPU a "cashew" suggestion;
+- strawberry: auto vs a one-item choice;
+- dog: "badger" vs "panda" (both wrong);
+- rocking chair and clock: one extra or different suggestion;
+- stethoscope (out of vocabulary): auto vs a two-item choice.
+
+**Cause.** The int8 TinyCLIP model is computed differently by the two runtimes: integer kernels on WASM, dequantised
+float math on WebGPU, where ONNX Runtime also warns that some nodes fall back to the CPU. The softmax over 2,940
+labels amplifies small cosine differences. Rounding to 3 decimals removes last-digit noise but not differences of
+this size.
+
+**Speed in this run** (software GPU, not representative of phones): TinyCLIP took 0.57 s on WASM (avg, p95 1.04 s) on
+the CI CPU, against 8.3 s on the software WebGPU adapter. On the developer's phone, real WebGPU took ~1.5 s median.
+WASM on the phone has not been measured.
+
+**Correction to earlier numbers.** Until this fix, `lab/fetch-photos.mjs` saved every out-of-vocabulary photo under the
+same two file names, so each category overwrote the previous one. The "out-of-vocabulary rejected" percentages in the
+benchmark tables above (including TinyCLIP 39M/16's 100%) were measured on effectively **2 distinct photos repeated**,
+not 26. Treat them as anecdotal until the next benchmark run. All object-photo numbers are unaffected.
+
 ## Reproducing
 
 Push to a `feature/**` branch touching `lab/**`, or run *Recognition lab* manually. Each job prints `EXPORT`, `BENCH`,
