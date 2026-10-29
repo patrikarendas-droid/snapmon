@@ -2,12 +2,13 @@
    Receives preprocessed 224×224 crops, returns vocabulary scores. Text embeddings for the whole vocabulary are
    precomputed offline (lab/export_clip.py), so only the image encoder runs on the phone.
 
-   Same model everywhere, different hardware: WebGPU where an adapter exists and the session works, otherwise
-   WebAssembly (CPU) with the very same weights. Downloads stream with progress, are checked for completeness
+   Standard backend for every player: WebAssembly (CPU), single-threaded, so every device does the same arithmetic
+   and reaches the same decision (WebGPU gave a different outcome on ~4.5% of photos, docs/RECOGNITION.md). WebGPU is
+   kept only as a developer comparison option ('webgpu': tries the GPU, falls back to WASM with the same weights). Downloads stream with progress, are checked for completeness
    (and against the deploy manifest's SHA-256 when one is given) before they are cached, and a cached file that fails
    to load is purged so a retry downloads it again.
 
-   Messages: {type:'init', base, ortBase, preferGPU, forceBackend, expect} → progress* → {type:'ready', info}
+   Messages: {type:'init', base, ortBase, backend:'wasm'|'webgpu', expect} → progress* → {type:'ready', info}
              {type:'run', id, crops:Float32Array, n} → {type:'result', id, top, ms} */
 'use strict';
 let session = null, vocab = null, meta = null, dim = 0, nLabels = 0, backend = '';
@@ -70,14 +71,18 @@ async function makeSession(modelBuf, which) {
 }
 
 // test: { failGPU, failCPU } lets automated tests simulate backend failures; never set by the game itself
-async function init({ base, ortBase, preferGPU, forceBackend, expect = {}, test = {} }) {
+async function init({ base, ortBase, backend: want = 'wasm', expect = {}, test = {} }) {
   const t0 = performance.now();
-  let gpu = !!test.failGPU && forceBackend !== 'wasm';
-  if (!gpu && forceBackend !== 'wasm' && preferGPU && navigator.gpu) { try { gpu = !!(await navigator.gpu.requestAdapter()); } catch (e) { gpu = false; } }
-  // the WebGPU bundle also contains the WASM backend, so one script serves both
+  let gpu = false;
+  if (want === 'webgpu') {
+    gpu = !!test.failGPU;
+    if (!gpu && navigator.gpu) { try { gpu = !!(await navigator.gpu.requestAdapter()); } catch (e) { gpu = false; } }
+  }
+  // the WebGPU bundle also contains the WASM backend; the standard path loads only the smaller CPU build
   importScripts(ortBase + (gpu ? 'ort.webgpu.min.js' : 'ort.min.js'));
   ort.env.wasm.wasmPaths = ortBase;
-  ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
+  // one thread on every device: the same WASM binary, the same operation order, the same result
+  ort.env.wasm.numThreads = 1;
   const urls = { meta: base + 'vocab.json', vocab: base + 'vocab.bin' };
   meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'])).buf));
   urls.model = base + meta.model;
@@ -97,7 +102,7 @@ async function init({ base, ortBase, preferGPU, forceBackend, expect = {}, test 
       throw Object.assign(new Error('the model failed to run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });
     }
   }
-  return { backend, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,
+  return { backend, requested: want, threads: ort.env.wasm.numThreads, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,
     name: meta.name, variant: meta.variant, fromCache: m.cached && v.cached };
 }
 

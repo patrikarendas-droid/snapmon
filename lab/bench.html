@@ -17,8 +17,9 @@ window.runEquivalence = async (labels, variant) => {
     }
     return res;
   };
+  Engine.setClipGPU(true); // v0.4.1: players run TinyCLIP on WASM; the GPU pass opts into WebGPU explicitly
   const gpu = await pass();
-  Engine.setForceCPU(true);
+  Engine.setClipGPU(false); Engine.setForceCPU(true);
   const cpu = await pass();
   return { gpu, cpu };
 };
@@ -41,8 +42,9 @@ window.runEquivalence = async (labels, variant) => {
     }
     return res;
   };
+  Engine.setClipGPU(true); // v0.4.1: players run TinyCLIP on WASM; the GPU pass opts into WebGPU explicitly
   const gpu = await pass();
-  Engine.setForceCPU(true);
+  Engine.setClipGPU(false); Engine.setForceCPU(true);
   const cpu = await pass();
   return { gpu, cpu };
 };
@@ -65,8 +67,9 @@ window.runEquivalence = async (labels, variant) => {
     }
     return res;
   };
+  Engine.setClipGPU(true); // v0.4.1: players run TinyCLIP on WASM; the GPU pass opts into WebGPU explicitly
   const gpu = await pass();
-  Engine.setForceCPU(true);
+  Engine.setClipGPU(false); Engine.setForceCPU(true);
   const cpu = await pass();
   return { gpu, cpu };
 };
@@ -89,8 +92,9 @@ window.runEquivalence = async (labels, variant) => {
     }
     return res;
   };
+  Engine.setClipGPU(true); // v0.4.1: players run TinyCLIP on WASM; the GPU pass opts into WebGPU explicitly
   const gpu = await pass();
-  Engine.setForceCPU(true);
+  Engine.setClipGPU(false); Engine.setForceCPU(true);
   const cpu = await pass();
   return { gpu, cpu };
 };
@@ -141,8 +145,9 @@ window.runEquivalence = async (labels, variant) => {
     }
     return res;
   };
+  Engine.setClipGPU(true); // v0.4.1: players run TinyCLIP on WASM; the GPU pass opts into WebGPU explicitly
   const gpu = await pass();
-  Engine.setForceCPU(true);
+  Engine.setClipGPU(false); Engine.setForceCPU(true);
   const cpu = await pass();
   return { gpu, cpu };
 };

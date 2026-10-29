@@ -268,7 +268,7 @@ function showFieldTest(p) {
   const colour = colourDiagnostics(p);
   const clipTop = clip ? clip.regions[0].ranked.slice(0, 3).map(x => ({ obj: x.obj, label: x.label, p: +x.p.toFixed(3) })) : null;
   p.ft = { v: 2, t: Date.now(), prod: { decision: prodRec.decision, reason: prodRec.reason, top: prodTop, ms: rec.debug && rec.debug.times && rec.debug.times.total },
-    clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null,
+    clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, inferMs: clip.inferMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null,
     hybrid: hybrid ? { decision: rec.decision, reason: rec.reason, top: ftTop(rec), ms: rec.debug.engine && rec.debug.engine.totalMs } : null,
     engine: { id: Engine.ID, backends: Engine.status.backends }, colour: colour && colour.log, marks: {} };
   const nm = x => esc(x.obj && OBJECTS[x.obj] ? OBJECTS[x.obj].name : x.label);
@@ -341,6 +341,16 @@ function ftSummaryHTML() {
   const row = (k, l) => { const s = st[k], ms = s.ms; if (!s.n) return ''; return `<tr><td>${l}</td><td>${s.n}</td><td>${pct(s.right, s.answered)}</td><td>${pct(s.inList, s.answered)}</td><td>${s.unknownOk} / ${s.missed}</td><td>${ms.length ? ms.sort((a, b) => a - b)[ms.length >> 1] + ' / ' + ms[ms.length - 1] : '–'}</td></tr>`; };
   return `<div class="debug small"><table><tr><th></th><th>photos</th><th>right when it answered</th><th>right one in list</th><th>right unknown / missed</th><th>ms median / worst</th></tr>${row('prod', 'Production')}${row('clip', 'Experimental')}${row('hybrid', 'Hybrid')}</table></div>
     <p class="small muted" style="margin:0">${list.length} field-test photos logged on this phone.</p>`;
+}
+
+// recognition timings per backend combination (every hunt), so TinyCLIP's CPU time can be measured on a real phone
+function perfHTML() {
+  const log = Engine.perfLog(), groups = {};
+  for (const e of log) { const k = `${e.backends.lens === 'webgl' ? 'GPU' : 'CPU'} detector + ${e.backends.clip === 'webgpu' ? 'GPU' : 'CPU'} TinyCLIP`; (groups[k] = groups[k] || []).push(e); }
+  const q = (a, f) => { a = a.filter(x => x != null).sort((x, y) => x - y); return a.length ? a[Math.min(a.length - 1, Math.floor(a.length * f))] : '–'; };
+  const rows = Object.entries(groups).map(([k, l]) => `<tr><td>${k}</td><td>${l.length}</td><td>${q(l.map(e => e.clipInferMs), .5)} / ${q(l.map(e => e.clipInferMs), .9)}</td><td>${q(l.map(e => e.clipMs), .5)}</td><td>${q(l.map(e => e.ms), .5)} / ${q(l.map(e => e.ms), .9)}</td></tr>`).join('');
+  return `<div class="debug small"><b>Recognition timings (ms, every hunt)</b>${rows ? `<table><tr><th></th><th>photos</th><th>TinyCLIP model median / p90</th><th>TinyCLIP total median</th><th>whole engine median / p90</th></tr>${rows}</table>` : '<p class="muted" style="margin:4px 0 0">No photos recognised yet.</p>'}</div>
+    <div class="row wrap"><button class="btn small grow" data-act="perfExport">Copy timings (${log.length})</button><button class="btn small" data-act="perfClear">Clear timings</button></div>`;
 }
 
 const ENGINE_FAIL = "SnapMon's recognition engine couldn't run on this device. Please check for system updates or try again.";
@@ -994,7 +1004,9 @@ function developerHTML() {
   return `<div class="card stack"><button class="row" data-act="devOpen" style="background:none;border:0;color:inherit;padding:0;text-align:left"><b class="grow">Developer &amp; testing</b><span class="muted">${open ? '▾' : '▸'}</span></button>
     ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what each part of the engine saw: predictions, boxes, scores, timing and backend.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
     <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdicts, side by side: Hybrid, detector + classifier alone, TinyCLIP alone, and the colour extraction. No monsters appear.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
-    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: runs the same models on the CPU instead of the GPU, to compare speed and results. Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
+    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: also runs the detector and classifier on the CPU instead of the GPU (TinyCLIP always runs on the CPU). Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
+    <div class="toggle"><div><b>TinyCLIP on GPU (comparison)</b><p>Testing only: runs TinyCLIP on WebGPU, like v0.4.0, to compare speed. Results can differ from what players get. Reloads the engine.</p></div><button class="switch ${S.settings.clipGPU ? 'on' : ''}" data-act="toggleClipGPU" aria-label="Toggle TinyCLIP on GPU"></button></div>
+    ${perfHTML()}
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
     <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow">Engine load: ${E.loadMs || '–'} ms</span></div>
@@ -1025,6 +1037,12 @@ const actions = {
     if (ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
   },
   toggleForceCPU() { S.settings.forceCPU = !S.settings.forceCPU; persist(); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); settingsSheet(); },
+  toggleClipGPU() { S.settings.clipGPU = !S.settings.clipGPU; persist(); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); settingsSheet(); },
+  perfExport() {
+    const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), timings: Engine.perfLog() });
+    try { navigator.clipboard.writeText(text).then(() => toast('Timings copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
+  },
+  perfClear() { Engine.clearPerf(); settingsSheet(); },
   async engineRedownload(_, el) {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to delete'; return; }
     await Engine.clearCache(); S.settings.engineCached = false; persist(); toast('Saved engine files deleted. They download again on the next hunt.'); settingsSheet();
@@ -1169,4 +1187,5 @@ if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFr
 // v0.4: Hybrid is the only recogniser; the old developer switch between recognisers is gone
 delete S.settings.expLens;
 if (S.settings.forceCPU && devOn()) Engine.setForceCPU(true);
+if (S.settings.clipGPU && devOn()) Engine.setClipGPU(true);
 if (S.settings.engineCached) setTimeout(() => Engine.load(), 1200); // engine saved on this phone: start it in the background

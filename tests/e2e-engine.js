@@ -1,7 +1,8 @@
 // Recognition-engine test with the REAL TinyCLIP worker and ONNX Runtime Web (WASM in headless Chromium), using the
 // tiny colour test model (tools/make-test-model.py) in place of the 39 MB TinyCLIP file. The detector/classifier part
 // is stubbed (tests/e2e-lens.js runs the real one). Covers: one-time notice, progress, caching across reloads,
-// interrupted and corrupted downloads (never cached), WebGPU failure -> CPU with the same model, CPU failure ->
+// interrupted and corrupted downloads (never cached), TinyCLIP on the CPU (WASM, one thread) for every player, the
+// developer-only WebGPU comparison falling back to the CPU with the same model, CPU failure ->
 // clear error and no monster, memory errors, timeouts, and that players cannot pick another recogniser.
 // Usage: node tests/e2e-engine.js <url> <ort-dist-dir> <screenshot-dir>
 const { chromium } = require('playwright');
@@ -26,7 +27,8 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
     if (f === 'vision.onnx') { modelHits++; if (modelRoute) return modelRoute(r); }
     r.fulfill({ path: path.join(MODEL, f), contentType: f.endsWith('.json') ? 'application/json' : 'application/octet-stream' });
   });
-  await ctx.route(/\/vendor\/ort\//, r => r.fulfill({ path: path.join(ortDir, r.request().url().split('/').pop()) }));
+  const ortFiles = [];
+  await ctx.route(/\/vendor\/ort\//, r => { const f = r.request().url().split('/').pop(); ortFiles.push(f); r.fulfill({ path: path.join(ortDir, f) }); });
   await ctx.route(/\/vendor\/tfjs\/|\/models\/(mobilenet|ssdlite)|cdn\.jsdelivr|tfhub|googleapis/, r => r.abort());
   await ctx.addInitScript(cam.init);
   // detector/classifier stub: one blue mug candidate with a box (the colour test model sees a blue photo as a mug too)
@@ -74,15 +76,24 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
   await p.waitForSelector('text=The recognition engine could not download', { timeout: 30000 });
   ok(/corrupted/.test(await p.evaluate(() => Engine.status.error)), 'a corrupted model download is detected (checksum) and rejected');
 
-  // 4) WebGPU fails -> the SAME model runs on the CPU (WASM)
-  modelRoute = null;
-  await p.evaluate(() => { ClipLens.CFG.test = { failGPU: true }; });
+  // 4) the standard path: TinyCLIP on the CPU (WASM, one thread), WebGPU never requested, even if a GPU would work
+  modelRoute = null; ortFiles.length = 0;
+  await p.evaluate(() => { ClipLens.CFG.test = { failGPU: true }; }); // would make a GPU attempt visible as gpuError
   await p.click('[data-act="engineDownload"]');
   await p.waitForSelector('#camShutter:not([disabled])', { timeout: 60000 });
   let info = await p.evaluate(() => ({ ...ClipLens.status.info, engine: Engine.status.state }));
-  ok(info.engine === 'ready' && info.backend === 'wasm' && /simulated WebGPU failure/.test(info.gpuError || ''), 'WebGPU failure falls back to the CPU backend (gpuError: ' + info.gpuError + ')');
-  ok(info.variant === 'testcolor' && info.modelBytes === size('vision.onnx'), 'the CPU fallback runs the very same model file (' + info.modelBytes + ' bytes)');
+  ok(info.engine === 'ready' && info.backend === 'wasm' && info.requested === 'wasm' && info.threads === 1 && !info.gpuError, `every player runs TinyCLIP on the CPU, one thread, with no GPU attempt (backend ${info.backend}, threads ${info.threads}, gpuError ${info.gpuError})`);
+  ok(ortFiles.includes('ort.min.js') && !ortFiles.some(f => /webgpu|jsep/.test(f)), 'only the CPU runtime build is downloaded (' + ortFiles.join(', ') + ')');
+  ok(/CPU vocabulary model/.test(await p.evaluate(() => engineStatusLine())), 'the engine status says TinyCLIP runs on the CPU');
   await p.click('[data-act="camClose"]');
+
+  // 4b) developer comparison: TinyCLIP on WebGPU; if WebGPU fails, the SAME model runs on the CPU
+  await p.evaluate(async () => { Engine.setClipGPU(true); await Engine.load(); });
+  info = await p.evaluate(() => ({ ...ClipLens.status.info, engine: Engine.status.state }));
+  ok(info.engine === 'ready' && info.requested === 'webgpu' && info.backend === 'wasm' && /simulated WebGPU failure/.test(info.gpuError || ''), 'developer WebGPU comparison falls back to the CPU backend (gpuError: ' + info.gpuError + ')');
+  ok(info.variant === 'testcolor' && info.modelBytes === size('vision.onnx'), 'the CPU fallback runs the very same model file (' + info.modelBytes + ' bytes)');
+  await p.evaluate(async () => { Engine.setClipGPU(false); ClipLens.CFG.test = null; await Engine.load(); });
+  ok(await p.evaluate(() => ClipLens.status.info.requested === 'wasm'), 'turning the comparison off returns to the standard CPU path');
 
   // 5) hunting with the real worker: blue mug on a brown table -> mug, blue monster (colour from the object, not the table)
   await blueMug(p); await cam.snap(p);
@@ -91,6 +102,8 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
   ok(m && m.obj === 'mug' && m.dna.pal && m.dna.pal.conf === 'confident', 'hunting runs the full Hybrid engine and creates a mug monster with a confident photo palette');
   ok(m && m.dna.col.h > 205 && m.dna.col.h < 240 && m.dna.col.s > 40, `the monster is blue like the photographed mug (hue ${m && m.dna.col.h}), not brown like the table`);
   ok(m && m.photo && m.photo.engine === 'hybrid-1', 'the monster records which engine identified it');
+  const perf = await p.evaluate(() => Engine.perfLog());
+  ok(perf.length >= 1 && perf[perf.length - 1].backends.clip === 'wasm' && perf[perf.length - 1].clipInferMs >= 0, 'recognition timings are logged on the phone with the TinyCLIP backend (' + JSON.stringify(perf[perf.length - 1]) + ')');
   await p.click('[data-act="ignore"]');
 
   // 6) reload: engine comes from the on-phone cache (no second download, no notice)
@@ -103,7 +116,7 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
   ok(!(await p.$('text=One-time download')), 'the download notice is shown only once');
   await p.waitForSelector('#camShutter:not([disabled])'); await p.click('[data-act="camClose"]');
 
-  // 7) consistency: the same photo gives the same decision on two engine loads (here both WASM; real GPU vs CPU is a phone test)
+  // 7) consistency: the same photo gives the same decision and score on two engine loads (both on the standard CPU path)
   const decide = () => p.evaluate(async () => {
     const c = document.createElement('canvas'); c.width = 320; c.height = 240; const g = c.getContext('2d'); g.fillStyle = '#c8641e'; g.fillRect(0, 0, 320, 240); // between red and yellow: a mid-range score, not a saturated 1.0
     const r = await Engine.recognize(c); return { d: r.rec.decision, top: r.rec.candidates.map(x => x.obj), p: r.clip.regions[0].best.p, backend: r.clip.backend };
@@ -111,22 +124,22 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
   const r1 = await decide();
   await p.evaluate(() => { Engine.setForceCPU(true); }); await p.evaluate(() => Engine.load());
   const r2 = await decide();
-  ok(JSON.stringify([r1.d, r1.top, r1.p]) === JSON.stringify([r2.d, r2.top, r2.p]), `same photo, same decision and score after reloading on the forced CPU path (${r1.p} vs ${r2.p})`);
+  ok(JSON.stringify([r1.d, r1.top, r1.p]) === JSON.stringify([r2.d, r2.top, r2.p]), `same photo, same decision and score after reloading the engine (${r1.p} vs ${r2.p})`);
 
   // 8) CPU failure too -> the device cannot run the engine: clear message, Retry, collection still usable, no monster
-  await p.evaluate(() => { Engine.setForceCPU(false); ClipLens.CFG.test = { failGPU: true, failCPU: 'simulated CPU failure' }; });
+  await p.evaluate(() => { Engine.setForceCPU(false); ClipLens.CFG.test = { failCPU: 'simulated CPU failure' }; });
   await p.evaluate(() => window.__snapmon.actions.openCamera());
   await p.waitForSelector('#camShutter:not([disabled])', { timeout: 15000 }).catch(() => {});
   await blueMug(p); await cam.snap(p);
   await p.waitForSelector("text=couldn't run on this device", { timeout: 30000 }); await shot('E04-engine-failed');
-  ok(!!(await p.$('[data-act="lensRetry"]')) && !(await p.$('[data-act="fight"]')), 'when neither backend works: the suggested message, a Retry button, and no monster');
+  ok(!!(await p.$('[data-act="lensRetry"]')) && !(await p.$('[data-act="fight"]')), 'when the CPU path cannot run: the suggested message, a Retry button, and no monster');
   await p.click('[data-act="cancelPhoto"]');
   await p.click('[data-act="tab"][data-arg="dex"]'); await p.waitForTimeout(200);
   ok(!!(await p.$('[data-act="dexView"]')), 'the collection still works while recognition is unavailable');
   await p.click('[data-act="tab"][data-arg="hunt"]');
 
   // 9) memory errors are reported as such
-  await p.evaluate(() => { ClipLens.reset(); Engine.status.state = 'idle'; ClipLens.CFG.test = { failGPU: true, failCPU: 'memory access out of bounds' }; });
+  await p.evaluate(() => { ClipLens.reset(); Engine.status.state = 'idle'; ClipLens.CFG.test = { failCPU: 'memory access out of bounds' }; });
   const kind = await p.evaluate(async () => { await Engine.load(); return Engine.status.kind; });
   ok(kind === 'memory', 'an out-of-memory failure is classified as memory (' + kind + ')');
 
