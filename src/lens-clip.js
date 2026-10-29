@@ -8,7 +8,7 @@
 
 const ClipLens = (() => {
   const CFG = {
-    variant: 'tinyclip-40m32',
+    variant: 'tinyclip-39m16',
     base: 'models/clip/',
     ortBase: 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',
     localOrt: 'vendor/ort/',

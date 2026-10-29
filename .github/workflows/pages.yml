@@ -12,8 +12,8 @@ concurrency:
   cancel-in-progress: true
 env:
   # experimental (developer-only) lens model; chosen from the lab benchmark, see docs/RECOGNITION.md
-  CLIP_VARIANT: tinyclip-8m16
-  CLIP_HF: wkcn/TinyCLIP-ViT-8M-16-Text-3M-YFCC15M
+  CLIP_VARIANT: tinyclip-39m16
+  CLIP_HF: wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M
 jobs:
   test:
     runs-on: ubuntu-latest
