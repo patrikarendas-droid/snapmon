@@ -9,6 +9,8 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
 (async () => {
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width: 412, height: 870 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Mobile Safari/537.36' });
+  // the lens is stubbed in this test: keep the real model downloads (started in the background after a reload) out of it
+  await ctx.route(/\/models\/|tfhub\.dev|kaggle|storage\.googleapis\.com|cdn\.jsdelivr\.net\/npm\/@tensorflow/, r => r.abort());
   const p = await ctx.newPage();
   await p.addInitScript(cam.init);
   p.on('pageerror', e => { errors.push('pageerror: ' + e.message); console.log('PAGEERROR', e.message); });
