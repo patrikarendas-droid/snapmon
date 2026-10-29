@@ -157,7 +157,11 @@ const ClipLens = (() => {
     else if (fused[0].conf >= L.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * L.CLEAR_MARGIN)) { decision = 'auto'; reason = 'confident'; }
     else { decision = 'choose'; reason = 'unsure'; }
     const whole = clip.regions.find(r => !r.box), alt = whole && whole.best;
-    if (decision === 'auto' && alt && alt.obj && OBJECTS[alt.obj] && alt.obj !== fused[0].obj && alt.p >= DISAGREE_P) {
+    // near-synonyms are not a disagreement: same category and CLIP rates production's object at least half as high
+    // (wall clock 0.075 vs clock 0.118 = agree; coffeepot 0.104 vs electric kettle 0.267 = disagree; second field test)
+    const backed = whole && fused[0] && OBJECTS[fused[0].obj] && alt && OBJECTS[alt.obj] && OBJECTS[alt.obj].cat === OBJECTS[fused[0].obj].cat &&
+      (whole.ranked || []).some(x => x.obj === fused[0].obj && x.p >= alt.p * 0.5);
+    if (decision === 'auto' && alt && alt.obj && OBJECTS[alt.obj] && alt.obj !== fused[0].obj && alt.p >= DISAGREE_P && !backed) {
       if (!fused.some(c => c.obj === alt.obj)) {
         if (fused.length >= L.MAX_CHOICES) fused.pop(); // keep the list short: the weakest production idea makes room
         fused.push({ label: alt.label, obj: alt.obj, cat: OBJECTS[alt.obj].cat, conf: alt.p, box: null, src: 'clip', rule: 5 });

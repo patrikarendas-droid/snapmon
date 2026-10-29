@@ -159,6 +159,7 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   const e = log[log.length - 1];
   ok(e.v === 2 && e.prod.decision === 'auto' && e.prod.top[0].obj === 'teapot' && e.hybrid.decision === 'choose' && e.marks.hybrid === 'top3' && e.truth === 'electric kettle', 'field-test log keeps production alone, the hybrid result and the verdicts');
   ok((await S()).stats.encounters === enc0, 'field-test photos never create encounters');
+  ok(await p.evaluate(() => ftNew().length) === 1, 'the field-test round counts as new results until it is copied out');
   await p.evaluate(() => { window.__snapmon.actions.camClose(); const S = window.__snapmon.S; S.settings.fieldTest = false; S.settings.expLens = 'off'; });
   await p.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; });
 
