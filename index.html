@@ -24,6 +24,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; } /* author display rules must never override the hidden attribute */
 html, body { height: 100%; }
 body { margin: 0; background: var(--ink); color: var(--text); font: 15px/1.45 var(--font-body); overscroll-behavior: none; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
@@ -196,9 +197,25 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .battle .overlay-inner > .arena { flex-shrink: 1; }
 .camera .overlay-inner.cam-inner { justify-content: center; }
 .cam-frame { position: relative; width: 100%; max-width: 100%; aspect-ratio: 3 / 4; max-height: 64vh; margin: 0 auto; border-radius: 18px; overflow: hidden; background: #000; border: 1px solid #2c4a52; }
-.cam-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cam-frame { touch-action: none; }
+.cam-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; transform-origin: 50% 50%; }
 .cam-frame .vf-corner, .cam-frame .vf-sweep { z-index: 2; }
-.cam-status { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ecto); font-weight: 600; z-index: 3; }
+.cam-status { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ecto); font-weight: 600; z-index: 3; background: #000; }
+.confirm-bar { height: 6px; } .confirm-bar i { background: var(--ecto); transition: none; }
+.lore { font-style: italic; } .lore-epic { color: #d9b8ff; } .lore-legendary { color: #ffd98a; text-shadow: 0 0 12px rgba(255,190,59,.35); }
+.guide-btn { font-weight: 800; font-size: 17px; color: var(--ecto); }
+.guide-sec { border: 1px solid var(--line); border-radius: 14px; background: var(--panel2, #1a1430); }
+.guide-sec > summary { padding: 12px 14px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+.guide-sec > summary::after { content: '▸'; color: var(--muted); } .guide-sec[open] > summary::after { content: '▾'; }
+.guide-sec > summary::-webkit-details-marker { display: none; }
+.guide-body { padding: 0 14px 12px; font-size: 14px; } .guide-body p { margin: 0 0 8px; } .guide-body ul { margin: 0 0 8px; padding-left: 18px; } .guide-body li { margin: 3px 0; }
+.guide-table { overflow-x: auto; margin: 6px 0; } .guide-table table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.guide-table th, .guide-table td { border-bottom: 1px solid var(--line); padding: 5px 6px; text-align: left; vertical-align: top; }
+.guide-cards { display: grid; gap: 8px; margin: 8px 0; } .guide-status { display: grid; grid-template-columns: 74px 1fr; gap: 8px; align-items: start; background: #0e0b18; border-radius: 10px; padding: 8px; }
+.guide-status .st { justify-self: start; }
+.zoom-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.zoom-row input[type=range] { flex: 1; max-width: 240px; accent-color: var(--ecto); }
+.zoom-row .num { min-width: 3.2em; text-align: right; color: var(--ecto); }
 .cam-controls { display: flex; justify-content: center; padding-top: 6px; }
 .shutter[disabled] { opacity: .45; }
 .photo-frame { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid #2c4a52; background: #000; aspect-ratio: 1; max-height: 42vh; max-width: 100%; margin: 0 auto; width: 100%; }
@@ -385,6 +402,7 @@ details.debug td { padding: 2px 6px 2px 0; border-top: 1px solid #221a38; vertic
 <script src="src/parts.js"></script>
 <script src="src/objects.js"></script>
 <script src="src/labels.js"></script>
+<script src="src/lore.js"></script>
 <script src="src/platform.js"></script>
 <script src="src/game.js"></script>
 <script src="src/audio.js"></script>
@@ -393,6 +411,7 @@ details.debug td { padding: 2px 6px 2px 0; border-top: 1px solid #221a38; vertic
 <script src="src/lens.js"></script>
 <script src="src/lens-clip.js"></script>
 <script src="src/engine.js"></script>
+<script src="src/guide.js"></script>
 <script src="src/ui.js"></script>
 <!--/SCRIPTS-->
 <!--/ARTIFACT-BODY-->

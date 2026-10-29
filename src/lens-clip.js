@@ -188,6 +188,12 @@ const ClipLens = (() => {
     return { candidates: fused, decision: 'choose', reason: decision === 'auto' ? 'disagree' : decision === 'unknown' ? 'second-opinion' : 'unsure' };
   }
 
+  // is the worker still alive and holding a session? (it can be frozen or killed while the app is in the background)
+  async function ping(ms = 4000) {
+    if (st.state !== 'ready' || !st.worker) return false;
+    if (st.busy) return true;
+    try { const r = await call('ping' + (++st.seq), { type: 'ping', id: 'ping' + st.seq }, ms); return !!r.ok; } catch (e) { return false; }
+  }
   function reset() { if (st.worker) st.worker.terminate(); Object.assign(st, { state: 'off', error: '', info: null, worker: null, meta: null, busy: false, loading: null }); st.pending.clear(); }
-  return { load, recognize, fuse, judge, hybridDecision, reset, status: st, CFG };
+  return { load, recognize, fuse, judge, hybridDecision, reset, ping, status: st, CFG };
 })();

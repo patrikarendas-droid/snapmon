@@ -62,6 +62,7 @@ function renderTop() {
     <div class="top-right">
       <div class="wallet"><span class="c">${S.coins}¢</span><span class="r">${S.rp} RP</span></div>
       <button class="icon-btn" data-act="mute" aria-label="${S.settings.muted ? 'Unmute sound' : 'Mute sound'}">${S.settings.muted ? ICON.mute : ICON.sound}</button>
+      <button class="icon-btn guide-btn" data-act="guide" aria-label="Guide: how to play">?</button>
       <button class="icon-btn" data-act="settings" aria-label="Settings and save data">${ICON.cog}</button>
     </div>`;
 }
@@ -128,21 +129,48 @@ async function openCamera() {
   closeSheet();
   // first hunt on this phone: say once what will be downloaded (this is information, not a choice of recogniser)
   if (Engine.status.state !== 'ready' && !S.settings.engineCached && !ui.engineNoticeOk) return showEngineNotice();
-  Engine.load(); // start (or resume) loading the engine while the player frames the shot
+  const t0 = performance.now();
   $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
     <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
-    <div class="cam-frame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
-      <div class="cam-status" id="camStatus">Starting camera…</div></div>
+    <div class="cam-frame" id="camFrame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
+      <div class="cam-status" id="camStatus"><span><i class="spin"></i> Starting camera…</span></div></div>
+    <div class="zoom-row" id="zoomRow" hidden><button class="btn small ghost" data-act="camZoom" data-arg="-" aria-label="Zoom out">−</button>
+      <input type="range" id="zoomRange" aria-label="Zoom" min="1" max="3" step="0.1" value="1"><button class="btn small ghost" data-act="camZoom" data-arg="+" aria-label="Zoom in">+</button><span class="small num" id="zoomVal">1.0×</span></div>
     <p class="muted small" style="text-align:center;margin:0">Fill the frame with one real object. The photo is analysed on this phone and never saved.</p>
     <div class="cam-controls"><button class="shutter" id="camShutter" data-act="camSnap" aria-label="Take photo" disabled>SNAP</button></div>
   </div></div>`;
   const v = $('#camVideo');
   try {
-    await Platform.camera.open(v);
-    if (!$('#camVideo')) { Platform.camera.close(v); return; } // closed while starting
-    const st = $('#camStatus'); if (st) st.hidden = true;
+    await Platform.camera.open(v); // resolves once the preview is really showing frames
+    if ($('#camVideo') !== v) { Platform.camera.close(v); return; } // closed (or reopened) while starting
+    const st = $('#camStatus'); if (st) st.remove();
     const btn = $('#camShutter'); if (btn) btn.disabled = false;
-  } catch (e) { Platform.camera.close(v); showCameraError(e); }
+    setupZoom(v);
+    ui.camStartMs = Math.round(performance.now() - t0);
+    // the engine starts only once the preview is live, so its start-up (heavy on the CPU path) never delays the camera
+    requestAnimationFrame(() => setTimeout(() => { if (Engine.status.state !== 'ready') Engine.load(); }, 60));
+  } catch (e) { Platform.camera.close(v); if ($('#camVideo') === v) showCameraError(e); }
+}
+// zoom controls: buttons, slider and two-finger pinch on the viewfinder; hidden if the camera offers no zoom at all
+function setupZoom(v) {
+  const z = Platform.camera.zoomInfo(), row = $('#zoomRow'), range = $('#zoomRange'), frame = $('#camFrame');
+  if (!row || !z || z.max <= z.min) return;
+  Object.assign(range, { min: z.min, max: z.max, step: z.step, value: z.value });
+  row.hidden = false; row.dataset.kind = z.kind;
+  let busy = false, want = null;
+  const apply = async val => {
+    want = val; if (busy) return; busy = true;
+    try { while (want != null) { const x = want; want = null; const got = await Platform.camera.setZoom(x, v); range.value = got; $('#zoomVal').textContent = (got / z.min).toFixed(1) + '×'; } }
+    catch (e) { /* the camera refused this zoom level: keep the previous one */ }
+    busy = false;
+  };
+  ui.camZoom = { info: z, apply, get value() { return +range.value; } };
+  range.addEventListener('input', () => apply(+range.value));
+  let pinch = null;
+  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  frame.addEventListener('touchstart', e => { if (e.touches.length === 2) pinch = { d: dist(e.touches), z: +range.value }; }, { passive: true });
+  frame.addEventListener('touchmove', e => { if (pinch && e.touches.length === 2) { e.preventDefault(); apply(pinch.z * dist(e.touches) / pinch.d); } }, { passive: false });
+  frame.addEventListener('touchend', e => { if (e.touches.length < 2) pinch = null; });
 }
 function showCameraError(e) {
   const d = Platform.camera.describe(e);
@@ -152,12 +180,12 @@ function showCameraError(e) {
     <button class="btn primary block" data-act="openCamera">Try again</button>
     <button class="btn ghost block" data-act="closeOverlay">Back</button></div></div>`;
 }
-function closeCamera() { Platform.camera.close($('#camVideo')); $('#overlay').innerHTML = ''; render(); }
+function closeCamera() { Platform.camera.close($('#camVideo')); ui.camZoom = null; $('#overlay').innerHTML = ''; render(); }
 function camSnap() {
   const v = $('#camVideo'); if (!v || !v.videoWidth) return;
   SFX.shutter();
-  const canvas = Platform.camera.capture(v);
-  Platform.camera.close(v);
+  const canvas = Platform.camera.capture(v); // exactly the region the viewfinder shows (including zoom)
+  Platform.camera.close(v); ui.camZoom = null;
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
@@ -207,7 +235,23 @@ Engine.onChange(() => {
   const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
   const pr = $('#engineProgress'); if (pr) pr.outerHTML = engineProgressHTML();
   const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
-  if ($('#sheet').innerHTML.includes('Recognition engine')) settingsSheet();
+  // Settings: only the engine row and the developer readouts change; the sheet itself is never rebuilt for progress
+  if (!ui.engineRowQueued && $('#engineRow')) {
+    ui.engineRowQueued = true;
+    requestAnimationFrame(() => {
+      ui.engineRowQueued = false;
+      // keep what the player is looking at in place: the row never shrinks while Settings is open, and when it grows
+      // while scrolled out of view above, the sheet scrolls by the same amount
+      const row = $('#engineRow');
+      if (row) {
+        const sh = row.closest('.sheet'), h0 = row.offsetHeight, above = sh && row.getBoundingClientRect().top < sh.getBoundingClientRect().top;
+        row.style.minHeight = h0 + 'px'; row.innerHTML = engineRowHTML();
+        const d = row.offsetHeight - h0; if (above && d > 0) sh.scrollTop += d;
+      }
+      const b = $('#devBackends'); if (b) b.textContent = backendsText();
+      const l = $('#devLoadMs'); if (l) l.textContent = loadTimesText();
+    });
+  }
 });
 
 /* ---------- recognition flow: photo → Hybrid engine → (pick among AI suggestions) → encounter scan ----------
@@ -246,7 +290,7 @@ async function recognizeFlow() {
   catch (e) { return fail(e.kind); }
   clearInterval(clock);
   if (ui.pending !== p) return;
-  p.rec = r.rec; p.clip = r.clip; p.prodOnly = { decision: r.prodOnly.decision, reason: r.prodOnly.reason, top: ftTop(r.prodOnly) };
+  p.rec = r.rec; p.clip = r.clip; p.prodOnly = { decision: r.prodOnly.decision, reason: r.prodOnly.reason, top: ftTop(r.prodOnly) }; p.prodCands = r.prodOnly.candidates;
   if (!S.settings.engineCached) { S.settings.engineCached = true; persist(); }
   if (devOn() && S.settings.fieldTest) return showFieldTest(p);
   if (p.rec.decision === 'unknown') return showUnknown(p);
@@ -350,7 +394,8 @@ function perfHTML() {
   const q = (a, f) => { a = a.filter(x => x != null).sort((x, y) => x - y); return a.length ? a[Math.min(a.length - 1, Math.floor(a.length * f))] : '–'; };
   const rows = Object.entries(groups).map(([k, l]) => `<tr><td>${k}</td><td>${l.length}</td><td>${q(l.map(e => e.clipInferMs), .5)} / ${q(l.map(e => e.clipInferMs), .9)}</td><td>${q(l.map(e => e.clipMs), .5)}</td><td>${q(l.map(e => e.ms), .5)} / ${q(l.map(e => e.ms), .9)}</td></tr>`).join('');
   return `<div class="debug small"><b>Recognition timings (ms, every hunt)</b>${rows ? `<table><tr><th></th><th>photos</th><th>TinyCLIP model median / p90</th><th>TinyCLIP total median</th><th>whole engine median / p90</th></tr>${rows}</table>` : '<p class="muted" style="margin:4px 0 0">No photos recognised yet.</p>'}</div>
-    <div class="row wrap"><button class="btn small grow" data-act="perfExport">Copy timings (${log.length})</button><button class="btn small" data-act="perfClear">Clear timings</button></div>`;
+    <div class="row wrap"><button class="btn small grow" data-act="perfExport">Copy timings (${log.length})</button><button class="btn small" data-act="perfClear">Clear timings</button></div>
+    <div class="row wrap"><button class="btn small grow" data-act="rejExport">Copy "Wrong object" reports (${rejLog().length})</button></div>`;
 }
 
 const ENGINE_FAIL = "SnapMon's recognition engine couldn't run on this device. Please check for system updates or try again.";
@@ -392,22 +437,77 @@ function candLine(c) {
   const o = OBJECTS[c.obj], name = o ? o.name : CATEGORY[c.cat].name;
   const same = o && o.name.toLowerCase() === String(c.label).toLowerCase();
   // a rule-5 suggestion carries a raw CLIP share, not a confidence, so it shows no percentage
-  const score = c.src === 'clip' && /^(5|5b|6)$/.test(String(c.rule)) ? 'second opinion' : Math.round(c.conf * 100) + '%';
+  const score = c.src === 'clip' && /^(5|5b|6|alt)$/.test(String(c.rule)) ? 'second opinion' : Math.round(c.conf * 100) + '%';
   return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${score}</span>`;
 }
 const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
+/* An automatic identification is never committed silently: the player sees what the lens found and has a few
+   seconds to say "Wrong object" BEFORE anything is rolled. The countdown pauses as soon as the screen is touched. */
+const CONFIRM_MS = 3500;
 function showIdentified(p, i) {
   const c = p.rec.candidates[i];
   SFX.click();
-  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+  const auto = !S.settings.debugLens;
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px" id="identRoot">
     <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="card ident"><span class="e">${catIcon(c)}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
+    ${auto ? `<div class="bar confirm-bar" aria-hidden="true"><i id="confirmBar"></i></div><p class="muted small" style="text-align:center;margin:0" id="confirmHint">Scanning for monsters in a moment… Not right? Tap <b>Wrong object</b>.</p>` : ''}
+    <div class="row"><button class="btn primary grow" data-act="pickCand" data-arg="${i}">Scan for monsters</button><button class="btn" data-act="wrongObject" data-arg="${i}">Wrong object</button></div>
     ${debugHTML(p.rec)}
-    ${S.settings.debugLens ? `<button class="btn primary block" data-act="pickCand" data-arg="${i}">Scan for monsters</button>` : '<p class="muted small" style="text-align:center">Scanning for supernatural activity…</p>'}
   </div></div>`;
   drawDetections(p, i);
-  if (!S.settings.debugLens) setTimeout(() => { if (ui.pending === p && !p.scanning) scan(i); }, 1100);
+  if (!auto) return;
+  const t0 = Date.now(), root = $('#identRoot');
+  p.confirm = { paused: false };
+  root.addEventListener('pointerdown', ev => { if (!ev.target.closest('[data-act]') && !p.confirm.paused) { p.confirm.paused = true; const h = $('#confirmHint'); if (h) h.textContent = 'Paused. Tap Scan for monsters when you are ready, or Wrong object.'; } });
+  const tick = () => {
+    if (ui.pending !== p || p.scanning || p.rejected || !$('#confirmBar')) return;
+    if (p.confirm.paused) { $('#confirmBar').style.width = '0%'; return; }
+    const f = (Date.now() - t0) / CONFIRM_MS;
+    $('#confirmBar').style.width = Math.min(100, f * 100) + '%';
+    if (f >= 1) return scan(i);
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+/* "Wrong object": nothing is rolled or created for a rejected identification. The player may pick one of the other
+   objects the models themselves proposed for THIS photo (never free text, never arbitrary objects), or retake it. */
+const REJ_KEY = 'snapmon.rejections.v1', ALT_MIN = 0.05, ALT_MAX = 4;
+const rejLog = () => { try { return JSON.parse(Platform.storage.get(REJ_KEY) || '[]'); } catch (e) { return []; } };
+function altCandidates(p) {
+  const out = [], seen = new Set(p.rejected || []), add = c => { if (!c || !c.obj || !OBJECTS[c.obj] || seen.has(c.obj) || out.length >= ALT_MAX) return; seen.add(c.obj); out.push(c); };
+  for (const c of p.rec.candidates) add(c);
+  for (const c of p.prodCands || []) if (c.conf >= Lens.CFG.MIN_CONF) add(c);
+  for (const r of (p.clip && p.clip.regions) || []) for (const x of r.ranked || []) if (x.p >= ALT_MIN) add({ label: x.label, obj: x.obj, cat: OBJECTS[x.obj] && OBJECTS[x.obj].cat, conf: x.p, box: r.box, src: 'clip', rule: 'alt' });
+  return out;
+}
+function wrongObject(p, rejectedObjs) {
+  p.rejected = [...new Set([...(p.rejected || []), ...rejectedObjs])];
+  p.rejections = (p.rejections || 0) + 1;
+  try { // local developer/field-test feedback only; photos are never stored or sent anywhere
+    const log = JSON.parse(Platform.storage.get(REJ_KEY) || '[]');
+    log.push({ t: Date.now(), v: GAME_VERSION, engine: Engine.ID, rejected: rejectedObjs, decision: p.rec.decision, reason: p.rec.reason, round: p.rejections,
+      shown: p.rec.candidates.slice(0, 4).map(c => ({ obj: c.obj, conf: +(+c.conf).toFixed(3), src: c.src })) });
+    Platform.storage.set(REJ_KEY, JSON.stringify(log.slice(-300)));
+  } catch (e) {}
+  // one round of alternatives per photo; rejecting those too means: retake
+  const alts = p.rejections > 1 ? [] : altCandidates(p);
+  p.alts = alts;
+  $('#overlay').innerHTML = alts.length ? `<div class="overlay"><div class="overlay-inner" style="gap:12px">
+    <div class="sheet-head"><h2>Which one is it?</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <p class="muted small" style="margin:0">These are the other possibilities the lens found in this photo. If none of them is right, take another photo.</p>
+    <div class="photo-frame" id="lensFrame"></div>
+    <div class="stack">${alts.map((c, i) => `<button class="list-item cand" data-act="pickAlt" data-arg="${i}" style="text-align:left">
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
+    <button class="btn primary block" data-act="retakePhoto">None of these: retake photo</button>
+  </div></div>` : `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    <div class="photo-frame" id="lensFrame"></div>
+    <h2 style="font-size:26px">SnapMon couldn't identify this object</h2>
+    <p>The lens has no other credible suggestion for this photo. Try again: get closer, fill the frame with the object, and use good light.</p>
+    <button class="btn primary block" data-act="retakePhoto">Retake photo</button>
+    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
+  drawDetections(p, -1);
 }
 function showChoices(p) {
   const rec = p.rec, multi = rec.reason === 'multiple';
@@ -417,7 +517,7 @@ function showChoices(p) {
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">
       <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
-    <button class="btn ghost block" data-act="openCamera">None of these: take another photo</button>
+    <button class="btn block" data-act="wrongObject" data-arg="all">Wrong object: none of these</button>
     ${debugHTML(rec)}
   </div></div>`;
   drawDetections(p);
@@ -467,7 +567,8 @@ function clipDebugHTML() {
 
 async function scan(i) {
   const p = ui.pending; if (!p || !p.rec || p.scanning) return;
-  const c = p.rec.candidates[+i]; if (!c) return;
+  const c = typeof i === 'object' ? i : p.rec.candidates[+i]; if (!c) return;
+  if ((p.rejected || []).includes(c.obj)) return; // a rejected identification never leads to an encounter
   p.scanning = true;
   // colour from the chosen object (palette with background suppression), fingerprint from the whole photo
   const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash, pal: Photo.palette(p.img, c.box), engine: Engine.ID };
@@ -475,7 +576,7 @@ async function scan(i) {
     <h2 style="text-align:center">Scanning for supernatural activity…</h2>
     <div class="photo-frame"><img alt="" src="${p.url}"><i class="vf-sweep"></i>
       <div class="scan-hud">${SCAN_READOUTS.slice(0, 4).map((r, k) => `<div class="meter"><span>${r}</span><i><b id="mt${k}"></b></i><span id="mv${k}">0.0</span></div>`).join('')}</div></div>
-    <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${Math.round(c.conf * 100)}% sure)</span></p>
+    <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${c.rule === 'alt' || /^(5|5b|6)$/.test(String(c.rule)) ? 'your pick from the lens\'s suggestions' : Math.round(c.conf * 100) + '% sure'})</span></p>
   </div></div>`;
   SFX.scan();
   const result = resolvePhoto(S, c.obj, photo, { label: c.label, aspect: c.aspect, conf: c.conf });
@@ -520,7 +621,7 @@ function showDiscovery(m, seen) {
       <h1 class="disc-name">${esc(m.name)}</h1>
       <div class="row wrap" style="justify-content:center">${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${m.label ? esc(m.label) : catLabel(m)}</span></div>
       ${seen.isNew ? `<span class="new-tag">NEW SPECIES · +${seen.rp} RP</span>` : ''}
-      <p class="muted" style="max-width:34ch">${esc(CATEGORY[m.cat].flavor)}</p>
+      <p class="muted lore lore-${m.rarity}" style="max-width:36ch">${esc(loreOf(m))}</p>
       ${analysis ? `<p class="small muted num">HP ${m.stats.hp} · ATK ${m.stats.atk} · DEF ${m.stats.def} · SPD ${m.stats.spd} · weak to ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</p>` : ''}
       <div class="stack" style="width:100%;max-width:340px">
         <button class="btn primary block" data-act="fight" style="font-size:18px;min-height:56px">Fight!</button>
@@ -775,7 +876,7 @@ function infoSheet() {
   const B = ui.battle, m = B.m, analysis = !!S.research.analysis, f = FAMILIES[m.fam];
   openSheet(`<div class="sheet-head"><h2>${esc(m.name.split(',')[0])}</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="row wrap">${rarityChip(m.rarity)}${famChip(m.fam)}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
-    <p class="muted">${esc(CATEGORY[m.cat].flavor)}</p>
+    <p class="muted lore lore-${m.rarity}">${esc(loreOf(m))}</p>
     ${analysis ? `<div class="stat-grid">${statBars(m.stats)}</div>
       <div class="small"><b>Weak to:</b> ${f.weak.map(e => ELEMENTS[e].name).join(', ')} · <b>Resists:</b> ${f.resist.map(e => ELEMENTS[e].name).join(', ') || 'nothing'}</div>
       <div class="small"><b>Your weapon:</b> ${ELEMENTS[WEAPONS[B.weapon].el].name} — ${effMult(m.fam, WEAPONS[B.weapon].el) > 1 ? '<span style="color:var(--good)">super effective</span>' : effMult(m.fam, WEAPONS[B.weapon].el) < 1 ? '<span style="color:var(--danger)">resisted</span>' : 'normal damage'}</div>
@@ -845,7 +946,7 @@ function monsterSheet(id) {
       <div><b>Weak to:</b> ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</div>
       ${m.thumb ? `<div class="row"><img src="${m.thumb}" alt="Original photo" style="width:72px;border-radius:8px"><span class="muted">The photo it was found in (kept because you enabled it in settings).</span></div>` : ''}
     </div>
-    <p class="muted small">${esc(CATEGORY[m.cat].flavor)}</p>
+    <p class="muted small lore lore-${m.rarity}">${esc(loreOf(m))}</p>
     <div class="row">
       <button class="btn grow ${S.companion === m.id ? '' : 'ecto'}" data-act="buddy" data-arg="${m.id}">${S.companion === m.id ? 'Dismiss buddy' : 'Make hunting buddy'}</button>
       <button class="btn danger" data-act="release" data-arg="${m.id}">Release</button>
@@ -860,7 +961,7 @@ function speciesSheet(key) {
     <div class="stage">${spriteHTML(d.dna, { size: 170, rarity: top.id })}<div class="shadow"></div></div>
     <div class="sheet-head"><div class="grow"><h2>${esc(d.name)}</h2>${d.monsterName && d.monsterName !== d.name ? `<div class="small muted">${esc(d.monsterName)}</div>` : ''}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="row wrap">${RARITIES.filter(r => (d.rarities || {})[r.id]).map(r => rarityChip(r.id)).join('')}${famChip(d.fam)}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
-    <p class="muted">${esc(c.flavor)}</p>
+    <p class="muted lore lore-${top.id}">${esc(speciesLore(d, top.id))}</p>
     <div class="card small stack" style="gap:4px">
       <div><b>Hides in:</b> ${o ? esc(o.name) : d.word ? '“' + esc(d.word) + '”' : esc(c.name)} <span class="muted">(${esc(c.name.split(' /')[0])})</span></div>
       <div><b>Look:</b> ${designLine(d.obj)}</div>
@@ -974,12 +1075,19 @@ function labScreen() {
 }
 
 /* ---------- settings ---------- */
-function settingsSheet() {
+function engineRowHTML() {
   const E = Engine.status;
+  return `<div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}`;
+}
+// start-up stages, to investigate slow or blank starts (e.g. the detector on the CPU backend)
+const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
+const backendsText = () => Object.entries(Engine.status.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded';
+function settingsSheet() {
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <button class="list-item" data-act="guide" style="text-align:left"><span class="e">📖</span><span class="grow"><b>Guide: how to play</b><br><span class="small muted">Status effects, combat, capture, rarity, items and research explained.</span></span><span class="muted">›</span></button>
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
-      <div class="toggle"><div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
+      <div class="toggle" id="engineRow">${engineRowHTML()}</div>
       <div class="toggle"><div><b>Keep photo thumbnails</b><p>Off by default. When on, a tiny 96 px copy of the photo is stored with monsters you capture, in this browser only.</p></div><button class="switch ${S.settings.keepPhotos ? 'on' : ''}" data-act="toggleKeep" aria-label="Toggle photo thumbnails"></button></div>
     </div>
     ${saveBlocked ? `<div class="card warn stack"><b>Saved progress not loaded</b><p class="small" style="margin:0">${saveBlocked.reason === 'newer' ? `It was made by a newer SNAPMON (save format ${saveBlocked.version}).` : 'It could not be read.'} It is untouched. Copy this code before doing anything else; you can restore it once the newer version is back.</p>
@@ -992,7 +1100,7 @@ function settingsSheet() {
       <div class="row"><input class="search grow" id="resetBox" placeholder="RESET" autocomplete="off"><button class="btn danger" data-act="reset">Erase</button></div></div>
     ${developerHTML()}
     <p class="small muted">SNAPMON never uploads your photos. There are no accounts, ads or purchases. Camera access is requested only when you tap SNAP, and the camera stops the moment you take the shot or leave the app.</p>
-    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>`);
+    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>`, 'settings');
 }
 
 // Developer tools are hidden (tap the version line 7 times). They never change how hunting recognises objects:
@@ -1004,31 +1112,53 @@ function developerHTML() {
   return `<div class="card stack"><button class="row" data-act="devOpen" style="background:none;border:0;color:inherit;padding:0;text-align:left"><b class="grow">Developer &amp; testing</b><span class="muted">${open ? '▾' : '▸'}</span></button>
     ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what each part of the engine saw: predictions, boxes, scores, timing and backend.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
     <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdicts, side by side: Hybrid, detector + classifier alone, TinyCLIP alone, and the colour extraction. No monsters appear.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
-    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: also runs the detector and classifier on the CPU instead of the GPU (TinyCLIP always runs on the CPU). Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
+    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: also runs the detector and classifier on the CPU instead of the GPU (TinyCLIP always runs on the CPU). Reloads the engine. Now: <span id="devBackends">${esc(backendsText())}</span>.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
     <div class="toggle"><div><b>TinyCLIP on GPU (comparison)</b><p>Testing only: runs TinyCLIP on WebGPU, like v0.4.0, to compare speed. Results can differ from what players get. Reloads the engine.</p></div><button class="switch ${S.settings.clipGPU ? 'on' : ''}" data-act="toggleClipGPU" aria-label="Toggle TinyCLIP on GPU"></button></div>
     ${perfHTML()}
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
-    <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow">Engine load: ${E.loadMs || '–'} ms</span></div>
+    <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow" id="devLoadMs">${loadTimesText()}</span></div>
     <p class="small muted" style="margin:0">Monster designs: ${counts.dedicated} specific, ${counts.composed} built from parts, ${counts.related} borrowed from a related object, ${counts.family} general family designs.</p>` : ''}
   </div>`;
 }
 
 /* ---------- sheets ---------- */
-function openSheet(html) {
-  $('#sheet').innerHTML = `<div class="sheet-wrap" data-act="sheetBg"><div class="sheet" role="dialog" aria-modal="true">${html}</div></div>`;
+// key: when the same sheet is already open, its contents are updated in place: no re-opening animation, and the
+// scroll position, typed text and focus are kept (Settings used to jump to the top on every change)
+function openSheet(html, key) {
+  const cur = $('#sheet .sheet');
+  if (key && cur && cur.dataset.key === key) {
+    const top = cur.scrollTop, vals = {}, focus = document.activeElement && cur.contains(document.activeElement) ? document.activeElement.id : '';
+    cur.querySelectorAll('input[id], textarea[id]:not([readonly])').forEach(e => { vals[e.id] = e.value; });
+    cur.innerHTML = html;
+    for (const [id, v] of Object.entries(vals)) { const e = cur.querySelector('#' + id); if (e) e.value = v; }
+    cur.scrollTop = top;
+    if (focus) { const f = cur.querySelector('#' + focus); if (f) f.focus({ preventScroll: true }); }
+    return;
+  }
+  $('#sheet').innerHTML = `<div class="sheet-wrap" data-act="sheetBg"><div class="sheet" role="dialog" aria-modal="true"${key ? ` data-key="${key}"` : ''}>${html}</div></div>`;
+}
+// flip one switch in place (no rebuild); also refreshes the backup code, which contains the settings
+function setSwitch(el, on) {
+  if (el) { el.classList.toggle('on', !!on); el.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+  const box = $('#exportBox'); if (box) box.value = exportSave(S);
 }
 function closeSheet() { $('#sheet').innerHTML = ''; }
 
 /* ---------- actions ---------- */
 const actions = {
   tab(id) { ui.tab = id; closeSheet(); render(); window.scrollTo({ top: 0 }); },
-  mute() { S.settings.muted = !S.settings.muted; SFX.setMuted(S.settings.muted); persist(); renderTop(); if ($('#sheet').innerHTML) settingsSheet(); },
+  mute() { S.settings.muted = !S.settings.muted; SFX.setMuted(S.settings.muted); persist(); renderTop(); const sw = $('#sheet .switch[data-act="mute"]'); if (sw) setSwitch(sw, !S.settings.muted); },
   settings: settingsSheet, closeSheet,
   sheetBg(_, el, ev) { if (ev.target === el) closeSheet(); },
   openCamera, camClose: closeCamera, camSnap,
+  camZoom(dir) { const z = ui.camZoom; if (z) z.apply(z.value + (dir === '+' ? 1 : -1) * Math.max(z.info.step, (z.info.max - z.info.min) / 10)); },
   cancelPhoto,
+  guide() { openSheet(Guide.html(ui.guideOpen), 'guide'); },
   pickCand(i) { scan(i); },
+  wrongObject(arg) { const p = ui.pending; if (!p || !p.rec || p.scanning) return; wrongObject(p, arg === 'all' ? p.rec.candidates.map(c => c.obj) : [p.rec.candidates[+arg].obj]); },
+  pickAlt(i) { const p = ui.pending; if (p && p.alts && p.alts[+i]) scan(p.alts[+i]); },
+  retakePhoto() { cancelPhoto(); openCamera(); },
   lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
   lensPrepare() { Engine.load().then(ok => { if (ok) { S.settings.engineCached = true; persist(); } }); },
   engineDownload() { ui.engineNoticeOk = true; showEngineLoading(openCamera); },
@@ -1036,13 +1166,17 @@ const actions = {
     ui.devTaps = (ui.devTaps || 0) + 1;
     if (ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
   },
-  toggleForceCPU() { S.settings.forceCPU = !S.settings.forceCPU; persist(); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); settingsSheet(); },
-  toggleClipGPU() { S.settings.clipGPU = !S.settings.clipGPU; persist(); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); settingsSheet(); },
+  toggleForceCPU(_, el) { S.settings.forceCPU = !S.settings.forceCPU; persist(); setSwitch(el, S.settings.forceCPU); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); },
+  toggleClipGPU(_, el) { S.settings.clipGPU = !S.settings.clipGPU; persist(); setSwitch(el, S.settings.clipGPU); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); },
   perfExport() {
     const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), timings: Engine.perfLog() });
     try { navigator.clipboard.writeText(text).then(() => toast('Timings copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
   },
   perfClear() { Engine.clearPerf(); settingsSheet(); },
+  rejExport() {
+    const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), rejections: rejLog() });
+    try { navigator.clipboard.writeText(text).then(() => toast('Reports copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
+  },
   async engineRedownload(_, el) {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to delete'; return; }
     await Engine.clearCache(); S.settings.engineCached = false; persist(); toast('Saved engine files deleted. They download again on the next hunt.'); settingsSheet();
@@ -1087,9 +1221,9 @@ const actions = {
   buy(id) { if (buyItem(S, id)) { SFX.coin(); persist(); render(); } },
   craft(id) { if (craftItem(S, id)) { SFX.coin(); toast(`Crafted ${ITEMS[id].name}.`); persist(); render(); } },
   research(id) { if (buyResearch(S, id)) { SFX.levelup(); toast(`Research complete: ${RESEARCH_BY_ID[id].name}`, 'gold'); persist(); render(); } },
-  toggleDebug() { S.settings.debugLens = !S.settings.debugLens; persist(); settingsSheet(); },
+  toggleDebug(_, el) { S.settings.debugLens = !S.settings.debugLens; persist(); setSwitch(el, S.settings.debugLens); },
   devOpen() { S.settings.devOpen = !S.settings.devOpen; persist(); settingsSheet(); },
-  toggleFieldTest() { S.settings.fieldTest = !S.settings.fieldTest; persist(); settingsSheet(); },
+  toggleFieldTest(_, el) { S.settings.fieldTest = !S.settings.fieldTest; persist(); setSwitch(el, S.settings.fieldTest); },
   ftMark(arg, el) {
     const p = ui.pending; if (!p || !p.ft) return;
     const [model, v] = arg.split(':'); p.ft.marks[model] = v;
@@ -1112,7 +1246,7 @@ const actions = {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again'; return; }
     Platform.storage.remove(FT_KEY); Platform.storage.remove(FT_KEY + '.copied'); settingsSheet();
   },
-  toggleKeep() { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); settingsSheet(); },
+  toggleKeep(_, el) { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); setSwitch(el, S.settings.keepPhotos); },
   copyExport() {
     const box = $('#exportBox'); box.value = exportSave(S);
     const fallback = () => { box.focus(); box.select(); toast('Code selected — use your phone’s Copy.'); };
@@ -1134,7 +1268,12 @@ document.addEventListener('click', ev => {
   fn(el.dataset.arg, el, ev);
 });
 // the camera never runs in the background: leaving the app closes it
-document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Platform.camera.isOpen()) closeCamera(); } });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Platform.camera.isOpen()) closeCamera(); } else resumeEngine(); });
+window.addEventListener('pageshow', e => { if (e.persisted) resumeEngine(); });
+document.addEventListener('toggle', e => { if (e.target.matches && e.target.matches('.guide-sec') && e.target.open) ui.guideOpen = e.target.dataset.sec; }, true);
+// back in the foreground: make sure the recognition engine still works (Android may have taken its GPU context or
+// frozen its worker) and quietly reload it from the phone's cache if not, before the player takes the next photo
+function resumeEngine() { if (Engine.status.state === 'ready') Engine.check(); }
 window.addEventListener('pagehide', () => persist(true));
 setInterval(() => { if (!ui.battle && !document.hidden) { const before = S.hp; regen(S); if (S.hp !== before) { renderTop(); persist(); } } }, 20000);
 

@@ -55,6 +55,8 @@ const Engine = (() => {
   function load() {
     if (st.state === 'ready') return Promise.resolve(true);
     if (loading) return loading;
+    // after a failure, start both parts from scratch (Retry must really reinitialise, not reuse a broken part)
+    if (st.state === 'failed') { ClipLens.reset(); Lens.reset && Lens.reset(); }
     loading = (async () => {
       const t0 = performance.now();
       Object.assign(st, { state: 'loading', error: '', kind: '', stage: 'Preparing…', loaded: 0, total: 0 }); emit();
@@ -70,11 +72,14 @@ const Engine = (() => {
         }
         // one part after the other keeps peak memory and bandwidth lower on phones
         st.stage = 'Object detector and classifier'; emit();
+        const tL = performance.now(); st.stageMs = {};
         if (!(await Lens.load())) throw Object.assign(new Error(Lens.status.error || 'detector/classifier failed to load'), { part: 'lens' });
+        st.stageMs.lens = Math.round(performance.now() - tL);
         st.loaded = lensBytes; st.backends.lens = Lens.status.backend; st.stage = 'Object vocabulary model'; emit();
+        const tC = performance.now();
         ClipLens.CFG.onProgress = prog => { const got = Object.values(prog).reduce((a, p) => a + (p.loaded || 0), 0); st.loaded = lensBytes + Math.min(clipBytes, got); emit(); };
         if (!(await ClipLens.load())) throw Object.assign(new Error(ClipLens.status.error || 'vocabulary model failed to load'), { kind: ClipLens.status.errorKind, part: 'clip' });
-        st.backends.clip = ClipLens.status.info.backend;
+        st.backends.clip = ClipLens.status.info.backend; st.stageMs.clip = Math.round(performance.now() - tC);
         st.loaded = st.total; st.loadMs = Math.round(performance.now() - t0); st.state = 'ready'; st.stage = '';
         try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {} // ask the browser not to evict the models
       } catch (e) {
@@ -86,27 +91,65 @@ const Engine = (() => {
     return loading;
   }
 
+  /* Recovery. Android Chrome may freeze or discard parts of a page in the background: the GPU (WebGL) context can be
+     lost, taking the detector/classifier weights with it, and the TinyCLIP worker can be frozen or stopped. Before
+     v0.4.2 the engine still reported "ready" afterwards, so every hunt failed until the page was reloaded.
+     check() asks both parts whether they still work (called when the app returns to the foreground); recover() throws
+     both parts away and loads them again from the copies saved on the phone (no download). Only one recovery runs at a
+     time, and it waits for any load already in progress. A page Chrome has killed entirely restarts from scratch. */
+  let recovering = null;
+  async function check() {
+    if (st.state !== 'ready') return st.state !== 'failed';
+    const ok = Lens.healthy() && await ClipLens.ping();
+    if (!ok) { st.recoveries = (st.recoveries || 0) + 1; await recover('check'); }
+    return st.state === 'ready';
+  }
+  function recover(why) {
+    if (recovering) return recovering;
+    recovering = (async () => {
+      if (loading) { try { await loading; } catch (e) {} }
+      st.lastRecovery = { why, t: Date.now() };
+      ClipLens.reset(); Lens.reset && Lens.reset();
+      Object.assign(st, { state: 'idle', backends: {} }); emit();
+      const ok = await load();
+      recovering = null;
+      return ok;
+    })();
+    return recovering;
+  }
+
   const timeout = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error('recognition timed out'), { kind: 'timeout' })), ms))]);
   // Recognise one photo with the standard pipeline. Returns { rec, prodOnly, clip }: rec carries the final decision.
   async function recognize(img, { timeoutMs = 45000 } = {}) {
     if (st.state !== 'ready') throw Object.assign(new Error('recognition engine not ready'), { kind: 'not-ready' });
-    const t0 = performance.now();
-    try {
-      const rec = await timeout(Lens.recognize(img), timeoutMs);
-      const prodOnly = { decision: rec.decision, reason: rec.reason, candidates: rec.candidates.slice() };
-      const clip = await timeout(ClipLens.recognize(rec.image, rec), timeoutMs);
-      const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
-      rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
-      rec.debug.decision = h.decision + (h.reason === 'disagree' ? ' (lenses disagree)' : h.reason === 'second-opinion' ? ' (second opinion)' : '');
-      const ms = Math.round(performance.now() - t0), backends = { lens: Lens.status.backend, clip: ClipLens.status.info.backend };
-      rec.debug.engine = { id: ENGINE_ID, backends, totalMs: ms };
-      perfAdd({ t: Date.now(), ms, lensMs: rec.debug.times && rec.debug.times.total, clipMs: clip.totalMs, clipInferMs: clip.inferMs, crops: clip.regions.length, backends });
-      return { rec, prodOnly, clip, ms };
-    } catch (e) {
-      // a crashed worker or a lost GPU context leaves the engine unusable: make the next attempt reload it
-      if (ClipLens.status.state !== 'ready') { st.state = 'failed'; emit(); }
-      throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind: (e && e.kind) || kindOf(e, 'run') });
+    try { return await recognizeOnce(img, timeoutMs); }
+    catch (e) {
+      const kind = (e && e.kind) || kindOf(e, 'run');
+      if (kind === 'busy') throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind });
+      // too slow: report it now (no second long wait), but reload in the background in case something is stuck
+      if (kind === 'timeout') { st.recoveries = (st.recoveries || 0) + 1; recover('timeout'); throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind }); }
+      // the engine may have lost its GPU context or worker (e.g. after the app was in the background): reload both
+      // parts from the phone's cache and try this photo once more, with the same models
+      st.recoveries = (st.recoveries || 0) + 1;
+      if (await recover('run: ' + kind)) {
+        try { return await recognizeOnce(img, timeoutMs); }
+        catch (e2) { st.state = 'failed'; st.error = String(e2.message || e2); st.kind = (e2 && e2.kind) || kindOf(e2, 'run'); emit(); throw Object.assign(e2 instanceof Error ? e2 : new Error(String(e2)), { kind: st.kind }); }
+      }
+      throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind: st.kind || kind });
     }
+  }
+  async function recognizeOnce(img, timeoutMs) {
+    const t0 = performance.now();
+    const rec = await timeout(Lens.recognize(img), timeoutMs);
+    const prodOnly = { decision: rec.decision, reason: rec.reason, candidates: rec.candidates.slice() };
+    const clip = await timeout(ClipLens.recognize(rec.image, rec), timeoutMs);
+    const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
+    rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
+    rec.debug.decision = h.decision + (h.reason === 'disagree' ? ' (lenses disagree)' : h.reason === 'second-opinion' ? ' (second opinion)' : '');
+    const ms = Math.round(performance.now() - t0), backends = { lens: Lens.status.backend, clip: ClipLens.status.info.backend };
+    rec.debug.engine = { id: ENGINE_ID, backends, totalMs: ms };
+    perfAdd({ t: Date.now(), ms, lensMs: rec.debug.times && rec.debug.times.total, clipMs: clip.totalMs, clipInferMs: clip.inferMs, crops: clip.regions.length, backends });
+    return { rec, prodOnly, clip, ms };
   }
 
   // developer testing only (same models, reloads the engine):
@@ -121,5 +164,5 @@ const Engine = (() => {
     reload();
   }
 
-  return { load, recognize, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
+  return { load, recognize, check, recover, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
 })();
