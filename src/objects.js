@@ -10,10 +10,12 @@
 
 const OBJECTS = {};
 const OBJECT_LIST = [];
+const ALIAS_INDEX = new Map(); // label → object id (first registration wins); updated as objects are added
 function OBJ(id, name, cat, vis, o = {}) {
   if (!CATEGORY[cat]) throw new Error('unknown category for ' + id);
   const def = { id, name, cat, vis: vis || null, h: o.h == null ? -1 : o.h, s: o.s, l: o.l, al: o.al || [], nm: o.nm || null, sig: o.sig || null, vocab: o.vocab !== false };
   OBJECTS[id] = def; OBJECT_LIST.push(def);
+  for (const a of [name, ...def.al]) { const k = String(a).toLowerCase().trim(); if (k && !ALIAS_INDEX.has(k)) ALIAS_INDEX.set(k, id); }
   return def;
 }
 const V = (t, p = {}) => ({ t, ...p });          // composed template
@@ -418,11 +420,6 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, 
 })();
 
 /* ---------- lookups ---------- */
-const ALIAS_INDEX = (() => {
-  const idx = new Map();
-  for (const o of OBJECT_LIST) for (const a of [o.name.toLowerCase(), ...o.al]) { const k = a.toLowerCase().trim(); if (!idx.has(k)) idx.set(k, o.id); }
-  return idx;
-})();
 // default object per category (the family template); used when a recogniser only names a broad category
 const CAT_DEFAULT_OBJECT = {
   toilet: 'toilet', mug: 'mug', shoe: 'sneaker', plant: 'potted_plant', laptop: 'laptop', banana: 'banana', sofa: 'sofa', phone: 'phone', bottle: 'bottle',

@@ -23,7 +23,8 @@ class Vision(torch.nn.Module):
 
 fp32 = os.path.join(out, 'vision_fp32.onnx')
 torch.onnx.export(Vision(model), torch.randn(1, 3, size, size), fp32, input_names=['pixel_values'], output_names=['image_embeds'],
-                  dynamic_axes={'pixel_values': {0: 'n'}, 'image_embeds': {0: 'n'}}, opset_version=17, do_constant_folding=True)
+                  dynamic_axes={'pixel_values': {0: 'n'}, 'image_embeds': {0: 'n'}}, opset_version=17, do_constant_folding=True,
+                  **({'dynamo': False} if 'dynamo' in torch.onnx.export.__code__.co_varnames else {}))
 from onnxruntime.quantization import quantize_dynamic, QuantType
 q8 = os.path.join(out, 'vision.onnx')
 quantize_dynamic(fp32, q8, weight_type=QuantType.QUInt8, op_types_to_quantize=['MatMul', 'Gemm'])

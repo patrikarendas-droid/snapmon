@@ -30,7 +30,7 @@ jobs:
       - name: Python deps
         run: |
           pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
-          pip install --quiet transformers onnx onnxruntime
+          pip install --quiet transformers onnx onnxruntime onnxscript
       - name: Export ${{ matrix.variant }}
         run: python lab/export_clip.py ${{ matrix.hf }} ${{ matrix.variant }} lab/vocab-labels.json models/clip
       - name: Production models + browser tooling

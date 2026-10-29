@@ -1,7 +1,13 @@
 /* SNAPMON — game state, saves, encounters, monster generation, combat rules, rewards. No DOM access here. */
 'use strict';
 
-const SAVE_KEY = 'snapmon.save.v1';
+const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
+const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
+const GAME_VERSION = '0.3.0';
+const STORE = {
+  get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
+  set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+};
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const randRange = (rng, a, b) => a + rng() * (b - a);
 const randInt = (rng, a, b) => a + Math.floor(rng() * (b - a + 1));
@@ -9,15 +15,15 @@ let RNG = Math.random; // swappable for tests
 
 function freshState() {
   return {
-    v: 2, created: Date.now(), level: 1, xp: 0, hp: 60, coins: 40, rp: 0,
+    v: SAVE_VERSION, created: Date.now(), level: 1, xp: 0, hp: 60, coins: 40, rp: 0,
     mats: { scrap: 4, goo: 4, ecto: 0, prism: 0 },
     items: { potion: 3, greater: 0, strength: 0, defense: 0, antidote: 1, enhancer: 0, trap: 5, smoke: 1 },
     weapons: { sword: 0 }, equipped: 'sword', charms: {}, charmSlots: [null, null],
     research: {}, monsters: [], dex: {}, companion: null,
     questsClaimed: {}, achievements: {},
-    stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {},
+    stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {}, objsPhotographed: {},
              cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0, unrecognized: 0, labelsSeen: {} },
-    enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [] },
+    enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [], recentObjs: [] },
     settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false },
     lastTick: Date.now(), nextId: 1, log: [],
   };
@@ -26,7 +32,8 @@ function migrate(s) {
   const base = freshState();
   const out = Object.assign(base, s);
   for (const k of ['mats', 'items', 'stats', 'enc', 'settings']) out[k] = Object.assign(base[k] || freshState()[k], s[k] || {});
-  for (const k of ['capByFam', 'famSeen', 'catsPhotographed']) out.stats[k] = out.stats[k] || {};
+  for (const k of ['capByFam', 'famSeen', 'catsPhotographed', 'objsPhotographed']) out.stats[k] = out.stats[k] || {};
+  out.enc.recentObjs = out.enc.recentObjs || [];
   if (!Array.isArray(out.charmSlots)) out.charmSlots = [null, null];
   if (!out.weapons || !Object.keys(out.weapons).length) out.weapons = { sword: 0 };
   if (!WEAPONS[out.equipped] || out.weapons[out.equipped] == null) out.equipped = Object.keys(out.weapons)[0];
@@ -34,19 +41,50 @@ function migrate(s) {
   // v1 -> v2 (AI recognition update): manual-entry setting retired, new counters added. Monsters, dex and progress are kept as-is.
   if ((s.v || 1) < 2) { delete out.settings.aiLens; out.v = 2; }
   if (!out.stats.labelsSeen) out.stats.labelsSeen = {};
+  if ((s.v || 1) < 3) migrateV2toV3(out);
   return out;
 }
+/* v2 -> v3 (object registry): monsters and the encyclopedia are keyed by specific objects instead of category+rarity.
+   Nothing is deleted: captured monsters keep their exact appearance (their stored DNA still renders with the original
+   sprite code) and gain an object id; old encyclopedia entries are merged into the matching object entries. */
+function migrateV2toV3(out) {
+  const objFor = (label, word, cat) => objectForLabel(label) || objectForLabel(word) || CAT_DEFAULT_OBJECT[cat] || null;
+  for (const m of out.monsters) {
+    if (m.obj) continue;
+    m.obj = objFor(m.label, m.word, m.cat);
+    if (m.obj) m.species = 'o:' + m.obj;
+  }
+  const dex = {};
+  const merge = (obj, d) => {
+    if (!obj || !OBJECTS[obj]) return;
+    const k = 'o:' + obj, e = dex[k] || (dex[k] = { key: k, obj, name: OBJECTS[obj].name, monsterName: d.name || OBJECTS[obj].name, cat: OBJECTS[obj].cat, fam: d.fam, first: d.first || Date.now(), seen: 0, caught: 0, rarities: {}, dna: d.dna, variants: {} });
+    e.first = Math.min(e.first, d.first || e.first); e.seen += d.seen || 0; e.caught += d.caught || 0;
+    if (d.rarity) e.rarities[d.rarity] = true;
+    Object.assign(e.variants, d.variants || {});
+  };
+  for (const d of Object.values(out.dex || {})) if (!d.obj) merge(objFor(null, d.word, d.cat), d); else dex[d.key] = d;
+  for (const m of out.monsters) if (m.obj && !dex['o:' + m.obj]) merge(m.obj, { name: m.name, fam: m.fam, first: m.caughtAt, seen: 1, caught: 1, rarity: m.rarity, dna: m.dna });
+  out.dex = dex;
+  for (const [cat, n] of Object.entries(out.stats.catsPhotographed || {})) { const o = CAT_DEFAULT_OBJECT[cat]; if (o) out.stats.objsPhotographed[o] = (out.stats.objsPhotographed[o] || 0) + n; }
+  out.v = 3;
+}
 let storageOK = true;
+let saveBlocked = null; // set when the stored save comes from a NEWER game version (e.g. after a code rollback)
 function loadState() {
-  try {
-    const raw = localStorage.getItem(SAVE_KEY);
-    if (!raw) return freshState();
-    return migrate(JSON.parse(raw));
-  } catch (e) { storageOK = false; return freshState(); }
+  let raw = null;
+  try { raw = STORE.get(SAVE_KEY); } catch (e) { storageOK = false; }
+  if (!raw) return freshState();
+  let parsed;
+  try { parsed = JSON.parse(raw); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
+  if ((parsed.v || 1) > SAVE_VERSION) { saveBlocked = { reason: 'newer', version: parsed.v, raw }; return freshState(); }
+  // keep an untouched copy of the old save before migrating it (one per old version)
+  if ((parsed.v || 1) < SAVE_VERSION) { const bk = SAVE_KEY + '.backup.v' + (parsed.v || 1); if (!STORE.get(bk)) STORE.set(bk, raw); }
+  try { return migrate(parsed); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
 }
 function saveState(S) {
-  try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); storageOK = true; return true; }
-  catch (e) { storageOK = false; return false; }
+  if (saveBlocked) return false; // never overwrite a save we could not read safely
+  const ok = STORE.set(SAVE_KEY, JSON.stringify(S));
+  storageOK = ok; return ok;
 }
 function exportSave(S) { return 'SNAPMON1:' + btoa(unescape(encodeURIComponent(JSON.stringify(S)))); }
 function importSave(text) {
@@ -54,6 +92,7 @@ function importSave(text) {
   if (!text.startsWith('SNAPMON1:')) throw new Error('That is not a SNAPMON backup code. It should start with SNAPMON1:');
   const obj = JSON.parse(decodeURIComponent(escape(atob(text.slice(9)))));
   if (!obj || typeof obj.level !== 'number' || !Array.isArray(obj.monsters)) throw new Error('The backup code is damaged or incomplete.');
+  if ((obj.v || 1) > SAVE_VERSION) throw new Error(`This backup was made by a newer SNAPMON (save format ${obj.v}). Update the game before restoring it.`);
   return migrate(obj);
 }
 
@@ -147,10 +186,10 @@ function hamming(a, b) {
 }
 
 /* ---------- encounters ---------- */
-function encounterChance(S, cat, photo) {
+function encounterChance(S, obj, photo) {
   const dup = !!(photo && photo.hash && S.enc.recentHashes.some(h => hamming(h, photo.hash) <= 6));
-  const newCat = !S.stats.catsPhotographed[cat];
-  const rc = S.enc.recentCats;
+  const newCat = !S.stats.objsPhotographed[obj];   // exploring new kinds of object is rewarded
+  const rc = S.enc.recentObjs, cat = obj;
   let p = 0.45 + (has(S, 'lens1') ? 0.06 : 0) + (has(S, 'lens2') ? 0.06 : 0);
   if (newCat) p += 0.15;
   if (rc.length >= 2 && rc[rc.length - 1] === cat && rc[rc.length - 2] === cat) p -= 0.12;
@@ -176,15 +215,18 @@ function pickWeighted(weights, rng) {
 }
 /* Main photo resolution for a RECOGNISED object. Mutates S. Returns { encounter, monster?, line, ... }
    obj: the recognised object { label, sub, aspect, conf } (a plain string is accepted as the label). */
-function resolvePhoto(S, cat, photo, obj, rng = RNG) {
+function resolvePhoto(S, objId, photo, obj, rng = RNG) {
   if (typeof obj === 'string' || obj == null) obj = { label: obj || '' };
+  if (!OBJECTS[objId] && CATEGORY[objId]) objId = CAT_DEFAULT_OBJECT[objId] || objId; // a bare category id (older callers/tests)
+  const cat = OBJECTS[objId] ? OBJECTS[objId].cat : objId;
   const word = obj.label;
   if (word) S.stats.labelsSeen[word] = (S.stats.labelsSeen[word] || 0) + 1;
   const first = S.stats.photos === 0 && S.stats.encounters === 0;
-  const ch = encounterChance(S, cat, photo);
+  const ch = encounterChance(S, objId, photo);
   S.stats.photos++;
   S.stats.catsPhotographed[cat] = (S.stats.catsPhotographed[cat] || 0) + 1;
-  S.enc.recentCats = [...S.enc.recentCats, cat].slice(-5);
+  S.stats.objsPhotographed[objId] = (S.stats.objsPhotographed[objId] || 0) + 1;
+  S.enc.recentObjs = [...S.enc.recentObjs, objId].slice(-5);
   if (photo && photo.hash) S.enc.recentHashes = [...S.enc.recentHashes, photo.hash].slice(-12);
   const hit = first || rng() < ch.p;
   if (!hit) {
@@ -202,7 +244,7 @@ function resolvePhoto(S, cat, photo, obj, rng = RNG) {
     else if (has(S, 'mutagen') && rng() < 0.09) variant = 'mutated';
     if (has(S, 'chroma') && rng() < 1 / 12) variant = 'shiny';
   }
-  const m = createMonster(S, { cat, rarity, variant, word, photo, first, rng, sub: obj.sub, aspect: obj.aspect, conf: obj.conf });
+  const m = createMonster(S, { obj: objId, cat, rarity, variant, word, photo, first, rng, aspect: obj.aspect, conf: obj.conf });
   return { encounter: true, monster: m, first, chance: ch };
 }
 
@@ -254,20 +296,33 @@ function monsterStats(rarity, fam, L, seed, variant) {
   if (variant === 'mutated') st.atk = Math.round(st.atk * 1.1);
   return st;
 }
-function createMonster(S, { cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
+function speciesName3(objId, rarity, fam) {
+  const o = OBJECTS[objId];
+  const h = hashStr(objId + '|' + rarity);
+  const head = o.nm || titleCase(o.name.split(/[\s/-]+/).filter(Boolean).pop().replace(/[^a-z]/gi, '').slice(0, 8)) || 'Odd';
+  let name = joinName(head, SUFFIX[rarity][(h >>> 5) % SUFFIX[rarity].length]);
+  if (rarity === 'legendary') name += ', ' + LEGEND_TITLES[fam];
+  return name;
+}
+function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
+  if (!obj) obj = CAT_DEFAULT_OBJECT[cat] || null;
+  if (obj && OBJECTS[obj]) cat = OBJECTS[obj].cat;
   const fam = monsterFamily(cat, word, variant);
   const r = RARITY[rarity];
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
   const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit } : null;
-  const base = { cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
+  const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
+  const abilities = monsterAbilities(cat, rarity, fam, base.word);
+  const o = obj && OBJECTS[obj];
+  if (o && o.sig) abilities[0] = { ...o.sig, cd: cdFor(o.sig) }; // object-specific signature move
   const m = {
     ...base, id: null, fam, level,
-    name: speciesName(cat, rarity, base.word, fam),
+    name: o ? speciesName3(obj, rarity, fam) : speciesName(cat, rarity, base.word, fam),
     stats: monsterStats(rarity, fam, level, seed, variant),
-    abilities: monsterAbilities(cat, rarity, fam, base.word),
-    dna: makeDNA(base), species: speciesKey(cat, rarity), seenAt: Date.now(),
+    abilities,
+    dna: makeDNA(base), species: o ? 'o:' + obj : speciesKey(cat, rarity), seenAt: Date.now(),
     label: word ? String(word).slice(0, 40) : null, conf: conf != null ? +(+conf).toFixed(2) : null,
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
@@ -285,10 +340,13 @@ function recordSighting(S, m) {
   let d = S.dex[m.species], isNew = false, rp = 0;
   if (!d) {
     isNew = true; rp = 2 + (RARITY[m.rarity].tier >= 2 ? 1 : 0) + (RARITY[m.rarity].tier >= 4 ? 2 : 0);
-    d = S.dex[m.species] = { key: m.species, cat: m.cat, rarity: m.rarity, name: m.name, fam: m.fam, first: Date.now(), seen: 0, caught: 0, dna: m.dna, word: m.word, variants: {} };
+    const o = m.obj && OBJECTS[m.obj];
+    d = S.dex[m.species] = { key: m.species, obj: m.obj || null, name: o ? o.name : m.name, monsterName: m.name, cat: m.cat, fam: m.fam, first: Date.now(), seen: 0, caught: 0, rarities: {}, dna: m.dna, word: m.word, variants: {} };
     S.rp += rp;
   }
   d.seen++;
+  d.rarities = d.rarities || {};
+  if (!d.rarities[m.rarity]) { d.rarities[m.rarity] = true; if (RARITY[m.rarity].tier > Math.max(-1, ...Object.keys(d.rarities).filter(r => r !== m.rarity).map(r => RARITY[r].tier))) d.dna = m.dna; }
   if (m.variant) d.variants[m.variant] = true;
   return { isNew, rp };
 }
