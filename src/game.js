@@ -313,7 +313,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
-  const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit } : null;
+  const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}) } : null;
   const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
   const abilities = monsterAbilities(cat, rarity, fam, base.word);
   const o = obj && OBJECTS[obj];

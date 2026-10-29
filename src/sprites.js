@@ -888,10 +888,17 @@ const SEC_COLOR = {
 };
 function buildPalette(dna) {
   const { h, s, l, ah, as, al } = dna.col;
+  // photo palettes: body shadow/highlight follow the photographed object's own shading (clamped to stay readable);
+  // achromatic objects (black, white, metal) keep colourless shading instead of the default warm/cool shift
+  let dl = 16, ll = 14, dh = 8, lh = -6, ds = 6, ls = -4;
+  if (dna.pal && dna.pal.conf === 'confident') {
+    dl = Math.max(9, Math.min(24, l - dna.pal.sh[2])); ll = Math.max(9, Math.min(22, dna.pal.hi[2] - l));
+    if (s < 15) { dh = 0; lh = 0; ds = 0; ls = 0; }
+  }
   let pal = {
-    [P.OUT]: hsl(h, 45, 11), [P.BODY]: hsl(h, s, l), [P.BODY_D]: hsl(h + 8, s + 6, l - 16), [P.BODY_L]: hsl(h - 6, s - 4, l + 14),
+    [P.OUT]: hsl(h, 45, dna.pal ? Math.min(11, l - 9) : 11), [P.BODY]: hsl(h, s, l), [P.BODY_D]: hsl(h + dh, s + ds, l - dl), [P.BODY_L]: hsl(h + lh, s + ls, l + ll),
     [P.ACC]: hsl(ah, as, al), [P.ACC_D]: hsl(ah + 8, as + 5, al - 16), [P.ACC_L]: hsl(ah, as - 10, Math.min(92, al + 22)),
-    [P.WHITE]: '#f7f3e8', [P.PUPIL]: '#141019', [P.MOUTH]: '#3b0d1f', [P.TOOTH]: '#fffbef', [P.PATTERN]: hsl(h + 30, s + 10, l - 10),
+    [P.WHITE]: '#f7f3e8', [P.PUPIL]: '#141019', [P.MOUTH]: '#3b0d1f', [P.TOOTH]: '#fffbef', [P.PATTERN]: dna.pal && s < 15 ? hsl(h, s, l - 14) : hsl(h + 30, s + 10, l - 10),
     [P.GLOW]: dna.glow || '#fff27a', [P.METAL]: hsl(h, 8, 72), [P.METAL_D]: hsl(h, 10, 40), [P.STEAM]: 'rgba(255,255,255,0.45)',
     [P.PAPER]: '#efe4c6', [P.TONGUE]: '#ff6f9a', [P.GOLD]: '#ffc93a', [P.TOXIC]: '#b6ff3b',
   };
@@ -976,6 +983,23 @@ function makeDNA3(m) {
   if (ph && ph.sat > 0.18 && baseHue >= 0) h = h + ((((ph.hue - h) % 360) + 540) % 360 - 180) * 0.2;
   let ah = cat.acc >= 0 ? cat.acc + R.int(-15, 15) : h + 150, as = 60 + R.int(-10, 15), al = 50 + R.int(-8, 8);
   if (ph && ph.sat > 0.25 && baseHue < 0) ah = ph.hue + 20;
+  // v0.4: a palette extracted from the photographed object (src/color.js) colours the body for real. A confident
+  // palette is copied (with a little individual variation and readability limits); a fallback one only leans the
+  // object's own colour towards the photo.
+  const pal = ph && ph.pal;
+  let palDNA = null, secPhoto = null;
+  if (pal && pal.conf === 'confident') {
+    const [ph0, ps0, pl0] = pal.primary;
+    h = ph0 + R.int(-3, 3); s = Math.max(0, Math.min(95, ps0 + R.int(-4, 4))); l = Math.max(20, Math.min(82, pl0 + R.int(-3, 3)));
+    palDNA = { conf: 'confident', hi: pal.highlight, sh: pal.shadow };
+    if (pal.secondary) secPhoto = [pal.secondary[0], Math.max(0, Math.min(95, pal.secondary[1])), Math.max(22, Math.min(80, pal.secondary[2]))];
+  } else if (pal && /\+bg$/.test(pal.method || '')) {
+    // uncertain but background-suppressed: lean halfway towards the photo (hue only if the photo is clearly coloured)
+    if (pal.primary[1] >= 18) h = h + ((((pal.primary[0] - h) % 360) + 540) % 360 - 180) * 0.5;
+    s = Math.round((s + pal.primary[1]) / 2);
+    l = Math.max(20, Math.min(82, Math.round((l + pal.primary[2]) / 2)));
+    palDNA = { conf: 'fallback' };
+  }
   if (m.variant === 'shiny') { h += 150; ah += 150; s = Math.min(95, s + 25); }
   if (m.variant === 'mutated') { ah = 85; as = 90; al = 52; }
   if (tier >= 4) { as = 85; al = 55; }
@@ -991,11 +1015,12 @@ function makeDNA3(m) {
     spikes: tier >= 2 && SR.chance(0.5), wings: tier >= 3 && SR.chance(0.6),
     drips: m.variant === 'mutated', variant: m.variant || null, tier, featSeed: R.int(1, 1e9),
     col: { h: Math.round(h), s, l, ah: Math.round(ah), as, al },
-    sec: (legacyKey && (SEC_COLOR_V2[legacyKey] || SEC_COLOR[vis.legacy])) || o.sec || (LEAFY_CATS.has(o.cat) ? [110, 55, 40] : [200, 55, 64]),
+    sec: secPhoto || (legacyKey && (SEC_COLOR_V2[legacyKey] || SEC_COLOR[vis.legacy])) || o.sec || (LEAFY_CATS.has(o.cat) ? [110, 55, 40] : [200, 55, 64]),
     glow: tier >= 4 ? '#ffe45c' : m.variant === 'spectral' ? '#9ff7ff' : m.variant === 'mutated' ? '#c6ff4a' : null,
     glowEyes: tier >= 4 || m.variant === 'spectral',
   };
   if (m.variant === 'spectral' && tier >= 4) dna.top = 'halo';
+  if (palDNA) dna.pal = palDNA;
   return dna;
 }
 const D_BUILDER_ALIAS = { fan: 'electric_fan', vacuum: 'vacuum_cleaner', smartwatch: 'wristwatch', robot_toy: 'robot' };

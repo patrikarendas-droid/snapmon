@@ -413,7 +413,8 @@ async function scan(i) {
   const p = ui.pending; if (!p || !p.rec || p.scanning) return;
   const c = p.rec.candidates[+i]; if (!c) return;
   p.scanning = true;
-  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash }; // colour from the chosen object, fingerprint from the whole photo
+  // colour from the chosen object (palette with background suppression), fingerprint from the whole photo
+  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash, pal: Photo.palette(p.img, c.box) };
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
     <h2 style="text-align:center">Scanning for supernatural activity…</h2>
     <div class="photo-frame"><img alt="" src="${p.url}"><i class="vf-sweep"></i>
