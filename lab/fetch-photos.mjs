@@ -54,7 +54,8 @@ fs.mkdirSync(out, { recursive: true });
 const labels = [];
 async function grab(list, truth, group) {
   for (const [i, f] of list.entries()) {
-    const file = `${truth}__${i}.jpg`;
+    // unique per group: out-of-vocabulary photos share one truth value, so the group must be in the name
+    const file = `${truth}__${group.replace(/[^a-z0-9]+/gi, '_')}__${i}.jpg`;
     try {
       const r = await fetch(f.url, { headers: { 'User-Agent': UA } }); if (!r.ok) continue;
       fs.writeFileSync(path.join(out, file), Buffer.from(await r.arrayBuffer()));
