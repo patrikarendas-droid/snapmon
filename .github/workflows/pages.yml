@@ -11,7 +11,7 @@ concurrency:
   group: pages
   cancel-in-progress: true
 env:
-  # experimental (developer-only) lens model; chosen from the lab benchmark, see docs/RECOGNITION.md
+  # TinyCLIP part of the standard Hybrid engine; chosen from the lab benchmark, see docs/RECOGNITION.md
   CLIP_VARIANT: tinyclip-39m16
   CLIP_HF: wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M
 jobs:
@@ -28,16 +28,20 @@ jobs:
           node tests/labels.js
           node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json
           node tests/sprites-v3.js
+          node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
           node tests/migrate.js
           node tests/clip-fusion.js
-      - name: Browser end-to-end test (live camera path, phone viewport)
+          node tests/color.js
+      - name: Browser tests (gameplay, recognition engine with the real worker, Back navigation)
         run: |
-          npm i --no-save --silent playwright@1.48.2
+          npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1
           npx playwright install --with-deps chromium > /dev/null
           python3 -m http.server 8765 > /dev/null 2>&1 &
           sleep 1
           mkdir -p shots
           node tests/e2e.js http://localhost:8765/index.html tests/fixtures shots
+          node tests/e2e-engine.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
+          node tests/e2e-nav.js http://localhost:8765/index.html shots
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -54,15 +58,14 @@ jobs:
         run: |
           mkdir -p _site
           cp -r index.html manifest.webmanifest icon.svg src dist _site/
-      - name: Mirror production AI models onto the site (best effort)
-        continue-on-error: true
+      # The standard Hybrid engine needs every file below; tools/check-site.js stops the deploy if one is missing.
+      - name: Detector and classifier models
         run: node tools/fetch-models.js _site/models
-      # Everything below only serves the developer-only experimental lens. Players never download it unless they
-      # switch it on in Settings → Developer. If any step fails the game still deploys and that lens reports "not deployed".
-      - name: Vendor ONNX Runtime Web
-        continue-on-error: true
+      - name: Runtime libraries (TF.js, ONNX Runtime Web), pinned versions
         run: |
-          npm i --no-save --silent onnxruntime-web@1.20.1
+          npm i --no-save --silent @tensorflow/tfjs@4.22.0 @tensorflow-models/mobilenet@2.1.1 @tensorflow-models/coco-ssd@2.2.3 onnxruntime-web@1.20.1
+          mkdir -p _site/vendor/tfjs
+          cp node_modules/@tensorflow/tfjs/dist/tf.min.js node_modules/@tensorflow-models/mobilenet/dist/mobilenet.min.js node_modules/@tensorflow-models/coco-ssd/dist/coco-ssd.min.js _site/vendor/tfjs/
           mkdir -p _site/vendor/ort
           cp node_modules/onnxruntime-web/dist/{ort.min.js,ort.webgpu.min.js,ort-wasm-simd-threaded.mjs,ort-wasm-simd-threaded.wasm,ort-wasm-simd-threaded.jsep.mjs,ort-wasm-simd-threaded.jsep.wasm} _site/vendor/ort/
           cp node_modules/onnxruntime-web/LICENSE _site/vendor/ort/LICENSE.txt || true
@@ -75,18 +78,18 @@ jobs:
         if: steps.clipcache.outputs.cache-hit != 'true'
         with:
           python-version: '3.11'
-      - name: Export experimental model
+      - name: Export TinyCLIP model
         if: steps.clipcache.outputs.cache-hit != 'true'
-        continue-on-error: true
         run: |
           pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
           pip install --quiet transformers onnx onnxruntime onnxscript
           python lab/export_clip.py $CLIP_HF $CLIP_VARIANT lab/vocab-labels.json models/clip lab/calib/$CLIP_VARIANT.json
-      - name: Add experimental model to the site
-        continue-on-error: true
+      - name: Add TinyCLIP model, manifest and site check
         run: |
           mkdir -p _site/models/clip/$CLIP_VARIANT
           cp models/clip/$CLIP_VARIANT/{vision.onnx,vocab.bin,vocab.json} _site/models/clip/$CLIP_VARIANT/
+          node tools/make-manifest.js _site
+          node tools/check-site.js _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
       - id: deployment

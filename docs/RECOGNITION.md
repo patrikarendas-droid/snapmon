@@ -179,6 +179,24 @@ Replaying all three field tests (69 photos) through the v0.3.3 rules gives: righ
 production 40/69 (58%), confidently wrong 3 vs 15, 1 needless choice. This includes in-sample photos, so the real gain
 is likely smaller; the out-of-sample run 3 table above is the fairest single number.
 
+## v0.4.0: Hybrid becomes the standard
+
+After three phone field tests (69 photos; the out-of-sample run: right object reachable on 22/29 with Hybrid vs 17/29
+with detector + classifier alone; confidently wrong 2 vs 5; no warming; ~1.5 s extra per photo with WebGPU), Hybrid
+is the **only** recogniser for players (`src/engine.js`, `ENGINE_ID = 'hybrid-1'`).
+
+- **Same models for everyone.** COCO-SSD lite + MobileNet v2 1.0 (TF.js), TinyCLIP ViT-39M/16 int8 (ONNX), the
+  2,940-label vocabulary, and the calibration in `lab/calib/tinyclip-39m16.json`.
+- **No substitutes.** The old tfhub/MobileNet 0.5 fallbacks are gone, and the engine needs all three parts. If one
+  cannot load or run, hunting stops with an explanation and a Retry.
+- **Backends.** GPU where it works (WebGL / WebGPU), otherwise CPU with the same weights (TF.js CPU / WASM). WebGPU
+  failures fall back automatically (also tested with simulated failures in `tests/e2e-engine.js`).
+- **Consistency.** TinyCLIP scores and margins are rounded to 3 decimals before any threshold, and ties are broken by
+  name, so last-digit float differences between backends cannot reorder results. Measured GPU vs CPU: see below.
+- **Downloads.** Downloads are checked against `models/manifest.json` (size and SHA-256) before they are cached.
+- **Developer comparison.** "Production only" and "Compare" survive only inside the hidden developer Field-test mode,
+  which never creates monsters.
+
 ## Reproducing
 
 Push to a `feature/**` branch touching `lab/**`, or run *Recognition lab* manually. Each job prints `EXPORT`, `BENCH`,

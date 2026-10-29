@@ -5,12 +5,13 @@ name: Recognition lab
 on:
   push:
     branches: ['feature/**']
-    paths: ['lab/**', '.github/workflows/lab.yml', 'src/lens-clip.js', 'src/workers/**']
+    paths: ['lab/**', '.github/workflows/lab.yml', 'src/lens-clip.js', 'src/lens.js', 'src/engine.js', 'src/workers/**']
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   bench:
+    if: github.event_name == 'workflow_dispatch'   # the full model comparison only on demand (results: docs/RECOGNITION.md)
     runs-on: ubuntu-latest
     timeout-minutes: 120
     strategy:
@@ -55,3 +56,34 @@ jobs:
             lab/out/
             models/clip/${{ matrix.variant }}/vocab.json
             lab/data/photos/labels.json
+
+  # GPU vs CPU consistency of the standard engine (same models, two backends) on the labelled photos
+  equivalence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Export TinyCLIP 39M/16 with the deployed calibration
+        run: |
+          pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --quiet transformers onnx onnxruntime onnxscript
+          python lab/export_clip.py wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M tinyclip-39m16 lab/vocab-labels.json models/clip lab/calib/tinyclip-39m16.json
+      - name: Models, runtimes, browser
+        run: |
+          node tools/fetch-models.js models
+          npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1 @tensorflow/tfjs@4.22.0 @tensorflow-models/mobilenet@2.1.1 @tensorflow-models/coco-ssd@2.2.3
+          npx playwright install --with-deps chromium > /dev/null
+          mkdir -p vendor/ort vendor/tfjs
+          cp node_modules/onnxruntime-web/dist/{ort.min.js,ort.webgpu.min.js,ort-wasm-simd-threaded.mjs,ort-wasm-simd-threaded.wasm,ort-wasm-simd-threaded.jsep.mjs,ort-wasm-simd-threaded.jsep.wasm} vendor/ort/
+          cp node_modules/@tensorflow/tfjs/dist/tf.min.js node_modules/@tensorflow-models/mobilenet/dist/mobilenet.min.js node_modules/@tensorflow-models/coco-ssd/dist/coco-ssd.min.js vendor/tfjs/
+      - name: Labelled photos (Wikimedia Commons, evaluation only)
+        run: node lab/fetch-photos.mjs lab/data/photos 2
+      - name: GPU vs CPU
+        run: |
+          python -m http.server 8765 > /dev/null 2>&1 &
+          sleep 2
+          node lab/equivalence.mjs http://localhost:8765 lab/data/photos tinyclip-39m16

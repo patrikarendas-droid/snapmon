@@ -143,6 +143,7 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .mcard { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 8px 6px 9px; text-align: center; cursor: pointer; overflow: hidden; }
 .mcard::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--rc) 28%, transparent), transparent 65%); pointer-events: none; }
 .mcard.seen img { opacity: .55; filter: grayscale(.5); }
+.swatch { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--line); vertical-align: middle; margin-right: 4px; }
 .rdot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; border: 1px solid; margin: 0 1px; }
 .mcard img { width: 100%; max-width: 96px; aspect-ratio: 1; display: block; margin: 0 auto; position: relative; }
 .mcard .nm { font-weight: 700; font-size: 12.5px; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative; }
@@ -356,7 +357,7 @@ details.debug td { padding: 2px 6px 2px 0; border-top: 1px solid #221a38; vertic
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important; } }
 @media (max-width: 360px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dex-row { grid-template-columns: 70px repeat(5, minmax(0, 1fr)); } .shutter { width: 84px; height: 84px; } }
 </style>
-<script>window.__SNAPMON_CLIP_WORKER = "/* SNAPMON — experimental Spirit Lens worker (CLIP-style image encoder via ONNX Runtime Web).\n   Runs off the main thread. Receives preprocessed 224×224 crops, returns vocabulary scores.\n   Text embeddings for the whole vocabulary are precomputed offline (lab/export_clip.py), so phones\n   only download the image encoder. Messages: {type:'init', base, ortBase, preferGPU} → {type:'ready'}\n                                             {type:'run', id, crops:Float32Array, n} → {type:'result', id, top} */\n'use strict';\nlet session = null, vocab = null, meta = null, dim = 0, nLabels = 0, backend = '';\n\nasync function cachedFetch(url) {\n  // Cache API keeps the model on the phone after the first download (falls back to a normal fetch)\n  try {\n    const c = await caches.open('snapmon-models-v1');\n    const hit = await c.match(url);\n    if (hit) return hit;\n    const r = await fetch(url);\n    if (!r.ok) throw new Error(r.status + ' ' + url);\n    try { await c.put(url, r.clone()); } catch (e) {}\n    return r;\n  } catch (e) {\n    const r = await fetch(url);\n    if (!r.ok) throw new Error('download failed (' + r.status + ') ' + url.split('/').pop());\n    return r;\n  }\n}\nfunction f16ToF32(u16) {\n  const out = new Float32Array(u16.length);\n  for (let i = 0; i < u16.length; i++) {\n    const h = u16[i], s = (h & 0x8000) ? -1 : 1, e = (h >> 10) & 0x1f, f = h & 0x3ff;\n    out[i] = e === 0 ? s * Math.pow(2, -14) * (f / 1024) : e === 31 ? (f ? NaN : s * Infinity) : s * Math.pow(2, e - 15) * (1 + f / 1024);\n  }\n  return out;\n}\n\nasync function init({ base, ortBase, preferGPU }) {\n  const t0 = performance.now();\n  let useGPU = false;\n  if (preferGPU && typeof navigator !== 'undefined' && navigator.gpu) { try { useGPU = !!(await navigator.gpu.requestAdapter()); } catch (e) { useGPU = false; } }\n  importScripts(ortBase + (useGPU ? 'ort.webgpu.min.js' : 'ort.min.js'));\n  ort.env.wasm.wasmPaths = ortBase;\n  ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;\n  meta = await (await cachedFetch(base + 'vocab.json')).json();\n  const [modelBuf, vocBuf] = await Promise.all([\n    cachedFetch(base + meta.model).then(r => r.arrayBuffer()),\n    cachedFetch(base + 'vocab.bin').then(r => r.arrayBuffer()),\n  ]);\n  dim = meta.dim; nLabels = meta.labels.length;\n  vocab = f16ToF32(new Uint16Array(vocBuf));\n  const providers = useGPU ? ['webgpu', 'wasm'] : ['wasm'];\n  session = await ort.InferenceSession.create(new Uint8Array(modelBuf), { executionProviders: providers, graphOptimizationLevel: 'all' });\n  backend = useGPU ? 'webgpu' : 'wasm';\n  // warm-up so the first real photo is not slowed down by kernel compilation\n  const s = meta.image.size;\n  await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', new Float32Array(3 * s * s), [1, 3, s, s]) });\n  return { backend, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: modelBuf.byteLength, vocabBytes: vocBuf.byteLength, name: meta.name };\n}\n\nasync function run({ crops, n, k = 8 }) {\n  const t0 = performance.now(), s = meta.image.size;\n  const out = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', crops, [n, 3, s, s]) });\n  const emb = out[session.outputNames[0]].data;\n  const scale = meta.scale, top = [];\n  for (let c = 0; c < n; c++) {\n    let norm = 0; for (let d = 0; d < dim; d++) norm += emb[c * dim + d] ** 2; norm = Math.sqrt(norm) || 1;\n    const cos = new Float32Array(nLabels);\n    let mx = -1e9;\n    for (let l = 0; l < nLabels; l++) { let dot = 0; const o = l * dim; for (let d = 0; d < dim; d++) dot += emb[c * dim + d] * vocab[o + d]; cos[l] = dot / norm; if (cos[l] > mx) mx = cos[l]; }\n    // softmax over the whole vocabulary (temperature = model's logit scale); summed per object later\n    let sum = 0; const p = new Float32Array(nLabels);\n    for (let l = 0; l < nLabels; l++) { p[l] = Math.exp(scale * (cos[l] - mx)); sum += p[l]; }\n    const idx = Array.from({ length: nLabels }, (_, i) => i).sort((a, b) => p[b] - p[a]).slice(0, k);\n    top.push(idx.map(i => ({ i, p: p[i] / sum, cos: +cos[i].toFixed(4) })));\n  }\n  return { top, ms: Math.round(performance.now() - t0) };\n}\n\nself.onmessage = async ev => {\n  const m = ev.data;\n  try {\n    if (m.type === 'init') self.postMessage({ type: 'ready', info: await init(m) });\n    else if (m.type === 'run') self.postMessage({ type: 'result', id: m.id, ...(await run(m)) });\n  } catch (e) { self.postMessage({ type: 'error', id: m.id, error: String(e && e.message || e) }); }\n};\n";</script>
+<script>window.__SNAPMON_CLIP_WORKER = "/* SNAPMON — TinyCLIP worker (part of the standard Hybrid recogniser, see engine.js). Runs off the main thread.\n   Receives preprocessed 224×224 crops, returns vocabulary scores. Text embeddings for the whole vocabulary are\n   precomputed offline (lab/export_clip.py), so only the image encoder runs on the phone.\n\n   Same model everywhere, different hardware: WebGPU where an adapter exists and the session works, otherwise\n   WebAssembly (CPU) with the very same weights. Downloads stream with progress, are checked for completeness\n   (and against the deploy manifest's SHA-256 when one is given) before they are cached, and a cached file that fails\n   to load is purged so a retry downloads it again.\n\n   Messages: {type:'init', base, ortBase, preferGPU, forceBackend, expect} → progress* → {type:'ready', info}\n             {type:'run', id, crops:Float32Array, n} → {type:'result', id, top, ms} */\n'use strict';\nlet session = null, vocab = null, meta = null, dim = 0, nLabels = 0, backend = '';\nconst CACHE = 'snapmon-models-v1';\nconst progress = (file, loaded, total) => self.postMessage({ type: 'progress', file, loaded, total });\n\nasync function sha256(buf) {\n  if (!self.crypto || !crypto.subtle) return null;\n  const h = await crypto.subtle.digest('SHA-256', buf);\n  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('');\n}\n// Cache API keeps model files on the phone after the first complete download.\nasync function cachedFetch(url, file, expect) {\n  let cache = null;\n  try { cache = await caches.open(CACHE); } catch (e) { /* storage blocked: plain download every time */ }\n  if (cache) {\n    const hit = await cache.match(url);\n    if (hit) { const buf = await hit.arrayBuffer(); progress(file, buf.byteLength, buf.byteLength); return { buf, cached: true }; }\n  }\n  const r = await fetch(url);\n  if (!r.ok) throw Object.assign(new Error('download failed (' + r.status + ') ' + file), { kind: 'download' });\n  const total = +r.headers.get('content-length') || (expect && expect.bytes) || 0;\n  let buf;\n  if (r.body && r.body.getReader) {\n    const reader = r.body.getReader(), parts = []; let got = 0, last = 0;\n    for (;;) {\n      const { done, value } = await reader.read(); if (done) break;\n      parts.push(value); got += value.byteLength;\n      if (got - last > 262144) { last = got; progress(file, got, total); }\n    }\n    const u8 = new Uint8Array(got); let o = 0; for (const p of parts) { u8.set(p, o); o += p.byteLength; }\n    buf = u8.buffer;\n  } else buf = await r.arrayBuffer();\n  progress(file, buf.byteLength, total || buf.byteLength);\n  // an interrupted transfer must never be cached as if it were the model\n  if (total && buf.byteLength !== total && !r.headers.get('content-encoding')) throw Object.assign(new Error('download interrupted: ' + file), { kind: 'download' });\n  if (expect && expect.bytes && buf.byteLength !== expect.bytes) throw Object.assign(new Error('incomplete download: ' + file), { kind: 'download' });\n  if (expect && expect.sha256) { const h = await sha256(buf); if (h && h !== expect.sha256) throw Object.assign(new Error('corrupted download: ' + file), { kind: 'download' }); }\n  if (cache) { try { await cache.put(url, new Response(buf.slice(0), { headers: { 'content-type': 'application/octet-stream' } })); } catch (e) { /* quota: fine */ } }\n  return { buf, cached: false };\n}\nasync function purge(urls) { try { const c = await caches.open(CACHE); for (const u of urls) await c.delete(u); } catch (e) {} }\n\nfunction f16ToF32(u16) {\n  const out = new Float32Array(u16.length);\n  for (let i = 0; i < u16.length; i++) {\n    const h = u16[i], s = (h & 0x8000) ? -1 : 1, e = (h >> 10) & 0x1f, f = h & 0x3ff;\n    out[i] = e === 0 ? s * Math.pow(2, -14) * (f / 1024) : e === 31 ? (f ? NaN : s * Infinity) : s * Math.pow(2, e - 15) * (1 + f / 1024);\n  }\n  return out;\n}\nconst memoryError = e => /memory|allocation|RangeError|Aborted\\(\\)|OOM/i.test(String(e && (e.message || e)));\n\nasync function makeSession(modelBuf, which) {\n  const s = await ort.InferenceSession.create(new Uint8Array(modelBuf), { executionProviders: which === 'webgpu' ? ['webgpu'] : ['wasm'], graphOptimizationLevel: 'all' });\n  // warm-up (also proves the backend really runs this model) so the first photo is not slowed down by compilation\n  const sz = meta.image.size;\n  await s.run({ [s.inputNames[0]]: new ort.Tensor('float32', new Float32Array(3 * sz * sz), [1, 3, sz, sz]) });\n  return s;\n}\n\n// test: { failGPU, failCPU } lets automated tests simulate backend failures; never set by the game itself\nasync function init({ base, ortBase, preferGPU, forceBackend, expect = {}, test = {} }) {\n  const t0 = performance.now();\n  let gpu = !!test.failGPU && forceBackend !== 'wasm';\n  if (!gpu && forceBackend !== 'wasm' && preferGPU && navigator.gpu) { try { gpu = !!(await navigator.gpu.requestAdapter()); } catch (e) { gpu = false; } }\n  // the WebGPU bundle also contains the WASM backend, so one script serves both\n  importScripts(ortBase + (gpu ? 'ort.webgpu.min.js' : 'ort.min.js'));\n  ort.env.wasm.wasmPaths = ortBase;\n  ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;\n  const urls = { meta: base + 'vocab.json', vocab: base + 'vocab.bin' };\n  meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'])).buf));\n  urls.model = base + meta.model;\n  const [m, v] = await Promise.all([cachedFetch(urls.model, meta.model, expect[meta.model]), cachedFetch(urls.vocab, 'vocab.bin', expect['vocab.bin'])]);\n  dim = meta.dim; nLabels = meta.labels.length;\n  vocab = f16ToF32(new Uint16Array(v.buf));\n  if (vocab.length !== dim * nLabels) { await purge(Object.values(urls)); throw Object.assign(new Error('vocabulary file does not match the model'), { kind: 'download' }); }\n  let gpuError = null;\n  if (gpu) {\n    try { if (test.failGPU) throw new Error('simulated WebGPU failure'); session = await makeSession(m.buf, 'webgpu'); backend = 'webgpu'; }\n    catch (e) { gpuError = String(e.message || e); session = null; }\n  }\n  if (!session) {\n    try { if (test.failCPU) throw new Error(test.failCPU); session = await makeSession(m.buf, 'wasm'); backend = 'wasm'; }\n    catch (e) {\n      if (m.cached) await purge([urls.model]); // maybe a damaged cached copy: download it again next time\n      throw Object.assign(new Error('the model failed to run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });\n    }\n  }\n  return { backend, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,\n    name: meta.name, variant: meta.variant, fromCache: m.cached && v.cached };\n}\n\nasync function run({ crops, n, k = 8 }) {\n  const t0 = performance.now(), s = meta.image.size;\n  const out = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', crops, [n, 3, s, s]) });\n  const emb = out[session.outputNames[0]].data;\n  const scale = meta.scale, top = [];\n  for (let c = 0; c < n; c++) {\n    let norm = 0; for (let d = 0; d < dim; d++) norm += emb[c * dim + d] ** 2; norm = Math.sqrt(norm) || 1;\n    const cos = new Float32Array(nLabels);\n    let mx = -1e9;\n    for (let l = 0; l < nLabels; l++) { let dot = 0; const o = l * dim; for (let d = 0; d < dim; d++) dot += emb[c * dim + d] * vocab[o + d]; cos[l] = dot / norm; if (cos[l] > mx) mx = cos[l]; }\n    // softmax over the whole vocabulary (temperature = model's logit scale); summed per object later\n    let sum = 0; const p = new Float32Array(nLabels);\n    for (let l = 0; l < nLabels; l++) { p[l] = Math.exp(scale * (cos[l] - mx)); sum += p[l]; }\n    const idx = Array.from({ length: nLabels }, (_, i) => i).sort((a, b) => p[b] - p[a]).slice(0, k);\n    top.push(idx.map(i => ({ i, p: p[i] / sum, cos: +cos[i].toFixed(4) })));\n  }\n  return { top, ms: Math.round(performance.now() - t0) };\n}\n\nself.onmessage = async ev => {\n  const m = ev.data;\n  try {\n    if (m.type === 'init') self.postMessage({ type: 'ready', info: await init(m) });\n    else if (m.type === 'run') self.postMessage({ type: 'result', id: m.id, ...(await run(m)) });\n  } catch (e) { self.postMessage({ type: 'error', id: m.id, error: String(e && e.message || e), kind: (e && e.kind) || (memoryError(e) ? 'memory' : 'init') }); }\n};\n";</script>
 
 
 <div id="app">
@@ -1524,10 +1525,17 @@ const SEC_COLOR = {
 };
 function buildPalette(dna) {
   const { h, s, l, ah, as, al } = dna.col;
+  // photo palettes: body shadow/highlight follow the photographed object's own shading (clamped to stay readable);
+  // achromatic objects (black, white, metal) keep colourless shading instead of the default warm/cool shift
+  let dl = 16, ll = 14, dh = 8, lh = -6, ds = 6, ls = -4;
+  if (dna.pal && dna.pal.conf === 'confident') {
+    dl = Math.max(9, Math.min(24, l - dna.pal.sh[2])); ll = Math.max(9, Math.min(22, dna.pal.hi[2] - l));
+    if (s < 15) { dh = 0; lh = 0; ds = 0; ls = 0; }
+  }
   let pal = {
-    [P.OUT]: hsl(h, 45, 11), [P.BODY]: hsl(h, s, l), [P.BODY_D]: hsl(h + 8, s + 6, l - 16), [P.BODY_L]: hsl(h - 6, s - 4, l + 14),
+    [P.OUT]: hsl(h, 45, dna.pal ? Math.min(11, l - 9) : 11), [P.BODY]: hsl(h, s, l), [P.BODY_D]: hsl(h + dh, s + ds, l - dl), [P.BODY_L]: hsl(h + lh, s + ls, l + ll),
     [P.ACC]: hsl(ah, as, al), [P.ACC_D]: hsl(ah + 8, as + 5, al - 16), [P.ACC_L]: hsl(ah, as - 10, Math.min(92, al + 22)),
-    [P.WHITE]: '#f7f3e8', [P.PUPIL]: '#141019', [P.MOUTH]: '#3b0d1f', [P.TOOTH]: '#fffbef', [P.PATTERN]: hsl(h + 30, s + 10, l - 10),
+    [P.WHITE]: '#f7f3e8', [P.PUPIL]: '#141019', [P.MOUTH]: '#3b0d1f', [P.TOOTH]: '#fffbef', [P.PATTERN]: dna.pal && s < 15 ? hsl(h, s, l - 14) : hsl(h + 30, s + 10, l - 10),
     [P.GLOW]: dna.glow || '#fff27a', [P.METAL]: hsl(h, 8, 72), [P.METAL_D]: hsl(h, 10, 40), [P.STEAM]: 'rgba(255,255,255,0.45)',
     [P.PAPER]: '#efe4c6', [P.TONGUE]: '#ff6f9a', [P.GOLD]: '#ffc93a', [P.TOXIC]: '#b6ff3b',
   };
@@ -1612,6 +1620,23 @@ function makeDNA3(m) {
   if (ph && ph.sat > 0.18 && baseHue >= 0) h = h + ((((ph.hue - h) % 360) + 540) % 360 - 180) * 0.2;
   let ah = cat.acc >= 0 ? cat.acc + R.int(-15, 15) : h + 150, as = 60 + R.int(-10, 15), al = 50 + R.int(-8, 8);
   if (ph && ph.sat > 0.25 && baseHue < 0) ah = ph.hue + 20;
+  // v0.4: a palette extracted from the photographed object (src/color.js) colours the body for real. A confident
+  // palette is copied (with a little individual variation and readability limits); a fallback one only leans the
+  // object's own colour towards the photo.
+  const pal = ph && ph.pal;
+  let palDNA = null, secPhoto = null;
+  if (pal && pal.conf === 'confident') {
+    const [ph0, ps0, pl0] = pal.primary;
+    h = ph0 + R.int(-3, 3); s = Math.max(0, Math.min(95, ps0 + R.int(-4, 4))); l = Math.max(20, Math.min(82, pl0 + R.int(-3, 3)));
+    palDNA = { conf: 'confident', hi: pal.highlight, sh: pal.shadow };
+    if (pal.secondary) secPhoto = [pal.secondary[0], Math.max(0, Math.min(95, pal.secondary[1])), Math.max(22, Math.min(80, pal.secondary[2]))];
+  } else if (pal && /\+bg$/.test(pal.method || '')) {
+    // uncertain but background-suppressed: lean halfway towards the photo (hue only if the photo is clearly coloured)
+    if (pal.primary[1] >= 18) h = h + ((((pal.primary[0] - h) % 360) + 540) % 360 - 180) * 0.5;
+    s = Math.round((s + pal.primary[1]) / 2);
+    l = Math.max(20, Math.min(82, Math.round((l + pal.primary[2]) / 2)));
+    palDNA = { conf: 'fallback' };
+  }
   if (m.variant === 'shiny') { h += 150; ah += 150; s = Math.min(95, s + 25); }
   if (m.variant === 'mutated') { ah = 85; as = 90; al = 52; }
   if (tier >= 4) { as = 85; al = 55; }
@@ -1627,11 +1652,12 @@ function makeDNA3(m) {
     spikes: tier >= 2 && SR.chance(0.5), wings: tier >= 3 && SR.chance(0.6),
     drips: m.variant === 'mutated', variant: m.variant || null, tier, featSeed: R.int(1, 1e9),
     col: { h: Math.round(h), s, l, ah: Math.round(ah), as, al },
-    sec: (legacyKey && (SEC_COLOR_V2[legacyKey] || SEC_COLOR[vis.legacy])) || o.sec || (LEAFY_CATS.has(o.cat) ? [110, 55, 40] : [200, 55, 64]),
+    sec: secPhoto || (legacyKey && (SEC_COLOR_V2[legacyKey] || SEC_COLOR[vis.legacy])) || o.sec || (LEAFY_CATS.has(o.cat) ? [110, 55, 40] : [200, 55, 64]),
     glow: tier >= 4 ? '#ffe45c' : m.variant === 'spectral' ? '#9ff7ff' : m.variant === 'mutated' ? '#c6ff4a' : null,
     glowEyes: tier >= 4 || m.variant === 'spectral',
   };
   if (m.variant === 'spectral' && tier >= 4) dna.top = 'halo';
+  if (palDNA) dna.pal = palDNA;
   return dna;
 }
 const D_BUILDER_ALIAS = { fan: 'electric_fan', vacuum: 'vacuum_cleaner', smartwatch: 'wristwatch', robot_toy: 'robot' };
@@ -2945,7 +2971,8 @@ for (const [id, name, cat, like] of LABEL_OBJECTS.extra) if (!OBJECTS[id]) OBJ(i
 
    Platform.camera  : open(video) / capture(video) → canvas / close(video) / isOpen() / supported() / describe(error)
    Platform.storage : get(key) / set(key, value) / remove(key)   (synchronous; returns false when storage is blocked)
-   Platform.device  : online() / webgl() / webgpu() / wasm()                                                         */
+   Platform.device  : online() / webgl() / webgpu() / wasm()
+   Platform.assets  : url(path) → where packaged model/runtime files live (site on the web, APK assets natively)   */
 'use strict';
 
 const Platform = (() => {
@@ -3001,6 +3028,15 @@ const Platform = (() => {
     remove(key) { try { localStorage.removeItem(key); return true; } catch (e) { return false; } },
   };
 
+  /* ---------- packaged assets ----------
+     Every model, vocabulary and runtime file is addressed relative to one base. On GitHub Pages that is the site
+     itself; a native build (Capacitor) sets window.SNAPMON_ASSET_BASE before the scripts load, e.g. to the APK's
+     bundled asset folder, so the same code loads the same files from the app package instead of the network. */
+  const assets = {
+    base: (typeof window !== 'undefined' && window.SNAPMON_ASSET_BASE) || '',
+    url(path) { return new URL(assets.base + path, location.href).href; },
+  };
+
   /* ---------- device capabilities ---------- */
   const device = {
     online: () => navigator.onLine !== false,
@@ -3009,7 +3045,7 @@ const Platform = (() => {
     wasm: () => typeof WebAssembly === 'object',
   };
 
-  return { name: 'web', camera, storage, device };
+  return { name: 'web', camera, storage, device, assets };
 })();
 
 </script>
@@ -3019,7 +3055,7 @@ const Platform = (() => {
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.3.3';
+const GAME_VERSION = '0.4.0';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -3040,7 +3076,7 @@ function freshState() {
     stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {}, objsPhotographed: {},
              cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0, unrecognized: 0, labelsSeen: {} },
     enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [], recentObjs: [] },
-    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false, expLens: 'off', fieldTest: false },
+    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false, engineCached: false, fieldTest: false },
     lastTick: Date.now(), nextId: 1, log: [],
   };
 }
@@ -3329,7 +3365,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
-  const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit } : null;
+  const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}), ...(photo.engine ? { engine: photo.engine } : {}) } : null; // engine: which recogniser identified it
   const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
   const abilities = monsterAbilities(cat, rarity, fam, base.word);
   const o = obj && OBJECTS[obj];
@@ -3721,6 +3757,181 @@ const SFX = (() => {
 
 </script>
 <script>
+/* SNAPMON — photo-derived monster colours (pure functions, no DOM: unit-tested in Node and reusable in a native build).
+
+   extractPalette(rgba, w, h, box) reads a small RGBA image (the photo downscaled to ~128 px) and returns the colours of
+   the photographed OBJECT, trying hard not to pick up the table, wall or floor behind it:
+
+   1. Regions. The object region is the detected box (shrunk 6%) or, without a box, a central ellipse. The background
+      model comes from pixels outside the box (a ring around it) plus the photo's border strip.
+   2. Background model. k-means (k = 3) in CIELAB on the background pixels; clusters with ≥ 12% of them count.
+   3. Foreground. Object-region pixels within ΔE 14 of a background cluster are dropped (unless that would drop
+      almost everything: then the object probably matches its surroundings, and the result is marked as a fallback).
+      Pixels are weighted towards the region's centre, where the object almost certainly is.
+   4. Surfaces. k-means (k = 5) on the foreground, then clusters that differ mainly in lightness (the same surface in
+      light and shadow) are merged into "surfaces". Specular glints (very light, colourless) and deep shadows only
+      count as a surface when they dominate (white or black objects).
+   5. Roles. primary = largest surface (its mid-tone), secondary = next clearly different surface (≥ 12%),
+      highlight = lightest tone of the primary surface, shadow = darkest tone of the primary surface.
+   6. Confidence. 'confident' when a box was used, enough foreground survived and one surface clearly leads;
+      otherwise 'fallback' (the sprite then only leans towards the photo instead of copying it).
+
+   Colours are returned as [h, s, l] (HSL in degrees / percent) for the sprite engine, plus hex for swatches. */
+'use strict';
+
+const ColorX = (() => {
+  /* ---------- colour spaces ---------- */
+  const lin = c => (c /= 255) <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  const f3 = t => t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
+  function rgb2lab(r, g, b) {
+    const R = lin(r), G = lin(g), B = lin(b);
+    const x = f3((R * 0.4124 + G * 0.3576 + B * 0.1805) / 0.95047), y = f3(R * 0.2126 + G * 0.7152 + B * 0.0722), z = f3((R * 0.0193 + G * 0.1192 + B * 0.9505) / 1.08883);
+    return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
+  }
+  function rgb2hsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+    let h = 0, s = 0;
+    if (d) {
+      s = d / (1 - Math.abs(2 * l - 1));
+      h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      h *= 60; if (h < 0) h += 360;
+    }
+    return [Math.round(h), Math.round(Math.min(1, s) * 100), Math.round(l * 100)];
+  }
+  const hex = ([r, g, b]) => '#' + [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+  const dE = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  const chroma = lab => Math.hypot(lab[1], lab[2]);
+  const hueAngle = lab => (Math.atan2(lab[2], lab[1]) * 180 / Math.PI + 360) % 360;
+  const hueDiff = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
+
+  /* ---------- weighted k-means (deterministic seeding: farthest-point from the heaviest pixel) ---------- */
+  function kmeans(pts, wts, k, iters = 8) {
+    const n = pts.length; if (!n) return [];
+    k = Math.min(k, n);
+    let first = 0; for (let i = 1; i < n; i++) if (wts[i] > wts[first]) first = i;
+    const C = [pts[first].slice()];
+    const dmin = pts.map(p => dE(p, C[0]));
+    while (C.length < k) {
+      let bi = 0, bd = -1; for (let i = 0; i < n; i++) { const d = dmin[i] * wts[i]; if (d > bd) { bd = d; bi = i; } }
+      if (bd <= 0) break;
+      C.push(pts[bi].slice());
+      for (let i = 0; i < n; i++) dmin[i] = Math.min(dmin[i], dE(pts[i], C[C.length - 1]));
+    }
+    const asg = new Int32Array(n);
+    for (let it = 0; it < iters; it++) {
+      for (let i = 0; i < n; i++) { let bj = 0, bd = Infinity; for (let j = 0; j < C.length; j++) { const d = dE(pts[i], C[j]); if (d < bd) { bd = d; bj = j; } } asg[i] = bj; }
+      const S = C.map(() => [0, 0, 0, 0]);
+      for (let i = 0; i < n; i++) { const s = S[asg[i]], w = wts[i]; s[0] += pts[i][0] * w; s[1] += pts[i][1] * w; s[2] += pts[i][2] * w; s[3] += w; }
+      for (let j = 0; j < C.length; j++) if (S[j][3] > 0) C[j] = [S[j][0] / S[j][3], S[j][1] / S[j][3], S[j][2] / S[j][3]];
+    }
+    const out = C.map(c => ({ lab: c, w: 0, rgb: [0, 0, 0], n: 0 }));
+    for (let i = 0; i < n; i++) { const o = out[asg[i]]; o.w += wts[i]; o.n++; }
+    return { clusters: out, asg };
+  }
+
+  /* ---------- main ---------- */
+  // rgba: Uint8ClampedArray (w*h*4). box: [x, y, w, h] fractions or null. Returns the palette (see header).
+  function extractPalette(rgba, w, h, box, opts = {}) {
+    const t0 = Date.now();
+    const useBox = box && box[2] > 0.04 && box[3] > 0.04 && box[2] * box[3] < 0.92 ? box : null;
+    const bx0 = useBox ? useBox[0] : 0.2, by0 = useBox ? useBox[1] : 0.2, bw = useBox ? useBox[2] : 0.6, bh = useBox ? useBox[3] : 0.6;
+    const cx = bx0 + bw / 2, cy = by0 + bh / 2, shrink = useBox ? 0.06 : 0;
+    const inObj = (fx, fy) => {
+      if (useBox) return fx >= bx0 + bw * shrink && fx <= bx0 + bw * (1 - shrink) && fy >= by0 + bh * shrink && fy <= by0 + bh * (1 - shrink);
+      const ex = (fx - 0.5) / 0.3, ey = (fy - 0.5) / 0.32; return ex * ex + ey * ey <= 1; // central ellipse
+    };
+    const border = 0.07, ring = useBox ? 0.12 : 0;
+    const inBg = (fx, fy) => {
+      if (fx < border || fx > 1 - border || fy < border || fy > 1 - border) return !(useBox && inObj(fx, fy));
+      if (!useBox) return false;
+      const inBox = fx >= bx0 && fx <= bx0 + bw && fy >= by0 && fy <= by0 + bh;
+      const nearBox = fx >= bx0 - bw * ring && fx <= bx0 + bw * (1 + ring) && fy >= by0 - bh * ring && fy <= by0 + bh * (1 + ring);
+      return nearBox && !inBox;
+    };
+    const step = Math.max(1, Math.round(Math.sqrt((w * h) / 4000))); // ~4k samples whatever the input size
+    const objPts = [], objW = [], objRGB = [], objXY = [], bgPts = [];
+    for (let y = 0; y < h; y += step) for (let x = 0; x < w; x += step) {
+      const i = (y * w + x) * 4; if (rgba[i + 3] < 128) continue;
+      const fx = (x + 0.5) / w, fy = (y + 0.5) / h, r = rgba[i], g = rgba[i + 1], b = rgba[i + 2];
+      if (inObj(fx, fy)) {
+        const lab = rgb2lab(r, g, b);
+        const dx = (fx - cx) / (bw / 2), dy = (fy - cy) / (bh / 2), rr = Math.min(1, Math.hypot(dx, dy));
+        objPts.push(lab); objW.push(1 - 0.65 * rr * rr); objRGB.push([r, g, b]); objXY.push([x, y]);
+      } else if (inBg(fx, fy)) bgPts.push(rgb2lab(r, g, b));
+    }
+    if (!objPts.length) return null;
+
+    // background model
+    let bgCenters = [];
+    if (bgPts.length >= 12) {
+      const km = kmeans(bgPts, bgPts.map(() => 1), 3, 6);
+      const tot = bgPts.length;
+      bgCenters = km.clusters.filter(c => c.w / tot >= 0.12).map(c => c.lab);
+    }
+    const BG_DE = opts.bgDE || 14;
+    const isBg = lab => bgCenters.some(c => dE(lab, c) < BG_DE);
+    let keep = objPts.map((p, i) => !isBg(p));
+    let kept = keep.filter(Boolean).length;
+    const fgShare = kept / objPts.length;
+    let bgSuppressed = true;
+    if (kept < Math.max(8, objPts.length * 0.12)) { keep = objPts.map(() => true); kept = objPts.length; bgSuppressed = false; } // object looks like its surroundings
+
+    const pts = [], wts = [], rgbs = [];
+    for (let i = 0; i < objPts.length; i++) if (keep[i]) { pts.push(objPts[i]); wts.push(objW[i]); rgbs.push(objRGB[i]); }
+    const km = kmeans(pts, wts, 5, 8);
+    const cl = km.clusters;
+    for (let i = 0; i < pts.length; i++) { const c = cl[km.asg[i]]; c.rgb[0] += rgbs[i][0] * wts[i]; c.rgb[1] += rgbs[i][1] * wts[i]; c.rgb[2] += rgbs[i][2] * wts[i]; }
+    const totW = cl.reduce((a, c) => a + c.w, 0) || 1;
+    for (const c of cl) { if (c.w) c.rgb = c.rgb.map(v => v / c.w); c.share = c.w / totW; c.C = chroma(c.lab); c.H = hueAngle(c.lab); c.L = c.lab[0]; }
+    const live = cl.filter(c => c.share > 0.02);
+
+    // merge clusters into surfaces: same hue family (or both colourless) differing mainly in lightness
+    const sameSurface = (a, b) => {
+      const ach = c => c.C < 10;
+      if (ach(a) && ach(b)) return Math.abs(a.L - b.L) < 32;
+      if (ach(a) !== ach(b)) return false;
+      return hueDiff(a.H, b.H) < 22 && Math.abs(a.C - b.C) < 30;
+    };
+    const surfaces = [];
+    for (const c of live.sort((a, b) => b.share - a.share)) {
+      const s = surfaces.find(s => s.members.some(m => sameSurface(m, c)));
+      if (s) { s.members.push(c); s.share += c.share; } else surfaces.push({ members: [c], share: c.share });
+    }
+    // glints and deep shadows are lighting, not paint: they only lead when they really dominate (white/black objects)
+    const lighting = s => s.members.every(m => (m.L > 92 && m.C < 8) || m.L < 9);
+    surfaces.sort((a, b) => (b.share * (lighting(b) && b.share < 0.5 ? 0.35 : 1)) - (a.share * (lighting(a) && a.share < 0.5 ? 0.35 : 1)));
+    const prim = surfaces[0];
+    const midTone = s => s.members.slice().sort((a, b) => b.share - a.share)[0];
+    const P = midTone(prim);
+    const byL = prim.members.slice().sort((a, b) => a.L - b.L);
+    const sec = surfaces.slice(1).find(s => s.share >= 0.12 && dE(midTone(s).lab, P.lab) > 20 && !lighting(s));
+    const toHSL = c => rgb2hsl(...c.rgb);
+    const primary = toHSL(P), shadow = toHSL(byL[0]), highlight = toHSL(byL[byL.length - 1]);
+    const secondary = sec ? toHSL(midTone(sec)) : null;
+    // confident only if the object's main colour is clearly unlike its surroundings (a red mug on a red cloth is not)
+    const bgGap = bgCenters.length ? Math.min(...bgCenters.map(c => dE(c, P.lab))) : 100;
+    const confident = !!useBox && bgSuppressed && prim.share >= 0.35 && fgShare >= 0.15 && bgGap >= 16;
+    const res = {
+      v: 1, primary, secondary, highlight, shadow,
+      swatches: { primary: hex(P.rgb), secondary: sec ? hex(midTone(sec).rgb) : null, highlight: hex(byL[byL.length - 1].rgb), shadow: hex(byL[0].rgb) },
+      conf: confident ? 'confident' : 'fallback',
+      method: (useBox ? 'box' : 'centre') + (bgSuppressed ? '+bg' : ''),
+      fgShare: +fgShare.toFixed(2), primaryShare: +prim.share.toFixed(2), bgGap: Math.round(bgGap),
+      ms: Date.now() - t0,
+    };
+    if (opts.mask) { // which sampled pixels counted as the object (for the field-test preview)
+      res.mask = { step, w, h, obj: objXY.filter((_, i) => keep[i]), bg: objXY.filter((_, i) => !keep[i]) };
+    }
+    return res;
+  }
+
+  return { extractPalette, rgb2lab, rgb2hsl, dE };
+})();
+if (typeof module !== 'undefined') module.exports = ColorX;
+
+</script>
+<script>
 /* SNAPMON — on-device colour/similarity analysis of a captured camera frame.
    Object recognition lives in lens.js.
    Photos never leave the device. Pixels are reduced to a colour signature + 64-bit similarity hash, then discarded
@@ -3766,6 +3977,17 @@ const Photo = (() => {
     return { hue, sat: +sat.toFixed(3), lit: +lit.toFixed(3), hash, swatch };
   }
 
+  // Object palette (src/color.js): the whole photo is reduced to ≤ 128 px so the background around the box can be
+  // modelled too. opts.mask also returns the sampled foreground/background pixels for the field-test preview.
+  function palette(src, box, opts = {}) {
+    const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
+    const k = Math.min(1, 128 / Math.max(w, h)), cw = Math.max(1, Math.round(w * k)), ch = Math.max(1, Math.round(h * k));
+    const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(src, 0, 0, cw, ch);
+    try { return ColorX.extractPalette(ctx.getImageData(0, 0, cw, ch).data, cw, ch, box || null, opts); } catch (e) { return null; }
+  }
+
   function thumbnail(src, size = 96) {
     const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
     const c = document.createElement('canvas'); c.width = size; c.height = size;
@@ -3774,25 +3996,30 @@ const Photo = (() => {
     return c.toDataURL('image/jpeg', 0.6);
   }
 
-  return { analyze, thumbnail }; // the live camera lives in platform.js (Platform.camera)
+  return { analyze, palette, thumbnail }; // the live camera lives in platform.js (Platform.camera)
 
 })();
 
 </script>
 <script>
-/* SNAPMON — Spirit Lens: on-device object recognition.
+/* SNAPMON — production half of the Hybrid recogniser (see engine.js): on-device object detection + classification.
    Two open-source TensorFlow.js models share one runtime (WebGL on Android Chrome):
      • MobileNet v2 (ImageNet, 1000 classes) — what is this object, fine-grained ("coffee mug", "strawberry", "golden retriever").
      • COCO-SSD lite (80 classes, bounding boxes) — where are the objects, so a photo with several things offers a choice.
    Each detected box is cropped and re-classified with MobileNet for a more specific label.
-   Weights are downloaded once (~30 MB) and cached in IndexedDB. Photos never leave the device. */
+   Weights come only from the packaged copies (Platform.assets: the site on the web, the APK natively), are cached in
+   IndexedDB, and are never swapped for different or smaller models: if either model cannot load, the engine reports
+   an error instead of hunting with a weaker recogniser. TF.js runs on WebGL (GPU) and falls back to its CPU backend
+   with the same weights. Photos never leave the device. */
 'use strict';
 
 const Lens = (() => {
+  // runtime libraries: the packaged copy first; the pinned CDN copy of the very same version is only a fallback for
+  // the library code (never for model weights)
   const CFG = {
-    tfjs: 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
-    mobilenetLib: 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js',
-    cocoLib: 'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js',
+    tfjs: ['vendor/tfjs/tf.min.js', 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js'],
+    mobilenetLib: ['vendor/tfjs/mobilenet.min.js', 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js'],
+    cocoLib: ['vendor/tfjs/coco-ssd.min.js', 'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js'],
     cacheKeys: { classifier: 'indexeddb://snapmon-lens-mobilenet-v2-100', detector: 'indexeddb://snapmon-lens-cocossd-lite' },
     localUrls: { classifier: 'models/mobilenet_v2_100/model.json', detector: 'models/ssdlite_mobilenet_v2/model.json' },
     MIN_CONF: 0.25,      // below this nothing counts as recognised
@@ -3809,17 +4036,22 @@ const Lens = (() => {
   const emit = () => listeners.forEach(f => { try { f(st); } catch (e) {} });
   let loading = null;
 
-  function addScript(src) {
+  function addOne(src) {
     return new Promise((res, rej) => {
       if ([...document.scripts].some(s => s.src === src && s.dataset.loaded)) return res();
       const s = document.createElement('script'); s.src = src; s.async = true; s.crossOrigin = 'anonymous';
-      s.onload = () => { s.dataset.loaded = '1'; res(); }; s.onerror = () => rej(new Error('could not download ' + src.split('/npm/')[1]));
+      s.onload = () => { s.dataset.loaded = '1'; res(); }; s.onerror = () => { s.remove(); rej(new Error('could not download ' + src.split('/').pop())); };
       document.head.appendChild(s);
     });
   }
+  async function addScript(list) {
+    let last;
+    for (const src of list) { try { return await addOne(/^https?:/.test(src) ? src : Platform.assets.url(src)); } catch (e) { last = e; } }
+    throw last;
+  }
   const withTimeout = (p, ms, what) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(what + ' timed out')), ms))]);
 
-  // Try IndexedDB cache → same-origin copy (GitHub Pages build) → public model host. Cache on first network success.
+  // IndexedDB cache → packaged copy. Cached on first download. No other hosts and no substitute models.
   async function loadModel(kind, loaders) {
     const errs = [];
     for (const [source, fn] of loaders) {
@@ -3842,30 +4074,31 @@ const Lens = (() => {
       try {
         await withTimeout(addScript(CFG.tfjs), 60000, 'AI runtime');
         await Promise.all([addScript(CFG.mobilenetLib), addScript(CFG.cocoLib)].map(p => withTimeout(p, 60000, 'model library')));
-        try { await tf.setBackend('webgl'); } catch (e) { /* falls back to whatever is available */ }
+        // GPU (WebGL) where it works, otherwise TF.js's CPU backend: same weights, same rules, just slower
+        let gl = false;
+        if (!CFG.forceCPU) { try { gl = await tf.setBackend('webgl'); await tf.ready(); } catch (e) { gl = false; } }
+        if (!gl || tf.getBackend() !== 'webgl') { await tf.setBackend('cpu'); }
         await tf.ready();
         st.backend = tf.getBackend();
         try { tf.env().set('WEBGL_DELETE_TEXTURE_THRESHOLD', 0); } catch (e) {} // free GPU textures eagerly on low-memory phones
         st.progress = 'Loading recognition models…'; emit();
-        const mnLocal = new URL(CFG.localUrls.classifier, location.href).href, coLocal = new URL(CFG.localUrls.detector, location.href).href;
+        const mnLocal = Platform.assets.url(CFG.localUrls.classifier), coLocal = Platform.assets.url(CFG.localUrls.detector);
         const [cls, det] = await Promise.allSettled([
           withTimeout(loadModel('classifier', [
             ['cache', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: CFG.cacheKeys.classifier, inputRange: [0, 1] })],
             ['site', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: mnLocal, inputRange: [0, 1] })],
-            ['tfhub', () => mobilenet.load({ version: 2, alpha: 1.0 })],
-            ['tfhub-lite', () => mobilenet.load({ version: 2, alpha: 0.5 })],
-          ]), 120000, 'classifier'),
+          ]), 180000, 'classifier'),
           withTimeout(loadModel('detector', [
             ['cache', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: CFG.cacheKeys.detector })],
             ['site', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: coLocal })],
-            ['google', () => cocoSsd.load({ base: 'lite_mobilenet_v2' })],
-          ]), 120000, 'detector'),
+          ]), 180000, 'detector'),
         ]);
         st.classifier = cls.status === 'fulfilled' ? cls.value : null;
         st.detector = det.status === 'fulfilled' ? det.value : null;
-        if (!st.classifier && !st.detector) throw new Error((cls.reason && cls.reason.message) || 'models unavailable');
+        // both models are part of the standard recogniser: no hunting with only one of them
+        if (!st.classifier || !st.detector) throw new Error((!st.classifier ? cls : det).reason.message || 'models unavailable');
         st.state = 'ready';
-        st.error = !st.detector ? 'multi-object detector unavailable: ' + det.reason.message : !st.classifier ? 'fine classifier unavailable: ' + cls.reason.message : '';
+        st.error = '';
         st.loadMs = Math.round(performance.now() - t0);
         st.progress = '';
       } catch (e) {
@@ -3911,7 +4144,13 @@ const Lens = (() => {
     if (st.state !== 'ready') throw new Error('Spirit Lens is not ready');
     if (st.busy) throw Object.assign(new Error('a recognition is already running'), { code: 'busy' }); // one job at a time on a phone
     st.busy = true;
-    try { return await recognizeOnce(src); } finally { st.busy = false; }
+    try { return await recognizeOnce(src); }
+    catch (e) {
+      // a lost or failing WebGL context: rerun on the CPU backend (same weights) once before giving up
+      if (st.backend !== 'webgl') throw e;
+      await tf.setBackend('cpu'); await tf.ready(); st.backend = tf.getBackend(); emit();
+      return await recognizeOnce(src);
+    } finally { st.busy = false; }
   }
   async function recognizeOnce(src) {
     const T = { start: performance.now() }, dbg = { backend: st.backend, sources: { ...st.sources }, detections: [], full: [], crops: [] };
@@ -3995,16 +4234,22 @@ const Lens = (() => {
   function fmtMap(m) { return m === 'excluded' ? 'excluded' : m ? m.obj : '?'; }
 
   async function clearCache() {
+    if (typeof tf === 'undefined') return;
     for (const k of Object.values(CFG.cacheKeys)) { try { await tf.io.removeModel(k); } catch (e) {} }
   }
+  // forget the loaded models (developer backend switch, or a clean reload after a failure)
+  function reset() {
+    for (const m of [st.classifier, st.detector]) { try { m && m.model && m.model.dispose && m.model.dispose(); } catch (e) {} }
+    Object.assign(st, { state: 'idle', error: '', classifier: null, detector: null, backend: '', busy: false }); loading = null; emit();
+  }
 
-  return { load, recognize, clearCache, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
+  return { load, recognize, clearCache, reset, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
 })();
 
 </script>
 <script>
-/* SNAPMON — EXPERIMENTAL Spirit Lens: CLIP-style zero-shot recognition over a large everyday-object vocabulary.
-   Developer-only (Settings → Developer). Never downloaded for normal players.
+/* SNAPMON — TinyCLIP half of the standard Hybrid recogniser (see engine.js): zero-shot recognition over a large
+   everyday-object vocabulary. Every player runs the same model, vocabulary and thresholds.
    Pipeline: production COCO-SSD boxes (if any) + the whole photo → 224 px crops → image encoder in a worker →
    cosine similarity against precomputed text embeddings → per-object probabilities → rejection rules.
    CLIP similarities are NOT probabilities: the shown "calibrated confidence" comes from a reliability table measured
@@ -4014,22 +4259,23 @@ const Lens = (() => {
 const ClipLens = (() => {
   const CFG = {
     variant: 'tinyclip-39m16',
-    base: 'models/clip/',
-    ortBase: 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/',
+    base: 'models/clip/',          // packaged assets (Platform.assets)
     localOrt: 'vendor/ort/',
     workerPath: 'src/workers/clip-worker.js',
+    forceBackend: null,             // developer testing only: 'wasm' forces the CPU path (same model)
+    expect: null,                   // { file: {bytes, sha256} } from the deploy manifest, checked by the worker
+    test: null,                     // automated tests only: { failGPU, failCPU } simulates backend failures
     // fallback thresholds; replaced by the benchmark's calibration in vocab.json when present
     accept: { p: 0.35, margin: 0.12 },
     MAX_CROPS: 4,
     TIMEOUT_MS: 30000,
   };
-  const st = { state: 'off', error: '', info: null, worker: null, seq: 0, pending: new Map(), meta: null, busy: false };
+  const st = { state: 'off', error: '', errorKind: '', info: null, worker: null, seq: 0, pending: new Map(), meta: null, busy: false, progress: {} };
 
   function workerURL() {
     if (window.__SNAPMON_CLIP_WORKER) return URL.createObjectURL(new Blob([window.__SNAPMON_CLIP_WORKER], { type: 'text/javascript' }));
     return new URL(CFG.workerPath, location.href).href;
   }
-  async function exists(url) { try { const r = await fetch(url, { method: 'HEAD' }); return r.ok; } catch (e) { return false; } }
 
   async function load() {
     if (st.state === 'ready') return true;
@@ -4037,21 +4283,23 @@ const ClipLens = (() => {
     st.loading = (async () => {
       st.state = 'loading'; st.error = '';
       try {
-        const base = new URL(CFG.base + CFG.variant + '/', location.href).href;
-        if (!(await exists(base + 'vocab.json'))) throw Object.assign(new Error('experimental model files are not deployed on this site'), { code: 'model-missing' });
-        st.meta = await (await fetch(base + 'vocab.json')).json();
-        const ortBase = (await exists(new URL(CFG.localOrt + 'ort.min.js', location.href).href)) ? new URL(CFG.localOrt, location.href).href : CFG.ortBase;
+        const base = Platform.assets.url(CFG.base + CFG.variant + '/'), ortBase = Platform.assets.url(CFG.localOrt);
         st.worker = new Worker(workerURL());
         st.worker.onmessage = ev => {
-          const m = ev.data, pend = st.pending.get(m.id != null ? m.id : 'init');
+          const m = ev.data;
+          if (m.type === 'progress') { st.progress[m.file] = { loaded: m.loaded, total: m.total }; if (CFG.onProgress) CFG.onProgress(st.progress); return; }
+          const pend = st.pending.get(m.id != null ? m.id : 'init');
           if (!pend) return;
           st.pending.delete(m.id != null ? m.id : 'init'); clearTimeout(pend.timer);
-          m.type === 'error' ? pend.reject(new Error(m.error)) : pend.resolve(m);
+          m.type === 'error' ? pend.reject(Object.assign(new Error(m.error), { kind: m.kind })) : pend.resolve(m);
         };
-        st.worker.onerror = e => { for (const p of st.pending.values()) p.reject(new Error('worker crashed: ' + (e.message || 'unknown'))); st.pending.clear(); };
-        const ready = await call('init', { type: 'init', base, ortBase, preferGPU: true }, 180000);
-        st.info = ready.info; st.state = 'ready';
-      } catch (e) { st.state = 'failed'; st.error = String(e.message || e); if (st.worker) st.worker.terminate(); st.worker = null; }
+        // the worker process itself can die (Android reclaiming memory): reject whatever was waiting
+        st.worker.onerror = e => { for (const p of st.pending.values()) p.reject(Object.assign(new Error('recognition worker stopped: ' + (e.message || 'unknown')), { kind: 'crash' })); st.pending.clear(); st.state = 'failed'; };
+        const ready = await call('init', { type: 'init', base, ortBase, preferGPU: true, forceBackend: CFG.forceBackend, expect: CFG.expect || {}, test: CFG.test || {} }, 240000);
+        st.info = ready.info;
+        st.meta = await (await fetch(base + 'vocab.json')).json(); // served from the HTTP/Cache copy the worker just verified
+        st.state = 'ready';
+      } catch (e) { st.state = 'failed'; st.error = String(e.message || e); st.errorKind = e.kind || (e.code === 'timeout' ? 'timeout' : 'init'); if (st.worker) st.worker.terminate(); st.worker = null; }
       st.loading = null;
       return st.state === 'ready';
     })();
@@ -4059,7 +4307,7 @@ const ClipLens = (() => {
   }
   function call(id, msg, timeout = CFG.TIMEOUT_MS) {
     return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => { st.pending.delete(id); reject(Object.assign(new Error('recognition timed out'), { code: 'timeout' })); }, timeout);
+      const timer = setTimeout(() => { st.pending.delete(id); reject(Object.assign(new Error('recognition timed out'), { code: 'timeout', kind: 'timeout' })); }, timeout);
       st.pending.set(id, { resolve, reject, timer });
       st.worker.postMessage(msg, msg.crops ? [msg.crops.buffer] : []);
     });
@@ -4083,13 +4331,20 @@ const ClipLens = (() => {
   }
 
   // Aggregate label probabilities per object, apply rejection, attach calibrated confidence.
+  // Scores are rounded to 3 decimals before any threshold or comparison: WebGPU and the CPU produce float results
+  // that differ in the last digits, and rounding makes those differences flip a decision far less often (the
+  // remaining risk is a score sitting exactly on a boundary; measured in docs/RECOGNITION.md).
+  const r3 = x => Math.round(x * 1000) / 1000;
   function judge(top) {
     const labels = st.meta.labels, per = new Map();
+    top = top.map(t => ({ ...t, p: r3(t.p) }));
     for (const t of top) { const L = labels[t.i]; const key = L.o || '__none'; const e = per.get(key) || { obj: L.o || null, label: L.l, p: 0, cos: t.cos }; e.p += t.p; if (t.cos > e.cos) { e.cos = t.cos; } per.set(key, e); }
-    const ranked = [...per.values()].sort((a, b) => b.p - a.p);
+    for (const e of per.values()) e.p = r3(e.p);
+    // ties are broken by name so every device ranks equal scores the same way
+    const ranked = [...per.values()].sort((a, b) => b.p - a.p || String(a.obj || a.label).localeCompare(String(b.obj || b.label)));
     const best = ranked[0], second = ranked[1] || { p: 0 };
     const th = (st.meta.calib && st.meta.calib.accept) || CFG.accept;
-    const margin = best.p - second.p;
+    const margin = r3(best.p - second.p);
     let accepted = !!best.obj && best.p >= th.p && margin >= th.margin, why = accepted ? 'accepted' : !best.obj ? 'background or person' : best.p < th.p ? 'low score' : 'ambiguous';
     if (accepted && st.meta.calib && st.meta.calib.minCos && best.cos < st.meta.calib.minCos) { accepted = false; why = 'weak match'; }
     return { best, ranked: ranked.slice(0, 5), margin, accepted, why, calibrated: calibrate(best.p) };
@@ -4184,6 +4439,126 @@ const ClipLens = (() => {
 
   function reset() { if (st.worker) st.worker.terminate(); Object.assign(st, { state: 'off', error: '', info: null, worker: null, meta: null, busy: false, loading: null }); st.pending.clear(); }
   return { load, recognize, fuse, judge, hybridDecision, reset, status: st, CFG };
+})();
+
+</script>
+<script>
+/* SNAPMON — the recognition engine: ONE standard Hybrid recogniser for every player.
+
+   Parts (all on the device, nothing uploaded):
+     • Lens (lens.js)      — COCO-SSD lite detector + MobileNet v2 classifier (TF.js; WebGL, CPU fallback)
+     • ClipLens (lens-clip.js + workers/clip-worker.js) — TinyCLIP ViT-39M/16 image encoder over a 2,940-label
+                             vocabulary (ONNX Runtime Web; WebGPU, WASM/CPU fallback)
+     • ClipLens.hybridDecision — the fusion and second-opinion rules (docs/RECOGNITION.md)
+
+   Every player gets the same model files, vocabulary, thresholds and rules (ENGINE_ID names that set). Hardware only
+   changes speed: GPU where it works, otherwise CPU with the same weights. If either part cannot load or run, hunting
+   stops with an explanation and a Retry. There is no weaker fallback recogniser.
+
+   Model files come from Platform.assets (the website today, the APK's bundled assets later). The deploy writes
+   models/manifest.json (sizes + SHA-256), used for the download notice and to verify downloads. */
+'use strict';
+
+const ENGINE_ID = 'hybrid-1'; // bump whenever a model file, the vocabulary, a threshold or a decision rule changes
+
+const Engine = (() => {
+  const FALLBACK_SIZES = { lens: 32.6 * 1048576, clip: 63.4 * 1048576 }; // used if the manifest is missing (upper bounds)
+  const st = { state: 'idle', stage: '', loaded: 0, total: 0, error: '', kind: '', loadMs: 0, manifest: null, backends: {} };
+  const listeners = new Set();
+  const emit = () => listeners.forEach(f => { try { f(st); } catch (e) {} });
+  let loading = null;
+
+  async function manifest() {
+    if (st.manifest) return st.manifest;
+    try { const r = await fetch(Platform.assets.url('models/manifest.json'), { cache: 'no-cache' }); if (r.ok) st.manifest = await r.json(); } catch (e) {}
+    return st.manifest;
+  }
+  // approximate one-time download, for the notice
+  async function downloadBytes() {
+    const m = await manifest();
+    if (m && m.groups) return (m.groups.lens || FALLBACK_SIZES.lens) + (m.groups.clip || FALLBACK_SIZES.clip);
+    return FALLBACK_SIZES.lens + FALLBACK_SIZES.clip;
+  }
+
+  // classify a failure into something the player can act on
+  function kindOf(e, part) {
+    const msg = String((e && (e.message || e)) || '');
+    if (e && e.kind) return e.kind; // the worker already knows (download / memory / init / timeout / crash)
+    if (!Platform.device.online()) return 'offline';
+    if (/download|fetch|network|404|unavailable|could not/i.test(msg)) return 'download';
+    if (/memory|allocation|RangeError|OOM|Aborted\(\)/i.test(msg)) return 'memory';
+    if (/timed out|timeout/i.test(msg)) return 'timeout';
+    if (!Platform.device.wasm()) return 'unsupported';
+    return part === 'run' ? 'run' : 'init';
+  }
+
+  function load() {
+    if (st.state === 'ready') return Promise.resolve(true);
+    if (loading) return loading;
+    loading = (async () => {
+      const t0 = performance.now();
+      Object.assign(st, { state: 'loading', error: '', kind: '', stage: 'Preparing…', loaded: 0, total: 0 }); emit();
+      try {
+        if (!Platform.device.wasm()) throw Object.assign(new Error('this browser cannot run WebAssembly'), { kind: 'unsupported' });
+        const m = await manifest();
+        const lensBytes = (m && m.groups && m.groups.lens) || FALLBACK_SIZES.lens, clipBytes = (m && m.groups && m.groups.clip) || FALLBACK_SIZES.clip;
+        st.total = lensBytes + clipBytes;
+        if (m && m.files) {
+          const pre = 'models/clip/' + ClipLens.CFG.variant + '/', expect = {};
+          for (const f of m.files) if (f.path.startsWith(pre)) expect[f.path.slice(pre.length)] = { bytes: f.bytes, sha256: f.sha256 };
+          ClipLens.CFG.expect = expect;
+        }
+        // one part after the other keeps peak memory and bandwidth lower on phones
+        st.stage = 'Object detector and classifier'; emit();
+        if (!(await Lens.load())) throw Object.assign(new Error(Lens.status.error || 'detector/classifier failed to load'), { part: 'lens' });
+        st.loaded = lensBytes; st.backends.lens = Lens.status.backend; st.stage = 'Object vocabulary model'; emit();
+        ClipLens.CFG.onProgress = prog => { const got = Object.values(prog).reduce((a, p) => a + (p.loaded || 0), 0); st.loaded = lensBytes + Math.min(clipBytes, got); emit(); };
+        if (!(await ClipLens.load())) throw Object.assign(new Error(ClipLens.status.error || 'vocabulary model failed to load'), { kind: ClipLens.status.errorKind, part: 'clip' });
+        st.backends.clip = ClipLens.status.info.backend;
+        st.loaded = st.total; st.loadMs = Math.round(performance.now() - t0); st.state = 'ready'; st.stage = '';
+        try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {} // ask the browser not to evict the models
+      } catch (e) {
+        st.state = 'failed'; st.error = String(e.message || e); st.kind = kindOf(e, 'load'); st.stage = '';
+      }
+      loading = null; emit();
+      return st.state === 'ready';
+    })();
+    return loading;
+  }
+
+  const timeout = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error('recognition timed out'), { kind: 'timeout' })), ms))]);
+  // Recognise one photo with the standard pipeline. Returns { rec, prodOnly, clip }: rec carries the final decision.
+  async function recognize(img, { timeoutMs = 45000 } = {}) {
+    if (st.state !== 'ready') throw Object.assign(new Error('recognition engine not ready'), { kind: 'not-ready' });
+    const t0 = performance.now();
+    try {
+      const rec = await timeout(Lens.recognize(img), timeoutMs);
+      const prodOnly = { decision: rec.decision, reason: rec.reason, candidates: rec.candidates.slice() };
+      const clip = await timeout(ClipLens.recognize(rec.image, rec), timeoutMs);
+      const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
+      rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
+      rec.debug.decision = h.decision + (h.reason === 'disagree' ? ' (lenses disagree)' : h.reason === 'second-opinion' ? ' (second opinion)' : '');
+      rec.debug.engine = { id: ENGINE_ID, backends: { lens: Lens.status.backend, clip: ClipLens.status.info.backend }, totalMs: Math.round(performance.now() - t0) };
+      return { rec, prodOnly, clip, ms: Math.round(performance.now() - t0) };
+    } catch (e) {
+      // a crashed worker or a lost GPU context leaves the engine unusable: make the next attempt reload it
+      if (ClipLens.status.state !== 'ready') { st.state = 'failed'; emit(); }
+      throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind: (e && e.kind) || kindOf(e, 'run') });
+    }
+  }
+
+  // developer testing: force the CPU path for both parts (same models) and reload
+  function setForceCPU(on) {
+    Lens.CFG.forceCPU = !!on; ClipLens.CFG.forceBackend = on ? 'wasm' : null;
+    ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit();
+  }
+  async function clearCache() {
+    try { await caches.delete('snapmon-models-v1'); } catch (e) {}
+    try { await Lens.clearCache(); } catch (e) {}
+    ClipLens.reset(); Lens.reset && Lens.reset(); Object.assign(st, { state: 'idle', backends: {} }); emit();
+  }
+
+  return { load, recognize, downloadBytes, manifest, setForceCPU, clearCache, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
 })();
 
 </script>
@@ -4315,7 +4690,10 @@ function questHTML(q) {
 /* ---------- photo flow ---------- */
 /* ---------- live camera (the only way to hunt: no gallery, no file upload) ---------- */
 async function openCamera() {
-  closeSheet(); Lens.load(); // warm the recogniser up while the player frames the shot
+  closeSheet();
+  // first hunt on this phone: say once what will be downloaded (this is information, not a choice of recogniser)
+  if (Engine.status.state !== 'ready' && !S.settings.engineCached && !ui.engineNoticeOk) return showEngineNotice();
+  Engine.load(); // start (or resume) loading the engine while the player frames the shot
   $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
     <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
     <div class="cam-frame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
@@ -4348,28 +4726,57 @@ function camSnap() {
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
-function lensStatusLine() {
-  const L = Lens.status;
-  if (L.state === 'ready') return `Ready (${esc(L.backend)}${L.error ? '; ' + esc(L.error) : ''}).`;
-  if (L.state === 'loading') return esc(L.progress || 'Loading…');
-  if (L.state === 'failed') return `Could not load: ${esc(L.error)}.`;
-  return S.settings.lensCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet (about 30 MB, once). It downloads while your camera is open.';
+/* ---------- the recognition engine: one-time notice, progress, status ---------- */
+const MB = b => Math.max(1, Math.round(b / 1048576));
+async function showEngineNotice() {
+  const bytes = await Engine.downloadBytes();
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+    <h2 style="font-size:26px">One-time download</h2>
+    <p>SNAPMON recognises objects with AI that runs <b>on this phone</b>. Its recognition engine (up to about <b>${MB(bytes)} MB</b>) downloads once and stays saved for next time. Parts you already have are not downloaded again.</p>
+    <p class="small muted">Photos are never uploaded to any AI service. Wi-Fi is recommended. While it downloads you can keep using the rest of the game.</p>
+    <button class="btn primary block" data-act="engineDownload">Download now (${MB(bytes)} MB)</button>
+    <button class="btn ghost block" data-act="closeOverlay">Not now</button></div></div>`;
+}
+function engineProgressHTML() {
+  const E = Engine.status, pct = E.total ? Math.min(100, Math.round(E.loaded / E.total * 100)) : 0;
+  return `<div class="stack" id="engineProgress" style="gap:6px"><div class="bar xp"><i style="width:${pct}%"></i></div>
+    <div class="small muted">${E.state === 'ready' ? 'Recognition engine ready.' : esc(E.stage || 'Starting…')} ${E.total ? `· ${MB(E.loaded)} / ${MB(E.total)} MB` : ''}</div></div>`;
+}
+// loading screen used before the first hunt; continues with next() once the engine is ready
+async function showEngineLoading(next) {
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+    <h2 style="font-size:26px">Preparing the recognition engine</h2>
+    ${engineProgressHTML()}
+    <p class="small muted">Recognition runs on this phone. This happens once; next time it starts from the saved copy.</p>
+    <button class="btn ghost block" data-act="closeOverlay">Continue in the background</button></div></div>`;
+  const ok = await Engine.load();
+  if (!$('#engineProgress')) return; // player left the screen; loading carries on
+  if (ok) { S.settings.engineCached = true; persist(); next(); } else showEngineFailed(null, Engine.status.kind);
+}
+function engineStatusLine() {
+  const E = Engine.status;
+  if (E.state === 'ready') return `Ready · ${E.backends.lens === 'webgl' ? 'GPU' : 'CPU'} detector, ${E.backends.clip === 'webgpu' ? 'GPU' : 'CPU'} vocabulary model.`;
+  if (E.state === 'loading') return `Loading: ${esc(E.stage)}${E.total ? ` (${MB(E.loaded)} / ${MB(E.total)} MB)` : ''}.`;
+  if (E.state === 'failed') return `Could not start: ${esc(E.error)}.`;
+  return S.settings.engineCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet.';
 }
 function lensChipHTML() {
-  const L = Lens.status;
-  const dot = L.state === 'ready' ? 'var(--good)' : L.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
-  const txt = L.state === 'ready' ? 'Spirit Lens ready' : L.state === 'loading' ? 'Spirit Lens warming up…' : L.state === 'failed' ? 'Spirit Lens offline' : S.settings.lensCached ? 'Spirit Lens asleep' : 'Spirit Lens not downloaded';
-  const btn = L.state === 'failed' ? '<button class="btn small" data-act="lensPrepare">Retry</button>' : L.state === 'idle' && !S.settings.lensCached ? '<button class="btn small" data-act="lensPrepare">Download now (~30 MB)</button>' : '';
-  return `<div class="lens-chip" id="lensChip"><i style="background:${dot}" class="${L.state === 'loading' ? 'pulse' : ''}"></i><span class="grow">${txt}</span>${btn}</div>`;
+  const E = Engine.status;
+  const dot = E.state === 'ready' ? 'var(--good)' : E.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
+  const pct = E.total ? ' ' + Math.round(E.loaded / E.total * 100) + '%' : '';
+  const txt = E.state === 'ready' ? 'Spirit Lens ready' : E.state === 'loading' ? 'Spirit Lens loading' + pct : E.state === 'failed' ? 'Spirit Lens could not start' : S.settings.engineCached ? 'Spirit Lens asleep' : 'Spirit Lens not downloaded';
+  const btn = E.state === 'failed' ? '<button class="btn small" data-act="lensPrepare">Retry</button>' : '';
+  return `<div class="lens-chip" id="lensChip"><i style="background:${dot}" class="${E.state === 'loading' ? 'pulse' : ''}"></i><span class="grow">${txt}</span>${btn}</div>`;
 }
-Lens.onChange(() => {
+Engine.onChange(() => {
   const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
+  const pr = $('#engineProgress'); if (pr) pr.outerHTML = engineProgressHTML();
   const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
-  if ($('#sheet').innerHTML.includes('Spirit Lens')) settingsSheet();
+  if ($('#sheet').innerHTML.includes('Recognition engine')) settingsSheet();
 });
 
-/* ---------- recognition flow: photo → Spirit Lens → (pick among detections) → encounter scan ----------
-   There is no manual entry: only objects the lens actually recognised can be hunted. */
+/* ---------- recognition flow: photo → Hybrid engine → (pick among AI suggestions) → encounter scan ----------
+   There is no manual entry: only objects the engine actually recognised can be hunted. */
 function beginIdentify(img, url) {
   const hash = Photo.analyze(img).hash; // whole-photo similarity fingerprint (repeat-photo detection)
   ui.pending = { img, url, hash, thumb: S.settings.keepPhotos ? Photo.thumbnail(img) : null, rec: null, t0: Date.now() };
@@ -4379,12 +4786,12 @@ function lensFrame(p, extra = '') {
   return `<div class="photo-frame" id="lensFrame"><img alt="Your photo" src="${p.url}">${extra}<i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i></div>`;
 }
 function lensStatusText() {
-  const L = Lens.status;
-  if (L.state === 'loading') return `${esc(L.progress || 'Starting the Spirit Lens…')}${S.settings.lensCached ? '' : ' First time only: about 30 MB of AI models download and are then kept on this phone.'}`;
-  if (L.state === 'ready') return 'Looking for objects… (runs on this phone)';
+  const E = Engine.status;
+  if (E.state === 'loading') return `Starting the recognition engine: ${esc(E.stage)}${E.total ? ` (${MB(E.loaded)} / ${MB(E.total)} MB)` : ''}…`;
+  if (E.state === 'ready') return 'Looking for objects… (runs on this phone)';
   return '';
 }
-const withTimeout = (promise, ms, code) => Promise.race([promise, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error(code), { code })), ms))]);
+const devOn = () => !!S.settings.devUnlocked;
 async function recognizeFlow() {
   const p = ui.pending; if (!p) return;
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
@@ -4392,43 +4799,24 @@ async function recognizeFlow() {
     ${lensFrame(p, '<i class="vf-sweep"></i><div class="scan-hud"><div class="lens-tag"><i class="spin"></i> ANALYSING <span id="lensClock">0.0s</span></div></div>')}
     <p class="muted" style="text-align:center" id="lensStatus">${lensStatusText()}</p></div></div>`;
   const clock = setInterval(() => { const el = $('#lensClock'); if (!el || ui.pending !== p) return clearInterval(clock); el.textContent = ((Date.now() - p.t0) / 1000).toFixed(1) + 's'; }, 100);
-  const fail = kind => { clearInterval(clock); if (ui.pending === p) showLensFailed(p, kind); };
-  if (!Platform.device.wasm() && !Platform.device.webgl()) return fail('unsupported');
-  if (Lens.status.state !== 'ready') {
-    const ok = await Lens.load();
+  const fail = kind => { clearInterval(clock); if (ui.pending === p) showEngineFailed(p, kind); };
+  persist(true); // save progress before the memory-heavy part (Android may stop a page that runs out of memory)
+  if (Engine.status.state !== 'ready') {
+    const ok = await Engine.load();
     if (ui.pending !== p) return clearInterval(clock);
-    if (!ok) return fail(Platform.device.online() ? 'download' : 'offline');
-    const s = $('#lensStatus'); if (s) s.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
+    if (!ok) return fail(Engine.status.kind);
   }
-  let rec;
-  try { rec = await withTimeout(Lens.recognize(p.img), 30000, 'timeout'); }
-  catch (e) { return fail(e.code === 'timeout' ? 'timeout' : e.code === 'busy' ? 'busy' : 'error'); }
-  if (ui.pending !== p) return clearInterval(clock);
-  p.rec = rec;
-  if (!S.settings.lensCached) { S.settings.lensCached = true; persist(); }
-  // developer-only experimental lens: compare side by side, or let it refine the result (hybrid)
-  const mode = S.settings.expLens || 'off';
-  if (mode !== 'off' || S.settings.fieldTest) {
-    const s = $('#lensStatus'); if (s) s.textContent = 'Experimental lens running…';
-    try {
-      if (ClipLens.status.state !== 'ready' && !(await ClipLens.load())) throw new Error(ClipLens.status.error || 'experimental lens unavailable');
-      p.clip = await withTimeout(ClipLens.recognize(rec.image, rec), 30000, 'timeout');
-      p.prodOnly = { decision: rec.decision, reason: rec.reason, top: ftTop(rec) }; // what production alone said (field test)
-      if (mode === 'hybrid') applyHybrid(rec, p.clip);
-    } catch (e) { p.clipError = String(e.message || e); }
-  }
+  let r;
+  try { r = await Engine.recognize(p.img); }
+  catch (e) { return fail(e.kind); }
   clearInterval(clock);
   if (ui.pending !== p) return;
-  if (S.settings.fieldTest) return showFieldTest(p);
-  if (rec.decision === 'unknown') return showUnknown(p);
-  if (rec.decision === 'auto') return showIdentified(p, 0);
+  p.rec = r.rec; p.clip = r.clip; p.prodOnly = { decision: r.prodOnly.decision, reason: r.prodOnly.reason, top: ftTop(r.prodOnly) };
+  if (!S.settings.engineCached) { S.settings.engineCached = true; persist(); }
+  if (devOn() && S.settings.fieldTest) return showFieldTest(p);
+  if (p.rec.decision === 'unknown') return showUnknown(p);
+  if (p.rec.decision === 'auto') return showIdentified(p, 0);
   showChoices(p);
-}
-// hybrid mode: replace the production candidates with the fused result and re-decide with the same rules
-function applyHybrid(rec, clip) {
-  const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
-  rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
-  rec.debug.decision = rec.decision + ' (hybrid' + (h.reason === 'disagree' ? ': lenses disagree' : '') + ')';
 }
 /* ---------- field test (developer mode) ----------
    Records what each model said and the tester's verdict in a SEPARATE store (snapmon.fieldtest.v1). Nothing here ever
@@ -4440,12 +4828,14 @@ const ftNew = () => { const after = +(Platform.storage.get(FT_KEY + '.copied') |
 const ftSave = list => Platform.storage.set(FT_KEY, JSON.stringify(list.slice(-500)));
 function ftTop(rec) { return (rec.candidates || []).slice(0, 3).map(c => ({ obj: c.obj, label: c.label, conf: +c.conf.toFixed(3) })); }
 function showFieldTest(p) {
-  const rec = p.rec, clip = p.clip, hybrid = (S.settings.expLens || 'off') === 'hybrid' && p.prodOnly;
+  const rec = p.rec, clip = p.clip, hybrid = true; // Hybrid is the standard; the other two are shown for comparison only
   const prodRec = p.prodOnly || { decision: rec.decision, reason: rec.reason, top: ftTop(rec) }, prodTop = prodRec.top;
+  const colour = colourDiagnostics(p);
   const clipTop = clip ? clip.regions[0].ranked.slice(0, 3).map(x => ({ obj: x.obj, label: x.label, p: +x.p.toFixed(3) })) : null;
   p.ft = { v: 2, t: Date.now(), prod: { decision: prodRec.decision, reason: prodRec.reason, top: prodTop, ms: rec.debug && rec.debug.times && rec.debug.times.total },
     clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null,
-    hybrid: hybrid ? { decision: rec.decision, reason: rec.reason, top: ftTop(rec) } : null, marks: {} };
+    hybrid: hybrid ? { decision: rec.decision, reason: rec.reason, top: ftTop(rec), ms: rec.debug.engine && rec.debug.engine.totalMs } : null,
+    engine: { id: Engine.ID, backends: Engine.status.backends }, colour: colour && colour.log, marks: {} };
   const nm = x => esc(x.obj && OBJECTS[x.obj] ? OBJECTS[x.obj].name : x.label);
   // verdict buttons match what the lens did: an answer is right / in the list / wrong; no answer is rightly unknown or a miss
   const ANSWERED = [['top1', 'Right'], ['top3', 'Right one is in the list'], ['wrong', 'Wrong']];
@@ -4456,13 +4846,15 @@ function showFieldTest(p) {
     <div class="sheet-head"><h2>Field test</h2><button class="btn small ghost" data-act="cancelPhoto">Close</button></div>
     <p class="small muted" style="margin:0">No monster is created in field-test mode. Your answers are stored separately and are never used for recognition.</p>
     <div class="photo-frame" id="lensFrame"></div>
-    <div class="card small stack" style="gap:4px"><b>Production lens</b> <span class="muted">${esc(prodRec.decision)} (${esc(prodRec.reason)}) · ${p.ft.prod.ms || '?'} ms</span>
+    <div class="card small stack" style="gap:4px"><b>Detector + classifier alone</b> <span class="muted">${esc(prodRec.decision)} (${esc(prodRec.reason)}) · ${p.ft.prod.ms || '?'} ms</span>
       <div>${prodTop.length ? prodTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">${Math.round(x.conf * 100)}%</span>`).join('<br>') : '<span class="muted">nothing accepted</span>'}</div></div>
-    ${clipTop ? `<div class="card small stack" style="gap:4px"><b>Experimental lens</b> <span class="muted">${clip.regions[0].accepted ? 'accepted' : 'rejected: ' + esc(clip.regions[0].why)} · ${clip.totalMs} ms · ${esc(clip.backend)}</span>
+    ${clipTop ? `<div class="card small stack" style="gap:4px"><b>TinyCLIP alone</b> <span class="muted">${clip.regions[0].accepted ? 'accepted' : 'rejected: ' + esc(clip.regions[0].why)} · ${clip.totalMs} ms · ${esc(clip.backend)}</span>
       <div>${clipTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">score ${(x.p * 100).toFixed(1)}</span>`).join('<br>')}</div></div>` : p.clipError ? `<div class="card small">Experimental lens failed: ${esc(p.clipError)}</div>` : ''}
-    ${hybrid ? `<div class="card small stack" style="gap:4px"><b>Hybrid result</b> <span class="muted">${esc(rec.decision)} (${esc(rec.reason)})</span>
+    ${hybrid ? `<div class="card small stack" style="gap:4px"><b>Hybrid (what a player gets)</b> <span class="muted">${esc(rec.decision)} (${esc(rec.reason)}) · ${p.ft.hybrid.ms || '?'} ms · ${esc(Object.values(Engine.status.backends).join(' + '))}</span>
       <div>${p.ft.hybrid.top.length ? p.ft.hybrid.top.map((x, i) => `${i + 1}. ${nm(x)}`).join('<br>') : '<span class="muted">nothing</span>'}</div></div>` : ''}
-    ${markRow('prod', 'Production verdict', prodRec.decision !== 'unknown')}${clipTop ? markRow('clip', 'Experimental verdict', clip.regions[0].accepted) : ''}${hybrid ? markRow('hybrid', 'Hybrid verdict', rec.decision !== 'unknown') : ''}
+    ${colour ? colour.html : ''}
+    ${hybrid ? markRow('hybrid', 'Hybrid verdict', rec.decision !== 'unknown') : ''}${markRow('prod', 'Detector + classifier verdict', prodRec.decision !== 'unknown')}${clipTop ? markRow('clip', 'TinyCLIP verdict', clip.regions[0].accepted) : ''}
+    ${colour ? `<div class="stack" style="gap:6px"><b class="small">Colour verdict</b><div class="row wrap">${[['right', 'Colours match the object'], ['background', 'Background leaked in'], ['wrong', 'Wrong colours']].map(([k, l]) => `<button class="fchip" data-act="ftMark" data-arg="colour:${k}">${l}</button>`).join('')}</div></div>` : ''}
     <input class="search" id="ftTruth" maxlength="60" placeholder="What was it really? (optional, for the test log only)" autocomplete="off">
     <button class="btn primary block" data-act="ftSave">Save result &amp; take another</button>
     ${debugHTML(rec)}
@@ -4471,6 +4863,33 @@ function showFieldTest(p) {
 }
 // Answered: right / list / wrong. Not answered: rightly unknown / missed. v1 entries (before the verdict fix) used
 // 'rejected_ok' for some wrong answers too, so those are counted from the logged decision, not the verdict.
+/* Colour diagnostics for the field test: which region was used, which pixels counted as the object (cyan) and which
+   were rejected as background (dimmed), the extracted swatches, and the monster those colours produce. */
+function colourDiagnostics(p) {
+  const c = p.rec.candidates[0]; if (!c) return null;
+  const pal = Photo.palette(p.img, c.box, { mask: true }); if (!pal) return null;
+  const o = OBJECTS[c.obj];
+  const dna = makeDNA({ obj: c.obj, cat: o ? o.cat : 'other', rarity: 'common', seed: 12345, photo: { hue: pal.primary[0], sat: pal.primary[1] / 100, lit: pal.primary[2] / 100, pal } });
+  // preview: the downscaled photo with the sampled object pixels highlighted
+  const w = p.img.width, h = p.img.height, k = Math.min(1, 160 / Math.max(w, h)), cv = document.createElement('canvas');
+  cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+  const g = cv.getContext('2d');
+  const sx = cv.width / pal.mask.w, sy = cv.height / pal.mask.h, st = pal.mask.step;
+  g.drawImage(p.img, 0, 0, w, h, 0, 0, cv.width, cv.height); g.fillStyle = 'rgba(0,0,0,0.6)'; g.fillRect(0, 0, cv.width, cv.height);
+  g.fillStyle = 'rgba(80,240,220,0.9)'; for (const [x, y] of pal.mask.obj) g.fillRect(x * sx, y * sy, st * sx, st * sy);
+  g.fillStyle = 'rgba(255,90,110,0.55)'; for (const [x, y] of pal.mask.bg) g.fillRect(x * sx, y * sy, st * sx, st * sy);
+  if (c.box) { g.strokeStyle = '#ffcf5a'; g.lineWidth = 2; g.strokeRect(c.box[0] * cv.width, c.box[1] * cv.height, c.box[2] * cv.width, c.box[3] * cv.height); }
+  const sw = (lab, hex) => hex ? `<span class="swatch" style="background:${hex}"></span>${lab}` : '';
+  const S_ = pal.swatches;
+  return {
+    log: { primary: S_.primary, secondary: S_.secondary, highlight: S_.highlight, shadow: S_.shadow, conf: pal.conf, method: pal.method, objectShare: pal.fgShare, ms: pal.ms },
+    html: `<div class="card small stack" style="gap:6px"><b>Colours (${esc(pal.conf)}, ${esc(pal.method)}, ${pal.ms} ms)</b>
+      <div class="row" style="align-items:flex-start;gap:10px"><img src="${cv.toDataURL()}" alt="colour sampling" style="width:55%;border-radius:8px;image-rendering:pixelated">
+        <div class="stack" style="gap:4px">${spriteHTML(dna, { size: 96 })}</div></div>
+      <div class="row wrap" style="gap:10px">${sw('primary', S_.primary)} ${sw('secondary', S_.secondary)} ${sw('highlight', S_.highlight)} ${sw('shadow', S_.shadow)}</div>
+      <span class="muted">Cyan: pixels used as the object · red: rejected as background · yellow: selected region. Object pixels ${Math.round(pal.fgShare * 100)}% of the region.</span></div>`,
+  };
+}
 function ftStats(list) {
   const blank = () => ({ n: 0, answered: 0, right: 0, inList: 0, unknownOk: 0, missed: 0, ms: [] }), m = { prod: blank(), clip: blank(), hybrid: blank() };
   for (const e of list) for (const k of ['prod', 'clip', 'hybrid']) {
@@ -4489,22 +4908,24 @@ function ftSummaryHTML() {
     <p class="small muted" style="margin:0">${list.length} field-test photos logged on this phone.</p>`;
 }
 
-function showLensFailed(p, kind) {
-  const L = Lens.status;
+const ENGINE_FAIL = "SnapMon's recognition engine couldn't run on this device. Please check for system updates or try again.";
+function showEngineFailed(p, kind) {
+  const E = Engine.status;
   const msg = {
-    download: ['The Spirit Lens could not download', 'Recognition runs on your phone, but its AI models (about 30 MB) must be downloaded once. The download failed. Check your connection and try again.'],
-    offline: ['You are offline', 'The Spirit Lens needs to download its AI models once (about 30 MB). Connect to the internet and try again. After that it works offline.'],
-    timeout: ['Recognition took too long', 'The Spirit Lens did not finish in time. Close other apps, then try again.'],
-    unsupported: ['This device cannot run the Spirit Lens', 'The browser lacks WebGL and WebAssembly, which on-device recognition needs. Try a recent version of Chrome.'],
-    busy: ['Still thinking', 'The lens was busy with another photo. Try again.'],
-    error: ['The Spirit Lens hit a problem', 'Something went wrong during recognition. Try again.'],
-  }[kind] || ['The Spirit Lens hit a problem', 'Try again.'];
+    download: ['The recognition engine could not download', 'SNAPMON recognises objects on your phone, but its models must be downloaded once. The download failed or was interrupted. Check your connection and try again; nothing broken is kept.'],
+    offline: ['You are offline', 'The recognition engine has to be downloaded once. Connect to the internet and try again. After that it works offline.'],
+    timeout: ['Recognition took too long', 'The recognition engine did not finish in time. Close other apps, then try again.'],
+    memory: ['Not enough memory', ENGINE_FAIL + ' Closing other apps may help.'],
+    unsupported: ['This browser cannot run the recognition engine', ENGINE_FAIL],
+    crash: ['The recognition engine stopped', ENGINE_FAIL],
+    busy: ['Still thinking', 'The engine was busy with another photo. Try again.'],
+  }[kind] || ['The recognition engine could not run', ENGINE_FAIL];
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
     <h2 style="font-size:26px">${msg[0]}</h2><p>${msg[1]}</p>
-    <p class="small muted">No monster was created. The photo was not stored.</p>
-    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(L.error || kind)}</p>` : ''}
-    <button class="btn primary block" data-act="lensRetry">Try again</button>
-    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
+    <p class="small muted">No monster was created${p ? ' and the photo was not stored' : ''}. Your collection, gear and settings still work.</p>
+    ${S.settings.debugLens ? `<p class="small muted" style="word-break:break-word">Details: ${esc(kind || '')} · ${esc(E.error || '')}</p>` : ''}
+    <button class="btn primary block" data-act="${p ? 'lensRetry' : 'engineDownload'}">Try again</button>
+    <button class="btn ghost block" data-act="${p ? 'cancelPhoto' : 'closeOverlay'}">Back</button></div></div>`;
 }
 function showUnknown(p) {
   const reason = p.rec.reason;
@@ -4588,13 +5009,13 @@ function cancelPhoto() {
   ui.pending = null; $('#overlay').innerHTML = ''; render();
 }
 
-// experimental lens comparison (developer mode). CLIP scores are raw similarities turned into vocabulary softmax shares;
+// TinyCLIP details (debug info). CLIP scores are raw similarities turned into vocabulary softmax shares;
 // the "calibrated" column comes from the benchmark's reliability table and is blank where none exists.
 function clipDebugHTML() {
   const p = ui.pending; if (!p || (!p.clip && !p.clipError)) return '';
-  if (p.clipError) return `<div class="small" style="margin-top:8px;color:var(--danger)">Experimental lens: ${esc(p.clipError)}</div>`;
+  if (p.clipError) return `<div class="small" style="margin-top:8px;color:var(--danger)">TinyCLIP: ${esc(p.clipError)}</div>`;
   const c = p.clip, info = ClipLens.status.info || {}, pct = v => (v * 100).toFixed(1) + '%';
-  return `<table><tr><th colspan="4">Experimental lens (${esc(info.name || '')} · ${esc(c.backend)} · ${c.totalMs} ms · loaded in ${info.loadMs} ms · ${((info.modelBytes + info.vocabBytes) / 1048576).toFixed(1)} MB)</th></tr>
+  return `<table><tr><th colspan="4">TinyCLIP (${esc(info.name || '')} · ${esc(c.backend)} · ${c.totalMs} ms · loaded in ${info.loadMs} ms · ${((info.modelBytes + info.vocabBytes) / 1048576).toFixed(1)} MB)</th></tr>
     <tr><td class="muted">region</td><td class="muted">top object</td><td class="muted">score / margin</td><td class="muted">calibrated · verdict</td></tr>
     ${c.regions.map(r => `<tr><td>${esc(r.cls)}</td><td>${esc(r.best.obj ? OBJECTS[r.best.obj].name : r.best.label)}<br><span class="muted">${r.ranked.slice(1, 3).map(x => esc(x.obj ? OBJECTS[x.obj].name : x.label) + ' ' + pct(x.p)).join(', ')}</span></td><td>${pct(r.best.p)} / ${pct(r.margin)}</td><td>${r.calibrated != null ? pct(r.calibrated) : 'n/a'} · ${r.accepted ? '<b style="color:var(--good)">accepted</b>' : esc(r.why)}</td></tr>`).join('')}</table>`;
 }
@@ -4603,7 +5024,8 @@ async function scan(i) {
   const p = ui.pending; if (!p || !p.rec || p.scanning) return;
   const c = p.rec.candidates[+i]; if (!c) return;
   p.scanning = true;
-  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash }; // colour from the chosen object, fingerprint from the whole photo
+  // colour from the chosen object (palette with background suppression), fingerprint from the whole photo
+  const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash, pal: Photo.palette(p.img, c.box), engine: Engine.ID };
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
     <h2 style="text-align:center">Scanning for supernatural activity…</h2>
     <div class="photo-frame"><img alt="" src="${p.url}"><i class="vf-sweep"></i>
@@ -5108,11 +5530,11 @@ function labScreen() {
 
 /* ---------- settings ---------- */
 function settingsSheet() {
-  const L = Lens.status;
+  const E = Engine.status;
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
-      <div class="toggle"><div><b>Spirit Lens</b><p>${lensStatusLine()} Recognition runs entirely on this phone with open-source models (MobileNet + COCO-SSD). Photos are never uploaded.</p></div>${L.state === 'ready' ? '' : `<button class="btn small" data-act="lensPrepare">${L.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
+      <div class="toggle"><div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
       <div class="toggle"><div><b>Keep photo thumbnails</b><p>Off by default. When on, a tiny 96 px copy of the photo is stored with monsters you capture, in this browser only.</p></div><button class="switch ${S.settings.keepPhotos ? 'on' : ''}" data-act="toggleKeep" aria-label="Toggle photo thumbnails"></button></div>
     </div>
     ${saveBlocked ? `<div class="card warn stack"><b>Saved progress not loaded</b><p class="small" style="margin:0">${saveBlocked.reason === 'newer' ? `It was made by a newer SNAPMON (save format ${saveBlocked.version}).` : 'It could not be read.'} It is untouched. Copy this code before doing anything else; you can restore it once the newer version is back.</p>
@@ -5125,20 +5547,22 @@ function settingsSheet() {
       <div class="row"><input class="search grow" id="resetBox" placeholder="RESET" autocomplete="off"><button class="btn danger" data-act="reset">Erase</button></div></div>
     ${developerHTML()}
     <p class="small muted">SNAPMON never uploads your photos. There are no accounts, ads or purchases. Camera access is requested only when you tap SNAP, and the camera stops the moment you take the shot or leave the app.</p>
-    <p class="small muted">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION}</p>`);
+    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>`);
 }
 
+// Developer tools are hidden (tap the version line 7 times). They never change how hunting recognises objects:
+// the comparison views exist only inside Field-test mode, which never creates monsters.
 function developerHTML() {
-  const C = ClipLens.status, mode = S.settings.expLens || 'off', counts = objectCounts();
+  if (!devOn()) return '';
+  const counts = objectCounts(), E = Engine.status;
   const open = S.settings.devOpen;
   return `<div class="card stack"><button class="row" data-act="devOpen" style="background:none;border:0;color:inherit;padding:0;text-align:left"><b class="grow">Developer &amp; testing</b><span class="muted">${open ? '▾' : '▸'}</span></button>
-    ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what the lens saw: top predictions, boxes, scores, timing and which model produced each result.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
-    <div class="stack" style="gap:6px"><b>Experimental lens (CLIP)</b><p class="small muted" style="margin:0">A larger zero-shot model with a ${ClipLens.status.meta ? ClipLens.status.meta.labels.length : 'multi-thousand'}-label vocabulary, run on this phone. Turning it on downloads an extra model once (about 41 MB) and makes each photo slower. Scores are similarity shares, not probabilities.</p>
-      <div class="seg">${[['off', 'Off'], ['compare', 'Compare'], ['hybrid', 'Hybrid']].map(([k, l]) => `<button class="${mode === k ? 'on' : ''}" data-act="expLens" data-arg="${k}">${l}</button>`).join('')}</div>
-      <p class="small muted" style="margin:0">Compare: production decides, experimental results appear in the debug panel. Hybrid: the experimental lens may refine the production answer (rules in docs/RECOGNITION.md).${C.state !== 'off' ? ` Status: ${esc(C.state)}${C.error ? ' · ' + esc(C.error) : ''}${C.info ? ` · ${esc(C.info.backend)} · loaded in ${C.info.loadMs} ms` : ''}.` : ''}</p></div>
-    <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdict; no monsters appear. Runs both lenses when the experimental lens is on.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
+    ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what each part of the engine saw: predictions, boxes, scores, timing and backend.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
+    <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdicts, side by side: Hybrid, detector + classifier alone, TinyCLIP alone, and the colour extraction. No monsters appear.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
+    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: runs the same models on the CPU instead of the GPU, to compare speed and results. Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
+    <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow">Engine load: ${E.loadMs || '–'} ms</span></div>
     <p class="small muted" style="margin:0">Monster designs: ${counts.dedicated} specific, ${counts.composed} built from parts, ${counts.related} borrowed from a related object, ${counts.family} general family designs.</p>` : ''}
   </div>`;
 }
@@ -5159,7 +5583,17 @@ const actions = {
   cancelPhoto,
   pickCand(i) { scan(i); },
   lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
-  lensPrepare() { Lens.load(); },
+  lensPrepare() { Engine.load().then(ok => { if (ok) { S.settings.engineCached = true; persist(); } }); },
+  engineDownload() { ui.engineNoticeOk = true; showEngineLoading(openCamera); },
+  devTap() {
+    ui.devTaps = (ui.devTaps || 0) + 1;
+    if (ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
+  },
+  toggleForceCPU() { S.settings.forceCPU = !S.settings.forceCPU; persist(); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); settingsSheet(); },
+  async engineRedownload(_, el) {
+    if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to delete'; return; }
+    await Engine.clearCache(); S.settings.engineCached = false; persist(); toast('Saved engine files deleted. They download again on the next hunt.'); settingsSheet();
+  },
   closeOverlay() { $('#overlay').innerHTML = ''; render(); },
   fight() { const m = ui.discovered; ui.discovered = null; if (m) startBattle(m); },
   ignore() {
@@ -5202,7 +5636,6 @@ const actions = {
   research(id) { if (buyResearch(S, id)) { SFX.levelup(); toast(`Research complete: ${RESEARCH_BY_ID[id].name}`, 'gold'); persist(); render(); } },
   toggleDebug() { S.settings.debugLens = !S.settings.debugLens; persist(); settingsSheet(); },
   devOpen() { S.settings.devOpen = !S.settings.devOpen; persist(); settingsSheet(); },
-  expLens(v) { S.settings.expLens = v; if (v === 'off') ClipLens.reset(); persist(); settingsSheet(); },
   toggleFieldTest() { S.settings.fieldTest = !S.settings.fieldTest; persist(); settingsSheet(); },
   ftMark(arg, el) {
     const p = ui.pending; if (!p || !p.ft) return;
@@ -5252,13 +5685,56 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) { per
 window.addEventListener('pagehide', () => persist(true));
 setInterval(() => { if (!ui.battle && !document.hidden) { const before = S.hp; regen(S); if (S.hp !== before) { renderTop(); persist(); } } }, 20000);
 
+/* ---------- Android Back button ----------
+   Back closes what is on top (sheet → camera → photo flow → other overlays), then returns to the Hunt screen; on the
+   Hunt screen the first Back shows a toast and a second Back within 2 s leaves SNAPMON.
+   Browser: SNAPMON keeps ONE extra "guard" history entry above its page, so Back fires popstate instead of leaving.
+   The guard is (re)armed by the player's taps, because Chrome ignores history entries added without a user gesture
+   when the user presses Back; it is never stacked, so history cannot grow or loop and Forward is not broken.
+   Native (Capacitor): call SnapmonNav.back() from the platform's backButton listener and exit the app when it
+   returns 'exit' (see docs/ANDROID.md). */
+const Nav = (() => {
+  let exitArmedAt = 0;
+  const isGuard = () => history.state && history.state.snapmon === 'guard';
+  function arm() { if (!isGuard()) { try { history.pushState({ snapmon: 'guard' }, ''); } catch (e) {} } }
+  // returns 'handled' (something was closed), 'armed' (exit toast shown) or 'exit'
+  function back() {
+    if ($('#sheet').innerHTML) { closeSheet(); return 'handled'; }
+    if ($('#overlay').innerHTML) {
+      if (Platform.camera.isOpen() || $('#camVideo')) { closeCamera(); return 'handled'; }
+      if (ui.battle) { toast('Finish the battle, or use Flee to escape.'); return 'handled'; }        // never abandon a fight silently
+      if (ui.discovered) { toast('Choose Fight or Let it slip away.'); return 'handled'; }            // an encounter is a decision
+      if (ui.pending && ui.pending.scanning) return 'handled';                                        // the scan finishes by itself
+      if (ui.pending) { cancelPhoto(); return 'handled'; }
+      $('#overlay').innerHTML = ''; render(); return 'handled';
+    }
+    if (ui.tab !== 'hunt') { actions.tab('hunt'); return 'handled'; }
+    if (Date.now() - exitArmedAt < 2000) { exitArmedAt = 0; persist(true); return 'exit'; }
+    exitArmedAt = Date.now(); toast('Press Back again to exit SnapMon.'); return 'armed';
+  }
+  try { if (!history.state || !history.state.snapmon) history.replaceState({ snapmon: 'root' }, ''); } catch (e) {}
+  document.addEventListener('pointerdown', arm, true);
+  document.addEventListener('keydown', arm, true);
+  window.addEventListener('popstate', ev => {
+    if (ev.state && ev.state.snapmon === 'guard') return; // Forward onto our own guard: nothing to do
+    const r = back();
+    if (r === 'exit') history.back(); // leave SNAPMON (closes an installed app; returns to the previous page in a tab)
+    else arm();                        // put the guard back (if Chrome skips it, the next tap re-arms it)
+  });
+  return { back, arm };
+})();
+window.SnapmonNav = { back: Nav.back }; // for a native wrapper's hardware Back button
+
 /* test hooks (used by the automated browser tests) */
 window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, setRNG: f => { RNG = f; }, render };
 
 render();
 persist(true);
 if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFrom} to ${SAVE_VERSION}. Your monsters were kept; a copy of the old save is stored too.`), 800);
-if (S.settings.lensCached) setTimeout(() => Lens.load(), 1200); // models are cached on this phone: start them in the background
+// v0.4: Hybrid is the only recogniser; the old developer switch between recognisers is gone
+delete S.settings.expLens;
+if (S.settings.forceCPU && devOn()) Engine.setForceCPU(true);
+if (S.settings.engineCached) setTimeout(() => Engine.load(), 1200); // engine saved on this phone: start it in the background
 
 </script>
 <!--/SCRIPTS-->

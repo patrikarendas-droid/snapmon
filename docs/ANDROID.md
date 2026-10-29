@@ -1,39 +1,119 @@
 # Preparing for an Android / Google Play build
 
-No APK is built yet. This is how the web version is organised so a native wrapper (e.g. **Capacitor** with the
-Android System WebView) can be added later without rewriting the game, and what must be checked when that happens.
+No APK is built yet. This is how the web version is organised so a native wrapper (planned: **Capacitor** with the
+Android System WebView) can be added without rewriting the game, and what must be checked before a store release.
 
 ## Layers
 
 | Layer | Files | Native build |
 |---|---|---|
-| Game logic (pure, testable in Node) | `src/data.js`, `src/game.js`, `src/objects.js`, `src/labels.js` | unchanged |
+| Game logic (pure, tested in Node) | `src/data.js`, `src/game.js`, `src/objects.js`, `src/labels.js`, `src/color.js` | unchanged |
 | Rendering | `src/sprites.js`, `src/parts.js`, `src/ui.js`, `index.html` | unchanged |
-| Device access | `src/platform.js` (`Platform.camera`, `Platform.storage`, `Platform.device`) | replace implementations here only |
-| AI | `src/lens.js` (production), `src/lens-clip.js` + `src/workers/clip-worker.js` (experimental) | model URLs configurable via `Lens.CFG` / `ClipLens.CFG` |
+| Device access | `src/platform.js` (`Platform.camera`, `Platform.storage`, `Platform.device`, `Platform.assets`) | replace implementations here only |
+| Recognition engine | `src/engine.js` → `src/lens.js` + `src/lens-clip.js` + `src/workers/clip-worker.js` | same code; asset base points into the APK |
+| Navigation | `Nav` / `window.SnapmonNav.back()` in `src/ui.js` | hook the hardware Back button |
+
+## One recogniser, bundled in the app
+
+Hybrid recognition (COCO-SSD lite + MobileNet v2 + TinyCLIP ViT-39M/16 with the calibrated decision rules) is part of
+the game, not an option. The APK should **contain** every model and runtime file so all players run the same versions
+and nothing is fetched from AI hosts during play.
+
+- **One asset base.** All engine files are addressed through `Platform.assets.url(path)`. The web build serves them
+  from the site. The native build sets `window.SNAPMON_ASSET_BASE` (e.g. `https://localhost/` for Capacitor's local
+  server, which serves the app's `public/` folder) before the scripts load. No other code changes.
+- **The file list already exists.** The deploy writes `models/manifest.json` with every file's path, size and SHA-256.
+  A native build step can copy exactly those files into the app and verify them. The worker already checks TinyCLIP
+  downloads against the manifest.
+- **Size.** Upper bound with the GPU runtime: about 32.6 MB (detector, classifier and TF.js) plus 63.7 MB (TinyCLIP
+  38.8 MB, vocabulary 2.9 MB, ONNX Runtime WebGPU/WASM build 22 MB), roughly 96 MB. The CPU-only runtime build is
+  11 MB instead of 22 MB.
+  - Google Play's limit for the base download is 200 MB (Android App Bundle), so the models fit. **Play Asset
+    Delivery** with an *install-time* asset pack is the alternative if the base module needs to stay small. Install-time
+    packs arrive with the app, are updated with each release, and need no in-game download screen.
+  - Avoid *on-demand* or *fast-follow* packs for the engine: they reintroduce a "download before you can play" state.
+- **Updates.** Model changes ship as normal app releases. Bump `ENGINE_ID` in `src/engine.js` whenever a model file,
+  the vocabulary, a threshold or a decision rule changes. Every monster records the engine that identified it
+  (`monster.photo.engine`), for future competitive or multiplayer checks.
+- **Licences.** All models and runtimes are under permissive licences compatible with commercial distribution (see
+  `THIRD_PARTY_NOTICES.md`). The APK must include those notices, e.g. on a Settings → Licences screen.
+
+## Same AI, different hardware
+
+| Part | GPU path | CPU path | Same weights? |
+|---|---|---|---|
+| Detector + classifier (TF.js) | WebGL | TF.js CPU backend | yes (automatic fallback, also mid-session if WebGL is lost) |
+| TinyCLIP (ONNX Runtime Web, in a worker) | WebGPU | WebAssembly (multi-threaded only when cross-origin isolated) | yes (automatic fallback if the WebGPU session fails) |
+
+- If both backends fail, the player gets "SnapMon's recognition engine couldn't run on this device. Please check for
+  system updates or try again." with a Retry. Hunting never continues with a weaker model.
+- **WebView caveats.**
+  - WebGPU in the Android System WebView lags behind Chrome, so many devices will run TinyCLIP on WASM there. Expect
+    WASM to be slower than the 1.5 s median measured with WebGPU in Chrome.
+  - Multi-threaded WASM needs cross-origin isolation. A Capacitor app can enable it by serving
+    `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` from its local server.
+    This can be a large speed-up on the CPU path.
+- **Consistency.** Scores are rounded to 3 decimals before thresholds, and ties are broken by name. GPU vs CPU results
+  measured on the benchmark photos are in `docs/RECOGNITION.md`.
 
 ## Camera
-- The web build uses `getUserMedia` with `facingMode: environment`, started only after a tap and stopped on capture,
-  close, or when the app is hidden. No gallery, no file input.
-- In Capacitor the same `getUserMedia` call works in the Android WebView once the app holds `android.permission.CAMERA`
-  and grants the WebView's permission request (`WebChromeClient.onPermissionRequest`; Capacitor's bridge does this).
-  Alternative: implement `Platform.camera` with a native preview plugin; the rest of the game only needs a canvas back.
-- Permissions needed: **CAMERA** only. No storage, location, microphone or network-state permissions. `INTERNET` only
-  if models are downloaded instead of bundled.
+- **Web build:** uses `getUserMedia` with the rear camera. It starts only after a tap and stops on capture, on close,
+  on Back, or when the app is hidden. There is no gallery and no file input.
+- **Capacitor:** the same `getUserMedia` call works in the WebView once the app holds `android.permission.CAMERA` and
+  grants the WebView's permission request (Capacitor's bridge does this).
+- **Permissions:** CAMERA only. INTERNET is not needed for play once the models are bundled.
 
-## Models
-- Production models (~30 MB) are fetched once and cached in IndexedDB. For a Play build, bundle them in the APK assets
-  and point `Lens.CFG.localUrls` at them (Play's base APK limit is 150 MB, or use Play Asset Delivery).
-- The experimental CLIP model is off by default and should stay out of a store build unless field tests justify it.
-- WebGL is available in the Android WebView; **WebGPU** support in WebView lags Chrome, so the worker falls back to
-  WASM (`ort.min.js`). WASM multithreading requires cross-origin isolation, which a WebView app can enable with
-  `Cross-Origin-Opener-Policy`/`Cross-Origin-Embedder-Policy` headers from the local server.
+## Back button
+The game already routes Back through one function:
+
+```js
+// Capacitor (@capacitor/app)
+import { App } from '@capacitor/app';
+App.addListener('backButton', () => {
+  if (window.SnapmonNav.back() === 'exit') App.exitApp(); // or App.minimizeApp()
+});
+```
+
+`SnapmonNav.back()` returns:
+- `'handled'`: it closed a sheet, the camera or a screen, or refused to abandon a battle;
+- `'armed'`: on the Hunt screen, it showed "Press Back again to exit SnapMon.";
+- `'exit'`: the second press within 2 s.
+
+In the browser the same function is driven by a History API guard entry (see `src/ui.js`). Native code gives fully
+reliable double-Back, which Chrome cannot guarantee (see the README).
 
 ## Storage
-- `Platform.storage` is synchronous localStorage today. A WebView keeps localStorage per app, but Android can clear it
-  under storage pressure; a native build should back it with Capacitor Preferences or files and keep the export /
-  import backup code.
+- `Platform.storage` uses synchronous localStorage today. Android can clear WebView storage under pressure, so a
+  native build should back it with Capacitor Preferences or files.
+- Keep the export/import backup code either way.
+- Model files in the APK need no browser cache at all.
 
-## Licences
-All runtime dependencies and model weights are under permissive licences compatible with commercial distribution;
-see `THIRD_PARTY_NOTICES.md`. Re-check that list before a store submission.
+## Compatibility testing before a store release (not done yet)
+
+Nothing below has been measured beyond the developer's own phone (WebGPU in Chrome: TinyCLIP ~1.5 s median, ~3 s on
+the first photo, no warming over 30 photos).
+
+1. **Devices.** At least:
+   - a recent mid-range phone (WebGPU likely);
+   - a 3–4-year-old mid-range phone (WebView WebGPU unlikely → WASM);
+   - a 3–4 GB RAM phone;
+   - an Android Go or very low-memory device to find the floor.
+2. **Measure on each:**
+   - engine initialisation time;
+   - first and repeated photo times;
+   - which backends ran (Field-test log);
+   - peak memory (Android Studio profiler or `adb shell dumpsys meminfo`);
+   - WebView crashes or renderer kills over 50 photos;
+   - temperature and battery.
+3. **Set the minimum from data:**
+   - Candidate rule: Android version with a WebView that runs WASM SIMD (Android 8+ with an updated WebView) **and** a
+     minimum RAM where 50 consecutive photos complete without the renderer being killed.
+   - Do not exclude devices only for lacking WebGPU: the CPU path runs the same engine.
+4. **Play Console.** Use the Device Catalog to exclude genuinely incompatible devices (by RAM or SoC) once the floor
+   is known. Declare the camera as a required feature.
+
+Known risks:
+- Memory pressure on 2–3 GB phones while both model parts are resident (~100 MB of weights plus runtime buffers).
+- Very slow WASM on old CPUs: recognition times out after 45 s with a message.
+- WebView builds without SIMD.
+- Background eviction of a browser cache: this only affects the web version.

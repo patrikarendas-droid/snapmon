@@ -1,16 +1,21 @@
-/* SNAPMON — Spirit Lens: on-device object recognition.
+/* SNAPMON — production half of the Hybrid recogniser (see engine.js): on-device object detection + classification.
    Two open-source TensorFlow.js models share one runtime (WebGL on Android Chrome):
      • MobileNet v2 (ImageNet, 1000 classes) — what is this object, fine-grained ("coffee mug", "strawberry", "golden retriever").
      • COCO-SSD lite (80 classes, bounding boxes) — where are the objects, so a photo with several things offers a choice.
    Each detected box is cropped and re-classified with MobileNet for a more specific label.
-   Weights are downloaded once (~30 MB) and cached in IndexedDB. Photos never leave the device. */
+   Weights come only from the packaged copies (Platform.assets: the site on the web, the APK natively), are cached in
+   IndexedDB, and are never swapped for different or smaller models: if either model cannot load, the engine reports
+   an error instead of hunting with a weaker recogniser. TF.js runs on WebGL (GPU) and falls back to its CPU backend
+   with the same weights. Photos never leave the device. */
 'use strict';
 
 const Lens = (() => {
+  // runtime libraries: the packaged copy first; the pinned CDN copy of the very same version is only a fallback for
+  // the library code (never for model weights)
   const CFG = {
-    tfjs: 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js',
-    mobilenetLib: 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js',
-    cocoLib: 'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js',
+    tfjs: ['vendor/tfjs/tf.min.js', 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js'],
+    mobilenetLib: ['vendor/tfjs/mobilenet.min.js', 'https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js'],
+    cocoLib: ['vendor/tfjs/coco-ssd.min.js', 'https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js'],
     cacheKeys: { classifier: 'indexeddb://snapmon-lens-mobilenet-v2-100', detector: 'indexeddb://snapmon-lens-cocossd-lite' },
     localUrls: { classifier: 'models/mobilenet_v2_100/model.json', detector: 'models/ssdlite_mobilenet_v2/model.json' },
     MIN_CONF: 0.25,      // below this nothing counts as recognised
@@ -27,17 +32,22 @@ const Lens = (() => {
   const emit = () => listeners.forEach(f => { try { f(st); } catch (e) {} });
   let loading = null;
 
-  function addScript(src) {
+  function addOne(src) {
     return new Promise((res, rej) => {
       if ([...document.scripts].some(s => s.src === src && s.dataset.loaded)) return res();
       const s = document.createElement('script'); s.src = src; s.async = true; s.crossOrigin = 'anonymous';
-      s.onload = () => { s.dataset.loaded = '1'; res(); }; s.onerror = () => rej(new Error('could not download ' + src.split('/npm/')[1]));
+      s.onload = () => { s.dataset.loaded = '1'; res(); }; s.onerror = () => { s.remove(); rej(new Error('could not download ' + src.split('/').pop())); };
       document.head.appendChild(s);
     });
   }
+  async function addScript(list) {
+    let last;
+    for (const src of list) { try { return await addOne(/^https?:/.test(src) ? src : Platform.assets.url(src)); } catch (e) { last = e; } }
+    throw last;
+  }
   const withTimeout = (p, ms, what) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(what + ' timed out')), ms))]);
 
-  // Try IndexedDB cache → same-origin copy (GitHub Pages build) → public model host. Cache on first network success.
+  // IndexedDB cache → packaged copy. Cached on first download. No other hosts and no substitute models.
   async function loadModel(kind, loaders) {
     const errs = [];
     for (const [source, fn] of loaders) {
@@ -60,30 +70,31 @@ const Lens = (() => {
       try {
         await withTimeout(addScript(CFG.tfjs), 60000, 'AI runtime');
         await Promise.all([addScript(CFG.mobilenetLib), addScript(CFG.cocoLib)].map(p => withTimeout(p, 60000, 'model library')));
-        try { await tf.setBackend('webgl'); } catch (e) { /* falls back to whatever is available */ }
+        // GPU (WebGL) where it works, otherwise TF.js's CPU backend: same weights, same rules, just slower
+        let gl = false;
+        if (!CFG.forceCPU) { try { gl = await tf.setBackend('webgl'); await tf.ready(); } catch (e) { gl = false; } }
+        if (!gl || tf.getBackend() !== 'webgl') { await tf.setBackend('cpu'); }
         await tf.ready();
         st.backend = tf.getBackend();
         try { tf.env().set('WEBGL_DELETE_TEXTURE_THRESHOLD', 0); } catch (e) {} // free GPU textures eagerly on low-memory phones
         st.progress = 'Loading recognition models…'; emit();
-        const mnLocal = new URL(CFG.localUrls.classifier, location.href).href, coLocal = new URL(CFG.localUrls.detector, location.href).href;
+        const mnLocal = Platform.assets.url(CFG.localUrls.classifier), coLocal = Platform.assets.url(CFG.localUrls.detector);
         const [cls, det] = await Promise.allSettled([
           withTimeout(loadModel('classifier', [
             ['cache', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: CFG.cacheKeys.classifier, inputRange: [0, 1] })],
             ['site', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: mnLocal, inputRange: [0, 1] })],
-            ['tfhub', () => mobilenet.load({ version: 2, alpha: 1.0 })],
-            ['tfhub-lite', () => mobilenet.load({ version: 2, alpha: 0.5 })],
-          ]), 120000, 'classifier'),
+          ]), 180000, 'classifier'),
           withTimeout(loadModel('detector', [
             ['cache', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: CFG.cacheKeys.detector })],
             ['site', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: coLocal })],
-            ['google', () => cocoSsd.load({ base: 'lite_mobilenet_v2' })],
-          ]), 120000, 'detector'),
+          ]), 180000, 'detector'),
         ]);
         st.classifier = cls.status === 'fulfilled' ? cls.value : null;
         st.detector = det.status === 'fulfilled' ? det.value : null;
-        if (!st.classifier && !st.detector) throw new Error((cls.reason && cls.reason.message) || 'models unavailable');
+        // both models are part of the standard recogniser: no hunting with only one of them
+        if (!st.classifier || !st.detector) throw new Error((!st.classifier ? cls : det).reason.message || 'models unavailable');
         st.state = 'ready';
-        st.error = !st.detector ? 'multi-object detector unavailable: ' + det.reason.message : !st.classifier ? 'fine classifier unavailable: ' + cls.reason.message : '';
+        st.error = '';
         st.loadMs = Math.round(performance.now() - t0);
         st.progress = '';
       } catch (e) {
@@ -129,7 +140,13 @@ const Lens = (() => {
     if (st.state !== 'ready') throw new Error('Spirit Lens is not ready');
     if (st.busy) throw Object.assign(new Error('a recognition is already running'), { code: 'busy' }); // one job at a time on a phone
     st.busy = true;
-    try { return await recognizeOnce(src); } finally { st.busy = false; }
+    try { return await recognizeOnce(src); }
+    catch (e) {
+      // a lost or failing WebGL context: rerun on the CPU backend (same weights) once before giving up
+      if (st.backend !== 'webgl') throw e;
+      await tf.setBackend('cpu'); await tf.ready(); st.backend = tf.getBackend(); emit();
+      return await recognizeOnce(src);
+    } finally { st.busy = false; }
   }
   async function recognizeOnce(src) {
     const T = { start: performance.now() }, dbg = { backend: st.backend, sources: { ...st.sources }, detections: [], full: [], crops: [] };
@@ -213,8 +230,14 @@ const Lens = (() => {
   function fmtMap(m) { return m === 'excluded' ? 'excluded' : m ? m.obj : '?'; }
 
   async function clearCache() {
+    if (typeof tf === 'undefined') return;
     for (const k of Object.values(CFG.cacheKeys)) { try { await tf.io.removeModel(k); } catch (e) {} }
   }
+  // forget the loaded models (developer backend switch, or a clean reload after a failure)
+  function reset() {
+    for (const m of [st.classifier, st.detector]) { try { m && m.model && m.model.dispose && m.model.dispose(); } catch (e) {} }
+    Object.assign(st, { state: 'idle', error: '', classifier: null, detector: null, backend: '', busy: false }); loading = null; emit();
+  }
 
-  return { load, recognize, clearCache, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
+  return { load, recognize, clearCache, reset, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
 })();

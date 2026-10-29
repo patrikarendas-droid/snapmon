@@ -43,6 +43,17 @@ const Photo = (() => {
     return { hue, sat: +sat.toFixed(3), lit: +lit.toFixed(3), hash, swatch };
   }
 
+  // Object palette (src/color.js): the whole photo is reduced to ≤ 128 px so the background around the box can be
+  // modelled too. opts.mask also returns the sampled foreground/background pixels for the field-test preview.
+  function palette(src, box, opts = {}) {
+    const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
+    const k = Math.min(1, 128 / Math.max(w, h)), cw = Math.max(1, Math.round(w * k)), ch = Math.max(1, Math.round(h * k));
+    const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(src, 0, 0, cw, ch);
+    try { return ColorX.extractPalette(ctx.getImageData(0, 0, cw, ch).data, cw, ch, box || null, opts); } catch (e) { return null; }
+  }
+
   function thumbnail(src, size = 96) {
     const w = src.videoWidth || src.naturalWidth || src.width, h = src.videoHeight || src.naturalHeight || src.height;
     const c = document.createElement('canvas'); c.width = size; c.height = size;
@@ -51,6 +62,6 @@ const Photo = (() => {
     return c.toDataURL('image/jpeg', 0.6);
   }
 
-  return { analyze, thumbnail }; // the live camera lives in platform.js (Platform.camera)
+  return { analyze, palette, thumbnail }; // the live camera lives in platform.js (Platform.camera)
 
 })();
