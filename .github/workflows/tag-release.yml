@@ -1,0 +1,39 @@
+name: Tag release
+# Creates an annotated version tag (e.g. v0.3.0) on a given commit. Run from the Actions tab:
+# Actions → Tag release → Run workflow. Tags are never moved or deleted by this workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Version tag, e.g. v0.3.0'
+        required: true
+      sha:
+        description: 'Commit to tag (default: tip of the chosen branch)'
+        required: false
+      message:
+        description: 'Short release note'
+        required: false
+permissions:
+  contents: write
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create and push tag
+        env:
+          TAG: ${{ inputs.tag }}
+          SHA: ${{ inputs.sha }}
+          MSG: ${{ inputs.message }}
+        run: |
+          set -e
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]] || { echo "Tag must look like v1.2.3"; exit 1; }
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then echo "Tag $TAG already exists; refusing to move it."; exit 1; fi
+          TARGET="${SHA:-HEAD}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$TARGET" -m "${MSG:-$TAG}"
+          git push origin "refs/tags/$TAG"
+          echo "Tagged $(git rev-parse --short "$TARGET") as $TAG"
