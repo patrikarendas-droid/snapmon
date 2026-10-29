@@ -19,6 +19,8 @@ Semantic versions, tagged on the production commit that shipped:
 | `v0.1.0` | First playable game (commit `137e1ad`). *Not tagged yet: create it in the GitHub web UI → Releases → Draft a new release → tag `v0.1.0`, target `137e1ad`. The tagging workflow cannot create it because that commit predates the workflow.* |
 | `v0.2.0` | On-device AI recognition (MobileNet + COCO-SSD). |
 | `v0.3.0` | Object registry, specific monsters, live-camera only, experimental CLIP lens, save format 3. |
+| `v0.3.1`–`v0.3.3` | Field-test follow-ups: second-opinion rules, fusion fixes, field-test tools. |
+| `v0.4.0` | Hybrid is the single standard recogniser; photo-derived monster colours; Android Back navigation. Save format 3 (unchanged). |
 
 `GAME_VERSION` and `SAVE_VERSION` live at the top of `src/game.js`. Settings shows both.
 
@@ -32,9 +34,12 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
 
 1. Work on a feature branch. Run the tests locally:
    ```
-   node tests/sim.js && node tests/labels.js && node tests/sprites-v3.js && node tests/migrate.js && node tests/clip-fusion.js
-   node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json
-   python3 -m http.server 8765 & node tests/e2e.js http://localhost:8765/index.html tests/fixtures /tmp/shots
+   node tests/sim.js && node tests/labels.js && node tests/sprites-v3.js && node tests/migrate.js && node tests/clip-fusion.js && node tests/color.js
+   node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json && node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
+   python3 -m http.server 8765 &
+   node tests/e2e.js http://localhost:8765/index.html tests/fixtures /tmp/shots
+   node tests/e2e-engine.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots
+   node tests/e2e-nav.js http://localhost:8765/index.html /tmp/shots
    ```
 2. Bump `GAME_VERSION` (and `SAVE_VERSION` + a migration in `migrate()` if the save format changes).
 3. Merge into production with a merge commit and push. The Pages workflow runs **all tests first**; the site only
@@ -61,6 +66,9 @@ git commit -m "Roll back to v0.2.0"
 git push
 ```
 Either way the Pages workflow redeploys automatically.
+
+Rolling back from v0.4.0 to v0.3.x is save-compatible (same save format 3): monsters keep their stored colours, and
+older code simply ignores the extra palette data. v0.3.x would bring back the old recogniser switch for developers.
 
 ## ⚠️ A code rollback does not roll back save data
 

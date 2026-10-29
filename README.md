@@ -36,17 +36,54 @@ The repository must be public for free GitHub Pages, or on a paid plan if privat
 
 ## Spirit Lens (object recognition)
 
-**Production** (what every player uses): two open-source TensorFlow.js models in the browser, sharing one WebGL runtime.
+Every player uses the **same Hybrid recognition engine** (`src/engine.js`): same model files, vocabulary, thresholds
+and decision rules. Only the speed depends on the phone.
 
-| Model | Job | Size |
-|---|---|---|
-| **MobileNet v2 1.0** (ImageNet, 1000 classes) | What is it? Fine-grained labels like "forklift", "coffee mug", "golden retriever". Falls back to MobileNet v2 0.5. | ~14 MB |
-| **COCO-SSD lite** (80 classes, boxes) | Where are things? Each box is cropped and re-classified by MobileNet for a specific label. | ~18 MB |
+| Part | Model | Job | Runs on |
+|---|---|---|---|
+| Detector | COCO-SSD lite (80 classes) | where are the objects (boxes, so a photo with several things offers a choice) | TF.js: WebGL, or CPU with the same weights |
+| Classifier | MobileNet v2 1.0 (ImageNet) | what is it, per photo and per box | TF.js: WebGL, or CPU |
+| Vocabulary model | TinyCLIP ViT-39M/16 (MIT), 2,940 labels | a second, zero-shot opinion over a much larger vocabulary | ONNX Runtime Web in a worker: WebGPU, or WebAssembly with the same weights |
 
-- Weights download once (about 30 MB) and stay in IndexedDB. One recognition runs at a time.
-- `tools/gen-labels.js` maps every recogniser class to a **registry object** (`src/labels.js`): 562 ImageNet classes to registry objects, 271 to their own identity with a related design (e.g. dog breeds), 62 to family-tier objects, 105 excluded (people, places, weapons); all 80 COCO classes.
+- The engine combines the two opinions with calibrated rules (`docs/RECOGNITION.md`):
+  - agreement → identified automatically;
+  - disagreement, uncertainty or a miss → you choose between the AI's own suggestions;
+  - nothing recognisable → "Unknown object" and a retake.
+- **Download:** the first hunt shows a one-time notice and downloads the engine (up to about 96 MB, less on phones
+  without WebGPU). It is saved for next time and works offline afterwards. Downloads are checked for completeness
+  and against the deploy manifest's checksums; a broken download is never kept.
+- **Failures:** if the engine cannot download or run, you get an explanation and Try again. There is no weaker
+  fallback recogniser, and the rest of the game (collection, gear, lab) keeps working.
+- **Privacy:** photos never leave the phone.
+- **Developer tools:** tap the version line in Settings 7 times. Debug info, Field-test mode (side-by-side results
+  of each engine part and the colour extraction, logged with your verdicts, no monsters) and a forced CPU backend
+  for testing. None of them changes how hunting recognises objects.
 
-**Experimental** (developer-only, off by default, Settings → Developer & testing): a TinyCLIP zero-shot classifier (MIT licence) running in a Web Worker with ONNX Runtime Web (WebGPU when available, otherwise WASM), scoring photo crops against precomputed text embeddings for a ~2,900-label vocabulary. *Compare* shows both lenses side by side; *Hybrid* lets it refine production results under documented rules. *Field-test mode* logs each photo's results with your verdict in a separate store for top-1/top-3 statistics, without creating monsters. Model evaluation, benchmark numbers and fusion rules: [`docs/RECOGNITION.md`](docs/RECOGNITION.md).
+## Monster colours from the photo
+
+Monsters take the colours of the **photographed object itself** (`src/color.js`):
+- **Region.** Colour is read from the detected box of the object you picked (or the photo's centre if there is no
+  box), plus a ring and border around it that model the background.
+- **Background removal.** Background colours are clustered and removed from the object's pixels, so a blue mug on a
+  brown table stays blue.
+- **Palette.** The remaining pixels are clustered into surfaces. Shading and glints are folded into one surface, and
+  white, black and metal objects stay colourless. That gives a primary, secondary, highlight and shadow colour.
+- **On the monster.** These colour the body and its shading; outlines, eyes, tyres and metal parts keep their own
+  colours so the object stays readable. If the extraction is unsure, the monster only leans towards the photo's
+  colour.
+- **Saved.** The palette is stored in the monster's DNA, so it never changes. Monsters from earlier versions render
+  exactly as before.
+- **Examples:** `docs/color-examples.png`. Typical extraction time is a few milliseconds.
+
+## Android Back button
+
+Back closes what is on top: a sheet, the camera (stopping it), a photo or result screen. From another tab it returns
+to Hunt. During a battle it reminds you to finish or flee; it never abandons the fight. On the Hunt screen the first
+Back shows "Press Back again to exit SnapMon." and a second Back within 2 s leaves.
+
+In Chrome this uses one History API guard entry, re-armed by your taps. Chrome ignores history entries made without a
+tap when Back is pressed, so if you press Back twice without touching the screen in between, the second press may
+leave immediately. A native build will call the same logic from the hardware Back button (`docs/ANDROID.md`).
 
 ## Systems
 
@@ -75,14 +112,16 @@ src/labels.js           generated recogniser label → object mapping (tools/gen
 src/platform.js         camera / storage / device layer (swap for a native build, see docs/ANDROID.md)
 src/game.js             state, save migration, encounters, monster generation, combat, rewards (no DOM)
 src/audio.js            WebAudio sound effects
-src/photo.js            colour and perceptual-hash analysis of the captured frame
-src/lens.js             production Spirit Lens (TF.js MobileNet + COCO-SSD)
-src/lens-clip.js        experimental CLIP lens: preprocessing, rejection, calibration, fusion
-src/workers/clip-worker.js  ONNX Runtime Web inference worker
+src/color.js            object palette extraction with background suppression (pure, unit-tested)
+src/photo.js            colour palette + perceptual hash of the captured frame
+src/engine.js           the standard Hybrid recognition engine: loading, progress, backends, decisions
+src/lens.js             detector + classifier part (TF.js COCO-SSD + MobileNet)
+src/lens-clip.js        TinyCLIP part: preprocessing, rejection, calibration, fusion rules
+src/workers/clip-worker.js  ONNX Runtime Web inference worker (WebGPU / WASM)
 src/ui.js               screens, camera, battle playback, developer tools
 tools/                  build, label/vocabulary generators, model mirror, sprite contact sheet
 lab/                    model export, labelled-photo fetcher and benchmark (run by .github/workflows/lab.yml)
-tests/                  logic, labels, sprites, save migration, fusion rules, browser end-to-end (live camera)
+tests/                  logic, labels, sprites, colours, save migration, fusion rules; browser: gameplay (live camera), engine (real worker), Back navigation
 docs/                   RECOGNITION.md, RELEASING.md (versions, rollback), ANDROID.md
 ```
 
@@ -90,4 +129,4 @@ Develop on a feature branch, run the tests (see `docs/RELEASING.md`), then merge
 
 ## Saves across versions
 
-Saves migrate forward automatically (v1 → v2 → v3). v0.3.0 keeps your hunter, monsters (pixel-identical: `tests/sprite-regress.js`), gear, quests and encyclopedia, which is regrouped by object; an untouched copy of the old save is kept in the same browser. A save from a *newer* version is never overwritten (see `docs/RELEASING.md` before rolling back). Export a backup code from Settings at any time.
+Saves migrate forward automatically (v1 → v2 → v3). v0.4.0 keeps save format 3 (no reset): new monsters simply store a photo palette, older ones render unchanged. v0.3.0 keeps your hunter, monsters (pixel-identical: `tests/sprite-regress.js`), gear, quests and encyclopedia, which is regrouped by object; an untouched copy of the old save is kept in the same browser. A save from a *newer* version is never overwritten (see `docs/RELEASING.md` before rolling back). Export a backup code from Settings at any time.
