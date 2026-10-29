@@ -3026,7 +3026,7 @@ const Platform = (() => {
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.3.0';
+const GAME_VERSION = '0.3.1';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -4149,11 +4149,38 @@ const ClipLens = (() => {
       else if (prod) pick = prod;
       if (pick && !out.some(o => o.obj === pick.obj)) out.push({ ...pick, rule });
     }
+    // production's other ideas stay available as choices (rule 4), so fusing never removes a right answer
+    const replaced = new Set(clipRes.regions.map(prodFor).filter(Boolean));
+    for (const c of prodRec.candidates || []) if (!replaced.has(c) && !out.some(o => o.obj === c.obj)) out.push({ ...c, rule: 4 });
     return out.sort((a, b) => b.conf - a.conf);
   }
 
+  /* Hybrid decision for one photo (developer "Hybrid" mode): fuse per region, then re-decide with the production
+     lens's own thresholds (L = Lens.CFG). Rule 5, from the first phone field test: when production would identify the
+     photo automatically but CLIP's best object for the whole photo is a different object with some support
+     (score >= DISAGREE_P), the player chooses between them instead. Production was confidently wrong on 7 of 30 phone
+     photos, and in each of those CLIP's best guess differed. Choices still come only from the lenses, never typed input. */
+  const DISAGREE_P = 0.08;
+  function hybridDecision(rec, clip, L) {
+    const fused = fuse(rec, clip).filter(c => c.conf >= L.MIN_CONF).slice(0, L.MAX_CHOICES);
+    let decision, reason;
+    if (!fused.length) { decision = 'unknown'; reason = rec.reason === 'person' ? 'person' : 'low'; }
+    else if (fused.filter(c => c.box).length >= 2) { decision = 'choose'; reason = 'multiple'; }
+    else if (fused[0].conf >= L.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * L.CLEAR_MARGIN)) { decision = 'auto'; reason = 'confident'; }
+    else { decision = 'choose'; reason = 'unsure'; }
+    const whole = clip.regions.find(r => !r.box), alt = whole && whole.best;
+    if (decision === 'auto' && alt && alt.obj && OBJECTS[alt.obj] && alt.obj !== fused[0].obj && alt.p >= DISAGREE_P) {
+      if (!fused.some(c => c.obj === alt.obj)) {
+        if (fused.length >= L.MAX_CHOICES) fused.pop(); // keep the list short: the weakest production idea makes room
+        fused.push({ label: alt.label, obj: alt.obj, cat: OBJECTS[alt.obj].cat, conf: alt.p, box: null, src: 'clip', rule: 5 });
+      }
+      decision = 'choose'; reason = 'disagree';
+    }
+    return { candidates: fused, decision, reason };
+  }
+
   function reset() { if (st.worker) st.worker.terminate(); Object.assign(st, { state: 'off', error: '', info: null, worker: null, meta: null, busy: false, loading: null }); st.pending.clear(); }
-  return { load, recognize, fuse, judge, reset, status: st, CFG };
+  return { load, recognize, fuse, judge, hybridDecision, reset, status: st, CFG };
 })();
 
 </script>
@@ -4383,6 +4410,7 @@ async function recognizeFlow() {
     try {
       if (ClipLens.status.state !== 'ready' && !(await ClipLens.load())) throw new Error(ClipLens.status.error || 'experimental lens unavailable');
       p.clip = await withTimeout(ClipLens.recognize(rec.image, rec), 30000, 'timeout');
+      p.prodOnly = { decision: rec.decision, reason: rec.reason, top: ftTop(rec) }; // what production alone said (field test)
       if (mode === 'hybrid') applyHybrid(rec, p.clip);
     } catch (e) { p.clipError = String(e.message || e); }
   }
@@ -4395,13 +4423,9 @@ async function recognizeFlow() {
 }
 // hybrid mode: replace the production candidates with the fused result and re-decide with the same rules
 function applyHybrid(rec, clip) {
-  const fused = ClipLens.fuse(rec, clip).filter(c => c.conf >= Lens.CFG.MIN_CONF).slice(0, Lens.CFG.MAX_CHOICES);
-  rec.candidates = fused;
-  if (!fused.length) { rec.decision = 'unknown'; rec.reason = rec.reason === 'person' ? 'person' : 'low'; }
-  else if (fused.filter(c => c.box).length >= 2) { rec.decision = 'choose'; rec.reason = 'multiple'; }
-  else if (fused[0].conf >= Lens.CFG.AUTO_CONF && (!fused[1] || fused[1].conf < fused[0].conf * Lens.CFG.CLEAR_MARGIN)) { rec.decision = 'auto'; rec.reason = 'confident'; }
-  else { rec.decision = 'choose'; rec.reason = 'unsure'; }
-  rec.debug.decision = rec.decision + ' (hybrid)';
+  const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
+  rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
+  rec.debug.decision = rec.decision + ' (hybrid' + (h.reason === 'disagree' ? ': lenses disagree' : '') + ')';
 }
 /* ---------- field test (developer mode) ----------
    Records what each model said and the tester's verdict in a SEPARATE store (snapmon.fieldtest.v1). Nothing here ever
@@ -4411,43 +4435,53 @@ const ftLoad = () => { try { return JSON.parse(Platform.storage.get(FT_KEY) || '
 const ftSave = list => Platform.storage.set(FT_KEY, JSON.stringify(list.slice(-500)));
 function ftTop(rec) { return (rec.candidates || []).slice(0, 3).map(c => ({ obj: c.obj, label: c.label, conf: +c.conf.toFixed(3) })); }
 function showFieldTest(p) {
-  const rec = p.rec, clip = p.clip, prodTop = ftTop(rec);
+  const rec = p.rec, clip = p.clip, hybrid = (S.settings.expLens || 'off') === 'hybrid' && p.prodOnly;
+  const prodRec = p.prodOnly || { decision: rec.decision, reason: rec.reason, top: ftTop(rec) }, prodTop = prodRec.top;
   const clipTop = clip ? clip.regions[0].ranked.slice(0, 3).map(x => ({ obj: x.obj, label: x.label, p: +x.p.toFixed(3) })) : null;
-  p.ft = { t: Date.now(), prod: { decision: rec.decision, reason: rec.reason, top: prodTop, ms: rec.debug && rec.debug.times && rec.debug.times.total },
-    clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null, marks: {} };
+  p.ft = { v: 2, t: Date.now(), prod: { decision: prodRec.decision, reason: prodRec.reason, top: prodTop, ms: rec.debug && rec.debug.times && rec.debug.times.total },
+    clip: clip ? { accepted: clip.regions[0].accepted, why: clip.regions[0].why, top: clipTop, ms: clip.totalMs, backend: clip.backend } : p.clipError ? { error: p.clipError } : null,
+    hybrid: hybrid ? { decision: rec.decision, reason: rec.reason, top: ftTop(rec) } : null, marks: {} };
   const nm = x => esc(x.obj && OBJECTS[x.obj] ? OBJECTS[x.obj].name : x.label);
-  const markRow = (model, label) => `<div class="stack" style="gap:6px"><b class="small">${label}</b><div class="row wrap">${[['top1', 'Top-1 right'], ['top3', 'In top 3'], ['wrong', 'Wrong'], ['rejected_ok', 'Rightly unknown'], ['rejected_bad', 'Wrongly unknown']]
+  // verdict buttons match what the lens did: an answer is right / in the list / wrong; no answer is rightly unknown or a miss
+  const ANSWERED = [['top1', 'Right'], ['top3', 'Right one is in the list'], ['wrong', 'Wrong']];
+  const UNANSWERED = [['rejected_ok', 'Rightly unknown'], ['missed_guess', 'Missed, but its best guess was right'], ['rejected_bad', 'Missed']];
+  const markRow = (model, label, answered) => `<div class="stack" style="gap:6px"><b class="small">${label}</b><div class="row wrap">${(answered ? ANSWERED : UNANSWERED)
     .map(([k, l]) => `<button class="fchip" data-act="ftMark" data-arg="${model}:${k}">${l}</button>`).join('')}</div></div>`;
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="gap:12px">
     <div class="sheet-head"><h2>Field test</h2><button class="btn small ghost" data-act="cancelPhoto">Close</button></div>
     <p class="small muted" style="margin:0">No monster is created in field-test mode. Your answers are stored separately and are never used for recognition.</p>
     <div class="photo-frame" id="lensFrame"></div>
-    <div class="card small stack" style="gap:4px"><b>Production lens</b> <span class="muted">${esc(rec.decision)} (${esc(rec.reason)}) · ${p.ft.prod.ms || '?'} ms</span>
+    <div class="card small stack" style="gap:4px"><b>Production lens</b> <span class="muted">${esc(prodRec.decision)} (${esc(prodRec.reason)}) · ${p.ft.prod.ms || '?'} ms</span>
       <div>${prodTop.length ? prodTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">${Math.round(x.conf * 100)}%</span>`).join('<br>') : '<span class="muted">nothing accepted</span>'}</div></div>
     ${clipTop ? `<div class="card small stack" style="gap:4px"><b>Experimental lens</b> <span class="muted">${clip.regions[0].accepted ? 'accepted' : 'rejected: ' + esc(clip.regions[0].why)} · ${clip.totalMs} ms · ${esc(clip.backend)}</span>
       <div>${clipTop.map((x, i) => `${i + 1}. ${nm(x)} <span class="muted">score ${(x.p * 100).toFixed(1)}</span>`).join('<br>')}</div></div>` : p.clipError ? `<div class="card small">Experimental lens failed: ${esc(p.clipError)}</div>` : ''}
-    ${markRow('prod', 'Production verdict')}${clipTop ? markRow('clip', 'Experimental verdict') : ''}
+    ${hybrid ? `<div class="card small stack" style="gap:4px"><b>Hybrid result</b> <span class="muted">${esc(rec.decision)} (${esc(rec.reason)})</span>
+      <div>${p.ft.hybrid.top.length ? p.ft.hybrid.top.map((x, i) => `${i + 1}. ${nm(x)}`).join('<br>') : '<span class="muted">nothing</span>'}</div></div>` : ''}
+    ${markRow('prod', 'Production verdict', prodRec.decision !== 'unknown')}${clipTop ? markRow('clip', 'Experimental verdict', clip.regions[0].accepted) : ''}${hybrid ? markRow('hybrid', 'Hybrid verdict', rec.decision !== 'unknown') : ''}
     <input class="search" id="ftTruth" maxlength="60" placeholder="What was it really? (optional, for the test log only)" autocomplete="off">
     <button class="btn primary block" data-act="ftSave">Save result &amp; take another</button>
     ${debugHTML(rec)}
   </div></div>`;
   drawDetections(p);
 }
+// Answered: right / list / wrong. Not answered: rightly unknown / missed. v1 entries (before the verdict fix) used
+// 'rejected_ok' for some wrong answers too, so those are counted from the logged decision, not the verdict.
 function ftStats(list) {
-  const m = { prod: { n: 0, top1: 0, top3: 0, rej: 0, rejOk: 0, ms: [] }, clip: { n: 0, top1: 0, top3: 0, rej: 0, rejOk: 0, ms: [] } };
-  for (const e of list) for (const k of ['prod', 'clip']) {
-    const v = e.marks && e.marks[k]; if (!v) continue; const s = m[k]; s.n++;
-    if (v === 'top1') { s.top1++; s.top3++; } if (v === 'top3') s.top3++;
-    if (v === 'rejected_ok' || v === 'rejected_bad') { s.rej++; if (v === 'rejected_ok') s.rejOk++; }
-    if (e[k] && e[k].ms) s.ms.push(e[k].ms);
+  const blank = () => ({ n: 0, answered: 0, right: 0, inList: 0, unknownOk: 0, missed: 0, ms: [] }), m = { prod: blank(), clip: blank(), hybrid: blank() };
+  for (const e of list) for (const k of ['prod', 'clip', 'hybrid']) {
+    const v = e.marks && e.marks[k], r = e[k]; if (!v || !r) continue; const s = m[k]; s.n++;
+    const answered = k === 'clip' ? r.accepted : r.decision !== 'unknown';
+    if (answered) { s.answered++; if (v === 'top1') s.right++; if (v === 'top1' || v === 'top3') s.inList++; }
+    else if (v === 'rejected_ok') s.unknownOk++; else s.missed++;
+    if (r.ms) s.ms.push(r.ms);
   }
   return m;
 }
 function ftSummaryHTML() {
   const list = ftLoad(), st = ftStats(list), pct = (a, b) => b ? Math.round(a / b * 100) + '%' : '–';
-  const row = (k, l) => { const s = st[k], ms = s.ms; return `<tr><td>${l}</td><td>${s.n}</td><td>${pct(s.top1, s.n - s.rej)}</td><td>${pct(s.top3, s.n - s.rej)}</td><td>${s.rejOk}/${s.rej}</td><td>${ms.length ? Math.round(ms.reduce((a, b) => a + b, 0) / ms.length) + ' / ' + Math.max(...ms) : '–'}</td></tr>`; };
-  return `<div class="debug small"><table><tr><th></th><th>marked</th><th>top-1</th><th>top-3</th><th>right unknowns</th><th>ms avg / worst</th></tr>${row('prod', 'Production')}${row('clip', 'Experimental')}</table></div>
-    <p class="small muted" style="margin:0">${list.length} field-test photos logged on this phone. Top-1/top-3 exclude photos marked "unknown".</p>`;
+  const row = (k, l) => { const s = st[k], ms = s.ms; if (!s.n) return ''; return `<tr><td>${l}</td><td>${s.n}</td><td>${pct(s.right, s.answered)}</td><td>${pct(s.inList, s.answered)}</td><td>${s.unknownOk} / ${s.missed}</td><td>${ms.length ? ms.sort((a, b) => a - b)[ms.length >> 1] + ' / ' + ms[ms.length - 1] : '–'}</td></tr>`; };
+  return `<div class="debug small"><table><tr><th></th><th>photos</th><th>right when it answered</th><th>right one in list</th><th>right unknown / missed</th><th>ms median / worst</th></tr>${row('prod', 'Production')}${row('clip', 'Experimental')}${row('hybrid', 'Hybrid')}</table></div>
+    <p class="small muted" style="margin:0">${list.length} field-test photos logged on this phone.</p>`;
 }
 
 function showLensFailed(p, kind) {
@@ -4486,7 +4520,9 @@ function showUnknown(p) {
 function candLine(c) {
   const o = OBJECTS[c.obj], name = o ? o.name : CATEGORY[c.cat].name;
   const same = o && o.name.toLowerCase() === String(c.label).toLowerCase();
-  return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${Math.round(c.conf * 100)}%</span>`;
+  // a rule-5 suggestion carries a raw CLIP share, not a confidence, so it shows no percentage
+  const score = c.rule === 5 ? 'second opinion' : Math.round(c.conf * 100) + '%';
+  return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${score}</span>`;
 }
 const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
 function showIdentified(p, i) {
@@ -4505,7 +4541,7 @@ function showIdentified(p, i) {
 function showChoices(p) {
   const rec = p.rec, multi = rec.reason === 'multiple';
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="gap:12px">
-    <div class="sheet-head"><h2>${multi ? 'Several objects detected' : 'The lens has a few ideas'}</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <div class="sheet-head"><h2>${multi ? 'Several objects detected' : rec.reason === 'disagree' ? 'The lenses disagree' : 'The lens has a few ideas'}</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <p class="muted small" style="margin:0">${multi ? 'Which one are you hunting?' : 'It is not completely sure. Which of these did you photograph?'} Every option comes from the lens's own analysis of your photo.</p>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">

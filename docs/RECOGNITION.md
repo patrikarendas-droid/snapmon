@@ -27,7 +27,11 @@ Models are downloaded once and cached.
 2. CLIP accepted, same category as production → CLIP's more specific object (truck → forklift).
 3. CLIP accepted and *trusted* (calibrated bin accuracy, or held-out precision of the thresholds measured on ≥ 10
    accepted photos, is ≥ 0.7) → CLIP's object, even when production disagrees or found nothing.
-4. Otherwise → production's answer. Without deployed calibration rule 3 never fires.
+4. Otherwise → production's answer, and production's other candidates stay in the choice list. Without deployed
+   calibration rule 3 never fires.
+5. (v0.3.1) Production would identify the photo automatically, but CLIP's best whole-photo object differs and scores
+   ≥ 0.08 → the player chooses between them ("The lenses disagree"). CLIP's suggestion shows no percentage, because
+   its score is not a confidence.
 Rules are unit-tested in `tests/clip-fusion.js`.
 
 ## Models evaluated
@@ -91,6 +95,36 @@ runs, so those pairs are untested.
 - Production still fails to reject out-of-vocabulary photos. CLIP rejects them reliably on its own, but the hybrid
   keeps production's answer when CLIP abstains (rule 4). Using CLIP as a veto is a possible next step and needs its
   own measurement.
+
+## First phone field test (v0.3.0, 29 Oct 2026)
+
+30 photos on the developer's Android phone, Chrome, experimental lens on **WebGPU**. Verdicts by the tester.
+
+| | Result |
+|---|---|
+| Production: #1 answer right | 16/30 (53%); answered 27, right when it answered 59% |
+| Production: identified automatically but wrong | **7** (stopwatch for a tape measure, coffeepot for an electric kettle, bicycle for a pallet jack, garbage truck for a carton press, clock for an angle grinder, fridge for a door, bowl for a trash can) |
+| TinyCLIP: best guess right (ignoring its threshold) | 20/30 (67%) |
+| TinyCLIP: accepted at the calibrated threshold | 9/30, all 9 right |
+| Time per photo | production median 144 ms (max 241); TinyCLIP median 1.48 s (max 3.1 s, first photo) |
+| Hybrid at the deployed thresholds | 16/30, same as production: whenever CLIP was confident enough, production was already right |
+
+Simulated on the same photos (so not independent evidence):
+- Lower CLIP thresholds (p ≥ 0.2, margin ≥ 0.1) would give 19/30 with 1 doubtful acceptance. 30 photos are too few to
+  re-tune thresholds, so they stay as calibrated in CI.
+- Rule 5 turns all 7 wrong automatic answers into choices. 4 of those include the right object (tape measure, kettle,
+  pallet jack, trash can); in the other 3 nothing is right and the player can retake. No correct automatic answer
+  would have become a choice.
+- The bowl/trash-can photo exposed a fusion bug: without detector boxes, fusion kept only production's top
+  candidate. Fixed in v0.3.1: production's runner-up candidates stay in the choice list.
+
+The verdict buttons were also ambiguous: "Rightly unknown" was used for some wrong answers. Since v0.3.1 they match what
+each lens did (answered: right / in list / wrong; no answer: rightly unknown / missed), and the log keeps the production
+result separate from the hybrid result.
+
+**Decision:** production stays the default. Production is fast on the phone, and the hybrid adds about 1.5 s per photo
+for no measured top-1 gain at the calibrated thresholds. Next field test: Hybrid with rule 5, to measure how often
+the player now gets the right object (automatically or in the choice list) and how many extra choices it causes.
 
 ## Reproducing
 
