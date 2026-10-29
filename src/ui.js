@@ -167,7 +167,7 @@ async function showEngineNotice() {
   const bytes = await Engine.downloadBytes();
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
     <h2 style="font-size:26px">One-time download</h2>
-    <p>SNAPMON recognises objects with AI that runs <b>on this phone</b>. Its recognition engine (about <b>${MB(bytes)} MB</b>) downloads once and stays saved for next time. Parts you already have are not downloaded again.</p>
+    <p>SNAPMON recognises objects with AI that runs <b>on this phone</b>. Its recognition engine (up to about <b>${MB(bytes)} MB</b>) downloads once and stays saved for next time. Parts you already have are not downloaded again.</p>
     <p class="small muted">Photos are never uploaded to any AI service. Wi-Fi is recommended. While it downloads you can keep using the rest of the game.</p>
     <button class="btn primary block" data-act="engineDownload">Download now (${MB(bytes)} MB)</button>
     <button class="btn ghost block" data-act="closeOverlay">Not now</button></div></div>`;

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-// Mirrors the two open-source TF.js models into the deployed site (used by the GitHub Pages workflow),
-// so players download them from the same origin as the game. Best effort: the game falls back to the
-// public model hosts if this mirror is missing. Usage: node tools/fetch-models.js <out-dir>
+// Mirrors the two open-source TF.js models into the deployed site (used by the GitHub Pages workflow), so players
+// download them from the same origin as the game. Required: the game has no other source for them. Usage: node tools/fetch-models.js <out-dir>
 const fs = require('fs'), path = require('path');
 const out = process.argv[2] || '_site/models';
 const MODELS = [
@@ -29,5 +28,6 @@ async function get(url) {
       console.log(`mirrored ${m.dir}: ${(bytes / 1048576).toFixed(1)} MB`);
     } catch (e) { okAll = false; console.log(`could not mirror ${m.dir}: ${e.message}`); fs.rmSync(path.join(out, m.dir), { recursive: true, force: true }); }
   }
-  if (!okAll) console.log('Some models were not mirrored; the game will download them from the public hosts instead.');
+  // the game loads models only from the site (no public-host fallback), so a missing mirror must stop the deploy
+  if (!okAll) { console.error('Some models could not be mirrored; aborting.'); process.exit(1); }
 })();

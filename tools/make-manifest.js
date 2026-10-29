@@ -14,7 +14,8 @@ const out = files.filter(f => !f.endsWith('manifest.json')).sort().map(f => {
 const sum = re => out.filter(f => re.test(f.path)).reduce((a, f) => a + f.bytes, 0);
 const manifest = {
   engine: process.env.ENGINE_ID || 'hybrid-1', created: new Date().toISOString(),
-  groups: { lens: sum(/^models\/(mobilenet|ssdlite)|^vendor\/tfjs\//), clip: sum(/^models\/clip\/|^vendor\/ort\/(ort\.min\.js|ort-wasm-simd-threaded\.(wasm|mjs))$/) },
+  // clip: model + vocabulary + the larger (WebGPU) runtime build, so the notice states an upper bound
+  groups: { lens: sum(/^models\/(mobilenet|ssdlite)|^vendor\/tfjs\//), clip: sum(/^models\/clip\/|^vendor\/ort\/(ort\.webgpu\.min\.js|ort-wasm-simd-threaded\.jsep\.(wasm|mjs))$/) },
   files: out,
 };
 fs.mkdirSync(path.join(site, 'models'), { recursive: true });

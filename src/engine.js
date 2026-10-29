@@ -17,7 +17,7 @@
 const ENGINE_ID = 'hybrid-1'; // bump whenever a model file, the vocabulary, a threshold or a decision rule changes
 
 const Engine = (() => {
-  const FALLBACK_SIZES = { lens: 31.1 * 1048576, clip: 41.7 * 1048576 }; // used if the manifest is missing
+  const FALLBACK_SIZES = { lens: 32.6 * 1048576, clip: 63.4 * 1048576 }; // used if the manifest is missing (upper bounds)
   const st = { state: 'idle', stage: '', loaded: 0, total: 0, error: '', kind: '', loadMs: 0, manifest: null, backends: {} };
   const listeners = new Set();
   const emit = () => listeners.forEach(f => { try { f(st); } catch (e) {} });

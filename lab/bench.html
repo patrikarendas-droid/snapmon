@@ -1,12 +1,104 @@
 <!doctype html><meta charset="utf-8"><title>SnapMon recognition benchmark</title>
-<script src="/src/data.js"></script><script src="/src/sprites.js"></script><script src="/src/parts.js"></script>
-<script src="/src/objects.js"></script><script src="/src/labels.js"></script><script src="/src/game.js"></script>
-<script src="/src/lens.js"></script><script src="/src/lens-clip.js"></script>
+<script>window.SNAPMON_ASSET_BASE = '/';</script><script src="/src/platform.js"></script><script src="/src/color.js">// GPU/CPU consistency: every photo through the full standard engine twice, first with GPU backends allowed
+// (WebGL for the detector/classifier, WebGPU for TinyCLIP when the browser exposes an adapter), then forced to the CPU.
+window.runEquivalence = async (labels, variant) => {
+  ClipLens.CFG.variant = variant;
+  const pass = async () => {
+    const t = performance.now(); const ok = await Engine.load();
+    const res = { load: { ok, ms: Math.round(performance.now() - t), error: Engine.status.error, backends: { ...Engine.status.backends } }, results: [] };
+    if (!ok) return res;
+    for (const L of labels) {
+      try {
+        const img = await loadImg('/lab/data/photos/' + L.file);
+        const t0 = performance.now(), r = await Engine.recognize(img, { timeoutMs: 120000 });
+        res.results.push({ file: L.file, ms: Math.round(performance.now() - t0), decision: r.rec.decision, top: r.rec.candidates.map(c => c.obj),
+          prod: r.prodOnly.candidates.map(c => [c.obj, +c.conf.toFixed(4)]), clip: r.clip.regions.map(g => ({ obj: g.best.obj, p: g.best.p, margin: g.margin, accepted: g.accepted })) });
+      } catch (e) { res.results.push({ file: L.file, error: String(e.message || e) }); }
+    }
+    return res;
+  };
+  const gpu = await pass();
+  Engine.setForceCPU(true);
+  const cpu = await pass();
+  return { gpu, cpu };
+};
+</script>
+<script src="/src/data.js"></script><script src="/src/sprites.js"></script><script src="/src/parts.js">// GPU/CPU consistency: every photo through the full standard engine twice, first with GPU backends allowed
+// (WebGL for the detector/classifier, WebGPU for TinyCLIP when the browser exposes an adapter), then forced to the CPU.
+window.runEquivalence = async (labels, variant) => {
+  ClipLens.CFG.variant = variant;
+  const pass = async () => {
+    const t = performance.now(); const ok = await Engine.load();
+    const res = { load: { ok, ms: Math.round(performance.now() - t), error: Engine.status.error, backends: { ...Engine.status.backends } }, results: [] };
+    if (!ok) return res;
+    for (const L of labels) {
+      try {
+        const img = await loadImg('/lab/data/photos/' + L.file);
+        const t0 = performance.now(), r = await Engine.recognize(img, { timeoutMs: 120000 });
+        res.results.push({ file: L.file, ms: Math.round(performance.now() - t0), decision: r.rec.decision, top: r.rec.candidates.map(c => c.obj),
+          prod: r.prodOnly.candidates.map(c => [c.obj, +c.conf.toFixed(4)]), clip: r.clip.regions.map(g => ({ obj: g.best.obj, p: g.best.p, margin: g.margin, accepted: g.accepted })) });
+      } catch (e) { res.results.push({ file: L.file, error: String(e.message || e) }); }
+    }
+    return res;
+  };
+  const gpu = await pass();
+  Engine.setForceCPU(true);
+  const cpu = await pass();
+  return { gpu, cpu };
+};
+</script>
+<script src="/src/objects.js"></script><script src="/src/labels.js"></script><script src="/src/game.js">// GPU/CPU consistency: every photo through the full standard engine twice, first with GPU backends allowed
+// (WebGL for the detector/classifier, WebGPU for TinyCLIP when the browser exposes an adapter), then forced to the CPU.
+window.runEquivalence = async (labels, variant) => {
+  ClipLens.CFG.variant = variant;
+  const pass = async () => {
+    const t = performance.now(); const ok = await Engine.load();
+    const res = { load: { ok, ms: Math.round(performance.now() - t), error: Engine.status.error, backends: { ...Engine.status.backends } }, results: [] };
+    if (!ok) return res;
+    for (const L of labels) {
+      try {
+        const img = await loadImg('/lab/data/photos/' + L.file);
+        const t0 = performance.now(), r = await Engine.recognize(img, { timeoutMs: 120000 });
+        res.results.push({ file: L.file, ms: Math.round(performance.now() - t0), decision: r.rec.decision, top: r.rec.candidates.map(c => c.obj),
+          prod: r.prodOnly.candidates.map(c => [c.obj, +c.conf.toFixed(4)]), clip: r.clip.regions.map(g => ({ obj: g.best.obj, p: g.best.p, margin: g.margin, accepted: g.accepted })) });
+      } catch (e) { res.results.push({ file: L.file, error: String(e.message || e) }); }
+    }
+    return res;
+  };
+  const gpu = await pass();
+  Engine.setForceCPU(true);
+  const cpu = await pass();
+  return { gpu, cpu };
+};
+</script>
+<script src="/src/lens.js"></script><script src="/src/lens-clip.js"></script><script src="/src/engine.js">// GPU/CPU consistency: every photo through the full standard engine twice, first with GPU backends allowed
+// (WebGL for the detector/classifier, WebGPU for TinyCLIP when the browser exposes an adapter), then forced to the CPU.
+window.runEquivalence = async (labels, variant) => {
+  ClipLens.CFG.variant = variant;
+  const pass = async () => {
+    const t = performance.now(); const ok = await Engine.load();
+    const res = { load: { ok, ms: Math.round(performance.now() - t), error: Engine.status.error, backends: { ...Engine.status.backends } }, results: [] };
+    if (!ok) return res;
+    for (const L of labels) {
+      try {
+        const img = await loadImg('/lab/data/photos/' + L.file);
+        const t0 = performance.now(), r = await Engine.recognize(img, { timeoutMs: 120000 });
+        res.results.push({ file: L.file, ms: Math.round(performance.now() - t0), decision: r.rec.decision, top: r.rec.candidates.map(c => c.obj),
+          prod: r.prodOnly.candidates.map(c => [c.obj, +c.conf.toFixed(4)]), clip: r.clip.regions.map(g => ({ obj: g.best.obj, p: g.best.p, margin: g.margin, accepted: g.accepted })) });
+      } catch (e) { res.results.push({ file: L.file, error: String(e.message || e) }); }
+    }
+    return res;
+  };
+  const gpu = await pass();
+  Engine.setForceCPU(true);
+  const cpu = await pass();
+  return { gpu, cpu };
+};
+</script>
 <script>
 // Benchmark page: runs the production lens and the experimental lens on each labelled photo. Ground truth is
 // only used by the scoring script afterwards; it never reaches either recogniser.
-Lens.CFG.localUrls = { classifier: '/models/mobilenet_v2_100/model.json', detector: '/models/ssdlite_mobilenet_v2/model.json' };
-ClipLens.CFG.base = '/models/clip/'; ClipLens.CFG.workerPath = '/src/workers/clip-worker.js'; ClipLens.CFG.localOrt = '/vendor/ort/';
+ClipLens.CFG.workerPath = '/src/workers/clip-worker.js'; // models and runtimes resolve from the site root via SNAPMON_ASSET_BASE
 const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
 window.runBench = async (labels, variant) => {
   const out = { variant, prodLoad: null, clipLoad: null, results: [] };
@@ -30,5 +122,28 @@ window.runBench = async (labels, variant) => {
     out.results.push(r);
   }
   return out;
+};
+// GPU/CPU consistency: every photo through the full standard engine twice, first with GPU backends allowed
+// (WebGL for the detector/classifier, WebGPU for TinyCLIP when the browser exposes an adapter), then forced to the CPU.
+window.runEquivalence = async (labels, variant) => {
+  ClipLens.CFG.variant = variant;
+  const pass = async () => {
+    const t = performance.now(); const ok = await Engine.load();
+    const res = { load: { ok, ms: Math.round(performance.now() - t), error: Engine.status.error, backends: { ...Engine.status.backends } }, results: [] };
+    if (!ok) return res;
+    for (const L of labels) {
+      try {
+        const img = await loadImg('/lab/data/photos/' + L.file);
+        const t0 = performance.now(), r = await Engine.recognize(img, { timeoutMs: 120000 });
+        res.results.push({ file: L.file, ms: Math.round(performance.now() - t0), decision: r.rec.decision, top: r.rec.candidates.map(c => c.obj),
+          prod: r.prodOnly.candidates.map(c => [c.obj, +c.conf.toFixed(4)]), clip: r.clip.regions.map(g => ({ obj: g.best.obj, p: g.best.p, margin: g.margin, accepted: g.accepted })) });
+      } catch (e) { res.results.push({ file: L.file, error: String(e.message || e) }); }
+    }
+    return res;
+  };
+  const gpu = await pass();
+  Engine.setForceCPU(true);
+  const cpu = await pass();
+  return { gpu, cpu };
 };
 </script>
