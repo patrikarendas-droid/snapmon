@@ -71,6 +71,19 @@ h = ClipLens.hybridDecision({ reason: 'confident', candidates: ['mug', 'glass', 
 ok(h.candidates.length === 4 && h.candidates[3].obj === 'teapot' && h.reason === 'disagree', 'rule 5 keeps the list at four choices, replacing the weakest');
 h = ClipLens.hybridDecision({ reason: 'confident', candidates: [{ label: 'wall clock', obj: 'wall_clock', cat: 'clock', conf: 0.99, box: null }] }, whole('clock', 0.118, false, [{ obj: 'wall_clock', p: 0.075 }]), L);
 ok(h.decision === 'auto' && h.candidates[0].obj === 'wall_clock', 'wall clock vs clock (CLIP backs both) is agreement, not a disagreement prompt');
+// third field test
+const box = [0.3, 0.2, 0.4, 0.5];
+f = ClipLens.fuse(prod([{ label: 'wall clock', obj: 'wall_clock', cat: 'clock', conf: 0.99, box }]),
+  { regions: [region('clock', false, null), region('clock', true, null, box)] });
+ok(f.length === 1 && f[0].box, 'one detected clock is not counted twice (whole photo and its box)');
+h = ClipLens.hybridDecision({ reason: 'unsure', candidates: [{ label: 'can opener', obj: 'x_can_opener', cat: OBJECTS.x_can_opener.cat, conf: 0.38, box: null }] }, whole('x_fire_extinguisher', 0.306), L);
+ok(h.decision === 'choose' && h.candidates.some(c => c.obj === 'x_fire_extinguisher' && c.rule === '5b'), 'rule 5b: production unsure (can opener) -> CLIP\'s fire extinguisher is offered too');
+h = ClipLens.hybridDecision({ reason: 'low', candidates: [] }, whole('kettle', 0.097), L);
+ok(h.decision === 'choose' && h.reason === 'second-opinion' && h.candidates[0].obj === 'kettle', 'rule 6: production found nothing -> "could it be this?" with CLIP\'s kettle');
+h = ClipLens.hybridDecision({ reason: 'low', candidates: [] }, whole('x_birch_tree', 0.047), L);
+ok(h.decision === 'unknown', 'rule 6 needs some support: a 0.047 guess stays unknown');
+h = ClipLens.hybridDecision({ reason: 'person', candidates: [] }, whole('sock', 0.2), L);
+ok(h.decision === 'unknown' && h.reason === 'person', 'rule 6 never turns a photo of a person into a monster choice');
 setMeta(null);
 console.log(bad ? `${bad} problem(s)` : 'ok: experimental lens decision rules behave as documented');
 process.exit(bad ? 1 : 0);
