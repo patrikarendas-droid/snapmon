@@ -3,7 +3,7 @@
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.1';
+const GAME_VERSION = '0.4.2';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -80,8 +80,11 @@ function loadState() {
   if ((parsed.v || 1) > SAVE_VERSION) { saveBlocked = { reason: 'newer', version: parsed.v, raw }; return freshState(); }
   // keep an untouched copy of the old save before migrating it (one per old version)
   if ((parsed.v || 1) < SAVE_VERSION) { migratedFrom = parsed.v || 1; const bk = SAVE_KEY + '.backup.v' + (parsed.v || 1); if (!STORE.get(bk)) STORE.set(bk, raw); }
-  try { return migrate(parsed); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
+  try { return withLore(migrate(parsed)); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
 }
+// v0.4.2: monsters store their flavour text; older monsters get theirs once (deterministic, so it is the same text
+// they already showed after the update) and keep it from then on. Additive field: the save format stays 3.
+function withLore(s) { for (const m of s.monsters || []) if (!m.lore) m.lore = monsterLore(m); return s; }
 function saveState(S) {
   if (saveBlocked) return false; // never overwrite a save we could not read safely
   const ok = STORE.set(SAVE_KEY, JSON.stringify(S));
@@ -120,7 +123,7 @@ function hunterStats(S, weaponId = S.equipped) {
 function regen(S, now = Date.now()) { // gentle passive healing between hunts: 3% max HP per minute
   const mins = Math.max(0, (now - (S.lastTick || now)) / 60000);
   const max = hunterStats(S).maxHp;
-  if (S.hp < max && mins > 0) S.hp = Math.min(max, S.hp + Math.floor(mins * max * 0.03));
+  if (S.hp < max && mins > 0) S.hp = Math.min(max, S.hp + Math.floor(mins * max * MECH.regenPerMin));
   if (mins >= 1 / 3 || S.hp >= max) S.lastTick = now;
   S.hp = Math.min(S.hp, max);
 }
@@ -186,20 +189,35 @@ function hamming(a, b) {
   return d;
 }
 
+/* ---------- rule numbers ----------
+   The battle, capture and encounter numbers live here so the in-game Guide (src/guide.js) can show the real values.
+   Changing a number here changes the game AND the guide. */
+const MECH = {
+  enc: { base: 0.45, lens: 0.06, newObj: 0.15, sameObj: 0.12, perMiss: 0.08, pity: 4, pitySensor: 3, dupMult: 0.3, min: 0.02 },
+  status: { poisonPct: 0.07, poisonMin: 2, burnPct: 0.05, burnFlat: 2, burnMin: 2, burnAtk: 0.85, defdown: 0.5, atkup: 1.5, defup: 1.6, stunAcc: 0.15 },
+  weak: 1.5, resist: 0.7, firstStrike: 1.25,
+  enemy: { abilityRate: 0.5, healBelow: 0.4, healAmt: 0.25, crit: 0.06, critX: 1.5, dodgeBase: 0.04, dodgePerSpd: 0.01, dodgeMax: 0.2, missPerSpd: 0.01 },
+  energy: { start: 30, battery: 25, perAttack: 20, max: 100 },
+  capture: { hpWeight: 0.8, stun: 0.15, dot: 0.05, research: 0.08, lenscap: 0.06, variantMult: 0.85, min: 0.03, max: 0.97, enhancer: 0.25, escapeAfter: 3, escapeChance: 0.35, quantumRefund: 0.35 },
+  flee: { base: 0.55, perSpd: 0.03, slipper: 0.15, legendary: 0.2, min: 0.15, max: 0.95 },
+  afterWin: 0.2, defeatCoins: 0.15, defeatHp: 0.4, regenPerMin: 0.03, fang: 0.15,
+};
+
 /* ---------- encounters ---------- */
 function encounterChance(S, obj, photo) {
   const dup = !!(photo && photo.hash && S.enc.recentHashes.some(h => hamming(h, photo.hash) <= 6));
   const newCat = !S.stats.objsPhotographed[obj];   // exploring new kinds of object is rewarded
   const rc = S.enc.recentObjs, cat = obj;
-  let p = 0.45 + (has(S, 'lens1') ? 0.06 : 0) + (has(S, 'lens2') ? 0.06 : 0);
-  if (newCat) p += 0.15;
-  if (rc.length >= 2 && rc[rc.length - 1] === cat && rc[rc.length - 2] === cat) p -= 0.12;
-  p += S.enc.miss * 0.08;
-  const pityMax = has(S, 'sensor') ? 3 : 4;
+  const E = MECH.enc;
+  let p = E.base + (has(S, 'lens1') ? E.lens : 0) + (has(S, 'lens2') ? E.lens : 0);
+  if (newCat) p += E.newObj;
+  if (rc.length >= 2 && rc[rc.length - 1] === cat && rc[rc.length - 2] === cat) p -= E.sameObj;
+  p += S.enc.miss * E.perMiss;
+  const pityMax = has(S, 'sensor') ? E.pitySensor : E.pity;
   let pity = false;
   if (!dup && S.enc.miss >= pityMax) { p = 1; pity = true; }
-  if (dup) p *= 0.3;
-  return { p: clamp(p, 0.02, 1), dup, newCat, pity };
+  if (dup) p *= E.dupMult;
+  return { p: clamp(p, E.min, 1), dup, newCat, pity };
 }
 function rarityWeights(S) {
   const w = Object.fromEntries(RARITIES.map(r => [r.id, r.weight]));
@@ -327,6 +345,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
     label: word ? String(word).slice(0, 40) : null, conf: conf != null ? +(+conf).toFixed(2) : null,
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
+  m.lore = monsterLore(m); // flavour text for this object AND rarity, stored so it never changes (lore.js)
   return m;
 }
 function variantLabel(v) { return v === 'spectral' ? 'Spectral' : v === 'mutated' ? 'Mutated' : v === 'shiny' ? 'Prismatic' : ''; }
@@ -360,27 +379,28 @@ function newBattle(S, m) {
     m, turn: 1, over: false, result: null, usedPotion: false, enhancer: 0, captureFails: 0, weapon: S.equipped,
     enemy: { name: m.nick || m.name, hp: m.stats.hp, maxHp: m.stats.hp, atk: m.stats.atk, def: m.stats.def, spd: m.stats.spd, fam: m.fam, status: {}, cds: {} },
     hero: { name: 'Hunter', hp: Math.max(1, Math.min(S.hp, hs.maxHp)), maxHp: hs.maxHp, atk: hs.atk, def: hs.def, spd: hs.spd, crit: hs.crit,
-            energy: 30 + (charmOn(S, 'battery') ? 25 : 0), status: {} },
+            energy: MECH.energy.start + (charmOn(S, 'battery') ? MECH.energy.battery : 0), status: {} },
   };
-  B.enemyFirst = m.stats.spd > hs.spd * 1.25;
+  B.enemyFirst = m.stats.spd > hs.spd * MECH.firstStrike;
   return B;
 }
-function effMult(fam, el) { const f = FAMILIES[fam]; return f.weak.includes(el) ? 1.5 : f.resist.includes(el) ? 0.7 : 1; }
+function effMult(fam, el) { const f = FAMILIES[fam]; return f.weak.includes(el) ? MECH.weak : f.resist.includes(el) ? MECH.resist : 1; }
 function addStatus(tgt, s, turns, ev, who) {
   if (NEG.includes(s) && tgt.status.immune) { ev.push({ t: 'text', msg: `${tgt.name} resisted ${s}!` }); return; }
   tgt.status[s] = { t: Math.max(turns, (tgt.status[s] || {}).t || 0) };
   ev.push({ t: 'status', who, s });
 }
 const STATUS_TURNS = { poison: 3, burn: 3, stun: 1, defdown: 3, atkup: 4, defup: 4, immune: 3 };
-function effDef(u) { return u.def * (u.status.defdown ? 0.5 : 1) * (u.status.defup ? 1.6 : 1); }
-function effAtk(u) { return u.atk * (u.status.atkup ? 1.5 : 1) * (u.status.burn ? 0.85 : 1); }
+function effDef(u) { const X = MECH.status; return u.def * (u.status.defdown ? X.defdown : 1) * (u.status.defup ? X.defup : 1); }
+function effAtk(u) { const X = MECH.status; return u.atk * (u.status.atkup ? X.atkup : 1) * (u.status.burn ? X.burnAtk : 1); }
 function dmgCalc(atk, power, def, rng) { return atk * power * randRange(rng, 0.9, 1.1) * 25 / (25 + def); }
 
 function tickStatuses(B, who, ev) { // start of `who`'s turn. returns true if the unit loses its turn
   const u = B[who];
   let skip = false;
-  if (u.status.poison) { const d = Math.max(2, Math.round(u.maxHp * 0.07)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'poison' }); }
-  if (u.status.burn) { const d = Math.max(2, Math.round(u.maxHp * 0.05 + 2)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'burn' }); }
+  const X = MECH.status;
+  if (u.status.poison) { const d = Math.max(X.poisonMin, Math.round(u.maxHp * X.poisonPct)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'poison' }); }
+  if (u.status.burn) { const d = Math.max(X.burnMin, Math.round(u.maxHp * X.burnPct + X.burnFlat)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'burn' }); }
   if (u.status.stun) { skip = true; ev.push({ t: 'text', msg: `${u.name === 'Hunter' ? 'You are' : u.name + ' is'} stunned and can't move!`, who, stun: true }); }
   for (const k of Object.keys(u.status)) { u.status[k].t--; if (u.status[k].t <= 0) { delete u.status[k]; ev.push({ t: 'expire', who, s: k }); } }
   if (who === 'enemy') for (const k of Object.keys(B.enemy.cds)) if (B.enemy.cds[k] > 0) B.enemy.cds[k]--;
@@ -401,7 +421,7 @@ function heroStrike(B, S, special, rng = RNG) {
   ev.push({ t: 'act', who: 'hero', name: sp ? sp.name : 'Attack', fx: W.fx, special: !!sp });
   let total = 0;
   for (let i = 0; i < hits && !B.over; i++) {
-    const acc = (sp && sp.sure) || W.acc >= 1 ? 1 : W.acc - Math.max(0, e.spd - h.spd) * 0.01 + (e.status.stun ? 0.15 : 0);
+    const acc = (sp && sp.sure) || W.acc >= 1 ? 1 : W.acc - Math.max(0, e.spd - h.spd) * MECH.enemy.missPerSpd + (e.status.stun ? MECH.status.stunAcc : 0);
     if (rng() > acc) { ev.push({ t: 'miss', who: 'enemy' }); continue; }
     const def = effDef(e) * (1 - (W.pierce || 0));
     let dmg = dmgCalc(effAtk(h), pow, def, rng) * eff;
@@ -414,10 +434,10 @@ function heroStrike(B, S, special, rng = RNG) {
     if (!sp && W.stun && rng() < W.stun && e.hp > 0) addStatus(e, 'stun', 1, ev, 'enemy');
     if (sp && sp.effect && rng() < (sp.chance || 1) && e.hp > 0) addStatus(e, sp.effect, STATUS_TURNS[sp.effect], ev, 'enemy');
   }
-  if (charmOn(S, 'fang') && total > 0) { const heal = Math.max(1, Math.round(total * 0.15)); h.hp = Math.min(h.maxHp, h.hp + heal); ev.push({ t: 'heal', who: 'hero', amt: heal }); }
+  if (charmOn(S, 'fang') && total > 0) { const heal = Math.max(1, Math.round(total * MECH.fang)); h.hp = Math.min(h.maxHp, h.hp + heal); ev.push({ t: 'heal', who: 'hero', amt: heal }); }
   if (eff > 1 && total) ev.push({ t: 'text', msg: "It's super effective!" });
   else if (eff < 1 && total) ev.push({ t: 'text', msg: 'It resists your weapon...' });
-  h.energy = clamp(h.energy + (sp ? -sp.cost : 20), 0, 100);
+  h.energy = clamp(h.energy + (sp ? -sp.cost : MECH.energy.perAttack), 0, MECH.energy.max);
   checkEnd(B, ev);
   return ev;
 }
@@ -428,8 +448,8 @@ function enemyTurn(B, rng = RNG) {
   const ready = B.m.abilities.filter(a => !(e.cds[a.name] > 0));
   let ab = null;
   const healer = ready.find(a => a.effect === 'heal');
-  if (healer && e.hp < e.maxHp * 0.4) ab = healer;
-  else if (ready.length && rng() < 0.5) {
+  if (healer && e.hp < e.maxHp * MECH.enemy.healBelow) ab = healer;
+  else if (ready.length && rng() < MECH.enemy.abilityRate) {
     const pick = ready.filter(a => !(a.self && a.effect !== 'heal' && e.status[a.effect])).filter(a => a.effect !== 'heal' || e.hp < e.maxHp * 0.7);
     if (pick.length) ab = pick[Math.floor(rng() * pick.length)];
   }
@@ -437,16 +457,16 @@ function enemyTurn(B, rng = RNG) {
   else e.cds[ab.name] = ab.cd;
   ev.push({ t: 'act', who: 'enemy', name: ab.name, ability: ab.name !== 'Attack', ultimate: !!ab.ultimate });
   if (ab.self) {
-    if (ab.effect === 'heal') { const amt = Math.round(e.maxHp * 0.25); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
+    if (ab.effect === 'heal') { const amt = Math.round(e.maxHp * MECH.enemy.healAmt); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
     else addStatus(e, ab.effect, STATUS_TURNS[ab.effect], ev, 'enemy');
     return ev;
   }
   const hits = ab.hits || 1;
   for (let i = 0; i < hits && !B.over; i++) {
-    const dodge = clamp(0.04 + (h.spd - e.spd) * 0.01, 0, 0.2);
+    const dodge = clamp(MECH.enemy.dodgeBase + (h.spd - e.spd) * MECH.enemy.dodgePerSpd, 0, MECH.enemy.dodgeMax);
     if (rng() < dodge) { ev.push({ t: 'miss', who: 'hero' }); continue; }
     let dmg = dmgCalc(effAtk(e), ab.power, effDef(h), rng);
-    const crit = rng() < 0.06; if (crit) dmg *= 1.5;
+    const crit = rng() < MECH.enemy.crit; if (crit) dmg *= MECH.enemy.critX;
     dmg = Math.max(1, Math.round(dmg));
     h.hp = Math.max(0, h.hp - dmg);
     ev.push({ t: 'hit', who: 'hero', dmg, crit });
@@ -460,12 +480,13 @@ function heroTurnStart(B) { const ev = []; const skip = tickStatuses(B, 'hero', 
 
 function captureChance(S, B) {
   const m = B.m, e = B.enemy, r = RARITY[m.rarity];
-  let c = r.capture * (1 - 0.8 * (e.hp / e.maxHp));
-  if (e.status.stun) c += 0.15;
-  if (e.status.poison || e.status.burn) c += 0.05;
-  c += B.enhancer + (has(S, 'capture1') ? 0.08 : 0) + (has(S, 'capture2') ? 0.08 : 0) + (charmOn(S, 'lenscap') ? 0.06 : 0);
-  if (m.variant) c *= 0.85;
-  return clamp(c, 0.03, 0.97);
+  const C = MECH.capture;
+  let c = r.capture * (1 - C.hpWeight * (e.hp / e.maxHp));
+  if (e.status.stun) c += C.stun;
+  if (e.status.poison || e.status.burn) c += C.dot;
+  c += B.enhancer + (has(S, 'capture1') ? C.research : 0) + (has(S, 'capture2') ? C.research : 0) + (charmOn(S, 'lenscap') ? C.lenscap : 0);
+  if (m.variant) c *= C.variantMult;
+  return clamp(c, C.min, C.max);
 }
 function attemptCapture(B, S, rng = RNG) {
   const ev = [];
@@ -476,13 +497,14 @@ function attemptCapture(B, S, rng = RNG) {
   if (rng() < ch) { B.over = true; B.result = 'captured'; ev.push({ t: 'capture', ok: true }); ev.push({ t: 'end', result: 'captured' }); return { ev, used: true }; }
   B.captureFails++;
   ev.push({ t: 'capture', ok: false });
-  if (has(S, 'capture2') && rng() < 0.35) { S.items.trap++; ev.push({ t: 'text', msg: 'Quantum recovery: the trap rematerialised in your bag.' }); }
-  if (B.captureFails >= 3 && RARITY[B.m.rarity].tier >= 3 && rng() < 0.35) { B.over = true; B.result = 'escaped'; ev.push({ t: 'text', msg: `${B.enemy.name} tore free and vanished!` }); ev.push({ t: 'end', result: 'escaped' }); }
+  if (has(S, 'capture2') && rng() < MECH.capture.quantumRefund) { S.items.trap++; ev.push({ t: 'text', msg: 'Quantum recovery: the trap rematerialised in your bag.' }); }
+  if (B.captureFails >= MECH.capture.escapeAfter && RARITY[B.m.rarity].tier >= 3 && rng() < MECH.capture.escapeChance) { B.over = true; B.result = 'escaped'; ev.push({ t: 'text', msg: `${B.enemy.name} tore free and vanished!` }); ev.push({ t: 'end', result: 'escaped' }); }
   return { ev, used: true };
 }
 function fleeChance(S, B) {
-  let c = 0.55 + (B.hero.spd - B.enemy.spd) * 0.03 + (charmOn(S, 'slipper') ? 0.15 : 0) - (B.m.rarity === 'legendary' ? 0.2 : 0);
-  return clamp(c, 0.15, 0.95);
+  const F = MECH.flee;
+  let c = F.base + (B.hero.spd - B.enemy.spd) * F.perSpd + (charmOn(S, 'slipper') ? F.slipper : 0) - (B.m.rarity === 'legendary' ? F.legendary : 0);
+  return clamp(c, F.min, F.max);
 }
 function attemptFlee(B, S, rng = RNG) {
   const ev = [{ t: 'act', who: 'hero', name: 'Flee' }];
@@ -512,7 +534,7 @@ function useItem(B, S, id) {
       const real = Math.min(maxHp - (h ? h.hp : S.hp), 10); setHp((h ? h.hp : S.hp) + real); if (real) ev.push({ t: 'heal', who: 'hero', amt: real });
       break;
     }
-    case 'enhancer': if (!B) return { ev, ok: false }; B.enhancer += 0.25; ev.push({ t: 'text', msg: 'Capture field amplified! +25% capture chance.' }); break;
+    case 'enhancer': if (!B) return { ev, ok: false }; B.enhancer += MECH.capture.enhancer; ev.push({ t: 'text', msg: 'Capture field amplified! +25% capture chance.' }); break;
     case 'smoke': if (!B) return { ev, ok: false }; B.over = true; B.result = 'fled'; ev.push({ t: 'text', msg: 'Poof! You vanish in a cloud of smoke.' }); ev.push({ t: 'end', result: 'fled' }); break;
     default: return { ev, ok: false };
   }
@@ -560,12 +582,12 @@ function finishBattle(S, B, rng = RNG) {
       m.caughtAt = Date.now();
       S.monsters.push(m);
     }
-    S.hp = Math.min(hunterStats(S).maxHp, S.hp + Math.round(hunterStats(S).maxHp * 0.2));
+    S.hp = Math.min(hunterStats(S).maxHp, S.hp + Math.round(hunterStats(S).maxHp * MECH.afterWin));
   } else if (B.result === 'defeat') {
     S.stats.losses++;
-    const lost = Math.floor(S.coins * 0.15); S.coins -= lost;
+    const lost = Math.floor(S.coins * MECH.defeatCoins); S.coins -= lost;
     sum.lostCoins = lost;
-    S.hp = Math.round(hunterStats(S).maxHp * 0.4);
+    S.hp = Math.round(hunterStats(S).maxHp * MECH.defeatHp);
   } else if (B.result === 'fled' || B.result === 'escaped') {
     S.stats.flees++;
   }

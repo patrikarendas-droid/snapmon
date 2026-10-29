@@ -49,7 +49,7 @@ window.runEquivalence = async (labels, variant) => {
   return { gpu, cpu };
 };
 </script>
-<script src="/src/objects.js"></script><script src="/src/labels.js"></script><script src="/src/game.js">// GPU/CPU consistency: every photo through the full standard engine twice, first with GPU backends allowed
+<script src="/src/objects.js"></script><script src="/src/labels.js"></script><script src="/src/lore.js"></script><script src="/src/game.js">// GPU/CPU consistency: every photo through the full standard engine twice, first with GPU backends allowed
 // (WebGL for the detector/classifier, WebGPU for TinyCLIP when the browser exposes an adapter), then forced to the CPU.
 window.runEquivalence = async (labels, variant) => {
   ClipLens.CFG.variant = variant;

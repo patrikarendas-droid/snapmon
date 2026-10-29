@@ -21,6 +21,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; } /* author display rules must never override the hidden attribute */
 html, body { height: 100%; }
 body { margin: 0; background: var(--ink); color: var(--text); font: 15px/1.45 var(--font-body); overscroll-behavior: none; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
@@ -193,9 +194,25 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .battle .overlay-inner > .arena { flex-shrink: 1; }
 .camera .overlay-inner.cam-inner { justify-content: center; }
 .cam-frame { position: relative; width: 100%; max-width: 100%; aspect-ratio: 3 / 4; max-height: 64vh; margin: 0 auto; border-radius: 18px; overflow: hidden; background: #000; border: 1px solid #2c4a52; }
-.cam-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cam-frame { touch-action: none; }
+.cam-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; transform-origin: 50% 50%; }
 .cam-frame .vf-corner, .cam-frame .vf-sweep { z-index: 2; }
-.cam-status { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ecto); font-weight: 600; z-index: 3; }
+.cam-status { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ecto); font-weight: 600; z-index: 3; background: #000; }
+.confirm-bar { height: 6px; } .confirm-bar i { background: var(--ecto); transition: none; }
+.lore { font-style: italic; } .lore-epic { color: #d9b8ff; } .lore-legendary { color: #ffd98a; text-shadow: 0 0 12px rgba(255,190,59,.35); }
+.guide-btn { font-weight: 800; font-size: 17px; color: var(--ecto); }
+.guide-sec { border: 1px solid var(--line); border-radius: 14px; background: var(--panel2, #1a1430); }
+.guide-sec > summary { padding: 12px 14px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+.guide-sec > summary::after { content: '▸'; color: var(--muted); } .guide-sec[open] > summary::after { content: '▾'; }
+.guide-sec > summary::-webkit-details-marker { display: none; }
+.guide-body { padding: 0 14px 12px; font-size: 14px; } .guide-body p { margin: 0 0 8px; } .guide-body ul { margin: 0 0 8px; padding-left: 18px; } .guide-body li { margin: 3px 0; }
+.guide-table { overflow-x: auto; margin: 6px 0; } .guide-table table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.guide-table th, .guide-table td { border-bottom: 1px solid var(--line); padding: 5px 6px; text-align: left; vertical-align: top; }
+.guide-cards { display: grid; gap: 8px; margin: 8px 0; } .guide-status { display: grid; grid-template-columns: 74px 1fr; gap: 8px; align-items: start; background: #0e0b18; border-radius: 10px; padding: 8px; }
+.guide-status .st { justify-self: start; }
+.zoom-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+.zoom-row input[type=range] { flex: 1; max-width: 240px; accent-color: var(--ecto); }
+.zoom-row .num { min-width: 3.2em; text-align: right; color: var(--ecto); }
 .cam-controls { display: flex; justify-content: center; padding-top: 6px; }
 .shutter[disabled] { opacity: .45; }
 .photo-frame { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid #2c4a52; background: #000; aspect-ratio: 1; max-height: 42vh; max-width: 100%; margin: 0 auto; width: 100%; }
@@ -364,7 +381,7 @@ details.debug td { padding: 2px 6px 2px 0; border-top: 1px solid #221a38; vertic
 </style>
 </head>
 <body>
-<script>window.__SNAPMON_CLIP_WORKER = "/* SNAPMON — TinyCLIP worker (part of the standard Hybrid recogniser, see engine.js). Runs off the main thread.\n   Receives preprocessed 224×224 crops, returns vocabulary scores. Text embeddings for the whole vocabulary are\n   precomputed offline (lab/export_clip.py), so only the image encoder runs on the phone.\n\n   Standard backend for every player: WebAssembly (CPU), single-threaded, so every device does the same arithmetic\n   and reaches the same decision (WebGPU gave a different outcome on ~4.5% of photos, docs/RECOGNITION.md). WebGPU is\n   kept only as a developer comparison option ('webgpu': tries the GPU, falls back to WASM with the same weights). Downloads stream with progress, are checked for completeness\n   (and against the deploy manifest's SHA-256 when one is given) before they are cached, and a cached file that fails\n   to load is purged so a retry downloads it again.\n\n   Messages: {type:'init', base, ortBase, backend:'wasm'|'webgpu', expect} → progress* → {type:'ready', info}\n             {type:'run', id, crops:Float32Array, n} → {type:'result', id, top, ms} */\n'use strict';\nlet session = null, vocab = null, meta = null, dim = 0, nLabels = 0, backend = '';\nconst CACHE = 'snapmon-models-v1';\nconst progress = (file, loaded, total) => self.postMessage({ type: 'progress', file, loaded, total });\n\nasync function sha256(buf) {\n  if (!self.crypto || !crypto.subtle) return null;\n  const h = await crypto.subtle.digest('SHA-256', buf);\n  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('');\n}\n// Cache API keeps model files on the phone after the first complete download.\nasync function cachedFetch(url, file, expect) {\n  let cache = null;\n  try { cache = await caches.open(CACHE); } catch (e) { /* storage blocked: plain download every time */ }\n  if (cache) {\n    const hit = await cache.match(url);\n    if (hit) { const buf = await hit.arrayBuffer(); progress(file, buf.byteLength, buf.byteLength); return { buf, cached: true }; }\n  }\n  const r = await fetch(url);\n  if (!r.ok) throw Object.assign(new Error('download failed (' + r.status + ') ' + file), { kind: 'download' });\n  const total = +r.headers.get('content-length') || (expect && expect.bytes) || 0;\n  let buf;\n  if (r.body && r.body.getReader) {\n    const reader = r.body.getReader(), parts = []; let got = 0, last = 0;\n    for (;;) {\n      const { done, value } = await reader.read(); if (done) break;\n      parts.push(value); got += value.byteLength;\n      if (got - last > 262144) { last = got; progress(file, got, total); }\n    }\n    const u8 = new Uint8Array(got); let o = 0; for (const p of parts) { u8.set(p, o); o += p.byteLength; }\n    buf = u8.buffer;\n  } else buf = await r.arrayBuffer();\n  progress(file, buf.byteLength, total || buf.byteLength);\n  // an interrupted transfer must never be cached as if it were the model\n  if (total && buf.byteLength !== total && !r.headers.get('content-encoding')) throw Object.assign(new Error('download interrupted: ' + file), { kind: 'download' });\n  if (expect && expect.bytes && buf.byteLength !== expect.bytes) throw Object.assign(new Error('incomplete download: ' + file), { kind: 'download' });\n  if (expect && expect.sha256) { const h = await sha256(buf); if (h && h !== expect.sha256) throw Object.assign(new Error('corrupted download: ' + file), { kind: 'download' }); }\n  if (cache) { try { await cache.put(url, new Response(buf.slice(0), { headers: { 'content-type': 'application/octet-stream' } })); } catch (e) { /* quota: fine */ } }\n  return { buf, cached: false };\n}\nasync function purge(urls) { try { const c = await caches.open(CACHE); for (const u of urls) await c.delete(u); } catch (e) {} }\n\nfunction f16ToF32(u16) {\n  const out = new Float32Array(u16.length);\n  for (let i = 0; i < u16.length; i++) {\n    const h = u16[i], s = (h & 0x8000) ? -1 : 1, e = (h >> 10) & 0x1f, f = h & 0x3ff;\n    out[i] = e === 0 ? s * Math.pow(2, -14) * (f / 1024) : e === 31 ? (f ? NaN : s * Infinity) : s * Math.pow(2, e - 15) * (1 + f / 1024);\n  }\n  return out;\n}\nconst memoryError = e => /memory|allocation|RangeError|Aborted\\(\\)|OOM/i.test(String(e && (e.message || e)));\n\nasync function makeSession(modelBuf, which) {\n  const s = await ort.InferenceSession.create(new Uint8Array(modelBuf), { executionProviders: which === 'webgpu' ? ['webgpu'] : ['wasm'], graphOptimizationLevel: 'all' });\n  // warm-up (also proves the backend really runs this model) so the first photo is not slowed down by compilation\n  const sz = meta.image.size;\n  await s.run({ [s.inputNames[0]]: new ort.Tensor('float32', new Float32Array(3 * sz * sz), [1, 3, sz, sz]) });\n  return s;\n}\n\n// test: { failGPU, failCPU } lets automated tests simulate backend failures; never set by the game itself\nasync function init({ base, ortBase, backend: want = 'wasm', expect = {}, test = {} }) {\n  const t0 = performance.now();\n  let gpu = false;\n  if (want === 'webgpu') {\n    gpu = !!test.failGPU;\n    if (!gpu && navigator.gpu) { try { gpu = !!(await navigator.gpu.requestAdapter()); } catch (e) { gpu = false; } }\n  }\n  // the WebGPU bundle also contains the WASM backend; the standard path loads only the smaller CPU build\n  importScripts(ortBase + (gpu ? 'ort.webgpu.min.js' : 'ort.min.js'));\n  ort.env.wasm.wasmPaths = ortBase;\n  // one thread on every device: the same WASM binary, the same operation order, the same result\n  ort.env.wasm.numThreads = 1;\n  const urls = { meta: base + 'vocab.json', vocab: base + 'vocab.bin' };\n  meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'])).buf));\n  urls.model = base + meta.model;\n  const [m, v] = await Promise.all([cachedFetch(urls.model, meta.model, expect[meta.model]), cachedFetch(urls.vocab, 'vocab.bin', expect['vocab.bin'])]);\n  dim = meta.dim; nLabels = meta.labels.length;\n  vocab = f16ToF32(new Uint16Array(v.buf));\n  if (vocab.length !== dim * nLabels) { await purge(Object.values(urls)); throw Object.assign(new Error('vocabulary file does not match the model'), { kind: 'download' }); }\n  let gpuError = null;\n  if (gpu) {\n    try { if (test.failGPU) throw new Error('simulated WebGPU failure'); session = await makeSession(m.buf, 'webgpu'); backend = 'webgpu'; }\n    catch (e) { gpuError = String(e.message || e); session = null; }\n  }\n  if (!session) {\n    try { if (test.failCPU) throw new Error(test.failCPU); session = await makeSession(m.buf, 'wasm'); backend = 'wasm'; }\n    catch (e) {\n      if (m.cached) await purge([urls.model]); // maybe a damaged cached copy: download it again next time\n      throw Object.assign(new Error('the model failed to run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });\n    }\n  }\n  return { backend, requested: want, threads: ort.env.wasm.numThreads, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,\n    name: meta.name, variant: meta.variant, fromCache: m.cached && v.cached };\n}\n\nasync function run({ crops, n, k = 8 }) {\n  const t0 = performance.now(), s = meta.image.size;\n  const out = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', crops, [n, 3, s, s]) });\n  const emb = out[session.outputNames[0]].data;\n  const scale = meta.scale, top = [];\n  for (let c = 0; c < n; c++) {\n    let norm = 0; for (let d = 0; d < dim; d++) norm += emb[c * dim + d] ** 2; norm = Math.sqrt(norm) || 1;\n    const cos = new Float32Array(nLabels);\n    let mx = -1e9;\n    for (let l = 0; l < nLabels; l++) { let dot = 0; const o = l * dim; for (let d = 0; d < dim; d++) dot += emb[c * dim + d] * vocab[o + d]; cos[l] = dot / norm; if (cos[l] > mx) mx = cos[l]; }\n    // softmax over the whole vocabulary (temperature = model's logit scale); summed per object later\n    let sum = 0; const p = new Float32Array(nLabels);\n    for (let l = 0; l < nLabels; l++) { p[l] = Math.exp(scale * (cos[l] - mx)); sum += p[l]; }\n    const idx = Array.from({ length: nLabels }, (_, i) => i).sort((a, b) => p[b] - p[a]).slice(0, k);\n    top.push(idx.map(i => ({ i, p: p[i] / sum, cos: +cos[i].toFixed(4) })));\n  }\n  return { top, ms: Math.round(performance.now() - t0) };\n}\n\nself.onmessage = async ev => {\n  const m = ev.data;\n  try {\n    if (m.type === 'init') self.postMessage({ type: 'ready', info: await init(m) });\n    else if (m.type === 'run') self.postMessage({ type: 'result', id: m.id, ...(await run(m)) });\n  } catch (e) { self.postMessage({ type: 'error', id: m.id, error: String(e && e.message || e), kind: (e && e.kind) || (memoryError(e) ? 'memory' : 'init') }); }\n};\n";</script>
+<script>window.__SNAPMON_CLIP_WORKER = "/* SNAPMON — TinyCLIP worker (part of the standard Hybrid recogniser, see engine.js). Runs off the main thread.\n   Receives preprocessed 224×224 crops, returns vocabulary scores. Text embeddings for the whole vocabulary are\n   precomputed offline (lab/export_clip.py), so only the image encoder runs on the phone.\n\n   Standard backend for every player: WebAssembly (CPU), single-threaded, so every device does the same arithmetic\n   and reaches the same decision (WebGPU gave a different outcome on ~4.5% of photos, docs/RECOGNITION.md). WebGPU is\n   kept only as a developer comparison option ('webgpu': tries the GPU, falls back to WASM with the same weights). Downloads stream with progress, are checked for completeness\n   (and against the deploy manifest's SHA-256 when one is given) before they are cached, and a cached file that fails\n   to load is purged so a retry downloads it again.\n\n   Messages: {type:'init', base, ortBase, backend:'wasm'|'webgpu', expect} → progress* → {type:'ready', info}\n             {type:'run', id, crops:Float32Array, n} → {type:'result', id, top, ms} */\n'use strict';\nlet session = null, vocab = null, meta = null, dim = 0, nLabels = 0, backend = '';\nconst CACHE = 'snapmon-models-v1';\nconst progress = (file, loaded, total) => self.postMessage({ type: 'progress', file, loaded, total });\n\nasync function sha256(buf) {\n  if (!self.crypto || !crypto.subtle) return null;\n  const h = await crypto.subtle.digest('SHA-256', buf);\n  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('');\n}\n// Cache API keeps model files on the phone after the first complete download.\nasync function cachedFetch(url, file, expect) {\n  let cache = null;\n  try { cache = await caches.open(CACHE); } catch (e) { /* storage blocked: plain download every time */ }\n  if (cache) {\n    const hit = await cache.match(url);\n    if (hit) { const buf = await hit.arrayBuffer(); progress(file, buf.byteLength, buf.byteLength); return { buf, cached: true }; }\n  }\n  const r = await fetch(url);\n  if (!r.ok) throw Object.assign(new Error('download failed (' + r.status + ') ' + file), { kind: 'download' });\n  const total = +r.headers.get('content-length') || (expect && expect.bytes) || 0;\n  let buf;\n  if (r.body && r.body.getReader) {\n    const reader = r.body.getReader(), parts = []; let got = 0, last = 0;\n    for (;;) {\n      const { done, value } = await reader.read(); if (done) break;\n      parts.push(value); got += value.byteLength;\n      if (got - last > 262144) { last = got; progress(file, got, total); }\n    }\n    const u8 = new Uint8Array(got); let o = 0; for (const p of parts) { u8.set(p, o); o += p.byteLength; }\n    buf = u8.buffer;\n  } else buf = await r.arrayBuffer();\n  progress(file, buf.byteLength, total || buf.byteLength);\n  // an interrupted transfer must never be cached as if it were the model\n  if (total && buf.byteLength !== total && !r.headers.get('content-encoding')) throw Object.assign(new Error('download interrupted: ' + file), { kind: 'download' });\n  if (expect && expect.bytes && buf.byteLength !== expect.bytes) throw Object.assign(new Error('incomplete download: ' + file), { kind: 'download' });\n  if (expect && expect.sha256) { const h = await sha256(buf); if (h && h !== expect.sha256) throw Object.assign(new Error('corrupted download: ' + file), { kind: 'download' }); }\n  if (cache) { try { await cache.put(url, new Response(buf.slice(0), { headers: { 'content-type': 'application/octet-stream' } })); } catch (e) { /* quota: fine */ } }\n  return { buf, cached: false };\n}\nasync function purge(urls) { try { const c = await caches.open(CACHE); for (const u of urls) await c.delete(u); } catch (e) {} }\n\nfunction f16ToF32(u16) {\n  const out = new Float32Array(u16.length);\n  for (let i = 0; i < u16.length; i++) {\n    const h = u16[i], s = (h & 0x8000) ? -1 : 1, e = (h >> 10) & 0x1f, f = h & 0x3ff;\n    out[i] = e === 0 ? s * Math.pow(2, -14) * (f / 1024) : e === 31 ? (f ? NaN : s * Infinity) : s * Math.pow(2, e - 15) * (1 + f / 1024);\n  }\n  return out;\n}\nconst memoryError = e => /memory|allocation|RangeError|Aborted\\(\\)|OOM/i.test(String(e && (e.message || e)));\n\nasync function makeSession(modelBuf, which) {\n  const s = await ort.InferenceSession.create(new Uint8Array(modelBuf), { executionProviders: which === 'webgpu' ? ['webgpu'] : ['wasm'], graphOptimizationLevel: 'all' });\n  // warm-up (also proves the backend really runs this model) so the first photo is not slowed down by compilation\n  const sz = meta.image.size;\n  await s.run({ [s.inputNames[0]]: new ort.Tensor('float32', new Float32Array(3 * sz * sz), [1, 3, sz, sz]) });\n  return s;\n}\n\n// test: { failGPU, failCPU } lets automated tests simulate backend failures; never set by the game itself\nasync function init({ base, ortBase, backend: want = 'wasm', expect = {}, test = {} }) {\n  const t0 = performance.now();\n  let gpu = false;\n  if (want === 'webgpu') {\n    gpu = !!test.failGPU;\n    if (!gpu && navigator.gpu) { try { gpu = !!(await navigator.gpu.requestAdapter()); } catch (e) { gpu = false; } }\n  }\n  // the WebGPU bundle also contains the WASM backend; the standard path loads only the smaller CPU build\n  importScripts(ortBase + (gpu ? 'ort.webgpu.min.js' : 'ort.min.js'));\n  ort.env.wasm.wasmPaths = ortBase;\n  // one thread on every device: the same WASM binary, the same operation order, the same result\n  ort.env.wasm.numThreads = 1;\n  const urls = { meta: base + 'vocab.json', vocab: base + 'vocab.bin' };\n  meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'])).buf));\n  urls.model = base + meta.model;\n  const [m, v] = await Promise.all([cachedFetch(urls.model, meta.model, expect[meta.model]), cachedFetch(urls.vocab, 'vocab.bin', expect['vocab.bin'])]);\n  dim = meta.dim; nLabels = meta.labels.length;\n  vocab = f16ToF32(new Uint16Array(v.buf));\n  if (vocab.length !== dim * nLabels) { await purge(Object.values(urls)); throw Object.assign(new Error('vocabulary file does not match the model'), { kind: 'download' }); }\n  let gpuError = null;\n  if (gpu) {\n    try { if (test.failGPU) throw new Error('simulated WebGPU failure'); session = await makeSession(m.buf, 'webgpu'); backend = 'webgpu'; }\n    catch (e) { gpuError = String(e.message || e); session = null; }\n  }\n  if (!session) {\n    try { if (test.failCPU) throw new Error(test.failCPU); session = await makeSession(m.buf, 'wasm'); backend = 'wasm'; }\n    catch (e) {\n      if (m.cached) await purge([urls.model]); // maybe a damaged cached copy: download it again next time\n      throw Object.assign(new Error('the model failed to run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });\n    }\n  }\n  return { backend, requested: want, threads: ort.env.wasm.numThreads, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,\n    name: meta.name, variant: meta.variant, fromCache: m.cached && v.cached };\n}\n\nasync function run({ crops, n, k = 8 }) {\n  const t0 = performance.now(), s = meta.image.size;\n  const out = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', crops, [n, 3, s, s]) });\n  const emb = out[session.outputNames[0]].data;\n  const scale = meta.scale, top = [];\n  for (let c = 0; c < n; c++) {\n    let norm = 0; for (let d = 0; d < dim; d++) norm += emb[c * dim + d] ** 2; norm = Math.sqrt(norm) || 1;\n    const cos = new Float32Array(nLabels);\n    let mx = -1e9;\n    for (let l = 0; l < nLabels; l++) { let dot = 0; const o = l * dim; for (let d = 0; d < dim; d++) dot += emb[c * dim + d] * vocab[o + d]; cos[l] = dot / norm; if (cos[l] > mx) mx = cos[l]; }\n    // softmax over the whole vocabulary (temperature = model's logit scale); summed per object later\n    let sum = 0; const p = new Float32Array(nLabels);\n    for (let l = 0; l < nLabels; l++) { p[l] = Math.exp(scale * (cos[l] - mx)); sum += p[l]; }\n    const idx = Array.from({ length: nLabels }, (_, i) => i).sort((a, b) => p[b] - p[a]).slice(0, k);\n    top.push(idx.map(i => ({ i, p: p[i] / sum, cos: +cos[i].toFixed(4) })));\n  }\n  return { top, ms: Math.round(performance.now() - t0) };\n}\n\nself.onmessage = async ev => {\n  const m = ev.data;\n  try {\n    if (m.type === 'init') self.postMessage({ type: 'ready', info: await init(m) });\n    else if (m.type === 'run') self.postMessage({ type: 'result', id: m.id, ...(await run(m)) });\n    else if (m.type === 'ping') self.postMessage({ type: 'pong', id: m.id, ok: !!session });\n  } catch (e) { self.postMessage({ type: 'error', id: m.id, error: String(e && e.message || e), kind: (e && e.kind) || (memoryError(e) ? 'memory' : 'init') }); }\n};\n";</script>
 
 
 <div id="app">
@@ -559,8 +576,8 @@ const MATERIALS = {
 const ITEMS = {
   potion:   { name: 'Healing Potion',         desc: 'Restore 40 HP.',                        price: 25, craft: { goo: 3 },            color: '#ff6b7f' },
   greater:  { name: 'Greater Healing Potion', desc: 'Restore 70% of max HP.',                price: 70, craft: { goo: 6, ecto: 2 },   color: '#ff3d6e' },
-  strength: { name: 'Strength Potion',        desc: '+50% attack for 3 turns.',              price: 45, craft: { goo: 4, scrap: 2 },  color: '#ff9b3d' },
-  defense:  { name: 'Defense Potion',         desc: '+60% defense for 3 turns.',             price: 45, craft: { scrap: 4, goo: 2 },  color: '#5ab3ff' },
+  strength: { name: 'Strength Potion',        desc: '+50% attack for your next 3 attacks.',              price: 45, craft: { goo: 4, scrap: 2 },  color: '#ff9b3d' },
+  defense:  { name: 'Defense Potion',         desc: '+60% defense against the next 4 attacks.',             price: 45, craft: { scrap: 4, goo: 2 },  color: '#5ab3ff' },
   antidote: { name: 'Antidote',               desc: 'Cure poison, burn & weakness. +10 HP.', price: 20, craft: { goo: 2 },            color: '#8dff6a' },
   enhancer: { name: 'Capture Enhancer',       desc: '+25% capture chance this battle.',      price: 60, craft: { ecto: 3 },           color: '#c48bff' },
   trap:     { name: 'Snap Trap',              desc: 'Capture device. Used on capture attempts.', price: 30, craft: { scrap: 2, ecto: 1 }, color: '#7cf5d3' },
@@ -2972,11 +2989,176 @@ for (const [id, name, cat, like] of LABEL_OBJECTS.extra) if (!OBJECTS[id]) OBJ(i
 
 </script>
 <script>
+/* SNAPMON — monster flavour text that reflects BOTH the photographed object and the monster's rarity.
+
+   No AI service and no randomness at display time: the text is assembled from curated pieces and picked
+   deterministically from (object, rarity, monster seed), then stored on the monster (m.lore) when it appears, so it
+   never changes between screens, restarts or future edits of these tables.
+
+   Pieces:
+     • LORE_KITS      — per object category: where it lurks, what it leaves behind, a petty habit, an ominous deed,
+                        and the mythic domain it rules. Works for every object in the registry (~2,000).
+     • LORE_TEMPLATES — per rarity, rising in tone: Common playful/mundane → Uncommon odd/mysterious → Rare distinctive
+                        → Epic ominous → Legendary mythic. A second "coda" sentence is added from Rare upwards.
+     • LORE_OBJECT    — hand-written lines for some very common objects, used for some of their monsters.
+     • the photo colour (only when the colour extraction was confident) and the monster's signature move/title.
+   Edit freely: monsters that already exist keep the text they were given. */
+'use strict';
+
+const LORE_KITS = {
+  toilet:   { place: ['the bathroom at 3 a.m.', 'the last stall'], stuff: ['suspicious bubbles', 'blue cleaning foam'], habit: ['gurgles whenever someone forgets to close the lid', 'flushes itself just to make you jump'], omen: ['every drain in the city gurgles in unison', 'the sewers rise to answer it'], realm: ['the endless sewers', 'the great drain beneath the world'] },
+  mug:      { place: ['the back of the cupboard', 'the office kitchen'], stuff: ['cold coffee rings', 'tea stains'], habit: ['cools your drink the moment you look away', 'hides behind the kettle and steals sugar'], omen: ['every cup in the house boils at once', 'no one in the city can sleep for a week'], realm: ['the bottomless brew', 'every sleepless night ever spent'] },
+  shoe:     { place: ['the pile by the front door', 'the dark under the bed'], stuff: ['muddy footprints', 'tangled laces'], habit: ['ties its own laces together when you are in a hurry', 'hides its partner somewhere new every morning'], omen: ['the ground shakes with footsteps that belong to no one', 'every road leads back to its door'], realm: ['every road ever walked', 'the march of a thousand years'] },
+  plant:    { place: ['the sunny windowsill', 'the corner nobody waters'], stuff: ['pale pollen', 'creeping roots'], habit: ['leans toward the window by day and toward you by night', 'drops a leaf every time you forget to water it'], omen: ['vines swallow the street overnight', 'the gardens close their petals and turn to face it'], realm: ['the green that covers everything', 'the roots beneath every city'] },
+  laptop:   { place: ['the desk drawer of forgotten cables', 'the server room'], stuff: ['error messages', 'warm crumbs in the keyboard'], habit: ['installs updates at the worst possible moment', 'hides your cursor when you are in a rush'], omen: ['every screen in the country goes blue', 'all the world\'s passwords are forgotten at once'], realm: ['the endless network', 'every machine that ever thought'] },
+  banana:   { place: ['the fruit bowl', 'the bottom of a school bag'], stuff: ['slippery peel', 'brown spots'], habit: ['ripens the moment you decide to eat it', 'leaves its peel exactly where you will step'], omen: ['the whole market ripens and rots in a single hour', 'every floor in town turns slippery'], realm: ['the great ripening', 'the yellow storm'] },
+  sofa:     { place: ['the gap between the cushions', 'the living room after dark'], stuff: ['lost coins', 'stale crumbs'], habit: ['swallows remote controls and refuses to give them back', 'pulls you in for "just five minutes" that last three hours'], omen: ['nobody in the house ever stands up again', 'whole families vanish into its cushions'], realm: ['the eternal afternoon nap', 'everything ever lost between cushions'] },
+  phone:    { place: ['the bottom of every pocket', 'the charging cable you can never find'], stuff: ['notifications', 'cracked-screen glitter'], habit: ['buzzes in your pocket when nobody called', 'dies at exactly 1% battery'], omen: ['every phone on earth rings at the same moment', 'nobody can look away from a screen ever again'], realm: ['the endless scroll', 'every message never sent'] },
+  bottle:   { place: ['the recycling bin', 'the back of the fridge'], stuff: ['sticky fizz', 'condensation'], habit: ['shakes itself before you open it', 'rolls under the car seat on purpose'], omen: ['rivers fizz and overflow their banks', 'the sea itself starts to bubble'], realm: ['the great tide', 'every drop that ever spilled'] },
+  book:     { place: ['the library\'s restricted shelf', 'the gap under a wobbly table leg'], stuff: ['ink blots', 'loose pages'], habit: ['loses your page whenever you close it', 'moves its bookmark three chapters back'], omen: ['every word in the library rearranges itself', 'the stories start writing their readers'], realm: ['the unwritten final chapter', 'every story ever told'] },
+  lamp:     { place: ['the dark corner of the room', 'the porch light'], stuff: ['moth wings', 'flickering shadows'], habit: ['flickers just when the film gets scary', 'burns out the moment you need it'], omen: ['every light in the city goes out at once', 'night forgets how to end'], realm: ['the last light', 'the long night between stars'] },
+  chair:    { place: ['the head of the dinner table', 'the classroom\'s back row'], stuff: ['squeaks', 'loose screws'], habit: ['wobbles only when someone important sits on it', 'scoots away just as you sit down'], omen: ['every seat in the land is suddenly taken', 'thrones crack and kings fall'], realm: ['the throne of all thrones', 'every seat at every table'] },
+  car:      { place: ['the multi-storey car park', 'the hard shoulder'], stuff: ['oil puddles', 'tyre marks'], habit: ['honks at pigeons for no reason', 'hides your keys inside itself'], omen: ['the motorways fill with engines that have no drivers', 'every traffic light turns red forever'], realm: ['the endless highway', 'every journey ever started'] },
+  animal:   { place: ['the sunny spot on the floor', 'the crawlspace under the porch'], stuff: ['loose fur', 'muddy paw prints'], habit: ['knocks things off tables and watches you pick them up', 'demands dinner an hour early'], omen: ['every animal in town falls silent and turns to look', 'the wild things of the world answer its call'], realm: ['the wild', 'the first hunt and the last'] },
+  tree:     { place: ['the old park', 'the edge of the woods'], stuff: ['sap', 'falling leaves'], habit: ['drops branches on cars it does not like', 'creaks loudly when you walk past alone'], omen: ['the forest walks', 'roots split the roads and swallow the town'], realm: ['the elder forest', 'the roots beneath the world'] },
+  food:     { place: ['the takeaway box', 'the back of the fridge'], stuff: ['grease stains', 'crumbs'], habit: ['shrinks a little every time you look away', 'smells delicious and tastes of regret'], omen: ['every kitchen in the city catches fire', 'the whole town wakes up hungry and never stops'], realm: ['the endless feast', 'every meal ever eaten'] },
+  fruit:    { place: ['the fruit bowl', 'the orchard'], stuff: ['sticky juice', 'seeds'], habit: ['rolls off the counter just to watch you chase it', 'bruises itself on purpose before you buy it'], omen: ['entire orchards wither overnight', 'the harvest rots on the branch from here to the sea'], realm: ['the final harvest', 'every orchard that ever bloomed'] },
+  cloth:    { place: ['the laundry pile', 'the back of the wardrobe'], stuff: ['lint', 'lost buttons'], habit: ['eats one sock from every pair', 'shrinks itself in the wash out of spite'], omen: ['every wardrobe in the land swings open at midnight', 'the city wakes up wearing someone else\'s clothes'], realm: ['the great unravelling', 'every thread ever spun'] },
+  tool:     { place: ['the garage toolbox', 'the junk drawer'], stuff: ['rust', 'stray screws'], habit: ['vanishes the moment you need it and reappears after', 'strips every screw it touches'], omen: ['every machine in the city falls apart at once', 'bridges loosen their bolts and lie down'], realm: ['the unmaking of things', 'every machine ever built'] },
+  toy:      { place: ['the toy box', 'the dark under the bed'], stuff: ['glitter', 'stuffing'], habit: ['moves when you are not looking', 'squeaks at night when everyone is asleep'], omen: ['every toy in the city opens its eyes', 'playrooms fall silent and nurseries go cold'], realm: ['the endless game', 'every forgotten childhood'] },
+  trash:    { place: ['the bins behind the restaurant', 'the forgotten corner of the yard'], stuff: ['mystery goo', 'banana peels'], habit: ['tips itself over right after you clean up', 'smells worst on the hottest day of the year'], omen: ['rubbish rises from every bin and walks', 'the landfill opens its eyes'], realm: ['the great heap', 'everything ever thrown away'] },
+  mirror:   { place: ['the hallway at night', 'the steamed-up bathroom'], stuff: ['fingerprints', 'fog'], habit: ['blinks a split second after you do', 'makes your hair look worse than it is'], omen: ['every reflection steps out of its glass', 'nobody can tell which side is real any more'], realm: ['the world behind the glass', 'every face ever reflected'] },
+  fridge:   { place: ['the kitchen at midnight', 'the corner of the utility room'], stuff: ['frost', 'a low electric hum'], habit: ['hums louder when you raid it at night', 'freezes the milk and melts the ice cream'], omen: ['summer freezes solid in a single breath', 'every appliance in the city starts humming its name'], realm: ['the eternal winter', 'the cold at the end of time'] },
+  candle:   { place: ['the birthday cake', 'the windowsill during a power cut'], stuff: ['dripping wax', 'smoke curls'], habit: ['relights itself after you blow it out', 'leans until the wax drips on the tablecloth'], omen: ['every flame in the city leans toward it', 'the sky glows orange from coast to coast'], realm: ['the first fire', 'the flame that never goes out'] },
+  clock:    { place: ['the bedside table', 'the station wall'], stuff: ['lost minutes', 'ticking echoes'], habit: ['steals five minutes from every morning', 'rings one minute after you fall back asleep'], omen: ['time stops for everyone but it', 'yesterday starts happening again'], realm: ['the end of time', 'every hour ever wasted'] },
+  keys:     { place: ['the bottom of the bag', 'the bowl by the door'], stuff: ['jingles', 'pocket fluff'], habit: ['hides whenever you are late', 'gets tangled with every other small thing'], omen: ['every lock in the world clicks open at once', 'all the doors forget who they belong to'], realm: ['every door ever closed', 'the lock on the last secret'] },
+  bag:      { place: ['the back of the wardrobe', 'the luggage carousel'], stuff: ['receipts', 'crumbs from last year'], habit: ['hides your phone in a pocket you did not know it had', 'zips itself shut on your fingers'], omen: ['everything anyone has ever lost spills out of it', 'whole buildings vanish into its pockets'], realm: ['the pocket with no bottom', 'everything ever packed and never found'] },
+  pillow:   { place: ['the unmade bed', 'the sofa\'s corner'], stuff: ['feathers', 'drool stains'], habit: ['lures you in with "just five more minutes"', 'gets too warm on one side however often you flip it'], omen: ['the whole city falls asleep and dreams the same dream', 'nobody wakes up for a hundred years'], realm: ['the endless dream', 'every night ever slept'] },
+  faucet:   { place: ['the bathroom sink', 'the leaky garden hose'], stuff: ['drips', 'limescale'], habit: ['drips just loud enough to keep you awake', 'runs hot when you want cold'], omen: ['every tap in the city opens at once', 'the floodwaters answer its call'], realm: ['the great flood', 'every drop that ever fell'] },
+  tv:       { place: ['the living room corner', 'the waiting room wall'], stuff: ['static', 'reruns'], habit: ['changes the channel during the best part', 'shows static only when you are alone'], omen: ['every screen on earth shows the same face', 'nobody can switch anything off ever again'], realm: ['channel zero', 'every broadcast ever sent'] },
+  bird:     { place: ['the rooftop', 'the park bench'], stuff: ['loose feathers', 'early-morning noise'], habit: ['sings outside your window at 4 a.m.', 'aims for freshly washed cars'], omen: ['the sky goes dark with wings', 'every bird on earth sings one terrible note'], realm: ['the open sky', 'the storm above the clouds'] },
+  fish:     { place: ['the aquarium', 'the harbour'], stuff: ['scales', 'bubbles'], habit: ['forgets you every three seconds and is offended each time', 'stares at you through the glass'], omen: ['the tides stop and the sea draws breath', 'every aquarium cracks at once'], realm: ['the deep', 'the bottom of every ocean'] },
+  bug:      { place: ['the crack in the wall', 'the kitchen at night'], stuff: ['tiny footprints', 'webs'], habit: ['scuttles under the fridge the moment you see it', 'buzzes near your ear just as you fall asleep'], omen: ['the ground hums with a billion legs', 'every crack in the city starts to move'], realm: ['the swarm', 'the million hidden things'] },
+  reptile:  { place: ['the warm rock', 'the warm spot under the desk lamp'], stuff: ['shed skin', 'cold footprints'], habit: ['basks in your seat the moment you get up', 'pretends to be a statue until you turn around'], omen: ['the old lizard-kings wake from their long sleep', 'the swamps rise and the cold-blooded march'], realm: ['the age of dragons', 'the time before mammals'] },
+  umbrella: { place: ['the stand by the door', 'the lost-property office'], stuff: ['raindrops', 'bent spokes'], habit: ['opens indoors on purpose', 'turns inside out in the gentlest breeze'], omen: ['storms gather wherever it goes', 'it never stops raining again'], realm: ['the endless storm', 'every rainy day'] },
+  instrument: { place: ['the music room', 'the attic'], stuff: ['broken strings', 'out-of-tune echoes'], habit: ['plays itself at midnight, always slightly out of tune', 'goes flat right before the concert'], omen: ['every song in the world becomes its song', 'the music never stops, and no one can stop dancing'], realm: ['the last song', 'the music before the world began'] },
+  ball:     { place: ['the dust under the sofa', 'the neighbour\'s garden'], stuff: ['grass stains', 'bounce marks'], habit: ['rolls under the sofa on purpose', 'bounces exactly where you are not'], omen: ['the ground itself starts to bounce', 'every window in town shatters at once'], realm: ['the endless game', 'the first game ever played'] },
+  pot:      { place: ['the back of the stove', 'the sink full of dishes'], stuff: ['burnt crust', 'steam'], habit: ['boils over the second you look away', 'never boils while you watch'], omen: ['every kitchen in the land boils over', 'the city drowns in soup'], realm: ['the cauldron of all things', 'every meal ever burnt'] },
+  cake:     { place: ['the birthday table', 'the bakery window'], stuff: ['frosting', 'sprinkles'], habit: ['makes its last slice look bigger than it is', 'wobbles when someone says the word "diet"'], omen: ['every party in the land turns into a feast without end', 'sugar rains from the sky'], realm: ['the endless celebration', 'every birthday wish ever made'] },
+  other:    { place: ['the place nobody looks', 'the edge of the photo'], stuff: ['an odd smell', 'static'], habit: ['pretends to be something else, badly', 'is never quite where you left it'], omen: ['ordinary things stop being ordinary', 'everyday objects forget what they are'], realm: ['the unexplained', 'everything nobody can name'] },
+};
+
+// {obj} object name · {Obj} capitalised · {colour} photo colour (templates with it are only used when the colour is
+// known) · {place} {stuff} {habit} {omen} {realm} from the category kit · {sig} signature move · {name} · {title}
+const LORE_TEMPLATES = {
+  common: [
+    'A tiny troublemaker that {habit}.',
+    'Mostly harmless. It {habit}, then pretends nothing happened.',
+    'Lives in {place} and {habit}.',
+    'Smells faintly of {stuff}. It bites, but only a little.',
+    'You have probably met one already: it {habit}.',
+    'Small, smug and {colour}. It {habit}.',
+  ],
+  uncommon: [
+    'Nobody knows how it got into {place}. The only clue is the {stuff} it leaves behind, glowing faintly at night.',
+    'Some say it is the {obj} you lost years ago, come back changed.',
+    'Watch {place} after midnight: it rearranges things there, one tiny detail at a time.',
+    'Its {colour} skin shimmers whenever nobody is looking straight at it.',
+    'It hums a tune no one taught it. Pets refuse to go near {place} when it does.',
+    'Throw it out of {place} and it is back by morning, a little bigger every time.',
+  ],
+  rare: [
+    'Old hunters tell of a {colour} {obj} that rules {place} like a small kingdom.',
+    'Its {sig} can be heard three streets away. Lesser monsters scatter when it wakes.',
+    'An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but {stuff}.',
+    'Collectors have spent fortunes chasing it. It has never been seen the same way twice.',
+    'It remembers every hunter who failed to catch it, and it keeps count.',
+    'Wherever it sleeps, {place} grows strangely quiet, as if listening.',
+  ],
+  epic: [
+    'When it stirs, {omen}. Hunters mark its lair on their maps in red.',
+    'It was sealed beneath {place} long ago. The seal did not hold.',
+    'Its {sig} has flattened whole neighbourhoods of lesser spirits, and it is still growing.',
+    'Its {colour} glow shines through walls. Nobody who followed it came back unchanged.',
+    'Old almanacs warn: if the {obj} goes silent, run. That silence is this creature breathing in.',
+    'It does not hunt to eat. It hunts to be remembered, and nobody forgets.',
+  ],
+  legendary: [
+    'Where it takes hold, {omen}. Even the gods fear {realm}.',
+    'Before the first {obj} was ever made, it was already waiting. It will remain after the last.',
+    'Ancient texts call it {title}. When it wakes, {omen}.',
+    'Kingdoms have fallen to its {sig}. Its true name is spoken only in whispers.',
+    'It is the {colour} titan of {realm}. Stars dim when it opens its eyes.',
+    'Every {obj} in the world is a door, and it holds every key. It has begun to open them.',
+  ],
+};
+// second sentence from Rare upwards, so the rarest monsters read the most distinctive
+const LORE_CODA = {
+  rare: ['Few hunters have seen one up close.', 'Collectors pay a fortune for a trace of its {stuff}.', 'It is never found in the same place twice.'],
+  epic: ['Its name is not spoken in {place}.', 'The ground is still warm where it last slept.', 'Seasoned hunters turn back when they find its {stuff}.'],
+  legendary: ['Mortal hunters were never meant to face it.', 'The world remembers its last awakening, and trembles.', 'Legends say only the bravest hunter will ever hold it.'],
+};
+// hand-written lines for some very common objects (used for some of their monsters, so not every one reads the same)
+const LORE_OBJECT = {
+  apple:   { common: 'A tiny troublemaker with a surprisingly sharp bite.', rare: 'An orchard legend, said to appear only beneath a blood-red moon.', legendary: 'Where its roots take hold, entire kingdoms wither. Even the gods fear the final harvest.' },
+  banana:  { common: 'Ripens into something far more dangerous than a slipping hazard.', legendary: 'When the great peel falls, empires slip. Every ruin on earth was once a banana\'s idea.' },
+  mug:     { common: 'Runs on pure caffeine. Has not slept since it was fired in the kiln.', legendary: 'It has drunk the dreams of every sleepless night. When its last drop falls, nobody will ever rest again.' },
+  cat:     { common: 'Not your pet. Something wearing your pet as a costume.', legendary: 'Older than the pyramids built in its honour. It allows the world to continue, for now.' },
+  dog:     { common: 'A very good monster. Mostly. It steals socks and hides them in the garden.', legendary: 'Its howl was the first sound the moon ever heard, and the moon has been afraid ever since.' },
+  toilet:  { common: 'It gurgles hungrily whenever someone forgets to close the lid.', legendary: 'Every drain on earth leads to its throne. One day it will flush, and the world will go with it.' },
+  phone:   { common: 'Feeds on your attention span. It is very, very well fed.', legendary: 'It holds every message ever sent. When it finally rings, the whole world will answer.' },
+  laptop:  { common: 'Installs updates at the worst possible moment out of pure spite.', legendary: 'It has read every password ever typed. It is simply deciding when to log out humanity.' },
+  sofa:    { common: 'Every coin, remote and snack you ever lost lives inside it.', legendary: 'Whole civilisations sat down on it for "just five minutes". None of them ever got up.' },
+  potted_plant: { common: 'Leans toward the window by day. Leans toward you by night.', legendary: 'Its roots have quietly wrapped around the planet. It is waiting for the gardeners to sleep.' },
+  sock:    { common: 'Floats out of the laundry at 3 a.m. looking for its missing half.', legendary: 'Every lost sock in history joined its army. The final laundry day is coming.' },
+  candle:  { common: 'Blow it out and it simply relights itself, angrier.', legendary: 'It was lit at the dawn of time. When it gutters, so will the sun.' },
+  rubber_duck: { common: 'Squeaks once for yes, twice for "you will regret this".', legendary: 'The tide obeys it. Sailors pray to it. It has never once blinked.' },
+};
+
+const LORE_COLOUR = h => {
+  // [hue, sat 0-100, light 0-100] → a colour word suited to monster lore
+  const [hu, sa, li] = h;
+  if (sa < 12) return li > 78 ? 'bone-white' : li < 22 ? 'pitch-black' : 'ash-grey';
+  if (li < 18) return 'shadow-dark';
+  const H = ((hu % 360) + 360) % 360;
+  return H < 14 || H >= 345 ? 'blood-red' : H < 40 ? 'ember-orange' : H < 65 ? 'golden' : H < 95 ? 'lime-green' : H < 160 ? 'emerald' : H < 195 ? 'sea-green' : H < 250 ? 'sapphire' : H < 290 ? 'violet' : 'rose-pink';
+};
+
+/* monsterLore(m): m needs obj (or cat), rarity, seed; optional photo.pal, name, abilities, fam */
+function monsterLore(m) {
+  const o = m.obj && OBJECTS[m.obj], cat = (o && o.cat) || m.cat || 'other';
+  const kit = LORE_KITS[cat] || LORE_KITS.other, rarity = RARITY[m.rarity] ? m.rarity : 'common';
+  const R = mulberry(hashStr('lore|' + (m.obj || cat) + '|' + rarity + '|' + (m.seed >>> 0)));
+  const pick = a => a[Math.floor(R() * a.length)];
+  const pal = m.photo && m.photo.pal, colour = pal && pal.conf === 'confident' && pal.primary ? LORE_COLOUR(pal.primary) : null;
+  const objName = o ? o.name.split(' / ')[0].toLowerCase() : (m.word || CATEGORY[cat].name.split(' /')[0]).toLowerCase();
+  const sig = (m.abilities && m.abilities[0] && m.abilities[0].name) || ((o && o.sig) || CATEGORY[cat].sig).name;
+  const title = (m.name && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : LEGEND_TITLES[m.fam] || 'the Nameless').replace(/^the /, 'the ');
+  const fill = t => t.replace(/\{(\w+)\}/g, (_, k) => ({ obj: objName, Obj: objName[0].toUpperCase() + objName.slice(1), colour, place: pick(kit.place), stuff: pick(kit.stuff), habit: pick(kit.habit), omen: pick(kit.omen), realm: pick(kit.realm), sig, title })[k] || '');
+  const own = o && LORE_OBJECT[m.obj] && LORE_OBJECT[m.obj][rarity];
+  let text;
+  if (own && R() < 0.5) text = own;
+  else {
+    const usable = LORE_TEMPLATES[rarity].filter(t => colour || !t.includes('{colour}'));
+    text = fill(pick(usable));
+  }
+  // a coda only after a one-sentence opening, so even Legendary lore stays at two sentences
+  if (LORE_CODA[rarity] && !own && !/[.!?] /.test(text)) text += ' ' + fill(pick(LORE_CODA[rarity]));
+  return text;
+}
+// text shown for a monster: its stored lore, or (monsters from before v0.4.2) the same deterministic result
+const loreOf = m => (m && m.lore) || monsterLore(m);
+// encyclopedia entry: the lore of the rarest form met so far, the same for everyone with that object
+function speciesLore(d, rarity) { return monsterLore({ obj: d.obj, cat: d.cat, rarity, seed: hashStr('species|' + d.key), fam: d.fam, name: d.monsterName }); }
+
+</script>
+<script>
 /* SNAPMON — platform layer. Everything that touches the device lives behind these small interfaces so a future
    native Android build (e.g. Capacitor + Android WebView) can replace the browser implementations without touching
    game logic, UI or AI code. See docs/ANDROID.md.
 
    Platform.camera  : open(video) / capture(video) → canvas / close(video) / isOpen() / supported() / describe(error)
+                      zoomInfo() / setZoom(value, video) / visibleRect(video)
    Platform.storage : get(key) / set(key, value) / remove(key)   (synchronous; returns false when storage is blocked)
    Platform.device  : online() / webgl() / webgpu() / wasm()
    Platform.assets  : url(path) → where packaged model/runtime files live (site on the web, APK assets natively)   */
@@ -2984,10 +3166,26 @@ for (const [id, name, cat, like] of LABEL_OBJECTS.extra) if (!OBJECTS[id]) OBJ(i
 
 const Platform = (() => {
   /* ---------- camera: live rear camera only (no gallery / file upload) ---------- */
-  let stream = null;
+  let stream = null, digital = 1;
+  const DIGITAL_MAX = 3; // software zoom limit: beyond 3× a 1280 px stream leaves too few pixels for recognition
+  const track = () => stream && stream.getVideoTracks()[0];
+  // resolves once the <video> is really showing camera frames (not merely "play() resolved")
+  function firstFrame(video, timeoutMs) {
+    return new Promise((resolve, reject) => {
+      let done = false;
+      const finish = ok => { if (done) return; done = true; clearTimeout(timer); for (const e of evs) video.removeEventListener(e, check); ok ? resolve() : reject(Object.assign(new Error('timeout'), { name: 'TimeoutError' })); };
+      const check = () => { if (video.videoWidth > 0 && video.readyState >= 2) finish(true); };
+      const evs = ['loadeddata', 'playing', 'resize', 'timeupdate'];
+      const timer = setTimeout(() => finish(false), timeoutMs);
+      for (const e of evs) video.addEventListener(e, check);
+      if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(() => check());
+      check();
+    });
+  }
   const camera = {
     supported: () => !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia),
     secure: () => window.isSecureContext !== false,
+    // resolves when the live preview is displaying frames; rejects on permission, hardware or timeout problems
     async open(video, { timeoutMs = 12000 } = {}) {
       if (!camera.secure()) throw Object.assign(new Error('insecure'), { kind: 'insecure' });
       if (!camera.supported()) throw Object.assign(new Error('unsupported'), { kind: 'unsupported' });
@@ -2998,18 +3196,43 @@ const Platform = (() => {
         if (e && (e.name === 'OverconstrainedError' || e.name === 'NotFoundError')) stream = await start({ video: true, audio: false }); // any camera will do
         else throw e;
       }
+      digital = 1;
       video.srcObject = stream; video.setAttribute('playsinline', ''); video.muted = true;
       await video.play();
+      await firstFrame(video, timeoutMs);
+    },
+    /* Zoom. Hardware zoom (MediaStreamTrack "zoom" constraint, supported by Chrome on many Android phones) changes the
+       camera stream itself. Otherwise a digital zoom crops the centre of the frame: the preview is scaled with CSS and
+       capture() crops exactly the same region, so recognition always sees what the viewfinder shows. */
+    zoomInfo() {
+      const t = track(), caps = t && t.getCapabilities ? t.getCapabilities() : {};
+      if (caps.zoom && caps.zoom.max > caps.zoom.min) {
+        const cur = (t.getSettings && t.getSettings().zoom) || caps.zoom.min;
+        return { kind: 'hardware', min: caps.zoom.min, max: Math.min(caps.zoom.max, caps.zoom.min * 10), step: caps.zoom.step || 0.1, value: cur };
+      }
+      return { kind: 'digital', min: 1, max: DIGITAL_MAX, step: 0.1, value: digital };
+    },
+    async setZoom(v, video) {
+      const z = camera.zoomInfo(); v = Math.max(z.min, Math.min(z.max, +v || z.min));
+      if (z.kind === 'hardware') { await track().applyConstraints({ advanced: [{ zoom: v }] }); return v; }
+      digital = v; if (video) video.style.transform = v > 1 ? `scale(${v})` : '';
+      return v;
+    },
+    // the part of the camera frame the viewfinder shows (object-fit: cover, then digital zoom), in video pixels
+    visibleRect(video) {
+      const vw = video.videoWidth, vh = video.videoHeight, cw = video.clientWidth || vw, ch = video.clientHeight || vh;
+      const k = Math.max(cw / vw, ch / vh), w = Math.min(vw, cw / k) / digital, h = Math.min(vh, ch / k) / digital;
+      return { x: (vw - w) / 2, y: (vh - h) / 2, w, h };
     },
     capture(video, maxSide = 1280) {
-      const w = video.videoWidth, h = video.videoHeight, s = Math.min(1, maxSide / Math.max(w, h));
-      const c = document.createElement('canvas'); c.width = Math.round(w * s); c.height = Math.round(h * s);
-      c.getContext('2d').drawImage(video, 0, 0, c.width, c.height);
+      const r = camera.visibleRect(video), s = Math.min(1, maxSide / Math.max(r.w, r.h));
+      const c = document.createElement('canvas'); c.width = Math.round(r.w * s); c.height = Math.round(r.h * s);
+      c.getContext('2d').drawImage(video, r.x, r.y, r.w, r.h, 0, 0, c.width, c.height);
       return c; // stays in memory only
     },
     close(video) {
       if (stream) stream.getTracks().forEach(t => t.stop());
-      stream = null; if (video) { video.pause && video.pause(); video.srcObject = null; }
+      stream = null; digital = 1; if (video) { video.pause && video.pause(); video.srcObject = null; video.style.transform = ''; }
     },
     isOpen: () => !!stream,
     // map browser errors to player-facing explanations
@@ -3062,7 +3285,7 @@ const Platform = (() => {
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.1';
+const GAME_VERSION = '0.4.2';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -3139,8 +3362,11 @@ function loadState() {
   if ((parsed.v || 1) > SAVE_VERSION) { saveBlocked = { reason: 'newer', version: parsed.v, raw }; return freshState(); }
   // keep an untouched copy of the old save before migrating it (one per old version)
   if ((parsed.v || 1) < SAVE_VERSION) { migratedFrom = parsed.v || 1; const bk = SAVE_KEY + '.backup.v' + (parsed.v || 1); if (!STORE.get(bk)) STORE.set(bk, raw); }
-  try { return migrate(parsed); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
+  try { return withLore(migrate(parsed)); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
 }
+// v0.4.2: monsters store their flavour text; older monsters get theirs once (deterministic, so it is the same text
+// they already showed after the update) and keep it from then on. Additive field: the save format stays 3.
+function withLore(s) { for (const m of s.monsters || []) if (!m.lore) m.lore = monsterLore(m); return s; }
 function saveState(S) {
   if (saveBlocked) return false; // never overwrite a save we could not read safely
   const ok = STORE.set(SAVE_KEY, JSON.stringify(S));
@@ -3179,7 +3405,7 @@ function hunterStats(S, weaponId = S.equipped) {
 function regen(S, now = Date.now()) { // gentle passive healing between hunts: 3% max HP per minute
   const mins = Math.max(0, (now - (S.lastTick || now)) / 60000);
   const max = hunterStats(S).maxHp;
-  if (S.hp < max && mins > 0) S.hp = Math.min(max, S.hp + Math.floor(mins * max * 0.03));
+  if (S.hp < max && mins > 0) S.hp = Math.min(max, S.hp + Math.floor(mins * max * MECH.regenPerMin));
   if (mins >= 1 / 3 || S.hp >= max) S.lastTick = now;
   S.hp = Math.min(S.hp, max);
 }
@@ -3245,20 +3471,35 @@ function hamming(a, b) {
   return d;
 }
 
+/* ---------- rule numbers ----------
+   The battle, capture and encounter numbers live here so the in-game Guide (src/guide.js) can show the real values.
+   Changing a number here changes the game AND the guide. */
+const MECH = {
+  enc: { base: 0.45, lens: 0.06, newObj: 0.15, sameObj: 0.12, perMiss: 0.08, pity: 4, pitySensor: 3, dupMult: 0.3, min: 0.02 },
+  status: { poisonPct: 0.07, poisonMin: 2, burnPct: 0.05, burnFlat: 2, burnMin: 2, burnAtk: 0.85, defdown: 0.5, atkup: 1.5, defup: 1.6, stunAcc: 0.15 },
+  weak: 1.5, resist: 0.7, firstStrike: 1.25,
+  enemy: { abilityRate: 0.5, healBelow: 0.4, healAmt: 0.25, crit: 0.06, critX: 1.5, dodgeBase: 0.04, dodgePerSpd: 0.01, dodgeMax: 0.2, missPerSpd: 0.01 },
+  energy: { start: 30, battery: 25, perAttack: 20, max: 100 },
+  capture: { hpWeight: 0.8, stun: 0.15, dot: 0.05, research: 0.08, lenscap: 0.06, variantMult: 0.85, min: 0.03, max: 0.97, enhancer: 0.25, escapeAfter: 3, escapeChance: 0.35, quantumRefund: 0.35 },
+  flee: { base: 0.55, perSpd: 0.03, slipper: 0.15, legendary: 0.2, min: 0.15, max: 0.95 },
+  afterWin: 0.2, defeatCoins: 0.15, defeatHp: 0.4, regenPerMin: 0.03, fang: 0.15,
+};
+
 /* ---------- encounters ---------- */
 function encounterChance(S, obj, photo) {
   const dup = !!(photo && photo.hash && S.enc.recentHashes.some(h => hamming(h, photo.hash) <= 6));
   const newCat = !S.stats.objsPhotographed[obj];   // exploring new kinds of object is rewarded
   const rc = S.enc.recentObjs, cat = obj;
-  let p = 0.45 + (has(S, 'lens1') ? 0.06 : 0) + (has(S, 'lens2') ? 0.06 : 0);
-  if (newCat) p += 0.15;
-  if (rc.length >= 2 && rc[rc.length - 1] === cat && rc[rc.length - 2] === cat) p -= 0.12;
-  p += S.enc.miss * 0.08;
-  const pityMax = has(S, 'sensor') ? 3 : 4;
+  const E = MECH.enc;
+  let p = E.base + (has(S, 'lens1') ? E.lens : 0) + (has(S, 'lens2') ? E.lens : 0);
+  if (newCat) p += E.newObj;
+  if (rc.length >= 2 && rc[rc.length - 1] === cat && rc[rc.length - 2] === cat) p -= E.sameObj;
+  p += S.enc.miss * E.perMiss;
+  const pityMax = has(S, 'sensor') ? E.pitySensor : E.pity;
   let pity = false;
   if (!dup && S.enc.miss >= pityMax) { p = 1; pity = true; }
-  if (dup) p *= 0.3;
-  return { p: clamp(p, 0.02, 1), dup, newCat, pity };
+  if (dup) p *= E.dupMult;
+  return { p: clamp(p, E.min, 1), dup, newCat, pity };
 }
 function rarityWeights(S) {
   const w = Object.fromEntries(RARITIES.map(r => [r.id, r.weight]));
@@ -3386,6 +3627,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
     label: word ? String(word).slice(0, 40) : null, conf: conf != null ? +(+conf).toFixed(2) : null,
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
+  m.lore = monsterLore(m); // flavour text for this object AND rarity, stored so it never changes (lore.js)
   return m;
 }
 function variantLabel(v) { return v === 'spectral' ? 'Spectral' : v === 'mutated' ? 'Mutated' : v === 'shiny' ? 'Prismatic' : ''; }
@@ -3419,27 +3661,28 @@ function newBattle(S, m) {
     m, turn: 1, over: false, result: null, usedPotion: false, enhancer: 0, captureFails: 0, weapon: S.equipped,
     enemy: { name: m.nick || m.name, hp: m.stats.hp, maxHp: m.stats.hp, atk: m.stats.atk, def: m.stats.def, spd: m.stats.spd, fam: m.fam, status: {}, cds: {} },
     hero: { name: 'Hunter', hp: Math.max(1, Math.min(S.hp, hs.maxHp)), maxHp: hs.maxHp, atk: hs.atk, def: hs.def, spd: hs.spd, crit: hs.crit,
-            energy: 30 + (charmOn(S, 'battery') ? 25 : 0), status: {} },
+            energy: MECH.energy.start + (charmOn(S, 'battery') ? MECH.energy.battery : 0), status: {} },
   };
-  B.enemyFirst = m.stats.spd > hs.spd * 1.25;
+  B.enemyFirst = m.stats.spd > hs.spd * MECH.firstStrike;
   return B;
 }
-function effMult(fam, el) { const f = FAMILIES[fam]; return f.weak.includes(el) ? 1.5 : f.resist.includes(el) ? 0.7 : 1; }
+function effMult(fam, el) { const f = FAMILIES[fam]; return f.weak.includes(el) ? MECH.weak : f.resist.includes(el) ? MECH.resist : 1; }
 function addStatus(tgt, s, turns, ev, who) {
   if (NEG.includes(s) && tgt.status.immune) { ev.push({ t: 'text', msg: `${tgt.name} resisted ${s}!` }); return; }
   tgt.status[s] = { t: Math.max(turns, (tgt.status[s] || {}).t || 0) };
   ev.push({ t: 'status', who, s });
 }
 const STATUS_TURNS = { poison: 3, burn: 3, stun: 1, defdown: 3, atkup: 4, defup: 4, immune: 3 };
-function effDef(u) { return u.def * (u.status.defdown ? 0.5 : 1) * (u.status.defup ? 1.6 : 1); }
-function effAtk(u) { return u.atk * (u.status.atkup ? 1.5 : 1) * (u.status.burn ? 0.85 : 1); }
+function effDef(u) { const X = MECH.status; return u.def * (u.status.defdown ? X.defdown : 1) * (u.status.defup ? X.defup : 1); }
+function effAtk(u) { const X = MECH.status; return u.atk * (u.status.atkup ? X.atkup : 1) * (u.status.burn ? X.burnAtk : 1); }
 function dmgCalc(atk, power, def, rng) { return atk * power * randRange(rng, 0.9, 1.1) * 25 / (25 + def); }
 
 function tickStatuses(B, who, ev) { // start of `who`'s turn. returns true if the unit loses its turn
   const u = B[who];
   let skip = false;
-  if (u.status.poison) { const d = Math.max(2, Math.round(u.maxHp * 0.07)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'poison' }); }
-  if (u.status.burn) { const d = Math.max(2, Math.round(u.maxHp * 0.05 + 2)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'burn' }); }
+  const X = MECH.status;
+  if (u.status.poison) { const d = Math.max(X.poisonMin, Math.round(u.maxHp * X.poisonPct)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'poison' }); }
+  if (u.status.burn) { const d = Math.max(X.burnMin, Math.round(u.maxHp * X.burnPct + X.burnFlat)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'burn' }); }
   if (u.status.stun) { skip = true; ev.push({ t: 'text', msg: `${u.name === 'Hunter' ? 'You are' : u.name + ' is'} stunned and can't move!`, who, stun: true }); }
   for (const k of Object.keys(u.status)) { u.status[k].t--; if (u.status[k].t <= 0) { delete u.status[k]; ev.push({ t: 'expire', who, s: k }); } }
   if (who === 'enemy') for (const k of Object.keys(B.enemy.cds)) if (B.enemy.cds[k] > 0) B.enemy.cds[k]--;
@@ -3460,7 +3703,7 @@ function heroStrike(B, S, special, rng = RNG) {
   ev.push({ t: 'act', who: 'hero', name: sp ? sp.name : 'Attack', fx: W.fx, special: !!sp });
   let total = 0;
   for (let i = 0; i < hits && !B.over; i++) {
-    const acc = (sp && sp.sure) || W.acc >= 1 ? 1 : W.acc - Math.max(0, e.spd - h.spd) * 0.01 + (e.status.stun ? 0.15 : 0);
+    const acc = (sp && sp.sure) || W.acc >= 1 ? 1 : W.acc - Math.max(0, e.spd - h.spd) * MECH.enemy.missPerSpd + (e.status.stun ? MECH.status.stunAcc : 0);
     if (rng() > acc) { ev.push({ t: 'miss', who: 'enemy' }); continue; }
     const def = effDef(e) * (1 - (W.pierce || 0));
     let dmg = dmgCalc(effAtk(h), pow, def, rng) * eff;
@@ -3473,10 +3716,10 @@ function heroStrike(B, S, special, rng = RNG) {
     if (!sp && W.stun && rng() < W.stun && e.hp > 0) addStatus(e, 'stun', 1, ev, 'enemy');
     if (sp && sp.effect && rng() < (sp.chance || 1) && e.hp > 0) addStatus(e, sp.effect, STATUS_TURNS[sp.effect], ev, 'enemy');
   }
-  if (charmOn(S, 'fang') && total > 0) { const heal = Math.max(1, Math.round(total * 0.15)); h.hp = Math.min(h.maxHp, h.hp + heal); ev.push({ t: 'heal', who: 'hero', amt: heal }); }
+  if (charmOn(S, 'fang') && total > 0) { const heal = Math.max(1, Math.round(total * MECH.fang)); h.hp = Math.min(h.maxHp, h.hp + heal); ev.push({ t: 'heal', who: 'hero', amt: heal }); }
   if (eff > 1 && total) ev.push({ t: 'text', msg: "It's super effective!" });
   else if (eff < 1 && total) ev.push({ t: 'text', msg: 'It resists your weapon...' });
-  h.energy = clamp(h.energy + (sp ? -sp.cost : 20), 0, 100);
+  h.energy = clamp(h.energy + (sp ? -sp.cost : MECH.energy.perAttack), 0, MECH.energy.max);
   checkEnd(B, ev);
   return ev;
 }
@@ -3487,8 +3730,8 @@ function enemyTurn(B, rng = RNG) {
   const ready = B.m.abilities.filter(a => !(e.cds[a.name] > 0));
   let ab = null;
   const healer = ready.find(a => a.effect === 'heal');
-  if (healer && e.hp < e.maxHp * 0.4) ab = healer;
-  else if (ready.length && rng() < 0.5) {
+  if (healer && e.hp < e.maxHp * MECH.enemy.healBelow) ab = healer;
+  else if (ready.length && rng() < MECH.enemy.abilityRate) {
     const pick = ready.filter(a => !(a.self && a.effect !== 'heal' && e.status[a.effect])).filter(a => a.effect !== 'heal' || e.hp < e.maxHp * 0.7);
     if (pick.length) ab = pick[Math.floor(rng() * pick.length)];
   }
@@ -3496,16 +3739,16 @@ function enemyTurn(B, rng = RNG) {
   else e.cds[ab.name] = ab.cd;
   ev.push({ t: 'act', who: 'enemy', name: ab.name, ability: ab.name !== 'Attack', ultimate: !!ab.ultimate });
   if (ab.self) {
-    if (ab.effect === 'heal') { const amt = Math.round(e.maxHp * 0.25); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
+    if (ab.effect === 'heal') { const amt = Math.round(e.maxHp * MECH.enemy.healAmt); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
     else addStatus(e, ab.effect, STATUS_TURNS[ab.effect], ev, 'enemy');
     return ev;
   }
   const hits = ab.hits || 1;
   for (let i = 0; i < hits && !B.over; i++) {
-    const dodge = clamp(0.04 + (h.spd - e.spd) * 0.01, 0, 0.2);
+    const dodge = clamp(MECH.enemy.dodgeBase + (h.spd - e.spd) * MECH.enemy.dodgePerSpd, 0, MECH.enemy.dodgeMax);
     if (rng() < dodge) { ev.push({ t: 'miss', who: 'hero' }); continue; }
     let dmg = dmgCalc(effAtk(e), ab.power, effDef(h), rng);
-    const crit = rng() < 0.06; if (crit) dmg *= 1.5;
+    const crit = rng() < MECH.enemy.crit; if (crit) dmg *= MECH.enemy.critX;
     dmg = Math.max(1, Math.round(dmg));
     h.hp = Math.max(0, h.hp - dmg);
     ev.push({ t: 'hit', who: 'hero', dmg, crit });
@@ -3519,12 +3762,13 @@ function heroTurnStart(B) { const ev = []; const skip = tickStatuses(B, 'hero', 
 
 function captureChance(S, B) {
   const m = B.m, e = B.enemy, r = RARITY[m.rarity];
-  let c = r.capture * (1 - 0.8 * (e.hp / e.maxHp));
-  if (e.status.stun) c += 0.15;
-  if (e.status.poison || e.status.burn) c += 0.05;
-  c += B.enhancer + (has(S, 'capture1') ? 0.08 : 0) + (has(S, 'capture2') ? 0.08 : 0) + (charmOn(S, 'lenscap') ? 0.06 : 0);
-  if (m.variant) c *= 0.85;
-  return clamp(c, 0.03, 0.97);
+  const C = MECH.capture;
+  let c = r.capture * (1 - C.hpWeight * (e.hp / e.maxHp));
+  if (e.status.stun) c += C.stun;
+  if (e.status.poison || e.status.burn) c += C.dot;
+  c += B.enhancer + (has(S, 'capture1') ? C.research : 0) + (has(S, 'capture2') ? C.research : 0) + (charmOn(S, 'lenscap') ? C.lenscap : 0);
+  if (m.variant) c *= C.variantMult;
+  return clamp(c, C.min, C.max);
 }
 function attemptCapture(B, S, rng = RNG) {
   const ev = [];
@@ -3535,13 +3779,14 @@ function attemptCapture(B, S, rng = RNG) {
   if (rng() < ch) { B.over = true; B.result = 'captured'; ev.push({ t: 'capture', ok: true }); ev.push({ t: 'end', result: 'captured' }); return { ev, used: true }; }
   B.captureFails++;
   ev.push({ t: 'capture', ok: false });
-  if (has(S, 'capture2') && rng() < 0.35) { S.items.trap++; ev.push({ t: 'text', msg: 'Quantum recovery: the trap rematerialised in your bag.' }); }
-  if (B.captureFails >= 3 && RARITY[B.m.rarity].tier >= 3 && rng() < 0.35) { B.over = true; B.result = 'escaped'; ev.push({ t: 'text', msg: `${B.enemy.name} tore free and vanished!` }); ev.push({ t: 'end', result: 'escaped' }); }
+  if (has(S, 'capture2') && rng() < MECH.capture.quantumRefund) { S.items.trap++; ev.push({ t: 'text', msg: 'Quantum recovery: the trap rematerialised in your bag.' }); }
+  if (B.captureFails >= MECH.capture.escapeAfter && RARITY[B.m.rarity].tier >= 3 && rng() < MECH.capture.escapeChance) { B.over = true; B.result = 'escaped'; ev.push({ t: 'text', msg: `${B.enemy.name} tore free and vanished!` }); ev.push({ t: 'end', result: 'escaped' }); }
   return { ev, used: true };
 }
 function fleeChance(S, B) {
-  let c = 0.55 + (B.hero.spd - B.enemy.spd) * 0.03 + (charmOn(S, 'slipper') ? 0.15 : 0) - (B.m.rarity === 'legendary' ? 0.2 : 0);
-  return clamp(c, 0.15, 0.95);
+  const F = MECH.flee;
+  let c = F.base + (B.hero.spd - B.enemy.spd) * F.perSpd + (charmOn(S, 'slipper') ? F.slipper : 0) - (B.m.rarity === 'legendary' ? F.legendary : 0);
+  return clamp(c, F.min, F.max);
 }
 function attemptFlee(B, S, rng = RNG) {
   const ev = [{ t: 'act', who: 'hero', name: 'Flee' }];
@@ -3571,7 +3816,7 @@ function useItem(B, S, id) {
       const real = Math.min(maxHp - (h ? h.hp : S.hp), 10); setHp((h ? h.hp : S.hp) + real); if (real) ev.push({ t: 'heal', who: 'hero', amt: real });
       break;
     }
-    case 'enhancer': if (!B) return { ev, ok: false }; B.enhancer += 0.25; ev.push({ t: 'text', msg: 'Capture field amplified! +25% capture chance.' }); break;
+    case 'enhancer': if (!B) return { ev, ok: false }; B.enhancer += MECH.capture.enhancer; ev.push({ t: 'text', msg: 'Capture field amplified! +25% capture chance.' }); break;
     case 'smoke': if (!B) return { ev, ok: false }; B.over = true; B.result = 'fled'; ev.push({ t: 'text', msg: 'Poof! You vanish in a cloud of smoke.' }); ev.push({ t: 'end', result: 'fled' }); break;
     default: return { ev, ok: false };
   }
@@ -3619,12 +3864,12 @@ function finishBattle(S, B, rng = RNG) {
       m.caughtAt = Date.now();
       S.monsters.push(m);
     }
-    S.hp = Math.min(hunterStats(S).maxHp, S.hp + Math.round(hunterStats(S).maxHp * 0.2));
+    S.hp = Math.min(hunterStats(S).maxHp, S.hp + Math.round(hunterStats(S).maxHp * MECH.afterWin));
   } else if (B.result === 'defeat') {
     S.stats.losses++;
-    const lost = Math.floor(S.coins * 0.15); S.coins -= lost;
+    const lost = Math.floor(S.coins * MECH.defeatCoins); S.coins -= lost;
     sum.lostCoins = lost;
-    S.hp = Math.round(hunterStats(S).maxHp * 0.4);
+    S.hp = Math.round(hunterStats(S).maxHp * MECH.defeatHp);
   } else if (B.result === 'fled' || B.result === 'escaped') {
     S.stats.flees++;
   }
@@ -4086,8 +4331,10 @@ const Lens = (() => {
         if (!CFG.forceCPU) { try { gl = await tf.setBackend('webgl'); await tf.ready(); } catch (e) { gl = false; } }
         if (!gl || tf.getBackend() !== 'webgl') { await tf.setBackend('cpu'); }
         await tf.ready();
-        st.backend = tf.getBackend();
+        st.backend = tf.getBackend(); st.lost = false;
         try { tf.env().set('WEBGL_DELETE_TEXTURE_THRESHOLD', 0); } catch (e) {} // free GPU textures eagerly on low-memory phones
+        // Android may take the GPU context away while the app is in the background: remember it, so the engine reloads
+        const ctx = glContext(); if (ctx && ctx.canvas && ctx.canvas.addEventListener) ctx.canvas.addEventListener('webglcontextlost', () => { st.lost = true; emit(); });
         st.progress = 'Loading recognition models…'; emit();
         const mnLocal = Platform.assets.url(CFG.localUrls.classifier), coLocal = Platform.assets.url(CFG.localUrls.detector);
         const [cls, det] = await Promise.allSettled([
@@ -4153,8 +4400,9 @@ const Lens = (() => {
     st.busy = true;
     try { return await recognizeOnce(src); }
     catch (e) {
-      // a lost or failing WebGL context: rerun on the CPU backend (same weights) once before giving up
-      if (st.backend !== 'webgl') throw e;
+      // a failing WebGL backend whose context is still alive: rerun on the CPU backend (same weights) once.
+      // With a lost context the weights are gone with it; the engine then reloads the models (Engine.recognize).
+      if (st.backend !== 'webgl' || !healthy()) throw e;
       await tf.setBackend('cpu'); await tf.ready(); st.backend = tf.getBackend(); emit();
       return await recognizeOnce(src);
     } finally { st.busy = false; }
@@ -4244,13 +4492,27 @@ const Lens = (() => {
     if (typeof tf === 'undefined') return;
     for (const k of Object.values(CFG.cacheKeys)) { try { await tf.io.removeModel(k); } catch (e) {} }
   }
-  // forget the loaded models (developer backend switch, or a clean reload after a failure)
+  function glContext() { try { const b = tf.backend(); return b && b.gpgpu && b.gpgpu.gl; } catch (e) { return null; } }
+  // false when the models can no longer run: the WebGL context was lost (background, GPU reset, memory pressure)
+  function healthy() {
+    if (st.state !== 'ready') return false;
+    if (st.backend !== 'webgl') return true;
+    const gl = glContext();
+    return !st.lost && !(gl && gl.isContextLost && gl.isContextLost());
+  }
+  // forget the loaded models (developer backend switch, or a clean reload after a failure). A WebGL backend whose
+  // context was lost is thrown away too, so the next load creates a fresh one; weights come back from the phone's cache.
   function reset() {
     for (const m of [st.classifier, st.detector]) { try { m && m.model && m.model.dispose && m.model.dispose(); } catch (e) {} }
-    Object.assign(st, { state: 'idle', error: '', classifier: null, detector: null, backend: '', busy: false }); loading = null; emit();
+    try {
+      const E = typeof tf !== 'undefined' && tf.engine && tf.engine();
+      const ctx = glContext(), lost = st.lost || !!(ctx && ctx.isContextLost && ctx.isContextLost());
+      if (E && E.registry && E.registry.webgl && lost) { try { E.registry.webgl.dispose(); } catch (e) {} delete E.registry.webgl; if (E.backendName === 'webgl') E.backendInstance = null; }
+    } catch (e) {}
+    Object.assign(st, { state: 'idle', error: '', classifier: null, detector: null, backend: '', busy: false, lost: false }); loading = null; emit();
   }
 
-  return { load, recognize, clearCache, reset, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
+  return { load, recognize, clearCache, reset, healthy, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
 })();
 
 </script>
@@ -4445,8 +4707,14 @@ const ClipLens = (() => {
     return { candidates: fused, decision: 'choose', reason: decision === 'auto' ? 'disagree' : decision === 'unknown' ? 'second-opinion' : 'unsure' };
   }
 
+  // is the worker still alive and holding a session? (it can be frozen or killed while the app is in the background)
+  async function ping(ms = 4000) {
+    if (st.state !== 'ready' || !st.worker) return false;
+    if (st.busy) return true;
+    try { const r = await call('ping' + (++st.seq), { type: 'ping', id: 'ping' + st.seq }, ms); return !!r.ok; } catch (e) { return false; }
+  }
   function reset() { if (st.worker) st.worker.terminate(); Object.assign(st, { state: 'off', error: '', info: null, worker: null, meta: null, busy: false, loading: null }); st.pending.clear(); }
-  return { load, recognize, fuse, judge, hybridDecision, reset, status: st, CFG };
+  return { load, recognize, fuse, judge, hybridDecision, reset, ping, status: st, CFG };
 })();
 
 </script>
@@ -4508,6 +4776,8 @@ const Engine = (() => {
   function load() {
     if (st.state === 'ready') return Promise.resolve(true);
     if (loading) return loading;
+    // after a failure, start both parts from scratch (Retry must really reinitialise, not reuse a broken part)
+    if (st.state === 'failed') { ClipLens.reset(); Lens.reset && Lens.reset(); }
     loading = (async () => {
       const t0 = performance.now();
       Object.assign(st, { state: 'loading', error: '', kind: '', stage: 'Preparing…', loaded: 0, total: 0 }); emit();
@@ -4523,11 +4793,14 @@ const Engine = (() => {
         }
         // one part after the other keeps peak memory and bandwidth lower on phones
         st.stage = 'Object detector and classifier'; emit();
+        const tL = performance.now(); st.stageMs = {};
         if (!(await Lens.load())) throw Object.assign(new Error(Lens.status.error || 'detector/classifier failed to load'), { part: 'lens' });
+        st.stageMs.lens = Math.round(performance.now() - tL);
         st.loaded = lensBytes; st.backends.lens = Lens.status.backend; st.stage = 'Object vocabulary model'; emit();
+        const tC = performance.now();
         ClipLens.CFG.onProgress = prog => { const got = Object.values(prog).reduce((a, p) => a + (p.loaded || 0), 0); st.loaded = lensBytes + Math.min(clipBytes, got); emit(); };
         if (!(await ClipLens.load())) throw Object.assign(new Error(ClipLens.status.error || 'vocabulary model failed to load'), { kind: ClipLens.status.errorKind, part: 'clip' });
-        st.backends.clip = ClipLens.status.info.backend;
+        st.backends.clip = ClipLens.status.info.backend; st.stageMs.clip = Math.round(performance.now() - tC);
         st.loaded = st.total; st.loadMs = Math.round(performance.now() - t0); st.state = 'ready'; st.stage = '';
         try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {} // ask the browser not to evict the models
       } catch (e) {
@@ -4539,27 +4812,65 @@ const Engine = (() => {
     return loading;
   }
 
+  /* Recovery. Android Chrome may freeze or discard parts of a page in the background: the GPU (WebGL) context can be
+     lost, taking the detector/classifier weights with it, and the TinyCLIP worker can be frozen or stopped. Before
+     v0.4.2 the engine still reported "ready" afterwards, so every hunt failed until the page was reloaded.
+     check() asks both parts whether they still work (called when the app returns to the foreground); recover() throws
+     both parts away and loads them again from the copies saved on the phone (no download). Only one recovery runs at a
+     time, and it waits for any load already in progress. A page Chrome has killed entirely restarts from scratch. */
+  let recovering = null;
+  async function check() {
+    if (st.state !== 'ready') return st.state !== 'failed';
+    const ok = Lens.healthy() && await ClipLens.ping();
+    if (!ok) { st.recoveries = (st.recoveries || 0) + 1; await recover('check'); }
+    return st.state === 'ready';
+  }
+  function recover(why) {
+    if (recovering) return recovering;
+    recovering = (async () => {
+      if (loading) { try { await loading; } catch (e) {} }
+      st.lastRecovery = { why, t: Date.now() };
+      ClipLens.reset(); Lens.reset && Lens.reset();
+      Object.assign(st, { state: 'idle', backends: {} }); emit();
+      const ok = await load();
+      recovering = null;
+      return ok;
+    })();
+    return recovering;
+  }
+
   const timeout = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(Object.assign(new Error('recognition timed out'), { kind: 'timeout' })), ms))]);
   // Recognise one photo with the standard pipeline. Returns { rec, prodOnly, clip }: rec carries the final decision.
   async function recognize(img, { timeoutMs = 45000 } = {}) {
     if (st.state !== 'ready') throw Object.assign(new Error('recognition engine not ready'), { kind: 'not-ready' });
-    const t0 = performance.now();
-    try {
-      const rec = await timeout(Lens.recognize(img), timeoutMs);
-      const prodOnly = { decision: rec.decision, reason: rec.reason, candidates: rec.candidates.slice() };
-      const clip = await timeout(ClipLens.recognize(rec.image, rec), timeoutMs);
-      const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
-      rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
-      rec.debug.decision = h.decision + (h.reason === 'disagree' ? ' (lenses disagree)' : h.reason === 'second-opinion' ? ' (second opinion)' : '');
-      const ms = Math.round(performance.now() - t0), backends = { lens: Lens.status.backend, clip: ClipLens.status.info.backend };
-      rec.debug.engine = { id: ENGINE_ID, backends, totalMs: ms };
-      perfAdd({ t: Date.now(), ms, lensMs: rec.debug.times && rec.debug.times.total, clipMs: clip.totalMs, clipInferMs: clip.inferMs, crops: clip.regions.length, backends });
-      return { rec, prodOnly, clip, ms };
-    } catch (e) {
-      // a crashed worker or a lost GPU context leaves the engine unusable: make the next attempt reload it
-      if (ClipLens.status.state !== 'ready') { st.state = 'failed'; emit(); }
-      throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind: (e && e.kind) || kindOf(e, 'run') });
+    try { return await recognizeOnce(img, timeoutMs); }
+    catch (e) {
+      const kind = (e && e.kind) || kindOf(e, 'run');
+      if (kind === 'busy') throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind });
+      // too slow: report it now (no second long wait), but reload in the background in case something is stuck
+      if (kind === 'timeout') { st.recoveries = (st.recoveries || 0) + 1; recover('timeout'); throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind }); }
+      // the engine may have lost its GPU context or worker (e.g. after the app was in the background): reload both
+      // parts from the phone's cache and try this photo once more, with the same models
+      st.recoveries = (st.recoveries || 0) + 1;
+      if (await recover('run: ' + kind)) {
+        try { return await recognizeOnce(img, timeoutMs); }
+        catch (e2) { st.state = 'failed'; st.error = String(e2.message || e2); st.kind = (e2 && e2.kind) || kindOf(e2, 'run'); emit(); throw Object.assign(e2 instanceof Error ? e2 : new Error(String(e2)), { kind: st.kind }); }
+      }
+      throw Object.assign(e instanceof Error ? e : new Error(String(e)), { kind: st.kind || kind });
     }
+  }
+  async function recognizeOnce(img, timeoutMs) {
+    const t0 = performance.now();
+    const rec = await timeout(Lens.recognize(img), timeoutMs);
+    const prodOnly = { decision: rec.decision, reason: rec.reason, candidates: rec.candidates.slice() };
+    const clip = await timeout(ClipLens.recognize(rec.image, rec), timeoutMs);
+    const h = ClipLens.hybridDecision(rec, clip, Lens.CFG);
+    rec.candidates = h.candidates; rec.decision = h.decision; rec.reason = h.reason;
+    rec.debug.decision = h.decision + (h.reason === 'disagree' ? ' (lenses disagree)' : h.reason === 'second-opinion' ? ' (second opinion)' : '');
+    const ms = Math.round(performance.now() - t0), backends = { lens: Lens.status.backend, clip: ClipLens.status.info.backend };
+    rec.debug.engine = { id: ENGINE_ID, backends, totalMs: ms };
+    perfAdd({ t: Date.now(), ms, lensMs: rec.debug.times && rec.debug.times.total, clipMs: clip.totalMs, clipInferMs: clip.inferMs, crops: clip.regions.length, backends });
+    return { rec, prodOnly, clip, ms };
   }
 
   // developer testing only (same models, reloads the engine):
@@ -4574,7 +4885,128 @@ const Engine = (() => {
     reload();
   }
 
-  return { load, recognize, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
+  return { load, recognize, check, recover, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
+})();
+
+</script>
+<script>
+/* SNAPMON — in-game Guide ("How to play"). Every number shown here is read from the game's own rule tables
+   (MECH, STATUS_TURNS and RARITIES in game.js/data.js; FAMILIES, WEAPONS, ITEMS, RESEARCH, CHARMS in data.js),
+   so the guide cannot drift from the rules: change a value there and the guide follows.
+   Deliberately not shown: hidden safety nets the game does not advertise. */
+'use strict';
+
+const Guide = (() => {
+  const SN = { poison: 'poison', burn: 'burn', stun: 'stun', defdown: 'DEF↓', atkup: 'ATK↑', defup: 'DEF↑', immune: 'immunity' };
+  const pct = x => Math.round(x * 100) + '%';
+  const pct1 = x => (Math.round(x * 1000) / 10) + '%';
+  const T = STATUS_TURNS, X = MECH.status, C = MECH.capture, E = MECH.enc;
+  const turns = n => n + (n === 1 ? ' turn' : ' turns');
+  const el = id => `<span style="color:${ELEMENTS[id].color}">${ELEMENTS[id].name}</span>`;
+  const famName = f => `<span style="color:${FAMILIES[f].color}">${FAMILIES[f].glyph} ${FAMILIES[f].name}</span>`;
+  const weaponsWith = test => WEAPON_ORDER.filter(w => test(WEAPONS[w])).map(w => WEAPONS[w].name);
+  const familiesUsing = eff => Object.keys(FAMILIES).filter(f => FAMILIES[f].abilities.some(a => a.effect === eff)).map(f => FAMILIES[f].name);
+  const totalWeight = RARITIES.reduce((a, r) => a + r.weight, 0);
+
+  const sections = [
+    { id: 'hunt', title: 'Hunting & encounters', body: () => `
+      <p>Photograph a real object with the Spirit Camera. The recognition engine runs on your phone and names the object; you can always reject a wrong answer before anything happens. Then the lens scans the object for a monster.</p>
+      <ul>
+        <li><b>Encounter chance:</b> ${pct(E.base)} per photo, <b>+${pct(E.newObj)}</b> for a kind of object you have never photographed, <b>+${pct(E.perMiss)}</b> for every quiet photo in a row.</li>
+        <li>After <b>${E.pity}</b> quiet photos in a row the next new photo is a guaranteed encounter (${E.pitySensor} with the Paranormal Sensor research).</li>
+        <li>Photographing the same kind of object three times in a row: <b>−${pct(E.sameObj)}</b>. The same view again: chance × ${E.dupMult}. Explore!</li>
+        <li>Wide-Angle and Night Vision lenses (research) add <b>+${pct(E.lens)}</b> each.</li>
+        <li>Your first ever monster is always a gentle Common one.</li>
+      </ul>` },
+    { id: 'combat', title: 'Combat basics', body: () => `
+      <p>Battles are turn-based: you act, then the monster acts. Each turn you can <b>Attack</b>, use your weapon's <b>Special</b>, use an <b>Item</b>, throw a <b>Snap Trap</b> or try to <b>Flee</b>. Using an item takes your turn.</p>
+      <ul>
+        <li><b>Damage</b> = attack × move power × 25 ÷ (25 + defence), varying ±10%. Defence never blocks everything: every hit does at least 1.</li>
+        <li><b>Who goes first:</b> you, unless the monster's speed is more than ${MECH.firstStrike}× yours.</li>
+        <li><b>Hitting:</b> each weapon has an accuracy; you lose 1 percentage point for every point of speed the monster has over you. The Pistol never misses.</li>
+        <li><b>Dodging:</b> you dodge a monster's hit ${pct(MECH.enemy.dodgeBase)} of the time, ${pct(MECH.enemy.dodgePerSpd)} more (or less) per point of speed you have over (or under) it, at most ${pct(MECH.enemy.dodgeMax)}.</li>
+        <li><b>Critical hits:</b> yours depend on the weapon (and charms); a monster crits ${pct(MECH.enemy.crit)} of the time for ×${MECH.enemy.critX} damage.</li>
+        <li><b>Monster abilities:</b> each monster has a signature move plus more moves the rarer it is (Legendaries add an Ultimate). After use, a move needs a few turns to recharge. A monster that can heal does so when below ${pct(MECH.enemy.healBelow)} HP.</li>
+      </ul>` },
+    { id: 'types', title: 'Damage types, weaknesses & resistances', body: () => `
+      <p>Every weapon deals one damage type. Hitting a weakness does <b>×${MECH.weak}</b> damage ("super effective"); a resistance takes only <b>×${MECH.resist}</b>. A monster's family decides its weaknesses.</p>
+      <div class="guide-table"><table><tr><th>Family</th><th>Weak to (×${MECH.weak})</th><th>Resists (×${MECH.resist})</th></tr>
+      ${Object.keys(FAMILIES).map(f => `<tr><td>${famName(f)}</td><td>${FAMILIES[f].weak.map(el).join(', ')}</td><td>${FAMILIES[f].resist.map(el).join(', ') || '–'}</td></tr>`).join('')}</table></div>
+      <p class="small muted">Weapons: ${WEAPON_ORDER.map(w => `${WEAPONS[w].name} = ${el(WEAPONS[w].el)}`).join(' · ')}. The family is shown next to every monster's name.</p>` },
+    { id: 'status', title: 'Status effects', body: () => `
+      <p>Effects tick and count down at the <b>start of the affected creature's turn</b>; "Lasts" below says what that means in practice. The same effect does not stack: applying it again only resets its timer (to the longer of the two). Different effects can be active at the same time.</p>
+      <div class="guide-cards">
+        ${statusCard('POISON', 'poison', `Loses ${pct(X.poisonPct)} of max HP (at least ${X.poisonMin}) at the start of each of its turns.`, `damage at the start of its next ${turns(T.poison)}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance.`, [`Monsters: ${familiesUsing('poison').join(', ')}`, `Weapons: Cursed Dagger hits (${pct(WEAPONS.dagger.poison)}, only if not already poisoned) and Hex Flurry`])}
+        ${statusCard('BURN', 'burn', `Loses ${pct(X.burnPct)} of max HP + ${X.burnFlat} at the start of each of its turns, and deals ${pct(1 - X.burnAtk)} less damage.`, `damage at the start of its next ${turns(T.burn)}; weaker attacks for its next ${T.burn - 1}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance (not added again if also poisoned).`, [`Monsters: ${familiesUsing('burn').join(', ')}`, `Weapons: Arcane Wand special (Arcane Nova)`])}
+        ${statusCard('STUN', 'stun', 'Loses its next turn.', T.stun === 1 ? 'its next turn' : `its next ${turns(T.stun)}`, `No cure: it wears off after one turn. A stunned monster is ${pct(X.stunAcc)} easier to hit and +${pct(C.stun)} easier to capture.`, [`Monsters: ${familiesUsing('stun').join(', ')}`, `Weapons: Thunder Hammer hits (${pct(WEAPONS.hammer.stun)}) and Thunderclap`])}
+        ${statusCard('DEF↓', 'defdown', `Defence is halved (×${X.defdown}): it takes more damage.`, `the opponent's next ${T.defdown - 1} attacks against it`, 'Cured by an Antidote.', [`Monsters: ${familiesUsing('defdown').join(', ')}`, `Weapons: Rusty Hunter Sword special (Rusty Cleave)`])}
+        ${statusCard('ATK↑', 'atkup', `Deals ×${X.atkup} damage.`, `its next ${T.atkup - 1} attacks`, 'Yours comes from a Strength Potion; monsters may power themselves up too.', [`Monsters: ${familiesUsing('atkup').join(', ')}`])}
+        ${statusCard('DEF↑', 'defup', `Defence ×${X.defup}: takes less damage.`, `the opponent's next ${T.defup} attacks`, 'Yours comes from a Defense Potion; some monsters raise their own defence.', [`Monsters: ${familiesUsing('defup').join(', ')}`])}
+        ${statusCard('IMMUNE', 'immune', 'Cannot be poisoned, burned, stunned or weakened (DEF↓).', `the monster's next ${turns(T.immune)}`, 'Given by an Antidote, together with the cure and +10 HP.', [])}
+      </div>
+      <p class="small muted">Example: your attack poisons a monster. It then loses HP at the start of each of its next ${T.poison} turns, and the poison is gone.</p>` },
+    { id: 'energy', title: 'Energy & weapon specials', body: () => `
+      <p>You start each battle with <b>${MECH.energy.start} energy</b> (+${MECH.energy.battery} with the Spare Battery charm). Every normal attack adds <b>+${MECH.energy.perAttack}</b> (up to ${MECH.energy.max}). A Special spends energy for a powerful move:</p>
+      <div class="guide-table"><table><tr><th>Weapon</th><th>Normal attack</th><th>Special (cost)</th></tr>
+      ${WEAPON_ORDER.map(w => { const W = WEAPONS[w], sp = W.special; return `<tr><td>${W.name}<br><span class="muted small">${el(W.el)}</span></td><td class="small">${W.hits ? W.hits + ' hits × ' + pct(W.hitPow) : '1 hit'} · accuracy ${pct(W.acc)} · crit ${pct(W.crit)} (×${W.critX})${W.pierce ? ` · ignores ${pct(W.pierce)} of defence` : ''}${W.poison ? ` · ${pct(W.poison)} poison` : ''}${W.stun ? ` · ${pct(W.stun)} stun` : ''}</td><td class="small"><b>${sp.name}</b> (${sp.cost}): ${pct(sp.power)} power${sp.hits ? ' × ' + sp.hits + ' hits' : ''}${sp.sure ? ', never misses' : ''}${sp.effect ? `, ${pct(sp.chance || 1)} ${SN[sp.effect]}` : ''}</td></tr>`; }).join('')}</table></div>
+      <p class="small muted">Each upgrade level in the Arsenal adds 15% to the weapon's attack.</p>` },
+    { id: 'capture', title: 'Capturing monsters', body: () => `
+      <p>Throw a <b>Snap Trap</b> (uses one trap and your turn). Captured monsters join your collection and can become your hunting buddy.</p>
+      <ul>
+        <li>The base chance depends on rarity (below) and <b>rises as the monster's HP falls</b>: at full HP you get only ${pct(1 - C.hpWeight)} of the base chance, near 0 HP almost all of it.</li>
+        <li><b>Stunned:</b> +${pct(C.stun)} · <b>poisoned or burning:</b> +${pct(C.dot)} · <b>Capture Enhancer:</b> +${pct(C.enhancer)} for the battle · <b>Reinforced / Quantum Traps</b> research: +${pct(C.research)} each · <b>Spirit Lens Cap</b> charm: +${pct(C.lenscap)}.</li>
+        <li>Variants (Spectral, Mutated, Prismatic) are harder: chance × ${C.variantMult}.</li>
+        <li>The chance is always between ${pct(C.min)} and ${pct(C.max)}. Epic and Legendary monsters may break free and vanish after ${C.escapeAfter} failed traps (${pct(C.escapeChance)} each time).</li>
+        <li>With Quantum Traps, a failed trap comes back ${pct(C.quantumRefund)} of the time. Monster Analysis research shows the exact odds in battle.</li>
+      </ul>` },
+    { id: 'rarity', title: 'Rarity', body: () => `
+      <p>When a monster appears, its rarity is rolled. The object you photographed does not change these odds.</p>
+      <div class="guide-table"><table><tr><th>Rarity</th><th>Chance</th><th>Stats</th><th>Base capture</th><th>Level vs you</th><th>Rewards</th></tr>
+      ${RARITIES.map(r => `<tr><td style="color:${r.color}"><b>${r.name}</b></td><td>${pct1(r.weight / totalWeight)}</td><td>×${r.mult} (HP ×${r.hpMult})</td><td>${pct(r.capture)}</td><td>${r.lvl[0] === r.lvl[1] ? (r.lvl[0] ? '+' + r.lvl[0] : 'same') : `+${r.lvl[0]} to +${r.lvl[1]}`}</td><td>×${r.xp}</td></tr>`).join('')}</table></div>
+      <ul class="small"><li>Research: the Ectoplasmic Lens makes Rare, Epic and Legendary 40% more likely; the Legend Tracker doubles Legendary odds.</li>
+        <li>Rarer monsters know more abilities; Legendaries also have an Ultimate and a title.</li>
+        <li>Variants (unlocked by research): Spectral and Mutated forms (9% each) change the monster's family; Prismatic colours (1 in 12) give +8% stats and double coins.</li></ul>` },
+    { id: 'levels', title: 'Levels & scaling', body: () => `
+      <ul>
+        <li>Win or capture to earn XP. Each hunter level: <b>+12 max HP, +2 attack, +1 defence, +1 speed</b>. A second charm slot opens at level 5.</li>
+        <li>Monsters appear at about your level, higher for rarer ones (table above). Below level 3, monsters are at most one level above you; Commons are sometimes one level below.</li>
+        <li>XP needed for the next level grows with each level.</li>
+      </ul>` },
+    { id: 'rewards', title: 'Rewards, defeat & healing', body: () => `
+      <ul>
+        <li><b>Victory:</b> XP, coins and materials (more for rarer, higher-level monsters); sometimes a potion or trap, a new weapon or a charm. You recover ${pct(MECH.afterWin)} of your max HP.</li>
+        <li><b>Capture:</b> slightly less XP, half the coins and materials, but you keep the monster. First capture of a species: +3 RP.</li>
+        <li><b>New species discovered:</b> research points (more for rare finds).</li>
+        <li><b>Defeat:</b> you lose ${pct(MECH.defeatCoins)} of your coins and wake up with ${pct(MECH.defeatHp)} HP. Monsters are never lost.</li>
+        <li><b>Fleeing:</b> ${pct(MECH.flee.base)} chance, +${pct(MECH.flee.perSpd)} per point of speed over the monster's, +${pct(MECH.flee.slipper)} with Haste Slippers, −${pct(MECH.flee.legendary)} against Legendaries (between ${pct(MECH.flee.min)} and ${pct(MECH.flee.max)}). A Smoke Bomb always works.</li>
+        <li><b>Resting:</b> you heal ${pct(MECH.regenPerMin)} of your max HP per minute between battles.</li>
+      </ul>` },
+    { id: 'items', title: 'Items', body: () => `
+      <div class="guide-table"><table><tr><th>Item</th><th>Effect</th><th>Shop</th></tr>
+      ${ITEM_ORDER.map(id => `<tr><td>${ITEMS[id].name}</td><td class="small">${ITEMS[id].desc}${id === 'antidote' ? ` Also immunity for the monster's next ${turns(T.immune)}.` : ''}</td><td class="small">${ITEMS[id].price} coins</td></tr>`).join('')}</table></div>
+      <p class="small muted">Items can also be crafted from materials in Gear → Shop &amp; Craft. Field Medicine research makes healing potions 30% stronger.</p>` },
+    { id: 'gear', title: 'Gear, charms & hunting buddy', body: () => `
+      <ul>
+        <li><b>Weapons</b> unlock with coins and materials (or drop from beaten monsters) and can be upgraded up to level 5 (8 with Master Smithing).</li>
+        <li><b>Charms</b> drop from beaten monsters; equip up to your slot count: ${CHARM_ORDER.map(c => `${CHARMS[c].name} (${CHARMS[c].desc.toLowerCase()})`).join(', ')}.</li>
+        <li><b>Hunting buddy:</b> one captured monster can follow you, adding 8% of its HP and 12% of its attack and defence to yours.</li>
+      </ul>` },
+    { id: 'research', title: 'Research', body: () => `
+      <p>Spend research points (RP) in the Lab. Some research needs an earlier one first.</p>
+      <div class="guide-table"><table><tr><th>Research</th><th>RP</th><th>Effect</th></tr>
+      ${RESEARCH.map(r => `<tr><td>${r.name}</td><td>${r.cost}</td><td class="small">${r.desc}${r.req ? ` <span class="muted">(needs ${RESEARCH_BY_ID[r.req].name})</span>` : ''}</td></tr>`).join('')}</table></div>` },
+  ];
+
+  function statusCard(label, cls, does, lasts, counter, sources) {
+    return `<div class="guide-status"><span class="st ${cls}">${label}</span><div class="small"><b>Effect:</b> ${does}<br><b>Lasts:</b> ${lasts}<br><b>Counter:</b> ${counter}${sources.length ? `<br><span class="muted">${sources.join(' · ')}</span>` : ''}</div></div>`;
+  }
+  // accordion: each section expands on its own; the open one is remembered while the guide is open
+  function html(open) {
+    return `<div class="sheet-head"><h2>Guide</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+      <p class="small muted" style="margin:0">How SNAPMON works. Numbers come straight from the game's rules.</p>
+      ${sections.map(s => `<details class="guide-sec" data-sec="${s.id}"${s.id === open ? ' open' : ''}><summary>${s.title}</summary><div class="guide-body">${s.body()}</div></details>`).join('')}`;
+  }
+  return { html, sections };
 })();
 
 </script>
@@ -4643,6 +5075,7 @@ function renderTop() {
     <div class="top-right">
       <div class="wallet"><span class="c">${S.coins}¢</span><span class="r">${S.rp} RP</span></div>
       <button class="icon-btn" data-act="mute" aria-label="${S.settings.muted ? 'Unmute sound' : 'Mute sound'}">${S.settings.muted ? ICON.mute : ICON.sound}</button>
+      <button class="icon-btn guide-btn" data-act="guide" aria-label="Guide: how to play">?</button>
       <button class="icon-btn" data-act="settings" aria-label="Settings and save data">${ICON.cog}</button>
     </div>`;
 }
@@ -4709,21 +5142,48 @@ async function openCamera() {
   closeSheet();
   // first hunt on this phone: say once what will be downloaded (this is information, not a choice of recogniser)
   if (Engine.status.state !== 'ready' && !S.settings.engineCached && !ui.engineNoticeOk) return showEngineNotice();
-  Engine.load(); // start (or resume) loading the engine while the player frames the shot
+  const t0 = performance.now();
   $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
     <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
-    <div class="cam-frame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
-      <div class="cam-status" id="camStatus">Starting camera…</div></div>
+    <div class="cam-frame" id="camFrame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
+      <div class="cam-status" id="camStatus"><span><i class="spin"></i> Starting camera…</span></div></div>
+    <div class="zoom-row" id="zoomRow" hidden><button class="btn small ghost" data-act="camZoom" data-arg="-" aria-label="Zoom out">−</button>
+      <input type="range" id="zoomRange" aria-label="Zoom" min="1" max="3" step="0.1" value="1"><button class="btn small ghost" data-act="camZoom" data-arg="+" aria-label="Zoom in">+</button><span class="small num" id="zoomVal">1.0×</span></div>
     <p class="muted small" style="text-align:center;margin:0">Fill the frame with one real object. The photo is analysed on this phone and never saved.</p>
     <div class="cam-controls"><button class="shutter" id="camShutter" data-act="camSnap" aria-label="Take photo" disabled>SNAP</button></div>
   </div></div>`;
   const v = $('#camVideo');
   try {
-    await Platform.camera.open(v);
-    if (!$('#camVideo')) { Platform.camera.close(v); return; } // closed while starting
-    const st = $('#camStatus'); if (st) st.hidden = true;
+    await Platform.camera.open(v); // resolves once the preview is really showing frames
+    if ($('#camVideo') !== v) { Platform.camera.close(v); return; } // closed (or reopened) while starting
+    const st = $('#camStatus'); if (st) st.remove();
     const btn = $('#camShutter'); if (btn) btn.disabled = false;
-  } catch (e) { Platform.camera.close(v); showCameraError(e); }
+    setupZoom(v);
+    ui.camStartMs = Math.round(performance.now() - t0);
+    // the engine starts only once the preview is live, so its start-up (heavy on the CPU path) never delays the camera
+    requestAnimationFrame(() => setTimeout(() => { if (Engine.status.state !== 'ready') Engine.load(); }, 60));
+  } catch (e) { Platform.camera.close(v); if ($('#camVideo') === v) showCameraError(e); }
+}
+// zoom controls: buttons, slider and two-finger pinch on the viewfinder; hidden if the camera offers no zoom at all
+function setupZoom(v) {
+  const z = Platform.camera.zoomInfo(), row = $('#zoomRow'), range = $('#zoomRange'), frame = $('#camFrame');
+  if (!row || !z || z.max <= z.min) return;
+  Object.assign(range, { min: z.min, max: z.max, step: z.step, value: z.value });
+  row.hidden = false; row.dataset.kind = z.kind;
+  let busy = false, want = null;
+  const apply = async val => {
+    want = val; if (busy) return; busy = true;
+    try { while (want != null) { const x = want; want = null; const got = await Platform.camera.setZoom(x, v); range.value = got; $('#zoomVal').textContent = (got / z.min).toFixed(1) + '×'; } }
+    catch (e) { /* the camera refused this zoom level: keep the previous one */ }
+    busy = false;
+  };
+  ui.camZoom = { info: z, apply, get value() { return +range.value; } };
+  range.addEventListener('input', () => apply(+range.value));
+  let pinch = null;
+  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  frame.addEventListener('touchstart', e => { if (e.touches.length === 2) pinch = { d: dist(e.touches), z: +range.value }; }, { passive: true });
+  frame.addEventListener('touchmove', e => { if (pinch && e.touches.length === 2) { e.preventDefault(); apply(pinch.z * dist(e.touches) / pinch.d); } }, { passive: false });
+  frame.addEventListener('touchend', e => { if (e.touches.length < 2) pinch = null; });
 }
 function showCameraError(e) {
   const d = Platform.camera.describe(e);
@@ -4733,12 +5193,12 @@ function showCameraError(e) {
     <button class="btn primary block" data-act="openCamera">Try again</button>
     <button class="btn ghost block" data-act="closeOverlay">Back</button></div></div>`;
 }
-function closeCamera() { Platform.camera.close($('#camVideo')); $('#overlay').innerHTML = ''; render(); }
+function closeCamera() { Platform.camera.close($('#camVideo')); ui.camZoom = null; $('#overlay').innerHTML = ''; render(); }
 function camSnap() {
   const v = $('#camVideo'); if (!v || !v.videoWidth) return;
   SFX.shutter();
-  const canvas = Platform.camera.capture(v);
-  Platform.camera.close(v);
+  const canvas = Platform.camera.capture(v); // exactly the region the viewfinder shows (including zoom)
+  Platform.camera.close(v); ui.camZoom = null;
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
 }
 
@@ -4788,7 +5248,23 @@ Engine.onChange(() => {
   const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
   const pr = $('#engineProgress'); if (pr) pr.outerHTML = engineProgressHTML();
   const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
-  if ($('#sheet').innerHTML.includes('Recognition engine')) settingsSheet();
+  // Settings: only the engine row and the developer readouts change; the sheet itself is never rebuilt for progress
+  if (!ui.engineRowQueued && $('#engineRow')) {
+    ui.engineRowQueued = true;
+    requestAnimationFrame(() => {
+      ui.engineRowQueued = false;
+      // keep what the player is looking at in place: the row never shrinks while Settings is open, and when it grows
+      // while scrolled out of view above, the sheet scrolls by the same amount
+      const row = $('#engineRow');
+      if (row) {
+        const sh = row.closest('.sheet'), h0 = row.offsetHeight, above = sh && row.getBoundingClientRect().top < sh.getBoundingClientRect().top;
+        row.style.minHeight = h0 + 'px'; row.innerHTML = engineRowHTML();
+        const d = row.offsetHeight - h0; if (above && d > 0) sh.scrollTop += d;
+      }
+      const b = $('#devBackends'); if (b) b.textContent = backendsText();
+      const l = $('#devLoadMs'); if (l) l.textContent = loadTimesText();
+    });
+  }
 });
 
 /* ---------- recognition flow: photo → Hybrid engine → (pick among AI suggestions) → encounter scan ----------
@@ -4827,7 +5303,7 @@ async function recognizeFlow() {
   catch (e) { return fail(e.kind); }
   clearInterval(clock);
   if (ui.pending !== p) return;
-  p.rec = r.rec; p.clip = r.clip; p.prodOnly = { decision: r.prodOnly.decision, reason: r.prodOnly.reason, top: ftTop(r.prodOnly) };
+  p.rec = r.rec; p.clip = r.clip; p.prodOnly = { decision: r.prodOnly.decision, reason: r.prodOnly.reason, top: ftTop(r.prodOnly) }; p.prodCands = r.prodOnly.candidates;
   if (!S.settings.engineCached) { S.settings.engineCached = true; persist(); }
   if (devOn() && S.settings.fieldTest) return showFieldTest(p);
   if (p.rec.decision === 'unknown') return showUnknown(p);
@@ -4931,7 +5407,8 @@ function perfHTML() {
   const q = (a, f) => { a = a.filter(x => x != null).sort((x, y) => x - y); return a.length ? a[Math.min(a.length - 1, Math.floor(a.length * f))] : '–'; };
   const rows = Object.entries(groups).map(([k, l]) => `<tr><td>${k}</td><td>${l.length}</td><td>${q(l.map(e => e.clipInferMs), .5)} / ${q(l.map(e => e.clipInferMs), .9)}</td><td>${q(l.map(e => e.clipMs), .5)}</td><td>${q(l.map(e => e.ms), .5)} / ${q(l.map(e => e.ms), .9)}</td></tr>`).join('');
   return `<div class="debug small"><b>Recognition timings (ms, every hunt)</b>${rows ? `<table><tr><th></th><th>photos</th><th>TinyCLIP model median / p90</th><th>TinyCLIP total median</th><th>whole engine median / p90</th></tr>${rows}</table>` : '<p class="muted" style="margin:4px 0 0">No photos recognised yet.</p>'}</div>
-    <div class="row wrap"><button class="btn small grow" data-act="perfExport">Copy timings (${log.length})</button><button class="btn small" data-act="perfClear">Clear timings</button></div>`;
+    <div class="row wrap"><button class="btn small grow" data-act="perfExport">Copy timings (${log.length})</button><button class="btn small" data-act="perfClear">Clear timings</button></div>
+    <div class="row wrap"><button class="btn small grow" data-act="rejExport">Copy "Wrong object" reports (${rejLog().length})</button></div>`;
 }
 
 const ENGINE_FAIL = "SnapMon's recognition engine couldn't run on this device. Please check for system updates or try again.";
@@ -4973,22 +5450,77 @@ function candLine(c) {
   const o = OBJECTS[c.obj], name = o ? o.name : CATEGORY[c.cat].name;
   const same = o && o.name.toLowerCase() === String(c.label).toLowerCase();
   // a rule-5 suggestion carries a raw CLIP share, not a confidence, so it shows no percentage
-  const score = c.src === 'clip' && /^(5|5b|6)$/.test(String(c.rule)) ? 'second opinion' : Math.round(c.conf * 100) + '%';
+  const score = c.src === 'clip' && /^(5|5b|6|alt)$/.test(String(c.rule)) ? 'second opinion' : Math.round(c.conf * 100) + '%';
   return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${score}</span>`;
 }
 const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
+/* An automatic identification is never committed silently: the player sees what the lens found and has a few
+   seconds to say "Wrong object" BEFORE anything is rolled. The countdown pauses as soon as the screen is touched. */
+const CONFIRM_MS = 3500;
 function showIdentified(p, i) {
   const c = p.rec.candidates[i];
   SFX.click();
-  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px">
+  const auto = !S.settings.debugLens;
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px" id="identRoot">
     <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="card ident"><span class="e">${catIcon(c)}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
+    ${auto ? `<div class="bar confirm-bar" aria-hidden="true"><i id="confirmBar"></i></div><p class="muted small" style="text-align:center;margin:0" id="confirmHint">Scanning for monsters in a moment… Not right? Tap <b>Wrong object</b>.</p>` : ''}
+    <div class="row"><button class="btn primary grow" data-act="pickCand" data-arg="${i}">Scan for monsters</button><button class="btn" data-act="wrongObject" data-arg="${i}">Wrong object</button></div>
     ${debugHTML(p.rec)}
-    ${S.settings.debugLens ? `<button class="btn primary block" data-act="pickCand" data-arg="${i}">Scan for monsters</button>` : '<p class="muted small" style="text-align:center">Scanning for supernatural activity…</p>'}
   </div></div>`;
   drawDetections(p, i);
-  if (!S.settings.debugLens) setTimeout(() => { if (ui.pending === p && !p.scanning) scan(i); }, 1100);
+  if (!auto) return;
+  const t0 = Date.now(), root = $('#identRoot');
+  p.confirm = { paused: false };
+  root.addEventListener('pointerdown', ev => { if (!ev.target.closest('[data-act]') && !p.confirm.paused) { p.confirm.paused = true; const h = $('#confirmHint'); if (h) h.textContent = 'Paused. Tap Scan for monsters when you are ready, or Wrong object.'; } });
+  const tick = () => {
+    if (ui.pending !== p || p.scanning || p.rejected || !$('#confirmBar')) return;
+    if (p.confirm.paused) { $('#confirmBar').style.width = '0%'; return; }
+    const f = (Date.now() - t0) / CONFIRM_MS;
+    $('#confirmBar').style.width = Math.min(100, f * 100) + '%';
+    if (f >= 1) return scan(i);
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+/* "Wrong object": nothing is rolled or created for a rejected identification. The player may pick one of the other
+   objects the models themselves proposed for THIS photo (never free text, never arbitrary objects), or retake it. */
+const REJ_KEY = 'snapmon.rejections.v1', ALT_MIN = 0.05, ALT_MAX = 4;
+const rejLog = () => { try { return JSON.parse(Platform.storage.get(REJ_KEY) || '[]'); } catch (e) { return []; } };
+function altCandidates(p) {
+  const out = [], seen = new Set(p.rejected || []), add = c => { if (!c || !c.obj || !OBJECTS[c.obj] || seen.has(c.obj) || out.length >= ALT_MAX) return; seen.add(c.obj); out.push(c); };
+  for (const c of p.rec.candidates) add(c);
+  for (const c of p.prodCands || []) if (c.conf >= Lens.CFG.MIN_CONF) add(c);
+  for (const r of (p.clip && p.clip.regions) || []) for (const x of r.ranked || []) if (x.p >= ALT_MIN) add({ label: x.label, obj: x.obj, cat: OBJECTS[x.obj] && OBJECTS[x.obj].cat, conf: x.p, box: r.box, src: 'clip', rule: 'alt' });
+  return out;
+}
+function wrongObject(p, rejectedObjs) {
+  p.rejected = [...new Set([...(p.rejected || []), ...rejectedObjs])];
+  p.rejections = (p.rejections || 0) + 1;
+  try { // local developer/field-test feedback only; photos are never stored or sent anywhere
+    const log = JSON.parse(Platform.storage.get(REJ_KEY) || '[]');
+    log.push({ t: Date.now(), v: GAME_VERSION, engine: Engine.ID, rejected: rejectedObjs, decision: p.rec.decision, reason: p.rec.reason, round: p.rejections,
+      shown: p.rec.candidates.slice(0, 4).map(c => ({ obj: c.obj, conf: +(+c.conf).toFixed(3), src: c.src })) });
+    Platform.storage.set(REJ_KEY, JSON.stringify(log.slice(-300)));
+  } catch (e) {}
+  // one round of alternatives per photo; rejecting those too means: retake
+  const alts = p.rejections > 1 ? [] : altCandidates(p);
+  p.alts = alts;
+  $('#overlay').innerHTML = alts.length ? `<div class="overlay"><div class="overlay-inner" style="gap:12px">
+    <div class="sheet-head"><h2>Which one is it?</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
+    <p class="muted small" style="margin:0">These are the other possibilities the lens found in this photo. If none of them is right, take another photo.</p>
+    <div class="photo-frame" id="lensFrame"></div>
+    <div class="stack">${alts.map((c, i) => `<button class="list-item cand" data-act="pickAlt" data-arg="${i}" style="text-align:left">
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
+    <button class="btn primary block" data-act="retakePhoto">None of these: retake photo</button>
+  </div></div>` : `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
+    <div class="photo-frame" id="lensFrame"></div>
+    <h2 style="font-size:26px">SnapMon couldn't identify this object</h2>
+    <p>The lens has no other credible suggestion for this photo. Try again: get closer, fill the frame with the object, and use good light.</p>
+    <button class="btn primary block" data-act="retakePhoto">Retake photo</button>
+    <button class="btn ghost block" data-act="cancelPhoto">Back</button></div></div>`;
+  drawDetections(p, -1);
 }
 function showChoices(p) {
   const rec = p.rec, multi = rec.reason === 'multiple';
@@ -4998,7 +5530,7 @@ function showChoices(p) {
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">
       <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
-    <button class="btn ghost block" data-act="openCamera">None of these: take another photo</button>
+    <button class="btn block" data-act="wrongObject" data-arg="all">Wrong object: none of these</button>
     ${debugHTML(rec)}
   </div></div>`;
   drawDetections(p);
@@ -5048,7 +5580,8 @@ function clipDebugHTML() {
 
 async function scan(i) {
   const p = ui.pending; if (!p || !p.rec || p.scanning) return;
-  const c = p.rec.candidates[+i]; if (!c) return;
+  const c = typeof i === 'object' ? i : p.rec.candidates[+i]; if (!c) return;
+  if ((p.rejected || []).includes(c.obj)) return; // a rejected identification never leads to an encounter
   p.scanning = true;
   // colour from the chosen object (palette with background suppression), fingerprint from the whole photo
   const photo = { ...Photo.analyze(p.img, c.box), hash: p.hash, pal: Photo.palette(p.img, c.box), engine: Engine.ID };
@@ -5056,7 +5589,7 @@ async function scan(i) {
     <h2 style="text-align:center">Scanning for supernatural activity…</h2>
     <div class="photo-frame"><img alt="" src="${p.url}"><i class="vf-sweep"></i>
       <div class="scan-hud">${SCAN_READOUTS.slice(0, 4).map((r, k) => `<div class="meter"><span>${r}</span><i><b id="mt${k}"></b></i><span id="mv${k}">0.0</span></div>`).join('')}</div></div>
-    <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${Math.round(c.conf * 100)}% sure)</span></p>
+    <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${c.rule === 'alt' || /^(5|5b|6)$/.test(String(c.rule)) ? 'your pick from the lens\'s suggestions' : Math.round(c.conf * 100) + '% sure'})</span></p>
   </div></div>`;
   SFX.scan();
   const result = resolvePhoto(S, c.obj, photo, { label: c.label, aspect: c.aspect, conf: c.conf });
@@ -5101,7 +5634,7 @@ function showDiscovery(m, seen) {
       <h1 class="disc-name">${esc(m.name)}</h1>
       <div class="row wrap" style="justify-content:center">${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${m.label ? esc(m.label) : catLabel(m)}</span></div>
       ${seen.isNew ? `<span class="new-tag">NEW SPECIES · +${seen.rp} RP</span>` : ''}
-      <p class="muted" style="max-width:34ch">${esc(CATEGORY[m.cat].flavor)}</p>
+      <p class="muted lore lore-${m.rarity}" style="max-width:36ch">${esc(loreOf(m))}</p>
       ${analysis ? `<p class="small muted num">HP ${m.stats.hp} · ATK ${m.stats.atk} · DEF ${m.stats.def} · SPD ${m.stats.spd} · weak to ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</p>` : ''}
       <div class="stack" style="width:100%;max-width:340px">
         <button class="btn primary block" data-act="fight" style="font-size:18px;min-height:56px">Fight!</button>
@@ -5356,7 +5889,7 @@ function infoSheet() {
   const B = ui.battle, m = B.m, analysis = !!S.research.analysis, f = FAMILIES[m.fam];
   openSheet(`<div class="sheet-head"><h2>${esc(m.name.split(',')[0])}</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="row wrap">${rarityChip(m.rarity)}${famChip(m.fam)}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
-    <p class="muted">${esc(CATEGORY[m.cat].flavor)}</p>
+    <p class="muted lore lore-${m.rarity}">${esc(loreOf(m))}</p>
     ${analysis ? `<div class="stat-grid">${statBars(m.stats)}</div>
       <div class="small"><b>Weak to:</b> ${f.weak.map(e => ELEMENTS[e].name).join(', ')} · <b>Resists:</b> ${f.resist.map(e => ELEMENTS[e].name).join(', ') || 'nothing'}</div>
       <div class="small"><b>Your weapon:</b> ${ELEMENTS[WEAPONS[B.weapon].el].name} — ${effMult(m.fam, WEAPONS[B.weapon].el) > 1 ? '<span style="color:var(--good)">super effective</span>' : effMult(m.fam, WEAPONS[B.weapon].el) < 1 ? '<span style="color:var(--danger)">resisted</span>' : 'normal damage'}</div>
@@ -5426,7 +5959,7 @@ function monsterSheet(id) {
       <div><b>Weak to:</b> ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</div>
       ${m.thumb ? `<div class="row"><img src="${m.thumb}" alt="Original photo" style="width:72px;border-radius:8px"><span class="muted">The photo it was found in (kept because you enabled it in settings).</span></div>` : ''}
     </div>
-    <p class="muted small">${esc(CATEGORY[m.cat].flavor)}</p>
+    <p class="muted small lore lore-${m.rarity}">${esc(loreOf(m))}</p>
     <div class="row">
       <button class="btn grow ${S.companion === m.id ? '' : 'ecto'}" data-act="buddy" data-arg="${m.id}">${S.companion === m.id ? 'Dismiss buddy' : 'Make hunting buddy'}</button>
       <button class="btn danger" data-act="release" data-arg="${m.id}">Release</button>
@@ -5441,7 +5974,7 @@ function speciesSheet(key) {
     <div class="stage">${spriteHTML(d.dna, { size: 170, rarity: top.id })}<div class="shadow"></div></div>
     <div class="sheet-head"><div class="grow"><h2>${esc(d.name)}</h2>${d.monsterName && d.monsterName !== d.name ? `<div class="small muted">${esc(d.monsterName)}</div>` : ''}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="row wrap">${RARITIES.filter(r => (d.rarities || {})[r.id]).map(r => rarityChip(r.id)).join('')}${famChip(d.fam)}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
-    <p class="muted">${esc(c.flavor)}</p>
+    <p class="muted lore lore-${top.id}">${esc(speciesLore(d, top.id))}</p>
     <div class="card small stack" style="gap:4px">
       <div><b>Hides in:</b> ${o ? esc(o.name) : d.word ? '“' + esc(d.word) + '”' : esc(c.name)} <span class="muted">(${esc(c.name.split(' /')[0])})</span></div>
       <div><b>Look:</b> ${designLine(d.obj)}</div>
@@ -5555,12 +6088,19 @@ function labScreen() {
 }
 
 /* ---------- settings ---------- */
-function settingsSheet() {
+function engineRowHTML() {
   const E = Engine.status;
+  return `<div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}`;
+}
+// start-up stages, to investigate slow or blank starts (e.g. the detector on the CPU backend)
+const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
+const backendsText = () => Object.entries(Engine.status.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded';
+function settingsSheet() {
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <button class="list-item" data-act="guide" style="text-align:left"><span class="e">📖</span><span class="grow"><b>Guide: how to play</b><br><span class="small muted">Status effects, combat, capture, rarity, items and research explained.</span></span><span class="muted">›</span></button>
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
-      <div class="toggle"><div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}</div>
+      <div class="toggle" id="engineRow">${engineRowHTML()}</div>
       <div class="toggle"><div><b>Keep photo thumbnails</b><p>Off by default. When on, a tiny 96 px copy of the photo is stored with monsters you capture, in this browser only.</p></div><button class="switch ${S.settings.keepPhotos ? 'on' : ''}" data-act="toggleKeep" aria-label="Toggle photo thumbnails"></button></div>
     </div>
     ${saveBlocked ? `<div class="card warn stack"><b>Saved progress not loaded</b><p class="small" style="margin:0">${saveBlocked.reason === 'newer' ? `It was made by a newer SNAPMON (save format ${saveBlocked.version}).` : 'It could not be read.'} It is untouched. Copy this code before doing anything else; you can restore it once the newer version is back.</p>
@@ -5573,7 +6113,7 @@ function settingsSheet() {
       <div class="row"><input class="search grow" id="resetBox" placeholder="RESET" autocomplete="off"><button class="btn danger" data-act="reset">Erase</button></div></div>
     ${developerHTML()}
     <p class="small muted">SNAPMON never uploads your photos. There are no accounts, ads or purchases. Camera access is requested only when you tap SNAP, and the camera stops the moment you take the shot or leave the app.</p>
-    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>`);
+    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>`, 'settings');
 }
 
 // Developer tools are hidden (tap the version line 7 times). They never change how hunting recognises objects:
@@ -5585,31 +6125,53 @@ function developerHTML() {
   return `<div class="card stack"><button class="row" data-act="devOpen" style="background:none;border:0;color:inherit;padding:0;text-align:left"><b class="grow">Developer &amp; testing</b><span class="muted">${open ? '▾' : '▸'}</span></button>
     ${open ? `<div class="toggle"><div><b>Recognition debug info</b><p>Shows what each part of the engine saw: predictions, boxes, scores, timing and backend.</p></div><button class="switch ${S.settings.debugLens ? 'on' : ''}" data-act="toggleDebug" aria-label="Toggle recognition debug info"></button></div>
     <div class="toggle"><div><b>Field-test mode</b><p>Photos are only recognised and logged with your verdicts, side by side: Hybrid, detector + classifier alone, TinyCLIP alone, and the colour extraction. No monsters appear.</p></div><button class="switch ${S.settings.fieldTest ? 'on' : ''}" data-act="toggleFieldTest" aria-label="Toggle field-test mode"></button></div>
-    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: also runs the detector and classifier on the CPU instead of the GPU (TinyCLIP always runs on the CPU). Reloads the engine. Now: ${esc(Object.entries(E.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded')}.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
+    <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: also runs the detector and classifier on the CPU instead of the GPU (TinyCLIP always runs on the CPU). Reloads the engine. Now: <span id="devBackends">${esc(backendsText())}</span>.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
     <div class="toggle"><div><b>TinyCLIP on GPU (comparison)</b><p>Testing only: runs TinyCLIP on WebGPU, like v0.4.0, to compare speed. Results can differ from what players get. Reloads the engine.</p></div><button class="switch ${S.settings.clipGPU ? 'on' : ''}" data-act="toggleClipGPU" aria-label="Toggle TinyCLIP on GPU"></button></div>
     ${perfHTML()}
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
-    <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow">Engine load: ${E.loadMs || '–'} ms</span></div>
+    <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow" id="devLoadMs">${loadTimesText()}</span></div>
     <p class="small muted" style="margin:0">Monster designs: ${counts.dedicated} specific, ${counts.composed} built from parts, ${counts.related} borrowed from a related object, ${counts.family} general family designs.</p>` : ''}
   </div>`;
 }
 
 /* ---------- sheets ---------- */
-function openSheet(html) {
-  $('#sheet').innerHTML = `<div class="sheet-wrap" data-act="sheetBg"><div class="sheet" role="dialog" aria-modal="true">${html}</div></div>`;
+// key: when the same sheet is already open, its contents are updated in place: no re-opening animation, and the
+// scroll position, typed text and focus are kept (Settings used to jump to the top on every change)
+function openSheet(html, key) {
+  const cur = $('#sheet .sheet');
+  if (key && cur && cur.dataset.key === key) {
+    const top = cur.scrollTop, vals = {}, focus = document.activeElement && cur.contains(document.activeElement) ? document.activeElement.id : '';
+    cur.querySelectorAll('input[id], textarea[id]:not([readonly])').forEach(e => { vals[e.id] = e.value; });
+    cur.innerHTML = html;
+    for (const [id, v] of Object.entries(vals)) { const e = cur.querySelector('#' + id); if (e) e.value = v; }
+    cur.scrollTop = top;
+    if (focus) { const f = cur.querySelector('#' + focus); if (f) f.focus({ preventScroll: true }); }
+    return;
+  }
+  $('#sheet').innerHTML = `<div class="sheet-wrap" data-act="sheetBg"><div class="sheet" role="dialog" aria-modal="true"${key ? ` data-key="${key}"` : ''}>${html}</div></div>`;
+}
+// flip one switch in place (no rebuild); also refreshes the backup code, which contains the settings
+function setSwitch(el, on) {
+  if (el) { el.classList.toggle('on', !!on); el.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+  const box = $('#exportBox'); if (box) box.value = exportSave(S);
 }
 function closeSheet() { $('#sheet').innerHTML = ''; }
 
 /* ---------- actions ---------- */
 const actions = {
   tab(id) { ui.tab = id; closeSheet(); render(); window.scrollTo({ top: 0 }); },
-  mute() { S.settings.muted = !S.settings.muted; SFX.setMuted(S.settings.muted); persist(); renderTop(); if ($('#sheet').innerHTML) settingsSheet(); },
+  mute() { S.settings.muted = !S.settings.muted; SFX.setMuted(S.settings.muted); persist(); renderTop(); const sw = $('#sheet .switch[data-act="mute"]'); if (sw) setSwitch(sw, !S.settings.muted); },
   settings: settingsSheet, closeSheet,
   sheetBg(_, el, ev) { if (ev.target === el) closeSheet(); },
   openCamera, camClose: closeCamera, camSnap,
+  camZoom(dir) { const z = ui.camZoom; if (z) z.apply(z.value + (dir === '+' ? 1 : -1) * Math.max(z.info.step, (z.info.max - z.info.min) / 10)); },
   cancelPhoto,
+  guide() { openSheet(Guide.html(ui.guideOpen), 'guide'); },
   pickCand(i) { scan(i); },
+  wrongObject(arg) { const p = ui.pending; if (!p || !p.rec || p.scanning) return; wrongObject(p, arg === 'all' ? p.rec.candidates.map(c => c.obj) : [p.rec.candidates[+arg].obj]); },
+  pickAlt(i) { const p = ui.pending; if (p && p.alts && p.alts[+i]) scan(p.alts[+i]); },
+  retakePhoto() { cancelPhoto(); openCamera(); },
   lensRetry() { if (ui.pending) { ui.pending.t0 = Date.now(); recognizeFlow(); } },
   lensPrepare() { Engine.load().then(ok => { if (ok) { S.settings.engineCached = true; persist(); } }); },
   engineDownload() { ui.engineNoticeOk = true; showEngineLoading(openCamera); },
@@ -5617,13 +6179,17 @@ const actions = {
     ui.devTaps = (ui.devTaps || 0) + 1;
     if (ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
   },
-  toggleForceCPU() { S.settings.forceCPU = !S.settings.forceCPU; persist(); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); settingsSheet(); },
-  toggleClipGPU() { S.settings.clipGPU = !S.settings.clipGPU; persist(); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); settingsSheet(); },
+  toggleForceCPU(_, el) { S.settings.forceCPU = !S.settings.forceCPU; persist(); setSwitch(el, S.settings.forceCPU); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); },
+  toggleClipGPU(_, el) { S.settings.clipGPU = !S.settings.clipGPU; persist(); setSwitch(el, S.settings.clipGPU); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); },
   perfExport() {
     const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), timings: Engine.perfLog() });
     try { navigator.clipboard.writeText(text).then(() => toast('Timings copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
   },
   perfClear() { Engine.clearPerf(); settingsSheet(); },
+  rejExport() {
+    const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), rejections: rejLog() });
+    try { navigator.clipboard.writeText(text).then(() => toast('Reports copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
+  },
   async engineRedownload(_, el) {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to delete'; return; }
     await Engine.clearCache(); S.settings.engineCached = false; persist(); toast('Saved engine files deleted. They download again on the next hunt.'); settingsSheet();
@@ -5668,9 +6234,9 @@ const actions = {
   buy(id) { if (buyItem(S, id)) { SFX.coin(); persist(); render(); } },
   craft(id) { if (craftItem(S, id)) { SFX.coin(); toast(`Crafted ${ITEMS[id].name}.`); persist(); render(); } },
   research(id) { if (buyResearch(S, id)) { SFX.levelup(); toast(`Research complete: ${RESEARCH_BY_ID[id].name}`, 'gold'); persist(); render(); } },
-  toggleDebug() { S.settings.debugLens = !S.settings.debugLens; persist(); settingsSheet(); },
+  toggleDebug(_, el) { S.settings.debugLens = !S.settings.debugLens; persist(); setSwitch(el, S.settings.debugLens); },
   devOpen() { S.settings.devOpen = !S.settings.devOpen; persist(); settingsSheet(); },
-  toggleFieldTest() { S.settings.fieldTest = !S.settings.fieldTest; persist(); settingsSheet(); },
+  toggleFieldTest(_, el) { S.settings.fieldTest = !S.settings.fieldTest; persist(); setSwitch(el, S.settings.fieldTest); },
   ftMark(arg, el) {
     const p = ui.pending; if (!p || !p.ft) return;
     const [model, v] = arg.split(':'); p.ft.marks[model] = v;
@@ -5693,7 +6259,7 @@ const actions = {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again'; return; }
     Platform.storage.remove(FT_KEY); Platform.storage.remove(FT_KEY + '.copied'); settingsSheet();
   },
-  toggleKeep() { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); settingsSheet(); },
+  toggleKeep(_, el) { S.settings.keepPhotos = !S.settings.keepPhotos; persist(); setSwitch(el, S.settings.keepPhotos); },
   copyExport() {
     const box = $('#exportBox'); box.value = exportSave(S);
     const fallback = () => { box.focus(); box.select(); toast('Code selected — use your phone’s Copy.'); };
@@ -5715,7 +6281,12 @@ document.addEventListener('click', ev => {
   fn(el.dataset.arg, el, ev);
 });
 // the camera never runs in the background: leaving the app closes it
-document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Platform.camera.isOpen()) closeCamera(); } });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { persist(true); if (Platform.camera.isOpen()) closeCamera(); } else resumeEngine(); });
+window.addEventListener('pageshow', e => { if (e.persisted) resumeEngine(); });
+document.addEventListener('toggle', e => { if (e.target.matches && e.target.matches('.guide-sec') && e.target.open) ui.guideOpen = e.target.dataset.sec; }, true);
+// back in the foreground: make sure the recognition engine still works (Android may have taken its GPU context or
+// frozen its worker) and quietly reload it from the phone's cache if not, before the player takes the next photo
+function resumeEngine() { if (Engine.status.state === 'ready') Engine.check(); }
 window.addEventListener('pagehide', () => persist(true));
 setInterval(() => { if (!ui.battle && !document.hidden) { const before = S.hp; regen(S); if (S.hp !== before) { renderTop(); persist(); } } }, 20000);
 

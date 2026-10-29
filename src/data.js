@@ -179,8 +179,8 @@ const MATERIALS = {
 const ITEMS = {
   potion:   { name: 'Healing Potion',         desc: 'Restore 40 HP.',                        price: 25, craft: { goo: 3 },            color: '#ff6b7f' },
   greater:  { name: 'Greater Healing Potion', desc: 'Restore 70% of max HP.',                price: 70, craft: { goo: 6, ecto: 2 },   color: '#ff3d6e' },
-  strength: { name: 'Strength Potion',        desc: '+50% attack for 3 turns.',              price: 45, craft: { goo: 4, scrap: 2 },  color: '#ff9b3d' },
-  defense:  { name: 'Defense Potion',         desc: '+60% defense for 3 turns.',             price: 45, craft: { scrap: 4, goo: 2 },  color: '#5ab3ff' },
+  strength: { name: 'Strength Potion',        desc: '+50% attack for your next 3 attacks.',              price: 45, craft: { goo: 4, scrap: 2 },  color: '#ff9b3d' },
+  defense:  { name: 'Defense Potion',         desc: '+60% defense against the next 4 attacks.',             price: 45, craft: { scrap: 4, goo: 2 },  color: '#5ab3ff' },
   antidote: { name: 'Antidote',               desc: 'Cure poison, burn & weakness. +10 HP.', price: 20, craft: { goo: 2 },            color: '#8dff6a' },
   enhancer: { name: 'Capture Enhancer',       desc: '+25% capture chance this battle.',      price: 60, craft: { ecto: 3 },           color: '#c48bff' },
   trap:     { name: 'Snap Trap',              desc: 'Capture device. Used on capture attempts.', price: 30, craft: { scrap: 2, ecto: 1 }, color: '#7cf5d3' },

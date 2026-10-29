@@ -22,6 +22,7 @@ Semantic versions, tagged on the production commit that shipped:
 | `v0.3.1`–`v0.3.3` | Field-test follow-ups: second-opinion rules, fusion fixes, field-test tools. |
 | `v0.4.0` | Hybrid is the single standard recogniser; photo-derived monster colours; Android Back navigation. Save format 3 (unchanged). |
 | `v0.4.1` | TinyCLIP runs on the CPU (WASM, one thread) for every player, for identical decisions across devices; recognition timings in the developer panel. Same models, rules and saves. |
+| `v0.4.2` | Playtest fixes: camera status text, camera zoom, Guide, rarity-specific flavour text, engine recovery after background, Settings no longer jumps, "Wrong object" before any encounter roll. Same models, thresholds, rules, odds and save format (monsters gain a stored `lore` text). |
 
 `GAME_VERSION` and `SAVE_VERSION` live at the top of `src/game.js`. Settings shows both.
 
@@ -36,11 +37,13 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
 1. Work on a feature branch. Run the tests locally:
    ```
    node tests/sim.js && node tests/labels.js && node tests/sprites-v3.js && node tests/migrate.js && node tests/clip-fusion.js && node tests/color.js
+   node tests/lore.js && node tests/guide.js && node tests/rules-trace.js   # rules-trace: encounter odds and battle maths unchanged
    node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json && node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
    python3 -m http.server 8765 &
    node tests/e2e.js http://localhost:8765/index.html tests/fixtures /tmp/shots
    node tests/e2e-engine.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots
    node tests/e2e-nav.js http://localhost:8765/index.html /tmp/shots
+   node tests/e2e-qol.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots
    ```
 2. Bump `GAME_VERSION` (and `SAVE_VERSION` + a migration in `migrate()` if the save format changes).
 3. Merge into production with a merge commit and push. The Pages workflow runs **all tests first**; the site only
@@ -71,6 +74,8 @@ Either way the Pages workflow redeploys automatically.
 Rolling back from v0.4.0 to v0.3.x is save-compatible (same save format 3): monsters keep their stored colours, and
 older code simply ignores the extra palette data. v0.3.x would bring back the old recogniser switch for developers.
 Rolling back from v0.4.1 to v0.4.0 is fully save-compatible; it only returns TinyCLIP to WebGPU where available.
+Rolling back from v0.4.2 is save-compatible too: older code ignores the stored `lore` field and shows the old
+per-category text again.
 
 ## ⚠️ A code rollback does not roll back save data
 

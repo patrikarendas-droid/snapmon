@@ -75,8 +75,10 @@ const Lens = (() => {
         if (!CFG.forceCPU) { try { gl = await tf.setBackend('webgl'); await tf.ready(); } catch (e) { gl = false; } }
         if (!gl || tf.getBackend() !== 'webgl') { await tf.setBackend('cpu'); }
         await tf.ready();
-        st.backend = tf.getBackend();
+        st.backend = tf.getBackend(); st.lost = false;
         try { tf.env().set('WEBGL_DELETE_TEXTURE_THRESHOLD', 0); } catch (e) {} // free GPU textures eagerly on low-memory phones
+        // Android may take the GPU context away while the app is in the background: remember it, so the engine reloads
+        const ctx = glContext(); if (ctx && ctx.canvas && ctx.canvas.addEventListener) ctx.canvas.addEventListener('webglcontextlost', () => { st.lost = true; emit(); });
         st.progress = 'Loading recognition models…'; emit();
         const mnLocal = Platform.assets.url(CFG.localUrls.classifier), coLocal = Platform.assets.url(CFG.localUrls.detector);
         const [cls, det] = await Promise.allSettled([
@@ -142,8 +144,9 @@ const Lens = (() => {
     st.busy = true;
     try { return await recognizeOnce(src); }
     catch (e) {
-      // a lost or failing WebGL context: rerun on the CPU backend (same weights) once before giving up
-      if (st.backend !== 'webgl') throw e;
+      // a failing WebGL backend whose context is still alive: rerun on the CPU backend (same weights) once.
+      // With a lost context the weights are gone with it; the engine then reloads the models (Engine.recognize).
+      if (st.backend !== 'webgl' || !healthy()) throw e;
       await tf.setBackend('cpu'); await tf.ready(); st.backend = tf.getBackend(); emit();
       return await recognizeOnce(src);
     } finally { st.busy = false; }
@@ -233,11 +236,25 @@ const Lens = (() => {
     if (typeof tf === 'undefined') return;
     for (const k of Object.values(CFG.cacheKeys)) { try { await tf.io.removeModel(k); } catch (e) {} }
   }
-  // forget the loaded models (developer backend switch, or a clean reload after a failure)
+  function glContext() { try { const b = tf.backend(); return b && b.gpgpu && b.gpgpu.gl; } catch (e) { return null; } }
+  // false when the models can no longer run: the WebGL context was lost (background, GPU reset, memory pressure)
+  function healthy() {
+    if (st.state !== 'ready') return false;
+    if (st.backend !== 'webgl') return true;
+    const gl = glContext();
+    return !st.lost && !(gl && gl.isContextLost && gl.isContextLost());
+  }
+  // forget the loaded models (developer backend switch, or a clean reload after a failure). A WebGL backend whose
+  // context was lost is thrown away too, so the next load creates a fresh one; weights come back from the phone's cache.
   function reset() {
     for (const m of [st.classifier, st.detector]) { try { m && m.model && m.model.dispose && m.model.dispose(); } catch (e) {} }
-    Object.assign(st, { state: 'idle', error: '', classifier: null, detector: null, backend: '', busy: false }); loading = null; emit();
+    try {
+      const E = typeof tf !== 'undefined' && tf.engine && tf.engine();
+      const ctx = glContext(), lost = st.lost || !!(ctx && ctx.isContextLost && ctx.isContextLost());
+      if (E && E.registry && E.registry.webgl && lost) { try { E.registry.webgl.dispose(); } catch (e) {} delete E.registry.webgl; if (E.backendName === 'webgl') E.backendInstance = null; }
+    } catch (e) {}
+    Object.assign(st, { state: 'idle', error: '', classifier: null, detector: null, backend: '', busy: false, lost: false }); loading = null; emit();
   }
 
-  return { load, recognize, clearCache, reset, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
+  return { load, recognize, clearCache, reset, healthy, status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, CFG };
 })();

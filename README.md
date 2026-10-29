@@ -22,17 +22,19 @@ The repository must be public for free GitHub Pages, or on a paid plan if privat
 
 ## How it plays
 
-1. Tap **SNAP**. The live rear camera opens inside the game (`getUserMedia`). Frame one real object and tap the shutter. The camera stops as soon as the shot is taken, the camera screen is closed, or you leave the app. There is **no gallery or file upload**, and photos are never saved or uploaded.
+1. Tap **SNAP**. The live rear camera opens inside the game (`getUserMedia`). Frame one real object (zoom with the slider, the +/− buttons or a two-finger pinch) and tap the shutter. The photo is exactly what the viewfinder shows. The camera stops as soon as the shot is taken, the camera screen is closed, or you leave the app. There is **no gallery or file upload**, and photos are never saved or uploaded.
 2. The **Spirit Lens** (on-device AI, see below) recognises what is in the photo:
-   - one confident object → identified automatically;
+   - one confident object → shown for a few seconds with **Wrong object** before anything is rolled (touch the screen to pause; it continues by itself if you do nothing);
    - several objects → you pick which detected object to hunt (numbered boxes on the photo);
    - unsure → you pick among the lens's own top suggestions;
    - nothing recognisable → *"Unknown object"* with a retake button, and no monster.
-   There is no way to type an object name or pick an arbitrary category. Camera problems (permission off, busy, no camera), model download failures, timeouts and unsupported devices each get their own message and a retry; none of them ever produces a random monster.
+   **Wrong object** rejects an identification: nothing is created, and you can pick one of the other objects the AI itself proposed for that photo, or retake it. There is no way to type an object name or pick an arbitrary category. Camera problems (permission off, busy, no camera), model download failures, timeouts and unsupported devices each get their own message and a retry; none of them ever produces a random monster.
 3. A scan runs. The encounter roll (separate from recognition) decides whether a monster appears.
-4. The monster is generated from the **specific recognised object** (see *Procedural monsters*): a forklift becomes a forklift monster, not a generic vehicle.
+4. The monster is generated from the **specific recognised object** (see *Procedural monsters*): a forklift becomes a forklift monster, not a generic vehicle. Its flavour text reflects both the object and the rarity (playful for Commons, mythic for Legendaries; `src/lore.js`) and is stored with the monster.
 5. Turn-based battle: **Attack**, weapon **Special**, **Items**, **Capture** (uses a Snap Trap), **Flee**, **Intel**.
 6. Win for XP, coins, materials and occasional weapons/charms; capture to add the monster to your permanent collection.
+
+The **Guide** (the **?** button at the top, or Settings → Guide) explains status effects, combat, damage types, capture, rarity, levels, items, gear and research. Its numbers are read from the game's rule tables (`src/guide.js`).
 
 ## Spirit Lens (object recognition)
 
@@ -53,6 +55,9 @@ and decision rules. Only the speed depends on the phone.
   and against the deploy manifest's checksums; a broken download is never kept.
 - **Failures:** if the engine cannot download or run, you get an explanation and Try again. There is no weaker
   fallback recogniser, and the rest of the game (collection, gear, lab) keeps working.
+- **Back from the background:** when the app returns to the foreground the engine checks itself (GPU context, worker)
+  and reloads from the phone's cache if Android took something away; a hunt that fails on a broken engine is
+  recovered and retried once, and Try again really reinitialises the engine. No page reload needed.
 - **Privacy:** photos never leave the phone.
 - **Developer tools:** tap the version line in Settings 7 times. Debug info, Field-test mode (side-by-side results
   of each engine part and the colour extraction, logged with your verdicts, no monsters) and a forced CPU backend
@@ -109,7 +114,8 @@ src/parts.js            sprite components, parametric templates, dedicated objec
 src/sprites.js          seeded RNG, pixel-grid sprite engine, monster DNA (v1/v2 legacy + v3 object DNA)
 src/labels.js           generated recogniser label → object mapping (tools/gen-labels.js)
 src/platform.js         camera / storage / device layer (swap for a native build, see docs/ANDROID.md)
-src/game.js             state, save migration, encounters, monster generation, combat, rewards (no DOM)
+src/lore.js             rarity-specific monster flavour text (deterministic, stored with each monster)
+src/game.js             state, save migration, rule numbers (MECH), encounters, monsters, combat, rewards (no DOM)
 src/audio.js            WebAudio sound effects
 src/color.js            object palette extraction with background suppression (pure, unit-tested)
 src/photo.js            colour palette + perceptual hash of the captured frame
@@ -117,10 +123,11 @@ src/engine.js           the standard Hybrid recognition engine: loading, progres
 src/lens.js             detector + classifier part (TF.js COCO-SSD + MobileNet)
 src/lens-clip.js        TinyCLIP part: preprocessing, rejection, calibration, fusion rules
 src/workers/clip-worker.js  ONNX Runtime Web inference worker (WASM for players; WebGPU for developer comparison)
-src/ui.js               screens, camera, battle playback, developer tools
+src/guide.js            the in-game Guide, generated from the rule tables
+src/ui.js               screens, camera (zoom), Wrong object flow, battle playback, developer tools
 tools/                  build, label/vocabulary generators, model mirror, sprite contact sheet
 lab/                    model export, labelled-photo fetcher and benchmark (run by .github/workflows/lab.yml)
-tests/                  logic, labels, sprites, colours, save migration, fusion rules; browser: gameplay (live camera), engine (real worker), Back navigation
+tests/                  logic, rules trace, guide, lore, labels, sprites, colours, save migration, fusion rules; browser: gameplay (live camera), engine (real worker), Back navigation, v0.4.2 fixes
 docs/                   RECOGNITION.md, RELEASING.md (versions, rollback), ANDROID.md
 ```
 

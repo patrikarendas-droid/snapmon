@@ -61,6 +61,26 @@ and nothing is fetched from AI hosts during play.
 - **Capacitor:** the same `getUserMedia` call works in the WebView once the app holds `android.permission.CAMERA` and
   grants the WebView's permission request (Capacitor's bridge does this).
 - **Permissions:** CAMERA only. INTERNET is not needed for play once the models are bundled.
+- **Zoom (v0.4.2).** If the camera track reports a `zoom` capability (`MediaStreamTrack.getCapabilities()`), the game
+  uses real camera zoom through `applyConstraints({ advanced: [{ zoom }] })`. Chrome on Android supports this on many
+  phones, but which phones and which zoom range is up to the phone's camera driver; it has not been checked on a real
+  device yet. Otherwise the game uses a digital zoom of up to 3×: the preview is scaled and the photo is cropped to
+  exactly the same region. Either way the photo (and what recognition sees) matches the viewfinder. Digital zoom
+  lowers the resolution (at 3×, a 1280 px frame leaves about 430 px), which recognition handles because the models work
+  at 224–300 px anyway. A native build can use CameraX zoom behind the same `Platform.camera.setZoom`.
+- **Viewfinder = photo (v0.4.2).** The viewfinder crops the camera frame to 3:4 (`object-fit: cover`). Before v0.4.2
+  the photo contained the full frame, including edges the player could not see; now it is cropped to the visible region.
+
+## App lifecycle (background / resume)
+- Android Chrome freezes background pages and may drop their GPU context (WebGL) or stop workers to save memory. v0.4.2
+  checks the engine when the page becomes visible again (`visibilitychange`, `pageshow`): it detects a lost WebGL
+  context (`webglcontextlost`, `isContextLost()`) and pings the TinyCLIP worker, and if anything is broken it reloads
+  both parts from the phone's cache (no download). A hunt that fails anyway triggers the same recovery and one retry;
+  Try again always reinitialises. Recoveries never switch to another model.
+- **Limit:** if Chrome kills the whole page (common after a long time in the background or under memory pressure), it
+  reloads from scratch when reopened. Progress is safe (saved before the heavy step and when the app is hidden), but
+  nothing in memory can survive that. A native app has the same limit when Android kills its process.
+- The camera is always stopped when the app goes to the background; the player reopens it with SNAP.
 
 ## Back button
 The game already routes Back through one function:

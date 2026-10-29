@@ -253,6 +253,22 @@ same two file names, so each category overwrote the previous one. The "out-of-vo
 benchmark tables above (including TinyCLIP 39M/16's 100%) were measured on effectively **2 distinct photos repeated**,
 not 26. Treat them as anecdotal until the next benchmark run. All object-photo numbers are unaffected.
 
+## v0.4.2: "Wrong object" and what the engine sees
+
+- **No silent commitment.** An automatic identification ("auto") is shown for 3.5 s with **Scan for monsters** and
+  **Wrong object** before any encounter roll. Touching the screen pauses the countdown. Choice screens offer
+  "Wrong object: none of these".
+- **After a rejection** nothing is rolled, created or counted. The player may pick one of the other objects the
+  models proposed for the same photo (other Hybrid candidates, detector/classifier candidates above its minimum
+  confidence, TinyCLIP's ranked objects with a vocabulary share ≥ 5%; up to 4, the rejected ones excluded), or retake.
+  One round of alternatives per photo; rejecting those too means retake. Rarity is rolled independently of the
+  object, so choosing among alternatives cannot be used to influence rarity. Rejections are logged on the phone only
+  (`snapmon.rejections.v1`, copyable from the developer panel) for field tests; they never feed back into recognition.
+- **Viewfinder crop.** Photos are now cropped to what the viewfinder shows (3:4, and the digital zoom if used), so the
+  engine no longer sees frame edges the player did not frame. This changes the input, not the models or rules; on
+  phones whose camera stream is already 3:4 the photo is unchanged.
+- **Recovery** after background/resume reloads the same models from the cache (docs/ANDROID.md, App lifecycle).
+
 ## Reproducing
 
 Push to a `feature/**` branch touching `lab/**`, or run *Recognition lab* manually. Each job prints `EXPORT`, `BENCH`,

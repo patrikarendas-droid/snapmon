@@ -130,5 +130,6 @@ self.onmessage = async ev => {
   try {
     if (m.type === 'init') self.postMessage({ type: 'ready', info: await init(m) });
     else if (m.type === 'run') self.postMessage({ type: 'result', id: m.id, ...(await run(m)) });
+    else if (m.type === 'ping') self.postMessage({ type: 'pong', id: m.id, ok: !!session });
   } catch (e) { self.postMessage({ type: 'error', id: m.id, error: String(e && e.message || e), kind: (e && e.kind) || (memoryError(e) ? 'memory' : 'init') }); }
 };
