@@ -27,7 +27,15 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
     ok(JSON.stringify(st.monsters.map(m => m.dna)) === JSON.stringify(old.monsters.map(m => m.dna)), 'v1 monsters keep identical DNA');
     ok(Object.keys(st.dex).length > 0 && Object.values(st.dex).every(d => d.obj) && !('aiLens' in st.settings), 'encyclopedia kept (regrouped by object), retired setting removed');
   }
-  await p.evaluate(() => { window.__snapmon.S.settings.debugLens = true; window.__snapmon.setRNG(() => 0.02); });
+  // the TinyCLIP part is stubbed to agree with the real detector/classifier (tests/e2e-engine.js runs the real worker)
+  const stubClip = () => p.evaluate(() => {
+    ClipLens.load = async () => { Object.assign(ClipLens.status, { state: 'ready', info: { backend: 'wasm', loadMs: 1, modelBytes: 0, vocabBytes: 0, name: 'stub' }, meta: { labels: [], calib: { accept: { p: 0.35, margin: 0.15 }, heldOut: { accepted: 28, precision: 0.75 } } } }); return true; };
+    ClipLens.recognize = async (img, rec) => { const c = rec.candidates[0];
+      return { regions: [{ box: null, cls: 'whole photo', best: c ? { obj: c.obj, label: c.label, p: 0.5 } : { obj: null, label: 'a wall', p: 0.4 }, accepted: !!c, why: c ? 'accepted' : 'background or person', calibrated: null,
+        ranked: c ? rec.candidates.map(x => ({ obj: x.obj, label: x.label, p: 0.5 })) : [], margin: 0.3 }], inferMs: 1, totalMs: 1, backend: 'wasm' }; };
+  });
+  await stubClip();
+  await p.evaluate(() => { const S = window.__snapmon.S; S.settings.debugLens = true; S.settings.engineCached = true; window.__snapmon.setRNG(() => 0.02); });
   const fake = preds => p.evaluate(pr => { window.__fakeClassify = () => pr; }, preds);
   const shot = n => p.screenshot({ path: `${outDir}/${n}.png` });
   ok(!(await p.$('#objSearch')) && !(await p.$('#catGrid')), 'no manual object entry on any screen');
@@ -107,7 +115,7 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   await close();
 
   // 7) model caching: reload uses IndexedDB copy of the detector
-  await p.reload(); await p.waitForTimeout(400);
+  await p.reload(); await p.waitForTimeout(400); await stubClip();
   await p.evaluate(() => Lens.load()); 
   const src = await p.evaluate(() => Lens.status.sources);
   console.log('   sources after reload:', JSON.stringify(src));
@@ -122,7 +130,7 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   await p2.evaluate(() => { window.mobilenet = undefined; });
   await p2.route(/mobilenet@/, r2 => r2.abort());
   await cam.show(p2, path.join(photos, 'coffee.jpg')); await cam.snap(p2);
-  await p2.waitForSelector('text=The Spirit Lens could not download', { timeout: 90000 });
+  await p2.waitForSelector('text=The recognition engine could not download', { timeout: 90000 });
   await p2.screenshot({ path: `${outDir}/L07-failed.png` });
   ok(true, 'lens-unavailable screen shown and no monster created');
   await b.close();
