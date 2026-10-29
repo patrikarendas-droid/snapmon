@@ -38,7 +38,7 @@ const Engine = (() => {
   // classify a failure into something the player can act on
   function kindOf(e, part) {
     const msg = String((e && (e.message || e)) || '');
-    if (e && e.kind && e.kind !== 'init') return e.kind;
+    if (e && e.kind) return e.kind; // the worker already knows (download / memory / init / timeout / crash)
     if (!Platform.device.online()) return 'offline';
     if (/download|fetch|network|404|unavailable|could not/i.test(msg)) return 'download';
     if (/memory|allocation|RangeError|OOM|Aborted\(\)/i.test(msg)) return 'memory';

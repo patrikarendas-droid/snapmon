@@ -94,7 +94,7 @@ async function init({ base, ortBase, preferGPU, forceBackend, expect = {}, test 
     try { if (test.failCPU) throw new Error(test.failCPU); session = await makeSession(m.buf, 'wasm'); backend = 'wasm'; }
     catch (e) {
       if (m.cached) await purge([urls.model]); // maybe a damaged cached copy: download it again next time
-      throw Object.assign(new Error('the model could not run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });
+      throw Object.assign(new Error('the model failed to run on the CPU: ' + (e.message || e)), { kind: memoryError(e) ? 'memory' : 'init' });
     }
   }
   return { backend, gpuError, loadMs: Math.round(performance.now() - t0), labels: nLabels, dim, modelBytes: m.buf.byteLength, vocabBytes: v.buf.byteLength,

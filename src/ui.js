@@ -1120,6 +1120,46 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) { per
 window.addEventListener('pagehide', () => persist(true));
 setInterval(() => { if (!ui.battle && !document.hidden) { const before = S.hp; regen(S); if (S.hp !== before) { renderTop(); persist(); } } }, 20000);
 
+/* ---------- Android Back button ----------
+   Back closes what is on top (sheet → camera → photo flow → other overlays), then returns to the Hunt screen; on the
+   Hunt screen the first Back shows a toast and a second Back within 2 s leaves SNAPMON.
+   Browser: SNAPMON keeps ONE extra "guard" history entry above its page, so Back fires popstate instead of leaving.
+   The guard is (re)armed by the player's taps, because Chrome ignores history entries added without a user gesture
+   when the user presses Back; it is never stacked, so history cannot grow or loop and Forward is not broken.
+   Native (Capacitor): call SnapmonNav.back() from the platform's backButton listener and exit the app when it
+   returns 'exit' (see docs/ANDROID.md). */
+const Nav = (() => {
+  let exitArmedAt = 0;
+  const isGuard = () => history.state && history.state.snapmon === 'guard';
+  function arm() { if (!isGuard()) { try { history.pushState({ snapmon: 'guard' }, ''); } catch (e) {} } }
+  // returns 'handled' (something was closed), 'armed' (exit toast shown) or 'exit'
+  function back() {
+    if ($('#sheet').innerHTML) { closeSheet(); return 'handled'; }
+    if ($('#overlay').innerHTML) {
+      if (Platform.camera.isOpen() || $('#camVideo')) { closeCamera(); return 'handled'; }
+      if (ui.battle) { toast('Finish the battle, or use Flee to escape.'); return 'handled'; }        // never abandon a fight silently
+      if (ui.discovered) { toast('Choose Fight or Let it slip away.'); return 'handled'; }            // an encounter is a decision
+      if (ui.pending && ui.pending.scanning) return 'handled';                                        // the scan finishes by itself
+      if (ui.pending) { cancelPhoto(); return 'handled'; }
+      $('#overlay').innerHTML = ''; render(); return 'handled';
+    }
+    if (ui.tab !== 'hunt') { actions.tab('hunt'); return 'handled'; }
+    if (Date.now() - exitArmedAt < 2000) { exitArmedAt = 0; persist(true); return 'exit'; }
+    exitArmedAt = Date.now(); toast('Press Back again to exit SnapMon.'); return 'armed';
+  }
+  try { if (!history.state || !history.state.snapmon) history.replaceState({ snapmon: 'root' }, ''); } catch (e) {}
+  document.addEventListener('pointerdown', arm, true);
+  document.addEventListener('keydown', arm, true);
+  window.addEventListener('popstate', ev => {
+    if (ev.state && ev.state.snapmon === 'guard') return; // Forward onto our own guard: nothing to do
+    const r = back();
+    if (r === 'exit') history.back(); // leave SNAPMON (closes an installed app; returns to the previous page in a tab)
+    else arm();                        // put the guard back (if Chrome skips it, the next tap re-arms it)
+  });
+  return { back, arm };
+})();
+window.SnapmonNav = { back: Nav.back }; // for a native wrapper's hardware Back button
+
 /* test hooks (used by the automated browser tests) */
 window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, setRNG: f => { RNG = f; }, render };
 
