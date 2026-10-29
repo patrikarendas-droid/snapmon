@@ -26,7 +26,7 @@ OBJ('forklift', 'Forklift', 'car', 'D', { h: 45, al: ['forklift', 'fork lift tru
 OBJ('excavator', 'Excavator', 'car', 'D', { h: 42, al: ['excavator', 'digger', 'backhoe', 'steam shovel'], nm: 'Diggo', sig: { name: 'Bucket Scoop', power: 1.4 } });
 OBJ('bulldozer', 'Bulldozer', 'car', 'D', { h: 45, al: ['bulldozer', 'dozer'], nm: 'Dozer', sig: { name: 'Plough Through', power: 1.5, effect: 'defdown', chance: 0.4 } });
 OBJ('tractor', 'Tractor', 'car', 'D', { h: 115, al: ['tractor', 'farm tractor'], nm: 'Tracto', sig: { name: 'Harvest Charge', power: 1.35 } });
-OBJ('crane', 'Mobile crane', 'car', 'D', { h: 45, al: ['crane truck', 'mobile crane', 'construction crane'], nm: 'Hoist', sig: { name: 'Wrecking Swing', power: 1.5 } });
+OBJ('crane', 'Mobile crane', 'car', 'D', { h: 45, al: ['crane', 'crane truck', 'mobile crane', 'construction crane'], nm: 'Hoist', sig: { name: 'Wrecking Swing', power: 1.5 } });
 OBJ('steam_locomotive', 'Steam locomotive', 'car', 'D', { h: 0, s: 15, l: 22, al: ['steam locomotive', 'steam engine'], nm: 'Choo', sig: { name: 'Boiler Blast', power: 1.1, effect: 'burn', chance: 0.5 } });
 OBJ('train', 'Train', 'car', 'D', { h: 210, al: ['train', 'electric locomotive', 'diesel locomotive', 'locomotive', 'passenger car', 'bullet train', 'freight car', 'high-speed train', 'subway train'], nm: 'Rail', sig: { name: 'Express Ram', power: 1.5 } });
 OBJ('tram', 'Tram', 'car', 'D', { h: 0, al: ['streetcar', 'tram', 'trolleybus', 'trolley'], nm: 'Trolly' });

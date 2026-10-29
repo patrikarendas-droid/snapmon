@@ -24,7 +24,7 @@ function freshState() {
     stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {}, objsPhotographed: {},
              cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0, unrecognized: 0, labelsSeen: {} },
     enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [], recentObjs: [] },
-    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false },
+    settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false, expLens: 'off', fieldTest: false },
     lastTick: Date.now(), nextId: 1, log: [],
   };
 }
@@ -70,6 +70,7 @@ function migrateV2toV3(out) {
 }
 let storageOK = true;
 let saveBlocked = null; // set when the stored save comes from a NEWER game version (e.g. after a code rollback)
+let migratedFrom = 0;    // old save format number when this load upgraded the save
 function loadState() {
   let raw = null;
   try { raw = STORE.get(SAVE_KEY); } catch (e) { storageOK = false; }
@@ -78,7 +79,7 @@ function loadState() {
   try { parsed = JSON.parse(raw); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
   if ((parsed.v || 1) > SAVE_VERSION) { saveBlocked = { reason: 'newer', version: parsed.v, raw }; return freshState(); }
   // keep an untouched copy of the old save before migrating it (one per old version)
-  if ((parsed.v || 1) < SAVE_VERSION) { const bk = SAVE_KEY + '.backup.v' + (parsed.v || 1); if (!STORE.get(bk)) STORE.set(bk, raw); }
+  if ((parsed.v || 1) < SAVE_VERSION) { migratedFrom = parsed.v || 1; const bk = SAVE_KEY + '.backup.v' + (parsed.v || 1); if (!STORE.get(bk)) STORE.set(bk, raw); }
   try { return migrate(parsed); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
 }
 function saveState(S) {

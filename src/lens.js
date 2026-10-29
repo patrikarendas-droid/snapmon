@@ -127,6 +127,11 @@ const Lens = (() => {
   /* ---------- recognition ---------- */
   async function recognize(src) {
     if (st.state !== 'ready') throw new Error('Spirit Lens is not ready');
+    if (st.busy) throw Object.assign(new Error('a recognition is already running'), { code: 'busy' }); // one job at a time on a phone
+    st.busy = true;
+    try { return await recognizeOnce(src); } finally { st.busy = false; }
+  }
+  async function recognizeOnce(src) {
     const T = { start: performance.now() }, dbg = { backend: st.backend, sources: { ...st.sources }, detections: [], full: [], crops: [] };
     const img = toCanvas(src, CFG.INPUT_MAX);
     await nextFrame();

@@ -139,12 +139,15 @@ const SUB_PARENT = { 'animal:dog': 'dog', 'animal:cat': 'cat', 'animal:bear': 'b
   'car:bus': 'bus', 'car:bike': 'bicycle', 'car:car': 'car', 'mug:teapot': 'teapot', 'mug:glass': 'glass', 'mug:mug': 'mug', 'bottle:vase': 'vase', 'bottle:can': 'can',
   'bottle:bottle': 'bottle', 'chair:table': 'dining_table', 'chair:cabinet': 'cabinet', 'chair:chair': 'dining_chair', 'tv:speaker': 'speaker', 'tv:camera': 'camera', 'tv:tv': 'tv',
   'shoe:boot': 'boot', 'shoe:sneaker': 'sneaker', 'cloth:hat': 'hat', 'cloth:sock': 'sock', 'cloth:shirt': 'shirt', 'pot:pan': 'frying_pan', 'pot:bowl': 'bowl', 'pot:pot': 'pot' };
+// excluded in v2 only because there was no fitting sprite: machines and vehicles a player can really photograph
+const SOFT_EXCLUDED = /^(airliner|airship|harvester|thresher|crane|gondola|dogsled|bobsled|schooner|yawl|catamaran|trimaran|speedboat|canoe|lifeboat|paddlewheel|steam locomotive|electric locomotive|bullet train|freight car|passenger car|streetcar|trolleybus|snowplow|forklift|mobile home|cash machine|honeycomb|hay)$/;
 IMAGENET.forEach((cls, i) => {
   const first = cls.split(',')[0].trim();
   let cat, sub = null;
   const r = RANGES.find(([a, b]) => i >= a && i <= b);
   if (r && i < 398) { cat = r[2]; sub = r[3]; }
   else { const rule = RULES.find(([re]) => re.test(first.toLowerCase())); cat = rule ? rule[1] : 'other'; sub = rule ? rule[2] || null : null; }
+  if (cat === null && SOFT_EXCLUDED.test(first.toLowerCase())) cat = 'car'; // v2 had no sprite for these; v3 resolves them below
   if (cat === null) { imagenet[cls] = 0; report.excluded++; return; }
   const obj = objectForLabel(cls);
   if (obj) { imagenet[cls] = obj; report.specific++; return; }
