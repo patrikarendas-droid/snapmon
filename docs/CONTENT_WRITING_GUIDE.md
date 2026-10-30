@@ -141,8 +141,8 @@ Rarity is a **different premise**, not the same sentence with bigger adjectives:
 
 - **New monsters only:** flavour text is chosen when a monster appears and stored on it; existing monsters keep theirs
   (unless the player chooses a refresh, if one is added later).
-- **Encyclopedia:** its text is computed when shown, so activated entries would change the encyclopedia text of
-  species already met. Decide at activation whether that is wanted.
+- **Encyclopedia:** its text is computed when shown, so activated entries also update the encyclopedia text of
+  species already met (approved: the improved lore is shown consistently).
 - **Never:** names, stats, artwork, odds, move numbers, saves format.
 
 ## Activation (Phase 2, needs explicit approval)
@@ -151,5 +151,7 @@ Rarity is a **different premise**, not the same sentence with bigger adjectives:
 2. `node tools/curated.js build --out src/curated-data.js` writes the reviewed entries as a script.
 3. Load `src/curated.js` and `src/curated-data.js` in `index.html` (after `game.js`), the single-file build
    (`tools/build.js`) and the test loaders; set `CURATED.enabled = true`.
-4. Re-record `tests/generator-snapshot.js` on purpose and note it in the journal; ship as a version bump.
+4. Keep a gameplay baseline that does not include text (stats, move numbers and effects, cooldowns, artwork, rarity,
+   recognition, balance) and must stay identical; re-record only the text part on purpose and note it in the
+   journal; ship as a version bump. Stable ability ids (approved) come first, as their own tested step.
 Rollback: set `CURATED.enabled = false` (or revert the activation commit); stored monster texts are unaffected.
