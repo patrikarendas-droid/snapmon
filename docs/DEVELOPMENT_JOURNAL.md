@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-10-30, release v0.4.5.
+Last updated: 2026-10-30, release v0.4.5 (+ Phase 1 curated-writing foundation on a branch).
 
 ---
 
@@ -75,6 +75,9 @@ Last updated: 2026-10-30, release v0.4.5.
 - **State:** v0.4.5 deployed. All automated suites pass (see section 7). Phone playtest of v0.4.4 (with Quick Monster
   Test Mode): monsters now resemble their objects, except drinks/foods drawn as burgers, a Mechanical spoon, and
   Legendaries sharing titles and moves; v0.4.5 addresses these (needs phone check).
+- **Lore overhaul Phase 1 (curated-writing foundation):** built on branch `feature/phase1-curated-foundation`, NOT
+  merged or deployed, waiting for the developer's review. No live change (frozen by `tests/generator-snapshot.js`).
+  Phase 2 (pilot content, activation) must not start without explicit approval.
 - **Next (proposed, not started):** verify v0.4.5 on the phone with Quick Monster Test Mode (drinks, foods, vegetables,
   kitchenware, Legendaries); continue visual QA of designs; native APK when requested.
 
@@ -85,6 +88,7 @@ Last updated: 2026-10-30, release v0.4.5.
 | Brief freeze after the camera shutter with **Force CPU backend** (developer option) | Mitigated in v0.4.4, needs phone check | The CPU detector (TF.js CPU backend) runs on the main thread for ~1 s; see section 6. `src/ui.js` `paintFirst`, `recognizeFlow`. | Phone test: the Analysing screen should now appear immediately with the photo, sweep still moving; only the clock text pauses. A full fix needs the detector in a worker (not planned). |
 | Same freeze for real players whose phone cannot use WebGL | Same mitigation | Rare: only phones where WebGL fails fall back to the CPU detector. | As above. |
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
+| Curated monster writing not active | Phase 1 done (branch) | `src/curated.js`, `tools/curated.js`, `content/curated/`, `docs/CONTENT_WRITING_GUIDE.md`. Move-name overrides need stable move keys on abilities (proposed, not built). Activated entries would also change encyclopedia text (computed at display time). | Developer review; then pilot batch (10–20 objects) and approved activation. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
 | Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change without consent; "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
@@ -127,7 +131,7 @@ Last updated: 2026-10-30, release v0.4.5.
 
 ## 7. Testing and verification
 
-- **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `guide`, `lore`, `identity`, `devtest`,
+- **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `generator-snapshot`, `curated`, `guide`, `lore`, `identity`, `devtest`,
   `migrate`, `labels`, `clip-fusion`, `color`, sprite regressions) and browser tests in headless Chromium with a fake
   camera (`e2e`, `e2e-engine` with the real TinyCLIP worker and a tiny test model, `e2e-nav`, `e2e-qol`, `e2e-v044`).
 - **Real-model lab (`lab.yml`):** runs the real models on ~150 labelled Wikimedia photos when engine/lab files change
@@ -157,6 +161,14 @@ Last updated: 2026-10-30, release v0.4.5.
 - **Unique Legendaries by construction (v0.4.5)** – generated from the object's own name rather than ~2,300
   hand-written entries; hand-written lines (`LORE_OBJECT`) are still used where they exist.
 - **Recogniser vocabulary unchanged in v0.4.5** – identity fixes only change how a recognised object looks and fights.
+
+- **Curated writing kept apart from the generators (Phase 1)** – reviewed text in `content/curated/*.json`, keyed by
+  exact object id, validated by `tools/curated.js`; `src/curated.js` is not loaded by the game and `CURATED.enabled`
+  is false. `monsterLore` has a guarded hook (no-op unless loaded and enabled; uses no random numbers). Only
+  `reviewed` entries can ever apply; anything missing/malformed falls back to the generator. Chosen over editing
+  `LORE_OBJECT` directly (mixes writing with code, no validation). Audit: ability names are identifiers in battle
+  cooldowns (`e.cds[name]`) and in identity updates (signature name compared with the category's); monster names,
+  moves and lore are stored on monsters and in backups; encyclopedia text (`speciesLore`) is computed live.
 
 ## 9. How to keep this journal
 

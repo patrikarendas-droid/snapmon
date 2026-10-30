@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+// Curated monster writing: validate, preview and look up object ids (docs/CONTENT_WRITING_GUIDE.md). Offline, no network.
+//   node tools/curated.js validate [files…]   check content/curated/*.json (or the given files); exit 1 on errors
+//   node tools/curated.js preview  [files…]   readable report: object, category, rarity, current text vs proposed text, moves
+//   node tools/curated.js lookup   <words>    find the exact object id for a word ("energy drink" → x_energy_drink)
+//   node tools/curated.js build --out <file>  write the reviewed entries as a browser script (for the activation step)
+const fs = require('fs'), vm = require('vm'), path = require('path');
+const ROOT = path.join(__dirname, '..'), DIR = path.join(ROOT, 'content/curated');
+const ctx = { console, Math, JSON, Date }; vm.createContext(ctx);
+vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js'].map(f => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n') +
+  ';globalThis.T={OBJECTS,OBJECT_LIST,CATEGORY,MOVE_ARCH,objectForLabel,objectTier,visualSource,monsterLore,createMonster,freshState,curatedMoveSlots,validateCurated,moveKit,CURATED,CURATED_RARITIES}', ctx);
+const T = ctx.T;
+const [cmd, ...args] = process.argv.slice(2);
+const files = a => { const f = a.filter(x => !x.startsWith('--')); return f.length ? f : (fs.existsSync(DIR) ? fs.readdirSync(DIR).filter(n => n.endsWith('.json')).sort().map(n => path.join(DIR, n)) : []); };
+function load(list) {
+  const seen = new Map(), docs = []; let errors = [], warnings = [];
+  for (const f of list) {
+    const rel = path.relative(ROOT, f), raw = fs.readFileSync(f, 'utf8'); let doc;
+    try { doc = JSON.parse(raw); } catch (e) { errors.push(`${rel}: not valid JSON (${e.message})`); continue; }
+    const r = T.validateCurated(doc, { file: rel, raw, seen }); errors = errors.concat(r.errors); warnings = warnings.concat(r.warnings); docs.push({ rel, doc });
+  }
+  return { docs, errors, warnings };
+}
+const moveText = a => a ? `${Math.round(a.power * 100)}% power${a.hits ? ` × ${a.hits}` : ''}${a.effect ? ` · ${a.effect}${a.chance ? ' ' + Math.round(a.chance * 100) + '%' : ''}` : ''}${a.self ? ' (self)' : ''}` : '';
+
+if (cmd === 'validate') {
+  const list = files(args), { docs, errors, warnings } = load(list);
+  const n = docs.reduce((s, d) => s + Object.keys((d.doc && d.doc.entries) || {}).length, 0);
+  for (const w of warnings) console.log('warning', w);
+  for (const e of errors) console.log('ERROR  ', e);
+  console.log(`${list.length} file(s), ${n} entr${n === 1 ? 'y' : 'ies'}: ${errors.length} error(s), ${warnings.length} warning(s)`);
+  process.exit(errors.length ? 1 : 0);
+} else if (cmd === 'preview') {
+  const { docs, errors } = load(files(args));
+  for (const e of errors) console.log('ERROR  ', e);
+  for (const { rel, doc } of docs) for (const [id, e] of Object.entries((doc && doc.entries) || {})) {
+    const o = T.OBJECTS[id]; if (!o) continue;
+    console.log(`\n=== ${id} — ${o.name} · category ${T.CATEGORY[o.cat].name} · group ${o.lore || '–'} · family ${o.fam || T.CATEGORY[o.cat].fam} · ${e.status || 'draft'} · ${rel}`);
+    for (const r of T.CURATED_RARITIES) {
+      const now = T.monsterLore({ obj: id, rarity: r, seed: 1 }), v = e.lore && e.lore[r], list = v == null ? [] : typeof v === 'string' ? [v] : v;
+      console.log(`  ${r.toUpperCase()}`);
+      console.log(`    now:      ${now}`);
+      if (list.length) list.forEach((t, i) => console.log(`    proposed${list.length > 1 ? '#' + (i + 1) : '  '}: ${t}`));
+      else console.log('    proposed: (none — keeps the current text)');
+    }
+    const slots = T.curatedMoveSlots(id), kit = Object.fromEntries(T.moveKit(o.cat, o).map(a => [a.name, a]));
+    console.log('  MOVES (names only; numbers never change)');
+    for (const [k, def] of Object.entries(slots)) {
+      const mech = k === 'signature' ? (o.sig || T.CATEGORY[o.cat].sig) : kit[def];
+      const p = e.moves && e.moves[k];
+      console.log(`    ${k.padEnd(22)} ${def}${mech ? ` [${moveText(mech)}]` : ''}${p ? `  →  ${p}` : ''}`);
+    }
+    if (e.notes) console.log(`  notes: ${e.notes}`);
+  }
+  if (!docs.length) console.log('no curated content files (content/curated/*.json)');
+  process.exit(errors.length ? 1 : 0);
+} else if (cmd === 'lookup') {
+  const q = args.join(' ').toLowerCase().trim(); if (!q) { console.log('usage: node tools/curated.js lookup <word>'); process.exit(1); }
+  const exact = T.objectForLabel(q), hits = T.OBJECT_LIST.filter(o => o.id === q || o.name.toLowerCase().includes(q) || o.al.some(a => a.toLowerCase().includes(q))).slice(0, 25);
+  if (exact) console.log(`"${q}" is recognised as: ${exact}  (${T.OBJECTS[exact].name})`);
+  for (const o of hits) console.log(`  ${o.id.padEnd(28)} ${o.name.padEnd(26)} ${T.CATEGORY[o.cat].name}${o.lore ? ' · group ' + o.lore : ''}`);
+  if (!hits.length) console.log('no object matches');
+} else if (cmd === 'build') {
+  const out = args[args.indexOf('--out') + 1]; if (!out || args.indexOf('--out') < 0) { console.log('usage: node tools/curated.js build --out <file>'); process.exit(1); }
+  const { docs, errors } = load(files(args.filter((a, i) => a !== '--out' && args[i - 1] !== '--out')));
+  if (errors.length) { for (const e of errors) console.log('ERROR  ', e); process.exit(1); }
+  const data = {}; for (const { doc } of docs) for (const [id, e] of Object.entries(doc.entries)) if (e.status === 'reviewed') data[id] = { status: 'reviewed', lore: e.lore || {}, moves: e.moves || {} };
+  fs.writeFileSync(out, `/* generated by tools/curated.js build — do not edit; edit content/curated/*.json */\nCURATED.data = ${JSON.stringify(data)};\n`);
+  console.log(`wrote ${out}: ${Object.keys(data).length} reviewed entr${Object.keys(data).length === 1 ? 'y' : 'ies'} (curated text stays off until CURATED.enabled is set)`);
+} else {
+  console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 6).map(l => l.replace(/^\/\/ ?/, '')).join('\n')); process.exit(cmd ? 1 : 0);
+}
