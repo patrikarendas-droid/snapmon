@@ -3,7 +3,7 @@
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.3';
+const GAME_VERSION = '0.4.4';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -266,6 +266,29 @@ function resolvePhoto(S, objId, photo, obj, rng = RNG) {
   const m = createMonster(S, { obj: objId, cat, rarity, variant, word, photo, first, rng, aspect: obj.aspect, conf: obj.conf });
   return { encounter: true, monster: m, first, chance: ch };
 }
+
+/* ---------- developer Quick Monster Test Mode (v0.4.4) ----------
+   For checking monster designs, names, colours and flavour text quickly. Only reachable from the hidden developer
+   tools, and only while DEV_TOOLS is true (set it to false for a public/release build: the developer menu and this
+   mode then disappear). A test monster is made by the normal generator from the REAL recognised object and photo, with
+   test-only rarity odds, and never touches the player's save: no encounter roll, pity, photo count, encyclopedia entry,
+   reward or item use. Test monsters live in their own storage key (TestRoster), are marked test:true, are not part of
+   the save or the backup code, and can be cleared at any time. */
+const DEV_TOOLS = true;
+const TEST_RARITY_WEIGHTS = { common: 20, uncommon: 20, rare: 25, epic: 20, legendary: 15 }; // real weights: RARITIES (46/28/20/5/1)
+function createTestMonster(S, objId, photo, obj = {}, rng = RNG) {
+  const cat = OBJECTS[objId] ? OBJECTS[objId].cat : 'other';
+  const m = createMonster(S, { obj: objId, cat, rarity: pickWeighted(TEST_RARITY_WEIGHTS, rng), word: obj.label, photo, rng, aspect: obj.aspect, conf: obj.conf });
+  m.test = true; m.id = 'test-' + Date.now().toString(36) + '-' + Math.floor(rng() * 1e6).toString(36); m.caughtAt = Date.now();
+  return m;
+}
+const TestRoster = {
+  KEY: 'snapmon.testroster.v1', MAX: 300,
+  list() { try { return JSON.parse(STORE.get(this.KEY) || '[]'); } catch (e) { return []; } },
+  add(m) { const l = this.list(); l.push({ ...m, test: true }); return STORE.set(this.KEY, JSON.stringify(l.slice(-this.MAX))); },
+  remove(id) { STORE.set(this.KEY, JSON.stringify(this.list().filter(m => m.id !== id))); },
+  clear() { STORE.set(this.KEY, '[]'); },
+};
 
 /* ---------- monsters ---------- */
 function joinName(a, b) {

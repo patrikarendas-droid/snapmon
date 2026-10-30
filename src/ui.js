@@ -8,7 +8,10 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&a
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const fmtDate = t => t ? new Date(t).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
 let saveTimer = null;
-function persist(now) { clearTimeout(saveTimer); if (now) saveState(S); else saveTimer = setTimeout(() => saveState(S), 250); }
+function persist(now) {
+  if (ui.testSnapshot) return; // a developer test battle is running: the real save is restored afterwards, never overwritten
+  clearTimeout(saveTimer); if (now) saveState(S); else saveTimer = setTimeout(() => saveState(S), 250);
+}
 SFX.setMuted(S.settings.muted);
 
 const ICON = {
@@ -100,6 +103,7 @@ function huntScreen() {
     <button class="side-btn" data-act="tab" data-arg="lab"><span class="ic">${ICON.lab}</span>Orders</button>
   </div>
   ${lensChipHTML()}
+  ${quickTest() ? '<div class="test-banner" style="text-align:center">QUICK MONSTER TEST MODE IS ON · test monsters only, nothing is saved to your collection</div>' : ''}
   ${low ? `<div class="card warn row"><div class="grow"><b>You're badly hurt.</b><div class="small muted">Monsters hit hard. Heal up before your next hunt — you also recover slowly over time.</div></div>
     ${S.items.potion ? `<button class="btn small" data-act="quickHeal">Drink potion (${S.items.potion})</button>` : `<button class="btn small" data-act="tab" data-arg="gear">Shop</button>`}</div>` : ''}
   <section class="card">
@@ -197,9 +201,10 @@ function camSnap() {
   const v = $('#camVideo'); if (!v || !v.videoWidth || ui.snapping || !Engine.ready()) return; // one shot, ready engine only
   ui.snapping = true; const btn = $('#camShutter'); if (btn) btn.disabled = true;
   SFX.shutter();
+  const tSnap = performance.now();
   const canvas = Platform.camera.capture(v); // exactly the region the viewfinder shows (including zoom)
-  Platform.camera.close(v); ui.camZoom = null;
-  beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85));
+  v.pause(); ui.camZoom = null; // the stream stops once the next screen is on screen (recognizeFlow), never before
+  beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85), tSnap);
 }
 
 /* ---------- the recognition engine: one-time notice, progress, status ---------- */
@@ -293,10 +298,21 @@ Engine.onChange(() => {
 
 /* ---------- recognition flow: photo → Hybrid engine → (pick among AI suggestions) → encounter scan ----------
    There is no manual entry: only objects the engine actually recognised can be hunted. */
-function beginIdentify(img, url) {
+function beginIdentify(img, url, tSnap = performance.now()) {
   const hash = Photo.analyze(img).hash; // whole-photo similarity fingerprint (repeat-photo detection)
-  ui.pending = { img, url, hash, thumb: S.settings.keepPhotos ? Photo.thumbnail(img) : null, rec: null, t0: Date.now() };
+  ui.pending = { img, url, hash, thumb: S.settings.keepPhotos ? Photo.thumbnail(img) : null, rec: null, t0: Date.now(), tSnap };
   recognizeFlow();
+}
+/* v0.4.4: the Analysing screen (with the photo just taken) must be ON SCREEN before recognition starts. With the
+   detector on the CPU backend, recognition holds the page's main thread for about a second; started straight after
+   the shutter (as before), the browser could not paint in between, so the camera area went blank (white or black)
+   for that second. Now: decode the photo, let two frames be painted, and only then stop the camera and recognise.
+   The scan sweep and spinner are compositor animations, so they keep moving even while the CPU detector works. */
+async function paintFirst(p) {
+  const img = $('#lensFrame img');
+  if (img && img.decode) { try { await Promise.race([img.decode(), wait(300)]); } catch (e) {} }
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  p.paintMs = Math.round(performance.now() - (p.tSnap || performance.now()));
 }
 function lensFrame(p, extra = '') {
   return `<div class="photo-frame" id="lensFrame"><img alt="Your photo" src="${p.url}">${extra}<i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i></div>`;
@@ -307,7 +323,7 @@ function lensStatusText() {
   if (E.state === 'ready') return 'Looking for objects… (runs on this phone)';
   return '';
 }
-const devOn = () => !!S.settings.devUnlocked;
+const devOn = () => DEV_TOOLS && !!S.settings.devUnlocked; // DEV_TOOLS=false (game.js) removes all developer tools from a release build
 async function recognizeFlow() {
   const p = ui.pending; if (!p) return;
   $('#overlay').innerHTML = `<div class="overlay scanning"><div class="overlay-inner" style="justify-content:center">
@@ -316,15 +332,19 @@ async function recognizeFlow() {
     <p class="muted" style="text-align:center" id="lensStatus">${lensStatusText()}</p></div></div>`;
   const clock = setInterval(() => { const el = $('#lensClock'); if (!el || ui.pending !== p) return clearInterval(clock); el.textContent = ((Date.now() - p.t0) / 1000).toFixed(1) + 's'; }, 100);
   const fail = kind => { clearInterval(clock); if (ui.pending === p) showEngineFailed(p, kind); };
+  await paintFirst(p);
+  Platform.camera.close(); // the photo is on screen now; release the camera
+  if (ui.pending !== p) return clearInterval(clock);
   persist(true); // save progress before the memory-heavy part (Android may stop a page that runs out of memory)
   if (Engine.status.state !== 'ready') {
     const ok = await Engine.load();
     if (ui.pending !== p) return clearInterval(clock);
     if (!ok) return fail(Engine.status.kind);
   }
-  let r;
+  let r; const blocks = watchMainThread();
   try { r = await Engine.recognize(p.img); }
-  catch (e) { return fail(e.kind); }
+  catch (e) { blocks.stop(); return fail(e.kind); }
+  ui.snapTimes = { paintMs: p.paintMs, recognizeBlockMs: blocks.stop() };
   clearInterval(clock);
   if (ui.pending !== p) return;
   p.rec = r.rec; p.clip = r.clip; p.prodOnly = { decision: r.prodOnly.decision, reason: r.prodOnly.reason, top: ftTop(r.prodOnly) }; p.prodCands = r.prodOnly.candidates;
@@ -571,6 +591,7 @@ function debugHTML(rec) {
     <tr><th colspan="3">Merged candidates</th></tr>${rows(d.candidates, r => `<tr><td>${esc(r.label)}</td><td>${pct(r.conf)}</td><td>${esc(r.obj || '?')} · ${esc(r.src)}</td></tr>`)}</table>${clipDebugHTML()}</details>`;
 }
 function cancelPhoto() {
+  if (Platform.camera.isOpen() && !$('#camVideo')) Platform.camera.close(); // cancelled before the camera was released
   if (ui.pending && ui.pending.url && ui.pending.url.startsWith('blob:')) URL.revokeObjectURL(ui.pending.url);
   ui.pending = null; $('#overlay').innerHTML = ''; render();
 }
@@ -600,7 +621,9 @@ async function scan(i) {
     <p class="muted" style="text-align:center">Target: <b style="color:var(--text)">${esc(c.label)}</b> <span class="small">(${c.rule === 'alt' || /^(5|5b|6)$/.test(String(c.rule)) ? 'your pick from the lens\'s suggestions' : Math.round(c.conf * 100) + '% sure'})</span></p>
   </div></div>`;
   SFX.scan();
-  const result = resolvePhoto(S, c.obj, photo, { label: c.label, aspect: c.aspect, conf: c.conf });
+  // developer Quick Monster Test Mode: a guaranteed test monster, generated by the normal generator, outside the save
+  const result = quickTest() ? { encounter: true, monster: createTestMonster(S, c.obj, photo, { label: c.label, aspect: c.aspect, conf: c.conf }), test: true }
+    : resolvePhoto(S, c.obj, photo, { label: c.label, aspect: c.aspect, conf: c.conf });
   const strength = result.encounter ? 0.55 + RARITY[result.monster.rarity].tier * 0.11 : 0.25;
   for (let step = 0; step < 6; step++) {
     await wait(220);
@@ -623,6 +646,7 @@ async function scan(i) {
     render(); return;
   }
   const m = result.monster; if (thumb) m.thumb = thumb;
+  if (result.test) return showTestDiscovery(m);
   const seen = recordSighting(S, m);
   persist();
   showDiscovery(m, seen);
@@ -636,6 +660,7 @@ function showDiscovery(m, seen) {
   $('#overlay').innerHTML = `<div class="overlay discovery" style="--rc:${r.color}">
     ${tier >= 1 ? '<div class="disc-rays"></div>' : ''}${tier >= 2 ? '<div class="disc-flash"></div>' : ''}
     <div class="overlay-inner" style="justify-content:center;align-items:center;position:relative">
+      ${seen.test ? '<p class="test-banner">TEST MONSTER · DEVELOPER MODE · TEST ODDS</p>' : ''}
       <p class="small" style="letter-spacing:.2em;color:var(--ecto)">${m.first ? 'YOUR FIRST MONSTER!' : 'SUPERNATURAL ACTIVITY DETECTED'}</p>
       <div class="disc-sprite">${spriteHTML(m.dna, { size: 220, rarity: m.rarity, variant: m.variant })}</div>
       <div class="rarity-banner" style="color:${r.color}">${r.name.toUpperCase()}${m.variant ? ' · ' + variantLabel(m.variant).toUpperCase() : ''}</div>
@@ -645,17 +670,21 @@ function showDiscovery(m, seen) {
       <p class="muted lore lore-${m.rarity}" style="max-width:36ch">${esc(loreOf(m))}</p>
       ${analysis ? `<p class="small muted num">HP ${m.stats.hp} · ATK ${m.stats.atk} · DEF ${m.stats.def} · SPD ${m.stats.spd} · weak to ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</p>` : ''}
       <div class="stack" style="width:100%;max-width:340px">
-        <button class="btn primary block" data-act="fight" style="font-size:18px;min-height:56px">Fight!</button>
-        <button class="btn ghost block" data-act="ignore">Let it slip away</button>
+        ${seen.instant ? `<p class="small" style="color:var(--ecto);margin:0">Added to the test collection (instant capture).</p>
+        <button class="btn primary block" data-act="openCamera" style="min-height:56px">Snap the next object</button>
+        <button class="btn ghost block" data-act="testCollection">View test collection</button>`
+        : `<button class="btn primary block" data-act="fight" style="font-size:18px;min-height:56px">${seen.test ? 'Test fight (no rewards)' : 'Fight!'}</button>
+        <button class="btn ghost block" data-act="ignore">Let it slip away</button>`}
       </div>
     </div></div>`;
   if (tier >= 3) { const o = $('.overlay'); o.classList.add('shake'); }
-  ui.discovered = m;
-  ui.lastSightings = [{ dna: m.dna, name: m.name, rarity: m.rarity, outcome: 'sighted' }, ...ui.lastSightings].slice(0, 8);
+  ui.discovered = seen.instant ? null : m;
+  if (!m.test) ui.lastSightings = [{ dna: m.dna, name: m.name, rarity: m.rarity, outcome: 'sighted' }, ...ui.lastSightings].slice(0, 8);
 }
 
 /* ---------- battle ---------- */
 function startBattle(m) {
+  if (m.test) ui.testSnapshot = JSON.stringify(S); // test battle: everything it changes (HP, items, rewards) is undone at the end
   const B = newBattle(S, m); ui.battle = B; ui.busy = false;
   B.disp = { hero: B.hero.hp, enemy: B.enemy.hp };
   renderBattle();
@@ -850,12 +879,50 @@ async function endBattle() {
   await wait(400);
   if (B.result === 'victory') { SFX.victory(); const f = $('#foe img'); if (f) { f.style.transition = 'transform .6s, opacity .6s, filter .6s'; f.style.filter = 'brightness(3)'; f.style.opacity = '0'; f.style.transform = 'translateY(-20px) scale(.6)'; } await wait(650); }
   else if (B.result === 'defeat') { SFX.defeat(); await wait(500); }
+  if (B.m.test) return endTestBattle(B);
   const sum = finishBattle(S, B);
   if (sum.levelUps.length) setTimeout(() => SFX.levelup(), 400);
   persist(true);
   const s0 = ui.lastSightings[0]; if (s0 && s0.dna === B.m.dna) s0.outcome = { victory: 'defeated', captured: 'captured', defeat: 'won', fled: 'escaped', escaped: 'escaped' }[B.result];
   ui.battle = null; ui.busy = false;
   showResult(B, sum);
+}
+const quickTest = () => DEV_TOOLS && devOn() && !!S.settings.quickTest;
+function endTestBattle(B) {
+  S = JSON.parse(ui.testSnapshot); ui.testSnapshot = null; // restore the real save exactly as it was before the fight
+  const caught = B.result === 'captured';
+  if (caught) TestRoster.add(B.m);
+  ui.battle = null; ui.busy = false;
+  $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;align-items:center;text-align:center;gap:14px">
+    <p class="test-banner">TEST BATTLE · DEVELOPER MODE</p>
+    <h1 class="result-title">${caught ? 'Test capture' : 'Test battle over'}</h1>
+    ${spriteHTML(B.m.dna, { size: 150, rarity: B.m.rarity, variant: B.m.variant })}
+    <p style="max-width:34ch">${caught ? 'Added to the test collection (Settings → Developer &amp; testing).' : 'Result: ' + esc(B.result) + '.'} No rewards were given; your HP, items, coins and progress are exactly as before the fight.</p>
+    <div class="stack" style="width:100%;max-width:340px"><button class="btn primary block" data-act="openCamera">Snap the next object</button><button class="btn ghost block" data-act="closeOverlay">Back to base</button></div></div></div>`;
+  render();
+}
+function showTestDiscovery(m) {
+  const instant = S.settings.instantCapture !== false;
+  if (instant) TestRoster.add(m);
+  showDiscovery(m, { isNew: false, test: true, instant });
+}
+function testMonsterSheet(id) {
+  const m = TestRoster.list().find(x => x.id === id); if (!m) return;
+  openSheet(`<div class="grab"></div><p class="test-banner">TEST MONSTER · NOT PART OF YOUR COLLECTION</p>
+    <div class="stage" style="background:radial-gradient(circle, color-mix(in srgb, ${RARITY[m.rarity].color} 25%, transparent), transparent 65%)">${spriteHTML(m.dna, { size: 190, rarity: m.rarity, variant: m.variant })}<div class="shadow"></div></div>
+    <div class="sheet-head"><div class="grow"><h2>${esc(m.name)}</h2></div><button class="btn small ghost" data-act="testCollection">Back</button></div>
+    <div class="row wrap">${rarityChip(m.rarity)}${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${esc(m.label || OBJECTS[m.obj].name)}</span></div>
+    <p class="muted small lore lore-${m.rarity}">${esc(loreOf(m))}</p>
+    <div class="stat-grid">${statBars(m.stats)}</div>
+    <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>
+    <div class="card small"><b>Look:</b> ${designLine(m.obj)}</div>
+    <button class="btn small danger" data-act="testDelete" data-arg="${esc(m.id)}">Delete this test monster</button>`, 'testmon');
+}
+function testCollectionSheet() {
+  const list = TestRoster.list().slice().reverse();
+  openSheet(`<div class="sheet-head"><h2>Test collection</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <p class="small muted" style="margin:0">Developer test monsters (${list.length}). Stored separately from your save and your backup code; never counted as caught.</p>
+    ${list.length ? `<div class="mgrid">${list.map(m => `<button class="mcard r-${m.rarity}" style="--rc:${RARITY[m.rarity].color}" data-act="testView" data-arg="${esc(m.id)}"><span class="vbadge">T</span><img class="px" alt="" src="${spriteURL(m.dna, 3)}"><div class="nm">${esc(m.name.split(',')[0])}</div><div class="sub" style="color:${RARITY[m.rarity].color}">${RARITY[m.rarity].name}</div></button>`).join('')}</div>` : '<div class="card empty"><p>No test monsters yet. Turn on Quick Monster Test Mode and snap something.</p></div>'}`, 'testcol');
 }
 function showResult(B, sum) {
   const m = B.m;
@@ -1102,7 +1169,7 @@ function engineRowHTML() {
   return `<div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}`;
 }
 // start-up stages, to investigate slow or blank starts (e.g. the detector on the CPU backend)
-const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms, longest main-thread block ${ui.camLongestBlock ?? '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
+const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms, longest main-thread block ${ui.camLongestBlock ?? '–'} ms · last photo: Analysing screen shown after ${ui.snapTimes ? ui.snapTimes.paintMs : '–'} ms, longest block while recognising ${ui.snapTimes ? ui.snapTimes.recognizeBlockMs : '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
 const backendsText = () => Object.entries(Engine.status.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded';
 function settingsSheet() {
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
@@ -1137,6 +1204,9 @@ function developerHTML() {
     <div class="toggle"><div><b>Force CPU backend</b><p>Testing only: also runs the detector and classifier on the CPU instead of the GPU (TinyCLIP always runs on the CPU). Reloads the engine. Now: <span id="devBackends">${esc(backendsText())}</span>.</p></div><button class="switch ${S.settings.forceCPU ? 'on' : ''}" data-act="toggleForceCPU" aria-label="Toggle forced CPU backend"></button></div>
     <div class="toggle"><div><b>TinyCLIP on GPU (comparison)</b><p>Testing only: runs TinyCLIP on WebGPU, like v0.4.0, to compare speed. Results can differ from what players get. Reloads the engine.</p></div><button class="switch ${S.settings.clipGPU ? 'on' : ''}" data-act="toggleClipGPU" aria-label="Toggle TinyCLIP on GPU"></button></div>
     ${perfHTML()}
+    <div class="toggle"><div><b>Quick Monster Test Mode</b><p>Testing only: every accepted photo produces a monster, with test odds (Common 20 · Uncommon 20 · Rare 25 · Epic 20 · Legendary 15 %). Test monsters never enter your save, collection or encyclopedia, and give no rewards. Wrong object still comes first.</p></div><button class="switch ${S.settings.quickTest ? 'on' : ''}" data-act="toggleQuickTest" aria-label="Toggle Quick Monster Test Mode"></button></div>
+    <div class="toggle"><div><b>Instant capture (test mode)</b><p>Adds each test monster straight to the test collection, without a battle. Off: test monsters can be fought; nothing that happens in a test battle is kept, except a captured monster in the test collection.</p></div><button class="switch ${S.settings.instantCapture !== false ? 'on' : ''}" data-act="toggleInstantCapture" aria-label="Toggle instant capture"></button></div>
+    <div class="row wrap"><button class="btn small grow" data-act="testCollection">Test collection (${TestRoster.list().length})</button><button class="btn small danger" data-act="testClear">Clear test monsters</button></div>
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
     <div class="row wrap"><button class="btn small" data-act="engineRedownload">Delete saved engine files</button><span class="small muted grow" id="devLoadMs">${loadTimesText()}</span></div>
@@ -1188,7 +1258,16 @@ const actions = {
   engineDownload() { ui.engineNoticeOk = true; showEngineLoading(openCamera); },
   devTap() {
     ui.devTaps = (ui.devTaps || 0) + 1;
-    if (ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
+    if (DEV_TOOLS && ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
+  },
+  toggleQuickTest(_, el) { S.settings.quickTest = !S.settings.quickTest; persist(); setSwitch(el, S.settings.quickTest); render(); },
+  toggleInstantCapture(_, el) { S.settings.instantCapture = S.settings.instantCapture === false; persist(); setSwitch(el, S.settings.instantCapture); },
+  testCollection: testCollectionSheet,
+  testView(id) { testMonsterSheet(id); },
+  testDelete(id) { TestRoster.remove(id); testCollectionSheet(); },
+  testClear(_, el) {
+    if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to clear'; return; }
+    TestRoster.clear(); toast('Test monsters cleared.'); settingsSheet();
   },
   toggleForceCPU(_, el) { S.settings.forceCPU = !S.settings.forceCPU; persist(); setSwitch(el, S.settings.forceCPU); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); },
   toggleClipGPU(_, el) { S.settings.clipGPU = !S.settings.clipGPU; persist(); setSwitch(el, S.settings.clipGPU); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); },
