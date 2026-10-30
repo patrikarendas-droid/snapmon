@@ -968,8 +968,7 @@ function makeDNA3(m) {
   const own = OBJECTS[m.obj], o = visualSource(own), cat = CATEGORY[own.cat], tier = RARITY[m.rarity].tier;
   const SR = mulberry(hashStr('species3:' + own.id + ':' + m.rarity)), R = mulberry(m.seed);
   const vis = o.vis;
-  const shape = vis && vis.legacy ? vis.legacy : vis ? 'obj' : (cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : 'blob'));
-  const sub = vis && vis.legacy ? vis.sub || null : (!vis ? m.sub || null : null);
+  const { shape, sub } = designOf(own, m);
   const eyePool = [['round', 'dot', 'sleepy'], ['round', 'googly', 'angry'], ['angry', 'googly', 'cyclops', 'slit'], ['angry', 'slit', 'many', 'cyclops'], ['slit', 'angry', 'cyclops']][tier];
   const mouthPool = [['smile', 'o', 'grin'], ['grin', 'tongue', 'smile', 'zigzag'], ['fangs', 'grin', 'zigzag', 'tongue'], ['chomp', 'fangs', 'tongue'], ['chomp', 'fangs']][tier];
   const topPool = [['none'], ['none', 'antennae', 'tuft'], ['horns', 'antennae', 'mohawk', 'tuft'], ['horns', 'mohawk', 'antennae'], ['crown']][tier];
@@ -1023,10 +1022,18 @@ function makeDNA3(m) {
   if (palDNA) dna.pal = palDNA;
   return dna;
 }
+// which body an object gets: its legacy sprite, an object builder ('obj'), or (no design) its category's shape
+function designOf(own, m = {}) {
+  const o = visualSource(own), vis = o.vis, cat = CATEGORY[own.cat];
+  const shape = vis && vis.legacy ? vis.legacy : vis ? 'obj' : (cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : 'blob'));
+  const sub = vis && vis.legacy ? vis.sub || null : (!vis ? m.sub || null : null);
+  return { shape, sub };
+}
 const D_BUILDER_ALIAS = { fan: 'electric_fan', vacuum: 'vacuum_cleaner', smartwatch: 'wristwatch', robot_toy: 'robot' };
 function objectBuilder(dna) {
   const o = typeof OBJECTS !== 'undefined' && OBJECTS[dna.obj] && visualSource(OBJECTS[dna.obj]);
   if (!o || !o.vis) return null; // family tier: falls through to the category's legacy shape
+  if (dna.shape !== 'obj') return null; // saved before this object had a design: keeps the look it was found with
   if (o.vis === 'D') { const k = D_BUILDER_ALIAS[o.id] || o.id; return PARTS.D[k] ? (g, R, d) => PARTS.D[k](g, R, d) : null; }
   if (o.vis.legacy) return null;    // original sprite: shape/sub already stored in the dna
   if (o.vis.t && PARTS.T[o.vis.t]) return (g, R, d) => PARTS.T[o.vis.t](g, o.vis, d.var || 0, R);

@@ -3,7 +3,7 @@
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.2';
+const GAME_VERSION = '0.4.3';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -336,6 +336,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   const abilities = monsterAbilities(cat, rarity, fam, base.word);
   const o = obj && OBJECTS[obj];
   if (o && o.sig) abilities[0] = { ...o.sig, cd: cdFor(o.sig) }; // object-specific signature move
+  else if (o && o.sigName) abilities[0] = { ...abilities[0], name: o.sigName }; // same numbers, a name that fits the object
   const m = {
     ...base, id: null, fam, level,
     name: o ? speciesName3(obj, rarity, fam) : speciesName(cat, rarity, base.word, fam),
@@ -347,6 +348,31 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
   m.lore = monsterLore(m); // flavour text for this object AND rarity, stored so it never changes (lore.js)
   return m;
+}
+/* v0.4.3: monsters found before their object had a proper design keep the look and text they were found with. The
+   player can choose to update one: only its body design, its signature move's NAME (same numbers) and its flavour text
+   change; colours, eyes, features, stats and level stay. Deterministic, and the old values are kept for undo. */
+function identityUpdate(m) {
+  const o = m && OBJECTS[m.obj]; if (!o || !m.dna || m.dna.v < 3) return null;
+  const want = designOf(o, { aspect: m.aspect, sub: m.sub }), ch = {};
+  if (want.shape !== m.dna.shape || (want.sub || null) !== (m.dna.sub || null)) ch.design = want;
+  const ab = m.abilities && m.abilities[0];
+  if (o.sigName && ab && ab.name === CATEGORY[o.cat].sig.name) ch.sig = o.sigName;
+  if (o.rule) { const fresh = monsterLore({ ...m, abilities: ch.sig ? [{ ...ab, name: ch.sig }] : m.abilities }); if (fresh !== m.lore) ch.lore = fresh; }
+  return ch.design ? ch : null; // offered only where the body changes; the rest rides along
+}
+function applyIdentityUpdate(S, m) {
+  const ch = identityUpdate(m); if (!ch) return false;
+  m.prevIdentity = { shape: m.dna.shape, sub: m.dna.sub || null, lore: m.lore || null, sig: m.abilities[0].name };
+  m.dna.shape = ch.design.shape; m.dna.sub = ch.design.sub;
+  if (ch.sig) m.abilities[0].name = ch.sig;
+  if (ch.lore) m.lore = ch.lore;
+  const d = S.dex[m.species]; if (d && d.dna && d.dna.v >= 3 && d.dna.shape !== ch.design.shape) { d.dna = { ...d.dna, shape: ch.design.shape, sub: ch.design.sub }; }
+  return true;
+}
+function undoIdentityUpdate(m) {
+  const p = m && m.prevIdentity; if (!p) return false;
+  m.dna.shape = p.shape; m.dna.sub = p.sub; if (p.lore) m.lore = p.lore; m.abilities[0].name = p.sig; delete m.prevIdentity; return true;
 }
 function variantLabel(v) { return v === 'spectral' ? 'Spectral' : v === 'mutated' ? 'Mutated' : v === 'shiny' ? 'Prismatic' : ''; }
 

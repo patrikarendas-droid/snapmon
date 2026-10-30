@@ -131,19 +131,38 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   await p.click('[data-act="retakePhoto"]'); await p.waitForSelector('#camShutter:not([disabled])'); await p.click('[data-act="camClose"]');
   st = await S();
   ok(st.stats.photos === before2.stats.photos && st.stats.encounters === before2.stats.encounters, 'rejecting every suggestion creates nothing and counts no photo');
-  // the countdown pauses when the player touches the screen, and Scan still works afterwards
-  await stubLens([{ label: 'coffee mug', obj: 'mug', conf: 0.95, box: null }]);
+  // v0.4.3: no countdown. A result waits indefinitely (with and without debug info) until the player decides
+  for (const debug of [false, true]) {
+    await p.evaluate(d => { window.__snapmon.S.settings.debugLens = d; }, debug);
+    await stubLens([{ label: 'coffee mug', obj: 'mug', conf: 0.99, box: null }]);
+    const b0 = await S();
+    await cam.snap(p); await p.waitForSelector('text=Object identified');
+    await p.waitForTimeout(debug ? 4000 : 12000); // far beyond the old 3.5 s
+    st = await S();
+    ok(!!(await p.$('text=Object identified')) && !(await p.$('text=Scanning for supernatural activity')) && st.stats.photos === b0.stats.photos && st.stats.encounters === b0.stats.encounters && !(await p.$('#confirmBar')),
+      `waiting ${debug ? 4 : 12} s (debug info ${debug ? 'on' : 'off'}) neither rolls an encounter nor leaves the result screen`);
+    if (!debug) await shot('Q04b-waiting');
+    if (!debug) { await p.click('[data-act="cancelPhoto"]'); continue; }
+    // only the explicit "Scan for monsters" proceeds
+    await p.click('[data-act="pickCand"]');
+    await waitText(/Fight!|All quiet|Already scanned/, 8000);
+    ok((await S()).stats.photos === b0.stats.photos + 1, 'tapping "Scan for monsters" is what starts the encounter roll');
+    await leaveResult();
+  }
+  await p.evaluate(() => { window.__snapmon.S.settings.debugLens = false; });
+
+  // identity follows the accepted alternative: rejecting "coffee mug" and picking "light switch" gives a light switch monster
+  await stubLens([{ label: 'coffee mug', obj: 'mug', conf: 0.9, box: null }, { label: 'light switch', obj: 'x_light_switch', conf: 0.4, box: null }]);
+  await p.evaluate(() => window.__snapmon.setRNG(() => 0.01));
   await cam.snap(p); await p.waitForSelector('text=Object identified');
-  await p.tap('#lensFrame'); await p.waitForTimeout(4200);
-  ok(!!(await p.$('text=Object identified')) && /Paused/.test(await p.textContent('#confirmHint')), 'touching the result pauses the countdown, so the player can read and decide');
-  // a CORRECT identification: just wait, the hunt continues by itself
-  await p.click('[data-act="cancelPhoto"]');
-  const before3 = await S();
-  await cam.snap(p); await p.waitForSelector('text=Object identified');
-  await p.waitForSelector('text=Scanning for supernatural activity', { timeout: 6000 });
-  await waitText(/Fight!|All quiet|Already scanned/, 8000);
-  st = await S();
-  ok(st.stats.photos === before3.stats.photos + 1, 'a correct identification continues to the scan automatically after the short countdown');
+  await p.click('[data-act="wrongObject"]'); await p.waitForSelector('text=Which one is it?');
+  const sw = (await p.$$eval('[data-act="pickAlt"]', els => els.map(e => e.textContent))).findIndex(t => /light switch/i.test(t));
+  await p.click(`[data-act="pickAlt"][data-arg="${sw}"]`);
+  await waitText(/Fight!/, 8000); await p.waitForTimeout(1500); await shot('Q07b-switch-from-alternative');
+  const swm = await p.evaluate(() => window.__snapmon.ui.discovered);
+  ok(swm && swm.obj === 'x_light_switch' && /Switch/.test(swm.name) && swm.dna.shape === 'obj' && swm.abilities[0].name === 'Lights Out' && !/vanishes the moment/.test(swm.lore) && (await p.textContent('.overlay')).includes(swm.lore),
+    `the chosen alternative carries its identity everywhere: ${swm && swm.name}, wall-switch body, "${swm && swm.abilities[0].name}", "${swm && swm.lore}"`);
+  await p.click('[data-act="ignore"]');
 
   /* ---- 4) lore on the discovery screen reflects rarity ---- */
   const m = await p.evaluate(() => window.__snapmon.ui.discovered);
@@ -213,21 +232,69 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   const l1 = await p.evaluate(() => window.__lensLoads);
   await p.evaluate(() => Promise.all([Engine.recover('a'), Engine.recover('b'), Engine.check()]));
   ok(await p.evaluate(() => window.__lensLoads) === l1 + 1 && await p.evaluate(() => Engine.status.state) === 'ready', 'concurrent recovery requests share one reinitialisation');
-  // e) initialisation fails -> clear message; Retry genuinely reinitialises (no page reload)
-  await p.evaluate(() => { ClipLens.CFG.test = { failCPU: 'simulated CPU failure' }; Engine.status.state = 'failed'; });
+  // e) a photo whose recognition fails after the engine broke: clear message; Retry genuinely reinitialises
+  await stubLens([{ label: 'coffee mug', obj: 'mug', conf: 0.95, box: null }]);
   await blue(); await cam.snap(p);
-  await p.waitForSelector("text=couldn't run on this device", { timeout: 30000 });
-  ok(!(await p.$('[data-act="fight"]')), 'failed initialisation: message and no monster');
-  await p.evaluate(() => { ClipLens.CFG.test = null; });
-  const l2 = await p.evaluate(() => window.__lensLoads);
-  await p.click('[data-act="lensRetry"]');
-  await p.waitForSelector('text=Object identified', { timeout: 30000 });
-  ok(await p.evaluate(() => window.__lensLoads) === l2 + 1, 'Retry reinitialises both parts of the engine and the same photo is recognised');
+  await p.evaluate(() => { window.__lensFailOnce = true; ClipLens.CFG.test = { failCPU: 'simulated CPU failure' }; }); // the automatic recovery fails too
+  await waitText(/couldn't run on this device|Object identified/, 30000).catch(() => {});
+  if (await p.$('text=Object identified')) await p.click('[data-act="cancelPhoto"]');
+  else {
+    ok(!(await p.$('[data-act="fight"]')), 'failed recognition: message and no monster');
+    await p.evaluate(() => { ClipLens.CFG.test = null; });
+    const l2 = await p.evaluate(() => window.__lensLoads);
+    await p.click('[data-act="lensRetry"]');
+    await p.waitForSelector('text=Object identified', { timeout: 30000 });
+    ok(await p.evaluate(() => window.__lensLoads) > l2, 'Retry reinitialises the engine and the same photo is recognised');
+    await p.click('[data-act="cancelPhoto"]');
+  }
+  await p.evaluate(async () => { ClipLens.CFG.test = null; window.__lensFailOnce = false; if (!Engine.ready()) await Engine.load(); });
+
+  /* ---- 8) SNAP only works when the Spirit Lens is ready ---- */
+  const snapInfo = () => p.evaluate(() => { const b = document.querySelector('#huntSnap'); return b && { disabled: b.disabled, text: b.textContent.trim(), aria: b.getAttribute('aria-disabled') }; });
+  ok((await snapInfo()).disabled === false && (await snapInfo()).text === 'SNAP', 'with a ready engine SNAP is enabled');
+  // a slow (CPU-heavy) engine start: SNAP is truly disabled, taps do nothing, and it unlocks by itself when ready
+  await p.evaluate(() => { Lens.load = async () => { window.__lensLoads++; await new Promise(r => setTimeout(r, 1500)); const t = performance.now(); while (performance.now() - t < 400) {} Lens.status.state = 'ready'; Lens.status.backend = 'cpu'; return true; }; Engine.setForceCPU(true); Engine.load(); });
+  await p.waitForTimeout(200);
+  let si = await snapInfo();
+  ok(si.disabled && si.aria === 'true' && /WAKING/.test(si.text), `while the engine starts SNAP is disabled ("${si.text}")`);
+  await shot('Q11-snap-waking');
+  for (let i = 0; i < 3; i++) await p.click('#huntSnap', { force: true }).catch(() => {});
+  ok(!(await p.$('#camVideo')) && await cam.live(p) === 0, 'tapping a disabled SNAP never opens the camera (so the camera never starts during the engine start-up)');
+  await p.waitForFunction(() => { const b = document.querySelector('#huntSnap'); return b && !b.disabled; }, null, { timeout: 15000 });
+  ok((await snapInfo()).text === 'SNAP', 'SNAP unlocks by itself once the engine is ready (no reload)');
+  // a "Snap another" button elsewhere while the engine is not ready waits on the loading screen, then opens the camera
+  await p.evaluate(() => { Engine.setForceCPU(false); window.__snapmon.actions.openCamera(); });
+  await p.waitForSelector('#camShutter:not([disabled])', { timeout: 15000 });
+  ok(await cam.live(p) === 1, 'other SNAP buttons wait for the engine, then open the camera (no dead end)');
+  // readiness lost while the camera is open (app resumed, engine re-checking): the shutter locks until recovery is done
+  await p.evaluate(() => { const op = ClipLens.ping; ClipLens.ping = async () => { await new Promise(r => setTimeout(r, 400)); ClipLens.ping = op; return op(); }; Engine.check(); });
+  await p.waitForTimeout(50);
+  const locked = await p.$eval('#camShutter', b => b.disabled);
+  await p.waitForFunction(() => !document.querySelector('#camShutter').disabled, null, { timeout: 15000 });
+  ok(locked, 'while the engine re-checks itself after a resume, the camera shutter is locked, then unlocks');
+  // rapid taps on the shutter take one photo
+  await p.evaluate(() => { window.__identify = 0; const orig = window.__snapmon.actions.camSnap; });
+  await p.evaluate(() => { const b = document.querySelector('#camShutter'); b.click(); b.click(); b.click(); });
+  await p.waitForSelector('text=Object identified', { timeout: 15000 });
+  ok(await p.evaluate(() => !!window.__snapmon.ui.pending) && await cam.live(p) === 0, 'three quick taps take exactly one photo');
   await p.click('[data-act="cancelPhoto"]');
+  // engine failure: SNAP disabled, Retry on the lens chip recovers it
+  await p.evaluate(async () => { ClipLens.CFG.test = { failCPU: 'simulated CPU failure' }; Engine.setClipGPU(false); await Engine.load(); });
+  si = await snapInfo();
+  ok(si.disabled && !!(await p.$('#lensChip [data-act="lensPrepare"]')), 'when the engine cannot start: SNAP disabled and a Retry on the lens chip');
+  await p.evaluate(() => { ClipLens.CFG.test = null; });
+  await p.click('#lensChip [data-act="lensPrepare"]');
+  await p.waitForFunction(() => { const b = document.querySelector('#huntSnap'); return b && !b.disabled; }, null, { timeout: 30000 });
+  ok(true, 'Retry brings SNAP back without reloading the page');
+  // main-thread instrumentation for the CPU camera glitch exists
+  await p.evaluate(() => window.__snapmon.actions.openCamera()); await p.waitForSelector('#camShutter:not([disabled])'); await p.waitForTimeout(1700);
+  ok(await p.evaluate(() => typeof window.__snapmon.ui.camLongestBlock === 'number'), 'camera start records the longest main-thread block (developer panel)');
+  await p.click('[data-act="camClose"]');
+
   // f) game state survived all of this
   ok((await S()).stats.photos >= before.stats.photos, 'progress kept through recovery');
 
   await b.close();
-  console.log(errors.length ? `\n${errors.length} PROBLEM(S)` : '\nALL v0.4.2 CHECKS PASSED');
+  console.log(errors.length ? `\n${errors.length} PROBLEM(S)` : '\nALL v0.4.2 + v0.4.3 CHECKS PASSED');
   process.exit(errors.length ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(2); });

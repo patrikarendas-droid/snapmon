@@ -97,13 +97,22 @@ const Engine = (() => {
      check() asks both parts whether they still work (called when the app returns to the foreground); recover() throws
      both parts away and loads them again from the copies saved on the phone (no download). Only one recovery runs at a
      time, and it waits for any load already in progress. A page Chrome has killed entirely restarts from scratch. */
-  let recovering = null;
+  let recovering = null, checkingP = null;
+  // while checking, the engine does not count as ready (the game disables SNAP), so a stale "ready" is never used
   async function check() {
     if (st.state !== 'ready') return st.state !== 'failed';
-    const ok = Lens.healthy() && await ClipLens.ping();
-    if (!ok) { st.recoveries = (st.recoveries || 0) + 1; await recover('check'); }
-    return st.state === 'ready';
+    if (checkingP) return checkingP;
+    st.checking = true; emit(); // not "ready" from this moment until the check is over
+    checkingP = (async () => {
+      try {
+        const ok = Lens.healthy() && await ClipLens.ping();
+        if (!ok) { st.recoveries = (st.recoveries || 0) + 1; await recover('check'); }
+        return st.state === 'ready';
+      } finally { st.checking = false; checkingP = null; emit(); }
+    })();
+    return checkingP;
   }
+  const ready = () => st.state === 'ready' && !st.checking && !recovering && !loading;
   function recover(why) {
     if (recovering) return recovering;
     recovering = (async () => {
@@ -164,5 +173,5 @@ const Engine = (() => {
     reload();
   }
 
-  return { load, recognize, check, recover, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
+  return { load, recognize, check, recover, ready, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
 })();

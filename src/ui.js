@@ -96,7 +96,7 @@ function huntScreen() {
   </section>
   <div class="shutter-row">
     <button class="side-btn" data-act="tab" data-arg="dex"><span class="ic">${ICON.dex}</span>Monsters</button>
-    <button class="shutter" data-act="openCamera" aria-label="Open the Spirit Camera">SNAP</button>
+    ${snapButtonHTML()}
     <button class="side-btn" data-act="tab" data-arg="lab"><span class="ic">${ICON.lab}</span>Orders</button>
   </div>
   ${lensChipHTML()}
@@ -127,29 +127,41 @@ function questHTML(q) {
 /* ---------- live camera (the only way to hunt: no gallery, no file upload) ---------- */
 async function openCamera() {
   closeSheet();
+  if (ui.cameraOpening || Platform.camera.isOpen()) return; // double taps
   // first hunt on this phone: say once what will be downloaded (this is information, not a choice of recogniser)
-  if (Engine.status.state !== 'ready' && !S.settings.engineCached && !ui.engineNoticeOk) return showEngineNotice();
-  const t0 = performance.now();
+  if (snapState() === 'download' && !ui.engineNoticeOk) return showEngineNotice();
+  // the camera opens only with a ready engine; "Snap another" buttons on result screens wait on the loading screen
+  if (!Engine.ready()) { if (Engine.status.state === 'failed') return showEngineFailed(null, Engine.status.kind); return showEngineLoading(openCamera); }
+  ui.cameraOpening = true; ui.snapping = false;
+  const t0 = performance.now(), blocks = watchMainThread();
   $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
     <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
     <div class="cam-frame" id="camFrame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
       <div class="cam-status" id="camStatus"><span><i class="spin"></i> Starting camera…</span></div></div>
     <div class="zoom-row" id="zoomRow" hidden><button class="btn small ghost" data-act="camZoom" data-arg="-" aria-label="Zoom out">−</button>
       <input type="range" id="zoomRange" aria-label="Zoom" min="1" max="3" step="0.1" value="1"><button class="btn small ghost" data-act="camZoom" data-arg="+" aria-label="Zoom in">+</button><span class="small num" id="zoomVal">1.0×</span></div>
+    <p class="small" id="camLensHint" style="text-align:center;margin:0;color:var(--flash)" hidden></p>
     <p class="muted small" style="text-align:center;margin:0">Fill the frame with one real object. The photo is analysed on this phone and never saved.</p>
     <div class="cam-controls"><button class="shutter" id="camShutter" data-act="camSnap" aria-label="Take photo" disabled>SNAP</button></div>
   </div></div>`;
   const v = $('#camVideo');
   try {
     await Platform.camera.open(v); // resolves once the preview is really showing frames
+    ui.cameraOpening = false;
     if ($('#camVideo') !== v) { Platform.camera.close(v); return; } // closed (or reopened) while starting
     const st = $('#camStatus'); if (st) st.remove();
-    const btn = $('#camShutter'); if (btn) btn.disabled = false;
+    syncShutter();
     setupZoom(v);
     ui.camStartMs = Math.round(performance.now() - t0);
-    // the engine starts only once the preview is live, so its start-up (heavy on the CPU path) never delays the camera
-    requestAnimationFrame(() => setTimeout(() => { if (Engine.status.state !== 'ready') Engine.load(); }, 60));
-  } catch (e) { Platform.camera.close(v); if ($('#camVideo') === v) showCameraError(e); }
+    setTimeout(() => { ui.camLongestBlock = blocks.stop(); }, 1500);
+  } catch (e) { ui.cameraOpening = false; blocks.stop(); Platform.camera.close(v); if ($('#camVideo') === v) showCameraError(e); }
+}
+/* Main-thread blocks while the camera starts (Chrome's Long Tasks API). A frozen or blank viewfinder for about a second
+   means something held the main thread; the longest block is shown in the developer panel next to the camera time. */
+function watchMainThread() {
+  let longest = 0, obs = null;
+  try { obs = new PerformanceObserver(list => { for (const e of list.getEntries()) longest = Math.max(longest, Math.round(e.duration)); }); obs.observe({ type: 'longtask', buffered: false }); } catch (e) { obs = null; }
+  return { stop() { try { obs && obs.disconnect(); } catch (e) {} obs = null; return longest; } };
 }
 // zoom controls: buttons, slider and two-finger pinch on the viewfinder; hidden if the camera offers no zoom at all
 function setupZoom(v) {
@@ -180,9 +192,10 @@ function showCameraError(e) {
     <button class="btn primary block" data-act="openCamera">Try again</button>
     <button class="btn ghost block" data-act="closeOverlay">Back</button></div></div>`;
 }
-function closeCamera() { Platform.camera.close($('#camVideo')); ui.camZoom = null; $('#overlay').innerHTML = ''; render(); }
+function closeCamera() { Platform.camera.close($('#camVideo')); ui.camZoom = null; ui.cameraOpening = false; $('#overlay').innerHTML = ''; render(); }
 function camSnap() {
-  const v = $('#camVideo'); if (!v || !v.videoWidth) return;
+  const v = $('#camVideo'); if (!v || !v.videoWidth || ui.snapping || !Engine.ready()) return; // one shot, ready engine only
+  ui.snapping = true; const btn = $('#camShutter'); if (btn) btn.disabled = true;
   SFX.shutter();
   const canvas = Platform.camera.capture(v); // exactly the region the viewfinder shows (including zoom)
   Platform.camera.close(v); ui.camZoom = null;
@@ -223,6 +236,28 @@ function engineStatusLine() {
   if (E.state === 'failed') return `Could not start: ${esc(E.error)}.`;
   return S.settings.engineCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet.';
 }
+/* SNAP only works when the Spirit Lens (the recognition engine) is ready. While it loads, wakes up, re-checks itself
+   after the app was in the background, or has failed, the button is really disabled (not just dimmed). Before the very
+   first download it opens the one-time download notice instead (no capture can start without the engine). */
+function snapState() {
+  const E = Engine.status;
+  if (Engine.ready()) return 'ready';
+  if (E.state === 'failed') return 'failed';
+  if (E.state === 'idle' && !S.settings.engineCached) return 'download';
+  return 'waking';
+}
+function snapButtonHTML() {
+  const st = snapState(), off = st === 'waking' || st === 'failed';
+  const label = { ready: 'Open the Spirit Camera', download: 'Download the Spirit Lens to start hunting', waking: 'SNAP is unavailable while the Spirit Lens wakes up', failed: 'SNAP is unavailable: the Spirit Lens could not start' }[st];
+  return `<button class="shutter ${off ? 'waiting' : ''}" id="huntSnap" data-act="openCamera" aria-label="${label}" ${off ? 'disabled aria-disabled="true"' : ''}>${st === 'waking' ? '<span class="waking">WAKING</span>' : 'SNAP'}</button>`;
+}
+// the camera's own shutter: needs live frames AND a ready engine
+function syncShutter() {
+  const btn = $('#camShutter'); if (!btn) return;
+  const v = $('#camVideo'), frames = !!(v && v.videoWidth && !$('#camStatus'));
+  btn.disabled = !(frames && Engine.ready()) || !!ui.snapping;
+  const hint = $('#camLensHint'); if (hint) { const waiting = frames && !Engine.ready(); hint.hidden = !waiting; hint.textContent = Engine.status.state === 'failed' ? 'The Spirit Lens could not start. Close the camera and tap Retry.' : 'Spirit Lens waking up… SNAP unlocks in a moment.'; }
+}
 function lensChipHTML() {
   const E = Engine.status;
   const dot = E.state === 'ready' ? 'var(--good)' : E.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
@@ -233,6 +268,8 @@ function lensChipHTML() {
 }
 Engine.onChange(() => {
   const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
+  const snap = $('#huntSnap'); if (snap) snap.outerHTML = snapButtonHTML();
+  syncShutter();
   const pr = $('#engineProgress'); if (pr) pr.outerHTML = engineProgressHTML();
   const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
   // Settings: only the engine row and the developer readouts change; the sheet itself is never rebuilt for progress
@@ -441,35 +478,19 @@ function candLine(c) {
   return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${score}</span>`;
 }
 const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
-/* An automatic identification is never committed silently: the player sees what the lens found and has a few
-   seconds to say "Wrong object" BEFORE anything is rolled. The countdown pauses as soon as the screen is touched. */
-const CONFIRM_MS = 3500;
+/* An identification is never committed by itself: the player looks at it as long as they like and then explicitly
+   taps "Scan for monsters" (the only way to reach the encounter roll) or "Wrong object". There is no timer. */
 function showIdentified(p, i) {
   const c = p.rec.candidates[i];
   SFX.click();
-  const auto = !S.settings.debugLens;
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px" id="identRoot">
     <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="card ident"><span class="e">${catIcon(c)}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
-    ${auto ? `<div class="bar confirm-bar" aria-hidden="true"><i id="confirmBar"></i></div><p class="muted small" style="text-align:center;margin:0" id="confirmHint">Scanning for monsters in a moment… Not right? Tap <b>Wrong object</b>.</p>` : ''}
     <div class="row"><button class="btn primary grow" data-act="pickCand" data-arg="${i}">Scan for monsters</button><button class="btn" data-act="wrongObject" data-arg="${i}">Wrong object</button></div>
     ${debugHTML(p.rec)}
   </div></div>`;
   drawDetections(p, i);
-  if (!auto) return;
-  const t0 = Date.now(), root = $('#identRoot');
-  p.confirm = { paused: false };
-  root.addEventListener('pointerdown', ev => { if (!ev.target.closest('[data-act]') && !p.confirm.paused) { p.confirm.paused = true; const h = $('#confirmHint'); if (h) h.textContent = 'Paused. Tap Scan for monsters when you are ready, or Wrong object.'; } });
-  const tick = () => {
-    if (ui.pending !== p || p.scanning || p.rejected || !$('#confirmBar')) return;
-    if (p.confirm.paused) { $('#confirmBar').style.width = '0%'; return; }
-    const f = (Date.now() - t0) / CONFIRM_MS;
-    $('#confirmBar').style.width = Math.min(100, f * 100) + '%';
-    if (f >= 1) return scan(i);
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
 }
 /* "Wrong object": nothing is rolled or created for a rejected identification. The player may pick one of the other
    objects the models themselves proposed for THIS photo (never free text, never arbitrary objects), or retake it. */
@@ -947,6 +968,7 @@ function monsterSheet(id) {
       ${m.thumb ? `<div class="row"><img src="${m.thumb}" alt="Original photo" style="width:72px;border-radius:8px"><span class="muted">The photo it was found in (kept because you enabled it in settings).</span></div>` : ''}
     </div>
     <p class="muted small lore lore-${m.rarity}">${esc(loreOf(m))}</p>
+    ${identityUpdate(m) ? `<div class="card small stack" style="gap:6px;border-color:var(--ecto)"><b>New ${esc(OBJECTS[m.obj].name.toLowerCase())} look available</b><span class="muted">You found this monster before SNAPMON had a proper design for a ${esc(OBJECTS[m.obj].name.toLowerCase())}. Updating changes its body design, its flavour text and the name of its signature move. Colours, eyes, stats and level stay exactly the same.</span><button class="btn small ecto" data-act="refreshLook" data-arg="${m.id}">Update its look</button></div>` : m.prevIdentity ? `<button class="btn small ghost" data-act="undoLook" data-arg="${m.id}">Restore its original look</button>` : ''}
     <div class="row">
       <button class="btn grow ${S.companion === m.id ? '' : 'ecto'}" data-act="buddy" data-arg="${m.id}">${S.companion === m.id ? 'Dismiss buddy' : 'Make hunting buddy'}</button>
       <button class="btn danger" data-act="release" data-arg="${m.id}">Release</button>
@@ -1080,7 +1102,7 @@ function engineRowHTML() {
   return `<div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}`;
 }
 // start-up stages, to investigate slow or blank starts (e.g. the detector on the CPU backend)
-const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
+const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms, longest main-thread block ${ui.camLongestBlock ?? '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
 const backendsText = () => Object.entries(Engine.status.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded';
 function settingsSheet() {
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
@@ -1156,6 +1178,8 @@ const actions = {
   cancelPhoto,
   guide() { openSheet(Guide.html(ui.guideOpen), 'guide'); },
   pickCand(i) { scan(i); },
+  refreshLook(id) { const m = S.monsters.find(x => x.id === id); if (m && applyIdentityUpdate(S, m)) { persist(); render(); monsterSheet(id); toast('Look updated.'); } },
+  undoLook(id) { const m = S.monsters.find(x => x.id === id); if (m && undoIdentityUpdate(m)) { persist(); render(); monsterSheet(id); } },
   wrongObject(arg) { const p = ui.pending; if (!p || !p.rec || p.scanning) return; wrongObject(p, arg === 'all' ? p.rec.candidates.map(c => c.obj) : [p.rec.candidates[+arg].obj]); },
   pickAlt(i) { const p = ui.pending; if (p && p.alts && p.alts[+i]) scan(p.alts[+i]); },
   retakePhoto() { cancelPhoto(); openCamera(); },
@@ -1327,4 +1351,4 @@ if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFr
 delete S.settings.expLens;
 if (S.settings.forceCPU && devOn()) Engine.setForceCPU(true);
 if (S.settings.clipGPU && devOn()) Engine.setClipGPU(true);
-if (S.settings.engineCached) setTimeout(() => Engine.load(), 1200); // engine saved on this phone: start it in the background
+if (S.settings.engineCached) setTimeout(() => Engine.load(), 300); // engine saved on this phone: wake it right away (SNAP unlocks when ready)

@@ -22,9 +22,9 @@ The repository must be public for free GitHub Pages, or on a paid plan if privat
 
 ## How it plays
 
-1. Tap **SNAP**. The live rear camera opens inside the game (`getUserMedia`). Frame one real object (zoom with the slider, the +/− buttons or a two-finger pinch) and tap the shutter. The photo is exactly what the viewfinder shows. The camera stops as soon as the shot is taken, the camera screen is closed, or you leave the app. There is **no gallery or file upload**, and photos are never saved or uploaded.
+1. Tap **SNAP** (it is enabled only once the Spirit Lens, the recognition engine, is ready; while it wakes up it shows WAKING). The live rear camera opens inside the game (`getUserMedia`). Frame one real object (zoom with the slider, the +/− buttons or a two-finger pinch) and tap the shutter. The photo is exactly what the viewfinder shows. The camera stops as soon as the shot is taken, the camera screen is closed, or you leave the app. There is **no gallery or file upload**, and photos are never saved or uploaded.
 2. The **Spirit Lens** (on-device AI, see below) recognises what is in the photo:
-   - one confident object → shown for a few seconds with **Wrong object** before anything is rolled (touch the screen to pause; it continues by itself if you do nothing);
+   - one confident object → shown with **Scan for monsters** and **Wrong object**; nothing is rolled until you choose (no timer);
    - several objects → you pick which detected object to hunt (numbered boxes on the photo);
    - unsure → you pick among the lens's own top suggestions;
    - nothing recognisable → *"Unknown object"* with a retake button, and no monster.
@@ -93,6 +93,20 @@ leave immediately. A native build will call the same logic from the hardware Bac
 
 - **Encounters** (only for recognised objects): base 45% + research lens bonuses, +15% for an object type you have never photographed, −12% for spamming the same type, and a 64-bit perceptual hash rejects near-identical repeat photos (×0.3 chance, no pity credit). Hidden pity: a guaranteed encounter after 4 quiet photos (3 with research), and a guaranteed Rare-or-better after 10 encounters without one. Rarity weights: Common 46 / Uncommon 28 / Rare 20 / Epic 5 / Legendary 1. The very first photo always finds an easy monster.
 - **Procedural monsters** (`src/objects.js`, `src/parts.js`, `src/sprites.js`): a registry links each recognised object → identity → visual template → variation → stats and signature move. Designs come in honest tiers: *specific* (hand-built from reusable parts, e.g. forklift, excavator, office chair, teapot), *composed* (a parametric template such as vehicle, seat or appliance with object-specific parameters), *related* (borrows a close relative's design, e.g. dog breeds), and *family* (the category's general shape). Settings → Developer shows the counts, and every monster sheet says which kind of design it has. Individuals vary in colour, eyes, mouth, pattern and rarity features while keeping the object's silhouette (`tests/sprites-v3.js` checks this). Legacy (v0.1/v0.2) monsters: 39 object categories with 60+ body builders including sub-types; the original 30 (toilet, mug, shoe, plant, laptop, banana, sofa, phone, bottle, book, lamp, chair, car, pet, tree, burger, fruit, clothing, toolbox, teddy, bin, mirror, fridge, candle, clock, key, backpack, pillow, faucet, TV) plus generic shapes for typed-in objects. Species traits (eyes, mouth, horns/crowns, legs) come from a hash of object + rarity; individual traits (colours from the photo, pattern, arms) from the monster's seed. Rarity adds anatomy: rare → horns/spikes/patterns, epic → wings/extra eyes, legendary → crowns, glowing eyes, auras and an ultimate move. Variants: Spectral, Mutated and Prismatic (unlocked by research). Each monster's full visual DNA is saved, so captured monsters never change.
+- **Object identity (v0.4.3)**: about 1,650 objects come from the large recognition vocabulary. They used to be drawn with
+  their category's single template, so a light switch or a security camera (filed under "tool") became a toolbox with
+  toolbox flavour text. Data-driven design rules (`DESIGN_RULES` in `src/objects.js`) now give them the closest honest
+  design: new reusable templates (wall plates for switches, sockets, thermostats, doorbells, detectors; security, dome,
+  web and dash cameras; street lamps, traffic lights, meters, signs, bollards; boards and easels; batteries, plugs, cables,
+  screws, nuts, chains, cards, coins, discs, chips, rings, medical and science kit, tents, fences, bells, scales,
+  treadmills…), new tool heads, or the design of a close relative. Each rule also picks a flavour-text group (electric,
+  camera, street, office, medical, …) and a fitting name for the signature move, whose numbers stay the category's.
+  Objects no rule covers keep their category shape where it fits (food, plants, animals, clothes…) or get a neutral
+  shape instead of another object's look. Current coverage: 163 specific, 503 composed, 634 related, 1,001 family
+  (26 of them neutral; the rest are foods, plants, animals, clothes and similar where the category shape fits).
+  Before/after: `docs/identity-before-after.png`; more designs: `docs/identity-designs-*.png`. Monsters found before v0.4.3 keep their saved look; the monster sheet offers "Update its look"
+  (body design, flavour text and move name change; colours, eyes, stats stay; undoable). `tests/identity.js` checks the
+  mapping, and `node tools/contact-sheet.js out.png <object ids…>` renders designs for visual review.
 - **Families & weaknesses**: Organic, Mechanical, Elemental, Household, Food, Botanical, Spectral, Mutated — each weak or resistant to weapon elements (Slash, Ballistic, Arcane, Shock, Toxic).
 - **Combat**: poison, burn, stun, defense down, attack/defense buffs, immunity; enemy abilities with cooldowns; capture chance from HP, rarity, status effects and gear.
 - **Weapons**: Rusty Hunter Sword, Ghostbuster Pistol (double-tap, never misses), Cursed Dagger (crits + poison), Arcane Wand (armour-piercing, burn), Thunder Hammer (huge, inaccurate, stuns). Forge with materials, upgrade to +5 (+8 with research). Six droppable charms, two slots from level 5.
@@ -114,7 +128,7 @@ src/parts.js            sprite components, parametric templates, dedicated objec
 src/sprites.js          seeded RNG, pixel-grid sprite engine, monster DNA (v1/v2 legacy + v3 object DNA)
 src/labels.js           generated recogniser label → object mapping (tools/gen-labels.js)
 src/platform.js         camera / storage / device layer (swap for a native build, see docs/ANDROID.md)
-src/lore.js             rarity-specific monster flavour text (deterministic, stored with each monster)
+src/lore.js             rarity- and object-group-specific flavour text (deterministic, stored with each monster)
 src/game.js             state, save migration, rule numbers (MECH), encounters, monsters, combat, rewards (no DOM)
 src/audio.js            WebAudio sound effects
 src/color.js            object palette extraction with background suppression (pure, unit-tested)

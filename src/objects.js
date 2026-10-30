@@ -406,6 +406,247 @@ const VOCAB_EXTRA = {
   banana: 'banana bunch, banana peel, banana split, plantain chips',
 };
 
+/* ---------- v0.4.3: designs for vocabulary objects ----------
+   Before v0.4.3 every vocabulary-only object was drawn with its category's single template, so a light switch or a
+   security camera (filed under "tool") became a toolbox with toolbox lore. These rules give each object the closest
+   honest design: a composed template with object parameters (V), or the design of a close relative (LIKE). Each rule
+   also names a lore group (lore.js) and a name for the signature move; the move keeps its category's numbers, so combat
+   balance is unchanged. First matching rule wins. Objects no rule covers get their category's neutral template
+   (CAT_FALLBACK_VIS) instead of a specific object's look. Tests (tests/identity.js) check the important cases. */
+const LIKE = id => ({ like: id });
+const DESIGN_RULES = [
+  // electrical fittings
+  [/light switch|dimmer/, V('wallplate', { kind: 'rocker' }), 'electric', 'Lights Out', [45, 6, 88]],
+  [/power socket|wall socket|outlet/, V('wallplate', { kind: 'socket', wide: true }), 'electric', 'Power Surge', [45, 6, 88]],
+  [/thermostat/, V('wallplate', { kind: 'dial' }), 'electric', 'Heatwave Dial', [45, 6, 88]],
+  [/fuse box|breaker/, V('wallplate', { kind: 'box', wide: true }), 'electric', 'Blown Fuse', [210, 8, 70]],
+  [/doorbell/, V('wallplate', { kind: 'bell' }), 'alarm', 'Ding-Dong Dash', [45, 6, 88]],
+  [/intercom/, V('wallplate', { kind: 'grille' }), 'alarm', 'Buzz Me In', [210, 8, 70]],
+  [/keypad|alarm panel/, V('wallplate', { kind: 'keypad' }), 'alarm', 'Wrong Code'],
+  [/smoke detector|fire alarm|carbon monoxide/, V('wallplate', { kind: 'disc' }), 'alarm', 'Shrill Chirp', [45, 6, 88]],
+  [/^plug$|^plug /, V('part', { kind: 'plug' }), 'electric', 'Unplugged'],
+  [/extension cord|power strip/, V('part', { kind: 'strip' }), 'electric', 'Overload'],
+  [/power bank|battery|batteries/, V('part', { kind: 'battery' }), 'electric', 'Low Battery'],
+  [/wireless charger/, V('part', { kind: 'disc' }), 'electric', 'Trickle Charge'],
+  [/charger/, V('part', { kind: 'plug' }), 'electric', 'Fast Charge'],
+  [/usb cable|cable|cord$/, V('part', { kind: 'coil' }), 'hardware', 'Tangle'],
+  [/band aid/, V('part', { kind: 'bandage' }), 'medical', 'Patch Up'],
+  [/hard disc/, V('part', { kind: 'chip' }), 'computer', 'Bit Flip'],
+  [/^coil$|^knot$|^reel$|spindle/, V('part', { kind: 'coil' }), 'hardware', 'Tangle'],
+  [/manhole cover|^shield$/, V('part', { kind: 'disc' }), 'street'],
+  [/mountain tent/, V('part', { kind: 'tent' }), 'outdoor', 'Pitch Camp'],
+  [/flagpole|^pole$|turnstile|pedestal/, V('pole', { kind: 'post' }), 'street'],
+  [/^pick$/, V('handtool', { head: 'pickaxe' }), 'tool'],
+  [/hair slide|buckle/, V('part', { kind: 'clip' }), 'jewel'],
+  [/pencil sharpener|rubber eraser|face powder|mousetrap|oil filter/, V('part', { kind: 'block' }), 'gadget'],
+  [/oscilloscope/, LIKE('monitor'), 'science'],
+  [/oxygen mask|snorkel|muzzle/, LIKE('glasses'), 'gadget'],
+  // cameras
+  [/security camera|cctv/, V('cctv', { kind: 'bullet' }), 'camera', 'Surveillance Glare', [210, 6, 84]],
+  [/dome camera/, V('cctv', { kind: 'dome' }), 'camera', 'Surveillance Glare', [210, 6, 84]],
+  [/webcam|baby monitor/, V('cctv', { kind: 'webcam' }), 'camera', 'Zoom Call'],
+  [/dashcam|action camera/, V('cctv', { kind: 'box' }), 'camera', 'Record Mode'],
+  [/camera lens|film camera|instant camera|cinema camera|video camera|camcorder/, LIKE('camera'), 'camera', 'Flash Burst'],
+  [/drone controller/, LIKE('game_controller'), 'gadget'],
+  [/drone|rc helicopter/, LIKE('helicopter'), 'gadget', 'Rotor Wash'],
+  [/security monitor/, LIKE('monitor'), 'camera'],
+  // street furniture
+  [/street lamp|lamp post|lamppost/, V('pole', { kind: 'lamp' }), 'street', 'Flicker', [210, 12, 32]],
+  [/traffic light/, V('pole', { kind: 'lights' }), 'street', 'Red Light', [150, 20, 24]],
+  [/parking meter/, V('pole', { kind: 'meter' }), 'street', 'Time Expired', [210, 10, 60]],
+  [/stop sign/, V('pole', { kind: 'sign8' }), 'street', 'Full Stop', [0, 78, 46]],
+  [/road sign|sign board|scoreboard|placard/, V('pole', { kind: 'signrect' }), 'street', 'Detour'],
+  [/bollard/, V('pole', { kind: 'bollard' }), 'street', 'Roadblock', [48, 85, 55]],
+  [/coat rack|hat stand/, V('pole', { kind: 'post' }), 'furniture'],
+  [/ceiling light|pendant light|wall lamp|chandelier|ring light|studio light|light stand|desk light|reading light|floor light/, LIKE('lamp'), 'light'],
+  // boards and art
+  [/whiteboard/, V('board', { kind: 'white' }), 'office', 'Marker Squeak'],
+  [/chalkboard/, V('board', { kind: 'chalk' }), 'office', 'Nails on Chalk'],
+  [/easel/, V('board', { kind: 'easel' }), 'art'],
+  [/projector screen/, V('board', { kind: 'screen' }), 'office'],
+  [/notice board|cork board|bulletin/, V('board', { kind: 'cork' }), 'office'],
+  [/canvas|painting|poster|wall art|picture frame|photo frame|tapestry|stained glass/, V('board', { kind: 'canvas' }), 'art', 'Brushstroke'],
+  // office
+  [/stapler remover|hole puncher|label maker|tape gun/, LIKE('stapler'), 'office', 'Paper Jam'],
+  [/glue gun|caulk gun|nerf gun|water gun|toy gun/, LIKE('power_drill'), 'gadget'],
+  [/shredder|laminator/, V('appliance', { w: 24, h: 14, topSlots: true, feet: false }), 'office', 'Paper Jam'],
+  [/clipboard|notepad|sticky note|folder|ring binder|planner|calendar|diary|journal|notebook/, LIKE('book'), 'office'],
+  [/paper clip|binder clip|safety pin|push pin|thumbtack|hairpin|hair clip|tie clip/, V('part', { kind: 'clip' }), 'office', 'Pinch'],
+  [/rubber band|hair tie|hula hoop/, V('part', { kind: 'ring' }), 'office'],
+  [/eraser|sharpener|ink pad|^stamp$|pill box|hinge|zippo|lighter|glasses case|contact lens case|sandpaper/, V('part', { kind: 'block' }), 'gadget'],
+  [/ruler|protractor|set square|level tool/, V('handtool', { head: 'ruler' }), 'office', 'Measure Twice'],
+  [/chalk$|paint tube|glue stick|laser pointer|toothpick|soldering iron|stylus|cigarette|vape|incense stick/, V('handtool', { head: 'pen' }), 'office'],
+  [/envelope opener|utility knife|box cutter|peeler/, V('handtool', { head: 'knife' }), 'tool'],
+  [/metal detector/, V('handtool', { head: 'detector' }), 'outdoor', 'Treasure Ping'],
+  [/megaphone/, LIKE('trumpet'), 'alarm', 'Megaphone Blast'],
+  [/walkie|pager|cordless phone|satellite phone|flip phone/, LIKE('phone'), 'gadget'],
+  [/multimeter|calculator|gps device|fitness tracker/, LIKE('calculator'), 'gadget'],
+  [/globe/, V('part', { kind: 'globe' }), 'science'],
+  [/^map$|atlas/, LIKE('newspaper'), 'office'],
+  [/compass|pocket watch|stopwatch|kitchen timer|egg timer/, LIKE('clock'), 'gadget'],
+  // medical and science
+  [/syringe/, V('handtool', { head: 'syringe' }), 'medical', 'Booster Shot'],
+  [/stethoscope/, V('part', { kind: 'stetho' }), 'medical', 'Heartbeat Check', [220, 10, 25]],
+  [/thermometer|rain gauge/, V('handtool', { head: 'thermo' }), 'medical', 'Fever Spike'],
+  [/bandage|plaster/, V('part', { kind: 'bandage' }), 'medical', 'Patch Up'],
+  [/first aid|first-aid/, V('part', { kind: 'kit' }), 'medical', 'Emergency Kit', [0, 70, 50]],
+  [/inhaler/, V('vessel', { prof: [[10, 5], [7, 3]], nozzle: true, rigid: true }), 'medical'],
+  [/hearing aid|earpiece/, LIKE('headphones'), 'gadget'],
+  [/crutch|cane|walking stick|hiking pole|ski pole/, V('handtool', { head: 'cane' }), 'outdoor'],
+  [/microscope|telescope|binocular|tripod/, V('part', { kind: 'scope' }), 'science', 'Close Look'],
+  [/test tube/, V('vessel', { prof: [[22, 3], [2, 4]], rigid: true }), 'science', 'Bubbling Brew'],
+  [/beaker|lab flask|petri dish/, V('vessel', { prof: [[12, 9], [8, 5], [4, 4]], liquid: true, rigid: true }), 'science', 'Bubbling Brew'],
+  [/magnifying glass|magnifier|monocle/, V('handtool', { head: 'magnifier' }), 'science', 'Close Look'],
+  // hardware
+  [/^nail$|screw|bolt/, V('part', { kind: 'screw' }), 'hardware', 'Drill Down'],
+  [/^nut$|washer/, V('part', { kind: 'nut' }), 'hardware', 'Lock Tight'],
+  [/chain/, V('part', { kind: 'chain' }), 'hardware', 'Chain Whip'],
+  [/rope|bungee|yarn|garden hose|hose reel|jump rope|skipping rope|string lights|fairy lights|led strip/, V('part', { kind: 'coil' }), 'hardware', 'Tangle'],
+  [/vise|clamp/, V('part', { kind: 'clamp' }), 'hardware', 'Vice Grip'],
+  [/padlock key|key fob|keyring|usb key|car key/, LIKE('key'), 'gadget'],
+  // hand tools (stay with the tool lore)
+  [/chisel|file tool/, V('handtool', { head: 'chisel' }), 'tool'],
+  [/crowbar/, V('handtool', { head: 'crowbar' }), 'tool'],
+  [/hacksaw/, V('handtool', { head: 'saw' }), 'tool'],
+  [/pickaxe|ice axe/, V('handtool', { head: 'pickaxe' }), 'tool'],
+  [/sledge/, V('handtool', { head: 'hammer' }), 'tool'],
+  [/trowel|beach spade/, V('handtool', { head: 'trowel' }), 'tool'],
+  [/snow shovel/, V('handtool', { head: 'shovel' }), 'tool'],
+  [/paint roller/, V('handtool', { head: 'roller' }), 'tool'],
+  [/hedge trimmer|leaf blower|pressure washer/, LIKE('power_drill'), 'tool'],
+  [/paint can|oil can/, LIKE('can'), 'tool'],
+  // kitchen
+  [/rolling pin/, V('handtool', { head: 'rollingpin' }), 'kitchen', 'Flatten'],
+  [/cheese grater|grater/, V('part', { kind: 'grater' }), 'kitchen', 'Shred'],
+  [/tongs|chopsticks/, V('handtool', { head: 'tongs' }), 'kitchen'],
+  [/can opener|corkscrew|bottle opener|nutcracker|garlic press|nail clippers|tweezers/, V('handtool', { head: 'pliers' }), 'kitchen'],
+  [/potato masher|spatula/, V('handtool', { head: 'spatula' }), 'kitchen'],
+  [/colander|sieve|strainer/, LIKE('bowl'), 'kitchen'],
+  [/funnel/, V('vessel', { prof: [[6, 2], [8, 8]], rigid: true }), 'kitchen'],
+  [/measuring cup/, V('vessel', { prof: [[12, 7]], handle: true, liquid: true }), 'kitchen'],
+  [/cutting board|cheese board|serving tray|mouse pad|doormat|bath mat|yoga mat|exercise mat/, V('part', { kind: 'card' }), 'kitchen'],
+  [/oven mitt|boxing glove/, LIKE('sock'), 'kitchen'],
+  [/apron|life jacket/, LIKE('jacket'), 'outdoor'],
+  [/hair straightener|curling iron|electric razor|shaver|massage gun/, LIKE('hair_dryer'), 'gadget'],
+  [/toothbrush|hair brush|makeup brush|comb/, V('handtool', { head: 'brush' }), 'gadget'],
+  [/razor/, V('handtool', { head: 'knife' }), 'gadget'],
+  // craft
+  [/sewing needle|knitting needles|crochet hook/, V('handtool', { head: 'needle' }), 'craft', 'Stitch Up'],
+  [/pin cushion/, V('produce', { shape: 'round', top: 'stem' }), 'craft', 'Pin Prick'],
+  [/thimble/, V('vessel', { prof: [[8, 5]], rigid: true }), 'craft'],
+  // outdoor and sport
+  [/fishing rod|fishing reel/, V('handtool', { head: 'rod' }), 'outdoor', 'Reel In'],
+  [/tent|gazebo|canopy tent/, V('part', { kind: 'tent' }), 'outdoor', 'Pitch Camp'],
+  [/sleeping mat|camping mattress|air mattress/, LIKE('sleeping_bag'), 'outdoor'],
+  [/sled|ski$|snowboard|surfboard|hoverboard|electric skateboard/, LIKE('skateboard'), 'outdoor', 'Wipeout'],
+  [/paddle|oar/, V('handtool', { head: 'paddle' }), 'outdoor', 'Paddle Slap'],
+  [/sprinkler|watering/, LIKE('watering_can'), 'outdoor'],
+  [/fence|gate$|garden gate|hurdle|tennis net|volleyball net|football goal|cricket stumps/, V('part', { kind: 'fence' }), 'outdoor'],
+  [/garden gnome|party hat/, V('produce', { shape: 'tall', top: 'cap' }), 'outdoor'],
+  [/birdhouse|bird feeder|letterbox/, LIKE('mailbox'), 'outdoor'],
+  [/planter|flower pot/, LIKE('potted_plant'), 'outdoor'],
+  [/compost bin|wheelie bin|pedal bin|waste paper basket|sanitary bin|sharps bin/, LIKE('trash_can'), 'outdoor'],
+  [/recycling crate|recycling box/, LIKE('crate'), 'outdoor'],
+  [/manhole|drain cover|frisbee|discus|hockey puck|spinning top|yo-yo/, V('part', { kind: 'disc' }), 'street'],
+  [/golf club|croquet mallet|polo mallet|lacrosse|hurling stick/, V('handtool', { head: 'club' }), 'sport', null, [210, 8, 70]],
+  [/javelin|golf tee/, V('handtool', { head: 'pen' }), 'sport'],
+  [/swim goggles|ski goggles|smart glasses|vr headset/, LIKE('glasses'), 'gadget'],
+  [/bicycle helmet|swim cap/, LIKE('helmet'), 'sport'],
+  [/bowling pin/, V('vessel', { prof: [[10, 6], [6, 3], [6, 4]], rigid: true }), 'sport'],
+  [/punching bag|kick pad/, V('vessel', { prof: [[24, 7]], cap: 3, rigid: true }), 'sport'],
+  [/whistle sport|whistle small/, LIKE('trumpet'), 'sport'],
+  [/medal ribbon|medal/, LIKE('trophy'), 'sport'],
+  // appliances, machines and electronics in the wrong body
+  [/treadmill|rowing machine|elliptical/, V('part', { kind: 'treadmill' }), 'gym', 'Cardio Grind'],
+  [/exercise bike/, LIKE('bicycle'), 'gym', 'Cardio Grind'],
+  [/arcade machine|jukebox|slot machine|atm machine|ticket machine|photo booth|vending kiosk/, LIKE('vending_machine'), 'arcade'],
+  [/kitchen scale|bathroom scale|^scale$/, V('part', { kind: 'scale' }), 'kitchen', 'Weigh In'],
+  [/grill|barbecue|smoker|hot plate|stove top|induction hob/, V('appliance', { w: 28, h: 14, burners: true, flame: true, panel: 'dial' }), 'kitchen'],
+  [/robot vacuum/, V('part', { kind: 'disc' }), 'gadget'],
+  [/carpet cleaner|steam cleaner|floor polisher/, LIKE('vacuum'), 'gadget'],
+  [/ceiling fan|tower fan|space heater fan|extractor fan/, LIKE('fan'), 'gadget'],
+  [/server|workstation/, LIKE('desktop_pc'), 'computer'],
+  [/chromebook|netbook/, LIKE('laptop'), 'computer'],
+  [/^cd$|^dvd$|vinyl record|cd changer/, V('part', { kind: 'disc' }), 'media', 'Skipping Track'],
+  [/cassette|tape deck|floppy disk/, V('part', { kind: 'cassette' }), 'media', 'Rewind'],
+  [/hard drive|usb stick|flash drive|sd card|memory card|graphics card|motherboard|^cpu$|ram stick|sim card/, V('part', { kind: 'chip' }), 'computer', 'Bit Flip'],
+  [/record player|turntable|mixing desk|drum machine|synth keyboard|keytar|harmonium/, LIKE('keyboard'), 'media'],
+  [/drawing tablet|e-ink tablet/, LIKE('tablet'), 'computer'],
+  [/3d printer|plotter|label printer|scanner/, LIKE('printer'), 'computer'],
+  [/docking station|usb hub|set-top box|streaming stick|amplifier|receiver|equalizer/, V('device', { w: 26, h: 9, buttons: true, light: true }), 'computer'],
+  [/soundbar|guitar amp|amplifier speaker|karaoke/, LIKE('speaker'), 'media'],
+  [/projector/, LIKE('projector'), 'media'],
+  [/reflector/, V('part', { kind: 'disc' }), 'media'],
+  [/remote/, LIKE('remote'), 'gadget'],
+  [/mp3 player|ipod/, LIKE('phone'), 'media'],
+  [/portable radio|clock radio/, LIKE('radio'), 'media'],
+  [/smart ring|wedding ring|^ring$|earring|bracelet|anklet|cufflink/, V('part', { kind: 'ring' }), 'jewel', 'Dazzle'],
+  [/necklace|pendant|locket|charm bracelet|brooch/, V('part', { kind: 'ring' }), 'jewel', 'Dazzle'],
+  [/^coin|coins|poker chip|game token|button$|^bead/, V('part', { kind: 'coin' }), 'jewel', 'Small Change'],
+  [/banknote|credit card|id card|ticket|receipt|playing card|trading card|greeting card|birthday card|postcard/, V('part', { kind: 'card' }), 'office'],
+  [/lipstick|mascara|eyeliner|lip balm|nail polish/, V('vessel', { prof: [[18, 5], [10, 4]], cap: 3, rigid: true }), 'cosmetic', 'Makeover'],
+  [/perfume|cologne|essential oil/, LIKE('spray_bottle'), 'cosmetic', 'Makeover'],
+  [/dice|rubik|lego brick|building blocks|domino|chess board|checkers/, LIKE('puzzle'), 'toyish'],
+  [/marble|stress ball|bouncy ball|magic 8 ball|snow globe/, LIKE('ball'), 'toyish'],
+  [/door knocker|doorknob|door handle|keyhole/, V('part', { kind: 'knob' }), 'door', 'Knock Knock'],
+  [/door|curtain|blinds|shutter|window pane|skylight/, LIKE('window'), 'door'],
+  [/cymbal|hi-hat|triangle|cowbell|^bell$|handbell|church bell|singing bowl|wind chime/, V('part', { kind: 'bell' }), 'music', 'Clang'],
+  [/bongo|conga|djembe|cajon|timpani|toy drum/, LIKE('drum'), 'music'],
+  [/bugle|euphonium|sousaphone|recorder|piccolo|kazoo|harmonica|melodica|bagpipes|didgeridoo/, LIKE('trumpet'), 'music'],
+  [/electric bass|double bass|mandolin|sitar|lute/, LIKE('guitar'), 'music'],
+  [/metronome/, LIKE('clock'), 'music'],
+  [/music stand|sheet music/, LIKE('book'), 'music'],
+  [/theremin|toy piano|xylophone toy/, LIKE('piano'), 'music'],
+  [/freezer|mini fridge|wine cooler|ice maker/, LIKE('fridge'), 'appliance'],
+  [/air fryer|deep fryer|pressure cooker|slow cooker|egg cooker|yogurt maker|steamer$/, LIKE('rice_cooker'), 'appliance'],
+  [/juicer|food processor|hand mixer|stand mixer|ice cream maker/, LIKE('blender'), 'appliance'],
+  [/pizza oven|toaster oven|bread maker/, LIKE('oven'), 'appliance'],
+  [/sandwich toaster|popcorn maker/, LIKE('toaster'), 'appliance'],
+  [/coffee grinder|spice grinder|milk frother|soda maker|water filter jug/, LIKE('coffee_machine'), 'appliance'],
+  [/water heater|boiler|furnace|electric heater|oil heater|gas heater|heating pad|electric blanket/, LIKE('radiator'), 'appliance'],
+  [/fire extinguisher/, V('vessel', { prof: [[22, 6], [4, 3]], nozzle: true, label: true, rigid: true }), 'alarm', 'Foam Blast'],
+  // vehicles that are not cars
+  [/rowboat|dinghy|inflatable boat|yacht|ferry|tugboat|fishing boat|houseboat|barge|toy boat|submarine/, LIKE('sailboat'), null],
+  [/glider|seaplane|biplane|jet fighter|space rocket/, LIKE('airplane'), null],
+  [/hot air balloon/, LIKE('balloon'), null],
+  [/monorail|funicular|toy train|model train/, LIKE('train'), null],
+  [/gondola lift|chairlift/, LIKE('tram'), null],
+  [/pram|stroller|baby carriage|shopping trolley|luggage cart|hand truck|dolly|pallet jack/, LIKE('wheelbarrow'), null],
+  [/roller skate|inline skate|segway/, LIKE('skateboard'), null],
+  [/quad bike|atv|buggy|quad tractor/, LIKE('go_kart'), null],
+  [/sidecar/, LIKE('motorcycle'), null],
+  [/rickshaw|tuk tuk/, LIKE('scooter'), null],
+  [/scissor lift|cherry picker|crane/, LIKE('crane'), null],
+  [/road roller|steamroller|asphalt paver|grader|skid steer|wheel loader/, LIKE('bulldozer'), null],
+  [/backhoe/, LIKE('excavator'), null],
+  [/hay baler|seed drill|plough|cultivator/, LIKE('tractor'), null],
+  [/trailer|car carrier|logging truck|street sweeper|snow plough|salt spreader|monster truck|toy truck/, LIKE('truck'), null],
+  [/escalator/, LIKE('ladder'), null],
+  [/elevator/, V('storage', { w: 22, h: 30, doors: 2 }), 'door'],
+  [/bar table|bistro table|console table|card table|nesting tables|drafting table|workbench|sawhorse|kitchen island|kitchen counter|standing desk|sit-stand desk|secretary desk/, LIKE('desk'), 'furniture'],
+  [/sideboard|hutch|credenza|bureau/, LIKE('dresser'), 'furniture'],
+  [/shoe rack|magazine rack|wine rack|spice rack|ladder shelf|cube shelf|room divider|folding screen/, LIKE('bookshelf'), 'furniture'],
+  [/bed frame|headboard|daybed|futon frame|sofa bed/, LIKE('bed'), 'furniture'],
+];
+// categories whose own template is ONE specific object (a toolbox, a key, a fridge…): objects that no rule covers get
+// a neutral template of the right kind instead of looking like that specific object
+const CAT_FALLBACK_VIS = {
+  tool: V('part', { kind: 'block' }), keys: V('part', { kind: 'block' }), fridge: V('appliance', { panel: 'buttons' }),
+  laptop: V('device', { w: 22, h: 12, light: true, buttons: true }), tv: V('device', { w: 24, h: 12, buttons: true, light: true }),
+};
+function applyDesignRules(o) {
+  if (o.vis) return;
+  const label = o.name.toLowerCase();
+  for (const [re, vis, lore, sig, col] of DESIGN_RULES) {
+    if (!re.test(label)) continue;
+    if (vis.like && !OBJECTS[vis.like]) break; // safety: never point at a missing design
+    o.vis = vis; o.lore = lore || null; if (sig) o.sigName = sig; o.rule = String(re);
+    if (col) [o.h, o.s, o.l] = col; // the object's usual colour when the photo gives none (light switches are white)
+    return;
+  }
+  if (CAT_FALLBACK_VIS[o.cat]) { o.vis = CAT_FALLBACK_VIS[o.cat]; o.neutral = true; }
+}
+
 /* ---------- build the vocabulary objects (family tier) ---------- */
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 (function addExtras() {
@@ -414,7 +655,7 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, 
       const label = raw.trim(); if (!label) continue;
       const id = 'x_' + slug(label);
       if (OBJECTS[id]) continue;
-      OBJ(id, label.replace(/^./, c => c.toUpperCase()), cat, null, { al: [label] });
+      applyDesignRules(OBJ(id, label.replace(/^./, c => c.toUpperCase()), cat, null, { al: [label] }));
     }
   }
 })();
@@ -430,7 +671,7 @@ const CAT_DEFAULT_OBJECT = {
 };
 function visualSource(o) { return o && o.vis && o.vis.like && OBJECTS[o.vis.like] ? OBJECTS[o.vis.like] : o; }
 function objectTier(o) {
-  if (!o) return 'family';
+  if (!o || o.neutral) return 'family';
   if (o.vis && o.vis.like) return 'related';
   if (o.vis === 'D' || (o.vis && o.vis.legacy)) return 'dedicated';
   if (o.vis && o.vis.t) return 'composed';

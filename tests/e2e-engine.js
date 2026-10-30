@@ -97,6 +97,7 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
 
   // 5) hunting with the real worker: blue mug on a brown table -> mug, blue monster (colour from the object, not the table)
   await blueMug(p); await cam.snap(p);
+  await p.waitForSelector('text=Object identified', { timeout: 30000 }); await p.click('[data-act="pickCand"]');
   await p.waitForSelector('[data-act="fight"]', { timeout: 30000 }); await p.waitForTimeout(1200); await shot('E03-blue-mug');
   const m = await p.evaluate(() => window.__snapmon.ui.discovered);
   ok(m && m.obj === 'mug' && m.dna.pal && m.dna.pal.conf === 'confident', 'hunting runs the full Hybrid engine and creates a mug monster with a confident photo palette');
@@ -109,7 +110,8 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
   // 6) reload: engine comes from the on-phone cache (no second download, no notice)
   const hitsBefore = modelHits;
   await p.reload(); await p.waitForTimeout(300); await stubLens(p);
-  await p.evaluate(() => Engine.load());
+  // the game wakes the engine by itself right after loading (possibly before the stub above): retry once if so
+  await p.evaluate(async () => { await Engine.load(); if (!Engine.ready()) await Engine.load(); });
   info = await p.evaluate(() => ClipLens.status.info);
   ok(info.fromCache === true && modelHits === hitsBefore, 'after a reload the model is read from the cache, not downloaded again');
   await p.evaluate(() => window.__snapmon.actions.openCamera());
@@ -129,11 +131,10 @@ const manifest = (over = {}) => ({ engine: 'hybrid-1', groups: { lens: 32610304,
   // 8) CPU failure too -> the device cannot run the engine: clear message, Retry, collection still usable, no monster
   await p.evaluate(() => { Engine.setForceCPU(false); ClipLens.CFG.test = { failCPU: 'simulated CPU failure' }; });
   await p.evaluate(() => window.__snapmon.actions.openCamera());
-  await p.waitForSelector('#camShutter:not([disabled])', { timeout: 15000 }).catch(() => {});
-  await blueMug(p); await cam.snap(p);
+  // v0.4.3: the camera does not even open without a working engine; the failure and a Retry are shown instead
   await p.waitForSelector("text=couldn't run on this device", { timeout: 30000 }); await shot('E04-engine-failed');
-  ok(!!(await p.$('[data-act="lensRetry"]')) && !(await p.$('[data-act="fight"]')), 'when the CPU path cannot run: the suggested message, a Retry button, and no monster');
-  await p.click('[data-act="cancelPhoto"]');
+  ok(!!(await p.$('[data-act="engineDownload"]')) && !(await p.$('#camVideo')) && await cam.live(p) === 0 && !(await p.$('[data-act="fight"]')), 'when the CPU path cannot run: the suggested message, a Retry button, no camera and no monster');
+  await p.click('[data-act="closeOverlay"]');
   await p.click('[data-act="tab"][data-arg="dex"]'); await p.waitForTimeout(200);
   ok(!!(await p.$('[data-act="dexView"]')), 'the collection still works while recognition is unavailable');
   await p.click('[data-act="tab"][data-arg="hunt"]');

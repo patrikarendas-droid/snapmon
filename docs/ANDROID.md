@@ -71,6 +71,16 @@ and nothing is fetched from AI hosts during play.
 - **Viewfinder = photo (v0.4.2).** The viewfinder crops the camera frame to 3:4 (`object-fit: cover`). Before v0.4.2
   the photo contained the full frame, including edges the player could not see; now it is cropped to the visible region.
 
+## A possible iOS version later (notes only; Android comes first)
+- Game logic, sprites, saves and the Guide are plain JavaScript with no platform dependency. Device access goes through
+  `src/platform.js` (camera, storage, assets), so an iOS shell (e.g. Capacitor) would replace only that layer.
+- Recognition runs on TF.js (WebGL or CPU) and ONNX Runtime WebAssembly, both of which work in iOS Safari / WKWebView.
+  Because TinyCLIP runs on WASM for everyone (v0.4.1), WebGPU support differences between Android and iOS do not matter.
+- The Back-button logic (`window.SnapmonNav.back`) is Android-specific by nature; iOS has no hardware Back, and the
+  same screens already have on-screen Close/Back buttons.
+- The Long Tasks API used by the developer camera diagnostics does not exist in Safari; the code skips it there.
+- No Android-only dependency has been added that would block iOS.
+
 ## App lifecycle (background / resume)
 - Android Chrome freezes background pages and may drop their GPU context (WebGL) or stop workers to save memory. v0.4.2
   checks the engine when the page becomes visible again (`visibilitychange`, `pageshow`): it detects a lost WebGL
@@ -81,6 +91,10 @@ and nothing is fetched from AI hosts during play.
   reloads from scratch when reopened. Progress is safe (saved before the heavy step and when the app is hidden), but
   nothing in memory can survive that. A native app has the same limit when Android kills its process.
 - The camera is always stopped when the app goes to the background; the player reopens it with SNAP.
+- **SNAP readiness (v0.4.3).** SNAP is disabled (not just dimmed) while the engine loads, wakes up, re-checks itself
+  after a resume or has failed; the camera shutter additionally needs live frames. This also removes the
+  frozen/blank viewfinder seen with "Force CPU backend": the CPU detector's start-up blocks the page's main thread for
+  about a second, and before v0.4.3 the camera could be opened during exactly that start-up.
 
 ## Back button
 The game already routes Back through one function:
