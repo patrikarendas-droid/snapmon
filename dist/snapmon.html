@@ -537,6 +537,125 @@ const LEGEND_TITLES = {
   food: 'the Eternal Feast', botanical: 'the Elder Root', spectral: 'the Unseen King', mutated: 'the Abomination',
 };
 
+/* v0.4.5: move kits. Before, every monster of a family drew its extra moves from the same three family moves, so every
+   rare Mechanical had the same repertoire. Now each object kind (category, or the object's group from objects.js) has
+   its own four moves; a monster's extra moves are picked from its kit per object, so they fit what it is. Kit moves
+   use the same number ranges as the family moves (MOVE_ARCH), so fights stay as hard as before. */
+const MOVE_ARCH = {
+  slam:   { power: 1.2 },
+  flurry: { power: 0.45, hits: 3 },
+  drain:  { power: 0.85, effect: 'drain' },
+  sap:    { power: 0.6, effect: 'defdown', chance: 0.7 },
+  chill:  { power: 0.9, effect: 'defdown', chance: 0.45 },
+  burn:   { power: 1.0, effect: 'burn', chance: 0.4 },
+  poison: { power: 0.9, effect: 'poison', chance: 0.5 },
+  stun:   { power: 0.8, effect: 'stun', chance: 0.3 },
+  pump:   { power: 0, effect: 'atkup', self: true },
+  guard:  { power: 0, effect: 'defup', self: true },
+  mend:   { power: 0, effect: 'heal', self: true },
+};
+// 'Move name:archetype, …' (four per kit)
+const MOVE_KITS = {
+  // categories
+  toilet: 'Plunger Pull:drain, Bubble Up:sap, Porcelain Shell:guard, Splash Back:stun',
+  mug: 'Steam Puff:sap, Refill:mend, Caffeine Kick:pump, Hot Spill:burn',
+  shoe: 'Heel Stomp:slam, Lace Lash:stun, Stinky Insole:poison, Kick Flurry:flurry',
+  plant: 'Pollen Puff:sap, Sap Sip:drain, Vine Snare:stun, Fresh Growth:mend',
+  laptop: 'Pop-Up Ads:flurry, Overheat:burn, Firewall:guard, Data Leech:drain',
+  banana: 'Peel Slap:slam, Ripen:pump, Mushy Squish:sap, Bunch Up:guard',
+  sofa: 'Cushion Crush:slam, Recline:mend, Spring Snap:stun, Crumb Cloud:sap',
+  phone: 'Ringtone Blast:stun, Battery Drain:drain, Auto-Correct:sap, Hot Battery:burn',
+  bottle: 'Fizz Spray:sap, Cap Shot:slam, Bubble Shield:guard, Undertow:drain',
+  book: 'Plot Twist:stun, Ink Splash:poison, Hardcover Slam:slam, Bookmark Ward:guard',
+  lamp: 'Flicker:stun, Hot Bulb:burn, Glow Up:pump, Moth Swarm:flurry',
+  chair: 'Wobble:stun, Seat Slam:slam, Splinter:poison, Brace:guard',
+  car: 'Horn Blast:stun, Exhaust Fumes:poison, Turbo Boost:pump, Hit and Run:flurry',
+  animal: 'Scratch Fury:flurry, Lick Wounds:mend, Growl:sap, Tail Whip:slam',
+  tree: 'Branch Smash:slam, Bark Skin:guard, Sap Trap:stun, Leaf Storm:flurry',
+  food: 'Gravy Splash:burn, Second Helping:mend, Crumb Toss:flurry, Food Coma:stun',
+  fruit: 'Juice Squirt:sap, Seed Spit:flurry, Ripe Burst:poison, Vitamin Boost:mend',
+  cloth: 'Wrap Up:stun, Static Cling:sap, Loose Thread:drain, Layer Up:guard',
+  tool: 'Heavy Swing:slam, Rust Bite:poison, Tighten Up:guard, Elbow Grease:pump',
+  toy: 'Wind-Up:pump, Squeak Toy:stun, Block Tower:guard, Toy Tantrum:flurry',
+  trash: 'Garbage Toss:flurry, Rot:poison, Lid Slam:slam, Scavenge:drain',
+  mirror: 'Glare Back:stun, Shatter:flurry, Mirror Image:guard, Vanity:pump',
+  fridge: 'Frost Breath:chill, Power Hum:stun, Cold Storage:guard, Ice Cube Barrage:flurry',
+  candle: 'Wax Drip:burn, Smoke Screen:sap, Flare Up:pump, Melt:drain',
+  clock: 'Alarm Ring:stun, Tick Tock:flurry, Rewind:mend, Deadline:sap',
+  keys: 'Jingle Jangle:stun, Lock Out:guard, Key Scratch:sap, Pick Pocket:drain',
+  bag: 'Strap Snag:stun, Stuff In:drain, Overpack:guard, Bag Swing:slam',
+  pillow: 'Feather Burst:flurry, Pillow Fort:guard, Nap Time:mend, Smother Hug:drain',
+  faucet: 'Water Jet:slam, Limescale:sap, Cold Rinse:mend, Splash:stun',
+  tv: 'Channel Surf:flurry, Screen Burn:burn, Ad Break:mend, Static Shock:stun',
+  bird: 'Peck Flurry:flurry, Feather Shield:guard, Screech:stun, Swoop:slam',
+  fish: 'Fin Slap:slam, Bubble Ring:sap, Slippery Scales:guard, Barb Sting:poison',
+  bug: 'Swarm:flurry, Sting:poison, Molt:mend, Web Snare:stun',
+  reptile: 'Tail Lash:slam, Shed Skin:mend, Bask:pump, Tongue Snare:stun',
+  umbrella: 'Canopy Block:guard, Downpour:flurry, Gust:stun, Pointy End:slam',
+  instrument: 'Crescendo:pump, Sour Note:sap, Drum Roll:flurry, Feedback:stun',
+  ball: 'Bounce Back:guard, Curveball:stun, Spike:slam, Pump Up:pump',
+  pot: 'Lid Clang:stun, Simmer:burn, Stir:flurry, Hearty Stew:mend',
+  cake: 'Frosting Splat:sap, Sprinkle Storm:flurry, Sugar High:pump, Cream Pie:stun',
+  other: 'Odd Glance:stun, Shape Shift:guard, Weird Touch:drain, Glitch:sap',
+  // object groups (objects.js)
+  electric: 'Spark:stun, Surge:burn, Grounded:guard, Live Wire:drain',
+  alarm: 'Siren Wail:stun, Low-Battery Chirp:sap, Alert Mode:pump, Shrill Barrage:flurry',
+  camera: 'Flash:stun, Zoom In:pump, Night Vision:sap, Snapshot Burst:flurry',
+  gadget: 'Beep Beep:stun, Factory Reset:mend, Glitch Out:sap, Turbo Mode:pump',
+  street: 'Rush Hour:flurry, Pothole:sap, Road Works:guard, Gridlock:stun',
+  office: 'Paper Cut:flurry, Ink Splatter:poison, Deadline Panic:stun, Coffee Break:mend',
+  art: 'Splatter:poison, Masterstroke:slam, Inspiration:pump, Smudge:sap',
+  medical: 'Quick Fix:mend, Iodine Sting:poison, Check-Up:sap, Bed Rest:guard',
+  science: 'Reaction:burn, Hypothesis:pump, Acid Drop:poison, Centrifuge:flurry',
+  hardware: 'Stripped Thread:sap, Rust Bite:poison, Torque:slam, Tighten:guard',
+  kitchen: 'Stir Up:flurry, Taste Test:mend, Clatter:stun, Hot Ladle:burn',
+  craft: 'Pin Prick:poison, Knit Together:mend, Thread Bind:stun, Patchwork:guard',
+  outdoor: 'Mud Slide:sap, Campfire:burn, Rough Terrain:guard, Bug Spray:poison',
+  sport: 'Power Shot:slam, Warm-Up:pump, Foul Play:sap, Fast Break:flurry',
+  gym: 'One More Rep:pump, Iron Grip:stun, Protein Shake:mend, Heavy Lift:slam',
+  arcade: 'Jackpot:flurry, Insert Coin:pump, Game Over:stun, Tilt:sap',
+  computer: 'Overheat:burn, Fan Spin:flurry, Firewall:guard, Data Leech:drain',
+  media: 'Bass Drop:stun, Feedback Loop:sap, Remix:pump, Skip Track:flurry',
+  jewel: 'Dazzle Flash:stun, Gem Shield:guard, Sharp Facet:slam, Allure:drain',
+  cosmetic: 'Glitter Bomb:stun, Perfume Cloud:poison, Touch-Up:mend, Contour:sap',
+  door: 'Slam Shut:slam, Creak:stun, Draught:sap, Deadbolt:guard',
+  drink: 'Fizz Burst:sap, Brain Freeze:stun, Sugar Rush:pump, Big Gulp:drain',
+  meat: 'Sizzle:burn, Meat Slap:slam, Marinate:sap, Protein Pack:guard',
+  seafood: 'Briny Splash:sap, Claw Pinch:flurry, Low Tide:drain, Fishy Whiff:poison',
+  dairy: 'Curdle:poison, Creamy Coat:guard, Meltdown:sap, Calcium Boost:pump',
+  condiment: 'Squirt:sap, Spicy Kick:burn, Sticky Glaze:stun, Dollop:flurry',
+  bowl: 'Slurp:drain, Boiling Broth:burn, Noodle Whip:flurry, Warm Comfort:mend',
+  bakery: 'Crust Crunch:slam, Rise:pump, Butter Up:guard, Crumb Shower:flurry',
+  dumpling: 'Steam Puff:sap, Pleat Pinch:stun, Stuffed:guard, Dip Dunk:drain',
+  snack: 'Crunch Time:flurry, Salt Sting:sap, Cheesy Drip:burn, Snack Attack:slam',
+  breakfast: 'Sunny Side Up:pump, Yolk Splash:sap, Rise and Shine:mend, Scramble:flurry',
+  veg: 'Root Smash:slam, Crunchy Skin:guard, Pungent Cloud:poison, Fibre Boost:mend',
+  leafy: 'Leaf Wrap:stun, Green Juice:mend, Bitter Bite:poison, Leaf Flurry:flurry',
+  nut: 'Shell Shock:stun, Hard Shell:guard, Nut Barrage:flurry, Crack Open:slam',
+  pantry: 'Flour Cloud:sap, Spice Storm:burn, Grain Avalanche:flurry, Long Shelf Life:guard',
+};
+const MOVE_KIT_ALIAS = { light: 'lamp', furniture: 'chair', appliance: 'fridge', music: 'instrument', toyish: 'toy' };
+// v0.4.5: legendary monsters are unique: title, the "legend move" and the ultimate are built from the object's own
+// name ({N}), so no two objects share them (tests/identity.js checks every object)
+const LEGEND_ADJ = {
+  organic: ['Primordial', 'Untamed', 'Ravenous', 'Eldest', 'Wild-Hearted', 'Thousand-Eyed'],
+  mechanical: ['Unbroken', 'Clockwork', 'Iron-Hearted', 'Ever-Turning', 'Last-Built', 'Tireless'],
+  elemental: ['Storm-Born', 'Ever-Burning', 'Tide-Calling', 'Living', 'Starlit', 'Thunderous'],
+  household: ['Hearthbound', 'Ever-Watching', 'Old', 'Unmoving', 'Patient', 'Keeper'],
+  food: ['Everlasting', 'Insatiable', 'Golden', 'Ravenous', 'Undying', 'Feast-Crowned'],
+  botanical: ['Elder', 'Deep-Rooted', 'Evergreen', 'Ancient', 'World-Seed', 'Overgrown'],
+  spectral: ['Unseen', 'Whispering', 'Hollow', 'Moonlit', 'Forgotten', 'Sleepless'],
+  mutated: ['Abominable', 'Ever-Changing', 'Unspeakable', 'Twisted', 'Swollen', 'Many-Mouthed'],
+};
+const LEGEND_MOVE_TPL = {
+  slam: 'Fall of the {N}', flurry: 'Thousand {N} Strikes', drain: 'Hunger of the {N}', sap: 'Curse of the {N}', chill: 'Shadow of the {N}',
+  burn: 'Fire of the {N}', poison: 'Blight of the {N}', stun: 'Gaze of the {N}', pump: 'Wrath of the {N}', guard: 'Bulwark of the {N}', mend: 'Rebirth of the {N}',
+};
+const ULTIMATE_TPL = {
+  burn: ['{N} Inferno', 'Molten {N}', 'Last Flame of the {N}'], poison: ['{N} Plague', 'Venom of the {N}', 'Creeping {N} Blight'],
+  stun: ['{N} Eclipse', 'Stillness of the {N}', 'Thousand-Year {N}'], defdown: ['{N} Cataclysm', 'Shattering {N}', 'Ruin of the {N}'],
+};
+
 /* Weapons — base stats, distinct damage behaviour, and visual effect id */
 const WEAPONS = {
   sword:  { name: 'Rusty Hunter Sword', el: 'slash', atk: 6, acc: 0.95, crit: 0.08, critX: 1.75, fx: 'slash',
@@ -2036,6 +2155,10 @@ const PARTS = (() => {
       if (p.gable) { poly(g, [[Math.round(20 - body[2]), top + 1], [20, top - 5], [Math.round(20 + body[2]), top + 1]], BL); rect(g, 19, top - 7, 2, 2, PA); }
       if (p.nozzle) { rect(g, 18, top - 3, 4, 3, A); rect(g, 14, top - 3, 4, 1, A); }
       if (p.steam) for (let s = 0; s < 4; s++) gset(g, 20 + (s % 2), top - 3 - s, ST);
+      const tw = widths[widths.length - 1][2];
+      if (p.foam) { ell(g, 20, top, tw + 0.5, 2.2, PA); ell(g, 20 - tw * 0.5, top - 1, 2.5, 2, PA); ell(g, 20 + tw * 0.4, top - 1.5, 2.5, 2, PA); } // milkshake / beer head
+      if (p.pearls) for (let i = 0; i < 7; i++) ell(g, 20 - mid[2] + 2.5 + (i * 3) % Math.max(3, Math.round(mid[2] * 2 - 4)), mid[1] - 2.5 - (i % 2) * 2, 1.2, 1.2, K); // bubble-tea tapioca
+      if (p.tip) poly(g, [[18, top], [22, top], [20, top - 4]], A); // squeeze-bottle nozzle
       const fy = body[0] + (body[1] - body[0]) * (p.label ? 0.2 : 0.35);
       return { eyes: { x: 20, y: Math.round(fy) + 1, span: Math.max(2, Math.min(5, Math.floor(body[2] / 2))) }, mouth: { x: 20, y: Math.round(body[0] + (body[1] - body[0]) * 0.7), w: Math.max(4, Math.min(10, Math.round(body[2]))) }, arms: [{ x: Math.round(20 - body[2]), y: (body[0] + body[1]) / 2, d: -1 }, { x: Math.round(20 + body[2]), y: (body[0] + body[1]) / 2, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: top }, rigid: !!p.rigid };
     },
@@ -2048,7 +2171,12 @@ const PARTS = (() => {
       if (sh === 'small') { rx = 7; ry = 7; cy = 27; }
       if (sh === 'cluster') { for (let r = 0; r < 4; r++) for (let i = 0; i <= 3 - r; i++) ell(g, 20 + (i - (3 - r) / 2) * 6, 12 + r * 6, 3.2, 3.2, B); rect(g, 19, 6, 2, 4, MD); ell(g, 23, 7, 3, 1.5, S); return { eyes: { x: 20, y: 17, span: 4 }, mouth: { x: 20, y: 23, w: 5 }, arms: [{ x: 8, y: 16, d: -1 }, { x: 32, y: 16, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 6 } }; }
       if (sh === 'pair') { line(g, 14, 22, 20, 6, MD); line(g, 26, 24, 20, 6, MD); ell(g, 21, 6, 3, 1.5, S); ell(g, 13, 26, 7, 7, B); ell(g, 27, 28, 6.5, 6.5, B); return { eyes: { x: 13, y: 25, span: 3 }, mouth: { x: 13, y: 29, w: 4 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 6 } }; }
-      if (sh === 'pear') { ell(g, 20, 27, 10 * s, 8 * s, B); ell(g, 20, 16, 6 * s, 7 * s, B); cy = 24; ry = 10; }
+      if (sh === 'stalk') { for (const [x, y0] of [[13, 11], [18, 8], [23, 12]]) { rect(g, x, y0, 4, 36 - y0, B); rect(g, x, y0, 1, 36 - y0, BL); } C.leaves(g, 20, 11, 5, 7, 12); rect(g, 12, 27, 16, 2, A); cy = 20; ry = 10; rx = 7; }
+      else if (sh === 'leaf') { ell(g, 20, 20, 11 * s, 14 * s, B); poly(g, [[16, 31], [24, 31], [20, 37]], B); line(g, 20, 8, 20, 36, BD); for (let y = 12; y < 32; y += 5) { line(g, 20, y + 3, 13, y, BD); line(g, 20, y + 3, 27, y, BD); } cy = 20; ry = 12; rx = 11; }
+      else if (sh === 'pod') { ell(g, 20, 24, 15 * s, 6, B); for (let x = 10; x <= 30; x += 5) ell(g, x, 23, 2.2, 2.2, BL); line(g, 6, 22, 3, 18, MD); cy = 24; ry = 6; rx = 15; }
+      else if (sh === 'chili') { for (const [x, y, r] of [[15, 15, 6], [19, 21, 5.5], [23, 26, 4.5], [26, 30, 3.2], [28, 33, 2]]) ell(g, x, y, r, r, B); ell(g, 14, 9, 4.5, 2, S); line(g, 14, 9, 12, 4, S); cx = 17; cy = 18; rx = 6; ry = 6; }
+      else if (sh === 'nut') { ell(g, 20, 22, 10 * s, 12 * s, B); line(g, 20, 11, 20, 33, BD); for (let i = 0; i < 8; i++) gset(g, 14 + (i * 5) % 12, 15 + (i * 7) % 15, BD); cy = 22; ry = 12; rx = 10; }
+      else if (sh === 'pear') { ell(g, 20, 27, 10 * s, 8 * s, B); ell(g, 20, 16, 6 * s, 7 * s, B); cy = 24; ry = 10; }
       else if (sh === 'carrot') { poly(g, [[12, 12], [28, 12], [21, 37], [19, 37]], B); for (let y = 16; y < 32; y += 4) line(g, 15 + (y - 12) * 0.2, y, 18, y, BD); cy = 18; ry = 6; rx = 8; }
       else if (sh === 'curved') { ell(g, 20, 22, 14, 8, B); ell(g, 22, 15, 12, 6, E); cy = 25; ry = 5; }
       else if (sh === 'heart') { ell(g, 20, 17, 13, 9, B); poly(g, [[7, 18], [33, 18], [20, 36]], B); cy = 20; ry = 8; }
@@ -2224,6 +2352,66 @@ const PARTS = (() => {
         default: rrect(g, 11, 13, 18, 18, 4, B); eyes = { x: 20, y: 20, span: 3 }; mouth = { x: 20, y: 25, w: 5 };
       }
       return { eyes, mouth, arms, legs, noLegs, float, top, rigid: true };
+    },
+    // v0.4.5: prepared food and pantry items (before, every unlisted meal borrowed the burger body)
+    meal(g, p, v) {
+      const k = p.kind;
+      let eyes = { x: 20, y: 22, span: 3 }, mouth = { x: 20, y: 27, w: 5 }, arms = [{ x: 9, y: 24, d: -1 }, { x: 31, y: 24, d: 1 }], legs = { y: 34, xs: [15, 25] }, noLegs = false, float = false, top = { x: 20, y: 10 };
+      switch (k) {
+        case 'bowl': {
+          const f = p.fill || 'rice', fc = f === 'salad' ? S : f === 'noodles' || f === 'cereal' ? GO : f === 'beans' ? AD : PA;
+          ell(g, 20, 20, 12, 5, fc); ell(g, 20, 17, 8, 4, fc);
+          if (f === 'noodles') { for (let i = 0; i < 5; i++) line(g, 11 + i * 4, 15 + (i % 2), 13 + i * 4, 21, AL); line(g, 26, 9, 30, 20, AD); line(g, 28, 9, 31, 20, AD); }
+          if (f === 'rice') for (let i = 0; i < 6; i++) gset(g, 14 + i * 2.5, 17 + (i % 2) * 2, A);
+          if (f === 'cereal' || f === 'beans') for (let i = 0; i < 9; i++) ell(g, 11 + (i * 7) % 19, 16 + (i * 3) % 6, 1.2, 1, f === 'beans' ? BD : AD);
+          if (f === 'salad') for (let i = 0; i < 5; i++) ell(g, 12 + i * 4, 16 + (i % 2) * 3, 1.5, 1.5, i % 2 ? TO : SL);
+          poly(g, [[6, 21], [34, 21], [30, 31], [10, 31]], B); ell(g, 20, 30, 10, 3, B); rect(g, 6, 21, 29, 2, BL); rect(g, 15, 33, 10, 2, BD);
+          eyes = { x: 20, y: 25, span: 4 }; mouth = { x: 20, y: 29, w: 6 }; arms = [{ x: 7, y: 24, d: -1 }, { x: 33, y: 24, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 12 }; break;
+        }
+        case 'sack': poly(g, [[15, 13], [25, 13], [28, 8], [12, 8]], B); rrect(g, 10, 14, 20, 21, 6, B); rect(g, 14, 12, 12, 2, AD); rrect(g, 13, 21, 14, 8, 1, PA); rect(g, 15, 26, 10, 1, BD);
+          eyes = { x: 20, y: 18, span: 3 }; mouth = { x: 20, y: 24, w: 5 }; arms = [{ x: 10, y: 24, d: -1 }, { x: 30, y: 24, d: 1 }]; legs = { y: 35, xs: [15, 25] }; top = { x: 20, y: 8 }; break;
+        case 'box': rrect(g, 11, 8, 18, 26, 1, B); rect(g, 11, 8, 18, 5, A); rrect(g, 14, 24, 12, 7, 1, PA); for (let x = 15; x < 25; x += 3) line(g, x, 26, x + 2, 29, GO);
+          eyes = { x: 20, y: 16, span: 3 }; mouth = { x: 20, y: 21, w: 5 }; arms = [{ x: 11, y: 20, d: -1 }, { x: 29, y: 20, d: 1 }]; top = { x: 20, y: 8 }; legs = { y: 35, xs: [15, 25] }; break;
+        case 'wedge': poly(g, [[4, 32], [36, 32], [36, 13]], B); line(g, 4, 32, 36, 13, BL); line(g, 36, 13, 36, 32, BD); for (const [x, y, r] of [[28, 27, 2], [32, 20, 1.5], [21, 29, 1.5], [33, 29, 1]]) ell(g, x, y, r, r * 0.8, BD);
+          eyes = { x: 28, y: 23, span: 3 }; mouth = { x: 27, y: 28, w: 4 }; arms = [{ x: 16, y: 28, d: -1 }, { x: 36, y: 23, d: 1 }]; legs = { y: 33, xs: [14, 30] }; top = { x: 34, y: 13 }; break;
+        case 'block': rrect(g, 8, 17, 24, 14, 2, B); rect(g, 8, 17, 24, 3, BL); rect(g, 8, 17, 7, 14, PA); rect(g, 14, 17, 1, 14, BD);
+          eyes = { x: 23, y: 23, span: 3 }; mouth = { x: 23, y: 27, w: 4 }; arms = [{ x: 8, y: 24, d: -1 }, { x: 32, y: 24, d: 1 }]; legs = { y: 32, xs: [14, 26] }; top = { x: 20, y: 17 }; break;
+        case 'bacon': for (let x = 4; x < 37; x++) { const o = Math.round(Math.sin(x / 3.2) * 2.5); rect(g, x, 17 + o, 1, 10, B); gset(g, x, 20 + o, PA); gset(g, x, 21 + o, PA); gset(g, x, 25 + o, BL); }
+          eyes = { x: 20, y: 21, span: 4 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 5, y: 22, d: -1 }, { x: 35, y: 22, d: 1 }]; legs = { y: 29, xs: [13, 27] }; top = { x: 20, y: 15 }; break;
+        case 'steak': ell(g, 20, 23, 14, 10, PA); ell(g, 20, 23, 12.5, 8.5, B); ell(g, 12, 23, 2.5, 3.5, PA); line(g, 12, 18, 12, 28, PA); for (const x of [16, 22, 28]) line(g, x - 3, 30, x + 3, 16, BD);
+          eyes = { x: 22, y: 20, span: 3 }; mouth = { x: 22, y: 27, w: 5 }; arms = [{ x: 6, y: 23, d: -1 }, { x: 34, y: 23, d: 1 }]; legs = { y: 33, xs: [15, 25] }; top = { x: 20, y: 13 }; break;
+        case 'drumstick': line(g, 24, 26, 33, 34, PA, 3); ell(g, 34, 33, 2, 2, PA); ell(g, 32, 36, 2, 2, PA); ell(g, 17, 19, 11, 10, B); ell(g, 21, 25, 7, 6, B); for (let i = 0; i < 7; i++) gset(g, 10 + (i * 5) % 14, 14 + (i * 3) % 10, BD);
+          eyes = { x: 16, y: 18, span: 3 }; mouth = { x: 16, y: 24, w: 5 }; arms = [{ x: 6, y: 20, d: -1 }, { x: 27, y: 18, d: 1 }]; legs = { y: 30, xs: [12, 20] }; top = { x: 17, y: 9 }; break;
+        case 'balls': for (const [x, y, r] of [[13, 27, 6], [27, 27, 6], [20, 17, 7.5]]) { ell(g, x, y, r, r, B); gset(g, x - 2, y - 2, BL); gset(g, x + 2, y + 1, BD); gset(g, x - 1, y + 3, BD); }
+          eyes = { x: 20, y: 16, span: 3 }; mouth = { x: 20, y: 20, w: 4 }; arms = [{ x: 7, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 9 }; break;
+        case 'skewer': line(g, 20, 2, 20, 37, AL); rrect(g, 13, 6, 14, 6, 2, S); rrect(g, 11, 13, 18, 13, 3, B); rrect(g, 13, 27, 14, 6, 2, TO);
+          eyes = { x: 20, y: 18, span: 3 }; mouth = { x: 20, y: 22, w: 5 }; arms = [{ x: 11, y: 19, d: -1 }, { x: 29, y: 19, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 20, y: 2 }; break;
+        case 'roll': ell(g, 19, 24, 15, 7, B); ell(g, 33, 24, 3.5, 6, BL); ell(g, 33, 24, 2, 3.5, A); for (const x of [10, 16, 22]) line(g, x, 18, x + 3, 30, BD);
+          eyes = { x: 18, y: 22, span: 3 }; mouth = { x: 18, y: 27, w: 5 }; arms = [{ x: 5, y: 24, d: -1 }, { x: 35, y: 24, d: 1 }]; legs = { y: 31, xs: [13, 25] }; top = { x: 19, y: 17 }; break;
+        case 'slab': rect(g, 7, 14, 26, 3, GO); for (let x = 8; x < 33; x += 4) ell(g, x, 14, 1.8, 1.2, GO); rect(g, 7, 17, 26, 4, B); rect(g, 7, 21, 26, 2, PA); rect(g, 7, 23, 26, 4, BD); rect(g, 7, 27, 26, 2, PA); rect(g, 7, 29, 26, 4, B);
+          eyes = { x: 20, y: 24, span: 4 }; mouth = { x: 20, y: 31, w: 6 }; arms = [{ x: 7, y: 24, d: -1 }, { x: 33, y: 24, d: 1 }]; legs = { y: 34, xs: [13, 27] }; top = { x: 20, y: 13 }; break;
+        case 'fillet': ell(g, 18, 24, 14, 8, B); poly(g, [[30, 24], [37, 18], [37, 30]], B); for (const x of [10, 16, 22, 28]) line(g, x, 18, x - 2, 30, BL);
+          eyes = { x: 15, y: 22, span: 3 }; mouth = { x: 15, y: 27, w: 5 }; arms = [{ x: 5, y: 24, d: -1 }, { x: 31, y: 22, d: 1 }]; legs = { y: 32, xs: [12, 24] }; top = { x: 18, y: 16 }; break;
+        case 'shrimp': ell(g, 19, 21, 12, 11, B); ell(g, 21, 24, 5.5, 5.5, E); rect(g, 21, 24, 15, 14, E); for (let a = 0.6; a < 4; a += 0.7) line(g, 19 + Math.cos(a + 2.4) * 6, 21 - Math.sin(a + 2.4) * 6, 19 + Math.cos(a + 2.4) * 11, 21 - Math.sin(a + 2.4) * 11, BD);
+          poly(g, [[22, 30], [30, 27], [31, 35]], B); line(g, 10, 12, 4, 6, TO); line(g, 12, 11, 8, 4, TO);
+          eyes = { x: 14, y: 16, span: 3 }; mouth = { x: 13, y: 22, w: 3 }; arms = [{ x: 8, y: 22, d: -1 }, { x: 31, y: 20, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 16, y: 10 }; break;
+        case 'shell': ell(g, 20, 14, 13, 6, B); ell(g, 20, 26, 14, 8, B); ell(g, 20, 22, 10, 3.5, BL); ell(g, 20, 21, 2.5, 2.5, PA); for (const x of [10, 15, 25, 30]) { line(g, 20, 33, x, 27, BD); line(g, 20, 9, x, 13, BD); }
+          eyes = { x: 20, y: 27, span: 4 }; mouth = { x: 20, y: 31, w: 4 }; arms = [{ x: 6, y: 25, d: -1 }, { x: 34, y: 25, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 8 }; break;
+        case 'dumpling': ell(g, 20, 28, 15, 12, B); rect(g, 4, 30, 33, 9, E); rect(g, 6, 29, 28, 2, BD); for (let x = 9; x <= 31; x += 4) { ell(g, x, 17 + Math.abs(x - 20) / 3, 1.6, 1.6, BL); gset(g, x + 2, 18 + Math.abs(x - 20) / 3, BD); }
+          eyes = { x: 20, y: 23, span: 4 }; mouth = { x: 20, y: 27, w: 6 }; arms = [{ x: 6, y: 26, d: -1 }, { x: 34, y: 26, d: 1 }]; legs = { y: 31, xs: [14, 26] }; top = { x: 20, y: 16 }; break;
+        case 'samosa': poly(g, [[20, 8], [36, 33], [4, 33]], B); line(g, 20, 8, 36, 33, BD); line(g, 20, 8, 4, 33, BL); rect(g, 5, 32, 31, 1, BD); for (let i = 0; i < 5; i++) gset(g, 14 + i * 3, 30 - (i % 2), BD);
+          eyes = { x: 20, y: 22, span: 3 }; mouth = { x: 20, y: 27, w: 5 }; arms = [{ x: 11, y: 24, d: -1 }, { x: 29, y: 24, d: 1 }]; legs = { y: 34, xs: [13, 27] }; top = { x: 20, y: 8 }; break;
+        case 'bun': ell(g, 20, 25, 14, 11, B); rect(g, 4, 33, 33, 6, E); for (const x of [12, 16, 24, 28]) line(g, x, 19, 20, 14, BD); ell(g, 20, 14, 2, 1.5, BD);
+          eyes = { x: 20, y: 24, span: 4 }; mouth = { x: 20, y: 29, w: 6 }; arms = [{ x: 6, y: 26, d: -1 }, { x: 34, y: 26, d: 1 }]; legs = { y: 33, xs: [14, 26] }; top = { x: 20, y: 14 }; break;
+        case 'nachos': poly(g, [[5, 33], [15, 14], [24, 33]], B); poly(g, [[16, 33], [27, 13], [35, 33]], B); poly(g, [[10, 26], [21, 7], [31, 27]], BL); for (const [x, y] of [[14, 18], [21, 12], [27, 20], [10, 28]]) ell(g, x, y, 2, 1.5, GO); for (const [x, y] of [[18, 22], [25, 28], [30, 25]]) ell(g, x, y, 1.3, 1.3, TO);
+          eyes = { x: 21, y: 18, span: 3 }; mouth = { x: 21, y: 23, w: 4 }; arms = [{ x: 8, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = { y: 34, xs: [13, 28] }; top = { x: 21, y: 7 }; break;
+        case 'toast': ell(g, 14, 14, 6, 5, BD); ell(g, 26, 14, 6, 5, BD); rect(g, 8, 14, 24, 20, BD); ell(g, 14, 14, 4.5, 3.5, B); ell(g, 26, 14, 4.5, 3.5, B); rect(g, 10, 14, 20, 18, B);
+          eyes = { x: 20, y: 20, span: 4 }; mouth = { x: 20, y: 26, w: 6 }; arms = [{ x: 8, y: 23, d: -1 }, { x: 32, y: 23, d: 1 }]; legs = { y: 35, xs: [14, 26] }; top = { x: 20, y: 9 }; break;
+        case 'stack': for (let i = 0; i < 4; i++) { ell(g, 20, 31 - i * 4, 13, 3, B); line(g, 8, 32 - i * 4, 32, 32 - i * 4, BD); } ell(g, 20, 18, 11, 2.5, GO); rect(g, 10, 18, 2, 6, GO); rect(g, 27, 18, 2, 9, GO); rect(g, 17, 14, 6, 3, PA);
+          eyes = { x: 20, y: 24, span: 4 }; mouth = { x: 20, y: 29, w: 6 }; arms = [{ x: 7, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = { y: 35, xs: [14, 26] }; top = { x: 20, y: 14 }; break;
+        default: ell(g, 20, 23, 12, 9, B);
+      }
+      return { eyes, mouth, arms, legs, noLegs, float, top };
     },
     handtool(g, p, v) {
       const head = p.head || 'hammer', len = clampi((p.len || 20) + v * 2, 10, 26), hx = 20, hy = 12;
@@ -3302,6 +3490,117 @@ const DESIGN_RULES = [
   [/shoe rack|magazine rack|wine rack|spice rack|ladder shelf|cube shelf|room divider|folding screen/, LIKE('bookshelf'), 'furniture'],
   [/bed frame|headboard|daybed|futon frame|sofa bed/, LIKE('bed'), 'furniture'],
 ];
+/* v0.4.5: food and drink. Before, every unlisted meal, drink and vegetable borrowed its category's single template, so
+   an energy drink became a burger with takeaway-box lore and a grease attack. These rules (checked before DESIGN_RULES,
+   only for food, dessert, fruit/veg and bottle objects) give drinks drink bodies, and meats, seafood, bowls, dumplings,
+   breads, sauces, pantry goods, vegetables, greens and nuts their own designs, lore groups and move kits. */
+const FOOD_CATS = new Set(['food', 'cake', 'fruit', 'bottle']);
+const FOOD_RULES = [
+  // drinks
+  [/\benergy drink\b/, LIKE('can'), 'drink', 'Energy Spike', [140, 70, 45]],
+  [/\b(soda|cola|beer can)\b/, LIKE('can'), 'drink', 'Fizz Blast', [0, 70, 45]],
+  [/bubble tea/, V('vessel', { prof: [[18, 7], [3, 8]], straw: true, liquid: true, pearls: true }), 'drink', 'Tapioca Barrage', [30, 40, 72]],
+  [/^tea$|hot chocolate/, LIKE('mug'), 'drink', 'Scalding Sip'],
+  [/smoothie|milkshake/, V('vessel', { prof: [[18, 6], [3, 7]], straw: true, liquid: true, foam: true }), 'drink', 'Straw Slurp', [330, 55, 72]],
+  [/lemonade|^juice$/, V('vessel', { prof: [[20, 6]], straw: true, liquid: true }), 'drink', 'Citrus Splash', [50, 85, 62]],
+  [/^beer$/, V('vessel', { prof: [[18, 7]], handle: true, liquid: true, foam: true }), 'drink', 'Froth Over', [40, 80, 52]],
+  [/^wine$|cocktail/, LIKE('glass'), 'drink', 'Toast of Doom', [345, 60, 35]],
+  [/water glass/, LIKE('glass'), 'drink', 'Splash Down', [200, 40, 80]],
+  // pantry and sauces
+  [/tea bag|coffee beans|coffee bag|^cocoa$|^flour$|^sugar$|^rice$/, V('meal', { kind: 'sack' }), 'pantry', 'Spill Out', [35, 35, 75]],
+  [/pasta box|noodles packet/, V('meal', { kind: 'box' }), 'pantry', 'Shelf Drop'],
+  [/^salt$|^spices$/, LIKE('salt_shaker'), 'pantry', 'Seasoning Storm'],
+  [/olive oil|vinegar|maple syrup|soy sauce/, V('vessel', { prof: [[16, 6], [4, 4], [5, 2]], label: true, cap: 2 }), 'condiment', 'Slick Pour', [45, 70, 40]],
+  [/ketchup|mustard|mayonnaise|hot sauce/, V('vessel', { prof: [[16, 7], [4, 5]], label: true, tip: true }), 'condiment', 'Squeeze Shot', [2, 75, 45]],
+  [/^honey$|^jam$|peanut butter|nutella|^salsa$|^hummus$|^dip$|caviar/, LIKE('jar'), 'condiment', 'Sticky Trap'],
+  // dairy
+  [/cheese wedge|^cheese$/, V('meal', { kind: 'wedge' }), 'dairy', 'Holey Smack', [48, 85, 62]],
+  [/^butter$/, V('meal', { kind: 'block' }), 'dairy', 'Slippery Spread', [50, 80, 75]],
+  [/^yogurt$/, V('vessel', { prof: [[15, 9]], rim: true, label: true }), 'dairy', 'Creamy Swirl', [0, 0, 94]],
+  [/^tofu$/, V('meal', { kind: 'block' }), 'veg', 'Wobble Block', [45, 25, 88]],
+  // bowls
+  [/ramen|^pho$|noodle/, V('meal', { kind: 'bowl', fill: 'noodles' }), 'bowl', 'Noodle Lasso'],
+  [/curry|rice bowl|fried rice|paella|risotto|burrito bowl/, V('meal', { kind: 'bowl', fill: 'rice' }), 'bowl', 'Steaming Spoonful'],
+  [/soup can/, LIKE('can'), 'bowl', 'Tin Soup Splash'],
+  [/cereal|oatmeal|granola|porridge|mac and cheese|^beans$|coleslaw/, V('meal', { kind: 'bowl', fill: 'cereal' }), 'bowl', 'Soggy Splash'],
+  [/salad bowl/, V('meal', { kind: 'bowl', fill: 'salad' }), 'leafy', 'Crunchy Toss'],
+  [/lasagna/, V('meal', { kind: 'slab' }), 'bowl', 'Layer Crush', [38, 70, 60]],
+  // meat
+  [/bacon/, V('meal', { kind: 'bacon' }), 'meat', 'Crispy Strip', [8, 55, 55]],
+  [/steak/, V('meal', { kind: 'steak' }), 'meat', 'Searing Slab', [5, 55, 38]],
+  [/chicken wing|drumstick chicken|fried chicken/, V('meal', { kind: 'drumstick' }), 'meat', 'Drumstick Drum', [30, 70, 50]],
+  [/meatball|nugget/, V('meal', { kind: 'balls' }), 'meat', 'Meatball Barrage', [20, 50, 40]],
+  [/kebab/, V('meal', { kind: 'skewer' }), 'meat', 'Skewer Spin', [20, 55, 42]],
+  [/sausage roll/, V('meal', { kind: 'roll' }), 'bakery', 'Flaky Wrap', [35, 65, 60]],
+  // seafood
+  [/fish and chips|fish fillet/, V('meal', { kind: 'fillet' }), 'seafood', 'Battered Slap', [35, 65, 60]],
+  [/shrimp|prawn/, V('meal', { kind: 'shrimp' }), 'seafood', 'Tail Flick', [12, 75, 62]],
+  [/lobster/, LIKE('crab'), 'seafood', 'Claw Crush', [5, 70, 48]],
+  [/oyster|mussel/, V('meal', { kind: 'shell' }), 'seafood', 'Clam Up', [220, 15, 40]],
+  // dumplings and wraps
+  [/dumpling|dim sum|empanada|ravioli|gnocchi|calzone/, V('meal', { kind: 'dumpling' }), 'dumpling', 'Pleated Punch', [40, 45, 82]],
+  [/samosa/, V('meal', { kind: 'samosa' }), 'dumpling', 'Triple Corner', [38, 70, 55]],
+  [/bao bun/, V('meal', { kind: 'bun' }), 'dumpling', 'Pillow Punch', [40, 25, 92]],
+  [/spring roll|enchilada|tamale/, V('meal', { kind: 'roll' }), 'dumpling', 'Rolling Crunch', [38, 70, 55]],
+  [/falafel/, V('meal', { kind: 'balls' }), 'snack', 'Chickpea Volley', [35, 60, 40]],
+  [/shawarma|gyro|burrito|quesadilla|wrap sandwich/, LIKE('taco'), 'snack', 'Wrap Attack'],
+  [/nachos/, V('meal', { kind: 'nachos' }), 'snack', 'Chip Shower', [45, 80, 55]],
+  [/pizza slice box/, LIKE('pizza'), 'snack', 'Cheese Pull'],
+  // bread and breakfast
+  [/sandwich roll|panini/, LIKE('burger'), 'bakery', 'Pressed Crunch'],
+  [/french toast|garlic bread|^toast$/, V('meal', { kind: 'toast' }), 'bakery', 'Toasty Smack', [35, 60, 62]],
+  [/pancake|waffle plate|crepe/, V('meal', { kind: 'stack' }), 'breakfast', 'Syrup Flood', [35, 60, 65]],
+  [/omelette|scrambled eggs/, LIKE('fried_egg'), 'breakfast', 'Egg-splosion'],
+  // vegetables, greens, nuts and seeds
+  [/radish|beet|turnip/, V('produce', { shape: 'round', top: 'leafy' }), 'veg', 'Root Bash', [340, 60, 45]],
+  [/parsnip|horseradish/, V('produce', { shape: 'carrot', top: 'leafy' }), 'veg', 'Root Bash', [45, 40, 80]],
+  [/celery|asparagus|leek|spring onion/, V('produce', { shape: 'stalk' }), 'veg', 'Stalk Whip', [100, 50, 55]],
+  [/spinach|kale|chard|bok choy|^herbs$|basil|mint leaves|parsley|rosemary|thyme|dill|sprouts/, V('produce', { shape: 'leaf' }), 'leafy', 'Leaf Lash', [115, 55, 40]],
+  [/brussels sprout/, V('produce', { shape: 'small', ridges: true }), 'veg', 'Sprout Spit', [95, 50, 45]],
+  [/green bean|pea pod|okra|edamame/, V('produce', { shape: 'pod' }), 'veg', 'Pea Shooter', [100, 55, 45]],
+  [/chili|jalapeno/, V('produce', { shape: 'chili' }), 'veg', 'Fire Breath', [2, 80, 48]],
+  [/ginger|^yam$|cassava|taro/, V('produce', { shape: 'oval', dimples: true }), 'veg', 'Knobbly Knock', [35, 45, 60]],
+  [/peanut|walnut|almond|cashew|pistachio|hazelnut|chestnut|pecan/, V('produce', { shape: 'nut' }), 'nut', 'Nutcracker', [30, 45, 45]],
+  [/seeds|sesame|lentils|chickpeas|kidney beans|soybean/, V('meal', { kind: 'bowl', fill: 'beans' }), 'pantry', 'Seed Scatter', [35, 45, 45]],
+  [/blueberry|blackberry|cranberry|gooseberry|currant/, V('produce', { shape: 'cluster' }), null, 'Berry Burst', [250, 50, 35]],
+  [/^hip$/, V('produce', { shape: 'small', top: 'stem' }), null, 'Thorny Burst', [8, 75, 45]],
+  [/^date$|raisin|prune|olive/, V('produce', { shape: 'small' }), null, 'Pit Spit', [20, 40, 30]],
+  [/mango|papaya|guava/, V('produce', { shape: 'pear' }), null, 'Tropical Burst', [40, 85, 55]],
+  [/^kiwi$/, V('produce', { shape: 'oval', dimples: true }), null, 'Fuzzy Burst', [30, 40, 35]],
+  [/dragon fruit/, V('produce', { shape: 'oval', top: 'crown' }), null, 'Dragon Bloom', [330, 70, 55]],
+  [/star fruit/, V('produce', { shape: 'oval', ridges: true }), null, 'Star Burst', [55, 80, 55]],
+  [/durian/, V('produce', { shape: 'round', dimples: true, top: 'stem' }), null, 'Stink Bomb', [70, 45, 45]],
+  [/passion fruit|lychee|persimmon|quince|apricot|nectarine|plum|fig|pomelo|kumquat|yuzu/, V('produce', { shape: 'round', top: 'stem' }), null, 'Juicy Burst'],
+  // sweets and desserts that are not cakes
+  [/lollipop|gummy|jelly beans|toffee|caramel|licorice|chewing gum|^mint$|cake pop|truffle/, LIKE('candy'), null, 'Sugar Spike'],
+  [/cotton candy|candy floss|marshmallow/, V('produce', { shape: 'round', top: 'none' }), null, 'Fluff Puff', [320, 55, 85]],
+  [/sugar cookie|fortune cookie|wafer|macaron/, LIKE('cookie'), null, 'Crumble Toss'],
+  [/brownie|fudge/, LIKE('chocolate'), null, 'Fudge Slam'],
+  [/pudding|jelly|jello|custard|mousse/, V('meal', { kind: 'bun' }), null, 'Wobble Wave', [350, 60, 60]],
+  [/gelato cup|frozen yogurt|sundae/, LIKE('ice_cream'), null, 'Brain Freeze Blast'],
+  [/churro/, V('meal', { kind: 'roll' }), 'bakery', 'Sugar Twist'],
+  [/cinnamon roll|danish|scone|pastry|eclair|cream puff/, V('meal', { kind: 'bun' }), 'bakery', 'Glaze Glob', [35, 60, 65]],
+  [/donut box|chocolate box|biscuit tin/, V('meal', { kind: 'box' }), null, 'Lid Pop'],
+  [/birthday candle/, LIKE('candle'), null, 'Wish Flame'],
+  // drink and food bottles
+  [/kombucha|milk bottle|drinking bottle|sports bottle|hip flask|decanter|carafe|sippy cup/, LIKE('bottle'), 'drink', 'Glug Glug'],
+  [/sauce bottle|oil bottle|syrup bottle/, V('vessel', { prof: [[16, 6], [4, 4], [5, 2]], label: true, cap: 2 }), 'condiment', 'Slick Pour'],
+  [/honey jar|pickle jar|spice jar|baby food jar|cookie jar/, LIKE('jar'), 'condiment', 'Sticky Trap'],
+];
+// v0.4.5: a group can change the monster family where the category's family does not fit the object (a spoon or a pen
+// is not a Mechanical monster just because its category is "tool" or "keys")
+const GROUP_FAM = { kitchen: 'household', office: 'household', craft: 'household', gym: 'household', sport: 'household', leafy: 'botanical' };
+// named objects whose category does not describe them: [group, signature-move name]
+const NAMED_GROUPS = {
+  cutlery_spoon: ['kitchen', 'Stir Crazy'], cutlery_fork: ['kitchen', 'Prong Poke'], knife: ['kitchen', 'Chop Chop'], spatula: ['kitchen', 'Flip Out'], whisk: ['kitchen', 'Whisk Away'],
+  sewing_machine: ['craft', 'Stitch Storm'], pen: ['office', 'Ink Blot'], stapler: ['office', 'Staple Storm'], scissors: ['office'], headphones: ['media', 'Bass Boost'],
+  dumbbell: ['gym', 'Heavy Rep'], trophy: ['sport', 'Victory Lap'], traffic_cone: ['street', 'Detour'],
+  hotdog: ['meat', 'Relish Rush'], sushi: ['seafood', 'Wasabi Wallop'], egg: ['breakfast', 'Crack Attack'], fried_egg: ['breakfast', 'Yolk Burst'], milk_carton: ['drink', 'Milk Splash'],
+  broccoli: ['veg', 'Floret Blast'], carrot: ['veg', 'Carrot Jab'], potato: ['veg', 'Spud Slam'], onion: ['veg', 'Tear Gas'], pumpkin: ['veg', 'Gourd Bash'], cucumber: ['veg', 'Cool Cucumber'],
+  corn: ['veg', 'Kernel Pop'], eggplant: ['veg', 'Purple Bruise'], pepper: ['veg', 'Pepper Spray'],
+  noodles: ['bowl', 'Noodle Lasso'], bread: ['bakery', 'Loaf Launch'], croissant: ['bakery', 'Flaky Fold'], fries: ['snack', 'Salt Storm'], popcorn: ['snack', 'Pop Pop Pop'], taco: ['snack', 'Taco Tuesday'],
+};
+for (const [id, [group, sig]] of Object.entries(NAMED_GROUPS)) { const o = OBJECTS[id]; if (!o) continue; o.lore = group; if (sig && !o.sig) o.sigName = sig; if (GROUP_FAM[group]) o.fam = GROUP_FAM[group]; }
 // categories whose own template is ONE specific object (a toolbox, a key, a fridge…): objects that no rule covers get
 // a neutral template of the right kind instead of looking like that specific object
 const CAT_FALLBACK_VIS = {
@@ -3311,10 +3610,11 @@ const CAT_FALLBACK_VIS = {
 function applyDesignRules(o) {
   if (o.vis) return;
   const label = o.name.toLowerCase();
-  for (const [re, vis, lore, sig, col] of DESIGN_RULES) {
+  for (const [re, vis, lore, sig, col] of FOOD_CATS.has(o.cat) ? [...FOOD_RULES, ...DESIGN_RULES] : DESIGN_RULES) {
     if (!re.test(label)) continue;
     if (vis.like && !OBJECTS[vis.like]) break; // safety: never point at a missing design
     o.vis = vis; o.lore = lore || null; if (sig) o.sigName = sig; o.rule = String(re);
+    if (GROUP_FAM[lore]) o.fam = GROUP_FAM[lore];
     if (col) [o.h, o.s, o.l] = col; // the object's usual colour when the photo gives none (light switches are white)
     return;
   }
@@ -3463,6 +3763,21 @@ const LORE_GROUP_KITS = {
   jewel: { place: ['the jewellery box', 'the bathroom sink', 'the gap between the floorboards'], stuff: ['sparkles', 'tiny scratches'], habit: ['slips off at the beach', 'hides in the sink drain', 'tarnishes the night before a wedding'], omen: ['every jewel in the land shines blood-red', 'kings and queens kneel before it'], realm: ['the treasure of all treasures', 'every crown ever worn'] },
   cosmetic: { place: ['the bathroom cabinet', 'the bottom of the handbag'], stuff: ['smudges', 'sweet perfume'], habit: ['smudges itself the moment you leave the house', 'rolls under the sink', 'dries up the day before a party'], omen: ['every mirror in the city shows a stranger', 'faces forget who they are'], realm: ['the perfect face', 'every disguise ever worn'] },
   door: { place: ['the front door', 'the long hallway', 'the room you never open'], stuff: ['creaks', 'cold draughts'], habit: ['creaks loudly when you sneak home late', 'locks itself when you step outside', 'slams in the wind'], omen: ['every door in the city opens at once', 'no lock will ever hold again'], realm: ['every door ever closed', 'the threshold between worlds'] },
+  // v0.4.5: food and drink groups (objects.js FOOD_RULES)
+  drink: { place: ['the back of the fridge', 'the vending machine', 'the corner-shop cooler'], stuff: ['sticky rings', 'fizz', 'condensation drips'], habit: ['shakes itself up just before you open it', 'goes flat the second you look away', 'keeps you awake until 3 a.m.'], omen: ['every drink in the city fizzes over at once', 'nobody anywhere can sleep again'], realm: ['the bottomless cup', 'every last drop'] },
+  meat: { place: ['the barbecue', 'the butcher\'s counter', 'the back of the grill'], stuff: ['sizzling grease', 'smoky sauce'], habit: ['sizzles louder when someone says the word "vegetarian"', 'burns on one side and stays raw on the other', 'steals the best spot on the grill'], omen: ['every barbecue in the land roars into flame', 'the smoke of a thousand grills blots out the sun'], realm: ['the eternal barbecue', 'the great grill at the end of the world'] },
+  seafood: { place: ['the fish market', 'the harbour restaurant', 'the bottom of the ice tray'], stuff: ['brine', 'a fishy whiff', 'crushed ice'], habit: ['smells stronger every hour it is left out', 'slips off the plate when you reach for it', 'pinches the waiter'], omen: ['the tide comes in and never goes out', 'every fish shop in town fills with seawater'], realm: ['the briny deep', 'the bottom of the sea'] },
+  dairy: { place: ['the cheese counter', 'the butter dish', 'the fridge door'], stuff: ['crumbs of rind', 'a sour smell', 'melted puddles'], habit: ['goes off one day before the date on the label', 'melts the moment you leave it on the table', 'smells stronger than it looks'], omen: ['all the milk in the land turns sour at once', 'the cheese caves rumble awake'], realm: ['the great cheese cave', 'the river of cream'] },
+  condiment: { place: ['the fridge door', 'the condiment tray', 'the back of the cupboard'], stuff: ['sticky drips', 'crusty lids'], habit: ['comes out all at once after refusing for ages', 'squirts sideways onto your shirt', 'glues its own lid shut'], omen: ['every jar in the land bursts open', 'the streets run thick and sticky'], realm: ['the endless pantry', 'the sauce that covers the world'] },
+  bowl: { place: ['the noodle bar', 'the kitchen table', 'the microwave at work'], stuff: ['steam', 'splashes of broth', 'stray grains'], habit: ['splashes broth on your shirt at the first slurp', 'is too hot until it is suddenly cold', 'never quite fills you up'], omen: ['every pot in the land boils over at once', 'a great tide of broth rolls through the streets'], realm: ['the bottomless bowl', 'the great cauldron of all meals'] },
+  bakery: { place: ['the bread bin', 'the bakery window', 'the toaster'], stuff: ['crumbs', 'flour dust', 'burnt crusts'], habit: ['goes stale the morning you wanted it', 'lands butter-side down on purpose', 'hides the last slice behind the heel'], omen: ['every oven in the city bakes at once', 'the smell of bread fills the world and no one can resist it'], realm: ['the eternal oven', 'the first loaf ever baked'] },
+  dumpling: { place: ['the steamer basket', 'the takeaway bag', 'the night-market stall'], stuff: ['steam puffs', 'dipping-sauce drips'], habit: ['bursts and squirts hot filling at the first bite', 'sticks to the bottom of the basket', 'hides one extra in the bag to make you feel guilty'], omen: ['every steamer in the city puffs at once', 'the fog of a thousand kitchens rolls in'], realm: ['the endless steamer', 'the folded heart of every kitchen'] },
+  snack: { place: ['the takeaway bag', 'the food truck', 'the late-night snack drawer'], stuff: ['greasy wrappers', 'salt crumbs', 'cheesy fingerprints'], habit: ['vanishes faster than you meant to eat it', 'drips sauce down your sleeve', 'calls to you at midnight'], omen: ['every food truck in the land opens at once and never closes', 'the whole city wakes up starving'], realm: ['the street of endless stalls', 'the midnight feast'] },
+  breakfast: { place: ['the frying pan', 'the breakfast table', 'the diner counter'], stuff: ['yolk drips', 'syrup puddles', 'shell bits'], habit: ['sticks to the pan just as you flip it', 'is cold before you sit down', 'makes you late every single morning'], omen: ['the sun refuses to rise until it is fed', 'every kitchen in the land smells of burning'], realm: ['the eternal morning', 'the first breakfast ever cooked'] },
+  veg: { place: ['the vegetable patch', 'the bottom of the fridge drawer', 'the market stall'], stuff: ['soil', 'crunchy peel', 'a sharp smell'], habit: ['hides at the bottom of the fridge drawer until it goes soft', 'makes children push their plates away', 'grows twice as big when you are not looking'], omen: ['the fields rise up and march on the cities', 'every garden in the land bursts out of its fences'], realm: ['the endless field', 'the deep, dark soil'] },
+  leafy: { place: ['the herb pot on the windowsill', 'the salad drawer', 'the kitchen garden'], stuff: ['loose leaves', 'a fresh green smell'], habit: ['wilts the day after you buy it', 'gets stuck in your teeth before a meeting', 'grows back the moment you pick it'], omen: ['green leaves cover every street overnight', 'the gardens swallow the town'], realm: ['the green that covers the world', 'the first garden'] },
+  nut: { place: ['the bottom of the snack bowl', 'the squirrel\'s stash', 'the old jar on the shelf'], stuff: ['shell fragments', 'crumbs'], habit: ['refuses to crack until you hit your thumb', 'rolls under the sofa and waits for years', 'hides its shell in your slipper'], omen: ['every squirrel in the land turns to stare', 'the great oaks drop their nuts on the city like hail'], realm: ['the forest floor', 'the hoard of every squirrel that ever lived'] },
+  pantry: { place: ['the back of the pantry', 'the top shelf of the cupboard', 'the corner-shop aisle'], stuff: ['spilled grains', 'flour dust', 'torn packets'], habit: ['tears open the moment you pick it up', 'expires the week before you finally use it', 'spills across the whole shelf'], omen: ['every cupboard in the land bursts open at once', 'the shelves of the world empty overnight'], realm: ['the endless pantry', 'the storehouse at the end of the world'] },
 };
 const LORE_GROUP_ALIAS = { light: 'lamp', furniture: 'chair', appliance: 'fridge', music: 'instrument', toyish: 'toy', tool: 'tool' };
 const loreKitFor = (o, cat) => { const g = o && o.lore; return (g && (LORE_GROUP_KITS[g] || LORE_KITS[LORE_GROUP_ALIAS[g]])) || LORE_KITS[cat] || LORE_KITS.other; };
@@ -3502,13 +3817,15 @@ const LORE_TEMPLATES = {
     'Old almanacs warn: if the {obj} goes silent, run. That silence is this creature breathing in.',
     'It does not hunt to eat. It hunts to be remembered, and nobody forgets.',
   ],
+  // v0.4.5: every Legendary line names its own object (directly or through its unique title), so no two legendary
+  // species can share their text
   legendary: [
-    'Where it takes hold, {omen}. Even the gods fear {realm}.',
+    'Where this {obj} takes hold, {omen}. Even the gods fear {realm}.',
     'Before the first {obj} was ever made, it was already waiting. It will remain after the last.',
     'Ancient texts call it {title}. When it wakes, {omen}.',
-    'Kingdoms have fallen to its {sig}. Its true name is spoken only in whispers.',
-    'It is the {colour} titan of {realm}. Stars dim when it opens its eyes.',
-    'Every {obj} in the world is a door, and it holds every key. It has begun to open them.',
+    'Kingdoms have fallen to its {sig}. Hunters call it {title}, and only in whispers.',
+    'This {colour} {obj} is the titan of {realm}. Stars dim when it opens its eyes.',
+    'Every {obj} in the world answers to it. It has begun to call them home.',
   ],
 };
 // second sentence from Rare upwards, so the rarest monsters read the most distinctive
@@ -3564,7 +3881,8 @@ function monsterLore(m) {
   const pal = m.photo && m.photo.pal, colour = pal && pal.conf === 'confident' && pal.primary ? LORE_COLOUR(pal.primary) : null;
   const objName = o ? o.name.split(' / ')[0].toLowerCase() : (m.word || CATEGORY[cat].name.split(' /')[0]).toLowerCase();
   const sig = (m.abilities && m.abilities[0] && m.abilities[0].name) || (o && o.sig && o.sig.name) || (o && o.sigName) || CATEGORY[cat].sig.name;
-  const title = m.name && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : LEGEND_TITLES[m.fam || CATEGORY[cat].fam] || 'the Nameless';
+  const fam = m.fam || (o && o.fam) || CATEGORY[cat].fam;
+  const title = m.name && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : o && typeof legendTitle === 'function' ? legendTitle(o, fam) : LEGEND_TITLES[fam] || 'the Nameless';
   const fill = t => t.replace(/\{(\w+)\}/g, (_, k) => ({ obj: objName, Obj: objName[0].toUpperCase() + objName.slice(1), colour, place: pick(kit.place), stuff: pick(kit.stuff), habit: pick(kit.habit), omen: pick(kit.omen), realm: pick(kit.realm), sig, title })[k] || '');
   const own = o && LORE_OBJECT[m.obj] && LORE_OBJECT[m.obj][rarity];
   let text;
@@ -3719,7 +4037,7 @@ const Platform = (() => {
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.4';
+const GAME_VERSION = '0.4.5';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -4022,23 +4340,44 @@ function speciesName(cat, rarity, word, fam) {
   let pre = c.names.length ? c.names[h % c.names.length] : titleCase((word || 'Odd').replace(/[^a-z]/gi, '').slice(0, 6)) || 'Odd';
   const suf = SUFFIX[rarity][(h >>> 5) % SUFFIX[rarity].length];
   let name = joinName(pre, suf);
-  if (rarity === 'legendary') name += ', ' + LEGEND_TITLES[fam];
+  if (rarity === 'legendary') name += ', ' + (word ? legendTitle({ id: 'w:' + word, name: word }, fam) : LEGEND_TITLES[fam]);
   return name;
 }
-function monsterFamily(cat, word, variant) {
+function monsterFamily(cat, word, variant, o) {
   if (variant === 'spectral') return 'spectral';
   if (variant === 'mutated') return 'mutated';
+  if (o && o.fam) return o.fam; // v0.4.5: the object's own nature (a spoon is Household, not Mechanical like its "tool" category)
   return CATEGORY[cat].fam || NATIVE_FAMILIES[hashStr(word || 'x') % 6];
 }
 function cdFor(ab) { return ab.self ? 3 : (ab.power >= 1.3 || ab.hits) ? 3 : ab.effect ? 2 : 2; }
-function monsterAbilities(cat, rarity, fam, word) {
+// the object's display name for move names and titles ("Energy Drink", "Padlock")
+const objNoun = o => o.name.split(' / ')[0].split(' ').map(titleCase).join(' ');
+function moveKit(cat, o) {
+  const g = o && o.lore, src = (g && (MOVE_KITS[g] || MOVE_KITS[MOVE_KIT_ALIAS[g]])) || MOVE_KITS[cat] || MOVE_KITS.other;
+  return src.split(',').map(s => { const [name, arch] = s.split(':').map(t => t.trim()); return { name, ...MOVE_ARCH[arch] }; });
+}
+function monsterAbilities(cat, rarity, fam, word, o) {
   const tier = RARITY[rarity].tier;
-  const SR = mulberry(hashStr('abil:' + cat + rarity + fam + (word || '')));
+  // objects get their own seed, so two objects of one category do not share a repertoire
+  const SR = mulberry(hashStr('abil:' + cat + rarity + fam + (word || '') + (o ? '|' + o.id : '')));
   const list = [{ ...CATEGORY[cat].sig }];
-  const pool = FAMILIES[fam].abilities.slice();
-  const extra = [0, 1, 1, 2, 2][tier];
+  if (!o) { // category-only monsters (Oddities): unchanged rules
+    const pool = FAMILIES[fam].abilities.slice();
+    const extra = [0, 1, 1, 2, 2][tier];
+    for (let i = 0; i < extra && pool.length; i++) list.push({ ...pool.splice(Math.floor(SR() * pool.length), 1)[0] });
+    if (tier >= 4) list.push({ name: 'Cataclysm of ' + FAMILIES[fam].name.replace(/al$/, 'ia'), power: 2.1, effect: ['burn', 'poison', 'stun', 'defdown'][SR.int(0, 3)], chance: 0.6, ultimate: true });
+    return list.map(a => ({ ...a, cd: a.ultimate ? 4 : cdFor(a) }));
+  }
+  const pool = moveKit(cat, o);
+  const extra = [0, 1, 1, 2, 1][tier];
   for (let i = 0; i < extra && pool.length; i++) list.push({ ...pool.splice(Math.floor(SR() * pool.length), 1)[0] });
-  if (tier >= 4) list.push({ name: 'Cataclysm of ' + FAMILIES[fam].name.replace(/al$/, 'ia'), power: 2.1, effect: ['burn', 'poison', 'stun', 'defdown'][SR.int(0, 3)], chance: 0.6, ultimate: true });
+  if (tier >= 4) {
+    // legendary: a legend move and an ultimate that carry the object's own name, unique to this monster
+    const N = objNoun(o), archs = Object.keys(LEGEND_MOVE_TPL), arch = archs[hashStr('legend|' + o.id) % archs.length];
+    list.push({ ...MOVE_ARCH[arch], name: LEGEND_MOVE_TPL[arch].replace('{N}', N), legend: true });
+    const eff = ['burn', 'poison', 'stun', 'defdown'][SR.int(0, 3)], tpl = ULTIMATE_TPL[eff];
+    list.push({ name: tpl[hashStr('ult|' + o.id) % tpl.length].replace('{N}', N), power: 2.1, effect: eff, chance: 0.6, ultimate: true });
+  }
   return list.map(a => ({ ...a, cd: a.ultimate ? 4 : cdFor(a) }));
 }
 function monsterStats(rarity, fam, L, seed, variant) {
@@ -4059,21 +4398,23 @@ function speciesName3(objId, rarity, fam) {
   const h = hashStr(objId + '|' + rarity);
   const head = o.nm || titleCase(o.name.split(/[\s/-]+/).filter(Boolean).pop().replace(/[^a-z]/gi, '').slice(0, 8)) || 'Odd';
   let name = joinName(head, SUFFIX[rarity][(h >>> 5) % SUFFIX[rarity].length]);
-  if (rarity === 'legendary') name += ', ' + LEGEND_TITLES[fam];
+  if (rarity === 'legendary') name += ', ' + legendTitle(o, fam);
   return name;
 }
+// v0.4.5: "the Unbroken Padlock", "the Bottomless Energy Drink": one title per object, never shared
+function legendTitle(o, fam) { const adj = LEGEND_ADJ[fam] || LEGEND_ADJ.household; return 'the ' + adj[hashStr('title|' + o.id) % adj.length] + ' ' + objNoun(o); }
 function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
   if (!obj) obj = CAT_DEFAULT_OBJECT[cat] || null;
   if (obj && OBJECTS[obj]) cat = OBJECTS[obj].cat;
-  const fam = monsterFamily(cat, word, variant);
+  const o = obj && OBJECTS[obj];
+  const fam = monsterFamily(cat, word, variant, o);
   const r = RARITY[rarity];
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
   const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}), ...(photo.engine ? { engine: photo.engine } : {}) } : null; // engine: which recogniser identified it
   const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
-  const abilities = monsterAbilities(cat, rarity, fam, base.word);
-  const o = obj && OBJECTS[obj];
+  const abilities = monsterAbilities(cat, rarity, fam, base.word, o);
   if (o && o.sig) abilities[0] = { ...o.sig, cd: cdFor(o.sig) }; // object-specific signature move
   else if (o && o.sigName) abilities[0] = { ...abilities[0], name: o.sigName }; // same numbers, a name that fits the object
   const m = {
@@ -5397,7 +5738,9 @@ const Guide = (() => {
   const el = id => `<span style="color:${ELEMENTS[id].color}">${ELEMENTS[id].name}</span>`;
   const famName = f => `<span style="color:${FAMILIES[f].color}">${FAMILIES[f].glyph} ${FAMILIES[f].name}</span>`;
   const weaponsWith = test => WEAPON_ORDER.filter(w => test(WEAPONS[w])).map(w => WEAPONS[w].name);
-  const familiesUsing = eff => Object.keys(FAMILIES).filter(f => FAMILIES[f].abilities.some(a => a.effect === eff)).map(f => FAMILIES[f].name);
+  // v0.4.5: monsters draw moves from their object's kit, so any kind of monster may use an effect: show example moves
+  const kitMoves = Object.values(MOVE_KITS).flatMap(k => k.split(',').map(x => x.split(':').map(t => t.trim())));
+  const familiesUsing = eff => [...new Set(kitMoves.filter(([, a]) => MOVE_ARCH[a].effect === eff).map(([n]) => n))].slice(0, 4).concat('…');
   const totalWeight = RARITIES.reduce((a, r) => a + r.weight, 0);
 
   const sections = [
@@ -5418,7 +5761,7 @@ const Guide = (() => {
         <li><b>Hitting:</b> each weapon has an accuracy; you lose 1 percentage point for every point of speed the monster has over you. The Pistol never misses.</li>
         <li><b>Dodging:</b> you dodge a monster's hit ${pct(MECH.enemy.dodgeBase)} of the time, ${pct(MECH.enemy.dodgePerSpd)} more (or less) per point of speed you have over (or under) it, at most ${pct(MECH.enemy.dodgeMax)}.</li>
         <li><b>Critical hits:</b> yours depend on the weapon (and charms); a monster crits ${pct(MECH.enemy.crit)} of the time for ×${MECH.enemy.critX} damage.</li>
-        <li><b>Monster abilities:</b> each monster has a signature move plus more moves the rarer it is (Legendaries add an Ultimate). After use, a move needs a few turns to recharge. A monster that can heal does so when below ${pct(MECH.enemy.healBelow)} HP.</li>
+        <li><b>Monster abilities:</b> each monster has a signature move plus more moves from its object's own move set the rarer it is (a drink fights like a drink, a spoon like kitchenware). Every Legendary is unique: its title, a legend move and its Ultimate carry its object's name. After use, a move needs a few turns to recharge. A monster that can heal does so when below ${pct(MECH.enemy.healBelow)} HP.</li>
       </ul>` },
     { id: 'types', title: 'Damage types, weaknesses & resistances', body: () => `
       <p>Every weapon deals one damage type. Hitting a weakness does <b>×${MECH.weak}</b> damage ("super effective"); a resistance takes only <b>×${MECH.resist}</b>. A monster's family decides its weaknesses.</p>
@@ -5428,12 +5771,12 @@ const Guide = (() => {
     { id: 'status', title: 'Status effects', body: () => `
       <p>Effects tick and count down at the <b>start of the affected creature's turn</b>; "Lasts" below says what that means in practice. The same effect does not stack: applying it again only resets its timer (to the longer of the two). Different effects can be active at the same time.</p>
       <div class="guide-cards">
-        ${statusCard('POISON', 'poison', `Loses ${pct(X.poisonPct)} of max HP (at least ${X.poisonMin}) at the start of each of its turns.`, `damage at the start of its next ${turns(T.poison)}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance.`, [`Monsters: ${familiesUsing('poison').join(', ')}`, `Weapons: Cursed Dagger hits (${pct(WEAPONS.dagger.poison)}, only if not already poisoned) and Hex Flurry`])}
-        ${statusCard('BURN', 'burn', `Loses ${pct(X.burnPct)} of max HP + ${X.burnFlat} at the start of each of its turns, and deals ${pct(1 - X.burnAtk)} less damage.`, `damage at the start of its next ${turns(T.burn)}; weaker attacks for its next ${T.burn - 1}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance (not added again if also poisoned).`, [`Monsters: ${familiesUsing('burn').join(', ')}`, `Weapons: Arcane Wand special (Arcane Nova)`])}
-        ${statusCard('STUN', 'stun', 'Loses its next turn.', T.stun === 1 ? 'its next turn' : `its next ${turns(T.stun)}`, `No cure: it wears off after one turn. A stunned monster is ${pct(X.stunAcc)} easier to hit and +${pct(C.stun)} easier to capture.`, [`Monsters: ${familiesUsing('stun').join(', ')}`, `Weapons: Thunder Hammer hits (${pct(WEAPONS.hammer.stun)}) and Thunderclap`])}
-        ${statusCard('DEF↓', 'defdown', `Defence is halved (×${X.defdown}): it takes more damage.`, `the opponent's next ${T.defdown - 1} attacks against it`, 'Cured by an Antidote.', [`Monsters: ${familiesUsing('defdown').join(', ')}`, `Weapons: Rusty Hunter Sword special (Rusty Cleave)`])}
-        ${statusCard('ATK↑', 'atkup', `Deals ×${X.atkup} damage.`, `its next ${T.atkup - 1} attacks`, 'Yours comes from a Strength Potion; monsters may power themselves up too.', [`Monsters: ${familiesUsing('atkup').join(', ')}`])}
-        ${statusCard('DEF↑', 'defup', `Defence ×${X.defup}: takes less damage.`, `the opponent's next ${T.defup} attacks`, 'Yours comes from a Defense Potion; some monsters raise their own defence.', [`Monsters: ${familiesUsing('defup').join(', ')}`])}
+        ${statusCard('POISON', 'poison', `Loses ${pct(X.poisonPct)} of max HP (at least ${X.poisonMin}) at the start of each of its turns.`, `damage at the start of its next ${turns(T.poison)}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance.`, [`Monster moves such as ${familiesUsing('poison').join(', ')}`, `Weapons: Cursed Dagger hits (${pct(WEAPONS.dagger.poison)}, only if not already poisoned) and Hex Flurry`])}
+        ${statusCard('BURN', 'burn', `Loses ${pct(X.burnPct)} of max HP + ${X.burnFlat} at the start of each of its turns, and deals ${pct(1 - X.burnAtk)} less damage.`, `damage at the start of its next ${turns(T.burn)}; weaker attacks for its next ${T.burn - 1}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance (not added again if also poisoned).`, [`Monster moves such as ${familiesUsing('burn').join(', ')}`, `Weapons: Arcane Wand special (Arcane Nova)`])}
+        ${statusCard('STUN', 'stun', 'Loses its next turn.', T.stun === 1 ? 'its next turn' : `its next ${turns(T.stun)}`, `No cure: it wears off after one turn. A stunned monster is ${pct(X.stunAcc)} easier to hit and +${pct(C.stun)} easier to capture.`, [`Monster moves such as ${familiesUsing('stun').join(', ')}`, `Weapons: Thunder Hammer hits (${pct(WEAPONS.hammer.stun)}) and Thunderclap`])}
+        ${statusCard('DEF↓', 'defdown', `Defence is halved (×${X.defdown}): it takes more damage.`, `the opponent's next ${T.defdown - 1} attacks against it`, 'Cured by an Antidote.', [`Monster moves such as ${familiesUsing('defdown').join(', ')}`, `Weapons: Rusty Hunter Sword special (Rusty Cleave)`])}
+        ${statusCard('ATK↑', 'atkup', `Deals ×${X.atkup} damage.`, `its next ${T.atkup - 1} attacks`, 'Yours comes from a Strength Potion; monsters may power themselves up too.', [`Monster moves such as ${familiesUsing('atkup').join(', ')}`])}
+        ${statusCard('DEF↑', 'defup', `Defence ×${X.defup}: takes less damage.`, `the opponent's next ${T.defup} attacks`, 'Yours comes from a Defense Potion; some monsters raise their own defence.', [`Monster moves such as ${familiesUsing('defup').join(', ')}`])}
         ${statusCard('IMMUNE', 'immune', 'Cannot be poisoned, burned, stunned or weakened (DEF↓).', `the monster's next ${turns(T.immune)}`, 'Given by an Antidote, together with the cure and +10 HP.', [])}
       </div>
       <p class="small muted">Example: your attack poisons a monster. It then loses HP at the start of each of its next ${T.poison} turns, and the poison is gone.</p>` },
@@ -5456,7 +5799,7 @@ const Guide = (() => {
       <div class="guide-table"><table><tr><th>Rarity</th><th>Chance</th><th>Stats</th><th>Base capture</th><th>Level vs you</th><th>Rewards</th></tr>
       ${RARITIES.map(r => `<tr><td style="color:${r.color}"><b>${r.name}</b></td><td>${pct1(r.weight / totalWeight)}</td><td>×${r.mult} (HP ×${r.hpMult})</td><td>${pct(r.capture)}</td><td>${r.lvl[0] === r.lvl[1] ? (r.lvl[0] ? '+' + r.lvl[0] : 'same') : `+${r.lvl[0]} to +${r.lvl[1]}`}</td><td>×${r.xp}</td></tr>`).join('')}</table></div>
       <ul class="small"><li>Research: the Ectoplasmic Lens makes Rare, Epic and Legendary 40% more likely; the Legend Tracker doubles Legendary odds.</li>
-        <li>Rarer monsters know more abilities; Legendaries also have an Ultimate and a title.</li>
+        <li>Rarer monsters know more abilities; each Legendary also has its own unique title, legend move and Ultimate.</li>
         <li>Variants (unlocked by research): Spectral and Mutated forms (9% each) change the monster's family; Prismatic colours (1 in 12) give +8% stats and double coins.</li></ul>` },
     { id: 'levels', title: 'Levels & scaling', body: () => `
       <ul>

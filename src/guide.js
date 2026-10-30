@@ -13,7 +13,9 @@ const Guide = (() => {
   const el = id => `<span style="color:${ELEMENTS[id].color}">${ELEMENTS[id].name}</span>`;
   const famName = f => `<span style="color:${FAMILIES[f].color}">${FAMILIES[f].glyph} ${FAMILIES[f].name}</span>`;
   const weaponsWith = test => WEAPON_ORDER.filter(w => test(WEAPONS[w])).map(w => WEAPONS[w].name);
-  const familiesUsing = eff => Object.keys(FAMILIES).filter(f => FAMILIES[f].abilities.some(a => a.effect === eff)).map(f => FAMILIES[f].name);
+  // v0.4.5: monsters draw moves from their object's kit, so any kind of monster may use an effect: show example moves
+  const kitMoves = Object.values(MOVE_KITS).flatMap(k => k.split(',').map(x => x.split(':').map(t => t.trim())));
+  const familiesUsing = eff => [...new Set(kitMoves.filter(([, a]) => MOVE_ARCH[a].effect === eff).map(([n]) => n))].slice(0, 4).concat('…');
   const totalWeight = RARITIES.reduce((a, r) => a + r.weight, 0);
 
   const sections = [
@@ -34,7 +36,7 @@ const Guide = (() => {
         <li><b>Hitting:</b> each weapon has an accuracy; you lose 1 percentage point for every point of speed the monster has over you. The Pistol never misses.</li>
         <li><b>Dodging:</b> you dodge a monster's hit ${pct(MECH.enemy.dodgeBase)} of the time, ${pct(MECH.enemy.dodgePerSpd)} more (or less) per point of speed you have over (or under) it, at most ${pct(MECH.enemy.dodgeMax)}.</li>
         <li><b>Critical hits:</b> yours depend on the weapon (and charms); a monster crits ${pct(MECH.enemy.crit)} of the time for ×${MECH.enemy.critX} damage.</li>
-        <li><b>Monster abilities:</b> each monster has a signature move plus more moves the rarer it is (Legendaries add an Ultimate). After use, a move needs a few turns to recharge. A monster that can heal does so when below ${pct(MECH.enemy.healBelow)} HP.</li>
+        <li><b>Monster abilities:</b> each monster has a signature move plus more moves from its object's own move set the rarer it is (a drink fights like a drink, a spoon like kitchenware). Every Legendary is unique: its title, a legend move and its Ultimate carry its object's name. After use, a move needs a few turns to recharge. A monster that can heal does so when below ${pct(MECH.enemy.healBelow)} HP.</li>
       </ul>` },
     { id: 'types', title: 'Damage types, weaknesses & resistances', body: () => `
       <p>Every weapon deals one damage type. Hitting a weakness does <b>×${MECH.weak}</b> damage ("super effective"); a resistance takes only <b>×${MECH.resist}</b>. A monster's family decides its weaknesses.</p>
@@ -44,12 +46,12 @@ const Guide = (() => {
     { id: 'status', title: 'Status effects', body: () => `
       <p>Effects tick and count down at the <b>start of the affected creature's turn</b>; "Lasts" below says what that means in practice. The same effect does not stack: applying it again only resets its timer (to the longer of the two). Different effects can be active at the same time.</p>
       <div class="guide-cards">
-        ${statusCard('POISON', 'poison', `Loses ${pct(X.poisonPct)} of max HP (at least ${X.poisonMin}) at the start of each of its turns.`, `damage at the start of its next ${turns(T.poison)}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance.`, [`Monsters: ${familiesUsing('poison').join(', ')}`, `Weapons: Cursed Dagger hits (${pct(WEAPONS.dagger.poison)}, only if not already poisoned) and Hex Flurry`])}
-        ${statusCard('BURN', 'burn', `Loses ${pct(X.burnPct)} of max HP + ${X.burnFlat} at the start of each of its turns, and deals ${pct(1 - X.burnAtk)} less damage.`, `damage at the start of its next ${turns(T.burn)}; weaker attacks for its next ${T.burn - 1}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance (not added again if also poisoned).`, [`Monsters: ${familiesUsing('burn').join(', ')}`, `Weapons: Arcane Wand special (Arcane Nova)`])}
-        ${statusCard('STUN', 'stun', 'Loses its next turn.', T.stun === 1 ? 'its next turn' : `its next ${turns(T.stun)}`, `No cure: it wears off after one turn. A stunned monster is ${pct(X.stunAcc)} easier to hit and +${pct(C.stun)} easier to capture.`, [`Monsters: ${familiesUsing('stun').join(', ')}`, `Weapons: Thunder Hammer hits (${pct(WEAPONS.hammer.stun)}) and Thunderclap`])}
-        ${statusCard('DEF↓', 'defdown', `Defence is halved (×${X.defdown}): it takes more damage.`, `the opponent's next ${T.defdown - 1} attacks against it`, 'Cured by an Antidote.', [`Monsters: ${familiesUsing('defdown').join(', ')}`, `Weapons: Rusty Hunter Sword special (Rusty Cleave)`])}
-        ${statusCard('ATK↑', 'atkup', `Deals ×${X.atkup} damage.`, `its next ${T.atkup - 1} attacks`, 'Yours comes from a Strength Potion; monsters may power themselves up too.', [`Monsters: ${familiesUsing('atkup').join(', ')}`])}
-        ${statusCard('DEF↑', 'defup', `Defence ×${X.defup}: takes less damage.`, `the opponent's next ${T.defup} attacks`, 'Yours comes from a Defense Potion; some monsters raise their own defence.', [`Monsters: ${familiesUsing('defup').join(', ')}`])}
+        ${statusCard('POISON', 'poison', `Loses ${pct(X.poisonPct)} of max HP (at least ${X.poisonMin}) at the start of each of its turns.`, `damage at the start of its next ${turns(T.poison)}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance.`, [`Monster moves such as ${familiesUsing('poison').join(', ')}`, `Weapons: Cursed Dagger hits (${pct(WEAPONS.dagger.poison)}, only if not already poisoned) and Hex Flurry`])}
+        ${statusCard('BURN', 'burn', `Loses ${pct(X.burnPct)} of max HP + ${X.burnFlat} at the start of each of its turns, and deals ${pct(1 - X.burnAtk)} less damage.`, `damage at the start of its next ${turns(T.burn)}; weaker attacks for its next ${T.burn - 1}`, `Cured by an Antidote. On a monster it adds +${pct(C.dot)} capture chance (not added again if also poisoned).`, [`Monster moves such as ${familiesUsing('burn').join(', ')}`, `Weapons: Arcane Wand special (Arcane Nova)`])}
+        ${statusCard('STUN', 'stun', 'Loses its next turn.', T.stun === 1 ? 'its next turn' : `its next ${turns(T.stun)}`, `No cure: it wears off after one turn. A stunned monster is ${pct(X.stunAcc)} easier to hit and +${pct(C.stun)} easier to capture.`, [`Monster moves such as ${familiesUsing('stun').join(', ')}`, `Weapons: Thunder Hammer hits (${pct(WEAPONS.hammer.stun)}) and Thunderclap`])}
+        ${statusCard('DEF↓', 'defdown', `Defence is halved (×${X.defdown}): it takes more damage.`, `the opponent's next ${T.defdown - 1} attacks against it`, 'Cured by an Antidote.', [`Monster moves such as ${familiesUsing('defdown').join(', ')}`, `Weapons: Rusty Hunter Sword special (Rusty Cleave)`])}
+        ${statusCard('ATK↑', 'atkup', `Deals ×${X.atkup} damage.`, `its next ${T.atkup - 1} attacks`, 'Yours comes from a Strength Potion; monsters may power themselves up too.', [`Monster moves such as ${familiesUsing('atkup').join(', ')}`])}
+        ${statusCard('DEF↑', 'defup', `Defence ×${X.defup}: takes less damage.`, `the opponent's next ${T.defup} attacks`, 'Yours comes from a Defense Potion; some monsters raise their own defence.', [`Monster moves such as ${familiesUsing('defup').join(', ')}`])}
         ${statusCard('IMMUNE', 'immune', 'Cannot be poisoned, burned, stunned or weakened (DEF↓).', `the monster's next ${turns(T.immune)}`, 'Given by an Antidote, together with the cure and +10 HP.', [])}
       </div>
       <p class="small muted">Example: your attack poisons a monster. It then loses HP at the start of each of its next ${T.poison} turns, and the poison is gone.</p>` },
@@ -72,7 +74,7 @@ const Guide = (() => {
       <div class="guide-table"><table><tr><th>Rarity</th><th>Chance</th><th>Stats</th><th>Base capture</th><th>Level vs you</th><th>Rewards</th></tr>
       ${RARITIES.map(r => `<tr><td style="color:${r.color}"><b>${r.name}</b></td><td>${pct1(r.weight / totalWeight)}</td><td>×${r.mult} (HP ×${r.hpMult})</td><td>${pct(r.capture)}</td><td>${r.lvl[0] === r.lvl[1] ? (r.lvl[0] ? '+' + r.lvl[0] : 'same') : `+${r.lvl[0]} to +${r.lvl[1]}`}</td><td>×${r.xp}</td></tr>`).join('')}</table></div>
       <ul class="small"><li>Research: the Ectoplasmic Lens makes Rare, Epic and Legendary 40% more likely; the Legend Tracker doubles Legendary odds.</li>
-        <li>Rarer monsters know more abilities; Legendaries also have an Ultimate and a title.</li>
+        <li>Rarer monsters know more abilities; each Legendary also has its own unique title, legend move and Ultimate.</li>
         <li>Variants (unlocked by research): Spectral and Mutated forms (9% each) change the monster's family; Prismatic colours (1 in 12) give +8% stats and double coins.</li></ul>` },
     { id: 'levels', title: 'Levels & scaling', body: () => `
       <ul>

@@ -137,6 +137,125 @@ const LEGEND_TITLES = {
   food: 'the Eternal Feast', botanical: 'the Elder Root', spectral: 'the Unseen King', mutated: 'the Abomination',
 };
 
+/* v0.4.5: move kits. Before, every monster of a family drew its extra moves from the same three family moves, so every
+   rare Mechanical had the same repertoire. Now each object kind (category, or the object's group from objects.js) has
+   its own four moves; a monster's extra moves are picked from its kit per object, so they fit what it is. Kit moves
+   use the same number ranges as the family moves (MOVE_ARCH), so fights stay as hard as before. */
+const MOVE_ARCH = {
+  slam:   { power: 1.2 },
+  flurry: { power: 0.45, hits: 3 },
+  drain:  { power: 0.85, effect: 'drain' },
+  sap:    { power: 0.6, effect: 'defdown', chance: 0.7 },
+  chill:  { power: 0.9, effect: 'defdown', chance: 0.45 },
+  burn:   { power: 1.0, effect: 'burn', chance: 0.4 },
+  poison: { power: 0.9, effect: 'poison', chance: 0.5 },
+  stun:   { power: 0.8, effect: 'stun', chance: 0.3 },
+  pump:   { power: 0, effect: 'atkup', self: true },
+  guard:  { power: 0, effect: 'defup', self: true },
+  mend:   { power: 0, effect: 'heal', self: true },
+};
+// 'Move name:archetype, …' (four per kit)
+const MOVE_KITS = {
+  // categories
+  toilet: 'Plunger Pull:drain, Bubble Up:sap, Porcelain Shell:guard, Splash Back:stun',
+  mug: 'Steam Puff:sap, Refill:mend, Caffeine Kick:pump, Hot Spill:burn',
+  shoe: 'Heel Stomp:slam, Lace Lash:stun, Stinky Insole:poison, Kick Flurry:flurry',
+  plant: 'Pollen Puff:sap, Sap Sip:drain, Vine Snare:stun, Fresh Growth:mend',
+  laptop: 'Pop-Up Ads:flurry, Overheat:burn, Firewall:guard, Data Leech:drain',
+  banana: 'Peel Slap:slam, Ripen:pump, Mushy Squish:sap, Bunch Up:guard',
+  sofa: 'Cushion Crush:slam, Recline:mend, Spring Snap:stun, Crumb Cloud:sap',
+  phone: 'Ringtone Blast:stun, Battery Drain:drain, Auto-Correct:sap, Hot Battery:burn',
+  bottle: 'Fizz Spray:sap, Cap Shot:slam, Bubble Shield:guard, Undertow:drain',
+  book: 'Plot Twist:stun, Ink Splash:poison, Hardcover Slam:slam, Bookmark Ward:guard',
+  lamp: 'Flicker:stun, Hot Bulb:burn, Glow Up:pump, Moth Swarm:flurry',
+  chair: 'Wobble:stun, Seat Slam:slam, Splinter:poison, Brace:guard',
+  car: 'Horn Blast:stun, Exhaust Fumes:poison, Turbo Boost:pump, Hit and Run:flurry',
+  animal: 'Scratch Fury:flurry, Lick Wounds:mend, Growl:sap, Tail Whip:slam',
+  tree: 'Branch Smash:slam, Bark Skin:guard, Sap Trap:stun, Leaf Storm:flurry',
+  food: 'Gravy Splash:burn, Second Helping:mend, Crumb Toss:flurry, Food Coma:stun',
+  fruit: 'Juice Squirt:sap, Seed Spit:flurry, Ripe Burst:poison, Vitamin Boost:mend',
+  cloth: 'Wrap Up:stun, Static Cling:sap, Loose Thread:drain, Layer Up:guard',
+  tool: 'Heavy Swing:slam, Rust Bite:poison, Tighten Up:guard, Elbow Grease:pump',
+  toy: 'Wind-Up:pump, Squeak Toy:stun, Block Tower:guard, Toy Tantrum:flurry',
+  trash: 'Garbage Toss:flurry, Rot:poison, Lid Slam:slam, Scavenge:drain',
+  mirror: 'Glare Back:stun, Shatter:flurry, Mirror Image:guard, Vanity:pump',
+  fridge: 'Frost Breath:chill, Power Hum:stun, Cold Storage:guard, Ice Cube Barrage:flurry',
+  candle: 'Wax Drip:burn, Smoke Screen:sap, Flare Up:pump, Melt:drain',
+  clock: 'Alarm Ring:stun, Tick Tock:flurry, Rewind:mend, Deadline:sap',
+  keys: 'Jingle Jangle:stun, Lock Out:guard, Key Scratch:sap, Pick Pocket:drain',
+  bag: 'Strap Snag:stun, Stuff In:drain, Overpack:guard, Bag Swing:slam',
+  pillow: 'Feather Burst:flurry, Pillow Fort:guard, Nap Time:mend, Smother Hug:drain',
+  faucet: 'Water Jet:slam, Limescale:sap, Cold Rinse:mend, Splash:stun',
+  tv: 'Channel Surf:flurry, Screen Burn:burn, Ad Break:mend, Static Shock:stun',
+  bird: 'Peck Flurry:flurry, Feather Shield:guard, Screech:stun, Swoop:slam',
+  fish: 'Fin Slap:slam, Bubble Ring:sap, Slippery Scales:guard, Barb Sting:poison',
+  bug: 'Swarm:flurry, Sting:poison, Molt:mend, Web Snare:stun',
+  reptile: 'Tail Lash:slam, Shed Skin:mend, Bask:pump, Tongue Snare:stun',
+  umbrella: 'Canopy Block:guard, Downpour:flurry, Gust:stun, Pointy End:slam',
+  instrument: 'Crescendo:pump, Sour Note:sap, Drum Roll:flurry, Feedback:stun',
+  ball: 'Bounce Back:guard, Curveball:stun, Spike:slam, Pump Up:pump',
+  pot: 'Lid Clang:stun, Simmer:burn, Stir:flurry, Hearty Stew:mend',
+  cake: 'Frosting Splat:sap, Sprinkle Storm:flurry, Sugar High:pump, Cream Pie:stun',
+  other: 'Odd Glance:stun, Shape Shift:guard, Weird Touch:drain, Glitch:sap',
+  // object groups (objects.js)
+  electric: 'Spark:stun, Surge:burn, Grounded:guard, Live Wire:drain',
+  alarm: 'Siren Wail:stun, Low-Battery Chirp:sap, Alert Mode:pump, Shrill Barrage:flurry',
+  camera: 'Flash:stun, Zoom In:pump, Night Vision:sap, Snapshot Burst:flurry',
+  gadget: 'Beep Beep:stun, Factory Reset:mend, Glitch Out:sap, Turbo Mode:pump',
+  street: 'Rush Hour:flurry, Pothole:sap, Road Works:guard, Gridlock:stun',
+  office: 'Paper Cut:flurry, Ink Splatter:poison, Deadline Panic:stun, Coffee Break:mend',
+  art: 'Splatter:poison, Masterstroke:slam, Inspiration:pump, Smudge:sap',
+  medical: 'Quick Fix:mend, Iodine Sting:poison, Check-Up:sap, Bed Rest:guard',
+  science: 'Reaction:burn, Hypothesis:pump, Acid Drop:poison, Centrifuge:flurry',
+  hardware: 'Stripped Thread:sap, Rust Bite:poison, Torque:slam, Tighten:guard',
+  kitchen: 'Stir Up:flurry, Taste Test:mend, Clatter:stun, Hot Ladle:burn',
+  craft: 'Pin Prick:poison, Knit Together:mend, Thread Bind:stun, Patchwork:guard',
+  outdoor: 'Mud Slide:sap, Campfire:burn, Rough Terrain:guard, Bug Spray:poison',
+  sport: 'Power Shot:slam, Warm-Up:pump, Foul Play:sap, Fast Break:flurry',
+  gym: 'One More Rep:pump, Iron Grip:stun, Protein Shake:mend, Heavy Lift:slam',
+  arcade: 'Jackpot:flurry, Insert Coin:pump, Game Over:stun, Tilt:sap',
+  computer: 'Overheat:burn, Fan Spin:flurry, Firewall:guard, Data Leech:drain',
+  media: 'Bass Drop:stun, Feedback Loop:sap, Remix:pump, Skip Track:flurry',
+  jewel: 'Dazzle Flash:stun, Gem Shield:guard, Sharp Facet:slam, Allure:drain',
+  cosmetic: 'Glitter Bomb:stun, Perfume Cloud:poison, Touch-Up:mend, Contour:sap',
+  door: 'Slam Shut:slam, Creak:stun, Draught:sap, Deadbolt:guard',
+  drink: 'Fizz Burst:sap, Brain Freeze:stun, Sugar Rush:pump, Big Gulp:drain',
+  meat: 'Sizzle:burn, Meat Slap:slam, Marinate:sap, Protein Pack:guard',
+  seafood: 'Briny Splash:sap, Claw Pinch:flurry, Low Tide:drain, Fishy Whiff:poison',
+  dairy: 'Curdle:poison, Creamy Coat:guard, Meltdown:sap, Calcium Boost:pump',
+  condiment: 'Squirt:sap, Spicy Kick:burn, Sticky Glaze:stun, Dollop:flurry',
+  bowl: 'Slurp:drain, Boiling Broth:burn, Noodle Whip:flurry, Warm Comfort:mend',
+  bakery: 'Crust Crunch:slam, Rise:pump, Butter Up:guard, Crumb Shower:flurry',
+  dumpling: 'Steam Puff:sap, Pleat Pinch:stun, Stuffed:guard, Dip Dunk:drain',
+  snack: 'Crunch Time:flurry, Salt Sting:sap, Cheesy Drip:burn, Snack Attack:slam',
+  breakfast: 'Sunny Side Up:pump, Yolk Splash:sap, Rise and Shine:mend, Scramble:flurry',
+  veg: 'Root Smash:slam, Crunchy Skin:guard, Pungent Cloud:poison, Fibre Boost:mend',
+  leafy: 'Leaf Wrap:stun, Green Juice:mend, Bitter Bite:poison, Leaf Flurry:flurry',
+  nut: 'Shell Shock:stun, Hard Shell:guard, Nut Barrage:flurry, Crack Open:slam',
+  pantry: 'Flour Cloud:sap, Spice Storm:burn, Grain Avalanche:flurry, Long Shelf Life:guard',
+};
+const MOVE_KIT_ALIAS = { light: 'lamp', furniture: 'chair', appliance: 'fridge', music: 'instrument', toyish: 'toy' };
+// v0.4.5: legendary monsters are unique: title, the "legend move" and the ultimate are built from the object's own
+// name ({N}), so no two objects share them (tests/identity.js checks every object)
+const LEGEND_ADJ = {
+  organic: ['Primordial', 'Untamed', 'Ravenous', 'Eldest', 'Wild-Hearted', 'Thousand-Eyed'],
+  mechanical: ['Unbroken', 'Clockwork', 'Iron-Hearted', 'Ever-Turning', 'Last-Built', 'Tireless'],
+  elemental: ['Storm-Born', 'Ever-Burning', 'Tide-Calling', 'Living', 'Starlit', 'Thunderous'],
+  household: ['Hearthbound', 'Ever-Watching', 'Old', 'Unmoving', 'Patient', 'Keeper'],
+  food: ['Everlasting', 'Insatiable', 'Golden', 'Ravenous', 'Undying', 'Feast-Crowned'],
+  botanical: ['Elder', 'Deep-Rooted', 'Evergreen', 'Ancient', 'World-Seed', 'Overgrown'],
+  spectral: ['Unseen', 'Whispering', 'Hollow', 'Moonlit', 'Forgotten', 'Sleepless'],
+  mutated: ['Abominable', 'Ever-Changing', 'Unspeakable', 'Twisted', 'Swollen', 'Many-Mouthed'],
+};
+const LEGEND_MOVE_TPL = {
+  slam: 'Fall of the {N}', flurry: 'Thousand {N} Strikes', drain: 'Hunger of the {N}', sap: 'Curse of the {N}', chill: 'Shadow of the {N}',
+  burn: 'Fire of the {N}', poison: 'Blight of the {N}', stun: 'Gaze of the {N}', pump: 'Wrath of the {N}', guard: 'Bulwark of the {N}', mend: 'Rebirth of the {N}',
+};
+const ULTIMATE_TPL = {
+  burn: ['{N} Inferno', 'Molten {N}', 'Last Flame of the {N}'], poison: ['{N} Plague', 'Venom of the {N}', 'Creeping {N} Blight'],
+  stun: ['{N} Eclipse', 'Stillness of the {N}', 'Thousand-Year {N}'], defdown: ['{N} Cataclysm', 'Shattering {N}', 'Ruin of the {N}'],
+};
+
 /* Weapons — base stats, distinct damage behaviour, and visual effect id */
 const WEAPONS = {
   sword:  { name: 'Rusty Hunter Sword', el: 'slash', atk: 6, acc: 0.95, crit: 0.08, critX: 1.75, fx: 'slash',

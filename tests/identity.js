@@ -7,7 +7,7 @@ const fs = require('fs'), vm = require('vm'), path = require('path');
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape }; vm.createContext(ctx);
 vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
-  ';globalThis.T={LORE_OBJECT,OBJECTS,OBJECT_LIST,objectForLabel,objectTier,visualSource,designOf,makeDNA,buildGrid,CATEGORY,LORE_KITS,LORE_GROUP_KITS,loreKitFor,monsterLore,createMonster,freshState,identityUpdate,applyIdentityUpdate,undoIdentityUpdate,exportSave,importSave,DESIGN_RULES,CAT_FALLBACK_VIS,setRNG:f=>{RNG=f}}', ctx);
+  ';globalThis.T={LORE_OBJECT,OBJECTS,OBJECT_LIST,objectForLabel,objectTier,visualSource,designOf,makeDNA,buildGrid,CATEGORY,LORE_KITS,LORE_GROUP_KITS,loreKitFor,monsterLore,createMonster,freshState,identityUpdate,applyIdentityUpdate,undoIdentityUpdate,exportSave,importSave,DESIGN_RULES,CAT_FALLBACK_VIS,MOVE_KITS,MOVE_ARCH,FAMILIES,setRNG:f=>{RNG=f}}', ctx);
 const T = ctx.T;
 let seed = 7; T.setRNG(() => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; });
 const grid = dna => T.buildGrid(dna).px.join('');
@@ -74,6 +74,65 @@ ok(round.monsters[0].dna.shape === 'obj' && round.monsters[0].lore === old.lore 
 T.undoIdentityUpdate(old);
 ok(old.dna.shape === 'tool' && grid(old.dna) === oldGrid && /vanishes the moment/.test(old.lore), 'the update can be undone exactly');
 ok(T.identityUpdate({ ...T.createMonster(T.freshState(), { obj: 'x_light_switch', rarity: 'common' }) }) === null, 'new monsters need no update');
+
+// ---------- v0.4.5: food and drink, object families, move kits, unique legendaries ----------
+const S5 = () => { const S = T.freshState(); S.level = 6; return S; };
+const mk = (id, r, label) => T.createMonster(S5(), { obj: id, rarity: r, word: label, photo: { hue: 0, sat: 0, lit: 0.5 } });
+const loreSeeds = (id, re) => { const out = []; for (const r of ['common', 'uncommon', 'rare', 'epic', 'legendary']) for (let s = 1; s < 30; s++) out.push(T.monsterLore({ obj: id, rarity: r, seed: s * 7919 })); return out.filter(t => re.test(t)); };
+const burgerGrid = grid(T.makeDNA({ obj: 'burger', cat: 'food', rarity: 'common', seed: 1 }));
+// the reported "Drinkling": an energy drink drawn as a burger, with takeaway-box lore and a grease attack
+{
+  const o = T.OBJECTS[T.objectForLabel('energy drink')], ms = ['common', 'rare', 'legendary'].map(r => mk(o.id, r, 'energy drink'));
+  ok(o.id === 'x_energy_drink' && T.visualSource(o).id === 'can' && ms.every(m => m.dna.shape === 'bottle' && m.dna.sub === 'can' && grid(m.dna) !== burgerGrid), 'energy drink: drawn as a drink can, not a burger');
+  ok(ms.every(m => m.abilities[0].name === 'Energy Spike' && m.abilities.every(a => !/grease/i.test(a.name))), `energy drink: drink moves (${ms[2].abilities.map(a => a.name).join(', ')})`);
+  ok(!loreSeeds(o.id, /takeaway|grease|crumbs/i).length, 'energy drink: no meal lore (takeaway box, grease, crumbs) in any flavour text');
+}
+const DRINK = /\b(drink|soda|cola|juice|smoothie|milkshake|lemonade|beer|wine|cocktail|tea|hot chocolate|bubble tea|kombucha)\b/;
+const drinks = T.OBJECT_LIST.filter(o => ['food', 'cake', 'fruit', 'bottle'].includes(o.cat) && DRINK.test(o.name.toLowerCase()) && !/bag|beans|bottle cap|cooler|stein|glass bottle|wine bottle|beer bottle/.test(o.name.toLowerCase()));
+ok(drinks.length >= 15 && drinks.every(o => { const v = T.visualSource(o); return v.cat === 'mug' || v.cat === 'bottle' || (o.vis && o.vis.t === 'vessel'); }), `every drink (${drinks.length}) has a cup, glass, can or bottle body`);
+const foodFamily = T.OBJECT_LIST.filter(o => ['food', 'fruit'].includes(o.cat) && T.objectTier(o) === 'family');
+ok(!foodFamily.length, `every food, fruit and vegetable has its own or a related design${foodFamily.length ? ': ' + foodFamily.slice(0, 5).map(o => o.name).join(', ') : ''}`);
+const groups = {}; for (const o of T.OBJECT_LIST) if (['food', 'fruit'].includes(o.cat) && o.lore) groups[o.lore] = (groups[o.lore] || 0) + 1;
+ok(['drink', 'meat', 'seafood', 'dairy', 'condiment', 'bowl', 'bakery', 'dumpling', 'snack', 'breakfast', 'veg', 'leafy', 'nut', 'pantry'].every(g => groups[g]), 'foods are split into their own kinds: ' + JSON.stringify(groups));
+for (const [label, kind] of [['steak', 'meat'], ['bacon', 'meat'], ['celery', 'veg'], ['spinach', 'leafy'], ['ramen bowl', 'bowl'], ['dumpling', 'dumpling'], ['shrimp plate', 'seafood'], ['cheese', 'dairy']]) {
+  const o = T.OBJECTS[T.objectForLabel(label)], m = mk(o.id, 'epic', label), kit = T.MOVE_KITS[kind].split(',').map(x => x.split(':')[0].trim());
+  ok(o.lore === kind && m.abilities.slice(1).every(a => kit.includes(a.name)) && grid(m.dna) !== burgerGrid, `${label}: its own design and ${kind} moves (${m.abilities.map(a => a.name).join(', ')})`);
+}
+// the reported spoon (Mechanical, with Nail Gun and toolbox lore) and pen (door and lock lore)
+{
+  const sp = mk('cutlery_spoon', 'epic', 'spoon'), pen = mk('pen', 'legendary', 'pen');
+  ok(sp.fam === 'household' && sp.abilities[0].name === 'Stir Crazy' && sp.abilities[0].power === T.CATEGORY.tool.sig.power, `spoon: Household family, kitchen moves (${sp.abilities.map(a => a.name).join(', ')}), same signature numbers`);
+  ok(!loreSeeds('cutlery_spoon', /nail gun|toolbox|screw|garage/i).length, 'spoon: no toolbox or nail-gun phrases in any flavour text');
+  ok(pen.fam === 'household' && T.OBJECTS.pen.lore === 'office' && !loreSeeds('pen', /\bdoors?\b|\blocks?\b|\bkeys?\b/i).length, 'pen: office lore, no doors, locks or keys in any flavour text');
+}
+// move kits: four moves each, numbers only from the shared archetypes (the same ranges as the family moves)
+const kitBad = Object.entries(T.MOVE_KITS).filter(([, k]) => { const mv = k.split(',').map(x => x.split(':').map(t => t.trim())); return mv.length !== 4 || mv.some(([n, a]) => !n || !T.MOVE_ARCH[a]) || new Set(mv.map(x => x[0])).size !== 4; });
+ok(!kitBad.length && Object.keys(T.CATEGORY).every(c => T.MOVE_KITS[c]), `${Object.keys(T.MOVE_KITS).length} move kits, four valid moves each, one per category at least${kitBad.length ? ': ' + kitBad.map(x => x[0]).join(', ') : ''}`);
+const famPow = Object.values(T.FAMILIES).flatMap(f => f.abilities.map(a => a.power)), archPow = Object.values(T.MOVE_ARCH).map(a => a.power);
+ok(Math.max(...archPow) <= Math.max(...famPow) && archPow.every(p => p === 0 || p >= Math.min(...famPow.filter(Boolean))), 'kit move power stays within the family moves\' range');
+// repertoire variety: rare and epic monsters of one category no longer share one move set
+for (const cat of ['tool', 'keys', 'laptop', 'food']) {
+  const sets = new Set(T.OBJECT_LIST.filter(o => o.cat === cat).slice(0, 60).map(o => mk(o.id, 'epic').abilities.slice(1).map(a => a.name).sort().join('+')));
+  ok(sets.size >= 4, `${cat}: epic monsters have ${sets.size} different repertoires (was 1 per family)`);
+}
+// legendaries are unique: names, titles, legend moves, ultimates and flavour text never repeat between objects
+{
+  const seen = { name: new Map(), title: new Map(), legend: new Map(), ult: new Map(), lore: new Map() }, dup = [];
+  for (const o of T.OBJECT_LIST) {
+    const m = mk(o.id, 'legendary', o.name), title = m.name.split(', ').slice(1).join(', ');
+    const vals = { name: m.name, title, legend: (m.abilities.find(a => a.legend) || {}).name, ult: (m.abilities.find(a => a.ultimate) || {}).name, lore: T.monsterLore({ ...m, seed: 1 }) };
+    for (const k in vals) { if (!vals[k] || seen[k].has(vals[k])) dup.push(`${k}: ${o.id} = ${seen[k].get(vals[k])} (${vals[k]})`); seen[k].set(vals[k], o.id); }
+  }
+  ok(!dup.length, `all ${T.OBJECT_LIST.length} legendaries have their own name, title, legend move, ultimate and flavour text${dup.length ? ': ' + dup.slice(0, 4).join(' | ') : ''}`);
+  const l1 = mk('pen', 'legendary'), l2 = mk('padlock', 'legendary');
+  ok(l1.name.split(', ')[1] !== l2.name.split(', ')[1] && !l1.abilities.some(a => (a.legend || a.ultimate) && l2.abilities.some(b => b.name === a.name)), `pen and combination lock: ${l1.name} vs ${l2.name}`);
+}
+// saved monsters keep what they were found with (family, moves, name are stored on the monster)
+{
+  const S = T.freshState(), old = { ...mk('cutlery_spoon', 'rare'), fam: 'mechanical', name: 'Spoonygoyle', abilities: [{ name: 'Nail Gun', power: 0.45, hits: 3, cd: 3 }] };
+  S.monsters = [old]; const round = T.importSave(T.exportSave(S));
+  ok(round.monsters[0].fam === 'mechanical' && round.monsters[0].abilities[0].name === 'Nail Gun' && round.monsters[0].name === 'Spoonygoyle', 'an existing Mechanical spoon keeps its family, moves and name through backup and load');
+}
 
 console.log(bad ? `\n${bad} PROBLEM(S)` : '\nALL IDENTITY CHECKS PASSED');
 process.exit(bad ? 1 : 0);

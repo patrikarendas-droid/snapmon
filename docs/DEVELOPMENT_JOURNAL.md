@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-10-30, release v0.4.4.
+Last updated: 2026-10-30, release v0.4.5.
 
 ---
 
@@ -67,14 +67,16 @@ Last updated: 2026-10-30, release v0.4.4.
 | v0.4.1 | bfeff56 | 2026-10-29 | TinyCLIP on the CPU (WASM, one thread) for every player; timing diagnostics. |
 | v0.4.2 | f6dc5cc | 2026-10-29 | Playtest fixes: camera status text, zoom, Guide, rarity lore, background recovery, Settings scroll, Wrong object. |
 | v0.4.3 | a27c89c | 2026-10-30 | Monsters match their object (designs + rules for ~1,000 objects); no countdown; SNAP waits for the engine. |
-| v0.4.4 | (see `git tag`) | 2026-10-30 | This journal; Force CPU shutter freeze mitigated; developer Quick Monster Test Mode. |
+| v0.4.4 | 11e8b76 | 2026-10-30 | This journal; Force CPU shutter freeze mitigated; developer Quick Monster Test Mode. |
+| v0.4.5 | (see `git tag`) | 2026-10-30 | Food/drink identity; object families; per-object move kits; unique Legendaries. |
 
 ## 4. Current state and next priorities
 
-- **State:** v0.4.4 deployed. All automated suites pass (see section 7). The developer's latest phone playtest (of
-  v0.4.2/0.4.3) confirmed: camera status text, Wrong object, Settings, background recovery, Guide and timings work.
-- **Next (proposed, not started):** verify v0.4.4 on the phone (checklist in the v0.4.4 report: Force CPU shutter,
-  Quick Monster Test Mode); continue visual QA of monster designs using the test mode; native APK when requested.
+- **State:** v0.4.5 deployed. All automated suites pass (see section 7). Phone playtest of v0.4.4 (with Quick Monster
+  Test Mode): monsters now resemble their objects, except drinks/foods drawn as burgers, a Mechanical spoon, and
+  Legendaries sharing titles and moves; v0.4.5 addresses these (needs phone check).
+- **Next (proposed, not started):** verify v0.4.5 on the phone with Quick Monster Test Mode (drinks, foods, vegetables,
+  kitchenware, Legendaries); continue visual QA of designs; native APK when requested.
 
 ## 5. Open issues / known limitations
 
@@ -82,7 +84,10 @@ Last updated: 2026-10-30, release v0.4.4.
 |---|---|---|---|
 | Brief freeze after the camera shutter with **Force CPU backend** (developer option) | Mitigated in v0.4.4, needs phone check | The CPU detector (TF.js CPU backend) runs on the main thread for ~1 s; see section 6. `src/ui.js` `paintFirst`, `recognizeFlow`. | Phone test: the Analysing screen should now appear immediately with the photo, sweep still moving; only the clock text pauses. A full fix needs the detector in a worker (not planned). |
 | Same freeze for real players whose phone cannot use WebGL | Same mitigation | Rare: only phones where WebGL fails fall back to the CPU detector. | As above. |
-| ~1,000 objects use their category's general shape | Known | Foods, plants, animals, clothes… where the shape fits; 26 have only a neutral shape. Coverage in README ("Object identity"). | Add designs/rules for the worst cases found in QA (`DESIGN_RULES` in `src/objects.js`). |
+| ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
+| "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
+| Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change without consent; "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
+| Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
 | Some borrowed designs are approximate (drone → helicopter, microscope basic) | Known | `docs/identity-designs-*.png` | Improve when found in QA. |
 | Hardware camera zoom untested on a real phone | Open | `src/platform.js` zoom; digital zoom fallback tested in browser. | Phone test. |
 | Real GPU (WebGL) detector vs CPU differences on phones | Unmeasured | Measured only on a software GPU (≤ 0.0001). `docs/RECOGNITION.md`. | Optional lab work. |
@@ -109,6 +114,17 @@ Last updated: 2026-10-30, release v0.4.4.
   - Not a full fix: the main thread is still busy for that second on the CPU backend. Moving TF.js into a worker
     would fix it fully but is a larger change; rejected for now as disproportionate for a developer option.
 
+- **Energy drink drawn as a burger ("Drinkling"), other drinks/foods/vegetables in their category's single shape** –
+  vocabulary objects with no design rule used the category template (food → burger) and the category's lore/moves.
+  New `FOOD_RULES` (drinks, meat, seafood, dairy, sauces, bowls, dumplings, bread, breakfast, pantry, vegetables, greens,
+  nuts, sweets) with the `meal` template and new produce shapes; each kind has lore and a move kit. v0.4.5.
+- **Spoon was Mechanical with Nail Gun/toolbox text; pen had door/lock text** – named objects in a broad category
+  (tool, keys) used its family, signature name and lore. `NAMED_GROUPS` + `GROUP_FAM` give them a fitting group and
+  family (kitchen/office → Household). v0.4.5.
+- **Legendaries shared "the Last Machine" titles and the same moves** – titles were per family, moves drawn with a
+  per-category seed from the family's 3 moves. Now title, legend move and Ultimate carry the object's name; legendary
+  lines always name the object; test checks all ~2,300 objects. Every rarity draws moves from its own object's kit. v0.4.5.
+
 ## 7. Testing and verification
 
 - **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `guide`, `lore`, `identity`, `devtest`,
@@ -134,6 +150,13 @@ Last updated: 2026-10-30, release v0.4.4.
   code; test battles restore the save afterwards. Chosen over marking monsters in the real collection.
 - **Detector stays on TF.js in the main thread** (v0.4.4) – a worker would remove the Force CPU freeze entirely but
   was judged too large for a cosmetic developer-mode issue.
+
+- **Move kits instead of family move pools (v0.4.5)** – each category/object group has 4 moves whose numbers come
+  from shared archetypes (`MOVE_ARCH`, same ranges as family moves); the extra moves are picked per object. The battle
+  trace was re-recorded on purpose; replaying it with the old move functions reproduced the old fixture exactly.
+- **Unique Legendaries by construction (v0.4.5)** – generated from the object's own name rather than ~2,300
+  hand-written entries; hand-written lines (`LORE_OBJECT`) are still used where they exist.
+- **Recogniser vocabulary unchanged in v0.4.5** – identity fixes only change how a recognised object looks and fights.
 
 ## 9. How to keep this journal
 
