@@ -59,6 +59,12 @@ and decision rules. Only the speed depends on the phone.
   and reloads from the phone's cache if Android took something away; a hunt that fails on a broken engine is
   recovered and retried once, and Try again really reinitialises the engine. No page reload needed.
 - **Privacy:** photos never leave the phone.
+- **Development journal:** `docs/DEVELOPMENT_JOURNAL.md` is the hand-off between development sessions (decisions,
+  release history, open issues); `CLAUDE.md` tells Claude Code sessions to read and update it.
+- **Quick Monster Test Mode (developer):** every accepted photo gives a monster with test odds (Common 20 · Uncommon 20
+  · Rare 25 · Epic 20 · Legendary 15 %), optionally captured instantly into a separate test collection that is not
+  part of the save, the backup code, the encyclopedia or progression. Test battles are undone afterwards. `DEV_TOOLS`
+  in `src/game.js` must be `false` in a release build, which removes all developer tools.
 - **Developer tools:** tap the version line in Settings 7 times. Debug info, Field-test mode (side-by-side results
   of each engine part and the colour extraction, logged with your verdicts, no monsters) and a forced CPU backend
   for testing. None of them changes how hunting recognises objects.

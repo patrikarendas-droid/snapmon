@@ -36,6 +36,7 @@ jobs:
           node tests/guide.js
           node tests/rules-trace.js
           node tests/identity.js
+          node tests/devtest.js
       - name: Browser tests (gameplay, recognition engine with the real worker, Back navigation)
         run: |
           npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1
@@ -47,6 +48,7 @@ jobs:
           node tests/e2e-engine.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
           node tests/e2e-nav.js http://localhost:8765/index.html shots
           node tests/e2e-qol.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
+          node tests/e2e-v044.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
   deploy:
     needs: test
     runs-on: ubuntu-latest

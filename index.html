@@ -106,8 +106,9 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .vf-corner.tr { top: 16px; right: 16px; border-left: 0; border-bottom: 0; border-radius: 0 8px 0 0; }
 .vf-corner.bl { bottom: 16px; left: 16px; border-right: 0; border-top: 0; border-radius: 0 0 0 8px; }
 .vf-corner.br { bottom: 16px; right: 16px; border-left: 0; border-top: 0; border-radius: 0 0 8px 0; }
-.vf-sweep { position: absolute; left: 0; right: 0; height: 40%; top: -40%; background: linear-gradient(transparent, rgba(124,245,211,.12) 85%, rgba(124,245,211,.5)); z-index: 2; animation: sweep 3.8s linear infinite; pointer-events: none; }
-@keyframes sweep { to { top: 100%; } }
+.vf-sweep { position: absolute; left: 0; right: 0; height: 40%; top: 0; background: linear-gradient(transparent, rgba(124,245,211,.12) 85%, rgba(124,245,211,.5)); z-index: 2; animation: sweep 3.8s linear infinite; pointer-events: none; will-change: transform; transform: translateY(-100%); }
+/* transform (not top): runs on the compositor, so the sweep keeps moving while the CPU detector holds the main thread */
+@keyframes sweep { from { transform: translateY(-100%); } to { transform: translateY(250%); } }
 .vf-center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; z-index: 3; padding: 40px; }
 .vf-center h1 { font-size: clamp(30px, 9vw, 44px); line-height: .95; color: var(--text); text-shadow: 0 0 18px rgba(124,245,211,.45); }
 .vf-center h1 em { font-style: normal; color: var(--ecto); }
@@ -214,6 +215,7 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .guide-status .st { justify-self: start; }
 .shutter[disabled], .shutter.waiting { opacity: .45; filter: grayscale(.6); cursor: default; } .shutter[disabled]::after { animation: none; opacity: 0; }
 .shutter .waking { font-size: 11px; letter-spacing: .1em; }
+.test-banner { font: 700 11px var(--font-body); letter-spacing: .14em; color: #1b1206; background: repeating-linear-gradient(45deg, #ffcf5a 0 10px, #ffb13b 10px 20px); padding: 4px 10px; border-radius: 6px; margin: 0; }
 .zoom-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
 .zoom-row input[type=range] { flex: 1; max-width: 240px; accent-color: var(--ecto); }
 .zoom-row .num { min-width: 3.2em; text-align: right; color: var(--ecto); }
