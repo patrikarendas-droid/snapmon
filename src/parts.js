@@ -281,9 +281,132 @@ const PARTS = (() => {
       if (p.shell) { ell(g, 20, bodyY - 2, bodyRX, bodyRY + 1, A); paintOn(g, (x, y) => ((x + y) % 5 === 0 ? AD : null), [A]); }
       return { eyes: { x: hx, y: hy - 1, span: 3 }, mouth: { x: hx - 1, y: hy + 3, w: 4 }, arms: [], legs: null, noLegs: true, top: { x: hx, y: hy - 5 } };
     },
+    /* v0.4.3 — reusable designs for objects that used to borrow their category's look (a toolbox for a light switch).
+       wallplate: switches, sockets, thermostats, doorbells, intercoms, keypads, fuse boxes, ceiling detectors */
+    wallplate(g, p, v) {
+      const k = p.kind || 'rocker';
+      if (k === 'disc') { // smoke detector / fire alarm: round ceiling disc with vents and a status light
+        ell(g, 20, 19, 14, 12, B); ell(g, 20, 19, 11, 9, BL); for (let a = 0; a < 6.28; a += 0.45) gset(g, 20 + Math.cos(a) * 12.5, 19 + Math.sin(a) * 10.5, BD);
+        ell(g, 20, 22, 3, 2.5, MD); rect(g, 27, 13, 2, 2, TO);
+        return { eyes: { x: 20, y: 16, span: 4 }, mouth: { x: 20, y: 25, w: 6 }, arms: [{ x: 6, y: 19, d: -1 }, { x: 34, y: 19, d: 1 }], legs: { y: 31, xs: [15, 25] }, top: { x: 20, y: 7 }, rigid: true };
+      }
+      const wide = !!p.wide, w = clampi((wide ? 26 : 18) + v, 14, 30), h = k === 'box' ? 28 : 26, x0 = Math.round(20 - w / 2), y0 = 6, cy = y0 + Math.round(h / 2) + 1;
+      rrect(g, x0, y0, w, h, 2, B); rect(g, x0 + 2, y0 + 1, w - 4, 1, BL); rect(g, x0 + 1, y0 + h - 2, w - 2, 1, BD);
+      const screws = () => { gset(g, 20, y0 + 2, MD); gset(g, 20, y0 + h - 3, MD); };
+      const socket = cx => { ell(g, cx, cy, 5, 5, BD); ell(g, cx, cy, 4, 4, BL); rect(g, cx - 2, cy - 2, 1, 3, K); rect(g, cx + 2, cy - 2, 1, 3, K); gset(g, cx, cy + 2, K); };
+      let eyes = { x: 20, y: y0 + 5, span: 3 }, mouth = { x: 20, y: y0 + h - 5, w: 5 };
+      switch (k) {
+        case 'rocker': screws(); rrect(g, 16, cy - 6, 8, 11, 1, MD); rect(g, 17, cy - 5, 6, 5, BL); rect(g, 17, cy, 6, 4, BD); if (wide) { rrect(g, 25, cy - 6, 6, 11, 1, MD); rect(g, 26, cy - 5, 4, 5, BL); } break;
+        case 'toggle': screws(); rrect(g, 17, cy - 3, 6, 7, 1, MD); line(g, 20, cy, 20, cy - 7, M, 2); ell(g, 20, cy - 7, 1.6, 1.6, BL); break;
+        case 'socket': screws(); if (wide) { socket(14); socket(26); } else socket(20); eyes = { x: 20, y: y0 + 4, span: 3 }; break;
+        case 'dial': rrect(g, x0 + 3, y0 + 4, w - 6, 4, 1, S); ell(g, 20, cy + 2, 6, 6, MD); ell(g, 20, cy + 2, 4.5, 4.5, BL); rect(g, 20, cy - 3, 1, 3, TO); eyes = { x: 20, y: y0 + 6, span: 3 }; mouth = { x: 20, y: y0 + h - 4, w: 4 }; break;
+        case 'bell': rect(g, 16, cy - 7, 8, 3, PA); ell(g, 20, cy + 2, 4.5, 4.5, MD); ell(g, 20, cy + 2, 3, 3, G); eyes = { x: 20, y: y0 + 4, span: 3 }; break;
+        case 'grille': C.grille(g, x0 + 3, cy - 7, w - 6, 7); ell(g, 20, cy + 4, 2.2, 2.2, A); rect(g, x0 + w - 5, y0 + 3, 2, 2, G); eyes = { x: 20, y: y0 + 4, span: 3 }; break;
+        case 'keypad': rrect(g, x0 + 3, y0 + 4, w - 6, 3, 1, S); for (let r = 0; r < 4; r++) for (let c = -1; c <= 1; c++) rect(g, 20 + c * 4 - 1, cy - 4 + r * 3, 2, 2, r === 3 && c ? A : MD); eyes = { x: 20, y: y0 + 5, span: 3 }; mouth = { x: 20, y: y0 + h - 3, w: 4 }; break;
+        case 'box': rect(g, x0 + 2, y0 + 3, w - 4, h - 6, BD); rect(g, x0 + 3, y0 + 4, w - 6, h - 8, B); for (let i = 0; i < (wide ? 5 : 3); i++) rect(g, x0 + 5 + i * 4, cy - 1, 2, 4, i % 2 ? M : BL); rect(g, x0 + w - 5, y0 + h / 2, 1, 3, M); line(g, 21, cy + 6, 25, cy + 10, G); line(g, 25, cy + 10, 23, cy + 10, G); break;
+      }
+      return { eyes, mouth, arms: [{ x: x0, y: cy, d: -1 }, { x: x0 + w, y: cy, d: 1 }], legs: { y: Math.min(35, y0 + h + 1), xs: [16, 24] }, top: { x: 20, y: y0 }, rigid: true };
+    },
+    /* cctv: security cameras (bullet on a wall arm, ceiling dome), webcams, dashcams and action cameras */
+    cctv(g, p, v) {
+      const k = p.kind || 'bullet';
+      if (k === 'dome') { // ceiling dome: mount plate, half-sphere of smoked glass, lens + infrared ring
+        ell(g, 20, 10, 13, 13, B); rect(g, 5, 1, 30, 9, E); rect(g, 5, 7, 30, 3, MD); rect(g, 6, 6, 28, 1, M);
+        ell(g, 20, 13, 8, 8, S); rect(g, 10, 4, 20, 9, E); rect(g, 5, 7, 30, 3, MD); ell(g, 20, 15, 3, 3, MD); gset(g, 21, 14, G);
+        for (const x of [14, 26]) gset(g, x, 15, TO);
+        return { eyes: { x: 20, y: 15, span: 3, forceStyle: 'cyclops' }, mouth: { x: 20, y: 20, w: 5 }, arms: [{ x: 8, y: 14, d: -1 }, { x: 32, y: 14, d: 1 }], legs: null, noLegs: true, float: true, top: { x: 20, y: 6 }, rigid: true };
+      }
+      if (k === 'webcam' || k === 'box') {
+        const w = k === 'box' ? 20 : 16, h = k === 'box' ? 13 : 14, x0 = Math.round(20 - w / 2), y0 = 11;
+        if (k === 'webcam') { rect(g, 15, y0 + h, 10, 2, MD); rect(g, 13, y0 + h + 2, 14, 2, MD); } else { rect(g, 18, y0 - 4, 4, 4, MD); rect(g, 14, y0 - 5, 12, 2, M); }
+        rrect(g, x0, y0, w, h, k === 'webcam' ? 6 : 3, B); ell(g, 20, y0 + h / 2, 4.5, 4.5, MD); ell(g, 20, y0 + h / 2, 3, 3, S); gset(g, 21, y0 + h / 2 - 1, G); rect(g, x0 + w - 3, y0 + 2, 1, 1, TO);
+        return { eyes: { x: 20, y: Math.round(y0 + h / 2), span: 3, forceStyle: 'cyclops' }, mouth: { x: 20, y: y0 + h - 2, w: 4 }, arms: [{ x: x0, y: y0 + h / 2, d: -1 }, { x: x0 + w, y: y0 + h / 2, d: 1 }], legs: k === 'webcam' ? null : { y: y0 + h + 1, xs: [16, 24] }, noLegs: k === 'webcam', top: { x: 20, y: y0 }, rigid: true };
+      }
+      // bullet camera on a wall bracket: housing with sun hood, lens at the front, red infrared light
+      const len = clampi(22 + v * 2, 18, 24), x0 = 10, y0 = 13;
+      rect(g, 3, 9, 4, 14, MD); rect(g, 2, 10, 1, 12, M); line(g, 6, 16, 11, 20, MD, 2); ell(g, 11, 20, 1.6, 1.6, M);
+      rrect(g, x0, y0, len, 10, 3, B); rect(g, x0 - 1, y0 - 2, len + 3, 3, BD); rect(g, x0, y0 + 7, len, 1, BD);
+      const lx = x0 + len; rect(g, lx - 2, y0 + 1, 3, 8, MD); ell(g, lx, y0 + 5, 3, 3.5, MD); ell(g, lx, y0 + 5, 2, 2.5, S); gset(g, lx, y0 + 4, G); gset(g, lx - 4, y0 + 1, TO);
+      return { eyes: { x: x0 + len / 2 - 1, y: y0 + 4, span: 3 }, mouth: { x: x0 + len / 2 - 1, y: y0 + 8, w: 5 }, arms: [{ x: x0 + 4, y: y0 + 9, d: -1 }, { x: lx - 4, y: y0 + 9, d: 1 }], legs: null, noLegs: true, float: true, top: { x: x0 + len / 2, y: y0 - 2 }, rigid: true };
+    },
+    /* pole: street furniture on a post (street lamp, traffic light, parking meter, signs, bollards, coat stands) */
+    pole(g, p, v) {
+      const k = p.kind || 'lamp';
+      if (k === 'bollard') { rrect(g, 14, 12, 12, 23, 4, B); rect(g, 14, 17, 12, 2, G); rect(g, 14, 22, 12, 1, BD); rect(g, 12, 34, 16, 2, MD);
+        return { eyes: { x: 20, y: 25, span: 3 }, mouth: { x: 20, y: 30, w: 4 }, arms: [{ x: 14, y: 24, d: -1 }, { x: 26, y: 24, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 12 }, rigid: true }; }
+      const post = (y0, x = 20) => { rect(g, x - 1, y0, 3, 36 - y0, MD); rect(g, x - 3, 34, 7, 2, MD); };
+      let eyes, mouth, arms, top;
+      switch (k) {
+        case 'lamp': post(12); line(g, 20, 12, 24, 7, MD, 2); rrect(g, 21, 3, 15, 6, 2, B); rect(g, 22, 9, 13, 2, G); rect(g, 23, 11, 11, 1, G);
+          eyes = { x: 28, y: 5, span: 3 }; mouth = { x: 20, y: 22, w: 3 }; arms = [{ x: 19, y: 20, d: -1 }, { x: 21, y: 20, d: 1 }]; top = { x: 28, y: 3 }; break;
+        case 'lights': post(27); rrect(g, 14, 2, 12, 26, 2, B); for (const [y, c] of [[8, TO], [15, GO], [22, G]]) { rect(g, 13, y - 4, 14, 1, BD); ell(g, 20, y, 3.2, 3.2, MD); ell(g, 20, y, 2.4, 2.4, c); }
+          eyes = { x: 20, y: 15, span: 3, forceStyle: 'cyclops' }; mouth = { x: 20, y: 26, w: 4 }; arms = [{ x: 14, y: 15, d: -1 }, { x: 26, y: 15, d: 1 }]; top = { x: 20, y: 2 }; break;
+        case 'meter': post(22); rrect(g, 13, 5, 14, 17, 4, M); rrect(g, 15, 8, 10, 6, 2, S); line(g, 20, 13, 23, 10, TO); rect(g, 18, 17, 4, 1, K); rect(g, 13, 20, 14, 2, MD);
+          eyes = { x: 20, y: 10, span: 3 }; mouth = { x: 20, y: 18, w: 4 }; arms = [{ x: 13, y: 14, d: -1 }, { x: 27, y: 14, d: 1 }]; top = { x: 20, y: 5 }; break;
+        case 'sign8': { post(22); const pts = []; for (let i = 0; i < 8; i++) { const a = Math.PI / 8 + i * Math.PI / 4; pts.push([20 + Math.cos(a) * 12, 12 + Math.sin(a) * 12]); } poly(g, pts, TO); const pts2 = pts.map(([x, y]) => [20 + (x - 20) * 0.82, 12 + (y - 12) * 0.82]); poly(g, pts2, B); rect(g, 13, 14, 15, 2, PA);
+          eyes = { x: 20, y: 9, span: 4 }; mouth = { x: 20, y: 18, w: 5 }; arms = [{ x: 9, y: 12, d: -1 }, { x: 31, y: 12, d: 1 }]; top = { x: 20, y: 1 }; break; }
+        case 'signrect': post(20); rect(g, 7, 4, 26, 16, PA); rect(g, 8, 5, 24, 14, B); poly(g, [[22, 9], [28, 12], [22, 15]], PA); rect(g, 13, 11, 9, 2, PA);
+          eyes = { x: 16, y: 8, span: 3 }; mouth = { x: 16, y: 16, w: 4 }; arms = [{ x: 7, y: 12, d: -1 }, { x: 33, y: 12, d: 1 }]; top = { x: 20, y: 4 }; break;
+        default: post(8); for (const d of [-1, 1]) { line(g, 20, 9, 20 + d * 8, 5, MD, 2); ell(g, 20 + d * 8, 5, 1.5, 1.5, A); } rrect(g, 15, 12, 10, 9, 3, B);
+          eyes = { x: 20, y: 15, span: 3 }; mouth = { x: 20, y: 19, w: 4 }; arms = [{ x: 15, y: 16, d: -1 }, { x: 25, y: 16, d: 1 }]; top = { x: 20, y: 4 };
+      }
+      return { eyes, mouth, arms, legs: null, noLegs: true, top, rigid: true };
+    },
+    /* board: whiteboards, chalkboards, easels, canvases, projector screens, pin boards */
+    board(g, p, v) {
+      const k = p.kind || 'white', w = clampi(26 + v * 2, 22, 30), x0 = Math.round(20 - w / 2), y0 = k === 'screen' ? 7 : 5, h = k === 'easel' ? 18 : 20;
+      if (k === 'easel') { line(g, 14, 20, 9, 36, AD, 2); line(g, 26, 20, 31, 36, AD, 2); line(g, 20, 20, 20, 36, AD, 2); rect(g, x0 - 1, y0 + h, w + 2, 2, AD); }
+      else if (k === 'screen') { rect(g, x0 - 2, y0 - 2, w + 4, 3, MD); rect(g, 19, y0 + h, 2, 13, MD); line(g, 14, 36, 20, 33, MD); line(g, 26, 36, 20, 33, MD); }
+      else { rect(g, x0 + 2, y0 + h, 2, 36 - y0 - h, MD); rect(g, x0 + w - 4, y0 + h, 2, 36 - y0 - h, MD); }
+      const surface = k === 'chalk' ? S : k === 'cork' ? AL : PA;
+      rect(g, x0, y0, w, h, k === 'canvas' || k === 'easel' ? AD : BD); rect(g, x0 + 2, y0 + 2, w - 4, h - 4, surface);
+      if (k === 'white') { line(g, x0 + 4, y0 + h - 5, x0 + 10, y0 + h - 7, A); rect(g, x0 + 2, y0 + h - 2, w - 4, 1, M); rect(g, x0 + 5, y0 + h - 3, 3, 1, TO); }
+      if (k === 'chalk') { line(g, x0 + 4, y0 + h - 6, x0 + 12, y0 + h - 6, PA); rect(g, x0 + 2, y0 + h - 2, w - 4, 1, AD); }
+      if (k === 'canvas' || k === 'easel') { ell(g, x0 + w - 7, y0 + 6, 3, 2, A); poly(g, [[x0 + 3, y0 + h - 3], [x0 + 10, y0 + h - 9], [x0 + 15, y0 + h - 3]], S); }
+      if (k === 'cork') for (const [dx, dy, c] of [[4, 4, PA], [w - 9, 5, A], [6, h - 8, S]]) rect(g, x0 + dx, y0 + dy, 4, 3, c);
+      return { eyes: { x: 20, y: y0 + Math.round(h * 0.4), span: 4 }, mouth: { x: 20, y: y0 + Math.round(h * 0.7), w: 6 }, arms: [{ x: x0, y: y0 + h / 2, d: -1 }, { x: x0 + w, y: y0 + h / 2, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: y0 }, rigid: true };
+    },
+    /* part: small everyday things that have no template of their own (batteries, plugs, cables, screws, cards,
+       coins, discs, chips, rings, bandages, medical and science kit, tents, fences, bells, scales...) */
+    part(g, p, v) {
+      const k = p.kind;
+      let eyes = { x: 20, y: 18, span: 3 }, mouth = { x: 20, y: 23, w: 5 }, arms = [{ x: 11, y: 22, d: -1 }, { x: 29, y: 22, d: 1 }], legs = { y: 34, xs: [16, 24] }, noLegs = false, float = false, top = { x: 20, y: 8 };
+      switch (k) {
+        case 'battery': rrect(g, 13, 9, 14, 25, 2, B); rect(g, 13, 9, 14, 7, A); rect(g, 17, 6, 6, 3, M); rect(g, 19, 11, 2, 1, PA); rect(g, 18, 12, 4, 1, PA); rect(g, 19, 13, 2, 1, PA); rect(g, 17, 29, 6, 1, BD); top = { x: 20, y: 6 }; eyes = { x: 20, y: 20, span: 3 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 13, y: 22, d: -1 }, { x: 27, y: 22, d: 1 }]; break;
+        case 'plug': rrect(g, 12, 12, 16, 15, 3, B); rect(g, 15, 6, 2, 6, M); rect(g, 23, 6, 2, 6, M); line(g, 20, 27, 20, 31, A, 2); line(g, 20, 31, 30, 35, A, 2); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 22, w: 5 }; arms = [{ x: 12, y: 19, d: -1 }, { x: 28, y: 19, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'strip': rrect(g, 5, 18, 30, 9, 2, B); for (const x of [10, 17, 24]) { ell(g, x, 22, 2.5, 2.5, BD); gset(g, x - 1, 22, K); gset(g, x + 1, 22, K); } rect(g, 30, 20, 3, 2, TO); line(g, 5, 22, 2, 30, A, 2); eyes = { x: 20, y: 14, span: 3 }; mouth = { x: 20, y: 28, w: 6 }; top = { x: 20, y: 12 }; arms = [{ x: 6, y: 22, d: -1 }, { x: 34, y: 22, d: 1 }]; legs = { y: 28, xs: [12, 28] }; break;
+        case 'coil': for (let r = 12; r >= 4; r -= 3) { ell(g, 20, 21, r, r * 0.8, r % 2 ? A : B); } ell(g, 20, 21, 2.5, 2, E); line(g, 30, 25, 35, 33, A, 2); eyes = { x: 20, y: 17, span: 4 }; mouth = { x: 20, y: 26, w: 5 }; legs = null; noLegs = true; top = { x: 20, y: 11 }; break;
+        case 'screw': rrect(g, 11, 6, 18, 6, 2, M); rect(g, 19, 7, 2, 4, MD); rect(g, 17, 12, 6, 18, M); for (let y = 13; y < 30; y += 3) line(g, 16, y + 1, 24, y, MD); poly(g, [[17, 30], [23, 30], [20, 35]], M); eyes = { x: 20, y: 16, span: 2 }; mouth = { x: 20, y: 22, w: 3 }; arms = [{ x: 17, y: 20, d: -1 }, { x: 23, y: 20, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'nut': { const pts = []; for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; pts.push([20 + Math.cos(a) * 12, 21 + Math.sin(a) * 12]); } poly(g, pts, M); ell(g, 20, 21, 5, 5, E); ell(g, 20, 21, 6.5, 6.5, MD, [M]); ell(g, 20, 21, 5, 5, E); eyes = { x: 20, y: 12, span: 4 }; mouth = { x: 20, y: 30, w: 6 }; top = { x: 20, y: 10 }; legs = { y: 33, xs: [15, 25] }; break; }
+        case 'chain': for (let i = 0; i < 4; i++) { const cx = 9 + i * 7, cy = 21 + (i % 2 ? -2 : 2); C.handleRing(g, cx, cy, 4.5, 3.5, i % 2 ? M : MD); } eyes = { x: 20, y: 13, span: 3 }; mouth = { x: 20, y: 29, w: 5 }; top = { x: 20, y: 12 }; break;
+        case 'clip': for (const [rx, ry] of [[7, 13], [5, 10], [3, 7]]) { ell(g, 20, 20, rx, ry, M); ell(g, 20, 20, rx - 1.2, ry - 1.2, E); } rect(g, 17, 8, 1, 16, E); eyes = { x: 20, y: 16, span: 2 }; mouth = { x: 20, y: 24, w: 3 }; legs = null; noLegs = true; float = true; top = { x: 20, y: 7 }; break;
+        case 'block': rrect(g, 10, 14, 20, 16, 3, B); rect(g, 10, 14, 20, 4, A); rect(g, 11, 28, 18, 1, BD); eyes = { x: 20, y: 21, span: 4 }; mouth = { x: 20, y: 26, w: 6 }; top = { x: 20, y: 14 }; arms = [{ x: 10, y: 22, d: -1 }, { x: 30, y: 22, d: 1 }]; legs = { y: 31, xs: [15, 25] }; break;
+        case 'card': rrect(g, 7, 11, 26, 17, 2, B); rect(g, 7, 15, 26, 3, A); rrect(g, 10, 20, 5, 4, 1, GO); rect(g, 18, 24, 12, 1, BD); eyes = { x: 24, y: 20, span: 3 }; mouth = { x: 24, y: 25, w: 4 }; top = { x: 20, y: 11 }; arms = [{ x: 7, y: 20, d: -1 }, { x: 33, y: 20, d: 1 }]; legs = { y: 29, xs: [14, 26] }; break;
+        case 'coin': ell(g, 20, 20, 12, 12, GO); ell(g, 20, 20, 9.5, 9.5, B); ell(g, 20, 20, 9.5, 9.5, GO, [B]); ell(g, 20, 20, 8.5, 8.5, AL); rect(g, 19, 12, 2, 3, GO); eyes = { x: 20, y: 18, span: 4 }; mouth = { x: 20, y: 24, w: 5 }; top = { x: 20, y: 8 }; legs = { y: 32, xs: [15, 25] }; break;
+        case 'disc': ell(g, 20, 20, 13, 13, B); ell(g, 20, 20, 10, 10, BL); ell(g, 20, 20, 6, 6, S); ell(g, 20, 20, 2, 2, E); line(g, 12, 12, 16, 9, PA); eyes = { x: 20, y: 14, span: 4 }; mouth = { x: 20, y: 27, w: 5 }; top = { x: 20, y: 7 }; legs = { y: 33, xs: [15, 25] }; break;
+        case 'chip': rrect(g, 8, 13, 24, 15, 1, S); for (let x = 10; x < 31; x += 3) { rect(g, x, 11, 1, 2, GO); rect(g, x, 28, 1, 2, GO); } rrect(g, 15, 16, 10, 9, 1, MD); rect(g, 10, 15, 3, 2, GO); eyes = { x: 20, y: 19, span: 3 }; mouth = { x: 20, y: 23, w: 4 }; top = { x: 20, y: 11 }; arms = [{ x: 8, y: 20, d: -1 }, { x: 32, y: 20, d: 1 }]; legs = { y: 31, xs: [14, 26] }; break;
+        case 'ring': ell(g, 20, 24, 11, 9, GO); ell(g, 20, 24, 8, 6, E); poly(g, [[16, 15], [24, 15], [26, 11], [20, 6], [14, 11]], S); line(g, 17, 11, 20, 8, SL); eyes = { x: 20, y: 12, span: 2 }; mouth = { x: 20, y: 31, w: 4 }; arms = [{ x: 9, y: 24, d: -1 }, { x: 31, y: 24, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'bandage': rrect(g, 4, 16, 32, 10, 5, B); rrect(g, 14, 16, 12, 10, 1, PA); for (const [x, y] of [[7, 19], [9, 22], [31, 19], [33, 22]]) gset(g, x, y, BD); eyes = { x: 20, y: 19, span: 3 }; mouth = { x: 20, y: 23, w: 4 }; top = { x: 20, y: 16 }; arms = [{ x: 5, y: 21, d: -1 }, { x: 35, y: 21, d: 1 }]; legs = { y: 27, xs: [14, 26] }; break;
+        case 'stetho': C.handleRing(g, 20, 11, 9, 7, MD); rect(g, 10, 3, 20, 8, E); ell(g, 11, 4, 1.5, 1.5, M); ell(g, 29, 4, 1.5, 1.5, M); line(g, 20, 18, 20, 22, MD, 2); ell(g, 20, 29, 7, 7, M); ell(g, 20, 29, 5.5, 5.5, BL); eyes = { x: 20, y: 27, span: 3 }; mouth = { x: 20, y: 32, w: 4 }; arms = [{ x: 15, y: 30, d: -1 }, { x: 25, y: 30, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 20, y: 5 }; break;
+        case 'kit': rrect(g, 8, 12, 24, 20, 2, PA); rect(g, 8, 12, 24, 3, B); C.handleRing(g, 20, 11, 4, 3, MD); C.redCross(g, 20, 23); eyes = { x: 14, y: 20, span: 2 }; mouth = { x: 26, y: 28, w: 3 }; top = { x: 20, y: 8 }; arms = [{ x: 8, y: 22, d: -1 }, { x: 32, y: 22, d: 1 }]; legs = { y: 33, xs: [13, 27] }; break;
+        case 'scope': line(g, 14, 30, 26, 8, B, 5); rrect(g, 24, 5, 6, 6, 1, MD); ell(g, 13, 31, 2.5, 2, MD); line(g, 20, 20, 13, 35, MD); line(g, 20, 20, 27, 35, MD); line(g, 20, 20, 20, 35, MD); eyes = { x: 21, y: 16, span: 2 }; mouth = { x: 18, y: 22, w: 3 }; arms = [{ x: 17, y: 20, d: -1 }, { x: 23, y: 18, d: 1 }]; legs = null; noLegs = true; top = { x: 27, y: 5 }; break;
+        case 'tent': poly(g, [[4, 34], [20, 8], [36, 34]], B); poly(g, [[15, 34], [20, 22], [25, 34]], BD); line(g, 20, 8, 20, 5, MD); line(g, 4, 34, 2, 36, MD); line(g, 36, 34, 38, 36, MD); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 21, w: 4 }; arms = [{ x: 12, y: 25, d: -1 }, { x: 28, y: 25, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'fence': for (const x of [7, 14, 21, 28]) { rect(g, x, 12, 5, 23, B); poly(g, [[x, 12], [x + 2.5, 8], [x + 5, 12]], B); } rect(g, 5, 17, 30, 2, BD); rect(g, 5, 27, 30, 2, BD); eyes = { x: 20, y: 21, span: 4 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 5, y: 22, d: -1 }, { x: 35, y: 22, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 8 }; break;
+        case 'knob': rect(g, 11, 8, 8, 26, B); ell(g, 15, 13, 1.5, 2, K); ell(g, 25, 21, 7, 7, GO); ell(g, 25, 21, 5, 5, AL); rect(g, 17, 20, 3, 3, GO); eyes = { x: 25, y: 20, span: 2 }; mouth = { x: 25, y: 24, w: 3 }; arms = [{ x: 18, y: 21, d: -1 }, { x: 32, y: 21, d: 1 }]; legs = null; noLegs = true; top = { x: 25, y: 14 }; break;
+        case 'bell': poly(g, [[13, 26], [15, 12], [20, 8], [25, 12], [27, 26]], GO); rect(g, 11, 26, 18, 3, GO); ell(g, 20, 31, 2.5, 2.5, AD); C.handleRing(g, 20, 7, 3, 2.5, MD); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 23, w: 5 }; arms = [{ x: 14, y: 20, d: -1 }, { x: 26, y: 20, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 20, y: 5 }; break;
+        case 'scale': rrect(g, 7, 22, 26, 10, 3, B); ell(g, 20, 17, 8, 8, PA); ell(g, 20, 17, 6.5, 6.5, BL); line(g, 20, 17, 24, 13, TO); rect(g, 7, 22, 26, 1, BL); eyes = { x: 20, y: 26, span: 4 }; mouth = { x: 20, y: 30, w: 5 }; arms = [{ x: 7, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = { y: 33, xs: [12, 28] }; top = { x: 20, y: 9 }; break;
+        case 'treadmill': line(g, 4, 31, 30, 27, MD, 4); ell(g, 6, 32, 2.5, 2.5, MD); ell(g, 29, 28, 2.5, 2.5, MD); line(g, 27, 27, 31, 8, M, 2); rrect(g, 25, 5, 12, 7, 2, B); rect(g, 27, 7, 7, 2, S); eyes = { x: 31, y: 7, span: 2 }; mouth = { x: 15, y: 27, w: 5 }; arms = [{ x: 27, y: 12, d: -1 }, { x: 37, y: 9, d: 1 }]; legs = null; noLegs = true; top = { x: 31, y: 5 }; break;
+        case 'globe': ell(g, 20, 16, 11, 11, S); poly(g, [[13, 10], [19, 8], [21, 13], [16, 18]], A); poly(g, [[22, 18], [28, 16], [27, 23], [23, 24]], A); C.handleRing(g, 20, 16, 13, 13, MD); rect(g, 5, 4, 30, 6, E); rect(g, 19, 29, 2, 4, MD); rect(g, 13, 33, 14, 2, MD); ell(g, 20, 16, 11, 11, S, [E]); eyes = { x: 20, y: 14, span: 4 }; mouth = { x: 20, y: 21, w: 5 }; arms = [{ x: 8, y: 17, d: -1 }, { x: 32, y: 17, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 5 }; break;
+        case 'grater': poly(g, [[14, 8], [26, 8], [30, 34], [10, 34]], M); for (let y = 12; y < 32; y += 3) for (let x = 14; x < 27; x += 3) gset(g, x, y, MD); C.handleRing(g, 20, 7, 4, 3, A); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 12, y: 21, d: -1 }, { x: 28, y: 21, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 4 }; break;
+        case 'clamp': rect(g, 9, 8, 4, 26, M); rect(g, 9, 8, 16, 4, M); rect(g, 9, 30, 16, 4, M); line(g, 21, 12, 21, 26, MD, 2); rect(g, 17, 26, 9, 3, MD); rect(g, 19, 4, 5, 4, A); eyes = { x: 17, y: 18, span: 2 }; mouth = { x: 17, y: 22, w: 3 }; arms = [{ x: 9, y: 20, d: -1 }, { x: 25, y: 20, d: 1 }]; legs = null; noLegs = true; top = { x: 17, y: 8 }; break;
+        case 'cassette': rrect(g, 6, 12, 28, 18, 2, B); rect(g, 9, 14, 22, 5, PA); C.handleRing(g, 15, 22, 3, 3, MD); C.handleRing(g, 25, 22, 3, 3, MD); rect(g, 13, 26, 14, 3, BD); eyes = { x: 20, y: 16, span: 4 }; mouth = { x: 20, y: 27, w: 5 }; top = { x: 20, y: 12 }; arms = [{ x: 6, y: 21, d: -1 }, { x: 34, y: 21, d: 1 }]; legs = { y: 31, xs: [13, 27] }; break;
+        default: rrect(g, 11, 13, 18, 18, 4, B); eyes = { x: 20, y: 20, span: 3 }; mouth = { x: 20, y: 25, w: 5 };
+      }
+      return { eyes, mouth, arms, legs, noLegs, float, top, rigid: true };
+    },
     handtool(g, p, v) {
       const head = p.head || 'hammer', len = clampi((p.len || 20) + v * 2, 10, 26), hx = 20, hy = 12;
-      if (head !== 'blade') { line(g, hx, hy + 2, hx, hy + len + 2, p.metalHandle ? MD : AD, 2); rect(g, hx - 1, hy + len - 4, 3, 6, A); }
+      if (!['blade', 'rollingpin', 'needle', 'ruler', 'cane', 'thermo', 'syringe', 'detector', 'rod', 'club'].includes(head)) { line(g, hx, hy + 2, hx, hy + len + 2, p.metalHandle ? MD : AD, 2); rect(g, hx - 1, hy + len - 4, 3, 6, A); }
       let eyes = { x: hx, y: hy, span: 3 }, mouth = { x: hx, y: hy + 4, w: 5 };
       switch (head) {
         case 'hammer': rrect(g, hx - 9, hy - 4, 16, 7, 1, M); poly(g, [[hx + 7, hy - 4], [hx + 11, hy - 6], [hx + 11, hy - 4], [hx + 7, hy + 2]], M); eyes = { x: hx - 2, y: hy - 2, span: 3 }; mouth = { x: hx - 2, y: hy + 1, w: 5 }; break;
@@ -310,6 +433,23 @@ const PARTS = (() => {
         case 'racket': C.handleRing(g, hx, hy - 3, 8, 10, A); for (let x = hx - 6; x <= hx + 6; x += 2) line(g, x, hy - 11, x, hy + 5, M); for (let y = hy - 11; y <= hy + 5; y += 2) line(g, hx - 6, y, hx + 6, y, M); ell(g, hx, hy - 3, 4, 4, A); eyes = { x: hx, y: hy - 4, span: 2 }; mouth = { x: hx, y: hy - 1, w: 3 }; break;
         case 'drill': rrect(g, hx - 10, hy - 6, 18, 9, 3, B); rect(g, hx - 15, hy - 3, 5, 3, M); line(g, hx - 15, hy - 2, hx - 19, hy - 2, MD); rrect(g, hx - 1, hy + 2, 7, 14, 2, B); rect(g, hx - 1, hy + 16, 9, 4, BD); rect(g, hx + 5, hy + 4, 2, 3, A); eyes = { x: hx - 3, y: hy - 3, span: 3 }; mouth = { x: hx - 3, y: hy + 1, w: 5 }; break;
         case 'tape': C.handleRing(g, hx, hy + 4, 8, 8, B); ell(g, hx, hy + 4, 4, 4, PA); eyes = { x: hx, y: hy + 1, span: 4 }; mouth = { x: hx, y: hy + 9, w: 5 }; break;
+        case 'club': line(g, hx + 4, hy - 14, hx - 2, hy + 14, M, 2); rrect(g, hx + 2, hy - 16, 5, 7, 2, A); poly(g, [[hx - 3, hy + 12], [hx + 1, hy + 14], [hx - 1, hy + 20], [hx - 12, hy + 20], [hx - 12, hy + 15]], M); eyes = { x: hx - 6, y: hy + 16, span: 2 }; mouth = { x: hx - 6, y: hy + 19, w: 3 }; break;
+        case 'chisel': poly(g, [[hx - 2, hy - 10], [hx + 2, hy - 10], [hx + 2, hy + 2], [hx - 2, hy + 2]], M); rect(g, hx - 2, hy - 11, 4, 1, MD); eyes = { x: hx, y: hy - 5, span: 1 }; mouth = { x: hx, y: hy - 1, w: 3 }; break;
+        case 'crowbar': line(g, hx, hy - 8, hx, hy + 2, M, 2); line(g, hx, hy - 8, hx + 5, hy - 10, M, 2); line(g, hx + 5, hy - 10, hx + 6, hy - 7, M, 2); eyes = { x: hx - 1, y: hy - 3, span: 1 }; mouth = { x: hx, y: hy + 1, w: 2 }; break;
+        case 'pickaxe': poly(g, [[hx - 13, hy - 1], [hx - 4, hy - 7], [hx + 4, hy - 7], [hx + 13, hy - 1], [hx + 4, hy - 4], [hx - 4, hy - 4]], M); rect(g, hx - 2, hy - 8, 4, 6, AD); eyes = { x: hx, y: hy - 6, span: 2 }; mouth = { x: hx, y: hy - 2, w: 4 }; break;
+        case 'trowel': poly(g, [[hx - 6, hy - 2], [hx + 6, hy - 2], [hx, hy - 14]], M); line(g, hx, hy - 2, hx, hy + 2, MD, 2); eyes = { x: hx, y: hy - 7, span: 2 }; mouth = { x: hx, y: hy - 4, w: 3 }; break;
+        case 'roller': rrect(g, hx - 9, hy - 10, 18, 7, 3, B); line(g, hx + 9, hy - 6, hx + 11, hy - 6, MD); line(g, hx + 11, hy - 6, hx, hy + 2, MD); eyes = { x: hx, y: hy - 8, span: 3 }; mouth = { x: hx, y: hy - 5, w: 5 }; break;
+        case 'rollingpin': rrect(g, hx - 11, hy - 3, 22, 7, 3, AL); rect(g, hx - 15, hy - 1, 4, 3, AD); rect(g, hx + 11, hy - 1, 4, 3, AD); eyes = { x: hx, y: hy - 1, span: 3 }; mouth = { x: hx, y: hy + 2, w: 5 }; break;
+        case 'tongs': line(g, hx - 2, hy + 6, hx - 7, hy - 12, M, 2); line(g, hx + 2, hy + 6, hx + 7, hy - 12, M, 2); rect(g, hx - 8, hy - 13, 3, 2, MD); rect(g, hx + 6, hy - 13, 3, 2, MD); eyes = { x: hx, y: hy - 2, span: 2 }; mouth = { x: hx, y: hy + 2, w: 3 }; break;
+        case 'syringe': rrect(g, hx - 3, hy - 8, 7, 18, 1, BL); rect(g, hx - 2, hy, 5, 9, TO); for (let y = hy - 6; y < hy + 9; y += 3) rect(g, hx + 2, y, 2, 1, MD); rect(g, hx - 5, hy + 10, 11, 2, M); line(g, hx, hy - 8, hx, hy - 15, M); eyes = { x: hx, y: hy - 4, span: 1 }; mouth = { x: hx, y: hy - 1, w: 3 }; break;
+        case 'thermo': rrect(g, hx - 2, hy - 12, 5, 22, 2, PA); rect(g, hx, hy - 8, 1, 16, TO); ell(g, hx, hy + 11, 3, 3, TO); eyes = { x: hx, y: hy - 6, span: 1 }; mouth = { x: hx, y: hy - 2, w: 2 }; break;
+        case 'magnifier': C.handleRing(g, hx, hy - 6, 8, 8, M); ell(g, hx, hy - 6, 6, 6, SL); eyes = { x: hx, y: hy - 7, span: 3 }; mouth = { x: hx, y: hy - 3, w: 4 }; break;
+        case 'rod': line(g, hx, hy + 10, hx + 10, hy - 14, AD, 2); line(g, hx + 10, hy - 14, hx + 13, hy + 6, PA); ell(g, hx + 13, hy + 7, 1.5, 1.5, TO); C.handleRing(g, hx - 3, hy + 6, 3, 3, M); eyes = { x: hx + 3, y: hy - 2, span: 1 }; mouth = { x: hx + 3, y: hy + 2, w: 2 }; break;
+        case 'paddle': ell(g, hx, hy - 6, 6, 10, AD); eyes = { x: hx, y: hy - 8, span: 3 }; mouth = { x: hx, y: hy - 3, w: 4 }; break;
+        case 'cane': line(g, hx, hy - 6, hx, hy + 20, AD, 2); C.handleRing(g, hx - 4, hy - 6, 4, 4, AD); rect(g, hx - 9, hy - 6, 6, 5, E); eyes = { x: hx - 4, y: hy - 9, span: 1 }; mouth = { x: hx, y: hy + 2, w: 2 }; break;
+        case 'needle': line(g, hx, hy - 14, hx, hy + 16, M, 1); C.handleRing(g, hx, hy - 12, 1.5, 2.5, M); line(g, hx, hy - 12, hx + 8, hy + 8, TO); eyes = { x: hx + 4, y: hy, span: 1 }; mouth = { x: hx + 5, y: hy + 4, w: 2 }; break;
+        case 'ruler': rect(g, hx - 3, hy - 14, 7, 30, AL); for (let y = hy - 12; y < hy + 15; y += 2) rect(g, hx - 3, y, y % 4 ? 2 : 3, 1, AD); eyes = { x: hx + 1, y: hy - 4, span: 1 }; mouth = { x: hx + 1, y: hy, w: 2 }; break;
+        case 'detector': ell(g, hx, hy + 14, 8, 3, M); ell(g, hx, hy + 14, 5, 1.5, E); line(g, hx, hy + 12, hx, hy - 6, MD, 2); rrect(g, hx - 4, hy - 9, 9, 6, 2, B); eyes = { x: hx, y: hy - 7, span: 2 }; mouth = { x: hx, y: hy - 4, w: 3 }; break;
         default: rrect(g, hx - 6, hy - 6, 13, 10, 2, M);
       }
       return { eyes, mouth, arms: [], legs: null, noLegs: true, float: true, top: { x: hx, y: 3 }, rigid: true };

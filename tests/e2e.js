@@ -35,7 +35,12 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
     ClipLens.recognize = async () => ({ regions: [{ box: null, cls: 'whole photo', best: { obj: cl.obj, label: cl.label, p: cl.p }, accepted: !!cl.accepted, why: cl.accepted ? 'accepted' : 'low score',
       calibrated: null, ranked: cl.ranked || [{ obj: cl.obj, label: cl.label, p: cl.p }], margin: 0.3 }], inferMs: 5, totalMs: 6, backend: 'webgpu' });
   }, [label, obj, decision, clip, box]);
-  const snapPhoto = async file => { await cam.show(p, `${imgDir}/${file}`); await cam.snap(p); };
+  // v0.4.3: an identification waits for the player; "Scan for monsters" is the only way on to the encounter roll
+  const snapPhoto = async file => {
+    await cam.show(p, `${imgDir}/${file}`); await cam.snap(p);
+    await p.waitForFunction(() => /Object identified|disagree|Several objects|few ideas|Could it be|Unknown object|Hybrid \(what/.test(document.querySelector('#overlay').textContent), null, { timeout: 15000 });
+    if (await p.$('text=Object identified')) await p.click('[data-act="pickCand"]');
+  };
   ok((await S()).items.potion === 3 && (await S()).items.trap === 5, 'starts with 3 potions and 5 traps');
   ok(await p.evaluate(() => document.body.scrollWidth <= window.innerWidth), 'no horizontal scroll on hunt');
 
@@ -53,6 +58,7 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await p.click('#camShutter');
   await p.waitForSelector('text=Object identified'); await shot(p, '02-identified');
   ok(await cam.live(p) === 0, 'camera tracks stopped right after the shot');
+  await p.click('[data-act="pickCand"]');
   await p.waitForSelector('text=Scanning for supernatural activity', { timeout: 4000 }); await p.waitForTimeout(300); await shot(p, '03-scanning');
   await p.waitForSelector('[data-act="fight"]', { timeout: 6000 }); await p.waitForTimeout(1500);
   await shot(p, '04-discovery');

@@ -198,7 +198,6 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .cam-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; transform-origin: 50% 50%; }
 .cam-frame .vf-corner, .cam-frame .vf-sweep { z-index: 2; }
 .cam-status { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ecto); font-weight: 600; z-index: 3; background: #000; }
-.confirm-bar { height: 6px; } .confirm-bar i { background: var(--ecto); transition: none; }
 .lore { font-style: italic; } .lore-epic { color: #d9b8ff; } .lore-legendary { color: #ffd98a; text-shadow: 0 0 12px rgba(255,190,59,.35); }
 .guide-btn { font-weight: 800; font-size: 17px; color: var(--ecto); }
 .guide-sec { border: 1px solid var(--line); border-radius: 14px; background: var(--panel2, #1a1430); }
@@ -210,6 +209,8 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .guide-table th, .guide-table td { border-bottom: 1px solid var(--line); padding: 5px 6px; text-align: left; vertical-align: top; }
 .guide-cards { display: grid; gap: 8px; margin: 8px 0; } .guide-status { display: grid; grid-template-columns: 74px 1fr; gap: 8px; align-items: start; background: #0e0b18; border-radius: 10px; padding: 8px; }
 .guide-status .st { justify-self: start; }
+.shutter[disabled], .shutter.waiting { opacity: .45; filter: grayscale(.6); cursor: default; } .shutter[disabled]::after { animation: none; opacity: 0; }
+.shutter .waking { font-size: 11px; letter-spacing: .1em; }
 .zoom-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
 .zoom-row input[type=range] { flex: 1; max-width: 240px; accent-color: var(--ecto); }
 .zoom-row .num { min-width: 3.2em; text-align: right; color: var(--ecto); }
@@ -1629,8 +1630,7 @@ function makeDNA3(m) {
   const own = OBJECTS[m.obj], o = visualSource(own), cat = CATEGORY[own.cat], tier = RARITY[m.rarity].tier;
   const SR = mulberry(hashStr('species3:' + own.id + ':' + m.rarity)), R = mulberry(m.seed);
   const vis = o.vis;
-  const shape = vis && vis.legacy ? vis.legacy : vis ? 'obj' : (cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : 'blob'));
-  const sub = vis && vis.legacy ? vis.sub || null : (!vis ? m.sub || null : null);
+  const { shape, sub } = designOf(own, m);
   const eyePool = [['round', 'dot', 'sleepy'], ['round', 'googly', 'angry'], ['angry', 'googly', 'cyclops', 'slit'], ['angry', 'slit', 'many', 'cyclops'], ['slit', 'angry', 'cyclops']][tier];
   const mouthPool = [['smile', 'o', 'grin'], ['grin', 'tongue', 'smile', 'zigzag'], ['fangs', 'grin', 'zigzag', 'tongue'], ['chomp', 'fangs', 'tongue'], ['chomp', 'fangs']][tier];
   const topPool = [['none'], ['none', 'antennae', 'tuft'], ['horns', 'antennae', 'mohawk', 'tuft'], ['horns', 'mohawk', 'antennae'], ['crown']][tier];
@@ -1684,10 +1684,18 @@ function makeDNA3(m) {
   if (palDNA) dna.pal = palDNA;
   return dna;
 }
+// which body an object gets: its legacy sprite, an object builder ('obj'), or (no design) its category's shape
+function designOf(own, m = {}) {
+  const o = visualSource(own), vis = o.vis, cat = CATEGORY[own.cat];
+  const shape = vis && vis.legacy ? vis.legacy : vis ? 'obj' : (cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : 'blob'));
+  const sub = vis && vis.legacy ? vis.sub || null : (!vis ? m.sub || null : null);
+  return { shape, sub };
+}
 const D_BUILDER_ALIAS = { fan: 'electric_fan', vacuum: 'vacuum_cleaner', smartwatch: 'wristwatch', robot_toy: 'robot' };
 function objectBuilder(dna) {
   const o = typeof OBJECTS !== 'undefined' && OBJECTS[dna.obj] && visualSource(OBJECTS[dna.obj]);
   if (!o || !o.vis) return null; // family tier: falls through to the category's legacy shape
+  if (dna.shape !== 'obj') return null; // saved before this object had a design: keeps the look it was found with
   if (o.vis === 'D') { const k = D_BUILDER_ALIAS[o.id] || o.id; return PARTS.D[k] ? (g, R, d) => PARTS.D[k](g, R, d) : null; }
   if (o.vis.legacy) return null;    // original sprite: shape/sub already stored in the dna
   if (o.vis.t && PARTS.T[o.vis.t]) return (g, R, d) => PARTS.T[o.vis.t](g, o.vis, d.var || 0, R);
@@ -2092,9 +2100,132 @@ const PARTS = (() => {
       if (p.shell) { ell(g, 20, bodyY - 2, bodyRX, bodyRY + 1, A); paintOn(g, (x, y) => ((x + y) % 5 === 0 ? AD : null), [A]); }
       return { eyes: { x: hx, y: hy - 1, span: 3 }, mouth: { x: hx - 1, y: hy + 3, w: 4 }, arms: [], legs: null, noLegs: true, top: { x: hx, y: hy - 5 } };
     },
+    /* v0.4.3 — reusable designs for objects that used to borrow their category's look (a toolbox for a light switch).
+       wallplate: switches, sockets, thermostats, doorbells, intercoms, keypads, fuse boxes, ceiling detectors */
+    wallplate(g, p, v) {
+      const k = p.kind || 'rocker';
+      if (k === 'disc') { // smoke detector / fire alarm: round ceiling disc with vents and a status light
+        ell(g, 20, 19, 14, 12, B); ell(g, 20, 19, 11, 9, BL); for (let a = 0; a < 6.28; a += 0.45) gset(g, 20 + Math.cos(a) * 12.5, 19 + Math.sin(a) * 10.5, BD);
+        ell(g, 20, 22, 3, 2.5, MD); rect(g, 27, 13, 2, 2, TO);
+        return { eyes: { x: 20, y: 16, span: 4 }, mouth: { x: 20, y: 25, w: 6 }, arms: [{ x: 6, y: 19, d: -1 }, { x: 34, y: 19, d: 1 }], legs: { y: 31, xs: [15, 25] }, top: { x: 20, y: 7 }, rigid: true };
+      }
+      const wide = !!p.wide, w = clampi((wide ? 26 : 18) + v, 14, 30), h = k === 'box' ? 28 : 26, x0 = Math.round(20 - w / 2), y0 = 6, cy = y0 + Math.round(h / 2) + 1;
+      rrect(g, x0, y0, w, h, 2, B); rect(g, x0 + 2, y0 + 1, w - 4, 1, BL); rect(g, x0 + 1, y0 + h - 2, w - 2, 1, BD);
+      const screws = () => { gset(g, 20, y0 + 2, MD); gset(g, 20, y0 + h - 3, MD); };
+      const socket = cx => { ell(g, cx, cy, 5, 5, BD); ell(g, cx, cy, 4, 4, BL); rect(g, cx - 2, cy - 2, 1, 3, K); rect(g, cx + 2, cy - 2, 1, 3, K); gset(g, cx, cy + 2, K); };
+      let eyes = { x: 20, y: y0 + 5, span: 3 }, mouth = { x: 20, y: y0 + h - 5, w: 5 };
+      switch (k) {
+        case 'rocker': screws(); rrect(g, 16, cy - 6, 8, 11, 1, MD); rect(g, 17, cy - 5, 6, 5, BL); rect(g, 17, cy, 6, 4, BD); if (wide) { rrect(g, 25, cy - 6, 6, 11, 1, MD); rect(g, 26, cy - 5, 4, 5, BL); } break;
+        case 'toggle': screws(); rrect(g, 17, cy - 3, 6, 7, 1, MD); line(g, 20, cy, 20, cy - 7, M, 2); ell(g, 20, cy - 7, 1.6, 1.6, BL); break;
+        case 'socket': screws(); if (wide) { socket(14); socket(26); } else socket(20); eyes = { x: 20, y: y0 + 4, span: 3 }; break;
+        case 'dial': rrect(g, x0 + 3, y0 + 4, w - 6, 4, 1, S); ell(g, 20, cy + 2, 6, 6, MD); ell(g, 20, cy + 2, 4.5, 4.5, BL); rect(g, 20, cy - 3, 1, 3, TO); eyes = { x: 20, y: y0 + 6, span: 3 }; mouth = { x: 20, y: y0 + h - 4, w: 4 }; break;
+        case 'bell': rect(g, 16, cy - 7, 8, 3, PA); ell(g, 20, cy + 2, 4.5, 4.5, MD); ell(g, 20, cy + 2, 3, 3, G); eyes = { x: 20, y: y0 + 4, span: 3 }; break;
+        case 'grille': C.grille(g, x0 + 3, cy - 7, w - 6, 7); ell(g, 20, cy + 4, 2.2, 2.2, A); rect(g, x0 + w - 5, y0 + 3, 2, 2, G); eyes = { x: 20, y: y0 + 4, span: 3 }; break;
+        case 'keypad': rrect(g, x0 + 3, y0 + 4, w - 6, 3, 1, S); for (let r = 0; r < 4; r++) for (let c = -1; c <= 1; c++) rect(g, 20 + c * 4 - 1, cy - 4 + r * 3, 2, 2, r === 3 && c ? A : MD); eyes = { x: 20, y: y0 + 5, span: 3 }; mouth = { x: 20, y: y0 + h - 3, w: 4 }; break;
+        case 'box': rect(g, x0 + 2, y0 + 3, w - 4, h - 6, BD); rect(g, x0 + 3, y0 + 4, w - 6, h - 8, B); for (let i = 0; i < (wide ? 5 : 3); i++) rect(g, x0 + 5 + i * 4, cy - 1, 2, 4, i % 2 ? M : BL); rect(g, x0 + w - 5, y0 + h / 2, 1, 3, M); line(g, 21, cy + 6, 25, cy + 10, G); line(g, 25, cy + 10, 23, cy + 10, G); break;
+      }
+      return { eyes, mouth, arms: [{ x: x0, y: cy, d: -1 }, { x: x0 + w, y: cy, d: 1 }], legs: { y: Math.min(35, y0 + h + 1), xs: [16, 24] }, top: { x: 20, y: y0 }, rigid: true };
+    },
+    /* cctv: security cameras (bullet on a wall arm, ceiling dome), webcams, dashcams and action cameras */
+    cctv(g, p, v) {
+      const k = p.kind || 'bullet';
+      if (k === 'dome') { // ceiling dome: mount plate, half-sphere of smoked glass, lens + infrared ring
+        ell(g, 20, 10, 13, 13, B); rect(g, 5, 1, 30, 9, E); rect(g, 5, 7, 30, 3, MD); rect(g, 6, 6, 28, 1, M);
+        ell(g, 20, 13, 8, 8, S); rect(g, 10, 4, 20, 9, E); rect(g, 5, 7, 30, 3, MD); ell(g, 20, 15, 3, 3, MD); gset(g, 21, 14, G);
+        for (const x of [14, 26]) gset(g, x, 15, TO);
+        return { eyes: { x: 20, y: 15, span: 3, forceStyle: 'cyclops' }, mouth: { x: 20, y: 20, w: 5 }, arms: [{ x: 8, y: 14, d: -1 }, { x: 32, y: 14, d: 1 }], legs: null, noLegs: true, float: true, top: { x: 20, y: 6 }, rigid: true };
+      }
+      if (k === 'webcam' || k === 'box') {
+        const w = k === 'box' ? 20 : 16, h = k === 'box' ? 13 : 14, x0 = Math.round(20 - w / 2), y0 = 11;
+        if (k === 'webcam') { rect(g, 15, y0 + h, 10, 2, MD); rect(g, 13, y0 + h + 2, 14, 2, MD); } else { rect(g, 18, y0 - 4, 4, 4, MD); rect(g, 14, y0 - 5, 12, 2, M); }
+        rrect(g, x0, y0, w, h, k === 'webcam' ? 6 : 3, B); ell(g, 20, y0 + h / 2, 4.5, 4.5, MD); ell(g, 20, y0 + h / 2, 3, 3, S); gset(g, 21, y0 + h / 2 - 1, G); rect(g, x0 + w - 3, y0 + 2, 1, 1, TO);
+        return { eyes: { x: 20, y: Math.round(y0 + h / 2), span: 3, forceStyle: 'cyclops' }, mouth: { x: 20, y: y0 + h - 2, w: 4 }, arms: [{ x: x0, y: y0 + h / 2, d: -1 }, { x: x0 + w, y: y0 + h / 2, d: 1 }], legs: k === 'webcam' ? null : { y: y0 + h + 1, xs: [16, 24] }, noLegs: k === 'webcam', top: { x: 20, y: y0 }, rigid: true };
+      }
+      // bullet camera on a wall bracket: housing with sun hood, lens at the front, red infrared light
+      const len = clampi(22 + v * 2, 18, 24), x0 = 10, y0 = 13;
+      rect(g, 3, 9, 4, 14, MD); rect(g, 2, 10, 1, 12, M); line(g, 6, 16, 11, 20, MD, 2); ell(g, 11, 20, 1.6, 1.6, M);
+      rrect(g, x0, y0, len, 10, 3, B); rect(g, x0 - 1, y0 - 2, len + 3, 3, BD); rect(g, x0, y0 + 7, len, 1, BD);
+      const lx = x0 + len; rect(g, lx - 2, y0 + 1, 3, 8, MD); ell(g, lx, y0 + 5, 3, 3.5, MD); ell(g, lx, y0 + 5, 2, 2.5, S); gset(g, lx, y0 + 4, G); gset(g, lx - 4, y0 + 1, TO);
+      return { eyes: { x: x0 + len / 2 - 1, y: y0 + 4, span: 3 }, mouth: { x: x0 + len / 2 - 1, y: y0 + 8, w: 5 }, arms: [{ x: x0 + 4, y: y0 + 9, d: -1 }, { x: lx - 4, y: y0 + 9, d: 1 }], legs: null, noLegs: true, float: true, top: { x: x0 + len / 2, y: y0 - 2 }, rigid: true };
+    },
+    /* pole: street furniture on a post (street lamp, traffic light, parking meter, signs, bollards, coat stands) */
+    pole(g, p, v) {
+      const k = p.kind || 'lamp';
+      if (k === 'bollard') { rrect(g, 14, 12, 12, 23, 4, B); rect(g, 14, 17, 12, 2, G); rect(g, 14, 22, 12, 1, BD); rect(g, 12, 34, 16, 2, MD);
+        return { eyes: { x: 20, y: 25, span: 3 }, mouth: { x: 20, y: 30, w: 4 }, arms: [{ x: 14, y: 24, d: -1 }, { x: 26, y: 24, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 12 }, rigid: true }; }
+      const post = (y0, x = 20) => { rect(g, x - 1, y0, 3, 36 - y0, MD); rect(g, x - 3, 34, 7, 2, MD); };
+      let eyes, mouth, arms, top;
+      switch (k) {
+        case 'lamp': post(12); line(g, 20, 12, 24, 7, MD, 2); rrect(g, 21, 3, 15, 6, 2, B); rect(g, 22, 9, 13, 2, G); rect(g, 23, 11, 11, 1, G);
+          eyes = { x: 28, y: 5, span: 3 }; mouth = { x: 20, y: 22, w: 3 }; arms = [{ x: 19, y: 20, d: -1 }, { x: 21, y: 20, d: 1 }]; top = { x: 28, y: 3 }; break;
+        case 'lights': post(27); rrect(g, 14, 2, 12, 26, 2, B); for (const [y, c] of [[8, TO], [15, GO], [22, G]]) { rect(g, 13, y - 4, 14, 1, BD); ell(g, 20, y, 3.2, 3.2, MD); ell(g, 20, y, 2.4, 2.4, c); }
+          eyes = { x: 20, y: 15, span: 3, forceStyle: 'cyclops' }; mouth = { x: 20, y: 26, w: 4 }; arms = [{ x: 14, y: 15, d: -1 }, { x: 26, y: 15, d: 1 }]; top = { x: 20, y: 2 }; break;
+        case 'meter': post(22); rrect(g, 13, 5, 14, 17, 4, M); rrect(g, 15, 8, 10, 6, 2, S); line(g, 20, 13, 23, 10, TO); rect(g, 18, 17, 4, 1, K); rect(g, 13, 20, 14, 2, MD);
+          eyes = { x: 20, y: 10, span: 3 }; mouth = { x: 20, y: 18, w: 4 }; arms = [{ x: 13, y: 14, d: -1 }, { x: 27, y: 14, d: 1 }]; top = { x: 20, y: 5 }; break;
+        case 'sign8': { post(22); const pts = []; for (let i = 0; i < 8; i++) { const a = Math.PI / 8 + i * Math.PI / 4; pts.push([20 + Math.cos(a) * 12, 12 + Math.sin(a) * 12]); } poly(g, pts, TO); const pts2 = pts.map(([x, y]) => [20 + (x - 20) * 0.82, 12 + (y - 12) * 0.82]); poly(g, pts2, B); rect(g, 13, 14, 15, 2, PA);
+          eyes = { x: 20, y: 9, span: 4 }; mouth = { x: 20, y: 18, w: 5 }; arms = [{ x: 9, y: 12, d: -1 }, { x: 31, y: 12, d: 1 }]; top = { x: 20, y: 1 }; break; }
+        case 'signrect': post(20); rect(g, 7, 4, 26, 16, PA); rect(g, 8, 5, 24, 14, B); poly(g, [[22, 9], [28, 12], [22, 15]], PA); rect(g, 13, 11, 9, 2, PA);
+          eyes = { x: 16, y: 8, span: 3 }; mouth = { x: 16, y: 16, w: 4 }; arms = [{ x: 7, y: 12, d: -1 }, { x: 33, y: 12, d: 1 }]; top = { x: 20, y: 4 }; break;
+        default: post(8); for (const d of [-1, 1]) { line(g, 20, 9, 20 + d * 8, 5, MD, 2); ell(g, 20 + d * 8, 5, 1.5, 1.5, A); } rrect(g, 15, 12, 10, 9, 3, B);
+          eyes = { x: 20, y: 15, span: 3 }; mouth = { x: 20, y: 19, w: 4 }; arms = [{ x: 15, y: 16, d: -1 }, { x: 25, y: 16, d: 1 }]; top = { x: 20, y: 4 };
+      }
+      return { eyes, mouth, arms, legs: null, noLegs: true, top, rigid: true };
+    },
+    /* board: whiteboards, chalkboards, easels, canvases, projector screens, pin boards */
+    board(g, p, v) {
+      const k = p.kind || 'white', w = clampi(26 + v * 2, 22, 30), x0 = Math.round(20 - w / 2), y0 = k === 'screen' ? 7 : 5, h = k === 'easel' ? 18 : 20;
+      if (k === 'easel') { line(g, 14, 20, 9, 36, AD, 2); line(g, 26, 20, 31, 36, AD, 2); line(g, 20, 20, 20, 36, AD, 2); rect(g, x0 - 1, y0 + h, w + 2, 2, AD); }
+      else if (k === 'screen') { rect(g, x0 - 2, y0 - 2, w + 4, 3, MD); rect(g, 19, y0 + h, 2, 13, MD); line(g, 14, 36, 20, 33, MD); line(g, 26, 36, 20, 33, MD); }
+      else { rect(g, x0 + 2, y0 + h, 2, 36 - y0 - h, MD); rect(g, x0 + w - 4, y0 + h, 2, 36 - y0 - h, MD); }
+      const surface = k === 'chalk' ? S : k === 'cork' ? AL : PA;
+      rect(g, x0, y0, w, h, k === 'canvas' || k === 'easel' ? AD : BD); rect(g, x0 + 2, y0 + 2, w - 4, h - 4, surface);
+      if (k === 'white') { line(g, x0 + 4, y0 + h - 5, x0 + 10, y0 + h - 7, A); rect(g, x0 + 2, y0 + h - 2, w - 4, 1, M); rect(g, x0 + 5, y0 + h - 3, 3, 1, TO); }
+      if (k === 'chalk') { line(g, x0 + 4, y0 + h - 6, x0 + 12, y0 + h - 6, PA); rect(g, x0 + 2, y0 + h - 2, w - 4, 1, AD); }
+      if (k === 'canvas' || k === 'easel') { ell(g, x0 + w - 7, y0 + 6, 3, 2, A); poly(g, [[x0 + 3, y0 + h - 3], [x0 + 10, y0 + h - 9], [x0 + 15, y0 + h - 3]], S); }
+      if (k === 'cork') for (const [dx, dy, c] of [[4, 4, PA], [w - 9, 5, A], [6, h - 8, S]]) rect(g, x0 + dx, y0 + dy, 4, 3, c);
+      return { eyes: { x: 20, y: y0 + Math.round(h * 0.4), span: 4 }, mouth: { x: 20, y: y0 + Math.round(h * 0.7), w: 6 }, arms: [{ x: x0, y: y0 + h / 2, d: -1 }, { x: x0 + w, y: y0 + h / 2, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: y0 }, rigid: true };
+    },
+    /* part: small everyday things that have no template of their own (batteries, plugs, cables, screws, cards,
+       coins, discs, chips, rings, bandages, medical and science kit, tents, fences, bells, scales...) */
+    part(g, p, v) {
+      const k = p.kind;
+      let eyes = { x: 20, y: 18, span: 3 }, mouth = { x: 20, y: 23, w: 5 }, arms = [{ x: 11, y: 22, d: -1 }, { x: 29, y: 22, d: 1 }], legs = { y: 34, xs: [16, 24] }, noLegs = false, float = false, top = { x: 20, y: 8 };
+      switch (k) {
+        case 'battery': rrect(g, 13, 9, 14, 25, 2, B); rect(g, 13, 9, 14, 7, A); rect(g, 17, 6, 6, 3, M); rect(g, 19, 11, 2, 1, PA); rect(g, 18, 12, 4, 1, PA); rect(g, 19, 13, 2, 1, PA); rect(g, 17, 29, 6, 1, BD); top = { x: 20, y: 6 }; eyes = { x: 20, y: 20, span: 3 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 13, y: 22, d: -1 }, { x: 27, y: 22, d: 1 }]; break;
+        case 'plug': rrect(g, 12, 12, 16, 15, 3, B); rect(g, 15, 6, 2, 6, M); rect(g, 23, 6, 2, 6, M); line(g, 20, 27, 20, 31, A, 2); line(g, 20, 31, 30, 35, A, 2); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 22, w: 5 }; arms = [{ x: 12, y: 19, d: -1 }, { x: 28, y: 19, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'strip': rrect(g, 5, 18, 30, 9, 2, B); for (const x of [10, 17, 24]) { ell(g, x, 22, 2.5, 2.5, BD); gset(g, x - 1, 22, K); gset(g, x + 1, 22, K); } rect(g, 30, 20, 3, 2, TO); line(g, 5, 22, 2, 30, A, 2); eyes = { x: 20, y: 14, span: 3 }; mouth = { x: 20, y: 28, w: 6 }; top = { x: 20, y: 12 }; arms = [{ x: 6, y: 22, d: -1 }, { x: 34, y: 22, d: 1 }]; legs = { y: 28, xs: [12, 28] }; break;
+        case 'coil': for (let r = 12; r >= 4; r -= 3) { ell(g, 20, 21, r, r * 0.8, r % 2 ? A : B); } ell(g, 20, 21, 2.5, 2, E); line(g, 30, 25, 35, 33, A, 2); eyes = { x: 20, y: 17, span: 4 }; mouth = { x: 20, y: 26, w: 5 }; legs = null; noLegs = true; top = { x: 20, y: 11 }; break;
+        case 'screw': rrect(g, 11, 6, 18, 6, 2, M); rect(g, 19, 7, 2, 4, MD); rect(g, 17, 12, 6, 18, M); for (let y = 13; y < 30; y += 3) line(g, 16, y + 1, 24, y, MD); poly(g, [[17, 30], [23, 30], [20, 35]], M); eyes = { x: 20, y: 16, span: 2 }; mouth = { x: 20, y: 22, w: 3 }; arms = [{ x: 17, y: 20, d: -1 }, { x: 23, y: 20, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'nut': { const pts = []; for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; pts.push([20 + Math.cos(a) * 12, 21 + Math.sin(a) * 12]); } poly(g, pts, M); ell(g, 20, 21, 5, 5, E); ell(g, 20, 21, 6.5, 6.5, MD, [M]); ell(g, 20, 21, 5, 5, E); eyes = { x: 20, y: 12, span: 4 }; mouth = { x: 20, y: 30, w: 6 }; top = { x: 20, y: 10 }; legs = { y: 33, xs: [15, 25] }; break; }
+        case 'chain': for (let i = 0; i < 4; i++) { const cx = 9 + i * 7, cy = 21 + (i % 2 ? -2 : 2); C.handleRing(g, cx, cy, 4.5, 3.5, i % 2 ? M : MD); } eyes = { x: 20, y: 13, span: 3 }; mouth = { x: 20, y: 29, w: 5 }; top = { x: 20, y: 12 }; break;
+        case 'clip': for (const [rx, ry] of [[7, 13], [5, 10], [3, 7]]) { ell(g, 20, 20, rx, ry, M); ell(g, 20, 20, rx - 1.2, ry - 1.2, E); } rect(g, 17, 8, 1, 16, E); eyes = { x: 20, y: 16, span: 2 }; mouth = { x: 20, y: 24, w: 3 }; legs = null; noLegs = true; float = true; top = { x: 20, y: 7 }; break;
+        case 'block': rrect(g, 10, 14, 20, 16, 3, B); rect(g, 10, 14, 20, 4, A); rect(g, 11, 28, 18, 1, BD); eyes = { x: 20, y: 21, span: 4 }; mouth = { x: 20, y: 26, w: 6 }; top = { x: 20, y: 14 }; arms = [{ x: 10, y: 22, d: -1 }, { x: 30, y: 22, d: 1 }]; legs = { y: 31, xs: [15, 25] }; break;
+        case 'card': rrect(g, 7, 11, 26, 17, 2, B); rect(g, 7, 15, 26, 3, A); rrect(g, 10, 20, 5, 4, 1, GO); rect(g, 18, 24, 12, 1, BD); eyes = { x: 24, y: 20, span: 3 }; mouth = { x: 24, y: 25, w: 4 }; top = { x: 20, y: 11 }; arms = [{ x: 7, y: 20, d: -1 }, { x: 33, y: 20, d: 1 }]; legs = { y: 29, xs: [14, 26] }; break;
+        case 'coin': ell(g, 20, 20, 12, 12, GO); ell(g, 20, 20, 9.5, 9.5, B); ell(g, 20, 20, 9.5, 9.5, GO, [B]); ell(g, 20, 20, 8.5, 8.5, AL); rect(g, 19, 12, 2, 3, GO); eyes = { x: 20, y: 18, span: 4 }; mouth = { x: 20, y: 24, w: 5 }; top = { x: 20, y: 8 }; legs = { y: 32, xs: [15, 25] }; break;
+        case 'disc': ell(g, 20, 20, 13, 13, B); ell(g, 20, 20, 10, 10, BL); ell(g, 20, 20, 6, 6, S); ell(g, 20, 20, 2, 2, E); line(g, 12, 12, 16, 9, PA); eyes = { x: 20, y: 14, span: 4 }; mouth = { x: 20, y: 27, w: 5 }; top = { x: 20, y: 7 }; legs = { y: 33, xs: [15, 25] }; break;
+        case 'chip': rrect(g, 8, 13, 24, 15, 1, S); for (let x = 10; x < 31; x += 3) { rect(g, x, 11, 1, 2, GO); rect(g, x, 28, 1, 2, GO); } rrect(g, 15, 16, 10, 9, 1, MD); rect(g, 10, 15, 3, 2, GO); eyes = { x: 20, y: 19, span: 3 }; mouth = { x: 20, y: 23, w: 4 }; top = { x: 20, y: 11 }; arms = [{ x: 8, y: 20, d: -1 }, { x: 32, y: 20, d: 1 }]; legs = { y: 31, xs: [14, 26] }; break;
+        case 'ring': ell(g, 20, 24, 11, 9, GO); ell(g, 20, 24, 8, 6, E); poly(g, [[16, 15], [24, 15], [26, 11], [20, 6], [14, 11]], S); line(g, 17, 11, 20, 8, SL); eyes = { x: 20, y: 12, span: 2 }; mouth = { x: 20, y: 31, w: 4 }; arms = [{ x: 9, y: 24, d: -1 }, { x: 31, y: 24, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'bandage': rrect(g, 4, 16, 32, 10, 5, B); rrect(g, 14, 16, 12, 10, 1, PA); for (const [x, y] of [[7, 19], [9, 22], [31, 19], [33, 22]]) gset(g, x, y, BD); eyes = { x: 20, y: 19, span: 3 }; mouth = { x: 20, y: 23, w: 4 }; top = { x: 20, y: 16 }; arms = [{ x: 5, y: 21, d: -1 }, { x: 35, y: 21, d: 1 }]; legs = { y: 27, xs: [14, 26] }; break;
+        case 'stetho': C.handleRing(g, 20, 11, 9, 7, MD); rect(g, 10, 3, 20, 8, E); ell(g, 11, 4, 1.5, 1.5, M); ell(g, 29, 4, 1.5, 1.5, M); line(g, 20, 18, 20, 22, MD, 2); ell(g, 20, 29, 7, 7, M); ell(g, 20, 29, 5.5, 5.5, BL); eyes = { x: 20, y: 27, span: 3 }; mouth = { x: 20, y: 32, w: 4 }; arms = [{ x: 15, y: 30, d: -1 }, { x: 25, y: 30, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 20, y: 5 }; break;
+        case 'kit': rrect(g, 8, 12, 24, 20, 2, PA); rect(g, 8, 12, 24, 3, B); C.handleRing(g, 20, 11, 4, 3, MD); C.redCross(g, 20, 23); eyes = { x: 14, y: 20, span: 2 }; mouth = { x: 26, y: 28, w: 3 }; top = { x: 20, y: 8 }; arms = [{ x: 8, y: 22, d: -1 }, { x: 32, y: 22, d: 1 }]; legs = { y: 33, xs: [13, 27] }; break;
+        case 'scope': line(g, 14, 30, 26, 8, B, 5); rrect(g, 24, 5, 6, 6, 1, MD); ell(g, 13, 31, 2.5, 2, MD); line(g, 20, 20, 13, 35, MD); line(g, 20, 20, 27, 35, MD); line(g, 20, 20, 20, 35, MD); eyes = { x: 21, y: 16, span: 2 }; mouth = { x: 18, y: 22, w: 3 }; arms = [{ x: 17, y: 20, d: -1 }, { x: 23, y: 18, d: 1 }]; legs = null; noLegs = true; top = { x: 27, y: 5 }; break;
+        case 'tent': poly(g, [[4, 34], [20, 8], [36, 34]], B); poly(g, [[15, 34], [20, 22], [25, 34]], BD); line(g, 20, 8, 20, 5, MD); line(g, 4, 34, 2, 36, MD); line(g, 36, 34, 38, 36, MD); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 21, w: 4 }; arms = [{ x: 12, y: 25, d: -1 }, { x: 28, y: 25, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 6 }; break;
+        case 'fence': for (const x of [7, 14, 21, 28]) { rect(g, x, 12, 5, 23, B); poly(g, [[x, 12], [x + 2.5, 8], [x + 5, 12]], B); } rect(g, 5, 17, 30, 2, BD); rect(g, 5, 27, 30, 2, BD); eyes = { x: 20, y: 21, span: 4 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 5, y: 22, d: -1 }, { x: 35, y: 22, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 8 }; break;
+        case 'knob': rect(g, 11, 8, 8, 26, B); ell(g, 15, 13, 1.5, 2, K); ell(g, 25, 21, 7, 7, GO); ell(g, 25, 21, 5, 5, AL); rect(g, 17, 20, 3, 3, GO); eyes = { x: 25, y: 20, span: 2 }; mouth = { x: 25, y: 24, w: 3 }; arms = [{ x: 18, y: 21, d: -1 }, { x: 32, y: 21, d: 1 }]; legs = null; noLegs = true; top = { x: 25, y: 14 }; break;
+        case 'bell': poly(g, [[13, 26], [15, 12], [20, 8], [25, 12], [27, 26]], GO); rect(g, 11, 26, 18, 3, GO); ell(g, 20, 31, 2.5, 2.5, AD); C.handleRing(g, 20, 7, 3, 2.5, MD); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 23, w: 5 }; arms = [{ x: 14, y: 20, d: -1 }, { x: 26, y: 20, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 20, y: 5 }; break;
+        case 'scale': rrect(g, 7, 22, 26, 10, 3, B); ell(g, 20, 17, 8, 8, PA); ell(g, 20, 17, 6.5, 6.5, BL); line(g, 20, 17, 24, 13, TO); rect(g, 7, 22, 26, 1, BL); eyes = { x: 20, y: 26, span: 4 }; mouth = { x: 20, y: 30, w: 5 }; arms = [{ x: 7, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = { y: 33, xs: [12, 28] }; top = { x: 20, y: 9 }; break;
+        case 'treadmill': line(g, 4, 31, 30, 27, MD, 4); ell(g, 6, 32, 2.5, 2.5, MD); ell(g, 29, 28, 2.5, 2.5, MD); line(g, 27, 27, 31, 8, M, 2); rrect(g, 25, 5, 12, 7, 2, B); rect(g, 27, 7, 7, 2, S); eyes = { x: 31, y: 7, span: 2 }; mouth = { x: 15, y: 27, w: 5 }; arms = [{ x: 27, y: 12, d: -1 }, { x: 37, y: 9, d: 1 }]; legs = null; noLegs = true; top = { x: 31, y: 5 }; break;
+        case 'globe': ell(g, 20, 16, 11, 11, S); poly(g, [[13, 10], [19, 8], [21, 13], [16, 18]], A); poly(g, [[22, 18], [28, 16], [27, 23], [23, 24]], A); C.handleRing(g, 20, 16, 13, 13, MD); rect(g, 5, 4, 30, 6, E); rect(g, 19, 29, 2, 4, MD); rect(g, 13, 33, 14, 2, MD); ell(g, 20, 16, 11, 11, S, [E]); eyes = { x: 20, y: 14, span: 4 }; mouth = { x: 20, y: 21, w: 5 }; arms = [{ x: 8, y: 17, d: -1 }, { x: 32, y: 17, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 5 }; break;
+        case 'grater': poly(g, [[14, 8], [26, 8], [30, 34], [10, 34]], M); for (let y = 12; y < 32; y += 3) for (let x = 14; x < 27; x += 3) gset(g, x, y, MD); C.handleRing(g, 20, 7, 4, 3, A); eyes = { x: 20, y: 17, span: 3 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 12, y: 21, d: -1 }, { x: 28, y: 21, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 4 }; break;
+        case 'clamp': rect(g, 9, 8, 4, 26, M); rect(g, 9, 8, 16, 4, M); rect(g, 9, 30, 16, 4, M); line(g, 21, 12, 21, 26, MD, 2); rect(g, 17, 26, 9, 3, MD); rect(g, 19, 4, 5, 4, A); eyes = { x: 17, y: 18, span: 2 }; mouth = { x: 17, y: 22, w: 3 }; arms = [{ x: 9, y: 20, d: -1 }, { x: 25, y: 20, d: 1 }]; legs = null; noLegs = true; top = { x: 17, y: 8 }; break;
+        case 'cassette': rrect(g, 6, 12, 28, 18, 2, B); rect(g, 9, 14, 22, 5, PA); C.handleRing(g, 15, 22, 3, 3, MD); C.handleRing(g, 25, 22, 3, 3, MD); rect(g, 13, 26, 14, 3, BD); eyes = { x: 20, y: 16, span: 4 }; mouth = { x: 20, y: 27, w: 5 }; top = { x: 20, y: 12 }; arms = [{ x: 6, y: 21, d: -1 }, { x: 34, y: 21, d: 1 }]; legs = { y: 31, xs: [13, 27] }; break;
+        default: rrect(g, 11, 13, 18, 18, 4, B); eyes = { x: 20, y: 20, span: 3 }; mouth = { x: 20, y: 25, w: 5 };
+      }
+      return { eyes, mouth, arms, legs, noLegs, float, top, rigid: true };
+    },
     handtool(g, p, v) {
       const head = p.head || 'hammer', len = clampi((p.len || 20) + v * 2, 10, 26), hx = 20, hy = 12;
-      if (head !== 'blade') { line(g, hx, hy + 2, hx, hy + len + 2, p.metalHandle ? MD : AD, 2); rect(g, hx - 1, hy + len - 4, 3, 6, A); }
+      if (!['blade', 'rollingpin', 'needle', 'ruler', 'cane', 'thermo', 'syringe', 'detector', 'rod', 'club'].includes(head)) { line(g, hx, hy + 2, hx, hy + len + 2, p.metalHandle ? MD : AD, 2); rect(g, hx - 1, hy + len - 4, 3, 6, A); }
       let eyes = { x: hx, y: hy, span: 3 }, mouth = { x: hx, y: hy + 4, w: 5 };
       switch (head) {
         case 'hammer': rrect(g, hx - 9, hy - 4, 16, 7, 1, M); poly(g, [[hx + 7, hy - 4], [hx + 11, hy - 6], [hx + 11, hy - 4], [hx + 7, hy + 2]], M); eyes = { x: hx - 2, y: hy - 2, span: 3 }; mouth = { x: hx - 2, y: hy + 1, w: 5 }; break;
@@ -2121,6 +2252,23 @@ const PARTS = (() => {
         case 'racket': C.handleRing(g, hx, hy - 3, 8, 10, A); for (let x = hx - 6; x <= hx + 6; x += 2) line(g, x, hy - 11, x, hy + 5, M); for (let y = hy - 11; y <= hy + 5; y += 2) line(g, hx - 6, y, hx + 6, y, M); ell(g, hx, hy - 3, 4, 4, A); eyes = { x: hx, y: hy - 4, span: 2 }; mouth = { x: hx, y: hy - 1, w: 3 }; break;
         case 'drill': rrect(g, hx - 10, hy - 6, 18, 9, 3, B); rect(g, hx - 15, hy - 3, 5, 3, M); line(g, hx - 15, hy - 2, hx - 19, hy - 2, MD); rrect(g, hx - 1, hy + 2, 7, 14, 2, B); rect(g, hx - 1, hy + 16, 9, 4, BD); rect(g, hx + 5, hy + 4, 2, 3, A); eyes = { x: hx - 3, y: hy - 3, span: 3 }; mouth = { x: hx - 3, y: hy + 1, w: 5 }; break;
         case 'tape': C.handleRing(g, hx, hy + 4, 8, 8, B); ell(g, hx, hy + 4, 4, 4, PA); eyes = { x: hx, y: hy + 1, span: 4 }; mouth = { x: hx, y: hy + 9, w: 5 }; break;
+        case 'club': line(g, hx + 4, hy - 14, hx - 2, hy + 14, M, 2); rrect(g, hx + 2, hy - 16, 5, 7, 2, A); poly(g, [[hx - 3, hy + 12], [hx + 1, hy + 14], [hx - 1, hy + 20], [hx - 12, hy + 20], [hx - 12, hy + 15]], M); eyes = { x: hx - 6, y: hy + 16, span: 2 }; mouth = { x: hx - 6, y: hy + 19, w: 3 }; break;
+        case 'chisel': poly(g, [[hx - 2, hy - 10], [hx + 2, hy - 10], [hx + 2, hy + 2], [hx - 2, hy + 2]], M); rect(g, hx - 2, hy - 11, 4, 1, MD); eyes = { x: hx, y: hy - 5, span: 1 }; mouth = { x: hx, y: hy - 1, w: 3 }; break;
+        case 'crowbar': line(g, hx, hy - 8, hx, hy + 2, M, 2); line(g, hx, hy - 8, hx + 5, hy - 10, M, 2); line(g, hx + 5, hy - 10, hx + 6, hy - 7, M, 2); eyes = { x: hx - 1, y: hy - 3, span: 1 }; mouth = { x: hx, y: hy + 1, w: 2 }; break;
+        case 'pickaxe': poly(g, [[hx - 13, hy - 1], [hx - 4, hy - 7], [hx + 4, hy - 7], [hx + 13, hy - 1], [hx + 4, hy - 4], [hx - 4, hy - 4]], M); rect(g, hx - 2, hy - 8, 4, 6, AD); eyes = { x: hx, y: hy - 6, span: 2 }; mouth = { x: hx, y: hy - 2, w: 4 }; break;
+        case 'trowel': poly(g, [[hx - 6, hy - 2], [hx + 6, hy - 2], [hx, hy - 14]], M); line(g, hx, hy - 2, hx, hy + 2, MD, 2); eyes = { x: hx, y: hy - 7, span: 2 }; mouth = { x: hx, y: hy - 4, w: 3 }; break;
+        case 'roller': rrect(g, hx - 9, hy - 10, 18, 7, 3, B); line(g, hx + 9, hy - 6, hx + 11, hy - 6, MD); line(g, hx + 11, hy - 6, hx, hy + 2, MD); eyes = { x: hx, y: hy - 8, span: 3 }; mouth = { x: hx, y: hy - 5, w: 5 }; break;
+        case 'rollingpin': rrect(g, hx - 11, hy - 3, 22, 7, 3, AL); rect(g, hx - 15, hy - 1, 4, 3, AD); rect(g, hx + 11, hy - 1, 4, 3, AD); eyes = { x: hx, y: hy - 1, span: 3 }; mouth = { x: hx, y: hy + 2, w: 5 }; break;
+        case 'tongs': line(g, hx - 2, hy + 6, hx - 7, hy - 12, M, 2); line(g, hx + 2, hy + 6, hx + 7, hy - 12, M, 2); rect(g, hx - 8, hy - 13, 3, 2, MD); rect(g, hx + 6, hy - 13, 3, 2, MD); eyes = { x: hx, y: hy - 2, span: 2 }; mouth = { x: hx, y: hy + 2, w: 3 }; break;
+        case 'syringe': rrect(g, hx - 3, hy - 8, 7, 18, 1, BL); rect(g, hx - 2, hy, 5, 9, TO); for (let y = hy - 6; y < hy + 9; y += 3) rect(g, hx + 2, y, 2, 1, MD); rect(g, hx - 5, hy + 10, 11, 2, M); line(g, hx, hy - 8, hx, hy - 15, M); eyes = { x: hx, y: hy - 4, span: 1 }; mouth = { x: hx, y: hy - 1, w: 3 }; break;
+        case 'thermo': rrect(g, hx - 2, hy - 12, 5, 22, 2, PA); rect(g, hx, hy - 8, 1, 16, TO); ell(g, hx, hy + 11, 3, 3, TO); eyes = { x: hx, y: hy - 6, span: 1 }; mouth = { x: hx, y: hy - 2, w: 2 }; break;
+        case 'magnifier': C.handleRing(g, hx, hy - 6, 8, 8, M); ell(g, hx, hy - 6, 6, 6, SL); eyes = { x: hx, y: hy - 7, span: 3 }; mouth = { x: hx, y: hy - 3, w: 4 }; break;
+        case 'rod': line(g, hx, hy + 10, hx + 10, hy - 14, AD, 2); line(g, hx + 10, hy - 14, hx + 13, hy + 6, PA); ell(g, hx + 13, hy + 7, 1.5, 1.5, TO); C.handleRing(g, hx - 3, hy + 6, 3, 3, M); eyes = { x: hx + 3, y: hy - 2, span: 1 }; mouth = { x: hx + 3, y: hy + 2, w: 2 }; break;
+        case 'paddle': ell(g, hx, hy - 6, 6, 10, AD); eyes = { x: hx, y: hy - 8, span: 3 }; mouth = { x: hx, y: hy - 3, w: 4 }; break;
+        case 'cane': line(g, hx, hy - 6, hx, hy + 20, AD, 2); C.handleRing(g, hx - 4, hy - 6, 4, 4, AD); rect(g, hx - 9, hy - 6, 6, 5, E); eyes = { x: hx - 4, y: hy - 9, span: 1 }; mouth = { x: hx, y: hy + 2, w: 2 }; break;
+        case 'needle': line(g, hx, hy - 14, hx, hy + 16, M, 1); C.handleRing(g, hx, hy - 12, 1.5, 2.5, M); line(g, hx, hy - 12, hx + 8, hy + 8, TO); eyes = { x: hx + 4, y: hy, span: 1 }; mouth = { x: hx + 5, y: hy + 4, w: 2 }; break;
+        case 'ruler': rect(g, hx - 3, hy - 14, 7, 30, AL); for (let y = hy - 12; y < hy + 15; y += 2) rect(g, hx - 3, y, y % 4 ? 2 : 3, 1, AD); eyes = { x: hx + 1, y: hy - 4, span: 1 }; mouth = { x: hx + 1, y: hy, w: 2 }; break;
+        case 'detector': ell(g, hx, hy + 14, 8, 3, M); ell(g, hx, hy + 14, 5, 1.5, E); line(g, hx, hy + 12, hx, hy - 6, MD, 2); rrect(g, hx - 4, hy - 9, 9, 6, 2, B); eyes = { x: hx, y: hy - 7, span: 2 }; mouth = { x: hx, y: hy - 4, w: 3 }; break;
         default: rrect(g, hx - 6, hy - 6, 13, 10, 2, M);
       }
       return { eyes, mouth, arms: [], legs: null, noLegs: true, float: true, top: { x: hx, y: 3 }, rigid: true };
@@ -2930,6 +3078,247 @@ const VOCAB_EXTRA = {
   banana: 'banana bunch, banana peel, banana split, plantain chips',
 };
 
+/* ---------- v0.4.3: designs for vocabulary objects ----------
+   Before v0.4.3 every vocabulary-only object was drawn with its category's single template, so a light switch or a
+   security camera (filed under "tool") became a toolbox with toolbox lore. These rules give each object the closest
+   honest design: a composed template with object parameters (V), or the design of a close relative (LIKE). Each rule
+   also names a lore group (lore.js) and a name for the signature move; the move keeps its category's numbers, so combat
+   balance is unchanged. First matching rule wins. Objects no rule covers get their category's neutral template
+   (CAT_FALLBACK_VIS) instead of a specific object's look. Tests (tests/identity.js) check the important cases. */
+const LIKE = id => ({ like: id });
+const DESIGN_RULES = [
+  // electrical fittings
+  [/light switch|dimmer/, V('wallplate', { kind: 'rocker' }), 'electric', 'Lights Out', [45, 6, 88]],
+  [/power socket|wall socket|outlet/, V('wallplate', { kind: 'socket', wide: true }), 'electric', 'Power Surge', [45, 6, 88]],
+  [/thermostat/, V('wallplate', { kind: 'dial' }), 'electric', 'Heatwave Dial', [45, 6, 88]],
+  [/fuse box|breaker/, V('wallplate', { kind: 'box', wide: true }), 'electric', 'Blown Fuse', [210, 8, 70]],
+  [/doorbell/, V('wallplate', { kind: 'bell' }), 'alarm', 'Ding-Dong Dash', [45, 6, 88]],
+  [/intercom/, V('wallplate', { kind: 'grille' }), 'alarm', 'Buzz Me In', [210, 8, 70]],
+  [/keypad|alarm panel/, V('wallplate', { kind: 'keypad' }), 'alarm', 'Wrong Code'],
+  [/smoke detector|fire alarm|carbon monoxide/, V('wallplate', { kind: 'disc' }), 'alarm', 'Shrill Chirp', [45, 6, 88]],
+  [/^plug$|^plug /, V('part', { kind: 'plug' }), 'electric', 'Unplugged'],
+  [/extension cord|power strip/, V('part', { kind: 'strip' }), 'electric', 'Overload'],
+  [/power bank|battery|batteries/, V('part', { kind: 'battery' }), 'electric', 'Low Battery'],
+  [/wireless charger/, V('part', { kind: 'disc' }), 'electric', 'Trickle Charge'],
+  [/charger/, V('part', { kind: 'plug' }), 'electric', 'Fast Charge'],
+  [/usb cable|cable|cord$/, V('part', { kind: 'coil' }), 'hardware', 'Tangle'],
+  [/band aid/, V('part', { kind: 'bandage' }), 'medical', 'Patch Up'],
+  [/hard disc/, V('part', { kind: 'chip' }), 'computer', 'Bit Flip'],
+  [/^coil$|^knot$|^reel$|spindle/, V('part', { kind: 'coil' }), 'hardware', 'Tangle'],
+  [/manhole cover|^shield$/, V('part', { kind: 'disc' }), 'street'],
+  [/mountain tent/, V('part', { kind: 'tent' }), 'outdoor', 'Pitch Camp'],
+  [/flagpole|^pole$|turnstile|pedestal/, V('pole', { kind: 'post' }), 'street'],
+  [/^pick$/, V('handtool', { head: 'pickaxe' }), 'tool'],
+  [/hair slide|buckle/, V('part', { kind: 'clip' }), 'jewel'],
+  [/pencil sharpener|rubber eraser|face powder|mousetrap|oil filter/, V('part', { kind: 'block' }), 'gadget'],
+  [/oscilloscope/, LIKE('monitor'), 'science'],
+  [/oxygen mask|snorkel|muzzle/, LIKE('glasses'), 'gadget'],
+  // cameras
+  [/security camera|cctv/, V('cctv', { kind: 'bullet' }), 'camera', 'Surveillance Glare', [210, 6, 84]],
+  [/dome camera/, V('cctv', { kind: 'dome' }), 'camera', 'Surveillance Glare', [210, 6, 84]],
+  [/webcam|baby monitor/, V('cctv', { kind: 'webcam' }), 'camera', 'Zoom Call'],
+  [/dashcam|action camera/, V('cctv', { kind: 'box' }), 'camera', 'Record Mode'],
+  [/camera lens|film camera|instant camera|cinema camera|video camera|camcorder/, LIKE('camera'), 'camera', 'Flash Burst'],
+  [/drone controller/, LIKE('game_controller'), 'gadget'],
+  [/drone|rc helicopter/, LIKE('helicopter'), 'gadget', 'Rotor Wash'],
+  [/security monitor/, LIKE('monitor'), 'camera'],
+  // street furniture
+  [/street lamp|lamp post|lamppost/, V('pole', { kind: 'lamp' }), 'street', 'Flicker', [210, 12, 32]],
+  [/traffic light/, V('pole', { kind: 'lights' }), 'street', 'Red Light', [150, 20, 24]],
+  [/parking meter/, V('pole', { kind: 'meter' }), 'street', 'Time Expired', [210, 10, 60]],
+  [/stop sign/, V('pole', { kind: 'sign8' }), 'street', 'Full Stop', [0, 78, 46]],
+  [/road sign|sign board|scoreboard|placard/, V('pole', { kind: 'signrect' }), 'street', 'Detour'],
+  [/bollard/, V('pole', { kind: 'bollard' }), 'street', 'Roadblock', [48, 85, 55]],
+  [/coat rack|hat stand/, V('pole', { kind: 'post' }), 'furniture'],
+  [/ceiling light|pendant light|wall lamp|chandelier|ring light|studio light|light stand|desk light|reading light|floor light/, LIKE('lamp'), 'light'],
+  // boards and art
+  [/whiteboard/, V('board', { kind: 'white' }), 'office', 'Marker Squeak'],
+  [/chalkboard/, V('board', { kind: 'chalk' }), 'office', 'Nails on Chalk'],
+  [/easel/, V('board', { kind: 'easel' }), 'art'],
+  [/projector screen/, V('board', { kind: 'screen' }), 'office'],
+  [/notice board|cork board|bulletin/, V('board', { kind: 'cork' }), 'office'],
+  [/canvas|painting|poster|wall art|picture frame|photo frame|tapestry|stained glass/, V('board', { kind: 'canvas' }), 'art', 'Brushstroke'],
+  // office
+  [/stapler remover|hole puncher|label maker|tape gun/, LIKE('stapler'), 'office', 'Paper Jam'],
+  [/glue gun|caulk gun|nerf gun|water gun|toy gun/, LIKE('power_drill'), 'gadget'],
+  [/shredder|laminator/, V('appliance', { w: 24, h: 14, topSlots: true, feet: false }), 'office', 'Paper Jam'],
+  [/clipboard|notepad|sticky note|folder|ring binder|planner|calendar|diary|journal|notebook/, LIKE('book'), 'office'],
+  [/paper clip|binder clip|safety pin|push pin|thumbtack|hairpin|hair clip|tie clip/, V('part', { kind: 'clip' }), 'office', 'Pinch'],
+  [/rubber band|hair tie|hula hoop/, V('part', { kind: 'ring' }), 'office'],
+  [/eraser|sharpener|ink pad|^stamp$|pill box|hinge|zippo|lighter|glasses case|contact lens case|sandpaper/, V('part', { kind: 'block' }), 'gadget'],
+  [/ruler|protractor|set square|level tool/, V('handtool', { head: 'ruler' }), 'office', 'Measure Twice'],
+  [/chalk$|paint tube|glue stick|laser pointer|toothpick|soldering iron|stylus|cigarette|vape|incense stick/, V('handtool', { head: 'pen' }), 'office'],
+  [/envelope opener|utility knife|box cutter|peeler/, V('handtool', { head: 'knife' }), 'tool'],
+  [/metal detector/, V('handtool', { head: 'detector' }), 'outdoor', 'Treasure Ping'],
+  [/megaphone/, LIKE('trumpet'), 'alarm', 'Megaphone Blast'],
+  [/walkie|pager|cordless phone|satellite phone|flip phone/, LIKE('phone'), 'gadget'],
+  [/multimeter|calculator|gps device|fitness tracker/, LIKE('calculator'), 'gadget'],
+  [/globe/, V('part', { kind: 'globe' }), 'science'],
+  [/^map$|atlas/, LIKE('newspaper'), 'office'],
+  [/compass|pocket watch|stopwatch|kitchen timer|egg timer/, LIKE('clock'), 'gadget'],
+  // medical and science
+  [/syringe/, V('handtool', { head: 'syringe' }), 'medical', 'Booster Shot'],
+  [/stethoscope/, V('part', { kind: 'stetho' }), 'medical', 'Heartbeat Check', [220, 10, 25]],
+  [/thermometer|rain gauge/, V('handtool', { head: 'thermo' }), 'medical', 'Fever Spike'],
+  [/bandage|plaster/, V('part', { kind: 'bandage' }), 'medical', 'Patch Up'],
+  [/first aid|first-aid/, V('part', { kind: 'kit' }), 'medical', 'Emergency Kit', [0, 70, 50]],
+  [/inhaler/, V('vessel', { prof: [[10, 5], [7, 3]], nozzle: true, rigid: true }), 'medical'],
+  [/hearing aid|earpiece/, LIKE('headphones'), 'gadget'],
+  [/crutch|cane|walking stick|hiking pole|ski pole/, V('handtool', { head: 'cane' }), 'outdoor'],
+  [/microscope|telescope|binocular|tripod/, V('part', { kind: 'scope' }), 'science', 'Close Look'],
+  [/test tube/, V('vessel', { prof: [[22, 3], [2, 4]], rigid: true }), 'science', 'Bubbling Brew'],
+  [/beaker|lab flask|petri dish/, V('vessel', { prof: [[12, 9], [8, 5], [4, 4]], liquid: true, rigid: true }), 'science', 'Bubbling Brew'],
+  [/magnifying glass|magnifier|monocle/, V('handtool', { head: 'magnifier' }), 'science', 'Close Look'],
+  // hardware
+  [/^nail$|screw|bolt/, V('part', { kind: 'screw' }), 'hardware', 'Drill Down'],
+  [/^nut$|washer/, V('part', { kind: 'nut' }), 'hardware', 'Lock Tight'],
+  [/chain/, V('part', { kind: 'chain' }), 'hardware', 'Chain Whip'],
+  [/rope|bungee|yarn|garden hose|hose reel|jump rope|skipping rope|string lights|fairy lights|led strip/, V('part', { kind: 'coil' }), 'hardware', 'Tangle'],
+  [/vise|clamp/, V('part', { kind: 'clamp' }), 'hardware', 'Vice Grip'],
+  [/padlock key|key fob|keyring|usb key|car key/, LIKE('key'), 'gadget'],
+  // hand tools (stay with the tool lore)
+  [/chisel|file tool/, V('handtool', { head: 'chisel' }), 'tool'],
+  [/crowbar/, V('handtool', { head: 'crowbar' }), 'tool'],
+  [/hacksaw/, V('handtool', { head: 'saw' }), 'tool'],
+  [/pickaxe|ice axe/, V('handtool', { head: 'pickaxe' }), 'tool'],
+  [/sledge/, V('handtool', { head: 'hammer' }), 'tool'],
+  [/trowel|beach spade/, V('handtool', { head: 'trowel' }), 'tool'],
+  [/snow shovel/, V('handtool', { head: 'shovel' }), 'tool'],
+  [/paint roller/, V('handtool', { head: 'roller' }), 'tool'],
+  [/hedge trimmer|leaf blower|pressure washer/, LIKE('power_drill'), 'tool'],
+  [/paint can|oil can/, LIKE('can'), 'tool'],
+  // kitchen
+  [/rolling pin/, V('handtool', { head: 'rollingpin' }), 'kitchen', 'Flatten'],
+  [/cheese grater|grater/, V('part', { kind: 'grater' }), 'kitchen', 'Shred'],
+  [/tongs|chopsticks/, V('handtool', { head: 'tongs' }), 'kitchen'],
+  [/can opener|corkscrew|bottle opener|nutcracker|garlic press|nail clippers|tweezers/, V('handtool', { head: 'pliers' }), 'kitchen'],
+  [/potato masher|spatula/, V('handtool', { head: 'spatula' }), 'kitchen'],
+  [/colander|sieve|strainer/, LIKE('bowl'), 'kitchen'],
+  [/funnel/, V('vessel', { prof: [[6, 2], [8, 8]], rigid: true }), 'kitchen'],
+  [/measuring cup/, V('vessel', { prof: [[12, 7]], handle: true, liquid: true }), 'kitchen'],
+  [/cutting board|cheese board|serving tray|mouse pad|doormat|bath mat|yoga mat|exercise mat/, V('part', { kind: 'card' }), 'kitchen'],
+  [/oven mitt|boxing glove/, LIKE('sock'), 'kitchen'],
+  [/apron|life jacket/, LIKE('jacket'), 'outdoor'],
+  [/hair straightener|curling iron|electric razor|shaver|massage gun/, LIKE('hair_dryer'), 'gadget'],
+  [/toothbrush|hair brush|makeup brush|comb/, V('handtool', { head: 'brush' }), 'gadget'],
+  [/razor/, V('handtool', { head: 'knife' }), 'gadget'],
+  // craft
+  [/sewing needle|knitting needles|crochet hook/, V('handtool', { head: 'needle' }), 'craft', 'Stitch Up'],
+  [/pin cushion/, V('produce', { shape: 'round', top: 'stem' }), 'craft', 'Pin Prick'],
+  [/thimble/, V('vessel', { prof: [[8, 5]], rigid: true }), 'craft'],
+  // outdoor and sport
+  [/fishing rod|fishing reel/, V('handtool', { head: 'rod' }), 'outdoor', 'Reel In'],
+  [/tent|gazebo|canopy tent/, V('part', { kind: 'tent' }), 'outdoor', 'Pitch Camp'],
+  [/sleeping mat|camping mattress|air mattress/, LIKE('sleeping_bag'), 'outdoor'],
+  [/sled|ski$|snowboard|surfboard|hoverboard|electric skateboard/, LIKE('skateboard'), 'outdoor', 'Wipeout'],
+  [/paddle|oar/, V('handtool', { head: 'paddle' }), 'outdoor', 'Paddle Slap'],
+  [/sprinkler|watering/, LIKE('watering_can'), 'outdoor'],
+  [/fence|gate$|garden gate|hurdle|tennis net|volleyball net|football goal|cricket stumps/, V('part', { kind: 'fence' }), 'outdoor'],
+  [/garden gnome|party hat/, V('produce', { shape: 'tall', top: 'cap' }), 'outdoor'],
+  [/birdhouse|bird feeder|letterbox/, LIKE('mailbox'), 'outdoor'],
+  [/planter|flower pot/, LIKE('potted_plant'), 'outdoor'],
+  [/compost bin|wheelie bin|pedal bin|waste paper basket|sanitary bin|sharps bin/, LIKE('trash_can'), 'outdoor'],
+  [/recycling crate|recycling box/, LIKE('crate'), 'outdoor'],
+  [/manhole|drain cover|frisbee|discus|hockey puck|spinning top|yo-yo/, V('part', { kind: 'disc' }), 'street'],
+  [/golf club|croquet mallet|polo mallet|lacrosse|hurling stick/, V('handtool', { head: 'club' }), 'sport', null, [210, 8, 70]],
+  [/javelin|golf tee/, V('handtool', { head: 'pen' }), 'sport'],
+  [/swim goggles|ski goggles|smart glasses|vr headset/, LIKE('glasses'), 'gadget'],
+  [/bicycle helmet|swim cap/, LIKE('helmet'), 'sport'],
+  [/bowling pin/, V('vessel', { prof: [[10, 6], [6, 3], [6, 4]], rigid: true }), 'sport'],
+  [/punching bag|kick pad/, V('vessel', { prof: [[24, 7]], cap: 3, rigid: true }), 'sport'],
+  [/whistle sport|whistle small/, LIKE('trumpet'), 'sport'],
+  [/medal ribbon|medal/, LIKE('trophy'), 'sport'],
+  // appliances, machines and electronics in the wrong body
+  [/treadmill|rowing machine|elliptical/, V('part', { kind: 'treadmill' }), 'gym', 'Cardio Grind'],
+  [/exercise bike/, LIKE('bicycle'), 'gym', 'Cardio Grind'],
+  [/arcade machine|jukebox|slot machine|atm machine|ticket machine|photo booth|vending kiosk/, LIKE('vending_machine'), 'arcade'],
+  [/kitchen scale|bathroom scale|^scale$/, V('part', { kind: 'scale' }), 'kitchen', 'Weigh In'],
+  [/grill|barbecue|smoker|hot plate|stove top|induction hob/, V('appliance', { w: 28, h: 14, burners: true, flame: true, panel: 'dial' }), 'kitchen'],
+  [/robot vacuum/, V('part', { kind: 'disc' }), 'gadget'],
+  [/carpet cleaner|steam cleaner|floor polisher/, LIKE('vacuum'), 'gadget'],
+  [/ceiling fan|tower fan|space heater fan|extractor fan/, LIKE('fan'), 'gadget'],
+  [/server|workstation/, LIKE('desktop_pc'), 'computer'],
+  [/chromebook|netbook/, LIKE('laptop'), 'computer'],
+  [/^cd$|^dvd$|vinyl record|cd changer/, V('part', { kind: 'disc' }), 'media', 'Skipping Track'],
+  [/cassette|tape deck|floppy disk/, V('part', { kind: 'cassette' }), 'media', 'Rewind'],
+  [/hard drive|usb stick|flash drive|sd card|memory card|graphics card|motherboard|^cpu$|ram stick|sim card/, V('part', { kind: 'chip' }), 'computer', 'Bit Flip'],
+  [/record player|turntable|mixing desk|drum machine|synth keyboard|keytar|harmonium/, LIKE('keyboard'), 'media'],
+  [/drawing tablet|e-ink tablet/, LIKE('tablet'), 'computer'],
+  [/3d printer|plotter|label printer|scanner/, LIKE('printer'), 'computer'],
+  [/docking station|usb hub|set-top box|streaming stick|amplifier|receiver|equalizer/, V('device', { w: 26, h: 9, buttons: true, light: true }), 'computer'],
+  [/soundbar|guitar amp|amplifier speaker|karaoke/, LIKE('speaker'), 'media'],
+  [/projector/, LIKE('projector'), 'media'],
+  [/reflector/, V('part', { kind: 'disc' }), 'media'],
+  [/remote/, LIKE('remote'), 'gadget'],
+  [/mp3 player|ipod/, LIKE('phone'), 'media'],
+  [/portable radio|clock radio/, LIKE('radio'), 'media'],
+  [/smart ring|wedding ring|^ring$|earring|bracelet|anklet|cufflink/, V('part', { kind: 'ring' }), 'jewel', 'Dazzle'],
+  [/necklace|pendant|locket|charm bracelet|brooch/, V('part', { kind: 'ring' }), 'jewel', 'Dazzle'],
+  [/^coin|coins|poker chip|game token|button$|^bead/, V('part', { kind: 'coin' }), 'jewel', 'Small Change'],
+  [/banknote|credit card|id card|ticket|receipt|playing card|trading card|greeting card|birthday card|postcard/, V('part', { kind: 'card' }), 'office'],
+  [/lipstick|mascara|eyeliner|lip balm|nail polish/, V('vessel', { prof: [[18, 5], [10, 4]], cap: 3, rigid: true }), 'cosmetic', 'Makeover'],
+  [/perfume|cologne|essential oil/, LIKE('spray_bottle'), 'cosmetic', 'Makeover'],
+  [/dice|rubik|lego brick|building blocks|domino|chess board|checkers/, LIKE('puzzle'), 'toyish'],
+  [/marble|stress ball|bouncy ball|magic 8 ball|snow globe/, LIKE('ball'), 'toyish'],
+  [/door knocker|doorknob|door handle|keyhole/, V('part', { kind: 'knob' }), 'door', 'Knock Knock'],
+  [/door|curtain|blinds|shutter|window pane|skylight/, LIKE('window'), 'door'],
+  [/cymbal|hi-hat|triangle|cowbell|^bell$|handbell|church bell|singing bowl|wind chime/, V('part', { kind: 'bell' }), 'music', 'Clang'],
+  [/bongo|conga|djembe|cajon|timpani|toy drum/, LIKE('drum'), 'music'],
+  [/bugle|euphonium|sousaphone|recorder|piccolo|kazoo|harmonica|melodica|bagpipes|didgeridoo/, LIKE('trumpet'), 'music'],
+  [/electric bass|double bass|mandolin|sitar|lute/, LIKE('guitar'), 'music'],
+  [/metronome/, LIKE('clock'), 'music'],
+  [/music stand|sheet music/, LIKE('book'), 'music'],
+  [/theremin|toy piano|xylophone toy/, LIKE('piano'), 'music'],
+  [/freezer|mini fridge|wine cooler|ice maker/, LIKE('fridge'), 'appliance'],
+  [/air fryer|deep fryer|pressure cooker|slow cooker|egg cooker|yogurt maker|steamer$/, LIKE('rice_cooker'), 'appliance'],
+  [/juicer|food processor|hand mixer|stand mixer|ice cream maker/, LIKE('blender'), 'appliance'],
+  [/pizza oven|toaster oven|bread maker/, LIKE('oven'), 'appliance'],
+  [/sandwich toaster|popcorn maker/, LIKE('toaster'), 'appliance'],
+  [/coffee grinder|spice grinder|milk frother|soda maker|water filter jug/, LIKE('coffee_machine'), 'appliance'],
+  [/water heater|boiler|furnace|electric heater|oil heater|gas heater|heating pad|electric blanket/, LIKE('radiator'), 'appliance'],
+  [/fire extinguisher/, V('vessel', { prof: [[22, 6], [4, 3]], nozzle: true, label: true, rigid: true }), 'alarm', 'Foam Blast'],
+  // vehicles that are not cars
+  [/rowboat|dinghy|inflatable boat|yacht|ferry|tugboat|fishing boat|houseboat|barge|toy boat|submarine/, LIKE('sailboat'), null],
+  [/glider|seaplane|biplane|jet fighter|space rocket/, LIKE('airplane'), null],
+  [/hot air balloon/, LIKE('balloon'), null],
+  [/monorail|funicular|toy train|model train/, LIKE('train'), null],
+  [/gondola lift|chairlift/, LIKE('tram'), null],
+  [/pram|stroller|baby carriage|shopping trolley|luggage cart|hand truck|dolly|pallet jack/, LIKE('wheelbarrow'), null],
+  [/roller skate|inline skate|segway/, LIKE('skateboard'), null],
+  [/quad bike|atv|buggy|quad tractor/, LIKE('go_kart'), null],
+  [/sidecar/, LIKE('motorcycle'), null],
+  [/rickshaw|tuk tuk/, LIKE('scooter'), null],
+  [/scissor lift|cherry picker|crane/, LIKE('crane'), null],
+  [/road roller|steamroller|asphalt paver|grader|skid steer|wheel loader/, LIKE('bulldozer'), null],
+  [/backhoe/, LIKE('excavator'), null],
+  [/hay baler|seed drill|plough|cultivator/, LIKE('tractor'), null],
+  [/trailer|car carrier|logging truck|street sweeper|snow plough|salt spreader|monster truck|toy truck/, LIKE('truck'), null],
+  [/escalator/, LIKE('ladder'), null],
+  [/elevator/, V('storage', { w: 22, h: 30, doors: 2 }), 'door'],
+  [/bar table|bistro table|console table|card table|nesting tables|drafting table|workbench|sawhorse|kitchen island|kitchen counter|standing desk|sit-stand desk|secretary desk/, LIKE('desk'), 'furniture'],
+  [/sideboard|hutch|credenza|bureau/, LIKE('dresser'), 'furniture'],
+  [/shoe rack|magazine rack|wine rack|spice rack|ladder shelf|cube shelf|room divider|folding screen/, LIKE('bookshelf'), 'furniture'],
+  [/bed frame|headboard|daybed|futon frame|sofa bed/, LIKE('bed'), 'furniture'],
+];
+// categories whose own template is ONE specific object (a toolbox, a key, a fridge…): objects that no rule covers get
+// a neutral template of the right kind instead of looking like that specific object
+const CAT_FALLBACK_VIS = {
+  tool: V('part', { kind: 'block' }), keys: V('part', { kind: 'block' }), fridge: V('appliance', { panel: 'buttons' }),
+  laptop: V('device', { w: 22, h: 12, light: true, buttons: true }), tv: V('device', { w: 24, h: 12, buttons: true, light: true }),
+};
+function applyDesignRules(o) {
+  if (o.vis) return;
+  const label = o.name.toLowerCase();
+  for (const [re, vis, lore, sig, col] of DESIGN_RULES) {
+    if (!re.test(label)) continue;
+    if (vis.like && !OBJECTS[vis.like]) break; // safety: never point at a missing design
+    o.vis = vis; o.lore = lore || null; if (sig) o.sigName = sig; o.rule = String(re);
+    if (col) [o.h, o.s, o.l] = col; // the object's usual colour when the photo gives none (light switches are white)
+    return;
+  }
+  if (CAT_FALLBACK_VIS[o.cat]) { o.vis = CAT_FALLBACK_VIS[o.cat]; o.neutral = true; }
+}
+
 /* ---------- build the vocabulary objects (family tier) ---------- */
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 (function addExtras() {
@@ -2938,7 +3327,7 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, 
       const label = raw.trim(); if (!label) continue;
       const id = 'x_' + slug(label);
       if (OBJECTS[id]) continue;
-      OBJ(id, label.replace(/^./, c => c.toUpperCase()), cat, null, { al: [label] });
+      applyDesignRules(OBJ(id, label.replace(/^./, c => c.toUpperCase()), cat, null, { al: [label] }));
     }
   }
 })();
@@ -2954,7 +3343,7 @@ const CAT_DEFAULT_OBJECT = {
 };
 function visualSource(o) { return o && o.vis && o.vis.like && OBJECTS[o.vis.like] ? OBJECTS[o.vis.like] : o; }
 function objectTier(o) {
-  if (!o) return 'family';
+  if (!o || o.neutral) return 'family';
   if (o.vis && o.vis.like) return 'related';
   if (o.vis === 'D' || (o.vis && o.vis.legacy)) return 'dedicated';
   if (o.vis && o.vis.t) return 'composed';
@@ -2985,7 +3374,7 @@ const LABEL_OBJECTS = {
   coco: {"person":0,"bicycle":"bicycle","car":"car","motorcycle":"motorcycle","airplane":0,"bus":"bus","train":"train","truck":"truck","boat":0,"traffic light":"x_traffic_light","fire hydrant":"fire_hydrant","stop sign":"x_stop_sign","parking meter":"x_parking_meter","bench":"bench","bird":"bird","cat":"cat","dog":"dog","horse":"horse","sheep":"sheep","cow":"cow","elephant":"elephant","bear":"bear","zebra":"zebra","giraffe":"giraffe","backpack":"backpack","umbrella":"umbrella","handbag":"handbag","tie":"tie","suitcase":"suitcase","frisbee":"ball","skis":"x_ski","snowboard":"x_snowboard","sports ball":"ball","kite":"kite","baseball bat":"baseball_bat","baseball glove":"shirt","skateboard":"skateboard","surfboard":"x_surfboard","tennis racket":"racket","bottle":"bottle","wine glass":"glass","cup":"mug","fork":"cutlery_fork","knife":"knife","spoon":"cutlery_spoon","bowl":"bowl","banana":"banana","apple":"apple","sandwich":"burger","orange":"orange","broccoli":"broccoli","carrot":"carrot","hot dog":"hotdog","pizza":"pizza","donut":"donut","cake":"cake","chair":"dining_chair","couch":"sofa","potted plant":"potted_plant","bed":"bed","dining table":"dining_table","toilet":"toilet","tv":"tv","laptop":"laptop","mouse":"mouse","remote":"remote","keyboard":"keyboard","cell phone":"phone","microwave":"microwave","oven":"oven","toaster":"toaster","sink":"sink","refrigerator":"fridge","book":"book","clock":"clock","vase":"vase","scissors":"scissors","teddy bear":"teddy","hair drier":"hair_dryer","toothbrush":"paintbrush"},
   extra: [["i_electric_ray","Electric ray","fish","fish"],["i_brambling","Brambling","bird","bird"],["i_junco","Junco","bird","bird"],["i_indigo_bunting","Indigo bunting","bird","bird"],["i_bulbul","Bulbul","bird","bird"],["i_water_ouzel","Water ouzel","bird","bird"],["i_bald_eagle","Bald eagle","bird","bird"],["i_european_fire_salamander","European fire salamander","reptile","lizard"],["i_common_newt","Common newt","reptile","lizard"],["i_eft","Eft","reptile","lizard"],["i_spotted_salamander","Spotted salamander","reptile","lizard"],["i_tailed_frog","Tailed frog","reptile","frog"],["i_leatherback_turtle","Leatherback turtle","reptile","turtle"],["i_mud_turtle","Mud turtle","reptile","turtle"],["i_banded_gecko","Banded gecko","reptile","lizard"],["i_american_chameleon","American chameleon","reptile","lizard"],["i_whiptail","Whiptail","reptile","lizard"],["i_agama","Agama","reptile","lizard"],["i_frilled_lizard","Frilled lizard","reptile","lizard"],["i_alligator_lizard","Alligator lizard","reptile","lizard"],["i_gila_monster","Gila monster","reptile","lizard"],["i_green_lizard","Green lizard","reptile","lizard"],["i_african_chameleon","African chameleon","reptile","lizard"],["i_african_crocodile","African crocodile","reptile","lizard"],["i_american_alligator","American alligator","reptile","lizard"],["i_thunder_snake","Thunder snake","reptile","snake"],["i_ringneck_snake","Ringneck snake","reptile","snake"],["i_hognose_snake","Hognose snake","reptile","snake"],["i_green_snake","Green snake","reptile","snake"],["i_king_snake","King snake","reptile","snake"],["i_water_snake","Water snake","reptile","snake"],["i_vine_snake","Vine snake","reptile","snake"],["i_night_snake","Night snake","reptile","snake"],["i_rock_python","Rock python","reptile","snake"],["i_indian_cobra","Indian cobra","reptile","snake"],["i_green_mamba","Green mamba","reptile","snake"],["i_horned_viper","Horned viper","reptile","snake"],["i_diamondback","Diamondback","reptile","snake"],["i_sidewinder","Sidewinder","reptile","snake"],["i_trilobite","Trilobite","bug","beetle"],["i_harvestman","Harvestman","bug","spider"],["i_black_and_gold_garden_spider","Black and gold garden spider","bug","spider"],["i_barn_spider","Barn spider","bug","spider"],["i_wolf_spider","Wolf spider","bug","spider"],["i_black_grouse","Black grouse","bird","bird"],["i_ptarmigan","Ptarmigan","bird","bird"],["i_ruffed_grouse","Ruffed grouse","bird","bird"],["i_prairie_chicken","Prairie chicken","bird","bird"],["i_partridge","Partridge","bird","bird"],["i_african_grey","African grey","bird","bird"],["i_sulphur_crested_cockatoo","Sulphur-crested cockatoo","bird","bird"],["i_lorikeet","Lorikeet","bird","bird"],["i_coucal","Coucal","bird","bird"],["i_bee_eater","Bee eater","bird","bird"],["i_hornbill","Hornbill","bird","bird"],["i_jacamar","Jacamar","bird","bird"],["i_brain_coral","Brain coral","fish","jellyfish"],["i_flatworm","Flatworm","bug","snail"],["i_nematode","Nematode","bug","snail"],["i_sea_slug","Sea slug","bug","snail"],["i_chiton","Chiton","bug","snail"],["i_fiddler_crab","Fiddler crab","bug","crab"],["i_american_lobster","American lobster","bug","crab"],["i_hermit_crab","Hermit crab","bug","crab"],["i_isopod","Isopod","bug","beetle"],["i_white_stork","White stork","bird","duck"],["i_black_stork","Black stork","bird","duck"],["i_spoonbill","Spoonbill","bird","duck"],["i_little_blue_heron","Little blue heron","bird","duck"],["i_american_egret","American egret","bird","duck"],["i_bittern","Bittern","bird","duck"],["i_limpkin","Limpkin","bird","duck"],["i_european_gallinule","European gallinule","bird","duck"],["i_american_coot","American coot","bird","duck"],["i_bustard","Bustard","bird","duck"],["i_ruddy_turnstone","Ruddy turnstone","bird","duck"],["i_red_backed_sandpiper","Red-backed sandpiper","bird","duck"],["i_redshank","Redshank","bird","duck"],["i_dowitcher","Dowitcher","bird","duck"],["i_oystercatcher","Oystercatcher","bird","duck"],["i_grey_whale","Grey whale","fish","shark"],["i_chihuahua","Chihuahua","animal","dog"],["i_japanese_spaniel","Japanese spaniel","animal","dog"],["i_maltese_dog","Maltese dog","animal","dog"],["i_pekinese","Pekinese","animal","dog"],["i_shih_tzu","Shih-Tzu","animal","dog"],["i_blenheim_spaniel","Blenheim spaniel","animal","dog"],["i_papillon","Papillon","animal","dog"],["i_toy_terrier","Toy terrier","animal","dog"],["i_rhodesian_ridgeback","Rhodesian ridgeback","animal","dog"],["i_afghan_hound","Afghan hound","animal","dog"],["i_basset","Basset","animal","dog"],["i_beagle","Beagle","animal","dog"],["i_bloodhound","Bloodhound","animal","dog"],["i_bluetick","Bluetick","animal","dog"],["i_black_and_tan_coonhound","Black-and-tan coonhound","animal","dog"],["i_walker_hound","Walker hound","animal","dog"],["i_english_foxhound","English foxhound","animal","dog"],["i_redbone","Redbone","animal","dog"],["i_borzoi","Borzoi","animal","dog"],["i_irish_wolfhound","Irish wolfhound","animal","dog"],["i_italian_greyhound","Italian greyhound","animal","dog"],["i_whippet","Whippet","animal","dog"],["i_ibizan_hound","Ibizan hound","animal","dog"],["i_norwegian_elkhound","Norwegian elkhound","animal","dog"],["i_otterhound","Otterhound","animal","dog"],["i_saluki","Saluki","animal","dog"],["i_scottish_deerhound","Scottish deerhound","animal","dog"],["i_weimaraner","Weimaraner","animal","dog"],["i_staffordshire_bullterrier","Staffordshire bullterrier","animal","dog"],["i_american_staffordshire_terrier","American Staffordshire terrier","animal","dog"],["i_bedlington_terrier","Bedlington terrier","animal","dog"],["i_border_terrier","Border terrier","animal","dog"],["i_kerry_blue_terrier","Kerry blue terrier","animal","dog"],["i_irish_terrier","Irish terrier","animal","dog"],["i_norfolk_terrier","Norfolk terrier","animal","dog"],["i_norwich_terrier","Norwich terrier","animal","dog"],["i_yorkshire_terrier","Yorkshire terrier","animal","dog"],["i_wire_haired_fox_terrier","Wire-haired fox terrier","animal","dog"],["i_lakeland_terrier","Lakeland terrier","animal","dog"],["i_sealyham_terrier","Sealyham terrier","animal","dog"],["i_airedale","Airedale","animal","dog"],["i_cairn","Cairn","animal","dog"],["i_australian_terrier","Australian terrier","animal","dog"],["i_dandie_dinmont","Dandie Dinmont","animal","dog"],["i_boston_bull","Boston bull","animal","dog"],["i_miniature_schnauzer","Miniature schnauzer","animal","dog"],["i_giant_schnauzer","Giant schnauzer","animal","dog"],["i_standard_schnauzer","Standard schnauzer","animal","dog"],["i_scotch_terrier","Scotch terrier","animal","dog"],["i_tibetan_terrier","Tibetan terrier","animal","dog"],["i_silky_terrier","Silky terrier","animal","dog"],["i_soft_coated_wheaten_terrier","Soft-coated wheaten terrier","animal","dog"],["i_west_highland_white_terrier","West Highland white terrier","animal","dog"],["i_lhasa","Lhasa","animal","dog"],["i_flat_coated_retriever","Flat-coated retriever","animal","dog"],["i_curly_coated_retriever","Curly-coated retriever","animal","dog"],["i_golden_retriever","Golden retriever","animal","dog"],["i_labrador_retriever","Labrador retriever","animal","dog"],["i_chesapeake_bay_retriever","Chesapeake Bay retriever","animal","dog"],["i_german_short_haired_pointer","German short-haired pointer","animal","dog"],["i_vizsla","Vizsla","animal","dog"],["i_english_setter","English setter","animal","dog"],["i_irish_setter","Irish setter","animal","dog"],["i_gordon_setter","Gordon setter","animal","dog"],["i_brittany_spaniel","Brittany spaniel","animal","dog"],["i_clumber","Clumber","animal","dog"],["i_english_springer","English springer","animal","dog"],["i_welsh_springer_spaniel","Welsh springer spaniel","animal","dog"],["i_cocker_spaniel","Cocker spaniel","animal","dog"],["i_sussex_spaniel","Sussex spaniel","animal","dog"],["i_irish_water_spaniel","Irish water spaniel","animal","dog"],["i_kuvasz","Kuvasz","animal","dog"],["i_schipperke","Schipperke","animal","dog"],["i_groenendael","Groenendael","animal","dog"],["i_malinois","Malinois","animal","dog"],["i_briard","Briard","animal","dog"],["i_kelpie","Kelpie","animal","dog"],["i_komondor","Komondor","animal","dog"],["i_old_english_sheepdog","Old English sheepdog","animal","dog"],["i_shetland_sheepdog","Shetland sheepdog","animal","dog"],["i_collie","Collie","animal","dog"],["i_border_collie","Border collie","animal","dog"],["i_bouvier_des_flandres","Bouvier des Flandres","animal","dog"],["i_rottweiler","Rottweiler","animal","dog"],["i_german_shepherd","German shepherd","animal","dog"],["i_doberman","Doberman","animal","dog"],["i_miniature_pinscher","Miniature pinscher","animal","dog"],["i_greater_swiss_mountain_dog","Greater Swiss Mountain dog","animal","dog"],["i_bernese_mountain_dog","Bernese mountain dog","animal","dog"],["i_appenzeller","Appenzeller","animal","dog"],["i_entlebucher","EntleBucher","animal","dog"],["i_boxer","Boxer","animal","dog"],["i_bull_mastiff","Bull mastiff","animal","dog"],["i_tibetan_mastiff","Tibetan mastiff","animal","dog"],["i_french_bulldog","French bulldog","animal","dog"],["i_great_dane","Great Dane","animal","dog"],["i_saint_bernard","Saint Bernard","animal","dog"],["i_eskimo_dog","Eskimo dog","animal","dog"],["i_malamute","Malamute","animal","dog"],["i_siberian_husky","Siberian husky","animal","dog"],["i_dalmatian","Dalmatian","animal","dog"],["i_affenpinscher","Affenpinscher","animal","dog"],["i_basenji","Basenji","animal","dog"],["i_pug","Pug","animal","dog"],["i_leonberg","Leonberg","animal","dog"],["i_newfoundland","Newfoundland","animal","dog"],["i_great_pyrenees","Great Pyrenees","animal","dog"],["i_samoyed","Samoyed","animal","dog"],["i_pomeranian","Pomeranian","animal","dog"],["i_chow","Chow","animal","dog"],["i_keeshond","Keeshond","animal","dog"],["i_brabancon_griffon","Brabancon griffon","animal","dog"],["i_pembroke","Pembroke","animal","dog"],["i_toy_poodle","Toy poodle","animal","dog"],["i_miniature_poodle","Miniature poodle","animal","dog"],["i_standard_poodle","Standard poodle","animal","dog"],["i_mexican_hairless","Mexican hairless","animal","dog"],["i_white_wolf","White wolf","animal","dog"],["i_red_wolf","Red wolf","animal","dog"],["i_dhole","Dhole","animal","dog"],["i_african_hunting_dog","African hunting dog","animal","dog"],["i_tiger_beetle","Tiger beetle","bug","beetle"],["i_long_horned_beetle","Long-horned beetle","bug","beetle"],["i_leaf_beetle","Leaf beetle","bug","beetle"],["i_mantis","Mantis","bug","beetle"],["i_leafhopper","Leafhopper","bug","beetle"],["i_lacewing","Lacewing","bug","beetle"],["i_ringlet","Ringlet","bug","butterfly"],["i_sulphur_butterfly","Sulphur butterfly","bug","butterfly"],["i_lycaenid","Lycaenid","bug","butterfly"],["i_sea_cucumber","Sea cucumber","bug","snail"],["i_mink","Mink","animal","cat"],["i_polecat","Polecat","animal","cat"],["i_three_toed_sloth","Three-toed sloth","animal","monkey"],["i_siamang","Siamang","animal","monkey"],["i_guenon","Guenon","animal","monkey"],["i_patas","Patas","animal","monkey"],["i_langur","Langur","animal","monkey"],["i_colobus","Colobus","animal","monkey"],["i_proboscis_monkey","Proboscis monkey","animal","monkey"],["i_marmoset","Marmoset","animal","monkey"],["i_capuchin","Capuchin","animal","monkey"],["i_howler_monkey","Howler monkey","animal","monkey"],["i_titi","Titi","animal","monkey"],["i_spider_monkey","Spider monkey","animal","monkey"],["i_squirrel_monkey","Squirrel monkey","animal","monkey"],["i_madagascar_cat","Madagascar cat","animal","monkey"],["i_indri","Indri","animal","monkey"],["i_barracouta","Barracouta","fish","fish"],["i_coho","Coho","fish","fish"],["i_rock_beauty","Rock beauty","fish","fish"],["i_sturgeon","Sturgeon","fish","fish"],["i_gar","Gar","fish","fish"],["i_academic_gown","Academic gown","cloth","shirt"],["i_amphibian","Amphibian","tool"],["i_band_aid","Band Aid","keys"],["i_barometer","Barometer","clock"],["i_bathing_cap","Bathing cap","cloth","hat"],["i_beacon","Beacon","lamp"],["i_bearskin","Bearskin","cloth","hat"],["i_bib","Bib","cloth","shirt"],["i_bobsled","Bobsled","car"],["i_bottlecap","Bottlecap","bottle","bottle"],["i_brass","Brass","tool"],["i_brassiere","Brassiere","cloth","shirt"],["i_breastplate","Breastplate","cloth","shirt"],["i_buckle","Buckle","keys"],["i_car_mirror","Car mirror","mirror"],["i_car_wheel","Car wheel","car","car"],["i_cash_machine","Cash machine","car"],["i_cassette","Cassette","tv","speaker"],["i_chain_mail","Chain mail","cloth","shirt"],["i_cocktail_shaker","Cocktail shaker","mug","glass"],["i_coil","Coil","tool"],["i_cuirass","Cuirass","cloth","shirt"],["i_diaper","Diaper","cloth","shirt"],["i_disk_brake","Disk brake","car","car"],["i_dogsled","Dogsled","car"],["i_face_powder","Face powder","keys"],["i_fire_screen","Fire screen","mirror"],["i_flagpole","Flagpole","tool"],["i_gas_pump","Gas pump","car","car"],["i_gondola","Gondola","car"],["i_grille","Grille","car","car"],["i_hair_slide","Hair slide","keys"],["i_hard_disc","Hard disc","laptop"],["i_harvester","Harvester","car"],["i_hook","Hook","tool"],["i_horse_cart","Horse cart","car","car"],["i_ipod","IPod","phone"],["i_knot","Knot","tool"],["i_lens_cap","Lens cap","tv","camera"],["i_lifeboat","Lifeboat","car"],["i_magnetic_compass","Magnetic compass","clock"],["i_maillot","Maillot","cloth","shirt"],["i_manhole_cover","Manhole cover","tool"],["i_mask","Mask","toy"],["i_matchstick","Matchstick","candle"],["i_mobile_home","Mobile home","car"],["i_model_t","Model T","car","car"],["i_mortar","Mortar","tool"],["i_mortarboard","Mortarboard","cloth","hat"],["i_mosquito_net","Mosquito net","pillow"],["i_mountain_tent","Mountain tent","tool"],["i_mousetrap","Mousetrap","tool"],["i_muzzle","Muzzle","keys"],["i_nipple","Nipple","bottle","bottle"],["i_odometer","Odometer","clock"],["i_oil_filter","Oil filter","tool"],["i_oscilloscope","Oscilloscope","laptop"],["i_oxcart","Oxcart","car","car"],["i_oxygen_mask","Oxygen mask","keys"],["i_packet","Packet","bag"],["i_paddlewheel","Paddlewheel","car"],["i_pajama","Pajama","cloth","shirt"],["i_pedestal","Pedestal","tool"],["i_pencil_sharpener","Pencil sharpener","tool"],["i_pick","Pick","tool"],["i_pill_bottle","Pill bottle","bottle","bottle"],["i_pinwheel","Pinwheel","toy"],["i_plate_rack","Plate rack","chair","cabinet"],["i_plunger","Plunger","toilet"],["i_pole","Pole","tool"],["i_potter_s_wheel","Potter's wheel","tool"],["i_reel","Reel","tool"],["i_rotisserie","Rotisserie","fridge"],["i_rubber_eraser","Rubber eraser","keys"],["i_sarong","Sarong","cloth","shirt"],["i_seat_belt","Seat belt","car","car"],["i_shield","Shield","tool"],["i_shower_cap","Shower cap","cloth","hat"],["i_ski_mask","Ski mask","cloth","hat"],["i_slot","Slot","tool"],["i_snorkel","Snorkel","keys"],["i_spindle","Spindle","tool"],["i_swimming_trunks","Swimming trunks","cloth","shirt"],["i_swing","Swing","tool"],["i_switch","Switch","phone"],["i_theater_curtain","Theater curtain","cloth","shirt"],["i_thresher","Thresher","car"],["i_tripod","Tripod","tool"],["i_turnstile","Turnstile","tool"],["i_velvet","Velvet","cloth","shirt"],["i_vestment","Vestment","cloth","shirt"],["i_wig","Wig","toy"],["i_wing","Wing","tool"],["i_wool","Wool","cloth","shirt"],["i_street_sign","Street sign","book"],["i_hay","Hay","car"],["i_potpie","Potpie","pot","pot"],["i_hip","Hip","fruit"]],
 };
-for (const [id, name, cat, like] of LABEL_OBJECTS.extra) if (!OBJECTS[id]) OBJ(id, name, cat, like ? { like } : null, { al: [name.toLowerCase()], vocab: false });
+for (const [id, name, cat, like] of LABEL_OBJECTS.extra) if (!OBJECTS[id]) { const o = OBJ(id, name, cat, like ? { like } : null, { al: [name.toLowerCase()], vocab: false }); if (!like && typeof applyDesignRules === 'function') applyDesignRules(o); }
 
 </script>
 <script>
@@ -3028,7 +3417,7 @@ const LORE_KITS = {
   toy:      { place: ['the toy box', 'the dark under the bed'], stuff: ['glitter', 'stuffing'], habit: ['moves when you are not looking', 'squeaks at night when everyone is asleep'], omen: ['every toy in the city opens its eyes', 'playrooms fall silent and nurseries go cold'], realm: ['the endless game', 'every forgotten childhood'] },
   trash:    { place: ['the bins behind the restaurant', 'the forgotten corner of the yard'], stuff: ['mystery goo', 'banana peels'], habit: ['tips itself over right after you clean up', 'smells worst on the hottest day of the year'], omen: ['rubbish rises from every bin and walks', 'the landfill opens its eyes'], realm: ['the great heap', 'everything ever thrown away'] },
   mirror:   { place: ['the hallway at night', 'the steamed-up bathroom'], stuff: ['fingerprints', 'fog'], habit: ['blinks a split second after you do', 'makes your hair look worse than it is'], omen: ['every reflection steps out of its glass', 'nobody can tell which side is real any more'], realm: ['the world behind the glass', 'every face ever reflected'] },
-  fridge:   { place: ['the kitchen at midnight', 'the corner of the utility room'], stuff: ['frost', 'a low electric hum'], habit: ['hums louder when you raid it at night', 'freezes the milk and melts the ice cream'], omen: ['summer freezes solid in a single breath', 'every appliance in the city starts humming its name'], realm: ['the eternal winter', 'the cold at the end of time'] },
+  fridge:   { place: ['the kitchen at midnight', 'the corner of the utility room'], stuff: ['frost', 'electric hums'], habit: ['hums louder when you raid it at night', 'freezes the milk and melts the ice cream'], omen: ['summer freezes solid in a single breath', 'every appliance in the city starts humming its name'], realm: ['the eternal winter', 'the cold at the end of time'] },
   candle:   { place: ['the birthday cake', 'the windowsill during a power cut'], stuff: ['dripping wax', 'smoke curls'], habit: ['relights itself after you blow it out', 'leans until the wax drips on the tablecloth'], omen: ['every flame in the city leans toward it', 'the sky glows orange from coast to coast'], realm: ['the first fire', 'the flame that never goes out'] },
   clock:    { place: ['the bedside table', 'the station wall'], stuff: ['lost minutes', 'ticking echoes'], habit: ['steals five minutes from every morning', 'rings one minute after you fall back asleep'], omen: ['time stops for everyone but it', 'yesterday starts happening again'], realm: ['the end of time', 'every hour ever wasted'] },
   keys:     { place: ['the bottom of the bag', 'the bowl by the door'], stuff: ['jingles', 'pocket fluff'], habit: ['hides whenever you are late', 'gets tangled with every other small thing'], omen: ['every lock in the world clicks open at once', 'all the doors forget who they belong to'], realm: ['every door ever closed', 'the lock on the last secret'] },
@@ -3045,8 +3434,36 @@ const LORE_KITS = {
   ball:     { place: ['the dust under the sofa', 'the neighbour\'s garden'], stuff: ['grass stains', 'bounce marks'], habit: ['rolls under the sofa on purpose', 'bounces exactly where you are not'], omen: ['the ground itself starts to bounce', 'every window in town shatters at once'], realm: ['the endless game', 'the first game ever played'] },
   pot:      { place: ['the back of the stove', 'the sink full of dishes'], stuff: ['burnt crust', 'steam'], habit: ['boils over the second you look away', 'never boils while you watch'], omen: ['every kitchen in the land boils over', 'the city drowns in soup'], realm: ['the cauldron of all things', 'every meal ever burnt'] },
   cake:     { place: ['the birthday table', 'the bakery window'], stuff: ['frosting', 'sprinkles'], habit: ['makes its last slice look bigger than it is', 'wobbles when someone says the word "diet"'], omen: ['every party in the land turns into a feast without end', 'sugar rains from the sky'], realm: ['the endless celebration', 'every birthday wish ever made'] },
-  other:    { place: ['the place nobody looks', 'the edge of the photo'], stuff: ['an odd smell', 'static'], habit: ['pretends to be something else, badly', 'is never quite where you left it'], omen: ['ordinary things stop being ordinary', 'everyday objects forget what they are'], realm: ['the unexplained', 'everything nobody can name'] },
+  other:    { place: ['the place nobody looks', 'the edge of the photo'], stuff: ['odd smells', 'static'], habit: ['pretends to be something else, badly', 'is never quite where you left it'], omen: ['ordinary things stop being ordinary', 'everyday objects forget what they are'], realm: ['the unexplained', 'everything nobody can name'] },
 };
+
+// v0.4.3: kits for object groups that share a category but not a nature (a light switch is not a hand tool). The
+// group comes from the object's design rule (objects.js DESIGN_RULES); objects without a group use their category kit.
+const LORE_GROUP_KITS = {
+  electric: { place: ['the wall by the door', 'the dark hallway', 'the wiring behind the plaster'], stuff: ['static sparks', 'hot-plastic smells', 'tiny blue sparks'], habit: ['flicks the lights off just as you reach the stairs', 'gives you a static zap when you are not expecting it', 'clicks on and off by itself at 3 a.m.'], omen: ['every light in the city blinks out at once', 'the power grid hums its name'], realm: ['the endless current', 'the great blackout'] },
+  alarm: { place: ['the ceiling above your bed', 'the front door', 'the hallway corner'], stuff: ['ear-splitting beeps', 'low-battery chirps'], habit: ['chirps once at 4 a.m. and then never again', 'rings when nobody is there', 'goes off every time you make toast'], omen: ['every alarm in the city screams at once', 'no one can ever sleep again'], realm: ['the last warning', 'the alarm that never stops'] },
+  camera: { place: ['the corner of the ceiling', 'the shop doorway', 'the car park'], stuff: ['blinking red lights', 'grainy footage', 'infrared glow'], habit: ['follows you with its lens wherever you walk', 'records your most embarrassing moments in high definition', 'zooms in whenever you pick your nose'], omen: ['every screen in the city shows what it sees', 'nothing anywhere goes unwatched'], realm: ['the all-seeing eye', 'every moment ever recorded'] },
+  gadget: { place: ['the junk drawer', 'the charging corner', 'the bottom of the gadget box'], stuff: ['dead batteries', 'blinking lights', 'tangled cables'], habit: ['runs out of battery exactly when you need it', 'beeps for reasons it will not explain', 'updates itself in the middle of the night'], omen: ['every device in the land rebels at once', 'the machines stop listening to their owners'], realm: ['the endless update', 'every gadget ever forgotten'] },
+  street: { place: ['the street corner', 'the crossing', 'the empty car park at night'], stuff: ['rain puddles', 'orange light', 'parking tickets'], habit: ['turns red the moment you are in a hurry', 'flickers just as you walk under it', 'tells you to stop for no reason at all'], omen: ['every road in the city goes red at once', 'the traffic stops and never moves again'], realm: ['every road ever travelled', 'the endless rush hour'] },
+  office: { place: ['the office supply cupboard', 'the back of the desk drawer', 'the meeting room'], stuff: ['paper cuts', 'sticky notes', 'ink smudges'], habit: ['jams right before a deadline', 'hides under the paperwork when you need it', 'squeaks during the quiet part of the meeting'], omen: ['every deadline in the world arrives at once', 'the paperwork never ends'], realm: ['the eternal Monday', 'every form ever filed'] },
+  art: { place: ['the gallery wall', 'the attic studio', 'the hallway'], stuff: ['paint drips', 'charcoal dust'], habit: ['changes its expression when you look away', 'leaves wet paint on your fingers', 'tilts a little crooked every night'], omen: ['every painting in the museum opens its eyes', 'colour drains from the whole city'], realm: ['the endless canvas', 'every picture ever painted'] },
+  medical: { place: ['the first-aid cupboard', 'the doctor\'s waiting room', 'the bathroom cabinet'], stuff: ['antiseptic fumes', 'sticky plasters'], habit: ['is always missing when someone gets a scrape', 'is a little too cold when it touches you', 'insists you say "aah"'], omen: ['every hospital light flickers at once', 'the whole city catches the same cold'], realm: ['the last cure', 'every fever ever broken'] },
+  science: { place: ['the school laboratory', 'the observatory', 'the dusty science cupboard'], stuff: ['bubbling liquid', 'lens smudges', 'mysterious residue'], habit: ['bubbles over when nobody is watching', 'shows you things you did not want to see up close', 'gets every measurement slightly wrong'], omen: ['every experiment in the world goes wrong at once', 'the stars rearrange themselves'], realm: ['the unknown', 'every secret of the universe'] },
+  hardware: { place: ['the garage shelf', 'the jar of spare bits', 'the bottom of the toolbag'], stuff: ['rust', 'loose threads of wire', 'tiny metal shavings'], habit: ['rolls away and hides under the fridge', 'tangles itself the moment you put it away', 'is always one short of what you need'], omen: ['every bolt in every bridge loosens at once', 'the whole city comes apart at the seams'], realm: ['the unmaking of things', 'everything that holds the world together'] },
+  kitchen: { place: ['the cutlery drawer', 'the kitchen counter', 'the back of the cupboard'], stuff: ['crumbs', 'flour dust', 'sticky fingerprints'], habit: ['hides in the drawer you checked twice', 'clatters onto the floor at the quietest moment', 'is always in the dishwasher when you need it'], omen: ['every kitchen in the land falls silent', 'no meal will ever be cooked again'], realm: ['the endless feast', 'every meal ever made'] },
+  craft: { place: ['the sewing box', 'the craft drawer', 'the knitting basket'], stuff: ['loose thread', 'tiny pinpricks'], habit: ['vanishes into the carpet', 'tangles every thread it touches', 'pricks your finger just once, on purpose'], omen: ['every stitch in the world comes undone', 'the cloth of the city unravels'], realm: ['the great unravelling', 'every thread ever spun'] },
+  outdoor: { place: ['the garden shed', 'the campsite', 'the back of the car boot'], stuff: ['mud', 'pine needles', 'damp grass'], habit: ['collapses the moment you finish setting it up', 'drags mud into the house', 'is always at the bottom of the bag'], omen: ['the wilderness takes back the town', 'every garden grows wild overnight'], realm: ['the wild outdoors', 'every trail ever walked'] },
+  sport: { place: ['the sports hall', 'the kit bag', 'the playing field'], stuff: ['sweat', 'grass stains', 'chalk lines'], habit: ['goes missing right before the big game', 'cheats when the referee is not looking', 'demands one more lap'], omen: ['every scoreboard in the world resets to zero', 'the game never ends'], realm: ['the eternal match', 'every game ever played'] },
+  gym: { place: ['the gym corner', 'the spare room'], stuff: ['sweat', 'squeaky rubber'], habit: ['makes the last minute feel like an hour', 'is mostly used to hang clothes on', 'beeps every time you slow down'], omen: ['nobody in the city can ever stop running', 'every heart in town races at once'], realm: ['the endless workout', 'the final rep'] },
+  arcade: { place: ['the arcade at the end of the pier', 'the station hall'], stuff: ['jingling coins', 'flashing lights'], habit: ['swallows your coin and gives nothing back', 'plays its jingle when nobody is near', 'always wins'], omen: ['every machine in the land lights up at once', 'the high score belongs to it forever'], realm: ['the endless game over', 'every coin ever spent'] },
+  computer: { place: ['the server room', 'the desk drawer of forgotten parts', 'the back of the computer'], stuff: ['dust bunnies', 'error codes', 'warm air'], habit: ['loses your files at the worst moment', 'whirs loudly when you need silence', 'needs a restart, again'], omen: ['every computer in the world crashes at once', 'all the world\'s data vanishes'], realm: ['the endless network', 'every byte ever saved'] },
+  media: { place: ['the record shelf', 'the box in the attic', 'the living room cabinet'], stuff: ['dusty sleeves', 'crackles and hiss'], habit: ['skips at the best part of the song', 'tangles its own tape', 'plays the same song all day'], omen: ['every speaker on earth plays the same note', 'music fades from the world'], realm: ['the last song', 'every melody ever recorded'] },
+  jewel: { place: ['the jewellery box', 'the bathroom sink', 'the gap between the floorboards'], stuff: ['sparkles', 'tiny scratches'], habit: ['slips off at the beach', 'hides in the sink drain', 'tarnishes the night before a wedding'], omen: ['every jewel in the land shines blood-red', 'kings and queens kneel before it'], realm: ['the treasure of all treasures', 'every crown ever worn'] },
+  cosmetic: { place: ['the bathroom cabinet', 'the bottom of the handbag'], stuff: ['smudges', 'sweet perfume'], habit: ['smudges itself the moment you leave the house', 'rolls under the sink', 'dries up the day before a party'], omen: ['every mirror in the city shows a stranger', 'faces forget who they are'], realm: ['the perfect face', 'every disguise ever worn'] },
+  door: { place: ['the front door', 'the long hallway', 'the room you never open'], stuff: ['creaks', 'cold draughts'], habit: ['creaks loudly when you sneak home late', 'locks itself when you step outside', 'slams in the wind'], omen: ['every door in the city opens at once', 'no lock will ever hold again'], realm: ['every door ever closed', 'the threshold between worlds'] },
+};
+const LORE_GROUP_ALIAS = { light: 'lamp', furniture: 'chair', appliance: 'fridge', music: 'instrument', toyish: 'toy', tool: 'tool' };
+const loreKitFor = (o, cat) => { const g = o && o.lore; return (g && (LORE_GROUP_KITS[g] || LORE_KITS[LORE_GROUP_ALIAS[g]])) || LORE_KITS[cat] || LORE_KITS.other; };
 
 // {obj} object name · {Obj} capitalised · {colour} photo colour (templates with it are only used when the colour is
 // known) · {place} {stuff} {habit} {omen} {realm} from the category kit · {sig} signature move · {name} · {title}
@@ -3113,8 +3530,20 @@ const LORE_OBJECT = {
   sock:    { common: 'Floats out of the laundry at 3 a.m. looking for its missing half.', legendary: 'Every lost sock in history joined its army. The final laundry day is coming.' },
   candle:  { common: 'Blow it out and it simply relights itself, angrier.', legendary: 'It was lit at the dawn of time. When it gutters, so will the sun.' },
   rubber_duck: { common: 'Squeaks once for yes, twice for "you will regret this".', legendary: 'The tide obeys it. Sailors pray to it. It has never once blinked.' },
+  x_light_switch: { common: 'Flicks the lights off just as you reach the top of the stairs, then giggles in the dark.', uncommon: 'Nobody remembers wiring it in. It clicks on by itself whenever someone says its name.', rare: 'Every bulb in the house answers to it. On stormy nights it decides who gets to see.', epic: 'One flick, and a whole street falls into darkness. It has been practising on yours.', legendary: 'At the dawn of time it said "let there be light". It has been deciding when to take it back ever since.' },
+  x_security_camera: { common: 'Watches the car park all night and judges everyone\'s parking.', uncommon: 'Its little red light blinks a second after you blink. It records things nobody else saw.', rare: 'It has seen every secret on this street, and it remembers every face.', epic: 'Its infrared eye sees through walls. Burglars confess before it even moves.', legendary: 'The all-seeing lens. It recorded the first sunrise and will record the last. Nothing has ever escaped its gaze.' },
+  x_power_socket: { common: 'Two surprised holes and one very shocked face. Keep your fingers out.', rare: 'It powers half the house and charges a little extra for every plug.', legendary: 'All the lightning of the world flows through its two small mouths. It decides which cities stay lit.' },
+  x_traffic_light: { common: 'Turns red the moment it sees you running late.', rare: 'Drivers whisper that it can hold a red light for an entire afternoon, just to make a point.', legendary: 'When its red eye opens, the whole world stops. Nobody has ever seen it turn green.' },
+  x_smoke_detector: { common: 'Chirps once at 4 a.m., then never again. It knows exactly what it is doing.', legendary: 'It smelled the first fire ever lit, and it has been screaming about it ever since.' },
+  x_stethoscope: { common: 'Listens to your heartbeat and gossips about it to the other medical supplies.', legendary: 'It has heard every heart that ever beat. It knows which one will be the last.' },
 };
 
+const LORE_HOOK = ['It was last seen near {place}.', 'It leaves {stuff} wherever it goes.', 'It still {habit}.', 'Look for {stuff} near {place}.'];
+function loreHook(text, objName, kit, sig) {
+  const t = text.toLowerCase();
+  if (t.includes(objName) || (sig && t.includes(sig.toLowerCase()))) return true;
+  return ['place', 'stuff', 'habit', 'omen', 'realm'].some(k => kit[k].some(ph => t.includes(ph.toLowerCase())));
+}
 const LORE_COLOUR = h => {
   // [hue, sat 0-100, light 0-100] → a colour word suited to monster lore
   const [hu, sa, li] = h;
@@ -3127,13 +3556,13 @@ const LORE_COLOUR = h => {
 /* monsterLore(m): m needs obj (or cat), rarity, seed; optional photo.pal, name, abilities, fam */
 function monsterLore(m) {
   const o = m.obj && OBJECTS[m.obj], cat = (o && o.cat) || m.cat || 'other';
-  const kit = LORE_KITS[cat] || LORE_KITS.other, rarity = RARITY[m.rarity] ? m.rarity : 'common';
+  const kit = loreKitFor(o, cat), rarity = RARITY[m.rarity] ? m.rarity : 'common';
   const R = mulberry(hashStr('lore|' + (m.obj || cat) + '|' + rarity + '|' + (m.seed >>> 0)));
   const pick = a => a[Math.floor(R() * a.length)];
   const pal = m.photo && m.photo.pal, colour = pal && pal.conf === 'confident' && pal.primary ? LORE_COLOUR(pal.primary) : null;
   const objName = o ? o.name.split(' / ')[0].toLowerCase() : (m.word || CATEGORY[cat].name.split(' /')[0]).toLowerCase();
-  const sig = (m.abilities && m.abilities[0] && m.abilities[0].name) || ((o && o.sig) || CATEGORY[cat].sig).name;
-  const title = (m.name && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : LEGEND_TITLES[m.fam] || 'the Nameless').replace(/^the /, 'the ');
+  const sig = (m.abilities && m.abilities[0] && m.abilities[0].name) || (o && o.sig && o.sig.name) || (o && o.sigName) || CATEGORY[cat].sig.name;
+  const title = m.name && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : LEGEND_TITLES[m.fam || CATEGORY[cat].fam] || 'the Nameless';
   const fill = t => t.replace(/\{(\w+)\}/g, (_, k) => ({ obj: objName, Obj: objName[0].toUpperCase() + objName.slice(1), colour, place: pick(kit.place), stuff: pick(kit.stuff), habit: pick(kit.habit), omen: pick(kit.omen), realm: pick(kit.realm), sig, title })[k] || '');
   const own = o && LORE_OBJECT[m.obj] && LORE_OBJECT[m.obj][rarity];
   let text;
@@ -3144,6 +3573,9 @@ function monsterLore(m) {
   }
   // a coda only after a one-sentence opening, so even Legendary lore stays at two sentences
   if (LORE_CODA[rarity] && !own && !/[.!?] /.test(text)) text += ' ' + fill(pick(LORE_CODA[rarity]));
+  // every text must say something about THIS object: a sentence without the object's name or one of its own details
+  // gets a detail from its kit (the old generic lines could describe anything)
+  if (!own && !loreHook(text, objName, kit, sig)) text += ' ' + fill(pick(LORE_HOOK));
   return text;
 }
 // text shown for a monster: its stored lore, or (monsters from before v0.4.2) the same deterministic result
@@ -3285,7 +3717,7 @@ const Platform = (() => {
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.2';
+const GAME_VERSION = '0.4.3';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -3618,6 +4050,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   const abilities = monsterAbilities(cat, rarity, fam, base.word);
   const o = obj && OBJECTS[obj];
   if (o && o.sig) abilities[0] = { ...o.sig, cd: cdFor(o.sig) }; // object-specific signature move
+  else if (o && o.sigName) abilities[0] = { ...abilities[0], name: o.sigName }; // same numbers, a name that fits the object
   const m = {
     ...base, id: null, fam, level,
     name: o ? speciesName3(obj, rarity, fam) : speciesName(cat, rarity, base.word, fam),
@@ -3629,6 +4062,31 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
   m.lore = monsterLore(m); // flavour text for this object AND rarity, stored so it never changes (lore.js)
   return m;
+}
+/* v0.4.3: monsters found before their object had a proper design keep the look and text they were found with. The
+   player can choose to update one: only its body design, its signature move's NAME (same numbers) and its flavour text
+   change; colours, eyes, features, stats and level stay. Deterministic, and the old values are kept for undo. */
+function identityUpdate(m) {
+  const o = m && OBJECTS[m.obj]; if (!o || !m.dna || m.dna.v < 3) return null;
+  const want = designOf(o, { aspect: m.aspect, sub: m.sub }), ch = {};
+  if (want.shape !== m.dna.shape || (want.sub || null) !== (m.dna.sub || null)) ch.design = want;
+  const ab = m.abilities && m.abilities[0];
+  if (o.sigName && ab && ab.name === CATEGORY[o.cat].sig.name) ch.sig = o.sigName;
+  if (o.rule) { const fresh = monsterLore({ ...m, abilities: ch.sig ? [{ ...ab, name: ch.sig }] : m.abilities }); if (fresh !== m.lore) ch.lore = fresh; }
+  return ch.design ? ch : null; // offered only where the body changes; the rest rides along
+}
+function applyIdentityUpdate(S, m) {
+  const ch = identityUpdate(m); if (!ch) return false;
+  m.prevIdentity = { shape: m.dna.shape, sub: m.dna.sub || null, lore: m.lore || null, sig: m.abilities[0].name };
+  m.dna.shape = ch.design.shape; m.dna.sub = ch.design.sub;
+  if (ch.sig) m.abilities[0].name = ch.sig;
+  if (ch.lore) m.lore = ch.lore;
+  const d = S.dex[m.species]; if (d && d.dna && d.dna.v >= 3 && d.dna.shape !== ch.design.shape) { d.dna = { ...d.dna, shape: ch.design.shape, sub: ch.design.sub }; }
+  return true;
+}
+function undoIdentityUpdate(m) {
+  const p = m && m.prevIdentity; if (!p) return false;
+  m.dna.shape = p.shape; m.dna.sub = p.sub; if (p.lore) m.lore = p.lore; m.abilities[0].name = p.sig; delete m.prevIdentity; return true;
 }
 function variantLabel(v) { return v === 'spectral' ? 'Spectral' : v === 'mutated' ? 'Mutated' : v === 'shiny' ? 'Prismatic' : ''; }
 
@@ -4818,13 +5276,22 @@ const Engine = (() => {
      check() asks both parts whether they still work (called when the app returns to the foreground); recover() throws
      both parts away and loads them again from the copies saved on the phone (no download). Only one recovery runs at a
      time, and it waits for any load already in progress. A page Chrome has killed entirely restarts from scratch. */
-  let recovering = null;
+  let recovering = null, checkingP = null;
+  // while checking, the engine does not count as ready (the game disables SNAP), so a stale "ready" is never used
   async function check() {
     if (st.state !== 'ready') return st.state !== 'failed';
-    const ok = Lens.healthy() && await ClipLens.ping();
-    if (!ok) { st.recoveries = (st.recoveries || 0) + 1; await recover('check'); }
-    return st.state === 'ready';
+    if (checkingP) return checkingP;
+    st.checking = true; emit(); // not "ready" from this moment until the check is over
+    checkingP = (async () => {
+      try {
+        const ok = Lens.healthy() && await ClipLens.ping();
+        if (!ok) { st.recoveries = (st.recoveries || 0) + 1; await recover('check'); }
+        return st.state === 'ready';
+      } finally { st.checking = false; checkingP = null; emit(); }
+    })();
+    return checkingP;
   }
+  const ready = () => st.state === 'ready' && !st.checking && !recovering && !loading;
   function recover(why) {
     if (recovering) return recovering;
     recovering = (async () => {
@@ -4885,7 +5352,7 @@ const Engine = (() => {
     reload();
   }
 
-  return { load, recognize, check, recover, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
+  return { load, recognize, check, recover, ready, downloadBytes, manifest, setForceCPU, setClipGPU, clearCache, perfLog, clearPerf: () => Platform.storage.remove(PERF_KEY), status: st, onChange: f => { listeners.add(f); return () => listeners.delete(f); }, ID: ENGINE_ID };
 })();
 
 </script>
@@ -5109,7 +5576,7 @@ function huntScreen() {
   </section>
   <div class="shutter-row">
     <button class="side-btn" data-act="tab" data-arg="dex"><span class="ic">${ICON.dex}</span>Monsters</button>
-    <button class="shutter" data-act="openCamera" aria-label="Open the Spirit Camera">SNAP</button>
+    ${snapButtonHTML()}
     <button class="side-btn" data-act="tab" data-arg="lab"><span class="ic">${ICON.lab}</span>Orders</button>
   </div>
   ${lensChipHTML()}
@@ -5140,29 +5607,41 @@ function questHTML(q) {
 /* ---------- live camera (the only way to hunt: no gallery, no file upload) ---------- */
 async function openCamera() {
   closeSheet();
+  if (ui.cameraOpening || Platform.camera.isOpen()) return; // double taps
   // first hunt on this phone: say once what will be downloaded (this is information, not a choice of recogniser)
-  if (Engine.status.state !== 'ready' && !S.settings.engineCached && !ui.engineNoticeOk) return showEngineNotice();
-  const t0 = performance.now();
+  if (snapState() === 'download' && !ui.engineNoticeOk) return showEngineNotice();
+  // the camera opens only with a ready engine; "Snap another" buttons on result screens wait on the loading screen
+  if (!Engine.ready()) { if (Engine.status.state === 'failed') return showEngineFailed(null, Engine.status.kind); return showEngineLoading(openCamera); }
+  ui.cameraOpening = true; ui.snapping = false;
+  const t0 = performance.now(), blocks = watchMainThread();
   $('#overlay').innerHTML = `<div class="overlay camera"><div class="overlay-inner cam-inner">
     <div class="sheet-head"><h2>Spirit Camera</h2><button class="btn small ghost" data-act="camClose">Close</button></div>
     <div class="cam-frame" id="camFrame"><video id="camVideo" autoplay playsinline muted></video><i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
       <div class="cam-status" id="camStatus"><span><i class="spin"></i> Starting camera…</span></div></div>
     <div class="zoom-row" id="zoomRow" hidden><button class="btn small ghost" data-act="camZoom" data-arg="-" aria-label="Zoom out">−</button>
       <input type="range" id="zoomRange" aria-label="Zoom" min="1" max="3" step="0.1" value="1"><button class="btn small ghost" data-act="camZoom" data-arg="+" aria-label="Zoom in">+</button><span class="small num" id="zoomVal">1.0×</span></div>
+    <p class="small" id="camLensHint" style="text-align:center;margin:0;color:var(--flash)" hidden></p>
     <p class="muted small" style="text-align:center;margin:0">Fill the frame with one real object. The photo is analysed on this phone and never saved.</p>
     <div class="cam-controls"><button class="shutter" id="camShutter" data-act="camSnap" aria-label="Take photo" disabled>SNAP</button></div>
   </div></div>`;
   const v = $('#camVideo');
   try {
     await Platform.camera.open(v); // resolves once the preview is really showing frames
+    ui.cameraOpening = false;
     if ($('#camVideo') !== v) { Platform.camera.close(v); return; } // closed (or reopened) while starting
     const st = $('#camStatus'); if (st) st.remove();
-    const btn = $('#camShutter'); if (btn) btn.disabled = false;
+    syncShutter();
     setupZoom(v);
     ui.camStartMs = Math.round(performance.now() - t0);
-    // the engine starts only once the preview is live, so its start-up (heavy on the CPU path) never delays the camera
-    requestAnimationFrame(() => setTimeout(() => { if (Engine.status.state !== 'ready') Engine.load(); }, 60));
-  } catch (e) { Platform.camera.close(v); if ($('#camVideo') === v) showCameraError(e); }
+    setTimeout(() => { ui.camLongestBlock = blocks.stop(); }, 1500);
+  } catch (e) { ui.cameraOpening = false; blocks.stop(); Platform.camera.close(v); if ($('#camVideo') === v) showCameraError(e); }
+}
+/* Main-thread blocks while the camera starts (Chrome's Long Tasks API). A frozen or blank viewfinder for about a second
+   means something held the main thread; the longest block is shown in the developer panel next to the camera time. */
+function watchMainThread() {
+  let longest = 0, obs = null;
+  try { obs = new PerformanceObserver(list => { for (const e of list.getEntries()) longest = Math.max(longest, Math.round(e.duration)); }); obs.observe({ type: 'longtask', buffered: false }); } catch (e) { obs = null; }
+  return { stop() { try { obs && obs.disconnect(); } catch (e) {} obs = null; return longest; } };
 }
 // zoom controls: buttons, slider and two-finger pinch on the viewfinder; hidden if the camera offers no zoom at all
 function setupZoom(v) {
@@ -5193,9 +5672,10 @@ function showCameraError(e) {
     <button class="btn primary block" data-act="openCamera">Try again</button>
     <button class="btn ghost block" data-act="closeOverlay">Back</button></div></div>`;
 }
-function closeCamera() { Platform.camera.close($('#camVideo')); ui.camZoom = null; $('#overlay').innerHTML = ''; render(); }
+function closeCamera() { Platform.camera.close($('#camVideo')); ui.camZoom = null; ui.cameraOpening = false; $('#overlay').innerHTML = ''; render(); }
 function camSnap() {
-  const v = $('#camVideo'); if (!v || !v.videoWidth) return;
+  const v = $('#camVideo'); if (!v || !v.videoWidth || ui.snapping || !Engine.ready()) return; // one shot, ready engine only
+  ui.snapping = true; const btn = $('#camShutter'); if (btn) btn.disabled = true;
   SFX.shutter();
   const canvas = Platform.camera.capture(v); // exactly the region the viewfinder shows (including zoom)
   Platform.camera.close(v); ui.camZoom = null;
@@ -5236,6 +5716,28 @@ function engineStatusLine() {
   if (E.state === 'failed') return `Could not start: ${esc(E.error)}.`;
   return S.settings.engineCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet.';
 }
+/* SNAP only works when the Spirit Lens (the recognition engine) is ready. While it loads, wakes up, re-checks itself
+   after the app was in the background, or has failed, the button is really disabled (not just dimmed). Before the very
+   first download it opens the one-time download notice instead (no capture can start without the engine). */
+function snapState() {
+  const E = Engine.status;
+  if (Engine.ready()) return 'ready';
+  if (E.state === 'failed') return 'failed';
+  if (E.state === 'idle' && !S.settings.engineCached) return 'download';
+  return 'waking';
+}
+function snapButtonHTML() {
+  const st = snapState(), off = st === 'waking' || st === 'failed';
+  const label = { ready: 'Open the Spirit Camera', download: 'Download the Spirit Lens to start hunting', waking: 'SNAP is unavailable while the Spirit Lens wakes up', failed: 'SNAP is unavailable: the Spirit Lens could not start' }[st];
+  return `<button class="shutter ${off ? 'waiting' : ''}" id="huntSnap" data-act="openCamera" aria-label="${label}" ${off ? 'disabled aria-disabled="true"' : ''}>${st === 'waking' ? '<span class="waking">WAKING</span>' : 'SNAP'}</button>`;
+}
+// the camera's own shutter: needs live frames AND a ready engine
+function syncShutter() {
+  const btn = $('#camShutter'); if (!btn) return;
+  const v = $('#camVideo'), frames = !!(v && v.videoWidth && !$('#camStatus'));
+  btn.disabled = !(frames && Engine.ready()) || !!ui.snapping;
+  const hint = $('#camLensHint'); if (hint) { const waiting = frames && !Engine.ready(); hint.hidden = !waiting; hint.textContent = Engine.status.state === 'failed' ? 'The Spirit Lens could not start. Close the camera and tap Retry.' : 'Spirit Lens waking up… SNAP unlocks in a moment.'; }
+}
 function lensChipHTML() {
   const E = Engine.status;
   const dot = E.state === 'ready' ? 'var(--good)' : E.state === 'failed' ? 'var(--danger)' : 'var(--flash)';
@@ -5246,6 +5748,8 @@ function lensChipHTML() {
 }
 Engine.onChange(() => {
   const chip = $('#lensChip'); if (chip) chip.outerHTML = lensChipHTML();
+  const snap = $('#huntSnap'); if (snap) snap.outerHTML = snapButtonHTML();
+  syncShutter();
   const pr = $('#engineProgress'); if (pr) pr.outerHTML = engineProgressHTML();
   const st = $('#lensStatus'); if (st) st.textContent = lensStatusText().replace(/&[a-z]+;/g, '');
   // Settings: only the engine row and the developer readouts change; the sheet itself is never rebuilt for progress
@@ -5454,35 +5958,19 @@ function candLine(c) {
   return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${score}</span>`;
 }
 const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
-/* An automatic identification is never committed silently: the player sees what the lens found and has a few
-   seconds to say "Wrong object" BEFORE anything is rolled. The countdown pauses as soon as the screen is touched. */
-const CONFIRM_MS = 3500;
+/* An identification is never committed by itself: the player looks at it as long as they like and then explicitly
+   taps "Scan for monsters" (the only way to reach the encounter roll) or "Wrong object". There is no timer. */
 function showIdentified(p, i) {
   const c = p.rec.candidates[i];
   SFX.click();
-  const auto = !S.settings.debugLens;
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px" id="identRoot">
     <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="card ident"><span class="e">${catIcon(c)}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
-    ${auto ? `<div class="bar confirm-bar" aria-hidden="true"><i id="confirmBar"></i></div><p class="muted small" style="text-align:center;margin:0" id="confirmHint">Scanning for monsters in a moment… Not right? Tap <b>Wrong object</b>.</p>` : ''}
     <div class="row"><button class="btn primary grow" data-act="pickCand" data-arg="${i}">Scan for monsters</button><button class="btn" data-act="wrongObject" data-arg="${i}">Wrong object</button></div>
     ${debugHTML(p.rec)}
   </div></div>`;
   drawDetections(p, i);
-  if (!auto) return;
-  const t0 = Date.now(), root = $('#identRoot');
-  p.confirm = { paused: false };
-  root.addEventListener('pointerdown', ev => { if (!ev.target.closest('[data-act]') && !p.confirm.paused) { p.confirm.paused = true; const h = $('#confirmHint'); if (h) h.textContent = 'Paused. Tap Scan for monsters when you are ready, or Wrong object.'; } });
-  const tick = () => {
-    if (ui.pending !== p || p.scanning || p.rejected || !$('#confirmBar')) return;
-    if (p.confirm.paused) { $('#confirmBar').style.width = '0%'; return; }
-    const f = (Date.now() - t0) / CONFIRM_MS;
-    $('#confirmBar').style.width = Math.min(100, f * 100) + '%';
-    if (f >= 1) return scan(i);
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
 }
 /* "Wrong object": nothing is rolled or created for a rejected identification. The player may pick one of the other
    objects the models themselves proposed for THIS photo (never free text, never arbitrary objects), or retake it. */
@@ -5960,6 +6448,7 @@ function monsterSheet(id) {
       ${m.thumb ? `<div class="row"><img src="${m.thumb}" alt="Original photo" style="width:72px;border-radius:8px"><span class="muted">The photo it was found in (kept because you enabled it in settings).</span></div>` : ''}
     </div>
     <p class="muted small lore lore-${m.rarity}">${esc(loreOf(m))}</p>
+    ${identityUpdate(m) ? `<div class="card small stack" style="gap:6px;border-color:var(--ecto)"><b>New ${esc(OBJECTS[m.obj].name.toLowerCase())} look available</b><span class="muted">You found this monster before SNAPMON had a proper design for a ${esc(OBJECTS[m.obj].name.toLowerCase())}. Updating changes its body design, its flavour text and the name of its signature move. Colours, eyes, stats and level stay exactly the same.</span><button class="btn small ecto" data-act="refreshLook" data-arg="${m.id}">Update its look</button></div>` : m.prevIdentity ? `<button class="btn small ghost" data-act="undoLook" data-arg="${m.id}">Restore its original look</button>` : ''}
     <div class="row">
       <button class="btn grow ${S.companion === m.id ? '' : 'ecto'}" data-act="buddy" data-arg="${m.id}">${S.companion === m.id ? 'Dismiss buddy' : 'Make hunting buddy'}</button>
       <button class="btn danger" data-act="release" data-arg="${m.id}">Release</button>
@@ -6093,7 +6582,7 @@ function engineRowHTML() {
   return `<div><b>Recognition engine</b><p>${engineStatusLine()} Every player uses the same engine: COCO-SSD + MobileNet v2 + TinyCLIP, all running on this phone. Photos are never uploaded.</p>${E.state === 'loading' ? engineProgressHTML() : ''}</div>${E.state === 'ready' || E.state === 'loading' ? '' : `<button class="btn small" data-act="lensPrepare">${E.state === 'failed' ? 'Retry' : 'Download'}</button>`}`;
 }
 // start-up stages, to investigate slow or blank starts (e.g. the detector on the CPU backend)
-const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
+const loadTimesText = () => { const E = Engine.status, s = E.stageMs || {}; return `Engine load ${E.loadMs || '–'} ms (detector ${s.lens ?? '–'}, TinyCLIP ${s.clip ?? '–'}) · last camera start ${ui.camStartMs ?? '–'} ms, longest main-thread block ${ui.camLongestBlock ?? '–'} ms${E.recoveries ? ` · recoveries ${E.recoveries}` : ''}`; };
 const backendsText = () => Object.entries(Engine.status.backends).map(([k, v]) => k + ' ' + v).join(', ') || 'not loaded';
 function settingsSheet() {
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
@@ -6169,6 +6658,8 @@ const actions = {
   cancelPhoto,
   guide() { openSheet(Guide.html(ui.guideOpen), 'guide'); },
   pickCand(i) { scan(i); },
+  refreshLook(id) { const m = S.monsters.find(x => x.id === id); if (m && applyIdentityUpdate(S, m)) { persist(); render(); monsterSheet(id); toast('Look updated.'); } },
+  undoLook(id) { const m = S.monsters.find(x => x.id === id); if (m && undoIdentityUpdate(m)) { persist(); render(); monsterSheet(id); } },
   wrongObject(arg) { const p = ui.pending; if (!p || !p.rec || p.scanning) return; wrongObject(p, arg === 'all' ? p.rec.candidates.map(c => c.obj) : [p.rec.candidates[+arg].obj]); },
   pickAlt(i) { const p = ui.pending; if (p && p.alts && p.alts[+i]) scan(p.alts[+i]); },
   retakePhoto() { cancelPhoto(); openCamera(); },
@@ -6340,7 +6831,7 @@ if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFr
 delete S.settings.expLens;
 if (S.settings.forceCPU && devOn()) Engine.setForceCPU(true);
 if (S.settings.clipGPU && devOn()) Engine.setClipGPU(true);
-if (S.settings.engineCached) setTimeout(() => Engine.load(), 1200); // engine saved on this phone: start it in the background
+if (S.settings.engineCached) setTimeout(() => Engine.load(), 300); // engine saved on this phone: wake it right away (SNAP unlocks when ready)
 
 </script>
 <!--/SCRIPTS-->

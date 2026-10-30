@@ -28,7 +28,7 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   ok(await onGame() && !(await p.$('.sheet')), 'Back closes the settings sheet and stays in the game');
 
   // the camera closes on Back and its stream stops
-  await p.evaluate(() => { window.__snapmon.S.settings.engineCached = true; Engine.load = async () => false; });
+  await p.evaluate(() => { window.__snapmon.S.settings.engineCached = true; Engine.load = async () => false; Engine.ready = () => true; });
   await tap('[data-act="openCamera"]'); await p.waitForSelector('#camShutter:not([disabled])');
   ok(await cam.live(p) === 1, 'camera running');
   await back();
