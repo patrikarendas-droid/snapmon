@@ -1,0 +1,136 @@
+/* SNAPMON — curated (hand-written, reviewed) monster writing: schema, validation and lookup.
+
+   PHASE 1: INACTIVE. This file is not loaded by index.html or the single-file builds, and CURATED.enabled is false, so
+   the live game is unchanged (tests/generator-snapshot.js proves it). It is used by the validator/preview tool
+   (tools/curated.js) and the tests. Activation is a separate, explicitly approved step (docs/CONTENT_WRITING_GUIDE.md).
+
+   Content lives in content/curated/*.json, keyed by the exact OBJECTS id (objects.js), never by recogniser text or
+   display name. Every field is optional; anything missing, draft or malformed returns null, and the caller keeps the
+   procedural text (lore.js). Lookups never touch the game's random number streams, so names, moves, stats and artwork
+   cannot shift because of curated text. Pure functions, no DOM, no network. */
+'use strict';
+
+const CURATED = {
+  enabled: false,     // master switch for curated flavour text (Phase 2, after review)
+  movesEnabled: false, // curated move NAMES additionally need stable move keys on abilities (proposed, not built)
+  schema: 1,
+  data: {},           // { objectId: entry } — filled from content/curated/*.json by `node tools/curated.js build`
+};
+const CURATED_RARITIES = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
+const CURATED_LIMITS = { loreMin: 12, loreMax: 220, variants: 8, moveMin: 3, moveMax: 28, notes: 600 };
+const CURATED_FIELDS = ['lore', 'moves', 'status', 'notes'];
+// template tokens, editing leftovers and markup that must never reach a player
+const CURATED_PLACEHOLDER = /\{[^}]*\}|\[[^\]]*\]|<[^>]*>|\b(todo|tbd|fixme|xxx+|lorem|ipsum|placeholder|insert|object name|monster name)\b|\.\.\.\s*$|^\W*$/i;
+
+const curatedSlug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+
+/* The moves an object's monsters can have, as stable keys → current default names. "signature" is ability 0;
+   "kit.<slug>" a move from the object's kit (data.js MOVE_KITS); "legend" and "ultimate" exist on Legendaries. */
+function curatedMoveSlots(objId) {
+  const o = typeof OBJECTS !== 'undefined' && OBJECTS[objId]; if (!o) return null;
+  const sig = (o.sig && o.sig.name) || o.sigName || CATEGORY[o.cat].sig.name;
+  const slots = { signature: sig, legend: 'legend move (Legendary only)', ultimate: 'Ultimate (Legendary only)' };
+  for (const a of moveKit(o.cat, o)) slots['kit.' + curatedSlug(a.name)] = a.name;
+  return slots;
+}
+
+/* Validates one parsed content file. Returns { errors, warnings } (arrays of strings). `raw` (the file text) lets it
+   catch duplicate keys, which JSON.parse would silently merge. `seen` (Map id → file) catches duplicates across files. */
+function validateCurated(doc, { file = 'content', raw = null, seen = null } = {}) {
+  const errors = [], warnings = [], E = m => errors.push(`${file}: ${m}`), W = m => warnings.push(`${file}: ${m}`);
+  if (raw != null) for (const d of curatedDuplicateKeys(raw)) E(`duplicate key "${d}" (JSON keeps only the last one)`);
+  if (!doc || typeof doc !== 'object' || Array.isArray(doc)) { E('the file must be one JSON object { "schema": 1, "entries": { … } }'); return { errors, warnings }; }
+  for (const k of Object.keys(doc)) if (!['schema', 'batch', 'entries'].includes(k)) E(`unknown top-level field "${k}"`);
+  if (doc.schema !== CURATED.schema) E(`"schema" must be ${CURATED.schema}`);
+  if (doc.batch != null && typeof doc.batch !== 'string') E('"batch" must be a string');
+  const entries = doc.entries;
+  if (!entries || typeof entries !== 'object' || Array.isArray(entries)) { E('"entries" must be an object keyed by object id'); return { errors, warnings }; }
+  for (const [id, e] of Object.entries(entries)) {
+    const at = `"${id}"`, o = OBJECTS[id];
+    if (!o) { const alt = typeof objectForLabel === 'function' && objectForLabel(id.replace(/_/g, ' ')); E(`${at} is not an object id${alt ? ` (did you mean "${alt}" — ${OBJECTS[alt].name}?)` : ' (use: node tools/curated.js lookup <word>)'}`); continue; }
+    if (seen) { if (seen.has(id)) E(`${at} is also defined in ${seen.get(id)}`); else seen.set(id, file); }
+    if (!e || typeof e !== 'object' || Array.isArray(e)) { E(`${at} must be an object`); continue; }
+    for (const k of Object.keys(e)) if (!CURATED_FIELDS.includes(k)) E(`${at}: unknown field "${k}" (allowed: ${CURATED_FIELDS.join(', ')})`);
+    if (e.status != null && !['draft', 'reviewed'].includes(e.status)) E(`${at}: "status" must be "draft" or "reviewed"`);
+    if (e.notes != null && (typeof e.notes !== 'string' || e.notes.length > CURATED_LIMITS.notes)) E(`${at}: "notes" must be text up to ${CURATED_LIMITS.notes} characters`);
+    if (e.lore == null && e.moves == null) W(`${at}: no lore and no moves`);
+    if (e.lore != null) {
+      if (typeof e.lore !== 'object' || Array.isArray(e.lore)) E(`${at}: "lore" must be an object keyed by rarity`);
+      else for (const [r, v] of Object.entries(e.lore)) {
+        if (!CURATED_RARITIES.includes(r)) { E(`${at}: lore rarity "${r}" is not one of ${CURATED_RARITIES.join(', ')}`); continue; }
+        const list = typeof v === 'string' ? [v] : v;
+        if (!Array.isArray(list) || !list.length) { E(`${at}.lore.${r}: must be a text or a list of texts`); continue; }
+        if (list.length > CURATED_LIMITS.variants) E(`${at}.lore.${r}: at most ${CURATED_LIMITS.variants} variants`);
+        list.forEach((t, i) => {
+          const where = `${at}.lore.${r}${list.length > 1 ? `[${i}]` : ''}`;
+          if (typeof t !== 'string') return E(`${where}: must be text`);
+          if (t !== t.trim()) E(`${where}: remove spaces at the start/end`);
+          if (t.trim().length < CURATED_LIMITS.loreMin) E(`${where}: too short (blank or under ${CURATED_LIMITS.loreMin} characters)`);
+          if (t.length > CURATED_LIMITS.loreMax) E(`${where}: ${t.length} characters (max ${CURATED_LIMITS.loreMax})`);
+          if (CURATED_PLACEHOLDER.test(t)) E(`${where}: contains a placeholder, template token or markup`);
+          if (/\s{2,}|[\r\n\t]/.test(t)) E(`${where}: double spaces or line breaks`);
+          if (!/[.!?…"”')]$/.test(t.trim())) W(`${where}: does not end with punctuation`);
+          if (/toolbox/i.test(t) && !/tool ?box|tool kit/i.test(o.name)) W(`${where}: mentions a toolbox but the object is ${o.name}`);
+        });
+        if (Array.isArray(list) && new Set(list).size !== list.length) E(`${at}.lore.${r}: the same text appears twice`);
+      }
+    }
+    if (e.moves != null) {
+      const slots = curatedMoveSlots(id);
+      if (typeof e.moves !== 'object' || Array.isArray(e.moves)) E(`${at}: "moves" must be an object of move key → name`);
+      else {
+        const names = new Map();
+        for (const [k, v] of Object.entries(e.moves)) {
+          if (!(k in slots)) { E(`${at}.moves: unknown move key "${k}" (this object has: ${Object.keys(slots).join(', ')})`); continue; }
+          if (typeof v !== 'string' || v.trim().length < CURATED_LIMITS.moveMin || v.length > CURATED_LIMITS.moveMax) { E(`${at}.moves.${k}: a name of ${CURATED_LIMITS.moveMin}–${CURATED_LIMITS.moveMax} characters`); continue; }
+          if (!/^[A-Za-z][A-Za-z0-9 '\-!&.,]*$/.test(v) || v !== v.trim() || /\s{2,}/.test(v) || CURATED_PLACEHOLDER.test(v)) E(`${at}.moves.${k}: letters, digits, spaces and ' - ! & . , only (no placeholders)`);
+          names.set(k, v);
+        }
+        // battle cooldowns are tracked per move NAME: two moves of one monster must never share a name
+        const final = new Map(Object.entries(slots).map(([k, d]) => [k, names.get(k) || d]));
+        const byName = {}; for (const [k, n] of final) (byName[n.toLowerCase()] = byName[n.toLowerCase()] || []).push(k);
+        for (const [n, ks] of Object.entries(byName)) if (ks.length > 1 && ks.some(k => names.has(k))) E(`${at}.moves: "${n}" would be used by ${ks.join(' and ')} (move names must differ)`);
+      }
+    }
+  }
+  return { errors, warnings };
+}
+
+// duplicate keys inside any one JSON object of the raw text (JSON.parse would keep only the last)
+function curatedDuplicateKeys(raw) {
+  const dups = [], stack = []; let i = 0;
+  const str = () => { let s = ''; i++; while (i < raw.length && raw[i] !== '"') { if (raw[i] === '\\') { s += raw[i + 1]; i += 2; } else s += raw[i++]; } i++; return s; };
+  while (i < raw.length) {
+    const c = raw[i];
+    if (c === '{') { stack.push({ keys: new Set(), obj: true, expectKey: true }); i++; }
+    else if (c === '[') { stack.push({ obj: false }); i++; }
+    else if (c === '}' || c === ']') { stack.pop(); i++; }
+    else if (c === ',') { const t = stack[stack.length - 1]; if (t && t.obj) t.expectKey = true; i++; }
+    else if (c === '"') { const t = stack[stack.length - 1], s = str(); if (t && t.obj && t.expectKey) { if (t.keys.has(s)) dups.push(s); t.keys.add(s); t.expectKey = false; } }
+    else i++;
+  }
+  return dups;
+}
+
+/* The curated flavour text for a NEW monster, or null (= use the procedural text). Only "reviewed" entries count.
+   The variant is chosen from the monster seed (no RNG calls). Defensive: any malformed field returns null. */
+function curatedLore(objId, rarity, seed) {
+  if (!CURATED.enabled || !objId) return null;
+  try {
+    const e = CURATED.data && Object.prototype.hasOwnProperty.call(CURATED.data, objId) ? CURATED.data[objId] : null;
+    if (!e || e.status !== 'reviewed' || !e.lore || typeof e.lore !== 'object') return null;
+    const v = e.lore[rarity], list = (typeof v === 'string' ? [v] : Array.isArray(v) ? v : []).filter(t => typeof t === 'string' && t.trim().length >= CURATED_LIMITS.loreMin && t.length <= CURATED_LIMITS.loreMax && !CURATED_PLACEHOLDER.test(t));
+    return list.length ? list[(seed >>> 0) % list.length].trim() : null;
+  } catch (err) { return null; }
+}
+
+/* Proposed (NOT wired into the game): the curated display name for a move slot, or null. Applying it needs a stable
+   move key stored on each ability first (see docs/CONTENT_WRITING_GUIDE.md, "Move names"). */
+function curatedMoveName(objId, slot) {
+  if (!CURATED.enabled || !CURATED.movesEnabled || !objId) return null;
+  try {
+    const e = CURATED.data && Object.prototype.hasOwnProperty.call(CURATED.data, objId) ? CURATED.data[objId] : null;
+    const v = e && e.status === 'reviewed' && e.moves && e.moves[slot];
+    return typeof v === 'string' && v.trim().length >= CURATED_LIMITS.moveMin && v.length <= CURATED_LIMITS.moveMax ? v.trim() : null;
+  } catch (err) { return null; }
+}

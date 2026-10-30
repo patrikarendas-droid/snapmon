@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "batch": "example-dummy",
+  "entries": {
+    "x_energy_drink": {
+      "status": "draft",
+      "notes": "DUMMY example for the schema only. Not real content; this file is never loaded by the game.",
+      "lore": {
+        "common": [
+          "Rattles in your bag all day, then sprays the ceiling the moment you crack it open.",
+          "Turns a lazy Sunday into a twitching eyelid and a 3 a.m. urge to alphabetise the spice rack."
+        ],
+        "uncommon": "Its heartbeat is audible through the aluminium, and it speeds up whenever someone yawns.",
+        "rare": "Night-shift workers leave it offerings of loose change. In return, the vending machine never jams on their floor.",
+        "epic": "One sip and you will not blink for a week. It feeds on the sleep you were meant to have.",
+        "legendary": "The first sunrise happened because it kept the sky awake. It is still deciding whether night deserves to return."
+      },
+      "moves": {
+        "signature": "Caffeine Spike",
+        "kit.fizz_burst": "Shake and Pop",
+        "legend": "The Long Shift",
+        "ultimate": "No More Sleep"
+      }
+    }
+  }
+}

@@ -194,6 +194,10 @@ const LORE_COLOUR = h => {
 function monsterLore(m) {
   const o = m.obj && OBJECTS[m.obj], cat = (o && o.cat) || m.cat || 'other';
   const kit = loreKitFor(o, cat), rarity = RARITY[m.rarity] ? m.rarity : 'common';
+  // curated, reviewed text (src/curated.js): not loaded by the game and switched off until explicitly activated;
+  // returns null for anything missing or malformed, and uses no random numbers
+  const curated = typeof curatedLore === 'function' ? curatedLore(m.obj, rarity, m.seed) : null;
+  if (curated) return curated;
   const R = mulberry(hashStr('lore|' + (m.obj || cat) + '|' + rarity + '|' + (m.seed >>> 0)));
   const pick = a => a[Math.floor(R() * a.length)];
   const pal = m.photo && m.photo.pal, colour = pal && pal.conf === 'confident' && pal.primary ? LORE_COLOUR(pal.primary) : null;
