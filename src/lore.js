@@ -81,6 +81,21 @@ const LORE_GROUP_KITS = {
   jewel: { place: ['the jewellery box', 'the bathroom sink', 'the gap between the floorboards'], stuff: ['sparkles', 'tiny scratches'], habit: ['slips off at the beach', 'hides in the sink drain', 'tarnishes the night before a wedding'], omen: ['every jewel in the land shines blood-red', 'kings and queens kneel before it'], realm: ['the treasure of all treasures', 'every crown ever worn'] },
   cosmetic: { place: ['the bathroom cabinet', 'the bottom of the handbag'], stuff: ['smudges', 'sweet perfume'], habit: ['smudges itself the moment you leave the house', 'rolls under the sink', 'dries up the day before a party'], omen: ['every mirror in the city shows a stranger', 'faces forget who they are'], realm: ['the perfect face', 'every disguise ever worn'] },
   door: { place: ['the front door', 'the long hallway', 'the room you never open'], stuff: ['creaks', 'cold draughts'], habit: ['creaks loudly when you sneak home late', 'locks itself when you step outside', 'slams in the wind'], omen: ['every door in the city opens at once', 'no lock will ever hold again'], realm: ['every door ever closed', 'the threshold between worlds'] },
+  // v0.4.5: food and drink groups (objects.js FOOD_RULES)
+  drink: { place: ['the back of the fridge', 'the vending machine', 'the corner-shop cooler'], stuff: ['sticky rings', 'fizz', 'condensation drips'], habit: ['shakes itself up just before you open it', 'goes flat the second you look away', 'keeps you awake until 3 a.m.'], omen: ['every drink in the city fizzes over at once', 'nobody anywhere can sleep again'], realm: ['the bottomless cup', 'every last drop'] },
+  meat: { place: ['the barbecue', 'the butcher\'s counter', 'the back of the grill'], stuff: ['sizzling grease', 'smoky sauce'], habit: ['sizzles louder when someone says the word "vegetarian"', 'burns on one side and stays raw on the other', 'steals the best spot on the grill'], omen: ['every barbecue in the land roars into flame', 'the smoke of a thousand grills blots out the sun'], realm: ['the eternal barbecue', 'the great grill at the end of the world'] },
+  seafood: { place: ['the fish market', 'the harbour restaurant', 'the bottom of the ice tray'], stuff: ['brine', 'a fishy whiff', 'crushed ice'], habit: ['smells stronger every hour it is left out', 'slips off the plate when you reach for it', 'pinches the waiter'], omen: ['the tide comes in and never goes out', 'every fish shop in town fills with seawater'], realm: ['the briny deep', 'the bottom of the sea'] },
+  dairy: { place: ['the cheese counter', 'the butter dish', 'the fridge door'], stuff: ['crumbs of rind', 'a sour smell', 'melted puddles'], habit: ['goes off one day before the date on the label', 'melts the moment you leave it on the table', 'smells stronger than it looks'], omen: ['all the milk in the land turns sour at once', 'the cheese caves rumble awake'], realm: ['the great cheese cave', 'the river of cream'] },
+  condiment: { place: ['the fridge door', 'the condiment tray', 'the back of the cupboard'], stuff: ['sticky drips', 'crusty lids'], habit: ['comes out all at once after refusing for ages', 'squirts sideways onto your shirt', 'glues its own lid shut'], omen: ['every jar in the land bursts open', 'the streets run thick and sticky'], realm: ['the endless pantry', 'the sauce that covers the world'] },
+  bowl: { place: ['the noodle bar', 'the kitchen table', 'the microwave at work'], stuff: ['steam', 'splashes of broth', 'stray grains'], habit: ['splashes broth on your shirt at the first slurp', 'is too hot until it is suddenly cold', 'never quite fills you up'], omen: ['every pot in the land boils over at once', 'a great tide of broth rolls through the streets'], realm: ['the bottomless bowl', 'the great cauldron of all meals'] },
+  bakery: { place: ['the bread bin', 'the bakery window', 'the toaster'], stuff: ['crumbs', 'flour dust', 'burnt crusts'], habit: ['goes stale the morning you wanted it', 'lands butter-side down on purpose', 'hides the last slice behind the heel'], omen: ['every oven in the city bakes at once', 'the smell of bread fills the world and no one can resist it'], realm: ['the eternal oven', 'the first loaf ever baked'] },
+  dumpling: { place: ['the steamer basket', 'the takeaway bag', 'the night-market stall'], stuff: ['steam puffs', 'dipping-sauce drips'], habit: ['bursts and squirts hot filling at the first bite', 'sticks to the bottom of the basket', 'hides one extra in the bag to make you feel guilty'], omen: ['every steamer in the city puffs at once', 'the fog of a thousand kitchens rolls in'], realm: ['the endless steamer', 'the folded heart of every kitchen'] },
+  snack: { place: ['the takeaway bag', 'the food truck', 'the late-night snack drawer'], stuff: ['greasy wrappers', 'salt crumbs', 'cheesy fingerprints'], habit: ['vanishes faster than you meant to eat it', 'drips sauce down your sleeve', 'calls to you at midnight'], omen: ['every food truck in the land opens at once and never closes', 'the whole city wakes up starving'], realm: ['the street of endless stalls', 'the midnight feast'] },
+  breakfast: { place: ['the frying pan', 'the breakfast table', 'the diner counter'], stuff: ['yolk drips', 'syrup puddles', 'shell bits'], habit: ['sticks to the pan just as you flip it', 'is cold before you sit down', 'makes you late every single morning'], omen: ['the sun refuses to rise until it is fed', 'every kitchen in the land smells of burning'], realm: ['the eternal morning', 'the first breakfast ever cooked'] },
+  veg: { place: ['the vegetable patch', 'the bottom of the fridge drawer', 'the market stall'], stuff: ['soil', 'crunchy peel', 'a sharp smell'], habit: ['hides at the bottom of the fridge drawer until it goes soft', 'makes children push their plates away', 'grows twice as big when you are not looking'], omen: ['the fields rise up and march on the cities', 'every garden in the land bursts out of its fences'], realm: ['the endless field', 'the deep, dark soil'] },
+  leafy: { place: ['the herb pot on the windowsill', 'the salad drawer', 'the kitchen garden'], stuff: ['loose leaves', 'a fresh green smell'], habit: ['wilts the day after you buy it', 'gets stuck in your teeth before a meeting', 'grows back the moment you pick it'], omen: ['green leaves cover every street overnight', 'the gardens swallow the town'], realm: ['the green that covers the world', 'the first garden'] },
+  nut: { place: ['the bottom of the snack bowl', 'the squirrel\'s stash', 'the old jar on the shelf'], stuff: ['shell fragments', 'crumbs'], habit: ['refuses to crack until you hit your thumb', 'rolls under the sofa and waits for years', 'hides its shell in your slipper'], omen: ['every squirrel in the land turns to stare', 'the great oaks drop their nuts on the city like hail'], realm: ['the forest floor', 'the hoard of every squirrel that ever lived'] },
+  pantry: { place: ['the back of the pantry', 'the top shelf of the cupboard', 'the corner-shop aisle'], stuff: ['spilled grains', 'flour dust', 'torn packets'], habit: ['tears open the moment you pick it up', 'expires the week before you finally use it', 'spills across the whole shelf'], omen: ['every cupboard in the land bursts open at once', 'the shelves of the world empty overnight'], realm: ['the endless pantry', 'the storehouse at the end of the world'] },
 };
 const LORE_GROUP_ALIAS = { light: 'lamp', furniture: 'chair', appliance: 'fridge', music: 'instrument', toyish: 'toy', tool: 'tool' };
 const loreKitFor = (o, cat) => { const g = o && o.lore; return (g && (LORE_GROUP_KITS[g] || LORE_KITS[LORE_GROUP_ALIAS[g]])) || LORE_KITS[cat] || LORE_KITS.other; };
@@ -120,13 +135,15 @@ const LORE_TEMPLATES = {
     'Old almanacs warn: if the {obj} goes silent, run. That silence is this creature breathing in.',
     'It does not hunt to eat. It hunts to be remembered, and nobody forgets.',
   ],
+  // v0.4.5: every Legendary line names its own object (directly or through its unique title), so no two legendary
+  // species can share their text
   legendary: [
-    'Where it takes hold, {omen}. Even the gods fear {realm}.',
+    'Where this {obj} takes hold, {omen}. Even the gods fear {realm}.',
     'Before the first {obj} was ever made, it was already waiting. It will remain after the last.',
     'Ancient texts call it {title}. When it wakes, {omen}.',
-    'Kingdoms have fallen to its {sig}. Its true name is spoken only in whispers.',
-    'It is the {colour} titan of {realm}. Stars dim when it opens its eyes.',
-    'Every {obj} in the world is a door, and it holds every key. It has begun to open them.',
+    'Kingdoms have fallen to its {sig}. Hunters call it {title}, and only in whispers.',
+    'This {colour} {obj} is the titan of {realm}. Stars dim when it opens its eyes.',
+    'Every {obj} in the world answers to it. It has begun to call them home.',
   ],
 };
 // second sentence from Rare upwards, so the rarest monsters read the most distinctive
@@ -182,7 +199,8 @@ function monsterLore(m) {
   const pal = m.photo && m.photo.pal, colour = pal && pal.conf === 'confident' && pal.primary ? LORE_COLOUR(pal.primary) : null;
   const objName = o ? o.name.split(' / ')[0].toLowerCase() : (m.word || CATEGORY[cat].name.split(' /')[0]).toLowerCase();
   const sig = (m.abilities && m.abilities[0] && m.abilities[0].name) || (o && o.sig && o.sig.name) || (o && o.sigName) || CATEGORY[cat].sig.name;
-  const title = m.name && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : LEGEND_TITLES[m.fam || CATEGORY[cat].fam] || 'the Nameless';
+  const fam = m.fam || (o && o.fam) || CATEGORY[cat].fam;
+  const title = m.name && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : o && typeof legendTitle === 'function' ? legendTitle(o, fam) : LEGEND_TITLES[fam] || 'the Nameless';
   const fill = t => t.replace(/\{(\w+)\}/g, (_, k) => ({ obj: objName, Obj: objName[0].toUpperCase() + objName.slice(1), colour, place: pick(kit.place), stuff: pick(kit.stuff), habit: pick(kit.habit), omen: pick(kit.omen), realm: pick(kit.realm), sig, title })[k] || '');
   const own = o && LORE_OBJECT[m.obj] && LORE_OBJECT[m.obj][rarity];
   let text;

@@ -2,6 +2,9 @@
 // (encounters, rarities, levels, battles with attacks, specials, items, traps and fleeing) must produce exactly the
 // recorded trace. v0.4.2 moved the rule numbers into MECH; this trace was recorded after checking that the result is
 // identical to v0.4.1 (41,667 steps compared). If you change the rules on purpose, run with "record" and say so.
+// v0.4.5 re-recorded on purpose: monsters' extra moves now come from per-object move kits and Legendaries get unique
+// moves, so battles play out differently. Replaying this trace with the v0.4.4 move/name/family functions patched in
+// reproduced the old fixture exactly (35,875 steps): odds, rarities, levels, stats and battle maths are unchanged.
 const G = require('./load')(), crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/rules-trace.json');
 let seed = 12345; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };

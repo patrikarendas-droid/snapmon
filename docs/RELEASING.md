@@ -22,6 +22,7 @@ Semantic versions, tagged on the production commit that shipped:
 | `v0.3.1`–`v0.3.3` | Field-test follow-ups: second-opinion rules, fusion fixes, field-test tools. |
 | `v0.4.0` | Hybrid is the single standard recogniser; photo-derived monster colours; Android Back navigation. Save format 3 (unchanged). |
 | `v0.4.1` | TinyCLIP runs on the CPU (WASM, one thread) for every player, for identical decisions across devices; recognition timings in the developer panel. Same models, rules and saves. |
+| `v0.4.5` | Food and drink identity (drinks no longer drawn as burgers; meat, seafood, bowls, dumplings, breads, sauces, dairy, vegetables, greens, nuts get their own designs, lore and moves); object families where the category does not fit (spoon, pen); per-object move kits; every Legendary has a unique title, legend move, Ultimate and flavour text. |
 | `v0.4.4` | Development journal (`docs/DEVELOPMENT_JOURNAL.md`, `CLAUDE.md`); the Analysing screen is painted before CPU recognition starts (Force CPU shutter freeze); developer Quick Monster Test Mode with a separate test collection. No gameplay, odds, model or save-format change. |
 | `v0.4.3` | Monsters match their object: new designs (wall plates, security cameras, street furniture, boards, small parts…) and design rules for ~1,000 vocabulary objects that used to borrow a category look (a light switch drawn as a toolbox), object-group flavour text and move names; no countdown on identifications; SNAP only works when the Spirit Lens is ready. Same odds, combat numbers, models and save format. |
 | `v0.4.2` | Playtest fixes: camera status text, camera zoom, Guide, rarity-specific flavour text, engine recovery after background, Settings no longer jumps, "Wrong object" before any encounter roll. Same models, thresholds, rules, odds and save format (monsters gain a stored `lore` text). |
@@ -77,6 +78,9 @@ Either way the Pages workflow redeploys automatically.
 Rolling back from v0.4.0 to v0.3.x is save-compatible (same save format 3): monsters keep their stored colours, and
 older code simply ignores the extra palette data. v0.3.x would bring back the old recogniser switch for developers.
 Rolling back from v0.4.1 to v0.4.0 is fully save-compatible; it only returns TinyCLIP to WebGPU where available.
+Rolling back from v0.4.5 to v0.4.4 is save-compatible (same format; monsters keep their stored moves, names and text).
+Visual consequence: monsters created in v0.4.5 with the new `meal` template or the new produce shapes (stalk, leaf, pod,
+chili, nut) are drawn as plain blobs/round produce by v0.4.4 until v0.4.5 is restored.
 Rolling back from v0.4.4 to v0.4.3 is fully save-compatible (test monsters live in their own storage key and are simply ignored).
 Rolling back from v0.4.3 to v0.4.2 is save-compatible (same format; nothing is lost), with one visual consequence:
 monsters of a redesigned vocabulary object that were created or updated in v0.4.3 have `dna.shape: "obj"`, which v0.4.2

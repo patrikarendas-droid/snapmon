@@ -628,6 +628,117 @@ const DESIGN_RULES = [
   [/shoe rack|magazine rack|wine rack|spice rack|ladder shelf|cube shelf|room divider|folding screen/, LIKE('bookshelf'), 'furniture'],
   [/bed frame|headboard|daybed|futon frame|sofa bed/, LIKE('bed'), 'furniture'],
 ];
+/* v0.4.5: food and drink. Before, every unlisted meal, drink and vegetable borrowed its category's single template, so
+   an energy drink became a burger with takeaway-box lore and a grease attack. These rules (checked before DESIGN_RULES,
+   only for food, dessert, fruit/veg and bottle objects) give drinks drink bodies, and meats, seafood, bowls, dumplings,
+   breads, sauces, pantry goods, vegetables, greens and nuts their own designs, lore groups and move kits. */
+const FOOD_CATS = new Set(['food', 'cake', 'fruit', 'bottle']);
+const FOOD_RULES = [
+  // drinks
+  [/\benergy drink\b/, LIKE('can'), 'drink', 'Energy Spike', [140, 70, 45]],
+  [/\b(soda|cola|beer can)\b/, LIKE('can'), 'drink', 'Fizz Blast', [0, 70, 45]],
+  [/bubble tea/, V('vessel', { prof: [[18, 7], [3, 8]], straw: true, liquid: true, pearls: true }), 'drink', 'Tapioca Barrage', [30, 40, 72]],
+  [/^tea$|hot chocolate/, LIKE('mug'), 'drink', 'Scalding Sip'],
+  [/smoothie|milkshake/, V('vessel', { prof: [[18, 6], [3, 7]], straw: true, liquid: true, foam: true }), 'drink', 'Straw Slurp', [330, 55, 72]],
+  [/lemonade|^juice$/, V('vessel', { prof: [[20, 6]], straw: true, liquid: true }), 'drink', 'Citrus Splash', [50, 85, 62]],
+  [/^beer$/, V('vessel', { prof: [[18, 7]], handle: true, liquid: true, foam: true }), 'drink', 'Froth Over', [40, 80, 52]],
+  [/^wine$|cocktail/, LIKE('glass'), 'drink', 'Toast of Doom', [345, 60, 35]],
+  [/water glass/, LIKE('glass'), 'drink', 'Splash Down', [200, 40, 80]],
+  // pantry and sauces
+  [/tea bag|coffee beans|coffee bag|^cocoa$|^flour$|^sugar$|^rice$/, V('meal', { kind: 'sack' }), 'pantry', 'Spill Out', [35, 35, 75]],
+  [/pasta box|noodles packet/, V('meal', { kind: 'box' }), 'pantry', 'Shelf Drop'],
+  [/^salt$|^spices$/, LIKE('salt_shaker'), 'pantry', 'Seasoning Storm'],
+  [/olive oil|vinegar|maple syrup|soy sauce/, V('vessel', { prof: [[16, 6], [4, 4], [5, 2]], label: true, cap: 2 }), 'condiment', 'Slick Pour', [45, 70, 40]],
+  [/ketchup|mustard|mayonnaise|hot sauce/, V('vessel', { prof: [[16, 7], [4, 5]], label: true, tip: true }), 'condiment', 'Squeeze Shot', [2, 75, 45]],
+  [/^honey$|^jam$|peanut butter|nutella|^salsa$|^hummus$|^dip$|caviar/, LIKE('jar'), 'condiment', 'Sticky Trap'],
+  // dairy
+  [/cheese wedge|^cheese$/, V('meal', { kind: 'wedge' }), 'dairy', 'Holey Smack', [48, 85, 62]],
+  [/^butter$/, V('meal', { kind: 'block' }), 'dairy', 'Slippery Spread', [50, 80, 75]],
+  [/^yogurt$/, V('vessel', { prof: [[15, 9]], rim: true, label: true }), 'dairy', 'Creamy Swirl', [0, 0, 94]],
+  [/^tofu$/, V('meal', { kind: 'block' }), 'veg', 'Wobble Block', [45, 25, 88]],
+  // bowls
+  [/ramen|^pho$|noodle/, V('meal', { kind: 'bowl', fill: 'noodles' }), 'bowl', 'Noodle Lasso'],
+  [/curry|rice bowl|fried rice|paella|risotto|burrito bowl/, V('meal', { kind: 'bowl', fill: 'rice' }), 'bowl', 'Steaming Spoonful'],
+  [/soup can/, LIKE('can'), 'bowl', 'Tin Soup Splash'],
+  [/cereal|oatmeal|granola|porridge|mac and cheese|^beans$|coleslaw/, V('meal', { kind: 'bowl', fill: 'cereal' }), 'bowl', 'Soggy Splash'],
+  [/salad bowl/, V('meal', { kind: 'bowl', fill: 'salad' }), 'leafy', 'Crunchy Toss'],
+  [/lasagna/, V('meal', { kind: 'slab' }), 'bowl', 'Layer Crush', [38, 70, 60]],
+  // meat
+  [/bacon/, V('meal', { kind: 'bacon' }), 'meat', 'Crispy Strip', [8, 55, 55]],
+  [/steak/, V('meal', { kind: 'steak' }), 'meat', 'Searing Slab', [5, 55, 38]],
+  [/chicken wing|drumstick chicken|fried chicken/, V('meal', { kind: 'drumstick' }), 'meat', 'Drumstick Drum', [30, 70, 50]],
+  [/meatball|nugget/, V('meal', { kind: 'balls' }), 'meat', 'Meatball Barrage', [20, 50, 40]],
+  [/kebab/, V('meal', { kind: 'skewer' }), 'meat', 'Skewer Spin', [20, 55, 42]],
+  [/sausage roll/, V('meal', { kind: 'roll' }), 'bakery', 'Flaky Wrap', [35, 65, 60]],
+  // seafood
+  [/fish and chips|fish fillet/, V('meal', { kind: 'fillet' }), 'seafood', 'Battered Slap', [35, 65, 60]],
+  [/shrimp|prawn/, V('meal', { kind: 'shrimp' }), 'seafood', 'Tail Flick', [12, 75, 62]],
+  [/lobster/, LIKE('crab'), 'seafood', 'Claw Crush', [5, 70, 48]],
+  [/oyster|mussel/, V('meal', { kind: 'shell' }), 'seafood', 'Clam Up', [220, 15, 40]],
+  // dumplings and wraps
+  [/dumpling|dim sum|empanada|ravioli|gnocchi|calzone/, V('meal', { kind: 'dumpling' }), 'dumpling', 'Pleated Punch', [40, 45, 82]],
+  [/samosa/, V('meal', { kind: 'samosa' }), 'dumpling', 'Triple Corner', [38, 70, 55]],
+  [/bao bun/, V('meal', { kind: 'bun' }), 'dumpling', 'Pillow Punch', [40, 25, 92]],
+  [/spring roll|enchilada|tamale/, V('meal', { kind: 'roll' }), 'dumpling', 'Rolling Crunch', [38, 70, 55]],
+  [/falafel/, V('meal', { kind: 'balls' }), 'snack', 'Chickpea Volley', [35, 60, 40]],
+  [/shawarma|gyro|burrito|quesadilla|wrap sandwich/, LIKE('taco'), 'snack', 'Wrap Attack'],
+  [/nachos/, V('meal', { kind: 'nachos' }), 'snack', 'Chip Shower', [45, 80, 55]],
+  [/pizza slice box/, LIKE('pizza'), 'snack', 'Cheese Pull'],
+  // bread and breakfast
+  [/sandwich roll|panini/, LIKE('burger'), 'bakery', 'Pressed Crunch'],
+  [/french toast|garlic bread|^toast$/, V('meal', { kind: 'toast' }), 'bakery', 'Toasty Smack', [35, 60, 62]],
+  [/pancake|waffle plate|crepe/, V('meal', { kind: 'stack' }), 'breakfast', 'Syrup Flood', [35, 60, 65]],
+  [/omelette|scrambled eggs/, LIKE('fried_egg'), 'breakfast', 'Egg-splosion'],
+  // vegetables, greens, nuts and seeds
+  [/radish|beet|turnip/, V('produce', { shape: 'round', top: 'leafy' }), 'veg', 'Root Bash', [340, 60, 45]],
+  [/parsnip|horseradish/, V('produce', { shape: 'carrot', top: 'leafy' }), 'veg', 'Root Bash', [45, 40, 80]],
+  [/celery|asparagus|leek|spring onion/, V('produce', { shape: 'stalk' }), 'veg', 'Stalk Whip', [100, 50, 55]],
+  [/spinach|kale|chard|bok choy|^herbs$|basil|mint leaves|parsley|rosemary|thyme|dill|sprouts/, V('produce', { shape: 'leaf' }), 'leafy', 'Leaf Lash', [115, 55, 40]],
+  [/brussels sprout/, V('produce', { shape: 'small', ridges: true }), 'veg', 'Sprout Spit', [95, 50, 45]],
+  [/green bean|pea pod|okra|edamame/, V('produce', { shape: 'pod' }), 'veg', 'Pea Shooter', [100, 55, 45]],
+  [/chili|jalapeno/, V('produce', { shape: 'chili' }), 'veg', 'Fire Breath', [2, 80, 48]],
+  [/ginger|^yam$|cassava|taro/, V('produce', { shape: 'oval', dimples: true }), 'veg', 'Knobbly Knock', [35, 45, 60]],
+  [/peanut|walnut|almond|cashew|pistachio|hazelnut|chestnut|pecan/, V('produce', { shape: 'nut' }), 'nut', 'Nutcracker', [30, 45, 45]],
+  [/seeds|sesame|lentils|chickpeas|kidney beans|soybean/, V('meal', { kind: 'bowl', fill: 'beans' }), 'pantry', 'Seed Scatter', [35, 45, 45]],
+  [/blueberry|blackberry|cranberry|gooseberry|currant/, V('produce', { shape: 'cluster' }), null, 'Berry Burst', [250, 50, 35]],
+  [/^hip$/, V('produce', { shape: 'small', top: 'stem' }), null, 'Thorny Burst', [8, 75, 45]],
+  [/^date$|raisin|prune|olive/, V('produce', { shape: 'small' }), null, 'Pit Spit', [20, 40, 30]],
+  [/mango|papaya|guava/, V('produce', { shape: 'pear' }), null, 'Tropical Burst', [40, 85, 55]],
+  [/^kiwi$/, V('produce', { shape: 'oval', dimples: true }), null, 'Fuzzy Burst', [30, 40, 35]],
+  [/dragon fruit/, V('produce', { shape: 'oval', top: 'crown' }), null, 'Dragon Bloom', [330, 70, 55]],
+  [/star fruit/, V('produce', { shape: 'oval', ridges: true }), null, 'Star Burst', [55, 80, 55]],
+  [/durian/, V('produce', { shape: 'round', dimples: true, top: 'stem' }), null, 'Stink Bomb', [70, 45, 45]],
+  [/passion fruit|lychee|persimmon|quince|apricot|nectarine|plum|fig|pomelo|kumquat|yuzu/, V('produce', { shape: 'round', top: 'stem' }), null, 'Juicy Burst'],
+  // sweets and desserts that are not cakes
+  [/lollipop|gummy|jelly beans|toffee|caramel|licorice|chewing gum|^mint$|cake pop|truffle/, LIKE('candy'), null, 'Sugar Spike'],
+  [/cotton candy|candy floss|marshmallow/, V('produce', { shape: 'round', top: 'none' }), null, 'Fluff Puff', [320, 55, 85]],
+  [/sugar cookie|fortune cookie|wafer|macaron/, LIKE('cookie'), null, 'Crumble Toss'],
+  [/brownie|fudge/, LIKE('chocolate'), null, 'Fudge Slam'],
+  [/pudding|jelly|jello|custard|mousse/, V('meal', { kind: 'bun' }), null, 'Wobble Wave', [350, 60, 60]],
+  [/gelato cup|frozen yogurt|sundae/, LIKE('ice_cream'), null, 'Brain Freeze Blast'],
+  [/churro/, V('meal', { kind: 'roll' }), 'bakery', 'Sugar Twist'],
+  [/cinnamon roll|danish|scone|pastry|eclair|cream puff/, V('meal', { kind: 'bun' }), 'bakery', 'Glaze Glob', [35, 60, 65]],
+  [/donut box|chocolate box|biscuit tin/, V('meal', { kind: 'box' }), null, 'Lid Pop'],
+  [/birthday candle/, LIKE('candle'), null, 'Wish Flame'],
+  // drink and food bottles
+  [/kombucha|milk bottle|drinking bottle|sports bottle|hip flask|decanter|carafe|sippy cup/, LIKE('bottle'), 'drink', 'Glug Glug'],
+  [/sauce bottle|oil bottle|syrup bottle/, V('vessel', { prof: [[16, 6], [4, 4], [5, 2]], label: true, cap: 2 }), 'condiment', 'Slick Pour'],
+  [/honey jar|pickle jar|spice jar|baby food jar|cookie jar/, LIKE('jar'), 'condiment', 'Sticky Trap'],
+];
+// v0.4.5: a group can change the monster family where the category's family does not fit the object (a spoon or a pen
+// is not a Mechanical monster just because its category is "tool" or "keys")
+const GROUP_FAM = { kitchen: 'household', office: 'household', craft: 'household', gym: 'household', sport: 'household', leafy: 'botanical' };
+// named objects whose category does not describe them: [group, signature-move name]
+const NAMED_GROUPS = {
+  cutlery_spoon: ['kitchen', 'Stir Crazy'], cutlery_fork: ['kitchen', 'Prong Poke'], knife: ['kitchen', 'Chop Chop'], spatula: ['kitchen', 'Flip Out'], whisk: ['kitchen', 'Whisk Away'],
+  sewing_machine: ['craft', 'Stitch Storm'], pen: ['office', 'Ink Blot'], stapler: ['office', 'Staple Storm'], scissors: ['office'], headphones: ['media', 'Bass Boost'],
+  dumbbell: ['gym', 'Heavy Rep'], trophy: ['sport', 'Victory Lap'], traffic_cone: ['street', 'Detour'],
+  hotdog: ['meat', 'Relish Rush'], sushi: ['seafood', 'Wasabi Wallop'], egg: ['breakfast', 'Crack Attack'], fried_egg: ['breakfast', 'Yolk Burst'], milk_carton: ['drink', 'Milk Splash'],
+  broccoli: ['veg', 'Floret Blast'], carrot: ['veg', 'Carrot Jab'], potato: ['veg', 'Spud Slam'], onion: ['veg', 'Tear Gas'], pumpkin: ['veg', 'Gourd Bash'], cucumber: ['veg', 'Cool Cucumber'],
+  corn: ['veg', 'Kernel Pop'], eggplant: ['veg', 'Purple Bruise'], pepper: ['veg', 'Pepper Spray'],
+  noodles: ['bowl', 'Noodle Lasso'], bread: ['bakery', 'Loaf Launch'], croissant: ['bakery', 'Flaky Fold'], fries: ['snack', 'Salt Storm'], popcorn: ['snack', 'Pop Pop Pop'], taco: ['snack', 'Taco Tuesday'],
+};
+for (const [id, [group, sig]] of Object.entries(NAMED_GROUPS)) { const o = OBJECTS[id]; if (!o) continue; o.lore = group; if (sig && !o.sig) o.sigName = sig; if (GROUP_FAM[group]) o.fam = GROUP_FAM[group]; }
 // categories whose own template is ONE specific object (a toolbox, a key, a fridge…): objects that no rule covers get
 // a neutral template of the right kind instead of looking like that specific object
 const CAT_FALLBACK_VIS = {
@@ -637,10 +748,11 @@ const CAT_FALLBACK_VIS = {
 function applyDesignRules(o) {
   if (o.vis) return;
   const label = o.name.toLowerCase();
-  for (const [re, vis, lore, sig, col] of DESIGN_RULES) {
+  for (const [re, vis, lore, sig, col] of FOOD_CATS.has(o.cat) ? [...FOOD_RULES, ...DESIGN_RULES] : DESIGN_RULES) {
     if (!re.test(label)) continue;
     if (vis.like && !OBJECTS[vis.like]) break; // safety: never point at a missing design
     o.vis = vis; o.lore = lore || null; if (sig) o.sigName = sig; o.rule = String(re);
+    if (GROUP_FAM[lore]) o.fam = GROUP_FAM[lore];
     if (col) [o.h, o.s, o.l] = col; // the object's usual colour when the photo gives none (light switches are white)
     return;
   }

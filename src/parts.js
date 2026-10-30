@@ -215,6 +215,10 @@ const PARTS = (() => {
       if (p.gable) { poly(g, [[Math.round(20 - body[2]), top + 1], [20, top - 5], [Math.round(20 + body[2]), top + 1]], BL); rect(g, 19, top - 7, 2, 2, PA); }
       if (p.nozzle) { rect(g, 18, top - 3, 4, 3, A); rect(g, 14, top - 3, 4, 1, A); }
       if (p.steam) for (let s = 0; s < 4; s++) gset(g, 20 + (s % 2), top - 3 - s, ST);
+      const tw = widths[widths.length - 1][2];
+      if (p.foam) { ell(g, 20, top, tw + 0.5, 2.2, PA); ell(g, 20 - tw * 0.5, top - 1, 2.5, 2, PA); ell(g, 20 + tw * 0.4, top - 1.5, 2.5, 2, PA); } // milkshake / beer head
+      if (p.pearls) for (let i = 0; i < 7; i++) ell(g, 20 - mid[2] + 2.5 + (i * 3) % Math.max(3, Math.round(mid[2] * 2 - 4)), mid[1] - 2.5 - (i % 2) * 2, 1.2, 1.2, K); // bubble-tea tapioca
+      if (p.tip) poly(g, [[18, top], [22, top], [20, top - 4]], A); // squeeze-bottle nozzle
       const fy = body[0] + (body[1] - body[0]) * (p.label ? 0.2 : 0.35);
       return { eyes: { x: 20, y: Math.round(fy) + 1, span: Math.max(2, Math.min(5, Math.floor(body[2] / 2))) }, mouth: { x: 20, y: Math.round(body[0] + (body[1] - body[0]) * 0.7), w: Math.max(4, Math.min(10, Math.round(body[2]))) }, arms: [{ x: Math.round(20 - body[2]), y: (body[0] + body[1]) / 2, d: -1 }, { x: Math.round(20 + body[2]), y: (body[0] + body[1]) / 2, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: top }, rigid: !!p.rigid };
     },
@@ -227,7 +231,12 @@ const PARTS = (() => {
       if (sh === 'small') { rx = 7; ry = 7; cy = 27; }
       if (sh === 'cluster') { for (let r = 0; r < 4; r++) for (let i = 0; i <= 3 - r; i++) ell(g, 20 + (i - (3 - r) / 2) * 6, 12 + r * 6, 3.2, 3.2, B); rect(g, 19, 6, 2, 4, MD); ell(g, 23, 7, 3, 1.5, S); return { eyes: { x: 20, y: 17, span: 4 }, mouth: { x: 20, y: 23, w: 5 }, arms: [{ x: 8, y: 16, d: -1 }, { x: 32, y: 16, d: 1 }], legs: null, noLegs: true, top: { x: 20, y: 6 } }; }
       if (sh === 'pair') { line(g, 14, 22, 20, 6, MD); line(g, 26, 24, 20, 6, MD); ell(g, 21, 6, 3, 1.5, S); ell(g, 13, 26, 7, 7, B); ell(g, 27, 28, 6.5, 6.5, B); return { eyes: { x: 13, y: 25, span: 3 }, mouth: { x: 13, y: 29, w: 4 }, arms: [], legs: null, noLegs: true, top: { x: 20, y: 6 } }; }
-      if (sh === 'pear') { ell(g, 20, 27, 10 * s, 8 * s, B); ell(g, 20, 16, 6 * s, 7 * s, B); cy = 24; ry = 10; }
+      if (sh === 'stalk') { for (const [x, y0] of [[13, 11], [18, 8], [23, 12]]) { rect(g, x, y0, 4, 36 - y0, B); rect(g, x, y0, 1, 36 - y0, BL); } C.leaves(g, 20, 11, 5, 7, 12); rect(g, 12, 27, 16, 2, A); cy = 20; ry = 10; rx = 7; }
+      else if (sh === 'leaf') { ell(g, 20, 20, 11 * s, 14 * s, B); poly(g, [[16, 31], [24, 31], [20, 37]], B); line(g, 20, 8, 20, 36, BD); for (let y = 12; y < 32; y += 5) { line(g, 20, y + 3, 13, y, BD); line(g, 20, y + 3, 27, y, BD); } cy = 20; ry = 12; rx = 11; }
+      else if (sh === 'pod') { ell(g, 20, 24, 15 * s, 6, B); for (let x = 10; x <= 30; x += 5) ell(g, x, 23, 2.2, 2.2, BL); line(g, 6, 22, 3, 18, MD); cy = 24; ry = 6; rx = 15; }
+      else if (sh === 'chili') { for (const [x, y, r] of [[15, 15, 6], [19, 21, 5.5], [23, 26, 4.5], [26, 30, 3.2], [28, 33, 2]]) ell(g, x, y, r, r, B); ell(g, 14, 9, 4.5, 2, S); line(g, 14, 9, 12, 4, S); cx = 17; cy = 18; rx = 6; ry = 6; }
+      else if (sh === 'nut') { ell(g, 20, 22, 10 * s, 12 * s, B); line(g, 20, 11, 20, 33, BD); for (let i = 0; i < 8; i++) gset(g, 14 + (i * 5) % 12, 15 + (i * 7) % 15, BD); cy = 22; ry = 12; rx = 10; }
+      else if (sh === 'pear') { ell(g, 20, 27, 10 * s, 8 * s, B); ell(g, 20, 16, 6 * s, 7 * s, B); cy = 24; ry = 10; }
       else if (sh === 'carrot') { poly(g, [[12, 12], [28, 12], [21, 37], [19, 37]], B); for (let y = 16; y < 32; y += 4) line(g, 15 + (y - 12) * 0.2, y, 18, y, BD); cy = 18; ry = 6; rx = 8; }
       else if (sh === 'curved') { ell(g, 20, 22, 14, 8, B); ell(g, 22, 15, 12, 6, E); cy = 25; ry = 5; }
       else if (sh === 'heart') { ell(g, 20, 17, 13, 9, B); poly(g, [[7, 18], [33, 18], [20, 36]], B); cy = 20; ry = 8; }
@@ -403,6 +412,66 @@ const PARTS = (() => {
         default: rrect(g, 11, 13, 18, 18, 4, B); eyes = { x: 20, y: 20, span: 3 }; mouth = { x: 20, y: 25, w: 5 };
       }
       return { eyes, mouth, arms, legs, noLegs, float, top, rigid: true };
+    },
+    // v0.4.5: prepared food and pantry items (before, every unlisted meal borrowed the burger body)
+    meal(g, p, v) {
+      const k = p.kind;
+      let eyes = { x: 20, y: 22, span: 3 }, mouth = { x: 20, y: 27, w: 5 }, arms = [{ x: 9, y: 24, d: -1 }, { x: 31, y: 24, d: 1 }], legs = { y: 34, xs: [15, 25] }, noLegs = false, float = false, top = { x: 20, y: 10 };
+      switch (k) {
+        case 'bowl': {
+          const f = p.fill || 'rice', fc = f === 'salad' ? S : f === 'noodles' || f === 'cereal' ? GO : f === 'beans' ? AD : PA;
+          ell(g, 20, 20, 12, 5, fc); ell(g, 20, 17, 8, 4, fc);
+          if (f === 'noodles') { for (let i = 0; i < 5; i++) line(g, 11 + i * 4, 15 + (i % 2), 13 + i * 4, 21, AL); line(g, 26, 9, 30, 20, AD); line(g, 28, 9, 31, 20, AD); }
+          if (f === 'rice') for (let i = 0; i < 6; i++) gset(g, 14 + i * 2.5, 17 + (i % 2) * 2, A);
+          if (f === 'cereal' || f === 'beans') for (let i = 0; i < 9; i++) ell(g, 11 + (i * 7) % 19, 16 + (i * 3) % 6, 1.2, 1, f === 'beans' ? BD : AD);
+          if (f === 'salad') for (let i = 0; i < 5; i++) ell(g, 12 + i * 4, 16 + (i % 2) * 3, 1.5, 1.5, i % 2 ? TO : SL);
+          poly(g, [[6, 21], [34, 21], [30, 31], [10, 31]], B); ell(g, 20, 30, 10, 3, B); rect(g, 6, 21, 29, 2, BL); rect(g, 15, 33, 10, 2, BD);
+          eyes = { x: 20, y: 25, span: 4 }; mouth = { x: 20, y: 29, w: 6 }; arms = [{ x: 7, y: 24, d: -1 }, { x: 33, y: 24, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 12 }; break;
+        }
+        case 'sack': poly(g, [[15, 13], [25, 13], [28, 8], [12, 8]], B); rrect(g, 10, 14, 20, 21, 6, B); rect(g, 14, 12, 12, 2, AD); rrect(g, 13, 21, 14, 8, 1, PA); rect(g, 15, 26, 10, 1, BD);
+          eyes = { x: 20, y: 18, span: 3 }; mouth = { x: 20, y: 24, w: 5 }; arms = [{ x: 10, y: 24, d: -1 }, { x: 30, y: 24, d: 1 }]; legs = { y: 35, xs: [15, 25] }; top = { x: 20, y: 8 }; break;
+        case 'box': rrect(g, 11, 8, 18, 26, 1, B); rect(g, 11, 8, 18, 5, A); rrect(g, 14, 24, 12, 7, 1, PA); for (let x = 15; x < 25; x += 3) line(g, x, 26, x + 2, 29, GO);
+          eyes = { x: 20, y: 16, span: 3 }; mouth = { x: 20, y: 21, w: 5 }; arms = [{ x: 11, y: 20, d: -1 }, { x: 29, y: 20, d: 1 }]; top = { x: 20, y: 8 }; legs = { y: 35, xs: [15, 25] }; break;
+        case 'wedge': poly(g, [[4, 32], [36, 32], [36, 13]], B); line(g, 4, 32, 36, 13, BL); line(g, 36, 13, 36, 32, BD); for (const [x, y, r] of [[28, 27, 2], [32, 20, 1.5], [21, 29, 1.5], [33, 29, 1]]) ell(g, x, y, r, r * 0.8, BD);
+          eyes = { x: 28, y: 23, span: 3 }; mouth = { x: 27, y: 28, w: 4 }; arms = [{ x: 16, y: 28, d: -1 }, { x: 36, y: 23, d: 1 }]; legs = { y: 33, xs: [14, 30] }; top = { x: 34, y: 13 }; break;
+        case 'block': rrect(g, 8, 17, 24, 14, 2, B); rect(g, 8, 17, 24, 3, BL); rect(g, 8, 17, 7, 14, PA); rect(g, 14, 17, 1, 14, BD);
+          eyes = { x: 23, y: 23, span: 3 }; mouth = { x: 23, y: 27, w: 4 }; arms = [{ x: 8, y: 24, d: -1 }, { x: 32, y: 24, d: 1 }]; legs = { y: 32, xs: [14, 26] }; top = { x: 20, y: 17 }; break;
+        case 'bacon': for (let x = 4; x < 37; x++) { const o = Math.round(Math.sin(x / 3.2) * 2.5); rect(g, x, 17 + o, 1, 10, B); gset(g, x, 20 + o, PA); gset(g, x, 21 + o, PA); gset(g, x, 25 + o, BL); }
+          eyes = { x: 20, y: 21, span: 4 }; mouth = { x: 20, y: 25, w: 5 }; arms = [{ x: 5, y: 22, d: -1 }, { x: 35, y: 22, d: 1 }]; legs = { y: 29, xs: [13, 27] }; top = { x: 20, y: 15 }; break;
+        case 'steak': ell(g, 20, 23, 14, 10, PA); ell(g, 20, 23, 12.5, 8.5, B); ell(g, 12, 23, 2.5, 3.5, PA); line(g, 12, 18, 12, 28, PA); for (const x of [16, 22, 28]) line(g, x - 3, 30, x + 3, 16, BD);
+          eyes = { x: 22, y: 20, span: 3 }; mouth = { x: 22, y: 27, w: 5 }; arms = [{ x: 6, y: 23, d: -1 }, { x: 34, y: 23, d: 1 }]; legs = { y: 33, xs: [15, 25] }; top = { x: 20, y: 13 }; break;
+        case 'drumstick': line(g, 24, 26, 33, 34, PA, 3); ell(g, 34, 33, 2, 2, PA); ell(g, 32, 36, 2, 2, PA); ell(g, 17, 19, 11, 10, B); ell(g, 21, 25, 7, 6, B); for (let i = 0; i < 7; i++) gset(g, 10 + (i * 5) % 14, 14 + (i * 3) % 10, BD);
+          eyes = { x: 16, y: 18, span: 3 }; mouth = { x: 16, y: 24, w: 5 }; arms = [{ x: 6, y: 20, d: -1 }, { x: 27, y: 18, d: 1 }]; legs = { y: 30, xs: [12, 20] }; top = { x: 17, y: 9 }; break;
+        case 'balls': for (const [x, y, r] of [[13, 27, 6], [27, 27, 6], [20, 17, 7.5]]) { ell(g, x, y, r, r, B); gset(g, x - 2, y - 2, BL); gset(g, x + 2, y + 1, BD); gset(g, x - 1, y + 3, BD); }
+          eyes = { x: 20, y: 16, span: 3 }; mouth = { x: 20, y: 20, w: 4 }; arms = [{ x: 7, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 9 }; break;
+        case 'skewer': line(g, 20, 2, 20, 37, AL); rrect(g, 13, 6, 14, 6, 2, S); rrect(g, 11, 13, 18, 13, 3, B); rrect(g, 13, 27, 14, 6, 2, TO);
+          eyes = { x: 20, y: 18, span: 3 }; mouth = { x: 20, y: 22, w: 5 }; arms = [{ x: 11, y: 19, d: -1 }, { x: 29, y: 19, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 20, y: 2 }; break;
+        case 'roll': ell(g, 19, 24, 15, 7, B); ell(g, 33, 24, 3.5, 6, BL); ell(g, 33, 24, 2, 3.5, A); for (const x of [10, 16, 22]) line(g, x, 18, x + 3, 30, BD);
+          eyes = { x: 18, y: 22, span: 3 }; mouth = { x: 18, y: 27, w: 5 }; arms = [{ x: 5, y: 24, d: -1 }, { x: 35, y: 24, d: 1 }]; legs = { y: 31, xs: [13, 25] }; top = { x: 19, y: 17 }; break;
+        case 'slab': rect(g, 7, 14, 26, 3, GO); for (let x = 8; x < 33; x += 4) ell(g, x, 14, 1.8, 1.2, GO); rect(g, 7, 17, 26, 4, B); rect(g, 7, 21, 26, 2, PA); rect(g, 7, 23, 26, 4, BD); rect(g, 7, 27, 26, 2, PA); rect(g, 7, 29, 26, 4, B);
+          eyes = { x: 20, y: 24, span: 4 }; mouth = { x: 20, y: 31, w: 6 }; arms = [{ x: 7, y: 24, d: -1 }, { x: 33, y: 24, d: 1 }]; legs = { y: 34, xs: [13, 27] }; top = { x: 20, y: 13 }; break;
+        case 'fillet': ell(g, 18, 24, 14, 8, B); poly(g, [[30, 24], [37, 18], [37, 30]], B); for (const x of [10, 16, 22, 28]) line(g, x, 18, x - 2, 30, BL);
+          eyes = { x: 15, y: 22, span: 3 }; mouth = { x: 15, y: 27, w: 5 }; arms = [{ x: 5, y: 24, d: -1 }, { x: 31, y: 22, d: 1 }]; legs = { y: 32, xs: [12, 24] }; top = { x: 18, y: 16 }; break;
+        case 'shrimp': ell(g, 19, 21, 12, 11, B); ell(g, 21, 24, 5.5, 5.5, E); rect(g, 21, 24, 15, 14, E); for (let a = 0.6; a < 4; a += 0.7) line(g, 19 + Math.cos(a + 2.4) * 6, 21 - Math.sin(a + 2.4) * 6, 19 + Math.cos(a + 2.4) * 11, 21 - Math.sin(a + 2.4) * 11, BD);
+          poly(g, [[22, 30], [30, 27], [31, 35]], B); line(g, 10, 12, 4, 6, TO); line(g, 12, 11, 8, 4, TO);
+          eyes = { x: 14, y: 16, span: 3 }; mouth = { x: 13, y: 22, w: 3 }; arms = [{ x: 8, y: 22, d: -1 }, { x: 31, y: 20, d: 1 }]; legs = null; noLegs = true; float = true; top = { x: 16, y: 10 }; break;
+        case 'shell': ell(g, 20, 14, 13, 6, B); ell(g, 20, 26, 14, 8, B); ell(g, 20, 22, 10, 3.5, BL); ell(g, 20, 21, 2.5, 2.5, PA); for (const x of [10, 15, 25, 30]) { line(g, 20, 33, x, 27, BD); line(g, 20, 9, x, 13, BD); }
+          eyes = { x: 20, y: 27, span: 4 }; mouth = { x: 20, y: 31, w: 4 }; arms = [{ x: 6, y: 25, d: -1 }, { x: 34, y: 25, d: 1 }]; legs = null; noLegs = true; top = { x: 20, y: 8 }; break;
+        case 'dumpling': ell(g, 20, 28, 15, 12, B); rect(g, 4, 30, 33, 9, E); rect(g, 6, 29, 28, 2, BD); for (let x = 9; x <= 31; x += 4) { ell(g, x, 17 + Math.abs(x - 20) / 3, 1.6, 1.6, BL); gset(g, x + 2, 18 + Math.abs(x - 20) / 3, BD); }
+          eyes = { x: 20, y: 23, span: 4 }; mouth = { x: 20, y: 27, w: 6 }; arms = [{ x: 6, y: 26, d: -1 }, { x: 34, y: 26, d: 1 }]; legs = { y: 31, xs: [14, 26] }; top = { x: 20, y: 16 }; break;
+        case 'samosa': poly(g, [[20, 8], [36, 33], [4, 33]], B); line(g, 20, 8, 36, 33, BD); line(g, 20, 8, 4, 33, BL); rect(g, 5, 32, 31, 1, BD); for (let i = 0; i < 5; i++) gset(g, 14 + i * 3, 30 - (i % 2), BD);
+          eyes = { x: 20, y: 22, span: 3 }; mouth = { x: 20, y: 27, w: 5 }; arms = [{ x: 11, y: 24, d: -1 }, { x: 29, y: 24, d: 1 }]; legs = { y: 34, xs: [13, 27] }; top = { x: 20, y: 8 }; break;
+        case 'bun': ell(g, 20, 25, 14, 11, B); rect(g, 4, 33, 33, 6, E); for (const x of [12, 16, 24, 28]) line(g, x, 19, 20, 14, BD); ell(g, 20, 14, 2, 1.5, BD);
+          eyes = { x: 20, y: 24, span: 4 }; mouth = { x: 20, y: 29, w: 6 }; arms = [{ x: 6, y: 26, d: -1 }, { x: 34, y: 26, d: 1 }]; legs = { y: 33, xs: [14, 26] }; top = { x: 20, y: 14 }; break;
+        case 'nachos': poly(g, [[5, 33], [15, 14], [24, 33]], B); poly(g, [[16, 33], [27, 13], [35, 33]], B); poly(g, [[10, 26], [21, 7], [31, 27]], BL); for (const [x, y] of [[14, 18], [21, 12], [27, 20], [10, 28]]) ell(g, x, y, 2, 1.5, GO); for (const [x, y] of [[18, 22], [25, 28], [30, 25]]) ell(g, x, y, 1.3, 1.3, TO);
+          eyes = { x: 21, y: 18, span: 3 }; mouth = { x: 21, y: 23, w: 4 }; arms = [{ x: 8, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = { y: 34, xs: [13, 28] }; top = { x: 21, y: 7 }; break;
+        case 'toast': ell(g, 14, 14, 6, 5, BD); ell(g, 26, 14, 6, 5, BD); rect(g, 8, 14, 24, 20, BD); ell(g, 14, 14, 4.5, 3.5, B); ell(g, 26, 14, 4.5, 3.5, B); rect(g, 10, 14, 20, 18, B);
+          eyes = { x: 20, y: 20, span: 4 }; mouth = { x: 20, y: 26, w: 6 }; arms = [{ x: 8, y: 23, d: -1 }, { x: 32, y: 23, d: 1 }]; legs = { y: 35, xs: [14, 26] }; top = { x: 20, y: 9 }; break;
+        case 'stack': for (let i = 0; i < 4; i++) { ell(g, 20, 31 - i * 4, 13, 3, B); line(g, 8, 32 - i * 4, 32, 32 - i * 4, BD); } ell(g, 20, 18, 11, 2.5, GO); rect(g, 10, 18, 2, 6, GO); rect(g, 27, 18, 2, 9, GO); rect(g, 17, 14, 6, 3, PA);
+          eyes = { x: 20, y: 24, span: 4 }; mouth = { x: 20, y: 29, w: 6 }; arms = [{ x: 7, y: 26, d: -1 }, { x: 33, y: 26, d: 1 }]; legs = { y: 35, xs: [14, 26] }; top = { x: 20, y: 14 }; break;
+        default: ell(g, 20, 23, 12, 9, B);
+      }
+      return { eyes, mouth, arms, legs, noLegs, float, top };
     },
     handtool(g, p, v) {
       const head = p.head || 'hammer', len = clampi((p.len || 20) + v * 2, 10, 26), hx = 20, hy = 12;

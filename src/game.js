@@ -3,7 +3,7 @@
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.4';
+const GAME_VERSION = '0.4.5';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -306,23 +306,44 @@ function speciesName(cat, rarity, word, fam) {
   let pre = c.names.length ? c.names[h % c.names.length] : titleCase((word || 'Odd').replace(/[^a-z]/gi, '').slice(0, 6)) || 'Odd';
   const suf = SUFFIX[rarity][(h >>> 5) % SUFFIX[rarity].length];
   let name = joinName(pre, suf);
-  if (rarity === 'legendary') name += ', ' + LEGEND_TITLES[fam];
+  if (rarity === 'legendary') name += ', ' + (word ? legendTitle({ id: 'w:' + word, name: word }, fam) : LEGEND_TITLES[fam]);
   return name;
 }
-function monsterFamily(cat, word, variant) {
+function monsterFamily(cat, word, variant, o) {
   if (variant === 'spectral') return 'spectral';
   if (variant === 'mutated') return 'mutated';
+  if (o && o.fam) return o.fam; // v0.4.5: the object's own nature (a spoon is Household, not Mechanical like its "tool" category)
   return CATEGORY[cat].fam || NATIVE_FAMILIES[hashStr(word || 'x') % 6];
 }
 function cdFor(ab) { return ab.self ? 3 : (ab.power >= 1.3 || ab.hits) ? 3 : ab.effect ? 2 : 2; }
-function monsterAbilities(cat, rarity, fam, word) {
+// the object's display name for move names and titles ("Energy Drink", "Padlock")
+const objNoun = o => o.name.split(' / ')[0].split(' ').map(titleCase).join(' ');
+function moveKit(cat, o) {
+  const g = o && o.lore, src = (g && (MOVE_KITS[g] || MOVE_KITS[MOVE_KIT_ALIAS[g]])) || MOVE_KITS[cat] || MOVE_KITS.other;
+  return src.split(',').map(s => { const [name, arch] = s.split(':').map(t => t.trim()); return { name, ...MOVE_ARCH[arch] }; });
+}
+function monsterAbilities(cat, rarity, fam, word, o) {
   const tier = RARITY[rarity].tier;
-  const SR = mulberry(hashStr('abil:' + cat + rarity + fam + (word || '')));
+  // objects get their own seed, so two objects of one category do not share a repertoire
+  const SR = mulberry(hashStr('abil:' + cat + rarity + fam + (word || '') + (o ? '|' + o.id : '')));
   const list = [{ ...CATEGORY[cat].sig }];
-  const pool = FAMILIES[fam].abilities.slice();
-  const extra = [0, 1, 1, 2, 2][tier];
+  if (!o) { // category-only monsters (Oddities): unchanged rules
+    const pool = FAMILIES[fam].abilities.slice();
+    const extra = [0, 1, 1, 2, 2][tier];
+    for (let i = 0; i < extra && pool.length; i++) list.push({ ...pool.splice(Math.floor(SR() * pool.length), 1)[0] });
+    if (tier >= 4) list.push({ name: 'Cataclysm of ' + FAMILIES[fam].name.replace(/al$/, 'ia'), power: 2.1, effect: ['burn', 'poison', 'stun', 'defdown'][SR.int(0, 3)], chance: 0.6, ultimate: true });
+    return list.map(a => ({ ...a, cd: a.ultimate ? 4 : cdFor(a) }));
+  }
+  const pool = moveKit(cat, o);
+  const extra = [0, 1, 1, 2, 1][tier];
   for (let i = 0; i < extra && pool.length; i++) list.push({ ...pool.splice(Math.floor(SR() * pool.length), 1)[0] });
-  if (tier >= 4) list.push({ name: 'Cataclysm of ' + FAMILIES[fam].name.replace(/al$/, 'ia'), power: 2.1, effect: ['burn', 'poison', 'stun', 'defdown'][SR.int(0, 3)], chance: 0.6, ultimate: true });
+  if (tier >= 4) {
+    // legendary: a legend move and an ultimate that carry the object's own name, unique to this monster
+    const N = objNoun(o), archs = Object.keys(LEGEND_MOVE_TPL), arch = archs[hashStr('legend|' + o.id) % archs.length];
+    list.push({ ...MOVE_ARCH[arch], name: LEGEND_MOVE_TPL[arch].replace('{N}', N), legend: true });
+    const eff = ['burn', 'poison', 'stun', 'defdown'][SR.int(0, 3)], tpl = ULTIMATE_TPL[eff];
+    list.push({ name: tpl[hashStr('ult|' + o.id) % tpl.length].replace('{N}', N), power: 2.1, effect: eff, chance: 0.6, ultimate: true });
+  }
   return list.map(a => ({ ...a, cd: a.ultimate ? 4 : cdFor(a) }));
 }
 function monsterStats(rarity, fam, L, seed, variant) {
@@ -343,21 +364,23 @@ function speciesName3(objId, rarity, fam) {
   const h = hashStr(objId + '|' + rarity);
   const head = o.nm || titleCase(o.name.split(/[\s/-]+/).filter(Boolean).pop().replace(/[^a-z]/gi, '').slice(0, 8)) || 'Odd';
   let name = joinName(head, SUFFIX[rarity][(h >>> 5) % SUFFIX[rarity].length]);
-  if (rarity === 'legendary') name += ', ' + LEGEND_TITLES[fam];
+  if (rarity === 'legendary') name += ', ' + legendTitle(o, fam);
   return name;
 }
+// v0.4.5: "the Unbroken Padlock", "the Bottomless Energy Drink": one title per object, never shared
+function legendTitle(o, fam) { const adj = LEGEND_ADJ[fam] || LEGEND_ADJ.household; return 'the ' + adj[hashStr('title|' + o.id) % adj.length] + ' ' + objNoun(o); }
 function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
   if (!obj) obj = CAT_DEFAULT_OBJECT[cat] || null;
   if (obj && OBJECTS[obj]) cat = OBJECTS[obj].cat;
-  const fam = monsterFamily(cat, word, variant);
+  const o = obj && OBJECTS[obj];
+  const fam = monsterFamily(cat, word, variant, o);
   const r = RARITY[rarity];
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
   let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
   const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}), ...(photo.engine ? { engine: photo.engine } : {}) } : null; // engine: which recogniser identified it
   const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
-  const abilities = monsterAbilities(cat, rarity, fam, base.word);
-  const o = obj && OBJECTS[obj];
+  const abilities = monsterAbilities(cat, rarity, fam, base.word, o);
   if (o && o.sig) abilities[0] = { ...o.sig, cd: cdFor(o.sig) }; // object-specific signature move
   else if (o && o.sigName) abilities[0] = { ...abilities[0], name: o.sigName }; // same numbers, a name that fits the object
   const m = {

@@ -113,6 +113,15 @@ leave immediately. A native build will call the same logic from the hardware Bac
   Before/after: `docs/identity-before-after.png`; more designs: `docs/identity-designs-*.png`. Monsters found before v0.4.3 keep their saved look; the monster sheet offers "Update its look"
   (body design, flavour text and move name change; colours, eyes, stats stay; undoable). `tests/identity.js` checks the
   mapping, and `node tools/contact-sheet.js out.png <object ids…>` renders designs for visual review.
+- **Food, drinks and move kits (v0.4.5)**: drinks get cup, glass, can or bottle bodies (an energy drink was drawn as a
+  burger); meats, seafood, bowls, dumplings, breads, breakfasts, sauces, dairy, pantry goods, vegetables, greens and
+  nuts have their own designs (`meal` template and new produce shapes), flavour text and moves (`docs/identity-food-v045.png`).
+  Every category and object group has a four-move kit (`MOVE_KITS` in `src/data.js`); a monster's extra moves come from
+  its own kit, picked per object, with numbers from the same ranges as before (`MOVE_ARCH`). Some objects take a family
+  that fits them better than their category's (a spoon or pen is Household, greens are Botanical). **Legendaries are
+  unique:** title, a legend move and the Ultimate are built from the object's own name, and their flavour text always
+  names the object; `tests/identity.js` checks every one of the ~2,300 possible legendaries. Monsters already caught keep
+  their family, moves, name and text.
 - **Families & weaknesses**: Organic, Mechanical, Elemental, Household, Food, Botanical, Spectral, Mutated — each weak or resistant to weapon elements (Slash, Ballistic, Arcane, Shock, Toxic).
 - **Combat**: poison, burn, stun, defense down, attack/defense buffs, immunity; enemy abilities with cooldowns; capture chance from HP, rarity, status effects and gear.
 - **Weapons**: Rusty Hunter Sword, Ghostbuster Pistol (double-tap, never misses), Cursed Dagger (crits + poison), Arcane Wand (armour-piercing, burn), Thunder Hammer (huge, inaccurate, stuns). Forge with materials, upgrade to +5 (+8 with research). Six droppable charms, two slots from level 5.
