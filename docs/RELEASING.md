@@ -22,6 +22,7 @@ Semantic versions, tagged on the production commit that shipped:
 | `v0.3.1`–`v0.3.3` | Field-test follow-ups: second-opinion rules, fusion fixes, field-test tools. |
 | `v0.4.0` | Hybrid is the single standard recogniser; photo-derived monster colours; Android Back navigation. Save format 3 (unchanged). |
 | `v0.4.1` | TinyCLIP runs on the CPU (WASM, one thread) for every player, for identical decisions across devices; recognition timings in the developer panel. Same models, rules and saves. |
+| `v0.4.7` | Developer-only God Mode for Quick Monster Test Mode battles (Instant capture off): unbeatable hunter, free specials, unlimited traps/items, 100% capture into the test collection. No change to normal gameplay. |
 | `v0.4.6` | Pilot 01 curated writing: hand-written, approved flavour text (5 rarities) and move names for 10 objects (apple, light switch, security camera, energy drink, forklift, microwave, rubber duck, sock, padlock, book), also in the encyclopedia; stable internal ability keys (cooldowns by key). Gameplay unchanged. |
 | `v0.4.5` | Food and drink identity (drinks no longer drawn as burgers; meat, seafood, bowls, dumplings, breads, sauces, dairy, vegetables, greens, nuts get their own designs, lore and moves); object families where the category does not fit (spoon, pen); per-object move kits; every Legendary has a unique title, legend move, Ultimate and flavour text. |
 | `v0.4.4` | Development journal (`docs/DEVELOPMENT_JOURNAL.md`, `CLAUDE.md`); the Analysing screen is painted before CPU recognition starts (Force CPU shutter freeze); developer Quick Monster Test Mode with a separate test collection. No gameplay, odds, model or save-format change. |
@@ -44,6 +45,7 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
    node tests/lore.js && node tests/guide.js && node tests/rules-trace.js && node tests/identity.js && node tests/devtest.js   # rules-trace: odds and battle maths unchanged
    node tests/generator-snapshot.js && node tests/curated.js && node tools/curated.js validate   # live generator frozen; curated content valid
    node tests/gameplay-baseline.js && node tests/ability-keys.js   # gameplay (no text) frozen; stable ability keys
+   node tests/god-mode.js && node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots   # developer God Mode
    node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json && node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
    python3 -m http.server 8765 &
    node tests/e2e.js http://localhost:8765/index.html tests/fixtures /tmp/shots
@@ -81,6 +83,7 @@ Either way the Pages workflow redeploys automatically.
 Rolling back from v0.4.0 to v0.3.x is save-compatible (same save format 3): monsters keep their stored colours, and
 older code simply ignores the extra palette data. v0.3.x would bring back the old recogniser switch for developers.
 Rolling back from v0.4.1 to v0.4.0 is fully save-compatible; it only returns TinyCLIP to WebGPU where available.
+Rolling back from v0.4.7 to v0.4.6 is fully save-compatible (the `godMode` developer setting is simply ignored).
 Rolling back from v0.4.6 to v0.4.5 is save-compatible: monsters keep their stored text and move names (Pilot 01 monsters found in
 v0.4.6 keep the curated text); the extra `key`/`cdWith` fields on abilities are ignored by v0.4.5 (cooldowns by name again).
 To switch curated writing off without a rollback: rebuild `src/curated-data.js` without `--enable`.

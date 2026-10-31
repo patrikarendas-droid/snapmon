@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
+Last updated: 2026-10-31, release v0.4.7 (developer God Mode).
 
 ---
 
@@ -70,6 +70,7 @@ Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
 | v0.4.4 | 11e8b76 | 2026-10-30 | This journal; Force CPU shutter freeze mitigated; developer Quick Monster Test Mode. |
 | v0.4.5 | a13f396 | 2026-10-30 | Food/drink identity; object families; per-object move kits; unique Legendaries. |
 | v0.4.6 | fc5f65d | 2026-10-31 | Pilot 01 curated writing active (10 objects); stable ability keys (Stage A, f95f3c7). |
+| v0.4.7 | (see `git tag`) | 2026-10-31 | Developer God Mode for Quick Monster Test Mode battles. |
 
 ## 4. Current state and next priorities
 
@@ -94,6 +95,15 @@ Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
   Defrost Disaster; book signature → Papercut Barrage. Now 39 move names. Final developer decisions (2026-10-31):
   light switch ultimate → The Big Switch; rubber duck legend → Flaming Quack; energy drink legend → Caffeine Crash;
   book legend → Rewrite the Ending; "Wake-Up Call" kept.
+- **v0.4.7 developer God Mode (2026-10-31):** Settings → Developer & testing → "God Mode (test battles)", default off,
+  remembered like the other developer switches; active only with Quick Monster Test Mode on AND Instant capture off
+  (the Settings line says why it is inactive; it never changes the other switches). Engine: `enableGodMode(B)` sets a
+  flag on one battle object only for a test monster (`m.test`) with DEV_TOOLS; `godOn(B)` re-checks both at every use,
+  so a normal battle (or DEV_TOOLS=false) ignores even a forced flag. Effects: hunter floored at 1 HP and restored at the
+  start of each of its turns (hits, damage numbers, statuses still shown), specials cost no energy, traps/items not
+  required or used up, capture attempt always succeeds (→ test collection only). Monster stats, moves, AI, statuses,
+  cooldowns untouched. Real save restored after test battles as before. Tests: `tests/god-mode.js`,
+  `tests/e2e-godmode.js`; gameplay baseline, rules trace and text snapshot unchanged. Needs phone check.
 - **v0.4.6 Pilot 01 ACTIVE (2026-10-31):** Stage A (stable ability keys + Pilot 01 content, curated off) merged as
   `f95f3c7` and deployed (CI green). Stage B (separate commit/merge): `src/curated-data.js` generated with
   `--enable`, loaded by index.html after game.js; createMonster applies curated move names by ability key; curated lore
@@ -129,7 +139,7 @@ Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
   4. Approved writing may update encyclopedia descriptions of species already discovered (consistent lore).
   5. The first 10–20 entries are written and reviewed separately before activation. Never mass-generate
      descriptions or mark entries "reviewed" automatically.
-- **Next (proposed, not started):** update the Claude Artifact to v0.4.6; phone check of v0.4.6 (Pilot 01 text and move names, encyclopedia, old monsters
+- **Next (proposed, not started):** phone check of v0.4.7 God Mode; update the Claude Artifact (still v0.4.5); phone check of v0.4.6 (Pilot 01 text and move names, encyclopedia, old monsters
   unchanged); next curated batch when written and approved; verify v0.4.5 on the phone with Quick Monster Test Mode (drinks, foods, vegetables,
   kitchenware, Legendaries); continue visual QA of designs; native APK when requested.
 
@@ -201,7 +211,8 @@ Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
 - **Rule numbers centralised in `MECH` (v0.4.2)** so the Guide shows real values; a fixed-seed trace proves balance
   is unchanged.
 - **Developer tools behind `DEV_TOOLS` + 7 taps on the version line** – `DEV_TOOLS` must be set to `false` for a
-  public/release build; this removes the developer menu, Force CPU, field tests and Quick Monster Test Mode.
+  public/release build; this removes the developer menu, Force CPU, field tests, Quick Monster Test Mode and God Mode
+  (the engine itself refuses God Mode without DEV_TOOLS). The hidden menu is not security in a public web build.
 - **Quick Monster Test Mode stores test monsters outside the save** (`snapmon.testroster.v1`), never in the backup
   code; test battles restore the save afterwards. Chosen over marking monsters in the real collection.
 - **Detector stays on TF.js in the main thread** (v0.4.4) – a worker would remove the Force CPU freeze entirely but
