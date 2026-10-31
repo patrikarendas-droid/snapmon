@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation and Pilot 01 content (both inactive).
+Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
 
 ---
 
@@ -68,7 +68,8 @@ Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation an
 | v0.4.2 | f6dc5cc | 2026-10-29 | Playtest fixes: camera status text, zoom, Guide, rarity lore, background recovery, Settings scroll, Wrong object. |
 | v0.4.3 | a27c89c | 2026-10-30 | Monsters match their object (designs + rules for ~1,000 objects); no countdown; SNAP waits for the engine. |
 | v0.4.4 | 11e8b76 | 2026-10-30 | This journal; Force CPU shutter freeze mitigated; developer Quick Monster Test Mode. |
-| v0.4.5 | (see `git tag`) | 2026-10-30 | Food/drink identity; object families; per-object move kits; unique Legendaries. |
+| v0.4.5 | a13f396 | 2026-10-30 | Food/drink identity; object families; per-object move kits; unique Legendaries. |
+| v0.4.6 | (see `git tag`) | 2026-10-31 | Pilot 01 curated writing active (10 objects); stable ability keys (Stage A, f95f3c7). |
 
 ## 4. Current state and next priorities
 
@@ -93,7 +94,14 @@ Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation an
   Defrost Disaster; book signature → Papercut Barrage. Now 39 move names. Final developer decisions (2026-10-31):
   light switch ultimate → The Big Switch; rubber duck legend → Flaming Quack; energy drink legend → Caffeine Crash;
   book legend → Rewrite the Ending; "Wake-Up Call" kept.
-- **Stable ability keys (2026-10-31), branch `feature/ability-ids` (also carries Pilot 01), not merged/deployed:** approved by the developer as
+- **v0.4.6 Pilot 01 ACTIVE (2026-10-31):** Stage A (stable ability keys + Pilot 01 content, curated off) merged as
+  `f95f3c7` and deployed (CI green). Stage B (separate commit/merge): `src/curated-data.js` generated with
+  `--enable`, loaded by index.html after game.js; createMonster applies curated move names by ability key; curated lore
+  via the existing hook; encyclopedia shows curated text. Only the 10 Pilot 01 objects change (tests/curated.js checks
+  all 34,515 configurations); gameplay baseline unchanged; rules trace unchanged (fixture checked with curated off, plus
+  curated-on run identical without names); text snapshot re-recorded for the live output while keeping the original
+  recording as `withoutCurated`. Existing monsters keep their stored text/names; no save reset. Needs phone check.
+- **Stable ability keys (2026-10-31), merged in Stage A:** approved by the developer as
   a separate technical step. `tests/gameplay-baseline.js` (no display text: rules, 46,020 monsters' stats/move
   numbers/DNA/sprites, recognition mapping, encounter odds, 1,052 battles) was recorded and committed BEFORE the change
   and is unchanged after it. Every ability now has `key` (signature / kit.<move> / fam.<move> / legend / ultimate /
@@ -115,7 +123,8 @@ Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation an
   4. Approved writing may update encyclopedia descriptions of species already discovered (consistent lore).
   5. The first 10–20 entries are written and reviewed separately before activation. Never mass-generate
      descriptions or mark entries "reviewed" automatically.
-- **Next (proposed, not started):** verify v0.4.5 on the phone with Quick Monster Test Mode (drinks, foods, vegetables,
+- **Next (proposed, not started):** phone check of v0.4.6 (Pilot 01 text and move names, encyclopedia, old monsters
+  unchanged); next curated batch when written and approved; verify v0.4.5 on the phone with Quick Monster Test Mode (drinks, foods, vegetables,
   kitchenware, Legendaries); continue visual QA of designs; native APK when requested.
 
 ## 5. Open issues / known limitations
@@ -125,7 +134,7 @@ Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation an
 | Brief freeze after the camera shutter with **Force CPU backend** (developer option) | Mitigated in v0.4.4, needs phone check | The CPU detector (TF.js CPU backend) runs on the main thread for ~1 s; see section 6. `src/ui.js` `paintFirst`, `recognizeFlow`. | Phone test: the Analysing screen should now appear immediately with the photo, sweep still moving; only the clock text pauses. A full fix needs the detector in a worker (not planned). |
 | Same freeze for real players whose phone cannot use WebGL | Same mitigation | Rare: only phones where WebGL fails fall back to the CPU detector. | As above. |
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
-| Curated monster writing not active | Phase 1 merged; Pilot 01 content imported; ability keys built (all inactive) | `src/curated.js`, `tools/curated.js`, `content/curated/`, `docs/CONTENT_WRITING_GUIDE.md`. Stable ability keys built (branch `feature/ability-ids`); curated move names not wired in yet. Activated entries will also update encyclopedia text (approved). | Pilot batch (10–20 objects) written and reviewed separately; then approved integration (ability ids, split gameplay/text baselines) and activation. |
+| Curated writing covers only 10 objects | v0.4.6: Pilot 01 active | `content/curated/`, `src/curated-data.js` (generated), `docs/CONTENT_WRITING_GUIDE.md`. Every other object uses the generated text. Same-name shared cooldown (`cdWith`, 4 configs) kept for compatibility. | Next batches written and reviewed separately; phone check of v0.4.6. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
 | Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change without consent; "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |

@@ -3,7 +3,7 @@
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.5';
+const GAME_VERSION = '0.4.6';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -421,6 +421,9 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
   assignAbilityKeys(m);
+  // curated move names (src/curated.js, reviewed content only): display names by stable key; numbers, cooldowns and
+  // keys are untouched, and no random numbers are used. Only new monsters get them; saved monsters keep their names.
+  if (typeof curatedMoveName === 'function' && o) for (const a of m.abilities) { const n = curatedMoveName(obj, a.key); if (n) a.name = n; }
   m.lore = monsterLore(m); // flavour text for this object AND rarity, stored so it never changes (lore.js)
   return m;
 }

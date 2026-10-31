@@ -6,15 +6,15 @@ const G = require('./load')();
 const fs = require('fs'), vm = require('vm'), path = require('path');
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape }; vm.createContext(ctx);
-vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
-  ';globalThis.T={LORE_OBJECT,OBJECTS,OBJECT_LIST,objectForLabel,objectTier,visualSource,designOf,makeDNA,buildGrid,CATEGORY,LORE_KITS,LORE_GROUP_KITS,loreKitFor,monsterLore,createMonster,freshState,identityUpdate,applyIdentityUpdate,undoIdentityUpdate,exportSave,importSave,DESIGN_RULES,CAT_FALLBACK_VIS,MOVE_KITS,MOVE_ARCH,FAMILIES,setRNG:f=>{RNG=f}}', ctx);
+vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js', 'curated-data.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
+  ';globalThis.T={LORE_OBJECT,OBJECTS,OBJECT_LIST,objectForLabel,objectTier,visualSource,designOf,makeDNA,buildGrid,CATEGORY,LORE_KITS,LORE_GROUP_KITS,loreKitFor,monsterLore,createMonster,freshState,identityUpdate,applyIdentityUpdate,undoIdentityUpdate,exportSave,importSave,DESIGN_RULES,CAT_FALLBACK_VIS,MOVE_KITS,MOVE_ARCH,FAMILIES,CURATED,setRNG:f=>{RNG=f}}', ctx);
 const T = ctx.T;
 let seed = 7; T.setRNG(() => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; });
 const grid = dna => T.buildGrid(dna).px.join('');
 const toolboxGrid = grid(T.makeDNA({ obj: 'toolbox', cat: 'tool', rarity: 'common', seed: 1 }));
 
 // the two reported cases, end to end
-for (const [label, id, tpl, lore, sig, word] of [['light switch', 'x_light_switch', 'wallplate', 'electric', 'Lights Out', 'Switch'], ['security camera', 'x_security_camera', 'cctv', 'camera', 'Surveillance Glare', 'Camera']]) {
+for (const [label, id, tpl, lore, sig, word] of [['light switch', 'x_light_switch', 'wallplate', 'electric', 'Lights Out', 'Switch'], ['security camera', 'x_security_camera', 'cctv', 'camera', 'Caught on Camera', 'Camera']]) { // camera: v0.4.6 curated move name (Pilot 01), same numbers
   const o = T.OBJECTS[T.objectForLabel(label)];
   ok(o && o.id === id, `"${label}" resolves to ${id}`);
   ok(T.visualSource(o).vis.t === tpl && T.objectTier(o) === 'composed', `${label}: drawn with the ${tpl} design (not the category's toolbox)`);
@@ -34,6 +34,7 @@ for (const [label, id, tpl, lore, sig, word] of [['light switch', 'x_light_switc
 // every flavour text names the object or uses one of its own details
 let hookless = [];
 for (const o of T.OBJECT_LIST) for (const r of ['common', 'rare', 'legendary']) {
+  if (T.CURATED.enabled && T.CURATED.data[o.id]) continue; // hand-written, reviewed text (Pilot 01): checked by tests/curated.js
   const t = T.monsterLore({ obj: o.id, rarity: r, seed: 99 }).toLowerCase(), kit = T.loreKitFor(o, o.cat), nm = o.name.split(' / ')[0].toLowerCase();
   const sig = ((o.sig && o.sig.name) || o.sigName || T.CATEGORY[o.cat].sig.name).toLowerCase(), own = Object.values(T.LORE_OBJECT[o.id] || {}).map(x => x.toLowerCase());
   const hook = t.includes(nm) || t.includes(sig) || own.includes(t) || Object.values(kit).flat().some(ph => t.includes(ph.toLowerCase()));
@@ -84,7 +85,7 @@ const burgerGrid = grid(T.makeDNA({ obj: 'burger', cat: 'food', rarity: 'common'
 {
   const o = T.OBJECTS[T.objectForLabel('energy drink')], ms = ['common', 'rare', 'legendary'].map(r => mk(o.id, r, 'energy drink'));
   ok(o.id === 'x_energy_drink' && T.visualSource(o).id === 'can' && ms.every(m => m.dna.shape === 'bottle' && m.dna.sub === 'can' && grid(m.dna) !== burgerGrid), 'energy drink: drawn as a drink can, not a burger');
-  ok(ms.every(m => m.abilities[0].name === 'Energy Spike' && m.abilities.every(a => !/grease/i.test(a.name))), `energy drink: drink moves (${ms[2].abilities.map(a => a.name).join(', ')})`);
+  ok(ms.every(m => m.abilities[0].name === 'Wake-Up Call' && m.abilities[0].power === 1.0 && m.abilities[0].effect === 'burn' && m.abilities.every(a => !/grease/i.test(a.name))), `energy drink: drink moves (${ms[2].abilities.map(a => a.name).join(', ')})`);
   ok(!loreSeeds(o.id, /takeaway|grease|crumbs/i).length, 'energy drink: no meal lore (takeaway box, grease, crumbs) in any flavour text');
 }
 const DRINK = /\b(drink|soda|cola|juice|smoothie|milkshake|lemonade|beer|wine|cocktail|tea|hot chocolate|bubble tea|kombucha)\b/;

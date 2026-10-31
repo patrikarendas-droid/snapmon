@@ -150,13 +150,20 @@ Rarity is a **different premise**, not the same sentence with bigger adjectives:
   species already met (approved: the improved lore is shown consistently).
 - **Never:** names, stats, artwork, odds, move numbers, saves format.
 
-## Activation (Phase 2, needs explicit approval)
+## Activation and adding a new batch (active since v0.4.6, Pilot 01)
 
-1. Review a pilot batch with `preview`; mark approved entries `"status": "reviewed"`.
-2. `node tools/curated.js build --out src/curated-data.js` writes the reviewed entries as a script.
-3. Load `src/curated.js` and `src/curated-data.js` in `index.html` (after `game.js`), the single-file build
-   (`tools/build.js`) and the test loaders; set `CURATED.enabled = true`.
-4. Keep a gameplay baseline that does not include text (stats, move numbers and effects, cooldowns, artwork, rarity,
-   recognition, balance) and must stay identical; re-record only the text part on purpose and note it in the
-   journal; ship as a version bump. Stable ability ids (approved) come first, as their own tested step.
-Rollback: set `CURATED.enabled = false` (or revert the activation commit); stored monster texts are unaffected.
+The game loads `src/curated.js` and `src/curated-data.js` (index.html, after `game.js`; the single-file builds inline
+them). `src/curated-data.js` is generated; never edit it by hand. To ship a new reviewed batch:
+
+1. Add or edit `content/curated/*.json`; `node tools/curated.js validate` and `preview`; get editorial approval and
+   only then set `"status": "reviewed"` (never automatically).
+2. `node tools/curated.js build --out src/curated-data.js --enable` (only reviewed entries are written), then
+   `node tools/build.js`.
+3. Tests: `tests/gameplay-baseline.js` must pass unchanged (no gameplay effect). `tests/curated.js` checks the data
+   file matches the content and that only the listed objects' text changes. Re-record only the text snapshot
+   (`node tests/generator-snapshot.js record`; it keeps the original pre-curated recording and refuses to record if
+   that no longer matches with curated text off). Note it in the journal; ship as a version bump.
+
+New monsters get the curated text and move names; existing monsters keep what they were found with; the
+encyclopedia shows the curated text for every species (approved). Rollback: rebuild the data file without `--enable`
+(or revert the activation commit); stored monster texts are unaffected.

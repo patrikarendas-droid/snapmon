@@ -3,7 +3,7 @@
 const fs = require('fs'), vm = require('vm'), path = require('path');
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape }; vm.createContext(ctx);
-vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
+vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js', 'curated-data.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
   ';globalThis.T={OBJECTS,FAMILIES,createMonster,freshState,migrate,exportSave,importSave,newBattle,heroTurnStart,heroStrike,enemyTurn,hunterStats,assignAbilityKeys,cooldownKey,curatedMoveSlots,identityUpdate,applyIdentityUpdate,undoIdentityUpdate,setRNG:f=>{RNG=f}}', ctx);
 const T = ctx.T, RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
 const clone = x => JSON.parse(JSON.stringify(x));

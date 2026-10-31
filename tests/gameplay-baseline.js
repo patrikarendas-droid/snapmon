@@ -12,7 +12,7 @@ const fs = require('fs'), vm = require('vm'), path = require('path'), crypto = r
 const FIX = path.join(__dirname, 'fixtures/gameplay-baseline.json');
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape, localStorage: { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } } };
 vm.createContext(ctx);
-vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
+vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js', 'curated-data.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
   ';globalThis.T={RARITIES,FAMILIES,MOVE_ARCH,MOVE_KITS,CATEGORIES,WEAPONS,ITEMS,CHARMS,MECH,STATUS_TURNS,TEST_RARITY_WEIGHTS,OBJECTS,objectForLabel,createMonster,freshState,makeDNA,buildGrid,buildPalette,resolvePhoto,newBattle,heroTurnStart,heroStrike,enemyTurn,attemptCapture,captureChance,attemptFlee,useItem,finishBattle,hunterStats,setRNG:f=>{RNG=f}}', ctx);
 const T = ctx.T;
 const parts = {}, H = () => crypto.createHash('sha256'), dig = h => h.digest('hex');
