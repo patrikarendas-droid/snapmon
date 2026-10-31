@@ -4,7 +4,7 @@
 const fs = require('fs'), path = require('path');
 const site = process.argv[2] || '_site';
 const variant = (fs.readFileSync(path.join(__dirname, '../src/lens-clip.js'), 'utf8').match(/variant: '([^']+)'/) || [])[1];
-const need = ['index.html', 'src/engine.js', 'src/workers/clip-worker.js', 'src/color.js',
+const need = ['index.html', 'src/engine.js', 'src/workers/clip-worker.js', 'src/color.js', 'src/curated.js', 'src/curated-data.js',
   'vendor/tfjs/tf.min.js', 'vendor/tfjs/mobilenet.min.js', 'vendor/tfjs/coco-ssd.min.js',
   'models/mobilenet_v2_100/model.json', 'models/ssdlite_mobilenet_v2/model.json',
   'vendor/ort/ort.min.js', 'vendor/ort/ort.webgpu.min.js', 'vendor/ort/ort-wasm-simd-threaded.wasm', 'vendor/ort/ort-wasm-simd-threaded.jsep.wasm',

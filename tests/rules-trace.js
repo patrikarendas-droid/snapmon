@@ -5,10 +5,15 @@
 // v0.4.5 re-recorded on purpose: monsters' extra moves now come from per-object move kits and Legendaries get unique
 // moves, so battles play out differently. Replaying this trace with the v0.4.4 move/name/family functions patched in
 // reproduced the old fixture exactly (35,875 steps): odds, rarities, levels, stats and battle maths are unchanged.
+// v0.4.6: the game now loads curated Pilot 01 text, which renames some moves (apple, forklift are in this trace). The
+// recorded fixture is checked with curated text OFF, and the curated-ON run must be identical once move names are
+// removed: renaming moves never changes the rules (cooldowns use stable ability keys).
 const G = require('./load')(), crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/rules-trace.json');
-let seed = 12345; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
-G.setRNG(rng); const out = [];
+let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+function trace(curatedOn) {
+G.CURATED.enabled = G.CURATED.movesEnabled = curatedOn;
+seed = 12345; G.setRNG(rng); const out = [];
 for (let g = 0; g < 300; g++) {
   const S = G.freshState(); S.level = 1 + g % 12; S.research = g % 3 ? { lens1: 1, capture1: 1, sensor: 1, capture2: 1, medic: 1 } : {}; S.charmSlots = g % 2 ? ['fang', 'lenscap'] : ['slipper', 'battery'];
   S.items = { potion: 3, greater: 1, strength: 1, defense: 1, antidote: 2, enhancer: 1, trap: 5, smoke: 1 }; S.hp = G.hunterStats(S).maxHp; S.weapons = { sword: 2, pistol: 1, dagger: 1, wand: 1, hammer: 1 }; S.equipped = ['sword', 'pistol', 'dagger', 'wand', 'hammer'][g % 5];
@@ -32,6 +37,13 @@ for (let g = 0; g < 300; g++) {
     const sum = G.finishBattle(S, B, rng); out.push([sum.result, sum.rewards, sum.drops, S.coins, S.hp, S.xp, S.level]);
   }
 }
+return out;
+}
+const live = { enabled: G.CURATED.enabled, moves: G.CURATED.movesEnabled };
+const out = trace(false), onOut = trace(true);
+G.CURATED.enabled = live.enabled; G.CURATED.movesEnabled = live.moves;
+const noNames = o => JSON.stringify(o, (k, v) => (k === 'name' ? undefined : v));
+if (noNames(out) !== noNames(onOut)) { console.log('FAIL: with curated text on, the battles differ beyond move names'); process.exit(1); }
 const hash = crypto.createHash('sha256').update(JSON.stringify(out)).digest('hex');
 if (process.argv[2] === 'record') { fs.writeFileSync(FIX, JSON.stringify({ steps: out.length, sha256: hash }, null, 1)); console.log('recorded', out.length, hash); process.exit(0); }
 const want = JSON.parse(fs.readFileSync(FIX, 'utf8'));

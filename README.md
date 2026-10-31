@@ -122,6 +122,9 @@ leave immediately. A native build will call the same logic from the hardware Bac
   unique:** title, a legend move and the Ultimate are built from the object's own name, and their flavour text always
   names the object; `tests/identity.js` checks every one of the ~2,300 possible legendaries. Monsters already caught keep
   their family, moves, name and text.
+- **Curated writing (v0.4.6)**: hand-written, reviewed flavour text and move names for selected objects
+  (`content/curated/`, guide: `docs/CONTENT_WRITING_GUIDE.md`); Pilot 01 covers 10 objects, every other object keeps
+  the generated text. Abilities have stable internal keys, so names never affect mechanics (`tests/gameplay-baseline.js`).
 - **Families & weaknesses**: Organic, Mechanical, Elemental, Household, Food, Botanical, Spectral, Mutated — each weak or resistant to weapon elements (Slash, Ballistic, Arcane, Shock, Toxic).
 - **Combat**: poison, burn, stun, defense down, attack/defense buffs, immunity; enemy abilities with cooldowns; capture chance from HP, rarity, status effects and gear.
 - **Weapons**: Rusty Hunter Sword, Ghostbuster Pistol (double-tap, never misses), Cursed Dagger (crits + poison), Arcane Wand (armour-piercing, burn), Thunder Hammer (huge, inaccurate, stuns). Forge with materials, upgrade to +5 (+8 with research). Six droppable charms, two slots from level 5.
