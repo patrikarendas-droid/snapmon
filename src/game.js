@@ -42,6 +42,7 @@ function migrate(s) {
   if ((s.v || 1) < 2) { delete out.settings.aiLens; out.v = 2; }
   if (!out.stats.labelsSeen) out.stats.labelsSeen = {};
   if ((s.v || 1) < 3) migrateV2toV3(out);
+  for (const m of out.monsters) assignAbilityKeys(m); // additive: older saves gain stable ability keys, nothing else changes
   return out;
 }
 /* v2 -> v3 (object registry): monsters and the encyclopedia are keyed by specific objects instead of category+rarity.
@@ -290,6 +291,33 @@ const TestRoster = {
   clear() { STORE.set(this.KEY, '[]'); },
 };
 
+/* ---------- stable ability keys ----------
+   Every ability carries `key`, a stable internal id unique within its monster: 'signature' (the first move),
+   'kit.<slug>' (a move from its kit), 'fam.<slug>' (a family move), 'legend', 'ultimate', or 'move.<slug>' for
+   anything else in older saves. Battle cooldowns use the key, so renaming a move can never change how it works.
+   `cdWith` keeps the pre-key rule that two moves with the SAME NAME share one cooldown (it occurs in 4 of ~46,000
+   possible monsters, e.g. an epic bee with "Sting" as signature and kit move); it is decided once, when keys are
+   assigned, and never again from names. Keys are additive: older game versions ignore them. */
+const abilitySlug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+function assignAbilityKeys(m) {
+  if (!m || !Array.isArray(m.abilities)) return m;
+  const o = m.obj && OBJECTS[m.obj], kit = new Set(), fam = new Set();
+  try { for (const a of moveKit(m.cat || (o && o.cat) || 'other', o)) kit.add(a.name); } catch (e) { /* unknown category: no kit */ }
+  for (const f of Object.values(FAMILIES)) for (const a of f.abilities) fam.add(a.name);
+  const used = new Set(m.abilities.filter(a => a && a.key).map(a => a.key)), byName = {};
+  for (const a of m.abilities) if (a && a.key) byName[a.name] = byName[a.name] || a.cdWith || a.key;
+  m.abilities.forEach((a, i) => {
+    if (!a || a.key) return;
+    const base = i === 0 ? 'signature' : a.ultimate ? 'ultimate' : a.legend ? 'legend' : kit.has(a.name) ? 'kit.' + abilitySlug(a.name) : fam.has(a.name) ? 'fam.' + abilitySlug(a.name) : 'move.' + abilitySlug(a.name);
+    let k = base, n = 2; while (used.has(k)) k = base + '.' + n++;
+    a.key = k; used.add(k);
+    if (byName[a.name]) a.cdWith = byName[a.name]; else byName[a.name] = k;
+  });
+  return m;
+}
+const cooldownKey = a => a.cdWith || a.key || a.name;
+const signatureOf = m => m && m.abilities && (m.abilities.find(a => a.key === 'signature') || m.abilities[0]); // name only as a last resort for a keyless ability
+
 /* ---------- monsters ---------- */
 function joinName(a, b) {
   if (!a) return b;
@@ -392,6 +420,7 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
     label: word ? String(word).slice(0, 40) : null, conf: conf != null ? +(+conf).toFixed(2) : null,
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
+  assignAbilityKeys(m);
   m.lore = monsterLore(m); // flavour text for this object AND rarity, stored so it never changes (lore.js)
   return m;
 }
@@ -402,23 +431,23 @@ function identityUpdate(m) {
   const o = m && OBJECTS[m.obj]; if (!o || !m.dna || m.dna.v < 3) return null;
   const want = designOf(o, { aspect: m.aspect, sub: m.sub }), ch = {};
   if (want.shape !== m.dna.shape || (want.sub || null) !== (m.dna.sub || null)) ch.design = want;
-  const ab = m.abilities && m.abilities[0];
-  if (o.sigName && ab && ab.name === CATEGORY[o.cat].sig.name) ch.sig = o.sigName;
+  const ab = signatureOf(m);
+  if (o.sigName && ab && ab.name === CATEGORY[o.cat].sig.name) ch.sig = o.sigName; // display name only; its key and numbers stay
   if (o.rule) { const fresh = monsterLore({ ...m, abilities: ch.sig ? [{ ...ab, name: ch.sig }] : m.abilities }); if (fresh !== m.lore) ch.lore = fresh; }
   return ch.design ? ch : null; // offered only where the body changes; the rest rides along
 }
 function applyIdentityUpdate(S, m) {
   const ch = identityUpdate(m); if (!ch) return false;
-  m.prevIdentity = { shape: m.dna.shape, sub: m.dna.sub || null, lore: m.lore || null, sig: m.abilities[0].name };
+  m.prevIdentity = { shape: m.dna.shape, sub: m.dna.sub || null, lore: m.lore || null, sig: signatureOf(m).name };
   m.dna.shape = ch.design.shape; m.dna.sub = ch.design.sub;
-  if (ch.sig) m.abilities[0].name = ch.sig;
+  if (ch.sig) signatureOf(m).name = ch.sig;
   if (ch.lore) m.lore = ch.lore;
   const d = S.dex[m.species]; if (d && d.dna && d.dna.v >= 3 && d.dna.shape !== ch.design.shape) { d.dna = { ...d.dna, shape: ch.design.shape, sub: ch.design.sub }; }
   return true;
 }
 function undoIdentityUpdate(m) {
   const p = m && m.prevIdentity; if (!p) return false;
-  m.dna.shape = p.shape; m.dna.sub = p.sub; if (p.lore) m.lore = p.lore; m.abilities[0].name = p.sig; delete m.prevIdentity; return true;
+  m.dna.shape = p.shape; m.dna.sub = p.sub; if (p.lore) m.lore = p.lore; signatureOf(m).name = p.sig; delete m.prevIdentity; return true;
 }
 function variantLabel(v) { return v === 'spectral' ? 'Spectral' : v === 'mutated' ? 'Mutated' : v === 'shiny' ? 'Prismatic' : ''; }
 
@@ -446,6 +475,7 @@ function recordSighting(S, m) {
 /* ---------- combat ---------- */
 const NEG = ['poison', 'burn', 'stun', 'defdown'];
 function newBattle(S, m) {
+  assignAbilityKeys(m); // monsters from any source (test collection, very old saves) fight by key
   const hs = hunterStats(S);
   const B = {
     m, turn: 1, over: false, result: null, usedPotion: false, enhancer: 0, captureFails: 0, weapon: S.equipped,
@@ -517,7 +547,7 @@ function enemyTurn(B, rng = RNG) {
   const ev = [], e = B.enemy, h = B.hero;
   if (B.over) return ev;
   if (tickStatuses(B, 'enemy', ev) || B.over) return ev;
-  const ready = B.m.abilities.filter(a => !(e.cds[a.name] > 0));
+  const ready = B.m.abilities.filter(a => !(e.cds[cooldownKey(a)] > 0));
   let ab = null;
   const healer = ready.find(a => a.effect === 'heal');
   if (healer && e.hp < e.maxHp * MECH.enemy.healBelow) ab = healer;
@@ -525,9 +555,9 @@ function enemyTurn(B, rng = RNG) {
     const pick = ready.filter(a => !(a.self && a.effect !== 'heal' && e.status[a.effect])).filter(a => a.effect !== 'heal' || e.hp < e.maxHp * 0.7);
     if (pick.length) ab = pick[Math.floor(rng() * pick.length)];
   }
-  if (!ab) ab = { name: 'Attack', power: 1 };
-  else e.cds[ab.name] = ab.cd;
-  ev.push({ t: 'act', who: 'enemy', name: ab.name, ability: ab.name !== 'Attack', ultimate: !!ab.ultimate });
+  if (!ab) ab = { name: 'Attack', power: 1, basic: true };
+  else e.cds[cooldownKey(ab)] = ab.cd;
+  ev.push({ t: 'act', who: 'enemy', name: ab.name, ability: !ab.basic, ultimate: !!ab.ultimate });
   if (ab.self) {
     if (ab.effect === 'heal') { const amt = Math.round(e.maxHp * MECH.enemy.healAmt); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
     else addStatus(e, ab.effect, STATUS_TURNS[ab.effect], ev, 'enemy');

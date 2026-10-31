@@ -12,7 +12,7 @@
 
 const CURATED = {
   enabled: false,     // master switch for curated flavour text (Phase 2, after review)
-  movesEnabled: false, // curated move NAMES additionally need stable move keys on abilities (proposed, not built)
+  movesEnabled: false, // curated move NAMES (keyed by the abilities' stable keys, game.js assignAbilityKeys); not wired in yet
   schema: 1,
   data: {},           // { objectId: entry } — filled from content/curated/*.json by `node tools/curated.js build`
 };
@@ -86,7 +86,7 @@ function validateCurated(doc, { file = 'content', raw = null, seen = null } = {}
           if (!/^[A-Za-z][A-Za-z0-9 '\-!&.,]*$/.test(v) || v !== v.trim() || /\s{2,}/.test(v) || CURATED_PLACEHOLDER.test(v)) E(`${at}.moves.${k}: letters, digits, spaces and ' - ! & . , only (no placeholders)`);
           names.set(k, v);
         }
-        // battle cooldowns are tracked per move NAME: two moves of one monster must never share a name
+        // two moves of one monster must never share a name, or players cannot tell them apart (battles use keys)
         const final = new Map(Object.entries(slots).map(([k, d]) => [k, names.get(k) || d]));
         const byName = {}; for (const [k, n] of final) (byName[n.toLowerCase()] = byName[n.toLowerCase()] || []).push(k);
         for (const [n, ks] of Object.entries(byName)) if (ks.length > 1 && ks.some(k => names.has(k))) E(`${at}.moves: "${n}" would be used by ${ks.join(' and ')} (move names must differ)`);
@@ -124,8 +124,8 @@ function curatedLore(objId, rarity, seed) {
   } catch (err) { return null; }
 }
 
-/* Proposed (NOT wired into the game): the curated display name for a move slot, or null. Applying it needs a stable
-   move key stored on each ability first (see docs/CONTENT_WRITING_GUIDE.md, "Move names"). */
+/* NOT wired into the game yet: the curated display name for a move slot (= an ability's stable key), or null.
+   Applying it is part of the approved activation step (see docs/CONTENT_WRITING_GUIDE.md, "Move names"). */
 function curatedMoveName(objId, slot) {
   if (!CURATED.enabled || !CURATED.movesEnabled || !objId) return null;
   try {

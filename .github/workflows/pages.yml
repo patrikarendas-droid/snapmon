@@ -38,6 +38,8 @@ jobs:
           node tests/identity.js
           node tests/devtest.js
           node tests/generator-snapshot.js
+          node tests/gameplay-baseline.js
+          node tests/ability-keys.js
           node tests/curated.js
           node tools/curated.js validate
       - name: Browser tests (gameplay, recognition engine with the real worker, Back navigation)

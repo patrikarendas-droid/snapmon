@@ -105,11 +105,16 @@ change. Move keys:
 | `legend` | the Legendary's legend move |
 | `ultimate` | the Legendary's Ultimate |
 
-**Not yet applied, by design.** Saved monsters store their moves by name and battles track cooldowns by name; abilities
-have no stable id today. Proposed for the activation step (needs approval): when a new monster is created, store a
-stable key on each ability (`key: "signature" | "kit.fizz_burst" | "legend" | "ultimate"`), additive and invisible to
-older saves; apply the curated name only to new monsters that have the key. Existing monsters keep their move names.
-Until then move names are validated and previewed only (`CURATED.movesEnabled` stays false).
+**Stable keys exist; names are not applied yet.** Every ability now carries a stable internal key (`signature`,
+`kit.fizz_burst`, `legend`, `ultimate`, …, the same keys as above) and battles track cooldowns by that key, so a
+display name can never change how a move works (`tests/ability-keys.js`). Older saves gain keys on load. Curated
+names will be applied at activation (separate approval) to new monsters by key; existing monsters keep their move
+names. Until then move names are validated and previewed only (`CURATED.movesEnabled` stays false).
+
+**Legendary moves:** the legend move's type (attack, heal, boost…) and the Ultimate's effect are chosen by the game,
+and the Ultimate's effect can differ between the normal, Spectral and Mutated forms of the same object. `preview`
+shows them. Ultimate names must therefore fit every possible effect (burn, poison, stun, defence down): prefer
+effect-neutral names ("Apple-ocalypse", "Planet Pickup").
 
 ## Writing rules
 
