@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-10-30, release v0.4.5 + Phase 1 curated-writing foundation (inactive).
+Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation and Pilot 01 content (both inactive).
 
 ---
 
@@ -79,6 +79,15 @@ Last updated: 2026-10-30, release v0.4.5 + Phase 1 curated-writing foundation (i
   production (no version bump; inert). Curated system stays disabled (`CURATED.enabled = false`, `curated.js` not
   loaded by the game or builds); `content/curated/` is empty. Live output frozen by `tests/generator-snapshot.js`.
   **Do not start the next phase without explicit approval.**
+- **Curated Pilot 01 imported (2026-10-31), INACTIVE:** `content/curated/pilot-01-approved.json`, byte-identical to the
+  developer's FINAL APPROVED file (sha256 2ab5752f…), on branch `content/pilot-01`. 10 objects (apple, x_light_switch,
+  x_security_camera, x_energy_drink, forklift, microwave, rubber_duck, sock, padlock, book) × 5 rarities = 50 lore texts,
+  40 proposed move names, all `reviewed` (= editorially approved, NOT activation). Validator: 0 errors, 0 warnings.
+  Preview: `docs/review/pilot-01-preview.txt`. Generator snapshot still matches the pre-activation baseline; game,
+  builds and saves unchanged; `CURATED.enabled`/`movesEnabled` false. Editorial notes (not acted on): some proposed
+  legendary move names do not match the generated mechanics (legend move type / Ultimate effect come from the
+  generator, and the Ultimate effect varies with Spectral/Mutated variants); light switch's signature override equals
+  its current name. Activation needs separate approval.
 - **Developer decisions for the next phases (2026-10-30):**
   1. Existing saves/progress are not important: a save reset is acceptable only if a change genuinely requires it,
      explained clearly beforehand. Never wipe saves unnecessarily.
@@ -100,7 +109,7 @@ Last updated: 2026-10-30, release v0.4.5 + Phase 1 curated-writing foundation (i
 | Brief freeze after the camera shutter with **Force CPU backend** (developer option) | Mitigated in v0.4.4, needs phone check | The CPU detector (TF.js CPU backend) runs on the main thread for ~1 s; see section 6. `src/ui.js` `paintFirst`, `recognizeFlow`. | Phone test: the Analysing screen should now appear immediately with the photo, sweep still moving; only the clock text pauses. A full fix needs the detector in a worker (not planned). |
 | Same freeze for real players whose phone cannot use WebGL | Same mitigation | Rare: only phones where WebGL fails fall back to the CPU detector. | As above. |
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
-| Curated monster writing not active | Phase 1 merged (inactive) | `src/curated.js`, `tools/curated.js`, `content/curated/`, `docs/CONTENT_WRITING_GUIDE.md`. Move-name overrides need stable ability ids (approved for the integration stage, not built). Activated entries will also update encyclopedia text (approved). | Pilot batch (10–20 objects) written and reviewed separately; then approved integration (ability ids, split gameplay/text baselines) and activation. |
+| Curated monster writing not active | Phase 1 merged; Pilot 01 content imported (inactive) | `src/curated.js`, `tools/curated.js`, `content/curated/`, `docs/CONTENT_WRITING_GUIDE.md`. Move-name overrides need stable ability ids (approved for the integration stage, not built). Activated entries will also update encyclopedia text (approved). | Pilot batch (10–20 objects) written and reviewed separately; then approved integration (ability ids, split gameplay/text baselines) and activation. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
 | Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change without consent; "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
