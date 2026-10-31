@@ -69,7 +69,7 @@ Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
 | v0.4.3 | a27c89c | 2026-10-30 | Monsters match their object (designs + rules for ~1,000 objects); no countdown; SNAP waits for the engine. |
 | v0.4.4 | 11e8b76 | 2026-10-30 | This journal; Force CPU shutter freeze mitigated; developer Quick Monster Test Mode. |
 | v0.4.5 | a13f396 | 2026-10-30 | Food/drink identity; object families; per-object move kits; unique Legendaries. |
-| v0.4.6 | (see `git tag`) | 2026-10-31 | Pilot 01 curated writing active (10 objects); stable ability keys (Stage A, f95f3c7). |
+| v0.4.6 | fc5f65d | 2026-10-31 | Pilot 01 curated writing active (10 objects); stable ability keys (Stage A, f95f3c7). |
 
 ## 4. Current state and next priorities
 
@@ -101,6 +101,12 @@ Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
   all 34,515 configurations); gameplay baseline unchanged; rules trace unchanged (fixture checked with curated off, plus
   curated-on run identical without names); text snapshot re-recorded for the live output while keeping the original
   recording as `withoutCurated`. Existing monsters keep their stored text/names; no save reset. Needs phone check.
+  Release verified: tag v0.4.6 → fc5f65d; Pages run 41196303977 (tests + site check incl. curated files + deploy)
+  succeeded and is the latest deployment; curated-data.js at the tag has the 10 entries with both switches on; the
+  real page and the single-file build were checked in a browser (v0.4.6, curated active, no errors). The live URL
+  itself cannot be fetched from Claude sessions (github.io is outside their network allowance).
+- **Claude Artifact copy not updated for v0.4.6** (still v0.4.5): the Artifact tool was unavailable in the release
+  session. Next session with the tool: publish `dist/snapmon.html` (or `dist/artifact.html`) to the existing artifact.
 - **Stable ability keys (2026-10-31), merged in Stage A:** approved by the developer as
   a separate technical step. `tests/gameplay-baseline.js` (no display text: rules, 46,020 monsters' stats/move
   numbers/DNA/sprites, recognition mapping, encounter odds, 1,052 battles) was recorded and committed BEFORE the change
@@ -123,7 +129,7 @@ Last updated: 2026-10-31, release v0.4.6 (Pilot 01 curated writing active).
   4. Approved writing may update encyclopedia descriptions of species already discovered (consistent lore).
   5. The first 10–20 entries are written and reviewed separately before activation. Never mass-generate
      descriptions or mark entries "reviewed" automatically.
-- **Next (proposed, not started):** phone check of v0.4.6 (Pilot 01 text and move names, encyclopedia, old monsters
+- **Next (proposed, not started):** update the Claude Artifact to v0.4.6; phone check of v0.4.6 (Pilot 01 text and move names, encyclopedia, old monsters
   unchanged); next curated batch when written and approved; verify v0.4.5 on the phone with Quick Monster Test Mode (drinks, foods, vegetables,
   kitchenware, Legendaries); continue visual QA of designs; native APK when requested.
 
