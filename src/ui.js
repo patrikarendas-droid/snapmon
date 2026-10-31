@@ -686,6 +686,7 @@ function showDiscovery(m, seen) {
 function startBattle(m) {
   if (m.test) ui.testSnapshot = JSON.stringify(S); // test battle: everything it changes (HP, items, rewards) is undone at the end
   const B = newBattle(S, m); ui.battle = B; ui.busy = false;
+  if (m.test && godMode()) enableGodMode(B); // never for a real monster (the engine also refuses)
   B.disp = { hero: B.hero.hp, enemy: B.enemy.hp };
   renderBattle();
   if (B.enemyFirst) { ui.busy = true; setLog(`${B.enemy.name} is faster and strikes first!`); setTimeout(() => runEnemy(), 700); }
@@ -698,9 +699,11 @@ function statusChips(u) {
 function renderBattle() {
   const B = ui.battle, m = B.m, W = WEAPONS[B.weapon], comp = companionOf(S);
   const cap = captureChance(S, B), analysis = !!S.research.analysis;
-  const capTxt = analysis ? Math.round(cap * 100) + '%' : cap > 0.6 ? 'High' : cap > 0.3 ? 'Medium' : 'Low';
+  const god = godOn(B);
+  const capTxt = god ? '100%' : analysis ? Math.round(cap * 100) + '%' : cap > 0.6 ? 'High' : cap > 0.3 ? 'Medium' : 'Low';
   const hunter = renderHunter(document.createElement('canvas'), B.weapon, 6).toDataURL();
   $('#overlay').innerHTML = `<div class="overlay battle"><div class="overlay-inner" id="battleRoot">
+    ${god ? '<p class="test-banner" id="godBanner" style="text-align:center;margin:0">GOD MODE · TEST BATTLE</p>' : ''}
     <div class="arena" id="arena" style="--fc:${FAMILIES[m.fam].color}">
       <div class="hp-card foe-card"><div class="nm"><span>${esc(B.enemy.name.split(',')[0])}</span><span class="lv">Lv ${m.level}</span></div>
         <div class="row" style="gap:6px"><span class="chip r" style="color:${RARITY[m.rarity].color};font-size:9.5px;padding:1px 6px">${RARITY[m.rarity].name.toUpperCase()}</span><span class="small" style="color:${FAMILIES[m.fam].color}">${FAMILIES[m.fam].glyph} ${FAMILIES[m.fam].name}</span></div>
@@ -718,9 +721,9 @@ function renderBattle() {
     <div class="battle-log" id="blog">…</div>
     <div class="actions ${ui.busy ? 'busy' : ''}" id="actions">
       <button class="act attack" data-act="bAttack">Attack<small>${esc(W.name.split(' ').slice(-1)[0])} · ${ELEMENTS[W.el].name}</small></button>
-      <button class="act special" data-act="bSpecial" ${B.hero.energy < W.special.cost ? 'disabled' : ''}>${esc(W.special.name)}<small>${W.special.cost} energy</small></button>
-      <button class="act" data-act="bItems">Items<small>${BATTLE_ITEMS.reduce((a, k) => a + (S.items[k] || 0), 0)} in bag</small></button>
-      <button class="act capture" data-act="bCapture" ${S.items.trap ? '' : 'disabled'}>Capture<small>${S.items.trap} traps · ${capTxt}</small></button>
+      <button class="act special" data-act="bSpecial" ${!god && B.hero.energy < W.special.cost ? 'disabled' : ''}>${esc(W.special.name)}<small>${god ? 'free (God Mode)' : W.special.cost + ' energy'}</small></button>
+      <button class="act" data-act="bItems">Items<small>${god ? 'unlimited' : BATTLE_ITEMS.reduce((a, k) => a + (S.items[k] || 0), 0) + ' in bag'}</small></button>
+      <button class="act capture" data-act="bCapture" ${god || S.items.trap ? '' : 'disabled'}>Capture<small>${god ? '∞' : S.items.trap} traps · ${capTxt}</small></button>
       <button class="act" data-act="bFlee">Flee<small>${analysis ? Math.round(fleeChance(S, B) * 100) + '%' : 'escape'}</small></button>
       <button class="act" data-act="bInfo">Intel<small>${analysis ? 'full scan' : 'basic'}</small></button>
     </div>
@@ -741,11 +744,12 @@ function refreshActions() {
   const B = ui.battle; if (!B || B.over) return;
   const a = $('#actions'); if (!a) return;
   a.classList.toggle('busy', ui.busy);
-  const sp = a.querySelector('[data-act="bSpecial"]'); if (sp) sp.disabled = B.hero.energy < WEAPONS[B.weapon].special.cost;
+  const god = godOn(B);
+  const sp = a.querySelector('[data-act="bSpecial"]'); if (sp) sp.disabled = !god && B.hero.energy < WEAPONS[B.weapon].special.cost;
   const cap = captureChance(S, B), analysis = !!S.research.analysis;
   const c = a.querySelector('[data-act="bCapture"]');
-  if (c) { c.disabled = !S.items.trap; c.querySelector('small').textContent = `${S.items.trap} traps · ${analysis ? Math.round(cap * 100) + '%' : cap > 0.6 ? 'High' : cap > 0.3 ? 'Medium' : 'Low'}`; }
-  const it = a.querySelector('[data-act="bItems"] small'); if (it) it.textContent = `${BATTLE_ITEMS.reduce((x, k) => x + (S.items[k] || 0), 0)} in bag`;
+  if (c) { c.disabled = !god && !S.items.trap; c.querySelector('small').textContent = god ? '∞ traps · 100%' : `${S.items.trap} traps · ${analysis ? Math.round(cap * 100) + '%' : cap > 0.6 ? 'High' : cap > 0.3 ? 'Medium' : 'Low'}`; }
+  const it = a.querySelector('[data-act="bItems"] small'); if (it) it.textContent = god ? 'unlimited' : `${BATTLE_ITEMS.reduce((x, k) => x + (S.items[k] || 0), 0)} in bag`;
 }
 function arenaPoint(who) {
   const ar = $('#arena'), el = who === 'enemy' ? $('#foe') : $('#hero');
@@ -813,7 +817,7 @@ async function play(events) {
           if (e.crit) anim($('.overlay'), 'shake');
         } else {
           heroImpact(); SFX.hurt();
-          B.disp.hero = Math.max(0, B.disp.hero - e.dmg);
+          B.disp.hero = Math.max(godOn(B) ? 1 : 0, B.disp.hero - e.dmg); // God Mode: the bar never shows 0
           anim($('#hero img'), 'hitflash');
           floatText('hero', (e.crit ? 'CRIT ' : '') + e.dmg, e.crit ? 'crit' : '', '#ff8a9a');
           if (e.crit) anim($('.overlay'), 'shake');
@@ -823,7 +827,7 @@ async function play(events) {
       case 'miss': SFX.miss(); floatText(e.who, 'MISS', '', '#a0a0b8'); setLog(e.who === 'enemy' ? 'Missed!' : 'You dodged it!'); await wait(380); break;
       case 'heal': SFX.heal(); B.disp[e.who] = Math.min(B[e.who].maxHp, B.disp[e.who] + e.amt); floatText(e.who, '+' + e.amt, '', '#7dff9a'); refreshBattleBars(); await wait(380); break;
       case 'status': SFX.status(); floatText(e.who, STATUS_NAME[e.s] || e.s, '', '#d6a2ff'); refreshBattleBars(); await wait(360); break;
-      case 'dot': B.disp[e.who] = Math.max(0, B.disp[e.who] - e.dmg); floatText(e.who, e.dmg, '', e.s === 'poison' ? '#c48bff' : '#ffae5c'); setLog(`${e.who === 'hero' ? 'You take' : B.enemy.name.split(',')[0] + ' takes'} ${e.s} damage.`); refreshBattleBars(); await wait(420); break;
+      case 'dot': B.disp[e.who] = Math.max(e.who === 'hero' && godOn(B) ? 1 : 0, B.disp[e.who] - e.dmg); floatText(e.who, e.dmg, '', e.s === 'poison' ? '#c48bff' : '#ffae5c'); setLog(`${e.who === 'hero' ? 'You take' : B.enemy.name.split(',')[0] + ' takes'} ${e.s} damage.`); refreshBattleBars(); await wait(420); break;
       case 'expire': refreshBattleBars(); break;
       case 'text': setLog(e.msg); await wait(e.stun ? 650 : 520); break;
       case 'capture': await captureAnim(e.ok); break;
@@ -852,7 +856,7 @@ async function battleAction(kind, arg) {
   const B = ui.battle; if (!B || ui.busy || B.over) return;
   let ev;
   if (kind === 'attack') ev = heroStrike(B, S, false);
-  else if (kind === 'special') { if (B.hero.energy < WEAPONS[B.weapon].special.cost) return toast('Not enough energy yet — basic attacks charge it.'); ev = heroStrike(B, S, true); }
+  else if (kind === 'special') { if (!godOn(B) && B.hero.energy < WEAPONS[B.weapon].special.cost) return toast('Not enough energy yet — basic attacks charge it.'); ev = heroStrike(B, S, true); }
   else if (kind === 'capture') { const r = attemptCapture(B, S); if (!r.used) return toast('You are out of Snap Traps. Craft or buy more in Gear.', 'bad'); ev = r.ev; }
   else if (kind === 'flee') ev = attemptFlee(B, S);
   else if (kind === 'item') { const r = useItem(B, S, arg); closeSheet(); if (!r.ok) return toast(r.ev[0] ? r.ev[0].msg : 'You cannot use that right now.'); ev = r.ev; }
@@ -888,6 +892,11 @@ async function endBattle() {
   showResult(B, sum);
 }
 const quickTest = () => DEV_TOOLS && devOn() && !!S.settings.quickTest;
+// God Mode (developer): only for test battles, i.e. Quick Monster Test Mode on and Instant capture off. The setting is
+// remembered like the other developer switches (default off); a build with DEV_TOOLS=false can never activate it.
+const godMode = () => quickTest() && S.settings.instantCapture === false && !!S.settings.godMode;
+const godStateText = () => !S.settings.godMode ? 'Off.' : godMode() ? 'ACTIVE in test battles.'
+  : `On, but inactive: needs ${[!quickTest() && 'Quick Monster Test Mode on', S.settings.instantCapture !== false && 'Instant capture off'].filter(Boolean).join(' and ')}.`;
 function endTestBattle(B) {
   S = JSON.parse(ui.testSnapshot); ui.testSnapshot = null; // restore the real save exactly as it was before the fight
   const caught = B.result === 'captured';
@@ -952,13 +961,14 @@ function showResult(B, sum) {
   render();
 }
 function itemsSheet() {
+  const god = godOn(ui.battle);
   const list = BATTLE_ITEMS.map(id => {
-    const it = ITEMS[id], n = S.items[id] || 0;
-    return `<div class="list-item ${n ? '' : 'locked'}"><div class="item-ic"><i class="potion-ic" style="--pc:${it.color}"></i></div>
-      <div class="grow"><h3>${esc(it.name)} <span class="muted num">×${n}</span></h3><p>${esc(it.desc)}</p></div>
-      <button class="btn small ${n ? 'ecto' : ''}" data-act="bUse" data-arg="${id}" ${n ? '' : 'disabled'}>Use</button></div>`;
+    const it = ITEMS[id], n = S.items[id] || 0, can = god || n;
+    return `<div class="list-item ${can ? '' : 'locked'}"><div class="item-ic"><i class="potion-ic" style="--pc:${it.color}"></i></div>
+      <div class="grow"><h3>${esc(it.name)} <span class="muted num">×${god ? '∞' : n}</span></h3><p>${esc(it.desc)}</p></div>
+      <button class="btn small ${can ? 'ecto' : ''}" data-act="bUse" data-arg="${id}" ${can ? '' : 'disabled'}>Use</button></div>`;
   }).join('');
-  openSheet(`<div class="sheet-head"><h2>Items</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div><p class="small muted">Using an item takes your turn.</p>${list}`);
+  openSheet(`<div class="sheet-head"><h2>Items</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div><p class="small muted">Using an item takes your turn.${god ? ' God Mode: items are not used up.' : ''}</p>${list}`);
 }
 function infoSheet() {
   const B = ui.battle, m = B.m, analysis = !!S.research.analysis, f = FAMILIES[m.fam];
@@ -1206,6 +1216,7 @@ function developerHTML() {
     ${perfHTML()}
     <div class="toggle"><div><b>Quick Monster Test Mode</b><p>Testing only: every accepted photo produces a monster, with test odds (Common 20 · Uncommon 20 · Rare 25 · Epic 20 · Legendary 15 %). Test monsters never enter your save, collection or encyclopedia, and give no rewards. Wrong object still comes first.</p></div><button class="switch ${S.settings.quickTest ? 'on' : ''}" data-act="toggleQuickTest" aria-label="Toggle Quick Monster Test Mode"></button></div>
     <div class="toggle"><div><b>Instant capture (test mode)</b><p>Adds each test monster straight to the test collection, without a battle. Off: test monsters can be fought; nothing that happens in a test battle is kept, except a captured monster in the test collection.</p></div><button class="switch ${S.settings.instantCapture !== false ? 'on' : ''}" data-act="toggleInstantCapture" aria-label="Toggle instant capture"></button></div>
+    <div class="toggle"><div><b>God Mode (test battles)</b><p>Testing only, for fights with test monsters (Quick Monster Test Mode on, Instant capture off): you cannot be defeated, specials need no energy, traps and items are unlimited, and a capture attempt always succeeds. The monster fights normally. Never affects normal hunts. <b id="godState">${esc(godStateText())}</b></p></div><button class="switch ${S.settings.godMode ? 'on' : ''}" data-act="toggleGodMode" aria-label="Toggle God Mode for test battles"></button></div>
     <div class="row wrap"><button class="btn small grow" data-act="testCollection">Test collection (${TestRoster.list().length})</button><button class="btn small danger" data-act="testClear">Clear test monsters</button></div>
     ${ftSummaryHTML()}
     <div class="row wrap"><button class="btn small grow" data-act="ftExport" data-arg="new">Copy new results (${ftNew().length})</button><button class="btn small" data-act="ftExport" data-arg="all">Copy whole log</button><button class="btn small danger" data-act="ftClear">Clear log</button></div>
@@ -1231,6 +1242,7 @@ function openSheet(html, key) {
   $('#sheet').innerHTML = `<div class="sheet-wrap" data-act="sheetBg"><div class="sheet" role="dialog" aria-modal="true"${key ? ` data-key="${key}"` : ''}>${html}</div></div>`;
 }
 // flip one switch in place (no rebuild); also refreshes the backup code, which contains the settings
+function syncGodState() { const g = $('#godState'); if (g) g.textContent = godStateText(); }
 function setSwitch(el, on) {
   if (el) { el.classList.toggle('on', !!on); el.setAttribute('aria-pressed', on ? 'true' : 'false'); }
   const box = $('#exportBox'); if (box) box.value = exportSave(S);
@@ -1260,8 +1272,9 @@ const actions = {
     ui.devTaps = (ui.devTaps || 0) + 1;
     if (DEV_TOOLS && ui.devTaps >= 7 && !S.settings.devUnlocked) { S.settings.devUnlocked = true; persist(); toast('Developer tools unlocked.'); settingsSheet(); }
   },
-  toggleQuickTest(_, el) { S.settings.quickTest = !S.settings.quickTest; persist(); setSwitch(el, S.settings.quickTest); render(); },
-  toggleInstantCapture(_, el) { S.settings.instantCapture = S.settings.instantCapture === false; persist(); setSwitch(el, S.settings.instantCapture); },
+  toggleQuickTest(_, el) { S.settings.quickTest = !S.settings.quickTest; persist(); setSwitch(el, S.settings.quickTest); syncGodState(); render(); },
+  toggleInstantCapture(_, el) { S.settings.instantCapture = S.settings.instantCapture === false; persist(); setSwitch(el, S.settings.instantCapture); syncGodState(); },
+  toggleGodMode(_, el) { S.settings.godMode = !S.settings.godMode; persist(); setSwitch(el, S.settings.godMode); syncGodState(); },
   testCollection: testCollectionSheet,
   testView(id) { testMonsterSheet(id); },
   testDelete(id) { TestRoster.remove(id); testCollectionSheet(); },

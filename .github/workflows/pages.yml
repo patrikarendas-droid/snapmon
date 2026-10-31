@@ -40,6 +40,7 @@ jobs:
           node tests/generator-snapshot.js
           node tests/gameplay-baseline.js
           node tests/ability-keys.js
+          node tests/god-mode.js
           node tests/curated.js
           node tools/curated.js validate
       - name: Browser tests (gameplay, recognition engine with the real worker, Back navigation)
@@ -54,6 +55,7 @@ jobs:
           node tests/e2e-nav.js http://localhost:8765/index.html shots
           node tests/e2e-qol.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
           node tests/e2e-v044.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
+          node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
   deploy:
     needs: test
     runs-on: ubuntu-latest

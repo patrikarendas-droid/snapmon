@@ -3,7 +3,7 @@
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.6';
+const GAME_VERSION = '0.4.7';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -489,6 +489,17 @@ function newBattle(S, m) {
   B.enemyFirst = m.stats.spd > hs.spd * MECH.firstStrike;
   return B;
 }
+/* ---------- developer God Mode (test battles only) ----------
+   A flag on ONE battle object, set only by enableGodMode() for a Quick Monster Test Mode monster (m.test) in a build
+   with DEV_TOOLS. It is never stored in the save and never set for a normal battle; every check below also re-verifies
+   m.test and DEV_TOOLS. In such a battle: the hunter cannot fall below 1 HP and is restored at the start of each of its
+   turns (hits, damage numbers and statuses still happen), specials cost no energy, Snap Traps and items are neither
+   required nor used up, and a capture attempt always succeeds. The monster, its moves, AI, statuses and cooldowns are
+   untouched. When it is off, none of these lines changes anything. */
+function enableGodMode(B) { if (!DEV_TOOLS || !B || !B.m || !B.m.test) return false; B.god = true; return true; }
+const godOn = B => !!(B && B.god && B.m && B.m.test && DEV_TOOLS);
+const godFloor = B => { if (godOn(B) && B.hero.hp < 1) B.hero.hp = 1; };
+
 function effMult(fam, el) { const f = FAMILIES[fam]; return f.weak.includes(el) ? MECH.weak : f.resist.includes(el) ? MECH.resist : 1; }
 function addStatus(tgt, s, turns, ev, who) {
   if (NEG.includes(s) && tgt.status.immune) { ev.push({ t: 'text', msg: `${tgt.name} resisted ${s}!` }); return; }
@@ -506,6 +517,7 @@ function tickStatuses(B, who, ev) { // start of `who`'s turn. returns true if th
   const X = MECH.status;
   if (u.status.poison) { const d = Math.max(X.poisonMin, Math.round(u.maxHp * X.poisonPct)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'poison' }); }
   if (u.status.burn) { const d = Math.max(X.burnMin, Math.round(u.maxHp * X.burnPct + X.burnFlat)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'burn' }); }
+  if (who === 'hero') godFloor(B);
   if (u.status.stun) { skip = true; ev.push({ t: 'text', msg: `${u.name === 'Hunter' ? 'You are' : u.name + ' is'} stunned and can't move!`, who, stun: true }); }
   for (const k of Object.keys(u.status)) { u.status[k].t--; if (u.status[k].t <= 0) { delete u.status[k]; ev.push({ t: 'expire', who, s: k }); } }
   if (who === 'enemy') for (const k of Object.keys(B.enemy.cds)) if (B.enemy.cds[k] > 0) B.enemy.cds[k]--;
@@ -542,7 +554,7 @@ function heroStrike(B, S, special, rng = RNG) {
   if (charmOn(S, 'fang') && total > 0) { const heal = Math.max(1, Math.round(total * MECH.fang)); h.hp = Math.min(h.maxHp, h.hp + heal); ev.push({ t: 'heal', who: 'hero', amt: heal }); }
   if (eff > 1 && total) ev.push({ t: 'text', msg: "It's super effective!" });
   else if (eff < 1 && total) ev.push({ t: 'text', msg: 'It resists your weapon...' });
-  h.energy = clamp(h.energy + (sp ? -sp.cost : MECH.energy.perAttack), 0, MECH.energy.max);
+  h.energy = clamp(h.energy + (sp ? (godOn(B) ? 0 : -sp.cost) : MECH.energy.perAttack), 0, MECH.energy.max);
   checkEnd(B, ev);
   return ev;
 }
@@ -573,7 +585,7 @@ function enemyTurn(B, rng = RNG) {
     let dmg = dmgCalc(effAtk(e), ab.power, effDef(h), rng);
     const crit = rng() < MECH.enemy.crit; if (crit) dmg *= MECH.enemy.critX;
     dmg = Math.max(1, Math.round(dmg));
-    h.hp = Math.max(0, h.hp - dmg);
+    h.hp = Math.max(0, h.hp - dmg); godFloor(B);
     ev.push({ t: 'hit', who: 'hero', dmg, crit });
     if (ab.effect === 'drain') { const amt = Math.round(dmg * 0.5); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
     else if (ab.effect && rng() < (ab.chance || 1) && h.hp > 0) addStatus(h, ab.effect, STATUS_TURNS[ab.effect], ev, 'hero');
@@ -581,7 +593,11 @@ function enemyTurn(B, rng = RNG) {
   checkEnd(B, ev);
   return ev;
 }
-function heroTurnStart(B) { const ev = []; const skip = tickStatuses(B, 'hero', ev); return { ev, skip }; }
+function heroTurnStart(B) {
+  const ev = []; const skip = tickStatuses(B, 'hero', ev);
+  if (godOn(B) && !B.over && B.hero.hp < B.hero.maxHp) { const amt = B.hero.maxHp - B.hero.hp; B.hero.hp = B.hero.maxHp; ev.push({ t: 'heal', who: 'hero', amt, god: true }); }
+  return { ev, skip };
+}
 
 function captureChance(S, B) {
   const m = B.m, e = B.enemy, r = RARITY[m.rarity];
@@ -595,9 +611,10 @@ function captureChance(S, B) {
 }
 function attemptCapture(B, S, rng = RNG) {
   const ev = [];
-  if ((S.items.trap || 0) <= 0) { ev.push({ t: 'text', msg: 'You are out of Snap Traps!' }); return { ev, used: false }; }
-  const ch = captureChance(S, B);
-  S.items.trap--;
+  const god = godOn(B);
+  if (!god && (S.items.trap || 0) <= 0) { ev.push({ t: 'text', msg: 'You are out of Snap Traps!' }); return { ev, used: false }; }
+  const ch = god ? 1 : captureChance(S, B);
+  if (!god) S.items.trap--;
   ev.push({ t: 'act', who: 'hero', name: 'Snap Trap', fx: 'trap' });
   if (rng() < ch) { B.over = true; B.result = 'captured'; ev.push({ t: 'capture', ok: true }); ev.push({ t: 'end', result: 'captured' }); return { ev, used: true }; }
   B.captureFails++;
@@ -619,7 +636,8 @@ function attemptFlee(B, S, rng = RNG) {
 }
 function useItem(B, S, id) {
   const ev = [], h = B ? B.hero : null;
-  if ((S.items[id] || 0) <= 0) return { ev, ok: false };
+  const god = godOn(B);
+  if (!god && (S.items[id] || 0) <= 0) return { ev, ok: false };
   const medic = has(S, 'medic') ? 1.3 : 1;
   const maxHp = h ? h.maxHp : hunterStats(S).maxHp;
   const curHp = h ? h.hp : S.hp;
@@ -643,7 +661,7 @@ function useItem(B, S, id) {
     case 'smoke': if (!B) return { ev, ok: false }; B.over = true; B.result = 'fled'; ev.push({ t: 'text', msg: 'Poof! You vanish in a cloud of smoke.' }); ev.push({ t: 'end', result: 'fled' }); break;
     default: return { ev, ok: false };
   }
-  S.items[id]--;
+  if (!god) S.items[id]--;
   if (B) ev.unshift({ t: 'act', who: 'hero', name: ITEMS[id].name, fx: 'item' });
   return { ev, ok: true };
 }
