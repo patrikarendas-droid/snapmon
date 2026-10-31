@@ -90,7 +90,9 @@ Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation an
   its current name. Activation needs separate approval.
   2026-10-31 developer-approved name fixes applied (lore untouched): padlock legend → Rusty Lockjaw, signature →
   Clack Clack Clack; light switch legend → Maximum Power, redundant signature override removed; microwave ultimate →
-  Defrost Disaster; book signature → Papercut Barrage. Now 39 move names. Further suggestions reported, not applied.
+  Defrost Disaster; book signature → Papercut Barrage. Now 39 move names. Final developer decisions (2026-10-31):
+  light switch ultimate → The Big Switch; rubber duck legend → Flaming Quack; energy drink legend → Caffeine Crash;
+  book legend → Rewrite the Ending; "Wake-Up Call" kept.
 - **Stable ability keys (2026-10-31), branch `feature/ability-ids` (also carries Pilot 01), not merged/deployed:** approved by the developer as
   a separate technical step. `tests/gameplay-baseline.js` (no display text: rules, 46,020 monsters' stats/move
   numbers/DNA/sprites, recognition mapping, encounter odds, 1,052 battles) was recorded and committed BEFORE the change
