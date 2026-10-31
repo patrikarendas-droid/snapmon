@@ -88,6 +88,9 @@ Last updated: 2026-10-31, release v0.4.5 + Phase 1 curated-writing foundation an
   legendary move names do not match the generated mechanics (legend move type / Ultimate effect come from the
   generator, and the Ultimate effect varies with Spectral/Mutated variants); light switch's signature override equals
   its current name. Activation needs separate approval.
+  2026-10-31 developer-approved name fixes applied (lore untouched): padlock legend → Rusty Lockjaw, signature →
+  Clack Clack Clack; light switch legend → Maximum Power, redundant signature override removed; microwave ultimate →
+  Defrost Disaster; book signature → Papercut Barrage. Now 39 move names. Further suggestions reported, not applied.
 - **Developer decisions for the next phases (2026-10-30):**
   1. Existing saves/progress are not important: a save reset is acceptable only if a change genuinely requires it,
      explained clearly beforehand. Never wipe saves unnecessarily.
