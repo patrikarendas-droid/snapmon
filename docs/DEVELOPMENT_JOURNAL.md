@@ -79,6 +79,17 @@ Last updated: 2026-10-30, release v0.4.5 + Phase 1 curated-writing foundation (i
   production (no version bump; inert). Curated system stays disabled (`CURATED.enabled = false`, `curated.js` not
   loaded by the game or builds); `content/curated/` is empty. Live output frozen by `tests/generator-snapshot.js`.
   **Do not start the next phase without explicit approval.**
+- **Stable ability keys (2026-10-31), branch `feature/ability-ids`, not merged/deployed:** approved by the developer as
+  a separate technical step. `tests/gameplay-baseline.js` (no display text: rules, 46,020 monsters' stats/move
+  numbers/DNA/sprites, recognition mapping, encounter odds, 1,052 battles) was recorded and committed BEFORE the change
+  and is unchanged after it. Every ability now has `key` (signature / kit.<move> / fam.<move> / legend / ultimate /
+  move.<name>); enemy cooldowns use the key; `cdWith` preserves the old shared cooldown for the 4 monsters with two
+  same-named moves (epic bee "Sting", rare/epic pin cushion "Pin Prick"). Older saves gain keys on load (additive,
+  no save reset, SAVE_VERSION unchanged; older versions ignore the field). Text snapshot unchanged apart from the
+  new fields (excluded from its hash on purpose). Curated system still inactive.
+- **Developer decisions on Pilot 01 (2026-10-31):** the 50 lore texts are accepted exactly as written; fix move NAMES
+  that do not fit their mechanics (never mechanics to fit names); Ultimate names must suit every effect the game can
+  give (burn, poison, stun, defence down; it varies by variant); remove the redundant light-switch signature override.
 - **Developer decisions for the next phases (2026-10-30):**
   1. Existing saves/progress are not important: a save reset is acceptable only if a change genuinely requires it,
      explained clearly beforehand. Never wipe saves unnecessarily.
@@ -100,7 +111,7 @@ Last updated: 2026-10-30, release v0.4.5 + Phase 1 curated-writing foundation (i
 | Brief freeze after the camera shutter with **Force CPU backend** (developer option) | Mitigated in v0.4.4, needs phone check | The CPU detector (TF.js CPU backend) runs on the main thread for ~1 s; see section 6. `src/ui.js` `paintFirst`, `recognizeFlow`. | Phone test: the Analysing screen should now appear immediately with the photo, sweep still moving; only the clock text pauses. A full fix needs the detector in a worker (not planned). |
 | Same freeze for real players whose phone cannot use WebGL | Same mitigation | Rare: only phones where WebGL fails fall back to the CPU detector. | As above. |
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
-| Curated monster writing not active | Phase 1 merged (inactive) | `src/curated.js`, `tools/curated.js`, `content/curated/`, `docs/CONTENT_WRITING_GUIDE.md`. Move-name overrides need stable ability ids (approved for the integration stage, not built). Activated entries will also update encyclopedia text (approved). | Pilot batch (10–20 objects) written and reviewed separately; then approved integration (ability ids, split gameplay/text baselines) and activation. |
+| Curated monster writing not active | Phase 1 merged (inactive) | `src/curated.js`, `tools/curated.js`, `content/curated/`, `docs/CONTENT_WRITING_GUIDE.md`. Stable ability keys built (branch `feature/ability-ids`); curated move names not wired in yet. Activated entries will also update encyclopedia text (approved). | Pilot batch (10–20 objects) written and reviewed separately; then approved integration (ability ids, split gameplay/text baselines) and activation. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
 | Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change without consent; "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
@@ -143,7 +154,7 @@ Last updated: 2026-10-30, release v0.4.5 + Phase 1 curated-writing foundation (i
 
 ## 7. Testing and verification
 
-- **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `generator-snapshot`, `curated`, `guide`, `lore`, `identity`, `devtest`,
+- **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `gameplay-baseline`, `ability-keys`, `generator-snapshot`, `curated`, `guide`, `lore`, `identity`, `devtest`,
   `migrate`, `labels`, `clip-fusion`, `color`, sprite regressions) and browser tests in headless Chromium with a fake
   camera (`e2e`, `e2e-engine` with the real TinyCLIP worker and a tiny test model, `e2e-nav`, `e2e-qol`, `e2e-v044`).
 - **Real-model lab (`lab.yml`):** runs the real models on ~150 labelled Wikimedia photos when engine/lab files change
@@ -181,6 +192,10 @@ Last updated: 2026-10-30, release v0.4.5 + Phase 1 curated-writing foundation (i
   `LORE_OBJECT` directly (mixes writing with code, no validation). Audit: ability names are identifiers in battle
   cooldowns (`e.cds[name]`) and in identity updates (signature name compared with the category's); monster names,
   moves and lore are stored on monsters and in backups; encyclopedia text (`speciesLore`) is computed live.
+- **Two regression baselines (2026-10-31):** `gameplay-baseline` (no text at all) must never change for wording work;
+  `generator-snapshot` (text + names + save) changes only on purpose (curated activation re-records it, the gameplay
+  baseline must still pass). Cooldowns by stable key, not display name; `cdWith` kept for exact compatibility rather
+  than silently fixing the shared-cooldown quirk (a possible later balance decision).
 
 ## 9. How to keep this journal
 
