@@ -36,7 +36,8 @@
 | w04-bugs-and-reptiles | 118 | 118 | done: 58 high / 125 medium / 33 low + 9 patterns | 221 fields (`patches/w04-editor-auto.json`, names re-paired) then `w04-self-fixes.json` (apply in that order) | open: Ultimate = Epic name in ~70 objects (pattern), crowd-scene Epics |
 | w05-vehicles-1 | 79 | 79 | running | self-fixes | |
 | w06-vehicles-2 | 79 | 79 | pending | self-fixes | |
-| w07–w22 | 1,639 | 0 | — | — | not started |
+| w07-clothing-and-shoes | 118 | 118 | pending | self-fixes | |
+| w08–w22 | 1,521 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
