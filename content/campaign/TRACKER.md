@@ -34,7 +34,8 @@
 | w02-mammals-2 | 106 | 106 | done: 76 high / 118 medium / 83 low + 14 patterns | 193 lore/move fields (`patches/w02-editor-auto.json`, bad suggestions overridden) + 146 names re-paired to their lore (`w02-editor-names.json`) + religious settings removed | open: one-trait-across-rarities in ~30 objects only partly fixed; Ultimate = Epic name + word (51); award legendaries |
 | w03-birds-and-sea-life | 120 | 120 | editor agent hit the usage limit mid-run; re-run pending | — | |
 | w04-bugs-and-reptiles | 118 | 118 | running | self-fixes (`patches/w04-self-fixes.json`) | |
-| w05–w22 | 1,797 | 0 | — | — | not started |
+| w05-vehicles-1 | 79 | 79 | running | self-fixes | |
+| w06–w22 | 1,718 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
