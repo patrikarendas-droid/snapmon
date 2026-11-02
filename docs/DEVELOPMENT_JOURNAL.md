@@ -135,6 +135,9 @@ Last updated: 2026-11-02, release v0.4.9 (recognition/identity audit; tag v0.4.9
   `tools/campaign.js` (brief/ingest/status/immutable), tracker + handoff `content/campaign/TRACKER.md`, live counts
   `content/campaign/STATUS.md`. Pilot 01 names proposal kept outside `content/curated/`. Independent editor agent per
   batch → `content/review/<batch>-issues.json`. Nothing reviewed/merged/deployed; v0.4.9 Android playtest still pending.
+  Progress (2026-11-02): w01–w08 written (821/2,248 objects, 4,155/11,290 names, 4,105/11,240 lore lines); editor
+  passes applied for w01–w04 (all high + meaningful medium); w05–w07 editor passes running/pending. Recurring editor
+  findings (names on the wrong rarity, one trait across rarities, Ultimate = Epic name) are tracked in TRACKER.md.
 - **Recognition → identity → visual audit (2026-11-02), branch `feature/recognition-identity-audit`, NOT merged or
   deployed (awaits approval).** Trigger: phone test of v0.4.8, a photographed sea urchin spawned the Starfish. Root
   cause: Starfish carried the alias "sea urchin" (first registration wins in `ALIAS_INDEX`), so `objectForLabel`, the
