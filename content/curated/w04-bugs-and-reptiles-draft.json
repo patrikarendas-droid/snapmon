@@ -2141,6 +2141,694 @@
         "kit.molt": "Empty Shell Shed",
         "kit.web_snare": "Buzz Daze"
       }
+    },
+    "x_cocoon": {
+      "status": "draft",
+      "names": {
+        "common": "Silkbundle",
+        "uncommon": "Snugwrap",
+        "rare": "Spinsack",
+        "epic": "Cocoon Cluster",
+        "legendary": "Bombyx, Spinner of a Mile"
+      },
+      "lore": {
+        "common": "Hangs in the corner of the shed wrapped in silk and won't come out, no matter how nicely you ask.",
+        "uncommon": "Wrapped itself so snugly in silk that it looks like a tiny sleeping bag.",
+        "rare": "Spun one thread of silk so long that it would reach the end of the street and back.",
+        "epic": "Hung in a cluster of a hundred cocoons from the porch, and the visitors thought it was a strange new lamp.",
+        "legendary": "Spun a silk thread a whole mile long without a single knot, then went to sleep inside it."
+      },
+      "moves": {
+        "signature": "Silk Nip",
+        "legend": "Silk Siphon",
+        "ultimate": "Bursting Silk",
+        "kit.swarm": "Wiggle Wiggle Wiggle Wiggle",
+        "kit.molt": "Silken Sleep",
+        "kit.web_snare": "Silk Thread Tangle"
+      }
+    },
+    "x_crocodile_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Floppysnap",
+        "uncommon": "Grinplastic",
+        "rare": "Shelfcroc",
+        "epic": "Nursery Snap Attack",
+        "legendary": "Sergeant Snapjaw of the Toybox"
+      },
+      "lore": {
+        "common": "Lies at the bottom of the toybox and bites your fingers every time you reach for something else.",
+        "uncommon": "Has a huge painted grin that looks friendly until the lights go out.",
+        "rare": "Snapped its plastic jaws so hard that it jumped off the shelf and landed in the goldfish bowl.",
+        "epic": "Hid under every bed in the nursery in turn, and the children slept with their feet tucked in for a week.",
+        "legendary": "Was the favourite toy of three generations of children, and still has all its plastic teeth."
+      },
+      "moves": {
+        "signature": "Plastic Snap",
+        "legend": "Painted Grin Startle",
+        "ultimate": "Toybox Surprise",
+        "kit.tail_lash": "Floppy Tail Swipe",
+        "kit.shed_skin": "Paint Touch-Up",
+        "kit.bask": "Windowsill Bravado"
+      }
+    },
+    "x_dinosaur": {
+      "status": "draft",
+      "names": {
+        "common": "Fossilfoot",
+        "uncommon": "Stompclaw",
+        "rare": "Museumwalker",
+        "epic": "Prehistoric Stomp",
+        "legendary": "Saurus Rex, Last of the Giants"
+      },
+      "lore": {
+        "common": "Leaves enormous footprints in the garden mud and blames the neighbours' dog.",
+        "uncommon": "Has a long tail that knocks over anything left on a low table.",
+        "rare": "Stood so still in the museum hall that the visitors thought it was a skeleton, then sneezed.",
+        "epic": "Stomped across the valley so heavily that every pond had little ripples for a week.",
+        "legendary": "Survived the end of the dinosaurs by hiding in a very deep cave, and came out only to complain about the noise."
+      },
+      "moves": {
+        "signature": "Fossil Bite",
+        "legend": "Earth-Shaking Stomp",
+        "ultimate": "Prehistoric Roar",
+        "kit.tongue_snare": "Swamp Tongue Snatch"
+      }
+    },
+    "x_dinosaur_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Squeakyrex",
+        "uncommon": "Playroar",
+        "rare": "Rugstomper",
+        "epic": "Playroom Rampage",
+        "legendary": "Dinomight the Unbreakable"
+      },
+      "lore": {
+        "common": "Stands in the middle of the carpet so that someone steps on it every single night.",
+        "uncommon": "Roars when you press its tummy, usually at three in the morning.",
+        "rare": "Lost its tail under the sofa years ago and has been looking for it ever since.",
+        "epic": "Led every plastic dinosaur in the playroom in a stampede across the rug, and knocked down the block tower.",
+        "legendary": "Survived the washing machine, the dog and the garden pond, and is still the favourite toy in the house."
+      },
+      "moves": {
+        "signature": "Plastic Bite",
+        "legend": "Tummy Roar Surprise",
+        "ultimate": "Rug Rampage",
+        "kit.tail_lash": "Plastic Tail Swing",
+        "kit.shed_skin": "Bath Time Rest",
+        "kit.bask": "Shelf Pride"
+      }
+    },
+    "x_earwig": {
+      "status": "draft",
+      "names": {
+        "common": "Pincerbutt",
+        "uncommon": "Flowerhider",
+        "rare": "Petalchewer",
+        "epic": "Dahlia Raid",
+        "legendary": "Forficula, the Pincer Knight"
+      },
+      "lore": {
+        "common": "Hides inside the folded towel, then runs out across your hand when you dry your face.",
+        "uncommon": "Waves the pincers on its back end at anyone who disturbs it, which looks silly but works.",
+        "rare": "Chewed holes in every dahlia petal in the garden so the flowers looked like lace.",
+        "epic": "Moved into every flower pot on the patio at once, and the gardener now waters them very carefully.",
+        "legendary": "Guarded its eggs all winter under a stone, licked them clean every day, and raised fifty earwig babies."
+      },
+      "moves": {
+        "signature": "Pincer Nip",
+        "legend": "Back-End Pinch",
+        "ultimate": "Sun-Hot Pincer",
+        "kit.molt": "Fresh Shell",
+        "kit.web_snare": "Pincer Grip"
+      }
+    },
+    "x_firefly": {
+      "status": "draft",
+      "names": {
+        "common": "Blinkybutt",
+        "uncommon": "Glowbug",
+        "rare": "Lanternwing",
+        "epic": "Twinkling Meadow",
+        "legendary": "Lampyris, Lantern of the Summer"
+      },
+      "lore": {
+        "common": "Flies into your bedroom and blinks on the ceiling all night like a broken nightlight.",
+        "uncommon": "Lights up its tail to say hello to other fireflies, and gets very confused by torches.",
+        "rare": "Flashed its light in perfect time with all its neighbours, so the whole tree blinked at once.",
+        "epic": "Lit up the meadow with a thousand friends so brightly that the campers turned off their lanterns.",
+        "legendary": "Blinked so brightly in the forest that the lost hikers followed it all the way home."
+      },
+      "moves": {
+        "signature": "Glow Bite",
+        "legend": "Tail Light Flash",
+        "ultimate": "Thousand Lights",
+        "kit.swarm": "Blink Blink Blink",
+        "kit.sting": "Bitter Glow",
+        "kit.molt": "Fresh Glow",
+        "kit.web_snare": "Dazzle Flash"
+      }
+    },
+    "x_flea": {
+      "status": "draft",
+      "names": {
+        "common": "Hoppit",
+        "uncommon": "Doghitcher",
+        "rare": "Itchmaker",
+        "epic": "Carpet Itch",
+        "legendary": "Pulex the Great Jumper"
+      },
+      "lore": {
+        "common": "Jumps off the dog onto your ankle just as you sit down on the sofa.",
+        "uncommon": "Hitches a ride on the cat for a holiday, and never asks where it's going.",
+        "rare": "Jumped a hundred times its own height and landed on the ceiling light.",
+        "epic": "Moved into the carpet with ten thousand friends and the whole family started scratching at the same time.",
+        "legendary": "Jumped from the dog to the moon, it says, but it was actually just a lightbulb."
+      },
+      "moves": {
+        "signature": "Itchy Bite",
+        "legend": "Super Jump Boost",
+        "ultimate": "Whole House Itch",
+        "kit.swarm": "Hop Hop Hop Hop",
+        "kit.sting": "Itch Nip",
+        "kit.molt": "Fresh Shell Rest"
+      }
+    },
+    "x_fly": {
+      "status": "draft",
+      "names": {
+        "common": "Buzzaround",
+        "uncommon": "Windowbanger",
+        "rare": "Foodlander",
+        "epic": "Summer Swarm",
+        "legendary": "Musca the Unswattable"
+      },
+      "lore": {
+        "common": "Buzzes round your head while you're trying to read, then lands on the exact page.",
+        "uncommon": "Bangs into the closed window over and over, even with the door open beside it.",
+        "rare": "Dodged every swat with a rolled-up newspaper and landed on the newspaper.",
+        "epic": "Brought a swarm of friends to the barbecue and nobody got a burger without company.",
+        "legendary": "Escaped a hundred swats, three fly swatters and one very angry chef, and lived to tell every fly in town."
+      },
+      "moves": {
+        "signature": "Buzz Bite",
+        "legend": "Dodge Dodge Dodge",
+        "ultimate": "Swatter Dodge Daze",
+        "kit.swarm": "Buzz Buzz Buzz Buzz",
+        "kit.molt": "Wing Clean",
+        "kit.web_snare": "Buzzing Distraction"
+      }
+    },
+    "x_gecko_lizard": {
+      "status": "draft",
+      "names": {
+        "common": "Glasswalker",
+        "uncommon": "Ceilingcling",
+        "rare": "Chirpgeck",
+        "epic": "Ceiling Crawl",
+        "legendary": "Gekko, Who Walks on Glass"
+      },
+      "lore": {
+        "common": "Walks across the ceiling right above your bed and chirps when you're trying to sleep.",
+        "uncommon": "Licks its own eyeballs clean, because it doesn't have any eyelids.",
+        "rare": "Walked straight up the window glass without slipping, then stared in at dinner.",
+        "epic": "Patrolled every wall of the house in one night, and not a single moth was left in the hall.",
+        "legendary": "Climbed the tallest glass tower in the city on its sticky toes, then caught a moth at the very top."
+      },
+      "moves": {
+        "signature": "Sticky Toe Bite",
+        "legend": "Moth Snatch",
+        "ultimate": "Window Climb Pounce"
+      }
+    },
+    "x_gnat": {
+      "status": "draft",
+      "names": {
+        "common": "Facebuzz",
+        "uncommon": "Eyebuzzer",
+        "rare": "Cloudlet",
+        "epic": "Gnat Cloud",
+        "legendary": "Culicoides, Small but Everywhere"
+      },
+      "lore": {
+        "common": "Hovers in a little cloud right where you want to walk, then follows you home.",
+        "uncommon": "Flies straight into your eye on a sunny day, every single time.",
+        "rare": "Is so small that it flies through window netting and laughs at it.",
+        "epic": "Formed a cloud so thick over the lake that the swans had to fly around it.",
+        "legendary": "Is so tiny that nobody can catch it, and it has bothered every picnic in history."
+      },
+      "moves": {
+        "signature": "Tiny Bite",
+        "legend": "Eye Bump",
+        "ultimate": "Gnat Cloud Smother",
+        "kit.swarm": "Buzz Cloud",
+        "kit.molt": "Tiny Rest",
+        "kit.web_snare": "Face Swarm Daze"
+      }
+    },
+    "x_honeycomb": {
+      "status": "draft",
+      "names": {
+        "common": "Dripcomb",
+        "uncommon": "Hexacell",
+        "rare": "Waxgold",
+        "epic": "Honey Flood",
+        "legendary": "Mellifera, Golden Comb of Plenty"
+      },
+      "lore": {
+        "common": "Drips honey on every surface it touches, then sticks to the tablecloth.",
+        "uncommon": "Every single cell is a perfect hexagon, and it won't stop showing off about it.",
+        "rare": "Shines like gold in the sunlight, so the bears keep trying to break into the shed.",
+        "epic": "Overflowed with so much honey that it flooded the hive, and the bees had to swim out.",
+        "legendary": "Held enough honey to sweeten every cup of tea in the village for a whole winter."
+      },
+      "moves": {
+        "signature": "Sticky Wax Nip",
+        "legend": "Honey Siphon",
+        "ultimate": "Honey Flood",
+        "kit.swarm": "Buzz Buzz Swarm",
+        "kit.sting": "Guard Sting",
+        "kit.molt": "Wax Rebuild",
+        "kit.web_snare": "Sticky Honey Trap"
+      }
+    },
+    "x_hornet": {
+      "status": "draft",
+      "names": {
+        "common": "Bigbuzz",
+        "uncommon": "Paperbuilder",
+        "rare": "Picnicraider",
+        "epic": "Hornet Squadron",
+        "legendary": "Vespa, the Golden Giant"
+      },
+      "lore": {
+        "common": "Flies into the kitchen, circles the fruit bowl three times and leaves you hiding behind the door.",
+        "uncommon": "Chews wood into paper to build its nest, so it's basically a flying paper factory.",
+        "rare": "Raided the picnic and carried off a whole slice of ham, all by itself.",
+        "epic": "Sent its whole squadron to patrol the orchard, and the apple pickers stayed indoors all week.",
+        "legendary": "Built a paper nest the size of a wheelbarrow under the barn roof, and nobody has dared to move it."
+      },
+      "moves": {
+        "signature": "Hornet Sting",
+        "legend": "Paper Nest Guard",
+        "ultimate": "Squadron Dive",
+        "kit.swarm": "Squadron Strafe",
+        "kit.molt": "Wing Groom Rest",
+        "kit.web_snare": "Buzzing Startle"
+      }
+    },
+    "x_housefly": {
+      "status": "draft",
+      "names": {
+        "common": "Sugarstomper",
+        "uncommon": "Lampcircler",
+        "rare": "Rubhands",
+        "epic": "Fly-In Feast",
+        "legendary": "Domestica, Queen of the Kitchen"
+      },
+      "lore": {
+        "common": "Circles the lampshade in the middle of the room for hours, as if it's lost the way out.",
+        "uncommon": "Rubs its front legs together like it's planning something.",
+        "rare": "Tastes your food with its feet, so it walks across your sandwich to check.",
+        "epic": "Brought a whole crowd of flies into the kitchen at once, and dinner was eaten very quickly.",
+        "legendary": "Has outlived every flyswatter in the house and still lands on the cake every birthday."
+      },
+      "moves": {
+        "signature": "Dirty Foot Nip",
+        "legend": "Buzz Buzz Buzz Bump",
+        "ultimate": "Sugar Bowl Swarm",
+        "kit.swarm": "Lampshade Laps",
+        "kit.sting": "Germy Nip",
+        "kit.molt": "Leg Rub Rest",
+        "kit.web_snare": "Buzz Buzz Daze"
+      }
+    },
+    "x_louse": {
+      "status": "draft",
+      "names": {
+        "common": "Scratchling",
+        "uncommon": "Nitnester",
+        "rare": "Hairhopper",
+        "epic": "Classroom Itch",
+        "legendary": "Pediculus, Lord of the Scalp"
+      },
+      "lore": {
+        "common": "Moves into your hair and makes you scratch in the middle of the school photo.",
+        "uncommon": "Glues its tiny eggs to hair so tightly that the comb has to work very hard.",
+        "rare": "Hopped from one head to another during story time and nobody saw a thing.",
+        "epic": "Spread through the whole school in a week and every parent got the same letter.",
+        "legendary": "Has lived in human hair since the very first people, and has never once been invited."
+      },
+      "moves": {
+        "signature": "Itchy Nip",
+        "legend": "Hair Hop",
+        "ultimate": "Scalp Scorch",
+        "kit.sting": "Itchy Bite",
+        "kit.molt": "Fresh Shell",
+        "kit.web_snare": "Hair Tangle"
+      }
+    },
+    "x_monitor_lizard": {
+      "status": "draft",
+      "names": {
+        "common": "Forktongue",
+        "uncommon": "Longclaw",
+        "rare": "Riverlord",
+        "epic": "River Raid",
+        "legendary": "Varanus, Monitor of the Mangrove"
+      },
+      "lore": {
+        "common": "Flicks its forked tongue at everything, including the dustbin, to see if it's edible.",
+        "uncommon": "Swims across the river with its tail swishing like a crocodile, then climbs a tree to dry off.",
+        "rare": "Raided the chicken run and carried off the eggs without breaking a single one.",
+        "epic": "Swam up the river with a dozen cousins, and the fishermen moved to a different spot.",
+        "legendary": "Grew so long that it can stand on its back legs and look over the garden fence."
+      },
+      "moves": {
+        "signature": "Forked Tongue Bite",
+        "legend": "Thick Scale Guard",
+        "ultimate": "Riverbank Raid"
+      }
+    },
+    "x_mosquito": {
+      "status": "draft",
+      "names": {
+        "common": "Earwhiner",
+        "uncommon": "Bitebuzz",
+        "rare": "Nightnibbler",
+        "epic": "Summer Night Raid",
+        "legendary": "Anopheles, Whiner of the Dark"
+      },
+      "lore": {
+        "common": "Whines in your ear just as you're falling asleep, then hides when you turn on the light.",
+        "uncommon": "Bites your ankle under the table and leaves an itchy bump the size of a pea.",
+        "rare": "Found the only gap in the mosquito net and invited all its friends in.",
+        "epic": "Raided the campsite with a million cousins, and every camper went home with spots.",
+        "legendary": "Has bitten every explorer, king and famous scientist in history, and still won't say sorry."
+      },
+      "moves": {
+        "signature": "Whiny Bite",
+        "legend": "Net Gap Guard",
+        "ultimate": "Midnight Itch Raid",
+        "kit.swarm": "Bite Bite Bite",
+        "kit.molt": "Pond Hatch",
+        "kit.web_snare": "Ear Whine Daze"
+      }
+    },
+    "x_newt": {
+      "status": "draft",
+      "names": {
+        "common": "Pondwander",
+        "uncommon": "Smoothskin",
+        "rare": "Crestwriggler",
+        "epic": "Pond Takeover",
+        "legendary": "Lissotriton, Lord of the Puddle"
+      },
+      "lore": {
+        "common": "Wanders out of the pond and gets stuck in the garden watering can.",
+        "uncommon": "Has skin so smooth and slippery that it slides straight out of your fingers.",
+        "rare": "Waves its tail at other newts in spring to show off its wavy crest.",
+        "epic": "Moved into every puddle in the park after a storm, and the ducks had to share.",
+        "legendary": "Lived in the same garden pond for thirty years, and has seen five families of goldfish come and go."
+      },
+      "moves": {
+        "signature": "Slippery Bite",
+        "legend": "Crest Wave Distraction",
+        "ultimate": "Puddle Takeover",
+        "kit.tongue_snare": "Quick Tongue"
+      }
+    },
+    "x_praying_mantis": {
+      "status": "draft",
+      "names": {
+        "common": "Prayerhands",
+        "uncommon": "Swivelhead",
+        "rare": "Bugcatcher",
+        "epic": "Statue Ambush",
+        "legendary": "Manticora, the Green Statue"
+      },
+      "lore": {
+        "common": "Sits on your windowsill with its arms folded, judging everything you do.",
+        "uncommon": "Swivels its head right round to stare at you, like a tiny green owl.",
+        "rare": "Snatched a fly from the air so fast that the fly is still wondering where it went.",
+        "epic": "Stood perfectly still in the rose bush for a whole day, and the garden ran out of flies.",
+        "legendary": "Caught a hummingbird by mistake, let it go politely, and has never lived it down."
+      },
+      "moves": {
+        "signature": "Snap Arm Nip",
+        "legend": "Fly Snatch",
+        "ultimate": "Green Statue Strike",
+        "kit.swarm": "Grab Grab Grab",
+        "kit.sting": "Spiky Forearm",
+        "kit.web_snare": "Folded Arms Freeze"
+      }
+    },
+    "x_salamander": {
+      "status": "draft",
+      "names": {
+        "common": "Rainspot",
+        "uncommon": "Cellardweller",
+        "rare": "Moistskin",
+        "epic": "Wet Wall Crawl",
+        "legendary": "Salamandria, Who Walks Through Fire"
+      },
+      "lore": {
+        "common": "Hides in the damp cellar and appears in the washing basket at the worst possible time.",
+        "uncommon": "Its skin must stay damp, so it gets very grumpy on sunny days.",
+        "rare": "Grew back its own tail after a bird pulled it off, and the bird was very confused.",
+        "epic": "Crawled up every damp wall in the old castle after the rain and the tourists thought the walls were moving.",
+        "legendary": "Walked out of a burning log on the campfire and gave every camper the fright of their life."
+      },
+      "moves": {
+        "signature": "Damp Bite",
+        "legend": "Spotty Flash",
+        "ultimate": "Wall Crawl Crack"
+      }
+    },
+    "x_silverfish": {
+      "status": "draft",
+      "names": {
+        "common": "Bookmuncher",
+        "uncommon": "Bathtubdasher",
+        "rare": "Silverwriggle",
+        "epic": "Library Raid",
+        "legendary": "Lepisma, Eater of Old Books"
+      },
+      "lore": {
+        "common": "Dashes across the bathroom floor as soon as you turn on the light.",
+        "uncommon": "Eats the glue in old books, so the pages fall out when you try to read.",
+        "rare": "Can live for a whole year without food, and still looks shiny.",
+        "epic": "Moved into the library basement and ate the glue out of every book on the bottom shelf.",
+        "legendary": "Has been living in the same old house for three hundred years, and has eaten half of every book in it."
+      },
+      "moves": {
+        "signature": "Silver Nip",
+        "legend": "Book Glue Snatch",
+        "ultimate": "Library Raid",
+        "kit.swarm": "Dash Dash Dash Dash",
+        "kit.sting": "Dusty Nibble",
+        "kit.molt": "Silver Shed",
+        "kit.web_snare": "Slippery Dodge"
+      }
+    },
+    "x_spider_egg": {
+      "status": "draft",
+      "names": {
+        "common": "Silkpouch",
+        "uncommon": "Eggpuff",
+        "rare": "Babyball",
+        "epic": "Spiderling Burst",
+        "legendary": "Ovum, Mother of Hundreds"
+      },
+      "lore": {
+        "common": "Hangs in the corner of the window and makes everyone too nervous to open it.",
+        "uncommon": "Is wrapped in so much silk that it looks like a little cotton ball.",
+        "rare": "Wiggles when you touch it, as if something inside wants to say hello.",
+        "epic": "Burst open with a hundred tiny spiders at once, and they all went in different directions.",
+        "legendary": "Hatched a thousand spiderlings that floated away on silk threads to every garden in the town."
+      },
+      "moves": {
+        "signature": "Hatchling Nip",
+        "legend": "Silk Ball Bump",
+        "ultimate": "Spiderling Burst",
+        "kit.swarm": "Hundred Hatchlings Rush",
+        "kit.molt": "Silk Rewrap",
+        "kit.web_snare": "Hatchling Thread"
+      }
+    },
+    "x_stick_insect": {
+      "status": "draft",
+      "names": {
+        "common": "Twigmimic",
+        "uncommon": "Swaywalker",
+        "rare": "Nightnibbler Twig",
+        "epic": "Hedge Hide",
+        "legendary": "Phasmida, Longest Stick of All"
+      },
+      "lore": {
+        "common": "Pretends to be a stick so well that someone tried to use it to roast a marshmallow.",
+        "uncommon": "Sways back and forth as it walks, like a twig blowing in the wind.",
+        "rare": "Ate every leaf in the tank in one night, then pretended to be a stick so nobody would notice.",
+        "epic": "Hid in the hedge so well that the gardener trimmed a hundred sticks and missed every one.",
+        "legendary": "Grew as long as a ruler and still managed to hide on a twig half its size."
+      },
+      "moves": {
+        "signature": "Twig Nip",
+        "legend": "Stick Swat",
+        "ultimate": "Twig Ambush",
+        "kit.swarm": "Sway Sway Sway",
+        "kit.sting": "Spiky Leg Prick",
+        "kit.web_snare": "Twig Freeze"
+      }
+    },
+    "x_t_rex": {
+      "status": "draft",
+      "names": {
+        "common": "Tinyarms",
+        "uncommon": "Stompjaw",
+        "rare": "Roarmouth",
+        "epic": "Prehistoric Thunder",
+        "legendary": "Tyranno, King of the Old World"
+      },
+      "lore": {
+        "common": "Can't reach its own snacks because its arms are too short, so it shouts until someone helps.",
+        "uncommon": "Has teeth as big as bananas, and is very proud of every single one.",
+        "rare": "Roared so loudly at a herd of plant-eaters that they dropped their lunches and ran.",
+        "epic": "Stomped so hard across the valley that every tree dropped its leaves at once.",
+        "legendary": "Was the biggest meat-eater the world had ever seen, and still couldn't scratch its own nose."
+      },
+      "moves": {
+        "signature": "Huge Tooth Bite",
+        "legend": "Lunch Snatch",
+        "ultimate": "Prehistoric Rot Roar",
+        "kit.shed_skin": "Old Scale Shed",
+        "kit.bask": "Ancient Sun Bask",
+        "kit.tongue_snare": "Jaws Grab"
+      }
+    },
+    "x_termite": {
+      "status": "draft",
+      "names": {
+        "common": "Woodchewer",
+        "uncommon": "Mudmounder",
+        "rare": "Paleworker",
+        "epic": "Termite Tower",
+        "legendary": "Isoptera, Architect of the Savannah"
+      },
+      "lore": {
+        "common": "Chews through the skirting board so quietly that nobody notices until the shelf falls off.",
+        "uncommon": "Builds tunnels of mud everywhere it goes, like a tiny road crew.",
+        "rare": "Ate the inside of a wooden chair and left the outside looking perfectly fine.",
+        "epic": "Built a tower of mud taller than a giraffe, with its own air conditioning.",
+        "legendary": "Ate an entire wooden barn from the inside out, and the farmer only found out when he leaned on it."
+      },
+      "moves": {
+        "signature": "Wood Nibble",
+        "legend": "Tunnel Crack",
+        "ultimate": "Tower Collapse",
+        "kit.swarm": "Million Munchers",
+        "kit.molt": "Mud Repair Rest"
+      }
+    },
+    "x_tick": {
+      "status": "draft",
+      "names": {
+        "common": "Grassclinger",
+        "uncommon": "Legwaiter",
+        "rare": "Bloodbag",
+        "epic": "Long Grass Ambush",
+        "legendary": "Ixodes, the Patient Hitcher"
+      },
+      "lore": {
+        "common": "Waits on a blade of grass with its arms out, ready to grab anyone who walks past.",
+        "uncommon": "Climbs up your leg so slowly that you don't notice until it's settled in.",
+        "rare": "Swelled up to the size of a pea after one meal, then dropped off for a nap.",
+        "epic": "Waited in the long grass with a thousand friends, and the hikers checked their socks for a week.",
+        "legendary": "Waited a whole year without eating for the right dog to pass, then rode it to the beach."
+      },
+      "moves": {
+        "signature": "Clingy Bite",
+        "legend": "Leg Climb Grabs",
+        "ultimate": "Long Grass Ambush",
+        "kit.swarm": "Grab Grab Grab Grab",
+        "kit.sting": "Itchy Bite Nip",
+        "kit.molt": "Grass Rest"
+      }
+    },
+    "x_triceratops": {
+      "status": "draft",
+      "names": {
+        "common": "Threehorn",
+        "uncommon": "Frillshield",
+        "rare": "Fernmuncher",
+        "epic": "Horn Charge Herd",
+        "legendary": "Trikera, Shield of the Plains"
+      },
+      "lore": {
+        "common": "Bumps into the doorframe with its horns every single time it comes indoors.",
+        "uncommon": "Has a big bony frill behind its head like a giant dinner plate.",
+        "rare": "Pushed over a tree with its horns just to get to the ferns at the top.",
+        "epic": "Charged across the plains with the whole herd, and every meat-eater moved to the hills.",
+        "legendary": "Faced down the biggest meat-eater in the valley with its three horns, and walked off chewing a fern."
+      },
+      "moves": {
+        "signature": "Horn Jab",
+        "legend": "Sun-Hot Frill",
+        "ultimate": "Three-Horn Charge",
+        "kit.shed_skin": "Frill Polish Rest",
+        "kit.bask": "Fern Feast Boost",
+        "kit.tongue_snare": "Fern Grab"
+      }
+    },
+    "x_wasp_nest": {
+      "status": "draft",
+      "names": {
+        "common": "Paperball",
+        "uncommon": "Eavesbuzzer",
+        "rare": "Grayhanger",
+        "epic": "Wasp Wall",
+        "legendary": "Vespiaria, the Paper Fortress"
+      },
+      "lore": {
+        "common": "Hangs under the garden shed roof so that nobody dares fetch the lawnmower.",
+        "uncommon": "Is made of chewed-up paper so neatly that it looks like a grey lantern.",
+        "rare": "Hums so loudly in the eaves that the house sounds like it's purring.",
+        "epic": "Sent out its whole family to the summer fête, and the cake stall closed early.",
+        "legendary": "Grew as big as a beach ball in one summer under the porch, and the family moved their door."
+      },
+      "moves": {
+        "signature": "Paper Nest Sting",
+        "legend": "Sting Sting Sting",
+        "ultimate": "Nest Shake",
+        "kit.swarm": "Wasp Swarm",
+        "kit.sting": "Angry Sting"
+      }
+    },
+    "x_woodlouse": {
+      "status": "draft",
+      "names": {
+        "common": "Dampdweller",
+        "uncommon": "Halfmoulter",
+        "rare": "Logscuttle",
+        "epic": "Compost Crew",
+        "legendary": "Oniscus, Keeper of the Compost"
+      },
+      "lore": {
+        "common": "Lives under the doormat and scuttles away whenever someone comes to the door.",
+        "uncommon": "Sheds its old shell in two halves, so for a day it walks around half old and half new.",
+        "rare": "Breathes through tiny gills, so it gets very cross when the garden dries out.",
+        "epic": "Turned the whole compost heap into rich soil in one summer, with ten thousand friends helping.",
+        "legendary": "Has been recycling the forest floor for millions of years, and still hasn't been thanked once."
+      },
+      "moves": {
+        "signature": "Compost Nip",
+        "legend": "Half Shell Crack",
+        "ultimate": "Compost Heap Crumble",
+        "kit.swarm": "Scuttle Scuttle Scuttle",
+        "kit.sting": "Rotten Wood Nibble",
+        "kit.molt": "Half Shell Swap"
+      }
     }
   }
 }
