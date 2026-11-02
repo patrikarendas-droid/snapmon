@@ -92,6 +92,7 @@ function ingest(batch, file) {
   for (const [id, e] of Object.entries(blocks)) {
     if (!ids.has(id)) { errs.push(`${id}: not in batch ${batch}`); continue; }
     if (RAR.some(r => !e.names[r]) || RAR.some(r => !e.lore[r])) errs.push(`${id}: needs 5 names and 5 lore lines`);
+    for (const [r, t] of Object.entries(e.lore)) if (/→|\?\?|TODO|\bhmm\b/i.test(t) || !/[.!?'"]$/.test(t)) errs.push(`${id}: lore.${r} looks unfinished: ${t.slice(-60)}`);
     const slots = G.curatedMoveSlots(id); for (const k of Object.keys(e.moves)) if (!(k in slots)) errs.push(`${id}: unknown move key ${k}`);
     if (e.keep) for (const k of e.keep) if (!(k in slots)) errs.push(`${id}: unknown kept key ${k}`);
     const mv = Object.values(e.moves).map(s => s.toLowerCase()); if (new Set(mv).size !== mv.length) errs.push(`${id}: duplicate move names`);
