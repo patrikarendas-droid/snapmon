@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-02, release v0.4.8; v0.4.9 (recognition/identity audit) prepared on a branch, awaiting approval.
+Last updated: 2026-11-02, release v0.4.9 (recognition/identity audit; tag v0.4.9 = 996d52b).
 
 ---
 
@@ -71,7 +71,8 @@ Last updated: 2026-11-02, release v0.4.8; v0.4.9 (recognition/identity audit) pr
 | v0.4.5 | a13f396 | 2026-10-30 | Food/drink identity; object families; per-object move kits; unique Legendaries. |
 | v0.4.6 | fc5f65d | 2026-10-31 | Pilot 01 curated writing active (10 objects); stable ability keys (Stage A, f95f3c7). |
 | v0.4.7 | 51f3c50 | 2026-10-31 | Developer God Mode for Quick Monster Test Mode battles. |
-| v0.4.8 | (see `git tag`) | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
+| v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
+| v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test. |
 
 ## 4. Current state and next priorities
 
@@ -151,8 +152,7 @@ Last updated: 2026-11-02, release v0.4.8; v0.4.9 (recognition/identity audit) pr
   urchins can opt in via "Update its look"; Starfish caught from "sea urchin" photos are NOT relabelled (possible via
   `m.label`, proposed separately). Kept for review: 88 medium flags (74 approximate category bodies, homonyms such as
   kite/crane/bat/monitor, piggy bank → Pig, whale → Shark, wombat → Bear). Next: phone check, approval, release.
-- **Audit round 2 — deferred-flag cleanup (2026-11-02, developer-approved approach), same branch, prepared as v0.4.9,
-  NOT merged.** Of the 88 deferred flags 73 fixed, 15 kept with reasons (`MAPPING_AUDIT.md` lists every one).
+- **Audit round 2 — deferred-flag cleanup (2026-11-02, developer-approved approach), released as v0.4.9 (merge 996d52b, Pages run 41467754965, tag v0.4.9).** Of the 88 deferred flags 73 fixed, 15 kept with reasons (`MAPPING_AUDIT.md` lists every one).
   New objects with exactly their old label strings (TinyCLIP labels/order unchanged): Piggy bank (pig body), Whale and
   Dolphin (shark body), Wombat (bear body), Binoculars (glasses body); "killer whale" → Orca, "tongs"/"trowel"/"gerbil"
   → their own objects. ~70 more honest bodies from existing templates (boomerang curve, castanets pair, coral tree,
@@ -163,7 +163,7 @@ Last updated: 2026-11-02, release v0.4.8; v0.4.9 (recognition/identity audit) pr
   change; rule tables and move numbers unchanged; baselines re-recorded with that list). Kept: kite/crane (ImageNet
   name collisions), mouse/washer/pot/hot pot homonyms, seals/sea lion/walrus/manatee/dugong (four-legged mammal body),
   stingray (fish body), mobile toy, mouthguard. Curated writing, models, calibration and saves unchanged. GAME_VERSION
-  0.4.9. Next: final approval → merge/deploy/tag; then the full curated-writing rollout (all 2,308 objects), then
+  0.4.9. CI: all tests incl. mapping-audit; TinyCLIP re-export identical (2941 labels, int8 38.8 MB, cos 0.9981, calibrated). Next: Android playtest; then the full curated-writing rollout (all 2,308 objects), then
   the postponed name/flavour-text UI.
 - **v0.4.8 — Pilot 02 INTEGRATION (2026-11-02, developer-approved, merged and deployed as v0.4.8):** the 50 entries are `reviewed` (file renamed `content/curated/pilot-02-approved.json`;
   only the status line changed). Curated **monster names** are live (`CURATED.namesEnabled`, `curatedMonsterName`):
