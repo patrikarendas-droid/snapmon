@@ -11,6 +11,8 @@
 // is the live output with curated text on, re-recorded for v0.4.6.
 // Pilot 02 integration (2026-11-02): re-recorded ON PURPOSE: 50 more objects get approved lore, move names and
 // monster names. `withoutCurated` is unchanged and still matches with curated content off.
+// Recognition audit (2026-11): re-recorded with "record-visual" (35 objects get an honest design, 2 objects added);
+// `textFrozen` proves names, stats, moves and texts of every v0.4.8 object are unchanged, curated on and off.
 const crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/generator-snapshot.json');
 const G = require('./load')();
@@ -57,6 +59,12 @@ if (process.argv[2] === 'record') {
   const out = { ...on, withoutCurated: want.withoutCurated || { monsters: want.monsters, species: want.species, exportChars: want.exportChars, sha256: want.sha256 }, textFrozen: want.textFrozen || { on: textOn, off: textOff } }; // textFrozen is recorded once and never overwritten
   if (out.withoutCurated.sha256 !== off.sha256) { console.log('FAIL: refusing to record — with curated text off the output no longer matches the original recording'); process.exit(1); }
   fs.writeFileSync(FIX, JSON.stringify(out, null, 1)); console.log('recorded', JSON.stringify(out)); process.exit(0);
+}
+// "record-visual": artwork/objects changed on purpose (recognition audit). Allowed only while the frozen TEXT of every
+// v0.4.8 object is unchanged (checked above); then the whole-output hashes, including withoutCurated, are re-recorded.
+if (process.argv[2] === 'record-visual') {
+  if (!(want.textFrozen && want.textFrozen.on === textOn && want.textFrozen.off === textOff)) { console.log('FAIL: refusing — the text of v0.4.8 objects changed'); process.exit(1); }
+  const out = { ...on, withoutCurated: off, textFrozen: want.textFrozen }; fs.writeFileSync(FIX, JSON.stringify(out, null, 1)); console.log('recorded (visual)', JSON.stringify(out)); process.exit(0);
 }
 const okOff = want.withoutCurated && want.withoutCurated.sha256 === off.sha256, okOn = want.sha256 === on.sha256, okText = want.textFrozen && want.textFrozen.on === textOn && want.textFrozen.off === textOff;
 if (!okText) { console.log(`FAIL: the text of the v0.4.8 objects changed (names, stats, moves, lore, encyclopedia; artwork excluded): on ${textOn}, off ${textOff}`); process.exit(1); }

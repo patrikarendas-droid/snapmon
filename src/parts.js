@@ -240,6 +240,12 @@ const PARTS = (() => {
       else if (sh === 'carrot') { poly(g, [[12, 12], [28, 12], [21, 37], [19, 37]], B); for (let y = 16; y < 32; y += 4) line(g, 15 + (y - 12) * 0.2, y, 18, y, BD); cy = 18; ry = 6; rx = 8; }
       else if (sh === 'curved') { ell(g, 20, 22, 14, 8, B); ell(g, 22, 15, 12, 6, E); cy = 25; ry = 5; }
       else if (sh === 'heart') { ell(g, 20, 17, 13, 9, B); poly(g, [[7, 18], [33, 18], [20, 36]], B); cy = 20; ry = 8; }
+      else if (sh === 'spiky') { // sea urchin (recognition audit 2026-11): a round body with radiating spines
+        cy = 23; rx = ry = 9 * s;
+        for (let i = 0; i < 20; i++) { const t = (i / 20) * Math.PI * 2, r1 = rx + (i % 2 ? 4 : 6.5); line(g, cx + Math.cos(t) * (rx - 1), cy + Math.sin(t) * (ry - 1), cx + Math.cos(t) * r1, cy + Math.sin(t) * r1, i % 2 ? BD : A); }
+        ell(g, cx, cy, rx, ry, B);
+        for (let i = 0; i < 10; i++) { const t = (i / 10) * Math.PI * 2 + 0.3; gset(g, Math.round(cx + Math.cos(t) * (rx - 2.5)), Math.round(cy + Math.sin(t) * (ry - 2.5)), BL); }
+      }
       else ell(g, cx, cy, rx, ry, B);
       if (p.stripes) paintOn(g, (x, y) => (Math.floor((x - 20) / 3) % 2 === 0 ? BD : null), [B]);
       if (p.seeds) for (let y = cy - ry + 3; y < cy + ry - 1; y += 4) for (let x = cx - rx + 3 + ((y >> 2) % 2) * 2; x < cx + rx - 2; x += 5) if (gget(g, x, y) === B) gset(g, x, y, p.seeds === 'dark' ? K : PA);

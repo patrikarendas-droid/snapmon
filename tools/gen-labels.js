@@ -139,6 +139,14 @@ const SUB_PARENT = { 'animal:dog': 'dog', 'animal:cat': 'cat', 'animal:bear': 'b
   'car:bus': 'bus', 'car:bike': 'bicycle', 'car:car': 'car', 'mug:teapot': 'teapot', 'mug:glass': 'glass', 'mug:mug': 'mug', 'bottle:vase': 'vase', 'bottle:can': 'can',
   'bottle:bottle': 'bottle', 'chair:table': 'dining_table', 'chair:cabinet': 'cabinet', 'chair:chair': 'dining_chair', 'tv:speaker': 'speaker', 'tv:camera': 'camera', 'tv:tv': 'tv',
   'shoe:boot': 'boot', 'shoe:sneaker': 'sneaker', 'cloth:hat': 'hat', 'cloth:sock': 'sock', 'cloth:shirt': 'shirt', 'pot:pan': 'frying_pan', 'pot:bowl': 'bowl', 'pot:pot': 'pot' };
+// recognition audit (2026-11, docs/review/MAPPING_AUDIT.md): ImageNet classes whose FIRST synonym belongs to a different
+// object (first match wins in objectForLabel). An object id resolves the class to it; null gives the class its own
+// identity through the normal path below (own name, the related design of its group or the family tier).
+const CLASS_OVERRIDES = {
+  'pot, flowerpot': 'potted_plant',            // "pot" is the cooking pot
+  'Cardigan, Cardigan Welsh corgi': null,      // "cardigan" is the T-shirt: a corgi becomes its own dog breed (like Pembroke)
+  "plane, carpenter's plane, woodworking plane": null, // "plane" is the airplane: a woodworking tool
+};
 // excluded in v2 only because there was no fitting sprite: machines and vehicles a player can really photograph
 const SOFT_EXCLUDED = /^(airliner|airship|harvester|thresher|crane|gondola|dogsled|bobsled|schooner|yawl|catamaran|trimaran|speedboat|canoe|lifeboat|paddlewheel|steam locomotive|electric locomotive|bullet train|freight car|passenger car|streetcar|trolleybus|snowplow|forklift|mobile home|cash machine|honeycomb|hay)$/;
 IMAGENET.forEach((cls, i) => {
@@ -149,7 +157,8 @@ IMAGENET.forEach((cls, i) => {
   else { const rule = RULES.find(([re]) => re.test(first.toLowerCase())); cat = rule ? rule[1] : 'other'; sub = rule ? rule[2] || null : null; }
   if (cat === null && SOFT_EXCLUDED.test(first.toLowerCase())) cat = 'car'; // v2 had no sprite for these; v3 resolves them below
   if (cat === null) { imagenet[cls] = 0; report.excluded++; return; }
-  const obj = objectForLabel(cls);
+  const over = Object.prototype.hasOwnProperty.call(CLASS_OVERRIDES, cls), obj = over ? CLASS_OVERRIDES[cls] : objectForLabel(cls);
+  if (over && obj && !OBJECTS[obj]) throw new Error('CLASS_OVERRIDES points at a missing object: ' + obj);
   if (obj) { imagenet[cls] = obj; report.specific++; return; }
   const id = 'i_' + slug(first);
   const parent = sub ? SUB_PARENT[cat + ':' + sub] : null;

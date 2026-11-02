@@ -12,6 +12,11 @@ const seen = new Set(), labels = [];
 const add = (l, o) => { const k = l.toLowerCase().trim(); if (!k || seen.has(k) || k.length > 40 || /[()]/.test(k)) return; seen.add(k); labels.push({ l: k, o }); };
 for (const o of ctx.R.OBJECT_LIST) { if (o.vocab === false) continue; add(o.name, o.id); for (const a of o.al) add(a, o.id); }
 for (const b of BACKGROUND) add(b, null);
+// keep the previous label order (stable diffs; the embedding rows follow the labels): known labels first, in their old
+// positions, new ones after them in generation order
+const OUT = path.join(__dirname, '../lab/vocab-labels.json');
+const prev = fs.existsSync(OUT) ? new Map(JSON.parse(fs.readFileSync(OUT, 'utf8')).map((x, i) => [x.l, i])) : new Map();
+labels.sort((a, b) => (prev.has(a.l) ? prev.get(a.l) : 1e9 + labels.indexOf(a)) - (prev.has(b.l) ? prev.get(b.l) : 1e9 + labels.indexOf(b)));
 fs.mkdirSync(path.join(__dirname, '../lab'), { recursive: true });
 fs.writeFileSync(path.join(__dirname, '../lab/vocab-labels.json'), JSON.stringify(labels));
 console.log(`vocabulary: ${labels.length} labels → ${new Set(labels.filter(x => x.o).map(x => x.o)).size} objects, ${labels.filter(x => !x.o).length} background concepts`);

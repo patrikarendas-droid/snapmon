@@ -8,6 +8,9 @@
 // (5) fixed-seed battles over a wide sample of objects (cooldown behaviour: which move is used on which turn, by its
 // position, damage, statuses, captures, rewards). Display names never enter the hash.
 // If gameplay is changed ON PURPOSE, run with "record" and say so in the commit and the journal.
+// Recognition audit (2026-11): re-recorded ON PURPOSE for artwork and label mapping only — `monsters` and `sprites`
+// (35 objects get an honest design: DNA shape changes, nothing else) and `recognition` (sea urchin, drum, dice, shopping
+// cart, flowerpot, corgi, carpenter's plane). `rules`, `mechanics`, `encounters` and `battles` are unchanged.
 const fs = require('fs'), vm = require('vm'), path = require('path'), crypto = require('crypto');
 const FIX = path.join(__dirname, 'fixtures/gameplay-baseline.json');
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape, localStorage: { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } } };
@@ -16,6 +19,9 @@ vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js',
   ';globalThis.T={RARITIES,FAMILIES,MOVE_ARCH,MOVE_KITS,CATEGORIES,WEAPONS,ITEMS,CHARMS,MECH,STATUS_TURNS,TEST_RARITY_WEIGHTS,OBJECTS,objectForLabel,createMonster,freshState,makeDNA,buildGrid,buildPalette,resolvePhoto,newBattle,heroTurnStart,heroStrike,enemyTurn,attemptCapture,captureChance,attemptFlee,useItem,finishBattle,hunterStats,setRNG:f=>{RNG=f}}', ctx);
 const T = ctx.T;
 const parts = {}, H = () => crypto.createHash('sha256'), dig = h => h.digest('hex');
+// the v0.4.8 object ids (tests/fixtures/registry-ids-v0.4.8.json): the samplers below iterate this frozen list, so
+// objects added later (recognition audit 2026-11: i_cardigan, i_plane) never shift which objects are sampled
+const FROZEN = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures/registry-ids-v0.4.8.json'), 'utf8')).ids;
 const mech = a => [a.power, a.hits || 0, a.effect || '', a.chance || 0, !!a.self, a.cd, !!a.ultimate, !!a.legend];
 let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
 
@@ -34,7 +40,7 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
 {
   const h = H(), hs = H(); let n = 0;
   T.setRNG(() => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; });
-  for (const id of Object.keys(T.OBJECTS).sort()) for (const r of ['common', 'uncommon', 'rare', 'epic', 'legendary']) for (const variant of [null, 'spectral', 'mutated', 'shiny']) {
+  for (const id of FROZEN) for (const r of ['common', 'uncommon', 'rare', 'epic', 'legendary']) for (const variant of [null, 'spectral', 'mutated', 'shiny']) {
     seed = n++ * 2654435761 >>> 0;
     const S = T.freshState(); S.level = 1 + n % 12;
     const m = T.createMonster(S, { obj: id, rarity: r, variant, photo: n % 2 ? { hue: (n * 37) % 360, sat: 0.6, lit: 0.5 } : null });
@@ -65,7 +71,7 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
 }
 // 4. encounter odds: fixed-seed photos of many objects
 {
-  const h = H(); seed = 777; T.setRNG(rng); const ids = Object.keys(T.OBJECTS).sort();
+  const h = H(); seed = 777; T.setRNG(rng); const ids = FROZEN;
   for (let g = 0; g < 60; g++) {
     const S = T.freshState(); S.level = 1 + g % 12; S.research = g % 3 ? { lens1: 1, capture1: 1, sensor: 1, lens2: 1, legend: 1 } : {};
     for (let k = 0; k < 40; k++) {
@@ -78,7 +84,7 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
 }
 // 5. fixed-seed battles over a wide sample of objects (move use reported by position, never by name)
 {
-  const h = H(); seed = 4242; T.setRNG(rng); const ids = Object.keys(T.OBJECTS).sort();
+  const h = H(); seed = 4242; T.setRNG(rng); const ids = FROZEN;
   const sample = ids.filter((_, i) => i % 9 === 0).concat(['bee', 'x_pin_cushion', 'x_energy_drink', 'padlock', 'cutlery_spoon', 'apple', 'forklift']);
   const clean = (ev, m) => JSON.parse(JSON.stringify(ev, (k, v) => (k === 'msg' ? undefined : k === 'name' && typeof v === 'string' ? (v === 'Attack' || v === 'Flee' ? v : m.abilities.findIndex(a => a.name === v)) : v)));
   let battles = 0;
