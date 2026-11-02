@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-10-31, release v0.4.7 (developer God Mode).
+Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline and Pilot 02 drafts (branch, not merged).
 
 ---
 
@@ -95,6 +95,17 @@ Last updated: 2026-10-31, release v0.4.7 (developer God Mode).
   Defrost Disaster; book signature → Papercut Barrage. Now 39 move names. Final developer decisions (2026-10-31):
   light switch ultimate → The Big Switch; rubber duck legend → Flaming Quack; energy drink legend → Caffeine Crash;
   book legend → Rewrite the Ending; "Wake-Up Call" kept.
+- **Curated-writing pipeline + Pilot 02 drafts (2026-11-02), branch `feature/curated-pipeline-pilot02`, NOT merged,
+  no release:** developer approved Pilot 01 on the phone and asked for names + lore + move names for all objects via
+  an auditable pipeline. Built: `tools/inventory.js` (2,301 objects, coverage per layer → `docs/review/COVERAGE.md`),
+  `docs/SNAPMON_WRITING_BIBLE.md` (editorial standard from approved Pilot 01), draft-only `names` field (schema 1,
+  validated, never used by the game or copied by `build`), `needs-revision` status, batch workflow
+  (`manifest`/`pack`/`progress`/`lint`/`review` in `tools/curated.js`). Pilot 02: fixed 50-id manifest, writer pass
+  (250 names, 250 texts, 180 move names, all `draft`), independent editor pass in a separate context (80 issues:
+  14 high, 44 medium, 22 low → `content/review/pilot-02-issues.json`), writer pass 2 addressing all highs and clear
+  mediums (`pilot-02-writer-response.json`). Review: `docs/review/pilot-02-review.md`. Live game, Pilot 01 and
+  `src/curated-data.js` byte-identical; builds not rebuilt (validator code in `src/curated.js` changed, runtime
+  unchanged: rebuild dist when merging). Next: developer reviews Pilot 02 and decides per entry.
 - **v0.4.7 developer God Mode (2026-10-31):** Settings → Developer & testing → "God Mode (test battles)", default off,
   remembered like the other developer switches; active only with Quick Monster Test Mode on AND Instant capture off
   (the Settings line says why it is inactive; it never changes the other switches). Engine: `enableGodMode(B)` sets a
@@ -139,7 +150,8 @@ Last updated: 2026-10-31, release v0.4.7 (developer God Mode).
   4. Approved writing may update encyclopedia descriptions of species already discovered (consistent lore).
   5. The first 10–20 entries are written and reviewed separately before activation. Never mass-generate
      descriptions or mark entries "reviewed" automatically.
-- **Next (proposed, not started):** phone check of v0.4.7 God Mode; update the Claude Artifact (still v0.4.5); phone check of v0.4.6 (Pilot 01 text and move names, encyclopedia, old monsters
+- **Next (proposed, not started):** developer review of Pilot 02 (`docs/review/pilot-02-review.md`), then the open
+  editor issues and legendary "The …" name share (18/50); phone check of v0.4.7 God Mode; update the Claude Artifact (still v0.4.5); phone check of v0.4.6 (Pilot 01 text and move names, encyclopedia, old monsters
   unchanged); next curated batch when written and approved; verify v0.4.5 on the phone with Quick Monster Test Mode (drinks, foods, vegetables,
   kitchenware, Legendaries); continue visual QA of designs; native APK when requested.
 
@@ -150,7 +162,7 @@ Last updated: 2026-10-31, release v0.4.7 (developer God Mode).
 | Brief freeze after the camera shutter with **Force CPU backend** (developer option) | Mitigated in v0.4.4, needs phone check | The CPU detector (TF.js CPU backend) runs on the main thread for ~1 s; see section 6. `src/ui.js` `paintFirst`, `recognizeFlow`. | Phone test: the Analysing screen should now appear immediately with the photo, sweep still moving; only the clock text pauses. A full fix needs the detector in a worker (not planned). |
 | Same freeze for real players whose phone cannot use WebGL | Same mitigation | Rare: only phones where WebGL fails fall back to the CPU detector. | As above. |
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
-| Curated writing covers only 10 objects | v0.4.6: Pilot 01 active | `content/curated/`, `src/curated-data.js` (generated), `docs/CONTENT_WRITING_GUIDE.md`. Every other object uses the generated text. Same-name shared cooldown (`cdWith`, 4 configs) kept for compatibility. | Next batches written and reviewed separately; phone check of v0.4.6. |
+| Curated writing covers only 10 objects | v0.4.6: Pilot 01 active; Pilot 02 (50) drafted, awaiting review | `content/curated/`, `src/curated-data.js` (generated), `docs/CONTENT_WRITING_GUIDE.md`. Every other object uses the generated text. Same-name shared cooldown (`cdWith`, 4 configs) kept for compatibility. | Next batches written and reviewed separately; phone check of v0.4.6. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
 | Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change without consent; "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
@@ -232,6 +244,10 @@ Last updated: 2026-10-31, release v0.4.7 (developer God Mode).
   `LORE_OBJECT` directly (mixes writing with code, no validation). Audit: ability names are identifiers in battle
   cooldowns (`e.cds[name]`) and in identity updates (signature name compared with the category's); monster names,
   moves and lore are stored on monsters and in backups; encyclopedia text (`speciesLore`) is computed live.
+- **Curated writing at scale (2026-11-02):** batches of ~50 by theme with variety, fixed manifests, writer pass →
+  separate editor pass → lint → developer approval; AI never sets "reviewed". Monster names stay draft-only until a
+  separate activation (proposal in the guide). Data size: ~1.1 KB per approved object → ~2.5 MB for all objects;
+  consider per-object lazy loading past a few hundred (not built).
 - **Two regression baselines (2026-10-31):** `gameplay-baseline` (no text at all) must never change for wording work;
   `generator-snapshot` (text + names + save) changes only on purpose (curated activation re-records it, the gameplay
   baseline must still pass). Cooldowns by stable key, not display name; `cdWith` kept for exact compatibility rather
