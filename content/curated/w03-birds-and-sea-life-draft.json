@@ -1,0 +1,671 @@
+{
+  "schema": 1,
+  "batch": "w03-birds-and-sea-life",
+  "entries": {
+    "i_african_grey": {
+      "status": "draft",
+      "names": {
+        "common": "Ringtonemimic",
+        "uncommon": "Copyparrot",
+        "rare": "Wordhoarder",
+        "epic": "Phone Prankster",
+        "legendary": "Professor Polygrey, Speaker of All"
+      },
+      "lore": {
+        "common": "Copies the microwave beep so perfectly that the family keeps opening an empty microwave.",
+        "uncommon": "Learns every word you say, especially the ones you didn't mean to say in front of guests.",
+        "rare": "Imitates the doorbell, the phone and the kettle at the same time. The family now just stands in the hallway.",
+        "epic": "Phoned for a pizza in its owner's voice and ordered forty with extra peanuts.",
+        "legendary": "Learned every language in the city by listening at the bus stop, then got a job as the airport's announcer."
+      },
+      "moves": {
+        "signature": "Mimic Dive",
+        "legend": "Fake Doorbell",
+        "ultimate": "Chatterbox Chaos"
+      }
+    },
+    "i_bald_eagle": {
+      "status": "draft",
+      "names": {
+        "common": "Fishsnatcher",
+        "uncommon": "Whitecrest",
+        "rare": "Skysoarer",
+        "epic": "Lake Raider",
+        "legendary": "Liberty Talon, Lord of Skies"
+      },
+      "lore": {
+        "common": "Looks very serious and important, then steals a fish from a smaller bird.",
+        "uncommon": "Soars so high on warm air that it can nap while flying.",
+        "rare": "Snatched a salmon out of the river while a whole bear was still aiming for it.",
+        "epic": "Built a nest so enormous on top of a cliff that hikers mistake it for a hut.",
+        "legendary": "Soared so high over the canyon that it saw tomorrow's weather and warned the farmers."
+      },
+      "moves": {
+        "signature": "Talon Dive",
+        "legend": "Fishy Breath",
+        "ultimate": "Canyon Soar Strike"
+      }
+    },
+    "i_bee_eater": {
+      "status": "draft",
+      "names": {
+        "common": "Buzzsnap",
+        "uncommon": "Stingwhacker",
+        "rare": "Rainbowbeak",
+        "epic": "Hive Raider",
+        "legendary": "Melitta, Bane of the Busy Bee"
+      },
+      "lore": {
+        "common": "Catches a bee, bashes it on a branch, then expects applause for its table manners.",
+        "uncommon": "Its feathers are so colourful that the flowers think it is showing off.",
+        "rare": "Can catch a bee mid-air from the far side of the meadow, then catch its friend on the way back.",
+        "epic": "Raided every beehive in the valley in one afternoon. The beekeepers now wear bird costumes to scare it.",
+        "legendary": "Ate so many bees in one summer that every flower in the valley had to start pollinating itself."
+      },
+      "moves": {
+        "signature": "Bee Snap Dive",
+        "legend": "Branch Whack",
+        "ultimate": "Rainbow Swoop"
+      }
+    },
+    "bird": {
+      "status": "draft",
+      "names": {
+        "common": "Chipthief",
+        "uncommon": "Feederhog",
+        "rare": "Dawn Chorister",
+        "epic": "Window Tapper",
+        "legendary": "Robin Featherbright, Song of the Street"
+      },
+      "lore": {
+        "common": "Steals a chip right out of your hand at the seaside, then looks hurt when you shout.",
+        "uncommon": "Taps on the window every morning to tell you the bird feeder is empty.",
+        "rare": "Starts the dawn chorus at four in the morning, and expects the whole street to join in.",
+        "epic": "Led every pigeon in the city to the same park bench. The statue has never been so busy.",
+        "legendary": "Sang so beautifully at dawn that the whole neighbourhood started waking up happy. The alarm-clock makers are out of business."
+      },
+      "moves": {
+        "signature": "Chip Dive",
+        "legend": "Feather Flurry Distraction",
+        "ultimate": "Dawn Chorus Storm"
+      }
+    },
+    "i_black_grouse": {
+      "status": "draft",
+      "names": {
+        "common": "Lyretail",
+        "uncommon": "Bubblecaller",
+        "rare": "Lekdancer",
+        "epic": "Moorland Disco",
+        "legendary": "Lord Lyre, Dancer of the Moor"
+      },
+      "lore": {
+        "common": "Struts round the field at dawn fluffing its tail and expects everyone to watch.",
+        "uncommon": "Makes a bubbling cooing sound like a kettle that won't boil.",
+        "rare": "Dances so hard at the morning meeting that the other grouse forget why they came.",
+        "epic": "Held a dance-off on the moor that lasted until lunch. The sheep joined in.",
+        "legendary": "Won every dance contest on the moor for so many years that the hills are named after its moves."
+      },
+      "moves": {
+        "signature": "Strutting Dive",
+        "legend": "Tail Fan Flurry",
+        "ultimate": "Moorland Disco Dance"
+      }
+    },
+    "i_brambling": {
+      "status": "draft",
+      "names": {
+        "common": "Beechseeker",
+        "uncommon": "Flockfinch",
+        "rare": "Winterorange",
+        "epic": "Million Flock",
+        "legendary": "Bramble, Leader of a Million Wings"
+      },
+      "lore": {
+        "common": "Arrives at the bird feeder with ten friends and empties it in a minute.",
+        "uncommon": "Its orange chest glows like a tiny bonfire in the winter snow.",
+        "rare": "Finds every beech nut in the forest and leaves the squirrels nothing.",
+        "epic": "Arrived with a flock so huge that the whole sky went dark for an afternoon. Street lights came on.",
+        "legendary": "Led a winter flock of millions to the perfect beech forest. The forest is still recovering from the party."
+      },
+      "moves": {
+        "signature": "Finch Dive",
+        "legend": "Rotten Nut Drop",
+        "ultimate": "Million Wing Swarm"
+      }
+    },
+    "i_bulbul": {
+      "status": "draft",
+      "names": {
+        "common": "Cheerychirp",
+        "uncommon": "Fruitpinch",
+        "rare": "Crestbopper",
+        "epic": "Garden Choir",
+        "legendary": "Bulbulina, the Cheerful Singer"
+      },
+      "lore": {
+        "common": "Sings loudly and cheerfully outside your window at sunrise, every single day.",
+        "uncommon": "Picks the ripest fruit off the tree the morning before you were going to pick it.",
+        "rare": "Its song is so catchy that the whole street is humming it by lunchtime.",
+        "epic": "Started a choir of bulbuls in the town square that drowned out the church bells.",
+        "legendary": "Sang so joyfully at the city festival that the orchestra put down its instruments and just listened."
+      },
+      "moves": {
+        "signature": "Crest Dive",
+        "legend": "Overripe Fruit Splat",
+        "ultimate": "Garden Choir Chorus"
+      }
+    },
+    "i_coucal": {
+      "status": "draft",
+      "names": {
+        "common": "Hootwalk",
+        "uncommon": "Bushstomper",
+        "rare": "Coopcooper",
+        "epic": "Grassland Gong",
+        "legendary": "Old Coucal, Drum of the Marsh"
+      },
+      "lore": {
+        "common": "Walks everywhere because it can't be bothered to fly, then complains about its feet.",
+        "uncommon": "Makes a deep hooting coop-coop sound like water glugging out of a bottle.",
+        "rare": "Its booming call is so deep that people check the plumbing.",
+        "epic": "Hooted across the marsh until every frog in the swamp lost its rhythm.",
+        "legendary": "Became the official drum of the marsh band, and the frogs keep time with it every night."
+      },
+      "moves": {
+        "signature": "Bush Pounce",
+        "legend": "Booming Distraction",
+        "ultimate": "Marsh Drum Roll"
+      }
+    },
+    "i_hornbill": {
+      "status": "draft",
+      "names": {
+        "common": "Casquehead",
+        "uncommon": "Mudsealer",
+        "rare": "Bigbeak",
+        "epic": "Forest Thunderbill",
+        "legendary": "Queen Hornbilla of the Sealed Tree"
+      },
+      "lore": {
+        "common": "Its huge beak gets stuck in the bird feeder every single time.",
+        "uncommon": "Seals itself inside a hollow tree with mud and has its food delivered through a slot.",
+        "rare": "Its wings whoosh so loudly when it flies that it sounds like a passing train.",
+        "epic": "Flew over the forest with such loud wings that every monkey ducked.",
+        "legendary": "Sealed itself inside the grandest tree in the forest and ran the whole jungle from there by post."
+      },
+      "moves": {
+        "signature": "Bigbeak Dive",
+        "legend": "Casque Crash",
+        "ultimate": "Forest Thunderbill Rumble"
+      }
+    },
+    "i_indigo_bunting": {
+      "status": "draft",
+      "names": {
+        "common": "Bluegleam",
+        "uncommon": "Starnavigator",
+        "rare": "Brightfeather",
+        "epic": "Night Sky Flyer",
+        "legendary": "Indigo, the Living Blue"
+      },
+      "lore": {
+        "common": "Is so blue that people think someone painted it, and keep trying to wash it.",
+        "uncommon": "Finds its way home by looking at the stars, then lands in the same tree every year.",
+        "rare": "Glows so brightly blue in the sunshine that the sky looks dull next to it.",
+        "epic": "Led a flock across the continent at night by the stars without a single wrong turn.",
+        "legendary": "Is so perfectly blue that the paint makers tried to copy it for years and gave up."
+      },
+      "moves": {
+        "signature": "Blue Flash Dive",
+        "legend": "Starlight Rest",
+        "ultimate": "Night Sky Flight"
+      }
+    },
+    "i_jacamar": {
+      "status": "draft",
+      "names": {
+        "common": "Butterflysnap",
+        "uncommon": "Shinybeak",
+        "rare": "Glintwing",
+        "epic": "Jungle Flash",
+        "legendary": "Jacara, Hunter of Wings"
+      },
+      "lore": {
+        "common": "Snaps at every butterfly it sees, then lets the boring ones go.",
+        "uncommon": "Its feathers shine like metal in the sun. It checks its reflection in every puddle.",
+        "rare": "Can catch a butterfly in mid-air without crumpling a single wing.",
+        "epic": "Flashed through the jungle so fast that every butterfly in the forest hid in a flower.",
+        "legendary": "Caught the fastest butterfly in the world after a chase that lasted a whole afternoon. Then let it go to be fair."
+      },
+      "moves": {
+        "signature": "Butterfly Snap",
+        "legend": "Glinting Wing Flash",
+        "ultimate": "Jungle Flash Strike"
+      }
+    },
+    "i_junco": {
+      "status": "draft",
+      "names": {
+        "common": "Snowbird",
+        "uncommon": "Tailflash",
+        "rare": "Groundhopper",
+        "epic": "Snowfield Scamper",
+        "legendary": "Junco, the Snowbird Sentinel"
+      },
+      "lore": {
+        "common": "Hops around under the bird feeder picking up what the other birds dropped. It says it's helping.",
+        "uncommon": "Flashes the white feathers on the sides of its tail whenever it flies away, like a little signal.",
+        "rare": "Arrives exactly when the first snow falls, every year, as if it booked the date.",
+        "epic": "Led a flock of snowbirds so big into a car park that every car looked like it had a hat.",
+        "legendary": "Became the official sign of winter: when it arrives, the whole town gets out its scarves."
+      },
+      "moves": {
+        "signature": "Snowflake Dive",
+        "legend": "Crumb Snatch",
+        "ultimate": "Snowfield Scorch"
+      }
+    },
+    "i_lorikeet": {
+      "status": "draft",
+      "names": {
+        "common": "Rainbowscreech",
+        "uncommon": "Nectarslurper",
+        "rare": "Brushtongue",
+        "epic": "Rainbow Riot",
+        "legendary": "Lorikeeta, the Rainbow Rascal"
+      },
+      "lore": {
+        "common": "Screeches so loudly at the bird feeder that the neighbours think there's a car alarm.",
+        "uncommon": "Licks nectar out of flowers with a tongue like a little paintbrush.",
+        "rare": "Flew into the café and drank every glass of juice in one go. The staff is still cleaning.",
+        "epic": "Arrived in the park with a flock so loud and colourful that the fireworks display was cancelled.",
+        "legendary": "Turned a grey city rainbow-coloured by perching on every rooftop at once. The tourists came for a month."
+      },
+      "moves": {
+        "signature": "Rainbow Dive",
+        "legend": "Feather Fluff Guard",
+        "ultimate": "Rainbow Riot Swoop"
+      }
+    },
+    "i_partridge": {
+      "status": "draft",
+      "names": {
+        "common": "Peartreesit",
+        "uncommon": "Coveycluster",
+        "rare": "Groundscurry",
+        "epic": "Hedge Explosion",
+        "legendary": "Lady Partridge of the Pear Tree"
+      },
+      "lore": {
+        "common": "Sits in a pear tree every December and waits for someone to sing about it.",
+        "uncommon": "Scurries along the ground with its whole family in a line, like a small train.",
+        "rare": "Bursts out of the hedge so suddenly that walkers drop their sandwiches.",
+        "epic": "Burst out of a hedge with a hundred cousins and caused a traffic jam of startled cyclists.",
+        "legendary": "Became the star of the most famous Christmas song in history and has refused to leave the pear tree since."
+      },
+      "moves": {
+        "signature": "Hedge Burst",
+        "legend": "Sandwich Snatch",
+        "ultimate": "Covey Chaos"
+      }
+    },
+    "i_prairie_chicken": {
+      "status": "draft",
+      "names": {
+        "common": "Boomsac",
+        "uncommon": "Orangepuff",
+        "rare": "Prairiedancer",
+        "epic": "Grassland Boom",
+        "legendary": "Pippa Prairie, the Boom Queen"
+      },
+      "lore": {
+        "common": "Puffs up two orange balloons on its neck every morning and booms like a bassoon.",
+        "uncommon": "Stamps its feet in a dance so fast that it looks like it's running on the spot.",
+        "rare": "Booms so loudly at sunrise that farmers miles away set their clocks by it.",
+        "epic": "Held a dance-off on the prairie so loud that the cows started tapping their hooves.",
+        "legendary": "Danced so magnificently that every bird on the prairie came to watch, including two very jealous peacocks."
+      },
+      "moves": {
+        "signature": "Prairie Dive",
+        "legend": "Booming Stare",
+        "ultimate": "Grassland Boom Dance"
+      }
+    },
+    "i_ptarmigan": {
+      "status": "draft",
+      "names": {
+        "common": "Snowslipper",
+        "uncommon": "Whiteswitch",
+        "rare": "Featherfoot",
+        "epic": "Mountain Whiteout",
+        "legendary": "Ptarmigrand, Ghost of the Snow"
+      },
+      "lore": {
+        "common": "Turns white in winter and then gets lost in the snow on its way home.",
+        "uncommon": "Has feathery feet like slippers, so it walks on snow while everyone else sinks.",
+        "rare": "Changes colour with the seasons so well that it hides in the mountains all year round.",
+        "epic": "Hid in the snow so perfectly that a whole team of mountaineers walked over it.",
+        "legendary": "Blended into the snow so well that it watched every ski race at the winter games from the finish line."
+      },
+      "moves": {
+        "signature": "Snowslide Dive",
+        "legend": "Winter Coat Power",
+        "ultimate": "Mountain Whiteout Storm"
+      }
+    },
+    "i_ruffed_grouse": {
+      "status": "draft",
+      "names": {
+        "common": "Wingdrummer",
+        "uncommon": "Ruffneck",
+        "rare": "Thunderwing",
+        "epic": "Forest Drumroll",
+        "legendary": "Drummond, the Forest Drummer"
+      },
+      "lore": {
+        "common": "Beats its wings so loudly on a log that people think there's a motorbike in the woods.",
+        "uncommon": "Puffs out a ruff of feathers round its neck like a fancy collar.",
+        "rare": "Exploded out of the leaves so suddenly that a hiker dropped their map into the river.",
+        "epic": "Drummed so loudly on a fallen log that every rabbit in the forest started dancing.",
+        "legendary": "Played a drum solo on a log that lasted so long that the forest held a festival in its honour."
+      },
+      "moves": {
+        "signature": "Ruff Dive",
+        "legend": "Log Drum Rest",
+        "ultimate": "Forest Drumroll Blast"
+      }
+    },
+    "i_sulphur_crested_cockatoo": {
+      "status": "draft",
+      "names": {
+        "common": "Binlidder",
+        "uncommon": "Crestscreech",
+        "rare": "Rooftopper Cocky",
+        "epic": "Suburb Shriek",
+        "legendary": "Lady Sulphura, Bin Queen of the Suburbs"
+      },
+      "lore": {
+        "common": "Screeches at sunrise so loudly that the whole street wakes up at once.",
+        "uncommon": "Raises its yellow crest when it's excited, which is whenever it sees a bin.",
+        "rare": "Learned to lift the lid of every wheelie bin in the street and taught all its friends.",
+        "epic": "Led a gang of cockatoos to open every bin in the suburb in one morning. The rubbish trucks just watch now.",
+        "legendary": "Taught every cockatoo in the country to open bins. The government has started designing bird-proof lids."
+      },
+      "moves": {
+        "signature": "Crest Dive Bomb",
+        "legend": "Bin Juice Splash",
+        "ultimate": "Suburb Shriek Swoop"
+      }
+    },
+    "i_water_ouzel": {
+      "status": "draft",
+      "names": {
+        "common": "Streamwalker",
+        "uncommon": "Bobbinghop",
+        "rare": "Underwaterwalk",
+        "epic": "Rapids Runner",
+        "legendary": "Dipperella, Walker of the Riverbed"
+      },
+      "lore": {
+        "common": "Bobs up and down on a rock in the stream like it's listening to music.",
+        "uncommon": "Walks straight into the river and keeps going underwater, looking for snacks.",
+        "rare": "Can walk along the bottom of a rushing stream without being swept away.",
+        "epic": "Walked up the whole waterfall from the bottom to the top, underwater, to find the best insects.",
+        "legendary": "Walked the entire length of the river underwater in one day. The fish waved as it passed."
+      },
+      "moves": {
+        "signature": "Splash Dive",
+        "legend": "Bobbing Brace",
+        "ultimate": "Rapids Run"
+      }
+    },
+    "chicken": {
+      "status": "draft",
+      "names": {
+        "common": "Eggbrag",
+        "uncommon": "Roadcrosser",
+        "rare": "Dawncrower",
+        "epic": "Coop Chaos",
+        "legendary": "Henrietta, the Hen Who Ruled the Roost"
+      },
+      "lore": {
+        "common": "Lays an egg and then tells the whole farm about it for twenty minutes.",
+        "uncommon": "Crosses the road just to see if anyone is going to ask why.",
+        "rare": "Crows at dawn, noon, teatime and midnight, just to make sure everyone is awake.",
+        "epic": "Started a pecking order argument that spread to every farm in the valley.",
+        "legendary": "Laid a golden egg, a silver egg and a chocolate egg in the same week, then demanded a pay rise."
+      },
+      "moves": {
+        "signature": "Peck Dive",
+        "legend": "Hot Coop Flap",
+        "ultimate": "Coop Chaos Charge"
+      }
+    },
+    "x_krill": {
+      "status": "draft",
+      "names": {
+        "common": "Tinyswarm",
+        "uncommon": "Glowkrill",
+        "rare": "Whalefood",
+        "epic": "Ocean Swarm",
+        "legendary": "Krillionaire, the Biggest Small Thing"
+      },
+      "lore": {
+        "common": "Is so tiny that it gets lost in a teaspoon of sea water.",
+        "uncommon": "Glows softly in the dark sea, so the fish think it's a tiny night light.",
+        "rare": "Swims in a swarm so thick that the sea turns pink.",
+        "epic": "Formed a swarm so huge that a whale opened its mouth and gave up because it couldn't decide where to start.",
+        "legendary": "Gathered every krill in the ocean into one swarm big enough to be seen from a satellite. Then everyone went home."
+      },
+      "moves": {
+        "signature": "Swarm Slap",
+        "legend": "Krill Cloud Muddle",
+        "ultimate": "Ocean Swarm Surge",
+        "kit.fin_slap": "Tail Flick",
+        "kit.slippery_scales": "Shell Shield"
+      }
+    },
+    "x_prawn": {
+      "status": "draft",
+      "names": {
+        "common": "Pinkcurl",
+        "uncommon": "Backflipper",
+        "rare": "Rockcleaner",
+        "epic": "Rockpool Raid",
+        "legendary": "Prawnzo, the Pink Escapist"
+      },
+      "lore": {
+        "common": "Turns bright pink in hot water and then sulks about it.",
+        "uncommon": "Flicks its tail and shoots backwards whenever someone looks at it.",
+        "rare": "Cleans fish in the rockpool and charges them in tiny shells.",
+        "epic": "Shot backwards so fast through the rockpool that every crab in it got its claws tangled.",
+        "legendary": "Escaped from every net in the harbour by swimming backwards, and now runs a rockpool cleaning business."
+      },
+      "moves": {
+        "signature": "Tail Flick Slap",
+        "legend": "Backflip Muddle",
+        "ultimate": "Rockpool Raid Rush",
+        "kit.fin_slap": "Flicking Tail",
+        "kit.slippery_scales": "Shell Brace",
+        "kit.barb_sting": "Spiky Nose Jab"
+      }
+    },
+    "x_crane_bird": {
+      "status": "draft",
+      "names": {
+        "common": "Onelegger",
+        "uncommon": "Crane Dancer",
+        "rare": "Paperfolder",
+        "epic": "Wetland Waltz",
+        "legendary": "Grus, the Thousand-Fold Crane"
+      },
+      "lore": {
+        "common": "Stands on one leg for hours, then falls over when it tries to switch.",
+        "uncommon": "Dances with its wings outstretched every time it meets a friend at the pond.",
+        "rare": "Inspired a thousand paper cranes and now insists on folding its own.",
+        "epic": "Led a dance of a thousand cranes across the wetland that made every frog stop and clap.",
+        "legendary": "Flew around the world with its flock and was folded into paper by every school it passed over."
+      },
+      "moves": {
+        "signature": "Crane Dive",
+        "legend": "Wing Spread Distraction",
+        "ultimate": "Wetland Waltz Stun"
+      }
+    },
+    "i_american_coot": {
+      "status": "draft",
+      "names": {
+        "common": "Waterpatter",
+        "uncommon": "Lobefoot",
+        "rare": "Bossycoot",
+        "epic": "Pond Splashdown",
+        "legendary": "Commander Coot of the Duck Pond"
+      },
+      "lore": {
+        "common": "Runs across the pond splashing loudly instead of flying, like a very wet sprinter.",
+        "uncommon": "Has funny lobed toes instead of webbed feet and shows them off to the ducks.",
+        "rare": "Bosses every duck on the pond into a different corner, then sits in the middle.",
+        "epic": "Splashed across the lake so much that the boats thought a storm had arrived.",
+        "legendary": "Took charge of every pond in the park and made the ducks queue for bread in order of size."
+      },
+      "moves": {
+        "signature": "Splashdown Dive",
+        "legend": "Peck Peck Peck",
+        "ultimate": "Pond Splashdown Wave"
+      }
+    },
+    "i_american_egret": {
+      "status": "draft",
+      "names": {
+        "common": "Stillwader",
+        "uncommon": "Whiteplume",
+        "rare": "Fishstatue",
+        "epic": "Marsh Mirage",
+        "legendary": "Lady Plumewhite of the Shallows"
+      },
+      "lore": {
+        "common": "Stands perfectly still in the pond for so long that people think it's a garden ornament.",
+        "uncommon": "Grows beautiful white plumes and preens them in front of every puddle.",
+        "rare": "Strikes a fish so fast that the fish doesn't notice until it's out of the water.",
+        "epic": "Stood so still in the marsh that a whole family of frogs built a house on its foot.",
+        "legendary": "Became the symbol of the marshes after standing perfectly still through a hurricane without ruffling a feather."
+      },
+      "moves": {
+        "signature": "Spear Dive",
+        "legend": "Swampy Strike",
+        "ultimate": "Marsh Mirage Stab"
+      }
+    },
+    "i_bittern": {
+      "status": "draft",
+      "names": {
+        "common": "Reedmimic",
+        "uncommon": "Boomfog",
+        "rare": "Swaystander",
+        "epic": "Marsh Foghorn",
+        "legendary": "Bitterna, Ghost of the Reeds"
+      },
+      "lore": {
+        "common": "Points its beak at the sky and sways with the reeds, hoping you'll mistake it for a reed.",
+        "uncommon": "Booms like a foghorn across the marsh so the ships think there's a lighthouse.",
+        "rare": "Hid in the reeds so well that the birdwatchers walked past it a dozen times.",
+        "epic": "Boomed so loudly at night that the fishing boats turned round and headed for shore.",
+        "legendary": "Has never been seen by a single birdwatcher, only heard. They now call it the marsh's best-kept secret."
+      },
+      "moves": {
+        "signature": "Reed Strike",
+        "legend": "Foghorn Charge",
+        "ultimate": "Marsh Foghorn Blast"
+      }
+    },
+    "i_black_stork": {
+      "status": "draft",
+      "names": {
+        "common": "Shystalk",
+        "uncommon": "Chimneysitter",
+        "rare": "Babycarrier",
+        "epic": "Forest Stalker",
+        "legendary": "Ciconia, the Shy Wanderer"
+      },
+      "lore": {
+        "common": "Hides in the trees whenever anyone looks, then complains nobody notices it.",
+        "uncommon": "Builds its nest in the quietest corner of the forest and leaves a sign saying \"Private\".",
+        "rare": "Wades through streams so quietly that the fish think it's a branch.",
+        "epic": "Flew across two continents without anybody spotting it, then sat on a chimney to be seen.",
+        "legendary": "Delivered a new baby to every family in the village, according to the old story. It's been very tired since."
+      },
+      "moves": {
+        "signature": "Shy Strike",
+        "legend": "Stork Swoop Crash",
+        "ultimate": "Forest Shadow Stalk"
+      }
+    },
+    "i_bustard": {
+      "status": "draft",
+      "names": {
+        "common": "Strutpuff",
+        "uncommon": "Heavyflyer",
+        "rare": "Plainsparader",
+        "epic": "Feather Explosion",
+        "legendary": "Big Bustardo, the Heaviest Flier"
+      },
+      "lore": {
+        "common": "Takes a long run-up before it can take off, then lands a few metres later.",
+        "uncommon": "Puffs itself up into a ball of white feathers to impress anyone nearby.",
+        "rare": "Is one of the heaviest flying birds, and makes sure the ground knows when it lands.",
+        "epic": "Puffed its feathers so wide at the display that it blocked out the sun for the whole plain.",
+        "legendary": "Flew a whole kilometre without stopping to rest, which it considers the greatest achievement in history."
+      },
+      "moves": {
+        "signature": "Heavy Landing",
+        "legend": "Feather Flare",
+        "ultimate": "Feather Explosion Display"
+      }
+    },
+    "i_dowitcher": {
+      "status": "draft",
+      "names": {
+        "common": "Mudprober",
+        "uncommon": "Sewing Beak",
+        "rare": "Shorescurry",
+        "epic": "Mudflat Machine",
+        "legendary": "Dowager Dowitch, Queen of the Mud"
+      },
+      "lore": {
+        "common": "Pokes its long beak into the mud so fast that it looks like a sewing machine.",
+        "uncommon": "Runs along the shoreline just ahead of every wave, never quite getting wet.",
+        "rare": "Probes the mud so quickly that it eats breakfast, lunch and dinner before the tide turns.",
+        "epic": "Probed so many holes in a mudflat that it looked like a giant pin cushion from the air.",
+        "legendary": "Stitched the entire beach together with its beak in one afternoon. The sand now stays put."
+      },
+      "moves": {
+        "signature": "Mud Jab",
+        "legend": "Beach Run Smash",
+        "ultimate": "Mudflat Machine Stitch"
+      }
+    },
+    "duck": {
+      "status": "draft",
+      "names": {
+        "common": "Breadbegger",
+        "uncommon": "Waddlequack",
+        "rare": "Ducklinghead",
+        "epic": "Pond Parade",
+        "legendary": "Sir Quacksworth, Admiral of the Pond"
+      },
+      "lore": {
+        "common": "Quacks loudly at anyone carrying bread, and gets very cross if it's toast.",
+        "uncommon": "Waddles across the road with its ducklings in a perfect line and stops all the traffic.",
+        "rare": "Water slides right off its back, so it splashes everyone else and stays dry.",
+        "epic": "Led a parade of a hundred ducks through the high street. The shops gave out free bread.",
+        "legendary": "Became admiral of every pond in the land and inspects each one with a very serious quack."
+      },
+      "moves": {
+        "signature": "Splash Dive Duck",
+        "legend": "Pond Rest",
+        "ultimate": "Pond Parade Charge"
+      }
+    }
+  }
+}
