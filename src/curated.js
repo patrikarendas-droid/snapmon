@@ -18,8 +18,11 @@ const CURATED = {
   data: {},           // { objectId: entry } — set by src/curated-data.js (generated from content/curated/*.json)
 };
 const CURATED_RARITIES = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
-const CURATED_LIMITS = { loreMin: 12, loreMax: 220, variants: 8, moveMin: 3, moveMax: 28, notes: 600 };
-const CURATED_FIELDS = ['lore', 'moves', 'status', 'notes'];
+const CURATED_LIMITS = { loreMin: 12, loreMax: 220, variants: 8, moveMin: 3, moveMax: 28, notes: 600, nameMin: 3, nameMax: 24, legendNameMax: 40 };
+// `names` (rarity → monster display name) is an OFFLINE, draft-only field since 2026-11-02: validated and previewed by
+// tools/curated.js, but nothing in the game reads it and `build` never copies it into src/curated-data.js.
+const CURATED_FIELDS = ['lore', 'moves', 'names', 'status', 'notes'];
+const CURATED_STATUSES = ['draft', 'needs-revision', 'reviewed']; // only "reviewed" can ever reach the game
 // template tokens, editing leftovers and markup that must never reach a player
 const CURATED_PLACEHOLDER = /\{[^}]*\}|\[[^\]]*\]|<[^>]*>|\b(todo|tbd|fixme|xxx+|lorem|ipsum|placeholder|insert|object name|monster name)\b|\.\.\.\s*$|^\W*$/i;
 
@@ -52,9 +55,25 @@ function validateCurated(doc, { file = 'content', raw = null, seen = null } = {}
     if (seen) { if (seen.has(id)) E(`${at} is also defined in ${seen.get(id)}`); else seen.set(id, file); }
     if (!e || typeof e !== 'object' || Array.isArray(e)) { E(`${at} must be an object`); continue; }
     for (const k of Object.keys(e)) if (!CURATED_FIELDS.includes(k)) E(`${at}: unknown field "${k}" (allowed: ${CURATED_FIELDS.join(', ')})`);
-    if (e.status != null && !['draft', 'reviewed'].includes(e.status)) E(`${at}: "status" must be "draft" or "reviewed"`);
+    if (e.status != null && !CURATED_STATUSES.includes(e.status)) E(`${at}: "status" must be one of ${CURATED_STATUSES.join(', ')}`);
+    if (e.names != null) {
+      if (typeof e.names !== 'object' || Array.isArray(e.names)) E(`${at}: "names" must be an object keyed by rarity`);
+      else {
+        const seenNames = new Map();
+        for (const [r, v] of Object.entries(e.names)) {
+          if (!CURATED_RARITIES.includes(r)) { E(`${at}: names rarity "${r}" is not one of ${CURATED_RARITIES.join(', ')}`); continue; }
+          const max = r === 'legendary' ? CURATED_LIMITS.legendNameMax : CURATED_LIMITS.nameMax, where = `${at}.names.${r}`;
+          if (typeof v !== 'string') { E(`${where}: must be text`); continue; }
+          if (v !== v.trim() || /\s{2,}/.test(v)) E(`${where}: no spaces at the start/end or double spaces`);
+          if (v.trim().length < CURATED_LIMITS.nameMin || v.length > max) E(`${where}: ${v.length} characters (${CURATED_LIMITS.nameMin}–${max})`);
+          if (!/^[A-Z][A-Za-z0-9 '\-,.!&]*$/.test(v) || CURATED_PLACEHOLDER.test(v)) E(`${where}: start with a capital letter; letters, digits, spaces and ' - , . ! & only (no placeholders)`);
+          const k = v.toLowerCase(); if (seenNames.has(k)) E(`${where}: same name as names.${seenNames.get(k)}`); else seenNames.set(k, r);
+          if (k === o.name.toLowerCase()) W(`${where}: identical to the object's own name ("${o.name}"): a monster name should be more than the label`);
+        }
+      }
+    }
     if (e.notes != null && (typeof e.notes !== 'string' || e.notes.length > CURATED_LIMITS.notes)) E(`${at}: "notes" must be text up to ${CURATED_LIMITS.notes} characters`);
-    if (e.lore == null && e.moves == null) W(`${at}: no lore and no moves`);
+    if (e.lore == null && e.moves == null && e.names == null) W(`${at}: no lore, names or moves`);
     if (e.lore != null) {
       if (typeof e.lore !== 'object' || Array.isArray(e.lore)) E(`${at}: "lore" must be an object keyed by rarity`);
       else for (const [r, v] of Object.entries(e.lore)) {
