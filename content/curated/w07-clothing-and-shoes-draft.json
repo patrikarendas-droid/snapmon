@@ -1,0 +1,683 @@
+{
+  "schema": 1,
+  "batch": "w07-clothing-and-shoes",
+  "entries": {
+    "boot": {
+      "status": "draft",
+      "names": {
+        "common": "Puddlestomper",
+        "uncommon": "Laceknotter",
+        "rare": "Mudtracker",
+        "epic": "Muddy Hall Stampede",
+        "legendary": "Old Bootsworth, Thousand-Mile Walker"
+      },
+      "lore": {
+        "common": "Hides its partner under the bed every morning just as you're late for school.",
+        "uncommon": "Ties its laces in a double knot so tight that nobody can get it off again.",
+        "rare": "Tracked mud from the garden right across the clean kitchen floor and up the stairs.",
+        "epic": "Stomped through every puddle on the school walk, and the whole class went home soaked to the knees.",
+        "legendary": "Walked a thousand miles across mountains and moors and came home with only a small hole in one toe."
+      },
+      "moves": {
+        "signature": "Muddy Heel Snatch",
+        "legend": "Puddle Siphon",
+        "ultimate": "Big Boot Stomp"
+      }
+    },
+    "dress": {
+      "status": "draft",
+      "names": {
+        "common": "Twirlskirt",
+        "uncommon": "Hemsnagger",
+        "rare": "Zipperstuck",
+        "epic": "Party Twirl",
+        "legendary": "Lady Swishington of the Ballroom"
+      },
+      "lore": {
+        "common": "Spins round so wide when you twirl that it knocks the cake off the table.",
+        "uncommon": "Catches its hem on every door handle on the way out of the party.",
+        "rare": "Got its zip stuck halfway up so its owner had to walk out sideways.",
+        "epic": "Twirled so beautifully across the dance floor that every guest stopped to watch.",
+        "legendary": "Was worn to three weddings, two proms and one very surprised birthday party, and still looks brand new."
+      },
+      "moves": {
+        "signature": "Hem Snag",
+        "legend": "Perfume Cloud",
+        "ultimate": "Grand Twirl"
+      }
+    },
+    "x_balaclava": {
+      "status": "draft",
+      "names": {
+        "common": "Itchface",
+        "uncommon": "Eyeholes",
+        "rare": "Snowmouth",
+        "epic": "Blizzard Bundle",
+        "legendary": "Woolly Wilbur of the Winter Peaks"
+      },
+      "lore": {
+        "common": "Itches your nose all morning, and it's the one place you can't scratch.",
+        "uncommon": "Leaves only your eyes showing, so nobody recognises you at the bus stop.",
+        "rare": "Kept a climber's face warm on the top of a freezing mountain.",
+        "epic": "Kept every child in the school warm on the snowiest day, and nobody's ears went red.",
+        "legendary": "Climbed the highest mountain in the world on a famous climber's head, and came back with frozen eyebrows."
+      },
+      "moves": {
+        "signature": "Wool Snatch",
+        "legend": "Warm Breath Glow",
+        "ultimate": "Blizzard Wrap"
+      }
+    },
+    "x_bandana": {
+      "status": "draft",
+      "names": {
+        "common": "Kerchief Knot",
+        "uncommon": "Neckflapper",
+        "rare": "Sweatwiper",
+        "epic": "Cowboy Dust Cloud",
+        "legendary": "Bandito Bandana of the Prairie"
+      },
+      "lore": {
+        "common": "Slips down over your eyes every time you run.",
+        "uncommon": "Flaps round your neck in the wind like a little flag.",
+        "rare": "Wiped the sweat off a whole team of builders on the hottest day of the year.",
+        "epic": "Was waved by every fan in the stadium at once, and the whole crowd turned red.",
+        "legendary": "Rode across the prairie on a cowboy's neck for twenty years and kept every speck of dust out of his mouth."
+      },
+      "moves": {
+        "signature": "Knot Snatch",
+        "legend": "Bandana Flick",
+        "ultimate": "Prairie Wave"
+      }
+    },
+    "i_bathing_cap": {
+      "status": "draft",
+      "names": {
+        "common": "Earsqueezer",
+        "uncommon": "Hairpuller",
+        "rare": "Flowercap",
+        "epic": "Swimming Pool Lap",
+        "legendary": "Captain Rubbercap of the Lido"
+      },
+      "lore": {
+        "common": "Pulls your hair every time you take it off after swimming.",
+        "uncommon": "Squeezes your head so tightly that your ears pop.",
+        "rare": "Kept a swimmer's hair completely dry for a whole hour, which nobody believed.",
+        "epic": "Was worn by every swimmer in the race, and the pool looked like a bowl of bobbing sweets.",
+        "legendary": "Swam the whole channel on a famous swimmer's head without letting in a single drop."
+      },
+      "moves": {
+        "signature": "Rubber Snap Snatch",
+        "legend": "Swim Cap Snap Crack",
+        "ultimate": "Lap After Lap"
+      }
+    },
+    "i_bearskin": {
+      "status": "draft",
+      "names": {
+        "common": "Tallfur",
+        "uncommon": "Sightblocker",
+        "rare": "Guardhat",
+        "epic": "Parade Ground March",
+        "legendary": "Grand Fuzzbusby of the Palace Guard"
+      },
+      "lore": {
+        "common": "Tickles the nose of every guard standing next to it, and none of them are allowed to sneeze.",
+        "uncommon": "Is so tall and furry that its owner has to duck under every doorway.",
+        "rare": "Stayed perfectly still in a gale while every other hat blew away.",
+        "epic": "Marched with a hundred other bearskins down the parade, and the street looked like a furry forest.",
+        "legendary": "Has stood outside the palace gate through every storm for fifty years without ever wobbling."
+      },
+      "moves": {
+        "signature": "Fluffy Swipe",
+        "legend": "Furry Fortress",
+        "ultimate": "Tall Hat March"
+      }
+    },
+    "x_beret": {
+      "status": "draft",
+      "names": {
+        "common": "Tiltytop",
+        "uncommon": "Artisthat",
+        "rare": "Cafesitter",
+        "epic": "Street Painter Swirl",
+        "legendary": "Madame Berangere of the Riverbank"
+      },
+      "lore": {
+        "common": "Slides off to one side no matter how carefully you put it on.",
+        "uncommon": "Makes everyone who wears it think they are a great painter.",
+        "rare": "Sat on the head of a painter by the river who painted the whole city in one afternoon.",
+        "epic": "Was worn by every artist in the square at once, and the tourists bought every painting.",
+        "legendary": "Has been worn by three generations of painters and has paint splodges in every colour ever made."
+      },
+      "moves": {
+        "signature": "Felt Snatch",
+        "legend": "Beret Bash",
+        "ultimate": "Paint Splodge Stink"
+      }
+    },
+    "x_bowler_hat": {
+      "status": "draft",
+      "names": {
+        "common": "Roundtop",
+        "uncommon": "Umbrellamate",
+        "rare": "Doffhat",
+        "epic": "City Commute Bob",
+        "legendary": "Sir Bowlerby of the Morning Train"
+      },
+      "lore": {
+        "common": "Rolls off your head on the windiest day and down the high street.",
+        "uncommon": "Goes everywhere with an umbrella, and won't be seen without one.",
+        "rare": "Was raised so politely at the bus stop that the whole queue raised theirs too.",
+        "epic": "Bobbed along with a thousand other bowlers on the morning train, and the platform looked like a field of mushrooms.",
+        "legendary": "Has ridden the same morning train on the same head for forty years and never once been rained on."
+      },
+      "moves": {
+        "signature": "Brim Snatch",
+        "legend": "Polite Tip Distraction",
+        "ultimate": "Steamy Commuter Crush"
+      }
+    },
+    "x_bucket_hat": {
+      "status": "draft",
+      "names": {
+        "common": "Floppybrim",
+        "uncommon": "Festivaltop",
+        "rare": "Rainsheddle",
+        "epic": "Muddy Festival Bounce",
+        "legendary": "Old Floppington of the Fields"
+      },
+      "lore": {
+        "common": "Flops down over your eyes every time you try to look up.",
+        "uncommon": "Has a floppy brim all the way round so the rain drips off in every direction.",
+        "rare": "Survived three muddy festivals and came home smelling of chips.",
+        "epic": "Was worn by every person in the festival crowd at once, and the field looked like a sea of upside-down buckets.",
+        "legendary": "Has been to every summer festival for twenty years and has a badge from every single one."
+      },
+      "moves": {
+        "signature": "Floppy Brim Snatch",
+        "legend": "Muddy Festival Whiff",
+        "ultimate": "Festival Field Bounce"
+      }
+    },
+    "x_crown": {
+      "status": "draft",
+      "names": {
+        "common": "Heavyhead",
+        "uncommon": "Jewelglint",
+        "rare": "Slidedown",
+        "epic": "Royal Parade Glitter",
+        "legendary": "The Golden Circlet of Ages"
+      },
+      "lore": {
+        "common": "Is so heavy that it slides down over your ears every time you nod.",
+        "uncommon": "Sparkles so brightly in the sun that everyone has to squint at you.",
+        "rare": "Was hidden in a cake by a cheeky prince and found by the cook.",
+        "epic": "Glittered so brightly at the parade that the whole crowd needed sunglasses.",
+        "legendary": "Has been worn at coronations for a thousand years and is still polished every single morning."
+      },
+      "moves": {
+        "signature": "Jewel Snatch",
+        "legend": "Dazzle Distraction",
+        "ultimate": "Royal Glitter",
+        "kit.wrap_up": "Gold Glint Daze",
+        "kit.static_cling": "Heavy Gold Crack",
+        "kit.layer_up": "Velvet Lining Guard"
+      }
+    },
+    "x_earmuffs": {
+      "status": "draft",
+      "names": {
+        "common": "Fluffyears",
+        "uncommon": "Muffledmuff",
+        "rare": "Snowfluff",
+        "epic": "Frosty Morning Muffle",
+        "legendary": "Lady Muffington of the Ice Rink"
+      },
+      "lore": {
+        "common": "Muffles every word you say so you answer the wrong questions all day.",
+        "uncommon": "Has two fluffy pom-poms that make you look like a bear.",
+        "rare": "Kept your ears so warm that you didn't hear the school bell.",
+        "epic": "Was worn by the whole ice-skating club, and nobody heard the coach for an entire lesson.",
+        "legendary": "Has kept the same skater's ears warm through forty winters of early-morning practice."
+      },
+      "moves": {
+        "signature": "Fluffy Snatch",
+        "legend": "Muffled Hearing",
+        "ultimate": "Frosty Silence Stink"
+      }
+    },
+    "x_fedora": {
+      "status": "draft",
+      "names": {
+        "common": "Brimtipper",
+        "uncommon": "Detectivehat",
+        "rare": "Shadowbrim",
+        "epic": "Rainy Street Mystery",
+        "legendary": "Inspector Fedorius of the Fog"
+      },
+      "lore": {
+        "common": "Tips forward over your eyes every time you look mysterious.",
+        "uncommon": "Makes everyone who wears it suddenly want to solve a mystery.",
+        "rare": "Hid its owner's face so well in the shadows that the cat didn't recognise him.",
+        "epic": "Was worn by every detective at the mystery party, and nobody could work out who was who.",
+        "legendary": "Has solved fifty cases on the same detective's head, and was given a little badge of its own."
+      },
+      "moves": {
+        "signature": "Brim Tip Snatch",
+        "legend": "Shadow Brim Distraction",
+        "ultimate": "Steamy Street Mystery"
+      }
+    },
+    "hat": {
+      "status": "draft",
+      "names": {
+        "common": "Gustgrabber",
+        "uncommon": "Hatheadmaker",
+        "rare": "Capswapper",
+        "epic": "Windy Day Chase",
+        "legendary": "Old Topper, Hat of All Hats"
+      },
+      "lore": {
+        "common": "Flies off your head on every windy day and leads you on a chase down the street.",
+        "uncommon": "Leaves your hair squashed flat when you take it off, so you have to keep it on.",
+        "rare": "Swapped heads with every hat at the party when nobody was looking.",
+        "epic": "Blew away in a gale with every other hat in town, and they all landed in the duck pond.",
+        "legendary": "Has been worn by five generations of the same family and still fits every one of them."
+      },
+      "moves": {
+        "signature": "Brim Snatch Snatch",
+        "legend": "Hat Trick Boost",
+        "ultimate": "Gust Lift-Off"
+      }
+    },
+    "x_headband": {
+      "status": "draft",
+      "names": {
+        "common": "Sweatstopper",
+        "uncommon": "Slidedownband",
+        "rare": "Hairhold",
+        "epic": "Gym Class Burst",
+        "legendary": "Coach Sweatwell of the Gym"
+      },
+      "lore": {
+        "common": "Slides down over your eyes just as you're about to catch the ball.",
+        "uncommon": "Holds back your hair so tightly that your eyebrows look surprised.",
+        "rare": "Soaked up a whole tennis match of sweat without dripping once.",
+        "epic": "Was worn by every runner at the school sports day, and the finish line looked like a rainbow.",
+        "legendary": "Has been worn at every marathon for twenty years and still stretches just right."
+      },
+      "moves": {
+        "signature": "Stretch Snatch",
+        "legend": "Cool Down Rest",
+        "ultimate": "Sports Day Sprint"
+      }
+    },
+    "i_mortarboard": {
+      "status": "draft",
+      "names": {
+        "common": "Tassleflicker",
+        "uncommon": "Squarehead",
+        "rare": "Capthrower",
+        "epic": "Graduation Toss",
+        "legendary": "Doctor Squaresworth, the Very Learned"
+      },
+      "lore": {
+        "common": "Its tassel swings in front of your nose and makes you sneeze.",
+        "uncommon": "Has a flat square top that slides off whenever you look down.",
+        "rare": "Was thrown in the air at graduation and landed on the head of the headmistress.",
+        "epic": "Was tossed in the air by every graduate at once, and the sky rained square hats.",
+        "legendary": "Has been worn at so many graduations that it knows more than all the professors together."
+      },
+      "moves": {
+        "signature": "Tassel Snatch",
+        "legend": "Hot Lecture Hall",
+        "ultimate": "Cap Toss"
+      }
+    },
+    "i_shower_cap": {
+      "status": "draft",
+      "names": {
+        "common": "Crinklecap",
+        "uncommon": "Steamybubble",
+        "rare": "Shampoosaver",
+        "epic": "Bathroom Steam",
+        "legendary": "Lady Ploppington of the Bathroom"
+      },
+      "lore": {
+        "common": "Crinkles so loudly in the shower that you can't hear yourself singing.",
+        "uncommon": "Looks like a see-through bubble on your head, and everyone laughs.",
+        "rare": "Kept a whole hairdo dry through a twenty-minute bath.",
+        "epic": "Was worn by everyone in the hotel on the same morning, and the corridors crinkled.",
+        "legendary": "Has kept the same grandma's curls dry through every bath for thirty years."
+      },
+      "moves": {
+        "signature": "Elastic Snatch",
+        "legend": "Drip Drip Drip",
+        "ultimate": "Steamy Shower Blast"
+      }
+    },
+    "i_ski_mask": {
+      "status": "draft",
+      "names": {
+        "common": "Snowface",
+        "uncommon": "Goggleholder",
+        "rare": "Frostbreath",
+        "epic": "Ski Slope Shiver",
+        "legendary": "Captain Frostface of the Piste"
+      },
+      "lore": {
+        "common": "Gets damp from your breath and then freezes stiff on the ski lift.",
+        "uncommon": "Covers everything but your eyes, so you look like a woolly ninja.",
+        "rare": "Kept a skier's face warm while flying down the steepest slope.",
+        "epic": "Kept the whole ski school warm on the coldest day of the season.",
+        "legendary": "Skied down every mountain in the range on the same face and never once got snow up its nose."
+      },
+      "moves": {
+        "signature": "Woolly Snatch",
+        "legend": "Damp Breath Whiff",
+        "ultimate": "Ski Slope Whiteout"
+      }
+    },
+    "x_sun_hat": {
+      "status": "draft",
+      "names": {
+        "common": "Floppyshade",
+        "uncommon": "Beachbrim",
+        "rare": "Neckshade",
+        "epic": "Beach Day Shade",
+        "legendary": "Lady Sunbrella of the Seaside"
+      },
+      "lore": {
+        "common": "Blows off into the sea the moment you get to the beach.",
+        "uncommon": "Has a brim so wide that the whole family can sit in its shade.",
+        "rare": "Kept a gardener cool through a whole afternoon of digging in the heat.",
+        "epic": "Shaded every grandma at the beach on the hottest day, and nobody got burnt.",
+        "legendary": "Has been to the beach every summer for forty years and still smells faintly of suncream."
+      },
+      "moves": {
+        "signature": "Wide Brim Snatch",
+        "legend": "Shady Rest",
+        "ultimate": "Sunburn Blaze"
+      }
+    },
+    "x_tiara": {
+      "status": "draft",
+      "names": {
+        "common": "Sparklepin",
+        "uncommon": "Princessband",
+        "rare": "Hairslipper",
+        "epic": "Ballroom Sparkle",
+        "legendary": "Princess Glimmerina of the Ball"
+      },
+      "lore": {
+        "common": "Slips out of your hair and falls into the punch bowl.",
+        "uncommon": "Sparkles in every photo, so nobody can see your face.",
+        "rare": "Was found by a pigeon and taken to its nest, where it still sparkles.",
+        "epic": "Sparkled so much at the ball that the chandelier felt jealous.",
+        "legendary": "Has been worn at every royal ball for a hundred years and has never lost a single jewel."
+      },
+      "moves": {
+        "signature": "Sparkle Snatch",
+        "legend": "Glitter Glitter Glitter",
+        "ultimate": "Tiara Twirl Finale",
+        "kit.wrap_up": "Diamond Glint Daze",
+        "kit.static_cling": "Hair Clip Pinch",
+        "kit.loose_thread": "Jewel Pluck",
+        "kit.layer_up": "Silver Band Guard"
+      }
+    },
+    "x_visor": {
+      "status": "draft",
+      "names": {
+        "common": "Brimonly",
+        "uncommon": "Glareblocker",
+        "rare": "Tennistop",
+        "epic": "Centre Court Glare",
+        "legendary": "Coach Shadewell of the Tennis Club"
+      },
+      "lore": {
+        "common": "Has no top, so the sun burns your head while your eyes stay shaded.",
+        "uncommon": "Blocks the glare so well that you can watch the ball against the sun.",
+        "rare": "Kept a tennis player's eyes shaded through a five-hour match.",
+        "epic": "Was worn by every player at the tennis tournament, and the court looked like a field of little roofs.",
+        "legendary": "Has watched every final at the same tennis club for thirty years."
+      },
+      "moves": {
+        "signature": "Brim Flick Snatch",
+        "legend": "Sun Glare Crack",
+        "ultimate": "Baseline Squint"
+      }
+    },
+    "x_wig_hair": {
+      "status": "draft",
+      "names": {
+        "common": "Slipwig",
+        "uncommon": "Curlyfake",
+        "rare": "Windblowoff",
+        "epic": "Theatre Wig Swap",
+        "legendary": "Madame Perruque of the Grand Theatre"
+      },
+      "lore": {
+        "common": "Slips sideways on your head during the school play.",
+        "uncommon": "Has curls so bouncy that they wobble when you talk.",
+        "rare": "Blew off in the wind and landed on a dog, which wore it proudly all the way home.",
+        "epic": "Was swapped between every actor in the play, and the audience couldn't keep track.",
+        "legendary": "Has been worn in every play at the grand theatre for a hundred years and still has every curl."
+      },
+      "moves": {
+        "signature": "Curl Snatch",
+        "legend": "Hairpin Guard",
+        "ultimate": "Big Wig Swap"
+      }
+    },
+    "helmet": {
+      "status": "draft",
+      "names": {
+        "common": "Strapsquasher",
+        "uncommon": "Headbonker",
+        "rare": "Helmethair",
+        "epic": "Building Site Bump",
+        "legendary": "Captain Hardshell of the Crash"
+      },
+      "lore": {
+        "common": "Squashes your hair flat and leaves a line round your forehead.",
+        "uncommon": "Bonks against every door frame because you forget you're wearing it.",
+        "rare": "Bounced off a low branch on the bike ride and its owner didn't even feel it.",
+        "epic": "Was worn by every worker on the building site, and the bricks bounced off them all.",
+        "legendary": "Has saved its owner from a hundred tumbles and still has the same sticker on the back."
+      },
+      "moves": {
+        "signature": "Bonk Snatch",
+        "legend": "Clonk Startle",
+        "ultimate": "Head First Charge",
+        "kit.wrap_up": "Visor Snap",
+        "kit.static_cling": "Hard Shell Crack",
+        "kit.loose_thread": "Strap Grab",
+        "kit.layer_up": "Padding Guard"
+      }
+    },
+    "jacket": {
+      "status": "draft",
+      "names": {
+        "common": "Pocketkeeper",
+        "uncommon": "Zipperjammer",
+        "rare": "Hookmisser",
+        "epic": "Puffer Parade",
+        "legendary": "Grand Overcoat of the Coat Rack"
+      },
+      "lore": {
+        "common": "Hides your keys in a pocket you didn't even know it had.",
+        "uncommon": "Jams its zip at the bottom so you have to wriggle out of it like a snake.",
+        "rare": "Kept a whole wallet, two sandwiches and a hamster in its pockets without anyone noticing.",
+        "epic": "Was hung on the same coat hook as every other jacket in the school, and the hook bent to the floor.",
+        "legendary": "Has been passed down through three brothers and still has the first brother's conker in the pocket."
+      },
+      "moves": {
+        "signature": "Pocket Pick",
+        "legend": "Collar Up Boost",
+        "ultimate": "Zip Jam"
+      }
+    },
+    "jeans": {
+      "status": "draft",
+      "names": {
+        "common": "Kneeripper",
+        "uncommon": "Pocketfluff",
+        "rare": "Shrinker",
+        "epic": "Washday Shrink",
+        "legendary": "Old Denim Dan, Faded Favourite"
+      },
+      "lore": {
+        "common": "Comes out of the washing machine one size smaller every single time.",
+        "uncommon": "Has pockets full of fluff, old tissues and a forgotten sweet.",
+        "rare": "Ripped at the knee on the playground and became even more fashionable.",
+        "epic": "Shrunk so much in the wash that the whole family had to try them on to find who they fitted.",
+        "legendary": "Has been worn for twenty years and faded to the perfect blue, with every patch telling a story."
+      },
+      "moves": {
+        "signature": "Denim Snatch",
+        "legend": "Ripped Knee Crack",
+        "ultimate": "Big Washday"
+      }
+    },
+    "scarf": {
+      "status": "draft",
+      "names": {
+        "common": "Tangleneck",
+        "uncommon": "Dripdrier",
+        "rare": "Doorcatcher",
+        "epic": "Wintry Wrap-Up",
+        "legendary": "Granny's Endless Woolly Scarf"
+      },
+      "lore": {
+        "common": "Catches in the car door every time you get out.",
+        "uncommon": "Dries your hands, your face and the dog, all on the same day.",
+        "rare": "Wrapped round so many times that you couldn't turn your head.",
+        "epic": "Was knitted so long that it went round the whole school choir at once.",
+        "legendary": "Was knitted by grandma every winter for fifty years and now reaches all the way to the end of the street."
+      },
+      "moves": {
+        "signature": "Woolly Snatch Snatch",
+        "legend": "Towel Snatch",
+        "ultimate": "Wrapped Up Tight"
+      }
+    },
+    "i_academic_gown": {
+      "status": "draft",
+      "names": {
+        "common": "Sleeveswisher",
+        "uncommon": "Floorsweeper",
+        "rare": "Floatinggown",
+        "epic": "Graduation Procession",
+        "legendary": "Professor Robesworth of the Old Hall"
+      },
+      "lore": {
+        "common": "Swishes its long sleeves into your dinner at every formal meal.",
+        "uncommon": "Is so long that it sweeps the floor of every corridor it walks down.",
+        "rare": "Billowed out so dramatically on the stage that the professor nearly floated away.",
+        "epic": "Led a procession of a thousand gowns across the university lawn, and the ducks waddled out of the way.",
+        "legendary": "Has been worn by every head of the university for two hundred years and still swishes perfectly."
+      },
+      "moves": {
+        "signature": "Sleeve Snatch",
+        "legend": "Sleeve Swipe Crack",
+        "ultimate": "Robe Billow Daze"
+      }
+    },
+    "i_bib": {
+      "status": "draft",
+      "names": {
+        "common": "Mealmuck",
+        "uncommon": "Dribblecatcher",
+        "rare": "Tieontrouble",
+        "epic": "Spaghetti Splatter",
+        "legendary": "Sir Bibbington, Hero of the Highchair"
+      },
+      "lore": {
+        "common": "Catches everything except the food that falls in your lap.",
+        "uncommon": "Ties at the back of your neck, then comes undone just before pudding.",
+        "rare": "Survived a whole bowl of spaghetti and still came out mostly white.",
+        "epic": "Caught a whole birthday cake's worth of crumbs at the toddler party.",
+        "legendary": "Has been worn by four babies in the same family and still has the same duck on the front."
+      },
+      "moves": {
+        "signature": "Dribble Snatch",
+        "legend": "Gravy Stain Crack",
+        "ultimate": "Food Fight"
+      }
+    },
+    "i_brassiere": {
+      "status": "draft",
+      "names": {
+        "common": "Strapsnapper",
+        "uncommon": "Washtangle",
+        "rare": "Hookfiddler",
+        "epic": "Washing Line Flap",
+        "legendary": "Madame Lacelace of the Laundry"
+      },
+      "lore": {
+        "common": "Comes out of the washing machine tangled round every sock in the load.",
+        "uncommon": "Has tiny hooks at the back that are very fiddly to do up in a hurry.",
+        "rare": "Hooked itself onto a jumper in the wash and refused to let go.",
+        "epic": "Flapped on the washing line in a gale, and the neighbours found it in their garden.",
+        "legendary": "Has survived a thousand washes and still has every hook and every bit of lace."
+      },
+      "moves": {
+        "signature": "Strap Snatch",
+        "legend": "Strap Snap Startle",
+        "ultimate": "Laundry Day Tangle"
+      }
+    },
+    "i_breastplate": {
+      "status": "draft",
+      "names": {
+        "common": "Clankchest",
+        "uncommon": "Shinypolish",
+        "rare": "Arrowbounce",
+        "epic": "Castle Wall Clang",
+        "legendary": "Sir Steelheart, Shield of the Knight"
+      },
+      "lore": {
+        "common": "Clanks so loudly when you walk that everyone knows you're coming.",
+        "uncommon": "Is polished so shiny that the knight can see his breakfast in it.",
+        "rare": "Bounced an arrow straight back at the archer who fired it.",
+        "epic": "Clanked down the castle wall with a hundred other knights, and the sound echoed for miles.",
+        "legendary": "Has protected a dozen knights over five hundred years and now stands proudly in the castle hall."
+      },
+      "moves": {
+        "signature": "Steel Snatch",
+        "legend": "Chest Bump",
+        "ultimate": "Knightly Charge",
+        "kit.wrap_up": "Polished Glint",
+        "kit.static_cling": "Steel Dent",
+        "kit.loose_thread": "Buckle Pluck"
+      }
+    },
+    "i_chain_mail": {
+      "status": "draft",
+      "names": {
+        "common": "Jinglelink",
+        "uncommon": "Ringsrattle",
+        "rare": "Heavyvest",
+        "epic": "Battle Rattle",
+        "legendary": "Sir Linksworth of the Iron Rings"
+      },
+      "lore": {
+        "common": "Jingles with every step, so knights can never sneak up on anyone.",
+        "uncommon": "Is made of a thousand tiny metal rings joined together.",
+        "rare": "Stopped a sword's swipe and only lost one tiny ring.",
+        "epic": "Rattled across the battlefield with a hundred other knights, and the horses wore earplugs.",
+        "legendary": "Was linked together ring by ring over a whole year by one patient blacksmith, and has never broken."
+      },
+      "moves": {
+        "signature": "Ring Snatch",
+        "legend": "Jingle Jingle Jingle",
+        "ultimate": "Iron Ring Clatter",
+        "kit.wrap_up": "Chain Rattle Daze",
+        "kit.static_cling": "Ring Gap Crack",
+        "kit.loose_thread": "Link Pluck"
+      }
+    }
+  }
+}
