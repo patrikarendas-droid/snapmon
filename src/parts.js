@@ -246,6 +246,11 @@ const PARTS = (() => {
         ell(g, cx, cy, rx, ry, B);
         for (let i = 0; i < 10; i++) { const t = (i / 10) * Math.PI * 2 + 0.3; gset(g, Math.round(cx + Math.cos(t) * (rx - 2.5)), Math.round(cy + Math.sin(t) * (ry - 2.5)), BL); }
       }
+      else if (sh === 'spinner') { // fidget spinner (recognition audit 2026-11): three weighted lobes round a bearing
+        cy = 23; rx = ry = 7;
+        for (const t of [-Math.PI / 2, Math.PI / 6, Math.PI * 5 / 6]) { const lx = cx + Math.cos(t) * 9, ly = cy + Math.sin(t) * 9; line(g, cx, cy, lx, ly, B, 5); ell(g, lx, ly, 5, 5, B); ell(g, lx, ly, 2, 2, M); }
+        ell(g, cx, cy, rx, ry, B); ell(g, cx, cy + 3, 2, 1.5, BD);
+      }
       else ell(g, cx, cy, rx, ry, B);
       if (p.stripes) paintOn(g, (x, y) => (Math.floor((x - 20) / 3) % 2 === 0 ? BD : null), [B]);
       if (p.seeds) for (let y = cy - ry + 3; y < cy + ry - 1; y += 4) for (let x = cx - rx + 3 + ((y >> 2) % 2) * 2; x < cx + rx - 2; x += 5) if (gget(g, x, y) === B) gset(g, x, y, p.seeds === 'dark' ? K : PA);
