@@ -755,6 +755,687 @@
         "kit.molt": "Fresh Shell Rest",
         "kit.web_snare": "Shiny Shell Daze"
       }
+    },
+    "i_african_chameleon": {
+      "status": "draft",
+      "names": {
+        "common": "Eyeswiveller",
+        "uncommon": "Colourmood",
+        "rare": "Leafrocker",
+        "epic": "Rainbow Tantrum",
+        "legendary": "Chamaeleo, Painter of Moods"
+      },
+      "lore": {
+        "common": "Points one eye at you and the other at the ceiling, so you never know which one is listening.",
+        "uncommon": "Walks so slowly, rocking back and forth like a leaf, that snails overtake it.",
+        "rare": "Turns dark and stripy when it is cross, and it is cross about nearly everything.",
+        "epic": "Flashed so many angry colours at a rival that the whole tree looked like a disco.",
+        "legendary": "Changed colour to match a rainbow so perfectly that a family photographed the sky and missed it entirely."
+      },
+      "moves": {
+        "signature": "Sticky Snap",
+        "legend": "Bitter Tongue Spit",
+        "ultimate": "Rainbow Tantrum"
+      }
+    },
+    "i_african_crocodile": {
+      "status": "draft",
+      "names": {
+        "common": "Logdrifter",
+        "uncommon": "Grinjaws",
+        "rare": "Riverlurker",
+        "epic": "Riverbank Ambush",
+        "legendary": "Old Nile, Who Never Blinks"
+      },
+      "lore": {
+        "common": "Lies so still on the riverbank that hikers sit on it for a picnic, then move very quickly.",
+        "uncommon": "Floats with only its eyes and nose above the water, like a log with opinions.",
+        "rare": "Lets little birds pick its teeth clean, then grins at everyone to show off.",
+        "epic": "Waited so long at the river crossing that the whole herd of zebras decided to go round the long way.",
+        "legendary": "Has been lying on the same sandbank for eighty years and has outlasted three bridges."
+      },
+      "moves": {
+        "signature": "Snapping Jaws",
+        "legend": "Riverbank Lurk",
+        "ultimate": "Riverbank Ambush"
+      }
+    },
+    "i_agama": {
+      "status": "draft",
+      "names": {
+        "common": "Pushupper",
+        "uncommon": "Rainbowhead",
+        "rare": "Rockbobber",
+        "epic": "Head-Bob Brawl",
+        "legendary": "Agama the Magnificent Nodder"
+      },
+      "lore": {
+        "common": "Does push-ups on a hot rock whenever anyone walks past, whether they're watching or not.",
+        "uncommon": "Its head turns bright orange in the sun while the rest of it stays blue.",
+        "rare": "Nods its head so fiercely at its rivals that they get dizzy and wander off.",
+        "epic": "Led a hundred lizards in a head-bobbing contest on the village wall. The village thought it was an earthquake.",
+        "legendary": "Did one hundred push-ups on the hottest rock in the desert without stopping, then had a cheeky drink of dew."
+      },
+      "moves": {
+        "signature": "Rock Rush Bite",
+        "legend": "Push-Up Pride",
+        "ultimate": "Rainbow Head Flash"
+      }
+    },
+    "i_alligator_lizard": {
+      "status": "draft",
+      "names": {
+        "common": "Stiffscale",
+        "uncommon": "Tailtosser",
+        "rare": "Slinkybelly",
+        "epic": "Garden Crawl",
+        "legendary": "Gerrhonota, the Tiny Dragon"
+      },
+      "lore": {
+        "common": "Wriggles away from your hand, then leaves its tail behind wiggling on the path.",
+        "uncommon": "Has a little fold down each side so it can puff up after a big lunch.",
+        "rare": "Hid in a gardener's glove all morning and gave him the shock of his life.",
+        "epic": "Lost its tail, grew a new one, and lost that one too, all in one busy summer.",
+        "legendary": "Ate every slug in the vegetable patch, then slept for a week in a flowerpot with its belly full."
+      },
+      "moves": {
+        "signature": "Scaly Nip",
+        "legend": "Sunny Rock Nap",
+        "ultimate": "Garden Crawl"
+      }
+    },
+    "i_american_alligator": {
+      "status": "draft",
+      "names": {
+        "common": "Swampgrump",
+        "uncommon": "Bellowback",
+        "rare": "Gatorwallow",
+        "epic": "Bayou Bellow",
+        "legendary": "Big Bayou Bertha"
+      },
+      "lore": {
+        "common": "Lies in the golf course pond and refuses to give back the ball.",
+        "uncommon": "Bellows so loudly in spring that the swamp water dances on its back.",
+        "rare": "Digs a hole in the mud that turns into a pond, then lets the turtles stay for free.",
+        "epic": "Gave one bellow that shook every frog off every lily pad in the swamp.",
+        "legendary": "Ruled the same swamp for sixty years and still remembers where every dropped picnic sandwich landed."
+      },
+      "moves": {
+        "signature": "Swamp Snap",
+        "legend": "Rolling Snaps",
+        "ultimate": "Bayou Bellow"
+      }
+    },
+    "i_american_chameleon": {
+      "status": "draft",
+      "names": {
+        "common": "Pinkthroat",
+        "uncommon": "Greenbrown",
+        "rare": "Railrunner",
+        "epic": "Dewlap Duel",
+        "legendary": "Anolis, Knight of the Porch Rail"
+      },
+      "lore": {
+        "common": "Pops out its pink throat flap at you, then pretends it didn't.",
+        "uncommon": "Turns brown when nervous and green when it calms down, like a mood ring with legs.",
+        "rare": "Runs along the porch rail so fast that it overshoots and lands in the flower pot.",
+        "epic": "Flapped its throat at every lizard on the street until they all moved two gardens away.",
+        "legendary": "Defended the same porch rail against every rival for its whole life, and the family named the porch after it."
+      },
+      "moves": {
+        "signature": "Rail Dash Nip",
+        "legend": "Dewlap Headbutt",
+        "ultimate": "Dewlap Duel"
+      }
+    },
+    "i_banded_gecko": {
+      "status": "draft",
+      "names": {
+        "common": "Stripytoes",
+        "uncommon": "Nightchirp",
+        "rare": "Tailwagger",
+        "epic": "Desert Night Hunt",
+        "legendary": "Coleonyx, Ghost of the Sand"
+      },
+      "lore": {
+        "common": "Chirps in the dark when you try to sleep, then hides as soon as you turn on the light.",
+        "uncommon": "Waves its tail like a cat before it pounces on a beetle.",
+        "rare": "Walks on tiptoe across the hot sand at night, so quietly that the scorpions don't hear it.",
+        "epic": "Hunted every cricket in the campsite in one night. The campers slept peacefully for the first time.",
+        "legendary": "Crossed the whole desert by moonlight on tiptoe, and arrived in time to watch the sunrise from a cactus."
+      },
+      "moves": {
+        "signature": "Night Nip",
+        "legend": "Tail Flick Startle",
+        "ultimate": "Desert Night Hunt"
+      }
+    },
+    "i_common_newt": {
+      "status": "draft",
+      "names": {
+        "common": "Pondcrawler",
+        "uncommon": "Crestback",
+        "rare": "Orangebelly",
+        "epic": "Newt Crossing",
+        "legendary": "Triturus, the Little Pond Dragon"
+      },
+      "lore": {
+        "common": "Wanders out of the pond and gets lost under the garden shed every autumn.",
+        "uncommon": "Grows a wavy crest along its back each spring and won't stop showing it off.",
+        "rare": "Flashed its bright orange belly at a heron, which decided to eat something else.",
+        "epic": "Led a parade of newts across the lane to the pond, and the postman had to wait for an hour.",
+        "legendary": "Grew back a whole new leg after losing one to a fish, then went straight back to bossing the pond."
+      },
+      "moves": {
+        "signature": "Pond Bite",
+        "legend": "Orange Belly Flash",
+        "ultimate": "Pond Parade"
+      }
+    },
+    "i_eft": {
+      "status": "draft",
+      "names": {
+        "common": "Orangewander",
+        "uncommon": "Leaflitter",
+        "rare": "Raindayer",
+        "epic": "Rainstorm Ramble",
+        "legendary": "Notophthalma, Wanderer of the Woods"
+      },
+      "lore": {
+        "common": "Comes out to wander only on rainy days, then complains when it gets wet.",
+        "uncommon": "Is bright orange so everyone knows it tastes horrible, and it's quite proud of that.",
+        "rare": "Walked across the whole forest floor in one rainy afternoon, past every hungry bird.",
+        "epic": "Led a thousand orange efts across the woodland path after a storm. Walkers had to tiptoe for an hour.",
+        "legendary": "Wandered through the woods for three whole years before finally deciding which pond to live in."
+      },
+      "moves": {
+        "signature": "Leaf Litter Nip",
+        "legend": "Red Eft Ram",
+        "ultimate": "Rainstorm Ramble"
+      }
+    },
+    "i_european_fire_salamander": {
+      "status": "draft",
+      "names": {
+        "common": "Yellowspot",
+        "uncommon": "Logsleeper",
+        "rare": "Rainwalker",
+        "epic": "Forest Floor Glow",
+        "legendary": "Salamandra of the Sparks"
+      },
+      "lore": {
+        "common": "Hides under logs all day and only comes out when it rains, then sits on the path.",
+        "uncommon": "Wears black with bright yellow blotches, the forest's way of saying do not lick.",
+        "rare": "Was mistaken for a firework by campers who threw it on the fire. It walked out very cross.",
+        "epic": "Came out with a hundred others after a storm and the forest looked like it was covered in sunflowers.",
+        "legendary": "Walked out of a campfire unharmed, and the old legend about salamanders and fire was born."
+      },
+      "moves": {
+        "signature": "Spotty Bite",
+        "legend": "Ember Tail",
+        "ultimate": "Forest Floor Glow"
+      }
+    },
+    "i_frilled_lizard": {
+      "status": "draft",
+      "names": {
+        "common": "Frillfluffer",
+        "uncommon": "Bipedrunner",
+        "rare": "Umbrellaneck",
+        "epic": "Outback Frill Panic",
+        "legendary": "Chlamydo, Frill of Fury"
+      },
+      "lore": {
+        "common": "Opens its huge neck frill whenever someone steps near, like an umbrella opening in your face.",
+        "uncommon": "Runs away on its back legs only, looking like a tiny dinosaur late for the bus.",
+        "rare": "Hissed and flared its frill so suddenly that a dingo ran home to its mum.",
+        "epic": "Opened its frill at a road train and the driver stopped to let it cross.",
+        "legendary": "Scared off an eagle, a snake and a dingo in one afternoon, then folded its frill and went for a nap."
+      },
+      "moves": {
+        "signature": "Frill Bite",
+        "legend": "Sour Hiss Spray",
+        "ultimate": "Outback Frill Panic"
+      }
+    },
+    "i_gila_monster": {
+      "status": "draft",
+      "names": {
+        "common": "Beadyscale",
+        "uncommon": "Slowchomp",
+        "rare": "Fatfoot",
+        "epic": "Desert Grip",
+        "legendary": "Heloderma, the Patient Chomper"
+      },
+      "lore": {
+        "common": "Bites onto things and won't let go, including the doormat.",
+        "uncommon": "Stores fat in its tail, so it only needs to eat three big meals a year.",
+        "rare": "Its bumpy scales look like tiny beads, and the crows keep trying to collect them.",
+        "epic": "Spent the whole summer in its burrow and the desert was suspiciously quiet.",
+        "legendary": "Ate one giant meal of eggs and didn't need dinner again for a whole year."
+      },
+      "moves": {
+        "signature": "Slow Chomp",
+        "legend": "Beaded Scale Distraction",
+        "ultimate": "Desert Grip"
+      }
+    },
+    "i_green_lizard": {
+      "status": "draft",
+      "names": {
+        "common": "Emeraldback",
+        "uncommon": "Hedgegleam",
+        "rare": "Wallclimber",
+        "epic": "Garden Wall Rush",
+        "legendary": "Lacerta, Emerald of the Hedges"
+      },
+      "lore": {
+        "common": "Sunbathes on the garden wall and sprints away the moment you open the back door.",
+        "uncommon": "Is so bright green that people think it's a toy dropped by a child.",
+        "rare": "Climbed the side of the house to sunbathe on the window ledge, and stared into the bathroom.",
+        "epic": "Raced along every garden wall in the village in one morning, and the cats were too slow to keep up.",
+        "legendary": "Turned bright blue on its throat in spring, and every lizard in the valley came to see it."
+      },
+      "moves": {
+        "signature": "Wall Nip",
+        "legend": "Sun Pride",
+        "ultimate": "Garden Wall Rush"
+      }
+    },
+    "lizard": {
+      "status": "draft",
+      "names": {
+        "common": "Hotrock Hogger",
+        "uncommon": "Tailtwitch",
+        "rare": "Wallscuttle",
+        "epic": "Sunbaked Stampede",
+        "legendary": "Old Iggy, Sunbather Supreme"
+      },
+      "lore": {
+        "common": "Sits on the hottest rock in the garden all afternoon and refuses to share it.",
+        "uncommon": "Its tail twitches when it's excited, which is when it sees a fly.",
+        "rare": "Climbed straight up the side of the house and peered through the window at your breakfast.",
+        "epic": "Led every lizard in the garden to sunbathe on the patio, and nobody could put out their chairs.",
+        "legendary": "Has sunbathed on the same rock for so long that the rock now has a lizard-shaped warm spot."
+      },
+      "moves": {
+        "signature": "Tail Twitch Bite",
+        "legend": "Sunbaked Bite",
+        "ultimate": "Sunbaked Stampede"
+      }
+    },
+    "i_spotted_salamander": {
+      "status": "draft",
+      "names": {
+        "common": "Polkadot",
+        "uncommon": "Mudnapper",
+        "rare": "Springmarcher",
+        "epic": "Vernal Pool March",
+        "legendary": "Ambystoma, the Rain Walker"
+      },
+      "lore": {
+        "common": "Hides under logs all year and pops out only on the rainiest night, as if it's a special occasion.",
+        "uncommon": "Its yellow polka dots look like someone flicked paint on it.",
+        "rare": "Marched across the road on the first rainy night of spring and stopped all the traffic.",
+        "epic": "Led a thousand salamanders to the spring pool in one night. The road was closed until morning.",
+        "legendary": "Has walked to the same pool on the same rainy night for twenty years, without ever checking a map."
+      },
+      "moves": {
+        "signature": "Polka Dot Bite",
+        "legend": "Log Nap",
+        "ultimate": "Vernal Pool March"
+      }
+    },
+    "i_whiptail": {
+      "status": "draft",
+      "names": {
+        "common": "Dustdasher",
+        "uncommon": "Stripedart",
+        "rare": "Sandflicker",
+        "epic": "Desert Dash",
+        "legendary": "Cnemidophorus, Sprinter of the Sands"
+      },
+      "lore": {
+        "common": "Dashes across the hot sand, stops, flicks its tongue, then dashes off in a new direction.",
+        "uncommon": "Has pale stripes down its back like a racing car.",
+        "rare": "Ran so fast across the trail that hikers thought they had seen a ghost.",
+        "epic": "Raced across a whole desert canyon in one go, leaving a trail of tiny dust clouds.",
+        "legendary": "Its whole family are sisters, and together they won every race in the desert without a single brother."
+      },
+      "moves": {
+        "signature": "Quick Nip",
+        "legend": "Whip Tail Startle",
+        "ultimate": "Desert Dash Daze"
+      }
+    },
+    "i_chiton": {
+      "status": "draft",
+      "names": {
+        "common": "Plateback",
+        "uncommon": "Rockhugger",
+        "rare": "Tidelicker",
+        "epic": "Rockpool Grip",
+        "legendary": "Old Polyplacophora"
+      },
+      "lore": {
+        "common": "Rides out every wave glued flat to its rock, then creeps off to graze the moment the tide goes out.",
+        "uncommon": "Has eight little plates on its back, like a tiny armadillo of the sea.",
+        "rare": "Licks the algae off rocks with a tongue full of tiny iron teeth.",
+        "epic": "Scraped every rock in the rockpool clean in one night. The seaweed was furious.",
+        "legendary": "Held on to the same rock through a hundred storms, and the rock is now named after it."
+      },
+      "moves": {
+        "signature": "Iron Tooth Nip",
+        "legend": "Rock Clamp Crack",
+        "ultimate": "Rockpool Grip",
+        "kit.swarm": "Rasping Tongue Scrapes",
+        "kit.molt": "Plate Tuck Rest",
+        "kit.web_snare": "Suction Grip"
+      }
+    },
+    "i_flatworm": {
+      "status": "draft",
+      "names": {
+        "common": "Rippleflat",
+        "uncommon": "Regrowworm",
+        "rare": "Pondglider",
+        "epic": "Splitting Image",
+        "legendary": "Planaria, Who Grew Back Twice"
+      },
+      "lore": {
+        "common": "Glides across the bottom of the pond like a tiny flat ribbon that has lost its present.",
+        "uncommon": "Can be cut in half and grow back as two flatworms, which is why it's never lonely.",
+        "rare": "Ripples through the water with its colourful edges, like a little flag waving.",
+        "epic": "Split itself into a hundred flatworms, and the pond had a very sudden population boom.",
+        "legendary": "Grew a whole new head after losing it, and still remembered where it left its lunch."
+      },
+      "moves": {
+        "signature": "Ripple Nip",
+        "legend": "Hot Rock Ripple",
+        "ultimate": "Rainbow Ripple Dazzle",
+        "kit.swarm": "Glide Glide Glide",
+        "kit.molt": "Regrow Rest",
+        "kit.web_snare": "Slime Ribbon Snare"
+      }
+    },
+    "i_nematode": {
+      "status": "draft",
+      "names": {
+        "common": "Tinywiggle",
+        "uncommon": "Rootknotter",
+        "rare": "Soilsquirm",
+        "epic": "Underground Swarm",
+        "legendary": "Nema, the Invisible Million"
+      },
+      "lore": {
+        "common": "Is so small that it lives in a single spoonful of soil with a million friends.",
+        "uncommon": "Wiggles through the soil in an S-shape, like it's drawing on a tiny map.",
+        "rare": "Gets into the roots of tomato plants and ties them in little knots.",
+        "epic": "A billion of them moved into one garden and the potatoes all grew knobbly.",
+        "legendary": "Is found everywhere on Earth, from the top of mountains to the bottom of the sea, and still nobody notices it."
+      },
+      "moves": {
+        "signature": "Root Nip",
+        "legend": "Wriggle Power",
+        "ultimate": "Root Knot Crack",
+        "kit.swarm": "Million Wriggles",
+        "kit.sting": "Root Nibble",
+        "kit.molt": "Cuticle Shed"
+      }
+    },
+    "i_sea_cucumber": {
+      "status": "draft",
+      "names": {
+        "common": "Seabedsausage",
+        "uncommon": "Sandsifter",
+        "rare": "Squirtback",
+        "epic": "Seabed Hoover",
+        "legendary": "Holothuria, Who Hoovered the Sea"
+      },
+      "lore": {
+        "common": "Lies on the seabed like a sausage someone dropped, and doesn't move all day.",
+        "uncommon": "Sifts the sand all day and leaves neat little sandy squiggles behind it.",
+        "rare": "Squirts sticky threads at crabs that bother it, then glides away.",
+        "epic": "Hoovered so much sand that the whole bay was cleaner than a swimming pool.",
+        "legendary": "Cleaned the whole seabed of a lagoon with nothing but a slow crawl, and the fish now swim there to admire it."
+      },
+      "moves": {
+        "signature": "Sandy Nip",
+        "legend": "Hot Sand Squirt",
+        "ultimate": "Seabed Hoover",
+        "kit.swarm": "Squirt Squirt Squirt",
+        "kit.sting": "Stinky Squirt",
+        "kit.molt": "Seabed Nap"
+      }
+    },
+    "i_sea_slug": {
+      "status": "draft",
+      "names": {
+        "common": "Frillyslug",
+        "uncommon": "Coralcrawler",
+        "rare": "Neonfringe",
+        "epic": "Reef Rainbow",
+        "legendary": "Nudibrancha, Jewel of the Reef"
+      },
+      "lore": {
+        "common": "Crawls over the coral looking so fancy that the clownfish are jealous.",
+        "uncommon": "Wears a fringe of frilly feathers on its back, as if it is going to a party every day.",
+        "rare": "Eats stinging jellyfish and keeps their stings for itself, without a thank-you.",
+        "epic": "Crawled across a whole reef with a hundred neon cousins and the divers forgot to breathe.",
+        "legendary": "Is the brightest creature on the reef, and the colour-changing octopus asks it for fashion tips."
+      },
+      "moves": {
+        "signature": "Frilly Nip",
+        "legend": "Bright Colour Guard",
+        "ultimate": "Reef Rainbow",
+        "kit.sting": "Borrowed Sting",
+        "kit.molt": "Seaweed Rest",
+        "kit.web_snare": "Colour Flash Daze"
+      }
+    },
+    "x_slug_creature": {
+      "status": "draft",
+      "names": {
+        "common": "Slimetrail",
+        "uncommon": "Lettucelurker",
+        "rare": "Nightmuncher",
+        "epic": "Garden Slime Raid",
+        "legendary": "Limax, Lord of the Lettuces"
+      },
+      "lore": {
+        "common": "Leaves a shiny slime trail across the kitchen floor every night.",
+        "uncommon": "Eats a hole in every lettuce in the garden, then hides under the watering can.",
+        "rare": "Squeezed through the keyhole and slimed its way to the cat's dinner bowl.",
+        "epic": "Led a hundred slugs on a midnight raid of the vegetable patch. The gardener cried into his cocoa.",
+        "legendary": "Ate a whole lettuce bigger than itself in one night, then had a nap inside the hole it made."
+      },
+      "moves": {
+        "signature": "Slimy Nip",
+        "legend": "Slime Slam",
+        "ultimate": "Garden Slime Raid",
+        "kit.swarm": "Night Nibbles",
+        "kit.sting": "Bitter Slime",
+        "kit.molt": "Damp Rest",
+        "kit.web_snare": "Slime Trail Snare"
+      }
+    },
+    "snail": {
+      "status": "draft",
+      "names": {
+        "common": "Shellcrawler",
+        "uncommon": "Slowpoke Shell",
+        "rare": "Rainyday Roamer",
+        "epic": "Garden Slime Spiral",
+        "legendary": "Escargotha, the Slowest Champion"
+      },
+      "lore": {
+        "common": "Crawls up the window and sticks there, staring at you all evening.",
+        "uncommon": "Pulls itself back into its shell whenever anyone says hello.",
+        "rare": "Slid all the way across the patio in one rainy night and left a shiny map behind it.",
+        "epic": "Climbed to the top of a sunflower with a hundred friends and the flower bent over to say hello.",
+        "legendary": "Raced a tortoise across the garden and won, because the tortoise stopped for lunch."
+      },
+      "moves": {
+        "signature": "Shell Nip",
+        "legend": "Garden Slime Ooze",
+        "ultimate": "Garden Slime Spiral",
+        "kit.swarm": "Lettuce Nibbles",
+        "kit.web_snare": "Sticky Slime Stick"
+      }
+    },
+    "i_diamondback": {
+      "status": "draft",
+      "names": {
+        "common": "Diamondscale",
+        "uncommon": "Rattletail",
+        "rare": "Coilwarner",
+        "epic": "Canyon Rattle",
+        "legendary": "Crotalus, Rattle of the Canyon"
+      },
+      "lore": {
+        "common": "Rattles its tail at everything, including tumbleweeds and its own shadow.",
+        "uncommon": "Has a pattern of diamonds down its back that looks like a fancy jumper.",
+        "rare": "Rattled so loudly from under a rock that a whole cowboy film crew ran away.",
+        "epic": "Rattled with a hundred cousins at once and the canyon echoed like a giant maraca.",
+        "legendary": "Grew the longest rattle in the desert, one bead for every shed skin, and uses it as a doorbell."
+      },
+      "moves": {
+        "signature": "Rattle Bite",
+        "legend": "Diamond Coil Strike",
+        "ultimate": "Canyon Rattle"
+      }
+    },
+    "x_garter_snake": {
+      "status": "draft",
+      "names": {
+        "common": "Stripedwiggle",
+        "uncommon": "Gardenslither",
+        "rare": "Musksquirm",
+        "epic": "Snake Ball Tumble",
+        "legendary": "Thamnophis of the Garden Hedge"
+      },
+      "lore": {
+        "common": "Slithers out from under the compost heap just as you reach for a garden fork.",
+        "uncommon": "Has neat stripes down its back like it's wearing a little sports kit.",
+        "rare": "Makes a terrible smell when picked up, so nobody picks it up twice.",
+        "epic": "Came out of hibernation with ten thousand others and the whole field looked like it was wriggling.",
+        "legendary": "Is the most common snake in the garden, and has seen every gardener in the street fall over in fright."
+      },
+      "moves": {
+        "signature": "Striped Bite",
+        "legend": "Coiled Guard",
+        "ultimate": "Snake Ball Tumble"
+      }
+    },
+    "i_green_mamba": {
+      "status": "draft",
+      "names": {
+        "common": "Treelasher",
+        "uncommon": "Leafslither",
+        "rare": "Greenstreak",
+        "epic": "Canopy Lightning",
+        "legendary": "Dendroaspis, Shadow of the Canopy"
+      },
+      "lore": {
+        "common": "Lies in the trees so still and green that birds land on it, then leave quickly.",
+        "uncommon": "Moves through the branches so fast that it looks like the leaves are flowing.",
+        "rare": "Shot through the treetops so quickly that a monkey dropped its banana in surprise.",
+        "epic": "Raced from one end of the forest to the other through the treetops without touching the ground.",
+        "legendary": "Is so fast and so green that nobody has ever taken a clear photo of it, which suits it perfectly."
+      },
+      "moves": {
+        "signature": "Treetop Bite",
+        "legend": "Treetop Strikes",
+        "ultimate": "Canopy Lightning"
+      }
+    },
+    "i_green_snake": {
+      "status": "draft",
+      "names": {
+        "common": "Grassribbon",
+        "uncommon": "Vinehider",
+        "rare": "Cricketcatcher",
+        "epic": "Meadow Slither",
+        "legendary": "Opheodrys, Ribbon of the Meadow"
+      },
+      "lore": {
+        "common": "Hides in the green grass and makes everyone jump when they spot it.",
+        "uncommon": "Is so thin and green that people think it's a vine until it slithers away.",
+        "rare": "Catches crickets in the meadow so quietly that the other crickets keep singing.",
+        "epic": "Slithered through every flower bed in the park and the gardeners thought the plants were dancing.",
+        "legendary": "Hid in the same hedge for twenty years and nobody ever spotted it, even the owl."
+      },
+      "moves": {
+        "signature": "Grass Bite",
+        "legend": "Sunbeam Bite",
+        "ultimate": "Meadow Slither"
+      }
+    },
+    "i_hognose_snake": {
+      "status": "draft",
+      "names": {
+        "common": "Upturnose",
+        "uncommon": "Deadplayer",
+        "rare": "Puffhisser",
+        "epic": "Grand Performance",
+        "legendary": "Heterodon, Champion Faker"
+      },
+      "lore": {
+        "common": "Flips onto its back and plays dead whenever anyone comes near, tongue out and all.",
+        "uncommon": "Has a turned-up nose like a little shovel, which it uses to dig up toads.",
+        "rare": "Hisses and puffs itself up like a cobra, but it's only pretending.",
+        "epic": "Played dead so well in the middle of the path that a group of hikers held a little funeral for it.",
+        "legendary": "Faked its own death so convincingly that a crow gave up, a fox gave up and the hawk said a few kind words."
+      },
+      "moves": {
+        "signature": "Shovel Nose Bite",
+        "legend": "Playing-Dead Nap",
+        "ultimate": "Grand Performance"
+      }
+    },
+    "i_horned_viper": {
+      "status": "draft",
+      "names": {
+        "common": "Sandhorn",
+        "uncommon": "Sidewinder",
+        "rare": "Dunesinker",
+        "epic": "Dune Ambush",
+        "legendary": "Cerastes, Lurker of the Dunes"
+      },
+      "lore": {
+        "common": "Buries itself in the sand with only its eyes and little horns showing, like a sandy rabbit.",
+        "uncommon": "Slides sideways across the dunes and leaves funny J-shaped tracks.",
+        "rare": "Hid so well in the sand that a camel stepped right over it and never knew.",
+        "epic": "Moved through the whole desert sideways and left a trail of ripples so long it looked like writing.",
+        "legendary": "Has waited under the same sand dune for so long that the dune has moved round it twice."
+      },
+      "moves": {
+        "signature": "Sandy Bite",
+        "legend": "Sand Ambush Snatch",
+        "ultimate": "Dune Ambush"
+      }
+    },
+    "i_indian_cobra": {
+      "status": "draft",
+      "names": {
+        "common": "Hoodspread",
+        "uncommon": "Swaydancer",
+        "rare": "Spectaclehood",
+        "epic": "Hood Spread Shock",
+        "legendary": "Naja, Wearer of the Spectacles"
+      },
+      "lore": {
+        "common": "Spreads its hood at anything that comes near, including the garden hose.",
+        "uncommon": "Has a mark on the back of its hood that looks like a pair of glasses.",
+        "rare": "Sways so gracefully in front of the flute player that the audience doesn't notice it can't hear.",
+        "epic": "Spread its hood at a mongoose so dramatically that the mongoose went home to think about its life.",
+        "legendary": "Stood up so tall in the long grass that it looked over the fence, the hedge and into next door's kitchen."
+      },
+      "moves": {
+        "signature": "Hooded Bite",
+        "legend": "Swaying Strikes",
+        "ultimate": "Hood Spread Showdown"
+      }
     }
   }
 }
