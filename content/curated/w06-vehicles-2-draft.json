@@ -1332,6 +1332,658 @@
         "kit.turbo_boost": "Second Gear Push",
         "kit.hit_and_run": "Nip Nip Nip"
       }
+    },
+    "x_hearse": {
+      "status": "draft",
+      "names": {
+        "common": "Slowpolish",
+        "uncommon": "Longblack",
+        "rare": "Quietcruiser",
+        "epic": "Hushed Convoy",
+        "legendary": "Lady Velvet, the Gentle Driver"
+      },
+      "lore": {
+        "common": "Drives so slowly through town that the cyclists overtake it and then feel bad about it.",
+        "uncommon": "Is the longest, shiniest black car on the street, and keeps its curtains very neatly folded.",
+        "rare": "Glides round corners so smoothly that not a single flower in the back ever moves.",
+        "epic": "Led a long line of cars through the town so quietly that every shop stopped and waited politely.",
+        "legendary": "Has been polished every morning for fifty years and is still so shiny you can fix your tie in its door."
+      },
+      "moves": {
+        "signature": "Long Bonnet Bump",
+        "legend": "Polish Pride",
+        "ultimate": "Silent Glide",
+        "kit.horn_blast": "Soft Horn Note",
+        "kit.exhaust_fumes": "Quiet Exhaust",
+        "kit.turbo_boost": "Steady Pace",
+        "kit.hit_and_run": "Glide Glide Glide"
+      }
+    },
+    "x_hockey_puck": {
+      "status": "draft",
+      "names": {
+        "common": "Goalslider",
+        "uncommon": "Icezipper",
+        "rare": "Shinbasher",
+        "epic": "Ice Rink Slapshot",
+        "legendary": "Captain Puckett of the Frozen Rink"
+      },
+      "lore": {
+        "common": "Slides under the sofa every time it's dropped and is never seen again until spring cleaning.",
+        "uncommon": "Zips across the ice so fast that nobody can tell where it went.",
+        "rare": "Bounced off the goalpost, the goalie and the referee before going in.",
+        "epic": "Was hit so hard in the final that it flew over the glass and landed in a spectator's popcorn.",
+        "legendary": "Scored the winning goal in the last second of the championship and was framed in the trophy room."
+      },
+      "moves": {
+        "signature": "Slap Slap Slap",
+        "legend": "Fast Ice Boost",
+        "ultimate": "Slapshot Stun",
+        "kit.pothole": "Ice Chip Crack",
+        "kit.gridlock": "Goalpost Clang"
+      }
+    },
+    "x_hot_rod": {
+      "status": "draft",
+      "names": {
+        "common": "Flamepaint",
+        "uncommon": "Bigengine",
+        "rare": "Burnoutbuddy",
+        "epic": "Drag Strip Roar",
+        "legendary": "Rodney Rumbleblaster"
+      },
+      "lore": {
+        "common": "Revs its engine at every traffic light until the windows rattle.",
+        "uncommon": "Has flames painted down its sides and an engine sticking out of its bonnet.",
+        "rare": "Did a burnout in the car park and left two black stripes that are still there.",
+        "epic": "Roared down the drag strip so loudly that every car alarm in town went off.",
+        "legendary": "Was built from three old cars in a garage, and won every race at the summer car show."
+      },
+      "moves": {
+        "signature": "Bonnet Bump",
+        "legend": "Engine Roar Ram",
+        "ultimate": "Drag Strip Launch",
+        "kit.horn_blast": "Two-Tone Horn",
+        "kit.exhaust_fumes": "Oily Exhaust Cloud"
+      }
+    },
+    "x_hovercraft": {
+      "status": "draft",
+      "names": {
+        "common": "Airskirter",
+        "uncommon": "Beachglider",
+        "rare": "Spraymaker",
+        "epic": "Channel Crossing",
+        "legendary": "Commander Cushion of the Channel"
+      },
+      "lore": {
+        "common": "Sprays a fine mist over everyone waiting on the beach, every single time.",
+        "uncommon": "Floats on a puffy skirt of air, so it glides over sand, mud and water without caring which.",
+        "rare": "Glided across the mudflats where every boat was stuck, and waved at them.",
+        "epic": "Crossed the whole channel in one roaring trip, and the seagulls had to fly fast to keep up.",
+        "legendary": "Has floated on air across the same stretch of sea for forty years and never once got its feet wet."
+      },
+      "moves": {
+        "signature": "Air Skirt Bump",
+        "legend": "Air Suction Siphon",
+        "ultimate": "Cushion Glide",
+        "kit.horn_blast": "Hooter Startle",
+        "kit.turbo_boost": "Fan Spin Up",
+        "kit.hit_and_run": "Glide Glide Glide Glide"
+      }
+    },
+    "x_hybrid_car": {
+      "status": "draft",
+      "names": {
+        "common": "Switchsilent",
+        "uncommon": "Batteryhum",
+        "rare": "Fuelsaver",
+        "epic": "Stop-Start Commute",
+        "legendary": "Ecolina, Champion of Miles"
+      },
+      "lore": {
+        "common": "Turns its engine off at every red light, so you think it's broken down.",
+        "uncommon": "Hums along on its battery in town, then suddenly purrs into engine mode on the motorway.",
+        "rare": "Drove to the seaside and back without needing to stop for fuel.",
+        "epic": "Led a convoy of hybrids across the country, and the petrol stations wondered where everyone had gone.",
+        "legendary": "Drove a million miles on the same engine, and the garage framed its first oil change receipt."
+      },
+      "moves": {
+        "signature": "Quiet Bump",
+        "legend": "Warm Battery Glow",
+        "ultimate": "Mode Switch Surge",
+        "kit.horn_blast": "Gentle Beep",
+        "kit.exhaust_fumes": "Tiny Exhaust Puff",
+        "kit.hit_and_run": "Stop Start Stop"
+      }
+    },
+    "x_limousine": {
+      "status": "draft",
+      "names": {
+        "common": "Stretchylimo",
+        "uncommon": "Cornerstuck",
+        "rare": "Partywagon",
+        "epic": "Prom Night Parade",
+        "legendary": "Lady Lengthington of the Red Carpet"
+      },
+      "lore": {
+        "common": "Gets stuck on every tight corner because it's too long to turn.",
+        "uncommon": "Is so long that it takes ages for the back half to arrive after the front.",
+        "rare": "Fitted twelve party guests, a cake and a dog in its back seat.",
+        "epic": "Drove the whole school to the prom in one trip, and every window in town waved.",
+        "legendary": "Has driven a hundred brides to their weddings and never once been late."
+      },
+      "moves": {
+        "signature": "Long Bumper Bump",
+        "legend": "Back Seat Rest",
+        "ultimate": "Red Carpet Arrival",
+        "kit.exhaust_fumes": "Fancy Exhaust",
+        "kit.turbo_boost": "Chauffeur Speed",
+        "kit.hit_and_run": "Corner Corner Corner"
+      }
+    },
+    "x_manhole": {
+      "status": "draft",
+      "names": {
+        "common": "Holegaper",
+        "uncommon": "Workmanpopper",
+        "rare": "Tunneldoor",
+        "epic": "Underground Echo",
+        "legendary": "Old Echoer of the Sewer Lane"
+      },
+      "lore": {
+        "common": "Lies open on the pavement with a little fence round it, and everyone walks the long way.",
+        "uncommon": "Has a workman's head pop out of it at the most surprising moments.",
+        "rare": "Echoed every word shouted down it, so the children queued to try it.",
+        "epic": "Let out a cloud of steam on a frosty morning, and the whole street looked like a dragon was below.",
+        "legendary": "Has been the doorway to the city's tunnels for two hundred years and still has the same iron ladder."
+      },
+      "moves": {
+        "signature": "Echo Echo Echo",
+        "legend": "Sewer Whiff",
+        "ultimate": "Underground Steam Puff",
+        "kit.rush_hour": "Clang Clang Clang Clang",
+        "kit.road_works": "Safety Barrier",
+        "kit.gridlock": "Workman Pop-Up"
+      }
+    },
+    "x_minicar": {
+      "status": "draft",
+      "names": {
+        "common": "Tinyparker",
+        "uncommon": "Roundroof",
+        "rare": "Squeezefit",
+        "epic": "City Squeeze",
+        "legendary": "Minimo, Smallest on the Street"
+      },
+      "lore": {
+        "common": "Parks sideways in the gap between two bigger cars and looks smug about it.",
+        "uncommon": "Is so small and round that people think it's a toy that grew up.",
+        "rare": "Squeezed down an alley so narrow that the cat had to back out.",
+        "epic": "Drove through the whole city centre in rush hour by squeezing through every gap.",
+        "legendary": "Fit forty clowns inside, they say, and still had room for the umbrella."
+      },
+      "moves": {
+        "signature": "Tiny Bump",
+        "legend": "Headlight Blink",
+        "ultimate": "Narrow Gap Squeeze",
+        "kit.horn_blast": "Squeaky Beep",
+        "kit.turbo_boost": "Small but Speedy",
+        "kit.hit_and_run": "Squeeze Squeeze Squeeze"
+      }
+    },
+    "x_muscle_car": {
+      "status": "draft",
+      "names": {
+        "common": "Rumblegrunt",
+        "uncommon": "Hoodscoop",
+        "rare": "Tyrescreecher",
+        "epic": "Main Street Rumble",
+        "legendary": "Big Thunderhood of Route Sixty"
+      },
+      "lore": {
+        "common": "Rumbles so deeply at the traffic lights that the windows of the bakery shake.",
+        "uncommon": "Has a big scoop on its bonnet that gulps air like a thirsty horse.",
+        "rare": "Squealed its tyres pulling away and left everyone at the bus stop holding their ears.",
+        "epic": "Rumbled down the main street with fifty other muscle cars on parade night.",
+        "legendary": "Has rumbled through every town on the long road west, and every diner keeps a parking space for it."
+      },
+      "moves": {
+        "signature": "Bonnet Ram",
+        "legend": "Engine Muscle",
+        "ultimate": "Tyre Squeal Launch",
+        "kit.horn_blast": "Deep Horn Blast",
+        "kit.exhaust_fumes": "Rumbling Exhaust",
+        "kit.hit_and_run": "Rumble Rumble Rumble Rumble"
+      }
+    },
+    "x_parking_meter": {
+      "status": "draft",
+      "names": {
+        "common": "Coinswallower",
+        "uncommon": "Tickticker",
+        "rare": "Ticketspitter",
+        "epic": "Parking Panic",
+        "legendary": "Old Meterman, Keeper of the Kerb"
+      },
+      "lore": {
+        "common": "Swallows your coin and gives you nothing, then ticks smugly.",
+        "uncommon": "Its little dial ticks down so slowly when you're early and so fast when you're late.",
+        "rare": "Ran out of time exactly as the traffic warden walked past.",
+        "epic": "Ran out on every car on the street at the same moment, and the traffic wardens had their busiest day.",
+        "legendary": "Has stood on the same corner for sixty years, ticking away, and knows every car on the street by sound."
+      },
+      "moves": {
+        "signature": "Tick Tick Tick",
+        "legend": "Coin Slot Guard",
+        "ultimate": "Time's Up",
+        "kit.rush_hour": "Coin Coin Coin",
+        "kit.pothole": "Bent Post Crack",
+        "kit.gridlock": "Expired Flash"
+      }
+    },
+    "x_placard": {
+      "status": "draft",
+      "names": {
+        "common": "Cardboard Shouter",
+        "uncommon": "Stickwaver",
+        "rare": "Crowdtopper",
+        "epic": "Parade Banner Wave",
+        "legendary": "Old Signholder, Voice of the Crowd"
+      },
+      "lore": {
+        "common": "Blocks the view of everyone behind it at the football match.",
+        "uncommon": "Is just cardboard on a stick, but it thinks it's very important.",
+        "rare": "Held up a big message at the marathon finish line that made the runners smile.",
+        "epic": "Was waved by the whole crowd at the parade, and the street looked like a sea of cardboard.",
+        "legendary": "Was held up at every big match for thirty years, and the team captain finally signed it."
+      },
+      "moves": {
+        "signature": "Wave Wave Wave",
+        "legend": "Cardboard Guard",
+        "ultimate": "Big Message Reveal",
+        "kit.rush_hour": "Bob Bob Bob",
+        "kit.pothole": "Soggy Sign Sag",
+        "kit.road_works": "Stick Brace",
+        "kit.gridlock": "Big Letter Flash"
+      }
+    },
+    "x_rally_car": {
+      "status": "draft",
+      "names": {
+        "common": "Gravelspitter",
+        "uncommon": "Muddyroof",
+        "rare": "Jumpcrest",
+        "epic": "Forest Stage Dash",
+        "legendary": "Rallietta, Queen of the Gravel"
+      },
+      "lore": {
+        "common": "Spits gravel at the spectators every time it skids round a bend.",
+        "uncommon": "Comes back from every race with mud on its roof, somehow.",
+        "rare": "Jumped off the crest of a hill and flew so far that the photographers missed it.",
+        "epic": "Raced through the forest stage at night with its lights blazing, and every owl looked up.",
+        "legendary": "Has raced through deserts, forests and snow, and won the toughest rally in the world twice."
+      },
+      "moves": {
+        "signature": "Gravel Spray",
+        "legend": "Muddy Windscreen",
+        "ultimate": "Hairpin Slide",
+        "kit.horn_blast": "Co-Driver Shout",
+        "kit.exhaust_fumes": "Muddy Exhaust Smoke",
+        "kit.turbo_boost": "Anti-Lag Boost"
+      }
+    },
+    "x_rc_car": {
+      "status": "draft",
+      "names": {
+        "common": "Ankleracer",
+        "uncommon": "Remotezoom",
+        "rare": "Catchaser",
+        "epic": "Driveway Grand Prix",
+        "legendary": "Turbo Tiny, Remote Racing Champ"
+      },
+      "lore": {
+        "common": "Races round your ankles in the kitchen until someone trips over it.",
+        "uncommon": "Is steered from across the room with a little remote that's always running out of batteries.",
+        "rare": "Chased the cat round the garden, and the cat has been on the shed roof ever since.",
+        "epic": "Raced every remote car on the street round the cul-de-sac, and the neighbours put out deckchairs.",
+        "legendary": "Jumped a ramp in the park so high that it landed in a tree and drove back down."
+      },
+      "moves": {
+        "signature": "Ankle Bump",
+        "legend": "Ramp Jump Ram",
+        "ultimate": "Remote Control Chaos",
+        "kit.horn_blast": "Beep Beep Remote",
+        "kit.exhaust_fumes": "Hot Motor Smell",
+        "kit.turbo_boost": "Fresh Batteries",
+        "kit.hit_and_run": "Zoom Zoom Zoom Zoom Zoom"
+      }
+    },
+    "x_road_sign": {
+      "status": "draft",
+      "names": {
+        "common": "Arrowpointer",
+        "uncommon": "Wronglefter",
+        "rare": "Windshaker",
+        "epic": "Junction Jumble",
+        "legendary": "Old Signpost, Pointer of the Way"
+      },
+      "lore": {
+        "common": "Points you the wrong way because someone turned it round for a joke.",
+        "uncommon": "Rattles in the wind so loudly that it sounds like someone knocking.",
+        "rare": "Pointed every tourist to the same little café, which is now very popular.",
+        "epic": "Had every sign at the big junction turned round in one night, and the whole town got lost.",
+        "legendary": "Has pointed the way to the same village for a hundred years, and nobody has ever needed a map."
+      },
+      "moves": {
+        "signature": "Arrow Point Point",
+        "legend": "Rattle Rattle Rattle",
+        "ultimate": "Wrong Way Mix-Up",
+        "kit.pothole": "Leaning Post Crack",
+        "kit.road_works": "Concrete Base",
+        "kit.gridlock": "Wrong Turn Daze"
+      }
+    },
+    "x_roadster": {
+      "status": "draft",
+      "names": {
+        "common": "Wingmirror",
+        "uncommon": "Twoseat",
+        "rare": "Backroadbender",
+        "epic": "Country Lane Dash",
+        "legendary": "Lady Swiftlane of the Hills"
+      },
+      "lore": {
+        "common": "Has only two seats, so somebody always has to stay home.",
+        "uncommon": "Is so low and sleek that it looks like it's crouching to pounce.",
+        "rare": "Took every bend on the country road so smoothly that the passenger's hat stayed on.",
+        "epic": "Raced up the hill road with a dozen other roadsters, and the sheep came to the fence to watch.",
+        "legendary": "Has driven every winding road in the mountains and still has the same picnic hamper in its boot."
+      },
+      "moves": {
+        "signature": "Bonnet Nudge",
+        "legend": "Hot Engine Purr",
+        "ultimate": "Winding Road Dash",
+        "kit.horn_blast": "Sporty Toot",
+        "kit.exhaust_fumes": "Petrol Puff",
+        "kit.turbo_boost": "Open Top Rush",
+        "kit.hit_and_run": "Bend Bend Bend"
+      }
+    },
+    "x_scoreboard_sign": {
+      "status": "draft",
+      "names": {
+        "common": "Scoreblinker",
+        "uncommon": "Bulbflasher",
+        "rare": "Lastsecond",
+        "epic": "Final Whistle Flash",
+        "legendary": "Grand Tallyboard of the Stadium"
+      },
+      "lore": {
+        "common": "Shows the wrong score for exactly one minute, so everyone cheers too early.",
+        "uncommon": "Has a few bulbs that never work, so the numbers look like they've lost a tooth.",
+        "rare": "Flashed GOAL so brightly that the players on the pitch had to shade their eyes.",
+        "epic": "Lit up every bulb at once for the cup final, and the stadium glowed for miles.",
+        "legendary": "Has shown every winning score at the old stadium for fifty years and never once lost count."
+      },
+      "moves": {
+        "signature": "Flash Flash Flash",
+        "legend": "Goal Flash Daze",
+        "ultimate": "Final Score Reveal",
+        "kit.rush_hour": "Blink Blink Blink",
+        "kit.pothole": "Broken Bulb Crack",
+        "kit.gridlock": "Bright Bulb Daze"
+      }
+    },
+    "x_sign_board": {
+      "status": "draft",
+      "names": {
+        "common": "Swingsign",
+        "uncommon": "Creakhanger",
+        "rare": "Chalkmenu",
+        "epic": "High Street Sign Storm",
+        "legendary": "Old Swinger of the Corner Shop"
+      },
+      "lore": {
+        "common": "Creaks back and forth in the wind all night outside the bedroom window.",
+        "uncommon": "Has the menu written in chalk, which gets washed off every time it rains.",
+        "rare": "Was spun round by the wind so fast that it read backwards for a whole morning.",
+        "epic": "Swung so wildly in a storm that every shop sign on the street joined in.",
+        "legendary": "Has hung outside the same corner shop for a hundred years and still has the same painted cat."
+      },
+      "moves": {
+        "signature": "Swing Swing Swing",
+        "legend": "Creaky Hinge Crack",
+        "ultimate": "Storm Swing",
+        "kit.pothole": "Loose Bracket",
+        "kit.road_works": "Double Chain Guard",
+        "kit.gridlock": "Bold Letters Daze"
+      }
+    },
+    "x_smart_car": {
+      "status": "draft",
+      "names": {
+        "common": "Nosein Parker",
+        "uncommon": "Twoseater Tiny",
+        "rare": "Kerbhopper",
+        "epic": "City Parking Coup",
+        "legendary": "Little Kerbella, the Clever Parker"
+      },
+      "lore": {
+        "common": "Parks with its nose against the kerb because it's shorter than most cars are wide.",
+        "uncommon": "Has just two seats and almost no boot, so shopping rides on the passenger.",
+        "rare": "Hopped into a parking space that three other cars had driven past.",
+        "epic": "Parked in every tiny gap on the busiest street, and the bigger cars went round and round.",
+        "legendary": "Fitted into a parking space so small that the traffic warden took a photo for the town newsletter."
+      },
+      "moves": {
+        "signature": "Tiny Nose Bump",
+        "legend": "Kerb Hop Ram",
+        "ultimate": "Tight Space Squeeze",
+        "kit.horn_blast": "Tiny Toot",
+        "kit.exhaust_fumes": "Little Exhaust Puff",
+        "kit.turbo_boost": "City Zip",
+        "kit.hit_and_run": "Park Park Park"
+      }
+    },
+    "x_spinning_top": {
+      "status": "draft",
+      "names": {
+        "common": "Wobbletop",
+        "uncommon": "Tablespinner",
+        "rare": "Dizzymaker",
+        "epic": "Kitchen Table Whirl",
+        "legendary": "Twirla, Spinner Without End"
+      },
+      "lore": {
+        "common": "Wobbles off the edge of the table just as it was getting going.",
+        "uncommon": "Spins so fast that its colours blur into a rainbow.",
+        "rare": "Spun for so long that the cat watched it until it fell asleep.",
+        "epic": "Spun across the whole kitchen floor and knocked over every skittle on the way.",
+        "legendary": "Spun for an entire day without stopping, and the family took turns to watch it."
+      },
+      "moves": {
+        "signature": "Spin Bump Crack",
+        "legend": "Wobble Crack",
+        "ultimate": "Dizzy Whirl",
+        "kit.rush_hour": "Spin Spin Spin Spin",
+        "kit.pothole": "Table Scratch"
+      }
+    },
+    "x_station_wagon_car": {
+      "status": "draft",
+      "names": {
+        "common": "Roofrackhauler",
+        "uncommon": "Dogbootcar",
+        "rare": "Campingwagon",
+        "epic": "Holiday Packing",
+        "legendary": "Grandma Wagonella of the Long Trip"
+      },
+      "lore": {
+        "common": "Has a roof rack piled so high that it can't fit under the car park barrier.",
+        "uncommon": "Has a whole dog-sized space in the boot, and the dog thinks it's a palace.",
+        "rare": "Carried a whole family, a tent, two bikes and a canoe to the lake in one trip.",
+        "epic": "Drove the whole family to the seaside every summer, and the back seat never stopped arguing.",
+        "legendary": "Has done the same summer holiday drive for thirty years and still has sand in its carpets from the first one."
+      },
+      "moves": {
+        "signature": "Tailgate Bump",
+        "legend": "Wet Dog Whiff",
+        "ultimate": "Roof Rack Spill",
+        "kit.horn_blast": "Are We There Honk",
+        "kit.turbo_boost": "Downhill Coast",
+        "kit.hit_and_run": "Pack Pack Pack"
+      }
+    },
+    "x_stock_car": {
+      "status": "draft",
+      "names": {
+        "common": "Bumpbasher",
+        "uncommon": "Ovallooper",
+        "rare": "Dentcollector",
+        "epic": "Oval Track Crunch",
+        "legendary": "Crash Carlotta, Hundred-Race Survivor"
+      },
+      "lore": {
+        "common": "Bumps every car on the track and says it was just being friendly.",
+        "uncommon": "Goes round the oval track so many times that it gets dizzy.",
+        "rare": "Pushed three cars out of the way on the last bend and still finished.",
+        "epic": "Crashed through the whole field on the oval and came out the other side still driving.",
+        "legendary": "Has more dents than paint, survived a hundred races and still crosses the finish line every time."
+      },
+      "moves": {
+        "signature": "Side Bump",
+        "legend": "Last Lap Push",
+        "ultimate": "Oval Pile-Up",
+        "kit.exhaust_fumes": "Track Smoke",
+        "kit.hit_and_run": "Bump Bump Bump Bump Bump"
+      }
+    },
+    "x_stop_sign": {
+      "status": "draft",
+      "names": {
+        "common": "Redoctagon",
+        "uncommon": "Haltholder",
+        "rare": "Brakemaker",
+        "epic": "Crossroads Halt",
+        "legendary": "Old Haltwell of the Crossroads"
+      },
+      "lore": {
+        "common": "Makes you stop at the empty crossroads in the middle of nowhere.",
+        "uncommon": "Is shaped like a red octagon, and it's quite proud of having eight sides.",
+        "rare": "Got covered in snow and only the S was showing, and everyone stopped anyway.",
+        "epic": "Stopped every car at the crossroads on the busiest day, and the traffic flowed perfectly.",
+        "legendary": "Has stood at the same crossroads for eighty years and has made a million cars stop exactly in time."
+      },
+      "moves": {
+        "signature": "Stop Stop Stop",
+        "legend": "Red Sign Guard",
+        "ultimate": "Sudden Halt",
+        "kit.rush_hour": "Wait Wait Wait",
+        "kit.pothole": "Bent Post Crack",
+        "kit.road_works": "Sturdy Post",
+        "kit.gridlock": "Bright Red Flash"
+      }
+    },
+    "x_street_lamp": {
+      "status": "draft",
+      "names": {
+        "common": "Mothmagnet",
+        "uncommon": "Flickerpost",
+        "rare": "Nightglow Lamp",
+        "epic": "Evening Lights On",
+        "legendary": "Old Lamplight of Gaslight Lane"
+      },
+      "lore": {
+        "common": "Flickers on and off all night right outside your bedroom window.",
+        "uncommon": "Is surrounded by every moth in the neighbourhood the moment it switches on.",
+        "rare": "Switched on so brightly that the hedgehog thought it was morning.",
+        "epic": "Lit up every street in town at exactly the same second, and everyone said ooh.",
+        "legendary": "Has lit the same lane for a hundred years and has seen every child in the village walk home safely."
+      },
+      "moves": {
+        "signature": "Flicker Flicker Flicker",
+        "legend": "Lamp Post Clonk",
+        "ultimate": "Bright Night Glare",
+        "kit.rush_hour": "Moth Moth Moth",
+        "kit.road_works": "Iron Post Guard",
+        "kit.gridlock": "Night Glare"
+      }
+    },
+    "x_toy_car": {
+      "status": "draft",
+      "names": {
+        "common": "Slipperstepper",
+        "uncommon": "Racetrackroller",
+        "rare": "Pocketracer",
+        "epic": "Carpet Racetrack",
+        "legendary": "Speedy Steel, Fastest in the Pocket"
+      },
+      "lore": {
+        "common": "Lies on the stairs exactly where you'll step on it in your socks.",
+        "uncommon": "Fits in your pocket so it comes everywhere, including the washing machine.",
+        "rare": "Rolled down the kitchen table, along the floor and under the fridge in one push.",
+        "epic": "Raced round a racetrack made of books with every other toy car in the house.",
+        "legendary": "Has been raced by three generations of children and still has the same scratched red paint."
+      },
+      "moves": {
+        "signature": "Die-Cast Bump",
+        "legend": "Under the Fridge Crack",
+        "ultimate": "Big Push Race",
+        "kit.horn_blast": "Vroom Vroom",
+        "kit.exhaust_fumes": "Pretend Exhaust",
+        "kit.hit_and_run": "Roll Roll Roll Roll Roll"
+      }
+    },
+    "x_vintage_car": {
+      "status": "draft",
+      "names": {
+        "common": "Crankhandle",
+        "uncommon": "Runningboard",
+        "rare": "Honkbulb",
+        "epic": "Vintage Run",
+        "legendary": "Grand Tourer of the Bygone Road"
+      },
+      "lore": {
+        "common": "Leaks a little puddle of oil wherever it parks, so everyone knows exactly where it has been.",
+        "uncommon": "Has wide running boards along the side that people stand on to wave.",
+        "rare": "Honked its rubber bulb horn so loudly that the horses in the field stampeded.",
+        "epic": "Drove from the city to the seaside in a long line of vintage cars, and every village came out to wave.",
+        "legendary": "Has finished the vintage car run from the city to the sea every year for seventy years."
+      },
+      "moves": {
+        "signature": "Running Board Swipe",
+        "legend": "Bulb Horn Honk",
+        "ultimate": "Bygone Road Rally",
+        "kit.horn_blast": "Parp Parp",
+        "kit.exhaust_fumes": "Old Engine Smoke",
+        "kit.turbo_boost": "Advance the Spark",
+        "kit.hit_and_run": "Putt Putt Bump"
+      }
+    },
+    "x_yo_yo": {
+      "status": "draft",
+      "names": {
+        "common": "Stringtangler",
+        "uncommon": "Sleeper Spin",
+        "rare": "Walkthedog",
+        "epic": "Playground Trick Show",
+        "legendary": "Yoyella, Queen of the String"
+      },
+      "lore": {
+        "common": "Tangles its string every time you put it in your pocket.",
+        "uncommon": "Spins at the bottom of its string, sleeping, until you flick it back up.",
+        "rare": "Walked along the floor like a dog on a lead, and the real dog was jealous.",
+        "epic": "Did so many tricks in the playground that the whole school forgot about lunch.",
+        "legendary": "Was spun round the world on a single string, and came back up into its owner's hand."
+      },
+      "moves": {
+        "signature": "String Snap Crack",
+        "legend": "Sleeper Guard",
+        "ultimate": "Round the World Spin",
+        "kit.pothole": "Tangled String",
+        "kit.road_works": "Tight String"
+      }
     }
   }
 }

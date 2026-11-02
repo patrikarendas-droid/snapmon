@@ -35,7 +35,8 @@
 | w03-birds-and-sea-life | 120 | 120 | done: 120 high / 168 medium / 27 low + 12 patterns | 288 fields (`patches/w03-editor-auto.json`, incl. names re-paired to lore; 4 suggestions overridden for payment/brand frames) | open: crowd-scene Epics, homecoming Legendaries (pattern level) |
 | w04-bugs-and-reptiles | 118 | 118 | running | self-fixes (`patches/w04-self-fixes.json`) | |
 | w05-vehicles-1 | 79 | 79 | running | self-fixes | |
-| w06–w22 | 1,718 | 0 | — | — | not started |
+| w06-vehicles-2 | 79 | 79 | pending | self-fixes | |
+| w07–w22 | 1,639 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
