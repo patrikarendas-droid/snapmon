@@ -830,6 +830,831 @@
         "kit.zoom_in": "Zoom In Boost",
         "kit.snapshot_burst": "Camera Camera Camera"
       }
+    },
+    "i_ipod": {
+      "status": "draft",
+      "names": {
+        "common": "Wheelspinner",
+        "uncommon": "Earbudknot",
+        "rare": "Shufflesurprise",
+        "epic": "School Bus Shuffle",
+        "legendary": "Old Clickwheel of the Desk Drawer"
+      },
+      "lore": {
+        "common": "Spins its click wheel so fast that you whizz straight past the song you wanted.",
+        "uncommon": "Comes out of every pocket with its earbuds tied in a knot.",
+        "rare": "Shuffled to the perfect song at the perfect moment, and its owner danced in the street.",
+        "epic": "Played on every head on the school bus, and the whole bus nodded in time.",
+        "legendary": "Held ten thousand songs in a box smaller than a sandwich, and still plays every one."
+      },
+      "moves": {
+        "signature": "Shuffle Shuffle Shuffle",
+        "legend": "Click Wheel Bash",
+        "ultimate": "Pocket Concert",
+        "kit.bass_drop": "Bass Boost Thump",
+        "kit.feedback_loop": "Repeat Muddle",
+        "kit.remix": "Playlist Boost"
+      }
+    },
+    "x_ipod_nano": {
+      "status": "draft",
+      "names": {
+        "common": "Clipontiny",
+        "uncommon": "Lostinlint",
+        "rare": "Joggerbeat",
+        "epic": "Park Run Playlist",
+        "legendary": "Little Nanobeat of the Running Track"
+      },
+      "lore": {
+        "common": "Clips onto your sleeve and gets lost in the washing machine.",
+        "uncommon": "Is so tiny that it hides in the lint at the bottom of your pocket.",
+        "rare": "Kept a jogger running for an extra mile with exactly the right song.",
+        "epic": "Played the playlist for every runner at the park run, and everyone finished at the same pace.",
+        "legendary": "Ran a whole marathon clipped to the same runner's sleeve and never skipped a beat."
+      },
+      "moves": {
+        "signature": "Beat Beat Beat",
+        "legend": "Tempo Boost",
+        "ultimate": "Final Track",
+        "kit.bass_drop": "Running Beat Thump",
+        "kit.feedback_loop": "Skip Muddle",
+        "kit.skip_track": "Skip Skip Skip"
+      }
+    },
+    "x_mp3_player": {
+      "status": "draft",
+      "names": {
+        "common": "Batterysip",
+        "uncommon": "Headphoneworm",
+        "rare": "Songhoarder",
+        "epic": "Road Trip Mixtape",
+        "legendary": "Old Megabeat of the Glovebox"
+      },
+      "lore": {
+        "common": "Sips its battery so slowly that nobody remembers to charge it.",
+        "uncommon": "Puts one song on repeat until you hear it in your dreams.",
+        "rare": "Holds every song its owner ever loved on one tiny chip.",
+        "epic": "Played the whole road trip mixtape, and the family sang along for eight hours.",
+        "legendary": "Has played the same family's road trip songs for fifteen summers."
+      },
+      "moves": {
+        "signature": "Play Play Play",
+        "legend": "Volume Knob Bash",
+        "ultimate": "Mixtape Marathon",
+        "kit.bass_drop": "Bass Thump Thump",
+        "kit.feedback_loop": "Repeat Track Muddle",
+        "kit.remix": "Shuffle Boost"
+      }
+    },
+    "x_overhead_projector": {
+      "status": "draft",
+      "names": {
+        "common": "Classroomwhirr",
+        "uncommon": "Upsidedowntext",
+        "rare": "Shadowhand",
+        "epic": "Classroom Shadow Show",
+        "legendary": "Old Transparency of the Classroom"
+      },
+      "lore": {
+        "common": "Whirrs its fan so loudly that the teacher has to shout.",
+        "uncommon": "Shows every sheet upside down the first time.",
+        "rare": "Made a giant shadow of the teacher's hand on the wall, and the class made it into a rabbit.",
+        "epic": "Projected a shadow puppet show across the whole school hall.",
+        "legendary": "Has taught every child in the school for forty years without ever needing a new bulb."
+      },
+      "moves": {
+        "signature": "Bright Lamp Flash",
+        "legend": "Shadow Startle",
+        "ultimate": "Big Shadow Show",
+        "kit.feedback_loop": "Wrong Sheet Muddle",
+        "kit.remix": "Focus Boost",
+        "kit.skip_track": "Sheet Sheet Sheet"
+      }
+    },
+    "projector": {
+      "status": "draft",
+      "names": {
+        "common": "Focusfiddler",
+        "uncommon": "Dustbeam",
+        "rare": "Wallmovie",
+        "epic": "Garden Cinema Night",
+        "legendary": "Grand Projectoria of the Back Garden"
+      },
+      "lore": {
+        "common": "Is always slightly out of focus no matter how much you twist the knob.",
+        "uncommon": "Shows every speck of dust floating in its beam.",
+        "rare": "Turned a plain bedroom wall into a giant cinema screen.",
+        "epic": "Showed a film on the side of a house for the whole street, and everyone brought deckchairs.",
+        "legendary": "Has shown a thousand film nights and still has its first bulb."
+      },
+      "moves": {
+        "signature": "Beam Flash",
+        "legend": "Light Beam Snatch",
+        "ultimate": "Giant Picture Glare",
+        "kit.channel_surf": "Slide Slide Slide",
+        "kit.screen_burn": "Hot Lens",
+        "kit.static_shock": "Beam Flash Startle"
+      }
+    },
+    "x_projector_lamp": {
+      "status": "draft",
+      "names": {
+        "common": "Hotglow",
+        "uncommon": "Bulbpopper",
+        "rare": "Brightbeam",
+        "epic": "Lecture Hall Glow",
+        "legendary": "Old Lampwell of the Projector"
+      },
+      "lore": {
+        "common": "Gets so hot that nobody dares touch it for an hour after.",
+        "uncommon": "Pops just before the big presentation, every time.",
+        "rare": "Shone so brightly that the film looked better than real life.",
+        "epic": "Lit up every lecture hall at the university on the first day of term.",
+        "legendary": "Shone the first ever film at the village hall, and the whole village still remembers the night it did."
+      },
+      "moves": {
+        "signature": "Lamp Flash",
+        "legend": "Bulb Guard",
+        "ultimate": "Bulb Burst",
+        "kit.bass_drop": "Click Startle",
+        "kit.feedback_loop": "Flicker Muddle",
+        "kit.remix": "Brightness Boost"
+      }
+    },
+    "x_slide_projector": {
+      "status": "draft",
+      "names": {
+        "common": "Clickclack Slides",
+        "uncommon": "Upsideslide",
+        "rare": "Carouselspinner",
+        "epic": "Holiday Slideshow",
+        "legendary": "Old Carousel of the Living Room"
+      },
+      "lore": {
+        "common": "Clacks so loudly between every slide that everyone jumps.",
+        "uncommon": "Always shows one slide upside down, and grandad pretends it's on purpose.",
+        "rare": "Spun its carousel round a hundred holiday photos in one go.",
+        "epic": "Showed every holiday slide the family ever took in one very long evening.",
+        "legendary": "Has shown the same family's holiday photos for fifty years."
+      },
+      "moves": {
+        "signature": "Slide Flash",
+        "legend": "Dusty Slide Stink",
+        "ultimate": "Slideshow Marathon",
+        "kit.bass_drop": "Clack Startle",
+        "kit.feedback_loop": "Jammed Slide Muddle",
+        "kit.skip_track": "Slide Slide Slide Slide"
+      }
+    },
+    "x_clock_radio": {
+      "status": "draft",
+      "names": {
+        "common": "Snoozepress",
+        "uncommon": "Wrongstation",
+        "rare": "Alarmblaster",
+        "epic": "Monday Morning Blare",
+        "legendary": "Old Wakewell of the Bedside"
+      },
+      "lore": {
+        "common": "Has a snooze button that gets pressed ten times every morning.",
+        "uncommon": "Wakes you up with the wrong radio station every day.",
+        "rare": "Blared so loudly that it woke up the whole house and the neighbours.",
+        "epic": "Went off in every bedroom of the house at once on Monday morning.",
+        "legendary": "Has woken the same family every school morning for twenty years."
+      },
+      "moves": {
+        "signature": "Alarm Flash",
+        "legend": "Snooze Snooze Snooze",
+        "ultimate": "Wake Up Blast",
+        "kit.bass_drop": "Alarm Thump",
+        "kit.remix": "Station Boost",
+        "kit.skip_track": "Snooze Press Press"
+      }
+    },
+    "x_portable_radio": {
+      "status": "draft",
+      "names": {
+        "common": "Aerialpoke",
+        "uncommon": "Beachblaster",
+        "rare": "Weatherwatcher",
+        "epic": "Beach Day Tunes",
+        "legendary": "Old Transistor of the Picnic Basket"
+      },
+      "lore": {
+        "common": "Pokes its aerial into everyone's eye at the picnic.",
+        "uncommon": "Plays music on the beach so loudly that seagulls fly over to listen.",
+        "rare": "Gave the weather warning just before the storm, and everyone got home dry.",
+        "epic": "Played the big match for everyone on the beach, and they all cheered at once.",
+        "legendary": "Has played the same family's summer songs on the beach for forty years."
+      },
+      "moves": {
+        "signature": "Tune Tune Tune",
+        "legend": "Aerial Poke",
+        "ultimate": "Static Squall",
+        "kit.feedback_loop": "Static Muddle",
+        "kit.remix": "Volume Boost",
+        "kit.skip_track": "Station Station Station"
+      }
+    },
+    "radio": {
+      "status": "draft",
+      "names": {
+        "common": "Crackletuner",
+        "uncommon": "Talkytalk",
+        "rare": "Songfinder",
+        "epic": "Kitchen Radio Singalong",
+        "legendary": "Old Wireless of the Kitchen Shelf"
+      },
+      "lore": {
+        "common": "Crackles between stations so loudly that the dog howls.",
+        "uncommon": "Talks all day long in the kitchen, even when nobody is listening.",
+        "rare": "Found the perfect song to cheer up a rainy afternoon.",
+        "epic": "Played a song that the whole street sang along to through open windows.",
+        "legendary": "Has sat on the same kitchen shelf for sixty years and still finds every station."
+      },
+      "moves": {
+        "signature": "Static Flash",
+        "legend": "Warm Valve Hum",
+        "ultimate": "Big Song Singalong",
+        "kit.channel_surf": "Station Station Static",
+        "kit.screen_burn": "Hot Valve",
+        "kit.ad_break": "Weather Break Rest"
+      }
+    },
+    "i_cassette": {
+      "status": "draft",
+      "names": {
+        "common": "Tapechewer",
+        "uncommon": "Pencilwinder",
+        "rare": "Mixtapemaker",
+        "epic": "Car Stereo Singalong",
+        "legendary": "Old Reelworth of the Glovebox"
+      },
+      "lore": {
+        "common": "Gets chewed by the tape player and spills ribbon everywhere.",
+        "uncommon": "Has to be wound back with a pencil when the tape comes loose.",
+        "rare": "Held a mixtape so perfect that it was played until the songs went wobbly.",
+        "epic": "Played in every car on the school trip at once, and the coach sounded like a party.",
+        "legendary": "Has played the same mixtape in the same car for thirty years."
+      },
+      "moves": {
+        "signature": "Play Button Flash",
+        "legend": "Pencil Wind Rest",
+        "ultimate": "Tape Tangle",
+        "kit.channel_surf": "Tape Hiss Hiss Hiss",
+        "kit.screen_burn": "Hot Tape Deck",
+        "kit.ad_break": "Flip Side Rest"
+      }
+    },
+    "x_guitar_amp": {
+      "status": "draft",
+      "names": {
+        "common": "Humbuzz",
+        "uncommon": "Volumeeleven",
+        "rare": "Feedbackscreech",
+        "epic": "Garage Band Blast",
+        "legendary": "Old Ampworth of the Garage"
+      },
+      "lore": {
+        "common": "Hums and buzzes even when nobody is playing.",
+        "uncommon": "Has a little red light that glows when it's warm and ready to roar.",
+        "rare": "Screeched with feedback so loudly that the cat left the house.",
+        "epic": "Blasted the garage band so loudly that the whole street stopped to listen.",
+        "legendary": "Has been played at every school concert for twenty years and still crunches perfectly."
+      },
+      "moves": {
+        "signature": "Power Chord Flash",
+        "legend": "Feedback Screech",
+        "ultimate": "Amp Stack Blast",
+        "kit.bass_drop": "Bass Thump Thump Thump",
+        "kit.feedback_loop": "Feedback Muddle",
+        "kit.remix": "Distortion Boost",
+        "kit.skip_track": "Riff Riff Riff"
+      }
+    },
+    "x_karaoke_machine": {
+      "status": "draft",
+      "names": {
+        "common": "Offkey",
+        "uncommon": "Micscreech",
+        "rare": "Lyricscroller",
+        "epic": "Party Singalong",
+        "legendary": "Lady Karaokina of the Living Room"
+      },
+      "lore": {
+        "common": "Makes everyone sing off-key, even the good singers.",
+        "uncommon": "Gives a round of fake applause after every song, even the terrible ones.",
+        "rare": "Showed the lyrics so fast that everybody sang a different word at the same time.",
+        "epic": "Got every guest at the party singing at once, and the neighbours joined in.",
+        "legendary": "Has hosted a hundred birthday parties and still has the same favourite song."
+      },
+      "moves": {
+        "signature": "Mic Flash",
+        "legend": "Spotlight Boost",
+        "ultimate": "Off-Key Encore",
+        "kit.bass_drop": "Backing Track Thump",
+        "kit.feedback_loop": "Mic Screech Muddle",
+        "kit.remix": "Key Change Boost",
+        "kit.skip_track": "Song Song Song"
+      }
+    },
+    "x_soundbar": {
+      "status": "draft",
+      "names": {
+        "common": "Bassrumble",
+        "uncommon": "Remotelost Bar",
+        "rare": "Dialoguemumble",
+        "epic": "Movie Night Rumble",
+        "legendary": "Grand Soundbarra of the TV Stand"
+      },
+      "lore": {
+        "common": "Rumbles the bass so hard that the popcorn bounces in the bowl.",
+        "uncommon": "Is controlled by a remote that nobody can ever find.",
+        "rare": "Makes every actor mumble, and then shouts every explosion.",
+        "epic": "Rumbled the whole house during the action film, and the pictures fell off the wall.",
+        "legendary": "Has played every film night for ten years and still shakes the sofa."
+      },
+      "moves": {
+        "signature": "Bass Flash",
+        "legend": "Hot Speaker Grill",
+        "ultimate": "Explosion Rumble",
+        "kit.bass_drop": "Sub Thump",
+        "kit.feedback_loop": "Mumble Muddle",
+        "kit.remix": "Surround Boost"
+      }
+    },
+    "speaker": {
+      "status": "draft",
+      "names": {
+        "common": "Boomrattle",
+        "uncommon": "Bluetoothbeep",
+        "rare": "Bassbouncer",
+        "epic": "Garden Party Boom",
+        "legendary": "Old Boomworth of the Bookshelf"
+      },
+      "lore": {
+        "common": "Rattles the shelf with every bass note.",
+        "uncommon": "Beeps loudly every time it connects, usually at midnight.",
+        "rare": "Bounced across the table with every beat.",
+        "epic": "Was turned up for the street party and made every car alarm on the road join in with the chorus.",
+        "legendary": "Was left playing in a lost suitcase and led the airport staff straight to it by the sound of the drums."
+      },
+      "moves": {
+        "signature": "Boom Flash",
+        "legend": "Bass Shake Crack",
+        "ultimate": "Volume Max Blast",
+        "kit.screen_burn": "Hot Cone",
+        "kit.static_shock": "Connect Beep Flash"
+      }
+    },
+    "x_megaphone": {
+      "status": "draft",
+      "names": {
+        "common": "Earblaster",
+        "uncommon": "Squawkhorn",
+        "rare": "Crowdcaller",
+        "epic": "Sports Day Shout",
+        "legendary": "Coach Shoutwell of the Playing Field"
+      },
+      "lore": {
+        "common": "Blasts in the ear of whoever is standing in front of it.",
+        "uncommon": "Squawks and whistles every time it's switched on.",
+        "rare": "Called the whole crowd to the finish line from across the field.",
+        "epic": "Called every race at sports day, and every child heard their name.",
+        "legendary": "Has called the start of every race at the same school for thirty years."
+      },
+      "moves": {
+        "signature": "Shout Shout Shout",
+        "legend": "Announce Announce Announce",
+        "ultimate": "Squawk Blast",
+        "kit.siren_wail": "Siren Squawk",
+        "kit.alert_mode": "Megaphone Boost",
+        "kit.shrill_barrage": "Squeal Squeal Squeal"
+      }
+    },
+    "x_megaphone_horn": {
+      "status": "draft",
+      "names": {
+        "common": "Hornblaster",
+        "uncommon": "Batterychirp",
+        "rare": "Stadiumcall",
+        "epic": "Stadium Announcement",
+        "legendary": "Old Hornsworth of the Pier"
+      },
+      "lore": {
+        "common": "Blasts its horn so loudly that the seagulls scatter.",
+        "uncommon": "Gives a little squeal of feedback every time it's lifted to someone's mouth.",
+        "rare": "Called the lost dog's name across the beach, and the dog came running.",
+        "epic": "Announced the start of the regatta to every boat in the harbour.",
+        "legendary": "Has announced every ferry departure from the same pier for forty years."
+      },
+      "moves": {
+        "signature": "Horn Flash",
+        "legend": "Hot Horn Blast",
+        "ultimate": "Big Announcement",
+        "kit.siren_wail": "Horn Wail",
+        "kit.low_battery_chirp": "Battery Chirp Crack",
+        "kit.alert_mode": "Volume Boost",
+        "kit.shrill_barrage": "Honk Honk Honk"
+      }
+    },
+    "x_arcade_machine": {
+      "status": "draft",
+      "names": {
+        "common": "Joystickjam",
+        "uncommon": "Highscorehog",
+        "rare": "Ticketfountain",
+        "epic": "Seaside Arcade Frenzy",
+        "legendary": "Grand Pixelina of the Pier Arcade"
+      },
+      "lore": {
+        "common": "Has a joystick that sticks to the left at the worst moment.",
+        "uncommon": "Has had the same name at the top of its high score list for ten years.",
+        "rare": "Spat out a whole roll of prize tickets when someone finally beat the record.",
+        "epic": "Kept every arcade machine on the pier beeping at once on the busiest summer day.",
+        "legendary": "Has been played by three generations of the same family, and grandma still holds the high score."
+      },
+      "moves": {
+        "signature": "Pixel Flash Flash",
+        "legend": "High Score Boost",
+        "ultimate": "Game Over Blast",
+        "kit.insert_coin": "Token Boost",
+        "kit.game_over": "Game Over Flash",
+        "kit.tilt": "Tilt Crack"
+      }
+    },
+    "x_atm_machine": {
+      "status": "draft",
+      "names": {
+        "common": "Pinforget",
+        "uncommon": "Receiptroller",
+        "rare": "Queuemaker",
+        "epic": "Saturday Queue",
+        "legendary": "Old Withdrawsworth of Station Square"
+      },
+      "lore": {
+        "common": "Makes everyone forget their PIN the moment they reach the front.",
+        "uncommon": "Rolls out a paper receipt so long that it trails along the pavement.",
+        "rare": "Made the whole queue wait while one person checked their balance five times.",
+        "epic": "Had a queue round the block on the morning of the summer fair.",
+        "legendary": "Has stood in the same station square for thirty years and only broken down once."
+      },
+      "moves": {
+        "signature": "Keypad Flash",
+        "legend": "Hot Screen Burn",
+        "ultimate": "Out of Service",
+        "kit.insert_coin": "Card In Boost",
+        "kit.game_over": "Declined Flash",
+        "kit.tilt": "Wrong PIN Crack"
+      }
+    },
+    "x_jukebox": {
+      "status": "draft",
+      "names": {
+        "common": "Coinswallow Juke",
+        "uncommon": "Songrepeater",
+        "rare": "Neonglow",
+        "epic": "Diner Dance Night",
+        "legendary": "Grand Jukeline of the Diner"
+      },
+      "lore": {
+        "common": "Plays the same song over and over because someone keeps choosing it.",
+        "uncommon": "Glows in neon colours in the corner of the diner.",
+        "rare": "Played a song so perfect that the whole diner stopped eating to listen.",
+        "epic": "Got everyone in the diner dancing on the tables.",
+        "legendary": "Has played in the same diner for sixty years and still has every record."
+      },
+      "moves": {
+        "signature": "Neon Flash",
+        "legend": "Record Swap Crack",
+        "ultimate": "Last Song",
+        "kit.jackpot": "Song Song Song Song",
+        "kit.tilt": "Needle Skip Crack"
+      }
+    },
+    "x_photo_booth": {
+      "status": "draft",
+      "names": {
+        "common": "Curtainpeeker",
+        "uncommon": "Fourflash",
+        "rare": "Gurnergrab",
+        "epic": "Wedding Booth Queue",
+        "legendary": "Lady Snapstrip of the Shopping Centre"
+      },
+      "lore": {
+        "common": "Takes the photo just as you're sitting down.",
+        "uncommon": "Flashes four times so fast that everyone ends up with their eyes closed.",
+        "rare": "Captured the funniest face anyone has ever pulled.",
+        "epic": "Had a queue all night at the wedding, and every guest came out with a strip of silly faces.",
+        "legendary": "Has printed a million photo strips, and every family has one stuck on the fridge."
+      },
+      "moves": {
+        "signature": "Flash Flash Flash Flash",
+        "legend": "Hot Lamp Glare",
+        "ultimate": "Photo Strip Print",
+        "kit.jackpot": "Snap Snap Snap Snap",
+        "kit.insert_coin": "Booth Boost",
+        "kit.tilt": "Blink Crack"
+      }
+    },
+    "x_slot_machine": {
+      "status": "draft",
+      "names": {
+        "common": "Leverpuller",
+        "uncommon": "Fruitspinner",
+        "rare": "Ticketshower",
+        "epic": "Pier Arcade Spin",
+        "legendary": "Old Cherrywheel of the Seaside"
+      },
+      "lore": {
+        "common": "Has a lever that every child pulls on the way past.",
+        "uncommon": "Spins its pictures of cherries and lemons until everyone gets dizzy.",
+        "rare": "Lined up three cherries and showered the floor with prize tickets.",
+        "epic": "Spun every reel in the seaside arcade at once, and the whole pier jingled.",
+        "legendary": "Has stood on the same seaside pier for fifty years and still spins its cherries."
+      },
+      "moves": {
+        "signature": "Spin Flash",
+        "legend": "Lever Yank",
+        "ultimate": "Three Cherries",
+        "kit.jackpot": "Ticket Ticket Ticket",
+        "kit.insert_coin": "Token Drop Boost",
+        "kit.tilt": "Tilt Wobble Crack"
+      }
+    },
+    "x_ticket_machine": {
+      "status": "draft",
+      "names": {
+        "common": "Ticketslow",
+        "uncommon": "Coinrefuser",
+        "rare": "Queuebuilder",
+        "epic": "Station Rush",
+        "legendary": "Old Faresworth of the Platform"
+      },
+      "lore": {
+        "common": "Takes ages to print a ticket while the train pulls in.",
+        "uncommon": "Refuses every coin that's a bit bent.",
+        "rare": "Printed the last ticket just as the train doors closed.",
+        "epic": "Had a queue down the whole platform on the morning of the big match.",
+        "legendary": "Has printed a million tickets at the same station and only jammed twice."
+      },
+      "moves": {
+        "signature": "Print Flash",
+        "legend": "Coin Snatch",
+        "ultimate": "Out of Paper",
+        "kit.jackpot": "Ticket Ticket Ticket Ticket",
+        "kit.game_over": "Error Flash",
+        "kit.tilt": "Jam Crack"
+      }
+    },
+    "x_vending_kiosk": {
+      "status": "draft",
+      "names": {
+        "common": "Snackstuck",
+        "uncommon": "Touchtapper",
+        "rare": "Coffeeforgot",
+        "epic": "Office Snack Raid",
+        "legendary": "Lady Snackwell of the Corridor"
+      },
+      "lore": {
+        "common": "Gets your snack stuck halfway down every single time.",
+        "uncommon": "Has a touch screen that needs tapping five times.",
+        "rare": "Made a coffee and forgot the cup.",
+        "epic": "Ran out of every snack on the busiest day at the office.",
+        "legendary": "Has served the same office for twenty years and only got one bag of crisps stuck, once."
+      },
+      "moves": {
+        "signature": "Touch Flash",
+        "legend": "Snack Snack Snack",
+        "ultimate": "Snack Avalanche",
+        "kit.jackpot": "Drop Drop Drop",
+        "kit.insert_coin": "Card Tap Boost",
+        "kit.tilt": "Stuck Snack Crack"
+      }
+    },
+    "x_action_camera": {
+      "status": "draft",
+      "names": {
+        "common": "Helmetmount",
+        "uncommon": "Splashproof",
+        "rare": "Daredevil Cam",
+        "epic": "Mountain Bike Plunge",
+        "legendary": "Captain Daredevil of the Cliff Edge"
+      },
+      "lore": {
+        "common": "Gets mounted to a helmet and films only the sky.",
+        "uncommon": "Survives every splash, puddle and dunk in the river.",
+        "rare": "Filmed a jump off a cliff into the sea from the jumper's own head.",
+        "epic": "Filmed the whole mountain bike race from the front, and the video made everyone dizzy.",
+        "legendary": "Has filmed every adventure its owner ever had, from the top of mountains to the bottom of the sea."
+      },
+      "moves": {
+        "signature": "Record Flash Flash",
+        "legend": "Footage Snatch",
+        "ultimate": "Daredevil Plunge",
+        "kit.flash": "Light Flash",
+        "kit.zoom_in": "Wide Angle Boost",
+        "kit.night_vision": "Night Mode Muddle"
+      }
+    },
+    "x_baby_monitor": {
+      "status": "draft",
+      "names": {
+        "common": "Cracklewatch",
+        "uncommon": "Snorerecorder",
+        "rare": "Nightvision",
+        "epic": "Bedtime Watch",
+        "legendary": "Old Watchwell of the Nursery"
+      },
+      "lore": {
+        "common": "Crackles so loudly that the parents think the baby is crying.",
+        "uncommon": "Records every snore, sigh and giggle from the nursery.",
+        "rare": "Showed the baby asleep in perfect night-vision green.",
+        "epic": "Watched every baby in the playgroup at the sleepover.",
+        "legendary": "Has watched over three babies in the same family and never missed a single cry."
+      },
+      "moves": {
+        "signature": "Static Flash Flash",
+        "legend": "Watchful Boost",
+        "ultimate": "Midnight Cry",
+        "kit.flash": "Night Light Flash",
+        "kit.zoom_in": "Zoom Boost",
+        "kit.night_vision": "Green Glow Muddle"
+      }
+    },
+    "x_battery": {
+      "status": "draft",
+      "names": {
+        "common": "Deadwhenneeded",
+        "uncommon": "Drawerdweller",
+        "rare": "Remotefixer",
+        "epic": "Toybox Power Up",
+        "legendary": "Old Voltworth of the Kitchen Drawer"
+      },
+      "lore": {
+        "common": "Runs out just when you need the torch.",
+        "uncommon": "Lives in the kitchen drawer with fifty others, and nobody knows which ones still work.",
+        "rare": "Brought the dead remote back to life and saved the family film night.",
+        "epic": "Powered every toy in the toybox on the morning of the big birthday.",
+        "legendary": "Has powered the same clock for ten years without being changed."
+      },
+      "moves": {
+        "signature": "Charge Charge Charge",
+        "legend": "Power Power Power",
+        "ultimate": "Battery Leak",
+        "kit.surge": "Hot Battery",
+        "kit.grounded": "Insulated Guard",
+        "kit.live_wire": "Power Snatch"
+      }
+    },
+    "x_candelabra": {
+      "status": "draft",
+      "names": {
+        "common": "Waxdripper",
+        "uncommon": "Fiveflame",
+        "rare": "Shadowdancer",
+        "epic": "Banquet Glow",
+        "legendary": "Grand Candela of the Banquet Hall"
+      },
+      "lore": {
+        "common": "Drips wax all over the tablecloth.",
+        "uncommon": "Holds five candles that never burn down at the same speed.",
+        "rare": "Made shadows dance across the walls of the old castle hall.",
+        "epic": "Lit the whole banquet table so beautifully that nobody wanted the lights on.",
+        "legendary": "Lit the long table at a castle feast where a hundred guests ate by candlelight until dawn."
+      },
+      "moves": {
+        "signature": "Flicker Flash Flash",
+        "legend": "Shadow Dance Startle",
+        "ultimate": "Candle Glow Up",
+        "kit.flicker": "Candle Flicker",
+        "kit.hot_bulb": "Hot Wax",
+        "kit.glow_up": "Five Candle Boost"
+      }
+    },
+    "x_candle_holder": {
+      "status": "draft",
+      "names": {
+        "common": "Waxpuddle",
+        "uncommon": "Tilttip",
+        "rare": "Windowglow",
+        "epic": "Birthday Glow",
+        "legendary": "Old Holdwell of the Windowsill"
+      },
+      "lore": {
+        "common": "Collects a puddle of wax that sets hard and never comes out.",
+        "uncommon": "Tilts its candle sideways so it burns down crooked.",
+        "rare": "Glowed in the window all night so a traveller could find their way.",
+        "epic": "Held the candles for the whole birthday party, and every wish was made.",
+        "legendary": "Has held a candle in the same window every winter for a hundred years."
+      },
+      "moves": {
+        "signature": "Glow Flash",
+        "legend": "Holder Bump",
+        "ultimate": "Wax Drip Splash",
+        "kit.flicker": "Candle Wobble",
+        "kit.hot_bulb": "Hot Wax Drip",
+        "kit.glow_up": "Steady Glow"
+      }
+    },
+    "x_cassette_tape": {
+      "status": "draft",
+      "names": {
+        "common": "Ribbonspill",
+        "uncommon": "Flipsider",
+        "rare": "Taperecorder",
+        "epic": "Radio Chart Recording",
+        "legendary": "Old Mixwell of the Shoebox"
+      },
+      "lore": {
+        "common": "Spills its brown ribbon all over the floor.",
+        "uncommon": "Has to be flipped over halfway through the album.",
+        "rare": "Recorded a whole radio show, including the adverts, and was played for years.",
+        "epic": "Recorded every song in the charts on a Sunday evening, and the whole class borrowed it.",
+        "legendary": "Has kept the same family's recordings for forty years in a shoebox."
+      },
+      "moves": {
+        "signature": "Play Flash Flash",
+        "legend": "Song Snatch",
+        "ultimate": "Tape Unspool",
+        "kit.feedback_loop": "Wobbly Tape Muddle",
+        "kit.remix": "Mix Boost Boost",
+        "kit.skip_track": "Fast Forward Forward"
+      }
+    },
+    "x_cd": {
+      "status": "draft",
+      "names": {
+        "common": "Scratchskipper",
+        "uncommon": "Rainbowshine",
+        "rare": "Coasterdisc",
+        "epic": "Birthday Mix",
+        "legendary": "Old Discworth of the Car Visor"
+      },
+      "lore": {
+        "common": "Skips on the best song because of one tiny scratch.",
+        "uncommon": "Shines rainbows across the room when it catches the light.",
+        "rare": "Was used as a coaster so often that it forgot it was music.",
+        "epic": "Played the birthday mix for the whole party until the speakers got tired.",
+        "legendary": "Was played so often at the school disco for twenty years that it now hangs framed on the wall of the hall."
+      },
+      "moves": {
+        "signature": "Rainbow Flash",
+        "legend": "Shiny Disc Guard",
+        "ultimate": "Disc Spin Out",
+        "kit.bass_drop": "Bass Track Thump",
+        "kit.skip_track": "Skip Skip Skip Skip"
+      }
+    },
+    "x_cd_changer": {
+      "status": "draft",
+      "names": {
+        "common": "Discshuffler",
+        "uncommon": "Clunkchange",
+        "rare": "Albumcarousel",
+        "epic": "Party Disc Rotation",
+        "legendary": "Old Carouselworth of the Hi-Fi"
+      },
+      "lore": {
+        "common": "Clunks loudly every time it changes disc.",
+        "uncommon": "Shuffles between five albums so often that the family argues about which one is on.",
+        "rare": "Held every album the family owned and played them all in a row.",
+        "epic": "Rotated every disc at the party so smoothly that the music never stopped.",
+        "legendary": "Has rotated the same five albums for twenty years."
+      },
+      "moves": {
+        "signature": "Disc Change Flash",
+        "legend": "Dusty Tray Smell",
+        "ultimate": "Disc Jam",
+        "kit.feedback_loop": "Wrong Disc Muddle",
+        "kit.remix": "Shuffle Boost",
+        "kit.skip_track": "Disc Disc Disc"
+      }
+    },
+    "x_charger": {
+      "status": "draft",
+      "names": {
+        "common": "Cablefraying",
+        "uncommon": "Wrongplug",
+        "rare": "Bedsidetangle",
+        "epic": "Charger Queue Scramble",
+        "legendary": "Old Plugsworth of the Bedside Table"
+      },
+      "lore": {
+        "common": "Frays at the end so it only works if you hold it at a certain angle.",
+        "uncommon": "Never fits the gadget you actually need to charge.",
+        "rare": "Tangles itself round every other cable on the bedside table.",
+        "epic": "Was the only charger in the house, so the whole family queued for it.",
+        "legendary": "Has charged the same phone every night for six years without a single fault."
+      },
+      "moves": {
+        "signature": "Plug Plug Plug",
+        "legend": "Frayed Cable Crack",
+        "ultimate": "Charge Surge",
+        "kit.spark": "Spark Startle",
+        "kit.surge": "Hot Plug Surge",
+        "kit.grounded": "Plug Guard"
+      }
     }
   }
 }
