@@ -33,7 +33,7 @@
 | w01-mammals-1 | 107 | 107 | done: 39 high / 102 medium / 64 low + 23 patterns | 143 fields (all high + all medium) via `patches/w01-editor-auto.json` | open: Sir/Lady legendary-name formula (~25), some award-shaped legendaries, low taste notes |
 | w02-mammals-2 | 106 | 106 | done: 76 high / 118 medium / 83 low + 14 patterns | 193 lore/move fields (`patches/w02-editor-auto.json`, bad suggestions overridden) + 146 names re-paired to their lore (`w02-editor-names.json`) + religious settings removed | open: one-trait-across-rarities in ~30 objects only partly fixed; Ultimate = Epic name + word (51); award legendaries |
 | w03-birds-and-sea-life | 120 | 120 | done: 120 high / 168 medium / 27 low + 12 patterns | 288 fields (`patches/w03-editor-auto.json`, incl. names re-paired to lore; 4 suggestions overridden for payment/brand frames) | open: crowd-scene Epics, homecoming Legendaries (pattern level) |
-| w04-bugs-and-reptiles | 118 | 118 | running | self-fixes (`patches/w04-self-fixes.json`) | |
+| w04-bugs-and-reptiles | 118 | 118 | done: 58 high / 125 medium / 33 low + 9 patterns | 221 fields (`patches/w04-editor-auto.json`, names re-paired) then `w04-self-fixes.json` (apply in that order) | open: Ultimate = Epic name in ~70 objects (pattern), crowd-scene Epics |
 | w05-vehicles-1 | 79 | 79 | running | self-fixes | |
 | w06-vehicles-2 | 79 | 79 | pending | self-fixes | |
 | w07–w22 | 1,639 | 0 | — | — | not started |
@@ -44,6 +44,7 @@
 - Avoid stock frames: "in the land/country", contests/judges/medals/trophies, "was declared/crowned", "according to its
   own story", payment punchlines (charged in biscuits), shake-off soaking a crowd, "seen from space", palaces/emperors.
 - Legendary = a concrete outrageous achievement with a real punchline. Vary legendary name shapes (not always Sir/Lady X).
+- Apply order when re-ingesting a batch: chunks → `<batch>-editor-auto.json` → `<batch>-editor-names.json` (if any) → `<batch>-self-fixes.json`.
 - Names must sit on the rarity whose lore they describe (write names AFTER the lore, per line).
 - Ultimate names: don't reuse the Epic monster name plus Rush/Charge/Storm; give the finisher its own image.
 - Check `brief` mechanics BEFORE naming moves (legend/ultimate effects differ per object; varied Ultimates need effect-neutral names).
