@@ -1,0 +1,599 @@
+{
+  "schema": 1,
+  "batch": "w02-mammals-2",
+  "entries": {
+    "i_schipperke": {
+      "status": "draft",
+      "names": {
+        "common": "Bargecaptain",
+        "uncommon": "Little Skipper",
+        "rare": "Deckpatrol",
+        "epic": "Canal Commander",
+        "legendary": "Captain Schipp of the Black Barge"
+      },
+      "lore": {
+        "common": "Barks at every boat that dares to sail past its window, even toy boats in the bath.",
+        "uncommon": "Rides at the front of the canal barge and barks orders the boatman pretends to follow.",
+        "rare": "Patrols the deck so thoroughly that not a single crumb has ever reached the river.",
+        "epic": "Barked so commandingly at a traffic jam of barges that they lined up in perfect order for the locks.",
+        "legendary": "Steered a barge the length of every canal in the land with its paws on the tiller. The ducks gave it right of way."
+      },
+      "moves": {
+        "signature": "Deck Dash",
+        "legend": "Captain's Cabin Rest",
+        "ultimate": "All Hands on Deck"
+      }
+    },
+    "i_scotch_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Stubbornbeard",
+        "uncommon": "Kiltwalker",
+        "rare": "Dignified Scot",
+        "epic": "Highland Huff",
+        "legendary": "Laird McWhiskers, the Unbudging"
+      },
+      "lore": {
+        "common": "Refuses to walk in the rain, the wind or any direction you suggest.",
+        "uncommon": "Trots along with its nose in the air as if it owns the pavement, the street and the town.",
+        "rare": "Once decided not to move for an entire afternoon. The lead, the owner and the postman all gave up.",
+        "epic": "Sat down in the middle of the castle drawbridge and the whole parade had to go round the long way.",
+        "legendary": "Was offered the keys to the castle and turned them down because the castle was not tidy enough."
+      },
+      "moves": {
+        "signature": "Stubborn Charge",
+        "legend": "Biscuit Swipe",
+        "ultimate": "Highland Huff Storm"
+      }
+    },
+    "i_scottish_deerhound": {
+      "status": "draft",
+      "names": {
+        "common": "Mossbeard",
+        "uncommon": "Glenstrider",
+        "rare": "Gentlelegs",
+        "epic": "Highland Gale",
+        "legendary": "Morag, Strider of the Glens"
+      },
+      "lore": {
+        "common": "Lies across the entire sofa with its long legs, then sighs when you ask for a corner.",
+        "uncommon": "Walks so softly on its long legs that the sheep don't notice it until it says hello.",
+        "rare": "Can outrun the wind on a highland hill, then stops to sniff a single flower.",
+        "epic": "Ran across the glen so fast that the mist was left behind and had to catch up.",
+        "legendary": "Was asked to carry a message from one end of the Highlands to the other. Arrived before the sender had finished writing it."
+      },
+      "moves": {
+        "signature": "Glen Bound",
+        "legend": "Misty Distraction",
+        "ultimate": "Highland Wind Run"
+      }
+    },
+    "i_sealyham_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Shortlegs Sealy",
+        "uncommon": "Bushybrow",
+        "rare": "Badger Bother",
+        "epic": "Comedy Terrier",
+        "legendary": "Sir Sealyham the Jester"
+      },
+      "lore": {
+        "common": "Its eyebrows are so bushy that it has to lift them to see what it is barking at.",
+        "uncommon": "Pulls silly faces until everyone at the table laughs and drops a sausage.",
+        "rare": "Can squeeze into any badger hole, then refuses to come out until it has been offered a snack.",
+        "epic": "Told such good jokes at the village fair, mostly with its eyebrows, that the clown resigned.",
+        "legendary": "Was appointed official jester of a Welsh castle. Has never repeated a joke, mainly because it can't remember them."
+      },
+      "moves": {
+        "signature": "Terrier Tumble",
+        "legend": "Bushy-Brow Distraction",
+        "ultimate": "Jester's Encore"
+      }
+    },
+    "i_shetland_sheepdog": {
+      "status": "draft",
+      "names": {
+        "common": "Minicollie",
+        "uncommon": "Barkalot",
+        "rare": "Duckherder",
+        "epic": "Island Round-Up",
+        "legendary": "Sheltie Belle of the Northern Isles"
+      },
+      "lore": {
+        "common": "Barks at every leaf that falls in autumn and treats each one as an emergency.",
+        "uncommon": "Herds the ducks on the pond into a neat queue, then looks back for applause.",
+        "rare": "Senses when anyone in the house is sad and arrives with a toy before they've even sat down.",
+        "epic": "Rounded up every pony on the island and parked them by size, from smallest to slightly less small.",
+        "legendary": "Kept every sheep on a windy island together through a winter storm. Barked a cheerful hello to each of them every morning."
+      },
+      "moves": {
+        "signature": "Sheltie Spring",
+        "legend": "Island Tumble",
+        "ultimate": "Northern Isles Round-Up"
+      }
+    },
+    "i_shih_tzu": {
+      "status": "draft",
+      "names": {
+        "common": "Topknotty",
+        "uncommon": "Palace Puff",
+        "rare": "Lionflop",
+        "epic": "Silken Stampede",
+        "legendary": "Princess Shih of the Golden Pillow"
+      },
+      "lore": {
+        "common": "Its topknot droops over its eyes until someone ties it up with a ribbon. Then it sulks about the ribbon.",
+        "uncommon": "Waddles regally through the house as if expecting servants to open every door.",
+        "rare": "Gave the palace guards such a look that they fetched it a cushion without being asked.",
+        "epic": "Led a parade of small dogs through the old city, each with a perfectly tied topknot.",
+        "legendary": "Was given its own wing of the palace, its own garden and its own chef. Still sleeps in the laundry basket."
+      },
+      "moves": {
+        "signature": "Royal Pounce",
+        "legend": "Regal Glare",
+        "ultimate": "Palace Puff Parade"
+      }
+    },
+    "i_siberian_husky": {
+      "status": "draft",
+      "names": {
+        "common": "Drama Howler",
+        "uncommon": "Fence Escaper",
+        "rare": "Blue-Eye Stare",
+        "epic": "Sled Stampede",
+        "legendary": "Siberia Sasha, the Great Escaper"
+      },
+      "lore": {
+        "common": "Complains loudly and dramatically when you say \"bath\". And \"walk\". And \"hello\".",
+        "uncommon": "Can escape from any garden, then sits outside the front door waiting to be let back in.",
+        "rare": "Its pale blue eyes stare so deep into your soul that you give it half your sandwich.",
+        "epic": "Led a sled team in the wrong direction because it smelled sausages. The race now has a new finish line.",
+        "legendary": "Escaped from every kennel, garden and fenced field in the country, then came home to howl about how boring it all was."
+      },
+      "moves": {
+        "signature": "Sled Dash",
+        "legend": "Howling Flurry",
+        "ultimate": "Arctic Breakout"
+      }
+    },
+    "i_silky_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Silktail",
+        "uncommon": "Bluecoat",
+        "rare": "Boldsnoot",
+        "epic": "Garden Blitz",
+        "legendary": "Lady Silkworth, Terror of Snakes"
+      },
+      "lore": {
+        "common": "Its silky coat collects every leaf in the garden like a tiny walking broom.",
+        "uncommon": "Its blue-and-tan coat shines so smoothly that people think it has been ironed.",
+        "rare": "Faces down snakes in the outback with a stern little bark. The snakes slither off embarrassed.",
+        "epic": "Chased a whole flock of cockatoos out of a cricket ground. The match finally started.",
+        "legendary": "Patrolled a whole sheep station alone for a summer and sent every snake packing with a single bark each."
+      },
+      "moves": {
+        "signature": "Silky Snap",
+        "legend": "Stern Little Bark",
+        "ultimate": "Outback Patrol"
+      }
+    },
+    "i_soft_coated_wheaten_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Wheatpup",
+        "uncommon": "Greetbounce",
+        "rare": "Softsocks",
+        "epic": "Welcome Whirlwind",
+        "legendary": "Wheaten Wendy, Queen of Hellos"
+      },
+      "lore": {
+        "common": "Jumps up to kiss your face every time you come home, even if you only went to the bin.",
+        "uncommon": "Its coat is so soft that strangers ask to stroke it, and it always says yes.",
+        "rare": "Its hello dance is so bouncy that the floorboards need replacing every year.",
+        "epic": "Greeted a whole football crowd one by one at the gate. The match started two hours late.",
+        "legendary": "Said hello to every single person in the town on one walk and remembered all their names."
+      },
+      "moves": {
+        "signature": "Greeting Leap",
+        "legend": "Fluffy Brace",
+        "ultimate": "Welcome Whirl"
+      }
+    },
+    "i_staffordshire_bullterrier": {
+      "status": "draft",
+      "names": {
+        "common": "Wigglestaff",
+        "uncommon": "Nannypup",
+        "rare": "Brick Hugger",
+        "epic": "Sofa Wrecker",
+        "legendary": "Stafford Sam, the Smiling Bulldozer"
+      },
+      "lore": {
+        "common": "Wags its whole body so hard that it falls over at the end of every greeting.",
+        "uncommon": "Watches over the children at the playground and sits beside anyone who looks lonely.",
+        "rare": "Can pull you down the street on a lead when it smells a sausage, no matter how hard you pull back.",
+        "epic": "Played so happily on the sofa that the sofa is now in two pieces.",
+        "legendary": "Pulled a broken-down bus up a hill to the school gates and then asked every child for a pat."
+      },
+      "moves": {
+        "signature": "Shoulder Shove",
+        "legend": "Wiggle Distraction",
+        "ultimate": "Smiling Bulldozer"
+      }
+    },
+    "i_standard_poodle": {
+      "status": "draft",
+      "names": {
+        "common": "Pomp Poodle",
+        "uncommon": "Duckfetcher Poo",
+        "rare": "Puzzlesolver",
+        "epic": "Grand Poodle Gala",
+        "legendary": "Dame Poodleton of the Lakeside"
+      },
+      "lore": {
+        "common": "Its fancy haircut takes two hours at the groomer and is ruined in one puddle.",
+        "uncommon": "Retrieves ducks from the lake, then dries its pompoms under the hand dryer at the café.",
+        "rare": "Can solve any puzzle toy in seconds and then hides the treats for later.",
+        "epic": "Was so elegant at the city's spring show that the other dogs asked for its autograph.",
+        "legendary": "Swam across the lake, won the show and was home before tea, without a single curl out of place."
+      },
+      "moves": {
+        "signature": "Pompom Charge",
+        "legend": "Lakeside Rest",
+        "ultimate": "Grand Gala"
+      }
+    },
+    "i_standard_schnauzer": {
+      "status": "draft",
+      "names": {
+        "common": "Beardguard",
+        "uncommon": "Rat Boss",
+        "rare": "Wise Whiskers",
+        "epic": "Farmyard Sheriff",
+        "legendary": "Herr Schnauzermann the Clever"
+      },
+      "lore": {
+        "common": "Barks at the dishwasher every time it beeps, then waits for it to apologise.",
+        "uncommon": "Seems to understand every word you say and pretends not to hear the word \"bath\".",
+        "rare": "Cleared the farm of rats, foxes and one very surprised badger in a single morning.",
+        "epic": "Guarded the whole farmyard so carefully that the hens now ask it before laying an egg.",
+        "legendary": "Took charge of a sleepy village, kept every gate shut and every hen counted, and was made sheriff without a vote."
+      },
+      "moves": {
+        "signature": "Beard Butt",
+        "legend": "Rotten Rat Whiff",
+        "ultimate": "Farmyard Patrol"
+      }
+    },
+    "i_sussex_spaniel": {
+      "status": "draft",
+      "names": {
+        "common": "Frownfloof",
+        "uncommon": "Lowbarker",
+        "rare": "Goldenliver",
+        "epic": "Hedge Mumbler",
+        "legendary": "Sir Sussex the Serious"
+      },
+      "lore": {
+        "common": "Always looks deeply worried, even while eating its favourite biscuit.",
+        "uncommon": "Barks quietly to itself while hunting, as if it is narrating a nature programme.",
+        "rare": "Pushed through a thorn hedge that every other dog refused to touch, then frowned at the thorns.",
+        "epic": "Barked its way through the whole countryside at a slow walk, and every pheasant knew it was coming.",
+        "legendary": "Was named the most serious dog in history after attending a hundred birthday parties without once smiling. It enjoyed them all."
+      },
+      "moves": {
+        "signature": "Low Rush",
+        "legend": "Sun-Baked Snooze",
+        "ultimate": "Serious Stampede"
+      }
+    },
+    "i_tibetan_mastiff": {
+      "status": "draft",
+      "names": {
+        "common": "Maneguard",
+        "uncommon": "Nightbarker Ti",
+        "rare": "Monastery Lion",
+        "epic": "Himalayan Thunder",
+        "legendary": "Dorje, Lion of the High Monastery"
+      },
+      "lore": {
+        "common": "Sleeps all day and barks all night, so the house is never sure whose schedule it is on.",
+        "uncommon": "Has a mane like a lion and a sense of dignity to match. Refuses to wear a raincoat.",
+        "rare": "Guarded a mountain village so well that the snow leopards sent a letter of complaint.",
+        "epic": "Barked once in the high valley and the echo knocked the snow off every roof.",
+        "legendary": "Guarded a monastery on top of the mountains for so long that the monks made it head of the welcoming committee."
+      },
+      "moves": {
+        "signature": "Lion Charge",
+        "legend": "Musty Mane Shake",
+        "ultimate": "Himalayan Thunder Roar"
+      }
+    },
+    "i_tibetan_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Snowshoe",
+        "uncommon": "Holy Fluff",
+        "rare": "Luckypaw",
+        "epic": "Mountain Mopstorm",
+        "legendary": "Lucky Lhakpa, the Holy Terrier"
+      },
+      "lore": {
+        "common": "Its big flat feet act like snowshoes, so it walks on top of the snow and laughs at you sinking.",
+        "uncommon": "Is considered lucky, so people keep patting it before exams.",
+        "rare": "Climbed a frozen cliff that the goats wouldn't try, just to look back and wag.",
+        "epic": "Shook its shaggy coat in the monastery courtyard and caused a small snowstorm.",
+        "legendary": "Brought so much luck to a mountain village that every lost key in the valley turned up the same afternoon."
+      },
+      "moves": {
+        "signature": "Snowshoe Bound",
+        "legend": "Lucky Biscuit Grab",
+        "ultimate": "Mountain Mopstorm Dash"
+      }
+    },
+    "i_toy_poodle": {
+      "status": "draft",
+      "names": {
+        "common": "Teacup Pom",
+        "uncommon": "Prance Petite",
+        "rare": "Handbag Genius",
+        "epic": "Tiny Twirl Show",
+        "legendary": "Mimi, Queen of the Handbag"
+      },
+      "lore": {
+        "common": "Rides in a handbag everywhere and complains if the handbag doesn't match.",
+        "uncommon": "Prances along the pavement on its tiptoes as if the ground is slightly beneath it.",
+        "rare": "Learned to open the treat cupboard and now runs the kitchen.",
+        "epic": "Twirled so beautifully at the dog show that the ice dancers asked for lessons.",
+        "legendary": "Has the largest handbag collection in the city, one for every day of the year, and still rides in yours."
+      },
+      "moves": {
+        "signature": "Prancing Pounce",
+        "legend": "Tiptoe Power-Up",
+        "ultimate": "Twirl Tornado"
+      }
+    },
+    "i_toy_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Ratwhistle",
+        "uncommon": "Teenytrot",
+        "rare": "Alert Whisker",
+        "epic": "Small Siren",
+        "legendary": "Tiny Tobias the Watchful"
+      },
+      "lore": {
+        "common": "Shivers whenever someone opens the fridge, just in case there's something cold in it for it.",
+        "uncommon": "Hears a mouse in the attic from the garden and runs in to report it.",
+        "rare": "Caught every mouse in the barn while the cat slept on the hay bales.",
+        "epic": "Barked so loudly at a burglar that the burglar ran into the police station to ask for protection.",
+        "legendary": "Kept a whole castle free of mice for its entire life. Was given a tiny castle of its own as thanks."
+      },
+      "moves": {
+        "signature": "Tiny Tackle",
+        "legend": "Shadow Snap",
+        "ultimate": "Small Siren Wail"
+      }
+    },
+    "i_vizsla": {
+      "status": "draft",
+      "names": {
+        "common": "Velcro Vizsla",
+        "uncommon": "Goldenshadow",
+        "rare": "Pointing Rusty",
+        "epic": "Field Fever",
+        "legendary": "Countess Vizslana the Clingy"
+      },
+      "lore": {
+        "common": "Follows you from room to room, including the bathroom, and looks offended when you close the door.",
+        "uncommon": "Its golden-rust coat glows in the sunshine, so it is easy to spot sitting on your favourite chair.",
+        "rare": "Points at a pheasant with such focus that it forgets to blink for five minutes.",
+        "epic": "Ran through a whole country estate so fast that the gardeners thought a comet had landed.",
+        "legendary": "Stayed glued to its owner's side for its entire life, including during a hot-air balloon trip. Insisted on piloting."
+      },
+      "moves": {
+        "signature": "Golden Rush",
+        "legend": "Sunbeam Scorch",
+        "ultimate": "Field Fever Dash"
+      }
+    },
+    "i_walker_hound": {
+      "status": "draft",
+      "names": {
+        "common": "Speedbay",
+        "uncommon": "Treewalker",
+        "rare": "Loudmouth Lou",
+        "epic": "Night Chase Choir",
+        "legendary": "Treeing Tess, the Fastest Voice"
+      },
+      "lore": {
+        "common": "Bays at the moon, the street lamp and the neighbour's porch light. It's not fussy.",
+        "uncommon": "Runs so fast after a scent that it overtakes the hunters, their horses and their lunch.",
+        "rare": "Its voice carries so far that people two valleys away come to see who's lost.",
+        "epic": "Chased a raccoon through the night so loudly that the whole forest gave up on sleep.",
+        "legendary": "Won the hound race so many times that the trophy is now just its own photo on a stand."
+      },
+      "moves": {
+        "signature": "Hound Sprint",
+        "legend": "Treeside Stand",
+        "ultimate": "Night Chase"
+      }
+    },
+    "i_weimaraner": {
+      "status": "draft",
+      "names": {
+        "common": "Greyghost",
+        "uncommon": "Silver Shadow",
+        "rare": "Amber Eyes",
+        "epic": "Ghostly Gallop",
+        "legendary": "Duke Weimar, the Silver Hunter"
+      },
+      "lore": {
+        "common": "Leans against your legs during dinner and stares with its amber eyes until you share.",
+        "uncommon": "Its silver coat makes it look like a ghost in the early morning mist. The postman runs.",
+        "rare": "Followed its owner so closely through the woods that the owner kept tripping over it.",
+        "epic": "Galloped through a misty forest at dawn and everyone in the village swore a ghost had passed.",
+        "legendary": "Was so devoted to its owner that it learned to open every door in the house, the car and the office building."
+      },
+      "moves": {
+        "signature": "Silver Lunge",
+        "legend": "Sandwich Siphon",
+        "ultimate": "Ghostly Gallop Run"
+      }
+    },
+    "i_welsh_springer_spaniel": {
+      "status": "draft",
+      "names": {
+        "common": "Redspring",
+        "uncommon": "Bouncebush",
+        "rare": "Valley Flusher",
+        "epic": "Hillside Hopper",
+        "legendary": "Dewi, the Leaping Dragon Dog"
+      },
+      "lore": {
+        "common": "Springs into every bush on the walk, then comes out looking surprised that it was a bush.",
+        "uncommon": "Its red-and-white coat makes it look like a little dragon. It plays along.",
+        "rare": "Flushes every bird out of the hedge, then politely waits for them to settle back in.",
+        "epic": "Bounced across every valley in Wales in one afternoon and was mistaken for a red dragon.",
+        "legendary": "Was adopted as the mascot of a whole country's rugby team and bounced so hard after a win that the stadium shook."
+      },
+      "moves": {
+        "signature": "Springing Bound",
+        "legend": "Hedge Snatch",
+        "ultimate": "Dragon Dog Leap"
+      }
+    },
+    "i_west_highland_white_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Westiepuff",
+        "uncommon": "Snowdigger Westie",
+        "rare": "Brave Whitey",
+        "epic": "Highland Holes",
+        "legendary": "Wee Hamish, Digger of the Highlands"
+      },
+      "lore": {
+        "common": "Digs a hole in the flowerbed, sits in it and waits to be photographed.",
+        "uncommon": "Its white coat stays white for exactly one minute after a bath.",
+        "rare": "Squeezed down a rabbit hole and came up in the neighbour's greenhouse holding a tomato.",
+        "epic": "Dug so many tunnels under a Highland golf course that the balls now roll back to the clubhouse.",
+        "legendary": "Dug a tunnel straight through a Highland hill to get to the other side faster. The hill is now a short cut."
+      },
+      "moves": {
+        "signature": "White Flash",
+        "legend": "Hill Hole Crash",
+        "ultimate": "Highland Dig-Out"
+      }
+    },
+    "i_whippet": {
+      "status": "draft",
+      "names": {
+        "common": "Couchsprinter",
+        "uncommon": "Zoomsnooze",
+        "rare": "Racing Noodle",
+        "epic": "Track Lightning",
+        "legendary": "Whizz, the Fastest Sleeper"
+      },
+      "lore": {
+        "common": "Sprints round the garden at top speed for one minute, then sleeps for six hours.",
+        "uncommon": "Shivers under two blankets and asks for a third.",
+        "rare": "Runs so fast that it reaches the ball before it has stopped bouncing.",
+        "epic": "Raced a train along the coast and beat it to the next station.",
+        "legendary": "Won every race at the track in one evening, then fell asleep in the winner's enclosure before the trophy arrived."
+      },
+      "moves": {
+        "signature": "Whippet Dash",
+        "legend": "Sun-Toasted Sprint",
+        "ultimate": "Lightning Lap"
+      }
+    },
+    "i_white_wolf": {
+      "status": "draft",
+      "names": {
+        "common": "Snowhowl",
+        "uncommon": "Frostpaw",
+        "rare": "Icefield Hunter",
+        "epic": "Blizzard Chorus",
+        "legendary": "Aurora, White Queen of the Ice"
+      },
+      "lore": {
+        "common": "Howls whenever the freezer door is opened because it smells like home.",
+        "uncommon": "Blends into the snow so perfectly that it sneaks up on its own pack.",
+        "rare": "Can cross a frozen lake without a single crack, while the polar bears are still testing the ice.",
+        "epic": "Howled so loudly over the Arctic that the icebergs drifted closer to listen.",
+        "legendary": "Led its pack across the frozen north for a whole winter and didn't lose a single pup, a single meal or a single argument."
+      },
+      "moves": {
+        "signature": "Frostbite Lunge",
+        "legend": "Musky Den Stink",
+        "ultimate": "Blizzard Howl"
+      }
+    },
+    "i_wire_haired_fox_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Wirycoat Fox",
+        "uncommon": "Bouncebristle",
+        "rare": "Burrowbolt",
+        "epic": "Hedgehog Havoc",
+        "legendary": "Sir Bristleworth the Bold"
+      },
+      "lore": {
+        "common": "Bounces straight up and down like a spring until somebody throws the ball.",
+        "uncommon": "Its wiry coat holds every twig, leaf and sticky burr from the walk.",
+        "rare": "Shot down a fox's burrow so fast that the fox came out the back door to see what was going on.",
+        "epic": "Chased the hunt's horses round the field and won the race without a rider.",
+        "legendary": "Was declared the bounciest dog in history after bouncing over the garden fence, the shed and the neighbour's caravan."
+      },
+      "moves": {
+        "signature": "Bristle Bounce",
+        "legend": "Hot-Headed Leap",
+        "ultimate": "Burrow Bolt Blast"
+      }
+    },
+    "i_yorkshire_terrier": {
+      "status": "draft",
+      "names": {
+        "common": "Bowtopper Yorkie",
+        "uncommon": "Mill Mouser",
+        "rare": "Bossypaw",
+        "epic": "Small Dog Fury",
+        "legendary": "Lady Yorkshire Pudding, the Bossy"
+      },
+      "lore": {
+        "common": "Wears a bow on its head and barks at anyone who doesn't compliment it.",
+        "uncommon": "Used to chase mice out of the old wool mills and still checks every cupboard for them.",
+        "rare": "Bosses around dogs ten times its size, and they listen.",
+        "epic": "Barked at a herd of cows until they walked backwards out of the field.",
+        "legendary": "Ran a whole house of big dogs, cats and a parrot with one bossy little bark."
+      },
+      "moves": {
+        "signature": "Bossy Bark",
+        "legend": "Bow-Tied Pride",
+        "ultimate": "Small Dog Fury Storm"
+      }
+    },
+    "elephant": {
+      "status": "draft",
+      "names": {
+        "common": "Trunkspray",
+        "uncommon": "Peanut Planner",
+        "rare": "Memory Keeper",
+        "epic": "Mudbath Monsoon",
+        "legendary": "Grandmammoth, Who Never Forgets"
+      },
+      "lore": {
+        "common": "Sprays water at everyone in the zoo queue, then flaps its ears to pretend it was the wind.",
+        "uncommon": "Remembers every person who ever gave it a peanut and the ones who didn't.",
+        "rare": "Can pick up a single peanut or a whole tree with its trunk. Usually picks the peanut.",
+        "epic": "Took a mud bath so enthusiastically that the whole safari camp now needs a car wash.",
+        "legendary": "Remembered every birthday of every animal in the jungle for fifty years and threw them all a party on the same day."
+      },
+      "moves": {
+        "legend": "Ear-Flap Distraction",
+        "ultimate": "Stampede Parade"
+      }
+    }
+  }
+}
