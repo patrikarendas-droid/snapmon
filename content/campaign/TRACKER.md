@@ -36,9 +36,9 @@
 | w04-bugs-and-reptiles | 118 | 118 | done: 58 high / 125 medium / 33 low + 9 patterns | 221 fields (`patches/w04-editor-auto.json`, names re-paired) then `w04-self-fixes.json` (apply in that order) | open: Ultimate = Epic name in ~70 objects (pattern), crowd-scene Epics |
 | w05-vehicles-1 | 79 | 79 | done: 28 high / 114 medium / 48 low + 12 patterns | 155 fields (`patches/w05-vehicles-1-editor-auto.json`, half-swaps auto-completed) then `w05-self-fixes.json` | open: templated "N years" Legendaries partly fixed |
 | w06-vehicles-2 | 79 | 79 | done: 38 high / 129 medium / 31 low + 12 patterns | 184 fields (`patches/w06-vehicles-2-editor-auto.json`) then `w06-self-fixes.json` | open: "every Y in town" Epics (pattern) |
-| w07-clothing-and-shoes | 118 | 118 | editor running | self-fixes | |
-| w08-bags-jewellery-and-carry | 94 | 94 | pending | self-fixes | |
-| w09-gadgets-and-computers | 123 | 123 | pending | self-fixes | |
+| w07-clothing-and-shoes | 118 | 118 | done: 268 high / 354 medium / 45 low + 14 patterns | 622 fields (`patches/w07-clothing-and-shoes-editor-auto.json`: Epics/Legendaries/Rares largely rewritten) then `w07-self-fixes.json` | open: Legendary name shape Lady/Sir X of the Y |
+| w08-bags-jewellery-and-carry | 94 | 94 | editor running (with w09) | self-fixes | |
+| w09-gadgets-and-computers | 123 | 123 | editor running (with w08) | self-fixes | |
 | w10–w22 | 1,304 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
@@ -48,6 +48,7 @@
   own story", payment punchlines (charged in biscuits), shake-off soaking a crowd, "seen from space", palaces/emperors.
 - Legendary = a concrete outrageous achievement with a real punchline. Vary legendary name shapes (not always Sir/Lady X).
 - Apply order when re-ingesting a batch: chunks → `<batch>-editor-auto.json` → `<batch>-editor-names.json` (if any) → `<batch>-self-fixes.json`.
+- Rare = a troublesome POWER (not the object simply doing its job well). Epic = a concrete CONSEQUENCE with a joke (not a crowd + comparison). Legendary = an outrageous FEAT with a punchline. Vary Legendary name shapes.
 - Legendaries: avoid "has done X for N years / still has its original …" and "polished every Sunday"; Epics: avoid "every Y in town / a hundred others" crowd scenes without a joke.
 - Names must sit on the rarity whose lore they describe (write names AFTER the lore, per line).
 - Ultimate names: don't reuse the Epic monster name plus Rush/Charge/Storm; give the finisher its own image.
