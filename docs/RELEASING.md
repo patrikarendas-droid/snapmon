@@ -45,6 +45,7 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
    node tests/lore.js && node tests/guide.js && node tests/rules-trace.js && node tests/identity.js && node tests/devtest.js   # rules-trace: odds and battle maths unchanged
    node tests/generator-snapshot.js && node tests/curated.js && node tools/curated.js validate   # live generator frozen; curated content valid
    node tests/gameplay-baseline.js && node tests/ability-keys.js   # gameplay (no text) frozen; stable ability keys
+   node tests/curated-pipeline.js   # inventory up to date, draft names/content never live, lint works
    node tests/god-mode.js && node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots   # developer God Mode
    node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json && node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
    python3 -m http.server 8765 &
