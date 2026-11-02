@@ -106,6 +106,14 @@ Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline and Pilot 02
   mediums (`pilot-02-writer-response.json`). Review: `docs/review/pilot-02-review.md`. Live game, Pilot 01 and
   `src/curated-data.js` byte-identical; builds not rebuilt (validator code in `src/curated.js` changed, runtime
   unchanged: rebuild dist when merging). Next: developer reviews Pilot 02 and decides per entry.
+- **Pilot 02 editorial pass 3 (2026-11-02):** developer approved the pipeline but not yet the content; asked for a
+  third pass on the remaining issues with 10 decisions (Bible strictly; legendary feats, not passive states; varied
+  name structures; no cross-object joke repeats; specific fixes; keep i_hip; preserve good writing; fresh editor).
+  Writer pass 3 (122 logged changes, `content/review/pilot-02-writer-pass3.json`) → fresh independent editor
+  (`pilot-02-issues-pass3.json`: 7 high, 32 medium, 25 low) → pass 3b fixing all highs and substantial mediums
+  (57 changes, `pilot-02-writer-response-pass3.json`). Open: 1 medium (office chair legendary kept as the developer's
+  reference) + 14 low taste notes, all listed in `docs/review/pilot-02-final-report.md` (new `report` command).
+  Still all draft; nothing merged or live.
 - **v0.4.7 developer God Mode (2026-10-31):** Settings → Developer & testing → "God Mode (test battles)", default off,
   remembered like the other developer switches; active only with Quick Monster Test Mode on AND Instant capture off
   (the Settings line says why it is inactive; it never changes the other switches). Engine: `enableGodMode(B)` sets a

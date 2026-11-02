@@ -108,11 +108,12 @@ ${enable ? 'CURATED.enabled = true;      // curated flavour text for new monster
   console.log(`\nlint${batch ? ' (' + batch + ')' : ''}: ${c('high')} high, ${c('medium')} medium, ${c('low')} low. Flags help an editor; they are not verdicts.`);
   process.exit(errors.length || (args.includes('--strict') && c('high')) ? 1 : 0);
 } else if (cmd === 'review') {
-  const batch = args.find(a => !a.startsWith('--')); if (!batch) { console.log('usage: node tools/curated.js review <batch>'); process.exit(1); }
+  const batch = args.find(a => !a.startsWith('--') && !/\.json$/.test(a)); if (!batch) { console.log('usage: node tools/curated.js review <batch> [--review f] [--resolved f]'); process.exit(1); }
   const { docs, errors } = load(files([])); if (errors.length) { for (const e of errors) console.log('ERROR  ', e); process.exit(1); }
-  const issuesFile = path.join(ROOT, 'content/review', batch + '-issues.json'), issues = fs.existsSync(issuesFile) ? JSON.parse(fs.readFileSync(issuesFile, 'utf8')).issues || [] : [];
+  const ropt = k => { const i = args.indexOf(k); return i >= 0 ? path.resolve(args[i + 1]) : null; }; // --review / --resolved pick a later editor pass
+  const issuesFile = ropt('--review') || path.join(ROOT, 'content/review', batch + '-issues.json'), issues = fs.existsSync(issuesFile) ? JSON.parse(fs.readFileSync(issuesFile, 'utf8')).issues || [] : [];
   const out = path.join(ROOT, 'docs/review', batch + '-review.md');
-  const respFile = path.join(ROOT, 'content/review', batch + '-writer-response.json'), resolved = fs.existsSync(respFile) ? JSON.parse(fs.readFileSync(respFile, 'utf8')).resolved || [] : [];
+  const respFile = ropt('--resolved') || path.join(ROOT, 'content/review', batch + '-writer-response.json'), resolved = fs.existsSync(respFile) ? JSON.parse(fs.readFileSync(respFile, 'utf8')).resolved || [] : [];
   fs.mkdirSync(path.dirname(out), { recursive: true }); fs.writeFileSync(out, W.reviewSheet(T, docs, batch, W.lint(T, docs, { batch }), issues, resolved));
   console.log(`wrote ${path.relative(ROOT, out)}`);
 } else if (cmd === 'report') {

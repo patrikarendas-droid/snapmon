@@ -11,8 +11,8 @@
     proposed  : Toasts pictures onto bread: a smiley face for friends, a rude face for whoever forgot to empty the crumb tray.
   EPIC   name: Toastygeist  →  Breakfast Volcano (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. It still freezes the milk and melts the ice cream.
-    proposed  : Launched a whole loaf into orbit around the kitchen light. Breakfast now comes round every ninety minutes, slightly singed.
-  LEGENDARY   name: Toastyrex, the Storm-Born Toaster  →  The Grand Toastmaster (draft name, not used by the game)
+    proposed  : Toasted every slice in the bakery at once. The neighbours woke up to the smell, and the fire brigade arrived with jam.
+  LEGENDARY   name: Toastyrex, the Storm-Born Toaster  →  Toastus Maximus (draft name, not used by the game)
     now:      Before the first toaster was ever made, it was already waiting. It will remain after the last.
     proposed  : Toasted a cloud until it went golden brown. Now it only rains butter on Sundays.
   MOVES (names only; numbers never change)
@@ -40,7 +40,7 @@
     proposed  : Boiled the village pond for a cup of tea, after politely asking the ducks to wait on the bank. They are now queuing for biscuits.
   LEGENDARY   name: Boilyrchon, the Ravenous Kettle  →  Bubbleworth the Everboil (draft name, not used by the game)
     now:      Ancient texts call it the Ravenous Kettle. When it wakes, no one in the city can sleep for a week.
-    proposed  : Has been boiling the same water since the Stone Age. It is still waiting for someone to say when.
+    proposed  : Boiled so hard that its lid shot into orbit. It whistles every time it passes over the house, and the family time their tea by it.
   MOVES (names only; numbers never change)
     signature              Scalding Splash [100% power · burn 55%]
     legend                 Hunger of the Kettle [85% power · drain]  →  Slurp It Back
@@ -57,16 +57,16 @@
     proposed  : Hums louder whenever the room goes quiet. Stare at it and it stops, pretending it never started.
   UNCOMMON   name: Frostymon  →  Butterbluff (draft name, not used by the game)
     now:      Some say it is the refrigerator you lost years ago, come back changed.
-    proposed  : Moves the butter behind the jam every night, then hums innocently when you finally find it.
+    proposed  : Moves the butter to a different shelf every night. Toast now comes with a treasure map.
   RARE   name: Frostygloom  →  Leftover Lurker (draft name, not used by the game)
     now:      Wherever it sleeps, the corner of the utility room grows strangely quiet, as if listening. Collectors pay a fortune for a trace of its electric hums.
     proposed  : Keeps leftovers fresh for ever, including the ones everybody wanted to forget. The lasagne from years ago still asks how you are.
-  EPIC   name: Frostydrake  →  Glacier Door (draft name, not used by the game)
+  EPIC   name: Frostydrake  →  Polar Lodger (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. It leaves frost wherever it goes.
-    proposed  : Opened its door during a heatwave and cooled the whole street. Penguins have started moving into the neighbourhood.
+    proposed  : Kept its door open all night to cool the bedroom. The family woke up next to a polar bear asking for the milk.
   LEGENDARY   name: Frostycolossus, the Starlit Refrigerator  →  The Cold Shoulder (draft name, not used by the game)
     now:      Kingdoms have fallen to its Deep Freeze. Hunters call it the Starlit Refrigerator, and only in whispers.
-    proposed  : Its little light stays on when the door closes, and it has seen everything. It is writing a cookbook about you.
+    proposed  : Froze a heatwave solid and keeps it in the ice tray. On cold days it pops out a cube of summer for anyone who asks.
   MOVES (names only; numbers never change)
     signature              Deep Freeze [85% power · stun 35%]
     legend                 Thousand Refrigerator Strikes [45% power × 3]  →  Fridge Magnet Barrage
@@ -89,16 +89,16 @@
     proposed  : Sucked the pattern off a carpet and spat it onto the ceiling. The room is now upside down, decoratively.
   EPIC   name: Suckledrake  →  Living Room Cyclone (draft name, not used by the game)
     now:      Its Big Suck has flattened whole neighbourhoods of lesser spirits, and it is still growing. Seasoned hunters turn back when they find its frost.
-    proposed  : Vacuumed a whole beach in one afternoon. The sandcastle competition has moved into its dust bag.
-  LEGENDARY   name: Suckleltimus, the Thunderous Vacuum Cleaner  →  Dustmouth, the Bottomless (draft name, not used by the game)
+    proposed  : Vacuumed the beach in one afternoon. The sandcastle competition has moved into its dust bag.
+  LEGENDARY   name: Suckleltimus, the Thunderous Vacuum Cleaner  →  Tornado Tamer (draft name, not used by the game)
     now:      Before the first vacuum cleaner was ever made, it was already waiting. It will remain after the last.
-    proposed  : Has sucked up every lost sock in history. They have formed a tiny country inside the bag and elected a left foot.
+    proposed  : Sucked up a tornado to stop it messing up the garden. It now uses it as a very powerful attachment.
   MOVES (names only; numbers never change)
     signature              Big Suck [90% power · drain]
     legend                 Blight of the Vacuum Cleaner [90% power · poison 50%]  →  Dust Bag Burst
-    ultimate               Creeping Vacuum Cleaner Blight [normal: 210% power · poison 60% / spectral: 210% power · defdown 60% / mutated: 210% power · poison 60%]  →  Clean Sweep
+    ultimate               Creeping Vacuum Cleaner Blight [normal: 210% power · poison 60% / spectral: 210% power · defdown 60% / mutated: 210% power · poison 60%]  →  Dust Storm
     kit.frost_breath       Frost Breath [90% power · defdown 45%]  →  Dust Bunny Ambush
-    kit.power_hum          Power Hum [80% power · stun 30%]  →  Deafening Drone
+    kit.power_hum          Power Hum [80% power · stun 30%]  →  Roaring Drone
     kit.cold_storage       Cold Storage [0% power · defup (self)]  →  Bumper Guard
     kit.ice_cube_barrage   Ice Cube Barrage [45% power × 3]
   notes: Appliance-kit defaults (Frost Breath, Cold Storage) did not fit a vacuum; renamed to match their effects (defence down, self defence up).
@@ -115,15 +115,15 @@
     proposed  : Walks across the kitchen on its spin cycle and sits by the door when it wants to go out.
   EPIC   name: Spinnygeist  →  Spin Thunder (draft name, not used by the game)
     now:      Its Spin Cycle has flattened whole neighbourhoods of lesser spirits, and it is still growing. The ground is still warm where it last slept.
-    proposed  : Washed every flag in town until it turned white. The next town over thinks everyone has surrendered.
+    proposed  : Washed every football kit in town together. Both teams are pink now, and the referee keeps sending off the wrong player.
   LEGENDARY   name: Spinnymega, the Ever-Burning Washing Machine  →  Tumbletide, Keeper of Lint (draft name, not used by the game)
     now:      Every washing machine in the world answers to it. It has begun to call them home.
-    proposed  : Spun so fast it went back in time and washed a pair of dinosaur pyjamas. Museums keep finding fossils of very tiny socks.
+    proposed  : Spun so fast that it became a whirlpool in the sea. Ships come out the other side clean, folded and missing one sock each.
   MOVES (names only; numbers never change)
     signature              Spin Cycle [45% power × 3]
     legend                 Hunger of the Washing Machine [85% power · drain]  →  Sock Snatch
-    ultimate               Washing Machine Plague [normal: 210% power · poison 60% / spectral: 210% power · burn 60% / mutated: 210% power · burn 60%]  →  Final Rinse
-    kit.frost_breath       Frost Breath [90% power · defdown 45%]  →  Cold Wash
+    ultimate               Washing Machine Plague [normal: 210% power · poison 60% / spectral: 210% power · burn 60% / mutated: 210% power · burn 60%]  →  Spin Cycle Finale
+    kit.frost_breath       Frost Breath [90% power · defdown 45%]  →  Shrink Wash
     kit.power_hum          Power Hum [80% power · stun 30%]  →  Unbalanced Load
     kit.cold_storage       Cold Storage [0% power · defup (self)]  →  Child Lock
     kit.ice_cube_barrage   Ice Cube Barrage [45% power × 3]
@@ -137,13 +137,13 @@
     proposed  : Gives everything it touches static electricity. Balloons follow it around like ducklings.
   RARE   name: Blowygloom  →  Dry Spell (draft name, not used by the game)
     now:      An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but electric hums. Few hunters have seen one up close.
-    proposed  : Dried a whole swimming pool so the swimmers would keep their hair neat. They are sitting in the empty pool, looking amazing.
+    proposed  : Dried the swimming pool so the swimmers would keep their hair neat. They are sitting in the empty pool, looking amazing.
   EPIC   name: Blowyzilla  →  Hurricane Curls (draft name, not used by the game)
     now:      Its Deep Freeze has flattened whole neighbourhoods of lesser spirits, and it is still growing. Seasoned hunters turn back when they find its frost.
     proposed  : Styled a hedge maze into a giant perm. Visitors keep getting lost in the curls.
   LEGENDARY   name: Blowycolossus, the Living Hair Dryer  →  Lady Blowout, the Storm Stylist (draft name, not used by the game)
     now:      Where this hair dryer takes hold, summer freezes solid in a single breath. Even the gods fear the eternal winter.
-    proposed  : Gave a mountain a blow-dry. The snow on top now has a fringe and refuses to melt in case it frizzes.
+    proposed  : Gave a snowy mountain a blow-dry. The snow on top now has a fringe, and skiers have to swerve round the curls.
   MOVES (names only; numbers never change)
     signature              Deep Freeze [85% power · stun 35%]  →  Frizz Blast
     legend                 Fire of the Hair Dryer [100% power · burn 40%]  →  Scorched Fringe
@@ -157,7 +157,7 @@
 === x_rolling_pin — Rolling pin · category Tool · group kitchen · family household · draft · content/curated/pilot-02-draft.json
   COMMON   name: Pinbit  →  Bonkpin (draft name, not used by the game)
     now:      You have probably met one already: it is always in the dishwasher when you need it.
-    proposed  : Rolls off the counter the second you put it down. It has bruised more toes than any table leg.
+    proposed  : Hides behind the whisk at the back of the drawer, so you end up rolling the pastry with a tin of beans.
   UNCOMMON   name: Pinster  →  Flourwhisp (draft name, not used by the game)
     now:      Some say it is the rolling pin you lost years ago, come back changed.
     proposed  : Rolls pastry so thin you can read through it. The baker now reads the morning news on her pie crust.
@@ -182,7 +182,7 @@
 === cutlery_spoon — Spoon · category Tool · group kitchen · family household · draft · content/curated/pilot-02-draft.json
   COMMON   name: Spoonyling  →  Clinkle (draft name, not used by the game)
     now:      You have probably met one already: it clatters onto the floor at the quietest moment.
-    proposed  : Hides under the bubbles at the bottom of the washing-up bowl. It loves the surprised yelp.
+    proposed  : Hangs off your nose at dinner, then drops into the soup at the exact moment someone takes a photo.
   UNCOMMON   name: Spoonymon  →  Bendini (draft name, not used by the game)
     now:      Some say it is the spoon you lost years ago, come back changed.
     proposed  : Bends itself whenever someone stares at it, then straightens up and blames the fork.
@@ -192,7 +192,7 @@
   EPIC   name: Spoonynaught  →  Soupnami (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. It leaves crumbs wherever it goes.
     proposed  : Stirred the harbour so hard it became a whirlpool of soup. Fishing boats now come home with croutons.
-  LEGENDARY   name: Spoonyrchon, the Ever-Watching Spoon  →  The Silver Spoon (draft name, not used by the game)
+  LEGENDARY   name: Spoonyrchon, the Ever-Watching Spoon  →  Spoonik, the Pea Launcher (draft name, not used by the game)
     now:      Where this spoon takes hold, every kitchen in the land falls silent. Even the gods fear every meal ever made.
     proposed  : Catapulted one pea off its handle so hard that it never came down. Children wave at it every evening from the dinner table.
   MOVES (names only; numbers never change)
@@ -217,10 +217,10 @@
     proposed  : Carries its own small raincloud everywhere, even on sunny days. It says it is just being prepared.
   EPIC   name: Brollysaur  →  Monsoon Mushroom (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. It was last seen near the lost-property office.
-    proposed  : Opened over a whole football stadium during the final. Nobody got wet, and nobody could see the match either.
+    proposed  : Opened over the football stadium during the final. Nobody got wet, and nobody could see the match either.
   LEGENDARY   name: Brollycolossus, the Old Umbrella  →  Captain Canopy, Rainmaster (draft name, not used by the game)
     now:      Kingdoms have fallen to its Spoke Jab. Hunters call it the Old Umbrella, and only in whispers.
-    proposed  : Has kept the same family dry for nine hundred years. It has never once been left on a bus.
+    proposed  : Opened so wide during a storm that it lifted the street like a kite. Everyone landed in the next town, completely dry.
   MOVES (names only; numbers never change)
     signature              Spoke Jab [45% power × 3]
     legend                 Hunger of the Umbrella [85% power · drain]  →  Rain Catcher
@@ -234,18 +234,18 @@
   COMMON   name: Flushling  →  Gurgles (draft name, not used by the game)
     now:      It gurgles hungrily whenever someone forgets to close the lid.
     proposed  : Keeps running for a minute after you leave, just so you come back and jiggle the handle.
-  UNCOMMON   name: Flushmon  →  Gurgle Guru (draft name, not used by the game)
+  UNCOMMON   name: Flushmon  →  Bowlwhisper (draft name, not used by the game)
     now:      Watch the bathroom at 3 a.m. after midnight: it rearranges things there, one tiny detail at a time.
     proposed  : Gurgles a reply whenever someone talks to themselves in the bathroom. Its advice is surprisingly good.
   RARE   name: Flushgoyle  →  Flushback (draft name, not used by the game)
     now:      An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but suspicious bubbles. Collectors pay a fortune for a trace of its blue cleaning foam.
-    proposed  : Flushes so powerfully that small things come back from the sea. Last Tuesday it returned a message in a bottle.
+    proposed  : Flushes backwards whenever someone drops a phone in, then hands it back with a gurgle of disapproval.
   EPIC   name: Flushgeist  →  Royal Flush (draft name, not used by the game)
     now:      It was sealed beneath the bathroom at 3 a.m. long ago. The seal did not hold.
-    proposed  : Flushed during a thunderstorm and sucked the storm down the pipes. Every tap in town now rumbles when it rains.
+    proposed  : Flushed during a thunderstorm and sucked the storm down the pipes. Every tap on the street now rumbles when it rains.
   LEGENDARY   name: Flushsovereign, the Unmoving Toilet  →  The Porcelain Throne (draft name, not used by the game)
     now:      Kingdoms have fallen to its Flush Vortex. Hunters call it the Unmoving Toilet, and only in whispers.
-    proposed  : Once flushed a whole traffic jam out of the city. Commuters arrived at work early, slightly damp and very confused.
+    proposed  : Once flushed a traffic jam out of the city. Commuters arrived at work early, slightly damp and very confused.
   MOVES (names only; numbers never change)
     signature              Flush Vortex [125% power · stun 25%]
     legend                 Bulwark of the Toilet [0% power · defup (self)]  →  Lid Down
@@ -257,12 +257,12 @@
   notes: Kept family-friendly: plumbing jokes only. Default 'Flush Vortex' and 'Plunger Pull' already fit.
 
 === clock — Alarm clock · category Clock / Watch · group – · family spectral · draft · content/curated/pilot-02-draft.json
-  COMMON   name: Tockling  →  Snoozle (draft name, not used by the game)
+  COMMON   name: Tockling  →  Tickle-Tock (draft name, not used by the game)
     now:      Lives in the station wall and rings one minute after you fall back asleep.
     proposed  : Rings one minute after you finally fall back asleep. It has been practising its timing for years.
   UNCOMMON   name: Tockimp  →  Ringaling (draft name, not used by the game)
     now:      Nobody knows how it got into the station wall. The only clue is the ticking echoes it leaves behind, glowing faintly at night.
-    proposed  : Moves its hands forward five minutes whenever you are late, and back again the moment you check.
+    proposed  : Runs five minutes fast on school days and five minutes slow on Saturdays. It thinks this is perfectly fair.
   RARE   name: Tockgloom  →  Minute Thief (draft name, not used by the game)
     now:      An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but ticking echoes. Few hunters have seen one up close.
     proposed  : Steals one minute from every morning in town and keeps them in a jar. It is saving up for a very long lunch.
@@ -294,10 +294,10 @@
     proposed  : Started a pillow fight at a sleepover that is still going on. The children are grandparents now and very good at dodging.
   EPIC   name: Fluffdrake  →  Feather Blizzard (draft name, not used by the game)
     now:      When it stirs, the whole city falls asleep and dreams the same dream. Hunters mark its lair on their maps in red.
-    proposed  : Burst over the town and it snowed feathers for a week. Every snowball fight turned into a tickle fight.
+    proposed  : Burst over the school and it snowed feathers for a week. Every snowball fight turned into a tickle fight.
   LEGENDARY   name: Fluffomega, the Old Pillow  →  The Duke of Doze (draft name, not used by the game)
     now:      Ancient texts call it the Old Pillow. When it wakes, the whole city falls asleep and dreams the same dream.
-    proposed  : Is so comfortable that mountains lie down on it to rest. That is why some of them are flat on top.
+    proposed  : Fluffed itself up so big that a passing jumbo jet landed on it for a nap. The passengers woke up in the right country, feeling wonderful.
   MOVES (names only; numbers never change)
     signature              Lullaby [60% power · stun 50%]
     legend                 Blight of the Pillow [90% power · poison 50%]  →  Drool Puddle
@@ -312,18 +312,18 @@
   COMMON   name: Couchling  →  Crumbhoard (draft name, not used by the game)
     now:      You have probably met one already: it swallows remote controls and refuses to give them back.
     proposed  : Swallows the TV remote whenever the show gets good. It gives it back during the adverts.
-  UNCOMMON   name: Couchbug  →  Sofa Portal (draft name, not used by the game)
+  UNCOMMON   name: Couchbug  →  Coin Gobbler (draft name, not used by the game)
     now:      It hums a tune no one taught it. Pets refuse to go near the gap between the cushions when it does.
     proposed  : Has a secret pocket between the cushions that leads to every other sofa in town. Coins travel very far.
   RARE   name: Couchex  →  Lazybones Loveseat (draft name, not used by the game)
     now:      It remembers every hunter who failed to catch it, and it keeps count. Collectors pay a fortune for a trace of its lost coins.
     proposed  : Hugs anyone who sits down so warmly they cannot get up. A man came round for five minutes in March and is still there.
-  EPIC   name: Couchzilla  →  The Sofa Abyss (draft name, not used by the game)
+  EPIC   name: Couchzilla  →  Cushionosaurus (draft name, not used by the game)
     now:      Old almanacs warn: if the sofa goes silent, run. That silence is this creature breathing in.
     proposed  : Grew so many cushions that it filled the living room, the stairs and the garden shed. The family now lives on top of it.
   LEGENDARY   name: Couchcolossus, the Unmoving Sofa  →  Snugglemount, the Coin Hoard (draft name, not used by the game)
     now:      Whole civilisations sat down on it for "just five minutes". None of them ever got up.
-    proposed  : Swallowed a whole cinema audience during the trailers. They refuse to come out, because the seats are comfier than the film.
+    proposed  : Ate a whole cinema's worth of popcorn through the gaps between its cushions. The film had to be paused while it digested.
   MOVES (names only; numbers never change)
     signature              Cushion Swallow [95% power · drain]
     legend                 Fall of the Sofa [120% power]  →  Belly Flop
@@ -339,16 +339,16 @@
     proposed  : Flickers right at the scary part of every film, then glows innocently.
   UNCOMMON   name: Lumenimp  →  Mothcatcher (draft name, not used by the game)
     now:      Throw it out of the dark corner of the room and it is back by morning, a little bigger every time.
-    proposed  : Switches itself on whenever you whisper a secret, so everyone can see your face.
+    proposed  : Switches itself on whenever someone tiptoes to the kitchen at night. The biscuit tin now has witnesses.
   RARE   name: Lumengoyle  →  Glarebear (draft name, not used by the game)
     now:      Its Blinding Glare can be heard three streets away. Lesser monsters scatter when it wakes.
     proposed  : Casts shadow puppets on the wall that keep acting after you put your hands down. The rabbit one has learned to wave.
   EPIC   name: Lumenosaur  →  Midnight Sun (draft name, not used by the game)
     now:      Old almanacs warn: if the table lamp goes silent, run. That silence is this creature breathing in.
-    proposed  : Shone so brightly during a power cut that the whole street held a garden party in its light. Moths flew in from abroad.
-  LEGENDARY   name: Lumenomega, the Storm-Born Table Lamp  →  Lumen the Unswitchable (draft name, not used by the game)
+    proposed  : Shone so brightly during a power cut that the neighbours held a garden party in its light. Moths flew in from abroad.
+  LEGENDARY   name: Lumenomega, the Storm-Born Table Lamp  →  Admiral Glow (draft name, not used by the game)
     now:      Before the first table lamp was ever made, it was already waiting. It will remain after the last.
-    proposed  : Has been left on for a hundred years because nobody can find its switch. The electricity company sends it birthday cards.
+    proposed  : Swapped jobs with a lighthouse for a week. Ships kept docking in the living room, and the lighthouse read every book on the shelf.
   MOVES (names only; numbers never change)
     signature              Blinding Glare [80% power · stun 35%]
     legend                 Wrath of the Table Lamp [0% power · atkup (self)]  →  Full Wattage
@@ -366,15 +366,15 @@
   UNCOMMON   name: Wickster  →  Relightie (draft name, not used by the game)
     now:      Some say it is the candle you lost years ago, come back changed.
     proposed  : Relights itself every time you blow it out, then flickers as if it is laughing.
-  RARE   name: Wickfiend  →  Sir Drippalot (draft name, not used by the game)
+  RARE   name: Wickfiend  →  Drip Dragon (draft name, not used by the game)
     now:      An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but dripping wax. It is never found in the same place twice.
-    proposed  : Grants birthday wishes, but only the ones you forgot to say out loud. One boy got a pony he had only mumbled about.
+    proposed  : Grants birthday wishes, but only the ones you forgot to make. One boy got the pony he wanted last year.
   EPIC   name: Wicktron  →  Birthday Bonfire (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. It was last seen near the birthday cake.
-    proposed  : Lit so many birthday candles at once that the cake became a lighthouse. Ships kept stopping for a slice.
-  LEGENDARY   name: Wickarchon, the Storm-Born Candle  →  The Wish Keeper (draft name, not used by the game)
+    proposed  : Lit so many candles on one birthday cake that the guests had to wear sunglasses. The cake now has its own fire marshal.
+  LEGENDARY   name: Wickarchon, the Storm-Born Candle  →  Waxwatch (draft name, not used by the game)
     now:      Ancient texts call it the Storm-Born Candle. When it wakes, the sky glows orange from coast to coast.
-    proposed  : Has kept the same tiny flame alive since the very first birthday. Every wish is written in its smoke, and most are about cake.
+    proposed  : Melted down and re-formed as a candle as tall as a tower block. The town uses it as a clock and goes to bed when it burns down to the next floor.
   MOVES (names only; numbers never change)
     signature              Wax Inferno [100% power · burn 65%]
     legend                 Curse of the Candle [60% power · defdown 70%]  →  Wax Puddle
@@ -385,13 +385,13 @@
     kit.melt               Melt [85% power · drain]
 
 === potted_plant — Potted plant · category Plant / Flower · group – · family botanical · draft · content/curated/pilot-02-draft.json
-  COMMON   name: Fernling  →  Droopy (draft name, not used by the game)
+  COMMON   name: Fernling  →  Leafdropper (draft name, not used by the game)
     now:      Lives in the sunny windowsill and leans toward the window by day and toward you by night.
     proposed  : Drops one leaf every time you forget to water it, right where you will see it.
   UNCOMMON   name: Fernimp  →  Leanbean (draft name, not used by the game)
     now:      It hums a tune no one taught it. Pets refuse to go near the corner nobody waters when it does.
     proposed  : Leans towards the window by day and towards the biscuit tin by night.
-  RARE   name: Fernwraith  →  Sunspot (draft name, not used by the game)
+  RARE   name: Fernwraith  →  Sunroom Sneak (draft name, not used by the game)
     now:      An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but pale pollen. It is never found in the same place twice.
     proposed  : Moves to a sunnier room while everyone sleeps. The family keeps finding it in the bathroom, looking pleased.
   EPIC   name: Fernaught  →  Jungle Downstairs (draft name, not used by the game)
@@ -399,7 +399,7 @@
     proposed  : Grew through the floor into the flat downstairs. The neighbours now have to water their ceiling.
   LEGENDARY   name: Fernarchon, the Deep-Rooted Potted Plant  →  Queen of the Windowsill (draft name, not used by the game)
     now:      Its roots have quietly wrapped around the planet. It is waiting for the gardeners to sleep.
-    proposed  : Its roots have quietly wrapped around the whole town. If anyone forgets to water it, every pipe in the street gurgles a reminder.
+    proposed  : Grew one leaf so big that the town uses it as an umbrella on rainy days. On sunny days it charges rent for the shade.
   MOVES (names only; numbers never change)
     signature              Thorn Lash [105% power · poison 50%]
     legend                 Shadow of the Potted Plant [90% power · defdown 45%]  →  Soggy Soil
@@ -411,7 +411,7 @@
   notes: Ultimate always stuns (no variant difference), so a stun-flavoured name is fine.
 
 === office_chair — Office chair · category Chair / Table · group – · family household · draft · content/curated/pilot-02-draft.json
-  COMMON   name: Swivelet  →  Squeakwheel (draft name, not used by the game)
+  COMMON   name: Swivelet  →  Sinkabout (draft name, not used by the game)
     now:      Lives in the head of the dinner table and wobbles only when someone important sits on it.
     proposed  : Sinks one notch lower every hour until you are typing with your chin.
   UNCOMMON   name: Swivelnik  →  Rollaway (draft name, not used by the game)
@@ -419,7 +419,7 @@
     proposed  : Rolls silently away whenever you stand up, so you always sit down on the floor.
   RARE   name: Swivelhex  →  Corridor Comet (draft name, not used by the game)
     now:      Wherever it sleeps, the head of the dinner table grows strangely quiet, as if listening. It is never found in the same place twice.
-    proposed  : Races down the corridors at night. Security footage shows it beating the water cooler by a wheel.
+    proposed  : Races down the corridors at night. Security footage shows it doing laps of the photocopier and winning.
   EPIC   name: Swiveldrake  →  Floordrill (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. Look for loose screws near the head of the dinner table.
     proposed  : Spun so fast in a meeting that it drilled through four floors. It arrived in the basement with the minutes neatly taken.
@@ -439,10 +439,10 @@
 === laptop — Laptop · category Laptop / PC · group – · family mechanical · draft · content/curated/pilot-02-draft.json
   COMMON   name: Lappylet  →  Loady (draft name, not used by the game)
     now:      Installs updates at the worst possible moment out of pure spite.
-    proposed  : Starts an update the moment you are in a hurry. The progress bar has said 99% since Tuesday.
-  UNCOMMON   name: Lappybug  →  Typo Goblin (draft name, not used by the game)
+    proposed  : Starts an update the moment you are in a hurry. The progress bar has said 99% since breakfast.
+  UNCOMMON   name: Lappybug  →  Hot Mic Gremlin (draft name, not used by the game)
     now:      Nobody knows how it got into the server room. The only clue is the warm crumbs in the keyboard it leaves behind, glowing faintly at night.
-    proposed  : Types the next word before you think of it, and it is always the wrong word. Your homework is now about ducks.
+    proposed  : Unmutes you at the worst possible moment. The whole class heard you singing to your hamster.
   RARE   name: Lappyfiend  →  Tab Hoarder (draft name, not used by the game)
     now:      It remembers every hunter who failed to catch it, and it keeps count. Few hunters have seen one up close. Look for warm crumbs in the keyboard near the server room.
     proposed  : Opens a hundred tabs whenever you look away and closes the one you needed. Its fan sounds like smug laughter.
@@ -451,7 +451,7 @@
     proposed  : Sent one email to everyone in the country, and everyone pressed reply-all. The internet had to have a little lie-down.
   LEGENDARY   name: Lappyrex, the Unbroken Laptop  →  Bartholomew Backup (draft name, not used by the game)
     now:      Every laptop in the world answers to it. It has begun to call them home.
-    proposed  : Saved a backup copy of the whole world, just in case. When anything goes wrong, it threatens to restore last Tuesday.
+    proposed  : Saved a backup copy of the world, just in case. When anything goes wrong, it threatens to restore yesterday.
   MOVES (names only; numbers never change)
     signature              Blue Screen [85% power · stun 40%]
     legend                 Fire of the Laptop [100% power · burn 40%]  →  Lap Roaster
@@ -474,10 +474,10 @@
     proposed  : Autocorrects whatever people say out loud. The head teacher's speech about safety became a speech about soup.
   EPIC   name: Swipezilla  →  Group Chat Goliath (draft name, not used by the game)
     now:      It was sealed beneath the charging cable you can never find long ago. The seal did not hold.
-    proposed  : Sent a notification to every phone in the country at once. A whole nation looked down, and every bus missed its stop.
-  LEGENDARY   name: Swipemega, the Ever-Turning Smartphone  →  The One Bar of Signal (draft name, not used by the game)
+    proposed  : Sent one text that went round the world twice and came back with replies in forty languages. It still has not read any of them.
+  LEGENDARY   name: Swipemega, the Ever-Turning Smartphone  →  Signalmaster Swipe (draft name, not used by the game)
     now:      It holds every message ever sent. When it finally rings, the whole world will answer.
-    proposed  : Has exactly one bar of signal, and that bar reaches everywhere. It once received a text from next Thursday.
+    proposed  : Found signal at the bottom of the sea and ordered a pizza for a submarine. The delivery rider now owns a very good wetsuit.
   MOVES (names only; numbers never change)
     signature              Notification Spam [42% power × 3]
     legend                 Curse of the Smartphone [60% power · defdown 70%]  →  Cracked Screen
@@ -493,16 +493,16 @@
     proposed  : Turns the volume up for the adverts and down for the bit everyone was waiting for.
   UNCOMMON   name: Tellyster  →  Channel Hopper (draft name, not used by the game)
     now:      Nobody knows how it got into the waiting room wall. The only clue is the reruns it leaves behind, glowing faintly at night.
-    proposed  : Changes the channel whenever someone says 'last one, then bed'.
+    proposed  : Whenever someone says 'last one, then bed', it changes the channel to the start of a brand-new film.
   RARE   name: Tellyhex  →  Screen Escapee (draft name, not used by the game)
     now:      An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but reruns. Few hunters have seen one up close.
     proposed  : Lets the characters climb out of the screen during the ad break. They raid the fridge and climb back in before the show restarts.
   EPIC   name: Tellydrake  →  Cliffhanger (draft name, not used by the game)
     now:      When it stirs, every screen on earth shows the same face. Hunters mark its lair on their maps in red.
-    proposed  : Showed one cliffhanger so gripping that the whole city stayed on the sofa for a week. Pizza deliveries tripled.
-  LEGENDARY   name: Tellymega, the Ever-Turning Television  →  The Never-Ending Rerun (draft name, not used by the game)
+    proposed  : Showed one cliffhanger so gripping that half the city stayed on the sofa for a week. Pizza deliveries tripled.
+  LEGENDARY   name: Tellymega, the Ever-Turning Television  →  Skyscreen (draft name, not used by the game)
     now:      Where this television takes hold, every screen on earth shows the same face. Even the gods fear every broadcast ever sent.
-    proposed  : Has been showing the same rerun since television was invented. It is still convinced the ending might change.
+    proposed  : Turned the night sky into a giant screen for the cup final. A cloud started buffering at the penalty, and millions groaned.
   MOVES (names only; numbers never change)
     signature              Static Storm [90% power · stun 30%]
     legend                 Rebirth of the Television [0% power · heal (self)]  →  Previously On
@@ -514,7 +514,7 @@
   notes: 'Ad Break' (self heal) is a perfect default and is kept.
 
 === remote — Remote control · category Phone · group – · family mechanical · draft · content/curated/pilot-02-draft.json
-  COMMON   name: Zappy  →  Cushion Ghost (draft name, not used by the game)
+  COMMON   name: Zappy  →  Wrong-Way Zapper (draft name, not used by the game)
     now:      A tiny troublemaker that buzzes in your pocket when nobody called.
     proposed  : Works perfectly for everyone except whoever is holding it. Point it at the TV and the microwave starts.
   UNCOMMON   name: Zappynik  →  Neighbourclick (draft name, not used by the game)
@@ -525,10 +525,10 @@
     proposed  : Rewinds arguments by ten seconds, so everyone has to have them again, word for word.
   EPIC   name: Zappydrake  →  Volume Vandal (draft name, not used by the game)
     now:      Old almanacs warn: if the remote control goes silent, run. That silence is this creature breathing in.
-    proposed  : Turned the whole town's volume up. Whispers can be heard in the next county, and the library has given up.
+    proposed  : Turned everything in the street up to full volume. Whispers can be heard in the next county, and the library has given up.
   LEGENDARY   name: Zappyrchon, the Iron-Hearted Remote Control  →  Clickmaster General (draft name, not used by the game)
     now:      Every remote control in the world answers to it. It has begun to call them home.
-    proposed  : Has a button for everything, including weekends. It once pressed fast-forward and the summer holidays were over by lunch.
+    proposed  : Pressed pause on a football match and the ball stopped in mid-air for a week. Pigeons nested on it.
   MOVES (names only; numbers never change)
     signature              Notification Spam [42% power × 3]  →  Button Barrage
     legend                 Blight of the Remote Control [90% power · poison 50%]  →  Sticky Buttons
@@ -570,20 +570,20 @@
     proposed  : Always ends up in the drawer you already checked, pointing at you.
   UNCOMMON   name: Snippygrub  →  Wonkycut (draft name, not used by the game)
     now:      Throw it out of the meeting room and it is back by morning, a little bigger every time.
-    proposed  : Cuts a perfectly straight line through anything, except the one thing you need cut straight.
-  RARE   name: Snippyfiend  →  Shadow Snipper (draft name, not used by the game)
+    proposed  : Cuts paper chains so long that they reach the next classroom. The paper people keep holding hands with strangers.
+  RARE   name: Snippyfiend  →  Fringe Fiend (draft name, not used by the game)
     now:      Wherever it sleeps, the meeting room grows strangely quiet, as if listening. Collectors pay a fortune for a trace of its paper cuts.
     proposed  : Gives everyone it meets a free haircut, very fast and very wonky. The football team now has matching fringes.
-  EPIC   name: Snippyzilla  →  Bridge Snip (draft name, not used by the game)
+  EPIC   name: Snippyzilla  →  Ribbon Ripper (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. Look for sticky notes near the office supply cupboard.
     proposed  : Cut the ribbon at a bridge opening, then kept going and cut the bridge. The new ferry service is very popular.
-  LEGENDARY   name: Snippyrex, the Patient Scissors  →  Snipperella, Cutter of Thursdays (draft name, not used by the game)
+  LEGENDARY   name: Snippyrex, the Patient Scissors  →  Snipperella, Cutter of Skies (draft name, not used by the game)
     now:      Kingdoms have fallen to its Snip Snip. Hunters call it the Patient Scissors, and only in whispers.
-    proposed  : Snipped Thursday out of the week to make it shorter. Nobody has missed it except the bin men.
+    proposed  : Cut the ribbon on the horizon and the sky fell open like a curtain. Behind it was a very surprised stagehand.
   MOVES (names only; numbers never change)
     signature              Snip Snip [50% power × 3]
     legend                 Fire of the Scissors [100% power · burn 40%]  →  Sparks Fly
-    ultimate               Scissors Plague [normal: 210% power · poison 60% / spectral: 210% power · burn 60% / mutated: 210% power · stun 60%]  →  Final Cut
+    ultimate               Scissors Plague [normal: 210% power · poison 60% / spectral: 210% power · burn 60% / mutated: 210% power · stun 60%]  →  Cut and Paste
     kit.paper_cut          Paper Cut [45% power × 3]
     kit.ink_splatter       Ink Splatter [90% power · poison 50%]  →  Rusty Snip
     kit.deadline_panic     Deadline Panic [80% power · stun 30%]  →  Running With Scissors
@@ -596,19 +596,19 @@
     proposed  : Jams on the last page of every important report. It loves the sound of quiet panic.
   UNCOMMON   name: Staplyster  →  Paperbiter (draft name, not used by the game)
     now:      Watch the office supply cupboard after midnight: it rearranges things there, one tiny detail at a time.
-    proposed  : Staples together things that were never meant to meet. A sock, a sandwich and the head teacher's tie are now best friends.
-  RARE   name: Staplyhex  →  Ka-Chunker (draft name, not used by the game)
+    proposed  : Staples together things that were never meant to meet. A spoon, a sandwich and the head teacher's tie are now best friends.
+  RARE   name: Staplyhex  →  Clackmouth (draft name, not used by the game)
     now:      It remembers every hunter who failed to catch it, and it keeps count. Collectors pay a fortune for a trace of its paper cuts.
-    proposed  : Clacks its jaw at anyone who walks past without saying good morning. The whole office now greets the stapler.
+    proposed  : Clacks its jaw at anyone who walks past without saying good morning. Everyone in the office now greets the stapler.
   EPIC   name: Staplygeist  →  Desk Crocodile (draft name, not used by the game)
     now:      Old almanacs warn: if the stapler goes silent, run. That silence is this creature breathing in.
-    proposed  : Stapled the school timetable to the wall so firmly that Monday cannot be moved. It has been Monday for a month.
+    proposed  : Stapled two towns together at the edges. Neighbours now borrow sugar from people forty miles away.
   LEGENDARY   name: Staplymega, the Unmoving Stapler  →  Ironjaw the Binder (draft name, not used by the game)
     now:      Kingdoms have fallen to its Staple Storm. Hunters call it the Unmoving Stapler, and only in whispers.
     proposed  : Bound every page ever written into one enormous book. The library had to move into it.
   MOVES (names only; numbers never change)
     signature              Staple Storm [45% power × 3]
-    legend                 Curse of the Stapler [60% power · defdown 70%]  →  Paper Pin-Down
+    legend                 Curse of the Stapler [60% power · defdown 70%]  →  Staple Through
     ultimate               Last Flame of the Stapler [normal: 210% power · burn 60% / spectral: 210% power · defdown 60% / mutated: 210% power · stun 60%]  →  The Final Staple
     kit.paper_cut          Paper Cut [45% power × 3]
     kit.ink_splatter       Ink Splatter [90% power · poison 50%]  →  Rusty Staple
@@ -630,7 +630,7 @@
     proposed  : Signed its name so big it can be seen from aeroplanes. The farmer is still mowing round the autograph.
   LEGENDARY   name: Scribblsovereign, the Ever-Watching Pen  →  The Mightier One (draft name, not used by the game)
     now:      Every pen in the world answers to it. It has begun to call them home.
-    proposed  : Never runs out of ink because it borrows from every other pen. That is why yours always dies at the worst moment.
+    proposed  : Wrote a full stop so heavy that it sank through the desk, the floor and the cellar. Builders found it in the sewer, still perfectly round.
   MOVES (names only; numbers never change)
     signature              Ink Blot [45% power × 3]  →  Ink Splotches
     legend                 Wrath of the Pen [0% power · atkup (self)]  →  Nervous Clicking
@@ -647,16 +647,16 @@
     proposed  : Goes from green to spotty in the time it takes to find a knife.
   UNCOMMON   name: Nanagrub  →  Slipstick (draft name, not used by the game)
     now:      It hums a tune no one taught it. Pets refuse to go near the fruit bowl when it does.
-    proposed  : Leaves its peel exactly where you will step, even if you are on the other side of town.
+    proposed  : Bends into a smile whenever someone is sad. It is very hard to stay grumpy at a grinning banana.
   RARE   name: Nanagloom  →  Top Banana (draft name, not used by the game)
     now:      Its Slippery Peel can be heard three streets away. Lesser monsters scatter when it wakes.
     proposed  : Ripens every other fruit in the bowl overnight. The pears woke up old.
   EPIC   name: Nanadrake  →  Bunch of Trouble (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. Look for brown spots near the fruit bowl.
-    proposed  : Dropped one peel in the town square and the whole parade slid into the river. The brass band kept playing underwater.
+    proposed  : Dropped one peel in the town square and the parade slid into the river. The brass band kept playing underwater.
   LEGENDARY   name: Nanamega, the Golden Banana  →  Bananarchy (draft name, not used by the game)
     now:      Before the first banana was ever made, it was already waiting. It will remain after the last.
-    proposed  : Bent itself into a smile so convincing that the Moon copied it. That is why the Moon sometimes looks like a banana.
+    proposed  : Straightened itself out once, just to prove it could. Every boomerang in the world stopped coming back in protest.
   MOVES (names only; numbers never change)
     signature              Slippery Peel [70% power · stun 45%]
     legend                 Gaze of the Banana [80% power · stun 30%]  →  Split Second
@@ -670,7 +670,7 @@
 === pizza — Pizza · category Meal / Snack · group – · family food · draft · content/curated/pilot-02-draft.json
   COMMON   name: Crustybit  →  Crusty Edge (draft name, not used by the game)
     now:      You have probably met one already: it smells delicious and tastes of regret.
-    proposed  : Burns the roof of your mouth on the first bite, then goes cold before the second.
+    proposed  : Drops its topping off the slice the instant you lift it. The cheese always lands face down.
   UNCOMMON   name: Crustynik  →  Stringcheese (draft name, not used by the game)
     now:      It hums a tune no one taught it. Pets refuse to go near the back of the fridge when it does.
     proposed  : Stretches its cheese into long strings that tie your shoelaces together.
@@ -750,19 +750,19 @@
     proposed  : Splits open on the last sip, so you drink a mouthful of leaves.
   UNCOMMON   name: Bagnik  →  Brewhaha (draft name, not used by the game)
     now:      Watch the back of the pantry after midnight: it rearranges things there, one tiny detail at a time.
-    proposed  : Brews itself in cold water when nobody is looking. The milk is always already in.
+    proposed  : Brews itself in cold water when nobody is looking. The goldfish bowl has turned a suspicious shade of brown.
   RARE   name: Bagwraith  →  Stringpuller (draft name, not used by the game)
     now:      Wherever it sleeps, the back of the pantry grows strangely quiet, as if listening. Few hunters have seen one up close.
-    proposed  : Reads the future in its own leaves, but only the boring parts. It predicted a Tuesday.
-  EPIC   name: Bagnaught  →  Teatanic (draft name, not used by the game)
+    proposed  : Reads the future in its own leaves, but only the boring parts. It predicted rain, then slightly different rain.
+  EPIC   name: Bagnaught  →  Reservoir Brew (draft name, not used by the game)
     now:      It was sealed beneath the top shelf of the cupboard long ago. The seal did not hold.
     proposed  : Dunked itself in the reservoir and turned the town's water into tea. Everyone was very polite for a week.
   LEGENDARY   name: Bagcolossus, the Insatiable Tea Bag  →  Earl Brewington (draft name, not used by the game)
     now:      Kingdoms have fallen to its Spill Out. Hunters call it the Insatiable Tea Bag, and only in whispers.
-    proposed  : Brewed one perfect cup of tea a thousand years ago and has guarded it ever since. Nobody has been allowed a sip.
+    proposed  : Dunked itself in the sea for one long brew. The whole coast now smells of breakfast, and the seagulls refuse to take off until someone brings biscuits.
   MOVES (names only; numbers never change)
     signature              Spill Out [100% power · burn 50%]  →  Scalding Dunk
-    legend                 Fall of the Tea Bag [120% power]  →  Big Dunk
+    legend                 Fall of the Tea Bag [120% power]  →  Teaspoon Squeeze
     ultimate               Thousand-Year Tea Bag [normal: 210% power · stun 60% / spectral: 210% power · defdown 60% / mutated: 210% power · burn 60%]  →  Elevenses
     kit.flour_cloud        Flour Cloud [60% power · defdown 70%]  →  Soggy Dangle
     kit.spice_storm        Spice Storm [100% power · burn 40%]
@@ -783,9 +783,9 @@
   EPIC   name: Sneakdrake  →  Marathon Runaway (draft name, not used by the game)
     now:      Its Sneaky Stomp has flattened whole neighbourhoods of lesser spirits, and it is still growing. The ground is still warm where it last slept.
     proposed  : Ran the marathon by itself while its owner was still tying the other shoe. It came home with a medal and a blister.
-  LEGENDARY   name: Sneakrex, the Thousand-Eyed Sneaker  →  Speedlace, the Runaway Shoe (draft name, not used by the game)
+  LEGENDARY   name: Sneakrex, the Thousand-Eyed Sneaker  →  Speedlace, the Long Stride (draft name, not used by the game)
     now:      Every sneaker in the world answers to it. It has begun to call them home.
-    proposed  : Took one step so long that it crossed a whole ocean before landing. Postcards from its heel still arrive.
+    proposed  : Took one step so long that it crossed an ocean before landing. The other shoe is still waiting on the doorstep with its laces crossed.
   MOVES (names only; numbers never change)
     signature              Sneaky Stomp [135% power]
     legend                 Thousand Sneaker Strikes [45% power × 3]  →  Hundred Stomps
@@ -796,7 +796,7 @@
     kit.kick_flurry        Kick Flurry [45% power × 3]
 
 === backpack — Backpack · category Bag / Box · group – · family organic · draft · content/curated/pilot-02-draft.json
-  COMMON   name: Packylet  →  Secret Pocket (draft name, not used by the game)
+  COMMON   name: Packylet  →  Zipnip (draft name, not used by the game)
     now:      Smells faintly of crumbs from last year. It bites, but only a little.
     proposed  : Hides your keys in a pocket you did not know it had, then shows you that pocket on Friday.
   UNCOMMON   name: Packymp  →  Pocket Maze (draft name, not used by the game)
@@ -805,12 +805,12 @@
   RARE   name: Packywraith  →  Homework Hider (draft name, not used by the game)
     now:      Collectors have spent fortunes chasing it. It has never been seen the same way twice. It leaves crumbs from last year wherever it goes.
     proposed  : Eats homework on the way to school and leaves a polite note instead. Teachers are starting to believe it.
-  EPIC   name: Packynaught  →  Bottomless Rucksack (draft name, not used by the game)
+  EPIC   name: Packynaught  →  Campsite Gulper (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. It leaves crumbs from last year wherever it goes.
     proposed  : Packed a camping trip into its front pocket, including the campsite. The field is now empty and confused.
-  LEGENDARY   name: Packymega, the Primordial Backpack  →  The Bag of Everything (draft name, not used by the game)
+  LEGENDARY   name: Packymega, the Primordial Backpack  →  Major Zip (draft name, not used by the game)
     now:      Before the first backpack was ever made, it was already waiting. It will remain after the last.
-    proposed  : Holds every lost lunchbox, glove and PE kit in history. Now and then a very old sandwich rolls out and waves.
+    proposed  : Zipped up a crack in the pavement so neatly that the road healed overnight. Builders now ask it to close potholes before lunch.
   MOVES (names only; numbers never change)
     signature              Zipper Bite [115% power · defdown 45%]
     legend                 Fire of the Backpack [100% power · burn 40%]  →  Sun-Baked Lunch
@@ -824,12 +824,12 @@
   COMMON   name: Specskin  →  Smudgy (draft name, not used by the game)
     now:      A tiny troublemaker that gets tangled with every other small thing.
     proposed  : Steams up the moment you walk into a warm room, so you say hello to the coat stand.
-  UNCOMMON   name: Specsnik  →  Squint Ahead (draft name, not used by the game)
+  UNCOMMON   name: Specsnik  →  Spoiler Specs (draft name, not used by the game)
     now:      Some say it is the glasses you lost years ago, come back changed.
-    proposed  : Lets you see one second into the future, which is just long enough to watch yourself trip.
-  RARE   name: Specswraith  →  Forehead Specs (draft name, not used by the game)
+    proposed  : Lets you read straight through closed books. It has spoiled the ending of every story in the library.
+  RARE   name: Specswraith  →  Near-Far Muddle (draft name, not used by the game)
     now:      Its Jingle Jab can be heard three streets away. Lesser monsters scatter when it wakes.
-    proposed  : Sits on top of your head while you search the whole house for them. They watch the entire search.
+    proposed  : Swaps near and far for whoever wears it. She waved at a friend across the valley and walked straight into the fridge.
   EPIC   name: Specsdrake  →  Marshmallow Magnifier (draft name, not used by the game)
     now:      When it stirs, all the doors forget who they belong to. Hunters mark its lair on their maps in red.
     proposed  : Magnified the sunshine on a picnic day and toasted every marshmallow in the park at once. The picnic was a huge success.
@@ -849,8 +849,8 @@
 === key — Key · category Keys / Small item · group – · family mechanical · draft · content/curated/pilot-02-draft.json
   COMMON   name: Jingle  →  Jangles (draft name, not used by the game)
     now:      Lives in the bowl by the door and hides whenever you are late.
-    proposed  : Hides in the coat you are not wearing, every single time you are late.
-  UNCOMMON   name: Jinglemp  →  Wrong-Lock Wally (draft name, not used by the game)
+    proposed  : Turns the wrong way in the lock every time it rains. It jingles happily while you stand in the downpour.
+  UNCOMMON   name: Jinglemp  →  Misfit Key (draft name, not used by the game)
     now:      Some say it is the key you lost years ago, come back changed.
     proposed  : Fits every lock except the one it belongs to. It thinks this keeps life interesting.
   RARE   name: Jinglefiend  →  Phantom Door (draft name, not used by the game)
@@ -858,8 +858,8 @@
     proposed  : Opens doors that were never there. There is now a cupboard in the middle of the park, full of umbrellas.
   EPIC   name: Jingledrake  →  Key to the City (draft name, not used by the game)
     now:      When it stirs, every lock in the world clicks open at once. Hunters mark its lair on their maps in red.
-    proposed  : Was given the key to the city and actually locked it. Everyone had to stay home and play board games for a week.
-  LEGENDARY   name: Jinglerex, the Unbroken Key  →  Keymaster Clink (draft name, not used by the game)
+    proposed  : Was given the key to the city and locked it by accident. The mayor had to climb back in through the library window.
+  LEGENDARY   name: Jinglerex, the Unbroken Key  →  Turnkey the Mighty (draft name, not used by the game)
     now:      Where this key takes hold, every lock in the world clicks open at once. Even the gods fear the lock on the last secret.
     proposed  : Turned once in mid-air and unlocked every door in the country, fridges and sweet jars included. Breakfast lasted all day.
   MOVES (names only; numbers never change)
@@ -878,15 +878,15 @@
   UNCOMMON   name: Fizzgrub  →  Bubble Burper (draft name, not used by the game)
     now:      Some say it is the bottle you lost years ago, come back changed.
     proposed  : Refills itself with whatever drink you wanted least. Today it is lukewarm cabbage juice.
-  RARE   name: Fizzhex  →  Bottlegram (draft name, not used by the game)
+  RARE   name: Fizzhex  →  Tunetop (draft name, not used by the game)
     now:      Wherever it sleeps, the back of the fridge grows strangely quiet, as if listening. Collectors pay a fortune for a trace of its condensation.
-    proposed  : Holds a different message every time you open it. Most are polite reminders to recycle.
+    proposed  : Plays a different tune when you blow across it. The neighbours now request songs through the window.
   EPIC   name: Fizznaught  →  Lakeside Rocket (draft name, not used by the game)
     now:      Old almanacs warn: if the bottle goes silent, run. That silence is this creature breathing in.
     proposed  : Got shaken at a picnic and shot across the lake like a rocket. The ducks gave it a round of applause.
-  LEGENDARY   name: Fizzrex, the Ever-Burning Bottle  →  The Bottomless Bottle (draft name, not used by the game)
+  LEGENDARY   name: Fizzrex, the Ever-Burning Bottle  →  Driftwell the Messenger (draft name, not used by the game)
     now:      Every bottle in the world answers to it. It has begun to call them home.
-    proposed  : Has floated round the oceans for a thousand years to deliver one letter. It still has not found anyone called Dave.
+    proposed  : Swallowed a whole ocean wave to keep a letter dry, then corked itself. The beach has been one wave short ever since, and surfers keep queuing for it.
   MOVES (names only; numbers never change)
     signature              Pressure Burst [115% power · defdown 50%]
     legend                 Wrath of the Bottle [0% power · atkup (self)]  →  Shake It Up
@@ -905,7 +905,7 @@
     proposed  : Fits into any box, however small. It has been seen inside a matchbox, looking smug.
   RARE   name: Whiskhex  →  Zoomies (draft name, not used by the game)
     now:      Wherever it sleeps, the sunny spot on the floor grows strangely quiet, as if listening. Collectors pay a fortune for a trace of its muddy paw prints.
-    proposed  : Races through the house at 3 a.m. at the speed of sound. The windows rattle and the goldfish hides.
+    proposed  : Races through the house in the middle of the night at the speed of sound. The windows rattle and the goldfish hides.
   EPIC   name: Whiskgeist  →  Catastrophe (draft name, not used by the game)
     now:      Old almanacs warn: if the cat goes silent, run. That silence is this creature breathing in.
     proposed  : Lay down in the town's only patch of sunshine and refused to move. Spring was postponed until it felt like getting up.
@@ -915,26 +915,26 @@
   MOVES (names only; numbers never change)
     signature              Feral Pounce [130% power]
     legend                 Blight of the Cat [90% power · poison 50%]  →  Hairball Hurl
-    ultimate               Shattering Cat [normal: 210% power · defdown 60% / spectral: 210% power · stun 60% / mutated: 210% power · stun 60%]  →  Nine Lives
+    ultimate               Shattering Cat [normal: 210% power · defdown 60% / spectral: 210% power · stun 60% / mutated: 210% power · stun 60%]  →  Midnight Zoomies
     kit.scratch_fury       Scratch Fury [45% power × 3]
     kit.lick_wounds        Lick Wounds [0% power · heal (self)]
     kit.growl              Growl [60% power · defdown 70%]  →  Disdainful Stare
     kit.tail_whip          Tail Whip [120% power]
 
 === dog — Dog · category Pet / Animal · group – · family organic · draft · content/curated/pilot-02-draft.json
-  COMMON   name: Wooflet  →  Sockthief (draft name, not used by the game)
+  COMMON   name: Wooflet  →  Barkback (draft name, not used by the game)
     now:      A very good monster. Mostly. It steals socks and hides them in the garden.
-    proposed  : Steals one sock and runs laps of the garden with it. It will swap it back for a biscuit, never for free.
+    proposed  : Barks at its own reflection in the oven door every morning. It has never once won the argument.
   UNCOMMON   name: Woofgrub  →  Cheese Detector (draft name, not used by the game)
     now:      Some say it is the dog you lost years ago, come back changed.
     proposed  : Knows you are opening the cheese from the far end of the garden, through two closed doors.
-  RARE   name: Woofbeast  →  Woofback (draft name, not used by the game)
+  RARE   name: Woofbeast  →  Postman Repeller (draft name, not used by the game)
     now:      It remembers every hunter who failed to catch it, and it keeps count. Few hunters have seen one up close. Look for muddy paw prints near the sunny spot on the floor.
     proposed  : Barks at the postman so loudly that letters fly back to their senders. Nobody in the street has had a bill in months.
   EPIC   name: Woofgeist  →  Holey Moley (draft name, not used by the game)
     now:      It was sealed beneath the sunny spot on the floor long ago. The seal did not hold.
     proposed  : Dug a hole in the park so big that the council turned it into a swimming pool. It still sniffs the deep end hopefully.
-  LEGENDARY   name: Woofarchon, the Thousand-Eyed Dog  →  Sir Wagsalot (draft name, not used by the game)
+  LEGENDARY   name: Woofarchon, the Thousand-Eyed Dog  →  Wagnificent (draft name, not used by the game)
     now:      Its howl was the first sound the moon ever heard, and the moon has been afraid ever since.
     proposed  : Wagged its tail so hard that the breeze sailed every boat in the harbour home. The fishermen now pay it in sausages.
   MOVES (names only; numbers never change)
@@ -953,16 +953,16 @@
     proposed  : Falls out of bed every night, so you have to climb down in the dark to rescue it.
   UNCOMMON   name: Teddymp  →  Bookworm Bear (draft name, not used by the game)
     now:      Throw it out of the toy box and it is back by morning, a little bigger every time.
-    proposed  : Ends up in a different chair every morning, always pretending to read a book.
+    proposed  : Squeaks loudly whenever someone tries to sneak out of bed. Bedtime has never been so well guarded.
   RARE   name: Teddyhex  →  Nightmare Bouncer (draft name, not used by the game)
     now:      An urban legend: it appears only beneath a blood-red moon, and leaves nothing behind but glitter. It is never found in the same place twice.
     proposed  : Scares away nightmares by telling them very long stories about its stuffing. The nightmares now pretend to be busy.
   EPIC   name: Teddyzilla  →  Big Squeeze Bear (draft name, not used by the game)
     now:      Old almanacs warn: if the teddy bear goes silent, run. That silence is this creature breathing in.
-    proposed  : Gave the whole town one giant hug during a storm. Every house got squished a little closer together, and everyone made friends.
+    proposed  : Grew big enough to hug a whole bus full of crying children. The bus now refuses to leave the depot without a cuddle.
   LEGENDARY   name: Teddyrex, the Many-Mouthed Teddy Bear  →  General Snuggles (draft name, not used by the game)
     now:      Where this teddy bear takes hold, every toy in the city opens its eyes. Even the gods fear the endless game.
-    proposed  : Has guarded the same bed for a hundred years. Every monster under every bed knows its name and goes to sleep early out of respect.
+    proposed  : Stayed awake for a week to win a staring contest with the dark. The dark blinked first and now leaves a little light on.
   MOVES (names only; numbers never change)
     signature              Stuffing Burst [80% power · defdown 65%]
     legend                 Hunger of the Teddy Bear [85% power · drain]  →  Bear Hug
@@ -986,23 +986,23 @@
   EPIC   name: Spinnerosaur  →  Turbine Twirl (draft name, not used by the game)
     now:      Its Stuffing Burst has flattened whole neighbourhoods of lesser spirits, and it is still growing. The ground is still warm where it last slept.
     proposed  : Spun up a whirlwind in the playground. Every lost hat, glove and paper aeroplane came down at once, sorted by colour.
-  LEGENDARY   name: Spinnercolossus, the Many-Mouthed Fidget Spinner  →  The Spinner Who Never Stopped (draft name, not used by the game)
+  LEGENDARY   name: Spinnercolossus, the Many-Mouthed Fidget Spinner  →  Wing Commander Whirr (draft name, not used by the game)
     now:      Every fidget spinner in the world answers to it. It has begun to call them home.
-    proposed  : Was flicked once, years ago, and has never stopped. Clocks have started setting their time by it.
+    proposed  : Spun so fast on one fingertip that it took off and toured the country like a tiny helicopter. Air traffic control has given it a call sign.
   MOVES (names only; numbers never change)
-    signature              Stuffing Burst [80% power · defdown 65%]  →  Dizzy Spin
-    legend                 Thousand Fidget Spinner Strikes [45% power × 3]  →  Endless Spins
-    ultimate               Last Flame of the Fidget Spinner [normal: 210% power · burn 60% / spectral: 210% power · stun 60% / mutated: 210% power · burn 60%]  →  Never Stop Spinning
+    signature              Stuffing Burst [80% power · defdown 65%]  →  Wobble Wind-Down
+    legend                 Thousand Fidget Spinner Strikes [45% power × 3]  →  Ricochet Flicks
+    ultimate               Last Flame of the Fidget Spinner [normal: 210% power · burn 60% / spectral: 210% power · stun 60% / mutated: 210% power · burn 60%]  →  Thumb Tornado
     kit.wind_up            Wind-Up [0% power · atkup (self)]
     kit.squeak_toy         Squeak Toy [80% power · stun 30%]  →  Whirr Buzz
-    kit.block_tower        Block Tower [0% power · defup (self)]  →  Balanced Spin
+    kit.block_tower        Block Tower [0% power · defup (self)]  →  Steady Bearings
     kit.toy_tantrum        Toy Tantrum [45% power × 3]  →  Bearing Barrage
   notes: AWKWARD DEFAULT: toy-kit signature 'Stuffing Burst' on a fidget spinner. Renamed to 'Dizzy Spin' (defence down).
 
 === bicycle — Bicycle · category Car / Vehicle · group – · family mechanical · draft · content/curated/pilot-02-draft.json
   COMMON   name: Pedalet  →  Squeakbrake (draft name, not used by the game)
     now:      You have probably met one already: it hides your keys inside itself.
-    proposed  : Drops its chain the moment you start going uphill.
+    proposed  : Drops its chain halfway up every hill. Downhill it has never once had a problem.
   UNCOMMON   name: Pedalimp  →  Wheelie Pop (draft name, not used by the game)
     now:      Throw it out of the hard shoulder and it is back by morning, a little bigger every time.
     proposed  : Rings its own bell at people it does not like. The postman has been rung at eleven times this week.
@@ -1011,10 +1011,10 @@
     proposed  : Rides itself to the shops while you sleep and comes back with a full basket. It never says who paid.
   EPIC   name: Pedaldrake  →  Tyre Mark Daredevil (draft name, not used by the game)
     now:      It was sealed beneath the hard shoulder long ago. The seal did not hold.
-    proposed  : Did a wheelie up the side of the town hall. The mayor's office now has tyre marks across the window.
+    proposed  : Did a wheelie up the stairs of the library. The children's section now has tyre marks across the ceiling.
   LEGENDARY   name: Pedalrex, the Ever-Turning Bicycle  →  Old Two Wheels (draft name, not used by the game)
     now:      Every bicycle in the world answers to it. It has begun to call them home.
-    proposed  : Rode round the world so many times that it wore a little groove in the equator. Ships now use it as a lane.
+    proposed  : Pedalled downhill so fast that it overtook its own shadow. The shadow is still trying to catch up and arrives everywhere ten minutes late.
   MOVES (names only; numbers never change)
     signature              Road Rage [150% power]  →  Downhill Crash
     legend                 Shadow of the Bicycle [90% power · defdown 45%]  →  Chain Slip
@@ -1040,7 +1040,7 @@
     proposed  : Closed the motorway for a hole that turned out to be a coin. Traffic queued back to the next town while someone picked it up.
   LEGENDARY   name: Coneyrex, the Ever-Turning Traffic Cone  →  Conelius the Unmovable (draft name, not used by the game)
     now:      Ancient texts call it the Ever-Turning Traffic Cone. When it wakes, every road in the city goes red at once.
-    proposed  : Has blocked the same lane since roads were invented. Nobody remembers what is underneath, and it will not say.
+    proposed  : Coned off one lane of the sky. Aeroplanes now queue politely above the town, and the pigeons have to use the slow lane.
   MOVES (names only; numbers never change)
     signature              Detour [45% power × 3]
     legend                 Bulwark of the Traffic Cone [0% power · defup (self)]  →  Cordon Off
@@ -1052,7 +1052,7 @@
   notes: Street-kit moves and signature 'Detour' already fit.
 
 === x_traffic_light — Traffic light · category Tool · group street · family mechanical · draft · content/curated/pilot-02-draft.json
-  COMMON   name: Lightling  →  Blinky (draft name, not used by the game)
+  COMMON   name: Lightling  →  Redhanded (draft name, not used by the game)
     now:      Turns red the moment it sees you running late.
     proposed  : Turns red just as you reach it, then green the moment you stop.
   UNCOMMON   name: Lightgrub  →  Amber Forever (draft name, not used by the game)
@@ -1063,8 +1063,8 @@
     proposed  : Makes pedestrians do a little dance before the green man appears. Nobody has crossed without a twirl in years.
   EPIC   name: Lightron  →  Gridlock Giant (draft name, not used by the game)
     now:      Its Red Light has flattened whole neighbourhoods of lesser spirits, and it is still growing. Its name is not spoken in the empty car park at night.
-    proposed  : Turned every light in the city red at once. Drivers got out, met each other and started a street party.
-  LEGENDARY   name: Lightsovereign, the Unbroken Traffic Light  →  The Longest Red Light (draft name, not used by the game)
+    proposed  : Turned every light in the city red at once. The ice cream van was stuck at one junction so long that it now has a queue of its own.
+  LEGENDARY   name: Lightsovereign, the Unbroken Traffic Light  →  Stopwell, Ruler of the Tide (draft name, not used by the game)
     now:      When its red eye opens, the whole world stops. Nobody has ever seen it turn green.
     proposed  : Once stopped the tide coming in by turning red at the beach. The sea is still politely waiting.
   MOVES (names only; numbers never change)
@@ -1089,9 +1089,9 @@
   EPIC   name: Trolleyzilla  →  Midnight Stampede (draft name, not used by the game)
     now:      Its Road Rage has flattened whole neighbourhoods of lesser spirits, and it is still growing. Seasoned hunters turn back when they find its tyre marks.
     proposed  : Led every trolley in the supermarket on a midnight race. The milk aisle has still not recovered.
-  LEGENDARY   name: Trolleysovereign, the Iron-Hearted Shopping Trolley  →  The Trolley That Got Away (draft name, not used by the game)
+  LEGENDARY   name: Trolleysovereign, the Iron-Hearted Shopping Trolley  →  Freewheel the Voyager (draft name, not used by the game)
     now:      Where this shopping trolley takes hold, every traffic light turns red forever. Even the gods fear every journey ever started.
-    proposed  : Has never been returned, and its coin is still inside, collecting interest. It is now richer than the supermarket.
+    proposed  : Rolled out of the car park and kept going until it reached the sea. It now sails between countries, and harbour staff keep trying to put a coin in it.
   MOVES (names only; numbers never change)
     signature              Road Rage [150% power]  →  Wonky Wheel Crash
     legend                 Fire of the Shopping Trolley [100% power · burn 40%]  →  Smoking Wheels
@@ -1117,7 +1117,7 @@
     proposed  : Called every gnome in the country to one garden for a meeting. The lawn has not been visible for a week.
   LEGENDARY   name: Gnomesovereign, the Unbroken Garden Gnome  →  Grand Gnome of the Rockery (draft name, not used by the game)
     now:      Kingdoms have fallen to its Nail Gun. Hunters call it the Unbroken Garden Gnome, and only in whispers.
-    proposed  : Has secretly run the neighbourhood watch for three hundred years. Every lost ball comes back, slightly polished.
+    proposed  : Won the garden show by standing perfectly still for nine days. The judges gave it best statue, best shrub and best tomato.
   MOVES (names only; numbers never change)
     signature              Nail Gun [45% power × 3]  →  Fishing Rod Flicks
     legend                 Fire of the Garden Gnome [100% power · burn 40%]  →  Lantern Singe
@@ -1140,10 +1140,10 @@
     proposed  : Sniffs out fibs as well as smoke. Every little lie at the dinner table sets it beeping.
   EPIC   name: Detectorosaur  →  Evacuator (draft name, not used by the game)
     now:      When it stirs, every alarm in the city screams at once. Hunters mark its lair on their maps in red.
-    proposed  : Beeped so loudly that the whole town did a fire drill. The fire station came out to watch.
-  LEGENDARY   name: Detectoromega, the Clockwork Smoke Detector  →  The Loudest Beep (draft name, not used by the game)
+    proposed  : Mistook a dragon-shaped cloud for smoke and set off every alarm in the shopping centre. The fire brigade hosed down the sky to be safe.
+  LEGENDARY   name: Detectoromega, the Clockwork Smoke Detector  →  Beeptacular (draft name, not used by the game)
     now:      Every smoke detector in the world answers to it. It has begun to call them home.
-    proposed  : Caught the very first piece of toast ever burnt, thousands of years ago. It has not stopped telling everyone about it.
+    proposed  : Beeped so loudly at a barbecue that every chimney in the country stopped smoking at once. Father Christmas had to use the front door.
   MOVES (names only; numbers never change)
     signature              Shrill Chirp [45% power × 3]
     legend                 Curse of the Smoke Detector [60% power · defdown 70%]  →  Ear-Splitting Nag
@@ -1162,11 +1162,11 @@
     proposed  : Charges phones only while you watch. The moment you walk away, it starts charging the kettle instead.
   RARE   name: Socketwraith  →  Fusebox Fury (draft name, not used by the game)
     now:      It powers half the house and charges a little extra for every plug.
-    proposed  : Blows the fuse whenever someone says they are nearly done. Half the town has unfinished homework.
+    proposed  : Blows the fuse whenever someone says they are nearly done. Half the class has unfinished homework.
   EPIC   name: Socketosaur  →  Megawatt Mouth (draft name, not used by the game)
     now:      It was sealed beneath the wall by the door long ago. The seal did not hold.
-    proposed  : Powered a whole fairground with one plug. The roller coaster went round so fast it arrived yesterday.
-  LEGENDARY   name: Socketomega, the Ever-Turning Power Socket  →  Voltina, Mother of Plugs (draft name, not used by the game)
+    proposed  : Powered the fairground with one plug. The roller coaster went round so fast it arrived yesterday.
+  LEGENDARY   name: Socketomega, the Ever-Turning Power Socket  →  Voltina, Queen of Lightning (draft name, not used by the game)
     now:      All the lightning of the world flows through its two small mouths. It decides which cities stay lit.
     proposed  : Plugged itself into a lightning bolt to charge one phone. The phone is now full until the year 3000 and glows in the dark.
   MOVES (names only; numbers never change)
@@ -1190,10 +1190,10 @@
     proposed  : Listens through walls and repeats what the neighbours said. The block of flats has never been so polite.
   EPIC   name: Stethoscdrake  →  Echo Doctor (draft name, not used by the game)
     now:      It does not hunt to eat. It hunts to be remembered, and nobody forgets. It still is always missing when someone gets a scrape.
-    proposed  : Listened to the town's heartbeat and found it was running late. It prescribed everyone a long weekend.
-  LEGENDARY   name: Stethoscsovereign, the Tireless Stethoscope  →  The Great Listener (draft name, not used by the game)
+    proposed  : Listened to a hot-air balloon and diagnosed it with hiccups. It now bounces across the sky in little jumps, and the passengers hold on to their hats.
+  LEGENDARY   name: Stethoscsovereign, the Tireless Stethoscope  →  Doctor Deep Ocean (draft name, not used by the game)
     now:      Before the first stethoscope was ever made, it was already waiting. It will remain after the last.
-    proposed  : Has heard every heartbeat that ever was. It knows which ones skipped when the cake arrived.
+    proposed  : Listened to the ocean's heartbeat and told it to calm down. The waves have been gentle ever since, and surfers have taken up knitting.
   MOVES (names only; numbers never change)
     signature              Heartbeat Check [45% power × 3]  →  Thumping Heartbeats
     legend                 Gaze of the Stethoscope [80% power · stun 30%]  →  Cold Touch
@@ -1211,17 +1211,17 @@
   UNCOMMON   name: Forkgrub  →  Hummdinger (draft name, not used by the game)
     now:      Some say it is the tuning fork you lost years ago, come back changed.
     proposed  : Tunes anything it touches. The doorbell now rings in key, and so does the cat.
-  RARE   name: Forkfiend  →  Window Wobbler (draft name, not used by the game)
+  RARE   name: Forkfiend  →  Fishtune (draft name, not used by the game)
     now:      It remembers every hunter who failed to catch it, and it keeps count. Few hunters have seen one up close. It was last seen near the attic.
-    proposed  : Hit a note so pure that every window on the street hummed along for an hour.
+    proposed  : Hummed one note for so long that a goldfish learned to sing it. The goldfish is now on tour, and the tuning fork is its manager.
   EPIC   name: Forkdrake  →  Wedding Bell Remix (draft name, not used by the game)
     now:      When it stirs, the music never stops, and no one can stop dancing. Hunters mark its lair on their maps in red.
     proposed  : Retuned the church bells so they play a dance tune. Weddings have become much livelier.
   LEGENDARY   name: Forkultimus, the Forgotten Tuning Fork  →  Maestro Middle C (draft name, not used by the game)
     now:      Kingdoms have fallen to its Haunting Chord. Hunters call it the Forgotten Tuning Fork, and only in whispers.
-    proposed  : Struck itself so purely that a mountain started ringing like a bell. Climbers wear earmuffs now, and the goats sing in harmony.
+    proposed  : Struck a note so pure that every out-of-tune piano in the country fixed itself. Piano tuners are on a very long holiday.
   MOVES (names only; numbers never change)
-    signature              Haunting Chord [85% power · stun 35%]  →  Perfect Pitch
+    signature              Haunting Chord [85% power · stun 35%]  →  Ear-Ringing Ping
     legend                 Hunger of the Tuning Fork [85% power · drain]  →  Steal the Note
     ultimate               Stillness of the Tuning Fork [normal: 210% power · stun 60% / spectral: 210% power · stun 60% / mutated: 210% power · defdown 60%]  →  Middle C Mayhem
     kit.crescendo          Crescendo [0% power · atkup (self)]
@@ -1233,7 +1233,7 @@
 === i_hip — Hip · category Fruit / Veg · group – · family food · draft · content/curated/pilot-02-draft.json
   COMMON   name: Hiplet  →  Prickle Pip (draft name, not used by the game)
     now:      Mostly harmless. It rolls off the counter just to watch you chase it, then pretends nothing happened.
-    proposed  : Hides on the thorniest branch, so you prick a finger reaching for it. It is only a rose hip, but a smug one.
+    proposed  : Grows on the thorniest branch of the hedge, so every finger that picks it gets pricked. It keeps count.
   UNCOMMON   name: Hipmon  →  Itchpowder (draft name, not used by the game)
     now:      Some say it is the hip you lost years ago, come back changed.
     proposed  : Its seeds make the best itching powder. It sprinkles them into gloves, then looks innocent.
@@ -1242,10 +1242,10 @@
     proposed  : Turns any cup of tea into rose hip syrup. The village tea party became very sticky and very cheerful.
   EPIC   name: Hipgeist  →  Hedgerow Havoc (draft name, not used by the game)
     now:      Its Thorny Burst has flattened whole neighbourhoods of lesser spirits, and it is still growing. Seasoned hunters turn back when they find its seeds.
-    proposed  : Grew a hedge round the whole school overnight. Lessons moved to the playground, which everyone agreed was better.
+    proposed  : Grew a hedge round the school overnight. Lessons moved to the playground, which everyone agreed was better.
   LEGENDARY   name: Hipultimus, the Insatiable Hip  →  Rosalind of the Hedgerow (draft name, not used by the game)
     now:      Where this hip takes hold, entire orchards wither overnight. Even the gods fear every orchard that ever bloomed.
-    proposed  : Has more vitamin C than all the oranges in the world. Colds turn round and leave the moment it walks in.
+    proposed  : Squirted one drop of rose hip juice into the town's water supply. Every cold in the region packed its bags and moved to the next county.
   MOVES (names only; numbers never change)
     signature              Thorny Burst [95% power · poison 60%]
     legend                 Shadow of the Hip [90% power · defdown 45%]  →  Prickly Hug
@@ -1259,11 +1259,11 @@
 === x_sea_urchin_shell — Sea urchin shell · category Fish / Sea life · group – · family elemental · draft · content/curated/pilot-02-draft.json
   COMMON   name: Shelling  →  Ouchpebble (draft name, not used by the game)
     now:      Lives in the harbour and stares at you through the glass.
-    proposed  : Waits in the sand exactly where you are about to step barefoot.
+    proposed  : Looks exactly like a harmless pebble until you sit on it.
   UNCOMMON   name: Shellimp  →  Seaprickle (draft name, not used by the game)
     now:      Watch the aquarium after midnight: it rearranges things there, one tiny detail at a time.
     proposed  : Hides in rock pools and pops up just as a crab gets comfortable.
-  RARE   name: Shellfiend  →  Towel Spiral (draft name, not used by the game)
+  RARE   name: Shellfiend  →  Tidewheel (draft name, not used by the game)
     now:      Collectors have spent fortunes chasing it. It has never been seen the same way twice. It was last seen near the harbour.
     proposed  : Rolls up the beach at high tide and rearranges everyone's towels into a spiral.
   EPIC   name: Shelltron  →  Crab Commander (draft name, not used by the game)
@@ -1271,7 +1271,7 @@
     proposed  : Called every crab on the coast to build it a sandcastle. The castle has a moat, a drawbridge and a very strict doorman.
   LEGENDARY   name: Shellarchon, the Storm-Born Sea Urchin Shell  →  Spikesbury, Rock Pool Royalty (draft name, not used by the game)
     now:      Where this sea urchin shell takes hold, every aquarium cracks at once. Even the gods fear the deep.
-    proposed  : Has collected one grain of sand from every beach on Earth. It is building a beach of its own and will not share the deckchairs.
+    proposed  : Rolled across the sea floor in one night and came back covered in every lost thing: rings, keys, a submarine's spare propeller. The lost property office now has a rock pool.
   MOVES (names only; numbers never change)
     signature              Tidal Slap [100% power · defdown 45%]  →  Tide Pool Splash
     legend                 Blight of the Sea Urchin Shell [90% power · poison 50%]  →  Prickle Sting
