@@ -114,6 +114,11 @@ Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline and Pilot 02
   (57 changes, `pilot-02-writer-response-pass3.json`). Open: 1 medium (office chair legendary kept as the developer's
   reference) + 14 low taste notes, all listed in `docs/review/pilot-02-final-report.md` (new `report` command).
   Still all draft; nothing merged or live.
+- **Pilot 02 final editorial instructions (2026-11-02):** Bible updated (Uncommon = recognizable behaviour, unusual
+  talent or small trick, magic optional; legendary achievements need not be physical; recognizability over technical
+  accuracy, e.g. spiky sea urchins). Exactly five texts revised (`content/review/pilot-02-final-five.json`): sea
+  urchin shell legendary, candle legendary punchline, tea bag epic, garden gnome legendary, egg uncommon. Dog uncommon
+  and office chair legendary kept by decision. All 50 still draft, awaiting the developer's final approval.
 - **v0.4.7 developer God Mode (2026-10-31):** Settings → Developer & testing → "God Mode (test battles)", default off,
   remembered like the other developer switches; active only with Quick Monster Test Mode on AND Instant capture off
   (the Settings line says why it is inactive; it never changes the other switches). Engine: `enableGodMode(B)` sets a

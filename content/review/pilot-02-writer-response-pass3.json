@@ -286,13 +286,18 @@
    "id": "potted_plant",
    "field": "names.rare",
    "change": "'Sunspot' is an astronomy term and comic character"
+  },
+  {
+   "id": "office_chair",
+   "field": "lore.legendary",
+   "change": "decided by the developer: kept as written"
   }
  ],
  "kept": [
   {
    "id": "office_chair",
    "field": "lore.legendary",
-   "why": "developer named it a reference example; editor (medium) finds it flat. Left for the developer to decide."
+   "why": "developer decision (2026-11-02): kept exactly as written; becoming the boss without doing any work is its extraordinary achievement"
   }
  ],
  "open": "Other low items are subjective taste notes, recorded in the final report; everything is still status draft."

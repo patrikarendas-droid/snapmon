@@ -44,11 +44,16 @@ joke with bigger numbers. These rules apply to the monster name, the flavour tex
 
 | Rarity | Premise | Monster name feels… | Move names feel… |
 |---|---|---|---|
-| **Common** | An annoying, stupid everyday habit. Small, relatable, cheeky. | small, catchy, playful, mildly troublesome | petty, physical |
-| **Uncommon** | One strange but understandable supernatural trick, still close to everyday life. | hints at an odd talent | a believable odd twist |
-| **Rare** | A memorable, genuinely troublesome power: a local legend you can picture causing chaos. | more bite, confidence, character | distinct, confident |
-| **Epic** | Ridiculous large-scale chaos: cinematic, spectacular, with a clear comic punchline. | bolder or sillier, **not** automatically grander fantasy syllables | big but readable |
-| **Legendary** | An outrageous, almost unbelievable feat with a funny consequence. Cosmic scale is allowed, never required. | iconic, memorable, tied to the object, still amusing | must fit the real mechanics of every variant |
+| **Common** | An annoying, stupid everyday habit. | small, catchy, playful, mildly troublesome | petty, physical |
+| **Uncommon** | A recognizable behaviour, unusual talent, or small supernatural trick. Relatable and playful. **Magic is optional.** | hints at a quirk or talent | a believable odd twist |
+| **Rare** | A memorable, genuinely troublesome power. | more bite, confidence, character | distinct, confident |
+| **Epic** | Ridiculous large-scale chaos with a funny consequence. | bolder or sillier, **not** automatically grander fantasy syllables | big but readable |
+| **Legendary** | An outrageous, almost unbelievable achievement with a funny punchline. Cosmic scale is allowed, never required, and the achievement does not have to be physical or destructive (becoming the boss without doing any work counts). | iconic, memorable, tied to the object, still amusing | must fit the real mechanics of every variant |
+
+Every rarity still needs a **different comic premise**, and humour must be present at every level. What matters is
+humour, personality and a natural progression through the five rarities (updated 2026-11-02 by the developer: an
+Uncommon can simply be a recognizable everyday behaviour, e.g. a dog knowing you opened the cheese from the far end of
+the garden).
 
 ### The reference ladder: apple (approved, exact)
 
@@ -134,8 +139,14 @@ across all content and flags clusters.
 - Gore, cruelty, body horror, tragedy played for laughs, anything frightening for a child.
 - Modern memes, brand names and slogans, trademarked characters, real people, politics.
 - Random non sequiturs (the joke must follow from the object), pretentious myth, dark-for-dark's-sake.
-- Facts that are wrong for the object (a sock does not have a plug).
+- Facts that are wrong for the object in a way players would notice (a sock does not have a plug).
 - Toolbox, kingdom or "door" filler that belongs to another object.
+
+### Recognizability over technical accuracy
+
+SnapMon is a fantasy monster game. Prefer the **familiar, intuitive association** over scientific nitpicking: people
+associate sea urchins with painful spikes, so the sea urchin shell monster embraces spikes even though an empty urchin
+shell is usually spineless. Fantasy exaggeration is welcome; the joke must still connect logically to the object.
 
 ## 7. Monster display names
 
