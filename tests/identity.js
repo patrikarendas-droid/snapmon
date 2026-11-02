@@ -120,7 +120,7 @@ for (const cat of ['tool', 'keys', 'laptop', 'food']) {
 {
   const seen = { name: new Map(), title: new Map(), legend: new Map(), ult: new Map(), lore: new Map() }, dup = [];
   for (const o of T.OBJECT_LIST) {
-    const m = mk(o.id, 'legendary', o.name), title = m.name.split(', ').slice(1).join(', ');
+    const m = mk(o.id, 'legendary', o.name), title = m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : m.name; // a curated Legendary name is its own title
     const vals = { name: m.name, title, legend: (m.abilities.find(a => a.legend) || {}).name, ult: (m.abilities.find(a => a.ultimate) || {}).name, lore: T.monsterLore({ ...m, seed: 1 }) };
     for (const k in vals) { if (!vals[k] || seen[k].has(vals[k])) dup.push(`${k}: ${o.id} = ${seen[k].get(vals[k])} (${vals[k]})`); seen[k].set(vals[k], o.id); }
   }
@@ -130,9 +130,9 @@ for (const cat of ['tool', 'keys', 'laptop', 'food']) {
 }
 // saved monsters keep what they were found with (family, moves, name are stored on the monster)
 {
-  const S = T.freshState(), old = { ...mk('cutlery_spoon', 'rare'), fam: 'mechanical', name: 'Spoonygoyle', abilities: [{ name: 'Nail Gun', power: 0.45, hits: 3, cd: 3 }] };
+  const S = T.freshState(), old = { ...mk('cutlery_fork', 'rare'), fam: 'mechanical', name: 'Forkygoyle', abilities: [{ name: 'Nail Gun', power: 0.45, hits: 3, cd: 3 }] }; // fork: no curated writing (curated objects take their reviewed text on load: tests/curated-refresh.js)
   S.monsters = [old]; const round = T.importSave(T.exportSave(S));
-  ok(round.monsters[0].fam === 'mechanical' && round.monsters[0].abilities[0].name === 'Nail Gun' && round.monsters[0].name === 'Spoonygoyle', 'an existing Mechanical spoon keeps its family, moves and name through backup and load');
+  ok(round.monsters[0].fam === 'mechanical' && round.monsters[0].abilities[0].name === 'Nail Gun' && round.monsters[0].name === 'Forkygoyle', 'an existing Mechanical fork keeps its family, moves and name through backup and load');
 }
 
 console.log(bad ? `\n${bad} PROBLEM(S)` : '\nALL IDENTITY CHECKS PASSED');

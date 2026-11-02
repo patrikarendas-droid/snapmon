@@ -9,6 +9,8 @@
 // v0.4.6 (Pilot 01 activation): text changed ON PURPOSE for the 10 Pilot 01 objects only. The original recording is
 // kept as `withoutCurated` and must still match with curated text switched off (proving nothing else changed); `sha256`
 // is the live output with curated text on, re-recorded for v0.4.6.
+// Pilot 02 integration (2026-11-02): re-recorded ON PURPOSE: 50 more objects get approved lore, move names and
+// monster names. `withoutCurated` is unchanged and still matches with curated content off.
 const crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/generator-snapshot.json');
 const G = require('./load')();

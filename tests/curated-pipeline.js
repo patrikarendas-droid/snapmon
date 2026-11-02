@@ -1,5 +1,6 @@
-// Curated-writing pipeline (2026-11-02): inventory, draft-only monster names, batch workflow and lint. Everything here
-// is offline tooling: these checks also prove the game ignores draft content and draft monster names entirely.
+// Curated-writing pipeline (2026-11-02): inventory, monster names, batch workflow and lint. The tooling is offline;
+// these checks also prove the game ignores draft content and draft names entirely, and (since the Pilot 02
+// integration) that only REVIEWED names reach the game. Save refresh of existing monsters: tests/curated-refresh.js.
 const fs = require('fs'), vm = require('vm'), path = require('path'), crypto = require('crypto'), { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
@@ -15,11 +16,13 @@ const readDoc = f => ({ rel: f, doc: JSON.parse(fs.readFileSync(path.join(ROOT, 
 
 // 1. live content untouched
 ok(sha('content/curated/pilot-01-approved.json') === 'ced698205fb806ef2930cdfa1c4eb844ac2f95d591bf47635a4b77db226baca7', 'Pilot 01 approved file is byte-identical to v0.4.6/v0.4.7');
-ok(sha('src/curated-data.js') === '85f4ee80ffa338c508958c739cd1a0baa1ec2960514f5f0976b5d0b5a18521b6' && Object.keys(T.CURATED.data).length === 10, 'live src/curated-data.js unchanged: still only the 10 Pilot 01 objects');
-const liveTxt = fs.readFileSync(path.join(ROOT, 'src/curated-data.js'), 'utf8');
-const runtime = fs.readdirSync(path.join(ROOT, 'src')).filter(f => f.endsWith('.js') && !/^curated/.test(f)).map(f => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n');
-const curSrc = fs.readFileSync(path.join(ROOT, 'src/curated.js'), 'utf8'), body = n => curSrc.slice(curSrc.indexOf('function ' + n), curSrc.indexOf('\n}', curSrc.indexOf('function ' + n)));
-ok(!/"names"/.test(liveTxt) && !/CURATED[^\n]*names|curated\w*Name\b(?<!MoveName)/.test(runtime) && !/names/.test(body('curatedLore')) && !/names/.test(body('curatedMoveName')), 'no monster-name data in the live file; no game code or runtime lookup reads curated names');
+{
+  const live = T.CURATED.data, ids = Object.keys(live), withNames = ids.filter(id => live[id].names);
+  ok(ids.length === 60 && ids.every(id => live[id].status === 'reviewed'), `live src/curated-data.js: ${ids.length} reviewed objects (Pilot 01 + Pilot 02), nothing else`);
+  ok(withNames.length === 50 && withNames.every(id => Object.keys(live[id].names).length === 5), `live names: ${withNames.length} objects with 5 names each (Pilot 02; Pilot 01 has none and keeps generated names)`);
+  const curSrc = fs.readFileSync(path.join(ROOT, 'src/curated.js'), 'utf8'), body = n => curSrc.slice(curSrc.indexOf('function ' + n), curSrc.indexOf('\n}', curSrc.indexOf('function ' + n)));
+  ok(/status === 'reviewed'/.test(body('curatedMonsterName')) && /namesEnabled/.test(body('curatedMonsterName')), 'the runtime name lookup reads only reviewed entries, behind its own switch (CURATED.namesEnabled)');
+}
 
 // 2. inventory
 let check = ''; try { check = execFileSync('node', [path.join(ROOT, 'tools/inventory.js'), '--check'], { encoding: 'utf8' }); } catch (e) { check = String(e.stdout || e.message); }
@@ -29,7 +32,7 @@ const ids = rows.map(r => r.id);
 ok(rows.length === T.OBJECT_LIST.length && new Set(ids).size === ids.length && ids.every((id, i) => !i || ids[i - 1] < id), `inventory: one row per registry object (${rows.length}), unique, sorted`);
 ok(rows.every(r => W.RAR.every(x => typeof r.names[x] === 'string' && typeof r.lore[x] === 'string') && ['signature', 'legend', 'ultimate'].every(k => r.moves.some(m => m.key === k))), 'every row has 5 current names, 5 procedural texts and signature/legend/ultimate slots');
 const apple = rows.find(r => r.id === 'apple'), ped = rows.find(r => r.id === 'toaster');
-ok(apple.curated.lore.status === 'reviewed' && apple.curated.lore.rarities.length === 5 && apple.curated.names.status === 'not-started' && ped.curated.status === 'draft' && ped.curated.names.rarities.length === 5, 'coverage per layer: Pilot 01 lore reviewed, names not started; Pilot 02 drafts counted as draft');
+ok(apple.curated.lore.status === 'reviewed' && apple.curated.lore.rarities.length === 5 && apple.curated.names.status === 'not-started' && ped.curated.status === 'reviewed' && ped.curated.names.status === 'reviewed' && ped.curated.names.rarities.length === 5, 'coverage per layer: Pilot 01 lore reviewed, names not started; Pilot 02 names and lore reviewed');
 ok(rows.find(r => r.id === 'x_energy_drink').moves.find(m => m.key === 'ultimate').variantsDiffer === true, 'inventory records when an Ultimate effect differs by variant');
 
 // 3. draft monster names: schema
@@ -49,32 +52,36 @@ for (const [what, e, re] of nameCases) ok(v(e).errors.some(x => re.test(x)), `na
 ok(v({ names: { common: 'Toaster' } }).warnings.some(w => /object's own name/.test(w)), 'names validator warns when a name is just the object label');
 ok(!v({ status: 'needs-revision', names: { common: 'Crumbit' } }).errors.length, 'status "needs-revision" is accepted (and is never live)');
 
-// 4. the game ignores names, even if an entry with names were marked reviewed and switched on
+// 4. names reach the game only from reviewed entries, only while switched on, and the build copies only reviewed names
 {
   const L = load(), P = load(false), mk = (TT, id, r) => { let s = 3; TT.setRNG(() => { s = (s * 16807) % 2147483647; return s / 2147483647; }); const m = TT.createMonster(TT.freshState(), { obj: id, rarity: r }); delete m.seenAt; return m; };
+  L.CURATED.data.toaster = { status: 'draft', names: { common: 'Crumbit', legendary: 'The Grand Toastmaster' }, lore: {}, moves: {} };
+  ok(['common', 'legendary'].every(r => mk(L, 'toaster', r).name === mk(P, 'toaster', r).name), 'a DRAFT entry with names never changes monster names');
   L.CURATED.data.toaster = { status: 'reviewed', names: { common: 'Crumbit', legendary: 'The Grand Toastmaster' }, lore: {}, moves: {} };
-  ok(['common', 'legendary'].every(r => mk(L, 'toaster', r).name === mk(P, 'toaster', r).name), 'a reviewed entry WITH names still does not change monster names (not wired into the game)');
+  ok(mk(L, 'toaster', 'common').name === 'Crumbit' && mk(L, 'toaster', 'legendary').name === 'The Grand Toastmaster' && mk(L, 'toaster', 'rare').name === mk(P, 'toaster', 'rare').name, 'a reviewed entry with names names the monster for those rarities; a missing rarity keeps the generated name');
+  L.CURATED.namesEnabled = false;
+  ok(mk(L, 'toaster', 'common').name === mk(P, 'toaster', 'common').name, 'names switched off (CURATED.namesEnabled = false): generated names again');
   const out = path.join(require('os').tmpdir(), 'snapmon-curated-build-test.js');
   const tmpDir = fs.mkdtempSync(path.join(require('os').tmpdir(), 'snapmon-cur-')), f = path.join(tmpDir, 'x.json');
-  fs.writeFileSync(f, JSON.stringify({ schema: 1, entries: { toaster: { status: 'reviewed', names: { common: 'Crumbit' }, lore: { common: 'Burns one corner of your toast every time.' } } } }));
+  fs.writeFileSync(f, JSON.stringify({ schema: 1, entries: { toaster: { status: 'reviewed', names: { common: 'Crumbit' }, lore: { common: 'Burns one corner of your toast every time.' } }, kettle: { status: 'draft', names: { common: 'Steamlet' }, lore: { common: 'Sings for no reason at all.' } } } }));
   execFileSync('node', [path.join(ROOT, 'tools/curated.js'), 'build', '--out', out, f]);
   const built = fs.readFileSync(out, 'utf8'); fs.unlinkSync(out); fs.rmSync(tmpDir, { recursive: true });
-  ok(built.includes('Burns one corner') && !built.includes('Crumbit') && !/"names"/.test(built), 'build never copies monster names into browser data, even for reviewed entries');
+  ok(built.includes('Burns one corner') && built.includes('Crumbit') && !built.includes('Steamlet') && !built.includes('Sings for no reason') && !/namesEnabled = true/.test(built) && /CURATED\.revision = '[0-9a-f]{12}'/.test(built), 'build copies reviewed names only (never drafts), switches nothing on without --enable, and writes a content revision');
 }
 
-// 5. Pilot 02: fixed manifest, all draft, complete, not live
+// 5. Pilot 02: fixed manifest, approved (reviewed) and live, complete
 {
-  const m = W.readManifest('pilot-02'), draft = readDoc('content/curated/pilot-02-draft.json'), p01 = readDoc('content/curated/pilot-01-approved.json');
+  const m = W.readManifest('pilot-02'), draft = readDoc('content/curated/pilot-02-approved.json'), p01 = readDoc('content/curated/pilot-01-approved.json');
   const docs = [p01, draft];
-  ok(m.ids.length === 50 && m.size === 50 && !W.checkManifest(T, m, docs).length, 'Pilot 02 manifest: exactly 50 valid, unique, not-yet-live ids');
+  ok(m.ids.length === 50 && m.size === 50 && !W.checkManifest(T, m, docs).length, 'Pilot 02 manifest: exactly 50 valid, unique ids, not live from any other batch');
   ok(m.ids.every(id => !p01.doc.entries[id]), 'no Pilot 01 object is in Pilot 02');
   const entries = draft.doc.entries;
-  ok(JSON.stringify(Object.keys(entries)) === JSON.stringify(m.ids), 'the draft file holds exactly the manifest ids, in manifest order');
-  ok(Object.values(entries).every(e => e.status === 'draft'), 'every Pilot 02 entry is status "draft" (never reviewed)');
-  ok(m.ids.every(id => !T.CURATED.data[id]), 'no Pilot 02 object is in the live data');
+  ok(JSON.stringify(Object.keys(entries)) === JSON.stringify(m.ids), 'the approved file holds exactly the manifest ids, in manifest order');
+  ok(Object.values(entries).every(e => e.status === 'reviewed'), 'every Pilot 02 entry is status "reviewed" (developer approval, 2026-11-02)');
+  ok(m.ids.every(id => JSON.stringify(T.CURATED.data[id].names) === JSON.stringify(entries[id].names) && JSON.stringify(T.CURATED.data[id].lore) === JSON.stringify(entries[id].lore)), 'every Pilot 02 object is live with exactly its approved names and lore');
   const pr = W.progress(T, m, docs);
   ok(pr.filter(r => r.complete).length === 50, `progress: ${pr.filter(r => r.complete).length} of 50 objects have 5 names + 5 texts`);
-  ok(!T.validateCurated(draft.doc, { file: 'pilot-02', raw: fs.readFileSync(path.join(ROOT, 'content/curated/pilot-02-draft.json'), 'utf8') }).errors.length, 'Pilot 02 draft file validates');
+  ok(!T.validateCurated(draft.doc, { file: 'pilot-02', raw: fs.readFileSync(path.join(ROOT, 'content/curated/pilot-02-approved.json'), 'utf8') }).errors.length, 'Pilot 02 approved file validates');
   for (const [id, e] of Object.entries(entries)) { const slots = T.curatedMoveSlots(id); if (Object.keys(e.moves || {}).some(k => !(k in slots))) ok(false, `${id}: unknown move key`); }
   const flags = W.lint(T, docs, { batch: 'pilot-02' });
   ok(!flags.some(f => f.sev === 'high'), `lint on Pilot 02: no high-severity flags (${flags.filter(f => f.sev === 'medium').length} medium, ${flags.filter(f => f.sev === 'low').length} low)`);
