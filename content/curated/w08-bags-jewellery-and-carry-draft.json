@@ -1427,6 +1427,716 @@
         "legend": "Powder Snatch",
         "ultimate": "Powder Puff Cloud"
       }
+    },
+    "x_mascara": {
+      "status": "draft",
+      "names": {
+        "common": "Blinksmudge",
+        "uncommon": "Wandwiggler",
+        "rare": "Lashlifter",
+        "epic": "Wedding Tears Run",
+        "legendary": "Madame Lashelle of the Grand Mirror"
+      },
+      "lore": {
+        "common": "Smudges under your eyes the first time you blink.",
+        "uncommon": "Has a tiny brush wand that wiggles out every last clump.",
+        "rare": "Lifted a pair of lashes so high that they nearly touched the eyebrows.",
+        "epic": "Ran down every cheek at the wedding when the speeches got soppy, and the photos looked like pandas.",
+        "legendary": "Survived a waterfall swim, a rainstorm and a weepy film without a single smudge."
+      },
+      "moves": {
+        "signature": "Flick Flick Flick",
+        "legend": "Lash Lift Boost",
+        "ultimate": "Long Lash Flutter",
+        "kit.touch_up": "Quick Fix Rest",
+        "kit.contour": "Smudge Crack"
+      }
+    },
+    "x_matchbox": {
+      "status": "draft",
+      "names": {
+        "common": "Rattlebox",
+        "uncommon": "Slidedrawer",
+        "rare": "Strikestrip",
+        "epic": "Model Village Box",
+        "legendary": "Old Tinderbox of the Mantelpiece"
+      },
+      "lore": {
+        "common": "Rattles when you shake it to see if there's anything left inside.",
+        "uncommon": "Slides open like a tiny drawer and always opens upside down.",
+        "rare": "Has a rough strip on its side that only grown-ups are allowed to use.",
+        "epic": "Was turned into a tiny town of houses, shops and a school by a very patient model maker.",
+        "legendary": "Has sat on the same high shelf for forty years, out of reach of every child in the family."
+      },
+      "moves": {
+        "signature": "Drawer Slide Crack",
+        "legend": "Box Bonk",
+        "ultimate": "Strip Strike Spark",
+        "kit.strap_snag": "Rattle Startle",
+        "kit.stuff_in": "Drawer Snatch"
+      }
+    },
+    "x_matches": {
+      "status": "draft",
+      "names": {
+        "common": "Grownuponly",
+        "uncommon": "Tipstriker",
+        "rare": "Candlelighter",
+        "epic": "Birthday Candle Glow",
+        "legendary": "Old Strikewell of the High Shelf"
+      },
+      "lore": {
+        "common": "Lives on the highest shelf in the kitchen, where only grown-ups can reach.",
+        "uncommon": "Has a red tip that only works when struck on the box.",
+        "rare": "Lit every candle on a birthday cake in one go, and the wish came true.",
+        "epic": "Lit a hundred lanterns at the night festival, and the whole park glowed gold.",
+        "legendary": "Lit the campfire on a rainy night with a single strike, and the grown-ups still talk about it."
+      },
+      "moves": {
+        "signature": "Strike Strike Strike",
+        "legend": "Safety Shelf Guard",
+        "ultimate": "Lantern Light Up",
+        "kit.jingle_jangle": "Box Rattle Startle",
+        "kit.lock_out": "High Shelf Guard",
+        "kit.key_scratch": "Strike Strip Scratch"
+      }
+    },
+    "x_messenger_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Flapbanger",
+        "uncommon": "Crossbody",
+        "rare": "Bikerider Bag",
+        "epic": "Cycle Courier Dash",
+        "legendary": "Old Satchelworth of the City Streets"
+      },
+      "lore": {
+        "common": "Bangs its flap against your hip with every step.",
+        "uncommon": "Is worn across the body so it never slips off on the bike.",
+        "rare": "Delivered a letter across the city faster than the post van.",
+        "epic": "Raced through the city on the back of every courier in rush hour.",
+        "legendary": "Has been on a thousand cycle deliveries and still smells of rain and city streets."
+      },
+      "moves": {
+        "signature": "Flap Bang Crack",
+        "legend": "Rainy Bag Whiff",
+        "ultimate": "Courier Swerve"
+      }
+    },
+    "x_music_box": {
+      "status": "draft",
+      "names": {
+        "common": "Windupwait",
+        "uncommon": "Tinkletune",
+        "rare": "Slowdowner",
+        "epic": "Concert Hall Hush",
+        "legendary": "Grand Melodina of the Nursery"
+      },
+      "lore": {
+        "common": "Has to be wound up a hundred times for one short tune.",
+        "uncommon": "Plays a tinkly tune that gets stuck in your head for days.",
+        "rare": "Plays its tune slower and slower as it winds down, until the last note takes a whole minute.",
+        "epic": "Was wound up at the school concert and played so sweetly that the orchestra stopped to listen.",
+        "legendary": "Has played the same lullaby to four generations of babies and never missed a note."
+      },
+      "moves": {
+        "signature": "Wind-Up Crack",
+        "legend": "Lullaby Rest",
+        "ultimate": "Music Box Lull"
+      }
+    },
+    "x_nail_polish": {
+      "status": "draft",
+      "names": {
+        "common": "Smudgenail",
+        "uncommon": "Toeprinter",
+        "rare": "Glitterflick",
+        "epic": "Sleepover Manicure",
+        "legendary": "Lady Glossnail of the Salon"
+      },
+      "lore": {
+        "common": "Smudges the moment you touch anything before it's dry.",
+        "uncommon": "Ends up on your toes, your fingers and the carpet.",
+        "rare": "Flicked so much glitter onto the nails that they sparkled in the dark.",
+        "epic": "Painted every nail at the sleepover, and the room smelled of polish until morning.",
+        "legendary": "Has painted ten thousand nails at the salon and never once spilled a drop."
+      },
+      "moves": {
+        "signature": "Dab Dab Dab",
+        "legend": "Wet Nail Smudge",
+        "ultimate": "Glitter Nail Flick"
+      }
+    },
+    "x_nail_polish_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Lidglue",
+        "uncommon": "Tinybrush",
+        "rare": "Colourwall",
+        "epic": "Salon Shelf Rainbow",
+        "legendary": "Madame Lacquer of the Salon Shelf"
+      },
+      "lore": {
+        "common": "Glues its own lid shut so it takes a grown-up to open it.",
+        "uncommon": "Has a tiny brush stuck to its lid that drips on everything.",
+        "rare": "Lined up in every colour on the salon shelf like a rainbow.",
+        "epic": "Was knocked off the shelf, and the salon floor became a work of art.",
+        "legendary": "Has stood on the same salon shelf for thirty years and still has its original colour."
+      },
+      "moves": {
+        "signature": "Brush Dab Crack",
+        "legend": "Polish Pong",
+        "ultimate": "Shelf Topple"
+      }
+    },
+    "x_necklace": {
+      "status": "draft",
+      "names": {
+        "common": "Clasphunter",
+        "uncommon": "Tanglechain",
+        "rare": "Pearlstring",
+        "epic": "Pearl Scatter",
+        "legendary": "Lady Pearlina of the Velvet Box"
+      },
+      "lore": {
+        "common": "Can't be done up without someone else's help.",
+        "uncommon": "Tangles itself into a knot in the jewellery box overnight.",
+        "rare": "Has a string of pearls so long that it wraps round twice.",
+        "epic": "Broke on the dance floor and sent a hundred pearls bouncing in every direction.",
+        "legendary": "Was found in a river after a hundred years, cleaned up, and worn to the wedding of the finder's granddaughter."
+      },
+      "moves": {
+        "signature": "Clasp Clasp Clasp Clasp",
+        "legend": "Pearl Pearl Pearl",
+        "ultimate": "Pearl Scatter Daze"
+      }
+    },
+    "x_paper_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Rustlebag",
+        "uncommon": "Bottomburst",
+        "rare": "Popblower",
+        "epic": "Bakery Rush",
+        "legendary": "Old Brownpaper of the Bakery"
+      },
+      "lore": {
+        "common": "Rustles so loudly that you can never sneak a biscuit out of it.",
+        "uncommon": "Bursts at the bottom when the rain gets it, every time.",
+        "rare": "Was blown up and popped so loudly that the whole class jumped.",
+        "epic": "Carried every loaf out of the bakery on the busiest morning of the year.",
+        "legendary": "Has carried the same family's bread home every Saturday for forty years."
+      },
+      "moves": {
+        "signature": "Paper Tear Crack",
+        "legend": "Crinkle Boost",
+        "ultimate": "Paper Pop"
+      }
+    },
+    "x_parasol_stand": {
+      "status": "draft",
+      "names": {
+        "common": "Toestubber",
+        "uncommon": "Sandfill",
+        "rare": "Heavybase",
+        "epic": "Garden Party Anchor",
+        "legendary": "Old Ironfoot of the Patio"
+      },
+      "lore": {
+        "common": "Stubs every toe that walks past it.",
+        "uncommon": "Is filled with sand so heavy that nobody can move it.",
+        "rare": "Held a parasol steady through a gale that blew over every chair.",
+        "epic": "Anchored every parasol at the garden party in the wind, and not one flew away.",
+        "legendary": "Has stood on the same patio for forty summers and never once tipped over."
+      },
+      "moves": {
+        "signature": "Toe Stub Stub",
+        "legend": "Sun-Hot Iron",
+        "ultimate": "Heavy Base Drop",
+        "kit.canopy_block": "Anchor Guard",
+        "kit.gust": "Wobble Startle",
+        "kit.pointy_end": "Pole Socket Jab"
+      }
+    },
+    "x_parcel_box": {
+      "status": "draft",
+      "names": {
+        "common": "Doorblocker",
+        "uncommon": "Tapemummy",
+        "rare": "Squashcorner",
+        "epic": "Delivery Van Avalanche",
+        "legendary": "Sir Boxley of the Sorting Office"
+      },
+      "lore": {
+        "common": "Blocks the front door so nobody can get in or out.",
+        "uncommon": "Is wrapped in so much tape that it looks like a mummy.",
+        "rare": "Arrived with one corner squashed flat and a pawprint on the lid, and the postman won't say a word.",
+        "epic": "Tumbled out of the delivery van with a hundred others when the doors opened.",
+        "legendary": "Has been round the sorting office so many times that it knows every postman by name."
+      },
+      "moves": {
+        "signature": "Corner Crack",
+        "legend": "Heavy Parcel Slam",
+        "ultimate": "Van Door Avalanche"
+      }
+    },
+    "x_patio_umbrella": {
+      "status": "draft",
+      "names": {
+        "common": "Crankwinder",
+        "uncommon": "Shadespinner",
+        "rare": "Gustlifter",
+        "epic": "Barbecue Shade",
+        "legendary": "Old Canopia of the Back Garden"
+      },
+      "lore": {
+        "common": "Has a crank that takes forever to wind open.",
+        "uncommon": "Spins round so the shade is always on the wrong side of the table.",
+        "rare": "Was lifted out of the table by a gust and carried halfway down the garden.",
+        "epic": "Shaded the whole family barbecue on the hottest day, and nobody got sunburnt.",
+        "legendary": "Opened over the garden table on the first sunny day of spring and wasn't shut again until the first frost."
+      },
+      "moves": {
+        "signature": "Spoke Poke Spoke",
+        "legend": "Musty Canopy Whiff",
+        "ultimate": "Canopy Crash",
+        "kit.canopy_block": "Big Shade Guard",
+        "kit.downpour": "Drip Drip Drip Drip",
+        "kit.gust": "Gust Spin Startle"
+      }
+    },
+    "x_pendant": {
+      "status": "draft",
+      "names": {
+        "common": "Backslider",
+        "uncommon": "Secretcatch",
+        "rare": "Gemcentre",
+        "epic": "Sparkling Dance",
+        "legendary": "Lady Gemheart of the Ballroom"
+      },
+      "lore": {
+        "common": "Slides round to the back of your neck every few minutes, so the gem hangs behind you.",
+        "uncommon": "Has a hidden catch, and inside is a lock of hair from a long-ago pet.",
+        "rare": "Has a gem in the centre that catches the light from across the room.",
+        "epic": "Sparkled across the ballroom so brightly that the dancers kept turning to look.",
+        "legendary": "Has been worn by five generations of brides and still sparkles like new."
+      },
+      "moves": {
+        "signature": "Swing Swing Swing",
+        "legend": "Gem Gem Gem",
+        "ultimate": "Gem Swing Daze"
+      }
+    },
+    "x_pipe": {
+      "status": "draft",
+      "names": {
+        "common": "Bubbleblower Pipe",
+        "uncommon": "Mantelpipe",
+        "rare": "Grandadprop",
+        "epic": "Bubble Cloud Party",
+        "legendary": "Old Meerschaum of the Mantelpiece"
+      },
+      "lore": {
+        "common": "Sits on the mantelpiece collecting dust and won't let anyone move it.",
+        "uncommon": "Was turned into a bubble pipe by grandad, who blows bubbles for the grandchildren.",
+        "rare": "Blew a single bubble so big that it floated over the garden fence.",
+        "epic": "Blew so many bubbles at the garden party that the whole lawn shimmered.",
+        "legendary": "Has been on the same mantelpiece for a hundred years and is now the family's lucky charm."
+      },
+      "moves": {
+        "signature": "Bubble Bubble Bubble",
+        "legend": "Bubble Siphon",
+        "ultimate": "Big Bubble Burst",
+        "kit.jingle_jangle": "Pipe Tap Startle",
+        "kit.lock_out": "Mantelpiece Guard",
+        "kit.key_scratch": "Stem Scratch"
+      }
+    },
+    "x_pizza_box": {
+      "status": "draft",
+      "names": {
+        "common": "Greaseprint",
+        "uncommon": "Lidpropper",
+        "rare": "Steamsquash",
+        "epic": "Pizza Night Pile",
+        "legendary": "Captain Crustbox of the Takeaway"
+      },
+      "lore": {
+        "common": "Leaves a greasy square on everything you put it on.",
+        "uncommon": "Has a tiny plastic table inside to stop the lid squashing the cheese.",
+        "rare": "Steamed up so much that the cheese stuck to the lid.",
+        "epic": "Piled up on the kitchen table for the party until the stack reached the light.",
+        "legendary": "Has carried a thousand pizzas through the rain and kept every slice warm."
+      },
+      "moves": {
+        "signature": "Lid Flap Crack",
+        "legend": "Greasy Lid Crack",
+        "ultimate": "Pizza Stack Topple"
+      }
+    },
+    "x_plastic_container": {
+      "status": "draft",
+      "names": {
+        "common": "Lidmismatch",
+        "uncommon": "Stainsoup",
+        "rare": "Freezerstack",
+        "epic": "Leftover Lid Hunt",
+        "legendary": "Lady Tubworth of the Kitchen Cupboard"
+      },
+      "lore": {
+        "common": "Never has a lid that fits, no matter how many you try.",
+        "uncommon": "Gets stained orange by the first bowl of soup and stays orange forever.",
+        "rare": "Stacked into a tower in the freezer that fell out every time the door opened.",
+        "epic": "Was hunted for by the whole family, and every lid in the cupboard came out except the right one.",
+        "legendary": "Has carried leftovers to work every day for ten years and still doesn't leak."
+      },
+      "moves": {
+        "signature": "Lid Snap Crack Snap",
+        "legend": "Microwave Heat",
+        "ultimate": "Leftover Tumble"
+      }
+    },
+    "x_poker_chip": {
+      "status": "draft",
+      "names": {
+        "common": "Stackclicker",
+        "uncommon": "Chiprattle",
+        "rare": "Gamecounter",
+        "epic": "Game Night Pile",
+        "legendary": "Old Counterworth of the Card Table"
+      },
+      "lore": {
+        "common": "Clicks and clacks in a pile on the table all through game night.",
+        "uncommon": "Rattles in the box when it's shaken and gets lost under the sofa.",
+        "rare": "Was used to count every point in the family card game.",
+        "epic": "Piled up into a tower on the card table so tall that it toppled over.",
+        "legendary": "Has been counted at every family game night for twenty years and is still bright red."
+      },
+      "moves": {
+        "signature": "Click Chip Crack",
+        "legend": "Box Rest",
+        "ultimate": "Chip Tower Topple",
+        "kit.dazzle_flash": "Shiny Chip Flash",
+        "kit.gem_shield": "Stack Guard",
+        "kit.sharp_facet": "Edge Flick Flick"
+      }
+    },
+    "x_ring": {
+      "status": "draft",
+      "names": {
+        "common": "Fingerslipper",
+        "uncommon": "Soapslider",
+        "rare": "Sparkleband",
+        "epic": "Engagement Surprise",
+        "legendary": "The Golden Band of Endless Shine"
+      },
+      "lore": {
+        "common": "Slips off your finger when you wash your hands, and lands in the sink.",
+        "uncommon": "Slides off with soap and gets lost in the washing-up water.",
+        "rare": "Sparkled so brightly that it caught the attention of a magpie.",
+        "epic": "Was hidden in a cake as a surprise, and the whole restaurant clapped when it was found.",
+        "legendary": "Was dropped in the sea, swallowed by a fish, and came home in a fisherman's supper ten years later."
+      },
+      "moves": {
+        "signature": "Spin Spin Spin",
+        "legend": "Sparkle Startle",
+        "ultimate": "Ring Toss"
+      }
+    },
+    "x_sequin": {
+      "status": "draft",
+      "names": {
+        "common": "Everywhere",
+        "uncommon": "Glitterdrop",
+        "rare": "Shinyshed",
+        "epic": "Sequin Storm",
+        "legendary": "Madame Paillette of the Grand Stage"
+      },
+      "lore": {
+        "common": "Drops off the costume and turns up on every chair in the house for months.",
+        "uncommon": "Sticks to the dog, the carpet and your cheek.",
+        "rare": "Caught the stage light so brightly that the whole audience squinted.",
+        "epic": "Shed from the costume so much on stage that the actors left a trail of glitter behind them.",
+        "legendary": "Has been sewn onto a hundred costumes and still sparkles on the oldest one."
+      },
+      "moves": {
+        "signature": "Glitter Glitter Glitter",
+        "legend": "Stage Light Flash",
+        "ultimate": "Sequin Storm Daze",
+        "kit.jingle_jangle": "Sparkle Rattle",
+        "kit.lock_out": "Stitched Guard",
+        "kit.key_scratch": "Edge Scratch"
+      }
+    },
+    "x_sewing_box": {
+      "status": "draft",
+      "names": {
+        "common": "Pinprickle",
+        "uncommon": "Threadtangle",
+        "rare": "Buttonkeeper",
+        "epic": "Costume Night Rush",
+        "legendary": "Granny Stitchwell's Sewing Box"
+      },
+      "lore": {
+        "common": "Pricks your finger with a hidden pin every time you open it.",
+        "uncommon": "Tangles every thread together into one big knot.",
+        "rare": "Keeps a button from every coat that was ever worn in the family.",
+        "epic": "Fixed every costume the night before the school play, and every child went on stage in one piece.",
+        "legendary": "Has mended the same family's clothes for a hundred years and still has the same thimble."
+      },
+      "moves": {
+        "signature": "Pin Prick Crack",
+        "legend": "Mend and Rest",
+        "ultimate": "Needle Startle"
+      }
+    },
+    "x_shoebox": {
+      "status": "draft",
+      "names": {
+        "common": "Tissuepaper",
+        "uncommon": "Shoeshuffle",
+        "rare": "Treasurehider",
+        "epic": "Wardrobe Box Tower",
+        "legendary": "Old Lidsworth of the Wardrobe Floor"
+      },
+      "lore": {
+        "common": "Is full of tissue paper that crackles and gets everywhere.",
+        "uncommon": "Has the shoes inside the wrong way round every single time.",
+        "rare": "Hid a whole collection of football cards under its tissue paper.",
+        "epic": "Stacked into a tower at the back of the wardrobe that toppled on whoever opened the door.",
+        "legendary": "Has kept a pair of baby shoes safe for fifty years."
+      },
+      "moves": {
+        "signature": "Lid Flip Crack",
+        "legend": "Tissue Distraction",
+        "ultimate": "Shoebox Avalanche"
+      }
+    },
+    "x_smart_ring": {
+      "status": "draft",
+      "names": {
+        "common": "Stepcounter",
+        "uncommon": "Buzzfinger",
+        "rare": "Sleeptracker",
+        "epic": "Fitness Finger Buzz",
+        "legendary": "Lady Pulsewell of the Running Track"
+      },
+      "lore": {
+        "common": "Counts every step you take and tells you off for sitting down.",
+        "uncommon": "Buzzes your finger every time a message arrives.",
+        "rare": "Knew you were sleepy before you did, and told you to go to bed.",
+        "epic": "Buzzed on every finger at the fun run at the same moment, and the runners all looked down.",
+        "legendary": "Has counted ten million steps on the same finger and never needed a new battery."
+      },
+      "moves": {
+        "signature": "Buzz Buzz Buzz",
+        "legend": "Warm Battery Buzz",
+        "ultimate": "Step Count Surge",
+        "kit.dazzle_flash": "Screen Flash",
+        "kit.sharp_facet": "Smart Band Jab",
+        "kit.allure": "Data Snatch"
+      }
+    },
+    "x_storage_box": {
+      "status": "draft",
+      "names": {
+        "common": "Lidsticker",
+        "uncommon": "Atticstack",
+        "rare": "Decorationkeeper",
+        "epic": "Attic Box Tumble",
+        "legendary": "Old Boxworth of the Loft"
+      },
+      "lore": {
+        "common": "Has a lid that sticks so tightly that it takes three people to open it.",
+        "uncommon": "Gets stacked in the attic and forgotten for years.",
+        "rare": "Kept every decoration in the house safe for a whole year.",
+        "epic": "Tumbled down the attic ladder and filled the hallway with old toys and decorations.",
+        "legendary": "Has kept the same family's memories in the loft for fifty years."
+      },
+      "moves": {
+        "signature": "Lid Clip Crack",
+        "legend": "Stack Guard",
+        "ultimate": "Hot Attic Tumble"
+      }
+    },
+    "x_sunshade": {
+      "status": "draft",
+      "names": {
+        "common": "Windscreenpop",
+        "uncommon": "Foldfight",
+        "rare": "Dashboardcool",
+        "epic": "Car Park Heatwave",
+        "legendary": "Lady Shadewell of the Dashboard"
+      },
+      "lore": {
+        "common": "Pops out of shape the moment you try to fold it back up.",
+        "uncommon": "Fights you every time you try to fold it into its bag.",
+        "rare": "Kept the car so cool on the hottest day that the chocolate didn't melt.",
+        "epic": "Shaded every car in the car park during the heatwave, and the steering wheels stayed cool.",
+        "legendary": "Has kept the same car cool every summer for ten years and still folds up perfectly."
+      },
+      "moves": {
+        "signature": "Pop Pop Pop Pop",
+        "legend": "Fold Fight Crack",
+        "ultimate": "Sunshade Spring",
+        "kit.canopy_block": "Shade Shield",
+        "kit.gust": "Spring Pop Startle",
+        "kit.pointy_end": "Corner Jab"
+      }
+    },
+    "x_tackle_box": {
+      "status": "draft",
+      "names": {
+        "common": "Hookcatcher",
+        "uncommon": "Wormtin",
+        "rare": "Floatkeeper",
+        "epic": "Fishing Trip Spill",
+        "legendary": "Old Lurekeeper of the Riverbank"
+      },
+      "lore": {
+        "common": "Catches your finger on a hook every time you open it.",
+        "uncommon": "Has a tin of worms that escapes whenever the lid isn't shut.",
+        "rare": "Kept every float, lure and line neatly sorted in its little drawers.",
+        "epic": "Spilled on the riverbank, and every hook and float went in the water.",
+        "legendary": "Has been on every fishing trip for forty years and still has grandad's lucky lure."
+      },
+      "moves": {
+        "signature": "Hook Prick Crack",
+        "legend": "Wormy Whiff",
+        "ultimate": "Tackle Spill"
+      }
+    },
+    "x_tin_box": {
+      "status": "draft",
+      "names": {
+        "common": "Lidpinch",
+        "uncommon": "Biscuitlure",
+        "rare": "Buttonsurprise",
+        "epic": "Biscuit Tin Raid",
+        "legendary": "Old Tinworth of the Pantry"
+      },
+      "lore": {
+        "common": "Pinches your fingers when you prise its lid off.",
+        "uncommon": "Looks like a biscuit tin but is full of sewing things.",
+        "rare": "Surprised everyone at the party with buttons instead of biscuits.",
+        "epic": "Was raided by the whole family at midnight, and not a single biscuit was left.",
+        "legendary": "Has held biscuits, buttons and secret notes for a hundred years."
+      },
+      "moves": {
+        "signature": "Lid Pinch Crack",
+        "legend": "Button Surprise",
+        "ultimate": "Biscuit Tin Bash"
+      }
+    },
+    "x_tissue_box": {
+      "status": "draft",
+      "names": {
+        "common": "Tissuepull",
+        "uncommon": "Lastonehide",
+        "rare": "Sneezeshield",
+        "epic": "Cold Season Rush",
+        "legendary": "Lady Softpuff of the Bedside Table"
+      },
+      "lore": {
+        "common": "Pulls out five tissues at once when you only wanted one.",
+        "uncommon": "Hides the last tissue so deep inside that you can't reach it.",
+        "rare": "Caught every sneeze in the house through a whole week of colds.",
+        "epic": "Ran out in every classroom on the same day during cold season.",
+        "legendary": "Has caught a million sneezes and never once let one escape."
+      },
+      "moves": {
+        "signature": "Pull Crack",
+        "legend": "Tissue Tissue Tissue Tissue",
+        "ultimate": "Sneeze Burst"
+      }
+    },
+    "x_toiletry_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Leakypouch",
+        "uncommon": "Toothbrushhider",
+        "rare": "Hookhanger",
+        "epic": "Hotel Bathroom Spill",
+        "legendary": "Sir Washbag of the Weekend Away"
+      },
+      "lore": {
+        "common": "Leaks shampoo over everything else in the suitcase.",
+        "uncommon": "Hides the toothbrush in a pocket that nobody remembers.",
+        "rare": "Hangs on a hook in the hotel bathroom so everything is within reach.",
+        "epic": "Spilled across the hotel bathroom floor, and the whole family slipped on the soap.",
+        "legendary": "Has been on every holiday for twenty years and still has a tiny hotel soap from the first trip."
+      },
+      "moves": {
+        "signature": "Zip Crack",
+        "legend": "Shampoo Spill Crack",
+        "ultimate": "Steamy Bathroom Spill"
+      }
+    },
+    "x_tool_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Spannerjangle",
+        "uncommon": "Screwdriverlost",
+        "rare": "Toolkeeper",
+        "epic": "Weekend Fix-Up",
+        "legendary": "Old Toolsworth of the Garage"
+      },
+      "lore": {
+        "common": "Jangles with every step, so you can hear the builder coming.",
+        "uncommon": "Loses the screwdriver you need every single time.",
+        "rare": "Kept every tool in the right pocket through a whole week of building.",
+        "epic": "Fixed every broken thing in the house in a single weekend.",
+        "legendary": "Has been to every job with the same builder for forty years and still has his first hammer."
+      },
+      "moves": {
+        "signature": "Spanner Clank",
+        "legend": "Jangle Startle",
+        "ultimate": "Tool Bag Drop"
+      }
+    },
+    "x_tupperware": {
+      "status": "draft",
+      "names": {
+        "common": "Burpseal",
+        "uncommon": "Lidsnapper",
+        "rare": "Stackpacker",
+        "epic": "Leftover Feast",
+        "legendary": "Lady Lidwell of the Fridge"
+      },
+      "lore": {
+        "common": "Burps when you press its lid down to seal it.",
+        "uncommon": "Snaps its lid on so tightly that it takes two hands to open.",
+        "rare": "Packed a whole week of lunches into the fridge in perfect stacks.",
+        "epic": "Held leftovers from the huge family feast, and the fridge was full for a week.",
+        "legendary": "Has kept a famous family recipe fresh in the fridge for thirty years."
+      },
+      "moves": {
+        "signature": "Burp Seal Crack",
+        "legend": "Lid Snap Slam",
+        "ultimate": "Fridge Stack Topple"
+      }
+    },
+    "x_wedding_ring": {
+      "status": "draft",
+      "names": {
+        "common": "Fingerslide",
+        "uncommon": "Soapbubble Ring",
+        "rare": "Goldglint",
+        "epic": "Wedding Day Ring Toss",
+        "legendary": "The Golden Promise"
+      },
+      "lore": {
+        "common": "Slides off your finger at the beach and hides in the sand.",
+        "uncommon": "Slips off in the soapy washing-up water every single time.",
+        "rare": "Glinted in the sunlight so brightly at the wedding that the photographer captured a rainbow.",
+        "epic": "Was nearly dropped down the aisle at the wedding, and the whole crowd held its breath.",
+        "legendary": "Has been worn every day for sixty years and never once taken off."
+      },
+      "moves": {
+        "signature": "Glint Glint Glint Glint",
+        "legend": "Golden Band Guard",
+        "ultimate": "Ring Bearer Fumble"
+      }
     }
   }
 }

@@ -37,7 +37,8 @@
 | w05-vehicles-1 | 79 | 79 | running | self-fixes | |
 | w06-vehicles-2 | 79 | 79 | pending | self-fixes | |
 | w07-clothing-and-shoes | 118 | 118 | pending | self-fixes | |
-| w08–w22 | 1,521 | 0 | — | — | not started |
+| w08-bags-jewellery-and-carry | 94 | 94 | pending | self-fixes | |
+| w09–w22 | 1,427 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
