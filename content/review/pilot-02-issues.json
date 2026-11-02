@@ -1,0 +1,567 @@
+{
+  "batch": "pilot-02",
+  "editor": "independent editor pass (separate Claude context), 2026-11-02",
+  "summary": "A solid batch: commons and uncommons are mostly tied to real habits and land well, monster names are far better than the generated defaults, and the writer caught most awkward kit defaults (hair dryer, glasses, remote, gnome). The biggest systemic problem is the Legendary tier: 20 of 50 legendaries open with a state rather than a feat ('Has been ... for N hundred years', 'Has/Holds every lost X in history', 'Is ...'), which is a new template replacing Pilot 01's 'Can ...' and keeps legendaries smaller than the house-style 'outrageous feat' (kettle, umbrella, lamp, candle, tea bag, teddy, bottle, tv, traffic cone, gnome, smoke detector, stethoscope, sofa, backpack, vacuum, sea urchin). Second, several premises are duplicated across objects or against Pilot 01: song stuck in your head (kettle/headphones), 'whole world hums' (headphones/tuning fork), 'sees everything and will tell' (fridge/glasses), lost coins make it rich (sofa/trolley), remote lost in the sofa (sofa/remote, plus Pilot 01 forklift), moving shadows (lamp/scissors), sneeze flickers the lights (power socket vs Pilot 01 light switch), and a weekday/time-skip cluster (scissors, key, stapler, laptop, phone, remote vs Pilot 01 'Paused Tuesday'). Several objects scale one joke instead of changing premise (burger rare/epic, backpack uncommon/epic, fidget spinner epic/legendary, spoon epic/legendary, hair dryer common/legendary, toaster uncommon/epic, banana uncommon/epic). Watch-words have shifted rather than disappeared: 'whole' appears in 28 lines and 'town' in 23 (mostly epics), the 'secretly, when nobody is looking' device recurs about 15 times, and socks appear in 6 lines on top of Pilot 01's sock. Strongest objects: cat, egg, office chair, pen and dog.",
+  "issues": [
+    {
+      "id": "kettle",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "note": "Duplicate premise: headphones uncommon is also 'plays the song stuck in your head'. Headphones owns it, since songs are what headphones are for. The kettle line also has no real punchline ('slightly wrong').",
+      "suggestion": "Whistles back at the birds every morning. The blackbirds now queue on the windowsill for a sing-off."
+    },
+    {
+      "id": "glasses",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Duplicate premise: fridge legendary is also 'has seen everything and is waiting to tell'. The fridge light version is more object-specific. As written, the glasses legendary is a state, not a legendary feat.",
+      "suggestion": "Lets its wearer read the small print on absolutely everything, including the sky. The clouds turn out to have terms and conditions."
+    },
+    {
+      "id": "remote",
+      "field": "lore.common",
+      "severity": "high",
+      "note": "Duplicate premise: sofa common is 'swallows the TV remote', and Pilot 01 forklift already ends 'It was in the sofa.' The sofa owns this joke.",
+      "suggestion": "Works perfectly for everyone except whoever is holding it. Point it at the TV and the microwave starts."
+    },
+    {
+      "id": "sofa",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Duplicate premise: the shopping trolley legendary is also 'a lost coin makes it richer than X'. Coins are already the sofa's uncommon joke, and the line is a passive 'Holds every X' hoard rather than a feat.",
+      "suggestion": "Swallowed a whole cinema audience during the trailers. They refuse to come out, because the seats are comfier than the film."
+    },
+    {
+      "id": "cutlery_spoon",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Same premise as its own epic: stirring a large body of water until it becomes a drink or food (harbour into soup, then ocean into tea). It also overlaps the tea bag epic (reservoir into tea).",
+      "suggestion": "Catapulted one pea off its handle so hard that it never came down. Children wave at it every evening from the dinner table."
+    },
+    {
+      "id": "x_power_socket",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Duplicates Pilot 01 light switch uncommon ('Can turn on every lamp in the house by sneezing'): sneeze plus lamps flickering. 'Is plugged into the weather' is also a state, not a feat.",
+      "suggestion": "Plugged itself into a lightning bolt to charge one phone. The phone is now full until the year 3000 and glows in the dark."
+    },
+    {
+      "id": "x_tuning_fork",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Duplicate premise: headphones legendary is also 'the whole world hums along'. It is also a third cosmic or whole-world legendary in the music family.",
+      "suggestion": "Struck itself so purely that a mountain started ringing like a bell. Climbers wear earmuffs now, and the goats sing in harmony."
+    },
+    {
+      "id": "key",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Weekday-skip premise duplicates scissors legendary (snipped Thursday out of the week) and Pilot 01 light switch (paused Tuesday). It is the weakest of the three, so this is the one to change.",
+      "suggestion": "Turned once in mid-air and unlocked every door in the country, fridges and sweet jars included. Breakfast lasted all day."
+    },
+    {
+      "id": "scissors",
+      "field": "lore.rare",
+      "severity": "high",
+      "note": "Duplicate premise: lamp rare is also shadows that move on their own. The lamp version (shadow puppets) is more object-specific. Scissors should use a scissors habit instead.",
+      "suggestion": "Gives everyone it meets a free haircut, very fast and very wonky. The football team now has matching fringes."
+    },
+    {
+      "id": "burger",
+      "field": "lore.epic",
+      "severity": "high",
+      "note": "Same joke scaled up: the rare already makes the burger grow taller (new layers, scaffolding). The epic just makes it taller again (higher than the town hall).",
+      "suggestion": "Squeezed its sauce so hard that it painted the town hall red and yellow. The council now calls it public art."
+    },
+    {
+      "id": "backpack",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "note": "Same premise as the epic (impossible capacity: a bicycle comes out, then a whole campsite goes in). 'Bigger on the inside' is also a strong echo of a famous TV catchphrase. Change the uncommon and keep the epic.",
+      "suggestion": "Gets heavier on the walk to school and lighter on the walk home. It refuses to explain the physics."
+    },
+    {
+      "id": "x_fidget_spinner",
+      "field": "lore.epic",
+      "severity": "high",
+      "note": "The epic ('Nobody has dared to stop it') and the legendary ('has never stopped') share one premise, which is also the legendary monster name. Change the epic.",
+      "suggestion": "Spun up a whirlwind in the playground. Every lost hat, glove and paper aeroplane came down at once, sorted by colour."
+    },
+    {
+      "id": "hair_dryer",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Repeats the common punchline (the cat has never looked fluffier, then the lions have never been so fluffy): the same joke with a bigger animal. A zoo is also barely bigger than the rare's swimming pool, so power does not rise.",
+      "suggestion": "Gave a mountain a blow-dry. The snow on top now has a fringe and refuses to melt in case it frizzes."
+    },
+    {
+      "id": "pizza",
+      "field": "lore.legendary",
+      "severity": "high",
+      "note": "Confusing and flat. Being 'delivered before anyone ordered it' is not tied to a clear power, and 'the delivery rider is still dizzy' has no logical link to it. It is the weakest legendary in the batch.",
+      "suggestion": "Delivered itself to every house on the planet at once. Every slice arrived hot, and every cat has already sat in the box."
+    },
+    {
+      "id": "toilet",
+      "field": "lore.rare",
+      "severity": "medium",
+      "note": "'Message in a bottle' is the bottle object's whole identity (rare 'Bottlegram', legendary letter, Ultimate 'Message in a Bottle'). Using it here weakens both objects.",
+      "suggestion": "Flushes backwards whenever someone drops a phone in, then hands it back with a gurgle of disapproval."
+    },
+    {
+      "id": "stapler",
+      "field": "lore.epic",
+      "severity": "medium",
+      "note": "Part of the weekday cluster ('It has been Monday for a month'), alongside scissors Thursday, key Friday/Saturday, laptop and toilet Tuesday, phone Thursday and Pilot 01 Tuesday. The stapler has better, more physical options.",
+      "suggestion": "Stapled two towns together at the edges. Neighbours now borrow sugar from people forty miles away."
+    },
+    {
+      "id": "toaster",
+      "field": "lore.epic",
+      "severity": "medium",
+      "note": "Same premise as the uncommon (pops toast so hard it flies across the room). The epic launches toast again, into a kitchen-light orbit. The scale is domestic, not 'large-scale chaos'.",
+      "suggestion": "Toasted a slice so big that the market uses it as a roof. On windy days it rains crumbs on the high street."
+    },
+    {
+      "id": "banana",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "The peel slip is used at both uncommon and epic. The uncommon is also not an odd talent ('even if you are on the other side of town' is unclear: whose peel, and how?).",
+      "suggestion": "Points itself like a compass towards the nearest monkey. Zookeepers have started using it to count."
+    },
+    {
+      "id": "banana",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "The second Moon legendary in the batch (cat also moves the Moon), after Pilot 01 apple turned the Moon into an apple. The cat's version is the stronger character joke, so change the banana.",
+      "suggestion": "Straightened itself out once, just to prove it could. Every boomerang in the world stopped coming back in protest."
+    },
+    {
+      "id": "fridge",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "'Writing a cookbook about you' is confusing: a cookbook is recipes, and a child will not get the intended 'tell-all book about your snacking'. Keep the light premise (glasses is being changed so it no longer duplicates this).",
+      "suggestion": "Its little light stays on when the door closes, and it has seen everything. It is writing a book about your midnight snacks."
+    },
+    {
+      "id": "fridge",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "Same beat as the common: hums, then acts innocent. 'Innocently/innocent' also appears in lamp common and i_hip uncommon.",
+      "suggestion": "Moves the butter to a different shelf every night. Breakfast has become a treasure hunt with a map stuck on the door."
+    },
+    {
+      "id": "kettle",
+      "field": "lore.epic",
+      "severity": "medium",
+      "note": "Boiling a pond while the ducks are in it is alarming for young players. 'Asked for biscuits' also echoes Pilot 01 rubber duck ('demanded more bread'), and ducks already appear in 4 Pilot 02 lines.",
+      "suggestion": "Heated the village pond into one giant cup of tea. The swans now use it as a hot tub and will not let anyone else in."
+    },
+    {
+      "id": "kettle",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "Passive 'Has been ... since the Stone Age' template. 'Say when' belongs to pouring, not boiling, so the punchline does not quite follow.",
+      "suggestion": "Boiled the sea for one cup of tea, then wandered off and forgot about it. Now it is boiling the sea again."
+    },
+    {
+      "id": "vacuum",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "Lost-sock hoard premise: socks also appear in washing machine common and legendary, dog common, stapler and sneaker, plus Pilot 01 has a whole sock object. 'Elected a left foot' is illogical (socks would elect a sock). It is also a passive 'Has ... every X in history' line.",
+      "suggestion": "Sucked up the fog over the city in one breath. The lighthouses are out of work, and its bag coughs out little clouds."
+    },
+    {
+      "id": "washing_machine",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "Two jokes chained together (time travel, dinosaur pyjamas, then fossils of tiny socks), which are hard for a child to follow. Time travel also repeats power socket epic ('arrived yesterday').",
+      "suggestion": "Spun so fast that it became a whirlpool in the sea. Ships come out the other side clean, folded and missing one sock each."
+    },
+    {
+      "id": "dog",
+      "field": "lore.common",
+      "severity": "medium",
+      "note": "Sock theft adds to the sock cluster (washing machine, vacuum, Pilot 01 sock). The monster name 'Sockthief' doubles it.",
+      "suggestion": "Barks at its own reflection in the oven door every morning. It has never once won the argument."
+    },
+    {
+      "id": "dog",
+      "field": "names.common",
+      "severity": "low",
+      "note": "'Sockthief' ties into the batch-wide sock repetition. Change it if the common lore changes.",
+      "suggestion": "Barkback or Muddypaws"
+    },
+    {
+      "id": "x_rolling_pin",
+      "field": "lore.common",
+      "severity": "medium",
+      "note": "Same premise as egg common (rolls off the edge of the counter). The egg's 'enjoys the gasp' is the better fit, so change the rolling pin.",
+      "suggestion": "Hides behind the whisk at the back of the drawer, so you end up rolling the pastry with a tin of beans."
+    },
+    {
+      "id": "cutlery_spoon",
+      "field": "lore.common",
+      "severity": "medium",
+      "note": "Illogical: nobody yelps on finding a spoon in the washing-up (a knife would make you yelp). The joke depends on danger a spoon does not have.",
+      "suggestion": "Hangs off your nose at dinner, then drops into the soup at the exact moment someone takes a photo."
+    },
+    {
+      "id": "clock",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "Confusing logic: moving the hands forward when you are already late and back when you check leaves no clear consequence or joke.",
+      "suggestion": "Runs five minutes fast on school days and five minutes slow on Saturdays. It thinks this is perfectly fair."
+    },
+    {
+      "id": "tv",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "No punchline: changing the channel on its own leaves out what happens next or why it is funny.",
+      "suggestion": "Whenever someone says 'last one, then bed', it changes the channel to the start of a brand-new film."
+    },
+    {
+      "id": "tv",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "A passive 'Has been showing ... since' template with a flat payoff. It reads as a rare-level habit, not an outrageous legendary feat.",
+      "suggestion": "Turned the night sky into a giant screen for the cup final. A cloud started buffering at the penalty, and the country groaned."
+    },
+    {
+      "id": "lamp",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "Weak consequence: 'so everyone can see your face' does not land. Lighting up whoever is sneaking is the stronger version of the same idea.",
+      "suggestion": "Switches itself on whenever someone tiptoes to the kitchen at night. The biscuit tin now has witnesses."
+    },
+    {
+      "id": "glasses",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "'See one second into the future, just long enough to watch yourself trip' is very close to Pilot 01 security camera rare ('watch people trip twice').",
+      "suggestion": "Lets you read straight through closed books. It has spoiled the ending of every story in the library."
+    },
+    {
+      "id": "glasses",
+      "field": "lore.rare",
+      "severity": "medium",
+      "note": "Rarity mismatch: glasses on your head is a common-tier everyday habit, not a 'genuinely troublesome power'. It also mixes pronouns ('Sits ... They') and uses 'entire'.",
+      "suggestion": "Swaps near and far for its wearer. She waved at a friend across the valley and walked straight into the fridge."
+    },
+    {
+      "id": "laptop",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "Overlaps phone rare (autocorrect turns the speech into soup). Both are 'wrong word swapped in, topic becomes a food or animal'.",
+      "suggestion": "Unmutes you at the worst possible moment. The whole class heard you singing to your hamster."
+    },
+    {
+      "id": "laptop",
+      "field": "lore.common",
+      "severity": "low",
+      "note": "Tuesday appears in both the common and the legendary of this object, and in 4 lines across the batch.",
+      "suggestion": "Change 'since Tuesday' to 'since breakfast'."
+    },
+    {
+      "id": "x_garden_gnome",
+      "field": "lore.common",
+      "severity": "medium",
+      "note": "A gnome turning a little more towards the house each morning, 'waiting to be invited in', reads as creepy (vampire or horror trope) for young children.",
+      "suggestion": "Turns to face whoever is mowing the lawn, so it can judge their stripes."
+    },
+    {
+      "id": "x_sea_urchin_shell",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "note": "Borrowed from another object: hearing the sea is a conch or seashell trait, not a sea urchin shell trait (Bible section 6: filler that belongs to another object).",
+      "suggestion": "Lets you peep through the little hole on top like a tiny window. Whatever you aim it at, a crab waves back."
+    },
+    {
+      "id": "x_sea_urchin_shell",
+      "field": "object",
+      "severity": "low",
+      "note": "Factual: the empty urchin shells (tests) found on beaches have usually lost their spines. The common (stepping on it barefoot) and the spike names and moves fit a live urchin better. This is acceptable as monster licence, but a line acknowledging the bumps or holes would be more accurate.",
+      "suggestion": "Leave as is, or make the common 'Looks exactly like a pebble until you sit on it.'"
+    },
+    {
+      "id": "x_sea_urchin_shell",
+      "field": "lore.legendary",
+      "severity": "low",
+      "note": "Another passive 'Has collected ... from every beach on Earth' hoard legendary. Not wrong, but it adds to the batch's biggest template.",
+      "suggestion": "Rolled out to sea and back on one tide, wearing a crown of seaweed. Every crab on the beach now bows to it."
+    },
+    {
+      "id": "i_hip",
+      "field": "lore.common",
+      "severity": "medium",
+      "note": "'It is only a rose hip, but a smug one' is exposition written to explain the object label. It breaks the two-sentence trick-then-punchline shape and is not funny.",
+      "suggestion": "Grows on the thorniest branch of the hedge, so every finger that picks it gets pricked. It keeps count."
+    },
+    {
+      "id": "x_tea_bag",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "A passive 'has guarded it ever since' template with a flat payoff. 'Nobody has been allowed' adds to the 16 'nobody' lines in the batch.",
+      "suggestion": "Turned the morning fog into milky tea. Commuters arrive at work warm, damp and smelling faintly of biscuits."
+    },
+    {
+      "id": "x_tea_bag",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "note": "'The milk is always already in' relies on adults knowing the milk-first argument. Children will not get the punchline.",
+      "suggestion": "Brews itself in cold water when nobody is looking. The goldfish bowl has turned a suspicious shade of brown."
+    },
+    {
+      "id": "x_smoke_detector",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "Repeats the uncommon's toast premise (the legend move 'Toast Alarm' makes three toast references). It is also a passive 'thousands of years ago' line with no feat.",
+      "suggestion": "Beeped at a burnt crumpet so loudly that every volcano in the world checked itself for smoke. Two of them apologised."
+    },
+    {
+      "id": "traffic_cone",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "'Nobody remembers what is underneath' is the generic-mystery shape the Bible warns against. It is also another 'since X was invented' passive legendary.",
+      "suggestion": "Coned off one lane of the sky. Aeroplanes now queue politely above the town, and the pigeons have to use the slow lane."
+    },
+    {
+      "id": "candle",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "note": "Birthdays and wishes are the premise of the rare, epic and legendary alike (the Ultimate is also 'Make a Wish'). The legendary is also a passive 'since the very first birthday' line.",
+      "suggestion": "Lit itself on the Sun to save a match. The Sun is still waiting for it to blow out and make a wish."
+    },
+    {
+      "id": "teddy",
+      "field": "lore.epic",
+      "severity": "medium",
+      "note": "No comic punchline: 'everyone made friends' is sweet but not funny. Squishing houses closer together is also slightly unsettling as an image.",
+      "suggestion": "Grew as big as the town hall and sat on its roof all through a storm. It is still drying out, and the clock now sticks out of its tummy."
+    },
+    {
+      "id": "x_tuning_fork",
+      "field": "lore.rare",
+      "severity": "medium",
+      "note": "Flat and repetitive: windows humming along is the common's humming scaled up, with no concrete consequence.",
+      "suggestion": "Rang so purely that every glass in the restaurant sang along. The waiter now takes requests."
+    },
+    {
+      "id": "pizza",
+      "field": "lore.common",
+      "severity": "medium",
+      "note": "Very close to Pilot 01 microwave common (too hot to touch, then cold): the same hot-then-cold contrast.",
+      "suggestion": "Drops its topping off the slice the instant you lift it. The cheese always lands face down."
+    },
+    {
+      "id": "bottle",
+      "field": "lore.legendary",
+      "severity": "low",
+      "note": "Rare and legendary both centre on messages. It is a good punchline (Dave), but the object's two top tiers share a premise and the legendary is another 'for a thousand years' line.",
+      "suggestion": "Change the rare: 'Plays a different tune when you blow across it. The neighbours now request songs through the window.'"
+    },
+    {
+      "id": "bicycle",
+      "field": "lore.common",
+      "severity": "low",
+      "note": "One sentence with no consequence or punchline.",
+      "suggestion": "Drops its chain halfway up every hill. Downhill it has never once had a problem."
+    },
+    {
+      "id": "x_traffic_light",
+      "field": "lore.epic",
+      "severity": "low",
+      "note": "'Started a street party' repeats lamp epic ('the whole street held a garden party').",
+      "suggestion": "Turned every light in the city red at once. The ice cream van has been stuck at one junction for so long it now has a queue of its own."
+    },
+    {
+      "id": "washing_machine",
+      "field": "lore.epic",
+      "severity": "low",
+      "note": "White flag = surrender is war imagery, and many children will not know the reference, so the punchline may not land.",
+      "suggestion": "Washed every football kit in town together. Now both teams are pink, and the referee keeps sending off the wrong player."
+    },
+    {
+      "id": "cat",
+      "field": "lore.rare",
+      "severity": "low",
+      "note": "Lint flags 3 sentences because of '3 a.m.'.",
+      "suggestion": "Use 'in the middle of the night'."
+    },
+    {
+      "id": "headphones",
+      "field": "object",
+      "severity": "medium",
+      "note": "Move slot `signature` (not renamed in the draft): The kept default 'Bass Boost' sounds like a self buff, but the slot is a 45% x3 multi-hit attack (Bible: buff words mislead).",
+      "suggestion": "Add moves.signature: \"Boom Boom Boom\""
+    },
+    {
+      "id": "x_tea_bag",
+      "field": "moves.kit.long_shelf_life",
+      "severity": "medium",
+      "note": "This slot is self defence up. 'Stewed Too Long' (bitter, over-brewed) suggests neither protection nor bracing.",
+      "suggestion": "Strong Brew"
+    },
+    {
+      "id": "x_tea_bag",
+      "field": "moves.legend",
+      "severity": "low",
+      "note": "'Big Dunk' collides with the signature 'Scalding Dunk' and the common name 'Drippy Dunk'.",
+      "suggestion": "Teaspoon Squeeze"
+    },
+    {
+      "id": "x_smoke_detector",
+      "field": "moves.legend",
+      "severity": "medium",
+      "note": "The legend move is defence down. 'Toast Alarm' reads as a stun or sudden noise, not as weakening. It is also the third toast reference in the object.",
+      "suggestion": "Tea Towel Flap"
+    },
+    {
+      "id": "bottle",
+      "field": "moves.kit.undertow",
+      "severity": "medium",
+      "note": "This slot is a single drain hit. The repeated 'Glug Glug' reads as a multi-hit in the Bible's convention (repeated words mean multi-hit).",
+      "suggestion": "Big Swig"
+    },
+    {
+      "id": "office_chair",
+      "field": "moves.signature",
+      "severity": "medium",
+      "note": "'Dizzy Spins' (multi-hit) nearly collides with fidget spinner signature 'Dizzy Spin' (defence down). The same name for different mechanics in one batch is confusing.",
+      "suggestion": "Swivel Swivel Swivel"
+    },
+    {
+      "id": "x_fidget_spinner",
+      "field": "moves.signature",
+      "severity": "low",
+      "note": "Four of its six move names contain 'Spin' (Dizzy Spin, Balanced Spin, Endless Spins, Never Stop Spinning), so in battle they are hard to tell apart.",
+      "suggestion": "Signature (defence down) 'Wobble Wind-Down'; kit.block_tower (defence up) 'Steady Bearings'."
+    },
+    {
+      "id": "bicycle",
+      "field": "moves.kit.turbo_boost",
+      "severity": "medium",
+      "note": "'Downhill Rush' collides with the signature 'Downhill Crash' on the same monster.",
+      "suggestion": "Pedal Power"
+    },
+    {
+      "id": "scissors",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "note": "'Final Cut' echoes a well-known video-editing product name. The batch also leans on 'Final' for Ultimates (Final Rinse, Final Cut, Final Sprint, The Final Staple, Season Finale, Pillow Fight Finale, plus Pilot 01 'The Final SQUEAK').",
+      "suggestion": "Cut and Paste"
+    },
+    {
+      "id": "washing_machine",
+      "field": "moves.kit.frost_breath",
+      "severity": "low",
+      "note": "This slot is defence down. 'Cold Wash' only keeps the frost theme. Shrinking clothes is a perfect defence-down image and this object's own joke.",
+      "suggestion": "Shrink Wash"
+    },
+    {
+      "id": "x_tuning_fork",
+      "field": "moves.signature",
+      "severity": "low",
+      "note": "This slot stuns. 'Perfect Pitch' names a skill and suggests neither a sudden noise nor a daze.",
+      "suggestion": "Ear-Ringing Ping"
+    },
+    {
+      "id": "vacuum",
+      "field": "moves.kit.power_hum",
+      "severity": "low",
+      "note": "'Deafening Drone' and hair dryer 'Deafening Whine' share a word. Both are stun slots, so pick one 'Deafening'.",
+      "suggestion": "Roaring Drone"
+    },
+    {
+      "id": "toilet",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "note": "'Gurgle Guru' is barely different from the common 'Gurgles'. Two names built on the same word in one object.",
+      "suggestion": "Bowlwhisper"
+    },
+    {
+      "id": "scissors",
+      "field": "names.epic",
+      "severity": "medium",
+      "note": "Four of five scissors names are built on 'snip' (Snipsy, Shadow Snipper, Bridge Snip, Snipperella). Vary the construction.",
+      "suggestion": "Ribbon Ripper (and if the rare lore changes to haircuts, rare 'Fringe Fiend')."
+    },
+    {
+      "id": "sneaker",
+      "field": "names.legendary",
+      "severity": "medium",
+      "note": "'Runaway' is used twice in this object (Marathon Runaway, Speedlace, the Runaway Shoe) and four times across the batch (lint).",
+      "suggestion": "Speedlace, the Long Stride"
+    },
+    {
+      "id": "dog",
+      "field": "names.legendary",
+      "severity": "medium",
+      "note": "'Sir Wagsalot' copies the construction of candle 'Sir Drippalot' ('Sir ...alot'), and 'Sir' also opens burger 'Sir Loin'.",
+      "suggestion": "Wagnificent"
+    },
+    {
+      "id": "backpack",
+      "field": "names.common",
+      "severity": "medium",
+      "note": "'Secret Pocket' is an object feature, not a creature, and it repeats 'Pocket' from the uncommon 'Pocket Maze'.",
+      "suggestion": "Zipnip"
+    },
+    {
+      "id": "backpack",
+      "field": "names.epic",
+      "severity": "low",
+      "note": "'Bottomless' appears in three names (Bottomless Rucksack, The Bottomless Bottle, Dustmouth, the Bottomless).",
+      "suggestion": "Campsite Gulper"
+    },
+    {
+      "id": "bottle",
+      "field": "names.legendary",
+      "severity": "low",
+      "note": "'The Bottomless Bottle' repeats 'Bottomless' (see backpack, vacuum) and does not match the lore (a thousand-year voyage, not endless contents).",
+      "suggestion": "Captain Driftwell"
+    },
+    {
+      "id": "x_traffic_light",
+      "field": "names.common",
+      "severity": "medium",
+      "note": "'Blinky' is the name of a famous arcade-game ghost (trademark echo).",
+      "suggestion": "Redblink"
+    },
+    {
+      "id": "x_tea_bag",
+      "field": "names.epic",
+      "severity": "low",
+      "note": "'Teatanic' puns on a real shipwreck with heavy loss of life (Bible: no tragedy played for laughs). It is mild, but the easiest name to swap.",
+      "suggestion": "Reservoir Brew"
+    },
+    {
+      "id": "key",
+      "field": "names.uncommon",
+      "severity": "low",
+      "note": "'Wrong-Lock Wally' echoes a trademarked children's-book character name in the UK.",
+      "suggestion": "Wrong-Lock Rattler"
+    },
+    {
+      "id": "x_sea_urchin_shell",
+      "field": "names.rare",
+      "severity": "low",
+      "note": "'Towel Spiral' describes the lore event, not a creature.",
+      "suggestion": "Tidewheel"
+    },
+    {
+      "id": "stapler",
+      "field": "names.rare",
+      "severity": "low",
+      "note": "The name 'Ka-Chunker' is nearly identical to the stapler's own move 'Ka-Chunk!'. 'Jamjaw' and 'Ironjaw' also share '-jaw'.",
+      "suggestion": "Clackmouth (or rename the move to 'Sudden Ka-Chunk')"
+    },
+    {
+      "id": "clock",
+      "field": "names.common",
+      "severity": "low",
+      "note": "'Snoozle' and the legendary 'Grandfather Snooze' share 'snooze' in one object, and pillow has 'Snoozy Puff'.",
+      "suggestion": "Tickle-Tock"
+    }
+  ]
+}

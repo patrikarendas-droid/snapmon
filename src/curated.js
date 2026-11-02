@@ -14,12 +14,17 @@
 const CURATED = {
   enabled: false,     // master switch for curated flavour text (switched on by src/curated-data.js)
   movesEnabled: false, // curated move NAMES by stable ability key (game.js createMonster); on via src/curated-data.js
+  namesEnabled: false, // curated MONSTER names per rarity (since Pilot 02 integration); on via src/curated-data.js
+  revision: null,      // content fingerprint written by the build: saves refresh once per revision (curatedRefresh)
   schema: 1,
   data: {},           // { objectId: entry } — set by src/curated-data.js (generated from content/curated/*.json)
 };
 const CURATED_RARITIES = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
-const CURATED_LIMITS = { loreMin: 12, loreMax: 220, variants: 8, moveMin: 3, moveMax: 28, notes: 600 };
-const CURATED_FIELDS = ['lore', 'moves', 'status', 'notes'];
+const CURATED_LIMITS = { loreMin: 12, loreMax: 220, variants: 8, moveMin: 3, moveMax: 28, notes: 600, nameMin: 3, nameMax: 24, legendNameMax: 40 };
+// `names` (rarity → monster display name): written into src/curated-data.js for reviewed entries and used by the game
+// only while CURATED.namesEnabled is on (Pilot 02 integration, 2026-11-02).
+const CURATED_FIELDS = ['lore', 'moves', 'names', 'status', 'notes'];
+const CURATED_STATUSES = ['draft', 'needs-revision', 'reviewed']; // only "reviewed" can ever reach the game
 // template tokens, editing leftovers and markup that must never reach a player
 const CURATED_PLACEHOLDER = /\{[^}]*\}|\[[^\]]*\]|<[^>]*>|\b(todo|tbd|fixme|xxx+|lorem|ipsum|placeholder|insert|object name|monster name)\b|\.\.\.\s*$|^\W*$/i;
 
@@ -52,9 +57,25 @@ function validateCurated(doc, { file = 'content', raw = null, seen = null } = {}
     if (seen) { if (seen.has(id)) E(`${at} is also defined in ${seen.get(id)}`); else seen.set(id, file); }
     if (!e || typeof e !== 'object' || Array.isArray(e)) { E(`${at} must be an object`); continue; }
     for (const k of Object.keys(e)) if (!CURATED_FIELDS.includes(k)) E(`${at}: unknown field "${k}" (allowed: ${CURATED_FIELDS.join(', ')})`);
-    if (e.status != null && !['draft', 'reviewed'].includes(e.status)) E(`${at}: "status" must be "draft" or "reviewed"`);
+    if (e.status != null && !CURATED_STATUSES.includes(e.status)) E(`${at}: "status" must be one of ${CURATED_STATUSES.join(', ')}`);
+    if (e.names != null) {
+      if (typeof e.names !== 'object' || Array.isArray(e.names)) E(`${at}: "names" must be an object keyed by rarity`);
+      else {
+        const seenNames = new Map();
+        for (const [r, v] of Object.entries(e.names)) {
+          if (!CURATED_RARITIES.includes(r)) { E(`${at}: names rarity "${r}" is not one of ${CURATED_RARITIES.join(', ')}`); continue; }
+          const max = r === 'legendary' ? CURATED_LIMITS.legendNameMax : CURATED_LIMITS.nameMax, where = `${at}.names.${r}`;
+          if (typeof v !== 'string') { E(`${where}: must be text`); continue; }
+          if (v !== v.trim() || /\s{2,}/.test(v)) E(`${where}: no spaces at the start/end or double spaces`);
+          if (v.trim().length < CURATED_LIMITS.nameMin || v.length > max) E(`${where}: ${v.length} characters (${CURATED_LIMITS.nameMin}–${max})`);
+          if (!/^[A-Z][A-Za-z0-9 '\-,.!&]*$/.test(v) || CURATED_PLACEHOLDER.test(v)) E(`${where}: start with a capital letter; letters, digits, spaces and ' - , . ! & only (no placeholders)`);
+          const k = v.toLowerCase(); if (seenNames.has(k)) E(`${where}: same name as names.${seenNames.get(k)}`); else seenNames.set(k, r);
+          if (k === o.name.toLowerCase()) W(`${where}: identical to the object's own name ("${o.name}"): a monster name should be more than the label`);
+        }
+      }
+    }
     if (e.notes != null && (typeof e.notes !== 'string' || e.notes.length > CURATED_LIMITS.notes)) E(`${at}: "notes" must be text up to ${CURATED_LIMITS.notes} characters`);
-    if (e.lore == null && e.moves == null) W(`${at}: no lore and no moves`);
+    if (e.lore == null && e.moves == null && e.names == null) W(`${at}: no lore, names or moves`);
     if (e.lore != null) {
       if (typeof e.lore !== 'object' || Array.isArray(e.lore)) E(`${at}: "lore" must be an object keyed by rarity`);
       else for (const [r, v] of Object.entries(e.lore)) {
@@ -135,3 +156,39 @@ function curatedMoveName(objId, slot) {
     return typeof v === 'string' && v.trim().length >= CURATED_LIMITS.moveMin && v.length <= CURATED_LIMITS.moveMax ? v.trim() : null;
   } catch (err) { return null; }
 }
+
+/* The curated monster name for a NEW or refreshed monster of this object and rarity, or null (= generated name). */
+function curatedMonsterName(objId, rarity) {
+  if (!CURATED.enabled || !CURATED.namesEnabled || !objId) return null;
+  try {
+    const e = CURATED.data && Object.prototype.hasOwnProperty.call(CURATED.data, objId) ? CURATED.data[objId] : null;
+    const v = e && e.status === 'reviewed' && e.names && e.names[rarity];
+    return typeof v === 'string' && v.trim().length >= CURATED_LIMITS.nameMin && v.length <= CURATED_LIMITS.legendNameMax && !CURATED_PLACEHOLDER.test(v) ? v.trim() : null;
+  } catch (err) { return null; }
+}
+
+/* Content refresh for monsters that already exist (saves, backups, the test collection). Brings one monster's NAME,
+   flavour TEXT and MOVE NAMES (by stable ability key) up to the latest reviewed writing for its object and rarity.
+   Never touches nickname, level, stats, rarity, variant, colours, DNA/sprite, move numbers, keys or anything else.
+   Objects without reviewed content are left exactly as they are. Returns true if something changed. */
+function curatedApply(m) {
+  if (!CURATED.enabled || !m || !m.obj) return false;
+  const e = CURATED.data && Object.prototype.hasOwnProperty.call(CURATED.data, m.obj) ? CURATED.data[m.obj] : null;
+  if (!e || e.status !== 'reviewed') return false;
+  const before = JSON.stringify([m.name, m.lore, (m.abilities || []).map(a => a && a.name)]);
+  const name = curatedMonsterName(m.obj, m.rarity); if (name) m.name = name;
+  const lore = curatedLore(m.obj, m.rarity, m.seed); if (lore) m.lore = lore;
+  for (const a of m.abilities || []) { if (!a || !a.key) continue; const n = curatedMoveName(m.obj, a.key); if (n) a.name = n; }
+  return before !== JSON.stringify([m.name, m.lore, (m.abilities || []).map(a => a && a.name)]);
+}
+/* Once per content revision: refresh every saved monster. Idempotent (a second run with the same revision does
+   nothing, and the result is deterministic anyway). S.curatedRev records the revision applied. */
+function curatedRefresh(S) {
+  if (!CURATED.enabled || !CURATED.revision || !S || S.curatedRev === CURATED.revision) return 0;
+  let n = 0; for (const m of S.monsters || []) if (curatedApply(m)) n++;
+  S.curatedRev = CURATED.revision;
+  return n;
+}
+/* What the encyclopedia shows as the species' monster name for a rarity (its curated name, else the stored one). */
+const curatedDexName = (d, rarity) => (d && d.obj && curatedMonsterName(d.obj, rarity)) || (d && d.monsterName) || null;
+

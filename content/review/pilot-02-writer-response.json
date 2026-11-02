@@ -1,0 +1,122 @@
+{
+ "batch": "pilot-02",
+ "pass": "writer pass 2 (2026-11-02), responding to content/review/pilot-02-issues.json",
+ "resolved": [
+  {
+   "id": "kettle",
+   "field": "lore.uncommon",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "glasses",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "remote",
+   "field": "lore.common",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "sofa",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "cutlery_spoon",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "x_power_socket",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "x_tuning_fork",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "key",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "scissors",
+   "field": "lore.rare",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "burger",
+   "field": "lore.epic",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "backpack",
+   "field": "lore.uncommon",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "x_fidget_spinner",
+   "field": "lore.epic",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "hair_dryer",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "pizza",
+   "field": "lore.legendary",
+   "change": "adopted the editor's suggestion"
+  },
+  {
+   "id": "headphones",
+   "field": "moves.signature",
+   "change": "own fix: the default 'Bass Boost' sounds like a self-buff but it is a 3-hit attack"
+  },
+  {
+   "id": "x_tea_bag",
+   "field": "moves.kit.long_shelf_life",
+   "change": "own fix: the move raises its own defence; 'Stewed Too Long' did not say so"
+  },
+  {
+   "id": "x_smoke_detector",
+   "field": "moves.legend",
+   "change": "own fix: the move lowers defence; 'Toast Alarm' suggested a different effect"
+  },
+  {
+   "id": "bottle",
+   "field": "moves.kit.undertow",
+   "change": "own fix: a single drain hit; repeated words signal multi-hit"
+  },
+  {
+   "id": "office_chair",
+   "field": "moves.signature",
+   "change": "own fix: avoided a near-collision with fidget spinner 'Dizzy Spin'"
+  },
+  {
+   "id": "bicycle",
+   "field": "moves.kit.turbo_boost",
+   "change": "own fix: 'Downhill Rush' sat next to 'Downhill Crash' on the same monster"
+  },
+  {
+   "id": "kettle",
+   "field": "lore.epic",
+   "change": "own fix: ducks were in the boiling pond"
+  },
+  {
+   "id": "x_garden_gnome",
+   "field": "lore.common",
+   "change": "own fix: 'waiting to be invited in' read as creepy"
+  },
+  {
+   "id": "x_sea_urchin_shell",
+   "field": "lore.uncommon",
+   "change": "own fix: hearing the sea belongs to a seashell, not an urchin shell"
+  }
+ ],
+ "open": "Every other editor issue (medium/low) is left open for the human editor; nothing here is approved and every entry is still status draft."
+}

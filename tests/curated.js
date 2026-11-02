@@ -1,6 +1,7 @@
 // Curated writing: the validator catches bad content, the lookup falls back to the procedural text for anything missing,
 // draft or malformed, and curated text never touches the random streams. Since v0.4.6 the game loads the reviewed
-// Pilot 01 entries (src/curated-data.js): section 5 checks that ONLY those 10 objects' lore and move names change.
+// entries (src/curated-data.js; Pilot 01 since v0.4.6, Pilot 02 with monster names since the Pilot 02 integration):
+// section 5 checks that ONLY those objects' names, lore and move names change. Save refresh: tests/curated-refresh.js.
 // tests/gameplay-baseline.js separately proves gameplay is unchanged.
 const fs = require('fs'), vm = require('vm'), path = require('path');
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
@@ -20,7 +21,7 @@ ok(T.CURATED.enabled === false && T.CURATED.movesEnabled === false && Object.key
 const ids = ['x_energy_drink', 'x_light_switch', 'x_security_camera', 'cutlery_spoon', 'pen', 'padlock', 'mug', 'apple'];
 const same = ids.every(id => ['common', 'rare', 'legendary'].every(r => JSON.stringify(make(T, id, r)) === JSON.stringify(make(PLAIN, id, r))));
 ok(same, 'with curated.js loaded but off, monsters (names, moves, stats, DNA, lore) are identical to the game without it');
-const LIVE_SNAPSHOT = { enabled: LIVE.CURATED.enabled, movesEnabled: LIVE.CURATED.movesEnabled, data: JSON.parse(JSON.stringify(LIVE.CURATED.data)) };
+const LIVE_SNAPSHOT = { enabled: LIVE.CURATED.enabled, movesEnabled: LIVE.CURATED.movesEnabled, namesEnabled: LIVE.CURATED.namesEnabled, revision: LIVE.CURATED.revision, data: JSON.parse(JSON.stringify(LIVE.CURATED.data)) };
 
 // 2. validator
 const v = (doc, raw) => T.validateCurated(doc, { file: 't', raw: raw || JSON.stringify(doc) });
@@ -82,32 +83,34 @@ ok(lo('x_energy_drink', 'common') === plain('x_energy_drink', 'common'), 'over-l
 T.CURATED.enabled = false;
 ok(lo('x_energy_drink', 'rare') === plain('x_energy_drink', 'rare'), 'switched off again: back to the procedural text');
 
-// 5. activation (v0.4.6, Pilot 01): exactly the reviewed content, loaded by the game, changing only text
+// 5. activation (v0.4.6 Pilot 01; Pilot 02 integration adds monster names): exactly the reviewed content, changing only text
 {
   const docs = contentFiles.map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))), want = {};
-  for (const d of docs) for (const [id, e] of Object.entries(d.entries)) if (e.status === 'reviewed') want[id] = { status: 'reviewed', lore: e.lore || {}, moves: e.moves || {} };
-  ok(LIVE_SNAPSHOT.enabled && LIVE_SNAPSHOT.movesEnabled, 'the game switches curated text and move names on (src/curated-data.js)');
+  for (const d of docs) for (const [id, e] of Object.entries(d.entries)) if (e.status === 'reviewed') want[id] = { status: 'reviewed', lore: e.lore || {}, moves: e.moves || {}, ...(e.names ? { names: e.names } : {}) };
+  ok(LIVE_SNAPSHOT.enabled && LIVE_SNAPSHOT.movesEnabled && LIVE_SNAPSHOT.namesEnabled && /^[0-9a-f]{12}$/.test(LIVE_SNAPSHOT.revision || ''), `the game switches curated text, move names and monster names on, with content revision ${LIVE_SNAPSHOT.revision} (src/curated-data.js)`);
   ok(JSON.stringify(LIVE_SNAPSHOT.data) === JSON.stringify(Object.fromEntries(Object.keys(want).sort().map(k => [k, want[k]]))), `src/curated-data.js matches content/curated exactly (${Object.keys(want).length} reviewed entries; rebuild with: node tools/curated.js build --out src/curated-data.js --enable)`);
   const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8'), at = f => html.indexOf(`<script src="src/${f}"></script>`);
   ok(at('game.js') > 0 && at('curated.js') > at('game.js') && at('curated-data.js') > at('curated.js') && at('ui.js') > at('curated-data.js'), 'index.html loads curated.js then curated-data.js after game.js and before the UI');
   const dist = fs.readFileSync(path.join(__dirname, '../dist/snapmon.html'), 'utf8');
   ok(dist.includes('CURATED.enabled = true;') && dist.includes(LIVE_SNAPSHOT.data.apple.lore.legendary), 'the single-file build contains the activated Pilot 01 data (rebuild with node tools/build.js)');
-  const pilot = new Set(Object.keys(want)), noText = m => JSON.stringify({ ...m, lore: 0, abilities: m.abilities.map(a => ({ ...a, name: 0 })) });
+  for (const f of ['dist/snapmon.html', 'dist/artifact.html']) { const h = fs.readFileSync(path.join(__dirname, '..', f), 'utf8'); ok(h.includes(`CURATED.revision = '${LIVE_SNAPSHOT.revision}'`) && h.includes(JSON.stringify(LIVE_SNAPSHOT.data.toaster.names.legendary)), `${f} contains the current curated data (revision ${LIVE_SNAPSHOT.revision}, Pilot 02 names; rebuild with node tools/build.js)`); }
+  const pilot = new Set(Object.keys(want)), noText = m => JSON.stringify({ ...m, name: 0, lore: 0, abilities: m.abilities.map(a => ({ ...a, name: 0 })) });
   let other = [], pilotBad = [], n = 0;
   for (const id of Object.keys(LIVE.OBJECTS)) for (const r of ['common', 'uncommon', 'rare', 'epic', 'legendary']) for (const variant of [null, 'spectral', 'mutated']) {
     const mk = TT => { seedRng(TT); const m = TT.createMonster(TT.freshState(), { obj: id, rarity: r, variant, word: id }); delete m.seenAt; return m; };
     const a = mk(LIVE), b = mk(PLAIN); n++;
     if (!pilot.has(id)) { if (JSON.stringify(a) !== JSON.stringify(b)) other.push(`${id}/${r}/${variant}`); continue; }
     const e = want[id], names = a.abilities.map(x => e.moves[x.key] || b.abilities.find(y => y.key === x.key).name);
-    if (noText(a) !== noText(b) || a.lore !== e.lore[r] || JSON.stringify(a.abilities.map(x => x.name)) !== JSON.stringify(names)) pilotBad.push(`${id}/${r}/${variant}`);
+    if (noText(a) !== noText(b) || a.lore !== e.lore[r] || a.name !== ((e.names && e.names[r]) || b.name) || JSON.stringify(a.abilities.map(x => x.name)) !== JSON.stringify(names)) pilotBad.push(`${id}/${r}/${variant}`);
   }
   ok(!other.length, `${n} monsters: every non-Pilot object is byte-identical to the game without curated content${other.length ? ': ' + other.slice(0, 3).join(', ') : ''}`);
-  ok(!pilotBad.length, `Pilot 01 monsters: the approved lore for their rarity and the approved move names by key; everything else (stats, keys, numbers, DNA, name) identical${pilotBad.length ? ': ' + pilotBad.slice(0, 3).join(', ') : ''}`);
+  ok(!pilotBad.length, `${pilot.size} curated objects (normal, Spectral, Mutated): the approved name (Pilot 02; Pilot 01 keeps the generated one), lore for their rarity and move names by key; everything else (stats, keys, numbers, DNA) identical${pilotBad.length ? ': ' + pilotBad.slice(0, 3).join(', ') : ''}`);
   const sp = (TT, id, r) => TT.speciesLore({ key: 'o:' + id, obj: id, cat: TT.OBJECTS[id].cat, fam: null, monsterName: TT.OBJECTS[id].name }, r);
-  ok([...pilot].every(id => ['common', 'uncommon', 'rare', 'epic', 'legendary'].every(r => sp(LIVE, id, r) === want[id].lore[r])) && ['mug', 'cutlery_spoon', 'x_power_socket'].every(id => sp(LIVE, id, 'rare') === sp(PLAIN, id, 'rare')), 'encyclopedia: Pilot 01 species show the approved text (also for species already discovered); others unchanged');
+  ok([...pilot].every(id => ['common', 'uncommon', 'rare', 'epic', 'legendary'].every(r => sp(LIVE, id, r) === want[id].lore[r])) && ['mug', 'shoe', 'x_traffic_cone', 'stapler_x'].filter(id => LIVE.OBJECTS[id] && !pilot.has(id)).every(id => sp(LIVE, id, 'rare') === sp(PLAIN, id, 'rare')), 'encyclopedia: curated species (Pilot 01 and 02) show the approved text (also for species already discovered); others unchanged');
+  // restoring a backup made before this content: the curated monster takes the reviewed writing, everything else stays
   const old = make(PLAIN, 'apple', 'legendary'), S = LIVE.freshState(); S.monsters = [{ ...old, id: 'm1' }];
   const back = LIVE.importSave(LIVE.exportSave(S)).monsters[0];
-  ok(back.lore === old.lore && JSON.stringify(back.abilities.map(a => a.name)) === JSON.stringify(old.abilities.map(a => a.name)), 'existing monsters keep their stored text and move names after the update (backup/load)');
+  ok(back.lore === want.apple.lore.legendary && back.name === old.name && JSON.stringify(back.abilities.map(a => a.name)) === JSON.stringify(old.abilities.map(a => want.apple.moves[a.key] || a.name)) && noText(back) === noText(S.monsters[0]), `a Pilot 01 monster from an older backup gets the approved text and move names, keeps its generated name "${old.name}" and everything else`);
   const de = make(LIVE, 'x_energy_drink', 'legendary'), ls = make(LIVE, 'x_light_switch', 'legendary');
   ok(de.abilities[0].name === 'Wake-Up Call' && de.abilities.find(a => a.key === 'legend').name === 'Caffeine Crash' && ls.abilities[0].name === 'Lights Out' && ls.abilities.find(a => a.key === 'ultimate').name === 'The Big Switch', `examples: ${de.abilities.map(a => a.name).join(', ')} | ${ls.abilities.map(a => a.name).join(', ')}`);
 }

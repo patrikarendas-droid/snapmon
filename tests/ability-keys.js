@@ -60,8 +60,8 @@ ok(!renameBad.length, `renaming moves (to new names, or all to one name, even "A
   const keyless = mm => mm.map(m => ({ ...m, abilities: m.abilities.map(({ key, cdWith, ...a }) => a) }));
   ok(JSON.stringify(keyless(M.monsters)) === JSON.stringify(before), 'loading changes nothing else on saved monsters (names, numbers, text)');
   ok(JSON.stringify(T.migrate(clone(M)).monsters) === JSON.stringify(M.monsters), 'loading twice gives the same keys (idempotent)');
-  const back = T.importSave(T.exportSave(M));
-  ok(JSON.stringify(back.monsters) === JSON.stringify(M.monsters), 'keys survive backup export/import');
+  const back = T.importSave(T.exportSave(M)), noText = mm => JSON.stringify(mm.map(m => ({ ...m, name: 0, lore: 0, abilities: m.abilities.map(a => ({ ...a, name: 0 })) })));
+  ok(noText(back.monsters) === noText(M.monsters), 'keys survive backup export/import (restoring refreshes only curated text: names, lore, move names)');
   const fights = mm => JSON.stringify(battle(clone(mm), 9).map(e => pos(e, mm)));
   ok(fights(v045) === fights(M.monsters[1]), 'a keyless monster (test collection, very old save) fights exactly like its keyed version');
 }

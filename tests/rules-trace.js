@@ -8,6 +8,8 @@
 // v0.4.6: the game now loads curated Pilot 01 text, which renames some moves (apple, forklift are in this trace). The
 // recorded fixture is checked with curated text OFF, and the curated-ON run must be identical once move names are
 // removed: renaming moves never changes the rules (cooldowns use stable ability keys).
+// Pilot 02 integration: curated MONSTER names too (dog, toilet are in this trace), so battle messages are compared by
+// the numbers they contain (damage, healing, chances) rather than their wording.
 const G = require('./load')(), crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/rules-trace.json');
 let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
@@ -42,8 +44,8 @@ return out;
 const live = { enabled: G.CURATED.enabled, moves: G.CURATED.movesEnabled };
 const out = trace(false), onOut = trace(true);
 G.CURATED.enabled = live.enabled; G.CURATED.movesEnabled = live.moves;
-const noNames = o => JSON.stringify(o, (k, v) => (k === 'name' ? undefined : v));
-if (noNames(out) !== noNames(onOut)) { console.log('FAIL: with curated text on, the battles differ beyond move names'); process.exit(1); }
+const noNames = o => JSON.stringify(o, (k, v) => (k === 'name' ? undefined : k === 'msg' && typeof v === 'string' ? v.replace(/[^0-9.]/g, '') : v));
+if (noNames(out) !== noNames(onOut)) { console.log('FAIL: with curated text on, the battles differ beyond monster and move names'); process.exit(1); }
 const hash = crypto.createHash('sha256').update(JSON.stringify(out)).digest('hex');
 if (process.argv[2] === 'record') { fs.writeFileSync(FIX, JSON.stringify({ steps: out.length, sha256: hash }, null, 1)); console.log('recorded', out.length, hash); process.exit(0); }
 const want = JSON.parse(fs.readFileSync(FIX, 'utf8'));

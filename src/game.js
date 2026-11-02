@@ -3,7 +3,7 @@
 
 const SAVE_KEY = 'snapmon.save.v1';      // storage key name kept from v0.1 so existing saves are found
 const SAVE_VERSION = 3;                  // bump + add a migration step whenever the save format changes
-const GAME_VERSION = '0.4.7';
+const GAME_VERSION = '0.4.8';
 const STORE = {
   get: k => { try { return typeof Platform !== 'undefined' ? Platform.storage.get(k) : localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { if (typeof Platform !== 'undefined') return Platform.storage.set(k, v); localStorage.setItem(k, v); return true; } catch (e) { return false; } },
@@ -81,7 +81,16 @@ function loadState() {
   if ((parsed.v || 1) > SAVE_VERSION) { saveBlocked = { reason: 'newer', version: parsed.v, raw }; return freshState(); }
   // keep an untouched copy of the old save before migrating it (one per old version)
   if ((parsed.v || 1) < SAVE_VERSION) { migratedFrom = parsed.v || 1; const bk = SAVE_KEY + '.backup.v' + (parsed.v || 1); if (!STORE.get(bk)) STORE.set(bk, raw); }
-  try { return withLore(migrate(parsed)); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
+  let S;
+  try { S = withLore(migrate(parsed)); } catch (e) { saveBlocked = { reason: 'corrupt', raw }; return freshState(); }
+  // curated-writing refresh (src/curated.js): once per content revision, existing monsters take the latest reviewed
+  // names, flavour text and move names. Before the FIRST refresh the untouched save is kept once (a single key, so later
+  // content revisions never pile up copies in storage; they only ever change text).
+  if (typeof curatedRefresh === 'function' && CURATED.enabled && CURATED.revision && S.curatedRev !== CURATED.revision) {
+    const bk = SAVE_KEY + '.backup.precurated'; try { if (!STORE.get(bk)) STORE.set(bk, raw); } catch (e) { /* backup is best effort */ }
+    curatedRefresh(S);
+  }
+  return S;
 }
 // v0.4.2: monsters store their flavour text; older monsters get theirs once (deterministic, so it is the same text
 // they already showed after the update) and keep it from then on. Additive field: the save format stays 3.
@@ -98,7 +107,9 @@ function importSave(text) {
   const obj = JSON.parse(decodeURIComponent(escape(atob(text.slice(9)))));
   if (!obj || typeof obj.level !== 'number' || !Array.isArray(obj.monsters)) throw new Error('The backup code is damaged or incomplete.');
   if ((obj.v || 1) > SAVE_VERSION) throw new Error(`This backup was made by a newer SNAPMON (save format ${obj.v}). Update the game before restoring it.`);
-  return migrate(obj);
+  const S = migrate(obj);
+  if (typeof curatedRefresh === 'function') curatedRefresh(S); // restored backups get the latest reviewed writing too
+  return S;
 }
 
 /* ---------- hunter ---------- */
@@ -285,7 +296,7 @@ function createTestMonster(S, objId, photo, obj = {}, rng = RNG) {
 }
 const TestRoster = {
   KEY: 'snapmon.testroster.v1', MAX: 300,
-  list() { try { return JSON.parse(STORE.get(this.KEY) || '[]'); } catch (e) { return []; } },
+  list() { try { const l = JSON.parse(STORE.get(this.KEY) || '[]'); if (typeof curatedApply === 'function') for (const m of l) curatedApply(m); return l; } catch (e) { return []; } }, // shown with the latest reviewed writing
   add(m) { const l = this.list(); l.push({ ...m, test: true }); return STORE.set(this.KEY, JSON.stringify(l.slice(-this.MAX))); },
   remove(id) { STORE.set(this.KEY, JSON.stringify(this.list().filter(m => m.id !== id))); },
   clear() { STORE.set(this.KEY, '[]'); },
@@ -421,8 +432,11 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   };
   if (first) { m.stats.hp = Math.round(m.stats.hp * 0.8); m.stats.atk = Math.max(3, Math.round(m.stats.atk * 0.8)); }
   assignAbilityKeys(m);
+  // curated monster name (reviewed content, src/curated.js): replaces the generated name, including a Legendary's
+  // generated title; family, rarity, species, stats and everything else stay as generated. No random numbers.
+  if (typeof curatedMonsterName === 'function' && o) { const cn = curatedMonsterName(obj, rarity); if (cn) m.name = cn; }
   // curated move names (src/curated.js, reviewed content only): display names by stable key; numbers, cooldowns and
-  // keys are untouched, and no random numbers are used. Only new monsters get them; saved monsters keep their names.
+  // keys are untouched, and no random numbers are used. Saved monsters get them via curatedRefresh (on load/restore).
   if (typeof curatedMoveName === 'function' && o) for (const a of m.abilities) { const n = curatedMoveName(obj, a.key); if (n) a.name = n; }
   m.lore = monsterLore(m); // flavour text for this object AND rarity, stored so it never changes (lore.js)
   return m;

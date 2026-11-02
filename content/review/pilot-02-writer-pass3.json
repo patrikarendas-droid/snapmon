@@ -1,0 +1,611 @@
+{
+ "batch": "pilot-02",
+ "pass": "writer pass 3 (2026-11-02): developer decisions 1-7 + remaining editor issues",
+ "changes": [
+  {
+   "id": "kettle",
+   "field": "lore.legendary",
+   "why": "priority: stronger, logically connected feat"
+  },
+  {
+   "id": "traffic_cone",
+   "field": "lore.legendary",
+   "why": "priority: editor's sky-lane direction"
+  },
+  {
+   "id": "x_tea_bag",
+   "field": "lore.legendary",
+   "why": "priority: memorable achievement"
+  },
+  {
+   "id": "toaster",
+   "field": "lore.epic",
+   "why": "priority: no repeat of the uncommon's flying toast"
+  },
+  {
+   "id": "x_rolling_pin",
+   "field": "lore.common",
+   "why": "priority: no repeat of the egg's counter-edge joke"
+  },
+  {
+   "id": "dog",
+   "field": "names.common",
+   "why": "priority: dog names revisited (sock theme removed)"
+  },
+  {
+   "id": "dog",
+   "field": "names.legendary",
+   "why": "priority: dog names revisited; no 'Sir ...alot' twin"
+  },
+  {
+   "id": "x_fidget_spinner",
+   "field": "moves.signature",
+   "why": "priority: fewer 'Spin' move names (defence down)"
+  },
+  {
+   "id": "x_fidget_spinner",
+   "field": "moves.kit.block_tower",
+   "why": "priority: fewer 'Spin' move names (self defence up)"
+  },
+  {
+   "id": "x_fidget_spinner",
+   "field": "moves.legend",
+   "why": "priority: fewer 'Spin' move names (3 hits)"
+  },
+  {
+   "id": "x_fidget_spinner",
+   "field": "moves.ultimate",
+   "why": "priority: fewer 'Spin' move names (effect-neutral)"
+  },
+  {
+   "id": "tv",
+   "field": "lore.uncommon",
+   "why": "priority: weak TV description"
+  },
+  {
+   "id": "tv",
+   "field": "lore.legendary",
+   "why": "priority: weak TV legendary"
+  },
+  {
+   "id": "tv",
+   "field": "names.legendary",
+   "why": "name matches the new legendary"
+  },
+  {
+   "id": "fridge",
+   "field": "lore.uncommon",
+   "why": "priority: fridge common/uncommon shared a beat"
+  },
+  {
+   "id": "fridge",
+   "field": "lore.legendary",
+   "why": "priority: confusing fridge legendary ('cookbook')"
+  },
+  {
+   "id": "fridge",
+   "field": "names.epic",
+   "why": "creature name instead of a feature ('Glacier Door'); matches the epic"
+  },
+  {
+   "id": "x_smoke_detector",
+   "field": "lore.legendary",
+   "why": "priority: weak smoke-detector legendary (and a third toast joke)"
+  },
+  {
+   "id": "x_smoke_detector",
+   "field": "names.legendary",
+   "why": "'The ...' reduced; fits the new legendary"
+  },
+  {
+   "id": "x_traffic_light",
+   "field": "names.common",
+   "why": "priority: replace 'Blinky' (arcade-character echo)"
+  },
+  {
+   "id": "vacuum",
+   "field": "lore.legendary",
+   "why": "socks cluster + passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "vacuum",
+   "field": "names.legendary",
+   "why": "'Bottomless' used three times; matches the legendary"
+  },
+  {
+   "id": "washing_machine",
+   "field": "lore.legendary",
+   "why": "editor issue (adopted suggestion) (sock callback kept: socks are the washing machine's own joke)"
+  },
+  {
+   "id": "washing_machine",
+   "field": "lore.epic",
+   "why": "editor issue (adopted suggestion) (surrender imagery removed)"
+  },
+  {
+   "id": "dog",
+   "field": "lore.common",
+   "why": "editor issue (adopted suggestion) (sock cluster)"
+  },
+  {
+   "id": "stapler",
+   "field": "lore.uncommon",
+   "why": "sock cluster"
+  },
+  {
+   "id": "stapler",
+   "field": "lore.epic",
+   "why": "editor issue (adopted suggestion) (weekday cluster)"
+  },
+  {
+   "id": "laptop",
+   "field": "lore.common",
+   "why": "editor issue (adopted suggestion) (weekday cluster)"
+  },
+  {
+   "id": "laptop",
+   "field": "lore.uncommon",
+   "why": "editor issue (adopted suggestion) (overlapped phone autocorrect)"
+  },
+  {
+   "id": "laptop",
+   "field": "lore.legendary",
+   "why": "weekday cluster (Tuesday removed)"
+  },
+  {
+   "id": "x_tea_bag",
+   "field": "lore.rare",
+   "why": "weekday cluster"
+  },
+  {
+   "id": "x_tea_bag",
+   "field": "lore.uncommon",
+   "why": "editor issue (adopted suggestion) (milk-first joke too adult)"
+  },
+  {
+   "id": "phone",
+   "field": "lore.legendary",
+   "why": "time-skip cluster ('text from next Thursday')"
+  },
+  {
+   "id": "phone",
+   "field": "names.legendary",
+   "why": "name matches the new legendary; 'The ...' reduced"
+  },
+  {
+   "id": "remote",
+   "field": "lore.legendary",
+   "why": "time-skip cluster (fast-forwarded holidays)"
+  },
+  {
+   "id": "banana",
+   "field": "lore.legendary",
+   "why": "editor issue (adopted suggestion) (Moon cluster)"
+  },
+  {
+   "id": "banana",
+   "field": "lore.uncommon",
+   "why": "peel-slip premise was used twice (uncommon and epic)"
+  },
+  {
+   "id": "x_stethoscope",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "x_stethoscope",
+   "field": "names.legendary",
+   "why": "'The ...' reduced; matches the legendary"
+  },
+  {
+   "id": "x_tuning_fork",
+   "field": "lore.legendary",
+   "why": "mountain cluster (hair dryer, rolling pin, pillow already)"
+  },
+  {
+   "id": "x_tuning_fork",
+   "field": "lore.rare",
+   "why": "editor issue (adopted suggestion) (humming repeated the common)"
+  },
+  {
+   "id": "x_tuning_fork",
+   "field": "names.rare",
+   "why": "matches the new rare"
+  },
+  {
+   "id": "umbrella",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "lamp",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "lamp",
+   "field": "names.legendary",
+   "why": "matches the new legendary"
+  },
+  {
+   "id": "lamp",
+   "field": "lore.uncommon",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "candle",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2); birthdays were rare+epic+legendary"
+  },
+  {
+   "id": "candle",
+   "field": "names.legendary",
+   "why": "'The ...' reduced; matches the legendary"
+  },
+  {
+   "id": "teddy",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "teddy",
+   "field": "lore.epic",
+   "why": "editor: epic had no punchline"
+  },
+  {
+   "id": "backpack",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "backpack",
+   "field": "names.legendary",
+   "why": "matches the legendary; 'The ...' reduced"
+  },
+  {
+   "id": "x_garden_gnome",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "x_sea_urchin_shell",
+   "field": "lore.legendary",
+   "why": "editor issue (adopted suggestion); passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "x_sea_urchin_shell",
+   "field": "lore.common",
+   "why": "editor fact note: beach urchin shells are pebble-like"
+  },
+  {
+   "id": "x_fidget_spinner",
+   "field": "lore.legendary",
+   "why": "passive legendary -> a feat (decision 2)"
+  },
+  {
+   "id": "x_fidget_spinner",
+   "field": "names.legendary",
+   "why": "matches the legendary; 'The ...' reduced"
+  },
+  {
+   "id": "toilet",
+   "field": "lore.rare",
+   "why": "editor issue (adopted suggestion) (message in a bottle belongs to the bottle)"
+  },
+  {
+   "id": "cutlery_spoon",
+   "field": "lore.common",
+   "why": "editor issue (adopted suggestion) (illogical yelp)"
+  },
+  {
+   "id": "cutlery_spoon",
+   "field": "names.legendary",
+   "why": "'The Silver Spoon' did not match the pea-launch legendary"
+  },
+  {
+   "id": "clock",
+   "field": "lore.uncommon",
+   "why": "editor issue (adopted suggestion) (confusing logic)"
+  },
+  {
+   "id": "glasses",
+   "field": "lore.uncommon",
+   "why": "editor issue (adopted suggestion) (echoed Pilot 01 'trip twice')"
+  },
+  {
+   "id": "glasses",
+   "field": "lore.rare",
+   "why": "editor issue (adopted suggestion) (rarity mismatch)"
+  },
+  {
+   "id": "glasses",
+   "field": "names.uncommon",
+   "why": "matches the new uncommon"
+  },
+  {
+   "id": "glasses",
+   "field": "names.rare",
+   "why": "matches the new rare"
+  },
+  {
+   "id": "i_hip",
+   "field": "lore.common",
+   "why": "editor issue (adopted suggestion) (exposition removed; rose hip named in rare and uncommon)"
+  },
+  {
+   "id": "pizza",
+   "field": "lore.common",
+   "why": "editor issue (adopted suggestion) (echoed Pilot 01 microwave hot/cold)"
+  },
+  {
+   "id": "bottle",
+   "field": "lore.rare",
+   "why": "editor issue (adopted suggestion) (messages were rare and legendary)"
+  },
+  {
+   "id": "bottle",
+   "field": "names.rare",
+   "why": "matches the new rare"
+  },
+  {
+   "id": "bottle",
+   "field": "names.legendary",
+   "why": "editor issue (adopted suggestion) ('Bottomless' x3)"
+  },
+  {
+   "id": "bicycle",
+   "field": "lore.common",
+   "why": "editor issue (adopted suggestion) (no punchline)"
+  },
+  {
+   "id": "x_traffic_light",
+   "field": "lore.epic",
+   "why": "editor issue (adopted suggestion) (party repeated the lamp)"
+  },
+  {
+   "id": "cat",
+   "field": "lore.rare",
+   "why": "editor issue (adopted suggestion) (3 sentences)"
+  },
+  {
+   "id": "toilet",
+   "field": "names.uncommon",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "scissors",
+   "field": "names.rare",
+   "why": "editor issue (adopted suggestion) (snip x4)"
+  },
+  {
+   "id": "scissors",
+   "field": "names.epic",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "sneaker",
+   "field": "names.legendary",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "backpack",
+   "field": "names.common",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "backpack",
+   "field": "names.epic",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "x_tea_bag",
+   "field": "names.epic",
+   "why": "editor issue (adopted suggestion) (shipwreck pun)"
+  },
+  {
+   "id": "key",
+   "field": "names.uncommon",
+   "why": "editor: trademark echo"
+  },
+  {
+   "id": "x_sea_urchin_shell",
+   "field": "names.rare",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "stapler",
+   "field": "names.rare",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "clock",
+   "field": "names.common",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "x_shopping_trolley",
+   "field": "names.legendary",
+   "why": "'The ...' reduced; ties to the coin-interest legendary"
+  },
+  {
+   "id": "scissors",
+   "field": "moves.ultimate",
+   "why": "editor issue (adopted suggestion) (product-name echo)"
+  },
+  {
+   "id": "washing_machine",
+   "field": "moves.kit.frost_breath",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "x_tuning_fork",
+   "field": "moves.signature",
+   "why": "editor issue (adopted suggestion) (stun)"
+  },
+  {
+   "id": "vacuum",
+   "field": "moves.kit.power_hum",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "x_tea_bag",
+   "field": "moves.legend",
+   "why": "editor issue (adopted suggestion)"
+  },
+  {
+   "id": "toaster",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "kettle",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "fridge",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "vacuum",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "vacuum",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "hair_dryer",
+   "field": "lore.rare",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "umbrella",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "umbrella",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "toilet",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "toilet",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "pillow",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "sofa",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "lamp",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "candle",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "potted_plant",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "laptop",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "phone",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "tv",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "tv",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "remote",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "stapler",
+   "field": "lore.rare",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "banana",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "sneaker",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "backpack",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "teddy",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "teddy",
+   "field": "lore.legendary",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "bicycle",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "x_smoke_detector",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "x_power_socket",
+   "field": "lore.rare",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "x_power_socket",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  },
+  {
+   "id": "i_hip",
+   "field": "lore.epic",
+   "why": "watch-word trim ('whole'/'town' overuse); wording only"
+  }
+ ]
+}

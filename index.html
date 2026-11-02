@@ -266,7 +266,7 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .hero img.hunter { width: 100%; animation: idle 2s ease-in-out infinite; transform-origin: 50% 100%; }
 .hero .plat { left: 0; right: 10%; bottom: -3%; height: 16%; }
 .hero .comp { position: absolute; width: 38%; left: 62%; bottom: 2%; }
-.hp-card { position: absolute; background: rgba(17,13,27,.88); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; display: grid; gap: 4px; z-index: 3; backdrop-filter: blur(4px); }
+.hp-card { position: absolute; background: rgba(17,13,27,.88); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; z-index: 3; backdrop-filter: blur(4px); }
 .hp-card.foe-card { left: 12px; top: 12px; width: 50%; }
 .hp-card.hero-card { right: 12px; bottom: 14px; width: 50%; }
 .hp-card .nm { font-weight: 700; font-size: 13.5px; line-height: 1.15; display: flex; gap: 6px; align-items: baseline; justify-content: space-between; }

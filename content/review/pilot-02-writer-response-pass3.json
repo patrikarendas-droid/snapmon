@@ -1,0 +1,304 @@
+{
+ "batch": "pilot-02",
+ "pass": "writer pass 3b (2026-11-02), responding to content/review/pilot-02-issues-pass3.json",
+ "resolved": [
+  {
+   "id": "backpack",
+   "field": "lore.legendary",
+   "change": "own rewrite: editor's 'school in its pocket' repeated the epic's capacity premise; zips are a new premise"
+  },
+  {
+   "id": "candle",
+   "field": "lore.epic",
+   "change": "adopted editor suggestion (lighthouse/ships removed)"
+  },
+  {
+   "id": "candle",
+   "field": "lore.legendary",
+   "change": "own rewrite: lighthouses removed (lamp owns them); candle clocks are real"
+  },
+  {
+   "id": "x_tea_bag",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (damp-commuter punchline belonged to the toilet)"
+  },
+  {
+   "id": "x_smoke_detector",
+   "field": "lore.epic",
+   "change": "adopted editor suggestion"
+  },
+  {
+   "id": "i_hip",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (feat instead of a state; 'complained' dropped)"
+  },
+  {
+   "id": "bottle",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion"
+  },
+  {
+   "id": "x_sea_urchin_shell",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (crabs no longer the legendary premise)"
+  },
+  {
+   "id": "fridge",
+   "field": "lore.epic",
+   "change": "adopted editor suggestion (heatwave was epic and legendary)"
+  },
+  {
+   "id": "fridge",
+   "field": "names.epic",
+   "change": "matches the new epic"
+  },
+  {
+   "id": "fridge",
+   "field": "lore.uncommon",
+   "change": "own fix: 'Breakfast has become a…' duplicated the egg rare (egg kept as a reference)"
+  },
+  {
+   "id": "x_stethoscope",
+   "field": "lore.epic",
+   "change": "own rewrite (editor suggestion would have collided with another entry) (the school-wall idea repeated its own rare)"
+  },
+  {
+   "id": "x_tuning_fork",
+   "field": "lore.rare",
+   "change": "adopted editor suggestion"
+  },
+  {
+   "id": "x_tuning_fork",
+   "field": "names.rare",
+   "change": "matches the new rare"
+  },
+  {
+   "id": "sofa",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion"
+  },
+  {
+   "id": "potted_plant",
+   "field": "lore.legendary",
+   "change": "own rewrite (editor suggestion would have collided with another entry) (editor's heatwave idea collided with the fridge)"
+  },
+  {
+   "id": "scissors",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (weekday premise echoed Pilot 01 light switch)"
+  },
+  {
+   "id": "scissors",
+   "field": "names.legendary",
+   "change": "matches the new legendary"
+  },
+  {
+   "id": "remote",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (muted storm echoed Pilot 01 padlock)"
+  },
+  {
+   "id": "phone",
+   "field": "lore.epic",
+   "change": "own rewrite (editor suggestion would have collided with another entry) (editor's power-cut idea collided with the lamp; laptop owns the whole-country message)"
+  },
+  {
+   "id": "kettle",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (stronger, logically connected feat)"
+  },
+  {
+   "id": "pillow",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (feat; mountains now 2 in the batch)"
+  },
+  {
+   "id": "hair_dryer",
+   "field": "lore.legendary",
+   "change": "own fix: clearer punchline; editor's cloud idea collided with the toaster legendary"
+  },
+  {
+   "id": "x_shopping_trolley",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (coins do not earn interest)"
+  },
+  {
+   "id": "x_shopping_trolley",
+   "field": "names.legendary",
+   "change": "matches the new legendary"
+  },
+  {
+   "id": "pen",
+   "field": "lore.legendary",
+   "change": "own rewrite: feat instead of a passive habit; editor's 'drawn door' collided with the key rare"
+  },
+  {
+   "id": "sneaker",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion"
+  },
+  {
+   "id": "bicycle",
+   "field": "lore.legendary",
+   "change": "adopted editor suggestion (equator lane was illogical)"
+  },
+  {
+   "id": "teddy",
+   "field": "lore.epic",
+   "change": "adopted editor suggestion"
+  },
+  {
+   "id": "teddy",
+   "field": "lore.uncommon",
+   "change": "adopted editor suggestion (night-wandering cluster)"
+  },
+  {
+   "id": "key",
+   "field": "lore.common",
+   "change": "adopted editor suggestion (hiding-place cluster)"
+  },
+  {
+   "id": "scissors",
+   "field": "lore.uncommon",
+   "change": "adopted editor suggestion ('except the one you need' cluster)"
+  },
+  {
+   "id": "candle",
+   "field": "names.rare",
+   "change": "adopted editor suggestion ('Sir…alot')"
+  },
+  {
+   "id": "candle",
+   "field": "names.legendary",
+   "change": "matches the candle-clock legendary"
+  },
+  {
+   "id": "dog",
+   "field": "names.rare",
+   "change": "adopted editor suggestion (Barkback/Woofback twins)"
+  },
+  {
+   "id": "sofa",
+   "field": "names.uncommon",
+   "change": "adopted editor suggestion (place, not creature)"
+  },
+  {
+   "id": "sofa",
+   "field": "names.epic",
+   "change": "own fix: creature name (editor's 'Cushion Mountain' is still a place)"
+  },
+  {
+   "id": "x_traffic_light",
+   "field": "names.legendary",
+   "change": "adopted editor suggestion"
+  },
+  {
+   "id": "toaster",
+   "field": "names.legendary",
+   "change": "adopted editor suggestion ('The …' cluster; the toaster legendary text itself is kept as a reference)"
+  },
+  {
+   "id": "key",
+   "field": "names.legendary",
+   "change": "own fix: 'Keymaster' echo; editor's 'Clinkerbell' echoes a famous fairy"
+  },
+  {
+   "id": "bottle",
+   "field": "names.rare",
+   "change": "adopted editor suggestion ('hooter' slang)"
+  },
+  {
+   "id": "office_chair",
+   "field": "names.common",
+   "change": "adopted editor suggestion ('Squeak-' x3)"
+  },
+  {
+   "id": "backpack",
+   "field": "names.legendary",
+   "change": "matches the zip legendary"
+  },
+  {
+   "id": "vacuum",
+   "field": "moves.ultimate",
+   "change": "adopted editor suggestion ('Clean' on a poison Ultimate)"
+  },
+  {
+   "id": "egg",
+   "field": "lore.rare",
+   "change": "resolved on the fridge side (fridge uncommon punchline changed); egg kept as the developer's reference"
+  },
+  {
+   "id": "candle",
+   "field": "lore.rare",
+   "change": "logic slip ('mumbled' is saying it out loud)"
+  },
+  {
+   "id": "office_chair",
+   "field": "lore.rare",
+   "change": "logic slip (a water cooler cannot race)"
+  },
+  {
+   "id": "bicycle",
+   "field": "lore.epic",
+   "change": "logic slip (outside wall vs inside ceiling)"
+  },
+  {
+   "id": "key",
+   "field": "lore.epic",
+   "change": "lockdown connotation removed"
+  },
+  {
+   "id": "cat",
+   "field": "moves.ultimate",
+   "change": "'Nine Lives' suggested revival on a pure attack"
+  },
+  {
+   "id": "washing_machine",
+   "field": "moves.ultimate",
+   "change": "'Rinse' leaned against the poison variant"
+  },
+  {
+   "id": "stapler",
+   "field": "moves.legend",
+   "change": "'Pin-Down' suggested a stun; the move lowers defence"
+  },
+  {
+   "id": "remote",
+   "field": "names.common",
+   "change": "name now matches the common (works for everyone but the holder)"
+  },
+  {
+   "id": "laptop",
+   "field": "names.uncommon",
+   "change": "name now matches the uncommon (unmuting)"
+  },
+  {
+   "id": "x_power_socket",
+   "field": "names.legendary",
+   "change": "'Mother of …' echoed a famous TV title; matches the lightning-bolt legendary"
+  },
+  {
+   "id": "potted_plant",
+   "field": "names.common",
+   "change": "'Droopy' is a well-known cartoon dog"
+  },
+  {
+   "id": "potted_plant",
+   "field": "names.rare",
+   "change": "'Sunspot' is an astronomy term and comic character"
+  },
+  {
+   "id": "office_chair",
+   "field": "lore.legendary",
+   "change": "decided by the developer: kept as written"
+  }
+ ],
+ "kept": [
+  {
+   "id": "office_chair",
+   "field": "lore.legendary",
+   "why": "developer decision (2026-11-02): kept exactly as written; becoming the boss without doing any work is its extraordinary achievement"
+  }
+ ],
+ "open": "Other low items are subjective taste notes, recorded in the final report; everything is still status draft."
+}
