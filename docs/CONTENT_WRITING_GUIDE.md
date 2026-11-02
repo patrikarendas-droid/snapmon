@@ -1,14 +1,23 @@
 # Content writing guide: curated monster writing
 
-Hand-written, reviewed flavour text and move names for specific objects. **Status: Phase 1 foundation. Curated text is
-switched off and the game does not load it.** Adding files changes nothing in the game until the activation step is
-approved (see "Activation" at the end).
+Hand-written, reviewed monster writing for specific objects: flavour text, move names and (draft-only for now) monster
+names. **Status (2026-11-02): live in the game since v0.4.6 for the 10 Pilot 01 objects only** (flavour text and move
+names). Every other object uses the generated text. Draft batches (Pilot 02, 50 objects) are in `content/curated/` but
+never reach the game: only entries the developer approves and marks `"reviewed"` do, and only after a separate
+activation step. **Monster names are not wired into the game at all yet** (see "Monster names").
+
+The editorial standard (humour, rarity rules, names, moves) is **[`SNAPMON_WRITING_BIBLE.md`](SNAPMON_WRITING_BIBLE.md)**.
+Coverage of every object and layer: [`review/COVERAGE.md`](review/COVERAGE.md).
 
 ## Where content lives
 
 - One or more files in `content/curated/`, e.g. `content/curated/pilot-01.json`. Any `*.json` there is checked.
 - A complete example (a dummy, never loaded): [`docs/curated-example.json`](curated-example.json).
-- Code: `src/curated.js` (schema, validator, lookup) · tool: `tools/curated.js` · tests: `tests/curated.js`.
+- Batch manifests (the fixed list of ids in a batch): `content/batches/<batch>.json`. Writer packs:
+  `content/packs/<batch>/`. Editor issue lists: `content/review/<batch>-issues.json`. Review sheets:
+  `docs/review/<batch>-review.md`. Inventory of all objects: `content/inventory/` (generated).
+- Code: `src/curated.js` (schema, validator, lookup) · tools: `tools/curated.js`, `tools/curated-workflow.js`,
+  `tools/inventory.js` · tests: `tests/curated.js`, `tests/curated-pipeline.js`. None of `content/` is in the game build.
 
 ## The JSON shape
 
@@ -43,10 +52,11 @@ approved (see "Activation" at the end).
 | `schema` | yes | always `1` |
 | `batch` | no | a label for the batch |
 | `entries` | yes | an object; each key is an **exact object id** (see below) |
-| `status` | no | `"draft"` (default) or `"reviewed"`. **Only `reviewed` entries can ever reach the game.** |
+| `status` | no | `"draft"` (default), `"needs-revision"` or `"reviewed"`. **Only `reviewed` entries can ever reach the game, and only the developer sets it.** |
 | `notes` | no | reviewer notes, up to 600 characters |
 | `lore` | no | keys: `common`, `uncommon`, `rare`, `epic`, `legendary` (any subset). Each is a text or a list of up to 8 texts. |
 | `moves` | no | move key → new display name (see "Move names") |
+| `names` | no | **draft-only:** rarity → monster display name (`common`…`legendary`). Common–Epic 3–24 characters, Legendary up to 40; starts with a capital; letters, digits, spaces and `' - , . ! &`; the five names of an object must differ. Validated and previewed; **never used by the game and never copied into the game data**. |
 
 Everything is optional. A missing rarity, a missing entry or a broken field simply keeps today's generated text.
 
@@ -78,9 +88,37 @@ The validator rejects:
 - placeholders, template tokens or markup: `{obj}`, `[name]`, `<b>`, TODO, TBD, lorem ipsum, XXX, or a trailing "...";
 - double spaces or line breaks inside a text;
 - unknown move keys, move names outside 3–28 characters or with unusual symbols;
-- move names that would collide with another of that object's moves (battle cooldowns are tracked per name).
+- move names that would collide with another of that object's moves (players could not tell them apart);
+- monster names that break the `names` rules above.
 
-It warns (but allows): a text without final punctuation, or a toolbox mention for an object that is not a toolbox.
+It warns (but allows): a text without final punctuation, a toolbox mention for an object that is not a toolbox, or a
+monster name that is just the object's own name.
+
+## Batch workflow (resumable across sessions)
+
+Every step is a command whose output is derived from the files, so a new Claude session (or a phone) can pick up
+anywhere: nothing lives only in a chat.
+
+```
+node tools/inventory.js                  # 1. refresh content/inventory/* and docs/review/COVERAGE.md (choose a theme)
+node tools/curated.js manifest <batch>   # 2. check content/batches/<batch>.json (fixed ids: re-runs never change them)
+node tools/curated.js pack <batch>       # 3. writer packs: facts, real move mechanics, legendary variants, examples
+# 4. WRITER pass: fill content/curated/<batch>-draft.json (status "draft"), following the Bible
+node tools/curated.js progress <batch>   #    what is done / still to do (names n/5, texts n/5, move names)
+node tools/curated.js lint --batch <batch>  # 5. mechanical flags (high / medium / low); fix highs, read the rest
+# 6. EDITOR pass in a SEPARATE session: writes content/review/<batch>-issues.json (id, field, severity, note, suggestion)
+node tools/curated.js review <batch>     # 7. docs/review/<batch>-review.md: phone-friendly sheets + flags + editor issues
+node tools/curated.js preview content/curated/<batch>-draft.json   # full before/after with exact move numbers
+```
+
+8. **Approval gate:** the developer reads the review sheet and decides per entry. Only then may an entry become
+   `"reviewed"`; an AI writer or editor never sets it, and passing tests or lint never sets it. Approved text is never
+   regenerated or overwritten without permission. Rejected entries can be marked `"needs-revision"`.
+9. Activation of approved entries is a separate release step (see the end of this guide).
+
+The linter is a flagger, not a judge: it counts warning-sign phrases, near-duplicates, repeated premises inside one
+object, repeated openings, filler, brands, gore and memes, duplicate and over-repeated monster-name endings, and checks
+move names against the real mechanics (multi-hit, burn, poison, heal, self-buffs, rarity, legendary variants).
 
 ## Editing from a phone
 
@@ -118,6 +156,10 @@ effect-neutral names ("Apple-ocalypse", "Planet Pickup").
 
 ## Writing rules
 
+**The full standard is [`SNAPMON_WRITING_BIBLE.md`](SNAPMON_WRITING_BIBLE.md)** (funny, accessible, physical and
+logical absurdity; humour all the way to Legendary). The table below is the original Phase 1 sketch, kept for history;
+where it differs (for example "dangerous threat", "myth-level"), the Bible wins.
+
 Rarity is a **different premise**, not the same sentence with bigger adjectives:
 
 | Rarity | Premise | Energy drink, for example |
@@ -148,7 +190,23 @@ Rarity is a **different premise**, not the same sentence with bigger adjectives:
   (unless the player chooses a refresh, if one is added later).
 - **Encyclopedia:** its text is computed when shown, so activated entries also update the encyclopedia text of
   species already met (approved: the improved lore is shown consistently).
-- **Never:** names, stats, artwork, odds, move numbers, saves format.
+- **Never:** monster names (not wired in), stats, artwork, odds, move numbers, save format.
+
+## Monster names (draft-only): activation proposal, NOT implemented
+
+Monster names are written and reviewed now so that a later release can use them. Today the game creates names in
+`game.js` (`speciesName3` / `speciesName`) and stores them on each monster; the `names` field is ignored. Proposed
+activation (needs the developer's approval as its own release):
+
+1. In `createMonster`, after the generated name: if a reviewed entry has `names[rarity]`, use it. Deterministic, no
+   random numbers, no effect on family, rarity, stats or moves. Legendary names replace the generated "Name, the
+   Title" whole.
+2. Existing monsters, nicknames and the test collection keep their stored names; encyclopedia entries keep
+   `monsterName` from first sight unless we decide to refresh species names (decision needed).
+3. `tools/curated.js build` would copy `names` only behind a separate switch (`CURATED.namesEnabled`).
+4. Tests before release: gameplay baseline unchanged; text snapshot re-recorded on purpose; UI truncation on a
+   412 px phone (encounter, battle header, monster sheet, encyclopedia, results, test collection); backup/restore;
+   old saves; uniqueness of legendary names across all objects (today guaranteed by `legendTitle`).
 
 ## Activation and adding a new batch (active since v0.4.6, Pilot 01)
 

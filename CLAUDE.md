@@ -10,3 +10,8 @@
    TinyCLIP on single-thread WASM for everyone, manual confirmation (no countdown), save compatibility, game balance
    (`tests/rules-trace.js`). Android first.
 5. Detailed specs: `README.md`, `docs/RECOGNITION.md`, `docs/RELEASING.md`, `docs/ANDROID.md`.
+6. **Curated monster writing** (names, flavour text, move names): follow `docs/SNAPMON_WRITING_BIBLE.md` and the
+   workflow in `docs/CONTENT_WRITING_GUIDE.md` ("Batch workflow"). Coverage: `docs/review/COVERAGE.md`; batches are
+   fixed lists in `content/batches/`; progress is `node tools/curated.js progress <batch>`. All new content stays
+   `"status": "draft"`: only the developer approves entries (`"reviewed"`); never set it yourself, never regenerate or
+   overwrite approved text, never add drafts to `src/curated-data.js`. Monster names are draft-only (not in the game).
