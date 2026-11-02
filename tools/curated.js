@@ -11,6 +11,7 @@
 //   node tools/curated.js progress <batch>    per object: names n/5, lore n/5, move names; complete count
 //   node tools/curated.js lint [--batch b]    editorial flags across ALL content (high / medium / low); --strict exits 1 on high
 //   node tools/curated.js review <batch>      write docs/review/<batch>-review.md (phone-friendly five-rarity sheets + flags)
+//   node tools/curated.js report <batch>      write docs/review/<batch>-final-report.md (all objects, open concerns, shortlist)
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const ROOT = path.join(__dirname, '..'), DIR = path.join(ROOT, 'content/curated');
 const ctx = { console, Math, JSON, Date }; vm.createContext(ctx);
@@ -113,6 +114,16 @@ ${enable ? 'CURATED.enabled = true;      // curated flavour text for new monster
   const out = path.join(ROOT, 'docs/review', batch + '-review.md');
   const respFile = path.join(ROOT, 'content/review', batch + '-writer-response.json'), resolved = fs.existsSync(respFile) ? JSON.parse(fs.readFileSync(respFile, 'utf8')).resolved || [] : [];
   fs.mkdirSync(path.dirname(out), { recursive: true }); fs.writeFileSync(out, W.reviewSheet(T, docs, batch, W.lint(T, docs, { batch }), issues, resolved));
+  console.log(`wrote ${path.relative(ROOT, out)}`);
+} else if (cmd === 'report') {
+  // node tools/curated.js report <batch> [--review content/review/<file>.json] [--resolved <file>] [--notes <file>]
+  const batch = args.find(a => !a.startsWith('--') && !/\.json$/.test(a)); if (!batch) { console.log('usage: node tools/curated.js report <batch> [--review f] [--resolved f] [--notes f]'); process.exit(1); }
+  const opt = k => { const i = args.indexOf(k); return i >= 0 ? path.resolve(args[i + 1]) : null; };
+  const rf = opt('--review') || path.join(ROOT, 'content/review', batch + '-issues.json'), review = fs.existsSync(rf) ? JSON.parse(fs.readFileSync(rf, 'utf8')) : { issues: [] };
+  const sf = opt('--resolved'), resolved = sf && fs.existsSync(sf) ? (JSON.parse(fs.readFileSync(sf, 'utf8')).resolved || []) : [];
+  const nf = opt('--notes'), notes = nf && fs.existsSync(nf) ? JSON.parse(fs.readFileSync(nf, 'utf8')) : {};
+  const { docs, errors } = load(files([])); if (errors.length) { for (const e of errors) console.log('ERROR  ', e); process.exit(1); }
+  const out = path.join(ROOT, 'docs/review', batch + '-final-report.md'); fs.writeFileSync(out, W.finalReport(T, docs, batch, review, resolved, notes));
   console.log(`wrote ${path.relative(ROOT, out)}`);
 } else {
   console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 14).map(l => l.replace(/^\/\/ ?/, '')).join('\n')); process.exit(cmd ? 1 : 0);
