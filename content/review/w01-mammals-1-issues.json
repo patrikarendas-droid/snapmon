@@ -1,0 +1,1878 @@
+{
+ "batch": "w01-mammals-1",
+ "editor": "independent agent",
+ "reviewed": 107,
+ "summary": "A competent, family-safe draft with a lot of genuinely good breed research: the sneeze-voting African hunting dog, the yodelling cat-clean basenji, the Dandie Dinmont named from a novel, the kerry blue born black, the Chesapeake's oily coat, the chin spin and the rat-tailed Irish water spaniel are exactly the recognisable details the Bible asks for, and the non-dog mammals (cow, deer, wombat, bat, camel) are mostly lively. The weakest aspect is ladder design: roughly a quarter of the objects scale one trait across four or five rarities (afghan hair, cairn stones, curly-coat lake, otterhound river, English setter pointing, griffon face, Appenzeller/Entlebucher cows, border terrier digging), and about 20 objects reuse the same premise in two rarities (e.g. beagle airport, frenchie/pug/clumber snoring, Samoyed fluff-as-snow, Xolo warmth, Dalmatian fire brigade). Across the batch, many lines are interchangeable between breeds: four working breeds share a 'cart to market' Uncommon, Leonberger and Newfoundland both rescue 'swimmers who were only paddling', Cardigan and Pembroke share a legendary, coonhound and redbone share an epic, Pyrenees and Lakeland share a legendary, and two lines repeat approved Pilot 02 dog content. Legendaries lean heavily on an award/title shape ('Won...', 'Was declared/named...', 'Became...', 'in the land/country': about 30 of 107) and on stock tags ('according to its own story', 'the judges', 'a medal', 'charged in biscuits', 'the farmer'); several legendaries end without a punchline (bloodhound, chihuahua, red wolf, Irish setter, Boston, Pekinese). Must-fix safety issues: a Lassie pastiche on the collie, a Pokemon species name ('Slowpoke Spaniel'), and the Old English sheepdog paint-advert brand reference, plus softer character/real-person echoes (Pugsley, Pompadour, Peter Pan). Move names are mostly well matched to mechanics; the exceptions are heat words on the Xolo's non-burn moves, a cold 'Blizzard' on a Pomeranian Ultimate that can burn, and 'Rescue' on two damage Ultimates. Legendary names over-use the 'Sir/Lady X of the Y' honorific formula (about 45 of 107).",
+ "patterns": [
+  {
+   "pattern": "One trait scaled across four or five rarities (one joke, bigger numbers) instead of five premises",
+   "ids": [
+    "wombat",
+    "x_alpaca_animal",
+    "i_afghan_hound",
+    "i_appenzeller",
+    "i_bedlington_terrier",
+    "i_border_terrier",
+    "i_brabancon_griffon",
+    "i_cairn",
+    "i_curly_coated_retriever",
+    "i_english_setter",
+    "i_entlebucher",
+    "i_otterhound",
+    "i_ibizan_hound",
+    "i_clumber",
+    "i_eskimo_dog",
+    "i_kuvasz",
+    "i_greater_swiss_mountain_dog",
+    "i_dhole",
+    "i_airedale",
+    "i_newfoundland",
+    "i_kelpie",
+    "i_groenendael"
+   ],
+   "severity": "medium",
+   "suggestion": "Let the headline trait own at most two rarities. Use a second and third real trait for the rest (temperament, origin job, body shape, a famous habit). Per-object directions are in the issues list."
+  },
+  {
+   "pattern": "Interchangeable lines between breeds (same premise, different dog)",
+   "ids": [
+    "i_bernese_mountain_dog",
+    "i_rottweiler",
+    "i_greater_swiss_mountain_dog",
+    "i_bouvier_des_flandres",
+    "i_leonberg",
+    "i_newfoundland",
+    "i_cardigan",
+    "i_pembroke",
+    "i_border_collie",
+    "i_black_and_tan_coonhound",
+    "i_redbone",
+    "i_english_setter",
+    "i_german_short_haired_pointer",
+    "i_great_pyrenees",
+    "i_lakeland_terrier",
+    "i_rhodesian_ridgeback",
+    "i_bloodhound",
+    "i_german_shepherd",
+    "deer",
+    "i_ibizan_hound",
+    "i_saint_bernard",
+    "i_samoyed",
+    "i_golden_retriever",
+    "i_affenpinscher",
+    "i_chow",
+    "i_giant_schnauzer",
+    "i_bluetick",
+    "i_maltese_dog",
+    "i_japanese_spaniel",
+    "i_great_dane",
+    "i_flat_coated_retriever",
+    "i_irish_setter"
+   ],
+   "severity": "high",
+   "suggestion": "For each pair, decide which breed owns the premise (the one where it is the most recognisable fact) and rewrite the other. Pairs: Bernese U / Rottweiler U / Swiss U / Bouvier U (cart to market); Leonberg R / Newfoundland R (paddling swimmers); Cardigan L / Pembroke L; Border collie C / Pembroke R; Coonhound E / Redbone E; English setter E / GSHP R; Pyrenees L / Lakeland L; Pyrenees R / Ridgeback L; Bloodhound L / GSD L; Deer U / Ibizan U; Newfoundland C / Saint Bernard C; Samoyed C / Golden U; Affenpinscher L / Chow L; Bouvier C / Giant schnauzer C; Border collie L / Giant schnauzer E; Border collie E / Bluetick E; Bernese C / GSD C; Maltese R / Japanese spaniel L; Bernese R / Great Dane U; Flat-coat L / Irish setter L."
+  },
+  {
+   "pattern": "Repeats of approved, live Pilot 02 dog content",
+   "ids": [
+    "i_australian_terrier",
+    "i_airedale",
+    "i_pomeranian"
+   ],
+   "severity": "high",
+   "suggestion": "Barking at its own reflection (pilot dog common) and the council converting a dug-up park (pilot dog epic) are already live on the generic dog; breeds must not repeat them."
+  },
+  {
+   "pattern": "Award/title Legendary structure ('Won...', 'Was declared/named/crowned/elected...', 'Became the most X in the land')",
+   "ids": [
+    "x_koala_bear",
+    "i_affenpinscher",
+    "i_airedale",
+    "i_american_staffordshire_terrier",
+    "i_basenji",
+    "i_bedlington_terrier",
+    "i_boston_bull",
+    "i_boxer",
+    "i_brabancon_griffon",
+    "i_chihuahua",
+    "i_clumber",
+    "i_dandie_dinmont",
+    "i_flat_coated_retriever",
+    "i_french_bulldog",
+    "i_giant_schnauzer",
+    "i_golden_retriever",
+    "i_irish_setter",
+    "i_irish_water_spaniel",
+    "i_italian_greyhound",
+    "i_kerry_blue_terrier",
+    "i_miniature_pinscher",
+    "i_norfolk_terrier",
+    "i_norwich_terrier",
+    "i_old_english_sheepdog",
+    "i_papillon",
+    "i_pekinese",
+    "i_pug",
+    "i_rottweiler",
+    "i_ibizan_hound",
+    "i_german_shepherd",
+    "i_chesapeake_bay_retriever"
+   ],
+   "severity": "medium",
+   "suggestion": "Cap at ~5 per batch. Prefer the Bible's legendary shapes: a huge feat with a petty motive or practical oversight (forklift/book/microwave), a world reacting deadpan, a callback to the common habit at legendary scale."
+  },
+  {
+   "pattern": "Stock scale fillers: 'in the land' (7), 'in the country' (9), 'across the (entire) country/countryside' (4), 'the whole' (30 lines)",
+   "ids": [
+    "i_airedale",
+    "i_brabancon_griffon",
+    "i_giant_schnauzer",
+    "i_keeshond",
+    "i_leonberg",
+    "i_norwich_terrier",
+    "i_rottweiler",
+    "i_appenzeller",
+    "i_border_collie",
+    "i_brittany_spaniel",
+    "i_cairn",
+    "i_english_springer",
+    "i_groenendael",
+    "i_malinois",
+    "i_norfolk_terrier",
+    "i_old_english_sheepdog",
+    "i_black_and_tan_coonhound",
+    "i_basset",
+    "i_english_foxhound"
+   ],
+   "severity": "medium",
+   "suggestion": "Replace abstract scale with a specific place or person (the bakery, the ski lift, the town clock, the lollipop lady). Specific nouns are funnier than abstractions (Bible 2.3)."
+  },
+  {
+   "pattern": "Hound tracks a scent/animal across the country/city",
+   "ids": [
+    "i_basset",
+    "i_black_and_tan_coonhound",
+    "i_beagle",
+    "i_bloodhound",
+    "i_english_foxhound",
+    "i_bluetick"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep one long-distance-tracking legendary (bloodhound or basset). Other hounds: baying/voice, ears, pack life, laziness, food obsession."
+  },
+  {
+   "pattern": "Herding a crowd of people or a whole region",
+   "ids": [
+    "i_border_collie",
+    "i_pembroke",
+    "i_briard",
+    "i_old_english_sheepdog",
+    "i_groenendael",
+    "i_kelpie",
+    "i_appenzeller",
+    "i_cardigan",
+    "i_entlebucher",
+    "i_giant_schnauzer"
+   ],
+   "severity": "medium",
+   "suggestion": "At most two herders should herd people; give the rest their distinct traits (Kelpie sheep-backing, Cardigan tail, OES fringe/shuffle, Briard fringe/double dewclaws, Groenendael speed)."
+  },
+  {
+   "pattern": "Shakes off water/coat and soaks or covers a crowd",
+   "ids": [
+    "i_bouvier_des_flandres",
+    "i_chesapeake_bay_retriever",
+    "i_komondor",
+    "i_old_english_sheepdog",
+    "i_newfoundland",
+    "i_samoyed",
+    "i_chow",
+    "i_leonberg",
+    "i_keeshond"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep at most two (e.g. Chesapeake and Komondor with breed-specific twists)."
+  },
+  {
+   "pattern": "Pulled/hauled an enormous load (carts, sleds, wagons, markets) - especially at Legendary",
+   "ids": [
+    "camel",
+    "x_llama_animal",
+    "deer",
+    "i_bernese_mountain_dog",
+    "i_bouvier_des_flandres",
+    "i_greater_swiss_mountain_dog",
+    "i_eskimo_dog",
+    "i_malamute",
+    "i_rottweiler"
+   ],
+   "severity": "medium",
+   "suggestion": "One or two hauling legendaries per batch. Draft dogs also have famous non-hauling traits (Bernese lean, Swissy bark, Rottweiler money purse, Malamute 'woo')."
+  },
+  {
+   "pattern": "Loud snoring",
+   "ids": [
+    "i_boston_bull",
+    "i_clumber",
+    "i_french_bulldog",
+    "i_pug"
+   ],
+   "severity": "medium",
+   "suggestion": "Nine snoring lines in four breeds. Keep one snore per breed at most; pug can own it."
+  },
+  {
+   "pattern": "Hears/smells food from far away (Uncommon template, echoes the live dog 'Cheese Detector')",
+   "ids": [
+    "i_african_hunting_dog",
+    "i_doberman",
+    "i_german_shepherd",
+    "i_french_bulldog",
+    "i_norwich_terrier",
+    "i_australian_terrier",
+    "i_beagle",
+    "i_ibizan_hound"
+   ],
+   "severity": "medium",
+   "suggestion": "Use breed-specific behaviours instead; the generic dog already owns this joke."
+  },
+  {
+   "pattern": "Payment punchline ('charged in cheese/biscuits', 'asked only for snacks/one biscuit', 'never charged for it')",
+   "ids": [
+    "camel",
+    "i_greater_swiss_mountain_dog",
+    "i_labrador_retriever",
+    "i_miniature_poodle",
+    "i_mexican_hairless"
+   ],
+   "severity": "medium",
+   "suggestion": "Use once at most; the approved dog legendary already ends 'paid in sausages'."
+  },
+  {
+   "pattern": "Dog show / judges / medal / trophy frames",
+   "ids": [
+    "i_afghan_hound",
+    "i_chihuahua",
+    "i_italian_greyhound",
+    "i_kerry_blue_terrier",
+    "i_bedlington_terrier",
+    "i_boxer",
+    "i_basenji",
+    "i_ibizan_hound",
+    "i_golden_retriever",
+    "i_chesapeake_bay_retriever",
+    "i_german_shepherd",
+    "i_papillon",
+    "i_norfolk_terrier"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep two or three; replace the rest with real-world consequences outside a competition."
+  },
+  {
+   "pattern": "Palace / royal / emperor settings",
+   "ids": [
+    "i_blenheim_spaniel",
+    "i_cocker_spaniel",
+    "i_borzoi",
+    "i_japanese_spaniel",
+    "i_kuvasz",
+    "i_pekinese",
+    "i_chow",
+    "i_affenpinscher",
+    "i_maltese_dog"
+   ],
+   "severity": "medium",
+   "suggestion": "Reserve for breeds where royalty is the recognisable fact (Pekinese, Kuvasz, Japanese chin, Blenheim) and use it at one rarity each."
+  },
+  {
+   "pattern": "'According to its own story/legend' ancient-age legendaries",
+   "ids": [
+    "i_japanese_spaniel",
+    "i_maltese_dog",
+    "i_mexican_hairless",
+    "i_norwegian_elkhound",
+    "i_saluki"
+   ],
+   "severity": "medium",
+   "suggestion": "Use once; the others need an achievement with a punchline instead of a claim."
+  },
+  {
+   "pattern": "Forever-young / puppy-at-heart",
+   "ids": [
+    "i_flat_coated_retriever",
+    "i_irish_setter"
+   ],
+   "severity": "high",
+   "suggestion": "Flat-coat owns the 'Peter Pan of dogs' idea at one rarity; Irish setter uses its mahogany coat and joyful speed."
+  },
+  {
+   "pattern": "Sleep-championship legendaries and sleep-themed names",
+   "ids": [
+    "bear",
+    "x_koala_bear",
+    "i_pug",
+    "i_clumber"
+   ],
+   "severity": "medium",
+   "suggestion": "One sleep legendary at most (koala is the strongest owner)."
+  },
+  {
+   "pattern": "Leaning on people as affection",
+   "ids": [
+    "i_bernese_mountain_dog",
+    "i_great_dane",
+    "i_rottweiler",
+    "i_american_staffordshire_terrier"
+   ],
+   "severity": "low",
+   "suggestion": "Keep for Bernese (or Great Dane) only."
+  },
+  {
+   "pattern": "Shedding 'a second dog' / indoor snow",
+   "ids": [
+    "i_bernese_mountain_dog",
+    "i_german_shepherd",
+    "i_samoyed",
+    "i_pomeranian",
+    "x_alpaca_animal"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep two shedding lines in the batch with different images."
+  },
+  {
+   "pattern": "Small dog barks down something huge (ships, lorries, dogs ten times its size)",
+   "ids": [
+    "i_affenpinscher",
+    "i_chihuahua",
+    "i_pekinese",
+    "i_miniature_pinscher",
+    "i_pomeranian"
+   ],
+   "severity": "low",
+   "suggestion": "Give each toy breed its own signature habit (chihuahua blanket-burrowing, pekinese rolling gait, affenpinscher monkey antics)."
+  },
+  {
+   "pattern": "Legendary name formula 'Sir/Lady/Captain/Duchess X of the Y' (Sir 14, Lady 9, Captain 4, plus Duchess, Countess, Baroness, Princess, Madame, Emperor) and repeated words Lion (12), Fluff (17), Storm (10), Chorus (7), Endless/Tireless/Untiring, Riverbank (6), Palace (8)",
+   "ids": [
+    "i_airedale",
+    "i_basset",
+    "i_bouvier_des_flandres",
+    "i_clumber",
+    "i_curly_coated_retriever",
+    "i_dalmatian",
+    "i_english_foxhound",
+    "i_english_springer",
+    "i_otterhound",
+    "i_boston_bull",
+    "i_affenpinscher",
+    "i_old_english_sheepdog",
+    "i_miniature_schnauzer",
+    "i_cocker_spaniel",
+    "i_pekinese",
+    "i_rhodesian_ridgeback",
+    "i_leonberg",
+    "i_chow",
+    "i_pomeranian",
+    "i_samoyed",
+    "camel",
+    "i_brittany_spaniel",
+    "i_eskimo_dog",
+    "i_german_short_haired_pointer",
+    "i_malinois"
+   ],
+   "severity": "medium",
+   "suggestion": "Fewer than a quarter of legendary names should carry an honorific; vary with single iconic names (Wagnificent-style), pun compounds and 'Name the Verb-er' forms."
+  },
+  {
+   "pattern": "Move-name families: heal = Nap/Snooze/Rest (13), defence-down = '... Distraction' (4) and 'Distracting ...' (3), signature = '... Pounce' (16), poison legend = '... Stink' (4), Ultimates '... Rampage/Stampede/Storm/Parade' (29)",
+   "ids": [
+    "i_beagle",
+    "i_bernese_mountain_dog",
+    "i_bluetick",
+    "i_chihuahua",
+    "i_eskimo_dog",
+    "i_pomeranian",
+    "i_samoyed",
+    "i_mink",
+    "i_cocker_spaniel",
+    "i_english_setter",
+    "i_giant_schnauzer",
+    "i_groenendael",
+    "i_norwegian_elkhound",
+    "i_border_terrier",
+    "i_dhole",
+    "i_kelpie",
+    "i_maltese_dog",
+    "cow",
+    "i_french_bulldog",
+    "i_ibizan_hound"
+   ],
+   "severity": "low",
+   "suggestion": "Mechanically correct but templated. Prefer the object's own vocabulary (Bible 8: 'One More Minute', 'No Entry') and make sure no two objects share near-identical slot names (Snowdrift Snooze / Snowbank Snooze; Snack Lunge / Snack Lunge Deluxe)."
+  },
+  {
+   "pattern": "Repeated small tags: 'the farmer' (9), 'village fete/fair' (5), church bells/choir (8), 'offered it a job' (2), 'in that order' (2), 'X asks it for lessons' (3), 'for N years' (11), 'timetable / on time / never late' (9), sausages (7), biscuits (9)",
+   "ids": [
+    "cow",
+    "i_australian_terrier",
+    "i_bluetick",
+    "i_border_collie",
+    "i_groenendael",
+    "i_komondor",
+    "i_polecat",
+    "i_border_terrier",
+    "i_english_foxhound",
+    "i_basenji",
+    "i_entlebucher",
+    "i_lhasa",
+    "i_beagle",
+    "i_boxer",
+    "i_miniature_schnauzer",
+    "i_pomeranian",
+    "wombat",
+    "i_mink",
+    "i_borzoi",
+    "i_briard",
+    "i_dhole",
+    "i_curly_coated_retriever"
+   ],
+   "severity": "low",
+   "suggestion": "Use the lint counts as a ceiling: each tag at most twice per batch."
+  }
+ ],
+ "issues": [
+  {
+   "id": "i_collie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "The 'saved somebody from falling down the same well' premise is the signature Lassie trope (a trademarked character the brief names explicitly). Together with names.legendary 'Lady Wellwatch, the Faithful Messenger', names.uncommon 'Wellwarner', lore.rare 'runs to fetch help' and lore.epic 'warn the village', the whole ladder reads as a Lassie pastiche.",
+   "suggestion": "Drop the well/fetch-help thread entirely. Legendary idea from the collie's long coat and herding: 'Grew its winter coat so thick that the shepherds moved into it for the season. The sheep visit at weekends.'"
+  },
+  {
+   "id": "i_collie",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "'Knows when trouble is coming and runs to fetch help' is the Lassie premise again (see legendary).",
+   "suggestion": "Use the collie's famous ruff/coat or its herding: 'Brushes itself against the hedge every morning and leaves a fluffy collar on every branch. Birds have started lining their nests with it.'"
+  },
+  {
+   "id": "i_collie",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'Lady Wellwatch, the Faithful Messenger' and names.uncommon 'Wellwarner' anchor the Lassie reference (well + faithful messenger).",
+   "suggestion": "Legendary: 'Lady Ruffington, the Moorland Mane'; Uncommon: 'Postman Pal' (matches the common line) or 'Ruffcollar'."
+  },
+  {
+   "id": "i_clumber",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "'Slowpoke Spaniel' uses the name of a trademarked Pokemon species (Slowpoke) - a direct collision in a monster-collecting game.",
+   "suggestion": "'Dawdlepaw' or 'Pondplodder' (ties to the duck-overtaking uncommon line)."
+  },
+  {
+   "id": "i_pug",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Sir Pugsley' evokes Pugsley Addams (a trademarked Addams Family character); combined with 'Lord of the Nap' it also repeats the sleep-champion premise already used by bear and koala.",
+   "suggestion": "'Sir Snortimer, Keeper of the Sunny Spot' or 'Wrinklesworth the Unbothered'."
+  },
+  {
+   "id": "i_pomeranian",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Lady Pompadour' names a real historical person (Madame de Pompadour); the Bible forbids real people. 'Fearless Fluff' is fine.",
+   "suggestion": "'Lady Puffington, the Fearless Fluff' or 'Duchess Furlough' - keep the epithet."
+  },
+  {
+   "id": "i_flat_coated_retriever",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Peter Paws, Who Never Grew Up' is an unmistakable Peter Pan reference (a protected character with active rights/licensing in places). The breed nickname 'Peter Pan of dogs' is real, but the name should not lean on the character.",
+   "suggestion": "'Waggleby, the Oldest Puppy' or 'Glossy Gilbert, Forever Fetching'."
+  },
+  {
+   "id": "i_old_english_sheepdog",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'The face of every paint advert in the country' points straight at a real brand's long-running mascot (the Old English sheepdog in paint adverts). Players will recognise the brand, which is exactly what the 'no brands' rule is avoiding.",
+   "suggestion": "Use the hair-over-eyes or the bear shuffle instead: 'Was hired to dust the ceilings of the cathedral by simply standing on a ladder and shaking. Found three lost choirboys' hats and a bat in its fringe.' (or any non-advertising coat joke)."
+  },
+  {
+   "id": "i_mexican_hairless",
+   "field": "moves.legend",
+   "severity": "high",
+   "issue": "'Heatwave Bounce' promises heat, but the legend move is a plain 120% hit with no burn (Fall of ...). Bible: no fire/heat words on a non-burn move.",
+   "suggestion": "'Bare Belly Bounce' or 'Tummy Flop'."
+  },
+  {
+   "id": "i_mexican_hairless",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Warm Charge' puts a heat word on the plain 130% signature hit (Feral Pounce, no status) and is used at every rarity.",
+   "suggestion": "'Bald Barge' or 'Naked Nudge'."
+  },
+  {
+   "id": "i_pomeranian",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "'Furball Blizzard Storm' (a) uses a cold word ('Blizzard') on an Ultimate whose Spectral variant burns - the name must be effect-neutral; (b) repeats the epic monster name 'Furball Blizzard' and stacks Blizzard+Storm.",
+   "suggestion": "'Pom-Pom Pile-Up' or 'Fluff Explosion'."
+  },
+  {
+   "id": "i_leonberg",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Lionheart Rescue' sounds like a helpful/healing act on a 210% damage Ultimate (poison/burn/stun by variant).",
+   "suggestion": "'Lionheart Belly-Flop' or 'Mane Splashdown' (effect-neutral, keeps the water/lion identity)."
+  },
+  {
+   "id": "i_saint_bernard",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Mountain Pass Rescue' reads as a heal/help on a 210% damage Ultimate (burn/defdown/burn).",
+   "suggestion": "'Avalanche Arrival' or 'Barrel Roll Down the Pass'."
+  },
+  {
+   "id": "i_labrador_retriever",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Snack Lunge Deluxe' is a near-collision with the beagle's signature 'Snack Lunge', and 'Deluxe' is filler.",
+   "suggestion": "'Loaf Gulp Lunge' or 'Otter-Tail Tackle'."
+  },
+  {
+   "id": "i_beagle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as lore.rare: both are airport luggage sniffing (rare: 'customs offered it a job'; legendary: 'became head of airport security'). The rare name 'Customs Beagle' locks it in.",
+   "suggestion": "Keep airport at Rare; Legendary from the beagle's baying and pack life: 'Howled one note so long and so tunefully that every beagle in the land answered. The concert lasted all weekend and was ended by a single dropped sausage.' (avoid 'in the land' if reused elsewhere)."
+  },
+  {
+   "id": "i_clumber",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Snoring is already the premise of common AND rare; epic is a third loud-snore line ('snored so loudly...'), and the legendary is sleeping through meetings. One joke at four rarities.",
+   "suggestion": "Epic from the clumber's heavy, low build and white coat: 'Lay down in a snowy field for a rest and the farmer spent all winter trying to roll it into a snowman.'"
+  },
+  {
+   "id": "i_clumber",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Second snoring line (common already snores). The clumber's dignified slow plod and duke's-estate origin are unused.",
+   "suggestion": "'Walks so solemnly through the park that people take their hats off. Pigeons have started forming a procession behind it.'"
+  },
+  {
+   "id": "i_french_bulldog",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Repeats the common premise (loud snoring) with bigger numbers - the Bible's 'same joke scaled'. Also overlaps pug/boston/clumber snoring.",
+   "suggestion": "Use the bat ears or the stocky refusal-to-walk: 'Its bat ears caught the wind on a blustery day and it floated over three gardens. Landed on a café table and ordered nothing.'"
+  },
+  {
+   "id": "i_pug",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Repeats the common premise (snoring so loud it is mistaken for an engine/motorbike). Common and epic are the same joke.",
+   "suggestion": "Use the curly tail or wrinkles: 'Its curly tail wound up so tight with excitement that it spun the pug like a top across the whole kitchen floor. The tiles are now beautifully polished.'"
+  },
+  {
+   "id": "i_pug",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Declared the official champion of rest' is the third sleep-championship legendary in the batch (koala legendary, bear legendary name). Weak punchline.",
+   "suggestion": "Pugs were bred as lapdogs for Chinese emperors: 'Sat on so many laps that it was given its own chair at every family dinner in town. It eats from all of them.'"
+  },
+  {
+   "id": "i_flat_coated_retriever",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as lore.common (old dog that still acts like a puppy) and also identical to the Irish setter legendary ('remained a puppy at heart... declared the official spirit of fun').",
+   "suggestion": "Use the glossy coat or retrieving: 'Retrieved so many things from the lake in one summer that the lake had to file a lost-property report. Top of the list: the lifeguard.'"
+  },
+  {
+   "id": "i_mexican_hairless",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Uncommon (used as a hot water bottle), epic (warmed the whole school) and legendary (kept people warm for three thousand years) are one warmth joke at three rarities.",
+   "suggestion": "Epic from baldness/sun cream/no fur: 'Tried on every jumper at the winter market to find one that fits. The stallholders are now knitting only in its size.'"
+  },
+  {
+   "id": "i_mexican_hairless",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Third warmth premise; also uses the batch's repeated 'according to its own story' frame and a weak payment punchline ('never once charged for it').",
+   "suggestion": "Use its ancient-Aztec/temple association with a concrete punch: 'Has posed for statues for three thousand years. The sculptors never had to carve any fur, so it always finishes first.'"
+  },
+  {
+   "id": "i_samoyed",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same premise as lore.uncommon: white fluff looks like snow (uncommon: 'snowing indoors'; epic: 'neighbours thought winter had come early'). Also the batch's ninth shake-off line.",
+   "suggestion": "Samoyeds were sled and herding dogs with a 'smile' that keeps drool from freezing: 'Smiled at the ice-cream van so sweetly that it gave away every lolly. The van now parks two streets away.' (and then replace the legendary smile line, see below)."
+  },
+  {
+   "id": "i_samoyed",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Third 'smile' premise (common, rare, legendary) and the legendary has no real punchline ('felt a bit cosier').",
+   "suggestion": "'Pulled a sled to the North Pole and back with a grin so wide the polar explorers forgot to take any photos of the Pole. Every picture is of the dog.'"
+  },
+  {
+   "id": "i_samoyed",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Interchangeable with golden retriever uncommon (greets/befriends the burglar).",
+   "suggestion": "'Sheds a cloud of white fluff on everything you wear. Black trousers are now a thing of the past.' (then move the snowing-indoors idea out of uncommon)."
+  },
+  {
+   "id": "i_miniature_pinscher",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as lore.uncommon (boss of the toys / ruler of the toy box). The 'King of Toys' nickname is a good find but should be used once.",
+   "suggestion": "Legendary from the hackney gait: 'Marched in the town's grand parade with knees so high that the brass band started following it instead of the drum major.'  Then change epic, which already uses the parade."
+  },
+  {
+   "id": "i_miniature_pinscher",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Repeats the common premise (high-stepping knees, marching).",
+   "suggestion": "'Chased a Great Dane twice its height out of the dog park, then demanded the park be renamed after it. The council is considering it.' (keeps tiny-but-bossy, different from rare)."
+  },
+  {
+   "id": "i_african_hunting_dog",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Reuses the rare premise (the pack votes by sneezing). The sneeze-vote fact is excellent but should appear once.",
+   "suggestion": "Legendary from their huge cooperative pack and relay hunting: 'Shared its dinner so fairly with fifty pack-mates that the town council asked it to cut the birthday cake at every party.'"
+  },
+  {
+   "id": "i_dalmatian",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as lore.rare (fire engine / fire brigade). Rare name 'Fireengine Pup' and legendary 'of the Fire Station' triple it.",
+   "suggestion": "Legendary from the spots: 'Joined the dots on its own back and found a perfect map to buried treasure. It was a bone. It was its own bone.'  Rename legendary to e.g. 'Sir Spottington, the Joined-Up Dot'."
+  },
+  {
+   "id": "i_leonberg",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as lore.rare (rescuing swimmers), and the rare line itself is interchangeable with Newfoundland rare.",
+   "suggestion": "Leonbergers were bred to look like lions (town crest): 'Was mistaken for the lion on the town crest so often that it now sits for the new coat of arms every year. The real lion has been asked to stand aside.'"
+  },
+  {
+   "id": "i_leonberg",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Interchangeable with Newfoundland rare: both 'rescue swimmers who were only paddling'.",
+   "suggestion": "Give Newfoundland the water rescue; Leonberg rare: 'Shakes its mane after a swim and dries every towel on the beach in one go. The towels are now damp and the beach is very surprised.' - or better, a lion-look line: 'Lay down at the zoo gates for a rest. The lions have asked to see its ticket.'"
+  },
+  {
+   "id": "i_newfoundland",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Interchangeable with Leonberg rare ('swimmers who were only paddling'). Also rare, epic and legendary are all water-rescue.",
+   "suggestion": "Keep one rescue (legendary). Rare from the giant webbed paddle-feet and strength: 'Paddled across the boating lake towing four pedalos and a swan. Nobody asked it to; it just thought they were going too slowly.'"
+  },
+  {
+   "id": "i_newfoundland",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Third rescue line in a row (rare, epic, legendary) plus the batch's shake-off-and-soak punchline.",
+   "suggestion": "'Sat in the paddling pool on a hot day. The water is now in the neighbour's garden and the paddling pool is a hat.'"
+  },
+  {
+   "id": "i_great_pyrenees",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as lore.rare (guarding the flock from wolves) and interchangeable with the Lakeland terrier legendary (guarded a flock through a whole winter without losing one sheep).",
+   "suggestion": "Use the double dewclaws or the snow-white coat: 'Lay down in a snowfield for the winter and the ski school used it as a beginners' slope. It did not notice until spring.'"
+  },
+  {
+   "id": "i_lakeland_terrier",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Interchangeable with Great Pyrenees legendary (guarded a flock all winter, none lost). Also factually off: Lakelands were fox/vermin terriers working alongside foxhound packs, not flock guardians.",
+   "suggestion": "'Squeezed into the smallest gap between two fells and came out the other side of the Lake District. It now gives tours through the shortcut, one walker at a time.'"
+  },
+  {
+   "id": "i_lakeland_terrier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Interchangeable with Gordon setter legendary (climbed every mountain/peak and left something on each summit).",
+   "suggestion": "'Barked at a rowing boat on the lake until it turned back. Then barked at the ferry. Then barked at the lake, which has started to ripple nervously.'"
+  },
+  {
+   "id": "i_rhodesian_ridgeback",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Factual error: the ridge is a permanent strip of hair growing in the opposite direction; it does not 'stand up when curious'. Owners would notice.",
+   "suggestion": "'Its ridge grows the wrong way, so it gets brushed backwards twice a day. It insists the rest of the dog is the bit growing wrong.' (or use their quiet, aloof nature)."
+  },
+  {
+   "id": "i_rhodesian_ridgeback",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Interchangeable with Great Pyrenees rare ('wolves sent a letter asking for visiting rights' vs 'lions sent a polite note asking if they could visit'). Epic also already uses lions.",
+   "suggestion": "Ridgebacks were bred to keep lions at bay by baiting, not killing: 'Kept a pride of lions busy for an entire afternoon just by walking backwards and forwards with its hair the wrong way. The lions are still trying to work out which way it is facing.'"
+  },
+  {
+   "id": "i_rottweiler",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Interchangeable with Bernese uncommon ('pulls a little cart of cheese... only eats a small amount of the cargo'); Greater Swiss uncommon and Bouvier uncommon are also cart-to-market. Four breeds share one Uncommon.",
+   "suggestion": "Rottweilers were butchers' dogs that carried the money purse round their necks: 'Carries the shopping money in a purse round its neck and checks the change twice. The greengrocer has started rounding up out of fear.'"
+  },
+  {
+   "id": "i_rottweiler",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Third cart line inside the butcher/cart ladder (uncommon, epic, legendary all market/cart/butcher).",
+   "suggestion": "'Sat on the garden swing and the swing went all the way round. It now refuses to get off until it does it again.'"
+  },
+  {
+   "id": "i_bernese_mountain_dog",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Repeats the uncommon cart premise and joins four other 'pulled/hauled a huge load' legendaries (deer, bouvier, eskimo, greater swiss).",
+   "suggestion": "Bernese are famous for leaning and for their tricolour coat: 'Leaned on the town clock tower to say hello. Every clock in the valley is now five minutes slow, and everyone is very relaxed about it.' (then change rare, which already leans)."
+  },
+  {
+   "id": "i_bernese_mountain_dog",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "'Sheds enough fur every day to knit a second dog' duplicates German shepherd common ('sheds a whole second dog onto the sofa').",
+   "suggestion": "Keep it here (Bernese is the bigger shedder) and change the German shepherd line - or use: 'Sits on your feet when you try to leave. Its whole back end comes too.'"
+  },
+  {
+   "id": "i_greater_swiss_mountain_dog",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Interchangeable with Bernese and Bouvier uncommons (milk cart to market). Uncommon, epic and legendary all pull carts.",
+   "suggestion": "Swissies are known for loud, deep barks and a 'thundering' gait (already rare): 'Barks once at the church bell to tell it the time is wrong. The bell has started ringing quietly.' - or the shiny tricolour: 'Puts its huge head on the table and waits. Not begging. Just supervising.'"
+  },
+  {
+   "id": "i_greater_swiss_mountain_dog",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Third cart premise and a weak payment punchline ('Charged in cheese', see pattern).",
+   "suggestion": "'Barked once on the highest Alp and the echo came back a week later from the next country, asking for directions home.'"
+  },
+  {
+   "id": "i_bouvier_des_flandres",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Interchangeable with Bernese / Greater Swiss uncommons (milk cart to market). Bouviers are cattle drovers and farm guards - use that.",
+   "suggestion": "'Drives the cows to milking by walking very slowly behind them and looking disappointed. They have never once been late.'"
+  },
+  {
+   "id": "i_bouvier_des_flandres",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Interchangeable with Giant schnauzer common (drinks, then drips/shakes its wet beard everywhere).",
+   "suggestion": "Keep it for Bouvier and change the schnauzer; or Bouvier: 'Its shaggy coat hides its eyes so well that it once guarded a garden gnome for a whole day by mistake.'"
+  },
+  {
+   "id": "i_pembroke",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Interchangeable with Cardigan legendary: both 'moved every cow without a single one noticing' because the legs are short.",
+   "suggestion": "Pembroke is the 'loaf' / 'sploot' and famous fluffy bottom: 'Splooted flat on the village green and was mistaken for a bread roll at the summer fair. Won first prize in the baking tent.'"
+  },
+  {
+   "id": "i_pembroke",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Interchangeable with Border collie common ('herds the family into the kitchen every evening'). Also echoes Old English sheepdog rare and Briard rare (herding people).",
+   "suggestion": "'Runs so fast on such short legs that it looks like a fluffy wind-up toy. Children keep looking for the key.'"
+  },
+  {
+   "id": "i_cardigan",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic and legendary are both cow-herding, and the legendary duplicates Pembroke (see above).",
+   "suggestion": "Keep the cow legendary for Cardigan (it is the older cattle corgi) and change epic: 'Ran under the tables at the wedding and herded every ankle onto the dance floor. The band has never had such a full room.'"
+  },
+  {
+   "id": "i_black_and_tan_coonhound",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Interchangeable with Redbone epic: both 'treed a raccoon and bayed until the whole forest/town came out'. Also repeats this object's common (treeing).",
+   "suggestion": "Coonhounds have long ears and a famous mournful bay: 'Bayed under the moon so mournfully that every dog in town howled along, and the cats organised a petition.' - then give Redbone a different epic (see below)."
+  },
+  {
+   "id": "i_black_and_tan_coonhound",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Tracked one raccoon across the country' is the batch's hound-tracks-across-country template (basset, foxhound, bloodhound, beagle) and the third raccoon line in this object.",
+   "suggestion": "'Its ears are so long it once tripped over them, rolled down a hill and treed itself. It is still very proud of the catch.' (use the long-ear trait)."
+  },
+  {
+   "id": "i_redbone",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Interchangeable with Black-and-tan coonhound epic (treed a raccoon in public and bayed until everyone came). 'Came out with torches' also reads like an angry mob.",
+   "suggestion": "Redbones are famous for the shiny red coat and surefootedness: 'Swam across a flooded river after a scent and came out shining like a new penny. The river looks duller now.'"
+  },
+  {
+   "id": "i_redbone",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Repeats the common premise (singing); 'recorded as an album' is a mild punch.",
+   "suggestion": "Keep singing at Legendary and change common: 'Sniffs every tree on the walk twice, in case it changed its mind about the smell.'"
+  },
+  {
+   "id": "i_english_setter",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Interchangeable with German short-haired pointer rare ('points at birds so perfectly that the birds land just to see what it wants'). Also this object has pointing in common, rare, epic AND legendary.",
+   "suggestion": "English setters 'set' by crouching low in the grass: 'Crouched so low in the long grass that the farmer mowed round it all summer. The setter-shaped patch is now a local landmark.'"
+  },
+  {
+   "id": "i_english_setter",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Third pointing line (common, rare, epic, legendary all hold a point).",
+   "suggestion": "Use the feathered coat and gentle temperament: 'So gentle that the ducks let it walk them across the road. The lollipop lady has asked for lessons.' (avoid 'lessons' if reused)."
+  },
+  {
+   "id": "i_german_short_haired_pointer",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Interchangeable with English setter epic (birds land to see what the pointer wants).",
+   "suggestion": "GSPs are all-rounders that hunt on land and in water: 'Pointed at a duck, swam out, fetched it, swam back and pointed at it again to be sure. The duck is exhausted.'"
+  },
+  {
+   "id": "i_german_shepherd",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Interchangeable with Bloodhound legendary ('solved every case in one afternoon' vs 'solved every unsolved case in one week'). Also uses the medal frame.",
+   "suggestion": "Give 'cases' to the bloodhound; GSD legendary from its versatility: 'Was a police dog, a guide dog, a mountain rescuer and a film star, all before lunch. Spent the afternoon guarding the sofa.'"
+  },
+  {
+   "id": "i_german_shepherd",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Duplicate of Bernese common (sheds 'a second dog').",
+   "suggestion": "'Lies across the doorway with one ear up, so you can never tell if it is asleep. Neither can it.'"
+  },
+  {
+   "id": "i_bloodhound",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "No punchline: 'Solved every case in the detective's notebook... just by sniffing the pages' ends on the setup.",
+   "suggestion": "'Solved every case in the detective's notebook just by sniffing the pages. The final page was the detective's lunch, which is why the notebook is shorter now.'"
+  },
+  {
+   "id": "i_affenpinscher",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Interchangeable with Chow legendary (sat in the big chair/throne and was taken for the ruler). The affenpinscher line also has a weak tag ('Nobody dared to ask it').",
+   "suggestion": "Affenpinscher = 'monkey terrier', famous for the monkey face: 'Sneaked into the zoo's monkey house and lived there for a month. The monkeys taught it nothing; it taught them to bark at the postman.'"
+  },
+  {
+   "id": "deer",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Interchangeable with Ibizan hound uncommon ('jump over the garden fence from standing still').",
+   "suggestion": "Keep for one of them. Deer alternative: 'Leaves exactly one bite out of every lettuce in the vegetable patch, so nobody can blame it for eating a whole one.'"
+  },
+  {
+   "id": "i_ibizan_hound",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Same as deer uncommon (standing fence-jump) and the object already jumps at rare, epic and legendary - four jumping rarities.",
+   "suggestion": "Ibizan hounds have amber eyes, pink noses that blush and hunt by hearing: 'Its nose turns pink when it is embarrassed, so everyone knows who ate the cake.'"
+  },
+  {
+   "id": "i_saint_bernard",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Interchangeable with Newfoundland common (shakes its head and coats the kitchen/ceiling in drool).",
+   "suggestion": "Keep drool for one breed. Saint Bernard: 'Lies across the whole hallway like a draught excluder, then sighs every time you step over it.'"
+  },
+  {
+   "id": "i_giant_schnauzer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Interchangeable with Border collie legendary (arranged the herd by height/size).",
+   "suggestion": "'Guarded the market so well that the pigeons now queue at a little gate and show their feet before they land.'"
+  },
+  {
+   "id": "i_giant_schnauzer",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Duplicate of Bouvier common (wet beard after the water bowl).",
+   "suggestion": "'Raises one bushy eyebrow at the hoover. The hoover has started switching itself off.' (then move the eyebrow idea away from uncommon) - or use its huge black bulk: 'Sits in the hallway in the dark and gives every visitor a fright by blinking.'"
+  },
+  {
+   "id": "i_bluetick",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Interchangeable with Border collie epic (moved/herded the clouds; farmers benefit).",
+   "suggestion": "Blueticks are known for a loud bawl and a cold nose for old trails: 'Followed a trail so old that it led to the grandmother of the raccoon. She was very surprised to have a visitor.'"
+  },
+  {
+   "id": "i_great_dane",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Interchangeable with Bernese rare (leans on people to show love and pushes them into the hedge/lake).",
+   "suggestion": "'Tries to sit on the armchair like the cat. Gets one leg on, then looks at you as if the chair is broken.'"
+  },
+  {
+   "id": "i_maltese_dog",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Interchangeable with Japanese spaniel legendary ('still expects to be carried up the stairs').",
+   "suggestion": "'Its white coat is so long that it hides its legs, so people think it glides. The cat has started checking under it for wheels.'"
+  },
+  {
+   "id": "i_chesapeake_bay_retriever",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Batch-wide repeated premise: shakes off after a swim and soaks a crowd (bouvier E, komondor E, OES E, newfoundland E, samoyed E).",
+   "suggestion": "Chessies are famously stubborn and broke ice to retrieve: 'Broke through the ice on the frozen bay to fetch a duck. The ice skaters now have a very straight canal through their rink.'"
+  },
+  {
+   "id": "i_bouvier_des_flandres",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Shake-off soak premise (also chesapeake, komondor, OES, newfoundland).",
+   "suggestion": "'Herded the market's runaway cows back into their pen, then herded the vegetable stall in too. The carrots are now very well behaved.'"
+  },
+  {
+   "id": "i_komondor",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Shake-off soak premise (fourth in the batch) plus 'village fair' repeat.",
+   "suggestion": "'Got caught in the rain and its cords soaked up a whole puddle each. It now weighs as much as a small car and refuses to go indoors until it drips dry.'"
+  },
+  {
+   "id": "i_old_english_sheepdog",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Shake-off soak premise again.",
+   "suggestion": "'Rolled down the hill at the village fun run like a giant ball of wool and won first, second and third place.'"
+  },
+  {
+   "id": "i_komondor",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Same premise as uncommon (disappears among the sheep), and the punchline 'Nobody has ever been so tricked' is a non-joke.",
+   "suggestion": "'Was entered in a mop-throwing contest by mistake. Won it, then walked home on its own carrying the trophy.'"
+  },
+  {
+   "id": "i_appenzeller",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Appenzeller and Entlebucher (two Swiss cattle dogs) have near-swappable ladders: cows in common, uncommon, epic, legendary for Appenzeller; cows and church bells in rare/epic/legendary for Entlebucher. The epic 'herded cows into a circle' is also a herding-crowd template.",
+   "suggestion": "Appenzellers are loud, high-pitched barkers with a tail curled like a snail shell: 'Barked once on the Alp and the cowbells rang back. Now they argue every morning, and the cheese factory has to wear earplugs.'"
+  },
+  {
+   "id": "i_appenzeller",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Brought every cow in the country home' = herding-the-country template; the fourth cow line.",
+   "suggestion": "Use the tight curled tail: 'Curled its tail so tight with pride that it went round twice. The village now uses it to wind the clock tower.'"
+  },
+  {
+   "id": "i_entlebucher",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Interchangeable with Appenzeller (cows + church/cow bells) and cow epic (cowbells ring). Uncommon/rare/epic/legendary are all herding.",
+   "suggestion": "Entlebuchers are the smallest Swiss mountain dog and famously tireless: 'Ran rings around the ski lift all afternoon. The skiers got so dizzy they skied uphill.'"
+  },
+  {
+   "id": "i_entlebucher",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Fourth herding line in the object and the batch's 'herd every herd' legendary.",
+   "suggestion": "'Volunteered to herd the clouds off the mountain before the tourists arrived. It is too small to reach them, but it barks at them very firmly and they do go.' - or any non-cow premise built on 'smallest Swiss dog, biggest attitude'."
+  },
+  {
+   "id": "i_great_pyrenees",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Interchangeable with Rhodesian ridgeback legendary (predators send a polite letter asking to visit). Pick one owner.",
+   "suggestion": "Keep for Pyrenees (the better fit) and change the ridgeback; or Pyrenees: 'Patrols the garden fence all night and files a full report every morning, in barks, at six o'clock.'"
+  },
+  {
+   "id": "i_samoyed",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Snowcloud' also appears as the legend move 'Snowcloud Nap' on the same object.",
+   "suggestion": "Uncommon 'Indoor Snowfall' or 'Fluffdrift'."
+  },
+  {
+   "id": "i_australian_terrier",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Duplicates the approved, live Pilot 02 dog common ('Barks at its own reflection in the oven door'). Also Pomeranian uncommon barks at its own reflection.",
+   "suggestion": "Aussie terriers were bred to kill snakes and rats on stations and have a big ruff: 'Barks at every garden hose in case it is a snake. Has never once been right, and never once stopped.'"
+  },
+  {
+   "id": "i_airedale",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-duplicate of the approved Pilot 02 dog epic ('Dug a hole in the park so big that the council turned it into a swimming pool' vs 'Dug so many holes in one park that the council reopened it as a golf course'). Also digging is the premise of common, rare and epic.",
+   "suggestion": "Airedales served as WWI messenger and police dogs (King of Terriers): 'Delivered every parcel in town before the post van woke up. The postman now rides in the back.'"
+  },
+  {
+   "id": "i_airedale",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Third digging line (common, rare, epic). Airedales are not particularly known as diggers among terriers.",
+   "suggestion": "Airedales are the largest terrier with a wiry coat and a clownish streak: 'Is too big to fit down any burrow, so it barks into each one and waits. Several rabbits have come out just to complain.'"
+  },
+  {
+   "id": "i_cocker_spaniel",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Puppy-eyes-get-food duplicates Blenheim uncommon ('huge eyes can get a biscuit out of anyone'). Barbecue sausage also repeated (basenji rare, labrador epic).",
+   "suggestion": "Cockers are famous for their constantly wagging 'merry' tail and flushing birds: 'Flushed a pheasant out of a hedge so fast that the pheasant landed in a picnic basket. The picnic is now a pheasant.' (keep it gentle) - or 'Wags its whole back half so hard on a lead that it walks sideways.'"
+  },
+  {
+   "id": "i_cocker_spaniel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Muddy puddles duplicates English springer rare and Irish setter epic (mud carried home/painted around).",
+   "suggestion": "'Its long ears dried in the wind like two flags, and the sailing club used them to tell the wind direction all summer.'"
+  },
+  {
+   "id": "i_chow",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "See affenpinscher: 'sat in the throne room... mistaken for the emperor' is shared. Keep it here (chows have the imperial association) but sharpen the punchline.",
+   "suggestion": "'Sat in the palace throne room for one afternoon and was mistaken for the emperor for ten years. Nobody noticed, because the old emperor had also never smiled.'"
+  },
+  {
+   "id": "i_english_springer",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Bouncing is the premise of common, epic and legendary; also 'every hedge in the country' template.",
+   "suggestion": "Springers 'spring' game for the gun and work as detection dogs: 'Sniffed out every lost tennis ball in the country in one summer and returned them all to the same tennis club. Members now play with forty balls at once.'"
+  },
+  {
+   "id": "i_english_springer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Second bounce line; 'every pheasant in the whole county' reads as generic hunting scale.",
+   "suggestion": "'Jumped into a hedge to check for birds and came out the other side of the maze. The maze has had to be redesigned.'"
+  },
+  {
+   "id": "i_boxer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Jumping/bouncing in common, epic and legendary; 'offered it a job' frame also used by beagle rare.",
+   "suggestion": "Boxers famously 'kidney bean' and are drooly clowns: 'Played boxing with the punchbag at the gym and won on points. The punchbag has asked for a rematch.'"
+  },
+  {
+   "id": "i_brittany_spaniel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Running laps in rare, epic and legendary. Epic 'wore a new footpath' also duplicates GSHP epic ('ran so many laps... its path').",
+   "suggestion": "Brittanys are compact pointers with an orange-and-white coat: 'Pointed at a pigeon on the town hall roof for so long that the council added it to the weather vane.'"
+  },
+  {
+   "id": "i_german_short_haired_pointer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Running/endurance in uncommon, epic and legendary; epic duplicates Brittany epic (laps wear a path).",
+   "suggestion": "'Swam after a duck across the reservoir, came back, and swam over again to say goodbye properly. The reservoir now has a lane for it.' (water work is a real GSP trait)."
+  },
+  {
+   "id": "i_german_short_haired_pointer",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Tirelessly' is an adverb, not a creature name, and repeats the legendary's 'the Tireless'.",
+   "suggestion": "'Liverdash' or 'Allrounder'."
+  },
+  {
+   "id": "i_afghan_hound",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Hair is the premise of common, uncommon, rare, epic and legendary (one trait at five rarities). Epic also uses the 'judges' dog-show frame.",
+   "suggestion": "Afghans are aloof, independent and famously selective about recall: 'Was called back in the park by twenty people at once. Ignored all of them so elegantly that they applauded.'"
+  },
+  {
+   "id": "i_afghan_hound",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Fifth hair line; also duplicates Saluki epic (desert sandstorm sprint) and uses the 'statue' frame.",
+   "suggestion": "'Came back from a mountain walk with every tangle from the whole range in its coat. The hairdresser is still brushing out a small goat.'"
+  },
+  {
+   "id": "i_brabancon_griffon",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Face/expression is the premise of common, rare, epic and legendary. Epic (clowns quit) is the weakest.",
+   "suggestion": "Griffons were stable ratters riding with coachmen (uncommon already): 'Cleared the royal stables of mice and then sat on the coach roof to accept the applause. The horses were not consulted.'"
+  },
+  {
+   "id": "i_brabancon_griffon",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Griffonius the Wise' is generic; nothing about the very human face/eyebrows.",
+   "suggestion": "'Sir Grumbleface, the Raised Eyebrow' or 'Judge Whiskerbrow'."
+  },
+  {
+   "id": "i_cairn",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Stone stacking is the premise of uncommon, rare, epic and legendary. It is a pun on the breed name rather than a dog behaviour (cairn terriers hunted vermin among rock cairns - digging, not building).",
+   "suggestion": "Cairns are shaggy, game diggers who rush into holes: 'Dug after a rabbit under the castle wall and came up inside the gift shop wearing a tea towel.' Keep the cairn-stacking pun at Legendary only."
+  },
+  {
+   "id": "i_cairn",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Third stone-moving line (moved a drystone wall).",
+   "suggestion": "'Fearlessly squeezes into any rock gap after a rat, then barks from inside until the hill echoes like a drum.'"
+  },
+  {
+   "id": "i_border_terrier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Digging/holes in uncommon, rare, epic and legendary (one premise at four rarities).",
+   "suggestion": "Border terriers are 'otter-faced', hardy and run with horses and hounds: 'Kept up with the whole hunt on its little legs, then rode home on the horse's saddle looking like it won.' (or a non-hunt version: 'ran beside the riding school ponies all day...')."
+  },
+  {
+   "id": "i_border_terrier",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Scrappy McBorder' leans on 'Scrappy' (also Lakeland's 'Scrappy Lakes'; and evokes a well-known cartoon puppy).",
+   "suggestion": "'Otterby Grit, the Unstoppable' or 'Borderline Bonkers'."
+  },
+  {
+   "id": "wombat",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Digging/tunnels in common, uncommon, epic and legendary. The famous wombat traits (cube-shaped droppings, surprising sprinting speed) are unused; rare uses the bottom.",
+   "suggestion": "Use the surprising speed: 'Looked slow, so the village challenged it to the fun run. Finished, went home and had a nap before second place arrived.'"
+  },
+  {
+   "id": "wombat",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "'Moles come to it for lessons' shares the 'X ask it for lessons' tag with mink uncommon and borzoi epic.",
+   "suggestion": "'Digs tunnels so straight that the moles use them as a ruler.'"
+  },
+  {
+   "id": "x_alpaca_animal",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Fleece in uncommon, rare, epic and legendary; epic and legendary both turn on shedding, which alpacas don't really do (they are sheared).",
+   "suggestion": "Alpacas hum, spit when cross, and use one shared toilet spot: 'All the alpacas in the field queued politely for the same corner. The village bus stop has started copying them.' (mild) - or 'Hummed so loudly at the village show that the brass band tuned to it.'"
+  },
+  {
+   "id": "x_alpaca_animal",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Second shedding premise; 'knitted itself into a jumper' is muddled (an alpaca wearing itself).",
+   "suggestion": "'Was shorn at the county fair and its fleece knitted enough jumpers for the whole village. It now walks around naked and looking very pleased.' (keep 'cosmic' off)."
+  },
+  {
+   "id": "x_koala_bear",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Same premise as uncommon (falls asleep anywhere), and 'napping championship' matches bear's legendary name 'the Sleep Champion' and pug's legendary.",
+   "suggestion": "Koalas hug trees to cool down and have fingerprint-like prints: 'Left its fingerprints at the scene of every missing biscuit in town. Detectives keep arresting the police chief by mistake.' (koala prints famously resemble human ones)."
+  },
+  {
+   "id": "x_koala_bear",
+   "field": "names.rare",
+   "severity": "low",
+   "issue": "Sleep in three of five names (Branchnapper, Snoozegrip, Twenty-Hour Napper).",
+   "suggestion": "Rare 'Gumleaf Fug' (ties to eucalyptus breath) or 'Hayfever Healer'."
+  },
+  {
+   "id": "bear",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Ursula, the Sleep Champion' shares the sleep-champion premise with koala legendary and pug legendary; the hibernation legendary also has a soft punchline.",
+   "suggestion": "Name: 'Grizwold, the Long Yawn'. Lore: 'Hibernated through a whole century and woke up hungry. Ate the picnic, the picnic table and the sign that says Do Not Feed the Bears.'"
+  },
+  {
+   "id": "bear",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "Hugging campers is not a bear trait players recognise (and a bear hug is not comforting to campers). Weakest line.",
+   "suggestion": "'Scratches its back on the same tree every morning. The tree is now completely smooth on one side and ticklish on the other.'"
+  },
+  {
+   "id": "i_polecat",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Repeats the uncommon premise (wild excited dancing).",
+   "suggestion": "'Moved into the hen house for one night. The hens are now sleeping on the church roof and refuse to discuss it.' (avoid any harm to hens) - or a stolen-eggs-hoarding line: polecats cache food."
+  },
+  {
+   "id": "i_polecat",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Repeats the rare premise (strong smell).",
+   "suggestion": "Polecats hoard food: 'Hid so many eggs in its den for winter that it hatched its own farm. Now it sells breakfast to the foxes.'"
+  },
+  {
+   "id": "x_llama_animal",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Repeats the common premise (carrying luggage), also one of five 'hauled a huge load' legendaries.",
+   "suggestion": "Llamas guard sheep and hum: 'Was hired to guard a flock and gave every fox such a long disapproving stare that the foxes became vegetarians.'"
+  },
+  {
+   "id": "i_japanese_spaniel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Repeats the common premise (spinning). Legendary uses the repeated 'according to its own story' frame.",
+   "suggestion": "Chins are cat-like and climb: 'Climbed to the top of the palace curtains and refused to come down until dinner was served up there.'"
+  },
+  {
+   "id": "i_italian_greyhound",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Clothing in uncommon and legendary; 'won every race at the grand dog show' is the batch's dog-show-trophy legendary.",
+   "suggestion": "IGs are tiny sighthounds that shiver and sunbathe: 'Found the only sunbeam in the whole of Italy on a cloudy day and lay in it. The tourists queued to stand next to it.'"
+  },
+  {
+   "id": "i_italian_greyhound",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "'Leaves a little dent in the lawn' is a weak rare power.",
+   "suggestion": "'Runs so fast round the sofa that the cushions end up in a different order each time.'"
+  },
+  {
+   "id": "i_borzoi",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Dancing in epic and legendary (frozen lake dance / palace waltz).",
+   "suggestion": "Borzois are tall Russian wolfhounds with a long narrow head: 'Put its long nose through the letterbox to say hello. The postman now delivers letters straight into its mouth.'"
+  },
+  {
+   "id": "i_borzoi",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "'Faints dramatically onto the sofa' at bath-time is generic; could be any dog.",
+   "suggestion": "'Lies on the sofa with all four long legs sticking off the end, so nobody else can sit down. Pretends to be asleep.'"
+  },
+  {
+   "id": "i_dandie_dinmont",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Repeats the rare premise (it is from a novel). The name fact (Scott's 'Guy Mannering') is great but used twice.",
+   "suggestion": "Use the long low body and huge eyes: 'Squeezed into a badger's sett and found three lost umbrellas, a teapot and the badger's old school photo. Brought them all home.'"
+  },
+  {
+   "id": "i_dandie_dinmont",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Topknot in common and epic; 'fire brigade got it down from the church' is fine, but topknot is also used by Bedlington epic.",
+   "suggestion": "Keep or swap common to the long body."
+  },
+  {
+   "id": "i_dhole",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Whistling in common, epic and legendary; epic punchline (birds use the song as a ringtone) is weak and modern.",
+   "suggestion": "Dholes share food and hunt in big packs: 'Shared one picnic sandwich between thirty pack members so fairly that every crumb had a name.'"
+  },
+  {
+   "id": "i_dhole",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "'Red coat glows like embers... can always find it at teatime' has no real punchline.",
+   "suggestion": "'Its red coat matches the sunset so well that it disappears every evening for ten minutes. The pack waits patiently.'"
+  },
+  {
+   "id": "i_keeshond",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Barge in rare and legendary; 'in the land' frame.",
+   "suggestion": "Keeshonds are 'smiling Dutchmen' with huge ruffs: 'Puffed up its ruff to say hello on a windy day and floated gently along the canal like a hot-air balloon. The ducks waved.'"
+  },
+  {
+   "id": "i_keeshond",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "'Barked at every bridge so the bridges knew to stay up' is confusing logic.",
+   "suggestion": "'Rode on the barge and barked at every bridge, so the bridge-keepers lifted them early. The barge has never once had to slow down.'"
+  },
+  {
+   "id": "i_kelpie",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Herding sheep in rare, epic and legendary; 'seen from space' is cosmic filler below Legendary (lint flag).",
+   "suggestion": "Kelpies are tireless in heat and dust: 'Worked so hard in the heat that the farmer's hat wilted. The kelpie lent it its shade and kept going.'"
+  },
+  {
+   "id": "i_kerry_blue_terrier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'Ran across the hills and the hills turned slightly blue' is a non sequitur (why would running colour hills?).",
+   "suggestion": "Kerry blues are soft-coated, non-shedding and fiery: 'Took on the vacuum cleaner, the lawnmower and the leaf blower in one afternoon. All three are now kept in the shed with the light on.' (then change rare, which mentions the vacuum)."
+  },
+  {
+   "id": "i_kerry_blue_terrier",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Dog-show/judges/medal frame (see pattern).",
+   "suggestion": "'Turned a little bluer every year until it was the exact colour of the sky. Lost for an hour every sunny day.'"
+  },
+  {
+   "id": "i_kuvasz",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Royal guarding in rare, epic and legendary.",
+   "suggestion": "Kuvaszok are white guardians of livestock that work alone: 'Lay down in the snow to watch the flock and the farmer built a snowman next to it. Nobody has worked out which one is guarding.'"
+  },
+  {
+   "id": "i_lhasa",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Monastery in epic and legendary; epic is also the batch's 'every bell rang' line (cow, entlebucher, appenzeller).",
+   "suggestion": "Lhasas are long-haired indoor sentinels with lion-like manes: 'Its fringe grew so long it swept the whole monastery corridor. The monks stopped buying brooms.'"
+  },
+  {
+   "id": "i_lhasa",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Weak punchline ('monks never had to lock a door').",
+   "suggestion": "'Guarded the monastery so well for a hundred years that the monks gave it the only key. It buried it.'"
+  },
+  {
+   "id": "i_malamute",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Digging in uncommon and epic.",
+   "suggestion": "'Woo-wooed at the snowplough until it turned round. The village now asks it to argue with the weather forecast.'"
+  },
+  {
+   "id": "i_miniature_poodle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Tricks in uncommon and epic; haircut in common and legendary; legendary uses the 'charged only in biscuits' payment tag.",
+   "suggestion": "Poodles were water retrievers (the cut kept joints warm): 'Swam the boating lake with its pompoms puffed up like floats. Three ducks hitched a ride.'"
+  },
+  {
+   "id": "i_miniature_poodle",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Same premise as common (fancy haircut) and payment tag.",
+   "suggestion": "'Taught itself to read the recipe book and baked a cake for the whole street. Left out the sugar because poodles are very health-conscious.'"
+  },
+  {
+   "id": "i_papillon",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Tricks in uncommon and rare (and agility in legendary). Rare is not a 'troublesome power'.",
+   "suggestion": "Papillon ears = butterfly: 'Its ears flutter so much in the wind that it took off from the garden wall and glided to next door's barbecue. It says it was the wind.'"
+  },
+  {
+   "id": "i_norfolk_terrier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Repeats the common premise (digging holes).",
+   "suggestion": "Norfolks are cheerful, drop-eared ratters that work in packs: 'Joined in the village tug-of-war on the losing side and grinned so cheerfully that the other team let go to pat it.'"
+  },
+  {
+   "id": "i_norfolk_terrier",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Award frame ('most cheerful dog in the country prize') and repeats Airedale's 'barked through the speech' tag.",
+   "suggestion": "'Wagged so cheerfully at the dentist that the dentist forgot to do any fillings. The whole waiting room left smiling.'"
+  },
+  {
+   "id": "i_norwich_terrier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Rats in rare and epic (also mini schnauzer rare, affenpinscher epic); 'the cats are furious' is a Bible warning phrase.",
+   "suggestion": "Norwiches are prick-eared, tiny and cheeky: 'Sat in a farmer's welly to keep warm, and the farmer walked to the market before noticing. It sold three cabbages while it was there.'"
+  },
+  {
+   "id": "i_norwich_terrier",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "No real punchline; 'bravest in the land' award frame.",
+   "suggestion": "'Scared off a wild boar with one bark, then asked the boar to help carry the shopping home.'"
+  },
+  {
+   "id": "i_norwegian_elkhound",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Moose in common, rare and epic.",
+   "suggestion": "'Its curled tail held a whole snowball, which it carried indoors as a present. Nobody wanted it.'"
+  },
+  {
+   "id": "i_norwegian_elkhound",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'According to its own family legend' frame (shared with 4 other legendaries) and no punchline beyond 'never stopped telling the story'.",
+   "suggestion": "'Held a moose at bay for so long that the moose moved in. They now share the porch and argue about the weather.'"
+  },
+  {
+   "id": "i_otterhound",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Swimming/river in all five rarities. Names and moves add 'Riverbank' four times (epic name, legendary name, legend move, ultimate).",
+   "suggestion": "Otterhounds are shaggy, huge-voiced and rare: 'Bayed once at the village pond and the echo bounced around the valley for a week. The church clock now chimes in a hound voice.'"
+  },
+  {
+   "id": "i_otterhound",
+   "field": "names.epic",
+   "severity": "low",
+   "issue": "'Riverbank' in epic name, legendary name, legend move and ultimate of one object.",
+   "suggestion": "Epic 'Big Splash Baritone'; Legend move 'Shaggy Stare'; Ultimate 'Muddy Bank Mayhem'."
+  },
+  {
+   "id": "i_curly_coated_retriever",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Lake/swimming in all five rarities; epic (ducks draw up timetables) also adds to the 'timetable/on time' tag.",
+   "suggestion": "Curly-coats are independent and keep their curls tight: 'Hid a tennis ball in its curls for a whole week. Nobody could find it, including the curly-coat.'"
+  },
+  {
+   "id": "i_groenendael",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Herding at rare, epic and legendary; legendary is the 'every flock on time/timetable' tag shared with briard, dhole and wombat.",
+   "suggestion": "Groenendaels are sensitive, very fast and jet black: 'Ran so fast through the dark that it beat its own shadow home. The shadow has asked for a rematch.'"
+  },
+  {
+   "id": "i_groenendael",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "'The farmer thought he dreamt it' is a weak tag.",
+   "suggestion": "'Herded a whole flock home at midnight without a light. In the morning the sheep were lined up by colour.' (only if border collie no longer sorts by height)."
+  },
+  {
+   "id": "i_briard",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Confusing logic ('sheep from other countries began to travel there') and no punchline.",
+   "suggestion": "'Its fringe flew up in a gust of wind and the sheep saw its eyes for the first time. They have been on their best behaviour ever since.'"
+  },
+  {
+   "id": "i_briard",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Herding people (commuters) is the batch's herding-crowd template; 'on time for the first time ever' tag repeated.",
+   "suggestion": "Acceptable if other herders change; otherwise use the double dewclaws/fringe."
+  },
+  {
+   "id": "i_irish_setter",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Interchangeable with flat-coat legendary/common (forever puppy, officially declared) and has no punchline ('declared the official spirit of fun at its retirement party').",
+   "suggestion": "Irish setters are famous for the mahogany coat and joyful running: 'Ran through an autumn forest so fast that the leaves thought it was a gust of wind and all fell at once. The park keeper is still raking.'"
+  },
+  {
+   "id": "i_irish_setter",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Goofball' is not creature-like, and 'Endless Puppy' + 'the Forever Young' repeat flat-coat's 'Forever Puppy'.",
+   "suggestion": "Uncommon 'Copperzoom'; Rare 'Mahogany Mischief'; Legendary 'Ruby O'Setter, the Autumn Gust'."
+  },
+  {
+   "id": "i_bedlington_terrier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Lamb-lookalike in common, rare, epic and legendary.",
+   "suggestion": "Bedlingtons are whippet-fast and were miners' ratting dogs: 'Raced the village whippets and won while still looking like a cushion. The whippets have asked for a recount.' (move speed from uncommon, which already uses it)."
+  },
+  {
+   "id": "i_bedlington_terrier",
+   "field": "names.common",
+   "severity": "low",
+   "issue": "'Lambpretender' and legendary 'the Great Pretender' repeat the same word; 'Great Pretender' is also a well-known song title.",
+   "suggestion": "Common 'Lambalike'; legendary 'Woolly Wolf, the Sheep Impostor'."
+  },
+  {
+   "id": "i_bull_mastiff",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "'For forty years' (boston also forty years) and 'guarded' (one of six 'Guarded...' legendaries).",
+   "suggestion": "'Sat on the castle drawbridge and nobody has been able to raise it since. The castle has been very secure for forty years' - or switch to its night-gamekeeper role with a fresh tag."
+  },
+  {
+   "id": "i_boston_bull",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Weak punchline ('never once missed a doorbell'); 'for forty years' tag; award/title structure.",
+   "suggestion": "Use the tuxedo: 'Wore its tuxedo to every wedding in town for so long that brides started sending it the seating plan first.'"
+  },
+  {
+   "id": "i_boston_bull",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Snoring again (also clumber, frenchie, pug).",
+   "suggestion": "'Sneezed backwards at the opera so loudly that the soprano started again from the beginning.' (reverse sneezing is a real Boston trait)."
+  },
+  {
+   "id": "i_basenji",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Singing contest repeats the epic (yodelling until goats join) and uses the 'judges' frame.",
+   "suggestion": "Basenjis are cat-clean, climb fences and hate rain: 'Refused to go out in the rain for so long that the town built it a covered street. Everyone else uses it now too.'"
+  },
+  {
+   "id": "i_basset",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Tracked a single crumb across the entire country' is the hound-tracks-across-the-country template.",
+   "suggestion": "'Lay down in the middle of the street and its ears covered both pavements. The council painted a zebra crossing on them.'"
+  },
+  {
+   "id": "i_beagle",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "'Followed one delicious smell across the city' is the hound-tracking template.",
+   "suggestion": "'Baying in the back garden, it started a howl that every beagle in the street joined. The neighbourhood now has a choir rota.'"
+  },
+  {
+   "id": "i_english_foxhound",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Followed a single scent across the entire countryside' - hound-tracking template; nap punchline is soft.",
+   "suggestion": "Foxhounds live and work in packs of forty: 'Led forty hounds into the village bakery at once. Nobody touched a bun; they just wanted to see. The baker cried with relief.'"
+  },
+  {
+   "id": "i_english_foxhound",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Village fete chaos repeats polecat epic and border terrier epic.",
+   "suggestion": "'Joined the church bell-ringers and bayed the right note every time. The bells are now a backing choir.' (only if basenji/foxhound rare church-choir overlap is also fixed)."
+  },
+  {
+   "id": "i_chihuahua",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "No punchline ('kept a crowd of a thousand photographers back'), and the rare already has bark-scares-a-lorry.",
+   "suggestion": "'Became bodyguard to a film star and held back a thousand photographers. Then bit the star's shoelace for walking too slowly.'"
+  },
+  {
+   "id": "i_chihuahua",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Barking down a much larger thing duplicates affenpinscher rare ('barks at ships... confidence of a dog ten times its size') and pekinese rare.",
+   "suggestion": "'Burrows under every blanket in the house and growls from inside. Nobody can make the bed any more.' (blanket-burrowing is a real chihuahua habit)."
+  },
+  {
+   "id": "i_affenpinscher",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Generic 'small dog with big confidence' - swappable with chihuahua/pekinese/min pin.",
+   "suggestion": "'Swings from the curtains like a little monkey and has never once used the door.'"
+  },
+  {
+   "id": "i_pekinese",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "'Faces down dogs ten times its size' is the shared small-dog-bravado line.",
+   "suggestion": "'Rolls along so low that it sweeps the floor with its fringe. The cleaner now follows it with a dustpan.'"
+  },
+  {
+   "id": "i_pekinese",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "No punchline beyond 'size of a slipper'; palace/emperor also in uncommon and epic.",
+   "suggestion": "'Was made the emperor's guard lion and kept the post for life. It guarded mainly the emperor's slippers, and slept in them.'"
+  },
+  {
+   "id": "i_irish_wolfhound",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "'Suits of armour bowed to it' is a weak image; castle in epic, legendary, legend move and ultimate.",
+   "suggestion": "'Rested its chin on the bus stop roof and everyone waiting got out of the rain. The bus company has asked it to stay.'"
+  },
+  {
+   "id": "i_red_wolf",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sentimental, not funny; and the legendary name 'Last Howl of the Marsh' leans on extinction, which is sad for a child-facing line.",
+   "suggestion": "Red wolves were successfully reintroduced in wetlands: 'Brought the whole family back to the old forest and howled so proudly that the trees rustled back. The owls are now taking bookings for the next reunion.' Name: 'Russet, Howl of the Marsh'."
+  },
+  {
+   "id": "i_red_wolf",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "'Even the moon loses track of it' is soft cosmic filler (lint flag).",
+   "suggestion": "'Disappears into the long grass so well that the farmer once mowed round a patch of nothing for an hour.'"
+  },
+  {
+   "id": "i_samoyed",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Fluffstorm Sled' is fine for the variants; just note that 'Storm' appears in ten names/moves across the batch.",
+   "suggestion": "Optional: 'Smiling Sled Run'."
+  },
+  {
+   "id": "i_doberman",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Factual: a Doberman's natural ears flop; 'ears stand up so sharply' describes cropped ears (a practice banned in many countries). Also part of the hears-food-from-afar uncommon template.",
+   "suggestion": "Use its sleek speed/loyalty: 'Follows you from room to room so closely that you once shut it in the fridge with you. It was delighted.' - or 'Leans on your legs and looks at the door until you remember the walk.'"
+  },
+  {
+   "id": "i_doberman",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "'Crown jewels' references a real national collection; fine, but 'for a decade without blinking' is a soft tag.",
+   "suggestion": "'Guarded the city museum so well that the statues started standing up straighter.'"
+  },
+  {
+   "id": "i_golden_retriever",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Medal frame; otherwise good.",
+   "suggestion": "'Retrieved every lost glove in the city and laid them out in pairs on the town hall steps. Somehow there is still one left over.'"
+  },
+  {
+   "id": "i_golden_retriever",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Two tennis balls is a mild rare power.",
+   "suggestion": "'Carries an egg in its mouth all the way home without cracking it, then gives it to the cat as a present.' (soft mouth is a real golden trait)."
+  },
+  {
+   "id": "i_labrador_retriever",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Barbecue sausage theft repeats basenji rare and cocker rare; sausages appear in 7 lines.",
+   "suggestion": "Use the Lab's soft mouth or love of water instead: 'Carried the shopping home from the market without denting a single peach. Ate the receipt as payment.' (if the payment tag is cut elsewhere, end on 'Then sat on the peaches.')"
+  },
+  {
+   "id": "i_chesapeake_bay_retriever",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Medal tag ('expects a medal every time').",
+   "suggestion": "'Swam across the frozen bay in midwinter for one tennis ball, then dropped it in the water to do it again.'"
+  },
+  {
+   "id": "i_gordon_setter",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Close to Lakeland epic (every summit in one day).",
+   "suggestion": "Keep if Lakeland epic changes."
+  },
+  {
+   "id": "i_gordon_setter",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "Glossy-coat uncommon repeated (flat-coat U, redbone U, irish setter U).",
+   "suggestion": "'Points at the biscuit tin from across the house and refuses to move until it is opened.'"
+  },
+  {
+   "id": "i_flat_coated_retriever",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Tail clears the coffee table - same as AmStaff common (wag knocks over coffee table).",
+   "suggestion": "'Brings back every single thing thrown, including the frisbee the neighbours threw away on purpose.'"
+  },
+  {
+   "id": "i_malinois",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'the Untiring' joins 'the Tireless', 'the Endless Runner/Walker/Sled' as stamina epithets.",
+   "suggestion": "'Major Malin, the Springloaded'."
+  },
+  {
+   "id": "cow",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Bessie, Who Jumped the Moon' is good, but 'Bessie' is the default cartoon cow name; consider something more SnapMon.",
+   "suggestion": "'Moonhopper Maud' or keep."
+  },
+  {
+   "id": "deer",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Poison Ivy Stampede' matches the poison-only Ultimate but shares a name with a well-known comic-book character.",
+   "suggestion": "'Bramble Stampede' or 'Thorny Thicket Charge'."
+  },
+  {
+   "id": "deer",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Sleigh-pulling is a reindeer/Santa trope, and the name 'Prance' evokes Prancer. Acceptable but leans on someone else's story.",
+   "suggestion": "'Stood so still in the snowy forest that it was decorated as a Christmas tree. Wore the fairy lights proudly all winter.'"
+  },
+  {
+   "id": "i_mink",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Minkerton' echoes a real detective agency name (Pinkerton).",
+   "suggestion": "'Slipsworth, Master Escaper'."
+  },
+  {
+   "id": "i_mink",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "Sleeping bag is not a mink trait; swappable with any small animal.",
+   "suggestion": "'Raids the garden pond, then leaves wet paw prints across the patio in a perfect straight line to the cat flap, so the cat gets the blame.'"
+  },
+  {
+   "id": "camel",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Payment tag ('only snacks every mile'), and one of five 'carried an enormous load' legendaries.",
+   "suggestion": "Camels famously grumble and spit: 'Grumbled so loudly about the long walk that the whole desert caravan turned round and went home. It was the camel's idea to go in the first place.'"
+  },
+  {
+   "id": "i_eskimo_dog",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Sled-pulling in rare, epic and legendary.",
+   "suggestion": "Use the cold-loving coat: 'Dug itself a snow bed outside, slept through a blizzard and woke up as the centre of a new igloo village. It charges no rent.'"
+  },
+  {
+   "id": "i_eskimo_dog",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Nanuk' is an Inuit word (polar bear) and evokes a famous film title; with the breed's sensitive name, safer to avoid Inuit vocabulary as a joke name.",
+   "suggestion": "'Frostbeard, the Endless Sled' (but see 'Endless' pattern) or 'Snowmuzzle the Unstoppable'."
+  },
+  {
+   "id": "i_eskimo_dog",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Snowbank Snooze' nearly collides with Bernese 'Snowdrift Snooze' (same slot, same effect).",
+   "suggestion": "'Tail Over Nose' (the real curling-up habit from the uncommon)."
+  },
+  {
+   "id": "i_old_english_sheepdog",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Herding children at parties repeats the herding-people template (border collie C, pembroke R, briard R).",
+   "suggestion": "'Can't see through its fringe, so it navigates by bumping. The furniture has been rearranged into a very gentle maze.'"
+  },
+  {
+   "id": "i_komondor",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Dreadlock Guard': 'dreadlocks' for dog cords is common but culturally loaded; 'cords' is the breed term.",
+   "suggestion": "'Cordcoat' or 'Ropepaw'."
+  },
+  {
+   "id": "i_clumber",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "'House of Gentlemen' is a parody of a real parliamentary chamber (light politics) and continues the sleep thread.",
+   "suggestion": "'Walked so slowly and grandly across the duke's lawn that the duke started walking behind it. The garden party is now a procession.'"
+  },
+  {
+   "id": "i_irish_terrier",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "'Battlefield' imagery (from the breed's real WWI messenger role) softened into a tug-of-war works, but 'Both teams surrendered' keeps the war frame for a child audience.",
+   "suggestion": "'Carried messages across the village tug-of-war so bravely that both teams let go to cheer. Everybody fell over.'"
+  },
+  {
+   "id": "x_llama_animal",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "'Protest march' of pack animals is mild labour politics; okay in tone but borderline for the 'no politics' rule.",
+   "suggestion": "'Spat at the cable car for being too slow. The cable car now takes the long way round.'"
+  },
+  {
+   "id": "i_lakeland_terrier",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Scrappy Lakes' - see Scrappy note on border terrier.",
+   "suggestion": "'Fell Scrambler'."
+  },
+  {
+   "id": "i_rhodesian_ridgeback",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Ridgeback' is just the breed name/object label; the Bible says names must not be plain object labels.",
+   "suggestion": "'Backcomb' or 'Wrongway Fur'."
+  },
+  {
+   "id": "i_collie",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Rescue Rush' continues the Lassie/rescue thread (and 'rescue' on an attack).",
+   "suggestion": "'Ruff Rush' or 'Moorland Dash'."
+  },
+  {
+   "id": "i_bernese_mountain_dog",
+   "field": "names.rare",
+   "severity": "low",
+   "issue": "Rare name 'Lovinglean' duplicates the signature move 'Loving Lean'.",
+   "suggestion": "Rare 'Lakeside Leaner' or change the signature to 'Fluff Shove'."
+  },
+  {
+   "id": "i_dalmatian",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Siren Rush' suggests a stunning noise; mutated variant is defence-down. Borderline-neutral.",
+   "suggestion": "'Spotted Stampede' or keep."
+  },
+  {
+   "id": "i_cardigan",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Ankle Snack' implies eating ankles; slightly bitey for the tone.",
+   "suggestion": "'Slipper Swipe' (drain = steal)."
+  },
+  {
+   "id": "i_norwich_terrier",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Barn Blaze' (burn-only, correct mechanic) evokes a barn fire with animals inside.",
+   "suggestion": "'Haystack Scorcher' or 'Red-Hot Ratcatch'."
+  },
+  {
+   "id": "i_miniature_schnauzer",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Same 'barks at X, Y and Z, in that order' frame as Pomeranian uncommon.",
+   "suggestion": "'Its beard collects a bit of every meal, so it carries yesterday's dinner around as a snack for later.'"
+  },
+  {
+   "id": "i_pomeranian",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Fluffcloud Pom' nearly collides with alpaca common 'Fluffcloud'; 'Fluff' appears in 17 names/moves across the batch.",
+   "suggestion": "'Puffball' or 'Hamsterbark' (ties to the wet-hamster common)."
+  },
+  {
+   "id": "i_pomeranian",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Shedding-carpets epic repeats the shedding pattern (bernese, GSD, samoyed, alpaca).",
+   "suggestion": "'Puffed itself up so much in a thunderstorm that it rolled down the street like a dandelion clock.'"
+  },
+  {
+   "id": "i_leonberg",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Shake-the-mane-makes-wind duplicates chow epic.",
+   "suggestion": "Keep one (chow) and use the Leonberg lion-lookalike elsewhere."
+  },
+  {
+   "id": "i_saluki",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Desert sandstorm sprint duplicates afghan legendary; 'according to the paintings' legendary is close to the 'own story' frame.",
+   "suggestion": "Saluki epic: 'Chased a hare across the desert so fast that it arrived before its own pawprints. They caught up an hour later.'"
+  },
+  {
+   "id": "i_great_pyrenees",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Pyrenella' is fine; noting only that 'Guardian of the Peaks' is a stock fantasy epithet.",
+   "suggestion": "'Pyrenella, the Midnight Barker' (ties to the common)."
+  },
+  {
+   "id": "i_briard",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Briarde' reads as a misspelling of the breed name.",
+   "suggestion": "'Fringella, the Shepherd's Shadow'."
+  },
+  {
+   "id": "i_appenzeller",
+   "field": "names.common",
+   "severity": "low",
+   "issue": "'Curltail' also appears in elkhound 'Curltail Viking'.",
+   "suggestion": "Common 'Snailtail' (Appenzeller tail curls like a snail shell)."
+  }
+ ]
+}
