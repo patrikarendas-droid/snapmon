@@ -43,6 +43,18 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
   }
   parts.monsters = dig(h); parts.sprites = dig(hs); parts.monsterCount = n;
 }
+// 2b. mechanics of every v0.4.8 object, without artwork (recognition audit, 2026-11): per-object seeds from the frozen
+// id list, so objects added later never shift the others. Visual-only design fixes leave this hash unchanged.
+{
+  const h = H(), frozen = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures/registry-ids-v0.4.8.json'), 'utf8')).ids;
+  T.setRNG(() => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; });
+  frozen.forEach((id, i) => { for (const [j, r] of ['common', 'uncommon', 'rare', 'epic', 'legendary'].entries()) for (const [k, variant] of [null, 'spectral', 'mutated', 'shiny'].entries()) {
+    seed = (i * 20 + j * 4 + k) * 2654435761 >>> 0; const S = T.freshState(); S.level = 1 + (i + j) % 12;
+    const m = T.createMonster(S, { obj: id, rarity: r, variant, photo: k % 2 ? { hue: (i * 37) % 360, sat: 0.6, lit: 0.5 } : null });
+    h.update(JSON.stringify([id, r, variant, m.level, m.fam, m.stats, m.abilities.map(mech), m.species]));
+  } });
+  parts.mechanics = dig(h);
+}
 // 3. recognition label → object mapping
 {
   const h = H(), vocab = JSON.parse(fs.readFileSync(path.join(__dirname, '../lab/vocab-labels.json'), 'utf8'));
@@ -91,5 +103,5 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
 }
 if (process.argv[2] === 'record') { fs.writeFileSync(FIX, JSON.stringify(parts, null, 1)); console.log('recorded', JSON.stringify(parts)); process.exit(0); }
 const want = JSON.parse(fs.readFileSync(FIX, 'utf8')), diff = Object.keys(want).filter(k => want[k] !== parts[k]);
-if (!diff.length) { console.log(`ok: gameplay unchanged — rules, ${parts.monsterCount} monsters (stats, moves, DNA, sprites), ${parts.labels} recognition labels, encounter odds, ${parts.battleCount} battles`); process.exit(0); }
+if (!diff.length) { console.log(`ok: gameplay unchanged — rules, ${parts.monsterCount} monsters (stats, moves, DNA, sprites), mechanics of every v0.4.8 object, ${parts.labels} recognition labels, encounter odds, ${parts.battleCount} battles`); process.exit(0); }
 console.log('FAIL: gameplay changed in: ' + diff.join(', ')); process.exit(1);
