@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-02, release v0.4.8; recognition/identity audit on a branch (not merged).
+Last updated: 2026-11-02, release v0.4.8; v0.4.9 (recognition/identity audit) prepared on a branch, awaiting approval.
 
 ---
 
@@ -151,6 +151,20 @@ Last updated: 2026-11-02, release v0.4.8; recognition/identity audit on a branch
   urchins can opt in via "Update its look"; Starfish caught from "sea urchin" photos are NOT relabelled (possible via
   `m.label`, proposed separately). Kept for review: 88 medium flags (74 approximate category bodies, homonyms such as
   kite/crane/bat/monitor, piggy bank → Pig, whale → Shark, wombat → Bear). Next: phone check, approval, release.
+- **Audit round 2 — deferred-flag cleanup (2026-11-02, developer-approved approach), same branch, prepared as v0.4.9,
+  NOT merged.** Of the 88 deferred flags 73 fixed, 15 kept with reasons (`MAPPING_AUDIT.md` lists every one).
+  New objects with exactly their old label strings (TinyCLIP labels/order unchanged): Piggy bank (pig body), Whale and
+  Dolphin (shark body), Wombat (bear body), Binoculars (glasses body); "killer whale" → Orca, "tongs"/"trowel"/"gerbil"
+  → their own objects. ~70 more honest bodies from existing templates (boomerang curve, castanets pair, coral tree,
+  street sign/flag poles, toy dinosaur lizard, shells, rings, strips, hats, ladders, hives …). Found and fixed a new
+  bug class: design rules matched inside words (weasel → easel, motherboard/chess board/headboard → oar, windbreaker →
+  breaker, honeycomb → comb, champagne flute → lute …): rules now match whole words (`wholeWordMatch`, 5 legitimate
+  exceptions). Those 15 objects get their correct lore group, so their generated moves/text change (the only mechanics
+  change; rule tables and move numbers unchanged; baselines re-recorded with that list). Kept: kite/crane (ImageNet
+  name collisions), mouse/washer/pot/hot pot homonyms, seals/sea lion/walrus/manatee/dugong (four-legged mammal body),
+  stingray (fish body), mobile toy, mouthguard. Curated writing, models, calibration and saves unchanged. GAME_VERSION
+  0.4.9. Next: final approval → merge/deploy/tag; then the full curated-writing rollout (all 2,308 objects), then
+  the postponed name/flavour-text UI.
 - **v0.4.8 — Pilot 02 INTEGRATION (2026-11-02, developer-approved, merged and deployed as v0.4.8):** the 50 entries are `reviewed` (file renamed `content/curated/pilot-02-approved.json`;
   only the status line changed). Curated **monster names** are live (`CURATED.namesEnabled`, `curatedMonsterName`):
   Pilot 02 objects use their 5 approved names (a Legendary's curated name replaces the generated "Name, title");
@@ -229,7 +243,7 @@ Last updated: 2026-11-02, release v0.4.8; recognition/identity audit on a branch
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
 | Curated writing covers only 60 objects | v0.4.6: Pilot 01 active; v0.4.8: Pilot 02 (50, with names) active | `content/curated/`, `src/curated-data.js` (generated), `docs/CONTENT_WRITING_GUIDE.md`. Every other object uses the generated text. Same-name shared cooldown (`cdWith`, 4 configs) kept for compatibility. | Remaining 2,241 objects in batches after approval; phone check; data size/lazy loading before full coverage. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
-| Approximate category bodies (74 objects) and ambiguous labels (kite, crane, piggy bank, whale, wombat) | Open, audited (2026-11) | `docs/review/MAPPING_AUDIT.md`, `docs/review/audit-sheets/04-review-queue.png` | Design work / new identities later; ImageNet "kite"/"crane" collide by name. |
+| Approximate bodies kept (seals, stingray, mobile toy, mouthguard) and ImageNet name collisions (kite, crane) | Audited, kept with reasons (v0.4.9 branch) | `docs/review/MAPPING_AUDIT.md`, `docs/review/audit-sheets/04-review-queue.png` | Design work / new identities later; ImageNet "kite"/"crane" collide by name. |
 | Starfish caught from "sea urchin" photos before the audit | Known | Stored `m.label` = "sea urchin" would allow a migration | Proposed separately; not automatic (could alter genuine starfish if labels were noisy). |
 | Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change family, moves' numbers or stats without consent (since the Pilot 02 integration their curated TEXT — name, lore, move names — is refreshed automatically, see section 4); "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |

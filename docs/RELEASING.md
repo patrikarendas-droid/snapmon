@@ -22,6 +22,7 @@ Semantic versions, tagged on the production commit that shipped:
 | `v0.3.1`–`v0.3.3` | Field-test follow-ups: second-opinion rules, fusion fixes, field-test tools. |
 | `v0.4.0` | Hybrid is the single standard recogniser; photo-derived monster colours; Android Back navigation. Save format 3 (unchanged). |
 | `v0.4.1` | TinyCLIP runs on the CPU (WASM, one thread) for every player, for identical decisions across devices; recognition timings in the developer panel. Same models, rules and saves. |
+| `v0.4.9` | Recognition → identity → visual audit: a photographed sea urchin is a sea urchin again (was the Starfish), 40+ labels reach their correct object (drum, dice, shopping cart, flowerpot, corgi, carpenter's plane, stick insect, koala, wolf, moth, whale, dolphin, wombat, piggy bank, binoculars …), 5 new objects (Piggy bank, Whale, Dolphin, Wombat, Binoculars) + 2 ImageNet breeds/tools, honest bodies for ~130 objects, design rules match whole words (a weasel is no longer an easel). Same models, calibration, TinyCLIP labels, save format 3, approved writing; saved monsters unchanged. |
 | `v0.4.8` | Pilot 02 curated writing: approved monster names, flavour text and move names for 50 more objects (60 curated in total); existing monsters are refreshed once to the latest reviewed writing (names, text, move names only; nicknames, stats, levels, variants, colours kept; one-time save backup `snapmon.save.v1.backup.precurated`); encyclopedia shows curated names; long names fit the battle card. Same save format 3, same rules and odds. |
 | `v0.4.7` | Developer-only God Mode for Quick Monster Test Mode battles (Instant capture off): unbeatable hunter, free specials, unlimited traps/items, 100% capture into the test collection. No change to normal gameplay. |
 | `v0.4.6` | Pilot 01 curated writing: hand-written, approved flavour text (5 rarities) and move names for 10 objects (apple, light switch, security camera, energy drink, forklift, microwave, rubber duck, sock, padlock, book), also in the encyclopedia; stable internal ability keys (cooldowns by key). Gameplay unchanged. |
@@ -88,6 +89,9 @@ Either way the Pages workflow redeploys automatically.
 Rolling back from v0.4.0 to v0.3.x is save-compatible (same save format 3): monsters keep their stored colours, and
 older code simply ignores the extra palette data. v0.3.x would bring back the old recogniser switch for developers.
 Rolling back from v0.4.1 to v0.4.0 is fully save-compatible; it only returns TinyCLIP to WebGPU where available.
+Rolling back from v0.4.9 to v0.4.8 is save-compatible for every monster except those of the 7 objects added in v0.4.9
+(Piggy bank, Whale, Dolphin, Wombat, Binoculars, Cardigan corgi, Carpenter's plane), which v0.4.8 does not know: keep
+v0.4.9 once such monsters exist, or treat a rollback like any rollback across new objects.
 Rolling back from v0.4.8 to v0.4.7 is save-compatible: refreshed monsters keep their curated names and text as plain stored
 strings, and v0.4.7 ignores `curatedRev`. The untouched pre-refresh save stays in `snapmon.save.v1.backup.precurated`.
 Rolling back from v0.4.7 to v0.4.6 is fully save-compatible (the `godMode` developer setting is simply ignored).

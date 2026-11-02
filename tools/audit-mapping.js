@@ -35,18 +35,17 @@ const KEEP = {
   'alias-collision:pot': '"pot" → Cooking pot; ImageNet "pot, flowerpot" is overridden to Potted plant (CLASS_OVERRIDES).',
   'alias-collision:hot pot': 'a hot pot is served in a pot: Cooking pot body is honest.',
   'alias-collision:mouse': 'ambiguous word; computer Mouse wins (ImageNet "mouse, computer mouse"); the animal keeps "mouse (animal)" on Hamster.',
-  'alias-collision:tongs': 'Pliers body is a fair two-armed approximation; Tongs object keeps its own name label for TinyCLIP only via the vocabulary (first wins).',
-  'alias-collision:trowel': 'Shovel is the closest digging tool; acceptable.',
-  'alias-collision:gerbil': 'rodent sharing the Hamster body; acceptable shared identity.',
   'alias-collision:drum': 'resolved: "drum" now → Drum; the oil-drum sense was removed from Drink can.',
   'alias-collision:dice': 'resolved: "dice" now → Dice; removed from Jigsaw puzzle.',
-  'kind-mismatch:honeycomb': 'a honeycomb is the bees\' comb; filed with bugs (Honeycomb object, its own name). Body is the bug template: review queue.',
-  'kind-mismatch:piggy bank': 'piggy bank → Pig: the pig body is the honest shape, but the identity is the animal. Recommended later: a Piggy bank object (new vocabulary entry) — not added here to keep recognition unchanged.',
+  // approximate bodies kept on purpose: right identity, a body that is close enough (no template worth inventing)
+  'family-body:x_seal': 'marine mammal on the four-legged mammal body: the identity, name and text are right; no flipper body exists. Acceptable approximation.',
+  'family-body:x_sea_lion': 'as x_seal.', 'family-body:x_walrus': 'as x_seal.', 'family-body:x_manatee': 'as x_seal.', 'family-body:x_dugong': 'as x_seal.',
+  'family-body:x_stingray': 'a ray on the fish body: related sea creature, recognisable as a fish-like animal.',
+  'family-body:x_mobile_toy': 'a hanging baby mobile on the plush-toy body: a toy, nothing closer exists.',
+  'family-body:x_mouthguard': 'small sports item on the round ball body; rarely photographed, no closer template.',
+  'kind-mismatch:honeycomb': 'identity is right (Honeycomb, filed with bugs: the bees\' comb). Its design rule matched "comb" (a hair comb) — fixed by whole-word rule matching; now a cell-dotted slab.',
   'unreachable-name:x_washer': 'see alias-collision:washer. Needs a distinct label (e.g. "metal washer") in a future vocabulary change.',
   'unreachable-name:x_mouse': 'see alias-collision:mouse.',
-  'unreachable-name:x_tongs': 'see alias-collision:tongs.',
-  'unreachable-name:x_trowel': 'see alias-collision:trowel.',
-  'unreachable-name:x_gerbil': 'see alias-collision:gerbil.',
 };
 // confirmed fixes of this audit: regression expectations (label → object) checked by tests/mapping-audit.js
 const FIXED = [
@@ -64,6 +63,12 @@ const FIXED = [
   ['scorpion', 'x_scorpion_arachnid', 'was Spider'], ['slug', 'x_slug_creature', 'was Snail'], ['centipede', 'x_centipede_insect', 'was Caterpillar'],
   ['toad', 'x_toad_creature', 'was Frog'],
   ['walking stick, walkingstick, stick insect', 'x_stick_insect', 'was the Walking stick (a cane) for the ImageNet insect class'],
+  ['piggy bank', 'piggy_bank', 'was Pig (new Piggy bank object, pig-shaped body)'], ['piggy bank, penny bank', 'piggy_bank', 'was Pig'],
+  ['whale', 'whale', 'was Shark (new Whale object, shark body)'], ['dolphin', 'dolphin', 'was Shark (new Dolphin object, shark body)'],
+  ['killer whale', 'x_orca', 'was Shark'], ['killer whale, killer, orca, grampus, sea wolf, Orcinus orca', 'x_orca', 'was Shark'],
+  ['wombat', 'wombat', 'was Bear (new Wombat object, bear body)'], ['binoculars', 'binoculars', 'was Glasses (new Binoculars object, scope design)'],
+  ['binoculars, field glasses, opera glasses', 'binoculars', 'was Glasses'], ['tongs', 'x_tongs', 'was Pliers'], ['trowel', 'x_trowel', 'was Shovel'],
+  ['gerbil', 'x_gerbil', 'was Hamster'],
 ];
 
 /* ---------- load the game registry and recogniser tables ---------- */
@@ -183,6 +188,10 @@ function render(C, flags) {
     md.push(`### ${rule} (${fs_.length}, ${fs_[0].sev})`, ''); if (REVIEW_GROUPS[rule]) md.push(REVIEW_GROUPS[rule], '');
     md.push('| Key | Detail | Decision |', '|---|---|---|', ...fs_.map(f => `| ${f.key} | ${f.detail.replace(/\|/g, '/')} | ${f.decision || (f.sev === 'high' ? '**UNDECIDED**' : 'review')} |`), '');
   }
+  const prev = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/audit/deferred-2026-11.json'), 'utf8')).flags, now = new Map(flags.map(f => [f.rule + ':' + f.key, f]));
+  const kept = prev.filter(f => now.has(f.rule + ':' + f.key)), fixedN = prev.length - kept.length;
+  md.push('## The 88 flags deferred in the first pass', '', `${fixedN} fixed, ${kept.length} kept (each with its reason). Source list: \`content/audit/deferred-2026-11.json\`.`, '', '| Flag | Was | Now |', '|---|---|---|',
+    ...prev.map(f => { const n = now.get(f.rule + ':' + f.key); const o = O[f.key] || null; return `| ${f.rule}: ${f.key} | ${f.detail.replace(/\|/g, '/')} | ${n ? 'kept — ' + (n.decision || 'review') : 'fixed' + (o && o.vis ? ' — ' + (o.vis.like ? 'drawn like ' + O[o.vis.like].name : o.vis.t + (o.vis.shape ? ' ' + o.vis.shape : o.vis.kind ? ' ' + o.vis.kind : o.vis.head ? ' ' + o.vis.head : '')) : X.objectForLabel(f.key) && X.objectForLabel(f.key) !== f.key ? ' — now → ' + X.objectForLabel(f.key) : '')}`; }), '');
   md.push('## How to use', '', '1. After changing aliases, VOCAB_EXTRA, design rules or `tools/gen-labels.js`: `node tools/gen-labels.js && node tools/gen-vocab.js && node tools/audit-mapping.js`.', '2. Read new flags; fix real errors in the SOURCE tables, or record a decision in `KEEP` (tools/audit-mapping.js) with the reason.', '3. Render suspicious groups: `node tools/audit-sheet.js out.png "title" id label=<label> …` and look at them.', '4. `node tests/mapping-audit.js` must pass (no undecided high flags, fixed cases stay fixed, no object id disappears).', '');
   return { md: md.join('\n'), labels: csv(labelRows), objects: csv(objRows) };
 }
