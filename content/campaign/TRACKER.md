@@ -34,9 +34,9 @@
 | w02-mammals-2 | 106 | 106 | done: 76 high / 118 medium / 83 low + 14 patterns | 193 lore/move fields (`patches/w02-editor-auto.json`, bad suggestions overridden) + 146 names re-paired to their lore (`w02-editor-names.json`) + religious settings removed | open: one-trait-across-rarities in ~30 objects only partly fixed; Ultimate = Epic name + word (51); award legendaries |
 | w03-birds-and-sea-life | 120 | 120 | done: 120 high / 168 medium / 27 low + 12 patterns | 288 fields (`patches/w03-editor-auto.json`, incl. names re-paired to lore; 4 suggestions overridden for payment/brand frames) | open: crowd-scene Epics, homecoming Legendaries (pattern level) |
 | w04-bugs-and-reptiles | 118 | 118 | done: 58 high / 125 medium / 33 low + 9 patterns | 221 fields (`patches/w04-editor-auto.json`, names re-paired) then `w04-self-fixes.json` (apply in that order) | open: Ultimate = Epic name in ~70 objects (pattern), crowd-scene Epics |
-| w05-vehicles-1 | 79 | 79 | running | self-fixes | |
-| w06-vehicles-2 | 79 | 79 | pending | self-fixes | |
-| w07-clothing-and-shoes | 118 | 118 | pending | self-fixes | |
+| w05-vehicles-1 | 79 | 79 | done: 28 high / 114 medium / 48 low + 12 patterns | 155 fields (`patches/w05-vehicles-1-editor-auto.json`, half-swaps auto-completed) then `w05-self-fixes.json` | open: templated "N years" Legendaries partly fixed |
+| w06-vehicles-2 | 79 | 79 | done: 38 high / 129 medium / 31 low + 12 patterns | 184 fields (`patches/w06-vehicles-2-editor-auto.json`) then `w06-self-fixes.json` | open: "every Y in town" Epics (pattern) |
+| w07-clothing-and-shoes | 118 | 118 | editor running | self-fixes | |
 | w08-bags-jewellery-and-carry | 94 | 94 | pending | self-fixes | |
 | w09–w22 | 1,427 | 0 | — | — | not started |
 
@@ -47,6 +47,7 @@
   own story", payment punchlines (charged in biscuits), shake-off soaking a crowd, "seen from space", palaces/emperors.
 - Legendary = a concrete outrageous achievement with a real punchline. Vary legendary name shapes (not always Sir/Lady X).
 - Apply order when re-ingesting a batch: chunks → `<batch>-editor-auto.json` → `<batch>-editor-names.json` (if any) → `<batch>-self-fixes.json`.
+- Legendaries: avoid "has done X for N years / still has its original …" and "polished every Sunday"; Epics: avoid "every Y in town / a hundred others" crowd scenes without a joke.
 - Names must sit on the rarity whose lore they describe (write names AFTER the lore, per line).
 - Ultimate names: don't reuse the Epic monster name plus Rush/Charge/Storm; give the finisher its own image.
 - Check `brief` mechanics BEFORE naming moves (legend/ultimate effects differ per object; varied Ultimates need effect-neutral names).
