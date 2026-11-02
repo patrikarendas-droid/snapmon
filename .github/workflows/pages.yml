@@ -44,6 +44,7 @@ jobs:
           node tests/curated.js
           node tests/curated-pipeline.js
           node tests/curated-refresh.js
+          node tests/mapping-audit.js
           node tools/curated.js validate
       - name: Browser tests (gameplay, recognition engine with the real worker, Back navigation)
         run: |
