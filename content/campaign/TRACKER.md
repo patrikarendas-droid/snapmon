@@ -22,15 +22,25 @@
 4. `node tools/campaign.js ingest <batch> <chunk file>` (validates, enforces globally unique names and real move keys,
    rejects unfinished lines), then `node tools/curated.js lint --batch <batch>` → fix every HIGH/MEDIUM.
 5. `node tools/campaign.js status` and commit (`Campaign: <batch> chunk N (x/y, draft)`).
-6. When a batch is complete: run an independent editor agent (prompt pattern in the w01/w02 commits' session; it writes
+6. Fix passes: write `content/campaign/patches/<batch>-*.json` ({id: {"lore.rare": …}}) and run
+   `node tools/campaign.js patch <batch> <file>`. If a chunk is ever re-ingested, re-apply that batch's patches after it.
+7. When a batch is complete: run an independent editor agent (prompt pattern in the w01/w02 commits' session; it writes
    `content/review/<batch>-issues.json`), then apply fixes to the chunk files, re-ingest, record the result below.
 
 ## Batches (22, frozen manifests in `content/batches/`)
 | Batch | Objects | Written | Editor pass | Fixes applied | Notes |
 |---|---|---|---|---|---|
-| w01-mammals-1 | 107 | 107 | running/see review file | — | bears, camelids, weasels, cow, deer, dog breeds A–Sam |
+| w01-mammals-1 | 107 | 107 | done: 39 high / 102 medium / 64 low + 23 patterns | 143 fields (all high + all medium) via `patches/w01-editor-auto.json` | open: Sir/Lady legendary-name formula (~25), some award-shaped legendaries, low taste notes |
 | w02-mammals-2 | 106 | 106 | running/see review file | — | dog breeds Sch–Y, wild canids, primates, farm, cats, small & marine mammals |
 | w03–w22 | 2,035 | 0 | — | — | not started |
+
+## Lessons from editor passes (apply while writing)
+- One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
+  related objects (breeds, species) and none with approved Pilot 02 lines.
+- Avoid stock frames: "in the land/country", contests/judges/medals/trophies, "was declared/crowned", "according to its
+  own story", payment punchlines (charged in biscuits), shake-off soaking a crowd, "seen from space", palaces/emperors.
+- Legendary = a concrete outrageous achievement with a real punchline. Vary legendary name shapes (not always Sir/Lady X).
+- Move names: no heat words on non-burn moves, no heal/rescue words on attacks, no cold words when a variant burns.
 
 ## Decisions and known issues
 - Batch partition: by inventory theme, sorted by visual source then name (related objects side by side).

@@ -6,6 +6,7 @@
 //   node tools/campaign.js ingest <batch> <file>  convert a compact draft file (format below) into content/curated/<batch>-draft.json
 //   node tools/campaign.js status                 reconcile every registry id; write content/campaign/STATUS.md (+ status.json)
 //   node tools/campaign.js immutable              check that approved files are byte-identical to the campaign baseline
+//   node tools/campaign.js patch <batch> <json>   merge editor-pass fixes {id: {"lore.rare": …}} into the batch draft
 // Compact draft format (one block per object, lines in any order):
 //   @<object id>
 //   N: common | uncommon | rare | epic | legendary          (five monster names)
@@ -108,6 +109,24 @@ function ingest(batch, file) {
   console.log(`${path.relative(ROOT, out)}: +${Object.keys(blocks).length} objects → ${Object.keys(doc.entries).length}/${ids.size}; ${r.warnings.length} warning(s)${r.warnings.length ? '\n' + r.warnings.join('\n') : ''}`);
 }
 
+// patch: merge reviewed fixes into a batch draft. File = JSON {"<id>": {"lore.rare": "…", "names.legendary": "…", "moves.ultimate": "…"}}.
+// Patches live in content/campaign/patches/ and are applied after the chunk files (re-ingesting a chunk = re-apply its patches).
+function patch(batch, file) {
+  const G = game(), out = path.join(CUR, batch + '-draft.json'), doc = readJSON(out), p = readJSON(file), errs = [];
+  const taken = allNames(batch); for (const [id, e] of Object.entries(doc.entries)) for (const v of Object.values(e.names || {})) taken.set(v.toLowerCase(), id + ' (this batch)');
+  let n = 0;
+  for (const [id, fields] of Object.entries(p)) { const e = doc.entries[id]; if (!e) { errs.push(`${id}: not in ${batch} draft`); continue; }
+    for (const [k, v] of Object.entries(fields)) { const [grp, key] = k.split('.');
+      if (!['lore', 'names', 'moves'].includes(grp) || (grp !== 'moves' && !RAR.includes(key)) || (grp === 'moves' && !(key in G.curatedMoveSlots(id)))) { errs.push(`${id}: bad field ${k}`); continue; }
+      if (grp === 'names') { const t = taken.get(v.toLowerCase()); if (t && !t.startsWith(id + ' ')) errs.push(`${id}: name "${v}" already used by ${t}`); taken.set(v.toLowerCase(), id + ' (this batch)'); }
+      if (grp === 'lore' && (/→/.test(v) || !/[.!?'"]$/.test(v))) errs.push(`${id}: ${k} looks unfinished`);
+      e[grp] = e[grp] || {}; e[grp][key] = v; n++; } }
+  const r = G.validateCurated(doc, { file: path.relative(ROOT, out) }); errs.push(...r.errors);
+  for (const [id, e] of Object.entries(doc.entries)) { const mv = Object.values(e.moves || {}).map(x => x.toLowerCase()); if (new Set(mv).size !== mv.length) errs.push(`${id}: duplicate move names`);
+    const nm = Object.values(e.names).map(x => x.toLowerCase()); if (new Set(nm).size !== nm.length) errs.push(`${id}: duplicate names within object`); }
+  if (errs.length) { console.log(errs.join('\n')); console.log(`\n${errs.length} problem(s): nothing written`); process.exit(1); }
+  fs.writeFileSync(out, JSON.stringify(doc, null, 2) + '\n'); console.log(`${path.relative(ROOT, out)}: ${n} field(s) patched from ${path.relative(ROOT, file)}`);
+}
 function status(write = true) {
   const mf = readJSON(path.join(CAMP, 'manifest.json')), rows = inventory(), owners = new Map(), G = game();
   for (const f of fs.readdirSync(CUR).filter(f => f.endsWith('.json'))) for (const [id, e] of Object.entries(readJSON(path.join(CUR, f)).entries || {})) { if (!owners.has(id)) owners.set(id, []); owners.get(id).push({ f, e }); }
@@ -143,6 +162,6 @@ function next(batch) { const mf = readJSON(path.join(CAMP, 'manifest.json'));
 function immutable() { const mf = readJSON(path.join(CAMP, 'manifest.json')); let ok = true; for (const f of APPROVED) { const same = sha(path.join(ROOT, f)) === mf.baseline[f]; ok = ok && same; console.log((same ? 'ok   ' : 'FAIL ') + f); } process.exit(ok ? 0 : 1); }
 
 const [cmd, ...a] = process.argv.slice(2);
-if (cmd === 'init') init(); else if (cmd === 'brief') brief(...a); else if (cmd === 'ingest') ingest(...a); else if (cmd === 'status') status(); else if (cmd === 'next') next(a[0]); else if (cmd === 'immutable') immutable();
+if (cmd === 'init') init(); else if (cmd === 'brief') brief(...a); else if (cmd === 'ingest') ingest(...a); else if (cmd === 'status') status(); else if (cmd === 'patch') patch(...a); else if (cmd === 'next') next(a[0]); else if (cmd === 'immutable') immutable();
 else console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 15).join('\n'));
 module.exports = { parseCompact, status };
