@@ -1551,6 +1551,786 @@
         "kit.glitch_out": "Crackle Crack",
         "kit.turbo_mode": "Long Range Boost"
       }
+    },
+    "x_walkie_talkie_handset": {
+      "status": "draft",
+      "names": {
+        "common": "Clipbelt",
+        "uncommon": "Channelhopper",
+        "rare": "Securitycrackle",
+        "epic": "Stadium Radio Chatter",
+        "legendary": "Chief Handsetworth of the Gate"
+      },
+      "lore": {
+        "common": "Clips to its owner's belt and digs into their side every time they sit down.",
+        "uncommon": "Hops onto the wrong channel and joins a stranger's conversation about sandwiches.",
+        "rare": "Crackled a warning across the whole festival site in seconds.",
+        "epic": "Kept every steward at the stadium talking at once on cup final day.",
+        "legendary": "Has guarded the same gate on every match day for twenty years and never missed a message."
+      },
+      "moves": {
+        "signature": "Crackle Crackle Crackle",
+        "legend": "Squelch Startle",
+        "ultimate": "Channel Chaos",
+        "kit.beep_beep": "Push to Talk Beep",
+        "kit.factory_reset": "Battery Swap",
+        "kit.glitch_out": "Wrong Channel Crack"
+      }
+    },
+    "x_caulk_gun": {
+      "status": "draft",
+      "names": {
+        "common": "Squeezedribbler",
+        "uncommon": "Wobblyline",
+        "rare": "Gapfiller",
+        "epic": "Bathroom Seal Spree",
+        "legendary": "Old Sealantworth of the Builder's Van"
+      },
+      "lore": {
+        "common": "Keeps dribbling sealant for ages after you let go of the trigger.",
+        "uncommon": "Draws a wobbly white line round the bath that looks like toothpaste.",
+        "rare": "Filled every gap in a draughty old window, and the curtains stopped flapping.",
+        "epic": "Sealed every bath in the new block of flats in a single day.",
+        "legendary": "Has sealed a thousand bathtubs and never left a single drip on the floor."
+      },
+      "moves": {
+        "signature": "Squeeze Squeeze Squeeze",
+        "legend": "Bead Bead Bead",
+        "ultimate": "Sealant Splurge",
+        "kit.beep_beep": "Trigger Click",
+        "kit.factory_reset": "Nozzle Clean",
+        "kit.glitch_out": "Wobbly Line Crack",
+        "kit.turbo_mode": "Full Squeeze"
+      }
+    },
+    "x_glue_gun": {
+      "status": "draft",
+      "names": {
+        "common": "Stringytrail",
+        "uncommon": "Fingersticker",
+        "rare": "Craftfixer",
+        "epic": "Craft Club Gluefest",
+        "legendary": "Lady Stickwell of the Craft Table"
+      },
+      "lore": {
+        "common": "Leaves long stringy glue threads across everything like a hot cobweb.",
+        "uncommon": "Sticks your fingers together just when you're holding two things.",
+        "rare": "Fixed a broken model plane so well that it flew again.",
+        "epic": "Glued every decoration for the school fair in one afternoon.",
+        "legendary": "Built a whole cardboard castle with a drawbridge that actually works."
+      },
+      "moves": {
+        "signature": "Glue Glue Glue",
+        "legend": "Hot Glue Slam",
+        "ultimate": "Molten Glue Blob",
+        "kit.beep_beep": "Ready Light Blink",
+        "kit.factory_reset": "Cool Stand Rest",
+        "kit.turbo_mode": "Fresh Glue Stick"
+      }
+    },
+    "x_nerf_gun": {
+      "status": "draft",
+      "names": {
+        "common": "Dartloser",
+        "uncommon": "Sofasniper",
+        "rare": "Foamblaster",
+        "epic": "Living Room Dart War",
+        "legendary": "Captain Foamshot of the Bunk Bed"
+      },
+      "lore": {
+        "common": "Loses every foam dart under the sofa within a day.",
+        "uncommon": "Fires a dart so softly that it bounces off the cat without a fuss.",
+        "rare": "Hit a target across the garden and knocked over a whole stack of cups.",
+        "epic": "Started a foam dart battle that filled every room in the house.",
+        "legendary": "Won every dart battle at a hundred birthday parties and still fires every time."
+      },
+      "moves": {
+        "signature": "Foam Dart Pop",
+        "legend": "Cushion Fort Guard",
+        "ultimate": "Hot Barrel Burst",
+        "kit.beep_beep": "Pump Click",
+        "kit.factory_reset": "Dart Reload",
+        "kit.glitch_out": "Jammed Dart Crack",
+        "kit.turbo_mode": "Pump Action Boost"
+      }
+    },
+    "x_toy_gun": {
+      "status": "draft",
+      "names": {
+        "common": "Clickclick",
+        "uncommon": "Popcap",
+        "rare": "Cowboyholster",
+        "epic": "Wild West Showdown",
+        "legendary": "Sheriff Clickpop of the Playground"
+      },
+      "lore": {
+        "common": "Clicks so loudly that the dog runs under the table.",
+        "uncommon": "Pops a little cap that smells of fireworks for ten seconds.",
+        "rare": "Spun round its owner's finger before going back into its holster.",
+        "epic": "Started a cowboy showdown in the playground that lasted all lunch break.",
+        "legendary": "Has won every playground showdown for three generations of one family."
+      },
+      "moves": {
+        "signature": "Click Pop Crack",
+        "legend": "Smoky Cap Whiff",
+        "ultimate": "Bang Flag Pop",
+        "kit.beep_beep": "Cap Pop Startle",
+        "kit.glitch_out": "Misfire Crack",
+        "kit.turbo_mode": "Quick Draw Boost"
+      }
+    },
+    "x_water_gun": {
+      "status": "draft",
+      "names": {
+        "common": "Backsquirter",
+        "uncommon": "Pumpsoaker",
+        "rare": "Hedgesniper",
+        "epic": "Summer Water Fight",
+        "legendary": "Admiral Soakworth of the Paddling Pool"
+      },
+      "lore": {
+        "common": "Squirts the person holding it more than the person it's aimed at.",
+        "uncommon": "Needs pumping twenty times before it squirts more than a dribble.",
+        "rare": "Soaked someone over the top of the hedge without being seen.",
+        "epic": "Started a water fight at the summer barbecue that soaked every guest.",
+        "legendary": "Won the biggest water fight in the history of the street, and the street is still drying."
+      },
+      "moves": {
+        "signature": "Squirt Squirt Crack",
+        "legend": "Pond Water Pong",
+        "ultimate": "Soak Attack",
+        "kit.beep_beep": "Squirt Startle",
+        "kit.factory_reset": "Refill Rest",
+        "kit.glitch_out": "Dribble Crack",
+        "kit.turbo_mode": "Full Pump"
+      }
+    },
+    "x_3d_printer": {
+      "status": "draft",
+      "names": {
+        "common": "Spaghettimaker",
+        "uncommon": "Slowbuilder",
+        "rare": "Toyprinter",
+        "epic": "Overnight Print Run",
+        "legendary": "Lady Layerwell of the Workshop"
+      },
+      "lore": {
+        "common": "Prints a tangle of spaghetti plastic when it gets bored halfway through.",
+        "uncommon": "Takes all night to build something the size of a thumb.",
+        "rare": "Printed a working spare part for the washing machine, and everyone was amazed.",
+        "epic": "Printed a hundred toy dinosaurs overnight for the school fair.",
+        "legendary": "Printed a whole tiny house, layer by layer, and a family of mice moved in."
+      },
+      "moves": {
+        "signature": "Nozzle Flash",
+        "legend": "Layer Layer Flash",
+        "ultimate": "Print Run",
+        "kit.overheat": "Hot Nozzle",
+        "kit.fan_spin": "Cooling Fan Fan",
+        "kit.data_leech": "Filament Snatch"
+      }
+    },
+    "x_label_printer": {
+      "status": "draft",
+      "names": {
+        "common": "Labeleverything",
+        "uncommon": "Stripspitter",
+        "rare": "Peelpeel",
+        "epic": "Office Label Frenzy",
+        "legendary": "Lady Labelworth of the Filing Cabinet"
+      },
+      "lore": {
+        "common": "Labels everything in the house, including the cat.",
+        "uncommon": "Spits out a tiny strip of label with a happy little whirr.",
+        "rare": "Has labels that peel off by themselves after a week.",
+        "epic": "Labelled every drawer, box and folder in the office in one morning.",
+        "legendary": "Has labelled every jar in the same kitchen for twenty years and never spelled one wrong."
+      },
+      "moves": {
+        "signature": "Label Flash",
+        "legend": "Organise Boost",
+        "ultimate": "Label Overload",
+        "kit.fan_spin": "Whirr Whirr",
+        "kit.firewall": "Sticky Guard",
+        "kit.data_leech": "Name Snatch"
+      }
+    },
+    "x_plotter": {
+      "status": "draft",
+      "names": {
+        "common": "Penscribble",
+        "uncommon": "Paperhog",
+        "rare": "Blueprinter",
+        "epic": "Architect Night Shift",
+        "legendary": "Old Linesworth of the Drawing Office"
+      },
+      "lore": {
+        "common": "Scribbles with its pens so loudly that the office sounds like a busy classroom.",
+        "uncommon": "Uses up a whole roll of paper on one drawing.",
+        "rare": "Drew the plans for a whole house in one smooth go.",
+        "epic": "Drew every plan for the new town overnight, and the architects came in to find their work done.",
+        "legendary": "Has drawn the plans for a hundred bridges and never once drawn a wobbly line."
+      },
+      "moves": {
+        "signature": "Pen Stroke Flash",
+        "legend": "Hot Roller",
+        "ultimate": "Blueprint Unroll",
+        "kit.overheat": "Warm Motor",
+        "kit.fan_spin": "Pen Pen Pen",
+        "kit.firewall": "Paper Guard",
+        "kit.data_leech": "Drawing Snatch"
+      }
+    },
+    "printer": {
+      "status": "draft",
+      "names": {
+        "common": "Paperjammer",
+        "uncommon": "Inklow",
+        "rare": "Blankprinter",
+        "epic": "Homework Night Jam",
+        "legendary": "Old Inkworth of the Study"
+      },
+      "lore": {
+        "common": "Jams the paper exactly when you need to print your homework.",
+        "uncommon": "Says it's out of ink just after you've bought a new one.",
+        "rare": "Printed a whole stack of blank pages and acted like nothing was wrong.",
+        "epic": "Jammed on the night before every project was due, and the whole family stood round it.",
+        "legendary": "Has printed every school project for one family for twelve years."
+      },
+      "moves": {
+        "signature": "Paper Feed Flash",
+        "legend": "Error Light Flash",
+        "ultimate": "Paper Jam",
+        "kit.pop_up_ads": "Print Print Print",
+        "kit.overheat": "Hot Toner",
+        "kit.data_leech": "Ink Snatch"
+      }
+    },
+    "x_scanner_bed": {
+      "status": "draft",
+      "names": {
+        "common": "Lidlight",
+        "uncommon": "Crookedscan",
+        "rare": "Photosaver",
+        "epic": "Family Album Scan",
+        "legendary": "Old Scanwell of the Spare Room"
+      },
+      "lore": {
+        "common": "Flashes a bright green light right in your eyes when you peek under the lid.",
+        "uncommon": "Scans everything a little bit crooked.",
+        "rare": "Saved a hundred old family photos from going faded and lost.",
+        "epic": "Scanned every photo in grandma's albums in one weekend.",
+        "legendary": "Has scanned every school report, birthday card and drawing for one family for thirty years."
+      },
+      "moves": {
+        "signature": "Scan Light Flash",
+        "legend": "Scan Boost",
+        "ultimate": "Crooked Copy",
+        "kit.overheat": "Warm Glass",
+        "kit.fan_spin": "Scan Scan Scan",
+        "kit.data_leech": "Photo Snatch"
+      }
+    },
+    "x_garage_remote": {
+      "status": "draft",
+      "names": {
+        "common": "Buttonmash",
+        "uncommon": "Doorhalfway",
+        "rare": "Pocketclick",
+        "epic": "Rainy Night Garage",
+        "legendary": "Sir Liftwell of the Driveway"
+      },
+      "lore": {
+        "common": "Needs its button pressed six times before the door moves.",
+        "uncommon": "Stops the garage door halfway, so you have to duck under it.",
+        "rare": "Was pressed in a pocket by accident and opened the garage all afternoon.",
+        "epic": "Opened every garage door on the street at once when the signals got muddled.",
+        "legendary": "Opened the garage just in time for a runaway pony to shelter from a hailstorm, and the pony still visits."
+      },
+      "moves": {
+        "signature": "Click Click Click",
+        "legend": "Door Bash",
+        "ultimate": "Garage Door Drop",
+        "kit.beep_beep": "Signal Beep",
+        "kit.factory_reset": "Reprogram",
+        "kit.glitch_out": "Muddled Signal",
+        "kit.turbo_mode": "Full Range"
+      }
+    },
+    "x_tv_remote_unit": {
+      "status": "draft",
+      "names": {
+        "common": "Cushionhider",
+        "uncommon": "Batterylid",
+        "rare": "Channelhog",
+        "epic": "Sofa Search Party",
+        "legendary": "Lord Clickfinder of the Living Room"
+      },
+      "lore": {
+        "common": "Hides down the side of the sofa cushions every evening.",
+        "uncommon": "Has a battery lid that falls off and gets lost.",
+        "rare": "Was hogged by one person all evening, and nobody else got to choose.",
+        "epic": "Was lost so well that the whole family took the living room apart looking for it.",
+        "legendary": "Has controlled the same family's TV for fifteen years, and the volume button is worn smooth."
+      },
+      "moves": {
+        "signature": "Channel Channel Channel",
+        "legend": "Battery Swap Rest",
+        "ultimate": "Volume Max Pong",
+        "kit.beep_beep": "Button Click",
+        "kit.factory_reset": "Fresh Batteries Rest",
+        "kit.turbo_mode": "Fast Forward"
+      }
+    },
+    "x_universal_remote": {
+      "status": "draft",
+      "names": {
+        "common": "Buttonmaze",
+        "uncommon": "Setupnightmare",
+        "rare": "Everythingcontrol",
+        "epic": "Home Cinema Chaos",
+        "legendary": "Grand Remotron of the Home Cinema"
+      },
+      "lore": {
+        "common": "Has fifty buttons, and the family only ever uses three of them.",
+        "uncommon": "Takes an hour to set up, and still won't control the fan.",
+        "rare": "Controlled the TV, the stereo and the lights all at once.",
+        "epic": "Turned on every gadget in the house at the same moment by mistake.",
+        "legendary": "Controlled a whole home cinema with one button, and the family finally watched a film without arguing."
+      },
+      "moves": {
+        "signature": "Button Button Button",
+        "legend": "Learn Mode Guard",
+        "ultimate": "Everything On",
+        "kit.beep_beep": "Infrared Beep",
+        "kit.factory_reset": "Reset Codes",
+        "kit.turbo_mode": "Macro Boost"
+      }
+    },
+    "router": {
+      "status": "draft",
+      "names": {
+        "common": "Blinkylights Box",
+        "uncommon": "Bufferer",
+        "rare": "Signalhog",
+        "epic": "Wifi Meltdown",
+        "legendary": "Grand Routeria of the Hallway"
+      },
+      "lore": {
+        "common": "Blinks its lights all night in the hallway like a tiny disco.",
+        "uncommon": "Makes every video buffer just at the best part.",
+        "rare": "Sent such a strong signal that next door's tablet connected by mistake.",
+        "epic": "Dropped the wifi for the whole house during the big final, and everyone groaned at once.",
+        "legendary": "Has kept the whole family online for ten years and only needed restarting a thousand times."
+      },
+      "moves": {
+        "signature": "Blink Blink Flash",
+        "legend": "Bandwidth Snatch",
+        "ultimate": "Wifi Drop",
+        "kit.pop_up_ads": "Packet Packet Packet",
+        "kit.overheat": "Warm Router",
+        "kit.firewall": "Password Guard"
+      }
+    },
+    "x_drawing_tablet": {
+      "status": "draft",
+      "names": {
+        "common": "Penloser",
+        "uncommon": "Mirrordraw",
+        "rare": "Pressurepro",
+        "epic": "Comic Book Crunch",
+        "legendary": "Madame Pixelbrush of the Studio"
+      },
+      "lore": {
+        "common": "Loses its pen under the desk every single day.",
+        "uncommon": "Lets you draw on the tablet while looking at the screen, which takes ages to learn.",
+        "rare": "Felt every bit of pressure from the pen and drew lines like real paint.",
+        "epic": "Drew a whole comic book in one weekend for the school competition.",
+        "legendary": "Has drawn the pictures for a dozen children's books."
+      },
+      "moves": {
+        "signature": "Stroke Flash",
+        "legend": "Warm Pen Glow",
+        "ultimate": "Masterpiece Stroke",
+        "kit.overheat": "Warm Surface",
+        "kit.firewall": "Screen Protector",
+        "kit.data_leech": "Colour Snatch"
+      }
+    },
+    "x_e_ink_tablet": {
+      "status": "draft",
+      "names": {
+        "common": "Slowflicker",
+        "uncommon": "Sunreader",
+        "rare": "Weeklastbattery",
+        "epic": "Holiday Reading Binge",
+        "legendary": "Lady Pagewell of the Beach Towel"
+      },
+      "lore": {
+        "common": "Flickers black and white every time you turn a page.",
+        "uncommon": "Can be read in the brightest sun without any glare.",
+        "rare": "Lasted a whole month on one charge.",
+        "epic": "Read a whole library of books on one holiday, and its owner got sunburnt from not looking up.",
+        "legendary": "Holds a thousand books in a space the size of one paperback."
+      },
+      "moves": {
+        "signature": "Page Flash",
+        "legend": "Ghost Image Crack",
+        "ultimate": "Last Page",
+        "kit.overheat": "Warm Case",
+        "kit.fan_spin": "Page Page Page",
+        "kit.firewall": "Sleep Cover",
+        "kit.data_leech": "Book Snatch"
+      }
+    },
+    "tablet": {
+      "status": "draft",
+      "names": {
+        "common": "Crackedscreen",
+        "uncommon": "Fingerprinter",
+        "rare": "Bedtimeglow",
+        "epic": "Car Journey Cartoons",
+        "legendary": "Lady Swipewell of the Back Seat"
+      },
+      "lore": {
+        "common": "Gets a crack in its corner the very first week.",
+        "uncommon": "Is covered in sticky fingerprints after every use.",
+        "rare": "Glowed under the duvet at bedtime long after lights out.",
+        "epic": "Played cartoons for the whole car journey, and nobody asked are we there yet.",
+        "legendary": "Has watched a thousand cartoons with the same child and still has its original case."
+      },
+      "moves": {
+        "signature": "Swipe Swipe Swipe",
+        "legend": "Bedtime Glow Startle",
+        "ultimate": "Low Battery Panic",
+        "kit.battery_drain": "Charge Snatch",
+        "kit.auto_correct": "Wrong Swipe Crack",
+        "kit.hot_battery": "Hot Back"
+      }
+    },
+    "typewriter": {
+      "status": "draft",
+      "names": {
+        "common": "Dingbell",
+        "uncommon": "Keyjammer",
+        "rare": "Inkribbon",
+        "epic": "Novel Night Clatter",
+        "legendary": "Old Remingworth of the Writing Desk"
+      },
+      "lore": {
+        "common": "Dings at the end of every line so loudly that the cat jumps.",
+        "uncommon": "Jams its keys together if you type too fast.",
+        "rare": "Has an ink ribbon that leaves black smudges on everyone's fingers.",
+        "epic": "Clattered all night while its owner finished a novel before the deadline.",
+        "legendary": "Has typed three famous novels and still has every key."
+      },
+      "moves": {
+        "signature": "Key Strike Flash",
+        "legend": "Carriage Return Ram",
+        "ultimate": "Last Page Clatter",
+        "kit.pop_up_ads": "Clack Clack Clack",
+        "kit.firewall": "Dust Cover Guard",
+        "kit.data_leech": "Ink Ribbon Snatch"
+      }
+    },
+    "x_carpet_cleaner": {
+      "status": "draft",
+      "names": {
+        "common": "Soggycarpet",
+        "uncommon": "Stainhunter",
+        "rare": "Waterdumper",
+        "epic": "Spring Clean Scrub",
+        "legendary": "Old Shampooer of the Hallway"
+      },
+      "lore": {
+        "common": "Leaves the carpet so soggy that nobody can walk on it for a day.",
+        "uncommon": "Hunts down every stain on the carpet, even the old juice ones.",
+        "rare": "Got the red wine out of the white carpet, and the party guests were amazed.",
+        "epic": "Cleaned every carpet in the hotel in one night.",
+        "legendary": "Has cleaned the same family carpet for twenty years, and it still looks brand new."
+      },
+      "moves": {
+        "signature": "Spray Flash",
+        "legend": "Tough Stain Guard",
+        "ultimate": "Big Scrub Daze",
+        "kit.beep_beep": "Tank Empty Beep",
+        "kit.glitch_out": "Soggy Crack",
+        "kit.turbo_mode": "Deep Clean Boost"
+      }
+    },
+    "x_floor_polisher": {
+      "status": "draft",
+      "names": {
+        "common": "Spinsurfer",
+        "uncommon": "Squeakmaker",
+        "rare": "Mirrorfloor",
+        "epic": "Hall Polish Spin",
+        "legendary": "Old Shinewell of the School Corridor"
+      },
+      "lore": {
+        "common": "Spins its owner round in circles until they figure out how to steer.",
+        "uncommon": "Makes every corridor so shiny that shoes squeak on it all day.",
+        "rare": "Polished the school hall so well that the children skated in their socks.",
+        "epic": "Polished every corridor in the hospital overnight, and the doctors slid to work.",
+        "legendary": "Has polished the same school hall for forty years and never left a smear."
+      },
+      "moves": {
+        "signature": "Spin Flash",
+        "legend": "Wax Coat Guard",
+        "ultimate": "Hot Wax Shine",
+        "kit.beep_beep": "Motor Hum Startle",
+        "kit.glitch_out": "Slippery Crack"
+      }
+    },
+    "x_steam_cleaner": {
+      "status": "draft",
+      "names": {
+        "common": "Hissblaster",
+        "uncommon": "Grimebuster",
+        "rare": "Steamcloud",
+        "epic": "Kitchen Deep Clean",
+        "legendary": "Lady Steamwell of the Oven Door"
+      },
+      "lore": {
+        "common": "Hisses so loudly that the dog hides in the garden.",
+        "uncommon": "Blasts away the grime that has been stuck to the oven for years.",
+        "rare": "Filled the bathroom with so much steam that the mirror dripped for an hour.",
+        "epic": "Cleaned every kitchen in the restaurant in one night, and the chef cried with joy.",
+        "legendary": "Has steamed the same oven clean every spring for twenty years."
+      },
+      "moves": {
+        "signature": "Steam Flash",
+        "legend": "Steam Power",
+        "ultimate": "Grime Blast",
+        "kit.factory_reset": "Refill Rest",
+        "kit.glitch_out": "Drip Crack",
+        "kit.turbo_mode": "Max Steam"
+      }
+    },
+    "x_amplifier": {
+      "status": "draft",
+      "names": {
+        "common": "Volumeknob",
+        "uncommon": "Feedbackwhine",
+        "rare": "Garagerock",
+        "epic": "Battle of the Bands",
+        "legendary": "Old Crankworth of the Stage"
+      },
+      "lore": {
+        "common": "Has a volume knob that goes up to eleven, and someone always turns it there.",
+        "uncommon": "Whines with feedback whenever the microphone gets too close.",
+        "rare": "Made a garage band sound like a stadium concert.",
+        "epic": "Blasted the battle of the bands so loudly that the school windows shook.",
+        "legendary": "Has played in every school concert for thirty years and still has its first fuse."
+      },
+      "moves": {
+        "signature": "Volume Flash",
+        "legend": "Hot Valve Whiff",
+        "ultimate": "Feedback Squeal",
+        "kit.overheat": "Hot Valves",
+        "kit.fan_spin": "Hum Hum Hum",
+        "kit.data_leech": "Power Snatch"
+      }
+    },
+    "x_amplifier_speaker": {
+      "status": "draft",
+      "names": {
+        "common": "Bassthumper",
+        "uncommon": "Crackledust",
+        "rare": "Partyshaker",
+        "epic": "Block Party Boom",
+        "legendary": "Grand Boomworth of the Back Garden"
+      },
+      "lore": {
+        "common": "Thumps the bass so hard that the pictures on the wall shake.",
+        "uncommon": "Crackles when the dust gets in its cone.",
+        "rare": "Shook the whole garden party with one bass note.",
+        "epic": "Boomed so loudly at the block party that the whole street danced.",
+        "legendary": "Has played every birthday party on the street for twenty years and never blown its speaker."
+      },
+      "moves": {
+        "signature": "Bass Flash",
+        "legend": "Thump Thump Thump",
+        "ultimate": "Big Bass Blast",
+        "kit.overheat": "Hot Speaker",
+        "kit.fan_spin": "Cone Wobble Wobble",
+        "kit.data_leech": "Sound Snatch"
+      }
+    },
+    "x_comb": {
+      "status": "draft",
+      "names": {
+        "common": "Toothloser",
+        "uncommon": "Tangletugger",
+        "rare": "Partmaker",
+        "epic": "School Photo Day",
+        "legendary": "Old Combsworth of the Back Pocket"
+      },
+      "lore": {
+        "common": "Loses one tooth every week until it looks like a gappy smile.",
+        "uncommon": "Tugs at every tangle and makes you say ow.",
+        "rare": "Made a parting so straight that you could use it as a ruler.",
+        "epic": "Was passed round the whole class on school photo day, and every hairstyle came out neat.",
+        "legendary": "Has lived in grandad's back pocket for fifty years and never lost its last tooth."
+      },
+      "moves": {
+        "signature": "Comb Comb Comb",
+        "legend": "Tangle Crack",
+        "ultimate": "Static Hair Comb",
+        "kit.beep_beep": "Tooth Twang",
+        "kit.factory_reset": "Rinse Rest",
+        "kit.glitch_out": "Snag Crack",
+        "kit.turbo_mode": "Smooth Stroke"
+      }
+    },
+    "x_contact_lens_case": {
+      "status": "draft",
+      "names": {
+        "common": "Leftright",
+        "uncommon": "Lidspinner",
+        "rare": "Solutionsplash",
+        "epic": "Sleepover Lens Hunt",
+        "legendary": "Little Lenskeeper of the Bathroom Shelf"
+      },
+      "lore": {
+        "common": "Gets left and right mixed up every morning.",
+        "uncommon": "Has two tiny lids that spin off and roll under the sink.",
+        "rare": "Splashed lens solution into its owner's eye by mistake.",
+        "epic": "Was searched for by everyone at the sleepover when a lens went missing.",
+        "legendary": "Has kept the same pair of lenses safe every night for a whole year."
+      },
+      "moves": {
+        "signature": "Lid Lid Lid",
+        "legend": "Twin Lid Guard",
+        "ultimate": "Lens Splash",
+        "kit.beep_beep": "Lid Pop Startle",
+        "kit.glitch_out": "Wrong Side Crack",
+        "kit.turbo_mode": "Fresh Solution"
+      }
+    },
+    "x_cpu": {
+      "status": "draft",
+      "names": {
+        "common": "Hotchip",
+        "uncommon": "Thinkfast",
+        "rare": "Pinbender",
+        "epic": "Overclock Overload",
+        "legendary": "Grand Processor of the Motherboard"
+      },
+      "lore": {
+        "common": "Gets so hot that its fan has to scream to keep it cool.",
+        "uncommon": "Thinks a billion thoughts a second and still makes you wait.",
+        "rare": "Has tiny pins that bend if you look at them wrong.",
+        "epic": "Ran so fast when it was overclocked that the whole computer lifted off the desk.",
+        "legendary": "Has done a trillion calculations without making a single mistake."
+      },
+      "moves": {
+        "signature": "Calculation Flash",
+        "legend": "Idle Rest",
+        "ultimate": "Overclock Flash",
+        "kit.overheat": "Thermal Spike",
+        "kit.fan_spin": "Cooler Fan Fan",
+        "kit.data_leech": "Cache Snatch"
+      }
+    },
+    "x_docking_station": {
+      "status": "draft",
+      "names": {
+        "common": "Cabletangle",
+        "uncommon": "Portplenty",
+        "rare": "Plugsnap",
+        "epic": "Desk Setup Rush",
+        "legendary": "Grand Hubsworth of the Office Desk"
+      },
+      "lore": {
+        "common": "Has a nest of cables behind it so tangled that unplugging one turns off the desk lamp.",
+        "uncommon": "Has more ports than anyone will ever need.",
+        "rare": "Snapped every plug into place with one satisfying click.",
+        "epic": "Plugged in every gadget in the office on Monday morning, and the fuse box sighed.",
+        "legendary": "Has connected the same office desk for ten years and never lost a signal."
+      },
+      "moves": {
+        "signature": "Plug Flash",
+        "legend": "Port Port Port",
+        "ultimate": "Cable Spaghetti",
+        "kit.overheat": "Warm Hub",
+        "kit.firewall": "Surge Guard"
+      }
+    },
+    "x_electric_toothbrush": {
+      "status": "draft",
+      "names": {
+        "common": "Buzzbrush",
+        "uncommon": "Splatterfoam",
+        "rare": "Timerbuzz",
+        "epic": "Morning Mirror Splatter",
+        "legendary": "Old Brushworth of the Charging Stand"
+      },
+      "lore": {
+        "common": "Splatters toothpaste over the mirror the moment you turn it on.",
+        "uncommon": "Buzzes so hard that your teeth tingle.",
+        "rare": "Buzzes every thirty seconds to tell you to move to the next corner.",
+        "epic": "Buzzed in every bathroom in the house at the same time, and the house hummed.",
+        "legendary": "Has brushed the same smile every morning and night for five years."
+      },
+      "moves": {
+        "signature": "Buzz Buzz Flash",
+        "legend": "Foam Splatter Crack",
+        "ultimate": "Big Brush",
+        "kit.beep_beep": "Timer Buzz",
+        "kit.factory_reset": "Charging Rest",
+        "kit.glitch_out": "Wobble Head Crack"
+      }
+    },
+    "x_equalizer": {
+      "status": "draft",
+      "names": {
+        "common": "Sliderwobble",
+        "uncommon": "Bassbooster",
+        "rare": "Lightdancer",
+        "epic": "Disco Night Lights",
+        "legendary": "Old Faderworth of the Studio"
+      },
+      "lore": {
+        "common": "Has a row of sliders that everyone fiddles with.",
+        "uncommon": "Boosts the bass so much that the floor wobbles.",
+        "rare": "Has little lights that dance up and down to the music.",
+        "epic": "Lit up every disco on the street, and the whole neighbourhood danced.",
+        "legendary": "Has mixed every song at the same radio station for thirty years."
+      },
+      "moves": {
+        "signature": "Slider Flash",
+        "legend": "Light Bar Flash",
+        "ultimate": "Disco Light Dance",
+        "kit.overheat": "Warm Faders",
+        "kit.fan_spin": "Beat Beat Beat",
+        "kit.firewall": "Limiter Guard",
+        "kit.data_leech": "Signal Snatch"
+      }
+    },
+    "x_eraser": {
+      "status": "draft",
+      "names": {
+        "common": "Dustcloud",
+        "uncommon": "Chalkclapper",
+        "rare": "Boardwiper",
+        "epic": "Classroom Wipe Out",
+        "legendary": "Old Feltworth of the Blackboard"
+      },
+      "lore": {
+        "common": "Leaves a cloud of chalk dust floating round the classroom.",
+        "uncommon": "Gets clapped together outside to get the dust out.",
+        "rare": "Wiped the whole board clean in one swipe.",
+        "epic": "Wiped every board in the school at the end of term, and the corridors filled with dust.",
+        "legendary": "Has wiped the same blackboard for fifty years and is still soft."
+      },
+      "moves": {
+        "signature": "Wipe Wipe Wipe",
+        "legend": "Chalk Dust Crack",
+        "ultimate": "Chalk Cloud",
+        "kit.beep_beep": "Clap Startle",
+        "kit.glitch_out": "Smudge Crack"
+      }
     }
   }
 }
