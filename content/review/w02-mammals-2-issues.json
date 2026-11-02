@@ -1,0 +1,2344 @@
+{
+  "batch": "w02-mammals-2",
+  "editor": "independent agent",
+  "reviewed": 106,
+  "summary": "The batch is clean on safety, length and most facts, and many single lines are genuinely funny and well observed (kangaroo pouch lizard, raccoon washing a doughnut, mole tunnel to the train, ferret cables, opossum 'no lines', rhino's bush-charging embarrassment, walrus moustache). Its biggest structural problem is that about half the objects scale one trait across three to five rarities (howler, indri, patas, antelope, rhino, skunk, opossum, mongoose, raccoon, hyena, meerkat, gorilla chest-beating, wheaten greetings, westie digging) instead of giving five premises. Second, monster names are systematically paired with the wrong rarity's lore in roughly 50 objects (e.g. Shetland 'Duckherder' on the sadness-sensing Rare, hamster 'Cheekstuffer' on the wheel Common), which must be re-paired before approval. Third, several lines are near-copies of w01 Legendaries (schipperke/keeshond canal barge, reindeer/deer sleigh, toy poodle/blenheim 'one for every day... still sits in yours', puppy/kerry blue 'every prize including the cat ones', yak/llama summit luggage, rat/wombat underground railway, Tibetan mastiff/lhasa monastery) and of other w02 objects (armadillo C = hedgehog C, titi U = siamang U, guinea pig E = marmoset E, white wolf U = polar bear cub R, both sloths' staring contests, shih tzu L = panda L). Legendaries lean heavily on contests, trophies and judges (24 of 106), Epics on 'Led/Started... everyone joined in' (18), and half of the Ultimates are just the Epic name plus Rush/Run/Storm. Hard flags: trademark/brand or character echoes (Velcro Vizsla, Slowpoke, Shirley the big-fleeced sheep, Leonidas, Hammond, Lady Pew, Pandora, Dasherella), religious settings/names on the Tibetan breeds and langur, one move that names a nap on a burn attack (Sussex 'Sun-Baked Snooze'), and fact slips (yaks grunt, not moo; plovers clean crocodiles, not hippos; coconuts on the rhino's savannah; gerbils thump feet not tails). Move mechanics are otherwise respected well: drain, heal, buff and multi-hit names match, and variant-differing Ultimates are mostly effect-neutral. Fixing the high items is mostly targeted rewrites of one or two rarities per object plus a name re-pairing pass; concrete replacements are given for each.",
+  "patterns": [
+    {
+      "pattern": "Monster names describe a different rarity's lore (names look written as a list, then lore reordered). E.g. Shetland 'Duckherder' is the Rare whose lore is sensing sadness, while the Uncommon herds ducks; hamster 'Cheekstuffer' (Common) has the wheel line and 'Wheelrunner' (Uncommon) the cheeks line. Name and lore sit together in the encyclopedia, so this reads as an error.",
+      "ids": [
+        "i_sealyham_terrier",
+        "i_shetland_sheepdog",
+        "i_soft_coated_wheaten_terrier",
+        "i_standard_schnauzer",
+        "i_tibetan_mastiff",
+        "i_tibetan_terrier",
+        "i_toy_poodle",
+        "i_walker_hound",
+        "i_weimaraner",
+        "i_welsh_springer_spaniel",
+        "i_west_highland_white_terrier",
+        "i_whippet",
+        "i_wire_haired_fox_terrier",
+        "elephant",
+        "giraffe",
+        "x_guinea_pig_pet",
+        "hamster",
+        "hippo",
+        "lion",
+        "i_capuchin",
+        "i_colobus",
+        "i_guenon",
+        "i_langur",
+        "i_madagascar_cat",
+        "x_orangutan_ape",
+        "i_squirrel_monkey",
+        "panda",
+        "sheep",
+        "x_anteater",
+        "x_armadillo",
+        "x_buffalo",
+        "x_chinchilla",
+        "x_donkey",
+        "x_gerbil",
+        "x_gibbon",
+        "x_kangaroo",
+        "x_manatee",
+        "x_meerkat",
+        "x_mongoose",
+        "x_moose_animal",
+        "x_opossum",
+        "x_otter",
+        "x_possum",
+        "x_puppy_dog",
+        "x_rat",
+        "x_reindeer_animal",
+        "x_sloth",
+        "x_wallaby",
+        "x_weasel",
+        "x_yak",
+        "i_sussex_spaniel",
+        "i_staffordshire_bullterrier",
+        "tiger"
+      ],
+      "severity": "high",
+      "suggestion": "Re-pair every name with the lore it describes before review. Most fixes are a straight swap between two adjacent rarities (Tibetan mastiff: Common 'Nightbarker Ti', Uncommon 'Maneguard'; hamster: Common 'Wheelrunner', Uncommon 'Cheekstuffer'; chinchilla: C 'Dustbather', U 'Fluffcloud Chin'/'Softpaw', R a jump name; reindeer: C 'Clickhoof', R 'Snowantler' or a sleigh name). Where lore is rewritten (see issues), rename to match the new premise."
+    },
+    {
+      "pattern": "One trait scaled across three to five rarities instead of five premises (one joke, bigger numbers).",
+      "ids": [
+        "i_scotch_terrier",
+        "i_scottish_deerhound",
+        "i_soft_coated_wheaten_terrier",
+        "i_west_highland_white_terrier",
+        "i_toy_terrier",
+        "i_yorkshire_terrier",
+        "i_walker_hound",
+        "i_sealyham_terrier",
+        "i_howler_monkey",
+        "i_indri",
+        "i_patas",
+        "i_siamang",
+        "i_titi",
+        "i_guenon",
+        "x_gorilla_ape",
+        "i_langur",
+        "x_orangutan_ape",
+        "i_marmoset",
+        "horse",
+        "x_antelope",
+        "x_armadillo",
+        "x_hyena",
+        "x_meerkat",
+        "x_mongoose",
+        "x_opossum",
+        "x_raccoon",
+        "x_rhino",
+        "x_skunk",
+        "x_gerbil",
+        "x_badger",
+        "x_rat",
+        "x_anteater"
+      ],
+      "severity": "high",
+      "suggestion": "Let the headline trait own at most two rarities; use other real traits (body, diet, family life, origin job, a famous habit) for the rest. Concrete per-object replacements are in the issues list."
+    },
+    {
+      "pattern": "Near-copies of w01 legendaries (same premise and same punchline structure).",
+      "ids": [
+        "i_schipperke",
+        "x_reindeer_animal",
+        "i_toy_poodle",
+        "x_puppy_dog",
+        "i_tibetan_mastiff",
+        "i_silky_terrier",
+        "i_shetland_sheepdog",
+        "x_rat",
+        "x_yak",
+        "i_white_wolf",
+        "i_soft_coated_wheaten_terrier",
+        "i_shih_tzu",
+        "panda"
+      ],
+      "severity": "high",
+      "suggestion": "Pairs: schipperke L = keeshond L (barge along every canal in the land, ducks salute); reindeer L = deer L (sleigh round the world in one night); toy poodle L = blenheim L ('one for every day of the year... still sits/rides in yours'); puppy L = kerry blue L (judges give every prize 'including the cat ones'); Tibetan mastiff L = lhasa L (guarding a mountain monastery for the monks); silky L = australian terrier L ('a whole sheep station alone'); Shetland L = lakeland L (flock kept through a winter storm, none lost); rat E = wombat L (underground railway that runs on time); yak L = llama L (carried an expedition's bags to the summit, then refused until...); white wolf L ~ african hunting dog L (led the pack across... without losing one); wheaten L ~ golden retriever L 'Greeter of Everyone'; shih tzu L / panda L ~ kuvasz L ('given its own palace/throne... still sleeps on the floor/basket'). Rewrite the w02 side."
+    },
+    {
+      "pattern": "Identical premises between two w02 objects (lore interchangeable).",
+      "ids": [
+        "x_armadillo",
+        "x_hedgehog",
+        "i_white_wolf",
+        "x_polar_bear_cub",
+        "i_titi",
+        "i_siamang",
+        "x_guinea_pig_pet",
+        "i_marmoset",
+        "i_three_toed_sloth",
+        "x_sloth",
+        "i_shih_tzu",
+        "panda",
+        "i_silky_terrier",
+        "i_wire_haired_fox_terrier",
+        "fox",
+        "x_raccoon",
+        "x_ferret",
+        "x_weasel",
+        "x_wildebeest",
+        "sheep",
+        "x_rhino",
+        "i_west_highland_white_terrier"
+      ],
+      "severity": "high",
+      "suggestion": "armadillo C = hedgehog C ('curls into a ball whenever someone says hello'); armadillo R = hedgehog E (rolled down a hill at the village fair knocking things over); white wolf U = polar bear cub R (white fur, sneaks up on its own pack/mother); titi U = siamang U ('Sings a duet with its partner every morning'); guinea pig E = marmoset E ('Started a squeak chorus'); three-toed sloth L = x_sloth L (staring contest); shih tzu L = panda L ('Was given its own palace... Still...'); silky C = wire fox U (coat collects every leaf/twig); fox C ~ raccoon C/E (bin tipping, rubbish sorted); ferret U ~ weasel U (war dance); wildebeest C = sheep C (follows the one in front into water); rhino L ~ westie L (tunnel through a hill/mountain, now a short cut). Keep one side, rewrite the other (suggestions in issues)."
+    },
+    {
+      "pattern": "Award/contest Legendaries: 24 of 106 Legendaries are won/contest/trophy/judges/declared/crowned/champion (w01 already had 21). Legendaries also start 'Was' 15 times, 'Won' 14, 'Became' 8.",
+      "ids": [
+        "i_standard_poodle",
+        "i_sussex_spaniel",
+        "i_walker_hound",
+        "i_whippet",
+        "i_wire_haired_fox_terrier",
+        "horse",
+        "i_howler_monkey",
+        "i_patas",
+        "i_proboscis_monkey",
+        "i_three_toed_sloth",
+        "pig",
+        "tiger",
+        "x_armadillo",
+        "x_chinchilla",
+        "x_hedgehog",
+        "x_kangaroo",
+        "x_mongoose",
+        "x_opossum",
+        "x_platypus",
+        "x_polar_bear_cub",
+        "x_porcupine",
+        "x_puppy_dog",
+        "x_sloth",
+        "x_wallaby"
+      ],
+      "severity": "medium",
+      "suggestion": "Keep at most 6-8 award Legendaries across the batch (keep the strongest: armadillo 'by being the ball', opossum 'no lines', pig 'ate the rosette', horse 'wind demanded a rematch'). Rewrite others as a deed with a consequence (silly logistics, misplaced helpfulness, petty revenge). Ban 'trophy' after this batch for a while; the words appear 5x here (walker hound, whippet, hedgehog, kangaroo, platypus)."
+    },
+    {
+      "pattern": "'Started a X chorus/contest and every Y joined in' Epic frame; 18 Epics start 'Led' or 'Started'.",
+      "ids": [
+        "x_guinea_pig_pet",
+        "i_marmoset",
+        "x_seal",
+        "x_hyena",
+        "x_wolf_pup",
+        "x_jackal",
+        "i_white_wolf",
+        "i_howler_monkey",
+        "i_madagascar_cat",
+        "x_antelope",
+        "i_shih_tzu",
+        "i_siberian_husky",
+        "i_squirrel_monkey",
+        "i_three_toed_sloth",
+        "i_titi",
+        "sheep",
+        "x_mouse",
+        "x_reindeer_animal",
+        "x_wildebeest",
+        "zebra"
+      ],
+      "severity": "medium",
+      "suggestion": "Max two 'joined in' choruses per batch. Vary Epic openings with a verb of the animal's own action (Dug, Shook, Sneezed, Sat on, Swallowed) and end on a concrete civic consequence."
+    },
+    {
+      "pattern": "Primates swinging through the whole forest/every tree without touching the ground.",
+      "ids": [
+        "i_spider_monkey",
+        "x_gibbon",
+        "i_siamang",
+        "monkey",
+        "i_colobus"
+      ],
+      "severity": "medium",
+      "suggestion": "Only the gibbon should own swinging (it is the champion brachiator). Spider monkey: tail as fifth hand; siamang: throat sac and arms-up walking; colobus: thumbless, white cape, babysitting; monkey: hats/bananas."
+    },
+    {
+      "pattern": "Herd/stampede premise and 'Stampede' as a name word (7 names plus 4 moves).",
+      "ids": [
+        "x_buffalo",
+        "zebra",
+        "x_reindeer_animal",
+        "x_wildebeest",
+        "i_squirrel_monkey",
+        "x_antelope",
+        "horse",
+        "i_shih_tzu",
+        "i_siberian_husky",
+        "x_guinea_pig_pet",
+        "i_three_toed_sloth",
+        "i_sussex_spaniel",
+        "sheep",
+        "x_dugong"
+      ],
+      "severity": "medium",
+      "suggestion": "Only buffalo and wildebeest should stampede in lore. Strip 'Stampede' from names where nothing stampedes (Silken Stampede, Sled Stampede, Squeak Stampede, Slowest Stampede, Troop Stampede) and from Ultimates on gentle animals ('Shallows Stampede' on the dugong, 'Serious Stampede' on the Sussex spaniel)."
+    },
+    {
+      "pattern": "Ultimate move names are the Epic monster name plus one word (51 of 106: 'Henhouse Heist Run', 'Tunnel City Rush Raid', 'Trash Can Heist Raid', 'Forest Traffic Jam Charge').",
+      "ids": [
+        "i_scotch_terrier",
+        "i_tibetan_mastiff",
+        "i_tibetan_terrier",
+        "i_toy_terrier",
+        "i_vizsla",
+        "i_weimaraner",
+        "i_yorkshire_terrier",
+        "fox",
+        "hippo",
+        "i_capuchin",
+        "i_howler_monkey",
+        "i_langur",
+        "i_patas",
+        "i_spider_monkey",
+        "i_squirrel_monkey",
+        "i_titi",
+        "sheep",
+        "squirrel",
+        "tiger",
+        "x_anteater",
+        "x_antelope",
+        "x_chinchilla",
+        "x_gerbil",
+        "x_gibbon",
+        "x_hedgehog",
+        "x_kangaroo",
+        "x_lemur",
+        "x_manatee",
+        "x_mole",
+        "x_mongoose",
+        "x_moose_animal",
+        "x_mouse",
+        "x_otter",
+        "x_platypus",
+        "x_polar_bear_cub",
+        "x_porcupine",
+        "x_possum",
+        "x_puppy_dog",
+        "x_raccoon",
+        "x_rat",
+        "x_reindeer_animal",
+        "x_rhino",
+        "x_sea_lion",
+        "x_seal",
+        "x_skunk",
+        "x_sloth",
+        "x_wallaby",
+        "x_weasel",
+        "x_wildebeest",
+        "x_yak",
+        "zebra"
+      ],
+      "severity": "medium",
+      "suggestion": "The Ultimate belongs only to the Legendary, so naming it after the Epic form is confusing and reads mechanical (and several become clunky, 'Rush Raid', 'Dash Storm'). Write the Ultimate from the Legendary's own premise, short and effect-neutral (pilot style: 'Walkies!', 'Breakfast Is Served', 'The Kettle's On')."
+    },
+    {
+      "pattern": "Thunder/Savannah/Jungle/Treetop/Queen/Sir/Professor name words overused (name word counts: Queen 14, Sir 10, Treetop 8, Stampede 7, Lady 6, Savannah 6, Thunder 5, Jungle 5, Champion 5, Professor 4). 80 of 106 Legendaries use 'Name, the Epithet'.",
+      "ids": [
+        "lion",
+        "tiger",
+        "x_buffalo",
+        "horse",
+        "i_tibetan_mastiff",
+        "x_gorilla_ape",
+        "i_capuchin",
+        "x_chimp",
+        "x_mole",
+        "x_platypus",
+        "i_colobus",
+        "i_spider_monkey",
+        "i_titi",
+        "squirrel"
+      ],
+      "severity": "medium",
+      "suggestion": "Cap each title word at ~3 per batch; drop 'Thunder' from lion/tiger/buffalo/horse/mastiff Epics (each should name its own chaos: lion 'Waterhole Hog', tiger 'Picnic Paddler'). Give at least a third of Legendaries a plain iconic name without an epithet."
+    },
+    {
+      "pattern": "Recurring stock props and frames: 'in one afternoon' (6) / 'afternoon' (11), 'in one night' (6), 'for fifty years' (4: elephant, manatee, rat, sloth), 'in the land' (5), 'in history' (4), sandwiches (6), tourists (5), 'waits for applause' (6), washing line (langur, monkey, lemur U), village fair (3), cricket/football match delayed (silky E, wheaten E).",
+      "ids": [
+        "i_welsh_springer_spaniel",
+        "i_colobus",
+        "x_dugong",
+        "x_gibbon",
+        "x_mongoose",
+        "x_polar_bear_cub",
+        "elephant",
+        "x_manatee",
+        "x_rat",
+        "x_sloth",
+        "i_schipperke",
+        "goat",
+        "x_anteater",
+        "x_moose_animal",
+        "x_mouse",
+        "i_shetland_sheepdog",
+        "i_capuchin",
+        "x_kangaroo",
+        "x_sea_lion",
+        "x_antelope",
+        "i_langur",
+        "monkey",
+        "x_lemur",
+        "i_silky_terrier",
+        "i_soft_coated_wheaten_terrier"
+      ],
+      "severity": "medium",
+      "suggestion": "Run a find for these strings before handing in and keep each to two uses per batch. Replace time spans with a concrete event ('before the kettle boiled', 'by the end of the school run')."
+    },
+    {
+      "pattern": "Line openers 'Its ... is so ... that' (28 lines, 12 of them Uncommons) and 'Can ...' (16 lines).",
+      "ids": [
+        "i_tibetan_terrier",
+        "i_silky_terrier",
+        "i_welsh_springer_spaniel",
+        "i_west_highland_white_terrier",
+        "giraffe",
+        "i_colobus",
+        "i_langur",
+        "i_proboscis_monkey",
+        "x_anteater",
+        "x_chinchilla",
+        "x_manatee",
+        "x_mole",
+        "i_scottish_deerhound",
+        "i_toy_terrier",
+        "x_kangaroo",
+        "x_raccoon",
+        "x_dingo"
+      ],
+      "severity": "low",
+      "suggestion": "Rephrase half of them as an action ('Licks its own ears...', 'Picks up the radio with its ears...')."
+    },
+    {
+      "pattern": "Religious settings and names: monasteries, monks, temples, priests, 'Holy', and deity names (Tara, Dorje).",
+      "ids": [
+        "i_tibetan_mastiff",
+        "i_tibetan_terrier",
+        "i_langur"
+      ],
+      "severity": "medium",
+      "suggestion": "Keep these secular: mountain village, fort, palace, old town rooftops. Rename 'Holy Fluff', 'Lucky Lhakpa, the Holy Terrier', 'Dorje, Lion of the High Monastery', 'Tara, Guardian of the Temple Roofs'."
+    },
+    {
+      "pattern": "Disambiguating signature moves by tacking the species on: 'Quick Snap Mongoose', 'Tiny Pounce Kitten', 'Striped Pounce Skunk', 'Puppy Pounce Howl'.",
+      "ids": [
+        "x_mongoose",
+        "x_kitten_cat",
+        "x_skunk",
+        "x_wolf_pup"
+      ],
+      "severity": "low",
+      "suggestion": "Give each its own verb: mongoose 'Cobra Dodge Bite', kitten 'Toe Ambush Pounce' (or 'Sock Attack'), skunk 'Tail-Up Charge', wolf pup 'Big Paw Pounce'."
+    }
+  ],
+  "issues": [
+    {
+      "id": "i_schipperke",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of w01 keeshond L (barge along every canal in the land, ducks give way/salute). Also 'every canal in the land' frame.",
+      "suggestion": "'Was made honorary harbour master of the whole canal. Every barge must now stop, show its sandwiches and wait to be sniffed.'"
+    },
+    {
+      "id": "i_schipperke",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Same premise as Uncommon (barking orders at boats), just more boats.",
+      "suggestion": "Use the breed's fox-like curiosity / ratting on barges: 'Chased one rat the full length of a cargo ship, through every cabin. The crew found the rat asleep in the captain's hat.'"
+    },
+    {
+      "id": "i_schipperke",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Black Barge' leans pirate; fine, but long (34) and the lore no longer steers a barge if rewritten.",
+      "suggestion": "'Harbourmaster Schipp'"
+    },
+    {
+      "id": "i_scotch_terrier",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common, Rare and Epic are all 'refuses to move' (walk refusal, afternoon sit-in, drawbridge sit-in). Also 'an entire afternoon' frame.",
+      "suggestion": "Use its digging/earth-dog job: 'Dug up the castle lawn hunting one mole, then presented the hole to the gardener as a gift.'"
+    },
+    {
+      "id": "i_scotch_terrier",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Still the sit-down premise; no real consequence beyond a detour.",
+      "suggestion": "'Barked at a bagpipe until it stopped. The whole Highland band now plays only when the terrier is asleep.'"
+    },
+    {
+      "id": "i_scotch_terrier",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Stubborn Charge' contradicts the stubborn-doesn't-move character.",
+      "suggestion": "'Beard First'"
+    },
+    {
+      "id": "i_scottish_deerhound",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare (outrun the wind) and Epic (ran so fast the mist was left behind) are the same speed premise, and the Legendary is speed again.",
+      "suggestion": "Use its towering height: 'Stood up to say hello and rested its chin on the roof of the bus. The bus waited politely until it had finished.'"
+    },
+    {
+      "id": "i_scottish_deerhound",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Starts with 'Can'; second sentence is cute but low trouble for a Rare.",
+      "suggestion": "'Outruns the wind on a Highland hill, then stops dead to sniff one flower, and the wind crashes into it.'"
+    },
+    {
+      "id": "i_scottish_deerhound",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Mossbeard' is also used as three-toed sloth Uncommon 'Mossbeard Sloth'; and a deerhound is not mossy.",
+      "suggestion": "'Sofasprawl'"
+    },
+    {
+      "id": "i_sealyham_terrier",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Uncommon (silly faces), Epic (jokes with eyebrows) and Legendary (jester) are all the comedy premise.",
+      "suggestion": "Use its badger/otter-hunting past and white coat: 'Went down a badger sett in a white coat and came out brown. The badgers now think it is one of them and send it party invitations.'"
+    },
+    {
+      "id": "i_sealyham_terrier",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Shortlegs Sealy' describes the legs, but the Common line is the eyebrows; 'Bushybrow' is on the Uncommon (faces). Swap.",
+      "suggestion": "Common 'Bushybrow', Uncommon 'Facepuller'."
+    },
+    {
+      "id": "i_shetland_sheepdog",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of w01 lakeland L (flock kept safe through a winter storm). No punchline.",
+      "suggestion": "'Herded the ferry passengers into a queue so neat that the island ferry now leaves early every single day.'"
+    },
+    {
+      "id": "i_shetland_sheepdog",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "'Senses when anyone is sad and arrives with a toy' is true of any dog (fails the swap test) and not troublesome.",
+      "suggestion": "'Herds the children at every birthday party into one corner of the garden, then barks until the cake comes out.'"
+    },
+    {
+      "id": "i_shetland_sheepdog",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Minicollie' repeats the 'miniature collie' label breed fans object to.",
+      "suggestion": "'Leafalarm'"
+    },
+    {
+      "id": "i_shetland_sheepdog",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "'arranged by size' is close to w01 border collie L 'arranged them by height'.",
+      "suggestion": "'...parked every pony on the island in a neat row outside the post office, waiting for letters.'"
+    },
+    {
+      "id": "i_shih_tzu",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Uncommon (expects servants to open doors) and Rare (guards fetch it a cushion) are the same royal-entitlement premise; Legendary is palace again.",
+      "suggestion": "Use its floor-length coat: 'Its silky coat sweeps the floor so well that the palace sacked the cleaners. It demands their wages in treats.'"
+    },
+    {
+      "id": "i_shih_tzu",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "A parade of dogs with topknots; no consequence or punchline.",
+      "suggestion": "'Snored so loudly through the palace banquet that the band played along to keep in time.'"
+    },
+    {
+      "id": "i_shih_tzu",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Silken Stampede' - nothing stampedes; adds to the Stampede cluster.",
+      "suggestion": "Match new Epic: 'Snorepuff'."
+    },
+    {
+      "id": "i_siberian_husky",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Uncommon (escapes the garden) and Legendary (escaped from every kennel in the country) are the same premise.",
+      "suggestion": "Keep the Legendary and use digging/heat: 'Digs a cool hole in the flowerbed on every warm day and lies in it like it's on holiday.' Rename Uncommon 'Flowerbed Lounger'."
+    },
+    {
+      "id": "i_siberian_husky",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Blue-eyed stare for a sandwich is the stare-for-food premise used by weimaraner C and lemur C/R.",
+      "suggestion": "'Its pale blue eyes freeze the cat mid-step, every time. The cat now walks round the house backwards.'"
+    },
+    {
+      "id": "i_silky_terrier",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Rare and Legendary are both 'sends snakes packing'; Legendary also near-copies w01 australian terrier L ('a whole sheep station alone').",
+      "suggestion": "'Had its silky coat brushed so long and straight that the town theatre hired it as the curtain. Takes a bow every night.'"
+    },
+    {
+      "id": "i_silky_terrier",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Same as wire-haired fox terrier Uncommon (coat collects every leaf/twig/burr).",
+      "suggestion": "'Barks at the kookaburra every morning. The kookaburra laughs back, and it has never once won.'"
+    },
+    {
+      "id": "i_silky_terrier",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Cricket ground chase and 'the match finally started' is the same delayed-match punchline as wheaten E.",
+      "suggestion": "'Chased a whole flock of cockatoos off the school roof. They moved onto the headmaster's car instead.'"
+    },
+    {
+      "id": "i_soft_coated_wheaten_terrier",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Four rarities are greeting (jumps to kiss, hello dance, greets a crowd, says hello to the whole town). Rare and Epic must change.",
+      "suggestion": "Rare from its coat: 'Its coat frizzes into a cloud in the rain, so on wet days the farmer keeps trying to shear it.'"
+    },
+    {
+      "id": "i_soft_coated_wheaten_terrier",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Greeting premise again plus the 'match started late' frame shared with silky E.",
+      "suggestion": "'Shook itself dry after a swim at the summer fair and frizzed every hairdo at the bandstand.'"
+    },
+    {
+      "id": "i_soft_coated_wheaten_terrier",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Close to w01 golden retriever 'Greeter of Everyone' and boston bull 'official greeter'; no punchline beyond remembering names.",
+      "suggestion": "'Said hello so hard at the airport that every plane had to circle until it calmed down.' or keep a greeting L once Rare/Epic are fixed but add a twist."
+    },
+    {
+      "id": "i_staffordshire_bullterrier",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Pulling on the lead towards a sausage is generic dog behaviour (swap test fails).",
+      "suggestion": "Use the famous Staffie grin and strong jaw: 'Grins so widely that strangers grin back, then carries a whole log home from the park in that grin.'"
+    },
+    {
+      "id": "i_staffordshire_bullterrier",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Nannypup' repeats the 'nanny dog' myth, which is disputed and sensitive for this breed; the line has no joke.",
+      "suggestion": "'Wigglewatch' with a funny line: 'Sits beside anyone who looks lonely and leans on them until they are not lonely, just squashed.'"
+    },
+    {
+      "id": "i_staffordshire_bullterrier",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Brick Hugger' does not match the lead-pulling lore.",
+      "suggestion": "Match the new Rare: 'Grinhauler'."
+    },
+    {
+      "id": "i_standard_poodle",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Show elegance at Epic and winning the show at Legendary are the same premise; 'autograph' is weak.",
+      "suggestion": "Use the water-retriever haircut origin: 'Shook its pompoms dry at the lakeside café and every customer got a free shower.'"
+    },
+    {
+      "id": "i_standard_poodle",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Duckfetcher Poo' - 'Poo' will read as toilet humour, unintended.",
+      "suggestion": "'Duckfetcher'"
+    },
+    {
+      "id": "i_standard_schnauzer",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Rat Boss' sits on the Uncommon (understands words) while the Rare is the ratting line and is named 'Wise Whiskers'. Swap.",
+      "suggestion": "Uncommon 'Wise Whiskers', Rare 'Rat Boss'."
+    },
+    {
+      "id": "i_standard_schnauzer",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Herr Schnauzermann' repeats w01 'Herr Whiskerbart' (German-title gag twice).",
+      "suggestion": "'Sheriff Whiskerbeard'"
+    },
+    {
+      "id": "i_sussex_spaniel",
+      "field": "moves.legend",
+      "severity": "high",
+      "issue": "'Sun-Baked Snooze' is a nap word on a 100% burn attack (promises rest/heal).",
+      "suggestion": "'Sun-Baked Ear Slap'"
+    },
+    {
+      "id": "i_sussex_spaniel",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Goldenliver' (from 'golden liver' coat) reads as an organ; confusing for children.",
+      "suggestion": "'Thornfrowner'"
+    },
+    {
+      "id": "i_sussex_spaniel",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Barking through the countryside so pheasants know it's coming is the Uncommon narrating-bark premise scaled.",
+      "suggestion": "'Frowned so seriously at the village fete that the coconut shy closed early out of respect.'"
+    },
+    {
+      "id": "i_sussex_spaniel",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Serious Stampede' - a lone slow spaniel does not stampede.",
+      "suggestion": "'Very Serious Business'"
+    },
+    {
+      "id": "i_tibetan_mastiff",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of w01 lhasa L (guarding a mountain monastery, monks), and religious setting.",
+      "suggestion": "'Guarded one mountain gate so faithfully that it now checks tickets for the whole range. Even the snow needs a pass.'"
+    },
+    {
+      "id": "i_tibetan_mastiff",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Dorje' is a Buddhist ritual object and 'High Monastery' is religious; avoid.",
+      "suggestion": "'Old Thundermane, Keeper of the Pass'"
+    },
+    {
+      "id": "i_tibetan_mastiff",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Common 'Maneguard' / Uncommon 'Nightbarker Ti' are swapped against their lore; ' Ti' tag is awkward.",
+      "suggestion": "Common 'Nightbarker', Uncommon 'Maneguard'."
+    },
+    {
+      "id": "i_tibetan_terrier",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Holy Fluff' and Legendary 'the Holy Terrier' plus the monastery Epic bring in religion; Uncommon/Rare names also swapped (Luckypaw on the cliff line).",
+      "suggestion": "Uncommon 'Luckypaw', Rare 'Cliffwag'; Legendary 'Lucky Lhakpa, Finder of Keys'; Epic setting 'village square' instead of monastery courtyard."
+    },
+    {
+      "id": "i_toy_poodle",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as Common (handbag) and same frame as w01 blenheim L ('one for every day of the year... still sits in yours').",
+      "suggestion": "'Taught itself to walk on its back legs so well that it now queues at the bakery on its own and pays in curtseys.'"
+    },
+    {
+      "id": "i_toy_poodle",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Teacup Pom' - Pom means Pomeranian, a different breed.",
+      "suggestion": "'Teacup Prissy' or 'Bagrider'."
+    },
+    {
+      "id": "i_toy_poodle",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Handbag Genius' is on the treat-cupboard line; handbag is the Common.",
+      "suggestion": "'Cupboard Genius'"
+    },
+    {
+      "id": "i_toy_terrier",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Uncommon (hears a mouse), Rare (caught every mouse) and Legendary (castle free of mice) are one mousing premise.",
+      "suggestion": "Use its huge bat ears: 'Its ears are so big and pointy that they pick up the radio. It barks along to the weather forecast.'"
+    },
+    {
+      "id": "i_toy_terrier",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Shivering when the fridge opens 'in case there's something cold for it' has no clear logic.",
+      "suggestion": "'Shivers on a warm day, under a blanket, by the fire, and still asks for your jumper.'"
+    },
+    {
+      "id": "i_toy_terrier",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Small Siren Wail' reads as a stun noise; variants are stun/defdown/poison.",
+      "suggestion": "'Tiny Terror'"
+    },
+    {
+      "id": "i_vizsla",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Common (follows you everywhere, 'velcro') and Legendary (glued to owner's side for life) are the same clinginess premise; weimaraner R repeats it too.",
+      "suggestion": "Keep the balloon gag but change the premise: 'Pointed at a pheasant from a hot-air balloon and held the point so hard that the balloon drifted over to it. The pheasant was very surprised.'"
+    },
+    {
+      "id": "i_vizsla",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "'Velcro Vizsla' uses a registered trademark (Velcro).",
+      "suggestion": "'Shadowstick'"
+    },
+    {
+      "id": "i_walker_hound",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Trophy/race frame; 'its own photo on a stand' is a weak punchline; R and E and C are all voice.",
+      "suggestion": "'Treed a raccoon so often that the raccoon now leaves a note on the tree saying where it has gone.'"
+    },
+    {
+      "id": "i_walker_hound",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Voice premise third time (C bays, R voice carries, E loud chase).",
+      "suggestion": "Keep R voice, make Epic about scent speed: 'Followed one scent so fast through the county that it arrived at the picnic before the picnic did.'"
+    },
+    {
+      "id": "i_walker_hound",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Treewalker' sits on the overtaking-hunters line; tree is the Legendary/raccoon theme.",
+      "suggestion": "'Lunch Overtaker'"
+    },
+    {
+      "id": "i_weimaraner",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Uncommon and Epic are both 'mistaken for a ghost in the misty morning'.",
+      "suggestion": "Use the counter-surfing habit: 'Raided the counter at a wedding and ate the top tier of the cake. Every photo shows a grey dog wearing icing.'"
+    },
+    {
+      "id": "i_weimaraner",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Following so closely the owner trips is the vizsla 'velcro' premise; and it repeats this object's own Legendary devotion.",
+      "suggestion": "'Opened the fridge with its nose and left it open, so the whole kitchen is now the same temperature as the milk.' (then rewrite L away from doors) or keep R and change L."
+    },
+    {
+      "id": "i_weimaraner",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Opening every door is a talent, not an outrageous achievement; no punchline.",
+      "suggestion": "'Learned to open every door in the office building, then let the whole street's dogs in for a meeting in the boardroom.'"
+    },
+    {
+      "id": "i_welsh_springer_spaniel",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Dragon look is already the Uncommon; 'in one afternoon'.",
+      "suggestion": "'Sprang into a hedge maze and out the other side, straight through. The maze now has a dog-shaped shortcut.'"
+    },
+    {
+      "id": "i_welsh_springer_spaniel",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Dragon Dog Leap' implies fire; variants stun/burn/poison.",
+      "suggestion": "'Valley Bounce'"
+    },
+    {
+      "id": "i_west_highland_white_terrier",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic (tunnels under golf course) and Legendary (tunnel through a hill) are the same digging premise; Common and Rare dig too.",
+      "suggestion": "'Got so muddy at the Highland Games that it took the whole pipe band to wash it. The bagpipes were full of bubbles.'"
+    },
+    {
+      "id": "i_whippet",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as Common (sprints, then sleeps), plus race/trophy frame.",
+      "suggestion": "'Ran a lap of the track so fast that it lapped itself and got confused about who had won.' Rename 'Whizz, the Self-Lapper'."
+    },
+    {
+      "id": "i_whippet",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare and Epic are both raw speed (beats a bouncing ball, beats a train).",
+      "suggestion": "'Wore a woolly jumper to the beach on the hottest day of the year and still asked for a towel to lie on.' or a whippet-shaped draught excluder gag."
+    },
+    {
+      "id": "i_whippet",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Lightning Lap' implies stun/electric; variants burn/poison/stun.",
+      "suggestion": "'Lap of Honour'"
+    },
+    {
+      "id": "i_white_wolf",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Close to w01 african hunting dog L ('led... without losing a single dog'); triple 'single' list is soft.",
+      "suggestion": "'Howled on the longest night of the winter, and the northern lights came out to see who was making that noise.'"
+    },
+    {
+      "id": "i_white_wolf",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Frostbite Lunge' on a plain 130% hit promises a cold/freeze status.",
+      "suggestion": "'Snowfield Lunge'"
+    },
+    {
+      "id": "i_wire_haired_fox_terrier",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as Common (bouncing up and down); 'declared the bounciest dog in history' frame.",
+      "suggestion": "'Was hired to sweep the town's chimneys with its wiry coat. Came out black, shook once, and the whole street needed washing.'"
+    },
+    {
+      "id": "i_wire_haired_fox_terrier",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Hedgehog Havoc' - the Epic is about outrunning horses; no hedgehog anywhere.",
+      "suggestion": "'Riderless Racer'"
+    },
+    {
+      "id": "i_wire_haired_fox_terrier",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Coat collects every twig/leaf/burr = silky terrier Common.",
+      "suggestion": "'Stands on its back legs at the window and reports every passing cat in a loud, wiry bark.'"
+    },
+    {
+      "id": "i_yorkshire_terrier",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Rare (bosses dogs ten times its size) and Legendary (ran a house of big dogs with one bark) are the same premise.",
+      "suggestion": "'Grew its silky show coat so long that it needs two page-boys to carry it on walks. It still stops to bark at pigeons.'"
+    },
+    {
+      "id": "elephant",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Uncommon (remembers peanut-givers) and Legendary (remembered every birthday) are both memory; 'for fifty years'; elephants in a 'jungle' party is muddled.",
+      "suggestion": "Use infrasound rumbles: 'Rumbled so low that every elephant across the continent felt it in their feet. They all turned up at once for the buffet.' Rename Legendary 'Grandmammoth, the Great Rumble'."
+    },
+    {
+      "id": "elephant",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Peanut Planner' / 'Memory Keeper' are swapped against their lines (memory is Uncommon, trunk is Rare).",
+      "suggestion": "Uncommon 'Memory Keeper', Rare 'Peanut Picker'."
+    },
+    {
+      "id": "elephant",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Stampede Parade' for a single elephant; Stampede cluster.",
+      "suggestion": "'Trunk Call'"
+    },
+    {
+      "id": "fox",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Bin-tipping and sorting rubbish overlaps raccoon C/E (bins, sorted by colour); fox and raccoon now feel reskinned.",
+      "suggestion": "Use the real shoe-stealing habit: 'Steals one shoe from every doorstep on the street, never the matching one.'"
+    },
+    {
+      "id": "fox",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Talking into running the farm 'on the same afternoon' is fine but uses the frame; punchline is soft.",
+      "suggestion": "'...ran the farm, the henhouse and the bakery. The hens have never been so well protected or so nervous.'"
+    },
+    {
+      "id": "x_wolf_pup",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Puppy Pounce Howl' crams three ideas into a plain hit.",
+      "suggestion": "'Big Paw Pounce'"
+    },
+    {
+      "id": "x_wolf_pup",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Howling chorus where every dog joins in; part of the 'joined in' cluster.",
+      "suggestion": "'Played tug-of-war with the pack leader's tail all through the full moon. The pack slept in and missed the whole hunt.'"
+    },
+    {
+      "id": "giraffe",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon 'Treetop Nibbler' / Rare 'Purple Tongue' are swapped against lore (the Uncommon is the tongue line, the Common the treetops).",
+      "suggestion": "Common 'Treetrimmer', Uncommon 'Purple Tongue', Rare 'Lookout Neck'."
+    },
+    {
+      "id": "giraffe",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Seeing dinners two streets away is a mild talent, not a troublesome power.",
+      "suggestion": "'Spots what everyone is having for dinner two streets away and turns up at the right window, every night.'"
+    },
+    {
+      "id": "goat",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Eatseverything' is hard to read as one word on a phone.",
+      "suggestion": "'Washline Muncher' or 'Peggobbler'."
+    },
+    {
+      "id": "x_guinea_pig_pet",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common (squeaks at the fridge door) and Rare (hears lettuce bag) are the same food-sound premise; also echoes the approved dog Uncommon 'cheese from the far end of the garden'.",
+      "suggestion": "Use the rumble-strut: 'Rumbles like a tiny motorbike when it is cross. The neighbours keep calling the garage.' Rename Rare 'Rumblestrut'."
+    },
+    {
+      "id": "x_guinea_pig_pet",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Started a squeak chorus... every guinea pig joined in' is almost word-for-word marmoset E.",
+      "suggestion": "'Chewed through its hay so fast that the pet shop now orders a whole haystack every Monday.' (keep marmoset or guinea pig, not both)."
+    },
+    {
+      "id": "x_guinea_pig_pet",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Squeak Stampede' - Stampede cluster.",
+      "suggestion": "'Hay Hurricane'"
+    },
+    {
+      "id": "hamster",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same cheek-hoarding premise as the Uncommon; sharing is sweet but no punchline.",
+      "suggestion": "'Shredded the whole class's homework to build the cosiest nest in school. The teacher now accepts \"the hamster ate it\".'"
+    },
+    {
+      "id": "hamster",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Hammond' is the name of a well-known trademarked video-game hamster character; also cheek names swapped (Common 'Cheekstuffer' has the wheel line).",
+      "suggestion": "'Shredwick, the Nest Builder'; Common 'Wheelrunner', Uncommon 'Cheekstuffer'."
+    },
+    {
+      "id": "hippo",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Birds flying in to clean teeth is the crocodile-and-plover legend, not hippos; 'charges them for the ride' is confusing.",
+      "suggestion": "'Spins its tail like a fan while it does its business, and the whole riverbank ducks.' (if too rude) 'Sprints so fast for its size that the safari jeeps have stopped racing it.'"
+    },
+    {
+      "id": "hippo",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Bubbleblower' has no link to the lore.",
+      "suggestion": "Match new Rare."
+    },
+    {
+      "id": "horse",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare, Epic and Legendary are all galloping speed.",
+      "suggestion": "Horses sleep standing up: 'Fell asleep standing up in the middle of the parade route. The whole parade tiptoed round it.'"
+    },
+    {
+      "id": "horse",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Stampede Thunder' vs Ultimate 'Thunder Stampede' - nearly the same; one horse does not stampede.",
+      "suggestion": "Epic 'Standing Snoozer'; Ultimate 'Photo Finish'."
+    },
+    {
+      "id": "horse",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Silver Mane, the Swiftest Steed' is generic fantasy.",
+      "suggestion": "'Nosewinner, Who Beat the Wind'"
+    },
+    {
+      "id": "lion",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "'Leonidas' is a real historical king and a well-known chocolate brand.",
+      "suggestion": "'Big Snoozemane, the Lazy King'"
+    },
+    {
+      "id": "lion",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare and Epic are both 'roared so loudly that...'.",
+      "suggestion": "'Sat on the only waterhole all day, so every animal on the savannah queued with a bucket.' Rename Epic 'Waterhole Hog'."
+    },
+    {
+      "id": "lion",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Roaryawn' on the mane-shake line.",
+      "suggestion": "'Hurricane Hair'"
+    },
+    {
+      "id": "lion",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Zebra Snack Snatch' implies the lion eating a zebra; avoid predation for kids.",
+      "suggestion": "'Biggest Share'"
+    },
+    {
+      "id": "i_capuchin",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Uncommon (cracks nuts with a stone) and Legendary (teaches the forest to crack nuts with stones) are the same premise.",
+      "suggestion": "Use fur-anointing: 'Rubs squashed ants into its fur as bug spray, then wonders why nobody sits next to it.' Rename 'Antrubber'."
+    },
+    {
+      "id": "i_capuchin",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Stealing sunglasses at the beach is generic monkey (macaque) behaviour; swap test fails.",
+      "suggestion": "'Taps every nut it finds to check if it's ripe, then knocks on your door too.'"
+    },
+    {
+      "id": "i_capuchin",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Nutcracker Cap' on the sunglasses line; 'Stonebasher' on the zips line.",
+      "suggestion": "Re-pair after rewrite."
+    },
+    {
+      "id": "i_colobus",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Uncommon (leaps with flowing cape) and Epic (leapt across the canopy, cape flowing) are the same; Epic adds 'in one afternoon'.",
+      "suggestion": "Use troop babysitting: 'Hands its baby round the whole troop to babysit, then has a long, quiet lie-down.'"
+    },
+    {
+      "id": "i_colobus",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Chewing leaves loudly is weak for a Rare and is reused by walrus/porcupine/manatee 'so loudly that X complain'.",
+      "suggestion": "'Eats leaves that would give any other monkey a tummy ache, then burps at the ones who try.'"
+    },
+    {
+      "id": "i_colobus",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "Names rotated: 'Capewing' on the thumbless line, 'Thumbless' on the chewing line.",
+      "suggestion": "Common 'Thumbless', Uncommon 'Babyswapper', Rare 'Leafburper', Epic 'Capewing'."
+    },
+    {
+      "id": "x_gorilla_ape",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common, Rare and Epic all beat the chest; Uncommon and Legendary are both 'gentle giant'.",
+      "suggestion": "'Hums happily while eating, so loudly that the whole troop knows exactly who found the best celery.'"
+    },
+    {
+      "id": "x_gorilla_ape",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Chest-beating again (keep it for the Epic only).",
+      "suggestion": "Gorillas belch to say all is well: 'Burps after every meal to tell the troop it's happy. The troop burps back.'"
+    },
+    {
+      "id": "x_gorilla_ape",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Gentle Giant Go' - trailing 'Go' is odd.",
+      "suggestion": "'Gentle Giant'"
+    },
+    {
+      "id": "i_guenon",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common (chatters), Rare (gossips) and Legendary (rumour) are one chatter premise.",
+      "suggestion": "Use face-pulling displays: 'Pulls such funny faces at the rival troop that they forget what they were arguing about.'"
+    },
+    {
+      "id": "i_guenon",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Chatter premise; swap in cheek pouches.",
+      "suggestion": "'Stuffs its cheek pouches full of fruit for later, then forgets and eats yours.'"
+    },
+    {
+      "id": "i_guenon",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Three sentences (lint); fine idea once Common/Rare change.",
+      "suggestion": "'Started a rumour at breakfast that every monkey in the forest knew by noon. It was where the best mangoes were, and it was true.'"
+    },
+    {
+      "id": "i_guenon",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "'organised by colour' repeats raccoon E 'sorted the rubbish by colour'.",
+      "suggestion": "'...ate it in rainbow order.'"
+    },
+    {
+      "id": "i_howler_monkey",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "All five are loudness; Common and Uncommon are literally the same (howls at dawn to say good morning).",
+      "suggestion": "Howlers rest most of the day on a leaf diet: 'Sleeps fifteen hours a day to save its voice. Nobody dares wake it.'"
+    },
+    {
+      "id": "i_howler_monkey",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Contest frame; still loud.",
+      "suggestion": "'Howled the morning call so reliably that the jungle airport set its clocks by it. Planes now land on the third howl.'"
+    },
+    {
+      "id": "i_howler_monkey",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'loudest-animal contest... the judges' is the contest/judges frame.",
+      "suggestion": "'Taught a whole valley of monkeys to howl in harmony. Tourists now pay to hear the morning concert, and bring earplugs.'"
+    },
+    {
+      "id": "i_howler_monkey",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Loudmouth Howl' vs walker hound 'Loudmouth Lou'.",
+      "suggestion": "'Dawnhowl'"
+    },
+    {
+      "id": "i_indri",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Common, Rare, Epic and Legendary are all singing.",
+      "suggestion": "Indris leap trunk to trunk: 'Leapt ten metres between tree trunks, upright, every time. The flying squirrels asked for lessons.'"
+    },
+    {
+      "id": "i_indri",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "The sideways dance is the sifaka's famous move, not the indri's.",
+      "suggestion": "'Clings to tree trunks bolt upright and sleeps like that, like a furry fence post.'"
+    },
+    {
+      "id": "i_indri",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Indira' strongly evokes a real politician.",
+      "suggestion": "'Indriella, the Singing Lemur'"
+    },
+    {
+      "id": "i_langur",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Common, Rare, Epic and Legendary are all rooftops (three of them temple roofs).",
+      "suggestion": "Use its long tail and baby-sharing: 'Its tail is so long that the whole troop uses it as a washing line. It does not enjoy laundry day.' (but avoid 'washing line' cluster) or 'Took a dip in the town fountain and splashed every stall in the market.'"
+    },
+    {
+      "id": "i_langur",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Tara' is a deity name; temple/priests bring religion in.",
+      "suggestion": "'Langurella, Queen of the Rooftops'; Legendary lore: '...the market traders gave it the only key to the clock tower. It mostly uses it as a toy.'"
+    },
+    {
+      "id": "i_langur",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Greyface' sits on the long-tail line.",
+      "suggestion": "'Tailbalance' (or swap with Rare 'Rooftopper')."
+    },
+    {
+      "id": "i_madagascar_cat",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Tail-waving contest repeats the Uncommon; contest frame.",
+      "suggestion": "'Stink-fought the whole neighbouring troop at once. The island had to open every window for a week.' (or move stink to Epic and give Rare a new premise)."
+    },
+    {
+      "id": "i_madagascar_cat",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Sunny rock repeats the Common sun-worship pose; lemur L uses sunrises too.",
+      "suggestion": "'Waved its striped tail so high above the forest that ships at sea use it as a lighthouse.'"
+    },
+    {
+      "id": "i_madagascar_cat",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "Common 'Ringtail' / Uncommon 'Sunbather' swapped against lore.",
+      "suggestion": "Common 'Sunbather', Uncommon 'Ringtail'."
+    },
+    {
+      "id": "i_marmoset",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Squeak premise three times (C, E, L); Epic is near-identical to guinea pig E.",
+      "suggestion": "Fathers carry the babies: 'Started a baby-carrying rota so good that the whole troop runs it like a taxi rank. Babies wait at the stop.'"
+    },
+    {
+      "id": "i_marmoset",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Squeaking until everyone agreed is the Common premise.",
+      "suggestion": "'Is so small that it slept in a teacup at the jungle café for a week before anyone noticed. It was charged for the tea.'"
+    },
+    {
+      "id": "monkey",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as Rare (stealing hats); 'royal wedding' evokes real royalty.",
+      "suggestion": "'Swung across the town hall roof by one hand, waved to the crowd and stole the mayor's speech. It was mostly about bananas.'"
+    },
+    {
+      "id": "monkey",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Banana-peel slip is a cartoon stock gag.",
+      "suggestion": "'Peels a banana from the wrong end, the way monkeys really do, and laughs at you for doing it the hard way.'"
+    },
+    {
+      "id": "x_orangutan_ape",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare (treehouse), Epic (giant nest) and Legendary (treetop city) are all building; plane gag repeats howler R.",
+      "suggestion": "Use the long call: 'Gave one long call from the canopy and every orangutan for a mile looked up and started packing.'"
+    },
+    {
+      "id": "x_orangutan_ape",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Nestbuilder' is on the leaf-umbrella line and 'Leafbrella' on the treehouse line. Swap.",
+      "suggestion": "Uncommon 'Leafbrella', Rare 'Nestbuilder'."
+    },
+    {
+      "id": "x_orangutan_ape",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Muddy Riverbank Fling' for poison: mud is not stink/rot.",
+      "suggestion": "'Rotten Fruit Fling'"
+    },
+    {
+      "id": "i_patas",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "All five rarities are speed (one joke scaled).",
+      "suggestion": "'Stands on its back legs in the long grass like a soldier on parade, then wanders off mid-salute.'"
+    },
+    {
+      "id": "i_patas",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Race-winner Legendary; weak punchline.",
+      "suggestion": "'Ran round the savannah so fast that it saw the back of its own head. Says it needs a haircut.'"
+    },
+    {
+      "id": "i_patas",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Dust cloud mistaken for a sandstorm repeats dingo E and wildebeest E dust clouds.",
+      "suggestion": "Keep one dust cloud in the batch (wildebeest), give patas e.g. 'Outran the safari jeep and waited at the gate to sell the tourists tickets.'"
+    },
+    {
+      "id": "i_proboscis_monkey",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Uncommon and Rare are both nose-honking loudness.",
+      "suggestion": "Proboscis monkeys swim well with a pot belly: 'Its round pot belly floats so well that it crosses rivers like a furry rubber ring.'"
+    },
+    {
+      "id": "i_proboscis_monkey",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Contest/trophy frame.",
+      "suggestion": "'Sneezed once across the river and the ferry was blown back to the jetty.'"
+    },
+    {
+      "id": "i_siamang",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "'Sings a duet with its partner every morning' is the titi Uncommon word-for-word; and E/L are duets too.",
+      "suggestion": "'Hangs by one arm while eating with the other, and drops the peel on whoever is underneath.'"
+    },
+    {
+      "id": "i_siamang",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "'Swings so fast it never touches the ground' is the gibbon/spider monkey premise.",
+      "suggestion": "'Puffs its throat sac up so big in a storm that it floats a little way down the valley.'"
+    },
+    {
+      "id": "i_siamang",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Duet again; 'in jungle history' frame.",
+      "suggestion": "Keep the duet Legendary and make Epic non-musical, or change L: 'Sang so loudly with its partner that a passing echo got stuck in the valley and is still answering them.'"
+    },
+    {
+      "id": "i_spider_monkey",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "'Swung through every tree without touching the ground' is the gibbon Legendary premise.",
+      "suggestion": "'Hung by its tail from the tallest tree and picked fruit for the whole troop with both hands. They now order by shouting.'"
+    },
+    {
+      "id": "i_spider_monkey",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Fivelimbs' is the fifth-arm idea, which is the Uncommon line.",
+      "suggestion": "Common 'Fruitdropper', Uncommon 'Fivelimbs'."
+    },
+    {
+      "id": "i_spider_monkey",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Dangling Distraction' - distraction suits defdown; this is a stun.",
+      "suggestion": "'Upside-Down Surprise'"
+    },
+    {
+      "id": "i_squirrel_monkey",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare (picnic sandwiches vanish) and Epic (troop raids café pastries) are the same food-raid premise.",
+      "suggestion": "'Bounced so excitedly in a sports shop that every ball in the place went off at once.'"
+    },
+    {
+      "id": "i_squirrel_monkey",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Troop Stampede' - Stampede cluster.",
+      "suggestion": "'Pastry Pirates' or match new Epic."
+    },
+    {
+      "id": "i_three_toed_sloth",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "'Slowpoke' is the name of a famous trademarked monster in a monster-collecting game.",
+      "suggestion": "'Inchalong'"
+    },
+    {
+      "id": "i_three_toed_sloth",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Staring contest Legendary duplicates x_sloth L ('wins every staring contest') and tiger L.",
+      "suggestion": "'Climbed down once a week for fifty years, so the forest built it a lift. It still takes the stairs, slowly.' (drop 'fifty years' if used elsewhere)"
+    },
+    {
+      "id": "i_three_toed_sloth",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "'people think it is a statue' - statue frame; also low trouble for a Rare.",
+      "suggestion": "'Moves so slowly that moss, moths and a family of beetles have all moved into its fur. It charges them rent.'"
+    },
+    {
+      "id": "i_three_toed_sloth",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Slowest Stampede' - Stampede cluster.",
+      "suggestion": "'Snailrace'"
+    },
+    {
+      "id": "i_titi",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Tail-twining in Common, Epic and Legendary.",
+      "suggestion": "'Its babies ride on dad's back, and the idea caught on. Every monkey father in the forest now carries a baby, and nobody has a free hand for snacks.'"
+    },
+    {
+      "id": "panda",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common (eats bamboo 14 hours) and Rare (eats a bamboo forest) are the same premise; Uncommon/Epic are both rolling.",
+      "suggestion": "'Its black eye patches make it look sad, so zoo visitors keep handing it their sandwiches. It is not sad.'"
+    },
+    {
+      "id": "panda",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same frame as shih tzu L ('Was given its own palace... Still...'), and eating again.",
+      "suggestion": "Use the pseudo-thumb: 'Peels bamboo so neatly with its extra thumb that the city's top chefs queue for lessons.'"
+    },
+    {
+      "id": "panda",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Pandora' is a mythological figure and a big brand name.",
+      "suggestion": "'Pandarella, the Bamboo Empress' or 'Bamboozle, the Bamboo Empress'."
+    },
+    {
+      "id": "pig",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Sizzling Squeal' on a pig evokes bacon frying.",
+      "suggestion": "'Hot Mud Squeal'"
+    },
+    {
+      "id": "pig",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Sir Hamsworth' leans on ham (pig meat).",
+      "suggestion": "'Sir Trufflesworth, Squire of the Sty'"
+    },
+    {
+      "id": "rabbit",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Cricket pitch sinking; fine, but cricket/match frame recurs.",
+      "suggestion": "'...the bowling green sank by a metre.' or village pond drains."
+    },
+    {
+      "id": "sheep",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "'Shirley' plus a magnificent fleece strongly evokes the big sheep in a famous trademarked sheep animation.",
+      "suggestion": "'Dame Woolhilda, Queen of the Fleece'"
+    },
+    {
+      "id": "sheep",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Follows the one in front into the pond duplicates wildebeest C (follows herd into a river); Common/Uncommon names swapped.",
+      "suggestion": "Keep for sheep (it is the classic), change wildebeest C. Swap names: Common 'Follower', Uncommon 'Woolball'."
+    },
+    {
+      "id": "sheep",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Uncommon (wool grows into the hedge) and Legendary (fleece knitted into a jumper) are the same wool premise.",
+      "suggestion": "'Escaped so often that the farmer gave up and built the fence around the sheep instead of the field.'"
+    },
+    {
+      "id": "squirrel",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Forgetting the store repeats the Common punchline (forgets where nuts are).",
+      "suggestion": "'Planted so many forgotten acorns that it now owns half the forest, and charges the woodpeckers rent.'"
+    },
+    {
+      "id": "squirrel",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Being chased by two dogs while leaping has no punchline or trouble.",
+      "suggestion": "'Crossed the whole town along the telephone wires without touching the ground, and got to the bakery before the bus.'"
+    },
+    {
+      "id": "tiger",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Staring-contest Legendary repeated by both sloths; 'the sun looked away' is cosmic by reflex. 'Rajah' is a royal title, fine but colonial.",
+      "suggestion": "'Fell asleep in the long grass so perfectly hidden that the safari bus parked on its tail. Nobody has ever reversed so fast.'"
+    },
+    {
+      "id": "tiger",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare (stripes hide it, zookeepers count twice) repeats the Uncommon stealth premise and the zebra Uncommon counting gag.",
+      "suggestion": "Tigers love water: 'Takes a long bath in the pond every afternoon and growls at anyone who wants the pond back.' (then move the swimming Epic to another premise)."
+    },
+    {
+      "id": "tiger",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Jungle Thunder' has nothing to do with the swimming-picnic lore; Thunder cluster.",
+      "suggestion": "'Picnic Paddler'"
+    },
+    {
+      "id": "x_anteater",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare, Epic and Legendary are all eating ants; 'Hoovered' is a brand-derived verb.",
+      "suggestion": "'Slept curled under its own bushy tail in the rain, and the town used it as a bus shelter.'"
+    },
+    {
+      "id": "x_anteater",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Anthill Vacuum Slurp' - 'slurp' reads as a drain move; variants are stun/stun/poison.",
+      "suggestion": "'Tongue Twister'"
+    },
+    {
+      "id": "x_anteater",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Longtongue' / 'Snifflenose' swapped against their lines.",
+      "suggestion": "Common 'Snifflenose', Uncommon 'Longtongue'."
+    },
+    {
+      "id": "x_antelope",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "All five rarities are leaping/bouncing.",
+      "suggestion": "Use radar ears: 'Its ears swivel like radar dishes, so it hears a lion yawn a mile away.'"
+    },
+    {
+      "id": "x_antelope",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Jumping contest; contest frame.",
+      "suggestion": "'Snorted an alarm so loud that the whole savannah ran away, including the lion it was warning about.'"
+    },
+    {
+      "id": "x_armadillo",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Word-for-word the hedgehog Common ('curls into a ball whenever someone says hello').",
+      "suggestion": "'Sleeps sixteen hours a day inside its own armour. Never needs a duvet, never shares one.'"
+    },
+    {
+      "id": "x_armadillo",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare, Epic and Legendary are all bowling (skittles, bowling-ball town, bowling champion); Rare also copies hedgehog E (rolled down a hill at the village fair).",
+      "suggestion": "Armadillos leap straight up when startled: 'Jumped straight up in surprise at the fireworks show and landed on stage. The crowd thought it was the finale.'"
+    },
+    {
+      "id": "x_armadillo",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Village-fair roll duplicates hedgehog E.",
+      "suggestion": "'Dug a burrow so fast under the fence that the fence ended up on the other side.' (and move the digging Uncommon to its armour/sleep habit)."
+    },
+    {
+      "id": "x_badger",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Common, Uncommon and Epic all dig; Uncommon and Epic both 'tunnels so long/huge that...'.",
+      "suggestion": "Badgers are notoriously clean with latrines and bedding changes: 'Airs its bedding outside every sunny morning and tuts at anyone with an untidy burrow.'"
+    },
+    {
+      "id": "x_badger",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Brock' is the traditional badger name, fine, but also a well-known game character; acceptable.",
+      "suggestion": "Optional 'Old Bramblebrock, Lord of the Sett'."
+    },
+    {
+      "id": "x_buffalo",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Epic and Legendary are both herd scale (stampede, herd taking a week to pass).",
+      "suggestion": "'Wallowed in the dust so often that its dust bath became the plains' favourite spa. Bookings are full for a year.' (then change U accordingly) or 'Stood still for so long that the prairie dogs built a town on its back.'"
+    },
+    {
+      "id": "x_buffalo",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "Mixes buffalo and bison; fine for kids but the object is 'buffalo'.",
+      "suggestion": "'Big Boss Buffalo, the Unstoppable'"
+    },
+    {
+      "id": "x_buffalo",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Plains Thunder' / Ultimate 'Prairie Thunder' near-duplicate; Thunder cluster.",
+      "suggestion": "Epic 'Seismic Herd'; Ultimate 'Wallow Wallop'."
+    },
+    {
+      "id": "x_chimp",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Third 'Professor' Legendary in the batch (capuchin, mole, platypus) - and two 'the Clever'.",
+      "suggestion": "'Chimperton, Head of Tours'"
+    },
+    {
+      "id": "x_chimp",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Hooting at feeding time 'and the whole zoo joins in' is the joined-in frame.",
+      "suggestion": "'Hoots so loudly at feeding time that the keepers now hand out lunch with earmuffs on.'"
+    },
+    {
+      "id": "x_chinchilla",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Common and Epic are both the dust bath; Uncommon and Legendary are both softness.",
+      "suggestion": "Fur-slip escape: 'Left a patch of fur in the cat's paws to escape. The cat now owns the softest bed in the street, and everyone wants one.'"
+    },
+    {
+      "id": "x_chinchilla",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Softness again (also the Uncommon).",
+      "suggestion": "'Jumped from the floor to the top of the wardrobe in one go and refused to come down until the furniture was rearranged.'"
+    },
+    {
+      "id": "x_chinchilla",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Dust Bath Blizzard Bash' - blizzard implies cold; long and clunky.",
+      "suggestion": "'Dust Cloud Whirl'"
+    },
+    {
+      "id": "x_dingo",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Sausages in Common and Rare (and husky E, staffie R).",
+      "suggestion": "'Climbs trees and fences like a cat to get to the campsite bins, and looks very proud up there.'"
+    },
+    {
+      "id": "x_dingo",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Leading the pack across the outback to swim has no punchline; pack-crossing is a w01 repeat.",
+      "suggestion": "'Howled so often over the outback that the echo learned the tune. Campers now hear two dingoes and only see one.'"
+    },
+    {
+      "id": "x_dingo",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Dust-cloud-follows-it repeats patas/wildebeest.",
+      "suggestion": "'...the red dust followed it home and settled on the washing.'"
+    },
+    {
+      "id": "x_donkey",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Common (stops dead, refuses to move) and Legendary (most stubborn, stood still a week) are the same premise.",
+      "suggestion": "Keep the tide line and change the Common: 'Rolls in the dust right after being brushed, then brays to make sure you saw.'"
+    },
+    {
+      "id": "x_donkey",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Cartsherpa' uses the name of a real ethnic group as a job word.",
+      "suggestion": "'Packhauler'"
+    },
+    {
+      "id": "x_donkey",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Heehaw' / 'Stubbornhoof' swapped against lore.",
+      "suggestion": "Common 'Stubbornhoof', Uncommon 'Heehaw'."
+    },
+    {
+      "id": "x_donkey",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Donald Donkerson' evokes famous Donalds.",
+      "suggestion": "'Dunstan Donkerson, the Stubborn Champion'"
+    },
+    {
+      "id": "x_dugong",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Common and Uncommon are both slow seagrass grazing; dugong also overlaps manatee throughout.",
+      "suggestion": "'Surfaces to breathe standing on its tail, like a sailor checking the weather.' (true dugong behaviour)"
+    },
+    {
+      "id": "x_dugong",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'its pub' - avoid pubs in a children's game; punchline is a list.",
+      "suggestion": "'...the town named its harbour, its ferry and its ice-cream flavour after it.'"
+    },
+    {
+      "id": "x_dugong",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Shallows Stampede' for a solitary gentle grazer.",
+      "suggestion": "'Seagrass Swell'"
+    },
+    {
+      "id": "x_ferret",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Common and Epic are both sock theft.",
+      "suggestion": "'Slipped down the back of every sofa in the furniture shop and came out with all the lost coins, two remotes and a very surprised hamster.'"
+    },
+    {
+      "id": "x_ferret",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Rare (squeezes through pipes) and Legendary (threads cables through pipes) are the same pipe premise; name says 'War Dancer' but the lore is cables.",
+      "suggestion": "Keep the cable Legendary (real and funny) and change the Rare: 'Falls asleep so deeply that you can carry it round the house like a scarf.' Rename Legendary 'Fernando, the Cable Runner'."
+    },
+    {
+      "id": "x_gerbil",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare, Epic and Legendary are all tunnels.",
+      "suggestion": "'Chewed every cardboard box in the post office into confetti. Parcels now arrive in a cloud.' (and change Common away from chewing: 'Sleeps in a heap with its friends so tight that nobody knows whose tail is whose.')"
+    },
+    {
+      "id": "x_gerbil",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Tailthumper' - gerbils drum their back feet, not tails; Common 'Sandtunneler' is on the chewing line.",
+      "suggestion": "Uncommon 'Footdrummer'."
+    },
+    {
+      "id": "x_gibbon",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Common, Rare, Epic and Legendary all swing; 'in one afternoon'.",
+      "suggestion": "Gibbons walk on two legs with arms up: 'Walked along a telephone wire on two legs, arms up like a tightrope walker. The circus wants its number.'"
+    },
+    {
+      "id": "x_gibbon",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Treetopper' / 'Morningsinger' swapped against lore.",
+      "suggestion": "Uncommon 'Morningsinger', Rare 'Treetopper'."
+    },
+    {
+      "id": "x_hedgehog",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Uncommon and Legendary are both slug-eating; trophy frame.",
+      "suggestion": "'Hibernated so soundly that the gardener built a summer house around it. It woke in spring and complained about the curtains.'"
+    },
+    {
+      "id": "x_hedgehog",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rolled downhill at the village fair = armadillo R.",
+      "suggestion": "Keep here (change armadillo), or 'Rolled into the autumn leaf pile and came out wearing all of it; the park now has one tidy lawn and one walking bonfire-sized heap.' (avoid real bonfire danger)."
+    },
+    {
+      "id": "x_hyena",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common, Rare, Epic and Legendary are all laughing.",
+      "suggestion": "'Its clan is run by the females, who marched to the waterhole and took the lions' best spot. The lions are writing a complaint.'"
+    },
+    {
+      "id": "x_hyena",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Laugh spreading 'until the zebras laughed too' - laughing again and the joined-in frame.",
+      "suggestion": "'Crunched up every bone at the safari barbecue so tidily that the lodge sacked its washing-up team.'"
+    },
+    {
+      "id": "x_jackal",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Uncommon, Rare and Legendary are all snack theft; stealing a sandwich 'from every camel' is odd.",
+      "suggestion": "'Pairs up with its partner for life and they yip duets at the fence posts. The fence posts have not replied.' or 'Hides leftovers under the sand and remembers every spot better than the squirrels do.'"
+    },
+    {
+      "id": "x_kangaroo",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Boxing again (Uncommon boxes) and trophy frame.",
+      "suggestion": "'Hopped so far in one bound that it needed a passport at the other end.'"
+    },
+    {
+      "id": "x_kangaroo",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Tailbalance' sits on the car-jump line; 'Boomer' is also used as a slang put-down.",
+      "suggestion": "Rare 'Carhopper'; Legendary 'Big Red, Champion of the Hop'."
+    },
+    {
+      "id": "x_kitten_cat",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Uncommon and Epic are both unravelling wool.",
+      "suggestion": "'Sharpened its tiny claws on every armchair in the furniture shop. Everything is now sold as \"vintage\".'"
+    },
+    {
+      "id": "x_kitten_cat",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'whole city stopped working for an afternoon' repeats manatee E 'whole town stopped work to watch'.",
+      "suggestion": "'Fell asleep in the bakery window and the queue to watch reached the next town. The bread went cold, nobody minded.'"
+    },
+    {
+      "id": "x_lemur",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common (stares until you give it the grape) and Rare (stares until tourist gives lunch) are the same premise; Legendary stares too.",
+      "suggestion": "Scent-marking: 'Rubbed its scent on every tree in the park so thoroughly that the dogs refuse to walk there.'"
+    },
+    {
+      "id": "x_lemur",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Sunrise waiting repeats madagascar cat sun themes and cosmic-by-reflex.",
+      "suggestion": "'Huddled with its whole troop into one fluffy ball on a cold night, so big that it rolled down the hill to the village and was mistaken for a sheep.'"
+    },
+    {
+      "id": "x_lemur",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Balancing on 'the washing line' repeats monkey U and langur U.",
+      "suggestion": "'...on the thinnest branches and the TV aerial.'"
+    },
+    {
+      "id": "x_manatee",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Rare (so gentle everything stops for it) and Legendary (most loved for being nice, fifty years) are the same premise; no punchline.",
+      "suggestion": "Manatees gather at power station warm water: 'Visited the power station's warm outflow every winter for so long that the station named its turbines after it.'"
+    },
+    {
+      "id": "x_manatee",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names rotated: 'Seacowpoke' (C) on the floating line, 'Slowfloat' (U) on lettuce, 'Lettuce Lover' (R) on gentleness.",
+      "suggestion": "C 'Slowfloat', U 'Lettuce Lover', R 'Sea Cowpoke' or match the new Rare."
+    },
+    {
+      "id": "x_meerkat",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Sentry duty in Uncommon, Rare, Epic and Legendary; Legendary uses the statue frame (w01 setter L too).",
+      "suggestion": "'Dug a burrow so grand that the mob has a guest room, a sandpit and a lookout tower with a lift.'"
+    },
+    {
+      "id": "x_meerkat",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Burrowbuddy' on the eagle-spotting line.",
+      "suggestion": "'Eagle-Eye'"
+    },
+    {
+      "id": "x_mole",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Bowling green bouncing 'during a match' - cluster (bowling, match).",
+      "suggestion": "'...under the tennis court so thoroughly that every ball now bounces sideways.'"
+    },
+    {
+      "id": "x_mongoose",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Snakes in Uncommon, Rare, Epic and Legendary.",
+      "suggestion": "Banded mongooses throw eggs between their legs at rocks: 'Cracks eggs by throwing them backwards between its legs at a rock. The kitchen walls are a disaster.'"
+    },
+    {
+      "id": "x_mongoose",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Snake-dance champion: snakes again, contest frame.",
+      "suggestion": "'Hid its whole gang in one burrow so tightly that they came out as one big mongoose and argued for an hour about who was the head.'"
+    },
+    {
+      "id": "x_mongoose",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Snakeduel' on the darting line; 'Burrowbandit' on the cobra line.",
+      "suggestion": "Common 'Shedflash', Rare 'Snakeduel'."
+    },
+    {
+      "id": "x_moose_animal",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Roadblocker' / 'Forest Traffic Jam' are swapped against R (road) / E (festival lights) lore; Common 'Antlermassive' is adjective-like and on the flower-basket line.",
+      "suggestion": "Common 'Basketmuncher', Rare 'Traffic Jam', Epic 'Festive Antlers'."
+    },
+    {
+      "id": "x_moose_animal",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Ducks riding in the antlers is charming but slight for a Legendary.",
+      "suggestion": "'Shed its antlers in the village square, and the village used them as a bus shelter until spring.'"
+    },
+    {
+      "id": "x_opossum",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Playing dead in Common, Rare, Epic and Legendary.",
+      "suggestion": "'Grins with all fifty of its teeth when it's nervous, which makes everyone else nervous too.'"
+    },
+    {
+      "id": "x_opossum",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Played dead again.",
+      "suggestion": "'Carried all thirteen of its babies across the high street on its back. The lollipop lady stopped every bus.'"
+    },
+    {
+      "id": "x_opossum",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Tickgobbler' on the faint line (and the tick-eating claim is shaky).",
+      "suggestion": "Match new Rare: 'Fiftygrin'."
+    },
+    {
+      "id": "x_otter",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Eating off its tummy (Common) and a restaurant on its tummy cracking shells (Legendary) are the same premise.",
+      "suggestion": "Keep L, change C: 'Keeps its favourite stone in a pocket under its arm and won't show anyone, not even you.'"
+    },
+    {
+      "id": "x_otter",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "Names rotated ('Shellcracker' on the floating line, 'Riverslider' on juggling, L 'Juggler of Pebbles' on the restaurant line).",
+      "suggestion": "C 'Tummytable', R 'Pebblejuggler', E 'Riverslider', L 'Ottoline, Chef of the Bay'."
+    },
+    {
+      "id": "x_platypus",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'every scientist had to rewrite their textbooks' is the 'scientists baffled' warning sign.",
+      "suggestion": "Males have a venom spur: 'Kicked the museum's stuffed duck with its secret ankle spur, and the duck has been nervous ever since.'"
+    },
+    {
+      "id": "x_platypus",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Professor' is the 4th professor in the batch; trophy frame in lore.",
+      "suggestion": "'The Odd Lot, Puzzle of Nature'; lore idea: 'Was sent to the museum to be labelled and ate all the labels. It is still filed under \"miscellaneous\".'"
+    },
+    {
+      "id": "x_polar_bear_cub",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Sneaking up on its own mother is the white wolf Uncommon.",
+      "suggestion": "'Waits so patiently by an ice hole that the seals start bringing it snacks to make it leave.'"
+    },
+    {
+      "id": "x_polar_bear_cub",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Uncommon and Epic are both sliding on its tummy.",
+      "suggestion": "'Fell asleep on an ice floe and drifted into the harbour. The ferry had to queue behind it.'"
+    },
+    {
+      "id": "x_polar_bear_cub",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Iceberg Slide Crash' - ice word on an Ultimate whose normal variant burns.",
+      "suggestion": "'Cub Tumble'"
+    },
+    {
+      "id": "x_porcupine",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Raising quills to win (Legendary) repeats the Rare (raises/rattles quills until everyone backs off).",
+      "suggestion": "Porcupines love salt: 'Licked the salt off every road sign in the county. The signs now all say very clean things.'"
+    },
+    {
+      "id": "x_porcupine",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Porcupines cannot shoot quills; myth is recognisable, acceptable as fantasy.",
+      "suggestion": "-"
+    },
+    {
+      "id": "x_possum",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Common and Epic are both thumping on a roof at night.",
+      "suggestion": "'Raided every fruit tree on the street in one night and left the pips on each doorstep, sorted by house number.'"
+    },
+    {
+      "id": "x_possum",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Fruitpincher' / 'Hisspaw' swapped against lore.",
+      "suggestion": "Uncommon 'Hisspaw', Rare 'Fruitpincher'."
+    },
+    {
+      "id": "x_puppy_dog",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Copies w01 kerry blue L punchline (judges gave it every prize, including the cat ones); dog-show/judges frame.",
+      "suggestion": "'Fell asleep in a bakery window for one minute. Customers queued round the block, and the puppy woke up and ate the display.'"
+    },
+    {
+      "id": "x_puppy_dog",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Puddlemaker' on the tripping line; 'Floppypaws' on the puppy-eyes line.",
+      "suggestion": "Uncommon 'Floppypaws', Rare 'Puppy Eyes'."
+    },
+    {
+      "id": "x_raccoon",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Bins in Common, Epic and Legendary; Epic also sorts rubbish like the fox Common.",
+      "suggestion": "Washing: 'Washed every apple in the orchard in the duck pond before the farmer could pick them. The ducks now charge for bathwater.'"
+    },
+    {
+      "id": "x_raccoon",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Binbandit' near-duplicates fox 'Binraider' and its own Legendary 'Bin Bandit'.",
+      "suggestion": "'Lidflipper'"
+    },
+    {
+      "id": "x_rat",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Underground railway that 'runs on time' copies w01 wombat L; Uncommon/Epic/Legendary all underground tunnels.",
+      "suggestion": "'Chewed a shortcut through every wall on the high street. The shops are now one long shop and nobody can find the exit.'"
+    },
+    {
+      "id": "x_rat",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Underground again, 'for fifty years', tidy tunnels has no punchline.",
+      "suggestion": "Rats laugh when tickled (real): 'Laughed so hard when the scientist tickled it that the whole lab joined in. Research has stopped for giggles.'"
+    },
+    {
+      "id": "x_rat",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Cheesecrafter' on the maze line.",
+      "suggestion": "'Mazebreaker'"
+    },
+    {
+      "id": "x_reindeer_animal",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Copies w01 deer L (pulled a sleigh round the whole world in one night) and is a Santa pastiche; Rare is also sleigh.",
+      "suggestion": "Antlers: 'Grew antlers so wide that the whole herd sheltered under them in a blizzard. Now it sheds them every spring as a ready-made bus shelter.'"
+    },
+    {
+      "id": "x_reindeer_animal",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Dasherella' borrows the name of one of Santa's reindeer.",
+      "suggestion": "'Antlerella, Leader of the Herd'"
+    },
+    {
+      "id": "x_reindeer_animal",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Snowantler' / 'Clickhoof' swapped against lore (clicking knees is Common).",
+      "suggestion": "Common 'Clickhoof', Rare 'Sleighblur'."
+    },
+    {
+      "id": "x_rhino",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Charging in Common, Rare, Epic and Legendary; coconuts are wrong for rhino habitat.",
+      "suggestion": "Poor eyesight: 'Can smell a tasty bush from across the plain, but can't see you standing right in front of it.'"
+    },
+    {
+      "id": "x_rhino",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Tunnel through a mountain 'now a convenient tunnel' duplicates westie L.",
+      "suggestion": "'Squinted at the lighthouse, decided it was a rival rhino and stared it down for a week. The ships now steer by the rhino.'"
+    },
+    {
+      "id": "x_rhino",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Charging Rhino' is a plain label, not a creature name.",
+      "suggestion": "Match new Rare: 'Squintsnout'."
+    },
+    {
+      "id": "x_sea_lion",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Uncommon (balances a ball) and Legendary (balancing a beach ball, bucket and lifeguard) are the same premise.",
+      "suggestion": "'Swam so fast past the ferry that the passengers thought the ferry was going backwards.'"
+    },
+    {
+      "id": "x_sea_lion",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare (lounges on the pier) and Epic (takes over the pier) are the same.",
+      "suggestion": "'Barked along to the brass band on the pier until the band gave up and the sea lions played the encore.'"
+    },
+    {
+      "id": "x_sea_lion",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Harbour Honk' - sea lions bark, not honk.",
+      "suggestion": "Match new Epic."
+    },
+    {
+      "id": "x_seal",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Greeting every fishing boat has no punchline; name 'Grey Sea Singer' fits the Epic, not this line.",
+      "suggestion": "'Bobbed up beside every swimmer on the coast so often that the lifeguards now count the seal first.' or a singing Legendary that tops the Epic."
+    },
+    {
+      "id": "x_skunk",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Common, Rare, Epic and Legendary are all spraying/raising the tail.",
+      "suggestion": "Skunks dig for grubs: 'Dug up the golf course hunting grubs, so every hole is now a hole-in-one.'"
+    },
+    {
+      "id": "x_skunk",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Picnic Evacuation Spray' promises a stink (poison) effect; variants are burn/burn/defdown.",
+      "suggestion": "'Everybody Out!'"
+    },
+    {
+      "id": "x_skunk",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Lady Pew' closely echoes a famous trademarked cartoon skunk.",
+      "suggestion": "'Lady Phew, the Striped Stench' or 'Duchess Whiff'."
+    },
+    {
+      "id": "x_sloth",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Staring contest duplicates three-toed sloth L; 'fifty years'.",
+      "suggestion": "'Crossed the road so slowly that the council resurfaced the road around it. It still has not reached the other side.'"
+    },
+    {
+      "id": "x_sloth",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare (sleeps so deeply birds nest in its fur) and Epic (nap over a road) are both sleeping.",
+      "suggestion": "'Swam across the river so lazily that the ferry waited and the passengers clapped it in.' (moving swim from U) and give U a hanging/climb-down habit."
+    },
+    {
+      "id": "x_sloth",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Treehugger Sloth' is on the swimming line and 'treehugger' is political slang.",
+      "suggestion": "'Lazy Lapper'"
+    },
+    {
+      "id": "x_sloth",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Treetop Sleepover Slam' - sleep word on an attack Ultimate.",
+      "suggestion": "'Very Late Arrival'"
+    },
+    {
+      "id": "x_wallaby",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "'Is a smaller kangaroo and won't stop reminding the kangaroos about it' - logic is unclear (reminding them of what?).",
+      "suggestion": "'Is smaller than a kangaroo and keeps reminding the kangaroos that small is faster.'"
+    },
+    {
+      "id": "x_wallaby",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Pouchsnack' on the light-footprints line; 'Bushbounce' on the kangaroo line.",
+      "suggestion": "Re-pair after rewrite."
+    },
+    {
+      "id": "x_weasel",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Common (egg under each arm from the henhouse) and Epic (every barn, farmers count eggs) are the same; Legendary also leaves with an egg.",
+      "suggestion": "'Danced its war dance in the village square so wildly that the morris dancers asked for lessons.'"
+    },
+    {
+      "id": "x_weasel",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Weasel war dance; ferret Uncommon is also a sideways excited dance and ferret L name says 'War Dancer'.",
+      "suggestion": "Keep the war dance on the weasel only (or Epic per above) and give the Uncommon the ring-gap line, Rare a new premise: 'Turns white in winter, then forgets and stays white in a muddy spring.'"
+    },
+    {
+      "id": "x_weasel",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "Names rotated ('Henhouse Sneak' on the dance line, 'Weaseldance' on the ring line).",
+      "suggestion": "Re-pair."
+    },
+    {
+      "id": "x_wildebeest",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Epic and Legendary are both the great migration.",
+      "suggestion": "'Looks as if it was built from spare parts (beard, mane, horns, tail) and has the paperwork to prove they are all its own.'"
+    },
+    {
+      "id": "x_wildebeest",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Follows the herd into a river duplicates the sheep Common.",
+      "suggestion": "'Bucks and kicks for no reason in the middle of grazing, then carries on chewing as if nothing happened.'"
+    },
+    {
+      "id": "x_wildebeest",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Wilbur' is a famous storybook pig.",
+      "suggestion": "'Wanderbeard, the Long Walker'"
+    },
+    {
+      "id": "x_yak",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Common (refuses to carry bags until breakfast), Rare (carried kit) and Legendary (carried every bag, refuses until thank you) are one carrying premise; Legendary copies w01 llama L. 'Moos' is wrong: yaks grunt (Bos grunniens, the 'grunting ox').",
+      "suggestion": "Common: 'Grunts at climbers every morning instead of mooing, then looks offended when nobody understands.'"
+    },
+    {
+      "id": "x_yak",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of w01 llama L.",
+      "suggestion": "'Grunted so deeply on the mountain that the avalanche changed its mind and went back up.'"
+    },
+    {
+      "id": "x_yak",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Shaking a shaggy coat over people repeats Tibetan terrier E; name 'Himalayan Haul' fits the Rare, not this.",
+      "suggestion": "'Sat on a frozen lake to keep warm and melted a hole big enough for the village to go swimming.'"
+    },
+    {
+      "id": "x_yak",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Mountainmooer' (yaks don't moo) and Common/Uncommon names swapped; legend move 'Distracting Moo' duplicates w01 cow and has the same fact problem.",
+      "suggestion": "Uncommon 'Sofacoat'; legend 'Grumbling Grunt'."
+    },
+    {
+      "id": "zebra",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare (dazzled a lion) and Epic (dizzy lions) are the same dazzle premise.",
+      "suggestion": "'Started a neck-nibbling grooming line two thousand zebras long, and nobody on the savannah got any sleep for the giggling.'"
+    },
+    {
+      "id": "zebra",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Road crossings painted to match repeats the Common (zebra crossings).",
+      "suggestion": "Keep L and change Common: 'Barks like a small dog when it's excited, and every farm dog in the valley answers.'"
+    },
+    {
+      "id": "zebra",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Stripesnack' - nothing about snacks.",
+      "suggestion": "'Crossing Keeper'"
+    },
+    {
+      "id": "zebra",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Muddy Waterhole Splash' for poison: mud is not rot/stink.",
+      "suggestion": "'Stale Waterhole Splash'"
+    },
+    {
+      "id": "i_squirrel_monkey",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Bouncetroop' on the single-bounce line, 'Yellowpaws' on the troop line.",
+      "suggestion": "Common 'Sugarbowl Bouncer', Uncommon 'Troopbounce'."
+    },
+    {
+      "id": "x_mouse",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Thank-you note for the cheese is cute; mouse-and-cheese is a stock trope used twice (R, L).",
+      "suggestion": "OK to keep one; L could use the palace pantry without cheese: '...ate the finest crumbs in the land.'"
+    },
+    {
+      "id": "x_dingo",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Desertdodger' does not reflect the head-turning line.",
+      "suggestion": "'Headturner'"
+    },
+    {
+      "id": "x_hyena",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Laughing Loud' is weak and grammatically odd.",
+      "suggestion": "Match new Rare: 'Clan Boss'."
+    },
+    {
+      "id": "x_jackal",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Clever Coat' is vague.",
+      "suggestion": "'Caravan Pincher'"
+    },
+    {
+      "id": "x_kitten_cat",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Tiny Pounce Kitten' - species tag to avoid collision with marmoset 'Tiny Pounce'.",
+      "suggestion": "'Toe Pounce'"
+    },
+    {
+      "id": "x_mongoose",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Quick Snap Mongoose' - species tag to avoid jackal 'Quick Snap'.",
+      "suggestion": "'Cobra Dodge Bite'"
+    },
+    {
+      "id": "x_skunk",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Striped Pounce Skunk' - species tag to avoid tiger 'Striped Pounce'.",
+      "suggestion": "'Tail-Up Charge'"
+    },
+    {
+      "id": "x_yak",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Distracting Moo' duplicates w01 cow legend name and yaks grunt.",
+      "suggestion": "'Grumbling Grunt'"
+    },
+    {
+      "id": "i_tibetan_mastiff",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Himalayan Thunder Roar' - roar suggests stun; variants defdown/poison/poison. Epic-name template.",
+      "suggestion": "'Guardian of the Pass'"
+    },
+    {
+      "id": "i_howler_monkey",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Jungle Foghorn Blast' suggests stun; variants poison/stun/poison.",
+      "suggestion": "'Morning Chorus'"
+    }
+  ]
+}

@@ -1,0 +1,760 @@
+{
+  "schema": 1,
+  "batch": "w04-bugs-and-reptiles",
+  "entries": {
+    "bee": {
+      "status": "draft",
+      "names": {
+        "common": "Buzzbumble",
+        "uncommon": "Pollenpocket",
+        "rare": "Waggledancer",
+        "epic": "Hive Hurricane",
+        "legendary": "Queen Honeycombe the Industrious"
+      },
+      "lore": {
+        "common": "Bumps into the same window forty times, then flies straight out of the open door beside it.",
+        "uncommon": "Comes home so covered in pollen that it looks like a tiny flying cheese puff.",
+        "rare": "Does a wiggly dance that tells the whole hive exactly where your picnic jam is.",
+        "epic": "Led the whole hive into the bakery to taste the doughnuts. The baker now sells them pre-licked.",
+        "legendary": "Made enough honey in one summer to fill the village pond. The ducks are very sticky and very happy."
+      },
+      "moves": {
+        "signature": "Bee Sting",
+        "legend": "Busy Buzz Boost",
+        "ultimate": "Hive Hurricane Stun",
+        "kit.swarm": "Buzz Buzz Buzz",
+        "kit.sting": "Honey Sting",
+        "kit.web_snare": "Pollen Puff Daze"
+      }
+    },
+    "beetle": {
+      "status": "draft",
+      "names": {
+        "common": "Legwaver",
+        "uncommon": "Dungroller",
+        "rare": "Shellshiner",
+        "epic": "Beetle Bulldozer",
+        "legendary": "Scarabella, Roller of the Desert"
+      },
+      "lore": {
+        "common": "Falls on its back and waves its legs in the air until someone helps it, then walks off without thanks.",
+        "uncommon": "Rolls a ball of dung bigger than itself across the field and won't let anyone help.",
+        "rare": "Its shell shines so brightly in the sun that magpies keep trying to steal it.",
+        "epic": "Rolled its dung ball so far that it gathered half the field and turned into a hill.",
+        "legendary": "Steered by the stars to roll its ball across the entire desert in a perfectly straight line, then started a second one."
+      },
+      "moves": {
+        "signature": "Stinky Nip",
+        "legend": "Shell Polish Rest",
+        "ultimate": "Beetle Bulldozer Charge",
+        "kit.swarm": "Click Click Click",
+        "kit.sting": "Pincer Nip"
+      }
+    },
+    "i_isopod": {
+      "status": "draft",
+      "names": {
+        "common": "Rollypolly",
+        "uncommon": "Woodlousecurl",
+        "rare": "Damplurker",
+        "epic": "Armoured Armada",
+        "legendary": "Old Pillbug, Rolling Fortress"
+      },
+      "lore": {
+        "common": "Rolls into a tight ball the moment anyone lifts the flowerpot, then refuses to come out.",
+        "uncommon": "Has fourteen legs and still takes ages to cross the patio.",
+        "rare": "Rolled down the garden path like a tiny armoured marble and knocked over a toy soldier.",
+        "epic": "Moved in under a log with ten thousand cousins and the log started walking.",
+        "legendary": "Rolled itself up so tightly that it survived being stepped on by an elephant, then complained about the noise."
+      },
+      "moves": {
+        "signature": "Armour Nip",
+        "legend": "Curl-Up Crunch",
+        "ultimate": "Armoured Armada Roll",
+        "kit.swarm": "Many-Legged Shuffle",
+        "kit.sting": "Musty Nibble",
+        "kit.molt": "Shell Swap"
+      }
+    },
+    "i_lacewing": {
+      "status": "draft",
+      "names": {
+        "common": "Greenwisp",
+        "uncommon": "Lacewinged",
+        "rare": "Aphidmuncher",
+        "epic": "Garden Guardian",
+        "legendary": "Chrysoperla, the Lace Ghost"
+      },
+      "lore": {
+        "common": "Flutters into the bedroom at night and sits on the lampshade like a tiny green ghost.",
+        "uncommon": "Its wings look like delicate lace, so it gets very upset when it flies into a cobweb.",
+        "rare": "Eats so many aphids that the roses have started sending it thank-you notes.",
+        "epic": "Cleared every aphid out of the town's rose gardens in one summer. The flower show was the best ever.",
+        "legendary": "Protected a whole orchard from greenfly for a decade and was given a little lace medal by the apples."
+      },
+      "moves": {
+        "signature": "Lace Bite",
+        "legend": "Leaf Rest",
+        "ultimate": "Garden Guardian Swoop",
+        "kit.swarm": "Flutter Flutter",
+        "kit.sting": "Aphid Nip",
+        "kit.molt": "Fresh Wings",
+        "kit.web_snare": "Lace Wing Daze"
+      }
+    },
+    "i_leaf_beetle": {
+      "status": "draft",
+      "names": {
+        "common": "Leafnibbler",
+        "uncommon": "Shinyshell",
+        "rare": "Holepuncher",
+        "epic": "Veg Patch Raid",
+        "legendary": "Chrysomela, Muncher of Gardens"
+      },
+      "lore": {
+        "common": "Nibbles a perfect little hole in every lettuce leaf, so the salad looks like lace.",
+        "uncommon": "Its shell glints like a jewel, so it thinks it's far too fancy to hide.",
+        "rare": "Plays dead and drops off the leaf whenever a gardener comes near, then climbs back up.",
+        "epic": "Munched through every bean plant on the allotment in one night. The gardener now grows plastic flowers.",
+        "legendary": "Ate a leaf so cleverly that it left a perfect portrait of the gardener in the holes."
+      },
+      "moves": {
+        "signature": "Leaf Nibble Nip",
+        "legend": "Jewel Shell Glint",
+        "ultimate": "Vegetable Garden Raid",
+        "kit.swarm": "Munch Munch Munch",
+        "kit.molt": "Fresh Shell",
+        "kit.web_snare": "Drop and Freeze"
+      }
+    },
+    "i_leafhopper": {
+      "status": "draft",
+      "names": {
+        "common": "Hopleaf",
+        "uncommon": "Springsap",
+        "rare": "Treehopper Trick",
+        "epic": "Garden Pogo",
+        "legendary": "Cicadella, the Pogo Champion"
+      },
+      "lore": {
+        "common": "Jumps off the leaf whenever you look at it, then lands on your nose.",
+        "uncommon": "Hops sideways round the stem to hide on the other side, like a tiny game of hide and seek.",
+        "rare": "Leapt so high off a rose that it landed on the roof of the greenhouse.",
+        "epic": "Hopped across the whole garden in one go and set off every wind chime on the way.",
+        "legendary": "Jumped from one end of the park to the other in a single bounce. The squirrels had to sit down."
+      },
+      "moves": {
+        "signature": "Sap Sip",
+        "legend": "Sideways Distraction",
+        "ultimate": "Garden Pogo Bounce",
+        "kit.swarm": "Hop Hop Hop",
+        "kit.sting": "Sap Nip",
+        "kit.molt": "Fresh Skin",
+        "kit.web_snare": "Sudden Jump"
+      }
+    },
+    "i_long_horned_beetle": {
+      "status": "draft",
+      "names": {
+        "common": "Antennalong",
+        "uncommon": "Woodborer",
+        "rare": "Squeakhorn",
+        "epic": "Forest Woodchopper",
+        "legendary": "Cerambyx, the Long-Horned Knight"
+      },
+      "lore": {
+        "common": "Its antennae are so long that it keeps poking itself in the back.",
+        "uncommon": "Squeaks like a little door hinge when you pick it up, then looks embarrassed.",
+        "rare": "Chewed through a wooden fence post so neatly that the fence still stands but makes a whistling sound.",
+        "epic": "Bored so many tunnels in the old oak that the wind now plays it like a flute.",
+        "legendary": "Chewed a perfect castle out of a single log and moved in with its whole family."
+      },
+      "moves": {
+        "signature": "Long Horn Jab",
+        "legend": "Squeaky Shell Crack",
+        "ultimate": "Forest Woodchopper",
+        "kit.swarm": "Chew Chew Chew",
+        "kit.molt": "Fresh Shell Rest"
+      }
+    },
+    "i_mantis": {
+      "status": "draft",
+      "names": {
+        "common": "Prayerpose",
+        "uncommon": "Headtilt",
+        "rare": "Snapgrabber",
+        "epic": "Garden Kung Fu",
+        "legendary": "Mantissa, Master of Patience"
+      },
+      "lore": {
+        "common": "Holds its arms together as if praying, then grabs your sandwich.",
+        "uncommon": "Turns its head right round to look at you over its shoulder, like a suspicious librarian.",
+        "rare": "Waits so still on a flower that the flies land on it to rest. Then it isn't still.",
+        "epic": "Practised kung fu poses on every rose in the garden so dramatically that the snails moved away.",
+        "legendary": "Waited perfectly still for a whole day for one fly, caught it, and was given a black belt by the spiders."
+      },
+      "moves": {
+        "signature": "Snap Grab",
+        "legend": "Sly Head Tilt",
+        "ultimate": "Garden Kung Fu Strike",
+        "kit.swarm": "Strike Strike Strike",
+        "kit.sting": "Spiky Arm Jab",
+        "kit.web_snare": "Statue Stare"
+      }
+    },
+    "i_tiger_beetle": {
+      "status": "draft",
+      "names": {
+        "common": "Sandsprinter",
+        "uncommon": "Stripebolt",
+        "rare": "Speedjaw",
+        "epic": "Beach Blur",
+        "legendary": "Cicindela, Fastest Bug Alive"
+      },
+      "lore": {
+        "common": "Runs so fast across the beach that it overshoots its own lunch.",
+        "uncommon": "Its shell glitters green and gold in the sun as it races about.",
+        "rare": "Runs so fast that its eyes can't keep up, so it stops to look around and starts again.",
+        "epic": "Raced across the whole beach so quickly that it left a little trail of tiny sandstorms.",
+        "legendary": "Became the fastest runner of any creature for its size, then retired to sunbathe on a warm rock."
+      },
+      "moves": {
+        "signature": "Speed Bite",
+        "legend": "Glittering Guard",
+        "ultimate": "Beach Blur Dash",
+        "kit.swarm": "Dash Dash Dash",
+        "kit.sting": "Jaw Snap",
+        "kit.molt": "Shell Shine"
+      }
+    },
+    "i_trilobite": {
+      "status": "draft",
+      "names": {
+        "common": "Fossilfriend",
+        "uncommon": "Seafloor Scuttler",
+        "rare": "Oldshell",
+        "epic": "Stony Revival",
+        "legendary": "Trilobitus, Older Than the Dinosaurs"
+      },
+      "lore": {
+        "common": "Scuttles along the bottom of the rockpool and looks offended that nobody recognises it.",
+        "uncommon": "Was found in a rock by a schoolgirl and has been showing off its stony shell ever since.",
+        "rare": "Rolled itself into a ball so old and hard that a geologist's hammer bounced off it.",
+        "epic": "Woke up in a museum display and scuttled round the whole gallery before anyone noticed.",
+        "legendary": "Lived for millions of years before the dinosaurs, and still turns up in rocks looking smug."
+      },
+      "moves": {
+        "signature": "Ancient Nip",
+        "legend": "Fossil Fire",
+        "ultimate": "Primordial Mud Rot",
+        "kit.swarm": "Scuttle Scuttle",
+        "kit.sting": "Spiny Prick",
+        "kit.molt": "Shell Shed",
+        "kit.web_snare": "Rolled-Up Stun"
+      }
+    },
+    "butterfly": {
+      "status": "draft",
+      "names": {
+        "common": "Flutterby",
+        "uncommon": "Wingpainter",
+        "rare": "Flowerkisser",
+        "epic": "Meadow Rainbow",
+        "legendary": "Monarcha, Who Crossed the Continent"
+      },
+      "lore": {
+        "common": "Lands on your nose for exactly one second, then flies away just as you try to take a photo.",
+        "uncommon": "Its wings are covered in tiny patterns that make the flowers jealous.",
+        "rare": "Fluttered round a garden party so prettily that every guest forgot what they were saying.",
+        "epic": "Led a cloud of a million butterflies through the meadow and the flowers thought spring had come twice.",
+        "legendary": "Flew across an entire continent on wings as thin as paper, then landed on the exact same tree as its grandmother."
+      },
+      "moves": {
+        "signature": "Pollen Dust",
+        "legend": "Fresh Wing Rest",
+        "ultimate": "Meadow Rainbow Swirl",
+        "kit.swarm": "Flutter Flutter Flutter",
+        "kit.sting": "Bitter Wing",
+        "kit.molt": "Wing Unfold"
+      }
+    },
+    "i_lycaenid": {
+      "status": "draft",
+      "names": {
+        "common": "Bluegossamer",
+        "uncommon": "Tinyblue",
+        "rare": "Antfriend",
+        "epic": "Hairstreak Haze",
+        "legendary": "Lycaena, the Little Blue Wonder"
+      },
+      "lore": {
+        "common": "Is so small and blue that people think a piece of the sky has fallen off.",
+        "uncommon": "Its caterpillar makes friends with ants, which carry it home and feed it.",
+        "rare": "Has fake little antennae on its wing tips, so birds peck at the wrong end.",
+        "epic": "Fluttered over a hillside with a thousand friends and the hill looked like it was turning blue.",
+        "legendary": "Was carried home by an ant army that thought it was their queen, and was waited on for a whole summer."
+      },
+      "moves": {
+        "signature": "Tiny Blue Bite",
+        "legend": "Sunlit Wing Scorch",
+        "ultimate": "Hairstreak Haze",
+        "kit.swarm": "Tiny Wing Flurry",
+        "kit.sting": "Bitter Dust",
+        "kit.molt": "New Wings",
+        "kit.web_snare": "False Head Trick"
+      }
+    },
+    "x_moth_insect": {
+      "status": "draft",
+      "names": {
+        "common": "Lampbumper",
+        "uncommon": "Woolnibbler",
+        "rare": "Dustywing",
+        "epic": "Porch Light Party",
+        "legendary": "Lunaria, Who Chased the Moon"
+      },
+      "lore": {
+        "common": "Bumps into the same lamp again and again all night, then falls asleep on the lampshade.",
+        "uncommon": "Nibbled a hole in your favourite jumper, then left a perfect wing-shaped dust print as a signature.",
+        "rare": "Its dusty wings leave a powdery print on everything it touches, including the cat.",
+        "epic": "Brought every moth in the neighbourhood to the porch light. The light switch now has a queue.",
+        "legendary": "Flew towards the Moon all night and swears it got very close, then landed back on the porch light."
+      },
+      "moves": {
+        "signature": "Dusty Bite",
+        "legend": "Dust Cloud Muddle",
+        "ultimate": "Porch Light Stun",
+        "kit.swarm": "Flutter Bump Bump",
+        "kit.sting": "Musty Wool Nibble",
+        "kit.molt": "Cocoon Rest",
+        "kit.web_snare": "Lamp-Glow Daze"
+      }
+    },
+    "i_ringlet": {
+      "status": "draft",
+      "names": {
+        "common": "Eyespotter",
+        "uncommon": "Grassdrifter",
+        "rare": "Shadywing",
+        "epic": "Meadow Rings",
+        "legendary": "Ringella, Watcher of the Meadow"
+      },
+      "lore": {
+        "common": "Flutters slowly through the long grass looking tired, even first thing in the morning.",
+        "uncommon": "Has little ring patterns on its wings that look like eyes, so it can watch you twice.",
+        "rare": "Flies even in cloudy weather when other butterflies are sulking indoors.",
+        "epic": "Fluttered through a meadow with so many friends that walkers thought the grass was blinking.",
+        "legendary": "Kept watch over the same meadow for a whole summer, flapping its eye-wings at every bird that came near."
+      },
+      "moves": {
+        "signature": "Grass Brush Bite",
+        "legend": "Eye Ring Distraction",
+        "ultimate": "Meadow Rings Swirl",
+        "kit.swarm": "Drifting Flurry",
+        "kit.sting": "Bitter Scale",
+        "kit.molt": "Fresh Wings Rest",
+        "kit.web_snare": "Eye-Spot Stare"
+      }
+    },
+    "i_sulphur_butterfly": {
+      "status": "draft",
+      "names": {
+        "common": "Lemonwing",
+        "uncommon": "Puddlesipper",
+        "rare": "Yellowflash",
+        "epic": "Golden Cloud",
+        "legendary": "Sulphurina, Cloud of Gold"
+      },
+      "lore": {
+        "common": "Sips from muddy puddles on the path and gets in the way of every cyclist.",
+        "uncommon": "Is so bright yellow that people think it's a dropped lemon sweet.",
+        "rare": "Flutters so fast and erratically that birds give up trying to follow it.",
+        "epic": "Gathered a flock of yellow butterflies so huge over a puddle that it looked like a pool of sunshine.",
+        "legendary": "Flew in a golden cloud so bright that the town turned off its street lights for the evening."
+      },
+      "moves": {
+        "signature": "Lemon Sip",
+        "legend": "Flash Flash Flash",
+        "ultimate": "Golden Cloud Swirl",
+        "kit.swarm": "Golden Flutter",
+        "kit.sting": "Puddle Splash Nip",
+        "kit.molt": "Golden Unfold",
+        "kit.web_snare": "Yellow Flash Daze"
+      }
+    },
+    "caterpillar": {
+      "status": "draft",
+      "names": {
+        "common": "Leafchomper",
+        "uncommon": "Inchwinder",
+        "rare": "Cocoonplanner",
+        "epic": "Cabbage Crunch",
+        "legendary": "Gobblemuch, Future Butterfly"
+      },
+      "lore": {
+        "common": "Eats a hole in every leaf in the garden, then sleeps on what's left.",
+        "uncommon": "Inches along by arching its whole body, like it's measuring the garden.",
+        "rare": "Ate its own weight in cabbage in a single day, then asked for dessert.",
+        "epic": "Munched through an entire vegetable patch in one night. The gardener now grows only flowers.",
+        "legendary": "Ate so much in one summer that it turned into the most beautiful butterfly in the valley and forgot it was ever hungry."
+      },
+      "moves": {
+        "signature": "Leaf Chomp",
+        "legend": "Cocoon Nap",
+        "ultimate": "Cabbage Crunch Charge",
+        "kit.swarm": "Munch Munch Munch Munch",
+        "kit.sting": "Fuzzy Itch",
+        "kit.web_snare": "Silk Thread Snare"
+      }
+    },
+    "x_centipede_insect": {
+      "status": "draft",
+      "names": {
+        "common": "Hundredlegs",
+        "uncommon": "Cornerscuttle",
+        "rare": "Shoetangler",
+        "epic": "Basement Sprint",
+        "legendary": "Centipedia, Owner of All the Shoes"
+      },
+      "lore": {
+        "common": "Scuttles out from under the bathroom mat just as you step on it.",
+        "uncommon": "Has so many legs that it never finishes putting its shoes on.",
+        "rare": "Runs so fast round the skirting boards that the cat has given up chasing it.",
+        "epic": "Sprinted through the whole house in one night and every slipper was moved to a different room.",
+        "legendary": "Bought one shoe for each foot, then opened the biggest shoe shop in the garden."
+      },
+      "moves": {
+        "signature": "Many-Leg Bite",
+        "legend": "Under-the-Mat Rest",
+        "ultimate": "Basement Sprint",
+        "kit.sting": "Venom Pincer",
+        "kit.molt": "Old Skin Shed",
+        "kit.web_snare": "Leg Tangle"
+      }
+    },
+    "x_earthworm": {
+      "status": "draft",
+      "names": {
+        "common": "Wigglesoil",
+        "uncommon": "Rainpopper",
+        "rare": "Soilchurner",
+        "epic": "Garden Plough",
+        "legendary": "Lumbricus, Gardener of the World"
+      },
+      "lore": {
+        "common": "Pops up through the lawn every time it rains, then gets lost on the path.",
+        "uncommon": "Wiggles through the soil all day, eating dirt and making the garden happier.",
+        "rare": "Churned the flowerbed so well that every plant in it grew twice as tall.",
+        "epic": "Ploughed the whole allotment in one night. The farmer woke up to perfect rows.",
+        "legendary": "Turned over every field in the county with nothing but wiggling. The tractors are now museum pieces."
+      },
+      "moves": {
+        "signature": "Wiggle Nip",
+        "legend": "Soil Churn Flurry",
+        "ultimate": "Garden Plough",
+        "kit.sting": "Muddy Squirm",
+        "kit.molt": "Soil Rest",
+        "kit.web_snare": "Slime Trap"
+      }
+    },
+    "x_leech": {
+      "status": "draft",
+      "names": {
+        "common": "Squelchsucker",
+        "uncommon": "Stickytoes",
+        "rare": "Pondhanger",
+        "epic": "Puddle Ambush",
+        "legendary": "Hirudia, the Clingiest Friend"
+      },
+      "lore": {
+        "common": "Sticks to your ankle when you paddle in the pond and refuses to say goodbye.",
+        "uncommon": "Stretches and loops along the pond floor like a slow, wobbly rubber band.",
+        "rare": "Clung onto a fisherman's boot so tightly that it went home with him and moved into the shed.",
+        "epic": "Ambushed every paddler at the summer lake. The swimmers now wear wellies.",
+        "legendary": "Became so famous for clinging on that the rock-climbers asked it for lessons."
+      },
+      "moves": {
+        "signature": "Suction Nip",
+        "legend": "Sticky Distraction",
+        "ultimate": "Puddle Ambush",
+        "kit.sting": "Squelchy Bite",
+        "kit.molt": "Stretch Rest",
+        "kit.web_snare": "Sticky Grip"
+      }
+    },
+    "x_millipede": {
+      "status": "draft",
+      "names": {
+        "common": "Curlylegs",
+        "uncommon": "Leaflitter Lurker",
+        "rare": "Stinkcurl",
+        "epic": "Forest Floor Parade",
+        "legendary": "Millipedon, the Thousand-Footed"
+      },
+      "lore": {
+        "common": "Curls into a spiral when touched and stays that way until you go away.",
+        "uncommon": "Walks with a ripple of legs that looks like a wave going down its body.",
+        "rare": "Releases a funny smell when frightened, which makes birds sneeze and fly off.",
+        "epic": "Led a parade of a thousand millipedes across the forest floor. The leaves moved like a carpet.",
+        "legendary": "Walked with a thousand legs and never once tripped, and became the forest's dance teacher."
+      },
+      "moves": {
+        "signature": "Stinky Nibble",
+        "legend": "Leg Ripple Flurry",
+        "ultimate": "Forest Floor Parade",
+        "kit.swarm": "Ripple Ripple Ripple",
+        "kit.sting": "Smelly Squirt",
+        "kit.web_snare": "Spiral Curl"
+      }
+    },
+    "i_american_lobster": {
+      "status": "draft",
+      "names": {
+        "common": "Clawsnapper",
+        "uncommon": "Tankescapee",
+        "rare": "Bigclaw",
+        "epic": "Harbour Walker",
+        "legendary": "Homarus, Who Walked Out of the Sea"
+      },
+      "lore": {
+        "common": "Snaps its claws at the restaurant tank glass every time someone points at it.",
+        "uncommon": "Has one big crushing claw and one small pinching claw, and argues with itself about which is better.",
+        "rare": "Walked out of the lobster pot, down the pier and back into the sea while the fisherman was looking at his phone.",
+        "epic": "Led a march of lobsters across the seabed so long that it blocked the fishing lanes for a week.",
+        "legendary": "Lived for a hundred years at the bottom of the sea, grew a claw as big as a door, and still won't share a single mussel."
+      },
+      "moves": {
+        "signature": "Claw Pinch",
+        "legend": "Shell-Crack Pinch",
+        "ultimate": "Harbour Walker Charge",
+        "kit.swarm": "Snap Snap Snap",
+        "kit.sting": "Spiky Pinch",
+        "kit.molt": "Shell Swap Rest",
+        "kit.web_snare": "Claw Clamp"
+      }
+    },
+    "crab": {
+      "status": "draft",
+      "names": {
+        "common": "Sidescuttle",
+        "uncommon": "Pinchtoe",
+        "rare": "Rockpoolboss",
+        "epic": "Beach Invasion",
+        "legendary": "Cancer the Claw King"
+      },
+      "lore": {
+        "common": "Scuttles sideways across the beach and pinches your toe when you try to walk the other way.",
+        "uncommon": "Blows little bubbles from its mouth when it's thinking hard about something.",
+        "rare": "Pinched the bucket handle so tightly that the child had to take the crab home in the bucket.",
+        "epic": "Led an army of crabs sideways across the beach. The sandcastles didn't stand a chance.",
+        "legendary": "Walked sideways across the entire seabed from one coast to the other, then wondered why it hadn't walked forwards."
+      },
+      "moves": {
+        "signature": "Toe Pinch",
+        "legend": "Sun-Hot Claw",
+        "ultimate": "Beach Invasion Charge",
+        "kit.swarm": "Claw Claw Claw",
+        "kit.sting": "Itchy Pinch",
+        "kit.web_snare": "Claw Grip"
+      }
+    },
+    "i_fiddler_crab": {
+      "status": "draft",
+      "names": {
+        "common": "Bigclawwave",
+        "uncommon": "Mudflatfiddle",
+        "rare": "Waveclaw",
+        "epic": "Mudflat Orchestra",
+        "legendary": "Uca, the Grand Fiddler"
+      },
+      "lore": {
+        "common": "Waves its one giant claw at everyone, like it's trying to get a taxi.",
+        "uncommon": "Waves its big claw in rhythm with a hundred neighbours, so the beach looks like a crowd at a concert.",
+        "rare": "Snapped its huge claw so hard that it made a sound like a firework.",
+        "epic": "Waved its claw so wildly with a thousand friends that seagulls thought the beach was cheering them.",
+        "legendary": "Became conductor of the biggest beach orchestra ever, with ten thousand crabs waving claws in time."
+      },
+      "moves": {
+        "signature": "Big Claw Snip",
+        "legend": "Claw Wave Daze",
+        "ultimate": "Mudflat Orchestra Crash",
+        "kit.sting": "Mud Pinch",
+        "kit.molt": "New Claw Rest"
+      }
+    },
+    "i_hermit_crab": {
+      "status": "draft",
+      "names": {
+        "common": "Shellswapper",
+        "uncommon": "Houseshopper",
+        "rare": "Shellstealer",
+        "epic": "Shell Market",
+        "legendary": "Paguro, the Picky House Hunter"
+      },
+      "lore": {
+        "common": "Tries on every shell on the beach and complains that none of them have enough cupboard space.",
+        "uncommon": "Swaps shells with its neighbours in a long queue, from smallest to biggest, every spring.",
+        "rare": "Moved into a bottle cap and now lives in the smallest, shiniest house on the beach.",
+        "epic": "Organised a shell market where a thousand hermit crabs swapped homes in one afternoon.",
+        "legendary": "Moved into a teapot and turned it into the grandest house on the seabed, with a spout for a chimney."
+      },
+      "moves": {
+        "signature": "Shell Pinch",
+        "legend": "Shell Slam",
+        "ultimate": "Shell Market Crash",
+        "kit.swarm": "Pinch Pinch Pinch",
+        "kit.sting": "Spiky Shell Prick",
+        "kit.molt": "New Shell Rest",
+        "kit.web_snare": "Shell Shut Stun"
+      }
+    },
+    "dragonfly": {
+      "status": "draft",
+      "names": {
+        "common": "Zigzagger",
+        "uncommon": "Pondpatroller",
+        "rare": "Hoverjewel",
+        "epic": "Pond Air Show",
+        "legendary": "Odonata, Ace of the Pond"
+      },
+      "lore": {
+        "common": "Zigzags across the pond so fast that it never lands where you think it will.",
+        "uncommon": "Can hover in one spot like a tiny helicopter, then shoot backwards.",
+        "rare": "Catches mosquitoes mid-air so neatly that the summer evenings are suddenly peaceful.",
+        "epic": "Performed an air show over the pond with a hundred others and the frogs held up scorecards.",
+        "legendary": "Has been patrolling ponds since before the dinosaurs, and still has the best eyesight in the garden."
+      },
+      "moves": {
+        "signature": "Zigzag Bite",
+        "legend": "Hover Power-Up",
+        "ultimate": "Pond Air Show Dive",
+        "kit.sting": "Mosquito Snatch",
+        "kit.molt": "New Wings Unfold",
+        "kit.web_snare": "Hover Stare"
+      }
+    },
+    "x_tadpole": {
+      "status": "draft",
+      "names": {
+        "common": "Wiggletail",
+        "uncommon": "Leggrower",
+        "rare": "Pondpuddle",
+        "epic": "Frogspawn Rush",
+        "legendary": "Pollywog, Future Frog Champion"
+      },
+      "lore": {
+        "common": "Wiggles round and round the pond, bumping into everyone, and never says sorry.",
+        "uncommon": "Woke up one morning with two new back legs and has been showing them off ever since.",
+        "rare": "Grew its front legs, lost its tail and turned into a frog in a single afternoon.",
+        "epic": "Hatched with ten thousand siblings and the pond looked like a bowl of wiggling rice.",
+        "legendary": "Grew up to be the loudest frog in the pond and still tells the young tadpoles about its tail days."
+      },
+      "moves": {
+        "signature": "Wiggle Bite",
+        "legend": "Tail Wiggle Flurry",
+        "ultimate": "Frogspawn Rush",
+        "kit.swarm": "Wiggle Wiggle Wiggle",
+        "kit.sting": "Pond Nibble",
+        "kit.molt": "New Legs"
+      }
+    },
+    "frog": {
+      "status": "draft",
+      "names": {
+        "common": "Ribbitbounce",
+        "uncommon": "Lilypadsitter",
+        "rare": "Tongueflicker",
+        "epic": "Pond Chorus",
+        "legendary": "Sir Croakalot, the Prince in Waiting"
+      },
+      "lore": {
+        "common": "Jumps into the pond with a huge splash right next to anyone who's just sat down.",
+        "uncommon": "Croaks so loudly on summer nights that the neighbours have bought earplugs.",
+        "rare": "Flicks its tongue out so fast that it catches flies before they've even noticed it.",
+        "epic": "Led a croaking chorus so loud that the whole village thought it was a brass band.",
+        "legendary": "Was kissed by a hundred hopeful princesses and stayed a frog every time. Says it's quite happy, thank you."
+      },
+      "moves": {
+        "signature": "Slimy Bite",
+        "legend": "Sun Bask Boost",
+        "ultimate": "Pond Chorus Croak",
+        "kit.tongue_snare": "Sticky Tongue"
+      }
+    },
+    "i_tailed_frog": {
+      "status": "draft",
+      "names": {
+        "common": "Streamclinger",
+        "uncommon": "Waterfallfrog",
+        "rare": "Silentcroak",
+        "epic": "Mountain Stream Hop",
+        "legendary": "Ascaphus, Frog of the Rushing Water"
+      },
+      "lore": {
+        "common": "Clings to stones in fast streams with its belly so it doesn't get washed away.",
+        "uncommon": "Has no voice and can't croak, so it waves at the other frogs instead.",
+        "rare": "Lives in water so cold and fast that the trout ask it how it copes.",
+        "epic": "Hopped up a whole mountain waterfall stone by stone. The hikers stopped to cheer.",
+        "legendary": "Has lived in the same rushing stream for so long that the stream now flows politely around it."
+      },
+      "moves": {
+        "signature": "Stream Bite",
+        "legend": "Waterfall Hop Boost",
+        "ultimate": "Mountain Stream Splash",
+        "kit.tail_lash": "Stubby Tail Swipe",
+        "kit.shed_skin": "Skin Shed Rest",
+        "kit.tongue_snare": "Quiet Tongue"
+      }
+    },
+    "x_toad_creature": {
+      "status": "draft",
+      "names": {
+        "common": "Wartwaddle",
+        "uncommon": "Garden Grumbler",
+        "rare": "Puffbelly",
+        "epic": "Toad Rush Hour",
+        "legendary": "Toadsworth, the Grumpy Gardener"
+      },
+      "lore": {
+        "common": "Sits in the middle of the garden path and refuses to move for anyone.",
+        "uncommon": "Puffs itself up to look bigger whenever a dog sniffs it.",
+        "rare": "Ate every slug in the vegetable patch in one night, then had a lie-in.",
+        "epic": "Led a march of a thousand toads across the country road. The traffic stopped for an hour.",
+        "legendary": "Kept the whole village's gardens slug-free for a decade, and was given a tiny bench of its own."
+      },
+      "moves": {
+        "signature": "Warty Bite",
+        "legend": "Big Belly Flop",
+        "ultimate": "Toad Rush Hour Stampede",
+        "kit.tail_lash": "Hind Leg Kick",
+        "kit.shed_skin": "Old Skin Shed",
+        "kit.tongue_snare": "Long Tongue Snap"
+      }
+    },
+    "ladybug": {
+      "status": "draft",
+      "names": {
+        "common": "Spotcount",
+        "uncommon": "Aphidhunter",
+        "rare": "Redshell",
+        "epic": "Garden Rescue",
+        "legendary": "Lady Coccinella of the Seven Spots"
+      },
+      "lore": {
+        "common": "Lands on your hand and walks to the end of your finger, then can't decide whether to fly.",
+        "uncommon": "Has exactly seven spots and gets upset when anyone counts only six.",
+        "rare": "Ate so many greenflies that the roses started blooming in December.",
+        "epic": "Swarmed over a farmer's field with a million friends and saved every crop from greenfly.",
+        "legendary": "Rescued every rose garden in the land from greenfly in one summer, and was given its very own flower show."
+      },
+      "moves": {
+        "signature": "Spotty Nip",
+        "legend": "Spotty Boost",
+        "ultimate": "Greenfly Patrol Swarm",
+        "kit.swarm": "Spot Spot Spot",
+        "kit.molt": "Fresh Shell Rest",
+        "kit.web_snare": "Shiny Shell Daze"
+      }
+    }
+  }
+}

@@ -116,7 +116,7 @@ function patch(batch, file) {
   const taken = allNames(batch); for (const [id, e] of Object.entries(doc.entries)) for (const v of Object.values(e.names || {})) taken.set(v.toLowerCase(), id + ' (this batch)');
   let n = 0;
   for (const [id, fields] of Object.entries(p)) { const e = doc.entries[id]; if (!e) { errs.push(`${id}: not in ${batch} draft`); continue; }
-    for (const [k, v] of Object.entries(fields)) { const [grp, key] = k.split('.');
+    for (const [k, v] of Object.entries(fields)) { const grp = k.slice(0, k.indexOf('.')), key = k.slice(k.indexOf('.') + 1);
       if (!['lore', 'names', 'moves'].includes(grp) || (grp !== 'moves' && !RAR.includes(key)) || (grp === 'moves' && !(key in G.curatedMoveSlots(id)))) { errs.push(`${id}: bad field ${k}`); continue; }
       if (grp === 'names') { const t = taken.get(v.toLowerCase()); if (t && !t.startsWith(id + ' ')) errs.push(`${id}: name "${v}" already used by ${t}`); taken.set(v.toLowerCase(), id + ' (this batch)'); }
       if (grp === 'lore' && (/→/.test(v) || !/[.!?'"]$/.test(v))) errs.push(`${id}: ${k} looks unfinished`);
