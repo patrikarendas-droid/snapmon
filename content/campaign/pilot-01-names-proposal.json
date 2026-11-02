@@ -1,0 +1,16 @@
+{
+ "note": "PROPOSAL (draft): monster names for the 10 approved Pilot 01 objects, whose approved lore and move names stay untouched. Kept outside content/curated/ on purpose (one content owner per object). After developer approval only these `names` are added to content/curated/pilot-01-approved.json.",
+ "status": "draft",
+ "names": {
+  "apple": { "common": "Crunchnibbler", "uncommon": "Coreback", "rare": "Pipshooter", "epic": "Orchard Quake", "legendary": "Granny Smash, the Moon Biter" },
+  "x_light_switch": { "common": "Darkflick", "uncommon": "Sneezelight", "rare": "Ceilingshoe", "epic": "Season Flipper", "legendary": "Switchmore, the Tuesday Pauser" },
+  "x_security_camera": { "common": "Pigeonwatch", "uncommon": "Zoomsnoop", "rare": "Replay Rascal", "epic": "Channel Everyone", "legendary": "The Eternal Freeze-Frame" },
+  "x_energy_drink": { "common": "Fizzjitter", "uncommon": "Sipsprout", "rare": "Turbotype", "epic": "Slothsprinter", "legendary": "Conga Comet, the Last Sip" },
+  "forklift": { "common": "Beepreverse", "uncommon": "Olivepicker", "rare": "Househoister", "epic": "Desert Cruiser", "legendary": "Atlas the Continent Stacker" },
+  "microwave": { "common": "Coldcentre", "uncommon": "Sixpress", "rare": "Swaptemp", "epic": "Turntable Town", "legendary": "Solarheat, the Six-Beep Sun" },
+  "rubber_duck": { "common": "Hushsqueak", "uncommon": "Airbather", "rare": "Copyquack", "epic": "Rubbertown", "legendary": "Admiral Quackington" },
+  "sock": { "common": "Heelhole", "uncommon": "Threadpuppet", "rare": "Tapdance Trainer", "epic": "Cheesecloud", "legendary": "The Planet Slipper" },
+  "padlock": { "common": "Wherekey", "uncommon": "Sneezelock", "rare": "Hushclamp", "epic": "Thunderjar", "legendary": "Shedlock, Jailer of the Sun" },
+  "book": { "common": "Snapshut", "uncommon": "Hiccupage", "rare": "Marginmaker", "epic": "Villainswap", "legendary": "The Author of Everything" }
+ }
+}
