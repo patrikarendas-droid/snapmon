@@ -1,0 +1,782 @@
+{
+  "schema": 1,
+  "batch": "w09-gadgets-and-computers",
+  "entries": {
+    "calculator": {
+      "status": "draft",
+      "names": {
+        "common": "Buttonsticker",
+        "uncommon": "Upsidespeller",
+        "rare": "Sumcruncher",
+        "epic": "Exam Hall Click-Clack",
+        "legendary": "Professor Sumsworth, Never Wrong"
+      },
+      "lore": {
+        "common": "Has one sticky button that adds an extra seven to every answer.",
+        "uncommon": "Spells HELLO when turned upside down, and the whole class giggles every single time.",
+        "rare": "Crunched a sum so long that the screen ran out of room and showed an E.",
+        "epic": "Click-clacked in every hand in the exam hall at once, and the teacher couldn't hear herself think.",
+        "legendary": "Has done the sums for the same shopkeeper for forty years without a single mistake."
+      },
+      "moves": {
+        "signature": "Equals Flash",
+        "legend": "Sum Sum Sum",
+        "ultimate": "Answer Overflow",
+        "kit.pop_up_ads": "Number Number Number",
+        "kit.overheat": "Solar Panel Scorch",
+        "kit.firewall": "Battery Cover Guard",
+        "kit.data_leech": "Memory Snatch"
+      }
+    },
+    "x_fitness_tracker": {
+      "status": "draft",
+      "names": {
+        "common": "Wristnag",
+        "uncommon": "Stepcheater",
+        "rare": "Heartwatcher",
+        "epic": "Fun Run Buzz",
+        "legendary": "Coach Pulsebeat of the Running Track"
+      },
+      "lore": {
+        "common": "Buzzes your wrist to tell you to stand up, just as you get comfy.",
+        "uncommon": "Counts arm-waving as steps, so its owner sits on the sofa waving.",
+        "rare": "Noticed its wearer's heart racing during a scary film and asked if they were exercising.",
+        "epic": "Buzzed on every wrist at the fun run at the same second, and the runners all checked at once.",
+        "legendary": "Counted every step of a walk across the whole country and still had battery left."
+      },
+      "moves": {
+        "signature": "Buzz Buzz Buzz",
+        "legend": "Calorie Snatch",
+        "ultimate": "Fun Run Final Lap"
+      }
+    },
+    "x_gps_device": {
+      "status": "draft",
+      "names": {
+        "common": "Recalculator",
+        "uncommon": "Wrongturner",
+        "rare": "Lakedriver",
+        "epic": "Satnav Detour",
+        "legendary": "Lady Routewell of the Dashboard"
+      },
+      "lore": {
+        "common": "Says recalculating every time you take a turn it didn't suggest.",
+        "uncommon": "Tells you to turn left into a field, a river or a farmer's barn.",
+        "rare": "Sent a delivery van down a lane so narrow that it had to reverse for a mile.",
+        "epic": "Sent every car on the motorway down the same tiny village road during a jam.",
+        "legendary": "Guided a lost family across three countries to the right campsite without a single wrong turn."
+      },
+      "moves": {
+        "signature": "Turn Turn Turn",
+        "legend": "Route Boost",
+        "ultimate": "Big Detour"
+      }
+    },
+    "x_multimeter": {
+      "status": "draft",
+      "names": {
+        "common": "Probepoker",
+        "uncommon": "Dialspinner",
+        "rare": "Fusefinder",
+        "epic": "Workshop Fault Hunt",
+        "legendary": "Old Ohmsworth of the Toolbox"
+      },
+      "lore": {
+        "common": "Pokes its two probes into everything, including your sandwich.",
+        "uncommon": "Has a dial with twenty settings, and everyone who borrows it just leaves it on the beeping one.",
+        "rare": "Found the broken fuse in a whole house of tangled wires in one minute.",
+        "epic": "Tested every plug in the school in one afternoon, and every lamp came back on.",
+        "legendary": "Has found faults in a thousand machines and never once got a shock itself."
+      },
+      "moves": {
+        "signature": "Probe Probe Probe",
+        "legend": "Beep Beep Beep",
+        "ultimate": "Fault Find Spark",
+        "kit.factory_reset": "Zero Reset",
+        "kit.glitch_out": "Wrong Setting Crack",
+        "kit.turbo_mode": "High Range Boost"
+      }
+    },
+    "x_compass": {
+      "status": "draft",
+      "names": {
+        "common": "Needlespinner",
+        "uncommon": "Northpointer",
+        "rare": "Wobbleneedle",
+        "epic": "Mountain Map Trek",
+        "legendary": "Old Truenorth of the Explorer's Pocket"
+      },
+      "lore": {
+        "common": "Spins its needle in circles every time you stand near the fridge.",
+        "uncommon": "Always points north, even when you'd rather go south for ice cream.",
+        "rare": "Wobbled its needle so much near a magnet that it pointed at the toilet.",
+        "epic": "Guided a whole school trip across the moor in the fog without a wrong turn.",
+        "legendary": "Guided an explorer across the frozen north and back, and still points north today."
+      },
+      "moves": {
+        "signature": "Spin Spin Spin",
+        "legend": "Needle Jab",
+        "ultimate": "True North Turn",
+        "kit.beep_beep": "Needle Swing Startle",
+        "kit.glitch_out": "Magnet Muddle",
+        "kit.turbo_mode": "Bearing Lock"
+      }
+    },
+    "x_compass_small": {
+      "status": "draft",
+      "names": {
+        "common": "Pocketpoint",
+        "uncommon": "Keyringcompass",
+        "rare": "Fogfinder",
+        "epic": "Cub Camp Orienteering",
+        "legendary": "Little Northstar of the Rucksack"
+      },
+      "lore": {
+        "common": "Hides in the bottom of your rucksack just when you need it.",
+        "uncommon": "Hangs on your keyring and points north every time you check the time.",
+        "rare": "Found the way out of the foggy woods when the grown-ups were lost.",
+        "epic": "Guided every scout at camp round the orienteering course in record time.",
+        "legendary": "Was carried up every mountain in the country on the same keyring."
+      },
+      "moves": {
+        "signature": "Point Point Point",
+        "legend": "Pocket Guard",
+        "ultimate": "Orienteering Dash",
+        "kit.beep_beep": "Needle Flick Startle",
+        "kit.glitch_out": "Wobble Muddle",
+        "kit.turbo_mode": "Northward Boost"
+      }
+    },
+    "x_egg_timer": {
+      "status": "draft",
+      "names": {
+        "common": "Sandtrickler",
+        "uncommon": "Upsidedowner Timer",
+        "rare": "Eggchecker",
+        "epic": "Breakfast Time Rush",
+        "legendary": "Old Hourglass of the Kitchen Shelf"
+      },
+      "lore": {
+        "common": "Runs out of sand just as you turn your back on the boiling pan.",
+        "uncommon": "Has to be turned upside down at exactly the right moment.",
+        "rare": "Timed a soft-boiled egg so perfectly that the yolk was runny every time.",
+        "epic": "Timed every egg in the café on the busiest breakfast morning without missing one.",
+        "legendary": "Has timed a hundred thousand perfect eggs and still has every grain of sand."
+      },
+      "moves": {
+        "signature": "Sand Run Flash",
+        "legend": "Trickle Trickle Trickle",
+        "ultimate": "Time's Up Crack",
+        "kit.beep_beep": "Glass Tap Startle",
+        "kit.factory_reset": "Turn Over Rest",
+        "kit.glitch_out": "Stuck Sand Crack",
+        "kit.turbo_mode": "Fast Trickle Boost"
+      }
+    },
+    "x_kitchen_timer": {
+      "status": "draft",
+      "names": {
+        "common": "Counterticker",
+        "uncommon": "Dingshriek",
+        "rare": "Twistwinder",
+        "epic": "Cake Bake Countdown",
+        "legendary": "Lady Dingwell of the Oven Door"
+      },
+      "lore": {
+        "common": "Ticks so loudly on the counter that you can hear it from the garden.",
+        "uncommon": "Dings so suddenly that everyone in the kitchen jumps.",
+        "rare": "Was twisted round so far that it rang in the middle of the night.",
+        "epic": "Counted down every cake at the bake sale, and not a single one was burnt.",
+        "legendary": "Has timed every Sunday roast for forty years and never let one burn."
+      },
+      "moves": {
+        "signature": "Ding Flash",
+        "legend": "Tick Tock Guard",
+        "ultimate": "Oven Bell Ring",
+        "kit.beep_beep": "Ding Ding Startle",
+        "kit.glitch_out": "Wrong Twist Crack"
+      }
+    },
+    "i_magnetic_compass": {
+      "status": "draft",
+      "names": {
+        "common": "Shipneedle",
+        "uncommon": "Brassdial",
+        "rare": "Stormsteady",
+        "epic": "Ocean Voyage Heading",
+        "legendary": "Captain Lodestone of the Old Ship"
+      },
+      "lore": {
+        "common": "Swings its needle so wildly in a storm that the sailors feel seasick looking at it.",
+        "uncommon": "Sits in a brass case on the ship's deck and shines in the sun.",
+        "rare": "Held its heading steady through the worst storm of the voyage.",
+        "epic": "Guided a whole fleet across the ocean without a single ship getting lost.",
+        "legendary": "Has guided ships across every ocean for two hundred years and still points true."
+      },
+      "moves": {
+        "signature": "Needle Swing Flash",
+        "legend": "Storm Muddle",
+        "ultimate": "Steady Heading",
+        "kit.beep_beep": "Brass Glint Startle",
+        "kit.factory_reset": "Calm Sea Rest",
+        "kit.glitch_out": "Iron Muddle",
+        "kit.turbo_mode": "Full Sail Boost"
+      }
+    },
+    "x_pocket_watch": {
+      "status": "draft",
+      "names": {
+        "common": "Lidflipper",
+        "uncommon": "Pocketticker",
+        "rare": "Lateforsure",
+        "epic": "Station Clock Chase",
+        "legendary": "Sir Tickington of the Waistcoat"
+      },
+      "lore": {
+        "common": "Flips its lid open at the wrong moment and catches on your jumper.",
+        "uncommon": "Ticks so loudly in its owner's pocket that the cat follows him around.",
+        "rare": "Made its owner late for everything by running five minutes slow.",
+        "epic": "Was checked by every passenger at the station when the train was late, and they all said tut.",
+        "legendary": "Has kept perfect time for a hundred years in three generations of waistcoat pockets."
+      },
+      "moves": {
+        "signature": "Tick Tick Tick",
+        "legend": "Lid Flash",
+        "ultimate": "Last Train Chase",
+        "kit.beep_beep": "Chime Startle",
+        "kit.glitch_out": "Slow Time Muddle",
+        "kit.turbo_mode": "Wound Up Boost"
+      }
+    },
+    "x_pocket_watch_chain": {
+      "status": "draft",
+      "names": {
+        "common": "Waistcoatloop",
+        "uncommon": "Chaintangle",
+        "rare": "Fobswinger",
+        "epic": "Coat Rail Calamity",
+        "legendary": "Lord Fobsworth of the Gold Chain"
+      },
+      "lore": {
+        "common": "Loops across the waistcoat and catches on every door handle.",
+        "uncommon": "Tangles round the buttons every time you sit down.",
+        "rare": "Swung its fob so grandly that it hypnotised the dinner guests.",
+        "epic": "Got hooked on a coat rail at the station, and pulled a whole row of coats onto the platform.",
+        "legendary": "Has hung from the same family's waistcoats for a hundred and fifty years."
+      },
+      "moves": {
+        "signature": "Chain Swing Flash",
+        "legend": "Gold Link Guard",
+        "ultimate": "Fob Swing Daze",
+        "kit.beep_beep": "Chain Jingle Startle",
+        "kit.factory_reset": "Polish Rest",
+        "kit.turbo_mode": "Swing Boost"
+      }
+    },
+    "x_stopwatch": {
+      "status": "draft",
+      "names": {
+        "common": "Clickstart",
+        "uncommon": "Lapforgetter",
+        "rare": "Resetpresser",
+        "epic": "Sports Day Timing",
+        "legendary": "Coach Splitsecond of the Track"
+      },
+      "lore": {
+        "common": "Starts by accident in your pocket and runs all day.",
+        "uncommon": "Has a lap button that its owner forgets every race, so second place is always a guess.",
+        "rare": "Was reset at the exact moment someone broke the school record.",
+        "epic": "Timed every race at sports day, and nobody argued about who won.",
+        "legendary": "Timed the fastest runner in the county's history, and is now kept in a glass case."
+      },
+      "moves": {
+        "signature": "Click Click Click",
+        "legend": "Lap Lap Lap",
+        "ultimate": "Photo Finish",
+        "kit.beep_beep": "Start Beep Startle",
+        "kit.factory_reset": "Reset Rest"
+      }
+    },
+    "x_stopwatch_sport": {
+      "status": "draft",
+      "names": {
+        "common": "Lanyardswinger",
+        "uncommon": "Whistlemate",
+        "rare": "Splittimer",
+        "epic": "Swimming Gala Splits",
+        "legendary": "Old Lapcounter of the Pool Deck"
+      },
+      "lore": {
+        "common": "Swings round its lanyard and hits the coach on the chin.",
+        "uncommon": "Is always next to the whistle, and gets blown into by mistake.",
+        "rare": "Timed every swimmer's split down to the hundredth of a second.",
+        "epic": "Timed every race at the swimming gala and still had battery for the relay.",
+        "legendary": "Has timed every race at the same pool for thirty years and still reads perfectly."
+      },
+      "moves": {
+        "signature": "Split Split Split",
+        "legend": "Lap Count Boost",
+        "ultimate": "Gala Finish Clock",
+        "kit.beep_beep": "Start Signal Beep",
+        "kit.factory_reset": "Clear Rest",
+        "kit.glitch_out": "Lap Muddle",
+        "kit.turbo_mode": "Final Lap Boost"
+      }
+    },
+    "x_stopwatch_timer": {
+      "status": "draft",
+      "names": {
+        "common": "Countdownbeep",
+        "uncommon": "Buttonmasher",
+        "rare": "Chessclock",
+        "epic": "Cooking Show Countdown",
+        "legendary": "Lady Countdowna of the Kitchen"
+      },
+      "lore": {
+        "common": "Beeps so loudly when it reaches zero that everyone drops what they're holding.",
+        "uncommon": "Has three buttons, and everyone presses the wrong one.",
+        "rare": "Was used as a chess clock, and both players ran out of time.",
+        "epic": "Counted down every round of the cooking show, and every chef finished with one second to spare.",
+        "legendary": "Has timed every round of the school quiz for twenty years and never let a team cheat."
+      },
+      "moves": {
+        "signature": "Zero Beep Flash",
+        "legend": "Wrong Button Bash",
+        "ultimate": "Last Second Panic",
+        "kit.beep_beep": "Count Beep Startle",
+        "kit.factory_reset": "Clear Reset",
+        "kit.glitch_out": "Button Muddle",
+        "kit.turbo_mode": "Overtime Boost"
+      }
+    },
+    "desktop_pc": {
+      "status": "draft",
+      "names": {
+        "common": "Updatenag",
+        "uncommon": "Fanwhirr",
+        "rare": "Popupper",
+        "epic": "Office Crash",
+        "legendary": "Grand Towerina of the Study"
+      },
+      "lore": {
+        "common": "Starts an update just as you need to print your homework.",
+        "uncommon": "Whirrs its fan so loudly that it sounds like it's taking off.",
+        "rare": "Filled the screen with pop-up windows until you couldn't see the desktop.",
+        "epic": "Froze at the same moment as every computer in the office, and everyone went for a cup of tea.",
+        "legendary": "Has run every family's homework, holiday photos and games for fifteen years without breaking down."
+      },
+      "moves": {
+        "signature": "Screen Flash",
+        "legend": "Update Crack",
+        "ultimate": "Total System Crash",
+        "kit.pop_up_ads": "Pop-Up Pop-Up Pop-Up",
+        "kit.firewall": "Antivirus Guard",
+        "kit.data_leech": "File Snatch"
+      }
+    },
+    "x_server": {
+      "status": "draft",
+      "names": {
+        "common": "Humbox",
+        "uncommon": "Blinkylights",
+        "rare": "Neverrests",
+        "epic": "Data Centre Surge",
+        "legendary": "Grand Servatrix of the Cold Room"
+      },
+      "lore": {
+        "common": "Hums all day and all night in a room nobody ever visits.",
+        "uncommon": "Has rows of blinking lights that look like it's thinking very hard.",
+        "rare": "Has never once been switched off, not even for a nap.",
+        "epic": "Handled every video in the country on the night of the big final, and didn't even sweat.",
+        "legendary": "Has stored every holiday photo in the town for twenty years and never lost a single one."
+      },
+      "moves": {
+        "signature": "Blink Flash",
+        "legend": "Server Power Up",
+        "ultimate": "Overnight Upload",
+        "kit.overheat": "Hot Server Room",
+        "kit.fan_spin": "Fan Fan Fan",
+        "kit.firewall": "Security Shield",
+        "kit.data_leech": "Bandwidth Snatch"
+      }
+    },
+    "x_server_rack": {
+      "status": "draft",
+      "names": {
+        "common": "Cablejungle",
+        "uncommon": "Rackstacker",
+        "rare": "Coldroomhum",
+        "epic": "Rack Meltdown",
+        "legendary": "Old Rackmount of the Basement"
+      },
+      "lore": {
+        "common": "Has so many cables behind it that nobody dares pull one out.",
+        "uncommon": "Stacks one server on top of another until it's taller than a person.",
+        "rare": "Is kept in a room so cold that the engineers wear winter coats in summer.",
+        "epic": "Blinked every light at once during the storm, and the engineers ran in with torches.",
+        "legendary": "Has kept the whole town's internet running from the same basement for thirty years."
+      },
+      "moves": {
+        "signature": "Blinking Rack Flash",
+        "legend": "Status Light Flash",
+        "ultimate": "Rack Cascade",
+        "kit.fan_spin": "Cooling Fan Whirr",
+        "kit.firewall": "Rack Door Guard",
+        "kit.data_leech": "Cable Snatch"
+      }
+    },
+    "x_workstation": {
+      "status": "draft",
+      "names": {
+        "common": "Twinscreen",
+        "uncommon": "Renderhog",
+        "rare": "Hotdesk",
+        "epic": "Animation Studio Crunch",
+        "legendary": "Lady Renderwell of the Design Studio"
+      },
+      "lore": {
+        "common": "Takes up the whole desk with its two screens and its giant keyboard.",
+        "uncommon": "Hogs every bit of power while it draws a single 3D teapot.",
+        "rare": "Got so hot during a render that its owner warmed their hands on it.",
+        "epic": "Rendered a whole animated film in one night with every computer in the studio.",
+        "legendary": "Designed a bridge so beautiful that the town named it after its owner."
+      },
+      "moves": {
+        "signature": "Render Flash",
+        "legend": "Processing Snatch",
+        "ultimate": "Final Render",
+        "kit.overheat": "Hot Render",
+        "kit.fan_spin": "Fan Blast Blast"
+      }
+    },
+    "dial_phone": {
+      "status": "draft",
+      "names": {
+        "common": "Curlycord",
+        "uncommon": "Dialspinner Phone",
+        "rare": "Ringshriek",
+        "epic": "Party Line Chatter",
+        "legendary": "Grandma Bellwether of the Hallway"
+      },
+      "lore": {
+        "common": "Gets its curly cord tangled every time someone walks across the hall.",
+        "uncommon": "Takes ages to dial, one clicking turn at a time.",
+        "rare": "Rang so loudly at midnight that the whole house woke up for a wrong number.",
+        "epic": "Rang in every house in the village at the same moment when the school called about snow.",
+        "legendary": "Has sat on the same hall table for fifty years and taken every important call the family ever had."
+      },
+      "moves": {
+        "signature": "Ring Ring Ring",
+        "legend": "Dial Dial Dial",
+        "ultimate": "Midnight Ring",
+        "kit.ringtone_blast": "Bell Ring Blast",
+        "kit.auto_correct": "Wrong Number Muddle",
+        "kit.hot_battery": "Warm Receiver"
+      }
+    },
+    "x_ceiling_fan_unit": {
+      "status": "draft",
+      "names": {
+        "common": "Wobblespin",
+        "uncommon": "Dustblade",
+        "rare": "Lightpull",
+        "epic": "Summer Breeze Whirl",
+        "legendary": "Old Whirlington of the Ceiling"
+      },
+      "lore": {
+        "common": "Wobbles so much on its highest speed that everyone below ducks.",
+        "uncommon": "Collects a thick line of dust on every blade.",
+        "rare": "Has a pull cord for the light and one for the fan, and you always pull the wrong one.",
+        "epic": "Whirled so fast on the hottest night that every paper in the house blew off the tables.",
+        "legendary": "Has spun over the same dinner table for fifty years and cooled a thousand family dinners."
+      },
+      "moves": {
+        "signature": "Blade Wobble Flash",
+        "legend": "Hot Motor Whirl",
+        "ultimate": "Ceiling Cyclone",
+        "kit.beep_beep": "Pull Cord Click",
+        "kit.glitch_out": "Wobble Crack"
+      }
+    },
+    "x_extractor_fan": {
+      "status": "draft",
+      "names": {
+        "common": "Steamsucker",
+        "uncommon": "Rattlevent",
+        "rare": "Fishsmeller",
+        "epic": "Bathroom Steam Gulp",
+        "legendary": "Old Ventilus of the Bathroom Wall"
+      },
+      "lore": {
+        "common": "Rattles in the wall for ten minutes after you switch the light off.",
+        "uncommon": "Sucks the steam out of the bathroom and leaves the mirror clear.",
+        "rare": "Pulled the smell of fried fish out of the kitchen before the guests arrived.",
+        "epic": "Cleared the steam from every bathroom in the hotel on the busiest morning.",
+        "legendary": "Has kept the same bathroom free of steam for forty years and never let the mirror fog."
+      },
+      "moves": {
+        "signature": "Rattle Flash",
+        "legend": "Fresh Air Rest",
+        "ultimate": "Steam Gulp",
+        "kit.beep_beep": "Switch Click",
+        "kit.factory_reset": "Cool Down Rest",
+        "kit.turbo_mode": "Boost Setting"
+      }
+    },
+    "x_space_heater_fan": {
+      "status": "draft",
+      "names": {
+        "common": "Toescorcher",
+        "uncommon": "Tickwarm",
+        "rare": "Cornerglow",
+        "epic": "Cold Office Warm-Up",
+        "legendary": "Old Toastington of the Study"
+      },
+      "lore": {
+        "common": "Blows hot air straight at your toes until they tingle.",
+        "uncommon": "Ticks and clicks as it warms up, like it's thinking about something.",
+        "rare": "Warmed a whole cold room in five minutes, and the cat moved in front of it forever.",
+        "epic": "Warmed every chilly desk in the office on the coldest Monday of the year.",
+        "legendary": "Has kept the same grandad's study warm every winter for thirty years."
+      },
+      "moves": {
+        "signature": "Warm Gust Flash",
+        "legend": "Heavy Base Ram",
+        "ultimate": "Heat Wave Blast",
+        "kit.factory_reset": "Thermostat Rest",
+        "kit.glitch_out": "Tick Tick Crack",
+        "kit.turbo_mode": "High Heat Boost"
+      }
+    },
+    "x_tower_fan": {
+      "status": "draft",
+      "names": {
+        "common": "Halfbreezer",
+        "uncommon": "Paperflapper",
+        "rare": "Tallbreeze",
+        "epic": "Heatwave Swivel",
+        "legendary": "Lady Coolbreeze of the Bedroom"
+      },
+      "lore": {
+        "common": "Swivels back and forth so you only get a breeze half the time.",
+        "uncommon": "Flaps every piece of paper on your desk onto the floor.",
+        "rare": "Is so tall and thin that it fits in the tiniest corner.",
+        "epic": "Cooled every bedroom in the house during the heatwave, and everyone slept at last.",
+        "legendary": "Has kept the same family cool through ten summer heatwaves."
+      },
+      "moves": {
+        "signature": "Swivel Flash",
+        "legend": "Big Breeze Bash",
+        "ultimate": "Swivel Storm",
+        "kit.beep_beep": "Remote Beep",
+        "kit.factory_reset": "Sleep Mode Rest",
+        "kit.glitch_out": "Paper Scatter Crack",
+        "kit.turbo_mode": "Turbo Breeze"
+      }
+    },
+    "x_drone_controller": {
+      "status": "draft",
+      "names": {
+        "common": "Thumbstick",
+        "uncommon": "Batterybeep",
+        "rare": "Skypilot",
+        "epic": "Park Drone Show",
+        "legendary": "Captain Hoverhand of the Field"
+      },
+      "lore": {
+        "common": "Has two thumbsticks, and you always push the wrong one.",
+        "uncommon": "Beeps when the battery is low just as the drone is over the lake.",
+        "rare": "Flew a drone so high that it filmed the whole town from above.",
+        "epic": "Flew a hundred drones in perfect shapes over the park for the summer festival.",
+        "legendary": "Landed a drone on a coin from the other side of the field."
+      },
+      "moves": {
+        "signature": "Thumbstick Flash",
+        "legend": "Hot Battery Beep",
+        "ultimate": "Drone Swoop",
+        "kit.beep_beep": "Low Battery Beep",
+        "kit.factory_reset": "Recalibrate",
+        "kit.glitch_out": "Signal Muddle",
+        "kit.turbo_mode": "Sport Mode"
+      }
+    },
+    "i_muzzle": {
+      "status": "draft",
+      "names": {
+        "common": "Strapfiddle",
+        "uncommon": "Barkstopper",
+        "rare": "Snifflemask",
+        "epic": "Vet Day Calm",
+        "legendary": "Old Gentlemuzzle of the Dog Show"
+      },
+      "lore": {
+        "common": "Is fiddled with by the dog all afternoon until it's crooked.",
+        "uncommon": "Stops a dog from barking at the postman, mostly.",
+        "rare": "Kept a very nervous dog calm through a whole visit to the vet.",
+        "epic": "Kept every excitable dog calm at the dog show, and the judges finished early.",
+        "legendary": "Has kept the same gentle dog safe and calm on every walk for twelve years."
+      },
+      "moves": {
+        "signature": "Strap Strap Strap",
+        "legend": "Calm Boost",
+        "ultimate": "Sun-Warm Strap",
+        "kit.beep_beep": "Buckle Click",
+        "kit.factory_reset": "Treat Rest",
+        "kit.glitch_out": "Wriggle Crack",
+        "kit.turbo_mode": "Good Dog Boost"
+      }
+    },
+    "i_oxygen_mask": {
+      "status": "draft",
+      "names": {
+        "common": "Elasticsnap",
+        "uncommon": "Dropdown",
+        "rare": "Breathehelp",
+        "epic": "Cabin Mask Drop",
+        "legendary": "Captain Airwell of the Rescue Kit"
+      },
+      "lore": {
+        "common": "Snaps its elastic strap against your ear when you put it on.",
+        "uncommon": "Drops down from the plane ceiling during the safety talk, and every child stares.",
+        "rare": "Helped a mountain climber breathe at the very top of the highest peak.",
+        "epic": "Dropped down in every row of the plane during the drill, and the passengers practised perfectly.",
+        "legendary": "Has helped a hundred climbers reach the top of the tallest mountains."
+      },
+      "moves": {
+        "signature": "Elastic Snap Snap",
+        "legend": "Mask Drop Startle",
+        "ultimate": "Big Breath",
+        "kit.beep_beep": "Flow Hiss",
+        "kit.factory_reset": "Fresh Air Rest",
+        "kit.glitch_out": "Strap Muddle",
+        "kit.turbo_mode": "Oxygen Boost"
+      }
+    },
+    "x_ski_goggles": {
+      "status": "draft",
+      "names": {
+        "common": "Fogupper",
+        "uncommon": "Goggletan",
+        "rare": "Mirrorlens",
+        "epic": "Whiteout Run",
+        "legendary": "Lady Glacierlens of the Piste"
+      },
+      "lore": {
+        "common": "Fogs up the moment you stop at the top of the slope.",
+        "uncommon": "Leaves a white goggle-shaped tan on your face.",
+        "rare": "Has mirror lenses so shiny that the skier behind sees their own face.",
+        "epic": "Cut through a whiteout on the mountain so clearly that the whole ski school followed its wearer down.",
+        "legendary": "Has skied every mountain in the range and never once let a snowflake in."
+      },
+      "moves": {
+        "signature": "Lens Glint Glint",
+        "legend": "Sun Glare Burn",
+        "ultimate": "Mogul Mayhem",
+        "kit.factory_reset": "Anti-Fog Wipe",
+        "kit.glitch_out": "Fog Muddle",
+        "kit.turbo_mode": "Downhill Boost"
+      }
+    },
+    "x_smart_glasses": {
+      "status": "draft",
+      "names": {
+        "common": "Notifyblinker",
+        "uncommon": "Talkingframes",
+        "rare": "Facefinder",
+        "epic": "Tech Show Dazzle",
+        "legendary": "Professor Spectacula of the Tech Fair"
+      },
+      "lore": {
+        "common": "Blinks notifications in front of your eyes while you're trying to read.",
+        "uncommon": "Talks to you in a tiny voice that nobody else can hear.",
+        "rare": "Recognised every face in the crowd and remembered everyone's name.",
+        "epic": "Dazzled every visitor at the tech fair, and the queue went round the block.",
+        "legendary": "Translated a whole conversation in a foreign market so its wearer could buy the best mangoes."
+      },
+      "moves": {
+        "signature": "Notification Flash",
+        "legend": "Screen Glare Crack",
+        "ultimate": "Data Overload",
+        "kit.beep_beep": "Ping Ping",
+        "kit.factory_reset": "Restart",
+        "kit.glitch_out": "Lag Muddle"
+      }
+    },
+    "i_snorkel": {
+      "status": "draft",
+      "names": {
+        "common": "Gurglepipe",
+        "uncommon": "Mouthpiecebite",
+        "rare": "Seadipper",
+        "epic": "Reef Peek",
+        "legendary": "Old Breathtube of the Lagoon"
+      },
+      "lore": {
+        "common": "Gurgles water into your mouth every time a little wave comes along.",
+        "uncommon": "Has a mouthpiece that leaves teeth marks after every swim.",
+        "rare": "Dipped under the water so smoothly that the fish didn't notice it.",
+        "epic": "Peeked at every fish on the reef in one afternoon, and the fish started peeking back.",
+        "legendary": "Has explored every lagoon on the island and still has its original mouthpiece."
+      },
+      "moves": {
+        "signature": "Gurgle Gurgle Gurgle",
+        "legend": "Air Gulp Snatch",
+        "ultimate": "Big Clear Blast",
+        "kit.beep_beep": "Water Spout Startle",
+        "kit.factory_reset": "Surface Rest",
+        "kit.glitch_out": "Flooded Tube Crack"
+      }
+    },
+    "x_snorkel_mask": {
+      "status": "draft",
+      "names": {
+        "common": "Foggyface",
+        "uncommon": "Hairtangler",
+        "rare": "Underwaterview",
+        "epic": "Reef Explorer",
+        "legendary": "Lady Coralview of the Bay"
+      },
+      "lore": {
+        "common": "Fogs up after five minutes, so you see nothing but cloud.",
+        "uncommon": "Has a strap that tangles in your hair every time you take it off.",
+        "rare": "Showed its wearer a whole hidden world of fish under the jetty.",
+        "epic": "Explored the whole reef with a family of snorkellers, and nobody wanted to get out.",
+        "legendary": "Has shown a thousand children their first fish and never let in a drop."
+      },
+      "moves": {
+        "signature": "Splash Splash Splash",
+        "legend": "Bubble Snatch",
+        "ultimate": "Reef Dive",
+        "kit.beep_beep": "Bubble Startle",
+        "kit.factory_reset": "Spit Clean Rest",
+        "kit.glitch_out": "Fog Crack",
+        "kit.turbo_mode": "Flipper Power-Up"
+      }
+    },
+    "x_swim_goggles": {
+      "status": "draft",
+      "names": {
+        "common": "Eyesquasher",
+        "uncommon": "Strapsnapper Goggles",
+        "rare": "Lanecounter",
+        "epic": "Gala Lens Sparkle",
+        "legendary": "Old Clearvision of the Pool"
+      },
+      "lore": {
+        "common": "Squashes your eyes so tightly that you look like a panda after swimming.",
+        "uncommon": "Snaps its strap so hard that it stings the back of your head.",
+        "rare": "Let its wearer count every tile on the bottom of the pool.",
+        "epic": "Was worn by every swimmer in the gala, and the pool sparkled with coloured lenses.",
+        "legendary": "Has swum ten thousand lengths and never once let in a single drop of chlorine."
+      },
+      "moves": {
+        "signature": "Strap Snap Snap",
+        "legend": "Lap Lap Lap",
+        "ultimate": "Lane Dash",
+        "kit.factory_reset": "Lens Rinse Rest",
+        "kit.glitch_out": "Leak Crack",
+        "kit.turbo_mode": "Tumble Turn Boost"
+      }
+    }
+  }
+}
