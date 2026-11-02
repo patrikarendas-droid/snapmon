@@ -45,7 +45,8 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
    node tests/lore.js && node tests/guide.js && node tests/rules-trace.js && node tests/identity.js && node tests/devtest.js   # rules-trace: odds and battle maths unchanged
    node tests/generator-snapshot.js && node tests/curated.js && node tools/curated.js validate   # live generator frozen; curated content valid
    node tests/gameplay-baseline.js && node tests/ability-keys.js   # gameplay (no text) frozen; stable ability keys
-   node tests/curated-pipeline.js   # inventory up to date, draft names/content never live, lint works
+   node tests/curated-pipeline.js   # inventory up to date, only reviewed names/content live, lint works
+   node tests/curated-refresh.js    # saved monsters take the latest reviewed writing once per revision; nothing else changes
    node tests/god-mode.js && node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots   # developer God Mode
    node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json && node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
    python3 -m http.server 8765 &
@@ -54,6 +55,7 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
    node tests/e2e-nav.js http://localhost:8765/index.html /tmp/shots
    node tests/e2e-qol.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots
    node tests/e2e-v044.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots
+   node tests/e2e-curated.js http://localhost:8765/index.html /tmp/shots   # old save refreshed in the page; long names fit at 412 px
    ```
 2. Bump `GAME_VERSION` (and `SAVE_VERSION` + a migration in `migrate()` if the save format changes).
 3. Merge into production with a merge commit and push. The Pages workflow runs **all tests first**; the site only

@@ -14,4 +14,5 @@
    workflow in `docs/CONTENT_WRITING_GUIDE.md` ("Batch workflow"). Coverage: `docs/review/COVERAGE.md`; batches are
    fixed lists in `content/batches/`; progress is `node tools/curated.js progress <batch>`. All new content stays
    `"status": "draft"`: only the developer approves entries (`"reviewed"`); never set it yourself, never regenerate or
-   overwrite approved text, never add drafts to `src/curated-data.js`. Monster names are draft-only (not in the game).
+   overwrite approved text, never add drafts to `src/curated-data.js`. Monster names from reviewed entries are live (since the Pilot 02
+   integration); saved monsters refresh to the latest reviewed writing once per content revision (`tests/curated-refresh.js`).

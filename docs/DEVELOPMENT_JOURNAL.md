@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline; Pilot 02 editorially approved (branch, not merged, not live).
+Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline; Pilot 02 integrated on the branch (names, refresh), awaiting final approval (not merged, not live).
 
 ---
 
@@ -126,6 +126,26 @@ Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline; Pilot 02 ed
   step (the status change is part of that approved implementation), nothing merged, deployed or rebuilt, monster
   names not activated. **Next phase (separate task, needs approval): plan safe integration of curated monster names
   and approved Pilot 02 content, incl. existing saves and the encyclopedia.**
+- **Pilot 02 INTEGRATION (2026-11-02, developer-authorized), branch `feature/curated-pipeline-pilot02`, NOT merged or
+  deployed (awaits final approval):** the 50 entries are `reviewed` (file renamed `content/curated/pilot-02-approved.json`;
+  only the status line changed). Curated **monster names** are live (`CURATED.namesEnabled`, `curatedMonsterName`):
+  Pilot 02 objects use their 5 approved names (a Legendary's curated name replaces the generated "Name, title");
+  Pilot 01 keeps generated names (no reviewed names yet); the other 2,241 objects are fully procedural. Lore and move
+  names as before (by stable ability key). **Existing monsters:** `curatedRefresh` (src/curated.js) runs on load and
+  on backup restore once per content revision (`CURATED.revision`, a 12-char hash written by the build; the save
+  stores `curatedRev`): it rewrites only `name`, `lore` and ability `name` of monsters whose object has reviewed
+  content; nicknames, level, stats, rarity, variant, DNA/colours, keys, numbers, equipment and progression untouched;
+  no random numbers; idempotent. Before the first refresh the untouched save is copied once to
+  `snapmon.save.v1.backup.precurated` (one key only, never overwritten). Encyclopedia sheet shows the curated name for
+  the top rarity seen (`curatedDexName`), otherwise the first-seen name; dex records are not rewritten. Test collection
+  shows the latest writing too. Rollback: older builds read the refreshed names/text as plain strings and ignore
+  `curatedRev`. Battle HP card fixed for long names (grid column `minmax(0,1fr)`: ellipsis instead of the HP bar
+  overflowing; found by the new browser test). Mechanics unchanged: gameplay baseline, rules trace (fixture unchanged;
+  curated-on run compared without names and message wording) pass; generator snapshot live hash re-recorded on purpose
+  (`withoutCurated` still matches). New tests: `tests/curated-refresh.js`, `tests/e2e-curated.js` (CI + RELEASING).
+  Size projection for all 2,301 objects: ~1.9 MB raw / ~0.7 MB gzip, ~35 ms cold parse on desktop Node (expect several
+  × on mid-range phones), refresh of 300 monsters ~3 ms → consider lazy loading before full coverage. Needs a phone
+  check. Next after approval: merge/deploy/tag as instructed; then the remaining 2,241 objects (not started).
 - **v0.4.7 developer God Mode (2026-10-31):** Settings → Developer & testing → "God Mode (test battles)", default off,
   remembered like the other developer switches; active only with Quick Monster Test Mode on AND Instant capture off
   (the Settings line says why it is inactive; it never changes the other switches). Engine: `enableGodMode(B)` sets a
@@ -183,9 +203,9 @@ Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline; Pilot 02 ed
 | Brief freeze after the camera shutter with **Force CPU backend** (developer option) | Mitigated in v0.4.4, needs phone check | The CPU detector (TF.js CPU backend) runs on the main thread for ~1 s; see section 6. `src/ui.js` `paintFirst`, `recognizeFlow`. | Phone test: the Analysing screen should now appear immediately with the photo, sweep still moving; only the clock text pauses. A full fix needs the detector in a worker (not planned). |
 | Same freeze for real players whose phone cannot use WebGL | Same mitigation | Rare: only phones where WebGL fails fall back to the CPU detector. | As above. |
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
-| Curated writing covers only 10 objects | v0.4.6: Pilot 01 active; Pilot 02 (50) editorially approved, not yet integrated | `content/curated/`, `src/curated-data.js` (generated), `docs/CONTENT_WRITING_GUIDE.md`. Every other object uses the generated text. Same-name shared cooldown (`cdWith`, 4 configs) kept for compatibility. | Next batches written and reviewed separately; phone check of v0.4.6. |
+| Curated writing covers only 60 objects | v0.4.6: Pilot 01 active; Pilot 02 (50, with names) integrated on the branch, awaiting final approval | `content/curated/`, `src/curated-data.js` (generated), `docs/CONTENT_WRITING_GUIDE.md`. Every other object uses the generated text. Same-name shared cooldown (`cdWith`, 4 configs) kept for compatibility. | Remaining 2,241 objects in batches after approval; phone check; data size/lazy loading before full coverage. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
-| Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change without consent; "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
+| Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change family, moves' numbers or stats without consent (since the Pilot 02 integration their curated TEXT — name, lore, move names — is refreshed automatically, see section 4); "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
 | Some borrowed designs are approximate (drone → helicopter, microscope basic) | Known | `docs/identity-designs-*.png` | Improve when found in QA. |
 | Hardware camera zoom untested on a real phone | Open | `src/platform.js` zoom; digital zoom fallback tested in browser. | Phone test. |
@@ -226,9 +246,9 @@ Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline; Pilot 02 ed
 
 ## 7. Testing and verification
 
-- **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `gameplay-baseline`, `ability-keys`, `generator-snapshot`, `curated`, `guide`, `lore`, `identity`, `devtest`,
+- **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `gameplay-baseline`, `ability-keys`, `generator-snapshot`, `curated`, `curated-pipeline`, `curated-refresh`, `god-mode`, `guide`, `lore`, `identity`, `devtest`,
   `migrate`, `labels`, `clip-fusion`, `color`, sprite regressions) and browser tests in headless Chromium with a fake
-  camera (`e2e`, `e2e-engine` with the real TinyCLIP worker and a tiny test model, `e2e-nav`, `e2e-qol`, `e2e-v044`).
+  camera (`e2e`, `e2e-engine` with the real TinyCLIP worker and a tiny test model, `e2e-nav`, `e2e-qol`, `e2e-v044`, `e2e-godmode`, `e2e-curated`).
 - **Real-model lab (`lab.yml`):** runs the real models on ~150 labelled Wikimedia photos when engine/lab files change
   (GPU vs CPU equivalence). Results in `docs/RECOGNITION.md`.
 - **Manual:** only the developer's Android phone. Anything not tested there is marked "needs phone check" in reports.
@@ -266,13 +286,16 @@ Last updated: 2026-11-02, release v0.4.7 + curated-writing pipeline; Pilot 02 ed
   cooldowns (`e.cds[name]`) and in identity updates (signature name compared with the category's); monster names,
   moves and lore are stored on monsters and in backups; encyclopedia text (`speciesLore`) is computed live.
 - **Curated writing at scale (2026-11-02):** batches of ~50 by theme with variety, fixed manifests, writer pass →
-  separate editor pass → lint → developer approval; AI never sets "reviewed". Monster names stay draft-only until a
-  separate activation (proposal in the guide). Data size: ~1.1 KB per approved object → ~2.5 MB for all objects;
+  separate editor pass → lint → developer approval; AI never sets "reviewed" (Pilot 02's status change was explicitly authorized by the developer). Monster names
+  are live since the Pilot 02 integration (reviewed entries only, own switch `namesEnabled`). Data size: ~1.1 KB per approved object → ~2.5 MB for all objects;
   consider per-object lazy loading past a few hundred (not built).
 - **Two regression baselines (2026-10-31):** `gameplay-baseline` (no text at all) must never change for wording work;
   `generator-snapshot` (text + names + save) changes only on purpose (curated activation re-records it, the gameplay
   baseline must still pass). Cooldowns by stable key, not display name; `cdWith` kept for exact compatibility rather
   than silently fixing the shared-cooldown quirk (a possible later balance decision).
+- **Curated refresh of saved monsters (Pilot 02 integration):** automatic, per content revision, text fields only,
+  chosen over a save reset (no data loss, deterministic, reversible via the one-time backup and plain-string rollback).
+  One backup key rather than one per revision so future batches never fill localStorage.
 
 ## 9. How to keep this journal
 

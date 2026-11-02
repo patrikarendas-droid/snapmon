@@ -1,10 +1,10 @@
 # Content writing guide: curated monster writing
 
-Hand-written, reviewed monster writing for specific objects: flavour text, move names and (draft-only for now) monster
-names. **Status (2026-11-02): live in the game since v0.4.6 for the 10 Pilot 01 objects only** (flavour text and move
-names). Every other object uses the generated text. Draft batches (Pilot 02, 50 objects) are in `content/curated/` but
-never reach the game: only entries the developer approves and marks `"reviewed"` do, and only after a separate
-activation step. **Monster names are not wired into the game at all yet** (see "Monster names").
+Hand-written, reviewed monster writing for specific objects: flavour text, move names and monster names.
+**Status (2026-11-02): Pilot 01 (10 objects: flavour text, move names) live since v0.4.6; Pilot 02 (50 objects:
+names, flavour text, move names) integrated on `feature/curated-pipeline-pilot02`, awaiting final approval.** Every
+other object uses the generated name and text. Only entries the developer approves and marks `"reviewed"` reach the
+game; drafts never do. Monster names are live for reviewed entries that have them (see "Monster names").
 
 The editorial standard (humour, rarity rules, names, moves) is **[`SNAPMON_WRITING_BIBLE.md`](SNAPMON_WRITING_BIBLE.md)**.
 Coverage of every object and layer: [`review/COVERAGE.md`](review/COVERAGE.md).
@@ -56,7 +56,7 @@ Coverage of every object and layer: [`review/COVERAGE.md`](review/COVERAGE.md).
 | `notes` | no | reviewer notes, up to 600 characters |
 | `lore` | no | keys: `common`, `uncommon`, `rare`, `epic`, `legendary` (any subset). Each is a text or a list of up to 8 texts. |
 | `moves` | no | move key → new display name (see "Move names") |
-| `names` | no | **draft-only:** rarity → monster display name (`common`…`legendary`). Common–Epic 3–24 characters, Legendary up to 40; starts with a capital; letters, digits, spaces and `' - , . ! &`; the five names of an object must differ. Validated and previewed; **never used by the game and never copied into the game data**. |
+| `names` | no | rarity → monster display name (`common`…`legendary`). Common–Epic 3–24 characters, Legendary up to 40; starts with a capital; letters, digits, spaces and `' - , . ! &`; the five names of an object must differ. Validated and previewed; **never used by the game and never copied into the game data**. |
 
 Everything is optional. A missing rarity, a missing entry or a broken field simply keeps today's generated text.
 
@@ -184,29 +184,25 @@ Rarity is a **different premise**, not the same sentence with bigger adjectives:
 - **Self-contained:** the text is shown on the monster sheet and in the encyclopedia; it must not rely on the
   monster's name, colour or level.
 
-## What curated text will and will not change (when activated)
+## What curated writing changes
 
-- **New monsters only:** flavour text is chosen when a monster appears and stored on it; existing monsters keep theirs
-  (unless the player chooses a refresh, if one is added later).
+- **New and existing monsters:** names, flavour text and move names are chosen when a monster appears and stored on
+  it. Since the Pilot 02 integration, saved monsters are refreshed to the latest reviewed writing once per content
+  revision (on load and backup restore, `curatedRefresh`): only those three text fields; nicknames and everything
+  else stay. The first refresh keeps a one-time copy of the untouched save (`snapmon.save.v1.backup.precurated`).
 - **Encyclopedia:** its text is computed when shown, so activated entries also update the encyclopedia text of
   species already met (approved: the improved lore is shown consistently).
-- **Never:** monster names (not wired in), stats, artwork, odds, move numbers, save format.
+- **Never:** stats, artwork, odds, move numbers, rarity, family, save format.
 
-## Monster names (draft-only): activation proposal, NOT implemented
+## Monster names (live since the Pilot 02 integration)
 
-Monster names are written and reviewed now so that a later release can use them. Today the game creates names in
-`game.js` (`speciesName3` / `speciesName`) and stores them on each monster; the `names` field is ignored. Proposed
-activation (needs the developer's approval as its own release):
-
-1. In `createMonster`, after the generated name: if a reviewed entry has `names[rarity]`, use it. Deterministic, no
-   random numbers, no effect on family, rarity, stats or moves. Legendary names replace the generated "Name, the
-   Title" whole.
-2. Existing monsters, nicknames and the test collection keep their stored names; encyclopedia entries keep
-   `monsterName` from first sight unless we decide to refresh species names (decision needed).
-3. `tools/curated.js build` would copy `names` only behind a separate switch (`CURATED.namesEnabled`).
-4. Tests before release: gameplay baseline unchanged; text snapshot re-recorded on purpose; UI truncation on a
-   412 px phone (encounter, battle header, monster sheet, encyclopedia, results, test collection); backup/restore;
-   old saves; uniqueness of legendary names across all objects (today guaranteed by `legendTitle`).
+`createMonster` uses `names[rarity]` from a reviewed entry (`curatedMonsterName`, switch `CURATED.namesEnabled`, set
+by `build --enable`); deterministic, no random numbers, no effect on family, rarity, stats or moves. A Legendary's
+curated name replaces the generated "Name, title" whole (the battle header shows the part before a comma and
+shortens long names with an ellipsis). Objects without reviewed names keep the generated name (Pilot 01 for now).
+Existing monsters take the curated name on refresh; nicknames win on screen. The encyclopedia sheet shows the curated
+name for the highest rarity seen, otherwise the name first seen. Tests: `tests/curated-refresh.js`,
+`tests/e2e-curated.js` (412 px), `tests/identity.js` (Legendary names unique across all objects).
 
 ## Activation and adding a new batch (active since v0.4.6, Pilot 01)
 
@@ -222,6 +218,7 @@ them). `src/curated-data.js` is generated; never edit it by hand. To ship a new 
    (`node tests/generator-snapshot.js record`; it keeps the original pre-curated recording and refuses to record if
    that no longer matches with curated text off). Note it in the journal; ship as a version bump.
 
-New monsters get the curated text and move names; existing monsters keep what they were found with; the
-encyclopedia shows the curated text for every species (approved). Rollback: rebuild the data file without `--enable`
-(or revert the activation commit); stored monster texts are unaffected.
+New monsters get the curated writing; existing monsters are refreshed once per content revision (the build writes
+`CURATED.revision`); the encyclopedia shows the curated text for every species (approved). `tests/curated-refresh.js`
+must pass. Rollback: rebuild the data file without `--enable` (or revert the activation commit); stored names and
+texts stay as plain strings that older builds read unchanged.
