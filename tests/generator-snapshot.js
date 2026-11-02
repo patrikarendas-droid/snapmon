@@ -60,6 +60,12 @@ if (process.argv[2] === 'record') {
   if (out.withoutCurated.sha256 !== off.sha256) { console.log('FAIL: refusing to record — with curated text off the output no longer matches the original recording'); process.exit(1); }
   fs.writeFileSync(FIX, JSON.stringify(out, null, 1)); console.log('recorded', JSON.stringify(out)); process.exit(0);
 }
+// "record-text": the text/mechanics of specific v0.4.8 objects changed ON PURPOSE (say which in the commit and journal).
+// Recognition audit round 2 (2026-11): 15 objects whose design rule matched inside another word (weasel → easel,
+// motherboard/chess board/cardboard/headboard/sideboard unit/ironing board/synth keyboard → oar, windbreaker → breaker,
+// vinyl record → cord, champagne flute → lute, honeycomb/combine harvester → comb, gingerbread man → ginger, string
+// lights → ring light) now take their correct rule or category: their lore group, moves and flavour text change.
+if (process.argv[2] === 'record-text') { const out = { ...on, withoutCurated: off, textFrozen: { on: textOn, off: textOff } }; fs.writeFileSync(FIX, JSON.stringify(out, null, 1)); console.log('recorded (text)', JSON.stringify(out.textFrozen)); process.exit(0); }
 // "record-visual": artwork/objects changed on purpose (recognition audit). Allowed only while the frozen TEXT of every
 // v0.4.8 object is unchanged (checked above); then the whole-output hashes, including withoutCurated, are re-recorded.
 if (process.argv[2] === 'record-visual') {

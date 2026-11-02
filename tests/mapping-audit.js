@@ -30,7 +30,8 @@ const filled = g => g.px.filter(v => v).length;
 {
   const frozen = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures/registry-ids-v0.4.8.json'), 'utf8')).ids;
   const missing = frozen.filter(id => !T.OBJECTS[id]);
-  ok(!missing.length && T.OBJECTS.i_cardigan && T.OBJECTS.i_plane, `all ${frozen.length} v0.4.8 object ids still exist (+ i_cardigan, i_plane)${missing.length ? ': missing ' + missing.slice(0, 5) : ''}`);
+  const added = ['i_cardigan', 'i_plane', 'piggy_bank', 'whale', 'dolphin', 'wombat', 'binoculars'];
+  ok(!missing.length && added.every(id => T.OBJECTS[id]) && Object.keys(T.OBJECTS).length === frozen.length + added.length, `all ${frozen.length} v0.4.8 object ids still exist, plus exactly ${added.join(', ')}${missing.length ? ': missing ' + missing.slice(0, 5) : ''}`);
 }
 // 3. every recogniser table agrees with objectForLabel; TinyCLIP labels and order are those of v0.4.8
 {
@@ -73,6 +74,18 @@ const filled = g => g.px.filter(v => v).length;
   const W = 40, pts = Array.from(ug.px).map((v, i) => v ? [i % W, Math.floor(i / W)] : null).filter(Boolean), xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
   const w = Math.max(...xs) - Math.min(...xs) + 1, h = Math.max(...ys) - Math.min(...ys) + 1;
   ok(w / h > 0.8 && w / h < 1.25 && w >= 24, `urchin silhouette is round (bounding box ${w}×${h})`);
+}
+// 5b. design rules match whole words: a weasel is not an easel, a motherboard not an oar (round 2)
+{
+  const want = { x_weasel: o => o.lore !== 'art' && !(o.vis && o.vis.kind === 'easel'), x_motherboard: o => o.vis && o.vis.kind === 'chip', x_chess_board: o => o.vis && o.vis.like === 'puzzle',
+    x_headboard: o => o.vis && o.vis.like === 'bed', x_vinyl_record: o => o.vis && o.vis.kind === 'disc', x_windbreaker: o => o.lore !== 'electric', x_champagne_flute: o => o.vis && o.vis.like === 'glass',
+    x_honeycomb: o => o.lore !== 'gadget', x_combine_harvester: o => o.lore !== 'gadget', x_gingerbread_man: o => o.lore !== 'veg', i_bobsled: o => !!o.rule, i_dogsled: o => !!o.rule };
+  const badR = Object.entries(want).filter(([id, f]) => !f(T.OBJECTS[id])).map(([id]) => id);
+  ok(!badR.length, `design rules match whole words only (weasel ≠ easel, motherboard ≠ oar, honeycomb ≠ comb …; sleds still sleds)${badR.length ? ': ' + badR : ''}`);
+  const ids = { whale: 'whale', dolphin: 'dolphin', wombat: 'wombat', 'piggy bank': 'piggy_bank', binoculars: 'binoculars' }, badI = [];
+  for (const [l, id] of Object.entries(ids)) { seeded(2); const m = T.createMonster(T.freshState(), { obj: T.objectForLabel(l), rarity: 'rare', word: l });
+    if (m.obj !== id || /shark|bear|pig\b|glasses|specs/i.test(m.name + ' ' + m.lore)) badI.push(l + ' → ' + m.obj + ' "' + m.name + '"'); }
+  ok(!badI.length, `whale, dolphin, wombat, piggy bank and binoculars are their own objects with their own names and texts (no Shark/Bear/Pig/Glasses text)${badI.length ? ': ' + badI.join('; ') : ''}`);
 }
 // 6. saved monsters: never silently relabelled; old urchins keep their stored look and may opt in
 {

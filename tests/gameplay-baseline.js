@@ -11,6 +11,9 @@
 // Recognition audit (2026-11): re-recorded ON PURPOSE for artwork and label mapping only — `monsters` and `sprites`
 // (35 objects get an honest design: DNA shape changes, nothing else) and `recognition` (sea urchin, drum, dice, shopping
 // cart, flowerpot, corgi, carpenter's plane). `rules`, `mechanics`, `encounters` and `battles` are unchanged.
+// Round 2 (deferred-flag cleanup): `mechanics` re-recorded ON PURPOSE for exactly 15 objects whose design rule matched
+// inside another word (weasel → easel, motherboard → oar …; see generator-snapshot.js): their move kit follows the
+// corrected lore group. Rule tables, move numbers and every other object are unchanged.
 const fs = require('fs'), vm = require('vm'), path = require('path'), crypto = require('crypto');
 const FIX = path.join(__dirname, 'fixtures/gameplay-baseline.json');
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape, localStorage: { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } } };
