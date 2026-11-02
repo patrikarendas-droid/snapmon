@@ -31,8 +31,10 @@
 | Batch | Objects | Written | Editor pass | Fixes applied | Notes |
 |---|---|---|---|---|---|
 | w01-mammals-1 | 107 | 107 | done: 39 high / 102 medium / 64 low + 23 patterns | 143 fields (all high + all medium) via `patches/w01-editor-auto.json` | open: Sir/Lady legendary-name formula (~25), some award-shaped legendaries, low taste notes |
-| w02-mammals-2 | 106 | 106 | running/see review file | — | dog breeds Sch–Y, wild canids, primates, farm, cats, small & marine mammals |
-| w03–w22 | 2,035 | 0 | — | — | not started |
+| w02-mammals-2 | 106 | 106 | done: 76 high / 118 medium / 83 low + 14 patterns | 193 lore/move fields (`patches/w02-editor-auto.json`, bad suggestions overridden) + 146 names re-paired to their lore (`w02-editor-names.json`) + religious settings removed | open: one-trait-across-rarities in ~30 objects only partly fixed; Ultimate = Epic name + word (51); award legendaries |
+| w03-birds-and-sea-life | 120 | 120 | editor agent hit the usage limit mid-run; re-run pending | — | |
+| w04-bugs-and-reptiles | 118 | 60 | — | self-fixes (`patches/w04-self-fixes.json`) | |
+| w05–w22 | 1,797 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
@@ -40,6 +42,9 @@
 - Avoid stock frames: "in the land/country", contests/judges/medals/trophies, "was declared/crowned", "according to its
   own story", payment punchlines (charged in biscuits), shake-off soaking a crowd, "seen from space", palaces/emperors.
 - Legendary = a concrete outrageous achievement with a real punchline. Vary legendary name shapes (not always Sir/Lady X).
+- Names must sit on the rarity whose lore they describe (write names AFTER the lore, per line).
+- Ultimate names: don't reuse the Epic monster name plus Rush/Charge/Storm; give the finisher its own image.
+- Check `brief` mechanics BEFORE naming moves (legend/ultimate effects differ per object; varied Ultimates need effect-neutral names).
 - Move names: no heat words on non-burn moves, no heal/rescue words on attacks, no cold words when a variant burns.
 
 ## Decisions and known issues
