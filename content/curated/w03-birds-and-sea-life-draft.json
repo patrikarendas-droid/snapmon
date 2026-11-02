@@ -1347,6 +1347,676 @@
         "kit.slippery_scales": "Hard Shell",
         "kit.barb_sting": "Beak Bite"
       }
+    },
+    "x_albatross": {
+      "status": "draft",
+      "names": {
+        "common": "Crashlander",
+        "uncommon": "Gliderwing",
+        "rare": "Bill-Clacker",
+        "epic": "Ocean Glider",
+        "legendary": "Endless Albert, Who Never Lands"
+      },
+      "lore": {
+        "common": "Lands on the beach by tumbling over its own enormous wings, then pretends it meant to.",
+        "uncommon": "Greets its partner with a clacking beak dance that sounds like two people sword-fighting with chopsticks.",
+        "rare": "Can glide for hours without a single flap, so it naps in the air and wakes up in a different sea.",
+        "epic": "Spread its wings across the harbour and every boat thought the sun had gone in.",
+        "legendary": "Flew around the whole world without touching the ground, then landed on a ship's deck and asked what it had missed."
+      },
+      "moves": {
+        "signature": "Glide Dive",
+        "legend": "Updraft Power",
+        "ultimate": "Ocean Glider Swoop"
+      }
+    },
+    "x_angelfish": {
+      "status": "draft",
+      "names": {
+        "common": "Stripefin",
+        "uncommon": "Tankglider",
+        "rare": "Pairpaddler",
+        "epic": "Coral Catwalk Fin",
+        "legendary": "Angelina of the Clearest Water"
+      },
+      "lore": {
+        "common": "Glides past the glass with its nose in the air, as if the other fish are beneath it.",
+        "uncommon": "Always swims with the same partner and sulks if anyone else joins the conversation.",
+        "rare": "Its tall stripy fins make it vanish among the water weeds, then reappear right behind your finger.",
+        "epic": "Swam so gracefully round the pet shop that customers bought the tank, the weeds and the shop assistant's chair.",
+        "legendary": "Has kept the same tank spotless for twenty years by staring at every crumb until it leaves on its own."
+      },
+      "moves": {
+        "signature": "Stripe Slap",
+        "legend": "Sharp Stare",
+        "ultimate": "Water Weed Whirl",
+        "kit.barb_sting": "Spiny Fin Prick"
+      }
+    },
+    "x_aquarium": {
+      "status": "draft",
+      "names": {
+        "common": "Hummingtank",
+        "uncommon": "Bubblecastle",
+        "rare": "Glassnose",
+        "epic": "Living Room Ocean",
+        "legendary": "The Great Glass Reef"
+      },
+      "lore": {
+        "common": "Its filter hums all night, exactly one note lower than the fridge.",
+        "uncommon": "Grows a new layer of green on the glass every time someone has just cleaned it.",
+        "rare": "Its bubbler blows so hard that the plastic diver has started riding the bubbles like a lift.",
+        "epic": "Sprang a tiny leak and turned the living room into a paddling pool. The fish loved the extra space.",
+        "legendary": "Grew so big and so beautiful that the whole street now visits it at weekends, and the fish wave back."
+      },
+      "moves": {
+        "signature": "Glass Bump",
+        "legend": "Hot Lamp Glare",
+        "ultimate": "Living Room Flood",
+        "kit.fin_slap": "Bubbler Burst",
+        "kit.slippery_scales": "Thick Glass"
+      }
+    },
+    "x_betta_fish": {
+      "status": "draft",
+      "names": {
+        "common": "Mirrorflare",
+        "uncommon": "Bubblenester",
+        "rare": "Silkfins",
+        "epic": "Fin Fanfare",
+        "legendary": "Betta Bravura, the Flowing Flag"
+      },
+      "lore": {
+        "common": "Puffs up and flares its fins at its own reflection, every morning, and loses every time.",
+        "uncommon": "Builds a little raft of bubbles at the top of the tank and gets very upset if you touch it.",
+        "rare": "Its silky fins flow like a ballgown, so it refuses to swim anywhere it might get them wet.",
+        "epic": "Flared at a passing cat so dramatically that the cat backed out of the room and has not returned.",
+        "legendary": "Built a bubble nest so large that the whole pet shop floated gently up to the ceiling for an afternoon."
+      },
+      "moves": {
+        "signature": "Flare Slap",
+        "legend": "Puffed-Up Poison",
+        "ultimate": "Fin Fanfare Flourish",
+        "kit.slippery_scales": "Silky Fin Shield"
+      }
+    },
+    "x_blackbird": {
+      "status": "draft",
+      "names": {
+        "common": "Leaftosser",
+        "uncommon": "Evensonger",
+        "rare": "Chinkalarm",
+        "epic": "Lawn Bombardier",
+        "legendary": "Merle, the Evening Songster"
+      },
+      "lore": {
+        "common": "Throws leaves all over the garden path looking for worms, then glares at you for sweeping.",
+        "uncommon": "Sings from the top of the chimney every evening as if it's the last concert of the year.",
+        "rare": "Its alarm call goes chink-chink-chink at every cat, so the cats now creep around in socks.",
+        "epic": "Turned over every leaf in the park in one afternoon looking for a single worm. The gardeners took the day off.",
+        "legendary": "Taught its evening song to every blackbird in town. Now the whole town goes to bed at exactly the same moment."
+      },
+      "moves": {
+        "signature": "Leaf Toss Dive",
+        "legend": "Chimney-Top Pride",
+        "ultimate": "Evensong Swoop"
+      }
+    },
+    "x_budgie": {
+      "status": "draft",
+      "names": {
+        "common": "Mirrorbell",
+        "uncommon": "Seedflinger",
+        "rare": "Chatterchirp",
+        "epic": "Cage Rumpus",
+        "legendary": "Bluebell Budgerigar, the Great Chatterer"
+      },
+      "lore": {
+        "common": "Flings seed husks out of its cage so the whole room crunches underfoot.",
+        "uncommon": "Rings the bell on its mirror whenever it wants attention, which is every few seconds.",
+        "rare": "Learned to say \"pretty bird\" so many times that the cat has started saying it too.",
+        "epic": "Escaped from its cage and organised every budgie in the pet shop into a chirping choir.",
+        "legendary": "Learned a hundred words, then used them all in one sentence, and the family still haven't worked out what it wanted."
+      },
+      "moves": {
+        "signature": "Seed Flick Dive",
+        "legend": "Mirror Power-Up",
+        "ultimate": "Chatter Poison Cloud"
+      }
+    },
+    "x_canary": {
+      "status": "draft",
+      "names": {
+        "common": "Yellowtrill",
+        "uncommon": "Cagesinger",
+        "rare": "Sunfeather",
+        "epic": "Morning Aria",
+        "legendary": "Carolina Canaria, the Golden Voice"
+      },
+      "lore": {
+        "common": "Sings at full volume the moment you take the cover off its cage, even at six in the morning.",
+        "uncommon": "Is so yellow that it makes the bananas in the fruit bowl look pale.",
+        "rare": "Hit a note so high that the glass of water beside the cage started humming along.",
+        "epic": "Sang so well at the opera house that the soprano asked it to stop showing off.",
+        "legendary": "Sang one note so long and so beautifully that the morning sun rose ten minutes early to hear the end."
+      },
+      "moves": {
+        "signature": "Sunny Dive",
+        "legend": "High Note Scorch",
+        "ultimate": "Morning Aria Swoop"
+      }
+    },
+    "x_carp": {
+      "status": "draft",
+      "names": {
+        "common": "Pondgulper",
+        "uncommon": "Mudstirrer",
+        "rare": "Lilylurk",
+        "epic": "Pond Belly Splash",
+        "legendary": "Old Carpington, Grandfish of the Pond"
+      },
+      "lore": {
+        "common": "Comes to the surface with its mouth open whenever anyone walks past, just in case.",
+        "uncommon": "Stirs up the mud at the bottom of the pond so nobody can see what it's eating.",
+        "rare": "Grew so big that the ducks now use it as a floating island to rest on.",
+        "epic": "Splashed its tail once and every lily pad in the lake did a somersault.",
+        "legendary": "Has lived in the same palace pond for a hundred years and still remembers everyone who ever fed it a crumb."
+      },
+      "moves": {
+        "signature": "Tail Swish Slap",
+        "legend": "Pond Floor Nap",
+        "ultimate": "Pond Belly Splash Wave"
+      }
+    },
+    "x_catfish": {
+      "status": "draft",
+      "names": {
+        "common": "Whiskerfin",
+        "uncommon": "Mudfeeler",
+        "rare": "Riverbottom Rumble",
+        "epic": "Muddy Monster",
+        "legendary": "Sir Barbel, Whiskers of the Deep River"
+      },
+      "lore": {
+        "common": "Lies on the riverbed all day feeling around with its whiskers for snacks nobody else wanted.",
+        "uncommon": "Its long whiskers can taste food from the other side of the pond, so it always arrives first.",
+        "rare": "Grew so big that fishermen tell stories about it, and every story is slightly bigger than the last.",
+        "epic": "Wriggled through the mud so hard that the whole river turned to hot chocolate colour for a week.",
+        "legendary": "Became so famous that anglers came from every country to catch it. It waved its whiskers at all of them."
+      },
+      "moves": {
+        "signature": "Whisker Slap",
+        "legend": "Riverbed Rest",
+        "ultimate": "Muddy Monster Rumble",
+        "kit.slippery_scales": "Slimy Skin"
+      }
+    },
+    "x_chick": {
+      "status": "draft",
+      "names": {
+        "common": "Cheepfluff",
+        "uncommon": "Followpeep",
+        "rare": "Peckeverything",
+        "epic": "Barnyard Peeping",
+        "legendary": "Little Clucky, Who Followed the Tractor"
+      },
+      "lore": {
+        "common": "Cheeps so loudly when it loses sight of its mother that the whole farm goes looking.",
+        "uncommon": "Follows the first thing it sees after hatching. This one follows the vacuum cleaner.",
+        "rare": "Pecks at everything shiny, including buttons, zips and the farmer's wristwatch.",
+        "epic": "Hatched alongside a hundred others in the same morning, and the farmhouse kitchen became a fluffy yellow carpet.",
+        "legendary": "Followed a tractor so devotedly that the farmer let it drive, and it ploughed the field in a perfect heart shape."
+      },
+      "moves": {
+        "signature": "Fluffy Dive",
+        "legend": "Crumb Siphon",
+        "ultimate": "Barnyard Peeping Panic"
+      }
+    },
+    "x_clam": {
+      "status": "draft",
+      "names": {
+        "common": "Snapshell",
+        "uncommon": "Squirtclam",
+        "rare": "Sanddigger",
+        "epic": "Beach Geyser",
+        "legendary": "Clamantha, Keeper of the Pearl"
+      },
+      "lore": {
+        "common": "Snaps shut whenever someone looks at it, then opens again just to check if they've gone.",
+        "uncommon": "Squirts water from the sand whenever someone walks past, so the beach is full of surprised paddlers.",
+        "rare": "Digs itself so deep in the sand so fast that spades give up.",
+        "epic": "Squirted a jet of water so high at the beach that the lifeguard put up a rainbow warning.",
+        "legendary": "Kept a single grain of sand safe for so long that it grew into the largest pearl ever seen. It refuses to let anyone borrow it."
+      },
+      "moves": {
+        "signature": "Shell Snap",
+        "legend": "Shut Tight",
+        "ultimate": "Beach Geyser Blast",
+        "kit.fin_slap": "Shell Clap",
+        "kit.barb_sting": "Squirt Jet"
+      }
+    },
+    "x_cockatoo": {
+      "status": "draft",
+      "names": {
+        "common": "Crestdancer",
+        "uncommon": "Cuddlebeak",
+        "rare": "Shoulderscreamer",
+        "epic": "Disco Crest",
+        "legendary": "Crestwell, Who Dances to Anything"
+      },
+      "lore": {
+        "common": "Screams in your ear when it wants a cuddle, then screams again when the cuddle ends.",
+        "uncommon": "Bobs its head and dances whenever music plays, including the microwave timer.",
+        "rare": "Raises its crest so high when it's surprised that it knocks the lampshade off.",
+        "epic": "Danced so energetically at a wedding that the whole guest list joined in and the band forgot to stop.",
+        "legendary": "Danced every night for eighty years without missing a single beat. The family band now follows its lead."
+      },
+      "moves": {
+        "signature": "Crest Dive",
+        "legend": "Hot-Headed Shriek",
+        "ultimate": "Disco Crest Spin"
+      }
+    },
+    "x_cod": {
+      "status": "draft",
+      "names": {
+        "common": "Batterhopeful",
+        "uncommon": "Shoalcod",
+        "rare": "Coldwater",
+        "epic": "North Sea Shoal",
+        "legendary": "Codfrey, the Big Fish of the North Sea"
+      },
+      "lore": {
+        "common": "Swims away very fast whenever anyone mentions chips.",
+        "uncommon": "Swims in shoals so huge that the fishing boats ask it for directions.",
+        "rare": "Grew so large in the cold dark sea that it frightened the fishing net, which tore itself open on purpose.",
+        "epic": "Led a shoal so big through the cold sea that the ferry had to stop and wait for it to pass.",
+        "legendary": "Outswam every fishing boat in the North Sea for twenty years and now gives swimming lessons to the young cod."
+      },
+      "moves": {
+        "signature": "Cold Slap",
+        "legend": "Shoal Shoal Shoal",
+        "ultimate": "North Sea Surge"
+      }
+    },
+    "x_crow": {
+      "status": "draft",
+      "names": {
+        "common": "Shinycollector",
+        "uncommon": "Nutdropper",
+        "rare": "Facekeeper",
+        "epic": "Roadside Nutcracker",
+        "legendary": "Corvina, the Cleverest Crow"
+      },
+      "lore": {
+        "common": "Steals shiny bottle caps from the pavement and hides them in the gutter.",
+        "uncommon": "Drops nuts on the road and waits for cars to crack them, then politely waits at the crossing to collect.",
+        "rare": "Remembers the face of everyone who has ever shooed it away, and caws at them every morning.",
+        "epic": "Organised every crow in town into a gang that collects lost keys. The lost-property office is overwhelmed.",
+        "legendary": "Solved a puzzle that scientists had been stuck on for weeks, using a stick, a stone and a bottle of water."
+      },
+      "moves": {
+        "signature": "Nutdrop Dive",
+        "legend": "Knowing Glare",
+        "ultimate": "Roadside Nutcracker Strike"
+      }
+    },
+    "x_dodo": {
+      "status": "draft",
+      "names": {
+        "common": "Clumsystep",
+        "uncommon": "Backagain",
+        "rare": "Flightlessbump",
+        "epic": "Island Waddle",
+        "legendary": "Dodonna, the Return of the Dodo"
+      },
+      "lore": {
+        "common": "Trips over its own feet while standing still, then looks round to see who pushed it.",
+        "uncommon": "Came back from history and is very confused by doorbells.",
+        "rare": "Waddled into a museum and was moved to the \"extinct\" display. It refuses to leave.",
+        "epic": "Waddled through a busy airport looking for its old island. Every flight was delayed to help it.",
+        "legendary": "Returned to its island after a very long time and found a whole new forest waiting for it. It planted the first tree itself."
+      },
+      "moves": {
+        "signature": "Waddle Bump",
+        "legend": "Snack Grab",
+        "ultimate": "Island Waddle Stampede"
+      }
+    },
+    "x_duckling": {
+      "status": "draft",
+      "names": {
+        "common": "Fuzzpaddle",
+        "uncommon": "Lineuptail",
+        "rare": "Firstswim",
+        "epic": "Duckling Parade",
+        "legendary": "Paddles, Who Leads the Line"
+      },
+      "lore": {
+        "common": "Paddles round and round in circles because it's still working out its feet.",
+        "uncommon": "Lines up behind its mother and won't take a single step out of order.",
+        "rare": "Took its first swim and paddled so fast that it overtook the mother duck.",
+        "epic": "Led a line of forty ducklings across the high street and every bus stopped for them.",
+        "legendary": "Became the lollipop warden of the park pond, and every duckling crosses safely when it says so."
+      },
+      "moves": {
+        "signature": "Fuzzy Dive",
+        "legend": "Muddy Paddle Splash",
+        "ultimate": "Duckling Parade Scorch"
+      }
+    },
+    "x_eagle": {
+      "status": "draft",
+      "names": {
+        "common": "Eyrieguard",
+        "uncommon": "Farsight",
+        "rare": "Talonsnatch",
+        "epic": "Mountain Shadow",
+        "legendary": "Aquila, Watcher of the Peaks"
+      },
+      "lore": {
+        "common": "Sits on the highest crag and glares at everyone below as if they owe it money.",
+        "uncommon": "Can spot a rabbit from two miles up, and a picnic from three.",
+        "rare": "Snatched a whole fish from a fisherman's line and flew off without saying thank you.",
+        "epic": "Built a nest on a cliff so big that it now has a guest room and a balcony.",
+        "legendary": "Soared so high above the mountains that it watched the sunrise twice in one morning."
+      },
+      "moves": {
+        "signature": "Talon Dive Strike",
+        "legend": "Rotten Fish Drop",
+        "ultimate": "Mountain Shadow Swoop"
+      }
+    },
+    "x_eel": {
+      "status": "draft",
+      "names": {
+        "common": "Wrigglegrip",
+        "uncommon": "Slipaway",
+        "rare": "Longnoodle",
+        "epic": "River Noodle Run",
+        "legendary": "Anguilla, the Great Wanderer"
+      },
+      "lore": {
+        "common": "Wriggles out of every hand that tries to hold it and leaves only a slimy handprint.",
+        "uncommon": "Slips through the smallest gap in the riverbank and appears in the neighbour's pond.",
+        "rare": "Can slither across a wet field from one river to another in the middle of the night.",
+        "epic": "Wriggled through every drainpipe in the village and came out of every tap at once.",
+        "legendary": "Swam halfway across the ocean to a sea it had never seen, to visit the place it was born. Sent a postcard home."
+      },
+      "moves": {
+        "signature": "Wriggle Slap",
+        "legend": "Slippery Brace",
+        "ultimate": "River Noodle Rush",
+        "kit.fin_slap": "Tail Thrash",
+        "kit.slippery_scales": "Slime Coat"
+      }
+    },
+    "x_emu": {
+      "status": "draft",
+      "names": {
+        "common": "Curiousstep",
+        "uncommon": "Bigfeet",
+        "rare": "Drumboom",
+        "epic": "Outback Sprinter",
+        "legendary": "Emma Emu, the Fastest Feet"
+      },
+      "lore": {
+        "common": "Peers into every car window at the safari park and steals the sandwich off the dashboard.",
+        "uncommon": "Makes a deep drumming boom in its chest that sounds like someone knocking on a hollow tree.",
+        "rare": "Runs so fast on its long legs that it overtakes the jeep that was chasing it.",
+        "epic": "Raced across the outback so quickly that the road signs spun round behind it.",
+        "legendary": "Outran a kangaroo, a dingo and a motorbike in the same afternoon. Then stopped to look at a shiny button."
+      },
+      "moves": {
+        "signature": "Big Feet Kick",
+        "legend": "Curious Stare",
+        "ultimate": "Outback Sprint Strike"
+      }
+    },
+    "x_falcon": {
+      "status": "draft",
+      "names": {
+        "common": "Diverocket",
+        "uncommon": "Hoodpeeker",
+        "rare": "Glovesitter",
+        "epic": "Stoop Strike",
+        "legendary": "Falcona, Fastest Thing with Feathers"
+      },
+      "lore": {
+        "common": "Sits on the falconer's glove looking bored, then flies off to chase a pigeon anyway.",
+        "uncommon": "Wears a little leather hood and pretends it can still see you.",
+        "rare": "Dives from the sky so fast that it arrives before the sound of its own wings.",
+        "epic": "Dived through the city so fast that every pigeon in the square scattered at once.",
+        "legendary": "Became the fastest creature on the planet, then spent the afternoon sitting very still on a church spire."
+      },
+      "moves": {
+        "signature": "Stoop Dive",
+        "legend": "Hawkeye Glare",
+        "ultimate": "Stoop Strike Storm"
+      }
+    },
+    "x_flamingo": {
+      "status": "draft",
+      "names": {
+        "common": "Pinkstand",
+        "uncommon": "Onelegpoise",
+        "rare": "Shrimpsnacker",
+        "epic": "Lagoon Ballet",
+        "legendary": "Florida Flamboyance, the Pinkest of All"
+      },
+      "lore": {
+        "common": "Stands on one leg all day and gets cross when anyone asks about the other one.",
+        "uncommon": "Stays pink by eating shrimp, and blushes even pinker when you mention it.",
+        "rare": "Sifts its food upside down with its head in the water, so it always sees the world the wrong way round.",
+        "epic": "Led a dance of a thousand flamingos across the lagoon. The whole lake turned pink and swayed.",
+        "legendary": "Stood on one leg without wobbling for a whole year. The other leg is still asleep."
+      },
+      "moves": {
+        "signature": "Pink Dive",
+        "legend": "One-Leg Rest",
+        "ultimate": "Lagoon Ballet Scorch"
+      }
+    },
+    "x_goldfish_bowl": {
+      "status": "draft",
+      "names": {
+        "common": "Roundview",
+        "uncommon": "Bowlbubble",
+        "rare": "Fishfriend Bowl",
+        "epic": "Bowl of Wonder",
+        "legendary": "The Great Round Window"
+      },
+      "lore": {
+        "common": "Makes everything outside look stretched and funny, so the goldfish thinks the cat is enormous.",
+        "uncommon": "Echoes every tap on the glass so loudly that the goldfish has started tapping back.",
+        "rare": "Makes the goldfish inside look twice as big as it is, and the goldfish loves the attention.",
+        "epic": "Rolled off the shelf, bounced on the carpet and landed back upright. The goldfish didn't notice.",
+        "legendary": "Became the most loved bowl in the house after keeping the same goldfish happy for twenty years."
+      },
+      "moves": {
+        "signature": "Glass Bowl Bump",
+        "legend": "Magnified Glare",
+        "ultimate": "Bowl of Wonder Spin",
+        "kit.fin_slap": "Ripple Slap"
+      }
+    },
+    "x_gosling": {
+      "status": "draft",
+      "names": {
+        "common": "Fluffhisser",
+        "uncommon": "Gooseylittle",
+        "rare": "Marchingpeep",
+        "epic": "Goose Squad",
+        "legendary": "Gertie, Captain of the Goose Squad"
+      },
+      "lore": {
+        "common": "Is only a ball of fluff but already hisses at everything like a grown-up goose.",
+        "uncommon": "Marches behind its parents across the park in perfect step, then gets distracted by a daisy.",
+        "rare": "Hissed at a dog twenty times its size and the dog decided to walk on the other side of the road.",
+        "epic": "Led a march of goslings straight through a football match. The referee stopped the game.",
+        "legendary": "Grew up to lead the biggest goose squad on the river, and nobody has dared feed it the wrong bread since."
+      },
+      "moves": {
+        "signature": "Fluffy Hiss Dive",
+        "legend": "Riverbank Rest Goose",
+        "ultimate": "Goose Squad Charge"
+      }
+    },
+    "x_guppy": {
+      "status": "draft",
+      "names": {
+        "common": "Tinyrainbow",
+        "uncommon": "Tankfiller",
+        "rare": "Tailshimmer",
+        "epic": "Rainbow School",
+        "legendary": "Guppella, Mother of a Thousand"
+      },
+      "lore": {
+        "common": "Is so tiny that it hides behind a single strand of water weed.",
+        "uncommon": "Has so many babies that the tank looks more crowded every morning.",
+        "rare": "Flicks its rainbow tail so fast that it leaves a little shimmer in the water behind it.",
+        "epic": "Its family grew so big that the pet shop had to buy a second aquarium just for its grandchildren.",
+        "legendary": "Filled every fish tank in town with its relatives, each one a slightly different colour of rainbow."
+      },
+      "moves": {
+        "signature": "Tiny Tail Slap",
+        "legend": "Rainbow Dazzle",
+        "ultimate": "Rainbow School Surge"
+      }
+    },
+    "x_hawk": {
+      "status": "draft",
+      "names": {
+        "common": "Circlescreech",
+        "uncommon": "Thermalrider",
+        "rare": "Mousesnatch",
+        "epic": "Highway Hunter",
+        "legendary": "Haunted Harrier, the Sky Screamer"
+      },
+      "lore": {
+        "common": "Circles over the garden for hours, making the birds at the feeder very nervous.",
+        "uncommon": "Its piercing screech is so dramatic that films borrow it for other birds.",
+        "rare": "Spotted a mouse in the long grass from the top of a lamp post a mile away.",
+        "epic": "Circled so many times over the motorway that the drivers started waving at it.",
+        "legendary": "Its screech became so famous that every eagle in every film uses it, and the hawk gets nothing for it."
+      },
+      "moves": {
+        "signature": "Hawk Dive",
+        "legend": "Burning Glare",
+        "ultimate": "Sky Scream Strike"
+      }
+    },
+    "x_heron": {
+      "status": "draft",
+      "names": {
+        "common": "Pondpincher",
+        "uncommon": "Statuestand",
+        "rare": "Hunchwader",
+        "epic": "Garden Pond Raid",
+        "legendary": "Old Ardea, the Patient Fisher"
+      },
+      "lore": {
+        "common": "Stands at the edge of the garden pond looking innocent, then steals the goldfish when nobody is looking.",
+        "uncommon": "Stands so still that people walk up to it thinking it's a garden ornament, then it flaps off.",
+        "rare": "Struck a fish so fast that the splash happened after it had already swallowed.",
+        "epic": "Raided every garden pond in the street in one morning. The goldfish now live in the bath.",
+        "legendary": "Waited at the same river bend so patiently that the river finally gave up and brought it a fish every morning."
+      },
+      "moves": {
+        "signature": "Pond Pinch Dive",
+        "legend": "Swamp Stab",
+        "ultimate": "Patient Strike"
+      }
+    },
+    "x_hummingbird": {
+      "status": "draft",
+      "names": {
+        "common": "Hoverhum",
+        "uncommon": "Nectarzip",
+        "rare": "Backwardsflier",
+        "epic": "Garden Blur",
+        "legendary": "Zippora, the Humming Jewel"
+      },
+      "lore": {
+        "common": "Hovers in front of your face, stares, and zips off without saying anything.",
+        "uncommon": "Can fly backwards, upside down and sideways, and does all three for no reason.",
+        "rare": "Beats its wings so fast that it hums like a tiny motor and nobody can see the wings at all.",
+        "epic": "Drank from every flower in the park in one minute and left the bees confused and empty-handed.",
+        "legendary": "Flew across a whole sea on a body the size of a thumb, then stopped for a single sip of nectar."
+      },
+      "moves": {
+        "signature": "Hover Dive",
+        "legend": "Zip Strike",
+        "ultimate": "Garden Blur Rush"
+      }
+    },
+    "x_kingfisher": {
+      "status": "draft",
+      "names": {
+        "common": "Blueflash",
+        "uncommon": "Perchdiver",
+        "rare": "Bulletbeak",
+        "epic": "River Bullet",
+        "legendary": "Alcedo, the Blue Lightning"
+      },
+      "lore": {
+        "common": "Sits on a branch over the river looking very important, then dives in and misses.",
+        "uncommon": "Flashes past so fast that people only see a streak of blue and wonder if they imagined it.",
+        "rare": "Dives into the water without a single splash, then comes up with a fish every time.",
+        "epic": "Its beak was so perfectly shaped that engineers copied it for the nose of a high-speed train.",
+        "legendary": "Caught a fish in every river in the county in one morning, then sat on its perch to dry off, looking smug."
+      },
+      "moves": {
+        "signature": "Plunge Dive",
+        "legend": "Blue Flash Distraction",
+        "ultimate": "River Bullet Strike"
+      }
+    },
+    "x_kiwi_bird": {
+      "status": "draft",
+      "names": {
+        "common": "Nosenibbler",
+        "uncommon": "Nightprobe",
+        "rare": "Bigegg",
+        "epic": "Forest Floor Forager",
+        "legendary": "Kiri, the Fuzzy Night Explorer"
+      },
+      "lore": {
+        "common": "Bumbles around the garden at night poking its long beak into every flowerpot.",
+        "uncommon": "Has nostrils at the very tip of its beak, so it can smell worms underground.",
+        "rare": "Laid an egg so enormous compared to its body that the whole forest came to look.",
+        "epic": "Probed the soil of the whole park in one night looking for worms. The gardeners found a perfect pattern of holes.",
+        "legendary": "Became the national symbol of a whole country without ever learning to fly. It is very proud of its fuzzy feathers."
+      },
+      "moves": {
+        "signature": "Long Beak Poke",
+        "legend": "Worm Hunt Distraction",
+        "ultimate": "Forest Floor Frenzy"
+      }
+    },
+    "x_macaw": {
+      "status": "draft",
+      "names": {
+        "common": "Nutcracker Mac",
+        "uncommon": "Rainbowscream",
+        "rare": "Bigbeak Macaw",
+        "epic": "Jungle Rainbow",
+        "legendary": "Rainbow Rosalind, Loudest in the Jungle"
+      },
+      "lore": {
+        "common": "Screams so loudly at sunrise that the monkeys put their hands over their ears.",
+        "uncommon": "Cracks open nuts that the squirrels can't even dent, and leaves the shells everywhere.",
+        "rare": "Its feathers are so bright that tourists think somebody painted it.",
+        "epic": "Led a flock of macaws over the jungle and the whole sky turned into a moving rainbow.",
+        "legendary": "Lived for seventy years, learned every word the explorers taught it, and now gives tours of the jungle."
+      },
+      "moves": {
+        "signature": "Rainbow Dive Bomb",
+        "legend": "Shadowy Swoop",
+        "ultimate": "Jungle Rainbow Storm"
+      }
     }
   }
 }
