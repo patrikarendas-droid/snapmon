@@ -32,7 +32,7 @@
 |---|---|---|---|---|---|
 | w01-mammals-1 | 107 | 107 | done: 39 high / 102 medium / 64 low + 23 patterns | 143 fields (all high + all medium) via `patches/w01-editor-auto.json` | open: Sir/Lady legendary-name formula (~25), some award-shaped legendaries, low taste notes |
 | w02-mammals-2 | 106 | 106 | done: 76 high / 118 medium / 83 low + 14 patterns | 193 lore/move fields (`patches/w02-editor-auto.json`, bad suggestions overridden) + 146 names re-paired to their lore (`w02-editor-names.json`) + religious settings removed | open: one-trait-across-rarities in ~30 objects only partly fixed; Ultimate = Epic name + word (51); award legendaries |
-| w03-birds-and-sea-life | 120 | 120 | editor agent hit the usage limit mid-run; re-run pending | — | |
+| w03-birds-and-sea-life | 120 | 120 | done: 120 high / 168 medium / 27 low + 12 patterns | 288 fields (`patches/w03-editor-auto.json`, incl. names re-paired to lore; 4 suggestions overridden for payment/brand frames) | open: crowd-scene Epics, homecoming Legendaries (pattern level) |
 | w04-bugs-and-reptiles | 118 | 118 | running | self-fixes (`patches/w04-self-fixes.json`) | |
 | w05-vehicles-1 | 79 | 79 | running | self-fixes | |
 | w06–w22 | 1,718 | 0 | — | — | not started |
