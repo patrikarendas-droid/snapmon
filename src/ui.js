@@ -1058,7 +1058,7 @@ function speciesSheet(key) {
   const top = RARITIES.filter(r => (d.rarities || {})[r.id]).pop() || RARITY.common;
   openSheet(`<div class="grab"></div>
     <div class="stage">${spriteHTML(d.dna, { size: 170, rarity: top.id })}<div class="shadow"></div></div>
-    <div class="sheet-head"><div class="grow"><h2>${esc(d.name)}</h2>${d.monsterName && d.monsterName !== d.name ? `<div class="small muted">${esc(d.monsterName)}</div>` : ''}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <div class="sheet-head"><div class="grow"><h2>${esc(d.name)}</h2>${(() => { const mn = typeof curatedDexName === 'function' ? curatedDexName(d, top.id) : d.monsterName; return mn && mn !== d.name ? `<div class="small muted">${esc(mn)}</div>` : ''; })()}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="row wrap">${RARITIES.filter(r => (d.rarities || {})[r.id]).map(r => rarityChip(r.id)).join('')}${famChip(d.fam)}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
     <p class="muted lore lore-${top.id}">${esc(speciesLore(d, top.id))}</p>
     <div class="card small stack" style="gap:4px">

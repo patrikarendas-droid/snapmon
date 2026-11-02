@@ -150,8 +150,8 @@ function checkManifest(T, m, docs) {
   if (!m.batch) errors.push('manifest needs "batch"');
   if (new Set(ids).size !== ids.length) errors.push('duplicate ids in the manifest');
   for (const id of ids) if (!T.OBJECTS[id]) errors.push(`unknown object id ${id}`);
-  const reviewed = new Set(entriesOf(docs).filter(x => x.status === 'reviewed').map(x => x.id));
-  for (const id of ids) if (reviewed.has(id)) errors.push(`${id} already has reviewed (live) content`);
+  const reviewed = new Set(entriesOf(docs).filter(x => x.status === 'reviewed' && x.batch !== m.batch).map(x => x.id)); // a batch's own approved entries are fine
+  for (const id of ids) if (reviewed.has(id)) errors.push(`${id} already has reviewed (live) content from another batch`);
   if (m.size != null && ids.length !== m.size) errors.push(`manifest says size ${m.size} but lists ${ids.length} ids`);
   return errors;
 }
