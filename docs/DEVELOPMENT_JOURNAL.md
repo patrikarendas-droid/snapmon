@@ -128,6 +128,13 @@ Last updated: 2026-11-02, release v0.4.9 (recognition/identity audit; tag v0.4.9
   step (the status change is part of that approved implementation), nothing merged, deployed or rebuilt, monster
   names not activated. **Next phase (separate task, needs approval): plan safe integration of curated monster names
   and approved Pilot 02 content, incl. existing saves and the encyclopedia.**
+- **Full curated-writing campaign (started 2026-11-02, developer-authorized, DRAFT only)**, branch
+  `content/full-writing-rollout` (from production 550121b, v0.4.9). Baseline: 2,308 objects = 50 approved (Pilot 02)
+  + 10 approved lore/moves needing names (Pilot 01) + 2,248 new; targets 11,290 new names and 11,240 new lore lines.
+  Frozen manifest `content/campaign/manifest.json`, 22 thematic batches `content/batches/w01…w22`, tool
+  `tools/campaign.js` (brief/ingest/status/immutable), tracker + handoff `content/campaign/TRACKER.md`, live counts
+  `content/campaign/STATUS.md`. Pilot 01 names proposal kept outside `content/curated/`. Independent editor agent per
+  batch → `content/review/<batch>-issues.json`. Nothing reviewed/merged/deployed; v0.4.9 Android playtest still pending.
 - **Recognition → identity → visual audit (2026-11-02), branch `feature/recognition-identity-audit`, NOT merged or
   deployed (awaits approval).** Trigger: phone test of v0.4.8, a photographed sea urchin spawned the Starfish. Root
   cause: Starfish carried the alias "sea urchin" (first registration wins in `ALIAS_INDEX`), so `objectForLabel`, the
