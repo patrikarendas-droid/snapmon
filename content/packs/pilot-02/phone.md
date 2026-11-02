@@ -1,0 +1,61 @@
+# Writer pack · phone
+
+**Smartphone** · category Phone · group – · family mechanical · design dedicated (looks like: Smartphone)
+Also recognised as: cellular telephone, phone, mobile phone, cell phone, iphone
+
+## Current generated monster names (to replace)
+- common: Swipelet
+- uncommon: Swipester
+- rare: Swipegloom
+- epic: Swipezilla
+- legendary: Swipemega, the Ever-Turning Smartphone
+
+## Move slots (names only; numbers never change)
+- `signature` · default "Notification Spam" · 42% ×3 · cd 3 · used by: common, uncommon, rare, epic, legendary
+- `legend` (Legendary only) · default "Curse of the Smartphone" · 60% · defdown 70% · cd 2
+- `ultimate` (Legendary only) · default "Creeping Smartphone Blight" · VARIES BY VARIANT → name must be effect-neutral: normal 210% · poison 60% · cd 4 / spectral 210% · poison 60% · cd 4 / mutated 210% · defdown 60% · cd 4
+- `kit.ringtone_blast` · default "Ringtone Blast" · 80% · stun 30% · cd 2 · used by: legendary
+- `kit.battery_drain` · default "Battery Drain" · 85% · drain · cd 2 · used by: rare, epic
+- `kit.auto_correct` · default "Auto-Correct" · 60% · defdown 70% · cd 2 · used by: epic
+- `kit.hot_battery` · default "Hot Battery" · 100% · burn 40% · cd 2 · used by: uncommon
+
+## Approved examples (Pilot 01, exact)
+**apple**
+- common: Steals the crunch from every other apple in the bowl. You can hear it chewing at night.
+- uncommon: Can make apple cores grow back into whole apples. Keeps doing it in the bin just to annoy whoever takes out the rubbish.
+- rare: Fires apple seeds hard enough to punch holes through walls. It's been banned from every school lunchbox in town.
+- epic: Can make giant apple trees burst out of the ground, launching entire houses into the sky. The residents are demanding seat belts.
+- legendary: Turned the Moon into a giant apple on a dare. The worm living inside is bigger than Australia.
+**microwave**
+- common: Heats the bowl until nobody can touch it. Leaves the soup freezing cold on purpose.
+- uncommon: Can warm leftovers without being plugged in. Still makes you press START six times.
+- rare: Traded the temperatures of the ice cream and the kettle. Dessert is boiling and the tea is a block of ice.
+- epic: Spins whole houses on an invisible turntable. Neighbours keep coming home to the wrong front door.
+- legendary: Can reheat the Sun when it cools down. Still beeps six times because nobody comes to open the door.
+
+## Deliver (JSON, status stays "draft")
+```json
+{
+  "phone": {
+    "status": "draft",
+    "names": {
+      "common": "…",
+      "uncommon": "…",
+      "rare": "…",
+      "epic": "…",
+      "legendary": "…"
+    },
+    "lore": {
+      "common": "…",
+      "uncommon": "…",
+      "rare": "…",
+      "epic": "…",
+      "legendary": "…"
+    },
+    "moves": {
+      "signature": "…"
+    },
+    "notes": "optional rationale for reviewers"
+  }
+}
+```

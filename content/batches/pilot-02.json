@@ -1,0 +1,24 @@
+{
+  "batch": "pilot-02",
+  "size": 50,
+  "created": "2026-11-02",
+  "rule": "Hand-picked from the real registry: recognisable everyday objects with comic potential across 8 themes, plus a few awkward or esoteric labels as a stress test. None of the 10 Pilot 01 objects. This list is fixed: re-runs never change it.",
+  "themes": {
+    "kitchen & appliances": ["toaster", "kettle", "fridge", "vacuum", "washing_machine", "hair_dryer", "x_rolling_pin", "cutlery_spoon"],
+    "home": ["umbrella", "toilet", "clock", "pillow", "sofa", "lamp", "candle", "potted_plant"],
+    "office & tech": ["office_chair", "laptop", "phone", "tv", "remote", "headphones", "scissors", "stapler", "pen"],
+    "food": ["banana", "pizza", "burger", "egg", "x_tea_bag"],
+    "personal & carry": ["sneaker", "backpack", "glasses", "key", "bottle"],
+    "animals & toys": ["cat", "dog", "teddy", "x_fidget_spinner"],
+    "street & outdoor": ["bicycle", "traffic_cone", "x_traffic_light", "x_shopping_trolley", "x_garden_gnome"],
+    "fittings & esoteric (stress test)": ["x_smoke_detector", "x_power_socket", "x_stethoscope", "x_tuning_fork", "i_hip", "x_sea_urchin_shell"]
+  },
+  "ids": ["toaster", "kettle", "fridge", "vacuum", "washing_machine", "hair_dryer", "x_rolling_pin", "cutlery_spoon",
+    "umbrella", "toilet", "clock", "pillow", "sofa", "lamp", "candle", "potted_plant",
+    "office_chair", "laptop", "phone", "tv", "remote", "headphones", "scissors", "stapler", "pen",
+    "banana", "pizza", "burger", "egg", "x_tea_bag",
+    "sneaker", "backpack", "glasses", "key", "bottle",
+    "cat", "dog", "teddy", "x_fidget_spinner",
+    "bicycle", "traffic_cone", "x_traffic_light", "x_shopping_trolley", "x_garden_gnome",
+    "x_smoke_detector", "x_power_socket", "x_stethoscope", "x_tuning_fork", "i_hip", "x_sea_urchin_shell"]
+}
