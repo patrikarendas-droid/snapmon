@@ -3,7 +3,7 @@
   "batch": "pilot-02",
   "entries": {
     "toaster": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Crumbit",
         "uncommon": "Springslot",
@@ -27,7 +27,7 @@
       "notes": "Its kit is the appliance kit, so the default 'Frost Breath' made no sense on a toaster; renamed to a defence-lowering crumb joke. Ultimate burns or stuns by variant: neutral name."
     },
     "kettle": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Whistlepip",
         "uncommon": "Steamwhisper",
@@ -50,7 +50,7 @@
       "notes": "'Caffeine Kick' (self attack up) renamed: a kettle holds water, not coffee. Legend drains HP; Ultimate varies (burn/defence down/poison), so a neutral name."
     },
     "fridge": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Hummington",
         "uncommon": "Butterbluff",
@@ -72,7 +72,7 @@
       "notes": "Default moves (Deep Freeze, Ice Cube Barrage, Cold Storage) already fit a fridge and are kept."
     },
     "vacuum": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Snufflehose",
         "uncommon": "Tangletail",
@@ -97,7 +97,7 @@
       "notes": "Appliance-kit defaults (Frost Breath, Cold Storage) did not fit a vacuum; renamed to match their effects (defence down, self defence up)."
     },
     "washing_machine": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Sudsy",
         "uncommon": "Shrinkle",
@@ -121,7 +121,7 @@
       }
     },
     "hair_dryer": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Whirrly",
         "uncommon": "Staticbloom",
@@ -147,7 +147,7 @@
       "notes": "AWKWARD DEFAULT: its signature was 'Deep Freeze' (appliance category) on a hair dryer. Renamed to 'Frizz Blast' (it stuns). 'Cool Shot Button' is a real hair-dryer button."
     },
     "x_rolling_pin": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Bonkpin",
         "uncommon": "Flourwhisp",
@@ -172,7 +172,7 @@
       }
     },
     "cutlery_spoon": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Clinkle",
         "uncommon": "Bendini",
@@ -194,7 +194,7 @@
       "notes": "Signature 'Stir Crazy' and kit moves already fit; only Legendary moves renamed."
     },
     "umbrella": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Drippet",
         "uncommon": "Inside-Outer",
@@ -216,7 +216,7 @@
       }
     },
     "toilet": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Gurgles",
         "uncommon": "Bowlwhisper",
@@ -238,7 +238,7 @@
       "notes": "Kept family-friendly: plumbing jokes only. Default 'Flush Vortex' and 'Plunger Pull' already fit."
     },
     "clock": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Tickle-Tock",
         "uncommon": "Ringaling",
@@ -260,7 +260,7 @@
       "notes": "Object is the alarm clock (id 'clock'). Default 'Time Skip', 'Rewind' and 'Deadline' fit."
     },
     "pillow": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Snoozy Puff",
         "uncommon": "Fibber Feathers",
@@ -283,7 +283,7 @@
       "notes": "'Smother Hug' (drain) renamed to something less dark for younger players."
     },
     "sofa": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Crumbhoard",
         "uncommon": "Coin Gobbler",
@@ -304,7 +304,7 @@
       }
     },
     "lamp": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Shady",
         "uncommon": "Mothcatcher",
@@ -326,7 +326,7 @@
       "notes": "Object is the table lamp. Kit moves (Flicker, Hot Bulb, Glow Up) already fit."
     },
     "candle": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Wickle",
         "uncommon": "Relightie",
@@ -347,7 +347,7 @@
       }
     },
     "potted_plant": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Leafdropper",
         "uncommon": "Leanbean",
@@ -369,7 +369,7 @@
       "notes": "Ultimate always stuns (no variant difference), so a stun-flavoured name is fine."
     },
     "office_chair": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Sinkabout",
         "uncommon": "Rollaway",
@@ -394,7 +394,7 @@
       "notes": "'Splinter' (poison) renamed: an office chair has no wooden splinters."
     },
     "laptop": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Loady",
         "uncommon": "Hot Mic Gremlin",
@@ -416,7 +416,7 @@
       "notes": "Kit moves (Pop-Up Ads, Overheat, Firewall, Data Leech) already fit."
     },
     "phone": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Buzzby",
         "uncommon": "Selfie Snatcher",
@@ -437,7 +437,7 @@
       }
     },
     "tv": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Fuzzbox",
         "uncommon": "Channel Hopper",
@@ -459,7 +459,7 @@
       "notes": "'Ad Break' (self heal) is a perfect default and is kept."
     },
     "remote": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Wrong-Way Zapper",
         "uncommon": "Neighbourclick",
@@ -484,7 +484,7 @@
       "notes": "AWKWARD DEFAULT: the remote uses the phone kit, so its signature was 'Notification Spam'. Renamed to fit a remote; 'Battery Drain' and 'Hot Battery' kept."
     },
     "headphones": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Knotbud",
         "uncommon": "Earworm",
@@ -506,7 +506,7 @@
       }
     },
     "scissors": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Snipsy",
         "uncommon": "Wonkycut",
@@ -531,7 +531,7 @@
       "notes": "Office-kit moves 'Ink Splatter' and 'Coffee Break' did not fit scissors; renamed to their real effects (poison, self heal)."
     },
     "stapler": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Jamjaw",
         "uncommon": "Paperbiter",
@@ -554,7 +554,7 @@
       }
     },
     "pen": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Clickety",
         "uncommon": "Doodlewink",
@@ -578,7 +578,7 @@
       "notes": "Rare avoids Pilot 01's book premise (writing that comes true)."
     },
     "banana": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Bruisey",
         "uncommon": "Slipstick",
@@ -600,7 +600,7 @@
       "notes": "'Split Second' (legend move, stuns) is a banana-split pun."
     },
     "pizza": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Crusty Edge",
         "uncommon": "Stringcheese",
@@ -624,7 +624,7 @@
       }
     },
     "burger": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Picklepult",
         "uncommon": "Splatbun",
@@ -650,7 +650,7 @@
       "notes": "Signature 'Grease Fire' is shared with pizza and every meal; burger gets its own."
     },
     "egg": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Rolly Yolk",
         "uncommon": "Humptywobble",
@@ -673,7 +673,7 @@
       "notes": "Signature burns, so it is renamed from 'Crack Attack' to a frying joke."
     },
     "x_tea_bag": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Drippy Dunk",
         "uncommon": "Brewhaha",
@@ -698,7 +698,7 @@
       "notes": "Pantry-kit default 'Flour Cloud' renamed for a tea bag (defence down)."
     },
     "sneaker": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Squeakstep",
         "uncommon": "Laceloose",
@@ -719,7 +719,7 @@
       }
     },
     "backpack": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Zipnip",
         "uncommon": "Pocket Maze",
@@ -740,7 +740,7 @@
       }
     },
     "glasses": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Smudgy",
         "uncommon": "Spoiler Specs",
@@ -766,7 +766,7 @@
       "notes": "AWKWARD DEFAULT: glasses use the keys kit, so the signature was 'Jingle Jab' and kit moves were key-themed. All renamed to fit glasses; numbers unchanged."
     },
     "key": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Jangles",
         "uncommon": "Misfit Key",
@@ -787,7 +787,7 @@
       }
     },
     "bottle": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Rattle Cap",
         "uncommon": "Bubble Burper",
@@ -809,7 +809,7 @@
       }
     },
     "cat": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Mugknocker",
         "uncommon": "Boxsitter",
@@ -831,7 +831,7 @@
       }
     },
     "dog": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Barkback",
         "uncommon": "Cheese Detector",
@@ -855,7 +855,7 @@
       "notes": "'Puppy Eyes' is the legend move, which stuns. Cat and dog share the animal default 'Feral Pounce'; the dog gets its own."
     },
     "teddy": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Button Eye",
         "uncommon": "Bookworm Bear",
@@ -879,7 +879,7 @@
       "notes": "Mutated family, but written cosy rather than creepy for younger players."
     },
     "x_fidget_spinner": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Whirligig",
         "uncommon": "Boredom Buzz",
@@ -905,7 +905,7 @@
       "notes": "AWKWARD DEFAULT: toy-kit signature 'Stuffing Burst' on a fidget spinner. Renamed to 'Dizzy Spin' (defence down)."
     },
     "bicycle": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Squeakbrake",
         "uncommon": "Wheelie Pop",
@@ -931,7 +931,7 @@
       "notes": "Vehicle-kit defaults (Road Rage, Horn Blast, Hit and Run) renamed to fit a bicycle."
     },
     "traffic_cone": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Stripey",
         "uncommon": "Party Hat",
@@ -953,7 +953,7 @@
       "notes": "Street-kit moves and signature 'Detour' already fit."
     },
     "x_traffic_light": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Redhanded",
         "uncommon": "Amber Forever",
@@ -978,7 +978,7 @@
       }
     },
     "x_shopping_trolley": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Wonkywheel",
         "uncommon": "Impulse Buy",
@@ -1003,7 +1003,7 @@
       "notes": "Vehicle-kit defaults renamed for a trolley."
     },
     "x_garden_gnome": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Pebble Nose",
         "uncommon": "Muddy Boots",
@@ -1028,7 +1028,7 @@
       "notes": "AWKWARD DEFAULT: filed under 'tool', so its signature was 'Nail Gun'. Renamed; it hits 3 times."
     },
     "x_smoke_detector": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Chirp O'Clock",
         "uncommon": "Toast Tattletale",
@@ -1049,7 +1049,7 @@
       }
     },
     "x_power_socket": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Surprised Face",
         "uncommon": "Plug Hog",
@@ -1071,7 +1071,7 @@
       }
     },
     "x_stethoscope": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Chilly Chestpiece",
         "uncommon": "Tummy Gossip",
@@ -1094,7 +1094,7 @@
       "notes": "'Cold Touch' (legend move) stuns: a cold stethoscope makes you flinch."
     },
     "x_tuning_fork": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Pingfork",
         "uncommon": "Hummdinger",
@@ -1118,7 +1118,7 @@
       "notes": "Instrument-kit default 'Drum Roll' renamed (a tuning fork has no drum)."
     },
     "i_hip": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Prickle Pip",
         "uncommon": "Itchpowder",
@@ -1142,7 +1142,7 @@
       "notes": "AWKWARD MAPPING: the registry object is called 'Hip' (from the ImageNet label 'hip, rose hip'). Players see 'Hip', so the text names the rose hip explicitly. Consider renaming the object display name later (separate change)."
     },
     "x_sea_urchin_shell": {
-      "status": "draft",
+      "status": "reviewed",
       "names": {
         "common": "Ouchpebble",
         "uncommon": "Seaprickle",

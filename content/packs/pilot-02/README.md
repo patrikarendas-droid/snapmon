@@ -8,6 +8,7 @@ How to write (any Claude session, also from a phone):
 2. For each object pack: write 5 monster names, 5 flavour texts (a different premise per rarity), and names only for
    move slots where a new name is a real improvement and fits the listed mechanics.
 3. Put the entries into `content/curated/pilot-02-draft.json` with `"status": "draft"`. Never "reviewed".
+   (Done. After developer approval the file became `content/curated/pilot-02-approved.json`, status "reviewed", 2026-11-02.)
 4. Run `node tools/curated.js validate`, `node tools/curated.js lint --batch pilot-02` and
    `node tools/curated.js progress pilot-02`. Fix errors; read the flags.
 5. An editor pass (a separate session) writes `content/review/pilot-02-issues.json`; the human editor decides.
