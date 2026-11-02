@@ -1,0 +1,179 @@
+{
+ "created": "2026-11-02",
+ "registry": 2308,
+ "baseline": {
+  "content/curated/pilot-01-approved.json": "ced698205fb806ef2930cdfa1c4eb844ac2f95d591bf47635a4b77db226baca7",
+  "content/curated/pilot-02-approved.json": "592b6ddfb9c7c0331d90f2f7ce7f9a61c4fcd3948bdffd428c673f59f60b0f5c"
+ },
+ "partition": {
+  "approvedComplete": {
+   "owner": "content/curated/pilot-02-approved.json",
+   "ids": [
+    "backpack",
+    "banana",
+    "bicycle",
+    "bottle",
+    "burger",
+    "candle",
+    "cat",
+    "clock",
+    "cutlery_spoon",
+    "dog",
+    "egg",
+    "fridge",
+    "glasses",
+    "hair_dryer",
+    "headphones",
+    "i_hip",
+    "kettle",
+    "key",
+    "lamp",
+    "laptop",
+    "office_chair",
+    "pen",
+    "phone",
+    "pillow",
+    "pizza",
+    "potted_plant",
+    "remote",
+    "scissors",
+    "sneaker",
+    "sofa",
+    "stapler",
+    "teddy",
+    "toaster",
+    "toilet",
+    "traffic_cone",
+    "tv",
+    "umbrella",
+    "vacuum",
+    "washing_machine",
+    "x_fidget_spinner",
+    "x_garden_gnome",
+    "x_power_socket",
+    "x_rolling_pin",
+    "x_sea_urchin_shell",
+    "x_shopping_trolley",
+    "x_smoke_detector",
+    "x_stethoscope",
+    "x_tea_bag",
+    "x_traffic_light",
+    "x_tuning_fork"
+   ]
+  },
+  "approvedNamesMissing": {
+   "owner": "content/curated/pilot-01-approved.json",
+   "namesProposal": "content/campaign/pilot-01-names-proposal.json",
+   "ids": [
+    "apple",
+    "book",
+    "forklift",
+    "microwave",
+    "padlock",
+    "rubber_duck",
+    "sock",
+    "x_energy_drink",
+    "x_light_switch",
+    "x_security_camera"
+   ]
+  },
+  "newContent": [
+   {
+    "batch": "w01-mammals-1",
+    "size": 107
+   },
+   {
+    "batch": "w02-mammals-2",
+    "size": 106
+   },
+   {
+    "batch": "w03-birds-and-sea-life",
+    "size": 120
+   },
+   {
+    "batch": "w04-bugs-and-reptiles",
+    "size": 118
+   },
+   {
+    "batch": "w05-vehicles-1",
+    "size": 79
+   },
+   {
+    "batch": "w06-vehicles-2",
+    "size": 79
+   },
+   {
+    "batch": "w07-clothing-and-shoes",
+    "size": 118
+   },
+   {
+    "batch": "w08-bags-jewellery-and-carry",
+    "size": 94
+   },
+   {
+    "batch": "w09-gadgets-and-computers",
+    "size": 123
+   },
+   {
+    "batch": "w10-screens-sound-and-light",
+    "size": 98
+   },
+   {
+    "batch": "w11-office-books-and-art",
+    "size": 112
+   },
+   {
+    "batch": "w12-house-odds-and-ends",
+    "size": 101
+   },
+   {
+    "batch": "w13-tools-and-sport",
+    "size": 98
+   },
+   {
+    "batch": "w14-garden-and-plants",
+    "size": 115
+   },
+   {
+    "batch": "w15-trees-fruit-and-veg",
+    "size": 117
+   },
+   {
+    "batch": "w16-toys-and-games",
+    "size": 85
+   },
+   {
+    "batch": "w17-furniture-and-bedding",
+    "size": 100
+   },
+   {
+    "batch": "w18-music-and-instruments",
+    "size": 56
+   },
+   {
+    "batch": "w19-kitchen-and-cookware",
+    "size": 112
+   },
+   {
+    "batch": "w20-fridges-taps-and-tableware",
+    "size": 93
+   },
+   {
+    "batch": "w21-sweets-bakery-and-snacks",
+    "size": 91
+   },
+   {
+    "batch": "w22-drinks-pantry-and-meals",
+    "size": 126
+   }
+  ]
+ },
+ "counts": {
+  "objects": 2308,
+  "approvedComplete": 50,
+  "approvedNamesMissing": 10,
+  "new": 2248,
+  "newNames": 11290,
+  "newLore": 11240
+ }
+}
