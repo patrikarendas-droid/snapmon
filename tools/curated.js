@@ -5,11 +5,18 @@
 //   node tools/curated.js lookup   <words>    find the exact object id for a word ("energy drink" → x_energy_drink)
 //   node tools/curated.js build --out <file> [--enable]  write the reviewed entries as a browser script; --enable
 //                                             also switches curated text and move names on (the activation step)
+//   Batch workflow (content/batches/<batch>.json lists the exact ids of a batch):
+//   node tools/curated.js manifest <batch>    check a batch manifest (ids exist, unique, not already live)
+//   node tools/curated.js pack <batch>        write writer packs to content/packs/<batch>/ (facts, move mechanics, examples)
+//   node tools/curated.js progress <batch>    per object: names n/5, lore n/5, move names; complete count
+//   node tools/curated.js lint [--batch b]    editorial flags across ALL content (high / medium / low); --strict exits 1 on high
+//   node tools/curated.js review <batch>      write docs/review/<batch>-review.md (phone-friendly five-rarity sheets + flags)
 const fs = require('fs'), vm = require('vm'), path = require('path');
 const ROOT = path.join(__dirname, '..'), DIR = path.join(ROOT, 'content/curated');
 const ctx = { console, Math, JSON, Date }; vm.createContext(ctx);
 vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js'].map(f => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n') +
-  ';globalThis.T={OBJECTS,OBJECT_LIST,CATEGORY,MOVE_ARCH,objectForLabel,objectTier,visualSource,monsterLore,createMonster,freshState,curatedMoveSlots,validateCurated,moveKit,CURATED,CURATED_RARITIES}', ctx);
+  ';globalThis.T={OBJECTS,OBJECT_LIST,CATEGORY,MOVE_ARCH,objectForLabel,objectTier,visualSource,monsterLore,createMonster,freshState,curatedMoveSlots,validateCurated,moveKit,cdFor,CURATED,CURATED_RARITIES,setRNG:f=>{RNG=f}}', ctx);
+const W = require('./curated-workflow');
 const T = ctx.T;
 const [cmd, ...args] = process.argv.slice(2);
 const files = a => { const f = a.filter(x => !x.startsWith('--')); return f.length ? f : (fs.existsSync(DIR) ? fs.readdirSync(DIR).filter(n => n.endsWith('.json')).sort().map(n => path.join(DIR, n)) : []); };
@@ -37,9 +44,10 @@ if (cmd === 'validate') {
   for (const { rel, doc } of docs) for (const [id, e] of Object.entries((doc && doc.entries) || {})) {
     const o = T.OBJECTS[id]; if (!o) continue;
     console.log(`\n=== ${id} — ${o.name} · category ${T.CATEGORY[o.cat].name} · group ${o.lore || '–'} · family ${o.fam || T.CATEGORY[o.cat].fam} · ${e.status || 'draft'} · ${rel}`);
+    const nowNames = W.moveFacts(T, id).names;
     for (const r of T.CURATED_RARITIES) {
       const now = T.monsterLore({ obj: id, rarity: r, seed: 1 }), v = e.lore && e.lore[r], list = v == null ? [] : typeof v === 'string' ? [v] : v;
-      console.log(`  ${r.toUpperCase()}`);
+      console.log(`  ${r.toUpperCase()}   name: ${nowNames[r]}${e.names && e.names[r] ? '  →  ' + e.names[r] + ' (draft name, not used by the game)' : ''}`);
       console.log(`    now:      ${now}`);
       if (list.length) list.forEach((t, i) => console.log(`    proposed${list.length > 1 ? '#' + (i + 1) : '  '}: ${t}`));
       else console.log('    proposed: (none — keeps the current text)');
@@ -79,6 +87,32 @@ if (cmd === 'validate') {
 CURATED.data = ${body};
 ${enable ? 'CURATED.enabled = true;      // curated flavour text for new monsters and the encyclopedia\nCURATED.movesEnabled = true; // curated move names for new monsters (by stable ability key)\n' : ''}`);
   console.log(`wrote ${out}: ${ids.length} reviewed entr${ids.length === 1 ? 'y' : 'ies'}, curated writing ${enable ? 'ON' : 'off'}`);
+} else if (cmd === 'manifest' || cmd === 'pack' || cmd === 'progress') {
+  const batch = args.find(a => !a.startsWith('--')); if (!batch) { console.log(`usage: node tools/curated.js ${cmd} <batch>`); process.exit(1); }
+  const m = W.readManifest(batch), { docs, errors } = load(files([]));
+  const bad = W.checkManifest(T, m, docs);
+  if (cmd === 'manifest') { for (const e of bad) console.log('ERROR  ', e); console.log(`${m.batch}: ${m.ids.length} ids${bad.length ? `, ${bad.length} problem(s)` : ', ok'}`); process.exit(bad.length ? 1 : 0); }
+  if (bad.length) { for (const e of bad) console.log('ERROR  ', e); process.exit(1); }
+  if (cmd === 'pack') { const out = path.join(ROOT, 'content/packs', batch); const f = W.writePack(T, m, docs, out); console.log(`wrote ${f.length} writer packs + README.md to ${path.relative(ROOT, out)}/`); process.exit(0); }
+  for (const e of errors) console.log('ERROR  ', e);
+  const rows = W.progress(T, m, docs), done = rows.filter(r => r.complete).length;
+  for (const r of rows) console.log(`${r.complete ? 'done ' : 'todo '} ${r.id.padEnd(28)} names ${r.names}/5 · lore ${r.lore}/5 · move names ${r.moves} · ${r.status}`);
+  console.log(`\n${m.batch}: ${done} of ${rows.length} objects complete (5 names + 5 texts); ${rows.length - done} to do`);
+} else if (cmd === 'lint') {
+  const bi = args.indexOf('--batch'), batch = bi >= 0 ? args[bi + 1] : null, { docs, errors } = load(files(args.filter((a, i) => a !== '--batch' && a !== '--strict' && args[i - 1] !== '--batch')));
+  for (const e of errors) console.log('ERROR  ', e);
+  const flags = W.lint(T, docs, { batch });
+  for (const f of flags) console.log(`${f.sev.toUpperCase().padEnd(6)} ${f.id} ${f.field}: ${f.msg}`);
+  const c = s => flags.filter(f => f.sev === s).length;
+  console.log(`\nlint${batch ? ' (' + batch + ')' : ''}: ${c('high')} high, ${c('medium')} medium, ${c('low')} low. Flags help an editor; they are not verdicts.`);
+  process.exit(errors.length || (args.includes('--strict') && c('high')) ? 1 : 0);
+} else if (cmd === 'review') {
+  const batch = args.find(a => !a.startsWith('--')); if (!batch) { console.log('usage: node tools/curated.js review <batch>'); process.exit(1); }
+  const { docs, errors } = load(files([])); if (errors.length) { for (const e of errors) console.log('ERROR  ', e); process.exit(1); }
+  const issuesFile = path.join(ROOT, 'content/review', batch + '-issues.json'), issues = fs.existsSync(issuesFile) ? JSON.parse(fs.readFileSync(issuesFile, 'utf8')).issues || [] : [];
+  const out = path.join(ROOT, 'docs/review', batch + '-review.md');
+  fs.mkdirSync(path.dirname(out), { recursive: true }); fs.writeFileSync(out, W.reviewSheet(T, docs, batch, W.lint(T, docs, { batch }), issues));
+  console.log(`wrote ${path.relative(ROOT, out)}`);
 } else {
-  console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 6).map(l => l.replace(/^\/\/ ?/, '')).join('\n')); process.exit(cmd ? 1 : 0);
+  console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 14).map(l => l.replace(/^\/\/ ?/, '')).join('\n')); process.exit(cmd ? 1 : 0);
 }
