@@ -1,0 +1,688 @@
+{
+  "schema": 1,
+  "batch": "w05-vehicles-1",
+  "entries": {
+    "airplane": {
+      "status": "draft",
+      "names": {
+        "common": "Seatkicker",
+        "uncommon": "Contrailer",
+        "rare": "Luggage Loser",
+        "epic": "Jetstream Rumble",
+        "legendary": "Captain Skylark, Round the World"
+      },
+      "lore": {
+        "common": "Keeps everyone waiting at the gate, then leaves ten minutes early when they're in the café.",
+        "uncommon": "Draws long white lines across the blue sky, and never finishes the picture.",
+        "rare": "Sent everybody's suitcase to a different country, and kept the socks.",
+        "epic": "Took off so loudly that every car alarm in the airport car park joined in.",
+        "legendary": "Flew round the whole world in a single day, then landed and asked why everyone looked so tired."
+      },
+      "moves": {
+        "signature": "Wing Tip Slam",
+        "legend": "Jet Engine Blast",
+        "ultimate": "Runway Finale",
+        "kit.horn_blast": "Cabin Chime Startle",
+        "kit.exhaust_fumes": "Jet Fuel Fumes",
+        "kit.turbo_boost": "Full Throttle"
+      }
+    },
+    "x_biplane": {
+      "status": "draft",
+      "names": {
+        "common": "Rattlewing",
+        "uncommon": "Loop-de-Loop",
+        "rare": "Cropduster",
+        "epic": "Air Show Barrel Roll",
+        "legendary": "Old Kitty Kestrel, Ace of the Fair"
+      },
+      "lore": {
+        "common": "Coughs and splutters on every take-off, so the farmer's cows lie down in protest.",
+        "uncommon": "Has two sets of wings, in case it loses one, it says.",
+        "rare": "Looped the loop so close to the haystack that it blew the scarecrow's hat off.",
+        "epic": "Flew upside down over the county show and every spectator's ice cream fell on their shoes.",
+        "legendary": "Flew under every bridge on the river in one afternoon, and still landed in time for tea."
+      },
+      "moves": {
+        "signature": "Propeller Swipe",
+        "legend": "Wing Wobble Distraction",
+        "ultimate": "Upside-Down Fly-By",
+        "kit.horn_blast": "Engine Cough Startle",
+        "kit.exhaust_fumes": "Smoky Trail",
+        "kit.turbo_boost": "Open Throttle",
+        "kit.hit_and_run": "Loop Loop Loop"
+      }
+    },
+    "x_glider": {
+      "status": "draft",
+      "names": {
+        "common": "Silentwing",
+        "uncommon": "Thermalseeker",
+        "rare": "Hilltopper",
+        "epic": "Cloudbase Climb",
+        "legendary": "Lady Zephyra, Who Never Landed"
+      },
+      "lore": {
+        "common": "Hangs around on the airfield all morning waiting for someone else to pull it into the air.",
+        "uncommon": "Has no engine at all, so it floats so quietly that birds fly alongside to check it's real.",
+        "rare": "Circled up a warm air bubble so high that it ended up above the clouds.",
+        "epic": "Soared across three counties without a single sound, and the cows didn't even look up.",
+        "legendary": "Stayed in the air for a whole day riding warm wind, and the eagles asked how it did it."
+      },
+      "moves": {
+        "signature": "Silent Swoop",
+        "legend": "Thermal Steal",
+        "ultimate": "Cloud-Top Dive",
+        "kit.horn_blast": "Whistling Wing",
+        "kit.exhaust_fumes": "Cow Field Breeze",
+        "kit.hit_and_run": "Swoop Swoop Swoop"
+      }
+    },
+    "x_jet_fighter_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Zoomzoom",
+        "uncommon": "Couchpilot",
+        "rare": "Missileclick",
+        "epic": "Bedroom Dogfight",
+        "legendary": "Major Whoosh, Ace of the Bedroom"
+      },
+      "lore": {
+        "common": "Is flown round the living room with loud whooshing noises until it crashes into the dog.",
+        "uncommon": "Has a little plastic pilot who hasn't blinked in ten years.",
+        "rare": "Fired its spring-loaded missile across the room and knocked the biscuit off the plate.",
+        "epic": "Fought a dogfight with every toy plane in the house, and the curtains were badly injured.",
+        "legendary": "Was flown in a thousand imaginary missions, crashed in nine hundred, and still has both wings."
+      },
+      "moves": {
+        "signature": "Plastic Nose Dive",
+        "legend": "Spring Missile Crack",
+        "ultimate": "Sofa Strafe",
+        "kit.horn_blast": "Whoosh Noise",
+        "kit.exhaust_fumes": "Pretend Smoke",
+        "kit.hit_and_run": "Zoom Zoom Zoom"
+      }
+    },
+    "x_seaplane": {
+      "status": "draft",
+      "names": {
+        "common": "Splashlander",
+        "uncommon": "Floatfeet",
+        "rare": "Lakehopper",
+        "epic": "Bay Splashdown",
+        "legendary": "Commodore Skimmer of the Lakes"
+      },
+      "lore": {
+        "common": "Lands on the lake right where the ducks were having their meeting.",
+        "uncommon": "Has floats for feet, so it wobbles about on the water like a duck on stilts.",
+        "rare": "Hopped from lake to lake all day, delivering post to cabins with no roads.",
+        "epic": "Landed in the bay so splashily that every sailing boat got a free wash.",
+        "legendary": "Delivered a birthday cake to an island with no airport, landed in the waves, and the icing wasn't even smudged."
+      },
+      "moves": {
+        "signature": "Float Bump",
+        "legend": "Calm Water Rest",
+        "ultimate": "Big Splashdown",
+        "kit.horn_blast": "Splash Startle",
+        "kit.turbo_boost": "Take-Off Run",
+        "kit.hit_and_run": "Skim Skim Skim"
+      }
+    },
+    "x_space_rocket_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Countdowner",
+        "uncommon": "Fin Wobble",
+        "rare": "Bedlauncher",
+        "epic": "Bedroom Blast-Off",
+        "legendary": "Commander Starlite of the Bunk Bed"
+      },
+      "lore": {
+        "common": "Counts down from ten every time you pick it up, then refuses to launch.",
+        "uncommon": "Has wobbly plastic fins that never stand up straight on the shelf.",
+        "rare": "Launched off the bunk bed and landed in the laundry basket, mission complete.",
+        "epic": "Blasted off with a pump of air and went over the garden fence into next door's pond.",
+        "legendary": "Has been to the moon a thousand times, according to its owner, and always back before bedtime."
+      },
+      "moves": {
+        "signature": "Nose Cone Bonk",
+        "legend": "Heat Shield",
+        "ultimate": "Launch Pad Liftoff",
+        "kit.horn_blast": "Countdown Beeps",
+        "kit.turbo_boost": "Air Pump Boost",
+        "kit.hit_and_run": "Bounce Bounce Bounce"
+      }
+    },
+    "ambulance": {
+      "status": "draft",
+      "names": {
+        "common": "Sirenwail",
+        "uncommon": "Flashblue",
+        "rare": "Corner Racer",
+        "epic": "Rush Hour Rescue",
+        "legendary": "Nightingale, Fastest to the Rescue"
+      },
+      "lore": {
+        "common": "Wails its siren just as you're about to fall asleep, then turns round the next corner.",
+        "uncommon": "Writes its name backwards on the front so other drivers can read it in their mirror.",
+        "rare": "Parted a traffic jam just by flashing its blue lights, like a magic trick.",
+        "epic": "Raced through the whole city in rush hour, and every car pulled over at once like a wave.",
+        "legendary": "Got across the busiest city in the world in ten minutes, and the patient had only a splinter."
+      },
+      "moves": {
+        "signature": "Bumper Nudge",
+        "legend": "Jump-Start Siphon",
+        "ultimate": "Blue-Light Dash",
+        "kit.exhaust_fumes": "Diesel Puff",
+        "kit.turbo_boost": "Siren Speed",
+        "kit.hit_and_run": "Swerve Swerve Swerve"
+      }
+    },
+    "x_hot_air_balloon": {
+      "status": "draft",
+      "names": {
+        "common": "Burnerroar",
+        "uncommon": "Basketbobber",
+        "rare": "Fieldlander",
+        "epic": "Dawn Drift",
+        "legendary": "Grand Montgolfiera, Queen of the Breeze"
+      },
+      "lore": {
+        "common": "Roars its burner right above your head at six in the morning.",
+        "uncommon": "Floats wherever the wind takes it, so it never knows where it will land.",
+        "rare": "Landed in a field of sheep, and the sheep followed it for a mile.",
+        "epic": "Floated over the city with a hundred other balloons, and everyone went to work late.",
+        "legendary": "Drifted across a whole mountain range with nothing but hot air and good luck."
+      },
+      "moves": {
+        "signature": "Basket Bump",
+        "legend": "Basket Bumps",
+        "ultimate": "Sudden Descent",
+        "kit.exhaust_fumes": "Propane Whiff",
+        "kit.turbo_boost": "Hot Air Rise",
+        "kit.hit_and_run": "Drift Drift Drift"
+      }
+    },
+    "x_asphalt_paver": {
+      "status": "draft",
+      "names": {
+        "common": "Tarspreader",
+        "uncommon": "Hotroad",
+        "rare": "Smoothmaker",
+        "epic": "Fresh Tarmac Flood",
+        "legendary": "Bitumen Bertha, Builder of Highways"
+      },
+      "lore": {
+        "common": "Leaves a hot black road behind it that smells like a burnt pancake.",
+        "uncommon": "Moves so slowly that the workers walk beside it chatting the whole time.",
+        "rare": "Laid a brand new road down the street in one day, and everyone's car was stuck at home.",
+        "epic": "Paved every pothole in town in one night, and the cyclists cried with happiness.",
+        "legendary": "Laid a road so smooth from coast to coast that drivers could hear their own tyres purring."
+      },
+      "moves": {
+        "signature": "Hot Tar Shove",
+        "legend": "Tar Smell Stink",
+        "ultimate": "Fresh Road Rollout",
+        "kit.horn_blast": "Reverse Beep Startle",
+        "kit.exhaust_fumes": "Hot Tar Fumes",
+        "kit.turbo_boost": "Paving Pace",
+        "kit.hit_and_run": "Pave Pave Pave"
+      }
+    },
+    "bulldozer": {
+      "status": "draft",
+      "names": {
+        "common": "Mudpusher",
+        "uncommon": "Blademouth",
+        "rare": "Hillshover",
+        "epic": "Construction Quake",
+        "legendary": "Big Bertha, Mover of Mountains"
+      },
+      "lore": {
+        "common": "Pushes the same pile of dirt back and forth all day as if it lost something.",
+        "uncommon": "Lowers its big blade like a grumpy face whenever someone walks past.",
+        "rare": "Pushed a hill out of the way to make a car park, and the hill went somewhere else.",
+        "epic": "Cleared a whole building site in one morning, and the workers had to find something else to do.",
+        "legendary": "Moved a mountain one push at a time, and the mountain now lives two miles further down the valley."
+      },
+      "moves": {
+        "signature": "Blade Push",
+        "legend": "Dirt Pile Crack",
+        "ultimate": "Ground-Shaking Shove",
+        "kit.horn_blast": "Reverse Alarm",
+        "kit.turbo_boost": "Diesel Surge",
+        "kit.hit_and_run": "Push Push Push"
+      }
+    },
+    "x_grader": {
+      "status": "draft",
+      "names": {
+        "common": "Longblade",
+        "uncommon": "Gravelsmoother",
+        "rare": "Ditchdigger",
+        "epic": "Dirt Road Smoothing",
+        "legendary": "Gravella, Smoother of Lanes"
+      },
+      "lore": {
+        "common": "Smooths out the gravel road, then leaves a little ridge right in the middle for you to bump over.",
+        "uncommon": "Has its blade in the middle of its body, like a giant with a belt buckle.",
+        "rare": "Dug a ditch along the whole lane so neatly that the rainwater ran away with a grin.",
+        "epic": "Smoothed out every dirt road in the county so well that the farmers' eggs stopped breaking.",
+        "legendary": "Graded a road so flat across the desert that you can roll a marble from one end to the other."
+      },
+      "moves": {
+        "signature": "Long Blade Swipe",
+        "legend": "Hot Gravel Spray",
+        "ultimate": "Ridge Ruin",
+        "kit.horn_blast": "Gravel Crunch Startle",
+        "kit.exhaust_fumes": "Dusty Diesel",
+        "kit.turbo_boost": "Grader Gear Up",
+        "kit.hit_and_run": "Scrape Scrape Scrape"
+      }
+    },
+    "x_road_roller": {
+      "status": "draft",
+      "names": {
+        "common": "Flattener",
+        "uncommon": "Slowroll",
+        "rare": "Pavementpress",
+        "epic": "Steady Squash",
+        "legendary": "Rolanda, Flattest of All"
+      },
+      "lore": {
+        "common": "Rolls over the same bit of road a hundred times as if it hasn't noticed.",
+        "uncommon": "Moves so slowly that pigeons walk beside it to keep it company.",
+        "rare": "Flattened the fresh tarmac so smooth that skateboarders queued to try it.",
+        "epic": "Rolled every new road in the town flat in a single week, and the town looked freshly ironed.",
+        "legendary": "Rolled out a playground so flat that every marble in it has stayed exactly where it was dropped."
+      },
+      "moves": {
+        "signature": "Roller Squash",
+        "legend": "Engine Idle Rest",
+        "ultimate": "Big Flat Roll",
+        "kit.horn_blast": "Beep Beep Startle",
+        "kit.exhaust_fumes": "Diesel Cloud",
+        "kit.turbo_boost": "Second Gear",
+        "kit.hit_and_run": "Roll Roll Roll"
+      }
+    },
+    "x_skid_steer": {
+      "status": "draft",
+      "names": {
+        "common": "Spinbucket",
+        "uncommon": "Tightturner",
+        "rare": "Yardscooper",
+        "epic": "Building Site Spin",
+        "legendary": "Little Bob, Busiest Digger"
+      },
+      "lore": {
+        "common": "Spins on the spot like it's dancing, then scoops up the wrong pile.",
+        "uncommon": "Turns round in its own space by skidding its wheels, and leaves rubber circles everywhere.",
+        "rare": "Fit through a garden gate that every other digger was too big for.",
+        "epic": "Moved a whole hill of sand in one afternoon, and the beach volleyball club moved in.",
+        "legendary": "Did the work of ten bigger diggers in one week, then fitted back into its tiny garage."
+      },
+      "moves": {
+        "signature": "Bucket Scoop",
+        "legend": "Spin Power",
+        "ultimate": "Skidding Scoop",
+        "kit.exhaust_fumes": "Diesel Belch",
+        "kit.turbo_boost": "Rev Up",
+        "kit.hit_and_run": "Spin Spin Spin"
+      }
+    },
+    "x_steamroller": {
+      "status": "draft",
+      "names": {
+        "common": "Puffhuff",
+        "uncommon": "Chuggaroll",
+        "rare": "Iron Drum",
+        "epic": "Village Flattening",
+        "legendary": "Old Puffington, the Iron Roller"
+      },
+      "lore": {
+        "common": "Puffs clouds of steam over the hedge and makes the washing on the line smell smoky.",
+        "uncommon": "Has a huge iron roller at the front that clanks like an old kettle.",
+        "rare": "Whistled so loudly at the village green that the cricketers dropped the ball.",
+        "epic": "Rolled up and down the village street for a whole day, and every bump disappeared.",
+        "legendary": "Has been rolling roads since great-grandad was a boy, and still gets polished every Sunday."
+      },
+      "moves": {
+        "signature": "Iron Roller Squash",
+        "legend": "Steam Whistle Startle",
+        "ultimate": "Steam Cloud Shock",
+        "kit.horn_blast": "Big Whistle",
+        "kit.exhaust_fumes": "Coal Smoke",
+        "kit.hit_and_run": "Chug Chug Chug"
+      }
+    },
+    "x_wheel_loader": {
+      "status": "draft",
+      "names": {
+        "common": "Bucketbelly",
+        "uncommon": "Gravelgulper",
+        "rare": "Heapmaker",
+        "epic": "Quarry Rush",
+        "legendary": "Big Shovelina, Queen of the Quarry"
+      },
+      "lore": {
+        "common": "Scoops up a huge bucket of gravel and drops half of it on the way to the lorry.",
+        "uncommon": "Lifts its bucket high like it's showing off a trophy.",
+        "rare": "Filled a lorry with one scoop, and the lorry sagged on its springs.",
+        "epic": "Moved every pile of gravel in the quarry in one day, and the quarry looked like a different place.",
+        "legendary": "Built a gravel mountain so tall that the quarry workers put a flag on top."
+      },
+      "moves": {
+        "signature": "Bucket Bash",
+        "legend": "Scoop Scoop Scoop",
+        "ultimate": "Heavy Bucket Drop",
+        "kit.horn_blast": "Reverse Warning",
+        "kit.exhaust_fumes": "Black Exhaust",
+        "kit.turbo_boost": "Big Lift",
+        "kit.hit_and_run": "Load Load Load"
+      }
+    },
+    "bus": {
+      "status": "draft",
+      "names": {
+        "common": "Doorhisser",
+        "uncommon": "Late Twelve",
+        "rare": "Doubledecker",
+        "epic": "School Run Rush",
+        "legendary": "Old Number Nine, the Never-Late"
+      },
+      "lore": {
+        "common": "Pulls away from the stop just as you reach it, every single time.",
+        "uncommon": "Hisses and kneels down at every stop like it's bowing to the passengers.",
+        "rare": "Fit forty schoolchildren, two dogs and a tuba on board, and still had room for a pram.",
+        "epic": "Carried the whole town to the seaside on the hottest day, and the beach ran out of sand space.",
+        "legendary": "Ran its route for fifty years without being late once, and the clock tower sets its time by it."
+      },
+      "moves": {
+        "signature": "Bumper Bash",
+        "legend": "Bell Ding Startle",
+        "ultimate": "Last Stop Slam",
+        "kit.horn_blast": "Big Horn Honk",
+        "kit.exhaust_fumes": "Diesel Fug",
+        "kit.hit_and_run": "Stop Start Stop"
+      }
+    },
+    "car": {
+      "status": "draft",
+      "names": {
+        "common": "Hornhonker",
+        "uncommon": "Parkingpest",
+        "rare": "Roadtripper",
+        "epic": "Motorway Mayhem",
+        "legendary": "Lady Roadster, a Million Miles"
+      },
+      "lore": {
+        "common": "Beeps its horn in the car park just to say hello to other cars.",
+        "uncommon": "Can never find a parking space near the shop, and always parks crooked.",
+        "rare": "Packed a whole family, a tent and a dog into its boot for a camping trip.",
+        "epic": "Got stuck in the biggest traffic jam ever and played the radio so loud that everyone sang along.",
+        "legendary": "Drove a million miles in one lifetime and still has the same fluffy dice hanging from its mirror."
+      },
+      "moves": {
+        "signature": "Bumper Bump",
+        "legend": "Honk Honk Honk",
+        "ultimate": "Hot Engine Rush",
+        "kit.horn_blast": "Horn Toot",
+        "kit.exhaust_fumes": "Smelly Exhaust",
+        "kit.turbo_boost": "Put Foot Down"
+      }
+    },
+    "i_car_wheel": {
+      "status": "draft",
+      "names": {
+        "common": "Hubcapper",
+        "uncommon": "Puddlesplasher",
+        "rare": "Rimroller",
+        "epic": "Runaway Tyre",
+        "legendary": "Rota the Unstoppable Wheel"
+      },
+      "lore": {
+        "common": "Rolls through the only puddle in the car park and splashes your clean trousers.",
+        "uncommon": "Has a shiny hubcap that it keeps losing in the hedge.",
+        "rare": "Rolled off the car on a hill and overtook the car on the way down.",
+        "epic": "Rolled through the whole town after coming loose, and every dog chased it.",
+        "legendary": "Rolled all the way to the sea from the mountain garage, and was found floating on its own."
+      },
+      "moves": {
+        "signature": "Rubber Bump",
+        "legend": "Hubcap Clatter",
+        "ultimate": "Downhill Roll",
+        "kit.exhaust_fumes": "Rubber Smell",
+        "kit.turbo_boost": "Pump Up",
+        "kit.hit_and_run": "Spin Spin Spin Spin"
+      }
+    },
+    "i_disk_brake": {
+      "status": "draft",
+      "names": {
+        "common": "Squealstop",
+        "uncommon": "Hotdisc",
+        "rare": "Padgrinder",
+        "epic": "Screeching Halt",
+        "legendary": "Calipra, Who Stopped the Runaway Bus"
+      },
+      "lore": {
+        "common": "Squeals loudly every time the car stops at the lights, so everyone turns to look.",
+        "uncommon": "Gets so hot after driving down a hill that you could warm your hands on it.",
+        "rare": "Stopped a speeding car so quickly that the shopping slid onto the front seat.",
+        "epic": "Squealed so loudly down the mountain road that every goat on the hill jumped.",
+        "legendary": "Stopped a runaway bus on the steepest hill in town, and the passengers clapped."
+      },
+      "moves": {
+        "signature": "Disc Clamp",
+        "legend": "Brake Dust Stink",
+        "ultimate": "Emergency Stop",
+        "kit.horn_blast": "Brake Squeal",
+        "kit.exhaust_fumes": "Brake Dust",
+        "kit.turbo_boost": "Grip Boost",
+        "kit.hit_and_run": "Stop Stop Stop"
+      }
+    },
+    "i_gas_pump": {
+      "status": "draft",
+      "names": {
+        "common": "Nozzledrip",
+        "uncommon": "Pricetick",
+        "rare": "Hosehugger",
+        "epic": "Forecourt Fuel Frenzy",
+        "legendary": "Petrolina, Fueler of Fleets"
+      },
+      "lore": {
+        "common": "Drips a little petrol on your shoe after every fill-up.",
+        "uncommon": "Ticks up the price so fast that it looks like it's racing.",
+        "rare": "Clicked off at exactly the wrong moment and left everyone in the queue grumbling.",
+        "epic": "Filled every car on the motorway before the holiday weekend, and still had fuel to spare.",
+        "legendary": "Fuelled ten thousand cars on the same corner for forty years, and still says thank you on its little screen."
+      },
+      "moves": {
+        "signature": "Nozzle Bonk",
+        "legend": "Price Tick Distraction",
+        "ultimate": "Fuel Spill Surprise",
+        "kit.horn_blast": "Nozzle Click",
+        "kit.exhaust_fumes": "Petrol Whiff",
+        "kit.turbo_boost": "Full Tank"
+      }
+    },
+    "i_grille": {
+      "status": "draft",
+      "names": {
+        "common": "Bugcatcher Grille",
+        "uncommon": "Chromegrin",
+        "rare": "Frontface",
+        "epic": "Headlight Glare",
+        "legendary": "Sir Gleamsworth, Grin of the Highway"
+      },
+      "lore": {
+        "common": "Catches every bug on the motorway and keeps them as souvenirs.",
+        "uncommon": "Looks like a grinning face on the front of the car, especially when the headlights are on.",
+        "rare": "Glinted so brightly in the sun that the car behind had to put on sunglasses.",
+        "epic": "Grinned at the traffic jam with its chrome teeth until every other car looked grumpy.",
+        "legendary": "Has been polished every Sunday for forty years and is now the shiniest grille in the country."
+      },
+      "moves": {
+        "signature": "Chrome Bump",
+        "legend": "Polish Pride",
+        "ultimate": "Chrome Grin Glare",
+        "kit.horn_blast": "Headlight Flash",
+        "kit.exhaust_fumes": "Squashed Bug Smell",
+        "kit.turbo_boost": "Air Intake Boost",
+        "kit.hit_and_run": "Grin Grin Grin"
+      }
+    },
+    "i_horse_cart": {
+      "status": "draft",
+      "names": {
+        "common": "Clipclopper",
+        "uncommon": "Haybaler",
+        "rare": "Cobblebumper",
+        "epic": "Market Day Trot",
+        "legendary": "Old Dobbin's Wagon of Plenty"
+      },
+      "lore": {
+        "common": "Clip-clops down the lane at its own pace, and the cars behind have to wait.",
+        "uncommon": "Carries a load of hay so high that the driver can't see over it.",
+        "rare": "Bounced over the cobbles so hard that all the apples fell out at once.",
+        "epic": "Brought the whole harvest to market in one trip, and the town ate pie for a week.",
+        "legendary": "Has carried every bride in the village to the church for a hundred years, and the horse still knows the way."
+      },
+      "moves": {
+        "signature": "Wheel Bump",
+        "legend": "Hay Pile Pride",
+        "ultimate": "Runaway Trot",
+        "kit.horn_blast": "Harness Bell Jingle",
+        "kit.exhaust_fumes": "Horse Pat Whiff",
+        "kit.turbo_boost": "Gee Up"
+      }
+    },
+    "i_model_t": {
+      "status": "draft",
+      "names": {
+        "common": "Crankstart",
+        "uncommon": "Tinlizzie",
+        "rare": "Puttputt",
+        "epic": "Dusty Road Race",
+        "legendary": "Grandad Tin, the First on the Road"
+      },
+      "lore": {
+        "common": "Needs a crank turned at the front to start, and kicks back at anyone who does it wrong.",
+        "uncommon": "Only comes in black, and is quite proud of it.",
+        "rare": "Putt-putted through the town so loudly that the horses all looked up from their hay.",
+        "epic": "Drove the dusty road from one town to the next, and the dust cloud reached the next county.",
+        "legendary": "Is over a hundred years old and still wins the vintage car parade by starting first time."
+      },
+      "moves": {
+        "signature": "Running Board Bump",
+        "legend": "Crank Handle Kick",
+        "ultimate": "Old Engine Backfire",
+        "kit.exhaust_fumes": "Oily Smoke",
+        "kit.turbo_boost": "Advance Spark",
+        "kit.hit_and_run": "Putt Putt Putt"
+      }
+    },
+    "i_oxcart": {
+      "status": "draft",
+      "names": {
+        "common": "Creakwheel",
+        "uncommon": "Slowhauler",
+        "rare": "Muddy Rut",
+        "epic": "Harvest Haul",
+        "legendary": "Grand Ox Wagon of the Valley"
+      },
+      "lore": {
+        "common": "Creaks so loudly on every turn of its wheel that the birds fly off.",
+        "uncommon": "Goes at the speed of a walking ox, which is the slowest speed there is.",
+        "rare": "Got stuck in the mud and pulled itself out with one heave from the ox.",
+        "epic": "Carried the whole village's harvest in one trip, and nobody's barn had any room left.",
+        "legendary": "Has been pulled along the same valley road for two hundred years, and its wheels are as round as ever."
+      },
+      "moves": {
+        "signature": "Wooden Wheel Bump",
+        "legend": "Creaky Startle",
+        "ultimate": "Ox Heave",
+        "kit.exhaust_fumes": "Barnyard Whiff",
+        "kit.turbo_boost": "Ox Pull",
+        "kit.hit_and_run": "Plod Plod Plod"
+      }
+    },
+    "i_seat_belt": {
+      "status": "draft",
+      "names": {
+        "common": "Clickstrap",
+        "uncommon": "Shoulderpinch",
+        "rare": "Lockjolt",
+        "epic": "Click Clack Squad",
+        "legendary": "Guardian Buckle, the Lifesaver"
+      },
+      "lore": {
+        "common": "Locks tight every time you lean forward to reach the radio.",
+        "uncommon": "Twists itself into a knot every time you put it on.",
+        "rare": "Clicked shut so firmly that the dog couldn't escape, even for a sausage.",
+        "epic": "Locked every passenger into the coach at once, and the driver finally had peace.",
+        "legendary": "Has kept millions of people safe without ever once being thanked by name."
+      },
+      "moves": {
+        "signature": "Buckle Slap",
+        "legend": "Lock Click Boost",
+        "ultimate": "Sudden Lock",
+        "kit.exhaust_fumes": "Old Car Whiff",
+        "kit.turbo_boost": "Tighten Up",
+        "kit.hit_and_run": "Click Click Click"
+      }
+    },
+    "cement_mixer": {
+      "status": "draft",
+      "names": {
+        "common": "Drumspinner",
+        "uncommon": "Slopper",
+        "rare": "Concretehauler",
+        "epic": "Wet Concrete Wave",
+        "legendary": "Mixella, Builder of Bridges"
+      },
+      "lore": {
+        "common": "Keeps its drum spinning even when it's parked, like it's afraid to stop.",
+        "uncommon": "Pours wet concrete everywhere except where it's supposed to go.",
+        "rare": "Mixed a load so thick that a builder's wellie is still stuck in the new path.",
+        "epic": "Poured the foundations for a whole street in one day, and the street's footprints are now permanent.",
+        "legendary": "Poured the concrete for the biggest bridge in the country, and still had enough left to make a paddling pool."
+      },
+      "moves": {
+        "signature": "Drum Bump",
+        "legend": "Wet Concrete Crack",
+        "ultimate": "Concrete Pour",
+        "kit.horn_blast": "Reverse Beeper",
+        "kit.turbo_boost": "Drum Spin Up",
+        "kit.hit_and_run": "Spin Pour Spin"
+      }
+    },
+    "x_cherry_picker": {
+      "status": "draft",
+      "names": {
+        "common": "Liftbucket",
+        "uncommon": "Highreacher",
+        "rare": "Lampfixer",
+        "epic": "Street Light Rescue",
+        "legendary": "Lofty Lifta, Reacher of Rooftops"
+      },
+      "lore": {
+        "common": "Lifts the worker up to the street light, then gets stuck halfway down.",
+        "uncommon": "Can reach the top of a three-storey house without leaving the pavement.",
+        "rare": "Rescued a kitten from the top of a tree, and the kitten wanted to go up again.",
+        "epic": "Changed every light bulb on the high street in one night, and the town shone like Christmas.",
+        "legendary": "Reached the top of the clock tower and fixed the clock just before New Year."
+      },
+      "moves": {
+        "signature": "Bucket Bump",
+        "legend": "Hot Bulb Swap",
+        "ultimate": "High Reach Drop",
+        "kit.horn_blast": "Warning Beep",
+        "kit.exhaust_fumes": "Diesel Wheeze",
+        "kit.hit_and_run": "Up Down Up"
+      }
+    }
+  }
+}
