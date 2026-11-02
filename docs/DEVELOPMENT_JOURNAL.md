@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-02, release v0.4.8 (Pilot 02 curated writing with monster names, automatic refresh of saved monsters).
+Last updated: 2026-11-02, release v0.4.8; v0.4.9 (recognition/identity audit) prepared on a branch, awaiting approval.
 
 ---
 
@@ -127,6 +127,44 @@ Last updated: 2026-11-02, release v0.4.8 (Pilot 02 curated writing with monster 
   step (the status change is part of that approved implementation), nothing merged, deployed or rebuilt, monster
   names not activated. **Next phase (separate task, needs approval): plan safe integration of curated monster names
   and approved Pilot 02 content, incl. existing saves and the encyclopedia.**
+- **Recognition → identity → visual audit (2026-11-02), branch `feature/recognition-identity-audit`, NOT merged or
+  deployed (awaits approval).** Trigger: phone test of v0.4.8, a photographed sea urchin spawned the Starfish. Root
+  cause: Starfish carried the alias "sea urchin" (first registration wins in `ALIAS_INDEX`), so `objectForLabel`, the
+  generated ImageNet table and the TinyCLIP vocabulary all routed it there; `x_sea_urchin_shell` (approved Pilot 02
+  writing) was only reachable as "sea urchin shell" and was drawn as a fish (no design). Fix: alias moved
+  (`EXTRA_ALIASES`), new round spiky body (`produce` shape `spiky`). New reusable tooling: `tools/audit-mapping.js`
+  (inventory of every route: 1000 ImageNet, 80 COCO, 2941 TinyCLIP labels, 3,230 aliases, 2,303 objects; triage
+  lint + recorded decisions; `docs/review/MAPPING_AUDIT.md`, `content/audit/*.csv`), `tools/audit-sheet(s).js`
+  (labelled contact sheets of real sprites, `docs/review/audit-sheets/`), `tests/mapping-audit.js` (CI). Fixed
+  identities (26 regression cases): sea urchin; drum (was Drink can); dice (Jigsaw puzzle); shopping cart
+  (Wheelbarrow → curated Shopping trolley); ImageNet flowerpot (Cooking pot), Cardigan corgi (T-shirt → new
+  `i_cardigan`), carpenter's plane (Airplane → new `i_plane`), stick insect (Walking stick cane) via `CLASS_OVERRIDES` in
+  `tools/gen-labels.js`; sibling species with their own existing object: koala, gorilla, orangutan, guinea pig, llama,
+  alpaca, wolf/timber wolf, moth, scorpion, slug, centipede, toad. Honest bodies for 57 objects (`VIS_FIXES`, visual
+  only: never lore group/family/moves), e.g. tuning fork (was a guitar), fidget spinner (was a teddy; new `spinner`
+  shape), electric switch (phone), sea turtle/krill/nautilus/anemone (fish), hats (T-shirt), snakes (lizard).
+  `objectForLabel` resolves whole ImageNet class strings like the generated table. TinyCLIP: label strings and order
+  unchanged (`gen-vocab` keeps the previous order), so the CI re-export produces the same text embeddings; only 17
+  label → object assignments change. No object id removed (frozen list `tests/fixtures/registry-ids-v0.4.8.json`).
+  Baselines: rules, mechanics (new frozen hash), encounters, battles and the text of every v0.4.8 object unchanged;
+  artwork/recognition hashes re-recorded on purpose. Saved monsters render identically (design stored in DNA); old
+  urchins can opt in via "Update its look"; Starfish caught from "sea urchin" photos are NOT relabelled (possible via
+  `m.label`, proposed separately). Kept for review: 88 medium flags (74 approximate category bodies, homonyms such as
+  kite/crane/bat/monitor, piggy bank → Pig, whale → Shark, wombat → Bear). Next: phone check, approval, release.
+- **Audit round 2 — deferred-flag cleanup (2026-11-02, developer-approved approach), same branch, prepared as v0.4.9,
+  NOT merged.** Of the 88 deferred flags 73 fixed, 15 kept with reasons (`MAPPING_AUDIT.md` lists every one).
+  New objects with exactly their old label strings (TinyCLIP labels/order unchanged): Piggy bank (pig body), Whale and
+  Dolphin (shark body), Wombat (bear body), Binoculars (glasses body); "killer whale" → Orca, "tongs"/"trowel"/"gerbil"
+  → their own objects. ~70 more honest bodies from existing templates (boomerang curve, castanets pair, coral tree,
+  street sign/flag poles, toy dinosaur lizard, shells, rings, strips, hats, ladders, hives …). Found and fixed a new
+  bug class: design rules matched inside words (weasel → easel, motherboard/chess board/headboard → oar, windbreaker →
+  breaker, honeycomb → comb, champagne flute → lute …): rules now match whole words (`wholeWordMatch`, 5 legitimate
+  exceptions). Those 15 objects get their correct lore group, so their generated moves/text change (the only mechanics
+  change; rule tables and move numbers unchanged; baselines re-recorded with that list). Kept: kite/crane (ImageNet
+  name collisions), mouse/washer/pot/hot pot homonyms, seals/sea lion/walrus/manatee/dugong (four-legged mammal body),
+  stingray (fish body), mobile toy, mouthguard. Curated writing, models, calibration and saves unchanged. GAME_VERSION
+  0.4.9. Next: final approval → merge/deploy/tag; then the full curated-writing rollout (all 2,308 objects), then
+  the postponed name/flavour-text UI.
 - **v0.4.8 — Pilot 02 INTEGRATION (2026-11-02, developer-approved, merged and deployed as v0.4.8):** the 50 entries are `reviewed` (file renamed `content/curated/pilot-02-approved.json`;
   only the status line changed). Curated **monster names** are live (`CURATED.namesEnabled`, `curatedMonsterName`):
   Pilot 02 objects use their 5 approved names (a Legendary's curated name replaces the generated "Name, title");
@@ -205,6 +243,8 @@ Last updated: 2026-11-02, release v0.4.8 (Pilot 02 curated writing with monster 
 | ~730 objects use their category's general shape | Known | Plants, animals, clothes, cakes/pies, cups, household bottles… where the shape fits. Every food, fruit and vegetable has a design since v0.4.5. | Add designs/rules for the worst cases found in QA (`FOOD_RULES`/`DESIGN_RULES` in `src/objects.js`). |
 | Curated writing covers only 60 objects | v0.4.6: Pilot 01 active; v0.4.8: Pilot 02 (50, with names) active | `content/curated/`, `src/curated-data.js` (generated), `docs/CONTENT_WRITING_GUIDE.md`. Every other object uses the generated text. Same-name shared cooldown (`cdWith`, 4 configs) kept for compatibility. | Remaining 2,241 objects in batches after approval; phone check; data size/lazy loading before full coverage. |
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
+| Approximate bodies kept (seals, stingray, mobile toy, mouthguard) and ImageNet name collisions (kite, crane) | Audited, kept with reasons (v0.4.9 branch) | `docs/review/MAPPING_AUDIT.md`, `docs/review/audit-sheets/04-review-queue.png` | Design work / new identities later; ImageNet "kite"/"crane" collide by name. |
+| Starfish caught from "sea urchin" photos before the audit | Known | Stored `m.label` = "sea urchin" would allow a migration | Proposed separately; not automatic (could alter genuine starfish if labels were noisy). |
 | Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change family, moves' numbers or stats without consent (since the Pilot 02 integration their curated TEXT — name, lore, move names — is refreshed automatically, see section 4); "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
 | Some borrowed designs are approximate (drone → helicopter, microscope basic) | Known | `docs/identity-designs-*.png` | Improve when found in QA. |

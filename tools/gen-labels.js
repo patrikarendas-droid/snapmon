@@ -139,6 +139,15 @@ const SUB_PARENT = { 'animal:dog': 'dog', 'animal:cat': 'cat', 'animal:bear': 'b
   'car:bus': 'bus', 'car:bike': 'bicycle', 'car:car': 'car', 'mug:teapot': 'teapot', 'mug:glass': 'glass', 'mug:mug': 'mug', 'bottle:vase': 'vase', 'bottle:can': 'can',
   'bottle:bottle': 'bottle', 'chair:table': 'dining_table', 'chair:cabinet': 'cabinet', 'chair:chair': 'dining_chair', 'tv:speaker': 'speaker', 'tv:camera': 'camera', 'tv:tv': 'tv',
   'shoe:boot': 'boot', 'shoe:sneaker': 'sneaker', 'cloth:hat': 'hat', 'cloth:sock': 'sock', 'cloth:shirt': 'shirt', 'pot:pan': 'frying_pan', 'pot:bowl': 'bowl', 'pot:pot': 'pot' };
+// recognition audit (2026-11, docs/review/MAPPING_AUDIT.md): ImageNet classes whose FIRST synonym belongs to a different
+// object (first match wins in objectForLabel). An object id resolves the class to it; { name } gives the class its own
+// identity through the normal path below (that name, the related design of its group or the family tier).
+const CLASS_OVERRIDES = {
+  'pot, flowerpot': 'potted_plant',            // "pot" is the cooking pot
+  'Cardigan, Cardigan Welsh corgi': { name: 'Cardigan corgi' },      // "cardigan" is the T-shirt: its own dog breed (like Pembroke)
+  "plane, carpenter's plane, woodworking plane": { name: "Carpenter's plane" }, // "plane" is the airplane: a woodworking tool
+  'walking stick, walkingstick, stick insect': 'x_stick_insect', // ImageNet animal class: the insect, not the cane
+};
 // excluded in v2 only because there was no fitting sprite: machines and vehicles a player can really photograph
 const SOFT_EXCLUDED = /^(airliner|airship|harvester|thresher|crane|gondola|dogsled|bobsled|schooner|yawl|catamaran|trimaran|speedboat|canoe|lifeboat|paddlewheel|steam locomotive|electric locomotive|bullet train|freight car|passenger car|streetcar|trolleybus|snowplow|forklift|mobile home|cash machine|honeycomb|hay)$/;
 IMAGENET.forEach((cls, i) => {
@@ -149,11 +158,13 @@ IMAGENET.forEach((cls, i) => {
   else { const rule = RULES.find(([re]) => re.test(first.toLowerCase())); cat = rule ? rule[1] : 'other'; sub = rule ? rule[2] || null : null; }
   if (cat === null && SOFT_EXCLUDED.test(first.toLowerCase())) cat = 'car'; // v2 had no sprite for these; v3 resolves them below
   if (cat === null) { imagenet[cls] = 0; report.excluded++; return; }
-  const obj = objectForLabel(cls);
+  const over = Object.prototype.hasOwnProperty.call(CLASS_OVERRIDES, cls) ? CLASS_OVERRIDES[cls] : undefined, obj = over === undefined ? objectForLabel(cls) : typeof over === 'string' ? over : null;
+  if (typeof over === 'string' && !OBJECTS[over]) throw new Error('CLASS_OVERRIDES points at a missing object: ' + over);
   if (obj) { imagenet[cls] = obj; report.specific++; return; }
   const id = 'i_' + slug(first);
   const parent = sub ? SUB_PARENT[cat + ':' + sub] : null;
-  extra.set(id, parent ? [id, first.replace(/^./, c => c.toUpperCase()), cat, parent] : [id, first.replace(/^./, c => c.toUpperCase()), cat === 'other' ? 'tool' : cat]);
+  const nm = over && over.name ? over.name : first.replace(/^./, c => c.toUpperCase());
+  extra.set(id, parent ? [id, nm, cat, parent] : [id, nm, cat === 'other' ? 'tool' : cat]);
   imagenet[cls] = id; if (parent) report.related++; else report.family.push(first);
 });
 for (const c of COCO) if (!(c in COCO_MAP)) throw new Error('COCO class without mapping: ' + c);

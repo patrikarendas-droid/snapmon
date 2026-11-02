@@ -130,7 +130,7 @@ OBJ('coffee_cup', 'Takeaway coffee', 'mug', 'D', { h: 30, s: 30, l: 80, al: ['pa
 OBJ('bottle', 'Bottle', 'bottle', L('bottle'), { al: ['bottle', 'water bottle', 'pop bottle', 'plastic bottle', 'soda bottle'], nm: 'Fizz' });
 OBJ('wine_bottle', 'Wine bottle', 'bottle', V('vessel', { prof: [[18, 6], [3, 5], [8, 2]], label: true, cap: 2 }), { h: 130, s: 40, l: 22, al: ['wine bottle', 'beer bottle', 'champagne bottle'], nm: 'Vino' });
 OBJ('jar', 'Jar', 'bottle', V('vessel', { prof: [[18, 8], [2, 6]], label: true, cap: 7 }), { al: ['jar', 'mason jar', 'jam jar'], nm: 'Jarvis' });
-OBJ('can', 'Drink can', 'bottle', L('bottle', 'can'), { al: ['can', 'soda can', 'tin can', 'milk can', 'barrel', 'rain barrel', 'drum'], nm: 'Canny' });
+OBJ('can', 'Drink can', 'bottle', L('bottle', 'can'), { al: ['can', 'soda can', 'tin can', 'milk can', 'barrel', 'rain barrel'], nm: 'Canny' });
 OBJ('vase', 'Vase', 'bottle', L('bottle', 'vase'), { al: ['vase', 'urn', 'amphora'], nm: 'Vasey' });
 OBJ('pitcher', 'Jug', 'mug', V('vessel', { prof: [[16, 8], [6, 6]], handle: true, spout: 4 }), { al: ['pitcher', 'water jug', 'whiskey jug', 'jug', 'milk jug'], nm: 'Juggs' });
 OBJ('thermos', 'Thermos', 'bottle', V('vessel', { prof: [[24, 6], [4, 5]], cap: 5 }), { h: 220, s: 10, l: 55, al: ['thermos', 'flask', 'vacuum flask', 'travel mug'], nm: 'Thermy' });
@@ -198,14 +198,14 @@ OBJ('wrench', 'Wrench', 'tool', V('handtool', { head: 'wrench' }), { al: ['wrenc
 OBJ('screwdriver', 'Screwdriver', 'tool', V('handtool', { head: 'screwdriver' }), { al: ['screwdriver'], nm: 'Screwy' });
 OBJ('saw', 'Saw', 'tool', V('handtool', { head: 'saw' }), { al: ['saw', 'handsaw', 'hacksaw', 'chain saw', 'chainsaw'], nm: 'Teethy' });
 OBJ('power_drill', 'Power drill', 'tool', V('handtool', { head: 'drill' }), { h: 50, al: ['power drill', 'drill', 'electric drill'], nm: 'Drilly', sig: { name: 'Bore Through', power: 1.2, effect: 'defdown', chance: 0.5 } });
-OBJ('pliers', 'Pliers', 'tool', V('handtool', { head: 'pliers' }), { al: ['pliers', 'wire cutters', 'tongs'], nm: 'Pinchy' });
-OBJ('shovel', 'Shovel', 'tool', V('handtool', { head: 'shovel', len: 24 }), { al: ['shovel', 'spade', 'trowel'], nm: 'Scoopy' });
+OBJ('pliers', 'Pliers', 'tool', V('handtool', { head: 'pliers' }), { al: ['pliers', 'wire cutters'], nm: 'Pinchy' });
+OBJ('shovel', 'Shovel', 'tool', V('handtool', { head: 'shovel', len: 24 }), { al: ['shovel', 'spade'], nm: 'Scoopy' });
 OBJ('rake', 'Rake', 'tool', V('handtool', { head: 'rake', len: 24 }), { al: ['rake', 'pitchfork'], nm: 'Raky' });
 OBJ('broom', 'Broom', 'tool', V('handtool', { head: 'broom' }), { al: ['broom', 'besom'], nm: 'Sweepy' });
 OBJ('mop', 'Mop', 'tool', V('handtool', { head: 'mop' }), { al: ['mop', 'swab'], nm: 'Moppy' });
 OBJ('paintbrush', 'Paintbrush', 'tool', V('handtool', { head: 'brush' }), { al: ['paintbrush', 'paint brush', 'brush', 'hairbrush', 'toothbrush'], nm: 'Brushy' });
 OBJ('ladder', 'Ladder', 'tool', 'D', { h: 28, al: ['ladder', 'stepladder'], nm: 'Climby' });
-OBJ('wheelbarrow', 'Wheelbarrow', 'tool', 'D', { h: 0, al: ['barrow', 'wheelbarrow', 'handcart', 'shopping cart'], nm: 'Barrow' });
+OBJ('wheelbarrow', 'Wheelbarrow', 'tool', 'D', { h: 0, al: ['barrow', 'wheelbarrow', 'handcart'], nm: 'Barrow' });
 OBJ('traffic_cone', 'Traffic cone', 'tool', 'D', { h: 22, s: 95, l: 52, al: ['traffic cone', 'cone', 'pylon'], nm: 'Coney' });
 OBJ('fire_hydrant', 'Fire hydrant', 'faucet', 'D', { h: 0, al: ['fire hydrant', 'hydrant'], nm: 'Hydra' });
 OBJ('trash_can', 'Trash can', 'trash', L('bin'), { al: ['ashcan', 'trash can', 'garbage can', 'bin', 'dustbin', 'wastebasket', 'recycling bin'], nm: 'Binny' });
@@ -230,7 +230,7 @@ OBJ('scarf', 'Scarf / towel', 'cloth', V('produce', { shape: 'long', stripes: tr
 OBJ('tie', 'Tie', 'cloth', V('produce', { shape: 'carrot' }), { al: ['windsor tie', 'tie', 'necktie', 'bow tie', 'bolo tie'], nm: 'Knotty' });
 OBJ('sneaker', 'Sneaker', 'shoe', L('shoe', 'sneaker'), { al: ['running shoe', 'sneaker', 'shoe', 'trainer', 'loafer', 'clog', 'sandal', 'slipper', 'high heels', 'flip-flop'], nm: 'Sneak' });
 OBJ('boot', 'Boot', 'shoe', L('shoe', 'boot'), { al: ['cowboy boot', 'boot', 'rain boot', 'hiking boot', 'wellington boot'], nm: 'Stompy' });
-OBJ('glasses', 'Glasses', 'keys', 'D', { al: ['sunglasses', 'sunglass', 'glasses', 'spectacles', 'goggles', 'binoculars', 'loupe'], nm: 'Specs' });
+OBJ('glasses', 'Glasses', 'keys', 'D', { al: ['sunglasses', 'sunglass', 'glasses', 'spectacles', 'goggles', 'loupe'], nm: 'Specs' });
 OBJ('key', 'Key', 'keys', L('key'), { al: ['key', 'keys', 'keychain', 'car key'], nm: 'Jingle' });
 OBJ('padlock', 'Padlock', 'keys', 'D', { h: 45, al: ['padlock', 'combination lock', 'lock'], nm: 'Locksy' });
 
@@ -294,21 +294,21 @@ OBJ('palm_tree', 'Palm tree', 'tree', 'D', { h: 115, al: ['palm tree', 'palm'], 
 OBJ('dog', 'Dog', 'animal', L('beast', 'dog'), { al: ['dog', 'puppy'], nm: 'Woof' });
 OBJ('cat', 'Cat', 'animal', L('beast'), { al: ['cat', 'kitten', 'tabby', 'tiger cat', 'persian cat', 'siamese cat', 'egyptian cat'], nm: 'Whisk' });
 OBJ('rabbit', 'Rabbit', 'animal', L('beast', 'rabbit'), { al: ['rabbit', 'bunny', 'hare', 'wood rabbit', 'angora'], nm: 'Hop' });
-OBJ('bear', 'Bear', 'animal', L('beast', 'bear'), { al: ['bear', 'brown bear', 'american black bear', 'ice bear', 'polar bear', 'sloth bear', 'koala', 'wombat'], nm: 'Grizz' });
+OBJ('bear', 'Bear', 'animal', L('beast', 'bear'), { al: ['bear', 'brown bear', 'american black bear', 'ice bear', 'polar bear', 'sloth bear'], nm: 'Grizz' });
 OBJ('panda', 'Panda', 'animal', L('beast', 'bear'), { s: 0, l: 92, al: ['giant panda', 'panda'], nm: 'Bamboo' });
-OBJ('monkey', 'Monkey', 'animal', L('beast', 'monkey'), { al: ['monkey', 'chimpanzee', 'gorilla', 'orangutan', 'baboon', 'macaque'], nm: 'Chimp' });
-OBJ('hamster', 'Hamster', 'animal', V('quadruped', { body: 'round', ears: 'round', snout: 'flat', tail: 'none' }), { h: 30, al: ['hamster', 'guinea pig', 'gerbil', 'mouse (animal)'], nm: 'Nibbles' });
+OBJ('monkey', 'Monkey', 'animal', L('beast', 'monkey'), { al: ['monkey', 'chimpanzee', 'baboon', 'macaque'], nm: 'Chimp' });
+OBJ('hamster', 'Hamster', 'animal', V('quadruped', { body: 'round', ears: 'round', snout: 'flat', tail: 'none' }), { h: 30, al: ['hamster', 'mouse (animal)'], nm: 'Nibbles' });
 OBJ('horse', 'Horse', 'animal', V('quadruped', { legs: 'long', neck: 4, ears: 'pointy', snout: 'long', tail: 'tuft', mane: true }), { h: 25, al: ['horse', 'sorrel', 'pony', 'foal'], nm: 'Gallop' });
 OBJ('zebra', 'Zebra', 'animal', V('quadruped', { legs: 'long', neck: 3, ears: 'pointy', snout: 'long', tail: 'tuft', pattern: 'stripes' }), { s: 0, l: 95, al: ['zebra'], nm: 'Stripes' });
 OBJ('cow', 'Cow', 'animal', V('quadruped', { body: 'long', ears: 'floppy', snout: 'flat', horns: 'small', tail: 'tuft', pattern: 'patches' }), { s: 0, l: 95, al: ['ox', 'cow', 'cattle', 'bull', 'water buffalo', 'bison'], nm: 'Moo' });
-OBJ('pig', 'Pig', 'animal', V('quadruped', { body: 'round', ears: 'pointy', snout: 'flat', tail: 'curly' }), { h: 345, s: 60, l: 78, al: ['hog', 'pig', 'piglet', 'wild boar', 'warthog', 'piggy bank'], nm: 'Oinky' });
+OBJ('pig', 'Pig', 'animal', V('quadruped', { body: 'round', ears: 'pointy', snout: 'flat', tail: 'curly' }), { h: 345, s: 60, l: 78, al: ['hog', 'pig', 'piglet', 'wild boar', 'warthog'], nm: 'Oinky' });
 OBJ('sheep', 'Sheep', 'animal', V('quadruped', { body: 'round', ears: 'floppy', snout: 'short', mane: true, tail: 'fluffy' }), { s: 0, l: 95, al: ['ram', 'sheep', 'lamb', 'bighorn'], nm: 'Woolly' });
 OBJ('goat', 'Goat', 'animal', V('quadruped', { ears: 'floppy', snout: 'long', horns: 'curl', tail: 'thin' }), { h: 30, s: 15, l: 80, al: ['goat', 'ibex'], nm: 'Baa' });
 OBJ('deer', 'Deer', 'animal', V('quadruped', { legs: 'long', neck: 3, ears: 'pointy', snout: 'long', horns: 'antler', tail: 'fluffy' }), { h: 28, al: ['deer', 'reindeer', 'moose', 'elk', 'impala', 'gazelle', 'hartebeest'], nm: 'Antler' });
-OBJ('camel', 'Camel', 'animal', V('quadruped', { legs: 'long', neck: 5, snout: 'long', hump: true, tail: 'tuft' }), { h: 35, s: 45, l: 60, al: ['arabian camel', 'camel', 'llama', 'alpaca'], nm: 'Humpy' });
+OBJ('camel', 'Camel', 'animal', V('quadruped', { legs: 'long', neck: 5, snout: 'long', hump: true, tail: 'tuft' }), { h: 35, s: 45, l: 60, al: ['arabian camel', 'camel'], nm: 'Humpy' });
 OBJ('lion', 'Lion', 'animal', V('quadruped', { ears: 'round', snout: 'short', mane: true, tail: 'tuft' }), { h: 38, al: ['lion'], nm: 'Roary' });
 OBJ('tiger', 'Tiger', 'animal', V('quadruped', { ears: 'round', snout: 'short', tail: 'thin', pattern: 'stripes', body: 'long' }), { h: 28, al: ['tiger', 'jaguar', 'leopard', 'cheetah', 'snow leopard', 'cougar', 'lynx'], nm: 'Prowl' });
-OBJ('fox', 'Fox', 'animal', V('quadruped', { ears: 'pointy', snout: 'long', tail: 'fluffy', pattern: 'belly' }), { h: 20, al: ['red fox', 'fox', 'kit fox', 'arctic fox', 'grey fox', 'wolf', 'timber wolf', 'coyote'], nm: 'Foxy' });
+OBJ('fox', 'Fox', 'animal', V('quadruped', { ears: 'pointy', snout: 'long', tail: 'fluffy', pattern: 'belly' }), { h: 20, al: ['red fox', 'fox', 'kit fox', 'arctic fox', 'grey fox', 'coyote'], nm: 'Foxy' });
 OBJ('squirrel', 'Squirrel', 'animal', V('quadruped', { ears: 'pointy', snout: 'short', tail: 'fluffy', body: 'round' }), { h: 22, al: ['fox squirrel', 'squirrel', 'chipmunk', 'marmot', 'beaver'], nm: 'Nutty' });
 OBJ('hippo', 'Hippo', 'animal', V('quadruped', { body: 'round', ears: 'round', snout: 'flat' }), { h: 280, s: 15, l: 55, al: ['hippopotamus', 'hippo', 'rhinoceros'], nm: 'Hippo' });
 OBJ('elephant', 'Elephant', 'animal', 'D', { h: 220, s: 6, l: 60, al: ['indian elephant', 'african elephant', 'elephant', 'tusker'], nm: 'Trunky', sig: { name: 'Trunk Slam', power: 1.45 } });
@@ -319,21 +319,21 @@ OBJ('duck', 'Duck', 'bird', L('bird', 'water'), { al: ['duck', 'drake', 'goose',
 OBJ('penguin', 'Penguin', 'bird', 'D', { al: ['king penguin', 'penguin'], nm: 'Waddle' });
 OBJ('chicken', 'Chicken', 'bird', L('bird'), { h: 5, s: 10, l: 92, al: ['hen', 'cock', 'chicken', 'rooster'], nm: 'Clucky' });
 OBJ('fish', 'Fish', 'fish', L('fish'), { al: ['fish', 'goldfish', 'tench', 'koi', 'clownfish', 'anemone fish', 'puffer', 'lionfish'], nm: 'Gill' });
-OBJ('shark', 'Shark', 'fish', L('fish', 'shark'), { h: 210, s: 15, l: 55, al: ['great white shark', 'tiger shark', 'hammerhead', 'shark', 'whale', 'killer whale', 'dolphin'], nm: 'Chomp' });
+OBJ('shark', 'Shark', 'fish', L('fish', 'shark'), { h: 210, s: 15, l: 55, al: ['great white shark', 'tiger shark', 'hammerhead', 'shark'], nm: 'Chomp' });
 OBJ('jellyfish', 'Jellyfish', 'fish', L('fish', 'jelly'), { h: 300, al: ['jellyfish', 'jelly fish', 'sea anemone'], nm: 'Wobble' });
-OBJ('starfish', 'Starfish', 'fish', L('fish', 'star'), { h: 15, al: ['starfish', 'sea star', 'sea urchin'], nm: 'Stella' });
+OBJ('starfish', 'Starfish', 'fish', L('fish', 'star'), { h: 15, al: ['starfish', 'sea star'], nm: 'Stella' });
 OBJ('octopus', 'Octopus', 'fish', 'D', { h: 345, al: ['octopus', 'squid'], nm: 'Inky' });
 OBJ('beetle', 'Beetle', 'bug', L('bug'), { al: ['beetle', 'ground beetle', 'dung beetle', 'rhinoceros beetle', 'weevil', 'cockroach', 'cricket', 'grasshopper', 'ant'], nm: 'Skitter' });
 OBJ('ladybug', 'Ladybug', 'bug', 'D', { h: 0, al: ['ladybug', 'ladybird'], nm: 'Dotty' });
 OBJ('bee', 'Bee', 'bug', 'D', { h: 48, al: ['bee', 'bumblebee', 'wasp', 'honeybee'], nm: 'Buzz', sig: { name: 'Sting', power: 0.9, effect: 'poison', chance: 0.65 } });
-OBJ('butterfly', 'Butterfly', 'bug', L('bug', 'butterfly'), { al: ['butterfly', 'monarch', 'admiral', 'moth', 'cabbage butterfly'], nm: 'Flutter' });
+OBJ('butterfly', 'Butterfly', 'bug', L('bug', 'butterfly'), { al: ['butterfly', 'monarch', 'admiral', 'cabbage butterfly'], nm: 'Flutter' });
 OBJ('dragonfly', 'Dragonfly', 'bug', 'D', { h: 190, al: ['dragonfly', 'damselfly'], nm: 'Darter' });
-OBJ('spider', 'Spider', 'bug', L('bug', 'spider'), { al: ['spider', 'tarantula', 'black widow', 'garden spider', 'spider web', 'scorpion'], nm: 'Webby' });
-OBJ('snail', 'Snail', 'bug', L('bug', 'snail'), { al: ['snail', 'slug', 'conch', 'seashell'], nm: 'Slimy' });
+OBJ('spider', 'Spider', 'bug', L('bug', 'spider'), { al: ['spider', 'tarantula', 'black widow', 'garden spider', 'spider web'], nm: 'Webby' });
+OBJ('snail', 'Snail', 'bug', L('bug', 'snail'), { al: ['snail', 'conch', 'seashell'], nm: 'Slimy' });
 OBJ('crab', 'Crab', 'bug', L('bug', 'crab'), { h: 8, al: ['crab', 'lobster', 'crayfish', 'dungeness crab', 'rock crab', 'king crab', 'shrimp'], nm: 'Pinch' });
-OBJ('caterpillar', 'Caterpillar', 'bug', 'D', { h: 100, al: ['caterpillar', 'worm', 'centipede'], nm: 'Crawly' });
+OBJ('caterpillar', 'Caterpillar', 'bug', 'D', { h: 100, al: ['caterpillar', 'worm'], nm: 'Crawly' });
 OBJ('lizard', 'Lizard', 'reptile', L('reptile'), { al: ['lizard', 'gecko', 'iguana', 'chameleon', 'crocodile', 'alligator', 'komodo dragon'], nm: 'Scaly' });
-OBJ('frog', 'Frog', 'reptile', L('reptile', 'frog'), { al: ['frog', 'bullfrog', 'tree frog', 'toad'], nm: 'Croak' });
+OBJ('frog', 'Frog', 'reptile', L('reptile', 'frog'), { al: ['frog', 'bullfrog', 'tree frog'], nm: 'Croak' });
 OBJ('turtle', 'Turtle', 'reptile', L('reptile', 'turtle'), { al: ['turtle', 'tortoise', 'box turtle', 'terrapin', 'loggerhead'], nm: 'Shelly' });
 OBJ('snake', 'Snake', 'reptile', L('reptile', 'snake'), { al: ['snake', 'python', 'cobra', 'boa constrictor', 'viper'], nm: 'Hiss' });
 
@@ -343,7 +343,7 @@ OBJ('robot_toy', 'Toy robot', 'toy', 'D', { h: 210, s: 10, l: 70, al: ['robot', 
 OBJ('rubber_duck', 'Rubber duck', 'toy', 'D', { h: 52, al: ['rubber duck', 'rubber duckie', 'bath toy'], nm: 'Squeak' });
 OBJ('kite', 'Kite', 'toy', 'D', { al: ['kite'], nm: 'Soary' });
 OBJ('balloon', 'Balloon', 'toy', V('produce', { shape: 'tall', top: 'none' }), { h: 0, al: ['balloon', 'balloons'], nm: 'Floaty' });
-OBJ('puzzle', 'Jigsaw puzzle', 'toy', V('storage', { w: 24, h: 20, drawers: 2 }), { al: ['jigsaw puzzle', 'puzzle', 'rubik\'s cube', 'board game', 'dice', 'playing cards'], nm: 'Piecey' });
+OBJ('puzzle', 'Jigsaw puzzle', 'toy', V('storage', { w: 24, h: 20, drawers: 2 }), { al: ['jigsaw puzzle', 'puzzle', 'rubik\'s cube', 'board game', 'playing cards'], nm: 'Piecey' });
 OBJ('ball', 'Ball', 'ball', L('ball'), { al: ['ball', 'sports ball', 'baseball', 'golf ball', 'rugby ball', 'croquet ball', 'ping-pong ball', 'puck', 'beach ball', 'frisbee'], nm: 'Bounce' });
 OBJ('soccer_ball', 'Football', 'ball', L('ball', 'soccer'), { al: ['soccer ball', 'football', 'volleyball'], nm: 'Kicky' });
 OBJ('basketball', 'Basketball', 'ball', L('ball', 'basket'), { h: 25, al: ['basketball'], nm: 'Hoopy' });
@@ -745,18 +745,99 @@ const CAT_FALLBACK_VIS = {
   tool: V('part', { kind: 'block' }), keys: V('part', { kind: 'block' }), fridge: V('appliance', { panel: 'buttons' }),
   laptop: V('device', { w: 22, h: 12, light: true, buttons: true }), tv: V('device', { w: 24, h: 12, buttons: true, light: true }),
 };
+// a rule matches whole words only (plural s/es allowed), so a weasel is not an easel, a motherboard not an oar, a
+// windbreaker not a circuit breaker. Names whose word-internal match is genuinely right stay listed here.
+const RULE_SUBWORD_OK = new Set(['bobsled', 'dogsled', 'paddlewheel', 'horseradish', 'corkscrew']);
+function wholeWordMatch(re, label) {
+  if (RULE_SUBWORD_OK.has(label)) return true;
+  const g = new RegExp(re.source, 'g'); let m;
+  while ((m = g.exec(label))) { if (!m[0]) { g.lastIndex++; continue; }
+    const a = m.index, b = a + m[0].length, before = a ? label[a - 1] : ' ', rest = label.slice(b);
+    if (!/[a-z]/.test(before) && (!/^[a-z]/.test(rest) || /^(s|es)\b/.test(rest))) return true; }
+  return false;
+}
 function applyDesignRules(o) {
   if (o.vis) return;
   const label = o.name.toLowerCase();
   for (const [re, vis, lore, sig, col] of FOOD_CATS.has(o.cat) ? [...FOOD_RULES, ...DESIGN_RULES] : DESIGN_RULES) {
     if (!re.test(label)) continue;
+    if (!wholeWordMatch(re, label)) continue; // recognition audit 2026-11: "easel" must not match a weasel, "oar" a motherboard
     if (vis.like && !OBJECTS[vis.like]) break; // safety: never point at a missing design
     o.vis = vis; o.lore = lore || null; if (sig) o.sigName = sig; o.rule = String(re);
     if (GROUP_FAM[lore]) o.fam = GROUP_FAM[lore];
     if (col) [o.h, o.s, o.l] = col; // the object's usual colour when the photo gives none (light switches are white)
     return;
   }
+  const fix = typeof VIS_FIXES !== 'undefined' && VIS_FIXES[label];
+  if (fix && (!fix.like || OBJECTS[fix.like])) { o.vis = fix; o.visFix = true; return; } // visual only (see VIS_FIXES)
   if (CAT_FALLBACK_VIS[o.cat]) { o.vis = CAT_FALLBACK_VIS[o.cat]; o.neutral = true; }
+}
+
+/* ---------- recognition → identity → visual audit (2026-11, docs/review/MAPPING_AUDIT.md) ----------
+   EXTRA_ALIASES: recogniser labels that belong to a vocabulary object but used to be claimed by a different object
+   (first registration wins): a photographed sea urchin became a Starfish, a shopping cart a Wheelbarrow.
+   VIS_FIXES: objects with no design of their own were drawn with their category's single template (a sea urchin as a
+   fish, a tuning fork as a guitar, a hat as a T-shirt). Each fix borrows the closest existing design (LIKE) or a
+   composed shape. Applied by exact object name, only where no design rule matched, and it sets the visual ONLY:
+   never the lore group, family or moves (gameplay unchanged; saved monsters keep the look stored in their DNA and can
+   opt in through "Update its look"). */
+const EXTRA_ALIASES = {
+  x_sea_urchin_shell: ['sea urchin'], x_shopping_trolley: ['shopping cart'],
+  // a sibling species claimed by a related object although its own identity exists (a moth was a Butterfly, a koala a
+  // Bear, a wolf a Fox): the label now names its own species, drawn with the same body as before (VIS_FIXES)
+  x_koala_bear: ['koala'], x_gorilla_ape: ['gorilla'], x_orangutan_ape: ['orangutan'], x_guinea_pig_pet: ['guinea pig'],
+  x_llama_animal: ['llama'], x_alpaca_animal: ['alpaca'], x_wolf_pup: ['wolf', 'timber wolf'], x_moth_insect: ['moth'],
+  x_scorpion_arachnid: ['scorpion'], x_slug_creature: ['slug'], x_centipede_insect: ['centipede'], x_toad_creature: ['toad'],
+  x_tongs: ['tongs'], x_trowel: ['trowel'], x_gerbil: ['gerbil'], x_orca: ['killer whale'],
+};
+const VIS_FIXES = {
+  'sea urchin shell': V('produce', { shape: 'spiky' }), 'sea turtle': LIKE('turtle'),
+  krill: LIKE('crab'), prawn: LIKE('crab'), nautilus: LIKE('snail'), anemone: LIKE('jellyfish'),
+  'rubber duckie bath': LIKE('rubber_duck'), 'fountain pen ink': LIKE('bottle'), 'sports bottle': LIKE('bottle'),
+  rattlesnake: LIKE('snake'), 'garter snake': LIKE('snake'), 'sea snake': LIKE('snake'), 'toad creature': LIKE('frog'),
+  'slug creature': LIKE('snail'), earthworm: LIKE('caterpillar'), leech: LIKE('caterpillar'), millipede: LIKE('caterpillar'),
+  'centipede insect': LIKE('caterpillar'), 'scorpion arachnid': LIKE('spider'),
+  beret: LIKE('hat'), fedora: LIKE('hat'), 'bowler hat': LIKE('hat'), 'sun hat': LIKE('hat'), 'bucket hat': LIKE('hat'),
+  visor: LIKE('hat'), crown: LIKE('hat'), tiara: LIKE('hat'),
+  'knee pads': LIKE('sock'), 'elbow pads': LIKE('sock'), 'shin guard': LIKE('sock'),
+  'tuning fork': LIKE('cutlery_fork'), switch: LIKE('x_light_switch'),
+  'cash machine': LIKE('vending_machine'), gondola: LIKE('sailboat'), lifeboat: LIKE('sailboat'),
+  'koala bear': LIKE('bear'), 'gorilla ape': LIKE('monkey'), 'orangutan ape': LIKE('monkey'), 'guinea pig pet': LIKE('hamster'),
+  'fidget spinner': V('produce', { shape: 'spinner' }), 'socks pair': LIKE('sock'), 'gloves pair': LIKE('sock'), 'mittens pair': LIKE('sock'),
+  earmuffs: LIKE('hat'), headband: LIKE('hat'), bandana: LIKE('hat'), balaclava: LIKE('hat'), tadpole: LIKE('fish'),
+  'toy robot dog': LIKE('robot_toy'), 'baby bottle': LIKE('bottle'), 'rain barrel tank': LIKE('can'), 'water tank': LIKE('can'),
+  'coloring book': LIKE('book'),
+  // deferred-flag cleanup (2026-11): clearly wrong category bodies → closest existing template
+  boomerang: V('produce', { shape: 'curved' }), castanets: V('produce', { shape: 'pair' }), shaker: V('produce', { shape: 'pear' }),
+  'rain stick': V('handtool', { head: 'cane' }), 'music box instrument': LIKE('box'), 'music box toy': LIKE('box'),
+  coral: LIKE('tree'), 'sea sponge': V('produce', { shape: 'tall', dimples: true }), clam: V('produce', { shape: 'oval', ridges: true }),
+  scallop: V('produce', { shape: 'oval', ridges: true }), 'street sign': V('pole', { kind: 'signrect' }), flag: V('pole', { kind: 'post' }),
+  banner: V('pole', { kind: 'post' }), 'toy dinosaur': LIKE('lizard'), 'toy kitchen': LIKE('oven'), 'wind-up toy': LIKE('robot_toy'),
+  'tea set toy': LIKE('teapot'), 'crayon box': LIKE('box'), 'jack in the box': LIKE('box'), 'sand bucket': LIKE('bucket'),
+  'party horn': LIKE('trumpet'), 'play dough': LIKE('jar'), kaleidoscope: V('part', { kind: 'scope' }), confetti: LIKE('balloon'),
+  pinata: LIKE('horse'), 'rocking horse': LIKE('horse'), 'rocking toy': LIKE('horse'), 'chess piece': LIKE('trophy'),
+  'bubble wand': V('handtool', { head: 'magnifier' }), slinky: V('part', { kind: 'coil' }), sticker: V('part', { kind: 'card' }),
+  'swim ring': V('part', { kind: 'ring' }), 'pool float': V('part', { kind: 'ring' }), pacifier: V('part', { kind: 'ring' }),
+  teether: V('part', { kind: 'ring' }), rattle: V('part', { kind: 'bell' }), pinwheel: LIKE('fan'), mask: V('produce', { shape: 'oval' }),
+  wig: LIKE('hat'), 'wig hair': LIKE('hat'), sweatband: LIKE('hat'), badge: V('part', { kind: 'coin' }), belt: V('part', { kind: 'strip' }),
+  suspenders: V('part', { kind: 'strip' }), lanyard: V('part', { kind: 'strip' }), ribbon: V('part', { kind: 'strip' }), bow: LIKE('tie'),
+  flippers: LIKE('sneaker'), 'starting block': V('part', { kind: 'block' }), 'bath bomb': LIKE('ball'), birdbath: LIKE('bowl'),
+  sponge: V('part', { kind: 'block' }), loofah: V('produce', { shape: 'long', ridges: true }), 'soap dish': LIKE('plate'),
+  'toilet brush': V('handtool', { head: 'brush' }), 'plunger tool': V('handtool', { head: 'brush' }), plunger: V('handtool', { head: 'brush' }), 'towel rack': LIKE('ladder'), 'towel rail': LIKE('ladder'), well: LIKE('bucket'),
+  'umbrella stand': LIKE('bucket'), beehive: V('produce', { shape: 'tall', stripes: true }), 'wasp nest': V('produce', { shape: 'tall', stripes: true }),
+  cocoon: V('produce', { shape: 'tall' }), chrysalis: V('produce', { shape: 'tall' }), 'spider egg': V('produce', { shape: 'cluster' }),
+  honeycomb: V('produce', { shape: 'oval', seeds: 'dark' }), 'champagne flute': LIKE('glass'), 'ironing board': LIKE('dining_table'),
+  'gingerbread man': LIKE('cookie'), cardboard: LIKE('box'),   'bat animal': LIKE('bird'), hay: V('produce', { shape: 'oval', ridges: true }), 'satellite model': LIKE('router'),
+  'llama animal': LIKE('camel'), 'alpaca animal': LIKE('camel'), 'wolf pup': LIKE('fox'), 'moth insect': LIKE('butterfly'),
+};
+
+/* Objects that recognisers named correctly but the registry had no identity for, so the label was an alias of a
+   different object (a piggy bank was the Pig, a whale and a dolphin the Shark, a wombat the Bear, binoculars the
+   Glasses). Each takes over exactly the label strings it already had (TinyCLIP text embeddings unchanged) and
+   borrows the old body where no better design exists: an approximate body, the right identity. */
+for (const [id, name, cat, vis] of [['piggy_bank', 'Piggy bank', 'toy', LIKE('pig')], ['whale', 'Whale', 'fish', LIKE('shark')],
+  ['dolphin', 'Dolphin', 'fish', LIKE('shark')], ['wombat', 'Wombat', 'animal', LIKE('bear')], ['binoculars', 'Binoculars', 'tv', LIKE('glasses')]]) {
+  OBJ(id, name, cat, vis, { al: [name.toLowerCase()] }); // binoculars: the two-lens Glasses body (the scope rule draws a tripod telescope)
 }
 
 /* ---------- build the vocabulary objects (family tier) ---------- */
@@ -767,7 +848,7 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, 
       const label = raw.trim(); if (!label) continue;
       const id = 'x_' + slug(label);
       if (OBJECTS[id]) continue;
-      applyDesignRules(OBJ(id, label.replace(/^./, c => c.toUpperCase()), cat, null, { al: [label] }));
+      applyDesignRules(OBJ(id, label.replace(/^./, c => c.toUpperCase()), cat, null, { al: [label, ...(EXTRA_ALIASES[id] || [])] }));
     }
   }
 })();
@@ -792,6 +873,8 @@ function objectTier(o) {
 // Resolve any recogniser label (a whole ImageNet class string, a COCO name or a vocabulary label) to an object id.
 function objectForLabel(label) {
   if (!label) return null;
+  // a whole ImageNet class string resolves exactly like the generated table (src/labels.js), so both routes agree
+  if (typeof LABEL_OBJECTS !== 'undefined' && LABEL_OBJECTS.imagenet && typeof LABEL_OBJECTS.imagenet[label] === 'string') return LABEL_OBJECTS.imagenet[label];
   const parts = String(label).toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
   for (const p of parts) if (ALIAS_INDEX.has(p)) return ALIAS_INDEX.get(p);
   for (const p of parts) { const q = p.replace(/s$/, ''); if (ALIAS_INDEX.has(q)) return ALIAS_INDEX.get(q); }

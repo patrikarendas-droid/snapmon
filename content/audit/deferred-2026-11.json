@@ -1,0 +1,445 @@
+{
+ "note": "The 88 medium flags deferred for review in the first audit pass (commit 84d0a9a). tools/audit-mapping.js reports what became of each.",
+ "flags": [
+  {
+   "rule": "alias-collision",
+   "key": "gerbil",
+   "detail": "\"gerbil\" declared by hamster, x_gerbil → hamster wins"
+  },
+  {
+   "rule": "alias-collision",
+   "key": "hot pot",
+   "detail": "\"hot pot\" declared by pot, noodles → pot wins"
+  },
+  {
+   "rule": "alias-collision",
+   "key": "mouse",
+   "detail": "\"mouse\" declared by mouse, x_mouse → mouse wins"
+  },
+  {
+   "rule": "alias-collision",
+   "key": "pot",
+   "detail": "\"pot\" declared by pot, potted_plant → pot wins"
+  },
+  {
+   "rule": "alias-collision",
+   "key": "tongs",
+   "detail": "\"tongs\" declared by pliers, x_tongs → pliers wins"
+  },
+  {
+   "rule": "alias-collision",
+   "key": "trowel",
+   "detail": "\"trowel\" declared by shovel, x_trowel → shovel wins"
+  },
+  {
+   "rule": "alias-collision",
+   "key": "washer",
+   "detail": "\"washer\" declared by washing_machine, x_washer → washing_machine wins"
+  },
+  {
+   "rule": "family-body",
+   "key": "i_hay",
+   "detail": "Hay: drawn with the car category body (car)"
+  },
+  {
+   "rule": "family-body",
+   "key": "i_mask",
+   "detail": "Mask: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "i_pinwheel",
+   "detail": "Pinwheel: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "i_street_sign",
+   "detail": "Street sign: drawn with the book category body (book)"
+  },
+  {
+   "rule": "family-body",
+   "key": "i_wig",
+   "detail": "Wig: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_badge",
+   "detail": "Badge: drawn with the cloth category body (cloth)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_banner",
+   "detail": "Banner: drawn with the book category body (book)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_bat_animal",
+   "detail": "Bat animal: drawn with the animal category body (beast)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_bath_bomb",
+   "detail": "Bath bomb: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_beehive",
+   "detail": "Beehive: drawn with the bug category body (bug)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_belt",
+   "detail": "Belt: drawn with the cloth category body (cloth)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_birdbath",
+   "detail": "Birdbath: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_boomerang",
+   "detail": "Boomerang: drawn with the ball category body (ball)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_bow",
+   "detail": "Bow: drawn with the cloth category body (cloth)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_bubble_wand",
+   "detail": "Bubble wand: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_castanets",
+   "detail": "Castanets: drawn with the instrument category body (instrument)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_chess_piece",
+   "detail": "Chess piece: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_chrysalis",
+   "detail": "Chrysalis: drawn with the bug category body (bug)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_clam",
+   "detail": "Clam: drawn with the fish category body (fish)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_cocoon",
+   "detail": "Cocoon: drawn with the bug category body (bug)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_confetti",
+   "detail": "Confetti: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_coral",
+   "detail": "Coral: drawn with the fish category body (fish)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_crayon_box",
+   "detail": "Crayon box: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_dugong",
+   "detail": "Dugong: drawn with the animal category body (beast)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_flag",
+   "detail": "Flag: drawn with the book category body (book)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_flippers",
+   "detail": "Flippers: drawn with the ball category body (ball)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_jack_in_the_box",
+   "detail": "Jack in the box: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_kaleidoscope",
+   "detail": "Kaleidoscope: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_lanyard",
+   "detail": "Lanyard: drawn with the cloth category body (cloth)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_loofah",
+   "detail": "Loofah: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_manatee",
+   "detail": "Manatee: drawn with the animal category body (beast)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_mobile_toy",
+   "detail": "Mobile toy: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_mouthguard",
+   "detail": "Mouthguard: drawn with the ball category body (ball)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_music_box_toy",
+   "detail": "Music box toy: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_pacifier",
+   "detail": "Pacifier: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_party_horn",
+   "detail": "Party horn: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_pinata",
+   "detail": "Pinata: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_play_dough",
+   "detail": "Play dough: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_plunger_tool",
+   "detail": "Plunger tool: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_pool_float",
+   "detail": "Pool float: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_rain_stick",
+   "detail": "Rain stick: drawn with the instrument category body (instrument)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_rattle",
+   "detail": "Rattle: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_ribbon",
+   "detail": "Ribbon: drawn with the cloth category body (cloth)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_rocking_horse",
+   "detail": "Rocking horse: drawn with the chair category body (chair)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_rocking_toy",
+   "detail": "Rocking toy: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_sand_bucket",
+   "detail": "Sand bucket: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_satellite_model",
+   "detail": "Satellite model: drawn with the car category body (car)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_scallop",
+   "detail": "Scallop: drawn with the fish category body (fish)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_sea_lion",
+   "detail": "Sea lion: drawn with the animal category body (beast)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_sea_sponge",
+   "detail": "Sea sponge: drawn with the fish category body (fish)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_seal",
+   "detail": "Seal: drawn with the animal category body (beast)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_shaker",
+   "detail": "Shaker: drawn with the instrument category body (instrument)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_slinky",
+   "detail": "Slinky: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_soap_dish",
+   "detail": "Soap dish: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_spider_egg",
+   "detail": "Spider egg: drawn with the bug category body (bug)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_sponge",
+   "detail": "Sponge: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_starting_block",
+   "detail": "Starting block: drawn with the ball category body (ball)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_sticker",
+   "detail": "Sticker: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_stingray",
+   "detail": "Stingray: drawn with the fish category body (fish)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_suspenders",
+   "detail": "Suspenders: drawn with the cloth category body (cloth)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_sweatband",
+   "detail": "Sweatband: drawn with the ball category body (ball)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_swim_ring",
+   "detail": "Swim ring: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_tea_set_toy",
+   "detail": "Tea set toy: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_teether",
+   "detail": "Teether: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_toilet_brush",
+   "detail": "Toilet brush: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_towel_rack",
+   "detail": "Towel rack: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_towel_rail",
+   "detail": "Towel rail: drawn with the chair category body (chair)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_toy_dinosaur",
+   "detail": "Toy dinosaur: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_toy_kitchen",
+   "detail": "Toy kitchen: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_umbrella_stand",
+   "detail": "Umbrella stand: drawn with the chair category body (chair)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_walrus",
+   "detail": "Walrus: drawn with the animal category body (beast)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_well",
+   "detail": "Well: drawn with the faucet category body (faucet)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_wig_hair",
+   "detail": "Wig hair: drawn with the cloth category body (cloth)"
+  },
+  {
+   "rule": "family-body",
+   "key": "x_wind_up_toy",
+   "detail": "Wind-up toy: drawn with the toy category body (toy)"
+  },
+  {
+   "rule": "kind-mismatch",
+   "key": "honeycomb",
+   "detail": "\"honeycomb\" (null) → x_honeycomb (Honeycomb, bug)"
+  },
+  {
+   "rule": "kind-mismatch",
+   "key": "piggy bank",
+   "detail": "\"piggy bank, penny bank\" (bag) → pig (Pig, animal)"
+  },
+  {
+   "rule": "unreachable-name",
+   "key": "x_gerbil",
+   "detail": "\"Gerbil\" → hamster (Hamster)"
+  },
+  {
+   "rule": "unreachable-name",
+   "key": "x_mouse",
+   "detail": "\"Mouse\" → mouse (Computer mouse)"
+  },
+  {
+   "rule": "unreachable-name",
+   "key": "x_tongs",
+   "detail": "\"Tongs\" → pliers (Pliers)"
+  },
+  {
+   "rule": "unreachable-name",
+   "key": "x_trowel",
+   "detail": "\"Trowel\" → shovel (Shovel)"
+  },
+  {
+   "rule": "unreachable-name",
+   "key": "x_washer",
+   "detail": "\"Washer\" → washing_machine (Washing machine)"
+  }
+ ]
+}
