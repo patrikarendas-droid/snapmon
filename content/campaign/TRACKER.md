@@ -38,7 +38,8 @@
 | w06-vehicles-2 | 79 | 79 | done: 38 high / 129 medium / 31 low + 12 patterns | 184 fields (`patches/w06-vehicles-2-editor-auto.json`) then `w06-self-fixes.json` | open: "every Y in town" Epics (pattern) |
 | w07-clothing-and-shoes | 118 | 118 | editor running | self-fixes | |
 | w08-bags-jewellery-and-carry | 94 | 94 | pending | self-fixes | |
-| w09–w22 | 1,427 | 0 | — | — | not started |
+| w09-gadgets-and-computers | 123 | 123 | pending | self-fixes | |
+| w10–w22 | 1,304 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
