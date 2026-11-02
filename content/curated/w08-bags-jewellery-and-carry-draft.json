@@ -1,0 +1,741 @@
+{
+  "schema": 1,
+  "batch": "w08-bags-jewellery-and-carry",
+  "entries": {
+    "basket": {
+      "status": "draft",
+      "names": {
+        "common": "Handlesqueak",
+        "uncommon": "Picnicpacker",
+        "rare": "Laundryheap",
+        "epic": "Hamper Avalanche",
+        "legendary": "Old Wickerwell of the Picnic Rug"
+      },
+      "lore": {
+        "common": "Squeaks its wicker handle with every step, like it's complaining about the weight.",
+        "uncommon": "Packs sandwiches, cake and a flask so neatly that the lid still shuts.",
+        "rare": "Swallowed a whole week of laundry and a missing sock that had been gone for a year.",
+        "epic": "Tipped over at the top of the hill and sent apples, eggs and a teapot rolling into the village.",
+        "legendary": "Has carried the family picnic up the same hill every summer since the hill was smaller."
+      },
+      "moves": {
+        "signature": "Wicker Rim Crack",
+        "legend": "Picnic Nap",
+        "ultimate": "Wicker Weave Slam"
+      }
+    },
+    "box": {
+      "status": "draft",
+      "names": {
+        "common": "Tapetangle",
+        "uncommon": "Catcastle",
+        "rare": "Stackwobble",
+        "epic": "Moving Day Tower",
+        "legendary": "Sir Cardington, King of the Recycling"
+      },
+      "lore": {
+        "common": "Keeps its sticky tape wound so tightly that nobody can find the end.",
+        "uncommon": "Becomes the cat's castle the moment it's emptied, and the present inside is ignored.",
+        "rare": "Stacked itself on top of five others and wobbled every time someone sneezed.",
+        "epic": "Toppled from a tower of moving boxes and sent books, plates and a lamp across the new hall.",
+        "legendary": "Was turned into a rocket, a car, a castle and a robot by the same child in one week."
+      },
+      "moves": {
+        "signature": "Box Corner Crack",
+        "legend": "Flat-Pack Pride",
+        "ultimate": "Cardboard Collapse"
+      }
+    },
+    "crate": {
+      "status": "draft",
+      "names": {
+        "common": "Splinterpoke",
+        "uncommon": "Fruitstacker",
+        "rare": "Liftgrunt",
+        "epic": "Market Crate Topple",
+        "legendary": "Old Slatwood of the Harbour"
+      },
+      "lore": {
+        "common": "Gives you a splinter every time you lift it without gloves.",
+        "uncommon": "Holds oranges in neat rows, so the market stall looks like a painting.",
+        "rare": "Was so heavy that it took four porters and a lot of groaning to lift.",
+        "epic": "Toppled off a market cart and sent a hundred melons rolling down the high street.",
+        "legendary": "Crossed the ocean three times on a cargo ship and still has the first port's stamp on its side."
+      },
+      "moves": {
+        "signature": "Slat Crack",
+        "legend": "Stack Stack Stack",
+        "ultimate": "Crate Avalanche",
+        "kit.strap_snag": "Splinter Startle",
+        "kit.stuff_in": "Straw Stuffing Snatch"
+      }
+    },
+    "handbag": {
+      "status": "draft",
+      "names": {
+        "common": "Keyburier",
+        "uncommon": "Bottomlessbag",
+        "rare": "Clasptrap",
+        "epic": "Handbag Spill",
+        "legendary": "Madame Clasp, Keeper of Everything"
+      },
+      "lore": {
+        "common": "Buries your keys at the very bottom every time you need them.",
+        "uncommon": "Holds tissues, mints, plasters, a hairbrush and, somehow, a spare umbrella.",
+        "rare": "Snapped its clasp shut so fast that it caught the end of a scarf.",
+        "epic": "Was tipped upside down at the bus stop and covered the pavement with lipsticks, receipts and coins.",
+        "legendary": "Has carried grandma's sweets through fifty years of birthdays and never run out."
+      },
+      "moves": {
+        "signature": "Clasp Snap Crack",
+        "legend": "Everything Bag Boost",
+        "ultimate": "Handbag Upturn"
+      }
+    },
+    "i_buckle": {
+      "status": "draft",
+      "names": {
+        "common": "Pinchbuckle",
+        "uncommon": "Shinyclasp",
+        "rare": "Holefinder",
+        "epic": "Belt Notch Dash",
+        "legendary": "Old Claspwell of the Saddle Room"
+      },
+      "lore": {
+        "common": "Pinches the skin of your tummy every time you do it up.",
+        "uncommon": "Shines so brightly in the morning sun that it blinds the person next to you.",
+        "rare": "Found a new hole in the belt that nobody had made, and held up the trousers anyway.",
+        "epic": "Clicked shut on every saddle in the stable in one morning, and the horses set off at once.",
+        "legendary": "Has held the same horse's saddle steady through a hundred races."
+      },
+      "moves": {
+        "signature": "Clasp Clasp Clasp",
+        "legend": "Notch Notch Notch",
+        "ultimate": "Buckle Snap Crack",
+        "kit.gem_shield": "Steel Clasp Guard",
+        "kit.allure": "Belt Grab"
+      }
+    },
+    "i_hair_slide": {
+      "status": "draft",
+      "names": {
+        "common": "Hairslip",
+        "uncommon": "Glittergrip",
+        "rare": "Fringepinner",
+        "epic": "Playground Glimmer",
+        "legendary": "Lady Glitterclip of the Classroom"
+      },
+      "lore": {
+        "common": "Slides out of your hair halfway through every school day.",
+        "uncommon": "Has so much glitter on it that it leaves sparkles on the pillow.",
+        "rare": "Held back a whole fringe through a windy football match.",
+        "epic": "Was clipped into every head in the playground on glitter day, and the whole school sparkled.",
+        "legendary": "Has held back three sisters' fringes over twenty years and never lost a single sparkle."
+      },
+      "moves": {
+        "signature": "Snap Snap Snap",
+        "legend": "Glitter Grip Guard",
+        "ultimate": "Hair Slide Flash",
+        "kit.gem_shield": "Sparkle Guard",
+        "kit.sharp_facet": "Clip Jab",
+        "kit.allure": "Hair Snatch"
+      }
+    },
+    "i_packet": {
+      "status": "draft",
+      "names": {
+        "common": "Rippacket",
+        "uncommon": "Crumbspiller",
+        "rare": "Seedshaker",
+        "epic": "Snack Packet Blizzard",
+        "legendary": "Old Crinkleworth of the Lunchbox"
+      },
+      "lore": {
+        "common": "Tears down the side instead of the top, so everything falls out.",
+        "uncommon": "Leaves crumbs in the bottom that nobody can reach.",
+        "rare": "Shook so many seeds over the garden that it grew a whole meadow.",
+        "epic": "Burst open in the car and filled the back seat with a blizzard of crisps.",
+        "legendary": "Has crinkled in the same lunchbox every school day and never once been eaten quietly."
+      },
+      "moves": {
+        "signature": "Crinkle Crack",
+        "legend": "Crumb Snatch",
+        "ultimate": "Snack Burst"
+      }
+    },
+    "mailbox": {
+      "status": "draft",
+      "names": {
+        "common": "Letterjammer",
+        "uncommon": "Rednosed",
+        "rare": "Postgulp",
+        "epic": "Birthday Card Flood",
+        "legendary": "Old Pillar of the Village Green"
+      },
+      "lore": {
+        "common": "Jams every big envelope halfway in so you have to push it with your elbow.",
+        "uncommon": "Stands on the corner in bright red, so nobody can ever say they couldn't find it.",
+        "rare": "Swallowed a whole parcel that should never have fitted through the slot.",
+        "epic": "Filled to the top with birthday cards in one day, and the postman needed a wheelbarrow.",
+        "legendary": "Has stood on the same village corner for a hundred years and posted every love letter in the village."
+      },
+      "moves": {
+        "signature": "Flap Snap Crack",
+        "legend": "Sun-Hot Pillar",
+        "ultimate": "Post Rush"
+      }
+    },
+    "x_cologne": {
+      "status": "draft",
+      "names": {
+        "common": "Sprayfog",
+        "uncommon": "Splashneck",
+        "rare": "Bottlesniff",
+        "epic": "Aftershave Cloud",
+        "legendary": "Sir Musksworth of the Bathroom Shelf"
+      },
+      "lore": {
+        "common": "Sprays so hard that the whole bathroom smells of pine for a week.",
+        "uncommon": "Is splashed on the neck every morning by someone who thinks it's very grown-up.",
+        "rare": "Was sniffed by the cat, which sneezed and refused to come into the bathroom for a day.",
+        "epic": "Was sprayed by every uncle at the wedding, and the cake tasted of pine.",
+        "legendary": "Has been splashed on before every important day for forty years, and the bottle is still half full."
+      },
+      "moves": {
+        "signature": "Spray Spray Spray",
+        "legend": "Fresh Splash Rest",
+        "ultimate": "Aftershave Fog",
+        "kit.glitter_bomb": "Splash Startle",
+        "kit.perfume_cloud": "Pine Cloud"
+      }
+    },
+    "x_perfume_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Atomiserpuff",
+        "uncommon": "Flowerfog",
+        "rare": "Crystalstopper",
+        "epic": "Department Store Mist",
+        "legendary": "Madame Parfum of the Dressing Table"
+      },
+      "lore": {
+        "common": "Puffs so much scent that everyone in the lift starts coughing.",
+        "uncommon": "Smells of a whole garden of roses packed into one tiny bottle.",
+        "rare": "Has a crystal stopper that sparkles like a little chandelier on the dressing table.",
+        "epic": "Was sprayed at everyone walking through the department store, and the whole street smelled of roses.",
+        "legendary": "Has sat on the same dressing table for sixty years and still smells exactly like grandma."
+      },
+      "moves": {
+        "signature": "Puff Puff Puff",
+        "legend": "Rose Cloud Distraction",
+        "ultimate": "Fragrance Fog"
+      }
+    },
+    "suitcase": {
+      "status": "draft",
+      "names": {
+        "common": "Wobblewheel Case",
+        "uncommon": "Bulgezipper",
+        "rare": "Carouselwanderer",
+        "epic": "Airport Luggage Spill",
+        "legendary": "Captain Trolley of Terminal Three"
+      },
+      "lore": {
+        "common": "Has one wheel that wobbles and drags you sideways through the airport.",
+        "uncommon": "Bulges so much that someone has to sit on it to close the zip.",
+        "rare": "Went round the airport carousel so many times that it got dizzy.",
+        "epic": "Burst open on the airport carousel and sent a hundred socks round in a circle.",
+        "legendary": "Has travelled to fifty countries and still has the luggage tag from its very first trip."
+      },
+      "moves": {
+        "signature": "Corner Bump Crack",
+        "legend": "Wheel Ram",
+        "ultimate": "Holiday Laundry Pong"
+      }
+    },
+    "treasure_chest": {
+      "status": "draft",
+      "names": {
+        "common": "Lidslammer",
+        "uncommon": "Coinkeeper",
+        "rare": "Lockpickproof",
+        "epic": "Sunken Treasure Spill",
+        "legendary": "Old Goldbeard's Iron-Bound Chest"
+      },
+      "lore": {
+        "common": "Slams its lid on your fingers every time you peek inside.",
+        "uncommon": "Keeps every coin, button and shiny pebble the children ever found.",
+        "rare": "Had a lock so stubborn that even the key gave up.",
+        "epic": "Was dug up on the beach and spilled so many toys that the sandcastles were forgotten.",
+        "legendary": "Sat at the bottom of the sea for three hundred years and came up still holding every coin."
+      },
+      "moves": {
+        "signature": "Lid Slam Crack",
+        "legend": "Sun-Hot Gold",
+        "ultimate": "Treasure Spill"
+      }
+    },
+    "wallet": {
+      "status": "draft",
+      "names": {
+        "common": "Coinspiller",
+        "uncommon": "Receiptstuffer",
+        "rare": "Pocketlost",
+        "epic": "Pay Day Fumble",
+        "legendary": "Old Leatherby of the Back Pocket"
+      },
+      "lore": {
+        "common": "Spills coins all over the floor whenever you open it.",
+        "uncommon": "Is stuffed so full of old receipts that it won't shut.",
+        "rare": "Disappeared into a pocket that wasn't there yesterday, and turned up in the fridge.",
+        "epic": "Dropped open at the busy till and sent cards, coins and a library ticket in every direction.",
+        "legendary": "Has been sat on in the same back pocket for thirty years and is now exactly bottom-shaped."
+      },
+      "moves": {
+        "signature": "Coin Spill Crack",
+        "legend": "Receipt Distraction",
+        "ultimate": "Pocket Fumble"
+      }
+    },
+    "x_anklet": {
+      "status": "draft",
+      "names": {
+        "common": "Tinkletoe",
+        "uncommon": "Beachchain",
+        "rare": "Sandsparkle",
+        "epic": "Beach Dance Jingle",
+        "legendary": "Lady Tinkleton of the Shore"
+      },
+      "lore": {
+        "common": "Tinkles with every step, so you can never sneak to the fridge.",
+        "uncommon": "Gets wrapped in seaweed every time you paddle at the beach.",
+        "rare": "Sparkled so brightly in the shallow water that the fish followed it.",
+        "epic": "Jingled through the beach dance on every ankle at once, and the waves kept time.",
+        "legendary": "Has been worn on every beach holiday for twenty years and still jingles the same tune."
+      },
+      "moves": {
+        "signature": "Jingle Jingle Jingle",
+        "legend": "Seaweed Snag Crack",
+        "ultimate": "Ankle Jingle Twirl",
+        "kit.sharp_facet": "Clasp Jab",
+        "kit.allure": "Shiny Snatch"
+      }
+    },
+    "x_awning": {
+      "status": "draft",
+      "names": {
+        "common": "Dripedge",
+        "uncommon": "Shadeseeker",
+        "rare": "Crankstuck",
+        "epic": "Cafe Downpour",
+        "legendary": "Old Stripeshade of the High Street"
+      },
+      "lore": {
+        "common": "Drips rainwater down the back of your neck as you walk past.",
+        "uncommon": "Throws a stripy shade over the café tables on the sunniest day.",
+        "rare": "Got its crank stuck halfway, so it sagged like a sleepy eyelid.",
+        "epic": "Caught a whole summer storm in its canvas, then dumped it all on the café at once.",
+        "legendary": "Has shaded the same bakery window for eighty years and kept every cake perfectly cool."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Puddle Pours",
+        "ultimate": "Canvas Dump",
+        "kit.canopy_block": "Stripy Shade Guard",
+        "kit.downpour": "Gutter Gush Gush",
+        "kit.gust": "Canvas Flap Startle"
+      }
+    },
+    "x_ballot_box": {
+      "status": "draft",
+      "names": {
+        "common": "Slotswallower",
+        "uncommon": "Classvote",
+        "rare": "Countday",
+        "epic": "Class Pet Election",
+        "legendary": "The Great Box of Choosing"
+      },
+      "lore": {
+        "common": "Swallows paper slips and won't tell anyone what's written on them.",
+        "uncommon": "Is used by the class to vote on what to name the new hamster.",
+        "rare": "Kept everyone guessing until the very last slip was counted.",
+        "epic": "Held so many votes for the school's new playground that the teacher counted until bedtime.",
+        "legendary": "Chose the name of every class pet for thirty years, and not one hamster complained."
+      },
+      "moves": {
+        "signature": "Slot Snap Crack",
+        "legend": "Lid Down Rest",
+        "ultimate": "Big Reveal Daze",
+        "kit.stuff_in": "Paper Slip Snatch",
+        "kit.bag_swing": "Box Bonk"
+      }
+    },
+    "x_beach_umbrella": {
+      "status": "draft",
+      "names": {
+        "common": "Sandwobble",
+        "uncommon": "Shadehog",
+        "rare": "Windtumbler",
+        "epic": "Beach Brolly Bowl",
+        "legendary": "Captain Parasolio of the Promenade"
+      },
+      "lore": {
+        "common": "Wobbles in the sand so that it falls on whoever is sleeping underneath.",
+        "uncommon": "Throws shade over exactly one person, and everyone else squeezes in.",
+        "rare": "Blew out of the sand in a gust and cartwheeled down the beach.",
+        "epic": "Tumbled along the whole beach in a gale, knocking over every deckchair on the way.",
+        "legendary": "Has shaded the same family on the same beach every summer for thirty years."
+      },
+      "moves": {
+        "signature": "Pole Poke Poke",
+        "legend": "Sunburn Brolly",
+        "ultimate": "Beach Cartwheel",
+        "kit.canopy_block": "Shade Guard",
+        "kit.downpour": "Sand Spray Spray",
+        "kit.gust": "Gust Tumble Startle"
+      }
+    },
+    "x_bead": {
+      "status": "draft",
+      "names": {
+        "common": "Underfoot",
+        "uncommon": "Stringslipper",
+        "rare": "Rainbowcount",
+        "epic": "Bead Spill Scatter",
+        "legendary": "Grand Abacus of the Craft Table"
+      },
+      "lore": {
+        "common": "Rolls under the sofa the moment it falls off the table.",
+        "uncommon": "Slips off the end of the string just as the necklace is nearly finished.",
+        "rare": "Was counted into a rainbow pattern so perfectly that nobody wanted to wear it.",
+        "epic": "Spilled out of the jar with a thousand others, and the whole kitchen floor became a marble run.",
+        "legendary": "Was threaded into a necklace so long that it went round the whole school hall."
+      },
+      "moves": {
+        "signature": "Roll Roll Roll",
+        "legend": "Glass Bead Guard",
+        "ultimate": "Bead Spill",
+        "kit.gem_shield": "Hard Shell Guard",
+        "kit.sharp_facet": "Hole Edge Poke"
+      }
+    },
+    "x_belt_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Hipbumper",
+        "uncommon": "Zipsnacker",
+        "rare": "Hikerpouch",
+        "epic": "Festival Crowd Squeeze",
+        "legendary": "Old Zipwell of the Mountain Path"
+      },
+      "lore": {
+        "common": "Bumps against your hip with every step, all day long.",
+        "uncommon": "Has a little zip pocket where snacks disappear forever.",
+        "rare": "Kept a map, a compass and a sandwich safe through a whole mountain hike.",
+        "epic": "Was worn by everyone at the festival, and the crowd moved like one big zip.",
+        "legendary": "Has been on every family hike for twenty years and still has a raisin from the first one."
+      },
+      "moves": {
+        "signature": "Zip Pocket Crack",
+        "legend": "Snug Pouch Guard",
+        "ultimate": "Hip Bump Barrage"
+      }
+    },
+    "x_bento_box": {
+      "status": "draft",
+      "names": {
+        "common": "Ricespiller",
+        "uncommon": "Compartment",
+        "rare": "Picnicpretty",
+        "epic": "School Lunch Swap",
+        "legendary": "Lady Obento of the Picnic Blanket"
+      },
+      "lore": {
+        "common": "Lets its rice tip into the fruit section if you carry it sideways.",
+        "uncommon": "Has a little box for everything, and nothing is allowed to touch.",
+        "rare": "Was arranged so beautifully that nobody wanted to eat it.",
+        "epic": "Started a lunch swap that went all the way round the school canteen.",
+        "legendary": "Has packed a hundred perfect lunches for the same family and never mixed a single compartment."
+      },
+      "moves": {
+        "signature": "Lid Clip Crack",
+        "legend": "Lunch Snatch",
+        "ultimate": "Lunch Swap"
+      }
+    },
+    "x_bracelet": {
+      "status": "draft",
+      "names": {
+        "common": "Wristjangle",
+        "uncommon": "Charmclink",
+        "rare": "Sleevecatcher",
+        "epic": "Wrist Party Jangle",
+        "legendary": "Lady Bangleworth of the Market"
+      },
+      "lore": {
+        "common": "Jangles against the desk every time you write a word.",
+        "uncommon": "Clinks against your cup every time you drink.",
+        "rare": "Caught on every jumper sleeve so firmly that it unravelled a cardigan.",
+        "epic": "Jangled on every wrist at the summer fête, and the band couldn't hear itself.",
+        "legendary": "Has been passed from grandmother to granddaughter for a hundred years and still jangles the same."
+      },
+      "moves": {
+        "signature": "Jangle Jangle Jangle",
+        "legend": "Clink Clink Clink",
+        "ultimate": "Wrist Jangle Finale"
+      }
+    },
+    "x_brooch": {
+      "status": "draft",
+      "names": {
+        "common": "Pinpoke",
+        "uncommon": "Lapelgleam",
+        "rare": "Scarfholder",
+        "epic": "Grand Ball Glitter",
+        "legendary": "Lady Cameo of the Velvet Lapel"
+      },
+      "lore": {
+        "common": "Pokes its pin into your finger every time you try to fasten it.",
+        "uncommon": "Gleams on the lapel so brightly that everyone asks where it came from.",
+        "rare": "Held a scarf in place through a gale on the clifftop.",
+        "epic": "Glittered on every coat at the grand ball, and the chandelier felt plain.",
+        "legendary": "Has been pinned to the same grandma's coat for sixty years and has never come undone."
+      },
+      "moves": {
+        "signature": "Pin Snatch Snatch",
+        "legend": "Gleam Distraction",
+        "ultimate": "Lapel Glare"
+      }
+    },
+    "x_bum_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Frontpouch",
+        "uncommon": "Zipclunk",
+        "rare": "Tourist Pouch",
+        "epic": "Theme Park Rush",
+        "legendary": "Old Pouchworth of the Holiday Coach"
+      },
+      "lore": {
+        "common": "Ends up on the front when it's meant to be at the back.",
+        "uncommon": "Clunks its zip against everything when you bend over.",
+        "rare": "Kept a tourist's passport, tickets and suncream safe through a whole holiday.",
+        "epic": "Was worn by every tourist at the theme park, and the queues looked like a parade of pouches.",
+        "legendary": "Has been on fifty package holidays and still has the first sun cream bottle inside."
+      },
+      "moves": {
+        "signature": "Zip Pocket Crack Crack",
+        "legend": "Strap Tight Guard",
+        "ultimate": "Theme Park Dash"
+      }
+    },
+    "x_button": {
+      "status": "draft",
+      "names": {
+        "common": "Poppedoff",
+        "uncommon": "Wronghole",
+        "rare": "Shinycoat",
+        "epic": "Sewing Box Spill",
+        "legendary": "Old Buttonwell of the Tin"
+      },
+      "lore": {
+        "common": "Pops off your shirt at the worst possible moment.",
+        "uncommon": "Always ends up in the wrong hole, so your coat hangs crooked.",
+        "rare": "Shone so brightly on the soldier's coat that the general noticed it from across the field.",
+        "epic": "Spilled from the sewing tin with a thousand others, and the floor was covered for a week.",
+        "legendary": "Has been sewn onto five coats over a hundred years and still has all four holes."
+      },
+      "moves": {
+        "signature": "Pop Pop Pop",
+        "legend": "Brass Heat Glint",
+        "ultimate": "Button Spill",
+        "kit.sharp_facet": "Edge Flick",
+        "kit.allure": "Thread Snatch"
+      }
+    },
+    "x_camera_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Lensguard",
+        "uncommon": "Strapdigger",
+        "rare": "Pocketsorter",
+        "epic": "Photo Trip Haul",
+        "legendary": "Old Shutterworth of the Safari"
+      },
+      "lore": {
+        "common": "Digs its strap into your shoulder after an hour of walking.",
+        "uncommon": "Guards every lens like a squashy little bodyguard.",
+        "rare": "Has a pocket for every battery, card and lens cap, and you still can't find the right one.",
+        "epic": "Carried every camera on the safari trip through dust and rain without a single scratch.",
+        "legendary": "Has been on a hundred photo trips around the world and still smells faintly of the first jungle."
+      },
+      "moves": {
+        "signature": "Strap Dig Crack",
+        "legend": "Lens Cap Snatch",
+        "ultimate": "Photo Safari Haul"
+      }
+    },
+    "x_cash_box": {
+      "status": "draft",
+      "names": {
+        "common": "Coinrattler",
+        "uncommon": "Keylost",
+        "rare": "Floatcounter",
+        "epic": "Fete Day Rush",
+        "legendary": "Old Tillsworth of the Village Fete"
+      },
+      "lore": {
+        "common": "Rattles so loudly when you carry it that everyone knows there's money inside.",
+        "uncommon": "Has a tiny key that is always lost.",
+        "rare": "Counted the money at the jumble sale so neatly that the club treasurer asked it to do her sums.",
+        "epic": "Took so many coins at the village fête that its lid wouldn't shut.",
+        "legendary": "Has looked after the money at every village fête for fifty years and never been a penny short."
+      },
+      "moves": {
+        "signature": "Coin Rattle Crack",
+        "legend": "Rattle Rattle Rattle",
+        "ultimate": "Coin Shower"
+      }
+    },
+    "x_cereal_box": {
+      "status": "draft",
+      "names": {
+        "common": "Crumbbottom",
+        "uncommon": "Toyhunter",
+        "rare": "Linerrip",
+        "epic": "Breakfast Pour Avalanche",
+        "legendary": "Captain Crunchwell of the Kitchen"
+      },
+      "lore": {
+        "common": "Hides the last crumbs in the bottom corner where no spoon can reach.",
+        "uncommon": "Has a toy inside that every child digs for before breakfast.",
+        "rare": "Ripped its inner bag so the cereal went everywhere.",
+        "epic": "Was poured so fast at breakfast that the bowl overflowed onto the table, the floor and the dog.",
+        "legendary": "Has been on the breakfast table every morning for ten years and is still somehow full."
+      },
+      "moves": {
+        "signature": "Flap Tear Crack",
+        "legend": "Toasted Flake Heat",
+        "ultimate": "Cereal Avalanche"
+      }
+    },
+    "x_charm_bracelet": {
+      "status": "draft",
+      "names": {
+        "common": "Charmclatter",
+        "uncommon": "Memorylink",
+        "rare": "Lucklinker",
+        "epic": "Charm Swap Party",
+        "legendary": "Lady Charmsworth of the Jewellery Box"
+      },
+      "lore": {
+        "common": "Clatters so loudly that you can hear it from the next room.",
+        "uncommon": "Has a charm for every holiday its owner ever went on.",
+        "rare": "Brought so much luck on exam day that its owner passed every test.",
+        "epic": "Started a charm swap at the party, and every bracelet came home with a new charm.",
+        "legendary": "Has a charm for every birthday from one to ninety, and still has room for more."
+      },
+      "moves": {
+        "signature": "Charm Charm Charm",
+        "legend": "Lucky Charm Rest",
+        "ultimate": "Charm Clatter",
+        "kit.gem_shield": "Lucky Charm Guard",
+        "kit.sharp_facet": "Charm Swing",
+        "kit.allure": "Lucky Snatch"
+      }
+    },
+    "x_cigar_box": {
+      "status": "draft",
+      "names": {
+        "common": "Lidcreaker",
+        "uncommon": "Crayonkeeper",
+        "rare": "Treasuretin",
+        "epic": "Attic Treasure Find",
+        "legendary": "Old Cedarlid of the Toy Cupboard"
+      },
+      "lore": {
+        "common": "Creaks its lid open so slowly that you think it's haunted.",
+        "uncommon": "Is now used to keep crayons, string and a broken watch.",
+        "rare": "Hid a whole collection of marbles so well that nobody found it for years.",
+        "epic": "Was found in the attic full of old photographs, and the whole family spent the day looking at them.",
+        "legendary": "Has kept the same family's tiny treasures for a hundred years, from conkers to wedding rings."
+      },
+      "moves": {
+        "signature": "Lid Creak Crack",
+        "legend": "Treasure Pride",
+        "ultimate": "Attic Dust Puff"
+      }
+    },
+    "x_clutch_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Underarmer",
+        "uncommon": "Snapclutch",
+        "rare": "Lipstickonly",
+        "epic": "Gala Night Sparkle",
+        "legendary": "Madame Clutchella of the Opera"
+      },
+      "lore": {
+        "common": "Gets squeezed under your arm so tightly that it slips out at the worst moment.",
+        "uncommon": "Snaps shut with a satisfying click every time.",
+        "rare": "Holds only a lipstick and a key, and refuses to hold anything else.",
+        "epic": "Glittered at the gala night so brightly that the photographers kept snapping it.",
+        "legendary": "Has been to every opera night in the city for thirty years and never once been left on a seat."
+      },
+      "moves": {
+        "signature": "Snap Clasp Crack",
+        "legend": "Glamour Boost",
+        "ultimate": "Clasp Click Finale"
+      }
+    },
+    "x_cocktail_umbrella": {
+      "status": "draft",
+      "names": {
+        "common": "Glassperch",
+        "uncommon": "Paperpop",
+        "rare": "Fruitstabber",
+        "epic": "Poolside Parasol",
+        "legendary": "Little Parasolina of the Lemonade"
+      },
+      "lore": {
+        "common": "Perches on your glass and pokes you in the nose with every sip.",
+        "uncommon": "Pops open and shut so many times that the paper tears.",
+        "rare": "Stabbed through a cherry, a pineapple chunk and a lemon slice all at once.",
+        "epic": "Was popped into every drink at the pool party, and the poolside looked like a tiny beach.",
+        "legendary": "Has shaded the ice cubes in a thousand lemonades and never once let one melt too quickly."
+      },
+      "moves": {
+        "signature": "Poke Poke Poke",
+        "legend": "Sip Snatch",
+        "ultimate": "Tiny Parasol Spin",
+        "kit.canopy_block": "Paper Shade Guard",
+        "kit.downpour": "Drip Drip Drop",
+        "kit.gust": "Paper Flutter Startle"
+      }
+    },
+    "x_coin": {
+      "status": "draft",
+      "names": {
+        "common": "Sofasinker",
+        "uncommon": "Headsortails",
+        "rare": "Fountainfinder",
+        "epic": "Wishing Well Splash",
+        "legendary": "Old Goldpiece of the Fountain"
+      },
+      "lore": {
+        "common": "Slips down the back of the sofa and lives there with the crumbs.",
+        "uncommon": "Is flipped to decide every argument and always lands on the edge.",
+        "rare": "Was thrown into the fountain and granted a wish, or so its owner says.",
+        "epic": "Was thrown into the wishing well with a thousand others, and the well overflowed with silver.",
+        "legendary": "Has passed through ten thousand hands and still has the old king's face on it."
+      },
+      "moves": {
+        "signature": "Flip Flip Flip",
+        "legend": "Lucky Toss Startle",
+        "ultimate": "Heads or Tails Toss",
+        "kit.gem_shield": "Metal Coin Guard",
+        "kit.sharp_facet": "Edge Spin"
+      }
+    }
+  }
+}
