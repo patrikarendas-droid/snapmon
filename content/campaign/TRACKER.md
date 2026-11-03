@@ -47,8 +47,8 @@
 | w15-trees-fruit-and-veg | 117 | 117 | done: 188 high / 477 medium / 29 low + 10 patterns | 665 fields (`patches/w15-trees-fruit-and-veg-editor-auto.json`) then `w15-self-fixes.json` | |
 | w16-toys-and-games | 85 | 85 | done: 49 high / 407 medium / 30 low + 11 patterns | 456 fields (`patches/w16-toys-and-games-editor-auto.json`) then `w16-self-fixes.json` | |
 | w17-furniture-and-bedding | 100 | 100 | done: 70 high / 141 medium / 6 low + 11 patterns | 211 fields (`patches/w17-furniture-and-bedding-editor-auto.json`) then `w17-self-fixes.json` | x_church_pew written as a hall bench (no religious content); wheelchair written as empowering/fast |
-| w18-music-and-instruments | 56 | 56 | pending | self-fixes | x_church_bell written as a village tower bell (no religious content) |
-| w19-kitchen-and-cookware | 112 | 112 | pending | self-fixes | knife, deep fryer, heaters written with grown-up/safety framing |
+| w18-music-and-instruments | 56 | 56 | done: 22 high / 188 medium / 11 low + 11 patterns | 210 fields (`patches/w18-music-and-instruments-editor-auto.json`) then `w18-self-fixes.json` | x_church_bell written as a village tower bell (no religious content) |
+| w19-kitchen-and-cookware | 112 | 112 | done: 92 high / 420 medium / 26 low + 12 patterns | 512 fields (`patches/w19-kitchen-and-cookware-editor-auto.json`) then `w19-self-fixes.json` | knife, deep fryer, heaters written with grown-up/safety framing |
 | w20-fridges-taps-and-tableware | 93 | 93 | pending | self-fixes | drinkware written alcohol-free (champagne flute, martini glass, shot glass, tankard, wine tumbler, cocktail shaker, beer stein hold juice/milkshake) |
 | w21-sweets-bakery-and-snacks | 91 | 91 | pending | self-fixes | |
 | w22-drinks-pantry-and-meals | 126 | 126 | pending | self-fixes | drinks alcohol-free (x_wine, x_beer, wine_bottle, hip flask = cocoa); medicines/cleaners/fuel cans kept high-shelf/grown-up only; spread written without its brand name (id x_nutella) |
