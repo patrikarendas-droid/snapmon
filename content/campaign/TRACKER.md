@@ -44,7 +44,8 @@
 | w12-house-odds-and-ends | 101 | 101 | pending | self-fixes | many fire objects (matches x4, candles, bonfire, fireworks) written with safety framing |
 | w13-tools-and-sport | 98 | 98 | pending | self-fixes | i_slot = one-armed bandit (gambling, written as seaside arcade) |
 | w14-garden-and-plants | 115 | 115 | pending | self-fixes | |
-| w15–w22 | 780 | 0 | — | — | not started |
+| w15-trees-fruit-and-veg | 117 | 117 | pending | self-fixes | |
+| w16–w22 | 663 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
