@@ -46,7 +46,8 @@
 | w14-garden-and-plants | 115 | 115 | pending | self-fixes | |
 | w15-trees-fruit-and-veg | 117 | 117 | pending | self-fixes | |
 | w16-toys-and-games | 85 | 85 | pending | self-fixes | |
-| w17–w22 | 578 | 0 | — | — | not started |
+| w17-furniture-and-bedding | 100 | 100 | pending | self-fixes | x_church_pew written as a hall bench (no religious content); wheelchair written as empowering/fast |
+| w18–w22 | 478 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
