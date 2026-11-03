@@ -726,6 +726,708 @@
         "kit.block_tower": "Ceramic Guard",
         "kit.toy_tantrum": "Rattle Rattle Rattle"
       }
+    },
+    "ping_pong_table": {
+      "status": "draft",
+      "names": {
+        "common": "Netclipper",
+        "uncommon": "Foldtrapper",
+        "rare": "Spinservant",
+        "epic": "Garage Table Tournament",
+        "legendary": "The Table Where the Rally Never Ended"
+      },
+      "lore": {
+        "common": "Clips every ball on the net so it dribbles over.",
+        "uncommon": "Folds up so suddenly that it traps the bats inside.",
+        "rare": "Puts a spin on every bounce that nobody can return.",
+        "epic": "Held a garage tournament that lasted all weekend, and the parents brought sandwiches.",
+        "legendary": "Hosted a rally so long that both players had to have tea in the middle of it."
+      },
+      "moves": {
+        "signature": "Ping Pong Ping",
+        "legend": "Net Stink",
+        "ultimate": "Smash Rally",
+        "kit.curveball": "Spin Serve",
+        "kit.spike": "Table Smash",
+        "kit.pump_up": "Rally Boost"
+      }
+    },
+    "x_building_blocks": {
+      "status": "draft",
+      "names": {
+        "common": "Towertoppler",
+        "uncommon": "Corneredge",
+        "rare": "Stackgrower",
+        "epic": "Block Tower Crash",
+        "legendary": "The Tower That Touched the Ceiling"
+      },
+      "lore": {
+        "common": "Topples the moment the last block goes on top.",
+        "uncommon": "Has corners that dig into your knees when you kneel on them.",
+        "rare": "Grows taller than the toddler building it.",
+        "epic": "Crashed down from the top of the tower, and every block scattered across the playroom.",
+        "legendary": "Was stacked into a tower so tall that it touched the ceiling, and nobody dared breathe."
+      },
+      "moves": {
+        "signature": "Stack Crack",
+        "legend": "Block Topple Crack",
+        "ultimate": "Tower Crash",
+        "kit.wind_up": "Stack Boost",
+        "kit.block_tower": "Block Wall Guard",
+        "kit.toy_tantrum": "Topple Topple Topple"
+      }
+    },
+    "x_checkers": {
+      "status": "draft",
+      "names": {
+        "common": "Kingjumper",
+        "uncommon": "Lostpiece",
+        "rare": "Doublejump",
+        "epic": "Park Bench Checkers",
+        "legendary": "The Checker That Was Crowned Twice"
+      },
+      "lore": {
+        "common": "Jumps over three pieces at once and makes its opponent groan.",
+        "uncommon": "Loses a piece under the sofa, so one is always a bottle cap.",
+        "rare": "Gets crowned so often that it needs its own tiny cushion.",
+        "epic": "Was played on every park bench in the square, and the pigeons watched every move.",
+        "legendary": "Won a game against a grandad who had never lost in fifty years."
+      },
+      "moves": {
+        "signature": "Jump Crack",
+        "legend": "Crown Bash",
+        "ultimate": "Triple Jump Crack",
+        "kit.squeak_toy": "Click Startle",
+        "kit.block_tower": "Stacked Guard",
+        "kit.toy_tantrum": "Jump Jump Jump"
+      }
+    },
+    "x_chess_board": {
+      "status": "draft",
+      "names": {
+        "common": "Thinkytable",
+        "uncommon": "Knockedover",
+        "rare": "Checkmateface",
+        "epic": "Chess Club Silence",
+        "legendary": "The Board That Hosted the Longest Game"
+      },
+      "lore": {
+        "common": "Makes everyone sit in silence for hours.",
+        "uncommon": "Gets knocked over by the cat just before the final move.",
+        "rare": "Pulls a face on whoever loses.",
+        "epic": "Hosted the chess club's final in such silence that the clock ticking was the loudest thing in town.",
+        "legendary": "Hosted a game so long that it was finished by the grandchildren of the people who started it."
+      },
+      "moves": {
+        "signature": "Move Crack",
+        "legend": "Check Crack",
+        "ultimate": "Checkmate",
+        "kit.wind_up": "Opening Boost",
+        "kit.squeak_toy": "Clock Tap Startle",
+        "kit.block_tower": "Castle Guard Chess"
+      }
+    },
+    "x_dice": {
+      "status": "draft",
+      "names": {
+        "common": "Tableroller",
+        "uncommon": "Sixwanter",
+        "rare": "Luckyroll",
+        "epic": "Board Game Fury",
+        "legendary": "The Dice That Rolled a Hundred Sixes"
+      },
+      "lore": {
+        "common": "Shows a different number every time someone else checks it.",
+        "uncommon": "Never rolls a six when you need one.",
+        "rare": "Rolls a double just when everyone's about to lose.",
+        "epic": "Rolled so badly in the board game that the whole family argued until bedtime.",
+        "legendary": "Rolled a hundred sixes in a row, and the family checked it for magic."
+      },
+      "moves": {
+        "signature": "Roll Roll Roll",
+        "legend": "Lucky Six Smash",
+        "ultimate": "Double Six Flash",
+        "kit.wind_up": "Blow On Boost",
+        "kit.squeak_toy": "Rattle Cup Startle",
+        "kit.block_tower": "Dice Cup Guard",
+        "kit.toy_tantrum": "Roll Roll Roll Roll"
+      }
+    },
+    "x_domino": {
+      "status": "draft",
+      "names": {
+        "common": "Toppler Domino",
+        "uncommon": "Pipmatcher",
+        "rare": "Curverunner",
+        "epic": "Domino Chain Fall",
+        "legendary": "The Domino Run That Filled the Hall"
+      },
+      "lore": {
+        "common": "Topples over before the run is finished, and the whole lot falls.",
+        "uncommon": "Has spots that everyone counts to make sure they match.",
+        "rare": "Links into a chain that curves round the whole room.",
+        "epic": "Fell in a chain round the whole school hall, and the class cheered at the end.",
+        "legendary": "Toppled in a run so long that it went from the kitchen to the bottom of the garden."
+      },
+      "moves": {
+        "signature": "Topple Crack",
+        "legend": "Hot Streak",
+        "ultimate": "Domino Run",
+        "kit.squeak_toy": "Click Click Startle",
+        "kit.block_tower": "Line Up Guard",
+        "kit.toy_tantrum": "Fall Fall Fall"
+      }
+    },
+    "puzzle": {
+      "status": "draft",
+      "names": {
+        "common": "Missingpiece",
+        "uncommon": "Cornersfirst",
+        "rare": "Skypiece",
+        "epic": "Rainy Weekend Puzzle",
+        "legendary": "The Puzzle With No Missing Pieces"
+      },
+      "lore": {
+        "common": "Is always missing one piece, found months later under the rug.",
+        "uncommon": "Gets its edges done first by everyone, then left.",
+        "rare": "Has a sky so blue that every piece looks the same.",
+        "epic": "Took the whole family a rainy weekend to finish, and they cheered at the last piece.",
+        "legendary": "Was finished with every single piece, which no family puzzle has ever managed."
+      },
+      "moves": {
+        "signature": "Piece Crack",
+        "legend": "Missing Piece Crack",
+        "ultimate": "Last Piece",
+        "kit.wind_up": "Sort Edges Boost",
+        "kit.block_tower": "Box Lid Guard"
+      }
+    },
+    "x_lego_brick": {
+      "status": "draft",
+      "names": {
+        "common": "Footstabber",
+        "uncommon": "Snapstuck",
+        "rare": "Bigbuilder",
+        "epic": "Brick City Build",
+        "legendary": "The Brick That Built a Castle"
+      },
+      "lore": {
+        "common": "Stabs every bare foot that walks across the bedroom at night.",
+        "uncommon": "Snaps onto another brick so tightly that teeth are needed to get it off.",
+        "rare": "Builds anything you can imagine, including a spaceship for the hamster.",
+        "epic": "Built a whole city on the living room floor, and nobody could walk across it for a week.",
+        "legendary": "Built a castle so big that the family cat moved into the tallest tower."
+      },
+      "moves": {
+        "signature": "Snap Crack",
+        "legend": "Stud Stab Burn",
+        "ultimate": "Brick Build Flash",
+        "kit.wind_up": "Build Boost",
+        "kit.squeak_toy": "Click Startle Brick",
+        "kit.toy_tantrum": "Snap Snap Snap"
+      }
+    },
+    "x_rubik_cube": {
+      "status": "draft",
+      "names": {
+        "common": "Twistytwister",
+        "uncommon": "Stickerpeeler",
+        "rare": "Speedsolver",
+        "epic": "Cube Solving Race",
+        "legendary": "The Cube Solved in Seconds"
+      },
+      "lore": {
+        "common": "Gets twisted for hours and ends up more mixed than before.",
+        "uncommon": "Has its stickers peeled off and moved by people who give up.",
+        "rare": "Gets solved in seconds by one kid in every class.",
+        "epic": "Was twisted by every pupil in the school during the cube craze, and the playground clicked.",
+        "legendary": "Was solved blindfolded by a girl who then did it with one hand."
+      },
+      "moves": {
+        "signature": "Twist Crack",
+        "legend": "Colour Snatch",
+        "ultimate": "Cube Solve Flash",
+        "kit.wind_up": "Twist Boost",
+        "kit.squeak_toy": "Click Click Click",
+        "kit.block_tower": "Colour Face Guard"
+      }
+    },
+    "racket": {
+      "status": "draft",
+      "names": {
+        "common": "Stringsnapper",
+        "uncommon": "Frameclonker",
+        "rare": "Smashmaster",
+        "epic": "Tennis Court Smash",
+        "legendary": "The Racket That Won the Summer"
+      },
+      "lore": {
+        "common": "Snaps a string on the first hit of the season.",
+        "uncommon": "Hits the ball with its frame and sends it over the fence.",
+        "rare": "Smashes the ball so hard that the opponent ducks.",
+        "epic": "Smashed every ball at the summer tournament, and the court ran out of balls.",
+        "legendary": "Won every match of the summer, and its owner slept with it under the pillow."
+      },
+      "moves": {
+        "signature": "Swing Swing Swing",
+        "legend": "Sweaty Grip Stink",
+        "ultimate": "Smash Point",
+        "kit.bounce_back": "String Guard",
+        "kit.curveball": "Slice Shot",
+        "kit.spike": "Overhead Smash"
+      }
+    },
+    "robot_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Beepwalker",
+        "uncommon": "Batterydie Robot",
+        "rare": "Flailarm",
+        "epic": "Living Room Robot March",
+        "legendary": "The Robot That Learned to Dance"
+      },
+      "lore": {
+        "common": "Beeps as it walks into the wall and keeps walking.",
+        "uncommon": "Runs out of battery halfway across the room.",
+        "rare": "Swings its arms so wildly that it knocks over the drinks.",
+        "epic": "Marched across the living room with every toy robot in the house, and the cat fled.",
+        "legendary": "Learned to dance so well that it was the star of the school talent show."
+      },
+      "moves": {
+        "signature": "Beep Crack",
+        "legend": "Robot Oil Stink",
+        "ultimate": "Robot Arm Swing",
+        "kit.squeak_toy": "Beep Boop Startle",
+        "kit.block_tower": "Metal Shell Guard"
+      }
+    },
+    "x_toy_robot_dog": {
+      "status": "draft",
+      "names": {
+        "common": "Barkbattery",
+        "uncommon": "Wagtail Bot",
+        "rare": "Fetchrobot",
+        "epic": "Robot Dog Show",
+        "legendary": "The Robot Dog That Fooled the Cat"
+      },
+      "lore": {
+        "common": "Barks a tinny bark that sets the real dog barking too.",
+        "uncommon": "Wags its plastic tail at everyone.",
+        "rare": "Fetches the ball and then forgets to bring it back.",
+        "epic": "Entered the dog show with real dogs, and the judges were very confused.",
+        "legendary": "Was taken for a walk round the whole park on a lead, and three real dogs tried to make friends."
+      },
+      "moves": {
+        "signature": "Tinny Bark Crack",
+        "legend": "Wag Wag Wag",
+        "ultimate": "Robot Fetch",
+        "kit.wind_up": "Charge Up Boost",
+        "kit.squeak_toy": "Tinny Bark Startle",
+        "kit.block_tower": "Plastic Guard Dog",
+        "kit.toy_tantrum": "Bark Bark Bark"
+      }
+    },
+    "x_wind_up_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Tablefaller",
+        "uncommon": "Keytwister",
+        "rare": "Clickwalker",
+        "epic": "Wind-Up Toy Race",
+        "legendary": "The Toy That Walked Across the Table"
+      },
+      "lore": {
+        "common": "Walks straight off the edge of the table.",
+        "uncommon": "Has a key that needs twisting until your fingers hurt.",
+        "rare": "Clicks and whirrs across the floor like a little machine.",
+        "epic": "Raced every wind-up toy in the house across the kitchen floor, and the cat chased them all.",
+        "legendary": "Walked across the whole dining table without falling off, which no wind-up toy has ever done."
+      },
+      "moves": {
+        "signature": "Click Click Crack",
+        "legend": "Wind-Up Heat",
+        "ultimate": "Wind-Up Walk",
+        "kit.block_tower": "Tin Shell Guard",
+        "kit.toy_tantrum": "Whirr Whirr Whirr"
+      }
+    },
+    "x_toy_boat": {
+      "status": "draft",
+      "names": {
+        "common": "Bathsinker",
+        "uncommon": "Pondsailer",
+        "rare": "Shoredrifter",
+        "epic": "Pond Boat Race",
+        "legendary": "The Boat That Sailed Across the Lake"
+      },
+      "lore": {
+        "common": "Sinks in the bath the moment it's loaded with soap.",
+        "uncommon": "Sails across the park pond pulled on a string.",
+        "rare": "Drifts away from the shore and has to be rescued with a stick.",
+        "epic": "Raced every toy boat on the park pond, and the ducks joined in.",
+        "legendary": "Sailed across the whole lake on its own and was found on the far side by a fisherman."
+      },
+      "moves": {
+        "signature": "Splash Crack",
+        "legend": "Water Snatch",
+        "ultimate": "Boat Race Ram",
+        "kit.squeak_toy": "Horn Toot",
+        "kit.block_tower": "Hull Guard Toy",
+        "kit.toy_tantrum": "Splash Splash Splash"
+      }
+    },
+    "skateboard": {
+      "status": "draft",
+      "names": {
+        "common": "Shinwhacker",
+        "uncommon": "Kickflipfail",
+        "rare": "Rampflyer",
+        "epic": "Skate Park Session",
+        "legendary": "The Board That Landed the Trick"
+      },
+      "lore": {
+        "common": "Shoots out from under its rider and hits them in the shin.",
+        "uncommon": "Fails every kickflip but looks cool trying.",
+        "rare": "Flies off the ramp so high that the crowd gasps.",
+        "epic": "Rolled through the skate park with every board in town, and the ramps rumbled.",
+        "legendary": "Landed a trick that nobody had ever done, and the skate park named it after the board."
+      },
+      "moves": {
+        "signature": "Roll Roll Roll",
+        "legend": "Grind Grind Grind",
+        "ultimate": "Kickflip Strike",
+        "kit.bounce_back": "Deck Guard",
+        "kit.curveball": "Ollie Startle",
+        "kit.spike": "Tail Slam",
+        "kit.pump_up": "Push Boost"
+      }
+    },
+    "x_flippers": {
+      "status": "draft",
+      "names": {
+        "common": "Flapwalker",
+        "uncommon": "Pooldrag",
+        "rare": "Fastswimmer",
+        "epic": "Snorkel Holiday Flap",
+        "legendary": "The Flippers That Raced the Turtle"
+      },
+      "lore": {
+        "common": "Makes everyone walk like a duck on the beach.",
+        "uncommon": "Drags along the bottom of the pool when its swimmer stops.",
+        "rare": "Makes its swimmer zoom through the water like a fish.",
+        "epic": "Flapped across the bay with every snorkeller on the holiday, and the fish moved aside.",
+        "legendary": "Raced a sea turtle across the lagoon and came a close second."
+      },
+      "moves": {
+        "signature": "Flap Flap Flap",
+        "legend": "Flipper Slap Crack",
+        "ultimate": "Flipper Kick Heat",
+        "kit.bounce_back": "Rubber Guard",
+        "kit.curveball": "Splash Startle Flipper",
+        "kit.spike": "Flipper Smack",
+        "kit.pump_up": "Flipper Power-Up"
+      }
+    },
+    "soccer_ball": {
+      "status": "draft",
+      "names": {
+        "common": "Netbuster",
+        "uncommon": "Muddyball",
+        "rare": "Curlkick",
+        "epic": "Park Football Final",
+        "legendary": "The Ball That Scored the Winning Goal"
+      },
+      "lore": {
+        "common": "Bursts the goal net on every big shot.",
+        "uncommon": "Comes home so muddy that it has to be washed in the bath.",
+        "rare": "Swerves away from the goalkeeper's gloves at the very last second, as if it has a mind of its own.",
+        "epic": "Was kicked in the park final for so long that the floodlights came on.",
+        "legendary": "Scored the winning goal in the cup final from the halfway line."
+      },
+      "moves": {
+        "signature": "Kick Kick Kick",
+        "legend": "Half Time Rest",
+        "ultimate": "Top Corner Heat",
+        "kit.curveball": "Bend It",
+        "kit.spike": "Header Smash",
+        "kit.pump_up": "Pump Boost"
+      }
+    },
+    "x_elbow_pads": {
+      "status": "draft",
+      "names": {
+        "common": "Sweatyelbow",
+        "uncommon": "Slidedown",
+        "rare": "Fallsaver",
+        "epic": "Skate Park Tumble",
+        "legendary": "The Pads That Saved Every Elbow"
+      },
+      "lore": {
+        "common": "Gets sweaty and smelly after the first ride.",
+        "uncommon": "Slides down to the wrist when its owner is riding.",
+        "rare": "Saves every elbow from scrapes on the playground.",
+        "epic": "Saved every elbow at the skate park on the busiest day.",
+        "legendary": "Saved its owner's elbows from a thousand tumbles."
+      },
+      "moves": {
+        "signature": "Pad Pad Pad",
+        "legend": "Hot Pad Burn",
+        "ultimate": "Tumble Roll",
+        "kit.curveball": "Elbow Startle",
+        "kit.spike": "Elbow Bump",
+        "kit.pump_up": "Brave Boost"
+      }
+    },
+    "x_knee_pads": {
+      "status": "draft",
+      "names": {
+        "common": "Kneesqueak",
+        "uncommon": "Strapslipper Pad",
+        "rare": "Kneesaver",
+        "epic": "Roller Rink Tumble",
+        "legendary": "The Pads That Took a Thousand Falls"
+      },
+      "lore": {
+        "common": "Squeaks every time its wearer kneels.",
+        "uncommon": "Has straps that slip until the pads sit on the ankles.",
+        "rare": "Makes every fall feel like a soft bump.",
+        "epic": "Saved every knee at the roller rink on the first day of the holidays.",
+        "legendary": "Took a thousand falls without a single scraped knee."
+      },
+      "moves": {
+        "signature": "Pad Thump Thump",
+        "legend": "Brave Boost Pad",
+        "ultimate": "Knee Slide",
+        "kit.bounce_back": "Padded Guard",
+        "kit.curveball": "Knee Squeak Startle",
+        "kit.pump_up": "Confidence Boost"
+      }
+    },
+    "x_shin_guard": {
+      "status": "draft",
+      "names": {
+        "common": "Sockslipper",
+        "uncommon": "Sweatyshin",
+        "rare": "Kickstopper",
+        "epic": "Football Tackle Day",
+        "legendary": "The Guard That Stopped Every Kick"
+      },
+      "lore": {
+        "common": "Slips down inside the sock during the match.",
+        "uncommon": "Gets so sweaty that it smells after one game.",
+        "rare": "Stops every kick from reaching the shin.",
+        "epic": "Took every kick in the football tournament, and its player didn't feel a thing.",
+        "legendary": "Stopped a kick from the hardest kicker in the league and didn't even crack."
+      },
+      "moves": {
+        "signature": "Guard Guard Guard",
+        "legend": "Sweaty Shin Burn",
+        "ultimate": "Kick Block Crack",
+        "kit.bounce_back": "Shin Guard Up",
+        "kit.curveball": "Tackle Startle",
+        "kit.pump_up": "Tough Boost"
+      }
+    },
+    "x_tea_set_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Tinycup",
+        "uncommon": "Teddyhost",
+        "rare": "Pretendpourer",
+        "epic": "Teddy Bear Tea Party",
+        "legendary": "The Tea Set That Hosted Every Teddy"
+      },
+      "lore": {
+        "common": "Has cups so tiny that only teddies can drink from them.",
+        "uncommon": "Hosts every teddy in the house for tea.",
+        "rare": "Pours pretend tea that somehow spills on the carpet.",
+        "epic": "Hosted a tea party for every teddy in the street, and the garden was full of bears.",
+        "legendary": "Has served pretend tea to four generations of teddies in the same family."
+      },
+      "moves": {
+        "signature": "Tiny Cup Crack",
+        "legend": "Tea Break Rest",
+        "ultimate": "Tea Party Spill",
+        "kit.wind_up": "Pour Boost",
+        "kit.squeak_toy": "Cup Clink",
+        "kit.toy_tantrum": "Pour Pour Pour"
+      }
+    },
+    "tennis_ball": {
+      "status": "draft",
+      "names": {
+        "common": "Dogchewer",
+        "uncommon": "Fuzzlost",
+        "rare": "Rooftopper Ball",
+        "epic": "Dog Park Fetch",
+        "legendary": "The Ball That Was Fetched Forever"
+      },
+      "lore": {
+        "common": "Gets chewed by every dog until it's soggy.",
+        "uncommon": "Loses its fuzz after one game.",
+        "rare": "Ends up on the roof of every house it's thrown near.",
+        "epic": "Was thrown at the dog park, and every dog chased it at once.",
+        "legendary": "Has been fetched by the same dog ten thousand times and is now mostly drool."
+      },
+      "moves": {
+        "signature": "Bounce Bounce Bounce Bounce",
+        "legend": "Ace Serve",
+        "ultimate": "Rooftop Lob",
+        "kit.bounce_back": "Felt Guard",
+        "kit.curveball": "Topspin Startle",
+        "kit.spike": "Smash Ball",
+        "kit.pump_up": "Fresh Ball Boost"
+      }
+    },
+    "x_chess_piece": {
+      "status": "draft",
+      "names": {
+        "common": "Missingking",
+        "uncommon": "Knightjumper",
+        "rare": "Pawnhero",
+        "epic": "Chess Piece Hunt",
+        "legendary": "The Pawn That Became a Queen"
+      },
+      "lore": {
+        "common": "Goes missing just as the game is about to start.",
+        "uncommon": "Jumps in an L-shape that confuses everyone.",
+        "rare": "Marches all the way across the board and becomes a queen.",
+        "epic": "Went missing from every chess set in the school, and the chess club used buttons.",
+        "legendary": "Marched from one end of the board to the other in the final and won the game."
+      },
+      "moves": {
+        "signature": "Move Move Crack",
+        "legend": "Castle Rest",
+        "ultimate": "Promotion Flash",
+        "kit.squeak_toy": "Tap Startle",
+        "kit.toy_tantrum": "Jump Jump Jump Jump"
+      }
+    },
+    "x_party_horn": {
+      "status": "draft",
+      "names": {
+        "common": "Unrolltoot",
+        "uncommon": "Earblaster Horn",
+        "rare": "Partysquealer",
+        "epic": "New Year Countdown",
+        "legendary": "The Horn That Started the Party"
+      },
+      "lore": {
+        "common": "Unrolls with a toot right into the next person's face.",
+        "uncommon": "Toots so loudly that everyone jumps.",
+        "rare": "Squeals in a high pitch that sets every dog barking.",
+        "epic": "Was blown by every guest at the countdown, and the street sounded like a flock of geese.",
+        "legendary": "Started a party so loud that the whole street joined in."
+      },
+      "moves": {
+        "signature": "Toot Crack",
+        "legend": "Toot Snatch",
+        "ultimate": "Countdown Blast",
+        "kit.wind_up": "Big Breath Boost",
+        "kit.squeak_toy": "Horn Squeal",
+        "kit.block_tower": "Party Guard"
+      }
+    },
+    "x_baby_doll": {
+      "status": "draft",
+      "names": {
+        "common": "Bottlefeeder",
+        "uncommon": "Cryingdoll",
+        "rare": "Prampusher",
+        "epic": "Doll Hospital",
+        "legendary": "The Doll That Was Loved Bald"
+      },
+      "lore": {
+        "common": "Gets fed a pretend bottle every five minutes.",
+        "uncommon": "Cries when you press its tummy, usually at the dinner table.",
+        "rare": "Gets pushed round the house in its own pram.",
+        "epic": "Was taken to the doll hospital at playgroup, and every doll got a bandage.",
+        "legendary": "Was loved so much over twenty years that it lost all its hair."
+      },
+      "moves": {
+        "signature": "Cry Crack",
+        "legend": "Cry Cry Cry",
+        "ultimate": "Doll Pram Push",
+        "kit.wind_up": "Feed Boost",
+        "kit.block_tower": "Blanket Guard",
+        "kit.toy_tantrum": "Wah Wah Wah"
+      }
+    },
+    "x_ball_pit_ball": {
+      "status": "draft",
+      "names": {
+        "common": "Sockstuffer",
+        "uncommon": "Pitescapee",
+        "rare": "Colourball",
+        "epic": "Soft Play Ball Storm",
+        "legendary": "The Ball That Escaped the Pit"
+      },
+      "lore": {
+        "common": "Gets stuffed down every child's sock.",
+        "uncommon": "Escapes the ball pit and ends up under the café table.",
+        "rare": "Comes in so many colours that the pit looks like a rainbow.",
+        "epic": "Was thrown up in the air by every child at once, and the soft play turned into a ball storm.",
+        "legendary": "Escaped the ball pit, rolled out of the soft play and was found in the car park."
+      },
+      "moves": {
+        "signature": "Throw Throw Throw",
+        "legend": "Plastic Heat",
+        "ultimate": "Ball Storm Flash",
+        "kit.bounce_back": "Bouncy Guard",
+        "kit.curveball": "Throw Startle",
+        "kit.spike": "Ball Bonk"
+      }
+    },
+    "x_barbie_doll": {
+      "status": "draft",
+      "names": {
+        "common": "Shoeloser",
+        "uncommon": "Hairbrusher",
+        "rare": "Outfitchanger",
+        "epic": "Doll Fashion Show",
+        "legendary": "The Doll With a Thousand Outfits"
+      },
+      "lore": {
+        "common": "Loses one tiny shoe the moment it's put on.",
+        "uncommon": "Gets its hair brushed until it's frizzy.",
+        "rare": "Changes outfits ten times a day.",
+        "epic": "Held a fashion show with every doll in the house, and the catwalk was the dining table.",
+        "legendary": "Has a thousand outfits and still only wears the same one."
+      },
+      "moves": {
+        "signature": "Shoe Flick Crack",
+        "legend": "Hair Snatch Doll",
+        "ultimate": "Outfit Change Flash",
+        "kit.wind_up": "Dress Up Boost",
+        "kit.squeak_toy": "Tiny Shoe Startle",
+        "kit.block_tower": "Doll House Guard",
+        "kit.toy_tantrum": "Twirl Twirl Twirl"
+      }
+    },
+    "x_basketball_hoop": {
+      "status": "draft",
+      "names": {
+        "common": "Rimrattle",
+        "uncommon": "Netdangler",
+        "rare": "Driveway Hoop",
+        "epic": "Driveway Shootout",
+        "legendary": "The Hoop That Saw a Thousand Baskets"
+      },
+      "lore": {
+        "common": "Rattles so loudly when the ball hits the rim that the neighbours complain.",
+        "uncommon": "Has a net that hangs by one thread.",
+        "rare": "Stands on the driveway so the car has to park round it.",
+        "epic": "Hosted a shootout that went on until the street lights came on.",
+        "legendary": "Saw a thousand baskets in one summer of practice."
+      },
+      "moves": {
+        "signature": "Rim Rattle Rattle",
+        "legend": "Backboard Crack",
+        "ultimate": "Swish Shot",
+        "kit.bounce_back": "Backboard Guard",
+        "kit.curveball": "Rim Bounce Startle",
+        "kit.pump_up": "Hot Hand Boost"
+      }
     }
   }
 }
