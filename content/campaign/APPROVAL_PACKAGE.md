@@ -1,4 +1,12 @@
-# Full curated-writing campaign — approval package (DRAFT)
+# Full curated-writing campaign — approval package
+
+> **Executed in v0.5.0 (2026-11-03):** the developer approved the release AS IS; all 22 batches are live
+> (`"status": "reviewed"`), Pilot 01 names were added, and the files were renamed to `content/curated/wNN-<theme>.json`.
+> This file is kept as the record of what was approved. Current counts: `content/campaign/STATUS.md`.
+> **Count correction:** the "10,010 move display names" below was a snapshot taken before the w20–w22 editor pass added
+> 41 kit move names. The actual count, read from the source fields, is **10,051** for the 2,248 campaign objects; with
+> the 60 previously approved objects (220) the live total is **10,271**. No move name was changed to reconcile counts.
+> At release, 139 duplicate Legendary legend/Ultimate names were made unique (`patches/v050-unique-legendary-moves/`).
 
 Branch `content/full-writing-rollout` (from production 550121b, v0.4.9). Content-only: no change to `src/`,
 mappings, recognition, mechanics, save format or build. **Nothing is reviewed, merged, deployed or tagged.**
@@ -11,7 +19,7 @@ mappings, recognition, mechanics, save format or build. **Nothing is reviewed, m
 | New objects written (22 batches, `content/curated/w01…w22-*-draft.json`) | 2,248 | 2,248 (all `"status": "draft"`) |
 | New monster names | 11,290 | 11,290 (unique across all content) |
 | New lore lines | 11,240 | 11,240 |
-| Move display names | — | 10,010 overrides |
+| Move display names (campaign objects only) | — | 10,010 at the time of writing; **10,051** actual (see note at top) |
 | Pilot 01 names (`content/campaign/pilot-01-names-proposal.json`) | 10 × 5 | 10/10 |
 | Approved Pilot 01/02 files | unchanged | byte-identical to baseline (`node tools/campaign.js immutable`) |
 

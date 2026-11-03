@@ -1,20 +1,25 @@
 // Pilot 02 integration (2026-11-02): existing monsters take the latest REVIEWED writing (monster names, flavour text,
 // move names) once per content revision, on load and on backup restore. Nothing else on a monster or in the save
 // changes; the refresh is idempotent, uses no random numbers, backs the untouched save up once, and older game versions
-// (curated content off) still read the refreshed save. Pilot 01 objects keep their generated names (no reviewed names).
+// (curated content off) still read the refreshed save. v0.5.0: every object has reviewed writing, including names for
+// Pilot 01. To keep testing the path for objects WITHOUT reviewed content (e.g. objects added later), the test withholds
+// the entries of a few objects (WITHHELD) from the live data.
 const fs = require('fs'), vm = require('vm'), path = require('path');
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
 const SRC = f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8');
+const WITHHELD = ['mug', 'shoe', 'cutlery_fork', 'x_paperclip'];
 const load = (withData = true, store = {}) => {
   const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape,
     localStorage: { _d: store, getItem(k) { return k in this._d ? this._d[k] : null; }, setItem(k, v) { this._d[k] = String(v); } } };
   vm.createContext(ctx);
   vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js'].concat(withData ? ['curated-data.js'] : []).map(SRC).join('\n') +
     ';globalThis.T={OBJECTS,CURATED,SAVE_KEY,createMonster,freshState,recordSighting,loadState,saveState,exportSave,importSave,migrate,TestRoster,curatedRefresh,curatedApply,curatedDexName,speciesLore,newBattle,enemyTurn,heroStrike,setRNG:f=>{RNG=f}}', ctx);
+  if (withData && ctx.T.CURATED.data) for (const id of WITHHELD) delete ctx.T.CURATED.data[id];
   return ctx.T;
 };
 const LIVE = load(), PLAIN = load(false), REV = LIVE.CURATED.revision;
 const P02 = require('../content/curated/pilot-02-approved.json').entries, P01 = require('../content/curated/pilot-01-approved.json').entries;
+const LIVEDATA = LIVE.CURATED.data;
 const RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'], VARIANTS = [null, 'spectral', 'mutated', 'shiny'];
 const seeded = (TT, s = 42) => TT.setRNG(() => { s = (s * 16807) % 2147483647; return s / 2147483647; });
 const make = (TT, obj, rarity, variant = null, s = 42) => { seeded(TT, s); const m = TT.createMonster(TT.freshState(), { obj, rarity, variant, word: obj }); m.seenAt = 1; return m; };
@@ -37,13 +42,17 @@ ok(LIVE.CURATED.enabled && LIVE.CURATED.namesEnabled && /^[0-9a-f]{12}$/.test(RE
   let p02 = [], p01 = [], other = [];
   for (const r of RAR) for (const v of VARIANTS) {
     for (const id of Object.keys(P02)) { const a = make(LIVE, id, r, v), b = make(PLAIN, id, r, v); if (a.name !== P02[id].names[r] || noText(a) !== noText(b) || a.lore !== P02[id].lore[r]) p02.push(`${id}/${r}/${v}`); }
-    for (const id of Object.keys(P01)) { const a = make(LIVE, id, r, v), b = make(PLAIN, id, r, v); if (a.name !== b.name || noText(a) !== noText(b)) p01.push(`${id}/${r}/${v}`); }
+    for (const id of Object.keys(P01)) { const a = make(LIVE, id, r, v), b = make(PLAIN, id, r, v); if (a.name !== P01[id].names[r] || noText(a) !== noText(b) || a.lore !== P01[id].lore[r]) p01.push(`${id}/${r}/${v}`); }
     for (const id of ['mug', 'shoe', 'cutlery_fork', 'x_paperclip'].filter(x => LIVE.OBJECTS[x])) { if (JSON.stringify(make(LIVE, id, r, v)) !== JSON.stringify(make(PLAIN, id, r, v))) other.push(`${id}/${r}/${v}`); }
   }
   ok(!p02.length, `new Pilot 02 monsters (50 objects × 5 rarities × normal/Spectral/Mutated/Shiny): the approved name and text, identical stats, keys, numbers, DNA${p02.length ? ': ' + p02.slice(0, 3) : ''}`);
-  ok(!p01.length, `new Pilot 01 monsters keep their generated names (no reviewed names yet)${p01.length ? ': ' + p01.slice(0, 3) : ''}`);
-  ok(!other.length, `objects without reviewed content: byte-identical to the game without curated content${other.length ? ': ' + other.slice(0, 3) : ''}`);
-  const long = Object.keys(P02).map(id => P02[id].names.legendary).sort((a, b) => b.length - a.length)[0];
+  ok(!p01.length, `new Pilot 01 monsters: the approved names (added in v0.5.0), approved text, identical stats${p01.length ? ': ' + p01.slice(0, 3) : ''}`);
+  // campaign objects (2,248, live since v0.5.0): a sample across batches, every rarity and variant
+  const camp = Object.keys(LIVEDATA).filter(id => !P01[id] && !P02[id]).filter((id, i) => i % 97 === 0); let cb = [];
+  for (const r of RAR) for (const v of VARIANTS) for (const id of camp) { const a = make(LIVE, id, r, v), b = make(PLAIN, id, r, v); if (a.name !== LIVEDATA[id].names[r] || a.lore !== LIVEDATA[id].lore[r] || noText(a) !== noText(b)) cb.push(`${id}/${r}/${v}`); }
+  ok(camp.length > 20 && !cb.length, `new campaign monsters (${camp.length} sample objects × 5 rarities × 4 variants): approved name and text, identical stats, keys, numbers, DNA${cb.length ? ': ' + cb.slice(0, 3) : ''}`);
+  ok(!other.length, `objects without reviewed content (withheld: ${WITHHELD.join(', ')}): byte-identical to the game without curated content${other.length ? ': ' + other.slice(0, 3) : ''}`);
+  const long = Object.keys(LIVEDATA).map(id => LIVEDATA[id].names.legendary).sort((a, b) => b.length - a.length)[0];
   ok(long.length <= 40, `longest Legendary name: "${long}" (${long.length} characters, limit 40)`);
 }
 
@@ -57,15 +66,15 @@ ok(LIVE.CURATED.enabled && LIVE.CURATED.namesEnabled && /^[0-9a-f]{12}$/.test(RE
   ok(S.curatedRev === REV, `the save remembers the content revision it was refreshed to (${S.curatedRev})`);
   const bad1 = [], bad2 = [], bad3 = [];
   S.monsters.forEach((m, i) => {
-    const o = before.monsters[i], e = P02[m.obj] || P01[m.obj];
+    const o = before.monsters[i], e = LIVEDATA[m.obj];
     if (noText(m) !== noText(o)) bad1.push(m.id);                                   // id, level, stats, rarity, variant, dna, seed, keys, numbers, nick…
     if (!e) { if (JSON.stringify(m) !== JSON.stringify(o)) bad2.push(m.id); return; } // no reviewed content: untouched
-    const wantName = P02[m.obj] ? P02[m.obj].names[m.rarity] : o.name;               // Pilot 01: generated name stays
+    const wantName = e.names ? e.names[m.rarity] : o.name;                            // v0.5.0: every live entry has names
     const wantMoves = o.abilities.map(a => (e.moves && e.moves[a.key]) || a.name);
     if (m.name !== wantName || m.lore !== e.lore[m.rarity] || JSON.stringify(m.abilities.map(a => a.name)) !== JSON.stringify(wantMoves)) bad3.push(`${m.id} ${m.obj}/${m.rarity}/${m.variant}`);
   });
   ok(!bad1.length, `${S.monsters.length} saved monsters: id, level, stats, rarity, variant, colours/DNA, seed, ability keys and numbers, nicknames identical${bad1.length ? ': ' + bad1.slice(0, 3) : ''}`);
-  ok(!bad3.length, `saved Pilot 02 monsters (normal, Spectral, Mutated, Shiny) take the approved name, text and move names; Pilot 01 the approved text and move names with their generated name${bad3.length ? ': ' + bad3.slice(0, 3) : ''}`);
+  ok(!bad3.length, `saved curated monsters (Pilot 01, Pilot 02 and campaign; normal, Spectral, Mutated, Shiny) take the approved name, text and move names${bad3.length ? ': ' + bad3.slice(0, 3) : ''}`);
   ok(!bad2.length, 'saved monsters of objects without reviewed content are byte-identical');
   ok(S.monsters.filter(m => m.nick).every(m => m.nick === before.monsters.find(o => o.id === m.id).nick) && S.monsters.some(m => m.nick), 'player nicknames are kept');
   const rest = s => JSON.stringify({ ...s, monsters: 0, curatedRev: 0 });
@@ -91,7 +100,8 @@ ok(LIVE.CURATED.enabled && LIVE.CURATED.namesEnabled && /^[0-9a-f]{12}$/.test(RE
   // 5. encyclopedia shows the curated identity for the top rarity seen; other species keep the first-seen name
   const d = S.dex['o:toaster'], dm = S.dex['o:mug'], da = S.dex['o:apple'];
   ok(G.curatedDexName(d, 'legendary') === P02.toaster.names.legendary && G.curatedDexName(d, 'common') === P02.toaster.names.common, `encyclopedia: toaster shows "${G.curatedDexName(d, 'legendary')}" (Legendary)`);
-  ok(G.curatedDexName(dm, 'rare') === dm.monsterName && G.curatedDexName(da, 'rare') === da.monsterName, 'encyclopedia: objects without curated names keep the name first seen (mug, Pilot 01 apple)');
+  ok(G.curatedDexName(dm, 'rare') === dm.monsterName, 'encyclopedia: objects without curated names keep the name first seen (mug, withheld)');
+  ok(G.curatedDexName(da, 'rare') === P01.apple.names.rare, `encyclopedia: Pilot 01 apple shows its approved name "${G.curatedDexName(da, 'rare')}" (v0.5.0)`);
   ok(G.speciesLore(d, 'epic') === P02.toaster.lore.epic, 'encyclopedia: curated flavour text for the rarity');
   ok(JSON.stringify(S.dex) === JSON.stringify(before.dex), 'encyclopedia records themselves are not rewritten (discovery, counts, rarities kept)');
 }

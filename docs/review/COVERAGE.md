@@ -137,7 +137,7 @@ its generated move name (that is the "not curated" count, not missing work).
 
 ## Live data size
 
-The live data file `src/curated-data.js` is 1821.3 KB for 2308 reviewed objects
-(~808 bytes each), bundled with the page (offline, no network at encounter time). Since v0.5.0 it
+The live data file `src/curated-data.js` is 1822.5 KB for 2308 reviewed objects
+(~809 bytes each), bundled with the page (offline, no network at encounter time). Since v0.5.0 it
 holds all 2308 objects; measured parse time: ~50 ms desktop, ~140–240 ms with 4–6× CPU throttling (one-time, at start-up).
 Only entries with `"status": "reviewed"` are built; drafts never enter the game.

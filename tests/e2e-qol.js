@@ -160,7 +160,8 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   await p.click(`[data-act="pickAlt"][data-arg="${sw}"]`);
   await waitText(/Fight!/, 8000); await p.waitForTimeout(1500); await shot('Q07b-switch-from-alternative');
   const swm = await p.evaluate(() => window.__snapmon.ui.discovered);
-  ok(swm && swm.obj === 'x_light_switch' && /Switch/.test(swm.name) && swm.dna.shape === 'obj' && swm.abilities[0].name === 'Lights Out' && !/vanishes the moment/.test(swm.lore) && (await p.textContent('.overlay')).includes(swm.lore),
+  const swName = await p.evaluate(r => ((CURATED.data.x_light_switch || {}).names || {})[r], swm && swm.rarity); // v0.5.0: approved Pilot 01 name
+  ok(swm && swm.obj === 'x_light_switch' && swm.name === swName && (await p.textContent('.overlay')).includes(swm.name) && swm.dna.shape === 'obj' && swm.abilities[0].name === 'Lights Out' && !/vanishes the moment/.test(swm.lore) && (await p.textContent('.overlay')).includes(swm.lore),
     `the chosen alternative carries its identity everywhere: ${swm && swm.name}, wall-switch body, "${swm && swm.abilities[0].name}", "${swm && swm.lore}"`);
   await p.click('[data-act="ignore"]');
 

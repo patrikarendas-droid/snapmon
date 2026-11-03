@@ -35,6 +35,10 @@ const KEEP = {
   'alias-collision:pot': '"pot" → Cooking pot; ImageNet "pot, flowerpot" is overridden to Potted plant (CLASS_OVERRIDES).',
   'alias-collision:hot pot': 'a hot pot is served in a pot: Cooking pot body is honest.',
   'alias-collision:mouse': 'ambiguous word; computer Mouse wins (ImageNet "mouse, computer mouse"); the animal keeps "mouse (animal)" on Hamster.',
+  // v0.5.0: every object has curated writing, so objects without a label of their own are now "curated-unreachable".
+  // Recognition is unchanged on purpose (out of scope); the writing is ready for when a label is given to them.
+  'curated-unreachable:x_mouse': 'animal Mouse: "mouse" → computer Mouse (see alias-collision:mouse); the animal is reached via "mouse (animal)" on Hamster. Writing kept for a future own label.',
+  'curated-unreachable:x_washer': 'hardware Washer: "washer" → Washing machine (see alias-collision:washer). Writing kept for a future own label.',
   'alias-collision:drum': 'resolved: "drum" now → Drum; the oil-drum sense was removed from Drink can.',
   'alias-collision:dice': 'resolved: "dice" now → Dice; removed from Jigsaw puzzle.',
   // approximate bodies kept on purpose: right identity, a body that is close enough (no template worth inventing)
