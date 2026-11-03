@@ -1,0 +1,3152 @@
+{
+ "batch": "w13-tools-and-sport",
+ "editor": "independent agent",
+ "reviewed": 98,
+ "summary": "Safety framing for blades is good: the box cutter and utility knife lines keep 'a careful grown-up' in charge, and the corkscrew deliberately uses fizzy grape juice. Many Commons are well observed (rake in the face, dumbbell toe-stubber, pliers that pinch, tape measure snap-back, screwdriver 'flat when you need a cross', flatpack with three screws left over, the screw that was never left over, polo horse getting the medal, leaf blower leaving children without a pile). The batch has the same structural faults as w12, and they are as widespread. (1) Legendaries: 22 use the endurance formula ('for fifty/a hundred years', 'still has its first rivet/spanner/stuffing'), and most others are sports wins or sincere fixes with no punchline. Names are 82 of 98 'The X That Y'. (2) Epics are overwhelmingly crowd scenes ('every X at the Y', 'the whole class/street/gym'). (3) Rares are often the tool doing its job (oil can fixes squeaks, plane smooths, wrench fixes pipes, file smooths, peeler peels, box cutter cuts tape). (4) Several objects run one trait across three or four rarities (hedge-trimmer topiary, amphibian driving into water, whistle calling people back, flare-like mop floods, sledge knocking down walls, washer stopping drips). (5) Requested clusters are near-identical in places: four gym machines share the 'travelled the distance of X without leaving the room' Legendary and two share the clothes-horse Common and New Year rush Epic; fairy lights and string lights duplicate Common (tangle), Uncommon (one bulb out) and Epic (garden party); bolt and nut have the same 'rolled off the bench, whole workshop searched' Epic; nut and washer the same rolls-under-the-cupboard Common; cable and USB cable the same 'which no cable has ever done' Legendary; box cutter and utility knife the same 'never cut what was inside' Legendary; kick pad and punching bag the same 'a million hits and still...' Legendary; axe and saw the same stuck-in-the-wood Common; knot, chain and rope all hold a boat in a storm. The sports sticks (golf club, tee, hurling, lacrosse, croquet, polo) all end on 'won the final / scored the winner'. (6) Cross-batch near-copies: i_slot repeats w10 x_slot_machine (lever every child pulls, pier arcade, same pier for decades), the javelin lands in the long jump pit like w06 discus, the jump rope craze repeats w11 hula hoop, the hose water fight w09 water gun, the ice axe 'now hangs on the hut wall' w10 power bank, the chisel's paint-tin opener the screwdriver Rare, plus smaller echoes (rubber band, toothpick, extension cord, steam cleaner, crochet blanket, cherry picker kitten). Hard flags: i_slot is a one-armed bandit with 'Bandit' names, a 'Jackpot' Ultimate and children pulling the lever; it needs a no-gambling rewrite. 'Hammer Time Boost' is a meme. The envelope opener invites waving it like a sword ('Sword Swing'). The ladder Epic drops paint on the cat. The cable car's 'Rusty Cable' and 'Frayed Cable' moves are frightening for a passenger ride. The ice axe Ultimate 'Glacier Swing' is cold while two variants burn; the amphibian Ultimate is a burn with no heat; the wrench 'Pipe Fix' and treadmill 'Belt Speed Up' sound like buffs on attacks. Clumsy suffixed names are common ('Handle Guard Trowel', 'Sawing Boost Boost', 'Second Coat Boost Boost', 'Rusty Hook Bite Cord', 'Water Bottle Rest Rest', 'Handle Bonk Knife'). Replacements are given for every high and medium item, and new names were checked against all curated files and the Pilot 01 proposal.",
+ "patterns": [
+  {
+   "pattern": "Legendary is the 'has done X for N years / still has its first ...' endurance formula.",
+   "ids": [
+    "broom",
+    "x_oil_can",
+    "dumbbell",
+    "i_brass",
+    "i_hook",
+    "i_knot",
+    "i_mortar",
+    "trophy",
+    "wrench",
+    "x_bolt",
+    "x_cable_car",
+    "x_clamp",
+    "x_corkscrew",
+    "x_envelope_opener",
+    "x_fairy_lights",
+    "x_file_tool",
+    "x_gutter",
+    "x_nail",
+    "x_shed",
+    "x_utility_knife",
+    "x_vise",
+    "x_washer",
+    "i_wing",
+    "toolbox",
+    "x_kick_pad",
+    "x_punching_bag",
+    "x_downpipe",
+    "x_whistle_sport",
+    "i_slot"
+   ],
+   "severity": "high",
+   "suggestion": "Rewrite as one outrageous feat with a punchline (oil can: the clock tower gives the town two lunchtimes; toolbox: things start breaking on purpose to get a visit; nail: the wall gives up first)."
+  },
+  {
+   "pattern": "Sports Legendaries all end on 'won the final / scored the winner / framed it' with no joke.",
+   "ids": [
+    "x_golf_club",
+    "x_golf_tee",
+    "x_hurling_stick",
+    "x_lacrosse_stick",
+    "x_croquet_mallet",
+    "x_whistle_sport",
+    "x_medal_ribbon",
+    "trophy",
+    "x_jump_rope",
+    "x_skipping_rope"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep polo (the horse gets the medal is the model). Give the others an absurd consequence instead of a trophy (golf club wins a game on the next course; lacrosse catches a seagull's lunch)."
+  },
+  {
+   "pattern": "Epic is a crowd scene ('every X at the Y', 'the whole class/street/gym at once') with no concrete consequence or joke.",
+   "ids": [
+    "dumbbell",
+    "x_bicycle_helmet",
+    "x_swim_cap",
+    "i_spindle",
+    "i_swing",
+    "lawn_mower",
+    "paintbrush",
+    "rake",
+    "x_medal_ribbon",
+    "x_whistle_small",
+    "x_whistle_sport",
+    "wheelbarrow",
+    "x_cable_car",
+    "x_clamp",
+    "x_elliptical",
+    "x_golf_tee",
+    "x_ice_axe",
+    "x_jump_rope",
+    "x_kick_pad",
+    "x_lacrosse_stick",
+    "x_nail",
+    "x_peeler",
+    "x_polo_mallet",
+    "x_punching_bag",
+    "x_rowing_machine",
+    "x_skipping_rope",
+    "x_snow_shovel",
+    "x_treadmill",
+    "x_trowel",
+    "x_vise",
+    "i_brass",
+    "x_fairy_lights",
+    "x_string_lights",
+    "i_reel",
+    "x_hurling_stick",
+    "i_pick",
+    "i_mortar",
+    "x_oil_can",
+    "x_envelope_opener",
+    "x_crowbar"
+   ],
+   "severity": "medium",
+   "suggestion": "Make something happen with a specific funny result (kick pad stuffing turns the hall into a snow globe; medal ribbons tie the fun-run finishers into a giant necklace)."
+  },
+  {
+   "pattern": "Rare is the tool doing its job well, not a troublesome power.",
+   "ids": [
+    "axe",
+    "x_oil_can",
+    "i_plane",
+    "i_potter_s_wheel",
+    "i_reel",
+    "i_pick",
+    "i_wing",
+    "x_box_cutter",
+    "x_cable_car",
+    "x_chain",
+    "x_clamp",
+    "x_file_tool",
+    "x_peeler",
+    "x_snow_shovel",
+    "wrench",
+    "x_whistle_sport",
+    "x_bicycle_helmet",
+    "x_beach_spade",
+    "x_screw",
+    "x_shed",
+    "x_sledge",
+    "saw",
+    "x_pressure_washer",
+    "x_cable",
+    "x_bolt"
+   ],
+   "severity": "high",
+   "suggestion": "Give it a power that causes trouble (wrench grips nuts from across the room; plane smooths the cat so it slides off sofas; reel winds in before the fish has decided to bite)."
+  },
+  {
+   "pattern": "One trait carried across three or four rarities.",
+   "ids": [
+    "i_amphibian",
+    "x_hedge_trimmer",
+    "x_whistle_small",
+    "mop",
+    "x_sledge",
+    "x_washer",
+    "x_rope",
+    "x_cable",
+    "x_shed",
+    "x_pickaxe",
+    "x_bowling_pin",
+    "i_potter_s_wheel",
+    "x_yarn",
+    "x_leaf_blower",
+    "power_drill",
+    "i_plane",
+    "x_exercise_bike",
+    "x_hacksaw_blade",
+    "x_file_tool",
+    "toolbox",
+    "i_pick"
+   ],
+   "severity": "high",
+   "suggestion": "Let the headline trait own at most two rarities; replacements are in the issues."
+  },
+  {
+   "pattern": "Legendary name monotony: 82 of 98 are 'The X That Y'; two are 'Old X of the Y'.",
+   "ids": [
+    "x_exercise_bike",
+    "x_oil_can",
+    "x_paint_can",
+    "x_bicycle_helmet",
+    "i_amphibian",
+    "i_brass",
+    "i_coil",
+    "i_hook",
+    "i_knot",
+    "i_pick",
+    "i_potter_s_wheel",
+    "i_reel",
+    "i_slot",
+    "i_spindle",
+    "i_swing",
+    "i_wing",
+    "lawn_mower",
+    "mop",
+    "paintbrush",
+    "x_hedge_trimmer",
+    "x_leaf_blower",
+    "power_drill",
+    "rake",
+    "shovel",
+    "toolbox",
+    "x_medal_ribbon",
+    "trophy",
+    "x_whistle_small",
+    "x_whistle_sport",
+    "wheelbarrow",
+    "x_beach_spade",
+    "x_bolt",
+    "x_bowling_pin",
+    "x_box_cutter",
+    "x_bungee_cord",
+    "x_cable",
+    "x_cable_car",
+    "x_chain",
+    "x_chisel",
+    "x_clamp",
+    "x_corkscrew",
+    "x_croquet_mallet",
+    "x_crowbar",
+    "x_downpipe",
+    "x_elliptical",
+    "x_fairy_lights",
+    "x_file_tool",
+    "x_garden_hose",
+    "x_golf_club",
+    "x_golf_tee",
+    "x_gutter",
+    "x_hacksaw_blade",
+    "x_hose_reel",
+    "x_hurling_stick",
+    "x_ice_axe",
+    "x_javelin",
+    "x_jump_rope",
+    "x_kick_pad",
+    "x_lacrosse_stick",
+    "x_led_strip",
+    "x_nail",
+    "x_nut",
+    "x_paint_roller",
+    "x_palette",
+    "x_peeler",
+    "x_pickaxe",
+    "x_polo_mallet",
+    "x_pressure_washer",
+    "x_punching_bag",
+    "x_rope",
+    "x_rowing_machine",
+    "x_screw",
+    "x_shed",
+    "x_skipping_rope",
+    "x_sledge",
+    "x_snow_shovel",
+    "x_string_lights",
+    "x_treadmill",
+    "x_trowel",
+    "x_usb_cable",
+    "x_utility_knife",
+    "x_vise",
+    "x_washer",
+    "x_yarn",
+    "axe",
+    "i_plane"
+   ],
+   "severity": "medium",
+   "suggestion": "Mix shapes ('Name, the Epithet', coined single names, title + name). Per-id names are given where the lore changes; untouched ones can follow the same mix."
+  },
+  {
+   "pattern": "Monster name describes another rarity or contradicts its own line.",
+   "ids": [
+    "i_hook",
+    "i_pick",
+    "i_coil",
+    "toolbox",
+    "x_medal_ribbon",
+    "x_whistle_small",
+    "x_beach_spade",
+    "x_chisel",
+    "x_file_tool",
+    "x_javelin",
+    "x_led_strip",
+    "x_sledge",
+    "x_usb_cable",
+    "i_amphibian",
+    "i_knot",
+    "x_utility_knife"
+   ],
+   "severity": "high",
+   "suggestion": "Re-pair per the issues (hook: C 'Snagger', U 'Woollymonster Hook'; file tool: C 'Scrapescreech', U 'Nailfiler'; whistle: U 'Pearattle')."
+  },
+  {
+   "pattern": "Near-identical clusters inside the batch (the requested groups).",
+   "ids": [
+    "x_exercise_bike",
+    "x_elliptical",
+    "x_rowing_machine",
+    "x_treadmill",
+    "x_fairy_lights",
+    "x_string_lights",
+    "x_bolt",
+    "x_nut",
+    "x_washer",
+    "x_screw",
+    "x_cable",
+    "x_usb_cable",
+    "x_box_cutter",
+    "x_utility_knife",
+    "x_kick_pad",
+    "x_punching_bag",
+    "axe",
+    "saw",
+    "x_hacksaw_blade",
+    "i_knot",
+    "x_chain",
+    "x_rope",
+    "x_jump_rope",
+    "x_skipping_rope",
+    "x_garden_hose",
+    "x_hose_reel",
+    "shovel",
+    "x_snow_shovel",
+    "x_beach_spade",
+    "wrench",
+    "hammer",
+    "x_sledge",
+    "x_croquet_mallet",
+    "x_polo_mallet",
+    "x_golf_club",
+    "x_golf_tee",
+    "x_hurling_stick",
+    "x_lacrosse_stick"
+   ],
+   "severity": "high",
+   "suggestion": "Which side changes is named in each issue."
+  },
+  {
+   "pattern": "Near-copies of earlier drafts (w10 slot machine, w06 discus, w11 hula hoop, w09 water gun, w10 power bank, w11 rubber band, w11 toothpick, w10 extension cord, w09 steam cleaner, w05 cherry picker, w08 buckle, w11 crochet hook).",
+   "ids": [
+    "i_slot",
+    "x_javelin",
+    "x_jump_rope",
+    "x_garden_hose",
+    "x_ice_axe",
+    "x_bungee_cord",
+    "x_hacksaw_blade",
+    "x_cable",
+    "x_pressure_washer",
+    "ladder",
+    "pliers",
+    "x_yarn"
+   ],
+   "severity": "high",
+   "suggestion": "Change the w13 side (replacements in the issues)."
+  },
+  {
+   "pattern": "i_slot: one-armed bandit framed with gambling glamour (Bandit names, Jackpot, children pulling the lever, millions of children).",
+   "ids": [
+    "i_slot"
+   ],
+   "severity": "high",
+   "suggestion": "Reframe as a retired seaside noise-machine that never pays out; no jackpot, no lever-pulling children (see issues)."
+  },
+  {
+   "pattern": "Clumsy suffixed or doubled move names.",
+   "ids": [
+    "paintbrush",
+    "x_hacksaw_blade",
+    "x_trowel",
+    "x_sledge",
+    "x_skipping_rope",
+    "x_shed",
+    "x_gutter",
+    "x_file_tool",
+    "x_peeler",
+    "x_paint_roller",
+    "x_treadmill",
+    "x_bungee_cord",
+    "x_utility_knife",
+    "x_usb_cable",
+    "x_string_lights",
+    "x_chisel",
+    "x_nail",
+    "x_bolt",
+    "x_box_cutter"
+   ],
+   "severity": "medium",
+   "suggestion": "Drop the object word at the end and doubled verbs ('Handle Guard Trowel' -> 'Handle Guard', 'Sawing Boost Boost' -> 'Fresh Blade Boost')."
+  },
+  {
+   "pattern": "Move names untruthful to the mechanics or repeating the Epic name.",
+   "ids": [
+    "i_amphibian",
+    "x_ice_axe",
+    "wrench",
+    "x_treadmill",
+    "x_rowing_machine",
+    "x_led_strip",
+    "x_crowbar",
+    "x_croquet_mallet",
+    "i_hook",
+    "toolbox",
+    "trophy",
+    "x_hose_reel",
+    "x_shed",
+    "x_rope",
+    "x_box_cutter",
+    "hammer",
+    "x_cable_car"
+   ],
+   "severity": "medium",
+   "suggestion": "Heat words only on burn, no cold words when a variant burns, no heal or buff words on attacks, one-hit moves not tripled, Ultimates with their own image."
+  }
+ ],
+ "issues": [
+  {
+   "id": "axe",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A tall woodpile is the axe doing its job.",
+   "suggestion": "'Splits anything it is pointed at, so the grown-ups keep it locked in the shed and point it only at logs.'"
+  },
+  {
+   "id": "axe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Pointsplitter'"
+  },
+  {
+   "id": "axe",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Warming every cottage in the valley is a sincere scale-up with no punchline.",
+   "suggestion": "'Split one log so cleanly that the two halves are still standing up in the woodshed, too surprised to fall over.'"
+  },
+  {
+   "id": "axe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Old X of the Y' shape.",
+   "suggestion": "'Chopwell, the Clean Split'"
+  },
+  {
+   "id": "x_exercise_bike",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Going nowhere' is the same joke as its Legendary (and the gym cluster).",
+   "suggestion": "'Has a little screen showing a beautiful mountain road that freezes on the same cow every time.'"
+  },
+  {
+   "id": "x_exercise_bike",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Cowscreen'"
+  },
+  {
+   "id": "x_exercise_bike",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Bike keeps the 'distance without leaving the room' Legendary (the other gym machines change); the name is the monotonous shape.",
+   "suggestion": "'Pedalina Nowhere-Fast'"
+  },
+  {
+   "id": "broom",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'Clean enough to eat from' is a cliche with no joke.",
+   "suggestion": "'Swept the street so fast on spring cleaning day that the cat, two pigeons and a parked bike ended up in one neat pile.'"
+  },
+  {
+   "id": "broom",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (same floor every day for fifty years).",
+   "suggestion": "'Swept so hard one windy day that it took off, did a lap of the garden and landed in next door's cauliflowers.'"
+  },
+  {
+   "id": "broom",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Sweepella the Airborne'"
+  },
+  {
+   "id": "x_oil_can",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Fixing squeaks is its job.",
+   "suggestion": "'Oils things so well that the whole house goes silent, and nobody can hear anyone sneaking to the biscuit tin any more.'"
+  },
+  {
+   "id": "x_oil_can",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A silent bike ride is not a consequence with a joke.",
+   "suggestion": "'Oiled every chain in the school bike shed, and the bikes rode off so fast that the children had to run after them.'"
+  },
+  {
+   "id": "x_oil_can",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Runaway Bike Shed'"
+  },
+  {
+   "id": "x_oil_can",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (gate squeaked for a hundred years).",
+   "suggestion": "'Oiled the stiff hands of the town clock so well that they slid round twice, and the town had two lunchtimes.'"
+  },
+  {
+   "id": "x_oil_can",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Slickwell the Silent'"
+  },
+  {
+   "id": "x_paint_can",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Famous street, no punchline.",
+   "suggestion": "'Painted every front door on the street a different colour, and now the postman delivers by colour and nobody gets the right letters.'"
+  },
+  {
+   "id": "x_paint_can",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Rainbowtin the Street Painter'"
+  },
+  {
+   "id": "dumbbell",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every weight dropped at once: crowd scene.",
+   "suggestion": "'Was dropped so hard that the treadmills started by themselves, and two people ran a mile before they noticed.'"
+  },
+  {
+   "id": "dumbbell",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Accidental Mile'"
+  },
+  {
+   "id": "dumbbell",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (lifted every morning for twenty years).",
+   "suggestion": "'Was lifted so often by one grandma that she now carries the shopping, the car and occasionally the neighbour.'"
+  },
+  {
+   "id": "dumbbell",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Daze' names stun; the mutated variant lowers defence.",
+   "suggestion": "'Weight Drop'"
+  },
+  {
+   "id": "hammer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Close to power_drill Uncommon and Epic (DIY noise, neighbours).",
+   "suggestion": "'Banged in so many nails in one weekend that the house next door started leaning over to see what was going on.'"
+  },
+  {
+   "id": "hammer",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Leaning Neighbour'"
+  },
+  {
+   "id": "hammer",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A treehouse built with patience has no punchline.",
+   "suggestion": "'Built a whole treehouse in one afternoon, and the tree liked it so much that it grew a second floor.'"
+  },
+  {
+   "id": "hammer",
+   "field": "moves.kit.elbow_grease",
+   "severity": "medium",
+   "issue": "'Hammer Time' is a meme and song catchphrase.",
+   "suggestion": "'Big Swing Warm-Up'"
+  },
+  {
+   "id": "x_bicycle_helmet",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Bouncing off a branch safely is its job.",
+   "suggestion": "'Bounces off everything, including its rider's own front door. It took a while to get into the house.'"
+  },
+  {
+   "id": "x_bicycle_helmet",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Bounceback Lid'"
+  },
+  {
+   "id": "x_bicycle_helmet",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Saved a Head' is grim for a kids' name, and 'shelf of honour' is a retirement formula.",
+   "suggestion": "'Took a tumble so its rider did not have to, then insisted on rolling home by itself. It got there first.'"
+  },
+  {
+   "id": "x_bicycle_helmet",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary and drops the injury image.",
+   "suggestion": "'Bonkwell the Brave Lid'"
+  },
+  {
+   "id": "x_swim_cap",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A hundred lengths without a drop is small and has no joke.",
+   "suggestion": "'Swam so fast that it got out of the pool before its swimmer and waited on the side with a towel.'"
+  },
+  {
+   "id": "x_swim_cap",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'-sworth' names repeat across these batches.",
+   "suggestion": "'Captain Dryhair of the Pool'"
+  },
+  {
+   "id": "i_amphibian",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all drive into water. Keep the Epic.",
+   "suggestion": "'Drives up waterfalls the wrong way, and the salmon have started catching lifts.'"
+  },
+  {
+   "id": "i_amphibian",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Waterfaller'"
+  },
+  {
+   "id": "i_amphibian",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Third into-the-water line; the name ('Drove Into the Sea') describes the Epic.",
+   "suggestion": "'Drove so far out on one tour that it reached a little island, and the island now has a bus stop.'"
+  },
+  {
+   "id": "i_amphibian",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Busboat the Island Hopper'"
+  },
+  {
+   "id": "i_amphibian",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "A burn move with no heat word, and it repeats the old Legendary name.",
+   "suggestion": "'Hot Engine Dive'"
+  },
+  {
+   "id": "i_brass",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Polished by the whole village: crowd, no joke.",
+   "suggestion": "'Was polished so brightly that it bounced the sun into the bakery and toasted every loaf in the window.'"
+  },
+  {
+   "id": "i_brass",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Toasted Window'"
+  },
+  {
+   "id": "i_brass",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (fifty years of reminding people).",
+   "suggestion": "'Reminded one man on its bench to enjoy the view so well that he is still there, and the council has built him a little roof.'"
+  },
+  {
+   "id": "i_brass",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Plaquewell the Reminder'"
+  },
+  {
+   "id": "i_coil",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Spiralstair' describes the staircase Legendary, not the bookcase bounce.",
+   "suggestion": "'Shelfbouncer'"
+  },
+  {
+   "id": "i_coil",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Bouncing down the stairs evokes a branded toy and is a small feat.",
+   "suggestion": "'Bounced so high off a trampoline that it landed in a passing hot-air balloon, and is now on holiday.'"
+  },
+  {
+   "id": "i_coil",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Boingo the Balloon Traveller'"
+  },
+  {
+   "id": "i_hook",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Names are swapped: the Common snags jumpers.",
+   "suggestion": "'Snagger'"
+  },
+  {
+   "id": "i_hook",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "The Uncommon is the woolly-monster coat pile.",
+   "suggestion": "'Woollymonster Hook'"
+  },
+  {
+   "id": "i_hook",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (a hundred years without bending).",
+   "suggestion": "'Held up a coat so full of conkers that it lifted the house half an inch, and the doors now close properly for the first time.'"
+  },
+  {
+   "id": "i_hook",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Hangwell the House Lifter'"
+  },
+  {
+   "id": "i_hook",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Snatch' promises a drain; the variants are defdown/defdown/stun.",
+   "suggestion": "'Big Snag Snap'"
+  },
+  {
+   "id": "i_knot",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Harbour boats in a storm repeats x_chain and x_rope Legendaries; the name 'Contest' matches nothing.",
+   "suggestion": "'Tied two shoelaces so well at sports day that the three-legged race became a twelve-legged race.'"
+  },
+  {
+   "id": "i_knot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Twelve-Legged Race'"
+  },
+  {
+   "id": "i_knot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (same harbour post fifty years) and boat cluster.",
+   "suggestion": "'Tied itself so firmly round a tree that nobody could undo it, so the family moved the tree instead.'"
+  },
+  {
+   "id": "i_knot",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Knottilda the Unpickable'"
+  },
+  {
+   "id": "i_mortar",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Smelled wonderful for a week: no joke.",
+   "suggestion": "'Thumped so hard on curry night that the plates danced off the shelf and landed in a neat stack on the table.'"
+  },
+  {
+   "id": "i_mortar",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Dancing Plates'"
+  },
+  {
+   "id": "i_mortar",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (same family's recipes for a hundred years).",
+   "suggestion": "'Ground one peppercorn so fine that it seasoned every pot of soup in town for a whole year.'"
+  },
+  {
+   "id": "i_pick",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Lost in pockets repeats the Common (lost in the sound hole).",
+   "suggestion": "'Leaves a tiny scratch on the guitar every time, and the scratches now spell something nobody can read.'"
+  },
+  {
+   "id": "i_pick",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Strumflick' did not describe either line.",
+   "suggestion": "'Scratchwriter'"
+  },
+  {
+   "id": "i_pick",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Strumming fast is its job.",
+   "suggestion": "'Strums so fast that the guitar starts playing songs it was never taught.'"
+  },
+  {
+   "id": "i_pick",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Concert pick for a lucky fan: no punchline.",
+   "suggestion": "'Was thrown into the crowd at a big concert, bounced off forty heads and landed back in the guitarist's pocket.'"
+  },
+  {
+   "id": "i_pick",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Plectra the Homecoming'"
+  },
+  {
+   "id": "i_plane",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Smoothing planks is its job.",
+   "suggestion": "'Smooths anything it touches, including the cat, which now slides off every sofa in the house.'"
+  },
+  {
+   "id": "i_plane",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Catsmoother'"
+  },
+  {
+   "id": "i_plane",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as the Uncommon (fixing sticky doors); 'Old X of the Y' name.",
+   "suggestion": "'Shaved a plank so thin that you can read the newspaper through it, and the family uses it as a window.'"
+  },
+  {
+   "id": "i_plane",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Planewell the See-Through'"
+  },
+  {
+   "id": "i_potter_s_wheel",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Spinning a bowl is its job.",
+   "suggestion": "'Spins so fast that anything put on it turns into a bowl, including the potter's sandwich.'"
+  },
+  {
+   "id": "i_potter_s_wheel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Splattering clay repeats the Common.",
+   "suggestion": "'Spun so fast in pottery class that every pot flew off and landed on the shelf, already in a neat row.'"
+  },
+  {
+   "id": "i_potter_s_wheel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Flying Pottery'"
+  },
+  {
+   "id": "i_potter_s_wheel",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Every mug in the café: no punchline.",
+   "suggestion": "'Made every mug in the village cafe, all so wonky that the cafe now sells tea by the slosh.'"
+  },
+  {
+   "id": "i_potter_s_wheel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Wonkywell the Mugmaker'"
+  },
+  {
+   "id": "i_reel",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Fighting a fish without snapping is its job.",
+   "suggestion": "'Winds in so fast that the fish arrives before it has decided to bite.'"
+  },
+  {
+   "id": "i_reel",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Fastwinder'"
+  },
+  {
+   "id": "i_reel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Fishing match (stock contest frame) and crowd untangling.",
+   "suggestion": "'Snarled its line round a whole riverbank of reeds, and the ducks sat in the tangle all day like a hammock.'"
+  },
+  {
+   "id": "i_reel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Duck Hammock'"
+  },
+  {
+   "id": "i_reel",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Biggest fish ever and 'still tells the story' is a stock formula.",
+   "suggestion": "'Hooked a fish so big that the fish reeled in the angler instead, and they now take turns.'"
+  },
+  {
+   "id": "i_reel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Tugwell the Two-Way Reel'"
+  },
+  {
+   "id": "i_slot",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Gambling glamour and a near-copy of w10 x_slot_machine Common: children pulling a one-armed bandit's lever.",
+   "suggestion": "'Rings its bell and flashes its lights at the seagulls, who are not impressed.'"
+  },
+  {
+   "id": "i_slot",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Moves away from the lever.",
+   "suggestion": "'Seagull Dinger'"
+  },
+  {
+   "id": "i_slot",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Bell and lights repeat the new Common; and the name is a gambling word.",
+   "suggestion": "'Has been switched off for years but still hums a little tune whenever the pier lights come on.'"
+  },
+  {
+   "id": "i_slot",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "'Bellringer Bandit' names the gambling machine.",
+   "suggestion": "'Pierhummer'"
+  },
+  {
+   "id": "i_slot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Seventy years on the same pier (endurance formula, near-copy of w10 x_slot_machine Legendary) ringing for millions of children (gambling glamour).",
+   "suggestion": "'Was retired to a museum, and still flashes its lights so proudly that the guards wear sunglasses.'"
+  },
+  {
+   "id": "i_slot",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The One-Armed Bandit of the Pier' is a gambling name.",
+   "suggestion": "'Flashbell the Retired'"
+  },
+  {
+   "id": "i_slot",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "'Jackpot' is gambling glamour.",
+   "suggestion": "'Bells and Whistles'"
+  },
+  {
+   "id": "i_slot",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "Pulling the lever is the gambling action.",
+   "suggestion": "'Ding Ding Ding'"
+  },
+  {
+   "id": "i_slot",
+   "field": "moves.kit.elbow_grease",
+   "severity": "medium",
+   "issue": "'Lever Yank' again centres the gambling action.",
+   "suggestion": "'Bell Polish Boost'"
+  },
+  {
+   "id": "i_spindle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Craft-fair hum is a crowd scene.",
+   "suggestion": "'Spun so fast at the craft fair that it wound every visitor's scarf into one long woolly rope.'"
+  },
+  {
+   "id": "i_spindle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Scarf Rope'"
+  },
+  {
+   "id": "i_swing",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A swing race is a crowd scene.",
+   "suggestion": "'Was swung so hard all lunchtime that its creaking drowned out the dinner bell, and nobody went in.'"
+  },
+  {
+   "id": "i_swing",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Lunchtime Creak'"
+  },
+  {
+   "id": "i_swing",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Said they touched a cloud' is a claim, not a feat, and nudges kids to swing dangerously high.",
+   "suggestion": "'Swings by itself every evening after the park closes, and the park keeper now gives it a push before going home.'"
+  },
+  {
+   "id": "i_swing",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Swingalong the Night Swinger'"
+  },
+  {
+   "id": "i_wing",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Turning smoothly is its job.",
+   "suggestion": "'Waves its flaps so politely that the plane in front always lets it land first.'"
+  },
+  {
+   "id": "i_wing",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Politeflap'"
+  },
+  {
+   "id": "i_wing",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Still has its first rivet' is the original-part formula.",
+   "suggestion": "'Flew so smoothly over the sea that a flock of geese tucked in behind it and reached Spain without flapping.'"
+  },
+  {
+   "id": "i_wing",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Slipstream the Goose Guide'"
+  },
+  {
+   "id": "ladder",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Paint tin landing on the cat is an animal getting hurt.",
+   "suggestion": "'Was knocked over on painting day and leaned against the wrong house, so next door got their gutter painted instead.'"
+  },
+  {
+   "id": "ladder",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Close to w05 x_cherry_picker Rare (kitten rescued from a tree).",
+   "suggestion": "'Was climbed so high by the window cleaner that he cleaned the clouds too, and the town had a very sunny week.'"
+  },
+  {
+   "id": "lawn_mower",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Line is fine; the name is the monotonous shape.",
+   "suggestion": "'Stripewell the Perfect'"
+  },
+  {
+   "id": "mop",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Flood again: Epic and Legendary are both floods.",
+   "suggestion": "'Soaked up a whole paddling pool in one go, then wrung itself out over the vegetable patch.'"
+  },
+  {
+   "id": "mop",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Spongebelle the Thirsty'"
+  },
+  {
+   "id": "paintbrush",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A crowd of helpers is not a consequence.",
+   "suggestion": "'Painted the fence so quickly that it did the gate, the shed and next door's fence before anyone could say stop.'"
+  },
+  {
+   "id": "paintbrush",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Fence Runaway'"
+  },
+  {
+   "id": "paintbrush",
+   "field": "moves.kit.elbow_grease",
+   "severity": "medium",
+   "issue": "Doubled 'Boost Boost'.",
+   "suggestion": "'Fresh Coat Boost'"
+  },
+  {
+   "id": "pliers",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of w08 i_buckle Common ('pinches the skin of your ... every time').",
+   "suggestion": "'Grabs everything by its slipperiest corner, so screws ping off across the floor.'"
+  },
+  {
+   "id": "pliers",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Pingpincher'"
+  },
+  {
+   "id": "x_hedge_trimmer",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary are all hedge animals. Keep the Rare.",
+   "suggestion": "'Trimmed the hedge so low that the neighbours on the other side waved hello for the first time in years, and were not pleased.'"
+  },
+  {
+   "id": "x_hedge_trimmer",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Surprise Neighbours'"
+  },
+  {
+   "id": "x_hedge_trimmer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Third topiary line.",
+   "suggestion": "'Trimmed a garden maze so cleverly that the gardener got lost in it and was found three days later by a hedgehog.'"
+  },
+  {
+   "id": "x_hedge_trimmer",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Mazemaker the Lost'"
+  },
+  {
+   "id": "x_leaf_blower",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "The neighbour leaf war repeats the Uncommon.",
+   "suggestion": "'Blew so hard on full power that it cleared the leaves, the gravel and next door's garden gnome off the drive.'"
+  },
+  {
+   "id": "x_leaf_blower",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Gnome Launcher'"
+  },
+  {
+   "id": "power_drill",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Holes in the wall repeat the Common and Rare.",
+   "suggestion": "'Drilled one hole so deep that it came out in the neighbour's kitchen, and the neighbour hung a picture on the other end.'"
+  },
+  {
+   "id": "power_drill",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Next Door Hole'"
+  },
+  {
+   "id": "power_drill",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A straight kitchen is sincere, no punchline.",
+   "suggestion": "'Built a whole kitchen by itself overnight, and the family woke up to find it had also made breakfast.'"
+  },
+  {
+   "id": "power_drill",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Drillda the Overnight Builder'"
+  },
+  {
+   "id": "saw",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-copy of axe Common (stuck in the wood, won't come out). Change the saw.",
+   "suggestion": "'Sings a wobbly note every time it bends, and the cat leaves the room.'"
+  },
+  {
+   "id": "saw",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Wobblesinger'"
+  },
+  {
+   "id": "saw",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of x_hacksaw_blade Uncommon (wobbles so every cut is crooked), and a flaw rather than a power.",
+   "suggestion": "'Cuts so fast that the plank does not notice until it is put down, then falls in half with a gasp.'"
+  },
+  {
+   "id": "saw",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Quickcutter'"
+  },
+  {
+   "id": "saw",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A straight line through a big log has no punchline.",
+   "suggestion": "'Sawed through a log as wide as a car and found a family of squirrels inside, who asked it to add a door while it was there.'"
+  },
+  {
+   "id": "saw",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Sawbella the Door Maker'"
+  },
+  {
+   "id": "screwdriver",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A boat still floating fifty years later is the endurance formula.",
+   "suggestion": "'Tightened one screw so hard that it came out on the other side of the world, where somebody uses it as a coat hook.'"
+  },
+  {
+   "id": "screwdriver",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Turnwell the Deep Driver'"
+  },
+  {
+   "id": "shovel",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Sandcastles belong to x_beach_spade (its Uncommon and Epic).",
+   "suggestion": "'Has a handle just slightly too short, so every gardener walks home bent like a question mark.'"
+  },
+  {
+   "id": "shovel",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Questionmarker'"
+  },
+  {
+   "id": "shovel",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of x_snow_shovel Epic (cleared the street after the snowstorm). The snow shovel keeps snow.",
+   "suggestion": "'Dug the vegetable patch so deep that it found an old bath, a rusty bike and next door's lost tortoise.'"
+  },
+  {
+   "id": "shovel",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Tortoise Dig'"
+  },
+  {
+   "id": "toolbox",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Same premise as the Uncommon (missing the one tool), and 'Latchsnapper' fits neither line.",
+   "suggestion": "'Rattles so loudly in the car boot that the driver keeps pulling over to check for a flat tyre.'"
+  },
+  {
+   "id": "toolbox",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Bootrattler'"
+  },
+  {
+   "id": "toolbox",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (fifty years, still has the first spanner).",
+   "suggestion": "'Fixed so many things in the village that the things started breaking on purpose, just to get a visit.'"
+  },
+  {
+   "id": "toolbox",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Fixwell the Village Mender'"
+  },
+  {
+   "id": "toolbox",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Garage Tool Avalanche').",
+   "suggestion": "'Spanner Shower'"
+  },
+  {
+   "id": "toolbox",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "Close to w08 x_diaper_bag Common ('every wipe in the world except the one you need').",
+   "suggestion": "'Opens its trays out like a peacock's tail, and everything on the top tray slides straight off.'"
+  },
+  {
+   "id": "x_medal_ribbon",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Clinkmedal' describes the clinking Uncommon.",
+   "suggestion": "'Proudmaker'"
+  },
+  {
+   "id": "x_medal_ribbon",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every runner's neck at the fun run: crowd.",
+   "suggestion": "'Got its ribbons tangled at the fun run, so every finisher crossed the line tied together like a giant necklace.'"
+  },
+  {
+   "id": "x_medal_ribbon",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Fun Run Necklace'"
+  },
+  {
+   "id": "trophy",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (passed round for a hundred years).",
+   "suggestion": "'Was won so often by one team that it now walks to their clubhouse by itself every spring.'"
+  },
+  {
+   "id": "trophy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Homing Cup the Faithful'"
+  },
+  {
+   "id": "trophy",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Trophy Cabinet Topple').",
+   "suggestion": "'Shelf Shaker'"
+  },
+  {
+   "id": "x_whistle_small",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "'Pealess' says it has no pea; the line says it has one.",
+   "suggestion": "'Pearattle'"
+  },
+  {
+   "id": "x_whistle_small",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all call people back. Keep the Rare.",
+   "suggestion": "'Was blown at the zoo, and every flamingo swapped to its other leg at once, then glared.'"
+  },
+  {
+   "id": "x_whistle_small",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Flamingo Swap'"
+  },
+  {
+   "id": "x_whistle_small",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Third calling-back line, plus 'hung by the door ever since'.",
+   "suggestion": "'Blew a note so high that only dogs could hear it, and every dog in the county turned up for a walk.'"
+  },
+  {
+   "id": "x_whistle_small",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Highnote the Dog Caller'"
+  },
+  {
+   "id": "x_whistle_sport",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Stopping the game is its job.",
+   "suggestion": "'Blows itself, so every match ends exactly when the home team is winning.'"
+  },
+  {
+   "id": "x_whistle_sport",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Homewhistle'"
+  },
+  {
+   "id": "x_whistle_sport",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Stadium went wild: crowd reaction.",
+   "suggestion": "'Blew full time so loudly that the pigeons on the stadium roof took off and spelled FULL TIME in the sky.'"
+  },
+  {
+   "id": "x_whistle_sport",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic (frees 'Final Whistle' for the Ultimate).",
+   "suggestion": "'Full Time Flock'"
+  },
+  {
+   "id": "x_whistle_sport",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (a thousand matches, framed at retirement).",
+   "suggestion": "'Blew full time so firmly that the rain stopped too, and the grass lay down for a well-earned rest.'"
+  },
+  {
+   "id": "x_whistle_sport",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Fulltime the Final Word'"
+  },
+  {
+   "id": "wheelbarrow",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A family race is a crowd; make the consequence the joke.",
+   "suggestion": "'Raced round the garden so fast that the compost jumped out and planted itself in the flowerbed.'"
+  },
+  {
+   "id": "wheelbarrow",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A wall that still stands has no punchline.",
+   "suggestion": "'Carried every stone for a whole garden wall, then refused to carry anything else because nothing was as important.'"
+  },
+  {
+   "id": "wheelbarrow",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Barrowina the Wall Builder'"
+  },
+  {
+   "id": "wrench",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Fixing pipes fast is its job (and 'plumber asks' echoes the w12 plunger Rare).",
+   "suggestion": "'Grips nuts from across the room, so every tap in the house tightens itself when it walks in.'"
+  },
+  {
+   "id": "wrench",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Distantgrip'"
+  },
+  {
+   "id": "wrench",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (no tap dripped in fifty years) and overlaps x_washer.",
+   "suggestion": "'Tightened a tap so hard that the river at the bottom of the garden stopped for an afternoon. The ducks walked across.'"
+  },
+  {
+   "id": "wrench",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Fix' sounds like healing on an attack.",
+   "suggestion": "'Pipe Clang'"
+  },
+  {
+   "id": "x_beach_spade",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being friends with the bucket is a trait, not a power.",
+   "suggestion": "'Digs a hole so deep in one go that it fills with sea and grows a tiny tide of its own.'"
+  },
+  {
+   "id": "x_beach_spade",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Tideholer'"
+  },
+  {
+   "id": "x_beach_spade",
+   "field": "names.epic",
+   "severity": "low",
+   "issue": "'Kingdom' is a stock word.",
+   "suggestion": "'Sandcastle Town'"
+  },
+  {
+   "id": "x_beach_spade",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Spade That Built a Castle Town' describes the Epic; the Legendary is a crab's hole.",
+   "suggestion": "'Crabhole the Deep Digger'"
+  },
+  {
+   "id": "x_bolt",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Stripped thread cluster (nut Uncommon, screw Uncommon), and a flaw not a power.",
+   "suggestion": "'Bolts itself onto anything nearby, so the bench is now bolted to the shed and the shed to the tree.'"
+  },
+  {
+   "id": "x_bolt",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Boltabout'"
+  },
+  {
+   "id": "x_bolt",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (held a bridge for a hundred years).",
+   "suggestion": "'Held the old pier together through a storm so wild that the pier bent into a smile and stayed that way.'"
+  },
+  {
+   "id": "x_bolt",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Boltbert the Pier Holder'"
+  },
+  {
+   "id": "x_bolt",
+   "field": "moves.kit.rust_bite",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Rust Bite Bolt').",
+   "suggestion": "'Rusty Thread Bite'"
+  },
+  {
+   "id": "x_bowling_pin",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A perfect strike repeats the Rare, as a crowd.",
+   "suggestion": "'Fell over so dramatically that the whole bowling alley stood up and clapped, and it took a bow by falling over again.'"
+  },
+  {
+   "id": "x_bowling_pin",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Drama Pin'"
+  },
+  {
+   "id": "x_box_cutter",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Cutting tape neatly is its job.",
+   "suggestion": "'Slits tape so quietly that the parcel does not notice it has been opened, and keeps pretending to be sealed.'"
+  },
+  {
+   "id": "x_box_cutter",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_utility_knife Legendary ('opened every parcel... never cut what was inside') and a thousand-boxes formula.",
+   "suggestion": "'Opened a box so gently that the cat asleep inside never woke up, and the whole house move happened around it.'"
+  },
+  {
+   "id": "x_box_cutter",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Snipwell the Gentle Opener'"
+  },
+  {
+   "id": "x_box_cutter",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Hot Blade' is an uneasy image on a knife, and the Spectral variant stuns.",
+   "suggestion": "'Box Top Pop'"
+  },
+  {
+   "id": "x_box_cutter",
+   "field": "moves.kit.heavy_swing",
+   "severity": "low",
+   "issue": "'Handle Swing Bonk' is clumsy.",
+   "suggestion": "'Handle Bonk'"
+  },
+  {
+   "id": "x_box_cutter",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "Softer framing for a blade.",
+   "suggestion": "'Tape Snip Snip'"
+  },
+  {
+   "id": "x_bungee_cord",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of w11 x_rubber_band Common ('pings back and snaps your finger').",
+   "suggestion": "'Is always one hook too short, so everyone stretches it with gritted teeth and their eyes shut.'"
+  },
+  {
+   "id": "x_bungee_cord",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Shorthook'"
+  },
+  {
+   "id": "x_bungee_cord",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A thousand miles of holding is the endurance formula.",
+   "suggestion": "'Held the holiday luggage on so tightly that, when the family arrived, the roof came off with it.'"
+  },
+  {
+   "id": "x_bungee_cord",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Grippina the Roof Hugger'"
+  },
+  {
+   "id": "x_bungee_cord",
+   "field": "moves.kit.rust_bite",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Rusty Hook Bite Cord').",
+   "suggestion": "'Rusty Hook Bite'"
+  },
+  {
+   "id": "x_cable",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Close to w10 x_extension_cord Common (lies across the floor where everyone trips), and a trait.",
+   "suggestion": "'Plugs itself into anything, so the toaster is charging the cat flap and the lamp is charging grandad's slippers.'"
+  },
+  {
+   "id": "x_cable",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Plugeverything'"
+  },
+  {
+   "id": "x_cable",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "The drawer tangle repeats the Common.",
+   "suggestion": "'Was pulled out of the drawer and just kept coming, until its far end turned out to be plugged into the house next door.'"
+  },
+  {
+   "id": "x_cable",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Next Door Plug-In'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Climbing smoothly is its job.",
+   "suggestion": "'Stops exactly halfway up whenever the view is best, which is usually when someone needs the toilet.'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Halfwaystopper'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every skier on the first snowy day: crowd.",
+   "suggestion": "'Carried so many skiers up on the first snowy day that the mountain tipped slightly, and the hut at the top now has a sloping floor.'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Sloping Summit'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (a million visitors for fifty years).",
+   "suggestion": "'Carried a cow up the mountain by mistake, and the cow liked the view so much that it now has a season ticket.'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Skylift Daisy'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "moves.legend",
+   "severity": "medium",
+   "issue": "A 'Rusty Cable' is a frightening image for a ride children take.",
+   "suggestion": "'Oily Wheel Whiff'"
+  },
+  {
+   "id": "x_cable_car",
+   "field": "moves.kit.stripped_thread",
+   "severity": "medium",
+   "issue": "A 'Frayed Cable' is a frightening image for a ride children take.",
+   "suggestion": "'Gust Wobble Crack'"
+  },
+  {
+   "id": "x_chain",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Holding firmly is its job.",
+   "suggestion": "'Locks itself round anything left still for a minute, so the picnic table is now chained to the bike.'"
+  },
+  {
+   "id": "x_chain",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Locksnap'"
+  },
+  {
+   "id": "x_chain",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Bikes locked together now overlaps the new Rare; also a crowd.",
+   "suggestion": "'Rattled so loudly down a bumpy farm lane that every dog came out to bark along, and the cows joined the chorus.'"
+  },
+  {
+   "id": "x_chain",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Farmyard Rattle'"
+  },
+  {
+   "id": "x_chain",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Boat-in-storms cluster with i_knot and x_rope, and a hundred-storms formula.",
+   "suggestion": "'Held a bike to a lamp post so well that, when the lamp post was moved for roadworks, the bike went with it.'"
+  },
+  {
+   "id": "x_chain",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Linkwell the Unbreakable'"
+  },
+  {
+   "id": "x_chain",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Chain Whip' reads as a weapon.",
+   "suggestion": "'Chain Reaction'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Near-copy of screwdriver Rare (used to open paint tins), and 'Malletbuddy' does not describe it.",
+   "suggestion": "'Gets hit by its mallet so often that it has started flinching whenever anyone picks one up.'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Malletflinch'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A chess set in a weekend: no joke.",
+   "suggestion": "'Carved a whole chess set in one weekend, and the knights keep jumping off the board.'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Jumping Knights'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A carved gate is sincere, no punchline.",
+   "suggestion": "'Carved the park gate with every animal in the forest, and now the real squirrels queue up to be carved too.'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Carvewell the Gatemaker'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "moves.kit.tighten_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Sharpened Guard Chisel').",
+   "suggestion": "'Sharp Edge Guard'"
+  },
+  {
+   "id": "x_chisel",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "Sawdust is not a stink.",
+   "suggestion": "'Wood Glue Pong'"
+  },
+  {
+   "id": "x_clamp",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Holding glued pieces is its job.",
+   "suggestion": "'Clamps on to anything it is pointed at, so the curtain, a sock and a loaf of bread are all stuck to the bench.'"
+  },
+  {
+   "id": "x_clamp",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Clampanything'"
+  },
+  {
+   "id": "x_clamp",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A clamp forest is a comparison.",
+   "suggestion": "'Was used by the whole woodwork class at once, and by home time every bench was clamped into one long table.'"
+  },
+  {
+   "id": "x_clamp",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'One Long Bench'"
+  },
+  {
+   "id": "x_clamp",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (a hundred years of playing beautifully).",
+   "suggestion": "'Held a violin while its glue set, and now the violin plays perfectly, but only when someone squeezes it.'"
+  },
+  {
+   "id": "x_clamp",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Squeezina the Violin Mender'"
+  },
+  {
+   "id": "x_corkscrew",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Every celebration bottle for fifty years' is an endurance formula and points at wine.",
+   "suggestion": "'Twisted into one cork so stubborn that it pulled out the bottle, the tablecloth and the table in one go.'"
+  },
+  {
+   "id": "x_corkscrew",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Twistwell the Stubborn Puller'"
+  },
+  {
+   "id": "x_croquet_mallet",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sports-win cluster; the garden party clapping is not a punchline.",
+   "suggestion": "'Hit the ball so hard through the first hoop that it went through every hoop in the garden and three in the next one.'"
+  },
+  {
+   "id": "x_croquet_mallet",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Croquetta the Long Shot'"
+  },
+  {
+   "id": "x_croquet_mallet",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Hot' names burn; the mutated variant lowers defence.",
+   "suggestion": "'Through the Hoop'"
+  },
+  {
+   "id": "x_crowbar",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Curators gasping at each crate: crowd reaction.",
+   "suggestion": "'Opened every crate at the museum delivery, and one dinosaur bone walked off to look for its friends.'"
+  },
+  {
+   "id": "x_crowbar",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Grandma's wedding dress is sweet but has no punchline.",
+   "suggestion": "'Prised open an old trunk in the attic that held grandma's lost roller skates, and grandma has not been seen indoors since.'"
+  },
+  {
+   "id": "x_crowbar",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Levina the Trunk Opener'"
+  },
+  {
+   "id": "x_crowbar",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Crack' names defence down; the variants are defdown/poison/stun.",
+   "suggestion": "'Lid Off Lever'"
+  },
+  {
+   "id": "x_downpipe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (a hundred years of storms without a leak).",
+   "suggestion": "'Gushed so hard in one storm that it shot a trout onto the lawn, and the cat has been waiting by it ever since.'"
+  },
+  {
+   "id": "x_downpipe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Gushwell the Trout Fountain'"
+  },
+  {
+   "id": "x_elliptical",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-identical to x_exercise_bike Common (used as a clothes horse/hanger).",
+   "suggestion": "'Has two handles that swing back and forth, so whoever walks past gets elbowed.'"
+  },
+  {
+   "id": "x_elliptical",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Elbowswing'"
+  },
+  {
+   "id": "x_elliptical",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of x_exercise_bike Epic (New Year / January fitness rush).",
+   "suggestion": "'Glided so smoothly at the gym that its rider forgot to get off and stayed through the cleaner, the night shift and breakfast.'"
+  },
+  {
+   "id": "x_elliptical",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Overnight Glide'"
+  },
+  {
+   "id": "x_elliptical",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Gym cluster: 'the length of the country without leaving the bedroom' repeats the exercise bike, rowing machine and treadmill Legendaries.",
+   "suggestion": "'Glided so smoothly that it slid across the gym, out of the door and halfway to the shops with its rider still striding.'"
+  },
+  {
+   "id": "x_elliptical",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Glidewell the Escapee'"
+  },
+  {
+   "id": "x_elliptical",
+   "field": "moves.kit.one_more_rep",
+   "severity": "low",
+   "issue": "'One More Minute' is an approved Pilot 01 heal name; here it is an attack boost.",
+   "suggestion": "'Extra Lap Boost'"
+  },
+  {
+   "id": "x_envelope_opener",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Child safety: everyone waving a pointed opener like a sword is a behaviour to avoid.",
+   "suggestion": "'Opens every letter in the pile except the one marked URGENT, which it always saves for later.'"
+  },
+  {
+   "id": "x_envelope_opener",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Urgentmisser'"
+  },
+  {
+   "id": "x_envelope_opener",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (every letter for a hundred years).",
+   "suggestion": "'Opened a letter so neatly that the letter sealed itself again and posted itself back, unopened.'"
+  },
+  {
+   "id": "x_envelope_opener",
+   "field": "moves.kit.heavy_swing",
+   "severity": "medium",
+   "issue": "'Sword Swing' reinforces waving it like a weapon.",
+   "suggestion": "'Desk Swipe'"
+  },
+  {
+   "id": "x_fairy_lights",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (twenty years of celebrations), close to w10 instant camera.",
+   "suggestion": "'Twinkled so convincingly that a swarm of fireflies tried to join the string, and one bulb has buzzed ever since.'"
+  },
+  {
+   "id": "x_fairy_lights",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Twinkla the Firefly Friend'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Names are swapped: the Common screeches.",
+   "suggestion": "'Scrapescreech'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "The Uncommon is borrowed for nails.",
+   "suggestion": "'Nailfiler'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Smoothing edges is its job.",
+   "suggestion": "'Files so smoothly that it took the corners off a box, and now the box rolls.'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Cornerfiler'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Screeching repeats the Common.",
+   "suggestion": "'Filed the rough edges off every chair in the workshop, and now nobody can stop sliding off them.'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Slippery Workshop'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (fifty years in one workshop).",
+   "suggestion": "'Filed a rocky mountain path so smooth that the goats now use it as a slide.'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Smoothwell the Goat Slide'"
+  },
+  {
+   "id": "x_file_tool",
+   "field": "moves.kit.tighten_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Handle Guard File').",
+   "suggestion": "'Handle Guard'"
+  },
+  {
+   "id": "x_garden_hose",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of w09 x_water_gun Epic ('started a water fight... soaked every guest').",
+   "suggestion": "'Sprayed so wildly when the tap went on that it washed the car, the windows and a very surprised postman.'"
+  },
+  {
+   "id": "x_garden_hose",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Postman Rinse'"
+  },
+  {
+   "id": "x_garden_hose",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Watering the street in a drought is sincere, no punchline.",
+   "suggestion": "'Stretched all the way to the park in a drought, and the ducks sent it a thank-you feather.'"
+  },
+  {
+   "id": "x_garden_hose",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Hoselina the Long Reach'"
+  },
+  {
+   "id": "x_golf_club",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sports cluster: hole in one, ball framed.",
+   "suggestion": "'Hit a ball so hard that it went right round the world and dropped into the hole from behind, a week late.'"
+  },
+  {
+   "id": "x_golf_club",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Driverella the Far Hitter'"
+  },
+  {
+   "id": "x_golf_tee",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Lost tees repeats the Common, as a crowd.",
+   "suggestion": "'Was pushed so deep into the ground that it grew roots, and the first hole now has a very small tree.'"
+  },
+  {
+   "id": "x_golf_tee",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Tee Tree'"
+  },
+  {
+   "id": "x_golf_tee",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Famous tournament and glass case: sports-win cluster.",
+   "suggestion": "'Launched a ball so high that it came down a week later in the hole, and the golfer counted it.'"
+  },
+  {
+   "id": "x_golf_tee",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Highpeg the Launcher'"
+  },
+  {
+   "id": "x_gutter",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (every drop for a hundred years).",
+   "suggestion": "'Caught so much rain in one storm that it became the highest pond in town, with its own duck.'"
+  },
+  {
+   "id": "x_gutter",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Puddlewell the Roof Pond'"
+  },
+  {
+   "id": "x_gutter",
+   "field": "moves.kit.tighten_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Bracket Guard Gutter').",
+   "suggestion": "'Bracket Guard'"
+  },
+  {
+   "id": "x_hacksaw_blade",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of w11 x_toothpick Common ('snaps in half the moment you use it'), and the Epic snaps too.",
+   "suggestion": "'Loses its teeth one by one, so every cut ends with a toothless squeak.'"
+  },
+  {
+   "id": "x_hacksaw_blade",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Toothdropper'"
+  },
+  {
+   "id": "x_hacksaw_blade",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Snapping loudly repeats the Common.",
+   "suggestion": "'Cut the bike-shed lock so fast that every bike inside rolled out and went for a ride on its own.'"
+  },
+  {
+   "id": "x_hacksaw_blade",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Bike Shed Breakout'"
+  },
+  {
+   "id": "x_hacksaw_blade",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Ten-year lock is small and has no joke.",
+   "suggestion": "'Cut through a garden gate lock stuck for ten years, and the gate swung open and ran off down the lane.'"
+  },
+  {
+   "id": "x_hacksaw_blade",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Snapless the Lock Breaker'"
+  },
+  {
+   "id": "x_hacksaw_blade",
+   "field": "moves.kit.elbow_grease",
+   "severity": "medium",
+   "issue": "Doubled 'Boost Boost'.",
+   "suggestion": "'Fresh Blade Boost'"
+  },
+  {
+   "id": "x_hose_reel",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of x_garden_hose Common (a kink stops the water).",
+   "suggestion": "'Winds itself up while someone is still holding the end, and drags them across the patio.'"
+  },
+  {
+   "id": "x_hose_reel",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Patiodragger'"
+  },
+  {
+   "id": "x_hose_reel",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Garden Hose Unravel').",
+   "suggestion": "'Big Rewind'"
+  },
+  {
+   "id": "x_hurling_stick",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sports cluster ('the crowd still talks about it').",
+   "suggestion": "'Scored a point from so far out that the ball landed in the next county, and that county still counts it.'"
+  },
+  {
+   "id": "x_hurling_stick",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Ashswing the Far Scorer'"
+  },
+  {
+   "id": "x_ice_axe",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A team climb where 'the ice sang' is poetic but has no joke.",
+   "suggestion": "'Struck a frozen waterfall so hard that the whole waterfall unfroze at once and soaked the climbing team.'"
+  },
+  {
+   "id": "x_ice_axe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Waterfall Thaw'"
+  },
+  {
+   "id": "x_ice_axe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of w10 x_power_bank Legendary ('mountain top... now hangs on the hut wall').",
+   "suggestion": "'Hooked a passing cloud on a mountain top and pulled it down, and the climbers had a snowball fight inside it.'"
+  },
+  {
+   "id": "x_ice_axe",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Cloudhook the Climber'"
+  },
+  {
+   "id": "x_ice_axe",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Glacier' is a cold word while the normal variant burns.",
+   "suggestion": "'Big Pick Swing'"
+  },
+  {
+   "id": "x_javelin",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Grassstab' is a violent word and does not describe careful carrying.",
+   "suggestion": "'Carefulcarry'"
+  },
+  {
+   "id": "x_javelin",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of w06 x_discus Rare ('landed in the long jump sandpit').",
+   "suggestion": "'Flew so far at sports day that it landed in the egg-and-spoon race, and won it.'"
+  },
+  {
+   "id": "x_javelin",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Egg and Spoon Win'"
+  },
+  {
+   "id": "x_javelin",
+   "field": "moves.kit.power_shot",
+   "severity": "low",
+   "issue": "'Spear' leans weapon.",
+   "suggestion": "'Long Launch'"
+  },
+  {
+   "id": "x_jump_rope",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of w11 x_hula_hoop Epic ('started a ... craze that went through every playground in town').",
+   "suggestion": "'Was turned so fast in the playground that a passing pigeon caught the rhythm and skipped along all lunchtime.'"
+  },
+  {
+   "id": "x_jump_rope",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Skipping Pigeon'"
+  },
+  {
+   "id": "x_kick_pad",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every student at the grading, hall rang: crowd.",
+   "suggestion": "'Took so many kicks at the grading that its stuffing flew out, and the hall looked like a snow globe.'"
+  },
+  {
+   "id": "x_kick_pad",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Stuffing Snowstorm'"
+  },
+  {
+   "id": "x_kick_pad",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-identical to x_punching_bag Legendary ('a million kicks/punches... still has its stuffing/hangs straight').",
+   "suggestion": "'Took one kick so perfectly that it flew across the hall into the lost property box, where it is still sulking.'"
+  },
+  {
+   "id": "x_kick_pad",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Thwack the Sulking Pad'"
+  },
+  {
+   "id": "x_lacrosse_stick",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sports-win cluster ('scored the winning goal').",
+   "suggestion": "'Caught a ball thrown from the far end of the field, then a frisbee, then a passing seagull's lunch.'"
+  },
+  {
+   "id": "x_lacrosse_stick",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Netty the Catch-All'"
+  },
+  {
+   "id": "x_led_strip",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Neighbours taking photos is no feat, and the name ('Lit Up the Bedroom') contradicts 'a whole house'.",
+   "suggestion": "'Glowed so brightly purple that a passing aeroplane flashed back, and the two now chat every evening.'"
+  },
+  {
+   "id": "x_led_strip",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Name contradicts the line.",
+   "suggestion": "'Glowstrip the Signaller'"
+  },
+  {
+   "id": "x_led_strip",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' names stun; normal burns and mutated lowers defence.",
+   "suggestion": "'Colour Cycle'"
+  },
+  {
+   "id": "x_nail",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A weekend of hammering: no joke.",
+   "suggestion": "'Held up every picture in the new house so straight that the house itself looked crooked by comparison.'"
+  },
+  {
+   "id": "x_nail",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (same portrait for a hundred years).",
+   "suggestion": "'Held up a painting so heavy that the wall gave up first, and the nail and the painting still hang there on their own.'"
+  },
+  {
+   "id": "x_nail",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Nailbert the Unbending'"
+  },
+  {
+   "id": "x_nail",
+   "field": "moves.kit.rust_bite",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Rust Bite Nail').",
+   "suggestion": "'Rusty Shank Bite'"
+  },
+  {
+   "id": "x_nut",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-identical to x_bolt Epic (rolled off the bench, the whole workshop searched). Change the nut.",
+   "suggestion": "'Got stuck on the wrong bolt and turned so stubbornly that the whole workbench turned round instead.'"
+  },
+  {
+   "id": "x_nut",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Turning Workbench'"
+  },
+  {
+   "id": "x_nut",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A thousand miles of holding is the endurance formula.",
+   "suggestion": "'Held a wheel on so firmly that the bike fell apart around it, and the wheel rolled all the way home alone.'"
+  },
+  {
+   "id": "x_nut",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Nutley the Last One Holding'"
+  },
+  {
+   "id": "x_paint_roller",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A fresh school hall is sincere, no punchline.",
+   "suggestion": "'Painted the school hall in one night, and the children came back to find even the piano was sky blue.'"
+  },
+  {
+   "id": "x_paint_roller",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Rollerina the Night Painter'"
+  },
+  {
+   "id": "x_paint_roller",
+   "field": "moves.kit.elbow_grease",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Second Coat Boost Roller').",
+   "suggestion": "'Wet Coat Boost'"
+  },
+  {
+   "id": "x_palette",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Still has paint from the first painting' is the original-part formula, with a vague famous painter.",
+   "suggestion": "'Mixed a colour so new that the rainbow came down to look at it and took it home.'"
+  },
+  {
+   "id": "x_palette",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Prisma the Colour Thief'"
+  },
+  {
+   "id": "x_peeler",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Peeling fast is its job.",
+   "suggestion": "'Peels anything it touches, so the potato, the apple and the label on the jam jar all came out bare.'"
+  },
+  {
+   "id": "x_peeler",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Peelanything'"
+  },
+  {
+   "id": "x_peeler",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "An overflowing bin is not much of a consequence.",
+   "suggestion": "'Peeled so many potatoes for Sunday lunch that the peelings made a hill in the garden, and the hens climbed it for the view.'"
+  },
+  {
+   "id": "x_peeler",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Peel Hill'"
+  },
+  {
+   "id": "x_peeler",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A mountain of mash scales up the Rare.",
+   "suggestion": "'Peeled the wallpaper off a whole house by mistake, and found a secret door behind it.'"
+  },
+  {
+   "id": "x_peeler",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Peelbert the Door Finder'"
+  },
+  {
+   "id": "x_peeler",
+   "field": "moves.kit.tighten_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Blade Guard Peeler').",
+   "suggestion": "'Safety Guard'"
+  },
+  {
+   "id": "x_pickaxe",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A tunnel repeats the Rare (tunnel digging).",
+   "suggestion": "'Struck one rock so hard that the whole hillside rang like a bell, and the sheep on top all stood up at once.'"
+  },
+  {
+   "id": "x_pickaxe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Ringing Hill'"
+  },
+  {
+   "id": "x_pickaxe",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Good image; add a punchline.",
+   "suggestion": "'Struck a rock that split open into a cave full of crystals, and the bats inside asked it to knock next time.'"
+  },
+  {
+   "id": "x_pressure_washer",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Near-copy of w09 x_steam_cleaner Uncommon ('blasts away the grime stuck for years').",
+   "suggestion": "'Blasts so hard that it washed the paint off the fence along with the moss, and the fence is now grey and furious.'"
+  },
+  {
+   "id": "x_pressure_washer",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Fencestripper'"
+  },
+  {
+   "id": "x_punching_bag",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every boxer at once: crowd.",
+   "suggestion": "'Was punched so hard that it swung up and rang the bell for the next round all by itself.'"
+  },
+  {
+   "id": "x_punching_bag",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-identical to x_kick_pad Legendary (a million hits, still intact).",
+   "suggestion": "'Was punched so often that it learned to dodge, and nobody in the gym has landed a punch since March.'"
+  },
+  {
+   "id": "x_punching_bag",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Dodgewell the Unhittable'"
+  },
+  {
+   "id": "x_rope",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Tug of war repeats the Rare, and the Ultimate is also 'Tug of War'.",
+   "suggestion": "'Pulled a stuck tractor out of the mud, and the tractor was so grateful that it followed the rope home.'"
+  },
+  {
+   "id": "x_rope",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Tractor Rescue'"
+  },
+  {
+   "id": "x_rope",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Boat-rescue cluster with i_knot and x_chain Legendaries.",
+   "suggestion": "'Swung a whole class across the school pond one by one, and only the teacher fell in.'"
+  },
+  {
+   "id": "x_rope",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Swingrope the Pond Crosser'"
+  },
+  {
+   "id": "x_rowing_machine",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A gym race sounding like a wind tunnel is a crowd and a comparison.",
+   "suggestion": "'Whooshed so hard at the gym that every towel in the room blew into one pile, with the instructor underneath.'"
+  },
+  {
+   "id": "x_rowing_machine",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Towel Pile Whoosh'"
+  },
+  {
+   "id": "x_rowing_machine",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Gym cluster ('the distance across an ocean without leaving the garage').",
+   "suggestion": "'Rowed so hard one morning that the garage slid down the drive into the pond, and finally got to float.'"
+  },
+  {
+   "id": "x_rowing_machine",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Oarsome the Garage Rower'"
+  },
+  {
+   "id": "x_rowing_machine",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Row Row Row' suggests three hits; the move is one stun hit.",
+   "suggestion": "'Seat Slide Startle'"
+  },
+  {
+   "id": "x_screw",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Grip cluster with x_nut Rare and x_bolt Uncommon.",
+   "suggestion": "'Turns itself in a little deeper every night, so the picture creeps up the wall a centimetre a week.'"
+  },
+  {
+   "id": "x_screw",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Nightturner'"
+  },
+  {
+   "id": "x_shed",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Stuffed full repeats the Epic and Legendary.",
+   "suggestion": "'Locks itself whenever someone needs the lawnmower, and opens only for the cat.'"
+  },
+  {
+   "id": "x_shed",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Catkeeper Shed'"
+  },
+  {
+   "id": "x_shed",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (fifty years, still room for more).",
+   "suggestion": "'Held so much junk that the family found their old car in it, with the picnic still in the boot.'"
+  },
+  {
+   "id": "x_shed",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Junkhall the Bottomless'"
+  },
+  {
+   "id": "x_shed",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Garden Shed Avalanche').",
+   "suggestion": "'Everything Falls Out'"
+  },
+  {
+   "id": "x_shed",
+   "field": "moves.kit.tighten_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Padlock Guard Shed').",
+   "suggestion": "'Rusty Padlock Guard'"
+  },
+  {
+   "id": "x_skipping_rope",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every child at the skipathon: crowd.",
+   "suggestion": "'Was skipped so hard at the skipathon that the playground got a groove, and every puddle there is now rope-shaped.'"
+  },
+  {
+   "id": "x_skipping_rope",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_jump_rope Legendary (a long unbroken skipping record).",
+   "suggestion": "'Skipped so fast that it tied itself into a bow round its owner, who arrived at the party already wrapped.'"
+  },
+  {
+   "id": "x_skipping_rope",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Skipina the Gift Wrapper'"
+  },
+  {
+   "id": "x_skipping_rope",
+   "field": "moves.kit.tighten",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Handle Guard Skip').",
+   "suggestion": "'Handle Grip Guard'"
+  },
+  {
+   "id": "x_sledge",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Knocking down a wall repeats the Epic.",
+   "suggestion": "'Thumps the ground so hard that every worm in the garden comes up to see who is there.'"
+  },
+  {
+   "id": "x_sledge",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Wormcaller'"
+  },
+  {
+   "id": "x_sledge",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Name ('Knocked Down a Wall') describes the Epic; the fence-posts line is small.",
+   "suggestion": "'Hit the ground so hard that a mole popped up three gardens away, holding its ears.'"
+  },
+  {
+   "id": "x_sledge",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Thudmore the Mole Startler'"
+  },
+  {
+   "id": "x_sledge",
+   "field": "moves.kit.tighten_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Handle Guard Sledge').",
+   "suggestion": "'Iron Head Guard'"
+  },
+  {
+   "id": "x_snow_shovel",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Clearing a drive fast is its job.",
+   "suggestion": "'Throws snow so far that it builds a snowman in next door's garden every time.'"
+  },
+  {
+   "id": "x_snow_shovel",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Snowmanflinger'"
+  },
+  {
+   "id": "x_snow_shovel",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Clearing the lane for the milk lorry is sincere, no punchline.",
+   "suggestion": "'Cleared the village lane so fast that the snowplough found nothing to do and went home in a sulk.'"
+  },
+  {
+   "id": "x_snow_shovel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Clearwell the Plough Beater'"
+  },
+  {
+   "id": "x_string_lights",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-identical to x_fairy_lights Common (comes out of the box as one tangle).",
+   "suggestion": "'Hangs perfectly straight for an hour, then droops in the middle like a sleepy smile.'"
+  },
+  {
+   "id": "x_string_lights",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Sagsmile'"
+  },
+  {
+   "id": "x_string_lights",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Near-identical to x_fairy_lights Uncommon (one bulb out, the whole string dark).",
+   "suggestion": "'Has one bulb that blinks out of time with the others, like a dancer who missed the start.'"
+  },
+  {
+   "id": "x_string_lights",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Offbeat Bulb'"
+  },
+  {
+   "id": "x_string_lights",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-identical to x_fairy_lights Epic (garden party glow).",
+   "suggestion": "'Was strung across the street for the summer fair, and the moths held their own fair underneath.'"
+  },
+  {
+   "id": "x_string_lights",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Moth Fair'"
+  },
+  {
+   "id": "x_string_lights",
+   "field": "moves.kit.tighten",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Hook Guard Lights').",
+   "suggestion": "'Hook Guard'"
+  },
+  {
+   "id": "x_treadmill",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A stampede at rush hour is a crowd and a comparison.",
+   "suggestion": "'Was set so fast at rush hour that its runner shot off the back into the yoga mats, and the class made it a new pose.'"
+  },
+  {
+   "id": "x_treadmill",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Yoga Mat Landing'"
+  },
+  {
+   "id": "x_treadmill",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Gym cluster ('a marathon distance without leaving the gym').",
+   "suggestion": "'Ran so fast once that the belt went backwards in time, and everyone went home before they had arrived.'"
+  },
+  {
+   "id": "x_treadmill",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Speedbelt the Backwards'"
+  },
+  {
+   "id": "x_treadmill",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Speed Up' sounds like a buff on a defence-down attack.",
+   "suggestion": "'Belt Snap'"
+  },
+  {
+   "id": "x_treadmill",
+   "field": "moves.kit.protein_shake",
+   "severity": "medium",
+   "issue": "Doubled 'Rest Rest'.",
+   "suggestion": "'Cool Sip Rest'"
+  },
+  {
+   "id": "x_trowel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A sea of tulips is a pretty image with no joke, and the Legendary is the same bulb-planting premise.",
+   "suggestion": "'Dug so many holes on planting day that the squirrels took it for a buffet and buried their nuts in every one.'"
+  },
+  {
+   "id": "x_trowel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Squirrel Buffet'"
+  },
+  {
+   "id": "x_trowel",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A thousand bulbs and a famous garden: scale-up of the Epic with no punchline.",
+   "suggestion": "'Planted a thousand bulbs in one autumn, all upside down, and in spring the tulips came up in Australia.'"
+  },
+  {
+   "id": "x_trowel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Downunder the Bulb Planter'"
+  },
+  {
+   "id": "x_trowel",
+   "field": "moves.kit.tighten_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Handle Guard Trowel').",
+   "suggestion": "'Handle Guard'"
+  },
+  {
+   "id": "x_usb_cable",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Frayedend' does not describe a plug that fits nothing at one end.",
+   "suggestion": "'Halfplug'"
+  },
+  {
+   "id": "x_usb_cable",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Charger Queue Rush' does not describe the dog yanking it out.",
+   "suggestion": "'Dog Yank Disaster'"
+  },
+  {
+   "id": "x_usb_cable",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_cable Legendary ('which no cable has ever done').",
+   "suggestion": "'Was plugged in upside down so confidently that the socket turned itself round to fit.'"
+  },
+  {
+   "id": "x_usb_cable",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Rightwayup the Confident'"
+  },
+  {
+   "id": "x_usb_cable",
+   "field": "moves.kit.tighten",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Plug Guard Cable').",
+   "suggestion": "'Plug Guard'"
+  },
+  {
+   "id": "x_utility_knife",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Snapping off blade segments describes loose sharp pieces; keep blade lines safe.",
+   "suggestion": "'Gets buried under everything in the toolbox, so the grown-ups tip the whole box out to find it.'"
+  },
+  {
+   "id": "x_utility_knife",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Toolboxhider'"
+  },
+  {
+   "id": "x_utility_knife",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Toolbox Blade' moves to the Common idea; the Uncommon is about clicking back in.",
+   "suggestion": "'Clickback'"
+  },
+  {
+   "id": "x_utility_knife",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_box_cutter Legendary ('opened every parcel... never cut what was inside').",
+   "suggestion": "'Cut the ribbon at the new library so neatly that the ribbon tied itself back up and asked to do it again.'"
+  },
+  {
+   "id": "x_utility_knife",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Snipsy the Ribbon Cutter'"
+  },
+  {
+   "id": "x_utility_knife",
+   "field": "moves.kit.heavy_swing",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Handle Bonk Knife').",
+   "suggestion": "'Handle Bonk'"
+  },
+  {
+   "id": "x_utility_knife",
+   "field": "moves.kit.rust_bite",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Rusty Blade Stink Knife').",
+   "suggestion": "'Rusty Blade Stink'"
+  },
+  {
+   "id": "x_vise",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Held everything, nothing slipped: no joke.",
+   "suggestion": "'Held every project in woodwork class at once, and when the bell rang it refused to let anyone take theirs home.'"
+  },
+  {
+   "id": "x_vise",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'No Going Home Grip'"
+  },
+  {
+   "id": "x_vise",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (every project for fifty years).",
+   "suggestion": "'Held a plank so firmly through a gale that the workshop blew away and the plank stayed exactly where it was.'"
+  },
+  {
+   "id": "x_vise",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Gripsy the Unshakeable'"
+  },
+  {
+   "id": "x_washer",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-identical to x_nut Common (rolls off and under the cupboard). Change the washer.",
+   "suggestion": "'Gets stuck on your finger like a ring, and everyone asks when the wedding is.'"
+  },
+  {
+   "id": "x_washer",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Fingerring'"
+  },
+  {
+   "id": "x_washer",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all stop drips (and overlap wrench).",
+   "suggestion": "'Fell down the plughole and rattled through the pipes so loudly that the whole street called a plumber.'"
+  },
+  {
+   "id": "x_washer",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Pipe Rattle'"
+  },
+  {
+   "id": "x_washer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Third drip line, endurance formula (twenty-year drip).",
+   "suggestion": "'Fitted so snugly into the town fountain that the fountain stopped, and the pigeons had to queue for baths elsewhere.'"
+  },
+  {
+   "id": "x_washer",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Fountainstopper the Snug'"
+  },
+  {
+   "id": "x_washer",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Drip Stop' sounds defensive on an attack.",
+   "suggestion": "'Washer Whirl'"
+  },
+  {
+   "id": "x_yarn",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Kittens unravelling it repeats the Common.",
+   "suggestion": "'Unravelled so far that one end was found at the school gates, and the children followed it home like a treasure hunt.'"
+  },
+  {
+   "id": "x_yarn",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Wool Trail'"
+  },
+  {
+   "id": "x_yarn",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Close to w11 x_crochet_hook Epic/Legendary (blanket covering everyone).",
+   "suggestion": "'Knitted itself into a scarf while nobody was looking, and the scarf has gone off on its own adventures.'"
+  },
+  {
+   "id": "x_yarn",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Woolly Wanderer'"
+  }
+ ]
+}

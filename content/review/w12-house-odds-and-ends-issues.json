@@ -1,0 +1,4105 @@
+{
+ "batch": "w12-house-odds-and-ends",
+ "editor": "independent agent",
+ "reviewed": 101,
+ "summary": "The batch is clean on brands, gore and politics, and most fire objects already say 'grown-ups' (sparkler gloves, matchstick fire dropped in the sink, box-free candles). Several single lines are genuinely funny (birthday candles' smoke alarm singing, bonfire making the fireworks wait, elevator that will not stop at four, urinal with a mountain view, chess clock pyjama game, monocle dog, soda can 'bike, can, plane, can'). The structural problems are serious and batch-wide. (1) Legendaries: 26 of 101 are the 'has done X for N years / never once / still' formula, and most of the rest are wholesome but have no punchline (lost dog reunited, hikers rescued, a famous inventor's first experiment). (2) Epics: about 70 are 'every X at the Y at once' or 'the whole family/class/street' crowd scenes with no joke. (3) Rares: roughly 40 are the object doing its job well (fire screen catches sparks, plunger unblocks fast, tripod holds still, inhaler helps breathing, flare signals far). (4) Legendary names: 76 of 101 are 'The X That Y', plus four 'Professor/Doctor -worth of the Lab'. (5) Names sit on the wrong rarity in about 15 objects (glass door, toilet seat cover, thermometer, shutter, keyhole, garage door, door handle, rear-view mirror, compact mirror, crumpled paper, bin bag, sparkler, digital alarm, match). (6) The requested clusters are near-identical in places: two lantern-guides-hikers Legendaries plus the campfire rescue, two 'made it to the lorry/down the stairs without a rip' bin-bag Legendaries, toilet paper vs roll holder ('family of six, which nobody can explain'), car mirror vs rear-view mirror (lost dog following the car), band-aid vs first-aid box Epics (sports day, ran out), three lab 'famous scientist' Legendaries and three foam-overflow Epics, three dawn light stripes (blinds, curtain, shutter), landfill vs rubbish heap gulls. (7) Cross-batch near-copies: matchstick model village (w08 matchbox), incense Epic and Legendary (w11 incense stick), soda can Epic (w11 cigarette butt), tripod Epic (w11 easel), pillar candle Rare (w10 torch), binoculars stand (w06 parking meter, w10 binoculars). Safety: the firework Common jokes about waiting after lighting until people think it has gone out, which is the exact dangerous situation, and must change. The bonfire 'half raw sausages' line, the magnifier's focused hot spot and the firework that 'went off at the wrong end of the field' near a crowd should go. The matchstick village has a church tower (religion). The smartwatch Legendary (heart beating oddly) and the inhaler 'Medicine Taste' move are too medical for the tone. The odometer 'tiny slot machine' simile is a gambling reference. Toilets are mostly tasteful, except the urinal 'splashes back' Common. Moves are mostly truthful to the mechanics. The weak spots are clumsy suffixed names ('Reflection Guard Window', 'Gurgle Crack Seat', 'Wax Melt Snatch Snatch', 'Hair Check Boost Boost'), Ultimates that repeat the Epic name (cuckoo, grandfather clock, curtain, lab flask, matchstick), and variant Ultimates named after one effect ('Daze', 'Flash', 'Glare', 'Hail', 'Pong' where some variants burn or poison). Concrete replacements are given for every high and medium item. Names are checked for uniqueness against all curated files and the Pilot 01 proposal.",
+ "patterns": [
+  {
+   "pattern": "Legendary is the 'has done X for N years / never once / still has' formula: an endurance record, not an outrageous feat with a punchline.",
+   "ids": [
+    "i_barometer",
+    "i_fire_screen",
+    "mirror",
+    "plastic_bag",
+    "x_blinds",
+    "x_curtain",
+    "x_french_door",
+    "x_front_door",
+    "x_garage_door",
+    "x_glass_door",
+    "x_skylight",
+    "window",
+    "x_window_pane",
+    "x_bathroom_mirror",
+    "x_binoculars_stand",
+    "x_cuckoo_clock",
+    "x_first_aid_box",
+    "x_grandfather_clock",
+    "x_keyhole",
+    "x_rain_gauge",
+    "x_sand_timer_clock",
+    "x_sundial_garden",
+    "x_test_tube_rack",
+    "x_thermometer",
+    "x_toilet_tank",
+    "x_wall_mirror",
+    "x_shutter",
+    "x_toilet_cistern",
+    "x_toilet_seat_cover",
+    "x_full_length_mirror",
+    "x_door_handle"
+   ],
+   "severity": "high",
+   "suggestion": "Rewrite each as one impossible achievement with a deflating, in-character punchline (see issues: blinds spelling HELLO in sunlight, sundial making the sun come out to check, cuckoo bird touring the forest, grandfather clock poking through the ceiling). Never 'for a hundred years' or 'still keeps perfect time'."
+  },
+  {
+   "pattern": "Legendary is sincere and heartwarming but has no joke (rescues, reunions, a famous scientist's first experiment, a town kept healthy).",
+   "ids": [
+    "i_car_mirror",
+    "i_matchstick",
+    "x_campfire",
+    "x_matchstick_fire",
+    "smartwatch",
+    "x_beaker",
+    "x_lab_flask",
+    "x_test_tube",
+    "x_inhaler",
+    "x_syringe",
+    "x_wood_stove",
+    "x_fire_pit",
+    "x_pillar_candle",
+    "x_scented_candle",
+    "x_tea_light_candle",
+    "x_landfill",
+    "x_flare",
+    "x_binocular_strap",
+    "x_tripod_head",
+    "x_potty",
+    "x_petri_dish",
+    "i_tripod",
+    "x_torch_fire",
+    "x_magnifier"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep the warmth if you like, but add a punchline that undercuts it (plunger: 'plus two socks, a toy car and the drain'; landfill: 'the sledgers still find the odd teapot')."
+  },
+  {
+   "pattern": "Epic is a crowd scene ('every X at the Y at once', 'the whole family/class/street') with a comparison or no joke at all, instead of a concrete large-scale consequence.",
+   "ids": [
+    "hourglass",
+    "i_band_aid",
+    "i_car_mirror",
+    "i_fire_screen",
+    "i_oscilloscope",
+    "plastic_bag",
+    "smartwatch",
+    "x_curtain",
+    "x_front_door",
+    "x_glass_door",
+    "window",
+    "x_bathroom_mirror",
+    "x_binocular_strap",
+    "x_binoculars_stand",
+    "x_chess_clock",
+    "x_cuckoo_clock",
+    "x_digital_alarm",
+    "x_door_handle",
+    "x_door_knocker",
+    "x_elevator",
+    "x_fire_pit",
+    "x_fireplace",
+    "x_full_length_mirror",
+    "x_globe",
+    "x_incense",
+    "x_landfill",
+    "x_litter",
+    "x_magnifier",
+    "x_magnifying_glass",
+    "x_makeup_mirror",
+    "x_microscope",
+    "x_monocle",
+    "x_scented_candle",
+    "x_skip",
+    "x_soda_can_litter",
+    "x_sparkler",
+    "x_tea_light_candle",
+    "x_telescope",
+    "x_test_tube_rack",
+    "x_thermometer",
+    "x_toilet_seat_cover",
+    "x_torch_fire",
+    "x_wall_mirror",
+    "x_wood_stove",
+    "x_skylight",
+    "x_porta_potty",
+    "x_compact_mirror_case",
+    "x_first_aid_kit"
+   ],
+   "severity": "medium",
+   "suggestion": "Make something physically happen with a specific funny result (cuckoo: a real cuckoo lays its egg in the little door; window: every school report blows across town; toilet seat cover: the visiting sheepdog herds them)."
+  },
+  {
+   "pattern": "Rare is the object doing its job well (or a plain trait), not a troublesome power.",
+   "ids": [
+    "i_band_aid",
+    "i_barometer",
+    "i_fire_screen",
+    "i_plunger",
+    "i_tripod",
+    "i_oscilloscope",
+    "x_inhaler",
+    "x_flare",
+    "x_first_aid_kit",
+    "x_rain_gauge",
+    "x_sand_timer_clock",
+    "x_sundial_garden",
+    "x_telescope",
+    "x_test_tube_rack",
+    "x_tripod_head",
+    "x_wood_stove",
+    "x_bonfire",
+    "x_scented_candle",
+    "x_potty",
+    "x_toilet_seat_cover",
+    "x_glass_door",
+    "x_garage_door",
+    "x_doorknob",
+    "x_shutter",
+    "x_snow_globe",
+    "x_tea_light_candle",
+    "x_torch_fire",
+    "x_binocular_strap",
+    "x_rear_view_mirror",
+    "x_dumpster",
+    "i_odometer",
+    "x_compost",
+    "x_fireplace",
+    "x_beaker"
+   ],
+   "severity": "high",
+   "suggestion": "Give each Rare a power that causes trouble (odometer rolls back when reversing so grandad drives home backwards; sundial moves its shadow so it is always half past ice cream; telescope spots next week's weather)."
+  },
+  {
+   "pattern": "Legendary name monotony: 76 of 101 are 'The X That Y', and four science objects use 'Professor/Doctor X-sworth of the Lab'.",
+   "ids": [
+    "hourglass",
+    "i_barometer",
+    "i_car_mirror",
+    "i_fire_screen",
+    "i_matchstick",
+    "i_odometer",
+    "i_tripod",
+    "mirror",
+    "plastic_bag",
+    "smartwatch",
+    "toilet_paper",
+    "trash_can",
+    "wall_clock",
+    "x_blinds",
+    "x_curtain",
+    "x_french_door",
+    "x_front_door",
+    "x_garage_door",
+    "x_glass_door",
+    "x_shutter",
+    "x_skylight",
+    "window",
+    "x_bandage",
+    "x_bathroom_mirror",
+    "x_bidet_seat",
+    "x_bin_bag",
+    "x_binocular_strap",
+    "x_binoculars_stand",
+    "x_compost",
+    "x_crumpled_paper",
+    "x_cuckoo_clock",
+    "x_door_handle",
+    "x_door_knocker",
+    "x_doorknob",
+    "x_dumpster",
+    "x_elevator",
+    "x_fire_pit",
+    "x_fireplace",
+    "x_firework",
+    "x_first_aid_box",
+    "x_flare",
+    "x_full_length_mirror",
+    "x_globe",
+    "x_grandfather_clock",
+    "x_incense",
+    "x_keyhole",
+    "x_landfill",
+    "x_litter",
+    "x_magnifier",
+    "x_match",
+    "x_microscope",
+    "x_petri_dish",
+    "x_pillar_candle",
+    "x_portable_toilet",
+    "x_potty",
+    "x_rain_gauge",
+    "x_rear_view_mirror",
+    "x_rubbish_heap",
+    "x_sand_timer_clock",
+    "x_scented_candle",
+    "x_skip",
+    "x_snow_globe",
+    "x_soda_can_litter",
+    "x_sparkler",
+    "x_sundial_garden",
+    "x_syringe",
+    "x_tea_light_candle",
+    "x_telescope",
+    "x_test_tube_rack",
+    "x_thermometer",
+    "x_toilet_cistern",
+    "x_toilet_roll_holder",
+    "x_toilet_seat_cover",
+    "x_toilet_tank",
+    "x_torch_fire",
+    "x_trash_bag",
+    "x_tripod_head",
+    "x_wall_mirror",
+    "x_wood_stove",
+    "x_beaker",
+    "x_lab_flask",
+    "x_test_tube",
+    "i_oscilloscope"
+   ],
+   "severity": "medium",
+   "suggestion": "Mix shapes: 'Name, the Epithet', a single coined name, a title + name, a compound. Per-id names are given where the lore changes; for the others pick from 'Name, the ...' or a single coined word (low issues are not listed individually for every untouched one)."
+  },
+  {
+   "pattern": "Monster name describes another rarity's lore (or contradicts its own).",
+   "ids": [
+    "x_glass_door",
+    "x_toilet_seat_cover",
+    "x_thermometer",
+    "x_shutter",
+    "x_keyhole",
+    "x_garage_door",
+    "x_door_handle",
+    "x_rear_view_mirror",
+    "x_compact_mirror_case",
+    "x_crumpled_paper",
+    "x_bin_bag",
+    "x_sparkler",
+    "x_digital_alarm",
+    "x_match",
+    "x_litter",
+    "x_matchstick_fire",
+    "hourglass",
+    "x_blinds"
+   ],
+   "severity": "high",
+   "suggestion": "Re-pair per the issues (glass door: C 'Walkintoer'; toilet seat cover: C 'Slideslipper', U 'Fluffycover'; thermometer: R 'Nosickday' and a new Legendary name)."
+  },
+  {
+   "pattern": "Near-identical clusters inside the batch (the requested groups).",
+   "ids": [
+    "x_rear_view_mirror",
+    "i_car_mirror",
+    "toilet_paper",
+    "x_toilet_roll_holder",
+    "x_bin_bag",
+    "x_trash_bag",
+    "trash_can",
+    "x_dumpster",
+    "x_landfill",
+    "x_rubbish_heap",
+    "i_band_aid",
+    "x_first_aid_box",
+    "i_matchstick",
+    "x_matchstick_fire",
+    "x_campfire",
+    "x_match",
+    "x_birthday_candles",
+    "x_bonfire",
+    "x_fire_pit",
+    "x_fireplace",
+    "x_wood_stove",
+    "x_blinds",
+    "x_curtain",
+    "x_shutter",
+    "x_beaker",
+    "x_lab_flask",
+    "x_test_tube",
+    "x_test_tube_rack",
+    "x_full_length_mirror",
+    "x_wall_mirror",
+    "mirror",
+    "x_french_door",
+    "window",
+    "x_garage_door",
+    "hourglass",
+    "x_sand_timer_clock",
+    "x_toilet_cistern",
+    "x_toilet_tank",
+    "x_porta_potty",
+    "x_portable_toilet",
+    "x_magnifier",
+    "x_magnifying_glass",
+    "x_firework",
+    "x_sparkler"
+   ],
+   "severity": "high",
+   "suggestion": "Which side changes is named in each issue. Rules used: keep the stronger or earlier line, change the other; never let two objects in one cluster share a premise, a punchline shape or a Legendary name shape."
+  },
+  {
+   "pattern": "Near-copies of earlier drafts (w08, w10, w11, w06, w09, w05).",
+   "ids": [
+    "i_matchstick",
+    "x_incense",
+    "x_soda_can_litter",
+    "i_tripod",
+    "x_pillar_candle",
+    "x_binoculars_stand",
+    "x_portable_toilet",
+    "x_bathroom_mirror",
+    "x_compost",
+    "x_blinds",
+    "x_garage_door",
+    "x_front_door",
+    "x_toilet_cistern",
+    "x_tripod_head",
+    "x_magnifier",
+    "x_magnifying_glass",
+    "x_makeup_mirror"
+   ],
+   "severity": "high",
+   "suggestion": "Change the w12 side (replacements in the issues)."
+  },
+  {
+   "pattern": "Fire objects: lines must keep grown-ups in charge and never model a risky behaviour.",
+   "ids": [
+    "x_firework",
+    "x_bonfire",
+    "x_magnifier",
+    "i_matchstick",
+    "x_match"
+   ],
+   "severity": "high",
+   "suggestion": "Firework Common must not joke about waiting near a lit firework; no half-raw sausages; no focusing sunlight into a hot spot; no misfire near a crowd. Replacements in the issues."
+  },
+  {
+   "pattern": "Clumsy suffixed or doubled move names.",
+   "ids": [
+    "window",
+    "x_bathroom_mirror",
+    "x_beaker",
+    "x_bidet_seat",
+    "x_binoculars_stand",
+    "x_flare",
+    "x_makeup_mirror",
+    "x_match",
+    "x_tea_light_candle",
+    "x_telescope",
+    "x_test_tube",
+    "x_wall_mirror",
+    "x_wood_stove",
+    "x_portable_toilet",
+    "x_toilet_tank",
+    "x_urinal_stall",
+    "x_porta_potty",
+    "x_first_aid_kit",
+    "x_monocle"
+   ],
+   "severity": "medium",
+   "suggestion": "Drop the object word tacked on the end and doubled verbs ('Reflection Guard Window' -> 'Double Glazing', 'Hair Check Boost Boost' -> 'Last Look Boost')."
+  },
+  {
+   "pattern": "Ultimate repeats the Epic monster name, or a variant Ultimate names only one effect.",
+   "ids": [
+    "i_matchstick",
+    "x_cuckoo_clock",
+    "x_grandfather_clock",
+    "x_curtain",
+    "x_lab_flask",
+    "x_shutter",
+    "x_blinds",
+    "x_door_handle",
+    "x_door_knocker",
+    "x_window_pane",
+    "x_makeup_mirror",
+    "x_porta_potty",
+    "x_toilet_cistern"
+   ],
+   "severity": "medium",
+   "suggestion": "Give each finisher its own image and keep variant Ultimates effect-neutral (no Daze/Flash/Glare/Pong/Hail when other variants burn or poison)."
+  }
+ ],
+ "issues": [
+  {
+   "id": "hourglass",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Not an annoying habit of the hourglass; people stare at it. Also shares the board-game setting with its own Epic and the sand timer clock.",
+   "suggestion": "'Drops one last stubborn grain after time is up, so every argument about who won starts all over again.'"
+  },
+  {
+   "id": "hourglass",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Sandwatcher' describes the old line.",
+   "suggestion": "'Lastgrain'"
+  },
+  {
+   "id": "hourglass",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Describes people turning it late, not a trait of the object.",
+   "suggestion": "'Pours its sand into a perfect little pyramid at the bottom, and refuses to be turned over until someone admires it.'"
+  },
+  {
+   "id": "hourglass",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Pyramidpour'"
+  },
+  {
+   "id": "hourglass",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A room shouting at it is a reaction, not a large-scale consequence.",
+   "suggestion": "'Leaked through a crack at the beach until the whole beach was inside its bottom bulb. The lifeguard is waiting for someone to turn it over.'"
+  },
+  {
+   "id": "hourglass",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Board Game Timeout' no longer fits and repeats the Common's setting.",
+   "suggestion": "'Beachswallower'"
+  },
+  {
+   "id": "hourglass",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Good feat, but the line stops before the joke.",
+   "suggestion": "'Stopped its sand halfway through a picnic, so the afternoon lasted all summer. The sandwiches did not.'"
+  },
+  {
+   "id": "hourglass",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Glass That Stopped Time' is the monotonous 'The X That Y' shape.",
+   "suggestion": "'Grainhalt, the Endless Afternoon'"
+  },
+  {
+   "id": "i_band_aid",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Placebo knee healing is a mild trait, not a troublesome power.",
+   "suggestion": "'Sticks so hard that it held a torn kite together through a gale. Getting it off afterwards took the whole family and a bath.'"
+  },
+  {
+   "id": "i_band_aid",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Kitemender'"
+  },
+  {
+   "id": "i_band_aid",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of x_first_aid_box Epic (sports day, every scraped knee, ran out). Change the band-aid side.",
+   "suggestion": "'Came out of a giant box and stuck the whole playground together, swing to slide and slide to teacher. Break lasted until home time.'"
+  },
+  {
+   "id": "i_band_aid",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Playground Patch-Up' is a patching name; the new Epic is about sticking.",
+   "suggestion": "'Playground Gluepatch'"
+  },
+  {
+   "id": "i_band_aid",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Teddy recovering is sweet but small; Legendary needs an outrageous feat.",
+   "suggestion": "'Patched a crack in the old town dam with one strip. The dam still holds, and it still has a cartoon dinosaur on it.'"
+  },
+  {
+   "id": "i_band_aid",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Long 'of the First Aid Box' title; fits poorly with a dam.",
+   "suggestion": "'Stickybrave, the Dam Patcher'"
+  },
+  {
+   "id": "i_band_aid",
+   "field": "moves.kit.iodine_sting",
+   "severity": "low",
+   "issue": "Antiseptic is a clean smell; poison names should be stink or grime.",
+   "suggestion": "'Grubby Pad Sting'"
+  },
+  {
+   "id": "i_barometer",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Always being right about storms is the barometer doing its job.",
+   "suggestion": "'Taps its own glass until the needle points at Stormy, and the storm turns up to match. Mostly uses it to cancel PE.'"
+  },
+  {
+   "id": "i_barometer",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Stormsummoner'"
+  },
+  {
+   "id": "i_barometer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Everyone tied down washing in time: no joke.",
+   "suggestion": "'Dropped its needle so far that the whole village tied down its washing, its bins and one very surprised goat.'"
+  },
+  {
+   "id": "i_barometer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Predicted every big storm for a hundred years' is the endurance formula.",
+   "suggestion": "'Pointed at Fair so stubbornly that a storm cloud gave up and went round the town. The next town over is still damp.'"
+  },
+  {
+   "id": "i_barometer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Glass That Called Every Storm' is the monotonous shape and no longer fits.",
+   "suggestion": "'Needle Fair, the Storm Dodger'"
+  },
+  {
+   "id": "i_car_mirror",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Fact slip (a wing mirror cannot see the back seat) and near-copy of x_rear_view_mirror Uncommon/Epic (watching back-seat arguments).",
+   "suggestion": "'Folds itself in to squeeze through gaps narrower than the car. The car is far less sure about this.'"
+  },
+  {
+   "id": "i_car_mirror",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Backseatspy' belongs to the rear-view mirror premise.",
+   "suggestion": "'Squeezefold'"
+  },
+  {
+   "id": "i_car_mirror",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Mirrors knocked along a lane: crowd, no joke.",
+   "suggestion": "'Folded in every mirror on the street at once like a row of shy ears, and the bin lorry squeezed through the lane for the first time ever.'"
+  },
+  {
+   "id": "i_car_mirror",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Reversing Panic' does not describe the new Epic.",
+   "suggestion": "'Earfold Alley'"
+  },
+  {
+   "id": "i_car_mirror",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Kept (the rear-view mirror changes instead), but it ends without a joke.",
+   "suggestion": "'Spotted a lost dog trotting behind the car for three streets and got it home. The dog now insists on riding in the mirror's reflection.'"
+  },
+  {
+   "id": "i_fire_screen",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Catching sparks is its job. Also repeats its own Legendary (no spark on the rug).",
+   "suggestion": "'Catches sparks and throws them back into the fire like a goalkeeper. It has started shouting SAVE every time.'"
+  },
+  {
+   "id": "i_fire_screen",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Sparkkeeper'"
+  },
+  {
+   "id": "i_fire_screen",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Family sitting round it all winter: no consequence or joke.",
+   "suggestion": "'Glowed so cosily that the cat, the dog and grandad fell asleep against it in a row, and nobody could reach the fire to add a log.'"
+  },
+  {
+   "id": "i_fire_screen",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Snoozefence'"
+  },
+  {
+   "id": "i_fire_screen",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (two hundred years without a spark on the rug).",
+   "suggestion": "'Blocked a spark the size of a football, spun it round and sent it back up the chimney. The neighbours thought it was a firework.'"
+  },
+  {
+   "id": "i_fire_screen",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Screen That Guarded the Hearth' is the monotonous shape.",
+   "suggestion": "'Sparkbouncer the Unflinching'"
+  },
+  {
+   "id": "i_fire_screen",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Guard' is a defence word on an attack.",
+   "suggestion": "'Brass Fence Slam'"
+  },
+  {
+   "id": "i_matchstick",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being glued into models is something done to it, not a power. Sharpened into a power below.",
+   "suggestion": "'Glues itself to other matchsticks overnight. The family woke up to a matchstick staircase leading straight to the biscuit tin.'"
+  },
+  {
+   "id": "i_matchstick",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of w08 x_matchbox Epic (model village 'Model Village Box') and has a church tower (religion).",
+   "suggestion": "'Was dropped into a jar of ten thousand toothpicks, and the family spent a whole week hunting for the one with the red head.'"
+  },
+  {
+   "id": "i_matchstick",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "'Matchstick Model Village' repeats w08 and the old Epic.",
+   "suggestion": "'Toothpick Haystack'"
+  },
+  {
+   "id": "i_matchstick",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_matchstick_fire Legendary and close to x_campfire (a light that guides walkers home). Change this side.",
+   "suggestion": "'Was struck by a grown-up in a pitch-dark cave and lit it up so well that the bats asked for it to be switched off.'"
+  },
+  {
+   "id": "i_matchstick",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Old name no longer fits; also 'The X That Y'.",
+   "suggestion": "'Cavelight the Bat-Botherer'"
+  },
+  {
+   "id": "i_matchstick",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name, and 'Spark' names burn while normal is poison and mutated stun.",
+   "suggestion": "'Last Match Standing'"
+  },
+  {
+   "id": "i_odometer",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Like a tiny slot machine' is a gambling reference in a kids' game.",
+   "suggestion": "'Has a trip counter that nobody ever resets, so every family holiday is officially four thousand miles long.'"
+  },
+  {
+   "id": "i_odometer",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Tripforgetter'"
+  },
+  {
+   "id": "i_odometer",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Turning over to a round number is a coincidence, not a power.",
+   "suggestion": "'Rolls its numbers backwards whenever the car reverses. Grandad now drives home backwards to make the car younger.'"
+  },
+  {
+   "id": "i_odometer",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Backroller'"
+  },
+  {
+   "id": "i_odometer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Family cheering at zeros: reaction, not consequence.",
+   "suggestion": "'Rolled over to all zeros on the motorway, so the car decided it was brand new and asked for its first service all over again.'"
+  },
+  {
+   "id": "i_odometer",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Feat is fine, punchline missing.",
+   "suggestion": "'Counted enough miles to drive to the moon and back in one old family car. The car would now like a holiday.'"
+  },
+  {
+   "id": "i_odometer",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'The Dial That Counted to the Moon' is the monotonous shape.",
+   "suggestion": "'Moonmiles, the Ageless Dial'"
+  },
+  {
+   "id": "i_plunger",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Unblocking fast is its job; also near-copy of w13 wrench Rare (plumber asks).",
+   "suggestion": "'Sticks to anything flat and will not let go: the fridge, the window, the dog's water bowl. Grown-ups now carry the glass table with it.'"
+  },
+  {
+   "id": "i_plunger",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Unblocker' describes the old line.",
+   "suggestion": "'Gripsucker'"
+  },
+  {
+   "id": "i_plunger",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'The guests never knew' is not a joke.",
+   "suggestion": "'Pulled so hard on the bath drain that the whole bath came up instead. The rubber duck is still in it, on the landing.'"
+  },
+  {
+   "id": "i_plunger",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Bathlifter'"
+  },
+  {
+   "id": "i_plunger",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Good feat, add the punchline.",
+   "suggestion": "'Rescued a lost wedding ring from the drain with one mighty pull, plus two socks, a toy car and most of the drain.'"
+  },
+  {
+   "id": "i_tripod",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Holding the camera still is its job (and lint flags stars below Legendary).",
+   "suggestion": "'Stands so still that birds land on it, a dog barked at it and a man tried to post a letter in it.'"
+  },
+  {
+   "id": "i_tripod",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Steadyshot' describes the old line.",
+   "suggestion": "'Stillstander'"
+  },
+  {
+   "id": "i_tripod",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of w11 x_easel Epic ('stood with fifty others... looked like a gallery').",
+   "suggestion": "'Spread its legs so wide on the busy pier that the whole queue for the ice cream van had to limbo underneath it.'"
+  },
+  {
+   "id": "i_tripod",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Limbo Legs'"
+  },
+  {
+   "id": "i_tripod",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sincere, no punchline.",
+   "suggestion": "'Held a camera still all night to catch the stars spinning. The photo shows perfect stars and one very confused moth.'"
+  },
+  {
+   "id": "i_tripod",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Tripod That Never Shook' is the monotonous shape.",
+   "suggestion": "'Mothframe the Unshakeable'"
+  },
+  {
+   "id": "mirror",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (same family a hundred years, never cracked); name 'Winked Back' describes nothing in the line.",
+   "suggestion": "'Copied its owner so well that the reflection went to school one morning instead. Nobody noticed until it wrote everything backwards.'"
+  },
+  {
+   "id": "mirror",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Reflecto, the Stand-In'"
+  },
+  {
+   "id": "mirror",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Mirror family cluster: keep this 'room looks twice as big' Rare; x_wall_mirror Rare changes.",
+   "suggestion": "'Makes a small room look twice as big, and the cat keeps trying to walk into the other room.'"
+  },
+  {
+   "id": "i_oscilloscope",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Showing sound waves is its job.",
+   "suggestion": "'Draws the wiggly line of any sound and then plays it back wrong. It turned the head teacher's speech into a duck.'"
+  },
+  {
+   "id": "i_oscilloscope",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Wavetwister'"
+  },
+  {
+   "id": "i_oscilloscope",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'Became a singing contest' is a crowd plus a stock contest frame.",
+   "suggestion": "'Drew every voice in assembly as a squiggle, and the squiggles tangled so badly that the caretaker untied them with a broom.'"
+  },
+  {
+   "id": "i_oscilloscope",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Squiggle Tangle'"
+  },
+  {
+   "id": "i_oscilloscope",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Fixing a radio is sincere with no punchline; 'Professor X of the Lab' repeats across the science objects.",
+   "suggestion": "'Found the hum in a broken radio, then the hum in the fridge, then the hum in grandad. Grandad was just humming.'"
+  },
+  {
+   "id": "i_oscilloscope",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Breaks the 'Professor ... of the Lab' cluster.",
+   "suggestion": "'Humhunter the Line Reader'"
+  },
+  {
+   "id": "i_oscilloscope",
+   "field": "moves.kit.acid_drop",
+   "severity": "low",
+   "issue": "Static is not a stink.",
+   "suggestion": "'Burnt Dust Whiff'"
+  },
+  {
+   "id": "plastic_bag",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'Looked like a ghost town' is a comparison, not a consequence.",
+   "suggestion": "'Blew out of every bin in the car park and joined up into one giant bag that tried to carry the supermarket home.'"
+  },
+  {
+   "id": "plastic_bag",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic; frees 'Bag Storm' for the Ultimate.",
+   "suggestion": "'Megabag Billow'"
+  },
+  {
+   "id": "plastic_bag",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Reused for twenty years' is the endurance formula, and close to x_soda_can_litter Legendary (recycled forever).",
+   "suggestion": "'Was reused so many times that it now goes to the shop by itself, picks the cheapest bread and comes home alone.'"
+  },
+  {
+   "id": "plastic_bag",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Errand Elsie, the Lone Shopper'"
+  },
+  {
+   "id": "smartwatch",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Everyone checking wrists at once is a crowd scene without a joke.",
+   "suggestion": "'Buzzed every wrist in the cinema at the scariest moment, and the whole audience screamed at their own arms instead of the film.'"
+  },
+  {
+   "id": "smartwatch",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Armscreamer'"
+  },
+  {
+   "id": "smartwatch",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "An irregular heartbeat and a doctor's visit is too medical and worrying for the tone, and has no joke.",
+   "suggestion": "'Talked its owner into ten thousand steps a day, then a hundred thousand. They are now somewhere in Scotland, still being buzzed.'"
+  },
+  {
+   "id": "smartwatch",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Buzzina the Step Tyrant'"
+  },
+  {
+   "id": "toilet_paper",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Unrolled by the cat shares its premise with its own Epic (puppy) and the roll holder Epic (cat). Toilet paper keeps the Epic.",
+   "suggestion": "'Rolls itself back up perfectly after the cat has finished, so nobody ever believes the cat did anything.'"
+  },
+  {
+   "id": "toilet_paper",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Rewinder Roll'"
+  },
+  {
+   "id": "toilet_paper",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "Close to w10 x_battery Common ('runs out just when you need the torch').",
+   "suggestion": "'Runs out exactly when you need it most, and leaves one lonely square stuck to the cardboard.'"
+  },
+  {
+   "id": "trash_can",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being knocked over by the fox is something done to it; and the fox premise is shared with x_bin_bag Rare.",
+   "suggestion": "'Locks its own lid the moment the fox arrives. The fox now leaves angry notes on the doormat.'"
+  },
+  {
+   "id": "trash_can",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Foxraided' no longer fits.",
+   "suggestion": "'Foxlocker'"
+  },
+  {
+   "id": "trash_can",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Swallow-so-much-rubbish cluster with x_dumpster and x_skip Legendaries; also the bin-lorry punch repeats x_dumpster Epic.",
+   "suggestion": "'Ate so much at the street party that it burped, and the burp blew the bunting into the next street.'"
+  },
+  {
+   "id": "trash_can",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Burpbin the Bottomless'"
+  },
+  {
+   "id": "trash_can",
+   "field": "moves.kit.lid_slam",
+   "severity": "low",
+   "issue": "Same as the default name (lint).",
+   "suggestion": "'Wheelie Lid Whack'"
+  },
+  {
+   "id": "wall_clock",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Same last-lesson premise as its own Rare, and a crowd stare with no joke.",
+   "suggestion": "'Fell off the hall wall, and every clock in the school stopped to look. Nobody knew what time it was until Thursday.'"
+  },
+  {
+   "id": "wall_clock",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Timeless Thursday'"
+  },
+  {
+   "id": "wall_clock",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'The Clock That Ran Backwards' is the monotonous shape.",
+   "suggestion": "'Tickback the Contrary'"
+  },
+  {
+   "id": "wall_clock",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Clock cluster: slowing down when you want it to hurry is close to hourglass Rare (slows when losing). Hourglass keeps it; consider a different power.",
+   "suggestion": "'Moves its hands back five minutes whenever the teacher looks away, so the last lesson never quite ends.'"
+  },
+  {
+   "id": "x_blinds",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Near-copy of w09 x_garage_remote Uncommon ('halfway, so you have to duck under it'), and x_garage_door Uncommon.",
+   "suggestion": "'Has one cord that does everything, and nobody knows which way to pull it, so the slats spin like a fan.'"
+  },
+  {
+   "id": "x_blinds",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Cordpuzzle'"
+  },
+  {
+   "id": "x_blinds",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Sunday Lie-In Fail' does not match the sleepover lore.",
+   "suggestion": "'Sleepover Snap-Up'"
+  },
+  {
+   "id": "x_blinds",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (stuck at half-mast for twenty years).",
+   "suggestion": "'Tilted its slats so exactly that it spelled HELLO in sunlight on the living-room floor. The cat has slept in the O ever since.'"
+  },
+  {
+   "id": "x_blinds",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Sunwriter of the Slats'"
+  },
+  {
+   "id": "x_blinds",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Daze' names stun but the mutated variant burns.",
+   "suggestion": "'Big Slat Snap'"
+  },
+  {
+   "id": "x_blinds",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Light-stripe cluster with x_curtain Rare and x_shutter Common: blinds keep it, the other two change.",
+   "suggestion": "'Lets the morning sun stripe across your face at five in the morning, even on Saturdays.'"
+  },
+  {
+   "id": "x_curtain",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-identical to x_blinds Rare and x_shutter Common (a stripe of dawn light on the pillow/cat).",
+   "suggestion": "'Gathers every lost thing in the house in its folds: socks, keys, a whole birthday present. It hands them back only when it is washed.'"
+  },
+  {
+   "id": "x_curtain",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Lightleaker' describes the old line.",
+   "suggestion": "'Foldhoarder'"
+  },
+  {
+   "id": "x_curtain",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Repeats its own Uncommon (hiding children) as a crowd.",
+   "suggestion": "'Swished open so dramatically at the school play that the audience clapped, and the actors had not even come on yet.'"
+  },
+  {
+   "id": "x_curtain",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (three generations) and a third use of the hide-and-seek premise.",
+   "suggestion": "'Blocked the draughts so well one winter that the radiators got bored and went on holiday.'"
+  },
+  {
+   "id": "x_curtain",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Curtain That Hid Every Child' no longer fits.",
+   "suggestion": "'Velveteen the Draught Tamer'"
+  },
+  {
+   "id": "x_curtain",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Theatre Curtain Call').",
+   "suggestion": "'Big Swish Finale'"
+  },
+  {
+   "id": "x_french_door",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Near-copy of window Uncommon ('lets in every fly in summer'). Change the French door.",
+   "suggestion": "'Has two handles, and everyone tries the wrong one first, every single time.'"
+  },
+  {
+   "id": "x_french_door",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "'Gardenletter' describes the old line.",
+   "suggestion": "'Wronghandle'"
+  },
+  {
+   "id": "x_french_door",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "'The whole garden came inside' is vague; make it concrete.",
+   "suggestion": "'Was flung open for the summer party, and the garden came inside: the hose, two ducks and next door's football.'"
+  },
+  {
+   "id": "x_french_door",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (opened on the first warm day for a hundred years).",
+   "suggestion": "'Opened so wide on the first warm day that it let summer in early, and the snowman in the garden asked to come inside.'"
+  },
+  {
+   "id": "x_french_door",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Summerlatch the Early'"
+  },
+  {
+   "id": "x_front_door",
+   "field": "names.rare",
+   "severity": "low",
+   "issue": "'Doorbellmate' does not describe falling into the hall.",
+   "suggestion": "'Tumblewelcome'"
+  },
+  {
+   "id": "x_front_door",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every guest at once / traffic jam: crowd, no joke.",
+   "suggestion": "'Was painted on a hot day and held every party guest stuck to it like flypaper, so the whole party happened on the doorstep.'"
+  },
+  {
+   "id": "x_front_door",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Wet Paint Welcome'"
+  },
+  {
+   "id": "x_front_door",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula and near-copy of w10 x_wall_lamp Legendary (welcomed every guest home for a hundred years).",
+   "suggestion": "'Spotted the family car at the end of the road, opened itself, boiled the kettle and laid out the slippers. Nobody knows how it reached the kettle.'"
+  },
+  {
+   "id": "x_front_door",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Welcomewell the Kettle-Boiler'"
+  },
+  {
+   "id": "x_front_door",
+   "field": "moves.kit.creak",
+   "severity": "low",
+   "issue": "Doubled word suggests a multi-hit on a single stun.",
+   "suggestion": "'Hinge Groan'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Near-copy of x_blinds Uncommon and w09 garage remote Uncommon (stuck halfway, go under it).",
+   "suggestion": "'Opens by itself whenever an aeroplane flies over, so the street always knows when the four o'clock flight is late.'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Planeopener'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A rattling hoop is a trait of the hoop, not a power.",
+   "suggestion": "'Rolls up so fast that it flings whatever is on top onto the roof: frisbees, footballs and once a very startled cat.'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Rooflauncher'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Near-copy of w10 x_guitar_amp Epic (garage band, whole street came to listen).",
+   "suggestion": "'Rolled up so fast that the car, the bikes and the paddling pool rolled out onto the road, and the street held a yard sale.'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Driveway Yard Sale'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (forty years, jammed once), and the name describes the Epic.",
+   "suggestion": "'Rolled up so high once that it kept going, over the roof and down the other side. The house now has a garage door at both ends.'"
+  },
+  {
+   "id": "x_garage_door",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Door That Revealed the Band' describes the Epic.",
+   "suggestion": "'Rollover the Roof-Climber'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "'Birdbumper' describes the pigeon Rare, while the Common is about people walking into it.",
+   "suggestion": "'Walkintoer'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Same premise as the Common (things fly or walk into it).",
+   "suggestion": "'Reflects so perfectly that the dog spent a whole afternoon barking at the dog on the other side. They are now best friends.'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Old Rare name moves to the Common; this one matches the new line.",
+   "suggestion": "'Twindog Pane'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Near-copy of x_door_handle Epic (first day of the sale, shoppers) and a crowd.",
+   "suggestion": "'Was polished so perfectly that a whole flock of pigeons queued politely outside it, waiting for it to open.'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Pigeon Queue Pane'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (cleaned perfectly for fifty years).",
+   "suggestion": "'Was polished so perfectly that a goose walked into it, honked at it for an hour and has since adopted its reflection.'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Clearwell the Unseen'"
+  },
+  {
+   "id": "x_glass_door",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "Clumsy 'Smack Crack'.",
+   "suggestion": "'Pane Smack'"
+  },
+  {
+   "id": "x_shower_curtain",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Flooding the floor is the same premise as its own Epic.",
+   "suggestion": "'Billows inward whenever someone sings in the shower, as if it wants to join in. It mostly wants the high notes.'"
+  },
+  {
+   "id": "x_shower_curtain",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Singalong Billow'"
+  },
+  {
+   "id": "x_shower_curtain",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Paddling-pool floor is a comparison; make the consequence concrete and funny.",
+   "suggestion": "'Let so much water out in one shower that the kitchen ceiling started to drizzle, and the dog downstairs got a shower too.'"
+  },
+  {
+   "id": "x_shower_curtain",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Downstairs Drizzle'"
+  },
+  {
+   "id": "x_shower_curtain",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A printed pattern and a toddler naming ducks is not a feat.",
+   "suggestion": "'Kept a hundred printed ducks for so long that one of them learned to swim off the curtain and float in the bath.'"
+  },
+  {
+   "id": "x_shower_curtain",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Fits, but long and 'The X With' shape.",
+   "suggestion": "'Quackcurtain, the Duck Keeper'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Same dawn light stripe as x_blinds Rare and x_curtain Rare, and 'Bangshutter' describes banging, not creaking.",
+   "suggestion": "'Bangs against the wall all night in the slightest breeze, like someone knocking to be let in.'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Slamming in a storm repeats its own Epic and the new Common.",
+   "suggestion": "'Has slats that sparrows love to nest behind, so opening the window means meeting a dozen cross sparrows.'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Sparrowhotel'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Peeling paint is a trait, not a power.",
+   "suggestion": "'Slams itself shut faster than a wasp can fly in. The wasps have started booking ahead.'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Waspbouncer'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every house on the seafront: crowd with no joke.",
+   "suggestion": "'Slammed shut along the whole seafront at once, and the bang knocked every seagull's chips into the sea.'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (safe through a hundred storms) and a third storm line.",
+   "suggestion": "'Closed so tightly that it stayed night-time inside the house for a week, and the owls moved in for the holiday.'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Nightmaker of the Seaside'"
+  },
+  {
+   "id": "x_shutter",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Storm Shutter Slam').",
+   "suggestion": "'Big Bang Shut'"
+  },
+  {
+   "id": "x_skylight",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Uncommon, Epic and Legendary are all 'shows the stars'. Keep the Uncommon.",
+   "suggestion": "'Collected so much snow on top that it all slid off in one go and buried the snowman, the car and the postman.'"
+  },
+  {
+   "id": "x_skylight",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Avalanche Pane'"
+  },
+  {
+   "id": "x_skylight",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (stars every clear night for fifty years) and third star line.",
+   "suggestion": "'Let in so much sunshine that the attic grew a lemon tree. The family now has the only attic in town with a harvest.'"
+  },
+  {
+   "id": "x_skylight",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Lemonroof the Sunlit'"
+  },
+  {
+   "id": "x_skylight",
+   "field": "moves.kit.slam_shut",
+   "severity": "low",
+   "issue": "'Lid Slam Down' is clumsy.",
+   "suggestion": "'Hatch Slam'"
+  },
+  {
+   "id": "window",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-copy of x_bathroom_mirror Uncommon (messages drawn in the steam).",
+   "suggestion": "'Sticks shut on the hottest day of the year and swings open on the coldest night.'"
+  },
+  {
+   "id": "window",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "'Breathdrawer' describes the old line.",
+   "suggestion": "'Wrongweather'"
+  },
+  {
+   "id": "window",
+   "field": "names.rare",
+   "severity": "low",
+   "issue": "'Viewblocker' says the opposite of the line (it is a view magnet).",
+   "suggestion": "'Daydreampane'"
+  },
+  {
+   "id": "window",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Snow-day stare repeats its own Rare (everyone looks out) as a crowd.",
+   "suggestion": "'Opened in a gust that blew every school report out of the classroom and across town. Several parents have still not seen theirs.'"
+  },
+  {
+   "id": "window",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Report Card Gust'"
+  },
+  {
+   "id": "window",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (watched the same street for a hundred years).",
+   "suggestion": "'Steamed up so beautifully one winter morning that the finger drawing on it was hung in the town gallery. The gallery keeps a kettle beside it.'"
+  },
+  {
+   "id": "window",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Fogsketch the Exhibited'"
+  },
+  {
+   "id": "window",
+   "field": "moves.kit.mirror_image",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Reflection Guard Window').",
+   "suggestion": "'Double Glazing'"
+  },
+  {
+   "id": "window",
+   "field": "moves.kit.shatter",
+   "severity": "low",
+   "issue": "Four words for a three-hit move.",
+   "suggestion": "'Hail Tap Tap'"
+  },
+  {
+   "id": "x_window_pane",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Children watching it hold: no consequence or joke.",
+   "suggestion": "'Was hammered by hailstones so big that it caught one, and the family kept it in the freezer as a pet.'"
+  },
+  {
+   "id": "x_window_pane",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Hailcatcher'"
+  },
+  {
+   "id": "x_window_pane",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (two hundred years in the same window).",
+   "suggestion": "'Survived a cricket ball, a hailstorm and a pigeon at full speed, and now wears a tiny sign that says UNDEFEATED.'"
+  },
+  {
+   "id": "x_window_pane",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Undefeated Pane'"
+  },
+  {
+   "id": "x_window_pane",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Hail' is a cold word while the normal and Spectral variants burn.",
+   "suggestion": "'Big Rattle Smash'"
+  },
+  {
+   "id": "x_bandage",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all turn people into mummies. Keep the Rare.",
+   "suggestion": "'Wrapped up a whole snowman during a game of doctors, and the snowman refused to melt until he felt better.'"
+  },
+  {
+   "id": "x_bandage",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Snowman Patient'"
+  },
+  {
+   "id": "x_bandage",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Third mummy line; 'teddy bear hospital' is small.",
+   "suggestion": "'Wrapped a wobbly old bridge in the park so tightly that it stopped wobbling. The ducks still use it every morning.'"
+  },
+  {
+   "id": "x_bandage",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Bandage That Made a Mummy' describes the Rare.",
+   "suggestion": "'Bridgewrap the Bold'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of w09 x_snorkel_mask Common (fogs up, you see nothing).",
+   "suggestion": "'Has a light above it that hums like a bee every time someone brushes their teeth.'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Humlight'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Opening into a cupboard is a trait, not a power.",
+   "suggestion": "'Shows tomorrow's bed hair tonight, so everyone goes to bed in a bad mood.'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Bedhair Prophet'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A family queue is a crowd, not a consequence.",
+   "suggestion": "'Steamed up so thickly that the whole family brushed their teeth by guessing, and grandad brushed his with the hairbrush.'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Fogged Out Family'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (thirty years, never told).",
+   "suggestion": "'Learned every song ever sung in front of it and released them as an album of foggy humming. Its biggest fans are toothbrushes.'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Foghum the Shower Star'"
+  },
+  {
+   "id": "x_bathroom_mirror",
+   "field": "moves.kit.shatter",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Crack Crack Mirror').",
+   "suggestion": "'Hairline Cracks'"
+  },
+  {
+   "id": "x_beaker",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Fizzing over is the same premise as its Common and Epic, and the flask and test tube Commons/Uncommons.",
+   "suggestion": "'Holds any amount without overflowing, so the class poured in a whole bucket and it still says 100 ml.'"
+  },
+  {
+   "id": "x_beaker",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Bottomless Beaker'"
+  },
+  {
+   "id": "x_beaker",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Foam Epic cluster (beaker, lab flask, test tube). The lab flask keeps foam; the beaker changes.",
+   "suggestion": "'Measured so many things in one lesson that it measured the teacher, the hamster and the school pond. The pond came to exactly four beakers.'"
+  },
+  {
+   "id": "x_beaker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Pond Measure'"
+  },
+  {
+   "id": "x_beaker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Famous inventor's first experiment' cluster with x_test_tube and x_lab_flask Legendaries, no punchline.",
+   "suggestion": "'Measured exactly one litre of thunderstorm, and the classroom has had its own small cloud ever since.'"
+  },
+  {
+   "id": "x_beaker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Breaks the 'Professor X-sworth of the Lab' cluster.",
+   "suggestion": "'Cloudcup the Storm Measurer'"
+  },
+  {
+   "id": "x_beaker",
+   "field": "moves.kit.acid_drop",
+   "severity": "medium",
+   "issue": "'Acid Drop Drop' is a clumsy doubling on a single hit.",
+   "suggestion": "'Sour Drip'"
+  },
+  {
+   "id": "x_bidet_seat",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A thirty-button remote is a trait, not a feat.",
+   "suggestion": "'Pressed its own buttons all night and invented a new one, a tiny tune when the lid closes. Now the whole hotel wants one.'"
+  },
+  {
+   "id": "x_bidet_seat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Buttonwhiz the Inventor'"
+  },
+  {
+   "id": "x_bidet_seat",
+   "field": "moves.kit.bubble_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Gurgle Crack Seat').",
+   "suggestion": "'Bubble Gurgle Crack'"
+  },
+  {
+   "id": "x_bin_bag",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Splitbottom Bag' describes the Epic; the Uncommon is about a knot that will not close.",
+   "suggestion": "'Knotrefuser'"
+  },
+  {
+   "id": "x_bin_bag",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Fox cluster with trash_can Rare (both 'fox every night').",
+   "suggestion": "'Grows a little bigger every time someone says 'just one more thing'. It now holds a whole broken deckchair.'"
+  },
+  {
+   "id": "x_bin_bag",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Onemorebag'"
+  },
+  {
+   "id": "x_binocular_strap",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Catching the binoculars is its job, and the Legendary is the same premise.",
+   "suggestion": "'Swings its binoculars round like a lasso whenever a rare bird appears, so nobody ever gets to see the bird.'"
+  },
+  {
+   "id": "x_binocular_strap",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Lassostrap'"
+  },
+  {
+   "id": "x_binocular_strap",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Repeats its own Uncommon (tangling) as a crowd.",
+   "suggestion": "'Slipped open on a cliff walk, and the binoculars rolled all the way down to the beach, where a seal was found using them.'"
+  },
+  {
+   "id": "x_binocular_strap",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Seal Spyglass'"
+  },
+  {
+   "id": "x_binocular_strap",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as the Rare (saved the binoculars) with 'still tells everyone' padding.",
+   "suggestion": "'Held its binoculars so still for so long that a woodpecker mistook them for a tree and nested in the case.'"
+  },
+  {
+   "id": "x_binocular_strap",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Nestholder the Patient'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of w06 x_parking_meter Common ('swallows your coin and gives you...').",
+   "suggestion": "'Points itself at the sky the moment your coin drops in, so you get ten seconds of cloud.'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Near-copy of w10 binoculars Rare ('nobody else could see').",
+   "suggestion": "'Zooms so far that it saw someone eating chips in France, and every seagull on the pier set off at once.'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Chipspotter'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Queue that saw the same boat: crowd, no joke.",
+   "suggestion": "'Swivelled round in a gust and showed the whole queue the inside of the ice cream van. The van sold out by lunch.'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Ice Cream Spyglass'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (eighty years, a million people).",
+   "suggestion": "'Stared at the horizon for so long that it finally saw the edge of the world, and refuses to tell anyone what is there.'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Horizonhog the Secretive'"
+  },
+  {
+   "id": "x_binoculars_stand",
+   "field": "moves.kit.hypothesis",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Zoom Boost Stand').",
+   "suggestion": "'Zoom Boost'"
+  },
+  {
+   "id": "x_birthday_candles",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Kept (x_match changes its hundred-candle Legendary), but the punchline is thin.",
+   "suggestion": "'Burned on a ninety-ninth birthday cake, and the birthday girl blew them all out first try, then asked for a hundredth.'"
+  },
+  {
+   "id": "x_bonfire",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Child safety: 'everyone eats them half raw' presents undercooked sausages as fine. Also not a power.",
+   "suggestion": "'Sends up a column of smoke so tall that the weather forecaster marked it on the map as a cloud.'"
+  },
+  {
+   "id": "x_bonfire",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Cloudmaker'"
+  },
+  {
+   "id": "x_bonfire",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "No punchline.",
+   "suggestion": "'Was built so cosy by the grown-ups that a pigeon nested on top, and bonfire night waited until the chicks could fly.'"
+  },
+  {
+   "id": "x_bonfire",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Nestpile the Patient'"
+  },
+  {
+   "id": "x_campfire",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Rescue-by-glow cluster with x_matchstick_fire and i_matchstick Legendaries; name describes the Rare.",
+   "suggestion": "'Burned so cosily at the campsite that the tents shuffled closer in the night, and everyone woke up in one big tent pile.'"
+  },
+  {
+   "id": "x_campfire",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Fire That Told Ghost Stories' describes the Rare.",
+   "suggestion": "'Campcuddle the Cosy Fire'"
+  },
+  {
+   "id": "x_campfire",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Fine joke (owls asked for quiet) but a crowd singalong; could be sharper.",
+   "suggestion": "'Got the whole campsite singing so loudly that the owls asked for quiet and the moon went behind a cloud.'"
+  },
+  {
+   "id": "x_chess_clock",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Fifty players gasping is a crowd reaction.",
+   "suggestion": "'Got its two sides muddled and made both players wait for each other all afternoon. Their pizza arrived, went cold and was eaten by the referee.'"
+  },
+  {
+   "id": "x_chess_clock",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Double Wait'"
+  },
+  {
+   "id": "x_compact_mirror_case",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Clicking shut in a library is a trait; and 'Sunsignaller' describes signalling, which is in the Epic.",
+   "suggestion": "'Flashes sunlight into anyone's eyes across a whole playground. Uses it to point out spinach in people's teeth.'"
+  },
+  {
+   "id": "x_compact_mirror_case",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Twenty people waving back is a crowd; signalling now belongs to the Rare.",
+   "suggestion": "'Bounced the sun so hard off the beach that the lifeguard thought it was a shark signal and cleared the whole sea.'"
+  },
+  {
+   "id": "x_compact_mirror_case",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Shark Alarm Flash'"
+  },
+  {
+   "id": "x_compact_mirror_case",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Rescue with no punchline.",
+   "suggestion": "'Signalled a passing ship from a stranded rowing boat, and the ship turned round. The captain only wanted to borrow it.'"
+  },
+  {
+   "id": "x_compost",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Near-copy of w05 i_manhole_cover Uncommon (steam on cold mornings, as if breathing). Also a trait.",
+   "suggestion": "'Turns banana skins into soil overnight, so nobody can finish a banana before it has been composted.'"
+  },
+  {
+   "id": "x_compost",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Overnight Rotter'"
+  },
+  {
+   "id": "x_compost",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Uses the stock 'won first prize at the show' frame.",
+   "suggestion": "'Grew a pumpkin so big on its own that the family now uses it as a garden shed. The worms pop round for tea.'"
+  },
+  {
+   "id": "x_compost",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Pumpkinshed the Generous'"
+  },
+  {
+   "id": "x_crumpled_paper",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Office basketball repeats its own Rare.",
+   "suggestion": "'Unfolded itself in the bin and turned out to be the map for the school fair. The whole school dug through the bin to find the bouncy castle.'"
+  },
+  {
+   "id": "x_crumpled_paper",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Bin Map Muddle'"
+  },
+  {
+   "id": "x_crumpled_paper",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Paper Ball That Scored' describes the Rare/Epic, not the famous-song Legendary.",
+   "suggestion": "'Hitscrunch, the Lost Song'"
+  },
+  {
+   "id": "x_crumpled_paper",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "A 'Blaze' on paper in a bin nudges toward burning rubbish.",
+   "suggestion": "'Hot Shot Toss'"
+  },
+  {
+   "id": "x_cuckoo_clock",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every clock in the shop at once: crowd, no joke.",
+   "suggestion": "'Cuckooed so convincingly at midnight that a real cuckoo moved in and laid an egg behind the little door.'"
+  },
+  {
+   "id": "x_cuckoo_clock",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Egg in the Door'"
+  },
+  {
+   "id": "x_cuckoo_clock",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (every hour for a hundred years).",
+   "suggestion": "'Popped its bird out so hard one noon that the bird flew off, toured the forest for a week and came back with a friend.'"
+  },
+  {
+   "id": "x_cuckoo_clock",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Tweetwell the Wanderer'"
+  },
+  {
+   "id": "x_cuckoo_clock",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Midnight Cuckoo Chorus').",
+   "suggestion": "'Twelve O'Clock Pop'"
+  },
+  {
+   "id": "x_digital_alarm",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "'Snoozehammer' does not describe flashing 12:00 after a power cut.",
+   "suggestion": "'Twelveflasher'"
+  },
+  {
+   "id": "x_digital_alarm",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Everyone woke at six on the school trip: crowd, no joke.",
+   "suggestion": "'Beeped so loudly through the wall that the neighbours got up, got dressed and went to work on a Saturday.'"
+  },
+  {
+   "id": "x_digital_alarm",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Saturday Shriek'"
+  },
+  {
+   "id": "x_digital_alarm",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Catching a flight is small for a Legendary.",
+   "suggestion": "'Woke up a bear at the zoo three weeks before spring. The bear now has its own snooze button.'"
+  },
+  {
+   "id": "x_digital_alarm",
+   "field": "moves.kit.alarm_ring",
+   "severity": "low",
+   "issue": "Legend 'Alarm Startle' and kit 'Alarm Blast' are both Legendary-only stuns with near-identical names.",
+   "suggestion": "'Six O'Clock Siren'"
+  },
+  {
+   "id": "x_door_handle",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Same full-hands premise as the Common.",
+   "suggestion": "'Is always on the opposite side to the one you expected, so everyone pats the door like a lost cat.'"
+  },
+  {
+   "id": "x_door_handle",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Oppositesider'"
+  },
+  {
+   "id": "x_door_handle",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of x_glass_door Epic (first day of the sales, shoppers waiting).",
+   "suggestion": "'Gave a whole office a static shock at once on woolly jumper day, and everyone's hair stood up for the team photo.'"
+  },
+  {
+   "id": "x_door_handle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Static Team Photo'"
+  },
+  {
+   "id": "x_door_handle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (turned a million times, still clicks), and the name describes the Rare.",
+   "suggestion": "'Shocked a passing thundercloud by mistake, and the thundercloud has kept away from the house ever since.'"
+  },
+  {
+   "id": "x_door_handle",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Sparkgrip the Storm-Scarer'"
+  },
+  {
+   "id": "x_door_handle",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Daze' names stun; the variants are defdown/defdown/burn.",
+   "suggestion": "'Stuck Door Shove'"
+  },
+  {
+   "id": "x_door_knocker",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Knocked by every child on dress-up night: crowd, no joke.",
+   "suggestion": "'Was knocked so hard that the door next door opened instead, and the two families have swapped houses ever since.'"
+  },
+  {
+   "id": "x_door_knocker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Wrong Door Knock'"
+  },
+  {
+   "id": "x_door_knocker",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Waking a napping grandad is small.",
+   "suggestion": "'Knocked so loudly once that the whole house woke up and walked to the seaside. It came back sunburnt.'"
+  },
+  {
+   "id": "x_door_knocker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Thunderknock the Brass Lion'"
+  },
+  {
+   "id": "x_door_knocker",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Daze' names stun; the variants are defdown/defdown/burn.",
+   "suggestion": "'Knock Knock Bang'"
+  },
+  {
+   "id": "x_doorknob",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A sock hung on it is not a power.",
+   "suggestion": "'Locks itself whenever someone says the word bath. Children have been using it for years.'"
+  },
+  {
+   "id": "x_doorknob",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Bathdodger'"
+  },
+  {
+   "id": "x_doorknob",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Uncommon, Epic and Legendary are all 'falls off'. Keep the Uncommon.",
+   "suggestion": "'Turned the wrong way so stubbornly that the whole family went in and out through the cat flap all weekend.'"
+  },
+  {
+   "id": "x_doorknob",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Cat Flap Weekend'"
+  },
+  {
+   "id": "x_doorknob",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Third falls-off line; found fifty years later is a long-time formula.",
+   "suggestion": "'Was turned so often that it unscrewed the whole front door, which walked off to find a quieter house.'"
+  },
+  {
+   "id": "x_doorknob",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Knobbert the Unscrewer'"
+  },
+  {
+   "id": "x_doorknob",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Twist Twist' suggests a multi-hit on a single defdown hit.",
+   "suggestion": "'Twist and Crack'"
+  },
+  {
+   "id": "x_dumpster",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Overflowing is a state, not a power.",
+   "suggestion": "'Swallows anything left near it, including a parked bike and a builder's lunch. It will not give the lunch back.'"
+  },
+  {
+   "id": "x_dumpster",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Lunchgobbler'"
+  },
+  {
+   "id": "x_dumpster",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Swallowed-so-much cluster with trash_can and x_skip Legendaries.",
+   "suggestion": "'Was emptied so rarely that it grew a little roof garden, and the market traders now eat their lunch up there.'"
+  },
+  {
+   "id": "x_dumpster",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Rooftop Greenbin'"
+  },
+  {
+   "id": "x_dumpster",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Crack' names defence down but the move is poison.",
+   "suggestion": "'Stinky Lid Pong'"
+  },
+  {
+   "id": "x_elevator",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Squeeze at rush hour: crowd with no joke.",
+   "suggestion": "'Squeezed in so many workers at nine o'clock that the doors closed on a tie, and the tie rode up and down all morning without its owner.'"
+  },
+  {
+   "id": "x_elevator",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Tie Lift'"
+  },
+  {
+   "id": "x_elevator",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Line is funny; the name is the monotonous shape.",
+   "suggestion": "'Floorskipper the Fourthless'"
+  },
+  {
+   "id": "x_fire_pit",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-copy of x_bonfire Common (smoke follows whoever moves). Change the fire pit.",
+   "suggestion": "'Keeps one log that will not burn, no matter how many times the grown-ups turn it over.'"
+  },
+  {
+   "id": "x_fire_pit",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "'Smokeswapper' describes the old line.",
+   "suggestion": "'Stubbornlog'"
+  },
+  {
+   "id": "x_fire_pit",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Kept the party warm: no joke.",
+   "suggestion": "'Kept the November garden party so warm that everyone forgot it was November, and somebody got the paddling pool out.'"
+  },
+  {
+   "id": "x_fire_pit",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Paddling Pool November'"
+  },
+  {
+   "id": "x_fire_pit",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Power cut / neighbours became friends is sincere and shares the power-cut setting with x_match and x_pillar_candle.",
+   "suggestion": "'Glowed so warmly one winter night that the frost on the whole street gave up, and next door's roses bloomed in January.'"
+  },
+  {
+   "id": "x_fire_pit",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Frostender, the Winter Rose'"
+  },
+  {
+   "id": "x_fireplace",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Drawing the family round it is a trait, not a power.",
+   "suggestion": "'Blows its smoke back down the chimney whenever someone opens a window, so the whole room smells like a kipper.'"
+  },
+  {
+   "id": "x_fireplace",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Backdrafter'"
+  },
+  {
+   "id": "x_fireplace",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of x_wood_stove Epic (kept the house warm through the snowstorm).",
+   "suggestion": "'Warmed the house so well during the snowstorm that the snowman outside melted, walked in and asked to sit closer.'"
+  },
+  {
+   "id": "x_fireplace",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Snowman Visitor'"
+  },
+  {
+   "id": "x_fireplace",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Same cat every evening of its life: endurance formula.",
+   "suggestion": "'Burned one log so slowly that it lasted the whole winter. The log is now part of the family and has its own chair.'"
+  },
+  {
+   "id": "x_fireplace",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Slowburn the Everlasting Log'"
+  },
+  {
+   "id": "x_firework",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Child safety: the joke is waiting so long after lighting that people think it has gone out, which is exactly when you must never go back to a firework.",
+   "suggestion": "'Comes in a box with a picture far more exciting than the firework inside.'"
+  },
+  {
+   "id": "x_firework",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Boxboaster'"
+  },
+  {
+   "id": "x_firework",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Safety: a firework going off 'at the wrong end of the field' near a crowd reads as a misfire.",
+   "suggestion": "'Burst into a shape so like a giant ice cream that the whole crowd went to the van at once, and the van ran out.'"
+  },
+  {
+   "id": "x_firework",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Sky Ice Cream'"
+  },
+  {
+   "id": "x_firework",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Rocket That Wrote in the Sky' is the same name shape as x_sparkler 'The Sparkler That Wrote in the Sky'.",
+   "suggestion": "'Skysmile the Disputed'"
+  },
+  {
+   "id": "x_firework",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "Hiding dogs is a real animal-welfare worry; a lighter consequence reads better.",
+   "suggestion": "'Bangs so loudly that every car alarm in the street joins in, one after the other.'"
+  },
+  {
+   "id": "x_first_aid_box",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (twenty years), though 'mostly plasters' is a nice touch.",
+   "suggestion": "'Patched up a whole football team, both goalposts and the referee's whistle in one match, and only ran out of lollipops.'"
+  },
+  {
+   "id": "x_first_aid_box",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Plasterella the Prepared'"
+  },
+  {
+   "id": "x_first_aid_box",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Antiseptic is clean; poison names should stink.",
+   "suggestion": "'Old Sling Whiff'"
+  },
+  {
+   "id": "x_first_aid_kit",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Always being ready is helpful, not troublesome.",
+   "suggestion": "'Packs itself into every bag, so the family carried seven first aid kits to the beach and no sandwiches.'"
+  },
+  {
+   "id": "x_first_aid_kit",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Sevenpack'"
+  },
+  {
+   "id": "x_first_aid_kit",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A tumble on scree is a real injury with no joke.",
+   "suggestion": "'Unzipped on a windy hilltop, and the bandages flew off like streamers and wrapped up a whole flock of sheep.'"
+  },
+  {
+   "id": "x_first_aid_kit",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Sheep Wrap'"
+  },
+  {
+   "id": "x_first_aid_kit",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Antiseptic Sting Startle' is a clumsy three-part name.",
+   "suggestion": "'Cold Spray Startle'"
+  },
+  {
+   "id": "x_flare",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary are all signalling to boats. Keep the Legendary.",
+   "suggestion": "'Burns underwater, which nobody believes until the fish start queuing to read by it.'"
+  },
+  {
+   "id": "x_flare",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Underwaterglow'"
+  },
+  {
+   "id": "x_flare",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Second signal line, crowd turning to look.",
+   "suggestion": "'Lit up the bay so brightly during the drill that the lighthouse thought it had been replaced and switched itself off in a huff.'"
+  },
+  {
+   "id": "x_flare",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Lighthouse Huff'"
+  },
+  {
+   "id": "x_flare",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'The Flare That Called the Lifeboat' is the monotonous shape.",
+   "suggestion": "'Redlight the Rescuer'"
+  },
+  {
+   "id": "x_flare",
+   "field": "moves.kit.melt",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Glow Siphon Flare').",
+   "suggestion": "'Red Glow Siphon'"
+  },
+  {
+   "id": "x_full_length_mirror",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Outfit-check cluster with its own Common and x_wall_mirror Common/Epic.",
+   "suggestion": "'Tipped over onto the bed during dressing up, and the bedroom looked like it went on for ever. The cat is still looking for the end.'"
+  },
+  {
+   "id": "x_full_length_mirror",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Endless Bedroom'"
+  },
+  {
+   "id": "x_full_length_mirror",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_wall_mirror Legendary (first day of school outfits) and a 'hundred... every one' formula.",
+   "suggestion": "'Liked one outfit so much that it kept the reflection, and its owner has been wearing an invisible jumper ever since.'"
+  },
+  {
+   "id": "x_full_length_mirror",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Outfitta the Approver'"
+  },
+  {
+   "id": "x_full_length_mirror",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Crack Crack' suggests a multi-hit on a single hit.",
+   "suggestion": "'Full Length Crack'"
+  },
+  {
+   "id": "x_globe",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Planning trips to fifty countries is a crowd without consequence.",
+   "suggestion": "'Was spun so hard in geography that it flew off its stand, rolled out of school and was found two streets away, still pointing at Peru.'"
+  },
+  {
+   "id": "x_globe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Runaway World'"
+  },
+  {
+   "id": "x_globe",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Landing on an island three times is a coincidence, not a feat.",
+   "suggestion": "'Spun so fast once that the real Earth noticed and joined in, and everyone got an extra five minutes of Tuesday.'"
+  },
+  {
+   "id": "x_globe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Spinworld the Day-Stretcher'"
+  },
+  {
+   "id": "x_grandfather_clock",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (two hundred years, perfect time).",
+   "suggestion": "'Grew so tall over the years that it now pokes through the ceiling and keeps the time for the bedroom upstairs too.'"
+  },
+  {
+   "id": "x_grandfather_clock",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Lanky Longcase the Two-Storey'"
+  },
+  {
+   "id": "x_grandfather_clock",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Midnight Chime'), and 'Daze' names stun while the mutated variant poisons.",
+   "suggestion": "'Thirteenth Bong'"
+  },
+  {
+   "id": "x_grandfather_clock",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "'Every Sunday' is close to the 'polished every Sunday' stock frame.",
+   "suggestion": "'Has to be wound with a chain so long that whoever winds it ends up halfway up the stairs.'"
+  },
+  {
+   "id": "x_incense",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Close to w11 x_incense_stick Rare (everyone sneezes) and 'Coughcloud' makes children cough.",
+   "suggestion": "'Can make its smoke smell like anything, and it mostly chooses toast when everyone is hungry.'"
+  },
+  {
+   "id": "x_incense",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Toastsmeller'"
+  },
+  {
+   "id": "x_incense",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of w11 x_incense_stick Epic (whole street smelled of flowers).",
+   "suggestion": "'Smoked so much at a tea party that the teapot disappeared, and the guests poured tea into the fog for an hour.'"
+  },
+  {
+   "id": "x_incense",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Foggy Tea Party'"
+  },
+  {
+   "id": "x_incense",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of w11 x_incense_stick Legendary (scented a whole market street).",
+   "suggestion": "'Drifted its smoke into such perfect shapes that it drew a dragon over the house, and the neighbours came out to wave at it.'"
+  },
+  {
+   "id": "x_incense",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Cone That Scented the Market' repeats w11's 'The Stick That Scented a Street'.",
+   "suggestion": "'Dragonwisp the Smoke Painter'"
+  },
+  {
+   "id": "x_inhaler",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Helping its owner breathe is its job.",
+   "suggestion": "'Gives a puff so fresh that its owner can blow out every candle on a cake from across the room.'"
+  },
+  {
+   "id": "x_inhaler",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Bigbreath'"
+  },
+  {
+   "id": "x_inhaler",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Repeats the Epic (running a race) and has no punchline.",
+   "suggestion": "'Helped its owner blow up the biggest balloon at the school fair. It lifted the bouncy castle an inch off the ground.'"
+  },
+  {
+   "id": "x_inhaler",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Puffbelle the Balloon Blower'"
+  },
+  {
+   "id": "x_inhaler",
+   "field": "moves.kit.iodine_sting",
+   "severity": "medium",
+   "issue": "Calling medicine a bad smell is unkind to children who need an inhaler.",
+   "suggestion": "'Dusty Cap Whiff'"
+  },
+  {
+   "id": "x_keyhole",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Three generations formula, and the name ('Saw the Surprise') describes the Epic.",
+   "suggestion": "'Let a draught through so cold that the soup on the other side froze into a lolly. Grandma ate it anyway.'"
+  },
+  {
+   "id": "x_keyhole",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Frostwhistle the Draughty'"
+  },
+  {
+   "id": "x_keyhole",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Flash' names stun; the mutated variant burns.",
+   "suggestion": "'Spyhole Surprise'"
+  },
+  {
+   "id": "x_lab_flask",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Bubbling over is the same premise as x_beaker Common and x_test_tube Uncommon.",
+   "suggestion": "'Has a neck so narrow that every bottle brush gets stuck in it.'"
+  },
+  {
+   "id": "x_lab_flask",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Brushtrapper'"
+  },
+  {
+   "id": "x_lab_flask",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Science fair winner / famous scientist' cluster with x_beaker and x_test_tube Legendaries.",
+   "suggestion": "'Brewed a colour so new that the art teacher borrowed it, named it and painted the whole staffroom with it.'"
+  },
+  {
+   "id": "x_lab_flask",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Breaks the 'Professor X-sworth of the Lab' cluster.",
+   "suggestion": "'Swirlina the Colour Maker'"
+  },
+  {
+   "id": "x_lab_flask",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the Epic name ('Science Fair Volcano').",
+   "suggestion": "'Bubble Eruption'"
+  },
+  {
+   "id": "x_landfill",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every seagull in the county: crowd, and gulls are already the Common.",
+   "suggestion": "'Slid a little in the rain and pushed the bin lorry back down the hill it had just driven up.'"
+  },
+  {
+   "id": "x_landfill",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Lorry Slide'"
+  },
+  {
+   "id": "x_landfill",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "True to life but no punchline.",
+   "suggestion": "'Was covered in soil and trees and became the town's favourite park. The sledgers still find the odd teapot.'"
+  },
+  {
+   "id": "x_litter",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Same premise as the Common (blown into someone's garden).",
+   "suggestion": "'Hides in hedges so cleverly that the litter-pickers walk past it every single week.'"
+  },
+  {
+   "id": "x_litter",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Hedgelurker'"
+  },
+  {
+   "id": "x_litter",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Picked-up-on-clean-up-day cluster with x_soda_can_litter Epic and w11 x_cigarette_butt Epic.",
+   "suggestion": "'Blew into the goal so many times during one match that the referee named it player of the match.'"
+  },
+  {
+   "id": "x_litter",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Goalmouth Wrapper'"
+  },
+  {
+   "id": "x_litter",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Last Wrapper on the Beach' does not describe a wrapper blown across counties to a heron.",
+   "suggestion": "'Windwanderer the Wrapper'"
+  },
+  {
+   "id": "x_litter",
+   "field": "moves.kit.lid_slam",
+   "severity": "low",
+   "issue": "Litter has no lid.",
+   "suggestion": "'Wrapper Slap'"
+  },
+  {
+   "id": "x_magnifier",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Child safety: focusing the sun into a hot spot is how people start fires. Also flagged cosmic by lint.",
+   "suggestion": "'Makes everything look huge except the one thing you are actually looking for.'"
+  },
+  {
+   "id": "x_magnifier",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "'Sunspotter' describes the old line.",
+   "suggestion": "'Wrongzoomer'"
+  },
+  {
+   "id": "x_magnifier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Passed round on bug hunt day: crowd, no joke; and x_magnifying_glass is the same object, so give it a distinct Epic.",
+   "suggestion": "'Made one ant look so huge that the whole class screamed, and the ant had to be calmed down with a crumb.'"
+  },
+  {
+   "id": "x_magnifier",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Giant Ant Panic'"
+  },
+  {
+   "id": "x_magnifier",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Close to w10 x_flashlight_torch Legendary ('found a lost ... after three days').",
+   "suggestion": "'Found a lost earring in the carpet, plus four marbles, a baby tooth and an argument from last summer.'"
+  },
+  {
+   "id": "x_magnifier",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Eagle-Eye Ernestine'"
+  },
+  {
+   "id": "x_magnifying_glass",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of w07 x_fedora Uncommon ('makes everyone want to solve a mystery').",
+   "suggestion": "'Makes the holder's eye look enormous to everyone on the other side.'"
+  },
+  {
+   "id": "x_magnifying_glass",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Bigeye Lens'"
+  },
+  {
+   "id": "x_magnifying_glass",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Same missing-food-and-guilty-dog premise as its own Legendary.",
+   "suggestion": "'Zoomed in so hard on a crossword clue that the letters ran off the page, and the whole family chased them round the table.'"
+  },
+  {
+   "id": "x_magnifying_glass",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Runaway Letters'"
+  },
+  {
+   "id": "x_makeup_mirror",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Close to w08 x_makeup_bag Epic (theatre dressing room before the show), and no joke.",
+   "suggestion": "'Lit up so brightly that the theatre forgot to switch on the stage lights, and the whole show was performed in the dressing room.'"
+  },
+  {
+   "id": "x_makeup_mirror",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Dressing Room Premiere'"
+  },
+  {
+   "id": "x_makeup_mirror",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A hundred successful actors: formula, no punchline.",
+   "suggestion": "'Made one actor look so dazzling that the whole audience wore sunglasses for the second half.'"
+  },
+  {
+   "id": "x_makeup_mirror",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Glare' names stun; normal and Spectral variants poison.",
+   "suggestion": "'Big Close-Up'"
+  },
+  {
+   "id": "x_makeup_mirror",
+   "field": "moves.kit.vanity",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Glamour Boost Mirror').",
+   "suggestion": "'Lipstick Boost'"
+  },
+  {
+   "id": "x_match",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Grownupsonly Match' does not describe a match that goes out; it suits a safety Rare.",
+   "suggestion": "'Puffout'"
+  },
+  {
+   "id": "x_match",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Going out after three strikes repeats the Common (goes out) and Uncommon (will not strike).",
+   "suggestion": "'Lights only for grown-ups. When a child picks up the box, every match inside pretends to be asleep.'"
+  },
+  {
+   "id": "x_match",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Moves the safety name to the line it describes.",
+   "suggestion": "'Grownupsonly'"
+  },
+  {
+   "id": "x_match",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_birthday_candles Legendary (every candle on a 99/100-candle cake).",
+   "suggestion": "'Was the only match that would light on a soggy campsite, so the grown-ups gave it a round of applause and its own tiny tent.'"
+  },
+  {
+   "id": "x_match",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Dryhead the Campsite Hero'"
+  },
+  {
+   "id": "x_match",
+   "field": "moves.kit.melt",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Glow Siphon Match').",
+   "suggestion": "'Glow Borrow'"
+  },
+  {
+   "id": "x_matchstick_fire",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Lasting one candle repeats the Uncommon (goes out quickly), and 'Blowoutable' is the Uncommon's idea.",
+   "suggestion": "'Burns in whatever colour the birthday child asks for, held by a grown-up, and it has never once been asked for beige.'"
+  },
+  {
+   "id": "x_matchstick_fire",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Colourflame'"
+  },
+  {
+   "id": "x_matchstick_fire",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Candle to candle round the table is a gentle scene with no consequence.",
+   "suggestion": "'Lit the barbecue so slowly that everyone ate the salad, then the bread, then the salad again.'"
+  },
+  {
+   "id": "x_matchstick_fire",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Slowstart Barbecue'"
+  },
+  {
+   "id": "x_microscope",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Thirty children gasping at once is a crowd reaction.",
+   "suggestion": "'Showed the class what was living on the school sandwich, and the whole school brought packed lunches for a week.'"
+  },
+  {
+   "id": "x_microscope",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Sandwich Safari'"
+  },
+  {
+   "id": "x_microscope",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Line is fine; the name is the monotonous shape.",
+   "suggestion": "'Tinyzoo the Discoverer'"
+  },
+  {
+   "id": "x_monocle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Popping out at a party repeats the Uncommon (drops into the teacup), and it is a crowd.",
+   "suggestion": "'Glinted so cleverly at the fancy dress party that everyone took its wearer for a professor, and he gave an hour-long speech about cheese.'"
+  },
+  {
+   "id": "x_monocle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Cheese Lecture'"
+  },
+  {
+   "id": "x_monocle",
+   "field": "moves.kit.centrifuge",
+   "severity": "low",
+   "issue": "Clumsy suffix ('Spin Spin Monocle').",
+   "suggestion": "'Twirl Twirl Twirl'"
+  },
+  {
+   "id": "x_petri_dish",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Echoes the real penicillin story with no punchline; 'a scientist got very excited' is not a feat.",
+   "suggestion": "'Grew a mould so friendly that it started waving at visitors, and the school had to give it a name badge.'"
+  },
+  {
+   "id": "x_petri_dish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Fuzzbert the Friendly Mould'"
+  },
+  {
+   "id": "x_petri_dish",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Mould' suggests poison on a plain three-hit move (lint).",
+   "suggestion": "'Spot Spot Spot'"
+  },
+  {
+   "id": "x_petri_dish",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Shock' leans stun; the variants are poison/stun/defdown. A neutral pun would be safer.",
+   "suggestion": "'Petri Party'"
+  },
+  {
+   "id": "x_pillar_candle",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of w10 x_flashlight_torch Rare (shadows on the wall look like monsters, 67% overlap).",
+   "suggestion": "'Leans its flame towards whoever tells a fib, so the whole dinner table has gone suspiciously quiet.'"
+  },
+  {
+   "id": "x_pillar_candle",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Fibflicker'"
+  },
+  {
+   "id": "x_pillar_candle",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Power-cut cluster (x_match Epic, x_fire_pit Legendary) and a 'burned for a week' endurance line.",
+   "suggestion": "'Burned so calmly through a thunderstorm that the storm stopped to watch, and the whole town got one quiet evening.'"
+  },
+  {
+   "id": "x_pillar_candle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Stillflame the Storm Calmer'"
+  },
+  {
+   "id": "x_porta_potty",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "The long queue repeats its own Uncommon.",
+   "suggestion": "'Was delivered to the wrong field and became the most popular spot among the cows. They queued anyway.'"
+  },
+  {
+   "id": "x_porta_potty",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Cow Queue'"
+  },
+  {
+   "id": "x_porta_potty",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Pong' names poison; normal and Spectral variants burn.",
+   "suggestion": "'Festival Finale'"
+  },
+  {
+   "id": "x_porta_potty",
+   "field": "moves.kit.splash_back",
+   "severity": "low",
+   "issue": "Clumsy word order.",
+   "suggestion": "'Door Swing Startle'"
+  },
+  {
+   "id": "x_portable_toilet",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of w10 x_light_stand Common ('wobbles every time someone walks by'). Also the toilet pair (porta potty / portable toilet) needs its own angle: building sites.",
+   "suggestion": "'Arrives on a crane, so the builders have to wait for the crane every time it needs moving.'"
+  },
+  {
+   "id": "x_portable_toilet",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Craneride'"
+  },
+  {
+   "id": "x_portable_toilet",
+   "field": "moves.kit.bubble_up",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Gurgle Crack Hut').",
+   "suggestion": "'Blue Bubble Crack'"
+  },
+  {
+   "id": "x_potty",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Making a toddler feel big is a nice trait, not a troublesome power.",
+   "suggestion": "'Hides itself whenever the toddler is not in the mood, usually behind the sofa with the remote.'"
+  },
+  {
+   "id": "x_potty",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Sofasneaker'"
+  },
+  {
+   "id": "x_potty",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sincere, no feat or punchline.",
+   "suggestion": "'Trained a toddler so well that he started training the dog, and the dog now gets a sticker too.'"
+  },
+  {
+   "id": "x_potty",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Stickerchart the Proud'"
+  },
+  {
+   "id": "x_rain_gauge",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Measuring carefully is its job.",
+   "suggestion": "'Catches so much rain that it keeps the leftovers as its own private pond, with its own private frog.'"
+  },
+  {
+   "id": "x_rain_gauge",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Frogpond Gauge'"
+  },
+  {
+   "id": "x_rain_gauge",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Biggest storm in a hundred years / record books' is the record formula.",
+   "suggestion": "'Measured so much rain in one storm that the forecaster had to invent a new word for it. The word was BUCKETSPLOSH.'"
+  },
+  {
+   "id": "x_rain_gauge",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Bucketsplosh the Recorder'"
+  },
+  {
+   "id": "x_rain_gauge",
+   "field": "moves.legend",
+   "severity": "medium",
+   "issue": "'Crack' names defence down on a burn move.",
+   "suggestion": "'Sun-Baked Plastic'"
+  },
+  {
+   "id": "x_rear_view_mirror",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Hanging fuzzy dice is decoration, not a power.",
+   "suggestion": "'Shows what was behind the car five minutes ago, so the driver always knows where the ice cream van was.'"
+  },
+  {
+   "id": "x_rear_view_mirror",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Pastglancer'"
+  },
+  {
+   "id": "x_rear_view_mirror",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of i_car_mirror Legendary (lost dog/puppy following the car home). Change the rear-view side.",
+   "suggestion": "'Bounced the sun so sharply into a speed camera that the camera took a photo of itself.'"
+  },
+  {
+   "id": "x_rear_view_mirror",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Mirror That Saw the Sticker Fight' describes the Epic.",
+   "suggestion": "'Camera Dazzler'"
+  },
+  {
+   "id": "x_rubbish_heap",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-identical to x_landfill Common (seagulls arguing over a crust).",
+   "suggestion": "'Grows a new sofa on top every week, and nobody ever sees who brings it.'"
+  },
+  {
+   "id": "x_rubbish_heap",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Sofasprout'"
+  },
+  {
+   "id": "x_rubbish_heap",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Near-copy of trash_can Uncommon (smells so bad on hot days that the flies...).",
+   "suggestion": "'Has a pram, a lamp and a rocking horse sticking out of it, and the rocking horse rocks in the wind.'"
+  },
+  {
+   "id": "x_rubbish_heap",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Rockinghorse Heap'"
+  },
+  {
+   "id": "x_rubbish_heap",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Four words for a three-hit move.",
+   "suggestion": "'Toss Toss Toss'"
+  },
+  {
+   "id": "x_sand_timer_clock",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Timing tea perfectly is its job, and the Legendary repeats it.",
+   "suggestion": "'Stops its sand whenever the tea is not ready, so every cup is perfect and every guest is very late.'"
+  },
+  {
+   "id": "x_sand_timer_clock",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Board-game cluster with hourglass Common/Epic.",
+   "suggestion": "'Timed the eggs so badly at breakfast that the eggs hatched first. The chicks are called Three Minutes and Four Minutes.'"
+  },
+  {
+   "id": "x_sand_timer_clock",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Egg Timer Hatchery'"
+  },
+  {
+   "id": "x_sand_timer_clock",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (every pot of tea for fifty years) and repeats the Rare.",
+   "suggestion": "'Was turned over so many times that it ran out of sand and started timing with sugar. Every cup of tea now arrives sweeter.'"
+  },
+  {
+   "id": "x_sand_timer_clock",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Sugarglass the Tea Timer'"
+  },
+  {
+   "id": "x_scented_candle",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Feeling cosy is a mood, not a power.",
+   "suggestion": "'Smells of whatever you wish for, so the family all wished at once and the house smelled of pizza, roses and wet dog.'"
+  },
+  {
+   "id": "x_scented_candle",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Wishscent'"
+  },
+  {
+   "id": "x_scented_candle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'Smelled like a garden' is a crowd plus comparison (and shared with x_incense).",
+   "suggestion": "'Was lit in every room for spa night, and the smells mixed into one so strong that the dog sneezed itself out of the door.'"
+  },
+  {
+   "id": "x_scented_candle",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sincere holiday memory, no feat.",
+   "suggestion": "'Smelled so much like summer that the tulips came up in December to check. They went back down very cross.'"
+  },
+  {
+   "id": "x_scented_candle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Summerwhiff the Season Fibber'"
+  },
+  {
+   "id": "x_skip",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Filled with every old sofa: crowd, no joke.",
+   "suggestion": "'Was filled with every old sofa on the street in one weekend, and the neighbours climbed up and sat on it to watch the football.'"
+  },
+  {
+   "id": "x_skip",
+   "field": "names.epic",
+   "severity": "low",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Sofa Skip Stadium'"
+  },
+  {
+   "id": "x_snow_globe",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Holding a tiny village is a trait, not a power.",
+   "suggestion": "'Makes it snow in the room around it, but only on whoever shook it too hard.'"
+  },
+  {
+   "id": "x_snow_globe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Snowshaker'"
+  },
+  {
+   "id": "x_soda_can_litter",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of w11 x_cigarette_butt Epic ('picked up by every volunteer... bins were full by lunch').",
+   "suggestion": "'Rattled down the high street on a windy day, and half the town marched behind it thinking it was a parade.'"
+  },
+  {
+   "id": "x_soda_can_litter",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Tin Can Parade'"
+  },
+  {
+   "id": "x_sparkler",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Gloveneeder' describes the Common (gloves).",
+   "suggestion": "'Starfountain'"
+  },
+  {
+   "id": "x_sparkler",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Lit by the whole family at once: crowd scene.",
+   "suggestion": "'Was waved so wildly by the grown-ups that they forgot how to stop, and the neighbours thought there was a disco next door.'"
+  },
+  {
+   "id": "x_sparkler",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Garden Disco Fizz'"
+  },
+  {
+   "id": "x_sparkler",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Writing in the air repeats the Uncommon, and the name shape duplicates x_firework's Legendary.",
+   "suggestion": "'Fizzed so brightly at the garden party that the stars blinked first and went to bed early.'"
+  },
+  {
+   "id": "x_sparkler",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Starwinker the Bright'"
+  },
+  {
+   "id": "x_sundial_garden",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Telling the time accurately is its job.",
+   "suggestion": "'Moves its shadow to whatever time it likes, so in this garden it is always half past ice cream.'"
+  },
+  {
+   "id": "x_sundial_garden",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Shadowshifter'"
+  },
+  {
+   "id": "x_sundial_garden",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "The clocks-changing premise repeats the Uncommon (an hour off in summer).",
+   "suggestion": "'Cast such a long shadow at sunset that the garden party thought it was bedtime and went home before the cake.'"
+  },
+  {
+   "id": "x_sundial_garden",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Early Bedtime Shadow'"
+  },
+  {
+   "id": "x_sundial_garden",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (three hundred years without a battery).",
+   "suggestion": "'Told the time so confidently one cloudy day that the sun came out to check, and has never been late since.'"
+  },
+  {
+   "id": "x_sundial_garden",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Shadowboss the Sun Checker'"
+  },
+  {
+   "id": "x_syringe",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Prick Prick Prick' is not gentle for a needle a child may fear.",
+   "suggestion": "'Scratch Scratch Scratch'"
+  },
+  {
+   "id": "x_syringe",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Vaccines are a sensitive topic; keep it gentle and give it a joke instead of a school-wide queue.",
+   "suggestion": "'Was so gentle at the school check-up that the loudest crier only noticed when it was time for the sticker.'"
+  },
+  {
+   "id": "x_syringe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Sticker Surprise'"
+  },
+  {
+   "id": "x_syringe",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Kept a whole town healthy' is a public-health claim with no joke.",
+   "suggestion": "'Gave a nervous elephant at the zoo its check-up so gently that the elephant asked for a sticker too.'"
+  },
+  {
+   "id": "x_syringe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Stickerwell the Gentle'"
+  },
+  {
+   "id": "x_tea_light_candle",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Fitting every lantern is a trait.",
+   "suggestion": "'Hops between lanterns when nobody is looking, so the lantern you just lit goes dark and the one behind you glows.'"
+  },
+  {
+   "id": "x_tea_light_candle",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Lanternhopper'"
+  },
+  {
+   "id": "x_tea_light_candle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Guests following the glow: no joke.",
+   "suggestion": "'Lined the garden path so prettily that the hedgehogs used it as a runway all night.'"
+  },
+  {
+   "id": "x_tea_light_candle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Hedgehog Runway'"
+  },
+  {
+   "id": "x_tea_light_candle",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Beautiful but no punchline.",
+   "suggestion": "'Lit a hundred paper lanterns at the river festival, and the fish came up to read the wishes written on them.'"
+  },
+  {
+   "id": "x_tea_light_candle",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'The Light Behind a Hundred Lanterns' is the monotonous shape.",
+   "suggestion": "'Lanternwick the Hundredfold'"
+  },
+  {
+   "id": "x_tea_light_candle",
+   "field": "moves.kit.melt",
+   "severity": "medium",
+   "issue": "Doubled 'Snatch Snatch' on a single drain.",
+   "suggestion": "'Wax Pool Grab'"
+  },
+  {
+   "id": "x_telescope",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Seeing craters clearly is its job (and cosmic below Legendary).",
+   "suggestion": "'Sees so far that it spotted next week's weather and spoiled the surprise for everyone.'"
+  },
+  {
+   "id": "x_telescope",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Weatherpeeker'"
+  },
+  {
+   "id": "x_telescope",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A queue down the hill is a crowd.",
+   "suggestion": "'Was pointed the wrong way at the star party, and fifty children spent an hour admiring a very surprised owl.'"
+  },
+  {
+   "id": "x_telescope",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Owl Party'"
+  },
+  {
+   "id": "x_telescope",
+   "field": "moves.kit.hypothesis",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Zoom Boost Star').",
+   "suggestion": "'Zoom In Boost'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Fizzing over is the lab-glass cluster premise (beaker, flask).",
+   "suggestion": "'Has a rubber bung so tight that it shoots across the room when it finally comes out.'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Bungpopper'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of x_lab_flask Rare (changes colour, the class gasps/claps). The flask keeps it.",
+   "suggestion": "'Makes anything inside it ten times bigger, so the teacher keeps the cress seeds well away from it.'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Growtube'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Foam-everywhere cluster with x_beaker and x_lab_flask Epics.",
+   "suggestion": "'Got mixed up with every other tube in the lab and made a smell so strong that the lesson finished on the playing field.'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Field Lesson Pong'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Famous-scientist cluster with x_beaker and x_lab_flask Legendaries.",
+   "suggestion": "'Held a sample of the sea so well that tiny waves still crash inside it, and seagulls follow anyone who carries it.'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Breaks the 'Doctor X-sworth of the Lab' cluster.",
+   "suggestion": "'Tidetube the Pocket Sea'"
+  },
+  {
+   "id": "x_test_tube",
+   "field": "moves.kit.reaction",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Bunsen Heat Tube').",
+   "suggestion": "'Bunsen Scorch'"
+  },
+  {
+   "id": "x_test_tube_rack",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Near-copy of x_test_tube Common (rolls off the table).",
+   "suggestion": "'Has one hole that is always a bit too small, so one tube has to stand on tiptoe.'"
+  },
+  {
+   "id": "x_test_tube_rack",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Tiptoe Rack'"
+  },
+  {
+   "id": "x_test_tube_rack",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Keeping the lab tidy is its job.",
+   "suggestion": "'Keeps every tube in alphabetical order, even unlabelled ones, and argues with the teacher about it.'"
+  },
+  {
+   "id": "x_test_tube_rack",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A row at the science fair: no consequence.",
+   "suggestion": "'Held every experiment at the science fair in one long row, and when one tube fizzed, the whole row fizzed in a wave.'"
+  },
+  {
+   "id": "x_test_tube_rack",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Fizzing Wave'"
+  },
+  {
+   "id": "x_test_tube_rack",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (three generations, never dropped one).",
+   "suggestion": "'Held twelve tubes perfectly still while the whole sports day ran through the lab by mistake.'"
+  },
+  {
+   "id": "x_test_tube_rack",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Steadystand the Unspilt'"
+  },
+  {
+   "id": "x_thermometer",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Feverfinder' contradicts the Rare (it always says you are fine), and the Legendary name describes this Rare.",
+   "suggestion": "'Nosickday'"
+  },
+  {
+   "id": "x_thermometer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Flu-season crowd and stickers: no joke.",
+   "suggestion": "'Was so honest during flu season that the whole class went back to school, including the hamster, who had been faking.'"
+  },
+  {
+   "id": "x_thermometer",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Hamster Fake-Out'"
+  },
+  {
+   "id": "x_thermometer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (twenty years, never wrong).",
+   "suggestion": "'Took the temperature of a summer heatwave and told it to go to bed. The heatwave left early.'"
+  },
+  {
+   "id": "x_thermometer",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'The Thermometer That Said You Were Fine' describes the Rare.",
+   "suggestion": "'Coolwell, the Heatwave Nurse'"
+  },
+  {
+   "id": "x_thermometer",
+   "field": "moves.kit.check_up",
+   "severity": "low",
+   "issue": "'Check Check Crack' reads as a multi-hit.",
+   "suggestion": "'Reading Crack'"
+  },
+  {
+   "id": "x_toilet_cistern",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Close to w10 x_ceiling_light Rare (pull cord always out of reach).",
+   "suggestion": "'Takes so long to refill that the next person waits outside humming the whole time.'"
+  },
+  {
+   "id": "x_toilet_cistern",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Slowrefill'"
+  },
+  {
+   "id": "x_toilet_cistern",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Loud refill at night repeats the Common.",
+   "suggestion": "'Refilled so eagerly one night that the water came up the pipes and made the kitchen tap gargle a tune.'"
+  },
+  {
+   "id": "x_toilet_cistern",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Gargle Tap Night'"
+  },
+  {
+   "id": "x_toilet_cistern",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (refilled a million times, still sings).",
+   "suggestion": "'Sang while refilling so beautifully that the neighbours recorded it, and it now has more listeners than the radio.'"
+  },
+  {
+   "id": "x_toilet_cistern",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Gurglina the Singing Tank'"
+  },
+  {
+   "id": "x_toilet_cistern",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Refill' suggests healing on a defdown/burn attack (lint).",
+   "suggestion": "'Pipe Rumble'"
+  },
+  {
+   "id": "x_toilet_roll_holder",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Unrolling the roll is toilet_paper's Rare premise.",
+   "suggestion": "'Hides the spare roll somewhere new every week, and only gives clues.'"
+  },
+  {
+   "id": "x_toilet_roll_holder",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Rollhider'"
+  },
+  {
+   "id": "x_toilet_roll_holder",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Cat-unrolled-the-roll is the same as toilet_paper Rare and Epic.",
+   "suggestion": "'Spun so fast during one sneeze that the roll wrapped the bathroom like a cocoon, and the family had to snip its way out.'"
+  },
+  {
+   "id": "x_toilet_roll_holder",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Bathroom Cocoon'"
+  },
+  {
+   "id": "x_toilet_roll_holder",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-identical to toilet_paper Legendary ('in a house/family of six, which nobody can explain'). Change the holder.",
+   "suggestion": "'Turned itself the right way round overnight in every house on the street, and ended a hundred family arguments.'"
+  },
+  {
+   "id": "x_toilet_roll_holder",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Rightway the Peacemaker'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Names are swapped: the Common slides off, the Uncommon is fluffy.",
+   "suggestion": "'Slideslipper'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "Swap with the Common.",
+   "suggestion": "'Fluffycover'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Cosy so people stay long is a mood, not a power.",
+   "suggestion": "'Grows its fluff overnight, and by Friday the whole seat is lost inside a woolly cloud.'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Fluffgrower'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Family stopped complaining: no joke.",
+   "suggestion": "'Was put on every toilet in the house, and the visiting sheepdog spent the whole holiday trying to herd them.'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Bathroom Flock'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (twenty winters, never slipped).",
+   "suggestion": "'Grew so fluffy that it was sheared at the farm show, and its wool knitted a scarf for every grandad on the street.'"
+  },
+  {
+   "id": "x_toilet_seat_cover",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Lambsy the Shearable'"
+  },
+  {
+   "id": "x_toilet_tank",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Running all night repeats the Uncommon (and the Legendary).",
+   "suggestion": "'Dropped its heavy lid with a bang so loud that the whole hotel came out in their dressing gowns for a fire drill.'"
+  },
+  {
+   "id": "x_toilet_tank",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Lid Drop Drill'"
+  },
+  {
+   "id": "x_toilet_tank",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula (jiggled every night for thirty years) and near-copy of w10 x_plug Legendary shape; cistern/tank pair needs different angles.",
+   "suggestion": "'Was jiggled once so perfectly by grandad that it never ran again, and grandad now offers his jiggle to the whole street.'"
+  },
+  {
+   "id": "x_toilet_tank",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Jigglewell the Fixed'"
+  },
+  {
+   "id": "x_toilet_tank",
+   "field": "moves.kit.splash_back",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Splash Startle Tank').",
+   "suggestion": "'Tank Splash'"
+  },
+  {
+   "id": "x_torch_fire",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A smoke trail is a trait, not a power.",
+   "suggestion": "'Throws a shadow twice the size of whoever holds it, so every tour guide looks like a giant.'"
+  },
+  {
+   "id": "x_torch_fire",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Bigshadow Torch'"
+  },
+  {
+   "id": "x_torch_fire",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Visitors felt like knights: no joke.",
+   "suggestion": "'Lit the whole castle for the torchlight tour, and the suits of armour stood up straighter to be seen.'"
+  },
+  {
+   "id": "x_torch_fire",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Feast till dawn is the palace/feast stock frame with no punchline.",
+   "suggestion": "'Burned so brightly in the great hall that the castle ghost asked for a dimmer switch.'"
+  },
+  {
+   "id": "x_torch_fire",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Blazewell the Ghost Annoyer'"
+  },
+  {
+   "id": "x_trash_bag",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Near-copy of x_bin_bag Common (drips something down you on the way out).",
+   "suggestion": "'Has a drawstring that snaps the moment you pull it, so every bag gets tied by its own ears.'"
+  },
+  {
+   "id": "x_trash_bag",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Earknotter'"
+  },
+  {
+   "id": "x_trash_bag",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_bin_bag Legendary (made it to the lorry without a tear).",
+   "suggestion": "'Held so much rubbish that it was mistaken for a beanbag at the street party and sat on all evening. It held.'"
+  },
+  {
+   "id": "x_trash_bag",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Sofabag the Mighty'"
+  },
+  {
+   "id": "x_trash_bag",
+   "field": "moves.kit.garbage_toss",
+   "severity": "low",
+   "issue": "Four words for a three-hit move.",
+   "suggestion": "'Swing Swing Swing'"
+  },
+  {
+   "id": "x_tripod_head",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Near-copy of w11 x_level_tool Common (bubble never sits in the middle).",
+   "suggestion": "'Has a handle that sticks out exactly where the photographer's elbow wants to be.'"
+  },
+  {
+   "id": "x_tripod_head",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Matches the new Uncommon.",
+   "suggestion": "'Elbowjabber'"
+  },
+  {
+   "id": "x_tripod_head",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Panning smoothly is its job.",
+   "suggestion": "'Turns so smoothly that it secretly swings the camera towards the ice cream van in every holiday video.'"
+  },
+  {
+   "id": "x_tripod_head",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Icecreampanner'"
+  },
+  {
+   "id": "x_tripod_head",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Sentimental year-long project; 'made everyone cry' is not a punchline.",
+   "suggestion": "'Turned so slowly to film one sunrise that it filmed the sunset as well, and called it a very long video.'"
+  },
+  {
+   "id": "x_tripod_head",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Slowpan the Patient'"
+  },
+  {
+   "id": "x_urinal_stall",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Toilets must stay tasteful: 'splashes back' is too much.",
+   "suggestion": "'Flushes by itself whenever someone walks past, so everybody jumps.'"
+  },
+  {
+   "id": "x_urinal_stall",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Matches the new Common.",
+   "suggestion": "'Surpriseflush'"
+  },
+  {
+   "id": "x_urinal_stall",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "Clumsy suffix and splash imagery ('Splash Startle Stall').",
+   "suggestion": "'Sudden Flush Startle'"
+  },
+  {
+   "id": "x_urinal_stall",
+   "field": "moves.kit.porcelain_shell",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Porcelain Guard Stall').",
+   "suggestion": "'Porcelain Wall'"
+  },
+  {
+   "id": "x_urinal_stall",
+   "field": "moves.kit.splash_back",
+   "severity": "medium",
+   "issue": "Doubled 'Back Back' and splash imagery.",
+   "suggestion": "'Echo Flush Startle'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Mirror cluster: 'makes a small hallway look like a ballroom' repeats mirror Rare (room twice as big). Change the wall mirror.",
+   "suggestion": "'Shows the room as it looked this morning, so the tidied hallway always looks messy.'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Morningmirror'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Outfit check at the party repeats its Common and x_full_length_mirror.",
+   "suggestion": "'Was used by so many guests checking their hair that by ten o'clock the hallway had run out of reflection.'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Out of Reflection'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of x_full_length_mirror Legendary (first-day-of-school outfits) and a fifty-years formula.",
+   "suggestion": "'Bounced the hallway light so far down the stairs that it lit the cellar, and the cellar spiders put on sunglasses.'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Cellarshine the Glimmer'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Glass Crack Mirror').",
+   "suggestion": "'Hairline Crack'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "moves.kit.shatter",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Shatter Shatter Mirror').",
+   "suggestion": "'Splinter Splinter Splinter'"
+  },
+  {
+   "id": "x_wall_mirror",
+   "field": "moves.kit.vanity",
+   "severity": "medium",
+   "issue": "Doubled 'Boost Boost'.",
+   "suggestion": "'Last Look Boost'"
+  },
+  {
+   "id": "x_wood_stove",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Keeping the kettle warm is its job.",
+   "suggestion": "'Toasts bread through its glass door just by staring at it, so the toast is always ready before anyone wanted any.'"
+  },
+  {
+   "id": "x_wood_stove",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Matches the new Rare.",
+   "suggestion": "'Starertoaster'"
+  },
+  {
+   "id": "x_wood_stove",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Snowed-in warmth and cards: same scene as x_fireplace Epic and x_match Epic.",
+   "suggestion": "'Got so hot during the snowstorm that the snow round the cottage melted into a moat, and the postman arrived by canoe.'"
+  },
+  {
+   "id": "x_wood_stove",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Matches the new Epic.",
+   "suggestion": "'Moat Maker'"
+  },
+  {
+   "id": "x_wood_stove",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Hikers thanking it: sincere, no punchline.",
+   "suggestion": "'Kept a mountain hut so warm that a family of marmots knocked every evening and asked to sit by it.'"
+  },
+  {
+   "id": "x_wood_stove",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Matches the new Legendary.",
+   "suggestion": "'Hutwarm the Marmot Magnet'"
+  },
+  {
+   "id": "x_wood_stove",
+   "field": "moves.kit.melt",
+   "severity": "medium",
+   "issue": "Clumsy suffix ('Warmth Siphon Stove').",
+   "suggestion": "'Warmth Siphon'"
+  },
+  {
+   "id": "x_matchstick_fire",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Kept (i_matchstick and x_campfire change), but 'guided everyone home' could end on a smile.",
+   "suggestion": "'Stayed lit through a gust of wind long enough to light the lantern that guided everyone home, then took a tiny bow.'"
+  }
+ ]
+}

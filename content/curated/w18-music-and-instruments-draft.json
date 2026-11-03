@@ -596,6 +596,28 @@
         "ultimate": "Hot Brass Reveille"
       }
     },
+    "x_didgeridoo": {
+      "status": "draft",
+      "names": {
+        "common": "Dronetube",
+        "uncommon": "Buzzlips",
+        "rare": "Longhummer",
+        "epic": "Floorboard Hummer",
+        "legendary": "The Drone That Never Took a Breath"
+      },
+      "lore": {
+        "common": "Hums a long low drone that sounds like a giant, very relaxed bee.",
+        "uncommon": "Makes its player's lips tickle for an hour after every practice.",
+        "rare": "Drones so deeply that the floorboards hum along and the cutlery trembles.",
+        "epic": "Rumbled through a school assembly so deeply that the whole hall's chairs buzzed.",
+        "legendary": "Played a single drone for twenty minutes without a pause, and the audience forgot to breathe too."
+      },
+      "moves": {
+        "signature": "Drone Startle",
+        "legend": "Sunbaked Heat Drone",
+        "ultimate": "Deep Rumble"
+      }
+    },
     "x_euphonium": {
       "status": "draft",
       "names": {
@@ -616,6 +638,600 @@
         "signature": "Brass Burp Startle",
         "legend": "Bandstand Boost",
         "ultimate": "Warm Brass Heat"
+      }
+    },
+    "x_harmonica_instrument": {
+      "status": "draft",
+      "names": {
+        "common": "Mouthblues",
+        "uncommon": "Wheezeharp",
+        "rare": "Pocketwail",
+        "epic": "Porch Step Blues",
+        "legendary": "The Harmonica That Played the Railway"
+      },
+      "lore": {
+        "common": "Sits in a back pocket and comes out whenever there is a long wait.",
+        "uncommon": "Plays the wrong note on the in-breath every single time.",
+        "rare": "Wails a sad tune so well that even happy listeners start to sigh.",
+        "epic": "Played the blues on a station platform so well that the train waited for the last note.",
+        "legendary": "Played along with every train on the line for thirty years and never missed a whistle."
+      },
+      "moves": {
+        "signature": "Wail Wail Startle",
+        "legend": "Pocket Stink",
+        "ultimate": "Platform Blues"
+      }
+    },
+    "x_harmonica_small": {
+      "status": "draft",
+      "names": {
+        "common": "Tinyharp",
+        "uncommon": "Keyringtune",
+        "rare": "Pocketpeep",
+        "epic": "Lunchbox Ditty",
+        "legendary": "The Littlest Harmonica in the World"
+      },
+      "lore": {
+        "common": "Is so small that it lives on a keyring and plays four notes.",
+        "uncommon": "Gets lost in the bottom of a bag among the receipts and crumbs.",
+        "rare": "Plays its four notes so cheerfully that whole playgrounds start to hum.",
+        "epic": "Played a tiny tune at a picnic so sweetly that the ducks came out of the pond to hear it.",
+        "legendary": "Is so small and so loud that it won a talent show against a full-sized piano."
+      },
+      "moves": {
+        "signature": "Peep Peep Peep",
+        "legend": "Tiny Tune Startle",
+        "ultimate": "Keyring Ditty"
+      }
+    },
+    "x_kazoo": {
+      "status": "draft",
+      "names": {
+        "common": "Buzzhum",
+        "uncommon": "Hummerbuzz",
+        "rare": "Silliwhistle",
+        "epic": "Birthday Buzz Band",
+        "legendary": "The Kazoo That Joined the Orchestra"
+      },
+      "lore": {
+        "common": "Buzzes like a bee when somebody hums into it.",
+        "uncommon": "Makes every song sound slightly ridiculous, no matter how serious it is.",
+        "rare": "Turns any quiet moment into a giggling contest within seconds.",
+        "epic": "Led a whole birthday party in a buzzing band that made the grown-ups cry with laughter.",
+        "legendary": "Played a solo at a grand concert hall, and the violinists all asked to borrow it."
+      },
+      "moves": {
+        "signature": "Buzz Startle",
+        "legend": "Bee Guard",
+        "ultimate": "Silly Crack"
+      }
+    },
+    "x_melodica": {
+      "status": "draft",
+      "names": {
+        "common": "Blowkeys",
+        "uncommon": "Tubepiano",
+        "rare": "Breathtoner",
+        "epic": "Music Class Squeal",
+        "legendary": "The Melodica That Got the Band Together"
+      },
+      "lore": {
+        "common": "Is a little keyboard played by blowing into a tube, which confuses everybody.",
+        "uncommon": "Leaves a tiny puddle on its tube after every music lesson.",
+        "rare": "Squeals so brightly in class that every child wants a turn at once.",
+        "epic": "Played every part in the school band when the others forgot their instruments.",
+        "legendary": "Started a band at a bus stop that was so good it was booked for a festival."
+      },
+      "moves": {
+        "signature": "Squeal Startle",
+        "legend": "Band Boost",
+        "ultimate": "Tube Tune"
+      }
+    },
+    "x_piccolo": {
+      "status": "draft",
+      "names": {
+        "common": "Shrillflute",
+        "uncommon": "Tinypiper",
+        "rare": "Earpiercer",
+        "epic": "Marching Band Squeak",
+        "legendary": "The Piccolo Heard Above Everything"
+      },
+      "lore": {
+        "common": "Is the smallest flute in the band and somehow the loudest.",
+        "uncommon": "Hits a note so high that the dog leaves the room.",
+        "rare": "Plays such piercing notes that the glasses on the table ring along.",
+        "epic": "Played over the top of a whole marching band, and the crowd heard nothing else.",
+        "legendary": "Played a note so high that it is said every bat in town replied."
+      },
+      "moves": {
+        "signature": "Shrill Startle",
+        "legend": "High Note",
+        "ultimate": "Squeaky Solo"
+      }
+    },
+    "x_recorder": {
+      "status": "draft",
+      "names": {
+        "common": "Squeakpipe",
+        "uncommon": "Hootstick",
+        "rare": "Fingerhopper",
+        "epic": "School Assembly Squeal",
+        "legendary": "The Recorder That Played in Tune"
+      },
+      "lore": {
+        "common": "Squeaks a little on the first note and on most of the others.",
+        "uncommon": "Comes home from school every day and is practised loudly in the kitchen.",
+        "rare": "Plays the same nursery tune so often that the whole family hums it in their sleep.",
+        "epic": "Squeaked through a whole school assembly, and the head teacher clapped with her eyes shut.",
+        "legendary": "Played a whole song perfectly in tune once, and the school still talks about it."
+      },
+      "moves": {
+        "signature": "Squeak Squeak Startle",
+        "legend": "Spit Valve Stink",
+        "ultimate": "Assembly Squeal"
+      }
+    },
+    "x_sousaphone": {
+      "status": "draft",
+      "names": {
+        "common": "Wraparound",
+        "uncommon": "Bellhorn",
+        "rare": "Parade Tuba",
+        "epic": "Marching Oompah",
+        "legendary": "The Sousaphone That Led the Parade"
+      },
+      "lore": {
+        "common": "Wraps round its player like a shiny brass snake with an enormous mouth.",
+        "uncommon": "Catches the wind in its giant bell and spins its player round in the breeze.",
+        "rare": "Oompahs so loudly that every drum in the band has to work twice as hard.",
+        "epic": "Led a whole parade with an oompah so loud that the floats bounced along.",
+        "legendary": "Marched through a whole carnival without missing a note, and a pigeon nested in its bell."
+      },
+      "moves": {
+        "signature": "Oompah Startle",
+        "legend": "Brass Bell Stink",
+        "ultimate": "Parade Oompah"
+      }
+    },
+    "trumpet": {
+      "status": "draft",
+      "names": {
+        "common": "Brassblast",
+        "uncommon": "Valvebuzzer",
+        "rare": "Fanfareer",
+        "epic": "Royal Fanfare",
+        "legendary": "The Trumpet That Opened the Festival"
+      },
+      "lore": {
+        "common": "Is shiny and brassy and very proud of its loud, clear sound.",
+        "uncommon": "Plays a sour note whenever its player is trying to impress someone.",
+        "rare": "Blasts a fanfare so loud that everyone in the room stands up.",
+        "epic": "Played a fanfare at the school fete so loud that the tombola spun on its own.",
+        "legendary": "Opened the town festival with one note that echoed for a whole minute across the hills."
+      },
+      "moves": {
+        "signature": "Brass Blast Startle",
+        "legend": "Rest Break",
+        "ultimate": "Fanfare Startle"
+      }
+    },
+    "violin": {
+      "status": "draft",
+      "names": {
+        "common": "Bowscraper",
+        "uncommon": "Squeakstring",
+        "rare": "Chinpillow",
+        "epic": "Grade Two Screech",
+        "legendary": "The Violin That Made Everyone Cry"
+      },
+      "lore": {
+        "common": "Sits under the chin and squeaks a little whenever the bow slips.",
+        "uncommon": "Makes cats run for the garden whenever practice begins.",
+        "rare": "Plays a slow tune so beautifully that people forget the squeaky practice months.",
+        "epic": "Squeaked through a grade exam so bravely that the examiner gave it a round of applause.",
+        "legendary": "Played a tune so beautiful at a wedding that every single guest cried happy tears."
+      },
+      "moves": {
+        "signature": "Bow Startle",
+        "legend": "Screech Startle",
+        "ultimate": "Heartstring Solo"
+      }
+    },
+    "x_banana_bunch": {
+      "status": "draft",
+      "names": {
+        "common": "Handofbananas",
+        "uncommon": "Ripenrace",
+        "rare": "Fruitfloweth",
+        "epic": "Smoothie Emergency",
+        "legendary": "The Bunch That Stayed Yellow"
+      },
+      "lore": {
+        "common": "Hangs together in a happy yellow cluster on the fruit bowl.",
+        "uncommon": "Turns spotty brown all at the same time, the day after it is bought.",
+        "rare": "Ripens every fruit in the bowl beside it, so the apples go soft too.",
+        "epic": "Ripened all at once, and the whole family ate banana bread for a fortnight.",
+        "legendary": "Stayed perfectly yellow for a whole month, and the greengrocer came to see it."
+      },
+      "moves": {
+        "signature": "Bunch Startle",
+        "legend": "Fruit Bowl Rest",
+        "ultimate": "Ripening Rush"
+      }
+    },
+    "x_banana_peel": {
+      "status": "draft",
+      "names": {
+        "common": "Slipskin",
+        "uncommon": "Pavementpeel",
+        "rare": "Gripdropper",
+        "epic": "Playground Skid",
+        "legendary": "The Peel That Made a Teacher Dance"
+      },
+      "lore": {
+        "common": "Lies yellow side down on the floor, waiting for someone in a hurry.",
+        "uncommon": "Gets left on the bus seat by somebody who never finished their snack.",
+        "rare": "Makes anyone who steps on it do a little dance before they land.",
+        "epic": "Sent a whole football team sliding off the pitch like a row of skittles.",
+        "legendary": "Made a strict teacher do a spin so graceful that the whole school asked for lessons."
+      },
+      "moves": {
+        "signature": "Slip Startle",
+        "legend": "Slip Slip Slip",
+        "ultimate": "Skid Spin"
+      }
+    },
+    "x_banana_split": {
+      "status": "draft",
+      "names": {
+        "common": "Sundaesplit",
+        "uncommon": "Cherrytopper",
+        "rare": "Sprinklesplash",
+        "epic": "Ice Cream Parlour Dare",
+        "legendary": "The Split That Fed a Whole Table"
+      },
+      "lore": {
+        "common": "Has a banana, three scoops of ice cream and a cherry that nobody wants to share.",
+        "uncommon": "Melts just as everyone is still deciding who gets the cherry.",
+        "rare": "Makes everyone nearby suddenly decide that they want dessert too.",
+        "epic": "Was ordered as a dare and was so big that the whole table needed spoons to finish it.",
+        "legendary": "Fed a whole birthday party from one dish, and there was still a cherry left at the end."
+      },
+      "moves": {
+        "signature": "Brain Freeze Startle",
+        "legend": "Scoop Snatch",
+        "ultimate": "Sundae Split"
+      }
+    },
+    "x_bell": {
+      "status": "draft",
+      "names": {
+        "common": "Dingdong",
+        "uncommon": "Clangtop",
+        "rare": "Tablebell",
+        "epic": "Dinner Time Clang",
+        "legendary": "The Bell That Rang a Thousand Times"
+      },
+      "lore": {
+        "common": "Rings a clear ding whenever it is shaken, even when nobody meant to.",
+        "uncommon": "Rings loudly whenever anybody walks past it with heavy feet.",
+        "rare": "Clangs so loudly that every person in the house comes running for dinner.",
+        "epic": "Was rung for dinner so loudly that the neighbours came too.",
+        "legendary": "Has rung so many times in its life that it can ring itself when it hears a cake arriving."
+      },
+      "moves": {
+        "signature": "Ding Startle",
+        "legend": "Ding Snatch",
+        "ultimate": "Tarnish Stink"
+      }
+    },
+    "x_castanets": {
+      "status": "draft",
+      "names": {
+        "common": "Clackclap",
+        "uncommon": "Fingerclicker",
+        "rare": "Clackitty",
+        "epic": "Flamenco Fire",
+        "legendary": "The Castanets of a Thousand Beats"
+      },
+      "lore": {
+        "common": "Clacks together in the palm with a sound like chattering teeth.",
+        "uncommon": "Clicks at completely the wrong moment in every song.",
+        "rare": "Clicks so fast that anyone nearby starts stamping their feet.",
+        "epic": "Clacked through a whole school dance show, and the stage floor shook with stamping.",
+        "legendary": "Clicked a rhythm so fast at a fiesta that the musicians had to run to keep up."
+      },
+      "moves": {
+        "signature": "Clack Startle",
+        "legend": "Clack Crack",
+        "ultimate": "Fiesta Clatter"
+      }
+    },
+    "x_church_bell": {
+      "status": "draft",
+      "names": {
+        "common": "Towerbell",
+        "uncommon": "Hourdonger",
+        "rare": "Ropeswinger",
+        "epic": "Wedding Day Peal",
+        "legendary": "The Bell Heard Across Seven Villages"
+      },
+      "lore": {
+        "common": "Hangs high in a stone tower and rings out every hour across the rooftops.",
+        "uncommon": "Rings so early on a Sunday morning that the whole village wakes up.",
+        "rare": "Rings so loudly that pigeons fly off every roof in town at once.",
+        "epic": "Rang out for a wedding so joyfully that the whole village came out to throw petals.",
+        "legendary": "Rang so far on a still evening that it was heard in seven villages and a lighthouse."
+      },
+      "moves": {
+        "signature": "Dong Startle",
+        "legend": "Peal Peal Peal",
+        "ultimate": "Great Peal"
+      }
+    },
+    "x_cowbell": {
+      "status": "draft",
+      "names": {
+        "common": "Moobell",
+        "uncommon": "Fieldclonk",
+        "rare": "Meadowbonger",
+        "epic": "Alpine Clang",
+        "legendary": "The Cowbell That Brought the Herd Home"
+      },
+      "lore": {
+        "common": "Clonks gently as its cow wanders through the meadow.",
+        "uncommon": "Rings the moment the cow tries to sneak into the vegetable patch.",
+        "rare": "Clangs so loudly that every cow in the valley turns to look.",
+        "epic": "Clanged through a whole mountain festival, and every cow in the valley joined the parade.",
+        "legendary": "Brought a whole herd of cows home from the mountains in a storm, all in a neat line."
+      },
+      "moves": {
+        "signature": "Clonk Startle",
+        "legend": "Meadow Startle",
+        "ultimate": "Hot Clang"
+      }
+    },
+    "x_cymbal": {
+      "status": "draft",
+      "names": {
+        "common": "Crashshine",
+        "uncommon": "Hissdisc",
+        "rare": "Splashbrass",
+        "epic": "Grand Crash Moment",
+        "legendary": "The Cymbal That Ended Every Song"
+      },
+      "lore": {
+        "common": "Waits patiently for the one moment in the song when it gets to crash.",
+        "uncommon": "Crashes a beat too early every single time.",
+        "rare": "Crashes so loudly that the whole audience jumps out of their seats.",
+        "epic": "Crashed so loudly in the school concert that the head teacher woke up.",
+        "legendary": "Has ended so many songs with a crash that the band can't finish without it."
+      },
+      "moves": {
+        "signature": "Crash Startle",
+        "legend": "Crash Crack",
+        "ultimate": "Grand Crash"
+      }
+    },
+    "x_guitar_pick": {
+      "status": "draft",
+      "names": {
+        "common": "Plectrumpip",
+        "uncommon": "Sofaslipper",
+        "rare": "Strummerchip",
+        "epic": "Lost Pick Panic",
+        "legendary": "The Pick That Played a Thousand Gigs"
+      },
+      "lore": {
+        "common": "Is a tiny triangle of plastic that makes every strum sound sharper.",
+        "uncommon": "Vanishes into the sofa cushions the moment the song starts.",
+        "rare": "Hides so well that every guitarist in the house must strum with a coin instead.",
+        "epic": "Was lost and found seven times in one gig, once in the singer's hair.",
+        "legendary": "Played a thousand gigs without ever being lost, and was framed when it retired."
+      },
+      "moves": {
+        "signature": "Pick Startle",
+        "legend": "Lost Pick Stink",
+        "ultimate": "Big Strum Startle"
+      }
+    },
+    "x_handbell": {
+      "status": "draft",
+      "names": {
+        "common": "Ringhand",
+        "uncommon": "Teatimer",
+        "rare": "Chimebell",
+        "epic": "Handbell Choir",
+        "legendary": "The Bell Rung at Every Sports Day"
+      },
+      "lore": {
+        "common": "Rings a clear note when shaken, and is passed round the classroom for turns.",
+        "uncommon": "Rings by accident whenever anyone picks it up from the shelf.",
+        "rare": "Rings so sweetly that a whole hall goes quiet waiting for the next note.",
+        "epic": "Rang in a choir of handbells so beautifully that the audience joined in humming.",
+        "legendary": "Was rung at every sports day for fifty years, and every child still runs at its sound."
+      },
+      "moves": {
+        "signature": "Chime Startle",
+        "legend": "Bell Distraction",
+        "ultimate": "Bell Choir"
+      }
+    },
+    "x_hi_hat": {
+      "status": "draft",
+      "names": {
+        "common": "Chickclap",
+        "uncommon": "Pedalchick",
+        "rare": "Sizzlehat",
+        "epic": "Jazz Hi-Hat Sizzle",
+        "legendary": "The Hi-Hat That Kept the Beat"
+      },
+      "lore": {
+        "common": "Snaps its two cymbals together with a crisp chick-chick sound.",
+        "uncommon": "Sizzles so long after being hit that the drummer has to stop it with a hand.",
+        "rare": "Keeps a beat so tight that the bass player stops counting and just follows.",
+        "epic": "Kept a jazz band in time all night, and the dancers never missed a step.",
+        "legendary": "Has kept the beat for so many bands that drummers just hit it and let it do the work."
+      },
+      "moves": {
+        "signature": "Chick Startle",
+        "legend": "Chick Chick Distraction",
+        "ultimate": "Tight Beat"
+      }
+    },
+    "x_plantain_chips": {
+      "status": "draft",
+      "names": {
+        "common": "Crunchcoin",
+        "uncommon": "Saltysnap",
+        "rare": "Crispfan",
+        "epic": "Snack Time Crunch",
+        "legendary": "The Bag That Never Ran Out"
+      },
+      "lore": {
+        "common": "Crunches loudly enough to be heard across the playground.",
+        "uncommon": "Leaves a trail of salty crumbs down the sofa.",
+        "rare": "Makes anyone nearby ask for just one more until the bag is empty.",
+        "epic": "Was shared at a picnic so many times that every guest got exactly one crisp.",
+        "legendary": "Lasted a whole school trip without ever running out, and the coach still smells of salt."
+      },
+      "moves": {
+        "signature": "Crunch Startle",
+        "legend": "Snack Guard",
+        "ultimate": "Salty Crunch"
+      }
+    },
+    "x_rain_stick": {
+      "status": "draft",
+      "names": {
+        "common": "Raintube",
+        "uncommon": "Seedshower",
+        "rare": "Tiltpatter",
+        "epic": "Desert Rain Song",
+        "legendary": "The Stick That Made It Rain"
+      },
+      "lore": {
+        "common": "Patters like rain when tipped, and is never quite finished pattering.",
+        "uncommon": "Makes everyone who hears it think they left the window open.",
+        "rare": "Patters so convincingly that people go to the door with an umbrella.",
+        "epic": "Made a whole classroom put on their coats because they thought it was pouring.",
+        "legendary": "Was tipped so gently in a dry summer that the next day it really did rain."
+      },
+      "moves": {
+        "signature": "Patter Startle",
+        "legend": "Rain Guard",
+        "ultimate": "Rainmaker"
+      }
+    },
+    "x_shaker": {
+      "status": "draft",
+      "names": {
+        "common": "Rattleegg",
+        "uncommon": "Shimmyshaker",
+        "rare": "Beadmaraca",
+        "epic": "Samba Shake",
+        "legendary": "The Shaker That Started a Samba"
+      },
+      "lore": {
+        "common": "Rattles whenever it is moved, so it is impossible to hide in a toy box.",
+        "uncommon": "Rolls under the sofa and keeps rattling every time someone walks past.",
+        "rare": "Shakes a rhythm so catchy that toddlers start wiggling at once.",
+        "epic": "Started a samba in the kitchen that went out the door and down the street.",
+        "legendary": "Shook a carnival into life all by itself and led the whole parade round the square."
+      },
+      "moves": {
+        "signature": "Shake Startle",
+        "legend": "Rhythm Siphon",
+        "ultimate": "Samba Startle"
+      }
+    },
+    "x_singing_bowl": {
+      "status": "draft",
+      "names": {
+        "common": "Humbowl",
+        "uncommon": "Ringrim",
+        "rare": "Calmchime",
+        "epic": "Quiet Room Hum",
+        "legendary": "The Bowl That Hummed for an Hour"
+      },
+      "lore": {
+        "common": "Hums when its rim is rubbed with a wooden stick, like a very calm bee.",
+        "uncommon": "Keeps humming long after it is put down, so it is never quite silent.",
+        "rare": "Hums so soothingly that everyone in the room breathes more slowly.",
+        "epic": "Calmed a noisy classroom so completely that the teacher fell asleep at her desk.",
+        "legendary": "Hummed for a whole hour after one strike, and the cat sat beside it the entire time."
+      },
+      "moves": {
+        "signature": "Hum Startle",
+        "legend": "Calm Boost",
+        "ultimate": "Hum Stink"
+      }
+    },
+    "x_triangle": {
+      "status": "draft",
+      "names": {
+        "common": "Tingtri",
+        "uncommon": "Dingcorner",
+        "rare": "Chimepoint",
+        "epic": "Orchestra Ting",
+        "legendary": "The Triangle That Stole the Show"
+      },
+      "lore": {
+        "common": "Waits quietly through the whole piece for its single ting.",
+        "uncommon": "Gets dropped on the floor and tings much louder than it was supposed to.",
+        "rare": "Tings at exactly the right moment so brightly that everyone notices it.",
+        "epic": "Got one ting in the school concert and was cheered louder than the trumpets.",
+        "legendary": "Stole the whole show at an orchestra concert with one perfect ting at the very end."
+      },
+      "moves": {
+        "signature": "Ting Startle",
+        "legend": "Ting Heat",
+        "ultimate": "Final Ting Crack"
+      }
+    },
+    "x_wind_chime": {
+      "status": "draft",
+      "names": {
+        "common": "Breezetinkle",
+        "uncommon": "Porchjangle",
+        "rare": "Windtune",
+        "epic": "Stormy Night Jangle",
+        "legendary": "The Chime That Played Every Breeze"
+      },
+      "lore": {
+        "common": "Tinkles softly on the porch whenever the wind passes by.",
+        "uncommon": "Jangles all night during windy weather, keeping half the street awake.",
+        "rare": "Plays such a pretty tune in a breeze that people stop to listen on the path.",
+        "epic": "Jangled so loudly in a storm that the neighbours thought it was a fire alarm.",
+        "legendary": "Has played a different tune for every breeze for twenty years and never repeated one."
+      },
+      "moves": {
+        "signature": "Tinkle Tinkle Startle",
+        "legend": "Breeze Guard",
+        "ultimate": "Storm Jangle"
+      }
+    },
+    "xylophone": {
+      "status": "draft",
+      "names": {
+        "common": "Malletbar",
+        "uncommon": "Woodtinkle",
+        "rare": "Barhopper",
+        "epic": "Concert Hall Ripple",
+        "legendary": "The Xylophone That Played Every Note"
+      },
+      "lore": {
+        "common": "Has rows of wooden bars that bounce mallets back up with a hollow tock.",
+        "uncommon": "Gets bars knocked out of place whenever someone plays too hard.",
+        "rare": "Ripples out notes so fast that the audience can't see the mallets.",
+        "epic": "Played so fast at a concert that the mallets got warm and the bars glowed.",
+        "legendary": "Played every note in every key in one evening, and the orchestra stood up to cheer."
+      },
+      "moves": {
+        "signature": "Tock Startle",
+        "legend": "Mallet Rest",
+        "ultimate": "Ripple Run"
       }
     }
   }
