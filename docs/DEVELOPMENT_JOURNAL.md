@@ -75,11 +75,12 @@ Last updated: 2026-11-03, release v0.5.0 (full curated writing live for all 2,30
 | v0.4.7 | 51f3c50 | 2026-10-31 | Developer God Mode for Quick Monster Test Mode battles. |
 | v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
 | v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test.
-| v0.5.0 | (see RELEASING.md) | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. | |
+| v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. | |
 
 ## 4. Current state and next priorities
 
-- **Live: v0.5.0** (production `claude/snapmon-game-dev-7o667u`, GitHub Pages). Save format 3 (unchanged since v0.3.0).
+- **Live: v0.5.0** (merge 6ecd64f on production `claude/snapmon-game-dev-7o667u`, Pages run 24 green, tag v0.5.0).
+  Save format 3 (unchanged since v0.3.0). Feature branch: `content/full-writing-rollout`.
 - **Curated writing is live for all 2,308 objects** (names, flavour text, move display names; 5 rarities each):
   - previously approved: Pilot 01 (10 objects, v0.4.6; names added in v0.5.0) and Pilot 02 (50 objects, v0.4.8);
   - campaign: 22 batches w01–w22 (2,248 objects), developer-approved for release AS IS on 2026-11-03 (imperfect lines
