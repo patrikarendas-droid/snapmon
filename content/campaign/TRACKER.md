@@ -41,8 +41,8 @@
 | w09-gadgets-and-computers | 123 | 123 | done: 132 high / 261 medium / 27 low + 16 patterns | 393 fields (`patches/w09-gadgets-and-computers-editor-auto.json`) then `w09-self-fixes.json` | usb_key L deliberately calls back to C (lint medium accepted) |
 | w10-screens-sound-and-light | 98 | 98 | done: 185 high / 312 medium / 41 low + 11 patterns | 497 fields (`patches/w10-screens-sound-and-light-editor-auto.json`) then `w10-self-fixes.json` | |
 | w11-office-books-and-art | 112 | 112 | done: 86 high / 287 medium / 67 low + 11 patterns | 373 fields (`patches/w11-office-books-and-art-editor-auto.json`) then `w11-self-fixes.json` | sensitive objects written neutrally for developer review: x_bible (family book, no religious content), x_cigarette/x_cigarette_butt/x_vape (negative framing, litter/quitting), x_incense_stick, x_ballot_box (w08, class pet vote) |
-| w12-house-odds-and-ends | 101 | 101 | editor running (with w13) | self-fixes | many fire objects (matches x4, candles, bonfire, fireworks) written with safety framing |
-| w13-tools-and-sport | 98 | 98 | editor running (with w12) | self-fixes | i_slot = one-armed bandit (gambling, written as seaside arcade) |
+| w12-house-odds-and-ends | 101 | 101 | done: 126 high / 352 medium / 48 low + 11 patterns | 478 fields (`patches/w12-house-odds-and-ends-editor-auto.json`) then `w12-self-fixes.json` | many fire objects (matches x4, candles, bonfire, fireworks) written with safety framing |
+| w13-tools-and-sport | 98 | 98 | done: 110 high / 267 medium / 15 low + 12 patterns | 377 fields (`patches/w13-tools-and-sport-editor-auto.json`) then `w13-self-fixes.json` | i_slot = one-armed bandit, reframed by the editor as a retired pier arcade machine (no gambling) |
 | w14-garden-and-plants | 115 | 115 | pending | self-fixes | |
 | w15-trees-fruit-and-veg | 117 | 117 | pending | self-fixes | |
 | w16-toys-and-games | 85 | 85 | pending | self-fixes | |
