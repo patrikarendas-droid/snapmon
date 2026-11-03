@@ -43,7 +43,8 @@
 | w11-office-books-and-art | 112 | 112 | pending | self-fixes | sensitive objects written neutrally for developer review: x_bible (family book, no religious content), x_cigarette/x_cigarette_butt/x_vape (negative framing, litter/quitting), x_incense_stick, x_ballot_box (w08, class pet vote) |
 | w12-house-odds-and-ends | 101 | 101 | pending | self-fixes | many fire objects (matches x4, candles, bonfire, fireworks) written with safety framing |
 | w13-tools-and-sport | 98 | 98 | pending | self-fixes | i_slot = one-armed bandit (gambling, written as seaside arcade) |
-| w14–w22 | 895 | 0 | — | — | not started |
+| w14-garden-and-plants | 115 | 115 | pending | self-fixes | |
+| w15–w22 | 780 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
