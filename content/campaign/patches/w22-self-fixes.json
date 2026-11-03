@@ -15,55 +15,28 @@
  "milk_carton": {
   "lore.uncommon": "Gets put back in the fridge with one sip left, so whoever finds it is cross."
  },
- "sushi": {
-  "lore.rare": "Turns any meal into a puzzle of chopsticks, soy sauce and one very brave dab of wasabi."
- },
  "x_hip_flask": {
   "moves.ultimate": "Curved Flask Clonk"
  },
  "x_hot_chocolate": {
   "lore.uncommon": "Grows a wrinkly skin on top if it is left for a minute, which half the family loves."
  },
- "x_hummus": {
-  "lore.legendary": "Was made so smooth at a picnic that a grandma said it was the best she'd ever had, and she'd had a lot."
- },
  "x_salsa": {
   "lore.uncommon": "Drips red juice down every tortilla chip and onto the tablecloth.",
   "lore.rare": "Sneaks a chunk of chilli onto the one chip that the bravest person didn't check."
  },
- "x_soda": {
-  "lore.legendary": "Made a burp so loud at a school lunch that the dinner ladies gave it a round of applause."
- },
  "x_spice_jar": {
   "lore.uncommon": "Has a label so faded that the cook sniffs it every time to guess what's inside."
- },
- "x_tea": {
-  "lore.uncommon": "Gets left to go cold on the windowsill while its maker answers the door."
  },
  "x_aerosol": {
   "lore.uncommon": "Sputters out its last puff in a sad little cough and then pretends it is still full."
  },
- "x_almond": {
-  "lore.rare": "Hides in the bottom of the cereal bag and waits for the moment a spoon gets bored."
- },
- "x_bacon": {
-  "lore.uncommon": "Spits a speck of hot fat at the cook's wrist the moment they lean in to check."
- },
- "x_bleach": {
-  "lore.epic": "Scrubbed the grout so white before a visit that the visitors asked if the bathroom was new."
- },
  "x_bottle_cap": {
   "lore.uncommon": "Pings off the counter when twisted too hard and lands in the dog's water bowl."
- },
- "x_candle_jar": {
-  "lore.rare": "Makes a whole evening feel slower and softer, until somebody blows it out and the spell breaks."
  },
  "x_chestnut": {
   "moves.legend": "Spiky Husk Stink",
   "moves.ultimate": "Chestnut Pop"
- },
- "x_coffee_bag": {
-  "lore.rare": "Puffs its rich smell through the valve every time the cupboard door bumps it."
  },
  "x_dish_soap": {
   "lore.uncommon": "Stands on the windowsill with a crust of dried bubbles round its lid."
@@ -77,9 +50,6 @@
  "x_jerry_can": {
   "lore.rare": "Makes a car smell so strongly of fuel that the windows stay open the whole drive."
  },
- "x_kebab": {
-  "lore.legendary": "Held so many chunks on one skewer that it needed two cooks to turn it, one at each end."
- },
  "x_lemonade": {
   "moves.signature": "Sunny Zest Heat"
  },
@@ -89,24 +59,17 @@
  "x_milkshake": {
   "lore.uncommon": "Gets slurped so loudly at the bottom of the glass that the whole cafe turns round."
  },
- "x_mussel": {
-  "lore.rare": "Holds its shell shut so tightly when raw that only a hot pot persuades it to open."
- },
  "x_nugget": {
   "lore.epic": "Was hidden in a lunchbox, and by break time the whole class had smelled it and asked to swap."
  },
  "x_olive_oil": {
   "lore.uncommon": "Leaves a greasy thumbprint on every page of the recipe book."
  },
- "x_oyster": {
-  "lore.rare": "Clamps its shell so tightly shut that it seems to be keeping a secret from the whole table."
- },
  "x_pumpkin_seeds": {
   "moves.ultimate": "Seed Scatter"
  },
  "x_sauce_bottle": {
-  "lore.uncommon": "Has a dried brown crust round its lid that cracks like a biscuit when it opens.",
-  "lore.legendary": "Has been on the same cafe table for so long that the regulars nod hello to it."
+  "lore.uncommon": "Has a dried brown crust round its lid that cracks like a biscuit when it opens."
  },
  "x_shampoo_bottle": {
   "lore.common": "Stands on the edge of the bath and falls in every time the plug is pulled."
@@ -118,20 +81,15 @@
  "x_soy_sauce": {
   "lore.uncommon": "Leaves a small brown ring on the table every time it is put down."
  },
- "x_soybean": {
-  "lore.rare": "Hides three beans in a pod that looks like it should hold only two."
- },
  "x_spray_can": {
   "lore.common": "Lives on the shed shelf next to the oil can, and the two argue about who squeaks less."
- },
- "x_sugar": {
-  "lore.rare": "Turns a cup of tea so sweet that the spoon almost stands up on its own."
  },
  "x_syrup_bottle": {
   "lore.uncommon": "Lets out a slow golden drip that lands exactly where somebody's elbow will go."
  },
  "x_vinegar": {
-  "moves.signature": "Sharp Splash Heat"
+  "moves.signature": "Sharp Splash Heat",
+  "moves.ultimate": "Vinegar Slam"
  },
  "x_vinegar_bottle": {
   "moves.legend": "Shaker Distraction"
@@ -141,5 +99,20 @@
  },
  "x_walnut": {
   "lore.rare": "Rolls out of the fruit bowl at night and is always found under the radiator."
+ },
+ "x_bacon": {
+  "moves.ultimate": "Full Fry-Up"
+ },
+ "x_honey": {
+  "lore.legendary": "Was found in a pyramid three thousand years old, still perfect, and the explorers had it on toast for lunch."
+ },
+ "x_noodles_packet": {
+  "moves.ultimate": "Kettle Kerfuffle"
+ },
+ "x_propane_tank": {
+  "moves.ultimate": "Valve Twist Slam"
+ },
+ "x_salt": {
+  "lore.uncommon": "Clumps into a solid lump in the shaker every time the kitchen gets steamy."
  }
 }

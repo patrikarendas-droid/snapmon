@@ -49,9 +49,9 @@
 | w17-furniture-and-bedding | 100 | 100 | done: 70 high / 141 medium / 6 low + 11 patterns | 211 fields (`patches/w17-furniture-and-bedding-editor-auto.json`) then `w17-self-fixes.json` | x_church_pew written as a hall bench (no religious content); wheelchair written as empowering/fast |
 | w18-music-and-instruments | 56 | 56 | done: 22 high / 188 medium / 11 low + 11 patterns | 210 fields (`patches/w18-music-and-instruments-editor-auto.json`) then `w18-self-fixes.json` | x_church_bell written as a village tower bell (no religious content) |
 | w19-kitchen-and-cookware | 112 | 112 | done: 92 high / 420 medium / 26 low + 12 patterns | 512 fields (`patches/w19-kitchen-and-cookware-editor-auto.json`) then `w19-self-fixes.json` | knife, deep fryer, heaters written with grown-up/safety framing |
-| w20-fridges-taps-and-tableware | 93 | 93 | pending | self-fixes | drinkware written alcohol-free (champagne flute, martini glass, shot glass, tankard, wine tumbler, cocktail shaker, beer stein hold juice/milkshake) |
-| w21-sweets-bakery-and-snacks | 91 | 91 | pending | self-fixes | |
-| w22-drinks-pantry-and-meals | 126 | 126 | pending | self-fixes | drinks alcohol-free (x_wine, x_beer, wine_bottle, hip flask = cocoa); medicines/cleaners/fuel cans kept high-shelf/grown-up only; spread written without its brand name (id x_nutella) |
+| w20-fridges-taps-and-tableware | 93 | 93 | done: 242 high / 383 medium / 46 low + 10 patterns | 625 fields (`patches/w20-fridges-taps-and-tableware-editor-auto.json`) then `w20-self-fixes.json` | drinkware written alcohol-free (champagne flute, martini glass, shot glass, tankard, wine tumbler, cocktail shaker, beer stein hold juice/milkshake) |
+| w21-sweets-bakery-and-snacks | 91 | 91 | done: 233 high / 310 medium / 41 low + 9 patterns | 543 fields (`patches/w21-sweets-bakery-and-snacks-editor-auto.json`) then `w21-self-fixes.json` | |
+| w22-drinks-pantry-and-meals | 126 | 126 | done: 301 high / 436 medium / 15 low + 8 patterns | 737 fields (`patches/w22-drinks-pantry-and-meals-editor-auto.json`) then `w22-self-fixes.json` | drinks alcohol-free (x_wine, x_beer, wine_bottle, hip flask = cocoa); medicines/cleaners/fuel cans kept high-shelf/grown-up only; spread written without its brand name (id x_nutella) |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between

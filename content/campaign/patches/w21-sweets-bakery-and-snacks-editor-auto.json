@@ -1,0 +1,727 @@
+{
+ "bread": {
+  "lore.rare": "Rises again in the bag every night, so the loaf is a little taller every morning and never fits the bread bin.",
+  "names.rare": "Bagriser",
+  "lore.epic": "Was sliced so thin for a picnic that the wind blew the sandwiches into the next field, and the cows had lunch.",
+  "names.epic": "Cow Picnic",
+  "lore.legendary": "Stayed fresh for a whole year out of pure stubbornness, then went stale the second someone wanted a sandwich.",
+  "names.legendary": "Doughford the Stubborn"
+ },
+ "x_panini": {
+  "lore.rare": "Pulls the cheese out of every other sandwich in the cafe to fill itself up.",
+  "names.rare": "Cheesethief",
+  "lore.legendary": "Was pressed so hard in the grill that it came out thinner than a page, and it was posted to Gran as a birthday card.",
+  "names.legendary": "Grillmore, the Posted Panini"
+ },
+ "x_sandwich_roll": {
+  "lore.rare": "Swaps its filling with the roll next to it in the lunchbox, so ham becomes jam by lunchtime.",
+  "names.rare": "Fillingswapper",
+  "lore.epic": "Was sat on by Dad on the coach, came out flat as a pancake, and the family ate it rolled up like a carpet.",
+  "names.epic": "Carpet Roll Lunch",
+  "lore.legendary": "Was stuffed so full that the whole picnic fitted inside it, blanket included, and the ants needed a map to find the jam.",
+  "names.legendary": "Picnicus, the Roll That Ate a Picnic",
+  "moves.ultimate": "Filling Burst"
+ },
+ "cake": {
+  "lore.rare": "Makes whoever cuts it sing 'Happy Birthday', even when it is nobody's birthday.",
+  "names.rare": "Birthdaysinger",
+  "lore.epic": "Leaned so far on the way to the table that it toppled onto the dog, who wore it as a hat for the rest of the party.",
+  "names.epic": "Cake Hat Dog",
+  "lore.legendary": "Was baked with so many layers that the top one had its own weather, and the candles had to be lit from a ladder.",
+  "names.legendary": "Gateau Grande, the Many-Storeyed"
+ },
+ "x_birthday_candle": {
+  "lore.epic": "Was blown out so hard that the wish flew into the next room and came true for the cat.",
+  "names.epic": "Cat Wish",
+  "lore.legendary": "Was blown out with a wish for 'more birthdays', and now the family has one every Tuesday.",
+  "names.legendary": "Wishwick, the Tuesday Birthday"
+ },
+ "x_cake_pop": {
+  "lore.rare": "Sends its sprinkles marching off in a line across the table whenever nobody is watching.",
+  "names.rare": "Sprinklemarcher",
+  "lore.epic": "Got its stick tangled in the birthday girl's hair, and she wore it as a hair clip all afternoon.",
+  "names.epic": "Cake Pop Hairclip",
+  "lore.legendary": "Popped so high off its stick that it went into orbit, and on clear nights it twinkles with sprinkles.",
+  "names.legendary": "Sprinkle Star, the Orbiting Pop"
+ },
+ "candy": {
+  "lore.uncommon": "Has its wrapper twisted so tightly that it takes a whole film to open.",
+  "names.uncommon": "Twistwrap",
+  "lore.rare": "Makes anyone who eats one talk in a squeaky voice for exactly one minute.",
+  "names.rare": "Squeakvoice",
+  "lore.epic": "Burst out of a pinata in such a rainbow that the garden looked like a sweet hailstorm, and the umbrellas came out.",
+  "names.epic": "Sweet Hailstorm",
+  "lore.legendary": "Was shared so fairly between six children that nobody argued, and all the parents fainted in shock."
+ },
+ "x_caramel": {
+  "lore.legendary": "Melted into a golden puddle so big that the town skated on it once it set, and everyone's skates stuck.",
+  "names.legendary": "Goldpond, the Sticky Rink",
+  "moves.ultimate": "Golden Gloop"
+ },
+ "x_chewing_gum": {
+  "lore.rare": "Sticks itself back under the same desk no matter how many times it is scraped off.",
+  "names.rare": "Deskhomer",
+  "lore.epic": "Blew a bubble so big in assembly that it popped and stuck the front row's hair together.",
+  "names.epic": "Front Row Pop",
+  "lore.legendary": "Blew a bubble so huge that it lifted its chewer off the playground, and the school had to reel him back in on a kite string.",
+  "names.legendary": "Bubbleton, the Flying Chew"
+ },
+ "x_gummy": {
+  "lore.rare": "Wobbles off the table on its own when nobody is looking and hides in the sofa cushions.",
+  "names.rare": "Sofawobbler",
+  "lore.epic": "Was squeezed so hard that it shot out of its eater's fingers and stuck to the classroom ceiling, where it still wobbles.",
+  "names.epic": "Ceiling Wobbler",
+  "lore.legendary": "Squished itself flat to slip under the door, popped back into a bear on the other side, and the bag never saw it again.",
+  "names.legendary": "Gummbert, the Great Escaper"
+ },
+ "x_jelly_beans": {
+  "lore.rare": "Changes flavour halfway through being chewed, so strawberry becomes sprout without warning.",
+  "names.rare": "Sproutswitch",
+  "lore.epic": "Spilled out of the jar across the school hall, and the whole assembly slid about like a disco.",
+  "names.epic": "Bean Disco Slide"
+ },
+ "x_licorice": {
+  "lore.rare": "Ties itself into knots in the bag, so getting one out takes a whole car journey.",
+  "names.rare": "Knotstring",
+  "lore.epic": "Was used as a skipping rope at break, and the rope got shorter every turn because somebody kept nibbling it.",
+  "names.epic": "Nibbled Skipping Rope",
+  "lore.legendary": "Turned every tongue in town black for a week, so the school photo looks like a row of happy panthers.",
+  "names.legendary": "Inkatongue the Liquorice"
+ },
+ "x_lollipop_swirl": {
+  "lore.rare": "Hypnotises anyone who stares at its swirl, so the whole queue at the fair walks round in circles.",
+  "names.rare": "Swirlhypno",
+  "lore.epic": "Was dropped on the fairground carousel and stuck so firmly that it now goes round with the horses.",
+  "names.epic": "Carousel Lolly",
+  "moves.ultimate": "Rainbow Spiral"
+ },
+ "x_mint": {
+  "lore.rare": "Makes anyone who eats it whistle by accident on every word with an S in it.",
+  "names.rare": "Whistlemint",
+  "lore.epic": "Was passed round after dinner, and the whole table breathed out so coldly that the candles froze.",
+  "names.epic": "Frozen Candle Dinner",
+  "lore.legendary": "Was crunched so loudly at a quiet dinner that the sound froze in the air, and the guests hung their coats on it.",
+  "names.legendary": "Frostcrunch, the Hanging Sound"
+ },
+ "x_toffee": {
+  "lore.uncommon": "Gets stuck to its own wrapper, so half of every piece is eaten with a bit of paper.",
+  "names.uncommon": "Wrapperglue",
+  "lore.rare": "Shatters like glass when tapped, and the pieces fly so far that the hammer has to wear goggles.",
+  "names.rare": "Shatterbit",
+  "lore.epic": "Was so hard that it broke the little hammer, then the big hammer, then the neighbour's hammer.",
+  "names.epic": "Hammer Breaker",
+  "lore.legendary": "Was so hard that it outlasted the castle wall it was stuck to, and the builders now order it by the tonne.",
+  "names.legendary": "Brittlestone, the Unbreakable"
+ },
+ "x_truffle": {
+  "lore.uncommon": "Hides a surprise filling inside its shell, so the strawberry one always turns out to be coffee.",
+  "names.uncommon": "Shellsurprise",
+  "lore.rare": "Melts on purpose in the hand of anyone who is about to share it.",
+  "names.rare": "Shymelt",
+  "lore.epic": "Was the last truffle in the box, and the family argued so long that it got bored and ate itself.",
+  "names.epic": "Self-Eating Sweet",
+  "lore.legendary": "Was so rich that it bought the chocolate shop it came from and handed out free samples on its first day as owner.",
+  "names.legendary": "Ganache Grande, Owner of the Shop"
+ },
+ "x_brownie": {
+  "lore.rare": "Grows a crispy corner wherever it is cut, so there is never a middle piece.",
+  "names.rare": "Cornergrower",
+  "lore.epic": "Was baked so gooey for the bake sale that the tray slid off the table and set as a chocolate path across the hall.",
+  "names.epic": "Chocolate Path",
+  "lore.legendary": "Was so gooey in the middle that a teaspoon fell in and came out on the other side of the world.",
+  "names.legendary": "Fudgehole, the Bottomless Brownie"
+ },
+ "chocolate": {
+  "lore.rare": "Melts only for its owner, and stays rock hard in the hand of anyone trying to pinch a square.",
+  "names.rare": "Pinchproof",
+  "lore.epic": "Melted on the classroom radiator and dripped into the shape of the teacher's face, smiling for once.",
+  "names.epic": "Teacher Portrait",
+  "lore.legendary": "Snapped into so many squares that it tiled the whole kitchen floor, and the family ate its way to the fridge.",
+  "names.legendary": "Cocoatile, the Edible Floor"
+ },
+ "x_fudge": {
+  "lore.rare": "Turns any spoon left in it into fudge, so the cutlery drawer is slowly becoming pudding.",
+  "names.rare": "Spoonfudger",
+  "lore.epic": "Was sold on the pier in a slab so heavy that the pier tilted, and the fishing boats got a free sample.",
+  "names.epic": "Tilted Pier",
+  "lore.legendary": "Was so sweet that the sea round the pier turned to syrup, and the waves now break in slow motion.",
+  "names.legendary": "Fudgeford, the Slow-Motion Sea"
+ },
+ "cookie": {
+  "lore.rare": "Hides its chocolate chips whenever anyone counts them, so every cookie seems to have just one.",
+  "names.rare": "Chiphider",
+  "lore.epic": "Crumbled so badly on a train that the pigeons at every station knew which carriage to wait at.",
+  "names.epic": "Pigeon Express",
+  "lore.legendary": "Was baked so big and round that it was mistaken for a full moon, and the wolves howled at it all night.",
+  "names.legendary": "Moonbiscuit, the Howled-At"
+ },
+ "x_fortune_cookie": {
+  "lore.rare": "Makes its fortunes come true, but only the small ones, so 'you will find treasure' means a coin under the sofa.",
+  "names.rare": "Smallfortune",
+  "lore.epic": "Gave the whole table the fortune 'look behind you', and they all turned round at once and knocked over the noodles.",
+  "names.epic": "Look Behind You",
+  "lore.legendary": "Predicted rain on sports day so firmly that the clouds felt they had to turn up.",
+  "names.legendary": "Fortunata, the Rain Caller"
+ },
+ "x_gingerbread_man": {
+  "lore.rare": "Bakes himself a little friend out of his own crumbs whenever someone takes a bite.",
+  "names.rare": "Crumbfriend",
+  "lore.epic": "Led a whole tray of gingerbread on a getaway across the kitchen, and the fox from the story asked them for directions.",
+  "names.epic": "Gingerbread Getaway",
+  "lore.legendary": "Ran so far that he outran the fox, the river and the end of his own story, and now nobody knows how it finishes.",
+  "names.legendary": "Snap the Uncatchable",
+  "moves.ultimate": "Catch Me If You Can"
+ },
+ "x_macaron": {
+  "lore.rare": "Has a shell so delicate that it cracks if anyone so much as says 'crunch' nearby.",
+  "names.rare": "Crunchflinch",
+  "lore.epic": "Was stacked into a tower at a fancy tea, and one sneeze sent the whole rainbow rolling under the piano.",
+  "names.epic": "Sneeze Tumble",
+  "lore.legendary": "Was mistaken for a famous painting, and now it hangs in a gallery with a guard watching it slowly soften.",
+  "names.legendary": "Pastella, the Gallery Biscuit"
+ },
+ "x_sugar_cookie": {
+  "lore.rare": "Rearranges its own icing when nobody is looking, so the smiley face is a frowny face by teatime.",
+  "names.rare": "Frownflipper",
+  "lore.epic": "Was iced so thickly at a party that it turned into a skateboard, and the birthday boy rode it to the bus stop.",
+  "names.epic": "Icing Skateboard",
+  "lore.legendary": "Was cut into a star so perfect that it floated up into the night sky, and there is now a constellation that smells of vanilla.",
+  "names.legendary": "Vanilla Star, the Sky Cookie"
+ },
+ "x_wafer": {
+  "lore.rare": "Plays a different note for every layer when tapped, like a tiny xylophone.",
+  "names.rare": "Waferphone",
+  "lore.epic": "Snapped so loudly in a quiet cinema that the film stopped, rewound and started again from the beginning.",
+  "names.epic": "Rewound Film",
+  "lore.legendary": "Was stacked into a tower so tall that the harbour used it as a lighthouse until a hungry storm ate it.",
+  "names.legendary": "Crispspire, the Wafer Lighthouse",
+  "moves.ultimate": "Layer Landslide"
+ },
+ "croissant": {
+  "lore.uncommon": "Sheds one flake into every keyboard, pocket and car seat it passes.",
+  "names.uncommon": "Keyboardflaker",
+  "lore.rare": "Points its horns at whoever ate the last one, so nobody can pretend it wasn't them.",
+  "names.rare": "Hornpointer",
+  "lore.legendary": "Was so buttery that it slid out of the bakery, down the high street and into the harbour, where it is now a boat.",
+  "names.legendary": "Crescendo, the Buttery Escape",
+  "moves.ultimate": "Golden Flake Flurry"
+ },
+ "cupcake": {
+  "names.uncommon": "Nosefroster",
+  "lore.rare": "Puffs out a cloud of icing sugar when bitten, and its eater sneezes sprinkles.",
+  "names.rare": "Sprinklesneeze",
+  "lore.epic": "Was stacked in a party tower, and when someone took one from the bottom, the whole tower rained onto the bouncy castle.",
+  "names.epic": "Cupcake Rainfall",
+  "lore.legendary": "Had icing so tall that a mountaineer climbed it, planted a flag and had to be rescued with a teaspoon.",
+  "names.legendary": "Summit Swirl, the Tallest Icing",
+  "moves.ultimate": "Icing Landslide"
+ },
+ "donut": {
+  "lore.rare": "Rolls away on its edge like a wheel whenever someone reaches for it.",
+  "names.rare": "Rollingring",
+  "lore.epic": "Was dunked in hot chocolate and floated round the mug like a rubber ring, with a marshmallow sunbathing in the middle.",
+  "names.epic": "Marshmallow Lifebelt",
+  "lore.legendary": "Was so big that the town turned it into a roundabout, and the cars go round it licking their lips.",
+  "names.legendary": "Ringmaster Glaze"
+ },
+ "fried_egg": {
+  "lore.common": "Spreads across the pan until it touches the sausages, then refuses to let go.",
+  "names.common": "Panspreader",
+  "lore.rare": "Shines its yolk like a little torch, so it can be found in a dark kitchen at midnight.",
+  "names.rare": "Yolktorch",
+  "lore.legendary": "Shone its yolk so brightly at breakfast that the sun thought it had been replaced and went back to bed.",
+  "names.legendary": "Sol Yolkington"
+ },
+ "x_omelette": {
+  "lore.rare": "Folds itself over anything left on the plate, so the peas, the fork and the salt cellar all get tucked in.",
+  "names.rare": "Tuckfolder",
+  "lore.epic": "Was flipped so hard in a cafe that it wrapped itself round the chef like a yellow scarf.",
+  "names.epic": "Omelette Scarf",
+  "lore.legendary": "Was cooked in a pan so big that the whole town used it as a duvet on the coldest night of the year.",
+  "names.legendary": "Folderella, the Town Duvet",
+  "moves.ultimate": "Big Fold Over"
+ },
+ "x_scrambled_eggs": {
+  "lore.rare": "Scrambles anything near the pan, so the shopping list and the crossword come out jumbled.",
+  "names.rare": "Jumbler",
+  "lore.epic": "Was made with so many eggs that the hens next door went on strike until they got a thank-you card.",
+  "names.epic": "Hen Strike",
+  "lore.legendary": "Was scrambled so fast that it unscrambled itself back into twelve whole eggs, and the cook had to start again.",
+  "names.legendary": "Unscrambler the Great",
+  "moves.ultimate": "Eggquake"
+ },
+ "fries": {
+  "lore.rare": "Points like a compass at the nearest bottle of ketchup, even in someone else's house.",
+  "names.rare": "Ketchupcompass",
+  "names.epic": "Seagull Getaway",
+  "lore.legendary": "Stayed hot for the walk home, then for the whole winter, and the family used the cone as a heater.",
+  "names.legendary": "Crispin, the Never-Cold Chip"
+ },
+ "x_frozen_yogurt": {
+  "lore.rare": "Gives anyone who eats it too fast a brain freeze so strong that they forget what day it is.",
+  "names.rare": "Brainfreezer",
+  "lore.epic": "Swirled out of the machine without stopping, and the morning staff had to dig their way into the shop.",
+  "names.epic": "Machine Overflow",
+  "lore.legendary": "Was swirled so tall that snow settled on top, and a skier came down it with chocolate flakes on his hat.",
+  "names.legendary": "Swirlpeak, the Ski Slope",
+  "moves.ultimate": "Topping Tumble"
+ },
+ "x_gelato_cup": {
+  "lore.uncommon": "Comes with a spoon so tiny that eating it takes longer than the holiday.",
+  "names.uncommon": "Tinyspade",
+  "lore.rare": "Changes flavour to match the weather, so a rainy day gets a scoop of puddle.",
+  "names.rare": "Weatherscoop",
+  "lore.epic": "Was served in a cup so big that the family had to hire a pedalo to reach the bottom.",
+  "names.epic": "Pedalo Scoop",
+  "lore.legendary": "Was so good that a family missed their flight home, and they now live above the gelato shop.",
+  "names.legendary": "Pistachia, the Missed Flight"
+ },
+ "ice_cream": {
+  "lore.uncommon": "Falls off the cone at the very first lick and lands scoop-side down.",
+  "names.uncommon": "Scoopdropper",
+  "lore.rare": "Drips only on whoever is wearing their best clothes, and it can find them across a whole beach.",
+  "names.rare": "Bestclothesdrip",
+  "lore.epic": "Melted into a river on the hottest day, and a family of ducks paddled away in the empty cone.",
+  "names.epic": "Cone Canoe",
+  "lore.legendary": "Was piled with so many scoops that the cone reached the clouds, and every cloud over town now tastes of strawberry.",
+  "names.legendary": "Scoopsky, the Cloud Cone"
+ },
+ "x_sundae": {
+  "lore.rare": "Puts a cherry on top of anything near it, so the soup, the homework and Dad's head all get one.",
+  "names.rare": "Cherryplacer",
+  "lore.epic": "Toppled at the ice-cream parlour and buried the counter, and the staff dug out two spoons and a surprised waiter.",
+  "names.epic": "Buried Counter",
+  "lore.legendary": "Was so tall that the girl eating it started at breakfast and reached the bottom on her birthday.",
+  "names.legendary": "Cherrytower, the Year-Long Sundae"
+ },
+ "x_pizza_slice_box": {
+  "lore.uncommon": "Always has one slice with all the olives, and it is always the one left at the end.",
+  "names.uncommon": "Oliveslice",
+  "lore.rare": "Turns any box stacked on it into pizza, so the shoe box and the cereal box now come with cheese.",
+  "names.rare": "Boxcheeser",
+  "lore.epic": "Was left on a car roof and flew off down the road like a frisbee, and a lorry driver caught it with one hand.",
+  "names.epic": "Motorway Frisbee",
+  "lore.legendary": "Folded itself into a paper aeroplane and delivered its own pizza across town before the shop had even picked up the phone.",
+  "names.legendary": "Pizzarocket, the Self-Delivering Box",
+  "moves.ultimate": "Last Slice Slam"
+ },
+ "popcorn": {
+  "lore.legendary": "Kept popping after the bag was empty until the kitchen was full to the ceiling, and the family had to eat its way out.",
+  "names.legendary": "Kernel Boom, the Endless Pop"
+ },
+ "x_gyro": {
+  "lore.uncommon": "Hides a few chips inside its pita, and one always falls out first.",
+  "names.uncommon": "Chipsmuggler",
+  "lore.epic": "Was wrapped so tight at a festival that it popped like a party cracker and showered the stage with lettuce.",
+  "names.epic": "Lettuce Confetti",
+  "lore.legendary": "Held so much sauce that when it finally burst, it painted the festival field white and the planes thought it had snowed.",
+  "names.legendary": "Tzatzikus, the Sauce Burst",
+  "moves.ultimate": "Spit Spin Finale"
+ },
+ "x_quesadilla_plate": {
+  "lore.epic": "Folded so hard that it snapped shut on the spatula and wouldn't let go until it got more cheese.",
+  "names.epic": "Spatula Snapper",
+  "lore.legendary": "Was so crispy that its crunch was heard across the desert, and a camel came to ask for a wedge.",
+  "names.legendary": "Crunchadilla"
+ },
+ "x_shawarma": {
+  "lore.epic": "Was so garlicky that the vampire film on the takeaway's TV switched itself off.",
+  "names.epic": "Vampire-Proof Wrap",
+  "lore.legendary": "Grew on its spit until it was as tall as the shop, and the owner now climbs a ladder to slice the top.",
+  "names.legendary": "Towerma, the Giant Spit",
+  "moves.ultimate": "Garlic Cloud"
+ },
+ "taco": {
+  "lore.rare": "Holds its shape only while someone is looking at it, and folds flat the moment its eater blinks.",
+  "names.rare": "Blinkfold",
+  "lore.epic": "Crunched so loudly at taco night that the smoke alarm went off and the dog hid in the bath.",
+  "names.epic": "Smoke Alarm Crunch",
+  "lore.legendary": "Was folded so big that a whole family slept inside it on a camping trip, with a zip made of cheese.",
+  "names.legendary": "Shellter, the Family Tent",
+  "moves.signature": "Jalapeno Crunch",
+  "moves.ultimate": "Shell Shatter"
+ },
+ "x_wrap_sandwich": {
+  "lore.rare": "Rolls itself tighter whenever anyone tries to take a bite, until it is as hard as a rolling pin.",
+  "names.rare": "Tightroll",
+  "lore.epic": "Was wrapped in so much foil that it set off the airport scanner, and the whole queue waited while it was unwrapped.",
+  "names.epic": "Airport Scanner Lunch",
+  "lore.legendary": "Wrapped itself round a runaway shopping trolley and stopped it at the bottom of the hill without losing a single pea.",
+  "names.legendary": "Wraptor, the Trolley Stopper",
+  "moves.ultimate": "Grand Unravel"
+ },
+ "x_apple_pie": {
+  "lore.rare": "Turns any apple left in the fruit bowl into a pie overnight, so the fruit bowl is now a pie dish.",
+  "names.rare": "Orchardbaker",
+  "lore.legendary": "Had a crust so big that it became the roof of the village hall, and now the rain smells of cinnamon.",
+  "names.legendary": "Lattice Grand, the Pie Roof"
+ },
+ "x_bao_bun": {
+  "lore.rare": "Bounces back so hard when squeezed that it boings out of the steamer and onto the next table.",
+  "names.rare": "Boingbun",
+  "lore.epic": "Was steamed so fluffy that the restaurant used it as a cushion, and two customers sat on their lunch.",
+  "names.epic": "Bun Cushion",
+  "lore.legendary": "Rose in the steamer so high that it lifted the restaurant off the ground, and the waiters now serve lunch in parachutes.",
+  "names.legendary": "Puffbao, the Rising Restaurant"
+ },
+ "x_biscuit_tin": {
+  "lore.rare": "Holds sewing things whenever a child opens it, and biscuits whenever a grown-up does.",
+  "names.rare": "Sewingswitcher",
+  "lore.epic": "Was opened so hard at a family party that the lid rolled down the hall, out of the door and into next door's party.",
+  "names.epic": "Runaway Lid",
+  "lore.legendary": "Was so hard to open that a crane and the strongest man in town both gave up, and Gran opened it with a teaspoon.",
+  "names.legendary": "Lidlock, the Unopenable Tin"
+ },
+ "x_butter": {
+  "lore.rare": "Goes rock hard the moment anyone wants to spread it, and melts the moment they give up.",
+  "names.rare": "Moodspread",
+  "lore.epic": "Was left out so long in summer that it slid off the table, out through the cat flap and down the garden.",
+  "names.epic": "Garden Slide",
+  "lore.legendary": "Spread so smoothly straight from the fridge that it buttered a whole loaf in one swipe, and the toaster gave a little bow.",
+  "names.legendary": "Spreadwell the Smooth"
+ },
+ "x_calzone": {
+  "lore.rare": "Hides a different pizza inside every time it is cut, so nobody ever knows what they ordered.",
+  "names.rare": "Mysteryfold",
+  "lore.epic": "Erupted so much cheese when it was cut that the party moved into the garden and ate the lava with forks.",
+  "names.epic": "Cheese Volcano",
+  "lore.legendary": "Folded itself round a whole pizza restaurant, and the diners finished their meal inside without noticing.",
+  "names.legendary": "Calzoneo, the Folded Restaurant",
+  "moves.signature": "Folded Lava Scald"
+ },
+ "x_candy_floss": {
+  "lore.rare": "Spins any hair it touches into more candy floss, so the hairdresser now sells it by the bag.",
+  "names.rare": "Hairspinner",
+  "lore.epic": "Was blown off its stick at the seaside and wrapped the lifeguard's chair in pink, with the lifeguard still in it.",
+  "names.epic": "Pink Lifeguard",
+  "lore.legendary": "Was spun so big at the fair that it became the new big top, and the circus moved in.",
+  "names.legendary": "Bigtop Floss, the Sugar Tent"
+ },
+ "x_cheese": {
+  "lore.rare": "Ages a whole year every time the fridge door is opened, so it is now older than Grandad.",
+  "names.rare": "Agedblock",
+  "lore.epic": "Was unwrapped on a train, and the whole carriage moved next door, leaving the cheese a first-class seat to itself.",
+  "names.epic": "Cheese First Class",
+  "lore.legendary": "Smelled so strong that the harbour used it as a foghorn, and the ships now steer by nose.",
+  "names.legendary": "Pongsworth, the Harbour Cheese"
+ },
+ "x_cheese_wedge": {
+  "lore.rare": "Moves its holes around overnight, so the slice you cut is never the slice you expected.",
+  "names.rare": "Holeshifter",
+  "lore.legendary": "Had so many holes that the wind whistled through it, and the town band now plays it as a flute.",
+  "names.legendary": "Swisswhistle, the Cheese Flute"
+ },
+ "x_cheesecake_slice": {
+  "lore.rare": "Weighs ten times more than it looks, so the waiter's tray tips over every time it is served.",
+  "names.rare": "Heavyslice",
+  "lore.epic": "Wobbled off its plate at a party and skied down the tablecloth into Grandad's lap.",
+  "names.epic": "Cheesecake Ski Run",
+  "lore.legendary": "Was so rich and heavy that when it was dropped, the earthquake machine across town recorded a small cheesequake.",
+  "names.legendary": "Cheesequake, the Heavy Slice"
+ },
+ "x_chocolate_box": {
+  "lore.rare": "Swaps its chocolates round whenever someone checks the map, so the toffee is always the coffee one.",
+  "names.rare": "Mapmuddler",
+  "lore.epic": "Was passed round a party so slowly that the person at the end found only the map and a coffee cream.",
+  "names.epic": "Coffee Cream Ending",
+  "moves.ultimate": "Map Muddle"
+ },
+ "x_churro": {
+  "lore.rare": "Grows longer every time it is dunked, so the last dip always needs a bigger cup.",
+  "names.rare": "Dunkstretcher",
+  "lore.epic": "Was so long and crisp that Grandad used it as a walking stick to the fair and back.",
+  "names.epic": "Walking Churro",
+  "lore.legendary": "Was piped so long at the fair that it went round the big wheel, and riders snapped off a piece as they passed.",
+  "names.legendary": "Twistmile, Round the Big Wheel"
+ },
+ "x_cinnamon_roll": {
+  "lore.rare": "Spins like a top when set down, and doesn't stop until somebody says 'cinnamon'.",
+  "names.rare": "Spinbun",
+  "lore.legendary": "Unrolled itself into one ribbon of dough long enough to wrap the town hall like a present.",
+  "names.legendary": "Swirlina, the Town Wrapper"
+ },
+ "x_cotton_candy": {
+  "lore.epic": "Floated off at the carnival and got tangled round the trapeze, so the acrobats swung through a pink cloud all night.",
+  "names.epic": "Trapeze Cloud",
+  "lore.legendary": "Drifted across the sea and was found by a lighthouse keeper two countries away, still on its stick.",
+  "names.legendary": "Drifter, the Sea-Crossing Fluff"
+ },
+ "x_cream_puff": {
+  "lore.uncommon": "Collapses into a sad pancake if anyone opens the oven door too early.",
+  "names.uncommon": "Ovenflop",
+  "lore.rare": "Puffs itself up bigger whenever someone says it looks small.",
+  "names.rare": "Puffpride",
+  "lore.epic": "Fired its cream across the room at a party and gave the portrait on the wall a beard.",
+  "names.epic": "Cream Beard Portrait",
+  "lore.legendary": "Was so light that it floated out of the bakery and became a weather balloon. Its forecast: cloudy, with a chance of cream.",
+  "names.legendary": "Puffington, the Weather Puff"
+ },
+ "x_crepe": {
+  "lore.rare": "Folds itself into any shape it is asked for, so the market stall now sells crepe swans.",
+  "names.rare": "Foldcrafter",
+  "lore.epic": "Was folded so many times on pancake day that it became a paper fan and cooled the whole kitchen.",
+  "names.epic": "Crepe Fan",
+  "lore.legendary": "Was so thin that it floated off the griddle like a magic carpet and gave the cook a ride round the market.",
+  "names.legendary": "Crepetta, the Flying Carpet"
+ },
+ "x_custard": {
+  "lore.rare": "Grows lumps on purpose whenever anyone says 'no lumps, please'.",
+  "lore.epic": "Was poured over a school pudding so thickly that the dinner lady lost her ladle in it until next term.",
+  "names.epic": "Lost Ladle",
+  "lore.legendary": "Set its skin so thick that the children bounced across the bowl like a trampoline, and nobody fell in.",
+  "names.legendary": "Skinsworth, the Custard Trampoline"
+ },
+ "x_danish": {
+  "lore.common": "Arrives at the meeting looking perfect and leaves it looking as if someone sat on it.",
+  "lore.epic": "Was opened at a big meeting, and the boss got so sticky that he signed every letter with his thumb.",
+  "names.epic": "Sticky Signature",
+  "lore.legendary": "Shed so many layers in one bite that the flakes were swept up and baked into a second danish.",
+  "names.legendary": "Flakesmith, the Second Pastry"
+ },
+ "x_dim_sum": {
+  "lore.rare": "Rolls its basket round the table by itself and stops in front of whoever is hungriest.",
+  "names.rare": "Basketroller",
+  "lore.epic": "Was stacked so high on Sunday that the tower of baskets swayed like a tree, and the whole restaurant leaned to hold it up.",
+  "names.epic": "Leaning Basket Tower",
+  "lore.legendary": "Served one basket with a dumpling and a smaller basket inside, and so on all the way down to a single crumb.",
+  "names.legendary": "Basketina, the Endless Nest"
+ },
+ "x_donut_box": {
+  "lore.rare": "Locks its lid whenever the person holding it says they'll only have one.",
+  "names.rare": "Justonelock",
+  "lore.epic": "Was opened so fast in the office that the sprinkles shot into the printer, and every report came out decorated.",
+  "names.epic": "Sprinkled Reports",
+  "lore.legendary": "Was so big that the office used it as the meeting table, and every meeting has finished early ever since.",
+  "names.legendary": "Boardroom Dozen, the Donut Table"
+ },
+ "x_dumpling": {
+  "lore.rare": "Pinches its pleats round the chopsticks and won't let go until it has been dipped in sauce.",
+  "names.rare": "Chopstickpincher",
+  "lore.epic": "Was folded at a family party into shapes so odd that one looked exactly like Grandad, and he refused to eat it.",
+  "names.epic": "Grandad Dumpling",
+  "lore.legendary": "Had pleats so perfect that the curtain maker copied them, and now every window in town is dressed like a dumpling.",
+  "names.legendary": "Pleatsworth, the Curtain Model"
+ },
+ "x_eclair": {
+  "lore.rare": "Grows its chocolate topping back overnight, so somebody licks it off every evening.",
+  "names.rare": "Chocoregrow",
+  "lore.epic": "Squirted so much cream at the bakery that the baker's hat turned into a meringue.",
+  "names.epic": "Meringue Hat",
+  "lore.legendary": "Was so shiny that the bakery used it as a mirror, and the baker straightens his hat in it every morning.",
+  "names.legendary": "Glossington, the Mirror Eclair"
+ },
+ "x_empanada": {
+  "lore.uncommon": "Has a crimped edge that is always the crunchiest bit and always the first to break off.",
+  "lore.rare": "Crimps itself shut so tightly that only the person who made it can open it.",
+  "names.rare": "Tightcrimp",
+  "lore.epic": "Was folded so big at the market that the stallholder used it as an umbrella when it rained.",
+  "names.epic": "Market Umbrella",
+  "lore.legendary": "Was so spicy that one bite cleared every blocked nose in the market at once, and the tissue stall closed early.",
+  "names.legendary": "Spicemaestro, the Nose Clearer"
+ },
+ "x_enchilada": {
+  "lore.rare": "Spreads its sauce onto anything nearby, so the oven gloves come out red and spicy.",
+  "names.rare": "Saucespreader",
+  "lore.epic": "Was baked in a tray too big for the oven, so the family cooked it on the car roof in the midday sun.",
+  "names.epic": "Car Roof Bake",
+  "lore.legendary": "Rolled so long in the oven that it came out of the back of the cooker and into the kitchen next door.",
+  "names.legendary": "Rollito Grande, the Wall Crosser"
+ },
+ "x_falafel": {
+  "lore.uncommon": "Rolls off the plate and away down the table whenever it isn't wrapped up.",
+  "names.uncommon": "Tablebolter",
+  "lore.rare": "Bounces like a rubber ball when dropped and has to be chased round the kitchen.",
+  "names.rare": "Bouncepea",
+  "lore.epic": "Was rolled so round at a festival that it was used in the football match and scored twice before it was eaten.",
+  "names.epic": "Football Falafel",
+  "lore.legendary": "Rolled out of its pita, down the hill and through the whole town like a crunchy snowball, picking up lettuce on the way.",
+  "names.legendary": "Chickpeak, the Rolling Boulder"
+ },
+ "x_french_toast": {
+  "lore.rare": "Soaks up any drink put near it, so the tea, the milk and the orange juice all go missing at breakfast.",
+  "names.rare": "Breakfastsoaker",
+  "lore.epic": "Soaked up so much syrup that it slid off the plate and skated across the kitchen like an ice-hockey puck.",
+  "names.epic": "Syrup Puck",
+  "lore.legendary": "Soaked up a whole lake of maple syrup in one slice, and the forest has been trying to get it back ever since.",
+  "names.legendary": "Mapleton, the Syrup Sponge"
+ },
+ "x_garlic_bread": {
+  "lore.rare": "Makes anyone who eats it whisper, because their breath can blow out a candle.",
+  "names.rare": "Breathblower",
+  "lore.epic": "Was baked so garlicky that the holiday photos came out with green clouds round everyone's mouths.",
+  "names.epic": "Green Cloud Photos",
+  "moves.ultimate": "Garlic Overload"
+ },
+ "x_gnocchi": {
+  "lore.rare": "Multiplies in the pot, so a handful for two turns into dinner for the whole street.",
+  "names.rare": "Potmultiplier",
+  "lore.epic": "Was rolled so big at a family party that one gnocchi became the baby's pillow.",
+  "names.epic": "Baby"
+ },
+ "x_jello": {
+  "lore.rare": "Wobbles in time to any music in the room, and loses its rhythm completely when Dad sings.",
+  "names.rare": "Jigglebeat",
+  "lore.epic": "Fell on the floor, bounced back onto the plate, and then did it again for an encore.",
+  "names.epic": "Encore Bounce",
+  "lore.legendary": "Wobbled for so long after one tap that it was used to power the town clock, and the clock hands now wiggle.",
+  "names.legendary": "Wigglesworth, the Clock Wobbler",
+  "moves.ultimate": "Jiggle Quake"
+ },
+ "x_jelly": {
+  "lore.rare": "Hops off the plate when it is shaped like a rabbit, and swims away when it is shaped like a fish.",
+  "names.rare": "Hopjelly",
+  "lore.epic": "Was turned out as a giant castle at a birthday party, and the toy soldiers defended it all afternoon before it fell.",
+  "names.epic": "Jelly Castle Siege",
+  "lore.legendary": "Was turned out so tall that it became the village's jelly mountain, and walkers now carry spoons instead of sticks.",
+  "names.legendary": "Mount Wobblemore"
+ },
+ "x_marshmallow": {
+  "lore.epic": "Was toasted so big at a campfire that it became a sleeping bag, and the scout leader slept in it.",
+  "names.epic": "Marshmallow Sleeping Bag",
+  "lore.legendary": "Toasted so golden that it outshone the campfire, and the campers roasted their sausages on it instead.",
+  "names.legendary": "Goldmallow, Brighter Than Fire"
+ },
+ "x_mousse": {
+  "lore.rare": "Makes everyone at the table speak in a hushed, fancy voice the moment it is served.",
+  "names.rare": "Hushpudding",
+  "lore.epic": "Drifted out of an open window at a fancy dinner and settled on the garden gnome like a chocolate hat.",
+  "names.epic": "Gnome Hat Mousse"
+ },
+ "x_muffin_top": {
+  "lore.rare": "Swells over the edge of the tin until it joins the muffin next door, so every batch comes out as one giant top.",
+  "names.rare": "Tinspiller",
+  "lore.epic": "Was pulled off every muffin at a party, and the abandoned bottoms formed a band and played a very sad song.",
+  "names.epic": "Sad Muffin Band",
+  "lore.legendary": "Pulled itself off every muffin in the bakery and became one giant top, which now has a shop of its own.",
+  "names.legendary": "Toppington, the Muffin Above All",
+  "moves.ultimate": "Dome Drop"
+ },
+ "x_nachos": {
+  "lore.rare": "Stretches its cheese between every chip, so picking up one lifts the whole plate.",
+  "names.rare": "Platelifter",
+  "lore.epic": "Was piled so high on film night that it blocked the TV, and the family watched the film through a gap in the chips.",
+  "names.epic": "Nacho Screen",
+  "lore.legendary": "Was piled so high that a mountain goat climbed it for the view and stayed for the guacamole.",
+  "names.legendary": "Nachomanjaro, the Cheesy Peak"
+ },
+ "x_pancake_stack": {
+  "lore.epic": "Was flipped so high on pancake day that the top pancake landed on the washing line and dried in the sun.",
+  "names.epic": "Washing Line Pancake",
+  "lore.legendary": "Was stacked so high that the top pancake had to be flipped by a passing helicopter.",
+  "names.legendary": "Flapjack Tower, the Sky Stack",
+  "moves.ultimate": "Tall Stack Topple"
+ },
+ "x_pastry": {
+  "lore.uncommon": "Puffs up so much in the oven that it hides the filling completely.",
+  "names.uncommon": "Puffhider",
+  "lore.rare": "Takes the shape of whatever it is draped over, so the baker now sells pastry hats, pastry shoes and a pastry cat.",
+  "names.rare": "Drapebaker",
+  "lore.epic": "Was rolled out so thin that the wind caught it like a sail and blew it out to sea.",
+  "names.epic": "Pastry Sail",
+  "lore.legendary": "Puffed up so high in the oven that it became the bakery's golden dome, and pigeons nest in its flakes.",
+  "names.legendary": "Flakedome the Golden",
+  "moves.ultimate": "Layer Upon Layer"
+ },
+ "x_pie_slice": {
+  "lore.uncommon": "Is always cut slightly bigger than everyone else's, and everyone notices.",
+  "names.uncommon": "Biggerslice",
+  "lore.rare": "Grows back into a whole pie if it is left on the plate overnight.",
+  "names.rare": "Piegrower",
+  "lore.epic": "Was cut so badly at a party that the slice went one way, the filling went the other, and the crust went home with the dog.",
+  "names.epic": "Split Decision Slice",
+  "lore.legendary": "Was cut so exactly that the knife became the town's official ruler, and every road is now measured in pie slices.",
+  "names.legendary": "Slicemeasure, the Perfect Cut"
+ },
+ "x_pudding": {
+  "lore.uncommon": "Gets announced at the start of dinner, so nobody can concentrate on their peas.",
+  "names.uncommon": "Peadistracter",
+  "lore.epic": "Was so popular at Sunday lunch that the vegetables tried to hide inside it.",
+  "names.epic": "Hiding Vegetables",
+  "lore.legendary": "Wobbled at exactly the right speed to rock a crying baby to sleep, and it now has a job at the nursery.",
+  "names.legendary": "Wobblina, the Baby Rocker",
+  "moves.ultimate": "Wobble Wave"
+ },
+ "x_ravioli": {
+  "lore.rare": "Folds itself into a little parcel and posts itself to whoever is hungriest.",
+  "names.rare": "Selfposter",
+  "lore.epic": "Got stuck together in one long chain, and the family pulled it out of the pan like a magician's scarf.",
+  "names.epic": "Magician",
+  "lore.legendary": "Held a whole dinner in one pocket: soup, pasta and a tiny trifle at the very end.",
+  "names.legendary": "Pocketto, the Three-Course Square",
+  "moves.ultimate": "Pocket Burst"
+ },
+ "x_samosa": {
+  "lore.rare": "Sneezes a puff of spice in the face of anyone who calls it a pasty by mistake.",
+  "names.rare": "Spicesneezer",
+  "lore.epic": "Was stacked into a pyramid at a party, and a tourist took a photo thinking it was the real thing.",
+  "names.epic": "Party Pyramid",
+  "lore.legendary": "Was so perfectly triangular that it was used to mend the roof of a house, and the attic now smells of cumin.",
+  "names.legendary": "Trianglo, the Spiced Roof"
+ },
+ "x_sausage_roll": {
+  "lore.common": "Is a sausage in flaky pastry that is always too hot inside and too cold outside.",
+  "lore.uncommon": "Leaves its sausage behind in the bag and arrives at the picnic as an empty tube.",
+  "names.uncommon": "Hollowroll",
+  "lore.epic": "Was baked so long for the picnic that it became the finishing line for the sack race.",
+  "names.epic": "Finishing Line Roll",
+  "lore.legendary": "Was baked in one piece long enough to go round the park, and the joggers nibble a bit each lap.",
+  "names.legendary": "Lapsworth, the Park-Long Roll"
+ },
+ "x_scone": {
+  "lore.rare": "Splits itself in half the moment the jam jar is opened, ready to be filled.",
+  "names.rare": "Selfsplitter",
+  "lore.epic": "Started such a jam-or-cream argument at a garden party that a fence was built down the middle of the field.",
+  "names.epic": "Jam Fence",
+  "moves.ultimate": "Jam Versus Cream"
+ },
+ "x_spring_roll": {
+  "lore.epic": "Unrolled in the fryer and came out as one long golden ribbon, which the family hung up as decorations.",
+  "names.epic": "Golden Ribbon Roll",
+  "lore.legendary": "Crunched once so loudly that the sound rolled down the river, and the boats pulled over to let it pass.",
+  "names.legendary": "Crunchroll, the River Rumble",
+  "moves.ultimate": "Golden Crunch Finale"
+ },
+ "x_tamale": {
+  "lore.epic": "Was made by the whole family in one day, and somebody wrapped Grandma's glasses in a husk and steamed them too.",
+  "names.epic": "Steamed Spectacles",
+  "lore.legendary": "Was wrapped so many times that unwrapping it became the town's longest party game, and the last layer came off on New Year's Day.",
+  "names.legendary": "Huskmaster, the Endless Unwrap"
+ },
+ "x_tart": {
+  "lore.rare": "Sets its glaze so hard that the fruit can be heard tapping on the inside to get out.",
+  "names.rare": "Glazelock",
+  "lore.epic": "Shone so brightly in the bakery window that a magpie flew off with the whole tart, plate and all.",
+  "names.epic": "Magpie Heist"
+ },
+ "x_tiramisu": {
+  "lore.rare": "Wakes anyone who eats it so thoroughly that they tidy their room at midnight.",
+  "names.rare": "Midnighttidier",
+  "lore.epic": "Was dusted with so much cocoa that the dinner party sneezed in chorus and the tablecloth turned brown.",
+  "names.epic": "Cocoa Sneeze Chorus",
+  "lore.legendary": "Lifted the spirits of a gloomy rain cloud so well that it rained sprinkles over the town.",
+  "names.legendary": "Pick-Me-Up, the Cloud Cheerer"
+ },
+ "x_toast": {
+  "lore.rare": "Grows its crusts back every time they are cut off, which annoys every child at breakfast.",
+  "names.rare": "Crustreturn",
+  "lore.legendary": "Fell butter side up so often that it broke the law of buttered toast, and now the cat lands on its back instead.",
+  "names.legendary": "Upsidebutter, the Lawbreaker"
+ },
+ "x_waffle_plate": {
+  "lore.rare": "Fills each square with a different topping by itself, and one square is always broccoli.",
+  "names.rare": "Squarefiller",
+  "lore.epic": "Was stacked into a tower so tall that children used the squares as a climbing wall.",
+  "names.epic": "Waffle Climbing Wall",
+  "lore.legendary": "Was laid out so big on the beach that it became a giant game of noughts and crosses, and the tide always wins.",
+  "names.legendary": "Gridlock, the Beach Board"
+ },
+ "x_yogurt": {
+  "names.common": "Lidlicker",
+  "names.uncommon": "Splashpot",
+  "lore.rare": "Curdles any milk stored next to it, so the fridge door is full of very surprised cheese.",
+  "names.rare": "Fridgecurdler",
+  "lore.legendary": "Was shaken so hard on a school trip that it turned into butter, then cheese, then a very small cow.",
+  "names.legendary": "Cultura, the Very Small Cow",
+  "moves.signature": "Chilli Mango Swirl"
+ }
+}

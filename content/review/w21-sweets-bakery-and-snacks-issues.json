@@ -1,0 +1,4504 @@
+{
+ "batch": "w21-sweets-bakery-and-snacks",
+ "editor": "independent agent",
+ "reviewed": 91,
+ "summary": "A sweet batch with good small observations (the crinkly wrapper you cannot open quietly, the cake that always sinks in the middle, the unpopped kernel waiting for the softest tooth, the jam-or-cream argument, the gingerbread man always losing a leg first). It is heavily templated above Uncommon: about 15 objects repeat one trait across all five rarities (flakes, cheese strings, drips, bubbles, cream squirts). Rares are the sugar-rush myth or the object being tasty, Epics are 'empty in minutes' party scenes, and Legendaries lean on 'which nobody believes / unheard of / no X has ever'. All 91 Legendary names are 'The X That Y'. Several same-food pairs (candy floss and cotton candy, jello and jelly, caramel and toffee) need a split. There is one brand ('Hot Pocket Heat'), one sitcom reference (the muffin-top bakery) and one 'crowned king'. Signatures are almost all 'X Startle' or 'Hot X Heat'. Replacements are given for every high and medium item, and checked for length, ASCII and global name uniqueness.",
+ "patterns": [
+  {
+   "pattern": "Rare is the object doing its job or the sugar-rush myth ('makes everyone full of energy', 'one square becomes three', 'so tempting that...'): 77 of 91 Rares are flagged.",
+   "ids": [
+    "bread",
+    "x_panini",
+    "x_sandwich_roll",
+    "cake",
+    "x_cake_pop",
+    "candy",
+    "x_chewing_gum",
+    "x_gummy",
+    "x_jelly_beans",
+    "x_licorice",
+    "x_lollipop_swirl",
+    "x_mint",
+    "x_toffee",
+    "x_truffle",
+    "x_brownie",
+    "chocolate",
+    "x_fudge",
+    "cookie",
+    "x_fortune_cookie",
+    "x_gingerbread_man",
+    "x_macaron",
+    "x_sugar_cookie",
+    "x_wafer",
+    "croissant",
+    "cupcake",
+    "donut",
+    "fried_egg",
+    "x_omelette",
+    "x_scrambled_eggs",
+    "fries",
+    "x_frozen_yogurt",
+    "x_gelato_cup",
+    "ice_cream",
+    "x_sundae",
+    "x_pizza_slice_box",
+    "taco",
+    "x_wrap_sandwich",
+    "x_apple_pie",
+    "x_bao_bun",
+    "x_biscuit_tin",
+    "x_butter",
+    "x_calzone",
+    "x_candy_floss",
+    "x_cheese",
+    "x_cheese_wedge",
+    "x_cheesecake_slice",
+    "x_chocolate_box",
+    "x_churro",
+    "x_cinnamon_roll",
+    "x_cream_puff",
+    "x_crepe",
+    "x_custard",
+    "x_dim_sum",
+    "x_donut_box",
+    "x_dumpling",
+    "x_eclair",
+    "x_empanada",
+    "x_enchilada",
+    "x_falafel",
+    "x_french_toast",
+    "x_garlic_bread",
+    "x_gnocchi",
+    "x_jello",
+    "x_jelly",
+    "x_mousse",
+    "x_muffin_top",
+    "x_nachos",
+    "x_pastry",
+    "x_pie_slice",
+    "x_ravioli",
+    "x_samosa",
+    "x_scone",
+    "x_tart",
+    "x_tiramisu",
+    "x_toast",
+    "x_waffle_plate",
+    "x_yogurt"
+   ],
+   "severity": "high",
+   "suggestion": "Replacement Rares are troublesome powers (Butterdown-style physics, Pinchproof chocolate, Shymelt truffle, Hornpointer croissant)."
+  },
+  {
+   "pattern": "One trait across every rarity: croissant, pastry, danish and sausage roll (flakes); panini, quesadilla, pizza box (cheese strings); ice cream (drips); chewing gum (bubbles); cream puff (squirting cream); muffin top (eaten first); waffle plate (syrup); jello (dancing wobble); cheesecake (too rich); candy floss and cotton candy (sticky and floating).",
+   "ids": [
+    "x_panini",
+    "x_chewing_gum",
+    "croissant",
+    "ice_cream",
+    "x_quesadilla_plate",
+    "x_candy_floss",
+    "x_cheesecake_slice",
+    "x_cotton_candy",
+    "x_cream_puff",
+    "x_danish",
+    "x_jello",
+    "x_muffin_top",
+    "x_pastry",
+    "x_sausage_roll",
+    "x_waffle_plate"
+   ],
+   "severity": "high",
+   "suggestion": "Replacements give each rarity its own premise."
+  },
+  {
+   "pattern": "Epics are bake-sale and party crowd scenes ('every brownie sold in one minute', 'the queue went round the block', 'every plate was empty in minutes').",
+   "ids": [
+    "bread",
+    "cake",
+    "x_birthday_candle",
+    "x_cake_pop",
+    "candy",
+    "x_gummy",
+    "x_jelly_beans",
+    "x_licorice",
+    "x_lollipop_swirl",
+    "x_toffee",
+    "x_truffle",
+    "x_brownie",
+    "chocolate",
+    "x_fudge",
+    "cookie",
+    "x_fortune_cookie",
+    "x_gingerbread_man",
+    "x_macaron",
+    "x_sugar_cookie",
+    "donut",
+    "x_omelette",
+    "x_scrambled_eggs",
+    "x_frozen_yogurt",
+    "x_gelato_cup",
+    "ice_cream",
+    "x_sundae",
+    "x_pizza_slice_box",
+    "x_gyro",
+    "x_quesadilla_plate",
+    "x_shawarma",
+    "taco",
+    "x_wrap_sandwich",
+    "x_bao_bun",
+    "x_biscuit_tin",
+    "x_butter",
+    "x_candy_floss",
+    "x_cheese",
+    "x_cheesecake_slice",
+    "x_chocolate_box",
+    "x_churro",
+    "x_cotton_candy",
+    "x_cream_puff",
+    "x_crepe",
+    "x_custard",
+    "x_danish",
+    "x_dim_sum",
+    "x_donut_box",
+    "x_dumpling",
+    "x_eclair",
+    "x_empanada",
+    "x_enchilada",
+    "x_falafel",
+    "x_french_toast",
+    "x_garlic_bread",
+    "x_gnocchi",
+    "x_jello",
+    "x_marshmallow",
+    "x_mousse",
+    "x_muffin_top",
+    "x_nachos",
+    "x_pancake_stack",
+    "x_pastry",
+    "x_pie_slice",
+    "x_pudding",
+    "x_ravioli",
+    "x_samosa",
+    "x_sausage_roll",
+    "x_scone",
+    "x_spring_roll",
+    "x_tamale",
+    "x_tart",
+    "x_tiramisu",
+    "x_waffle_plate"
+   ],
+   "severity": "high",
+   "suggestion": "Each listed Epic gets one concrete consequence with a joke."
+  },
+  {
+   "pattern": "Legendaries use the 'which nobody believes / which is unheard of / which no X has ever done' formula (toast, donut, fried egg, fries, nachos, waffle plate, custard, pie slice, marshmallow, jelly, cake pop) or are quiet successes (83 of 91 flagged); all 91 Legendary names are 'The X That Y'.",
+   "ids": [
+    "bread",
+    "x_panini",
+    "x_sandwich_roll",
+    "cake",
+    "x_birthday_candle",
+    "x_cake_pop",
+    "x_caramel",
+    "x_chewing_gum",
+    "x_gummy",
+    "x_licorice",
+    "x_mint",
+    "x_toffee",
+    "x_truffle",
+    "x_brownie",
+    "chocolate",
+    "x_fudge",
+    "cookie",
+    "x_fortune_cookie",
+    "x_gingerbread_man",
+    "x_macaron",
+    "x_sugar_cookie",
+    "x_wafer",
+    "croissant",
+    "cupcake",
+    "donut",
+    "fried_egg",
+    "x_omelette",
+    "x_scrambled_eggs",
+    "fries",
+    "x_frozen_yogurt",
+    "x_gelato_cup",
+    "ice_cream",
+    "x_sundae",
+    "x_pizza_slice_box",
+    "popcorn",
+    "x_gyro",
+    "x_quesadilla_plate",
+    "x_shawarma",
+    "taco",
+    "x_wrap_sandwich",
+    "x_apple_pie",
+    "x_bao_bun",
+    "x_biscuit_tin",
+    "x_butter",
+    "x_calzone",
+    "x_candy_floss",
+    "x_cheese",
+    "x_cheese_wedge",
+    "x_cheesecake_slice",
+    "x_churro",
+    "x_cinnamon_roll",
+    "x_cotton_candy",
+    "x_cream_puff",
+    "x_crepe",
+    "x_custard",
+    "x_danish",
+    "x_dim_sum",
+    "x_donut_box",
+    "x_dumpling",
+    "x_eclair",
+    "x_empanada",
+    "x_enchilada",
+    "x_falafel",
+    "x_french_toast",
+    "x_jello",
+    "x_jelly",
+    "x_marshmallow",
+    "x_muffin_top",
+    "x_nachos",
+    "x_pancake_stack",
+    "x_pastry",
+    "x_pie_slice",
+    "x_pudding",
+    "x_ravioli",
+    "x_samosa",
+    "x_sausage_roll",
+    "x_spring_roll",
+    "x_tamale",
+    "x_tiramisu",
+    "x_toast",
+    "x_waffle_plate",
+    "x_yogurt"
+   ],
+   "severity": "high",
+   "suggestion": "Replacement Legendaries are feats with punchlines; after the name swaps 'The X That' drops to 8 of 91. Only 5 of 91 replacement Legendaries are cosmic."
+  },
+  {
+   "pattern": "Signature templates: almost every sweet is 'X Startle' (stun) and almost every savoury snack 'Hot X Heat' (burn). There are heat names on cold food too ('Creamy Heat' on yoghurt, 'Crunch Heat' on tacos), and one brand name ('Hot Pocket Heat').",
+   "ids": [
+    "x_panini",
+    "x_sandwich_roll",
+    "croissant",
+    "x_omelette",
+    "x_scrambled_eggs",
+    "fries",
+    "x_pizza_slice_box",
+    "popcorn",
+    "x_gyro",
+    "x_quesadilla_plate",
+    "x_shawarma",
+    "taco",
+    "x_wrap_sandwich",
+    "x_apple_pie",
+    "x_bao_bun",
+    "x_calzone",
+    "x_cheese",
+    "x_cheese_wedge",
+    "x_crepe",
+    "x_dim_sum",
+    "x_dumpling",
+    "x_french_toast",
+    "x_gnocchi",
+    "x_samosa",
+    "x_sausage_roll",
+    "x_spring_roll",
+    "x_toast",
+    "x_waffle_plate",
+    "x_yogurt"
+   ],
+   "severity": "medium",
+   "suggestion": "'X Startle' is truthful to stun, but vary it over time. The heat templates get object-specific names (low) or truthful heat images (medium). 'Hot Pocket Heat' is high."
+  },
+  {
+   "pattern": "Ultimate repeats or contains the Epic name in 23 objects (Fairground Swirl, Bake Sale Swirl, Best Bit First, Lunchbox Unroll, Takeaway Starter, Sunday Pudding, Gingerbread Chase).",
+   "ids": [
+    "x_sandwich_roll",
+    "x_caramel",
+    "x_lollipop_swirl",
+    "x_gingerbread_man",
+    "x_wafer",
+    "croissant",
+    "cupcake",
+    "x_omelette",
+    "x_scrambled_eggs",
+    "x_frozen_yogurt",
+    "x_pizza_slice_box",
+    "x_gyro",
+    "x_shawarma",
+    "taco",
+    "x_wrap_sandwich",
+    "x_jello",
+    "x_muffin_top",
+    "x_pancake_stack",
+    "x_pastry",
+    "x_pudding",
+    "x_ravioli",
+    "x_scone",
+    "x_spring_roll"
+   ],
+   "severity": "medium",
+   "suggestion": "Each finisher gets its own image (names given)."
+  },
+  {
+   "pattern": "Same-food pairs that need a split: candy floss and cotton candy; jello and jelly; caramel (gooey) and toffee (brittle); gyro, shawarma, wrap sandwich and taco; cheese and cheese wedge; cookie, sugar cookie and biscuit tin; cake, cupcake and cake pop; frozen yoghurt, gelato and ice cream.",
+   "ids": [
+    "cake",
+    "x_cake_pop",
+    "x_caramel",
+    "x_toffee",
+    "cookie",
+    "x_sugar_cookie",
+    "cupcake",
+    "x_frozen_yogurt",
+    "x_gelato_cup",
+    "ice_cream",
+    "x_gyro",
+    "x_shawarma",
+    "taco",
+    "x_wrap_sandwich",
+    "x_biscuit_tin",
+    "x_candy_floss",
+    "x_cheese",
+    "x_cheese_wedge",
+    "x_cotton_candy",
+    "x_jello",
+    "x_jelly"
+   ],
+   "severity": "medium",
+   "suggestion": "The replacements follow the split given in each object's issue."
+  },
+  {
+   "pattern": "Cross-object and cross-batch copies: stretched cheese (panini, quesadilla, pizza box, w20 lasagna); flipping onto pets (fried egg, crepe, pancake stack, cake); 'too pretty to eat' (macaron, eclair, cake pop, tart); sharing fairly (candy L = chocolate L); seagull raids (fries E = ice cream E, w22 fish and chips); glue in the mouth (caramel U = toffee U, w22 peanut butter).",
+   "ids": [
+    "candy",
+    "x_toffee",
+    "chocolate",
+    "x_omelette",
+    "ice_cream",
+    "x_gyro",
+    "x_quesadilla_plate",
+    "x_shawarma",
+    "x_wrap_sandwich",
+    "x_cheese",
+    "x_cheese_wedge",
+    "x_chocolate_box",
+    "x_crepe",
+    "x_eclair",
+    "x_empanada",
+    "x_french_toast",
+    "x_pancake_stack",
+    "x_pudding",
+    "x_sausage_roll",
+    "x_toast"
+   ],
+   "severity": "high",
+   "suggestion": "One side keeps the premise and the other gets a new one."
+  },
+  {
+   "pattern": "References: 'Hot Pocket Heat' is a brand name; the muffin-top Legendary (a bakery that sells only the tops) is a well-known TV sitcom joke; the falafel cook is 'crowned king'. Also checked: the birthday candle and marshmallow keep fire gentle, and nothing involves alcohol.",
+   "ids": [
+    "x_calzone",
+    "x_falafel",
+    "x_muffin_top"
+   ],
+   "severity": "high",
+   "suggestion": "Replacements given."
+  }
+ ],
+ "issues": [
+  {
+   "id": "bread",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Rises again in the bag every night, so the loaf is a little taller every morning and never fits the bread bin.'"
+  },
+  {
+   "id": "bread",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bagriser'"
+  },
+  {
+   "id": "bread",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was sliced so thin for a picnic that the wind blew the sandwiches into the next field, and the cows had lunch.'"
+  },
+  {
+   "id": "bread",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cow Picnic'"
+  },
+  {
+   "id": "bread",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a quiet week of lunches, and feeding bread crusts to ducks is a habit the game should not model (bread is bad for them).",
+   "suggestion": "'Stayed fresh for a whole year out of pure stubbornness, then went stale the second someone wanted a sandwich.'"
+  },
+  {
+   "id": "bread",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Doughford the Stubborn'"
+  },
+  {
+   "id": "x_panini",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all stretch the cheese; it also overlaps x_quesadilla_plate L and x_pizza_slice_box U.",
+   "suggestion": "'Pulls the cheese out of every other sandwich in the cafe to fill itself up.'"
+  },
+  {
+   "id": "x_panini",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Cheesethief'"
+  },
+  {
+   "id": "x_panini",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary repeats the stretched cheese and is a record frame.",
+   "suggestion": "'Was pressed so hard in the grill that it came out thinner than a page, and it was posted to Gran as a birthday card.'"
+  },
+  {
+   "id": "x_panini",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Grillmore, the Posted Panini'"
+  },
+  {
+   "id": "x_panini",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Press Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Grill Stripe Sear'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare repeats the Common (filling escaping).",
+   "suggestion": "'Swaps its filling with the roll next to it in the lunchbox, so ham becomes jam by lunchtime.'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Fillingswapper'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic has no joke ('still delicious').",
+   "suggestion": "'Was sat on by Dad on the coach, came out flat as a pancake, and the family ate it rolled up like a carpet.'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Carpet Roll Lunch'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was stuffed so full that the whole picnic fitted inside it, blanket included, and the ants needed a map to find the jam.'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Picnicus, the Roll That Ate a Picnic'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Roll Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Toasted Roll Singe'"
+  },
+  {
+   "id": "x_sandwich_roll",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Picnic Squash' repeats the Epic name 'Picnic Roll Squash'.",
+   "suggestion": "'Filling Burst'"
+  },
+  {
+   "id": "cake",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Makes whoever cuts it sing 'Happy Birthday', even when it is nobody's birthday.'"
+  },
+  {
+   "id": "cake",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Birthdaysinger'"
+  },
+  {
+   "id": "cake",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a small everyday incident, not a large concrete consequence with a joke. Also leans on 'three people'.",
+   "suggestion": "'Leaned so far on the way to the table that it toppled onto the dog, who wore it as a hat for the rest of the party.'"
+  },
+  {
+   "id": "cake",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cake Hat Dog'"
+  },
+  {
+   "id": "cake",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Was baked with so many layers that the top one had its own weather, and the candles had to be lit from a ladder.'"
+  },
+  {
+   "id": "cake",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gateau Grande, the Many-Storeyed'"
+  },
+  {
+   "id": "x_birthday_candle",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic only scales the Rare (relighting) by number.",
+   "suggestion": "'Was blown out so hard that the wish flew into the next room and came true for the cat.'"
+  },
+  {
+   "id": "x_birthday_candle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cat Wish'"
+  },
+  {
+   "id": "x_birthday_candle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline. ('the whole party says it came true').",
+   "suggestion": "'Was blown out with a wish for 'more birthdays', and now the family has one every Tuesday.'"
+  },
+  {
+   "id": "x_birthday_candle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wishwick, the Tuesday Birthday'"
+  },
+  {
+   "id": "x_cake_pop",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the same 'too perfect to eat' premise as x_macaron R and L.",
+   "suggestion": "'Sends its sprinkles marching off in a line across the table whenever nobody is watching.'"
+  },
+  {
+   "id": "x_cake_pop",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sprinklemarcher'"
+  },
+  {
+   "id": "x_cake_pop",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a small everyday incident, not a large concrete consequence with a joke.",
+   "suggestion": "'Got its stick tangled in the birthday girl's hair, and she wore it as a hair clip all afternoon.'"
+  },
+  {
+   "id": "x_cake_pop",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cake Pop Hairclip'"
+  },
+  {
+   "id": "x_cake_pop",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which is unheard of' formula with no feat.",
+   "suggestion": "'Popped so high off its stick that it went into orbit, and on clear nights it twinkles with sprinkles.'"
+  },
+  {
+   "id": "x_cake_pop",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Sprinkle Star, the Orbiting Pop'"
+  },
+  {
+   "id": "candy",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats x_caramel U and x_toffee U (stuck to teeth and jaws).",
+   "suggestion": "'Has its wrapper twisted so tightly that it takes a whole film to open.'"
+  },
+  {
+   "id": "candy",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Twistwrap'"
+  },
+  {
+   "id": "candy",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the sugar-rush myth (the object doing its job).",
+   "suggestion": "'Makes anyone who eats one talk in a squeaky voice for exactly one minute.'"
+  },
+  {
+   "id": "candy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Squeakvoice'"
+  },
+  {
+   "id": "candy",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Burst out of a pinata in such a rainbow that the garden looked like a sweet hailstorm, and the umbrellas came out.'"
+  },
+  {
+   "id": "candy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sweet Hailstorm'"
+  },
+  {
+   "id": "candy",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary needs a punchline after 'nobody argued once'; it also near-copies chocolate L (equal squares).",
+   "suggestion": "'Was shared so fairly between six children that nobody argued, and all the parents fainted in shock.'"
+  },
+  {
+   "id": "x_caramel",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Fine; slightly sharper ending.",
+   "suggestion": "'Stuck so many fingers together at a party that the whole room ended up holding hands in one long chain.'"
+  },
+  {
+   "id": "x_caramel",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary scales the Uncommon and Epic glue (third glue line in one object).",
+   "suggestion": "'Melted into a golden puddle so big that the town skated on it once it set, and everyone's skates stuck.'"
+  },
+  {
+   "id": "x_caramel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Goldpond, the Sticky Rink'"
+  },
+  {
+   "id": "x_caramel",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Sticky Fingers' repeats the Epic name 'Sticky Fingers Day'.",
+   "suggestion": "'Golden Gloop'"
+  },
+  {
+   "id": "x_chewing_gum",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all scale one trait (bigger bubbles).",
+   "suggestion": "'Sticks itself back under the same desk no matter how many times it is scraped off.'"
+  },
+  {
+   "id": "x_chewing_gum",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Deskhomer'"
+  },
+  {
+   "id": "x_chewing_gum",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic repeats the Rare and is only one fringe; make the consequence bigger.",
+   "suggestion": "'Blew a bubble so big in assembly that it popped and stuck the front row's hair together.'"
+  },
+  {
+   "id": "x_chewing_gum",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Front Row Pop'"
+  },
+  {
+   "id": "x_chewing_gum",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Blew a bubble so huge that it lifted its chewer off the playground, and the school had to reel him back in on a kite string.'"
+  },
+  {
+   "id": "x_chewing_gum",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bubbleton, the Flying Chew'"
+  },
+  {
+   "id": "x_gummy",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Wobbles off the table on its own when nobody is looking and hides in the sofa cushions.'"
+  },
+  {
+   "id": "x_gummy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sofawobbler'"
+  },
+  {
+   "id": "x_gummy",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Uncommon (the gummy clump).",
+   "suggestion": "'Was squeezed so hard that it shot out of its eater's fingers and stuck to the classroom ceiling, where it still wobbles.'"
+  },
+  {
+   "id": "x_gummy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Ceiling Wobbler'"
+  },
+  {
+   "id": "x_gummy",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Squished itself flat to slip under the door, popped back into a bear on the other side, and the bag never saw it again.'"
+  },
+  {
+   "id": "x_gummy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gummbert, the Great Escaper'"
+  },
+  {
+   "id": "x_jelly_beans",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare repeats the Common and Uncommon (guessing flavours).",
+   "suggestion": "'Changes flavour halfway through being chewed, so strawberry becomes sprout without warning.'"
+  },
+  {
+   "id": "x_jelly_beans",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sproutswitch'"
+  },
+  {
+   "id": "x_jelly_beans",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Spilled out of the jar across the school hall, and the whole assembly slid about like a disco.'"
+  },
+  {
+   "id": "x_jelly_beans",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bean Disco Slide'"
+  },
+  {
+   "id": "x_jelly_beans",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "'nobody could ever agree' is not a punchline.",
+   "suggestion": "'Tasted of every flavour at once, including Thursday, which turns out to taste of fish fingers.'"
+  },
+  {
+   "id": "x_licorice",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is a mild trait (wrapped round a wrist).",
+   "suggestion": "'Ties itself into knots in the bag, so getting one out takes a whole car journey.'"
+  },
+  {
+   "id": "x_licorice",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Knotstring'"
+  },
+  {
+   "id": "x_licorice",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was used as a skipping rope at break, and the rope got shorter every turn because somebody kept nibbling it.'"
+  },
+  {
+   "id": "x_licorice",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Nibbled Skipping Rope'"
+  },
+  {
+   "id": "x_licorice",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the 'for N years / so many times / never once / without ever' formula instead of an outrageous feat with a punchline.",
+   "suggestion": "'Turned every tongue in town black for a week, so the school photo looks like a row of happy panthers.'"
+  },
+  {
+   "id": "x_licorice",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Inkatongue the Liquorice'"
+  },
+  {
+   "id": "x_lollipop_swirl",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare and Epic repeat the Common (it lasts for hours).",
+   "suggestion": "'Hypnotises anyone who stares at its swirl, so the whole queue at the fair walks round in circles.'"
+  },
+  {
+   "id": "x_lollipop_swirl",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Swirlhypno'"
+  },
+  {
+   "id": "x_lollipop_swirl",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same 'still half finished' premise as the Rare.",
+   "suggestion": "'Was dropped on the fairground carousel and stuck so firmly that it now goes round with the horses.'"
+  },
+  {
+   "id": "x_lollipop_swirl",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Carousel Lolly'"
+  },
+  {
+   "id": "x_lollipop_swirl",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Fairground Swirl' repeats the Epic name 'Fairground Swirl'.",
+   "suggestion": "'Rainbow Spiral'"
+  },
+  {
+   "id": "x_mint",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Makes anyone who eats it whistle by accident on every word with an S in it.'"
+  },
+  {
+   "id": "x_mint",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Whistlemint'"
+  },
+  {
+   "id": "x_mint",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a crowd puff of mint with no consequence.",
+   "suggestion": "'Was passed round after dinner, and the whole table breathed out so coldly that the candles froze.'"
+  },
+  {
+   "id": "x_mint",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Frozen Candle Dinner'"
+  },
+  {
+   "id": "x_mint",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary repeats the Rare and Epic (cold breath).",
+   "suggestion": "'Was crunched so loudly at a quiet dinner that the sound froze in the air, and the guests hung their coats on it.'"
+  },
+  {
+   "id": "x_mint",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Frostcrunch, the Hanging Sound'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats x_caramel U (stuck to teeth). Split them: caramel = gooey and stretchy, toffee = hard and brittle.",
+   "suggestion": "'Gets stuck to its own wrapper, so half of every piece is eaten with a bit of paper.'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Wrapperglue'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the same 'lasts all afternoon' premise as x_lollipop_swirl.",
+   "suggestion": "'Shatters like glass when tapped, and the pieces fly so far that the hammer has to wear goggles.'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Shatterbit'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic copies x_caramel U (nobody can talk).",
+   "suggestion": "'Was so hard that it broke the little hammer, then the big hammer, then the neighbour's hammer.'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Hammer Breaker'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the 'for N years / so many times / never once / without ever' formula instead of an outrageous feat with a punchline.",
+   "suggestion": "'Was so hard that it outlasted the castle wall it was stuck to, and the builders now order it by the tonne.'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Brittlestone, the Unbreakable'"
+  },
+  {
+   "id": "x_toffee",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Sticky Stink': sticky is not a smell.",
+   "suggestion": "'Burnt Sugar Pong'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats the Common (melting on fingers).",
+   "suggestion": "'Hides a surprise filling inside its shell, so the strawberry one always turns out to be coffee.'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Shellsurprise'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Melts on purpose in the hand of anyone who is about to share it.'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Shymelt'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a small everyday incident, not a large concrete consequence with a joke.",
+   "suggestion": "'Was the last truffle in the box, and the family argued so long that it got bored and ate itself.'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Self-Eating Sweet'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was so rich that it bought the chocolate shop it came from and handed out free samples on its first day as owner.'"
+  },
+  {
+   "id": "x_truffle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ganache Grande, Owner of the Shop'"
+  },
+  {
+   "id": "x_brownie",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Grows a crispy corner wherever it is cut, so there is never a middle piece.'"
+  },
+  {
+   "id": "x_brownie",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Cornergrower'"
+  },
+  {
+   "id": "x_brownie",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was baked so gooey for the bake sale that the tray slid off the table and set as a chocolate path across the hall.'"
+  },
+  {
+   "id": "x_brownie",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Chocolate Path'"
+  },
+  {
+   "id": "x_brownie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Was so gooey in the middle that a teaspoon fell in and came out on the other side of the world.'"
+  },
+  {
+   "id": "x_brownie",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Fudgehole, the Bottomless Brownie'"
+  },
+  {
+   "id": "x_brownie",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Bake Sale' is just a label.",
+   "suggestion": "'Gooey Middle Slam'"
+  },
+  {
+   "id": "chocolate",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is a mild habit (one square becomes three).",
+   "suggestion": "'Melts only for its owner, and stays rock hard in the hand of anyone trying to pinch a square.'"
+  },
+  {
+   "id": "chocolate",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Pinchproof'"
+  },
+  {
+   "id": "chocolate",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic only scales the Uncommon (melting in a pocket).",
+   "suggestion": "'Melted on the classroom radiator and dripped into the shape of the teacher's face, smiling for once.'"
+  },
+  {
+   "id": "chocolate",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Teacher Portrait'"
+  },
+  {
+   "id": "chocolate",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary near-copies candy L (sharing fairly) and is a quiet success.",
+   "suggestion": "'Snapped into so many squares that it tiled the whole kitchen floor, and the family ate its way to the fridge.'"
+  },
+  {
+   "id": "chocolate",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Cocoatile, the Edible Floor'"
+  },
+  {
+   "id": "x_fudge",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the sugar-rush myth (giddy for an hour).",
+   "suggestion": "'Turns any spoon left in it into fudge, so the cutlery drawer is slowly becoming pudding.'"
+  },
+  {
+   "id": "x_fudge",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Spoonfudger'"
+  },
+  {
+   "id": "x_fudge",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was sold on the pier in a slab so heavy that the pier tilted, and the fishing boats got a free sample.'"
+  },
+  {
+   "id": "x_fudge",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Tilted Pier'"
+  },
+  {
+   "id": "x_fudge",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary repeats the Epic pier queue as another crowd.",
+   "suggestion": "'Was so sweet that the sea round the pier turned to syrup, and the waves now break in slow motion.'"
+  },
+  {
+   "id": "x_fudge",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Fudgeford, the Slow-Motion Sea'"
+  },
+  {
+   "id": "x_fudge",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Fudge Heat' is filler.",
+   "suggestion": "'Bubbling Sugar Pot'"
+  },
+  {
+   "id": "cookie",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Hides its chocolate chips whenever anyone counts them, so every cookie seems to have just one.'"
+  },
+  {
+   "id": "cookie",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Chiphider'"
+  },
+  {
+   "id": "cookie",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Uncommon (sinking in the milk).",
+   "suggestion": "'Crumbled so badly on a train that the pigeons at every station knew which carriage to wait at.'"
+  },
+  {
+   "id": "cookie",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Pigeon Express'"
+  },
+  {
+   "id": "cookie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Was baked so big and round that it was mistaken for a full moon, and the wolves howled at it all night.'"
+  },
+  {
+   "id": "cookie",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Moonbiscuit, the Howled-At'"
+  },
+  {
+   "id": "x_fortune_cookie",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Makes its fortunes come true, but only the small ones, so 'you will find treasure' means a coin under the sofa.'"
+  },
+  {
+   "id": "x_fortune_cookie",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Smallfortune'"
+  },
+  {
+   "id": "x_fortune_cookie",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Gave the whole table the fortune 'look behind you', and they all turned round at once and knocked over the noodles.'"
+  },
+  {
+   "id": "x_fortune_cookie",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Look Behind You'"
+  },
+  {
+   "id": "x_fortune_cookie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Predicted rain on sports day so firmly that the clouds felt they had to turn up.'"
+  },
+  {
+   "id": "x_fortune_cookie",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Fortunata, the Rain Caller'"
+  },
+  {
+   "id": "x_gingerbread_man",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is not a power ('looks so cheeky that he might run off').",
+   "suggestion": "'Bakes himself a little friend out of his own crumbs whenever someone takes a bite.'"
+  },
+  {
+   "id": "x_gingerbread_man",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Crumbfriend'"
+  },
+  {
+   "id": "x_gingerbread_man",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a small everyday incident, not a large concrete consequence with a joke.",
+   "suggestion": "'Led a whole tray of gingerbread on a getaway across the kitchen, and the fox from the story asked them for directions.'"
+  },
+  {
+   "id": "x_gingerbread_man",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Gingerbread Getaway'"
+  },
+  {
+   "id": "x_gingerbread_man",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary retells the folk tale without a twist.",
+   "suggestion": "'Ran so far that he outran the fox, the river and the end of his own story, and now nobody knows how it finishes.'"
+  },
+  {
+   "id": "x_gingerbread_man",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Snap the Uncatchable'"
+  },
+  {
+   "id": "x_gingerbread_man",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Gingerbread Chase' repeats the Epic name 'Gingerbread Chase'.",
+   "suggestion": "'Catch Me If You Can'"
+  },
+  {
+   "id": "x_macaron",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare and Legendary share one premise (too pretty to eat); it also matches x_cake_pop R.",
+   "suggestion": "'Has a shell so delicate that it cracks if anyone so much as says 'crunch' nearby.'"
+  },
+  {
+   "id": "x_macaron",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Crunchflinch'"
+  },
+  {
+   "id": "x_macaron",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was stacked into a tower at a fancy tea, and one sneeze sent the whole rainbow rolling under the piano.'"
+  },
+  {
+   "id": "x_macaron",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sneeze Tumble'"
+  },
+  {
+   "id": "x_macaron",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary repeats the Rare.",
+   "suggestion": "'Was mistaken for a famous painting, and now it hangs in a gallery with a guard watching it slowly soften.'"
+  },
+  {
+   "id": "x_macaron",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pastella, the Gallery Biscuit'"
+  },
+  {
+   "id": "x_sugar_cookie",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Rearranges its own icing when nobody is looking, so the smiley face is a frowny face by teatime.'"
+  },
+  {
+   "id": "x_sugar_cookie",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Frownflipper'"
+  },
+  {
+   "id": "x_sugar_cookie",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was iced so thickly at a party that it turned into a skateboard, and the birthday boy rode it to the bus stop.'"
+  },
+  {
+   "id": "x_sugar_cookie",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Icing Skateboard'"
+  },
+  {
+   "id": "x_sugar_cookie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was cut into a star so perfect that it floated up into the night sky, and there is now a constellation that smells of vanilla.'"
+  },
+  {
+   "id": "x_sugar_cookie",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Vanilla Star, the Sky Cookie'"
+  },
+  {
+   "id": "x_wafer",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare and Epic are the same noise (loud crunch).",
+   "suggestion": "'Plays a different note for every layer when tapped, like a tiny xylophone.'"
+  },
+  {
+   "id": "x_wafer",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Waferphone'"
+  },
+  {
+   "id": "x_wafer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Snapped so loudly in a quiet cinema that the film stopped, rewound and started again from the beginning.'"
+  },
+  {
+   "id": "x_wafer",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Rewound Film'"
+  },
+  {
+   "id": "x_wafer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the 'for N years / so many times / never once / without ever' formula instead of an outrageous feat with a punchline.",
+   "suggestion": "'Was stacked into a tower so tall that the harbour used it as a lighthouse until a hungry storm ate it.'"
+  },
+  {
+   "id": "x_wafer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crispspire, the Wafer Lighthouse'"
+  },
+  {
+   "id": "x_wafer",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Crumb Shower' repeats the Epic name 'Wafer Crumb Shower'. 'Crumb Shower' is also the bakery kit's default move name.",
+   "suggestion": "'Layer Landslide'"
+  },
+  {
+   "id": "croissant",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Common, Uncommon, Rare, Epic and Legendary are all flakes; give each its own premise.",
+   "suggestion": "'Sheds one flake into every keyboard, pocket and car seat it passes.'"
+  },
+  {
+   "id": "croissant",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Keyboardflaker'"
+  },
+  {
+   "id": "croissant",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Same flakes premise again.",
+   "suggestion": "'Points its horns at whoever ate the last one, so nobody can pretend it wasn't them.'"
+  },
+  {
+   "id": "croissant",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Hornpointer'"
+  },
+  {
+   "id": "croissant",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same flakes premise again; no feat.",
+   "suggestion": "'Was so buttery that it slid out of the bakery, down the high street and into the harbour, where it is now a boat.'"
+  },
+  {
+   "id": "croissant",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crescendo, the Buttery Escape'"
+  },
+  {
+   "id": "croissant",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Flake Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Fresh Oven Flakes'"
+  },
+  {
+   "id": "croissant",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flake Storm' repeats the Epic name 'Breakfast Flake Storm'.",
+   "suggestion": "'Golden Flake Flurry'"
+  },
+  {
+   "id": "cupcake",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Paperwrapper' does not match the Uncommon lore (icing on the nose).",
+   "suggestion": "'Nosefroster'"
+  },
+  {
+   "id": "cupcake",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Puffs out a cloud of icing sugar when bitten, and its eater sneezes sprinkles.'"
+  },
+  {
+   "id": "cupcake",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sprinklesneeze'"
+  },
+  {
+   "id": "cupcake",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic stops at 'toppled'; give the fall a landing.",
+   "suggestion": "'Was stacked in a party tower, and when someone took one from the bottom, the whole tower rained onto the bouncy castle.'"
+  },
+  {
+   "id": "cupcake",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cupcake Rainfall'"
+  },
+  {
+   "id": "cupcake",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Had icing so tall that a mountaineer climbed it, planted a flag and had to be rescued with a teaspoon.'"
+  },
+  {
+   "id": "cupcake",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Summit Swirl, the Tallest Icing'"
+  },
+  {
+   "id": "cupcake",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Bake Sale Swirl' repeats the Epic name 'Bake Sale Swirl'.",
+   "suggestion": "'Icing Landslide'"
+  },
+  {
+   "id": "donut",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Rolls away on its edge like a wheel whenever someone reaches for it.'"
+  },
+  {
+   "id": "donut",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Rollingring'"
+  },
+  {
+   "id": "donut",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Uncommon (jam squirting out).",
+   "suggestion": "'Was dunked in hot chocolate and floated round the mug like a rubber ring, with a marshmallow sunbathing in the middle.'"
+  },
+  {
+   "id": "donut",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Marshmallow Lifebelt'"
+  },
+  {
+   "id": "donut",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which nobody believed' formula.",
+   "suggestion": "'Was so big that the town turned it into a roundabout, and the cars go round it licking their lips.'"
+  },
+  {
+   "id": "donut",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ringmaster Glaze'"
+  },
+  {
+   "id": "donut",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Jam does not stink; poison should read as a smell.",
+   "suggestion": "'Sour Jam Pong'"
+  },
+  {
+   "id": "fried_egg",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Line describes the object plainly; there is no habit and no joke.",
+   "suggestion": "'Spreads across the pan until it touches the sausages, then refuses to let go.'"
+  },
+  {
+   "id": "fried_egg",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Pairs with the new Common lore.",
+   "suggestion": "'Panspreader'"
+  },
+  {
+   "id": "fried_egg",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Shines its yolk like a little torch, so it can be found in a dark kitchen at midnight.'"
+  },
+  {
+   "id": "fried_egg",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Yolktorch'"
+  },
+  {
+   "id": "fried_egg",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which no egg has ever managed' formula.",
+   "suggestion": "'Shone its yolk so brightly at breakfast that the sun thought it had been replaced and went back to bed.'"
+  },
+  {
+   "id": "fried_egg",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Sol Yolkington'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Folds itself over anything left on the plate, so the peas, the fork and the salt cellar all get tucked in.'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Tuckfolder'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic copies fried_egg E (flipped onto something).",
+   "suggestion": "'Was flipped so hard in a cafe that it wrapped itself round the chef like a yellow scarf.'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Omelette Scarf'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was cooked in a pan so big that the whole town used it as a duvet on the coldest night of the year.'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Folderella, the Town Duvet'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Egg Heat' is shared word for word with x_egg_cup.",
+   "suggestion": "'Pan Sizzle Sting'"
+  },
+  {
+   "id": "x_omelette",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Omelette Flip' repeats the Epic name 'Breakfast Omelette Flip'.",
+   "suggestion": "'Big Fold Over'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare and Legendary share one premise (fluffy as clouds).",
+   "suggestion": "'Scrambles anything near the pan, so the shopping list and the crossword come out jumbled.'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Jumbler'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was made with so many eggs that the hens next door went on strike until they got a thank-you card.'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Hen Strike'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was scrambled so fast that it unscrambled itself back into twelve whole eggs, and the cook had to start again.'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Unscrambler the Great'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Scramble Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Buttery Pan Scald'"
+  },
+  {
+   "id": "x_scrambled_eggs",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Sunday Scramble' repeats the Epic name 'Sunday Scramble Rush'.",
+   "suggestion": "'Eggquake'"
+  },
+  {
+   "id": "fries",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Points like a compass at the nearest bottle of ketchup, even in someone else's house.'"
+  },
+  {
+   "id": "fries",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Ketchupcompass'"
+  },
+  {
+   "id": "fries",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Chip Shop Queue' does not match the Epic lore (a seagull steals them).",
+   "suggestion": "'Seagull Getaway'"
+  },
+  {
+   "id": "fries",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which is unheard of' formula.",
+   "suggestion": "'Stayed hot for the walk home, then for the whole winter, and the family used the cone as a heater.'"
+  },
+  {
+   "id": "fries",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crispin, the Never-Cold Chip'"
+  },
+  {
+   "id": "fries",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Salt has no smell; vinegar does.",
+   "suggestion": "'Vinegar Pong'"
+  },
+  {
+   "id": "fries",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Chip Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Vinegar Sizzle'"
+  },
+  {
+   "id": "x_frozen_yogurt",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Common and Epic all pile on toppings.",
+   "suggestion": "'Gives anyone who eats it too fast a brain freeze so strong that they forget what day it is.'"
+  },
+  {
+   "id": "x_frozen_yogurt",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Brainfreezer'"
+  },
+  {
+   "id": "x_frozen_yogurt",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same toppings premise again.",
+   "suggestion": "'Swirled out of the machine without stopping, and the morning staff had to dig their way into the shop.'"
+  },
+  {
+   "id": "x_frozen_yogurt",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Machine Overflow'"
+  },
+  {
+   "id": "x_frozen_yogurt",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was swirled so tall that snow settled on top, and a skier came down it with chocolate flakes on his hat.'"
+  },
+  {
+   "id": "x_frozen_yogurt",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Swirlpeak, the Ski Slope'"
+  },
+  {
+   "id": "x_frozen_yogurt",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Summer Swirl' repeats the Epic name 'Summer Swirl Cup'.",
+   "suggestion": "'Topping Tumble'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats ice_cream U (melting down the side).",
+   "suggestion": "'Comes with a spoon so tiny that eating it takes longer than the holiday.'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Tinyspade'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Changes flavour to match the weather, so a rainy day gets a scoop of puddle.'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Weatherscoop'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was served in a cup so big that the family had to hire a pedalo to reach the bottom.'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Pedalo Scoop'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was so good that a family missed their flight home, and they now live above the gelato shop.'"
+  },
+  {
+   "id": "x_gelato_cup",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pistachia, the Missed Flight'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Common, Uncommon and Rare are all drips.",
+   "suggestion": "'Falls off the cone at the very first lick and lands scoop-side down.'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Scoopdropper'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Same drip premise again.",
+   "suggestion": "'Drips only on whoever is wearing their best clothes, and it can find them across a whole beach.'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bestclothesdrip'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic copies fries E (a seagull raid on the beach).",
+   "suggestion": "'Melted into a river on the hottest day, and a family of ducks paddled away in the empty cone.'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cone Canoe'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which nobody believes' formula.",
+   "suggestion": "'Was piled with so many scoops that the cone reached the clouds, and every cloud over town now tastes of strawberry.'"
+  },
+  {
+   "id": "ice_cream",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Scoopsky, the Cloud Cone'"
+  },
+  {
+   "id": "x_sundae",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Puts a cherry on top of anything near it, so the soup, the homework and Dad's head all get one.'"
+  },
+  {
+   "id": "x_sundae",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Cherryplacer'"
+  },
+  {
+   "id": "x_sundae",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Toppled at the ice-cream parlour and buried the counter, and the staff dug out two spoons and a surprised waiter.'"
+  },
+  {
+   "id": "x_sundae",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Buried Counter'"
+  },
+  {
+   "id": "x_sundae",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary only scales the Rare (very tall).",
+   "suggestion": "'Was so tall that the girl eating it started at breakfast and reached the bottom on her birthday.'"
+  },
+  {
+   "id": "x_sundae",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Cherrytower, the Year-Long Sundae'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats the cheese string of x_panini and x_quesadilla_plate.",
+   "suggestion": "'Always has one slice with all the olives, and it is always the one left at the end.'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Oliveslice'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Turns any box stacked on it into pizza, so the shoe box and the cereal box now come with cheese.'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Boxcheeser'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was left on a car roof and flew off down the road like a frisbee, and a lorry driver caught it with one hand.'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Motorway Frisbee'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Folded itself into a paper aeroplane and delivered its own pizza across town before the shop had even picked up the phone.'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pizzarocket, the Self-Delivering Box'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Cheese Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Molten Topping Burn'"
+  },
+  {
+   "id": "x_pizza_slice_box",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Pizza Party Box' repeats the Epic name 'Pizza Box Party'.",
+   "suggestion": "'Last Slice Slam'"
+  },
+  {
+   "id": "popcorn",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Kept popping after the bag was empty until the kitchen was full to the ceiling, and the family had to eat its way out.'"
+  },
+  {
+   "id": "popcorn",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Kernel Boom, the Endless Pop'"
+  },
+  {
+   "id": "popcorn",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Pop Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Hot Kernel Pop'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats the Common and x_shawarma U (sauce dripping).",
+   "suggestion": "'Hides a few chips inside its pita, and one always falls out first.'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Chipsmuggler'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was wrapped so tight at a festival that it popped like a party cracker and showered the stage with lettuce.'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Lettuce Confetti'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Held so much sauce that when it finally burst, it painted the festival field white and the planes thought it had snowed.'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Tzatzikus, the Sauce Burst'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Wrap Heat' is shared word for word with x_shawarma and x_wrap_sandwich.",
+   "suggestion": "'Charred Pita Sting'"
+  },
+  {
+   "id": "x_gyro",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Street Feast' repeats the Epic name 'Street Food Feast'.",
+   "suggestion": "'Spit Spin Finale'"
+  },
+  {
+   "id": "x_quesadilla_plate",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a still picture (wedges like a clock), and 'Cheese Pull Contest' is a contest frame.",
+   "suggestion": "'Folded so hard that it snapped shut on the spatula and wouldn't let go until it got more cheese.'"
+  },
+  {
+   "id": "x_quesadilla_plate",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Spatula Snapper'"
+  },
+  {
+   "id": "x_quesadilla_plate",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary copies x_panini (the endless cheese pull).",
+   "suggestion": "'Was so crispy that its crunch was heard across the desert, and a camel came to ask for a wedge.'"
+  },
+  {
+   "id": "x_quesadilla_plate",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crunchadilla'"
+  },
+  {
+   "id": "x_quesadilla_plate",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Cheese Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Molten Wedge Burn'"
+  },
+  {
+   "id": "x_shawarma",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was so garlicky that the vampire film on the takeaway's TV switched itself off.'"
+  },
+  {
+   "id": "x_shawarma",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Vampire-Proof Wrap'"
+  },
+  {
+   "id": "x_shawarma",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a quiet crowd line ('worth the queue').",
+   "suggestion": "'Grew on its spit until it was as tall as the shop, and the owner now climbs a ladder to slice the top.'"
+  },
+  {
+   "id": "x_shawarma",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Towerma, the Giant Spit'"
+  },
+  {
+   "id": "x_shawarma",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Wrap Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Garlic Grill Sizzle'"
+  },
+  {
+   "id": "x_shawarma",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Takeaway Night' repeats the Epic 'Late Night Takeaway' and is word for word x_fried_rice's Epic and Ultimate.",
+   "suggestion": "'Garlic Cloud'"
+  },
+  {
+   "id": "taco",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Common and Epic are all the shell falling apart.",
+   "suggestion": "'Holds its shape only while someone is looking at it, and folds flat the moment its eater blinks.'"
+  },
+  {
+   "id": "taco",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Blinkfold'"
+  },
+  {
+   "id": "taco",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same falling-apart premise again.",
+   "suggestion": "'Crunched so loudly at taco night that the smoke alarm went off and the dog hid in the bath.'"
+  },
+  {
+   "id": "taco",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Smoke Alarm Crunch'"
+  },
+  {
+   "id": "taco",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Was folded so big that a whole family slept inside it on a camping trip, with a zip made of cheese.'"
+  },
+  {
+   "id": "taco",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Shellter, the Family Tent'"
+  },
+  {
+   "id": "taco",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Crunch Heat' has no believable heat image for this object, but the move burns.",
+   "suggestion": "'Jalapeno Crunch'"
+  },
+  {
+   "id": "taco",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Taco Avalanche' repeats the Epic name 'Taco Night Avalanche'.",
+   "suggestion": "'Shell Shatter'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Rolls itself tighter whenever anyone tries to take a bite, until it is as hard as a rolling pin.'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Tightroll'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Uncommon (unrolling).",
+   "suggestion": "'Was wrapped in so much foil that it set off the airport scanner, and the whole queue waited while it was unwrapped.'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Airport Scanner Lunch'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Wrapped itself round a runaway shopping trolley and stopped it at the bottom of the hill without losing a single pea.'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wraptor, the Trolley Stopper'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Wrap Heat' is shared word for word with x_gyro and x_shawarma.",
+   "suggestion": "'Foil Toasted Sting'"
+  },
+  {
+   "id": "x_wrap_sandwich",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Lunchbox Unroll' repeats the Epic name 'Lunchbox Unroll'.",
+   "suggestion": "'Grand Unravel'"
+  },
+  {
+   "id": "x_apple_pie",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Turns any apple left in the fruit bowl into a pie overnight, so the fruit bowl is now a pie dish.'"
+  },
+  {
+   "id": "x_apple_pie",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Orchardbaker'"
+  },
+  {
+   "id": "x_apple_pie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a contest frame ('won the village show three years running').",
+   "suggestion": "'Had a crust so big that it became the roof of the village hall, and now the rain smells of cinnamon.'"
+  },
+  {
+   "id": "x_apple_pie",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lattice Grand, the Pie Roof'"
+  },
+  {
+   "id": "x_apple_pie",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Apple Startle' uses a heat word, but the move is a stun.",
+   "suggestion": "'Cinnamon Waft'"
+  },
+  {
+   "id": "x_bao_bun",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Bounces back so hard when squeezed that it boings out of the steamer and onto the next table.'"
+  },
+  {
+   "id": "x_bao_bun",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Boingbun'"
+  },
+  {
+   "id": "x_bao_bun",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was steamed so fluffy that the restaurant used it as a cushion, and two customers sat on their lunch.'"
+  },
+  {
+   "id": "x_bao_bun",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bun Cushion'"
+  },
+  {
+   "id": "x_bao_bun",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Rose in the steamer so high that it lifted the restaurant off the ground, and the waiters now serve lunch in parachutes.'"
+  },
+  {
+   "id": "x_bao_bun",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Puffbao, the Rising Restaurant'"
+  },
+  {
+   "id": "x_bao_bun",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Bun Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Steam Basket Scald'"
+  },
+  {
+   "id": "x_biscuit_tin",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power. The sewing-tin joke is good; it works better as a power than as the Legendary.",
+   "suggestion": "'Holds sewing things whenever a child opens it, and biscuits whenever a grown-up does.'"
+  },
+  {
+   "id": "x_biscuit_tin",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sewingswitcher'"
+  },
+  {
+   "id": "x_biscuit_tin",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was opened so hard at a family party that the lid rolled down the hall, out of the door and into next door's party.'"
+  },
+  {
+   "id": "x_biscuit_tin",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Runaway Lid'"
+  },
+  {
+   "id": "x_biscuit_tin",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a recognisable everyday joke (the sewing tin), not an outrageous feat.",
+   "suggestion": "'Was so hard to open that a crane and the strongest man in town both gave up, and Gran opened it with a teaspoon.'"
+  },
+  {
+   "id": "x_biscuit_tin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lidlock, the Unopenable Tin'"
+  },
+  {
+   "id": "x_butter",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Goes rock hard the moment anyone wants to spread it, and melts the moment they give up.'"
+  },
+  {
+   "id": "x_butter",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Moodspread'"
+  },
+  {
+   "id": "x_butter",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a small everyday incident, not a large concrete consequence with a joke.",
+   "suggestion": "'Was left out so long in summer that it slid off the table, out through the cat flap and down the garden.'"
+  },
+  {
+   "id": "x_butter",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Garden Slide'"
+  },
+  {
+   "id": "x_butter",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a quiet success ('the family took a photo').",
+   "suggestion": "'Spread so smoothly straight from the fridge that it buttered a whole loaf in one swipe, and the toaster gave a little bow.'"
+  },
+  {
+   "id": "x_butter",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Spreadwell the Smooth'"
+  },
+  {
+   "id": "x_calzone",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare and Epic share one premise (the cheese volcano).",
+   "suggestion": "'Hides a different pizza inside every time it is cut, so nobody ever knows what they ordered.'"
+  },
+  {
+   "id": "x_calzone",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Mysteryfold'"
+  },
+  {
+   "id": "x_calzone",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Erupted so much cheese when it was cut that the party moved into the garden and ate the lava with forks.'"
+  },
+  {
+   "id": "x_calzone",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cheese Volcano'"
+  },
+  {
+   "id": "x_calzone",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Folded itself round a whole pizza restaurant, and the diners finished their meal inside without noticing.'"
+  },
+  {
+   "id": "x_calzone",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Calzoneo, the Folded Restaurant'"
+  },
+  {
+   "id": "x_calzone",
+   "field": "moves.signature",
+   "severity": "high",
+   "issue": "'Hot Pocket Heat' contains a brand name (a well-known frozen snack); no brands.",
+   "suggestion": "'Folded Lava Scald'"
+  },
+  {
+   "id": "x_candy_floss",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply melting. Candy floss and x_cotton_candy are the same food; split them (candy floss = sticky seaside, cotton candy = floating clouds).",
+   "suggestion": "'Spins any hair it touches into more candy floss, so the hairdresser now sells it by the bag.'"
+  },
+  {
+   "id": "x_candy_floss",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Hairspinner'"
+  },
+  {
+   "id": "x_candy_floss",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Uncommon (sticking to hair).",
+   "suggestion": "'Was blown off its stick at the seaside and wrapped the lifeguard's chair in pink, with the lifeguard still in it.'"
+  },
+  {
+   "id": "x_candy_floss",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Pink Lifeguard'"
+  },
+  {
+   "id": "x_candy_floss",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was spun so big at the fair that it became the new big top, and the circus moved in.'"
+  },
+  {
+   "id": "x_candy_floss",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bigtop Floss, the Sugar Tent'"
+  },
+  {
+   "id": "x_cheese",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Common, Rare, Epic and Legendary are all the same strong smell.",
+   "suggestion": "'Ages a whole year every time the fridge door is opened, so it is now older than Grandad.'"
+  },
+  {
+   "id": "x_cheese",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Agedblock'"
+  },
+  {
+   "id": "x_cheese",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was unwrapped on a train, and the whole carriage moved next door, leaving the cheese a first-class seat to itself.'"
+  },
+  {
+   "id": "x_cheese",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cheese First Class'"
+  },
+  {
+   "id": "x_cheese",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same smell premise; 'became famous' is not a punchline.",
+   "suggestion": "'Smelled so strong that the harbour used it as a foghorn, and the ships now steer by nose.'"
+  },
+  {
+   "id": "x_cheese",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pongsworth, the Harbour Cheese'"
+  },
+  {
+   "id": "x_cheese",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Cheesy Heat' is shared word for word with x_cheese_wedge; cheese is not hot.",
+   "suggestion": "'Melted Rind Burn'"
+  },
+  {
+   "id": "x_cheese_wedge",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Moves its holes around overnight, so the slice you cut is never the slice you expected.'"
+  },
+  {
+   "id": "x_cheese_wedge",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Holeshifter'"
+  },
+  {
+   "id": "x_cheese_wedge",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Had so many holes that the wind whistled through it, and the town band now plays it as a flute.'"
+  },
+  {
+   "id": "x_cheese_wedge",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Swisswhistle, the Cheese Flute'"
+  },
+  {
+   "id": "x_cheese_wedge",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Cheesy Heat' is shared word for word with x_cheese.",
+   "suggestion": "'Grilled Cheese Sizzle'"
+  },
+  {
+   "id": "x_cheesecake_slice",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary are all 'too rich to finish'.",
+   "suggestion": "'Weighs ten times more than it looks, so the waiter's tray tips over every time it is served.'"
+  },
+  {
+   "id": "x_cheesecake_slice",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Heavyslice'"
+  },
+  {
+   "id": "x_cheesecake_slice",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same 'too rich' premise.",
+   "suggestion": "'Wobbled off its plate at a party and skied down the tablecloth into Grandad's lap.'"
+  },
+  {
+   "id": "x_cheesecake_slice",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cheesecake Ski Run'"
+  },
+  {
+   "id": "x_cheesecake_slice",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same 'too rich' premise; no punchline.",
+   "suggestion": "'Was so rich and heavy that when it was dropped, the earthquake machine across town recorded a small cheesequake.'"
+  },
+  {
+   "id": "x_cheesecake_slice",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Cheesequake, the Heavy Slice'"
+  },
+  {
+   "id": "x_chocolate_box",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare copies x_jelly_beans U (one flavour nobody wants).",
+   "suggestion": "'Swaps its chocolates round whenever someone checks the map, so the toffee is always the coffee one.'"
+  },
+  {
+   "id": "x_chocolate_box",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Mapmuddler'"
+  },
+  {
+   "id": "x_chocolate_box",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was passed round a party so slowly that the person at the end found only the map and a coffee cream.'"
+  },
+  {
+   "id": "x_chocolate_box",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Coffee Cream Ending'"
+  },
+  {
+   "id": "x_chocolate_box",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "A callback ending gives the Legendary its punchline.",
+   "suggestion": "'Always had one more chocolate inside, however many were taken, and the last one was always the coffee cream.'"
+  },
+  {
+   "id": "x_chocolate_box",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Chocolate Pick' is word for word the Ultimate of x_truffle.",
+   "suggestion": "'Map Muddle'"
+  },
+  {
+   "id": "x_churro",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Grows longer every time it is dunked, so the last dip always needs a bigger cup.'"
+  },
+  {
+   "id": "x_churro",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Dunkstretcher'"
+  },
+  {
+   "id": "x_churro",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Rare (dunking).",
+   "suggestion": "'Was so long and crisp that Grandad used it as a walking stick to the fair and back.'"
+  },
+  {
+   "id": "x_churro",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Walking Churro'"
+  },
+  {
+   "id": "x_churro",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is 'carried by three people', with no punchline.",
+   "suggestion": "'Was piped so long at the fair that it went round the big wheel, and riders snapped off a piece as they passed.'"
+  },
+  {
+   "id": "x_churro",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Twistmile, Round the Big Wheel'"
+  },
+  {
+   "id": "x_cinnamon_roll",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is a habit (saving the middle).",
+   "suggestion": "'Spins like a top when set down, and doesn't stop until somebody says 'cinnamon'.'"
+  },
+  {
+   "id": "x_cinnamon_roll",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Spinbun'"
+  },
+  {
+   "id": "x_cinnamon_roll",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary repeats the Epic (the smell waking the street).",
+   "suggestion": "'Unrolled itself into one ribbon of dough long enough to wrap the town hall like a present.'"
+  },
+  {
+   "id": "x_cinnamon_roll",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Swirlina, the Town Wrapper'"
+  },
+  {
+   "id": "x_cotton_candy",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all scale one trait (floating); also x_candy_floss is the same food.",
+   "suggestion": "'Floated off at the carnival and got tangled round the trapeze, so the acrobats swung through a pink cloud all night.'"
+  },
+  {
+   "id": "x_cotton_candy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Trapeze Cloud'"
+  },
+  {
+   "id": "x_cotton_candy",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary repeats the Epic (floating like a cloud).",
+   "suggestion": "'Drifted across the sea and was found by a lighthouse keeper two countries away, still on its stick.'"
+  },
+  {
+   "id": "x_cotton_candy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Drifter, the Sea-Crossing Fluff'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Common, Uncommon, Rare and Epic all squirt cream.",
+   "suggestion": "'Collapses into a sad pancake if anyone opens the oven door too early.'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Ovenflop'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Same cream-squirt premise.",
+   "suggestion": "'Puffs itself up bigger whenever someone says it looks small.'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Puffpride'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same cream-squirt premise, and the cat licks it up.",
+   "suggestion": "'Fired its cream across the room at a party and gave the portrait on the wall a beard.'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cream Beard Portrait'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was so light that it floated out of the bakery and became a weather balloon. Its forecast: cloudy, with a chance of cream.'"
+  },
+  {
+   "id": "x_cream_puff",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Puffington, the Weather Puff'"
+  },
+  {
+   "id": "x_crepe",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Folds itself into any shape it is asked for, so the market stall now sells crepe swans.'"
+  },
+  {
+   "id": "x_crepe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Foldcrafter'"
+  },
+  {
+   "id": "x_crepe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic copies x_pancake_stack E and fried_egg E (landing on a pet).",
+   "suggestion": "'Was folded so many times on pancake day that it became a paper fan and cooled the whole kitchen.'"
+  },
+  {
+   "id": "x_crepe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Crepe Fan'"
+  },
+  {
+   "id": "x_crepe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was so thin that it floated off the griddle like a magic carpet and gave the cook a ride round the market.'"
+  },
+  {
+   "id": "x_crepe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crepetta, the Flying Carpet'"
+  },
+  {
+   "id": "x_crepe",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Crepe Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Griddle Scorch'"
+  },
+  {
+   "id": "x_custard",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Grows lumps on purpose whenever anyone says 'no lumps, please'.'"
+  },
+  {
+   "id": "x_custard",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a small everyday incident, not a large concrete consequence with a joke.",
+   "suggestion": "'Was poured over a school pudding so thickly that the dinner lady lost her ladle in it until next term.'"
+  },
+  {
+   "id": "x_custard",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Lost Ladle'"
+  },
+  {
+   "id": "x_custard",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which nobody has managed since' formula.",
+   "suggestion": "'Set its skin so thick that the children bounced across the bowl like a trampoline, and nobody fell in.'"
+  },
+  {
+   "id": "x_custard",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Skinsworth, the Custard Trampoline'"
+  },
+  {
+   "id": "x_danish",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Common repeats croissant and x_pastry (flakes on every shirt).",
+   "suggestion": "'Arrives at the meeting looking perfect and leaves it looking as if someone sat on it.'"
+  },
+  {
+   "id": "x_danish",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Common flakes as a crowd scene.",
+   "suggestion": "'Was opened at a big meeting, and the boss got so sticky that he signed every letter with his thumb.'"
+  },
+  {
+   "id": "x_danish",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sticky Signature'"
+  },
+  {
+   "id": "x_danish",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Shed so many layers in one bite that the flakes were swept up and baked into a second danish.'"
+  },
+  {
+   "id": "x_danish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Flakesmith, the Second Pastry'"
+  },
+  {
+   "id": "x_dim_sum",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare and Epic share one premise (too many baskets).",
+   "suggestion": "'Rolls its basket round the table by itself and stops in front of whoever is hungriest.'"
+  },
+  {
+   "id": "x_dim_sum",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Basketroller'"
+  },
+  {
+   "id": "x_dim_sum",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was stacked so high on Sunday that the tower of baskets swayed like a tree, and the whole restaurant leaned to hold it up.'"
+  },
+  {
+   "id": "x_dim_sum",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Leaning Basket Tower'"
+  },
+  {
+   "id": "x_dim_sum",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Served one basket with a dumpling and a smaller basket inside, and so on all the way down to a single crumb.'"
+  },
+  {
+   "id": "x_dim_sum",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Basketina, the Endless Nest'"
+  },
+  {
+   "id": "x_dim_sum",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Basket Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Bamboo Steam Scald'"
+  },
+  {
+   "id": "x_donut_box",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Locks its lid whenever the person holding it says they'll only have one.'"
+  },
+  {
+   "id": "x_donut_box",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Justonelock'"
+  },
+  {
+   "id": "x_donut_box",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was opened so fast in the office that the sprinkles shot into the printer, and every report came out decorated.'"
+  },
+  {
+   "id": "x_donut_box",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sprinkled Reports'"
+  },
+  {
+   "id": "x_donut_box",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was so big that the office used it as the meeting table, and every meeting has finished early ever since.'"
+  },
+  {
+   "id": "x_donut_box",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Boardroom Dozen, the Donut Table'"
+  },
+  {
+   "id": "x_dumpling",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Pinches its pleats round the chopsticks and won't let go until it has been dipped in sauce.'"
+  },
+  {
+   "id": "x_dumpling",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Chopstickpincher'"
+  },
+  {
+   "id": "x_dumpling",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was folded at a family party into shapes so odd that one looked exactly like Grandad, and he refused to eat it.'"
+  },
+  {
+   "id": "x_dumpling",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Grandad Dumpling'"
+  },
+  {
+   "id": "x_dumpling",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Had pleats so perfect that the curtain maker copied them, and now every window in town is dressed like a dumpling.'"
+  },
+  {
+   "id": "x_dumpling",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pleatsworth, the Curtain Model'"
+  },
+  {
+   "id": "x_dumpling",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Dumpling Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Pleated Steam Scald'"
+  },
+  {
+   "id": "x_eclair",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare copies x_macaron R (photographed before eating).",
+   "suggestion": "'Grows its chocolate topping back overnight, so somebody licks it off every evening.'"
+  },
+  {
+   "id": "x_eclair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Chocoregrow'"
+  },
+  {
+   "id": "x_eclair",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Squirted so much cream at the bakery that the baker's hat turned into a meringue.'"
+  },
+  {
+   "id": "x_eclair",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Meringue Hat'"
+  },
+  {
+   "id": "x_eclair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Was so shiny that the bakery used it as a mirror, and the baker straightens his hat in it every morning.'"
+  },
+  {
+   "id": "x_eclair",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Glossington, the Mirror Eclair'"
+  },
+  {
+   "id": "x_empanada",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon copies x_calzone U (burnt tongue).",
+   "suggestion": "'Has a crimped edge that is always the crunchiest bit and always the first to break off.'"
+  },
+  {
+   "id": "x_empanada",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Crimps itself shut so tightly that only the person who made it can open it.'"
+  },
+  {
+   "id": "x_empanada",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Tightcrimp'"
+  },
+  {
+   "id": "x_empanada",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was folded so big at the market that the stallholder used it as an umbrella when it rained.'"
+  },
+  {
+   "id": "x_empanada",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Market Umbrella'"
+  },
+  {
+   "id": "x_empanada",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was so spicy that one bite cleared every blocked nose in the market at once, and the tissue stall closed early.'"
+  },
+  {
+   "id": "x_empanada",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Spicemaestro, the Nose Clearer'"
+  },
+  {
+   "id": "x_enchilada",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Spreads its sauce onto anything nearby, so the oven gloves come out red and spicy.'"
+  },
+  {
+   "id": "x_enchilada",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Saucespreader'"
+  },
+  {
+   "id": "x_enchilada",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was baked in a tray too big for the oven, so the family cooked it on the car roof in the midday sun.'"
+  },
+  {
+   "id": "x_enchilada",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Car Roof Bake'"
+  },
+  {
+   "id": "x_enchilada",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline. 'Fiesta' also reads as a festival stereotype.",
+   "suggestion": "'Rolled so long in the oven that it came out of the back of the cooker and into the kitchen next door.'"
+  },
+  {
+   "id": "x_enchilada",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Rollito Grande, the Wall Crosser'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats the Common (crumbling).",
+   "suggestion": "'Rolls off the plate and away down the table whenever it isn't wrapped up.'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Tablebolter'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Bounces like a rubber ball when dropped and has to be chased round the kitchen.'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bouncepea'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was rolled so round at a festival that it was used in the football match and scored twice before it was eaten.'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Football Falafel'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a 'crowned king' frame.",
+   "suggestion": "'Rolled out of its pita, down the hill and through the whole town like a crunchy snowball, picking up lettuce on the way.'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Chickpeak, the Rolling Boulder'"
+  },
+  {
+   "id": "x_falafel",
+   "field": "moves.kit.cheesy_drip",
+   "severity": "low",
+   "issue": "Default kit name 'Cheesy Drip' (a burn) belongs to another kind of object (fridge/kettle kit) and is wrong for this one.",
+   "suggestion": "'Hot Tahini Drip'"
+  },
+  {
+   "id": "x_french_toast",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Soaks up any drink put near it, so the tea, the milk and the orange juice all go missing at breakfast.'"
+  },
+  {
+   "id": "x_french_toast",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Breakfastsoaker'"
+  },
+  {
+   "id": "x_french_toast",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Soaked up so much syrup that it slid off the plate and skated across the kitchen like an ice-hockey puck.'"
+  },
+  {
+   "id": "x_french_toast",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Syrup Puck'"
+  },
+  {
+   "id": "x_french_toast",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Soaked up a whole lake of maple syrup in one slice, and the forest has been trying to get it back ever since.'"
+  },
+  {
+   "id": "x_french_toast",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Mapleton, the Syrup Sponge'"
+  },
+  {
+   "id": "x_french_toast",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Toast Heat' is shared word for word with x_toast.",
+   "suggestion": "'Eggy Pan Sizzle'"
+  },
+  {
+   "id": "x_garlic_bread",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Makes anyone who eats it whisper, because their breath can blow out a candle.'"
+  },
+  {
+   "id": "x_garlic_bread",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Breathblower'"
+  },
+  {
+   "id": "x_garlic_bread",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was baked so garlicky that the holiday photos came out with green clouds round everyone's mouths.'"
+  },
+  {
+   "id": "x_garlic_bread",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Green Cloud Photos'"
+  },
+  {
+   "id": "x_garlic_bread",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Garlic Heat' is almost the same name as the signature 'Hot Garlic Heat'.",
+   "suggestion": "'Garlic Butter Blaze'"
+  },
+  {
+   "id": "x_garlic_bread",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "The Ultimate's effect differs by variant (normal stun / spectral stun / mutated poison); 'Garlic Breath' promises one effect, so it must be effect-neutral. 'Breath' reads as a stink, but two variants stun.",
+   "suggestion": "'Garlic Overload'"
+  },
+  {
+   "id": "x_gnocchi",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Multiplies in the pot, so a handful for two turns into dinner for the whole street.'"
+  },
+  {
+   "id": "x_gnocchi",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Potmultiplier'"
+  },
+  {
+   "id": "x_gnocchi",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was rolled so big at a family party that one gnocchi became the baby's pillow.'"
+  },
+  {
+   "id": "x_gnocchi",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Baby's Pillow'"
+  },
+  {
+   "id": "x_gnocchi",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Pillow Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Pillow Steam Scald'"
+  },
+  {
+   "id": "x_jello",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all scale one trait (wobbling like a dance). x_jelly is the same dessert; split them (jello = neon cubes, jelly = moulded shapes).",
+   "suggestion": "'Wobbles in time to any music in the room, and loses its rhythm completely when Dad sings.'"
+  },
+  {
+   "id": "x_jello",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Jigglebeat'"
+  },
+  {
+   "id": "x_jello",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same dancing premise as a crowd scene.",
+   "suggestion": "'Fell on the floor, bounced back onto the plate, and then did it again for an encore.'"
+  },
+  {
+   "id": "x_jello",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Encore Bounce'"
+  },
+  {
+   "id": "x_jello",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise; 'watched it like a show' is not a punchline.",
+   "suggestion": "'Wobbled for so long after one tap that it was used to power the town clock, and the clock hands now wiggle.'"
+  },
+  {
+   "id": "x_jello",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wigglesworth, the Clock Wobbler'"
+  },
+  {
+   "id": "x_jello",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Wobble Dance' repeats the Epic name 'Party Wobble Dance'.",
+   "suggestion": "'Jiggle Quake'"
+  },
+  {
+   "id": "x_jelly",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Hops off the plate when it is shaped like a rabbit, and swims away when it is shaped like a fish.'"
+  },
+  {
+   "id": "x_jelly",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Hopjelly'"
+  },
+  {
+   "id": "x_jelly",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic has no joke beyond the size; its name 'Birthday Jelly Rabbit' does not match the castle lore either.",
+   "suggestion": "'Was turned out as a giant castle at a birthday party, and the toy soldiers defended it all afternoon before it fell.'"
+  },
+  {
+   "id": "x_jelly",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Jelly Castle Siege'"
+  },
+  {
+   "id": "x_jelly",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which no jelly has ever done' formula.",
+   "suggestion": "'Was turned out so tall that it became the village's jelly mountain, and walkers now carry spoons instead of sticks.'"
+  },
+  {
+   "id": "x_jelly",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Mount Wobblemore'"
+  },
+  {
+   "id": "x_marshmallow",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "A marshmallow catching fire on a stick is real, but it is the one fire image in this batch; a puff keeps it gentler.",
+   "suggestion": "'Puffs up so fast near the campfire that it doubles in size before it is even toasted.'"
+  },
+  {
+   "id": "x_marshmallow",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was toasted so big at a campfire that it became a sleeping bag, and the scout leader slept in it.'"
+  },
+  {
+   "id": "x_marshmallow",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Marshmallow Sleeping Bag'"
+  },
+  {
+   "id": "x_marshmallow",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which no camper has ever managed' formula.",
+   "suggestion": "'Toasted so golden that it outshone the campfire, and the campers roasted their sausages on it instead.'"
+  },
+  {
+   "id": "x_marshmallow",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Goldmallow, Brighter Than Fire'"
+  },
+  {
+   "id": "x_mousse",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Makes everyone at the table speak in a hushed, fancy voice the moment it is served.'"
+  },
+  {
+   "id": "x_mousse",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Hushpudding'"
+  },
+  {
+   "id": "x_mousse",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a quiet success (asked for the recipe).",
+   "suggestion": "'Drifted out of an open window at a fancy dinner and settled on the garden gnome like a chocolate hat.'"
+  },
+  {
+   "id": "x_mousse",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Gnome Hat Mousse'"
+  },
+  {
+   "id": "x_mousse",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Chocolate Heat' is filler; a fondue is hot.",
+   "suggestion": "'Chocolate Fondue Scald'"
+  },
+  {
+   "id": "x_muffin_top",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Common, Uncommon, Rare and Epic all say 'the top gets eaten first'.",
+   "suggestion": "'Swells over the edge of the tin until it joins the muffin next door, so every batch comes out as one giant top.'"
+  },
+  {
+   "id": "x_muffin_top",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Tinspiller'"
+  },
+  {
+   "id": "x_muffin_top",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was pulled off every muffin at a party, and the abandoned bottoms formed a band and played a very sad song.'"
+  },
+  {
+   "id": "x_muffin_top",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sad Muffin Band'"
+  },
+  {
+   "id": "x_muffin_top",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "The Legendary ('a bakery started selling only the tops') is a well-known TV sitcom joke; avoid the reference.",
+   "suggestion": "'Pulled itself off every muffin in the bakery and became one giant top, which now has a shop of its own.'"
+  },
+  {
+   "id": "x_muffin_top",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Toppington, the Muffin Above All'"
+  },
+  {
+   "id": "x_muffin_top",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Best Bit First' repeats the Epic name 'Best Bit First'.",
+   "suggestion": "'Dome Drop'"
+  },
+  {
+   "id": "x_nachos",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Stretches its cheese between every chip, so picking up one lifts the whole plate.'"
+  },
+  {
+   "id": "x_nachos",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Platelifter'"
+  },
+  {
+   "id": "x_nachos",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a small everyday incident, not a large concrete consequence with a joke.",
+   "suggestion": "'Was piled so high on film night that it blocked the TV, and the family watched the film through a gap in the chips.'"
+  },
+  {
+   "id": "x_nachos",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Nacho Screen'"
+  },
+  {
+   "id": "x_nachos",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which is unheard of' formula.",
+   "suggestion": "'Was piled so high that a mountain goat climbed it for the view and stayed for the guacamole.'"
+  },
+  {
+   "id": "x_nachos",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Nachomanjaro, the Cheesy Peak'"
+  },
+  {
+   "id": "x_nachos",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Hot Salsa Heat' repeats the signature pattern 'Hot Cheese Heat'.",
+   "suggestion": "'Jalapeno Blaze'"
+  },
+  {
+   "id": "x_pancake_stack",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic copies cake E (toppling onto the dog).",
+   "suggestion": "'Was flipped so high on pancake day that the top pancake landed on the washing line and dried in the sun.'"
+  },
+  {
+   "id": "x_pancake_stack",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Washing Line Pancake'"
+  },
+  {
+   "id": "x_pancake_stack",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was stacked so high that the top pancake had to be flipped by a passing helicopter.'"
+  },
+  {
+   "id": "x_pancake_stack",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Flapjack Tower, the Sky Stack'"
+  },
+  {
+   "id": "x_pancake_stack",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Syrup does not stink unless it is burnt.",
+   "suggestion": "'Burnt Syrup Pong'"
+  },
+  {
+   "id": "x_pancake_stack",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Pancake Tower' repeats the Epic name 'Pancake Day Tower'.",
+   "suggestion": "'Tall Stack Topple'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "All five rarities are flakes; give each its own premise.",
+   "suggestion": "'Puffs up so much in the oven that it hides the filling completely.'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Puffhider'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Same flakes premise again.",
+   "suggestion": "'Takes the shape of whatever it is draped over, so the baker now sells pastry hats, pastry shoes and a pastry cat.'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Drapebaker'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same flakes premise as a crowd scene.",
+   "suggestion": "'Was rolled out so thin that the wind caught it like a sail and blew it out to sea.'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Pastry Sail'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same flakes premise again.",
+   "suggestion": "'Puffed up so high in the oven that it became the bakery's golden dome, and pigeons nest in its flakes.'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Flakedome the Golden'"
+  },
+  {
+   "id": "x_pastry",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Bakery Counter' repeats the Epic name 'Bakery Counter'.",
+   "suggestion": "'Layer Upon Layer'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon repeats the Common (filling sliding out).",
+   "suggestion": "'Is always cut slightly bigger than everyone else's, and everyone notices.'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Biggerslice'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Grows back into a whole pie if it is left on the plate overnight.'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Piegrower'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the filling spill.",
+   "suggestion": "'Was cut so badly at a party that the slice went one way, the filling went the other, and the crust went home with the dog.'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Split Decision Slice'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which nobody has managed since' formula.",
+   "suggestion": "'Was cut so exactly that the knife became the town's official ruler, and every road is now measured in pie slices.'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Slicemeasure, the Perfect Cut'"
+  },
+  {
+   "id": "x_pie_slice",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Pie Slice' is just the object's label.",
+   "suggestion": "'Wedge Wallop'"
+  },
+  {
+   "id": "x_pudding",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon copies x_custard U (skin on top).",
+   "suggestion": "'Gets announced at the start of dinner, so nobody can concentrate on their peas.'"
+  },
+  {
+   "id": "x_pudding",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Peadistracter'"
+  },
+  {
+   "id": "x_pudding",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic and Legendary repeat the Rare (eating vegetables to get pudding).",
+   "suggestion": "'Was so popular at Sunday lunch that the vegetables tried to hide inside it.'"
+  },
+  {
+   "id": "x_pudding",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Hiding Vegetables'"
+  },
+  {
+   "id": "x_pudding",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise again; no feat.",
+   "suggestion": "'Wobbled at exactly the right speed to rock a crying baby to sleep, and it now has a job at the nursery.'"
+  },
+  {
+   "id": "x_pudding",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wobblina, the Baby Rocker'"
+  },
+  {
+   "id": "x_pudding",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Sunday Pudding' repeats the Epic name 'Sunday Pudding'.",
+   "suggestion": "'Wobble Wave'"
+  },
+  {
+   "id": "x_ravioli",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary repeat the Common (surprise fillings).",
+   "suggestion": "'Folds itself into a little parcel and posts itself to whoever is hungriest.'"
+  },
+  {
+   "id": "x_ravioli",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Selfposter'"
+  },
+  {
+   "id": "x_ravioli",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same premise again.",
+   "suggestion": "'Got stuck together in one long chain, and the family pulled it out of the pan like a magician's scarf.'"
+  },
+  {
+   "id": "x_ravioli",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Magician's Ravioli'"
+  },
+  {
+   "id": "x_ravioli",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise again; no punchline.",
+   "suggestion": "'Held a whole dinner in one pocket: soup, pasta and a tiny trifle at the very end.'"
+  },
+  {
+   "id": "x_ravioli",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pocketto, the Three-Course Square'"
+  },
+  {
+   "id": "x_ravioli",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Pasta Pockets' repeats the Epic name 'Pasta Night Pockets'.",
+   "suggestion": "'Pocket Burst'"
+  },
+  {
+   "id": "x_samosa",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Sneezes a puff of spice in the face of anyone who calls it a pasty by mistake.'"
+  },
+  {
+   "id": "x_samosa",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Spicesneezer'"
+  },
+  {
+   "id": "x_samosa",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was stacked into a pyramid at a party, and a tourist took a photo thinking it was the real thing.'"
+  },
+  {
+   "id": "x_samosa",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Party Pyramid'"
+  },
+  {
+   "id": "x_samosa",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Was so perfectly triangular that it was used to mend the roof of a house, and the attic now smells of cumin.'"
+  },
+  {
+   "id": "x_samosa",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Trianglo, the Spiced Roof'"
+  },
+  {
+   "id": "x_samosa",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Crunch Heat' is shared with x_falafel and x_spring_roll.",
+   "suggestion": "'Cumin Scorch'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Common and Uncommon repeat the flakes of croissant and x_pastry.",
+   "suggestion": "'Is a sausage in flaky pastry that is always too hot inside and too cold outside.'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Same flakes premise as the Common.",
+   "suggestion": "'Leaves its sausage behind in the bag and arrives at the picnic as an empty tube.'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Hollowroll'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was baked so long for the picnic that it became the finishing line for the sack race.'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Finishing Line Roll'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a crowd scene ('a whole town / every child') with no outrageous feat or punchline.",
+   "suggestion": "'Was baked in one piece long enough to go round the park, and the joggers nibble a bit each lap.'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lapsworth, the Park-Long Roll'"
+  },
+  {
+   "id": "x_sausage_roll",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Roll Heat' is shared word for word with x_sandwich_roll.",
+   "suggestion": "'Puff Pastry Scald'"
+  },
+  {
+   "id": "x_scone",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Splits itself in half the moment the jam jar is opened, ready to be filled.'"
+  },
+  {
+   "id": "x_scone",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Selfsplitter'"
+  },
+  {
+   "id": "x_scone",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Uncommon argument with no consequence.",
+   "suggestion": "'Started such a jam-or-cream argument at a garden party that a fence was built down the middle of the field.'"
+  },
+  {
+   "id": "x_scone",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Jam Fence'"
+  },
+  {
+   "id": "x_scone",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Cream Tea' repeats the Epic name 'Afternoon Cream Tea'.",
+   "suggestion": "'Jam Versus Cream'"
+  },
+  {
+   "id": "x_spring_roll",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Common, Epic and Legendary are all loud crunching.",
+   "suggestion": "'Unrolled in the fryer and came out as one long golden ribbon, which the family hung up as decorations.'"
+  },
+  {
+   "id": "x_spring_roll",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Golden Ribbon Roll'"
+  },
+  {
+   "id": "x_spring_roll",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same crunch premise; a car alarm is a small result.",
+   "suggestion": "'Crunched once so loudly that the sound rolled down the river, and the boats pulled over to let it pass.'"
+  },
+  {
+   "id": "x_spring_roll",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crunchroll, the River Rumble'"
+  },
+  {
+   "id": "x_spring_roll",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Crunch Heat' is shared with x_falafel and x_samosa.",
+   "suggestion": "'Sweet Chilli Sting'"
+  },
+  {
+   "id": "x_spring_roll",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Takeaway Starter' repeats the Epic name 'Takeaway Starter'.",
+   "suggestion": "'Golden Crunch Finale'"
+  },
+  {
+   "id": "x_tamale",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Was made by the whole family in one day, and somebody wrapped Grandma's glasses in a husk and steamed them too.'"
+  },
+  {
+   "id": "x_tamale",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Steamed Spectacles'"
+  },
+  {
+   "id": "x_tamale",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was wrapped so many times that unwrapping it became the town's longest party game, and the last layer came off on New Year's Day.'"
+  },
+  {
+   "id": "x_tamale",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Huskmaster, the Endless Unwrap'"
+  },
+  {
+   "id": "x_tart",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Sets its glaze so hard that the fruit can be heard tapping on the inside to get out.'"
+  },
+  {
+   "id": "x_tart",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Glazelock'"
+  },
+  {
+   "id": "x_tart",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is a crowd scene ('everyone / the whole X / so many at once') with no concrete consequence or joke.",
+   "suggestion": "'Shone so brightly in the bakery window that a magpie flew off with the whole tart, plate and all.'"
+  },
+  {
+   "id": "x_tart",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Magpie Heist'"
+  },
+  {
+   "id": "x_tiramisu",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Wakes anyone who eats it so thoroughly that they tidy their room at midnight.'"
+  },
+  {
+   "id": "x_tiramisu",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Midnighttidier'"
+  },
+  {
+   "id": "x_tiramisu",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Was dusted with so much cocoa that the dinner party sneezed in chorus and the tablecloth turned brown.'"
+  },
+  {
+   "id": "x_tiramisu",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cocoa Sneeze Chorus'"
+  },
+  {
+   "id": "x_tiramisu",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a pleasant success with no outrageous feat and no punchline.",
+   "suggestion": "'Lifted the spirits of a gloomy rain cloud so well that it rained sprinkles over the town.'"
+  },
+  {
+   "id": "x_tiramisu",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pick-Me-Up, the Cloud Cheerer'"
+  },
+  {
+   "id": "x_toast",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the toaster's job (popping up), not the toast's.",
+   "suggestion": "'Grows its crusts back every time they are cut off, which annoys every child at breakfast.'"
+  },
+  {
+   "id": "x_toast",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Crustreturn'"
+  },
+  {
+   "id": "x_toast",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which no toast has ever done' formula.",
+   "suggestion": "'Fell butter side up so often that it broke the law of buttered toast, and now the cat lands on its back instead.'"
+  },
+  {
+   "id": "x_toast",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Upsidebutter, the Lawbreaker'"
+  },
+  {
+   "id": "x_toast",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Toast Heat' is shared word for word with x_french_toast.",
+   "suggestion": "'Golden Crust Singe'"
+  },
+  {
+   "id": "x_waffle_plate",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "All five rarities are syrup filling the squares.",
+   "suggestion": "'Fills each square with a different topping by itself, and one square is always broccoli.'"
+  },
+  {
+   "id": "x_waffle_plate",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Squarefiller'"
+  },
+  {
+   "id": "x_waffle_plate",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same syrup premise.",
+   "suggestion": "'Was stacked into a tower so tall that children used the squares as a climbing wall.'"
+  },
+  {
+   "id": "x_waffle_plate",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Waffle Climbing Wall'"
+  },
+  {
+   "id": "x_waffle_plate",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which is unheard of' formula.",
+   "suggestion": "'Was laid out so big on the beach that it became a giant game of noughts and crosses, and the tide always wins.'"
+  },
+  {
+   "id": "x_waffle_plate",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gridlock, the Beach Board'"
+  },
+  {
+   "id": "x_waffle_plate",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Waffle Heat' is the generic 'Hot X Heat' signature template repeated across these batches; give this object its own heat image.",
+   "suggestion": "'Griddle Waffle Sear'"
+  },
+  {
+   "id": "x_yogurt",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Lidlicker' describes the Common lore (the licked lid); move it here.",
+   "suggestion": "'Lidlicker'"
+  },
+  {
+   "id": "x_yogurt",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the Uncommon lore (splashing when opened).",
+   "suggestion": "'Splashpot'"
+  },
+  {
+   "id": "x_yogurt",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare is the object simply doing its job (or doing it very well), not a troublesome power.",
+   "suggestion": "'Curdles any milk stored next to it, so the fridge door is full of very surprised cheese.'"
+  },
+  {
+   "id": "x_yogurt",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Fridgecurdler'"
+  },
+  {
+   "id": "x_yogurt",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the 'which nobody believes' formula.",
+   "suggestion": "'Was shaken so hard on a school trip that it turned into butter, then cheese, then a very small cow.'"
+  },
+  {
+   "id": "x_yogurt",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Cultura, the Very Small Cow'"
+  },
+  {
+   "id": "x_yogurt",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Creamy Heat' has no believable heat image for this object, but the move burns.",
+   "suggestion": "'Chilli Mango Swirl'"
+  }
+ ]
+}
