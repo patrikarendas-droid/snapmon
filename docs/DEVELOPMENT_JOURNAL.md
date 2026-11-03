@@ -135,10 +135,13 @@ Last updated: 2026-11-02, release v0.4.9 (recognition/identity audit; tag v0.4.9
   `tools/campaign.js` (brief/ingest/status/immutable), tracker + handoff `content/campaign/TRACKER.md`, live counts
   `content/campaign/STATUS.md`. Pilot 01 names proposal kept outside `content/curated/`. Independent editor agent per
   batch → `content/review/<batch>-issues.json`. Nothing reviewed/merged/deployed; v0.4.9 Android playtest still pending.
-  Progress (2026-11-03): w01–w12 written (1,255/2,248 objects, 6,325/11,290 names, 6,275/11,240 lore lines, all DRAFT);
-  editor passes applied for w01–w09 (high + meaningful medium; names re-paired to their lore; formulaic Rares/Epics/
-  Legendaries rewritten); w10–w11 editor pass running. Sensitive objects (bible, cigarettes, vape, matches, ballot box)
-  are written neutrally and listed in TRACKER.md for the developer.
+  Progress (2026-11-03): **all 22 batches written** — 2,248/2,248 new objects, 11,290/11,290 names, 11,240/11,240
+  lore lines, 9,934 move display overrides, all DRAFT; Pilot 01 names proposed 10/10; `campaign.js status` reconciles
+  every registry ID; approved files byte-identical to baseline. Editor passes applied w01–w13 (high + meaningful
+  medium); w14–w22 editor passes in progress; every batch is lint-clean (0 high/medium). Sensitive objects written
+  neutrally and listed in TRACKER.md (bible, cigarettes, vape, matches, ballot box, i_slot as pier arcade machine,
+  church pew/bell without religious content, all drinkware alcohol-free, medicines/cleaners/fuel as grown-up only,
+  x_nutella written without the brand).
 - **Recognition → identity → visual audit (2026-11-02), branch `feature/recognition-identity-audit`, NOT merged or
   deployed (awaits approval).** Trigger: phone test of v0.4.8, a photographed sea urchin spawned the Starfish. Root
   cause: Starfish carried the alias "sea urchin" (first registration wins in `ALIAS_INDEX`), so `objectForLabel`, the
