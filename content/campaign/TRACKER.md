@@ -39,7 +39,8 @@
 | w07-clothing-and-shoes | 118 | 118 | done: 268 high / 354 medium / 45 low + 14 patterns | 622 fields (`patches/w07-clothing-and-shoes-editor-auto.json`: Epics/Legendaries/Rares largely rewritten) then `w07-self-fixes.json` | open: Legendary name shape Lady/Sir X of the Y |
 | w08-bags-jewellery-and-carry | 94 | 94 | editor running (with w09) | self-fixes | |
 | w09-gadgets-and-computers | 123 | 123 | editor running (with w08) | self-fixes | |
-| w10–w22 | 1,304 | 0 | — | — | not started |
+| w10-screens-sound-and-light | 98 | 98 | pending | self-fixes | |
+| w11–w22 | 1,206 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
