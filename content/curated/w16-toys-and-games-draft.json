@@ -1,0 +1,731 @@
+{
+  "schema": 1,
+  "batch": "w16-toys-and-games",
+  "entries": {
+    "ball": {
+      "status": "draft",
+      "names": {
+        "common": "Gutterseeker",
+        "uncommon": "Hedgevanisher",
+        "rare": "Wrongbouncer",
+        "epic": "Window Smash Sunday",
+        "legendary": "Bouncealot the Unstoppable"
+      },
+      "lore": {
+        "common": "Rolls straight into the drain the moment someone kicks it gently.",
+        "uncommon": "Disappears into the same hedge every single game.",
+        "rare": "Bounces off the path at an angle no physics teacher can explain.",
+        "epic": "Bounced off the shed, the car and the greenhouse in one kick, and the whole street came out.",
+        "legendary": "Was kicked so high that it landed on the school roof and is still the school's most famous ball."
+      },
+      "moves": {
+        "signature": "Bounce Bounce Bounce",
+        "legend": "Big Boot",
+        "ultimate": "Window Rattle Shot"
+      }
+    },
+    "x_bouncy_ball": {
+      "status": "draft",
+      "names": {
+        "common": "Ceilingbopper",
+        "uncommon": "Underfridger",
+        "rare": "Superbouncer",
+        "epic": "Kitchen Ricochet",
+        "legendary": "Zingo the Ball Who Never Stopped"
+      },
+      "lore": {
+        "common": "Bops the ceiling light every time it's dropped on the kitchen floor.",
+        "uncommon": "Always ends up under the fridge with the dust and lost peas.",
+        "rare": "Bounces higher every time, as if it's getting angrier.",
+        "epic": "Ricocheted round the kitchen so fast that everyone ducked behind the table.",
+        "legendary": "Was dropped from a tower and bounced back up to the top floor, where it waited politely."
+      },
+      "moves": {
+        "signature": "Ping Ping Ping",
+        "legend": "Super Bounce",
+        "ultimate": "Ricochet Rumble",
+        "kit.wind_up": "Squeeze Up",
+        "kit.squeak_toy": "Rubber Squeak",
+        "kit.toy_tantrum": "Bounce Bounce Bounce"
+      }
+    },
+    "x_magic_8_ball": {
+      "status": "draft",
+      "names": {
+        "common": "Askagainlater",
+        "uncommon": "Cloudyanswer",
+        "rare": "Truthteller Ball",
+        "epic": "Sleepover Fortune Night",
+        "legendary": "The Ball That Answered Everything"
+      },
+      "lore": {
+        "common": "Always says ask again later when you need an answer right now.",
+        "uncommon": "Shows its answer in a cloudy bubble that takes ages to float up.",
+        "rare": "Gives answers so spooky that the whole sleepover goes quiet.",
+        "epic": "Was asked a hundred questions at the sleepover, and everyone screamed at every yes.",
+        "legendary": "Said yes to the question will it snow tomorrow, and the next day there was a snowman on every lawn."
+      },
+      "moves": {
+        "signature": "Shake Shake Crack",
+        "legend": "Mystery Answer Snatch",
+        "ultimate": "Fortune Shake",
+        "kit.wind_up": "Shake Boost",
+        "kit.squeak_toy": "Rattle Startle",
+        "kit.toy_tantrum": "Shake Shake Shake"
+      }
+    },
+    "x_marble": {
+      "status": "draft",
+      "names": {
+        "common": "Floorroller",
+        "uncommon": "Cleverlosesit",
+        "rare": "Glasseye",
+        "epic": "Marble Run Mayhem",
+        "legendary": "The Marble That Won Every Game"
+      },
+      "lore": {
+        "common": "Rolls across the floor at night and wakes the whole house.",
+        "uncommon": "Gets lost under the skirting board the moment the game starts.",
+        "rare": "Has a swirl of colour inside that looks like a tiny galaxy.",
+        "epic": "Escaped the marble run and rolled down the whole school corridor.",
+        "legendary": "Won every playground game for a whole year, and the other marbles were too scared to play."
+      },
+      "moves": {
+        "signature": "Clink Clink Clink",
+        "legend": "Sun Glass Heat",
+        "ultimate": "Marble Run Flash",
+        "kit.wind_up": "Flick Boost",
+        "kit.block_tower": "Glass Guard",
+        "kit.toy_tantrum": "Roll Roll Roll"
+      }
+    },
+    "x_stress_ball": {
+      "status": "draft",
+      "names": {
+        "common": "Squishsquash",
+        "uncommon": "Squeezeface",
+        "rare": "Tempercalmer",
+        "epic": "Exam Week Squish",
+        "legendary": "The Ball That Calmed the Office"
+      },
+      "lore": {
+        "common": "Gets squeezed so hard that it looks like it's pulling a face.",
+        "uncommon": "Has a funny face that squishes up when you squeeze it.",
+        "rare": "Calms down anyone who's about to shout.",
+        "epic": "Was squeezed by every pupil during exam week, and half of them burst.",
+        "legendary": "Calmed a whole office on deadline day, and nobody shouted once."
+      },
+      "moves": {
+        "signature": "Squish Squish Squish",
+        "legend": "Squishy Pong",
+        "ultimate": "Squeeze Burst",
+        "kit.squeak_toy": "Squish Startle",
+        "kit.block_tower": "Squish Guard",
+        "kit.toy_tantrum": "Squeeze Squeeze Squeeze"
+      }
+    },
+    "balloon": {
+      "status": "draft",
+      "names": {
+        "common": "Ceilingfloater",
+        "uncommon": "Popscare",
+        "rare": "Stringwanderer",
+        "epic": "Party Balloon Escape",
+        "legendary": "The Balloon That Crossed the Sea"
+      },
+      "lore": {
+        "common": "Floats up to the ceiling so the string is just out of reach.",
+        "uncommon": "Pops with a bang that makes everyone at the party scream.",
+        "rare": "Escapes from tiny hands and sails off over the rooftops.",
+        "epic": "Escaped from the party with fifty others, and the sky over the village went colourful.",
+        "legendary": "Floated across the whole sea and landed in another country with its party message still attached."
+      },
+      "moves": {
+        "signature": "Static Cling Crack",
+        "legend": "Rubber Pong",
+        "ultimate": "Big Pop"
+      }
+    },
+    "x_confetti": {
+      "status": "draft",
+      "names": {
+        "common": "Everywherebits",
+        "uncommon": "Hairhider",
+        "rare": "Vacuumclogger",
+        "epic": "Wedding Confetti Storm",
+        "legendary": "The Confetti Found a Year Later"
+      },
+      "lore": {
+        "common": "Ends up in every corner of the house for months.",
+        "uncommon": "Hides in your hair long after the party is over.",
+        "rare": "Clogs the vacuum cleaner so badly that it gives up.",
+        "epic": "Was thrown at the wedding, and the whole street sparkled for a week.",
+        "legendary": "Was still being found in shoes, pockets and books a whole year after the party."
+      },
+      "moves": {
+        "signature": "Flutter Crack",
+        "legend": "Tidy Up Rest",
+        "ultimate": "Confetti Storm",
+        "kit.wind_up": "Throw Boost",
+        "kit.block_tower": "Paper Pile Guard",
+        "kit.toy_tantrum": "Flutter Flutter Flutter"
+      }
+    },
+    "baseball_bat": {
+      "status": "draft",
+      "names": {
+        "common": "Missingswing",
+        "uncommon": "Splinterbat",
+        "rare": "Homerunner",
+        "epic": "Park Baseball Smash",
+        "legendary": "The Bat That Hit the Ball Over the Wall"
+      },
+      "lore": {
+        "common": "Swings with all its might and hits nothing but air.",
+        "uncommon": "Gives a splinter to anyone holding it wrong.",
+        "rare": "Hits the ball so far that the fielders give up running.",
+        "epic": "Smashed a ball over the park fence and into the duck pond, and the ducks were furious.",
+        "legendary": "Hit a ball so far that it landed in the next town's park and won their game too."
+      },
+      "moves": {
+        "signature": "Swing Swing Swing",
+        "legend": "Sweet Spot Heat",
+        "ultimate": "Home Run",
+        "kit.bounce_back": "Grip Guard",
+        "kit.curveball": "Swing Startle",
+        "kit.pump_up": "Batting Boost"
+      }
+    },
+    "basketball": {
+      "status": "draft",
+      "names": {
+        "common": "Rimspinner",
+        "uncommon": "Bouncehog",
+        "rare": "Backboardbanger",
+        "epic": "Playground Slam Dunk",
+        "legendary": "The Ball That Made Every Shot"
+      },
+      "lore": {
+        "common": "Spins round the rim and pops back out every time.",
+        "uncommon": "Bounces so loudly in the hallway that the neighbours bang on the ceiling.",
+        "rare": "Bangs off the backboard so hard that the whole hoop shakes.",
+        "epic": "Was slam-dunked so hard that the playground hoop bent down like a bow.",
+        "legendary": "Went in from the other end of the court in the last second of the final."
+      },
+      "moves": {
+        "signature": "Dribble Dribble Dribble",
+        "legend": "Slam Dunk",
+        "ultimate": "Buzzer Beater",
+        "kit.bounce_back": "Bounce Guard",
+        "kit.curveball": "No Look Pass",
+        "kit.spike": "Slam Spike",
+        "kit.pump_up": "Hot Streak Boost"
+      }
+    },
+    "x_coloring_book": {
+      "status": "draft",
+      "names": {
+        "common": "Outsideline",
+        "uncommon": "Crayonsnapped",
+        "rare": "Halfcoloured",
+        "epic": "Rainy Day Colouring",
+        "legendary": "The Book That Was Coloured Perfectly"
+      },
+      "lore": {
+        "common": "Gets coloured outside every line.",
+        "uncommon": "Has a crayon snapped in its spine from the last time.",
+        "rare": "Is always half finished, with every page started and none done.",
+        "epic": "Was coloured by the whole class on a rainy day, and every page was a different rainbow.",
+        "legendary": "Was coloured so perfectly by one patient child that it was framed in the school hall."
+      },
+      "moves": {
+        "signature": "Scribble Crack",
+        "legend": "Bold Line Bash",
+        "ultimate": "Crayon Heat Blaze",
+        "kit.wind_up": "Colour Boost",
+        "kit.squeak_toy": "Crayon Squeak",
+        "kit.toy_tantrum": "Scribble Scribble Scribble"
+      }
+    },
+    "x_baby_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Dribbleteat",
+        "uncommon": "Spitupper",
+        "rare": "Midnightfeed",
+        "epic": "Midnight Feed",
+        "legendary": "The Bottle That Got the Baby to Sleep"
+      },
+      "lore": {
+        "common": "Dribbles milk down the baby's chin every time.",
+        "uncommon": "Gets thrown out of the pram onto the pavement.",
+        "rare": "Is needed at three in the morning, every morning.",
+        "epic": "Was warmed up at the same time as every bottle at the toddler group, and the room was quiet at last.",
+        "legendary": "Got a baby to sleep through the whole night for the first time, and the parents nearly cried."
+      },
+      "moves": {
+        "signature": "Dribble Crack",
+        "legend": "Warm Milk Guard",
+        "ultimate": "Bottle Drop Startle",
+        "kit.wind_up": "Warm Up Boost",
+        "kit.squeak_toy": "Teat Squeak",
+        "kit.block_tower": "Bottle Guard",
+        "kit.toy_tantrum": "Throw Throw Throw"
+      }
+    },
+    "x_sports_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Squirtface",
+        "uncommon": "Lidchewer",
+        "rare": "Bagleaker",
+        "epic": "Sports Day Squirt",
+        "legendary": "The Bottle That Never Leaked"
+      },
+      "lore": {
+        "common": "Squirts water up your nose when you squeeze it too hard.",
+        "uncommon": "Has its lid chewed by its owner during every match.",
+        "rare": "Leaks into the bottom of the school bag every single day.",
+        "epic": "Squirted every player on the team at half-time, and the coach got soaked too.",
+        "legendary": "Was carried to every match for ten years and never leaked once."
+      },
+      "moves": {
+        "signature": "Squirt Squirt Squirt",
+        "legend": "Water Break Rest",
+        "ultimate": "Leaky Bag Pong",
+        "kit.bounce_back": "Lid Guard",
+        "kit.curveball": "Squirt Startle",
+        "kit.pump_up": "Hydration Boost"
+      }
+    },
+    "x_crayon_box": {
+      "status": "draft",
+      "names": {
+        "common": "Snappedcrayon",
+        "uncommon": "Missingcolour",
+        "rare": "Waxyhands",
+        "epic": "Rainbow Wall Art",
+        "legendary": "The Box That Had Every Colour"
+      },
+      "lore": {
+        "common": "Has every crayon snapped in half within a week.",
+        "uncommon": "Is always missing the one colour you need.",
+        "rare": "Leaves waxy colours on your hands and the table.",
+        "epic": "Was used on the bedroom wall by a toddler, and the wall became a rainbow.",
+        "legendary": "Had every colour in the world in it, including one nobody had a name for."
+      },
+      "moves": {
+        "signature": "Colour Colour Crack",
+        "legend": "Wax Flash",
+        "ultimate": "Crayon Box Spill",
+        "kit.wind_up": "Sharpen Boost",
+        "kit.squeak_toy": "Crayon Squeak Squeak",
+        "kit.toy_tantrum": "Snap Snap Snap"
+      }
+    },
+    "x_jack_in_the_box": {
+      "status": "draft",
+      "names": {
+        "common": "Popscarer",
+        "uncommon": "Windwinder Box",
+        "rare": "Grinbouncer",
+        "epic": "Birthday Surprise Pop",
+        "legendary": "The Clown That Popped Out for a Century"
+      },
+      "lore": {
+        "common": "Pops out so suddenly that everyone drops what they're holding.",
+        "uncommon": "Needs winding round and round while it plays a tune.",
+        "rare": "Grins out of its box so widely that the cat runs away.",
+        "epic": "Popped out in the middle of the birthday party, and the whole room screamed then laughed.",
+        "legendary": "Has popped out of the same box for a hundred years and still makes grandad jump."
+      },
+      "moves": {
+        "signature": "Pop Crack",
+        "legend": "Surprise Crack",
+        "ultimate": "Big Pop Out",
+        "kit.wind_up": "Crank Boost",
+        "kit.squeak_toy": "Spring Squeak",
+        "kit.block_tower": "Box Lid Guard",
+        "kit.toy_tantrum": "Pop Pop Pop"
+      }
+    },
+    "x_music_box_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Tunerepeater",
+        "uncommon": "Windupwait Toy",
+        "rare": "Lullabyspinner",
+        "epic": "Nursery Lullaby",
+        "legendary": "The Box That Sent Every Baby to Sleep"
+      },
+      "lore": {
+        "common": "Plays the same tune over and over until everyone is humming it.",
+        "uncommon": "Has to be wound up every five minutes.",
+        "rare": "Plays a lullaby so gentle that the cat falls asleep too.",
+        "epic": "Played its lullaby at the nursery, and every baby fell asleep at once.",
+        "legendary": "Has sent three generations of babies to sleep with the same tune."
+      },
+      "moves": {
+        "signature": "Tune Tune Crack",
+        "legend": "Lullaby Snatch",
+        "ultimate": "Sleepy Tune Stink",
+        "kit.wind_up": "Wind Wind Boost",
+        "kit.block_tower": "Lid Guard Music",
+        "kit.toy_tantrum": "Plink Plink Plink"
+      }
+    },
+    "x_sand_bucket": {
+      "status": "draft",
+      "names": {
+        "common": "Sandtipper",
+        "uncommon": "Crabcatcher",
+        "rare": "Castlemaker",
+        "epic": "Sandcastle Kingdom Build",
+        "legendary": "The Bucket That Built a Castle Town"
+      },
+      "lore": {
+        "common": "Tips its sand out before the castle is finished.",
+        "uncommon": "Catches crabs that pinch everyone who looks inside.",
+        "rare": "Makes perfect castle towers every single time.",
+        "epic": "Was filled with the whole beach's best shells, and the shell collectors followed it home.",
+        "legendary": "Built a sandcastle so big that the lifeguard climbed it to watch the sea."
+      },
+      "moves": {
+        "signature": "Sand Tip Crack",
+        "legend": "Bucket Bash",
+        "ultimate": "Sand Tower Topple",
+        "kit.wind_up": "Fill Up Boost",
+        "kit.squeak_toy": "Spade Clink",
+        "kit.block_tower": "Castle Guard",
+        "kit.toy_tantrum": "Tip Tip Tip"
+      }
+    },
+    "i_pinwheel": {
+      "status": "draft",
+      "names": {
+        "common": "Windspinner",
+        "uncommon": "Stuckwheel",
+        "rare": "Colourblur",
+        "epic": "Seaside Pinwheel Whirl",
+        "legendary": "The Pinwheel That Never Stopped Spinning"
+      },
+      "lore": {
+        "common": "Stops dead the moment you stop running, and refuses to spin standing still.",
+        "uncommon": "Gets stuck when it's not facing the wind, so you have to blow on it.",
+        "rare": "Spins so fast that it hums.",
+        "epic": "Spun with a hundred others on the seaside garden, and the whole beach whirred.",
+        "legendary": "Spun for a whole summer on the windowsill without stopping once."
+      },
+      "moves": {
+        "signature": "Spin Crack",
+        "legend": "Breeze Rest",
+        "ultimate": "Whirl Blur",
+        "kit.wind_up": "Blow Boost",
+        "kit.squeak_toy": "Whirr Startle",
+        "kit.toy_tantrum": "Spin Spin Spin"
+      }
+    },
+    "game_controller": {
+      "status": "draft",
+      "names": {
+        "common": "Thumbhammerer",
+        "uncommon": "Driftystick",
+        "rare": "Wirewrapper",
+        "epic": "Sleepover Final Showdown",
+        "legendary": "The Controller That Won the Final"
+      },
+      "lore": {
+        "common": "Gets its buttons mashed so hard that they stick.",
+        "uncommon": "Has a stick that drifts to the left on its own.",
+        "rare": "Wraps its wire round everyone's ankles.",
+        "epic": "Was passed round the whole sleepover until sunrise, and the batteries gave up first.",
+        "legendary": "Won the final of a game tournament with the last button press."
+      },
+      "moves": {
+        "signature": "Button Mash Crack",
+        "legend": "Drift Crack",
+        "ultimate": "Game Over Pong",
+        "kit.wind_up": "Power Up",
+        "kit.squeak_toy": "Rumble Startle",
+        "kit.toy_tantrum": "Press Press Press"
+      }
+    },
+    "handheld_console": {
+      "status": "draft",
+      "names": {
+        "common": "Batterydrainer",
+        "uncommon": "Cardigan Pocket",
+        "rare": "Carjourney",
+        "epic": "Back Seat Tournament",
+        "legendary": "The Console of a Thousand Journeys"
+      },
+      "lore": {
+        "common": "Runs out of battery just before the final level.",
+        "uncommon": "Has a cracked screen corner that its owner insists makes it look cooler.",
+        "rare": "Makes a long car journey feel like five minutes.",
+        "epic": "Kept the whole back seat quiet on a ten-hour drive.",
+        "legendary": "Survived a thousand car journeys, two drops in a puddle and one trip through the washing machine."
+      },
+      "moves": {
+        "signature": "Pixel Crack",
+        "legend": "Hot Screen Heat",
+        "ultimate": "Low Battery Panic",
+        "kit.wind_up": "Charge Boost",
+        "kit.squeak_toy": "Beep Startle",
+        "kit.block_tower": "Case Guard"
+      }
+    },
+    "x_sweatband": {
+      "status": "draft",
+      "names": {
+        "common": "Wristsoaker",
+        "uncommon": "Headbandpro",
+        "rare": "Retrolook",
+        "epic": "Tennis Match Sweat",
+        "legendary": "The Band That Soaked a Whole Match"
+      },
+      "lore": {
+        "common": "Soaks up so much sweat that it drips.",
+        "uncommon": "Makes everyone who wears it look like a tennis star.",
+        "rare": "Looks so old-fashioned that everyone thinks it's a costume.",
+        "epic": "Soaked up the sweat of every player at the tennis club on the hottest day.",
+        "legendary": "Soaked up a whole five-hour tennis match without dripping once."
+      },
+      "moves": {
+        "signature": "Sweat Sweat Sweat",
+        "legend": "Wipe Wipe Wipe",
+        "ultimate": "Sweat Squeeze",
+        "kit.curveball": "Wrist Flick",
+        "kit.spike": "Band Snap",
+        "kit.pump_up": "Focus Boost"
+      }
+    },
+    "i_wig": {
+      "status": "draft",
+      "names": {
+        "common": "Itchyscalp",
+        "uncommon": "Slideoff",
+        "rare": "Disguisemaster",
+        "epic": "Costume Party Wig Swap",
+        "legendary": "The Wig That Fooled the Whole Family"
+      },
+      "lore": {
+        "common": "Itches so much that its wearer scratches all evening.",
+        "uncommon": "Slides off sideways when its wearer nods.",
+        "rare": "Changes its wearer's whole personality, so every pirate wig produces a very loud pirate.",
+        "epic": "Was swapped between every guest at the costume party, and nobody knew who was who.",
+        "legendary": "Fooled a whole family into thinking grandma had a new haircut for a week."
+      },
+      "moves": {
+        "signature": "Itchy Crack",
+        "legend": "Wig Stink",
+        "ultimate": "Wig Swap Flash",
+        "kit.wind_up": "Comb Boost",
+        "kit.squeak_toy": "Wig Flick",
+        "kit.toy_tantrum": "Swish Swish Swish"
+      }
+    },
+    "x_pinata": {
+      "status": "draft",
+      "names": {
+        "common": "Neverbreaker",
+        "uncommon": "Swingdodger",
+        "rare": "Sweetfountain",
+        "epic": "Birthday Pinata Burst",
+        "legendary": "The Pinata That Rained Sweets"
+      },
+      "lore": {
+        "common": "Refuses to break no matter how many times it's hit.",
+        "uncommon": "Swings away from the stick at the last second.",
+        "rare": "Bursts open with sweets that rain down on everyone.",
+        "epic": "Burst at the birthday party and showered sweets over the whole garden.",
+        "legendary": "Survived a hundred hits at one party before finally showering the whole street with sweets."
+      },
+      "moves": {
+        "signature": "Swing Crack",
+        "legend": "Dodge Crack",
+        "ultimate": "Sweet Rain",
+        "kit.squeak_toy": "Swinging Startle",
+        "kit.block_tower": "Papier Guard",
+        "kit.toy_tantrum": "Bash Bash Bash"
+      }
+    },
+    "x_rocking_toy": {
+      "status": "draft",
+      "names": {
+        "common": "Squeakrocker",
+        "uncommon": "Fingerpincher Rocker",
+        "rare": "Fieldgalloper",
+        "epic": "Nursery Rocking Race",
+        "legendary": "The Horse That Rocked Four Generations"
+      },
+      "lore": {
+        "common": "Squeaks on every rock so the whole house knows it's being ridden.",
+        "uncommon": "Pinches fingers under its rockers.",
+        "rare": "Rocks so fast that its rider thinks they're galloping across a field.",
+        "epic": "Rocked so hard in the nursery that it crossed the room and bumped the door.",
+        "legendary": "Has been rocked by four generations of children in the same family."
+      },
+      "moves": {
+        "signature": "Rock Rock Crack",
+        "legend": "Rocker Pinch Crack",
+        "ultimate": "Gallop Heat",
+        "kit.wind_up": "Rocking Boost",
+        "kit.squeak_toy": "Rocker Squeak",
+        "kit.block_tower": "Saddle Guard"
+      }
+    },
+    "i_mask": {
+      "status": "draft",
+      "names": {
+        "common": "Eyeholeslip",
+        "uncommon": "Scaryface",
+        "rare": "Nobodyknewme",
+        "epic": "Masked Parade",
+        "legendary": "The Mask That Hid the Mayor"
+      },
+      "lore": {
+        "common": "Slips so the eye holes end up on your cheeks.",
+        "uncommon": "Has a face so scary that the cat hides under the bed.",
+        "rare": "Hides its wearer so well that nobody recognises them, not even their mum.",
+        "epic": "Was worn by everyone in the street parade, and the whole town felt like a festival.",
+        "legendary": "Hid the mayor so well at the town party that nobody knew he'd joined the conga line."
+      },
+      "moves": {
+        "signature": "Mask Crack",
+        "legend": "Scare Scare Scare",
+        "ultimate": "Mask Off Reveal",
+        "kit.squeak_toy": "Boo Startle",
+        "kit.block_tower": "Hidden Face Guard",
+        "kit.toy_tantrum": "Boo Boo Boo"
+      }
+    },
+    "x_play_dough": {
+      "status": "draft",
+      "names": {
+        "common": "Carpetgrinder",
+        "uncommon": "Colourmixer Dough",
+        "rare": "Tastetester",
+        "epic": "Play Dough Zoo",
+        "legendary": "The Dough That Became a Zoo"
+      },
+      "lore": {
+        "common": "Gets ground into the carpet and never comes out.",
+        "uncommon": "Mixes every colour into one brownish lump.",
+        "rare": "Gets tasted by every toddler, who find it very salty.",
+        "epic": "Was made into a whole zoo by the playgroup, with a giraffe and three wonky elephants.",
+        "legendary": "Made a model so good that it was put in a glass case at the library."
+      },
+      "moves": {
+        "signature": "Squish Crack",
+        "legend": "Brown Lump Crack",
+        "ultimate": "Salty Dough Stink",
+        "kit.wind_up": "Roll Out Boost",
+        "kit.squeak_toy": "Squelch Startle"
+      }
+    },
+    "kite": {
+      "status": "draft",
+      "names": {
+        "common": "Treegrabber",
+        "uncommon": "Nosediver",
+        "rare": "Highflyer",
+        "epic": "Beach Kite Festival",
+        "legendary": "The Kite That Touched the Clouds"
+      },
+      "lore": {
+        "common": "Gets tangled in the only tree on the whole beach.",
+        "uncommon": "Nosedives into the sand the moment it gets going.",
+        "rare": "Flies so high that it's just a speck in the sky.",
+        "epic": "Flew with a hundred others at the kite festival, and the sky was full of dragons.",
+        "legendary": "Flew so high that a passing plane's pilot waved at it."
+      },
+      "moves": {
+        "signature": "Swoop Crack",
+        "legend": "String Stink",
+        "ultimate": "Sunny Sky Dive",
+        "kit.wind_up": "Wind Catch",
+        "kit.squeak_toy": "Flap Startle",
+        "kit.block_tower": "String Guard",
+        "kit.toy_tantrum": "Swoop Swoop Swoop"
+      }
+    },
+    "x_toy_dinosaur": {
+      "status": "draft",
+      "names": {
+        "common": "Toestabber Dino",
+        "uncommon": "Roarbutton",
+        "rare": "Sandpitfossil",
+        "epic": "Playroom Dino Stampede",
+        "legendary": "The Dinosaur Who Survived the Wash"
+      },
+      "lore": {
+        "common": "Stabs your bare foot with its spiky tail in the dark.",
+        "uncommon": "Has a wobbly head that nods yes to every question it's asked.",
+        "rare": "Gets buried in the sandpit and dug up as a fossil.",
+        "epic": "Led a stampede of plastic dinosaurs across the playroom that knocked over the castle.",
+        "legendary": "Survived a trip through the washing machine and came out roaring louder than before."
+      },
+      "moves": {
+        "signature": "Tail Stab Crack",
+        "legend": "Stomp Stomp Stomp",
+        "ultimate": "Plastic Roar Stink",
+        "kit.wind_up": "Roar Boost",
+        "kit.block_tower": "Plastic Scale Guard",
+        "kit.toy_tantrum": "Roar Roar Roar"
+      }
+    },
+    "x_toy_kitchen": {
+      "status": "draft",
+      "names": {
+        "common": "Pretendcooker",
+        "uncommon": "Plasticpeas",
+        "rare": "Teaserver",
+        "epic": "Playroom Restaurant",
+        "legendary": "The Kitchen of the Finest Plastic Cake"
+      },
+      "lore": {
+        "common": "Gets plastic peas served to everyone who walks past.",
+        "uncommon": "Has plastic food that ends up everywhere in the house.",
+        "rare": "Serves tea to every teddy in the room at once.",
+        "epic": "Opened a restaurant in the playroom, and every grown-up had to order dinner.",
+        "legendary": "Served a plastic cake so convincing that grandad tried to eat it."
+      },
+      "moves": {
+        "signature": "Pan Bash Crack",
+        "legend": "Pretend Dinner Bash",
+        "ultimate": "Plastic Cake Crack",
+        "kit.wind_up": "Oven On Boost",
+        "kit.squeak_toy": "Timer Ding",
+        "kit.block_tower": "Cupboard Guard",
+        "kit.toy_tantrum": "Clatter Clatter Clatter"
+      }
+    },
+    "piggy_bank": {
+      "status": "draft",
+      "names": {
+        "common": "Coinrattle Pig",
+        "uncommon": "Shakeemptier",
+        "rare": "Neverbreakpig",
+        "epic": "Party Coin Shake",
+        "legendary": "The Pig That Saved for a Bicycle"
+      },
+      "lore": {
+        "common": "Rattles loudly every time it's picked up.",
+        "uncommon": "Has a cork in its tummy that nobody is allowed to pull out until the summer holidays.",
+        "rare": "Has no hole in the bottom, so the only way to get coins out is a lot of patient shaking.",
+        "epic": "Was shaken by every child at the party, and the floor was covered in coins.",
+        "legendary": "Saved up enough coins over five years for its owner to buy a brand-new bicycle."
+      },
+      "moves": {
+        "signature": "Coin Rattle Crack",
+        "legend": "Savings Rest",
+        "ultimate": "Piggy Bank Drop",
+        "kit.wind_up": "Save Up Boost",
+        "kit.squeak_toy": "Oink Startle",
+        "kit.block_tower": "Ceramic Guard",
+        "kit.toy_tantrum": "Rattle Rattle Rattle"
+      }
+    }
+  }
+}
