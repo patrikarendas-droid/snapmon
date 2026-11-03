@@ -1,0 +1,1018 @@
+{
+  "schema": 1,
+  "batch": "w21-sweets-bakery-and-snacks",
+  "entries": {
+    "bread": {
+      "status": "draft",
+      "names": {
+        "common": "Crustloaf",
+        "uncommon": "Heelhoarder",
+        "rare": "Toastmaker",
+        "epic": "Sandwich Mountain",
+        "legendary": "The Loaf That Fed a Week of Lunches"
+      },
+      "lore": {
+        "common": "Sits in the bread bin with two crusty ends that nobody wants to eat.",
+        "uncommon": "Goes stale on one side while the other side is still soft.",
+        "rare": "Makes the whole kitchen smell so warm and bready that everyone wants toast.",
+        "epic": "Made so many sandwiches for a school trip that the coach smelled like a bakery.",
+        "legendary": "Made a week of lunches for a family of six, and the crusts went to the ducks."
+      },
+      "moves": {
+        "signature": "Toasty Heat",
+        "legend": "Crust Guard",
+        "ultimate": "Sandwich Stack"
+      }
+    },
+    "x_panini": {
+      "status": "draft",
+      "names": {
+        "common": "Grillstripe",
+        "uncommon": "Cheesestretch",
+        "rare": "Pressedbun",
+        "epic": "Cafe Lunch Ooze",
+        "legendary": "The Panini That Stretched Forever"
+      },
+      "lore": {
+        "common": "Has stripes across its top from the hot press, like a tiny zebra.",
+        "uncommon": "Oozes cheese from its edges onto the plate and the fingers.",
+        "rare": "Stretches so much when bitten that the cheese reaches arm's length.",
+        "epic": "Stretched its cheese so far at lunch that two friends were joined across the table.",
+        "legendary": "Stretched a string of cheese so long that it was measured with a tape measure and broke a record."
+      },
+      "moves": {
+        "signature": "Hot Press Heat",
+        "legend": "Cheese Snatch",
+        "ultimate": "Cheese Stretch"
+      }
+    },
+    "x_sandwich_roll": {
+      "status": "draft",
+      "names": {
+        "common": "Fillingspiller",
+        "uncommon": "Crumbcoat",
+        "rare": "Lunchroll",
+        "epic": "Picnic Roll Squash",
+        "legendary": "The Roll That Held a Whole Picnic"
+      },
+      "lore": {
+        "common": "Holds its filling for exactly one bite before it starts to escape.",
+        "uncommon": "Covers everyone who eats it in a fine layer of crumbs.",
+        "rare": "Squeezes its filling out the back with every bite.",
+        "epic": "Was squashed at the bottom of the picnic bag and came out flat as a pancake but still delicious.",
+        "legendary": "Held a whole picnic's worth of filling in one roll, and four people shared it."
+      },
+      "moves": {
+        "signature": "Hot Roll Heat",
+        "legend": "Crumb Guard",
+        "ultimate": "Picnic Squash"
+      }
+    },
+    "cake": {
+      "status": "draft",
+      "names": {
+        "common": "Spongeslab",
+        "uncommon": "Icingcoat",
+        "rare": "Candlestand",
+        "epic": "Party Cake Collapse",
+        "legendary": "The Cake That Fed a Whole School"
+      },
+      "lore": {
+        "common": "Has a layer of icing on top that everyone wants to lick off first.",
+        "uncommon": "Sinks a little in the middle, no matter how carefully it's baked.",
+        "rare": "Makes everyone at the party stop talking when it's carried in.",
+        "epic": "Leaned so far on the way to the table that three people had to catch it.",
+        "legendary": "Was cut into enough slices for a whole school, and every child got a corner."
+      },
+      "moves": {
+        "signature": "Sugar Rush Startle",
+        "legend": "Big Slice",
+        "ultimate": "Party Cake"
+      }
+    },
+    "x_birthday_candle": {
+      "status": "draft",
+      "names": {
+        "common": "Waxwick",
+        "uncommon": "Wishflicker",
+        "rare": "Blowcandle",
+        "epic": "Wish Time Puff",
+        "legendary": "The Candle That Granted the Wish"
+      },
+      "lore": {
+        "common": "Stands on a cake and waits for one big puff and a wish.",
+        "uncommon": "Drips coloured wax onto the icing every time it's lit for too long.",
+        "rare": "Comes back to life after being blown out, and everyone has to blow again.",
+        "epic": "Relit itself five times at a party, and the birthday boy was out of breath.",
+        "legendary": "Was blown out with a wish so perfect that the whole party says it came true."
+      },
+      "moves": {
+        "signature": "Flicker Startle",
+        "legend": "Wish Wish Wish",
+        "ultimate": "Birthday Wish"
+      }
+    },
+    "x_cake_pop": {
+      "status": "draft",
+      "names": {
+        "common": "Stickcake",
+        "uncommon": "Sprinklebauble",
+        "rare": "Popball",
+        "epic": "Party Stick Treat",
+        "legendary": "The Pop That Never Fell Off Its Stick"
+      },
+      "lore": {
+        "common": "Is a ball of cake on a stick, covered in shiny icing and sprinkles.",
+        "uncommon": "Falls off its stick when bitten too hard.",
+        "rare": "Looks so perfect that nobody wants to be the first to eat one.",
+        "epic": "Was dropped at a party and rolled across the floor like a tiny bowling ball.",
+        "legendary": "Stayed on its stick through a whole party of bouncing children, which is unheard of."
+      },
+      "moves": {
+        "signature": "Sprinkle Startle",
+        "legend": "Pop Pop Pop",
+        "ultimate": "Party Pop"
+      }
+    },
+    "candy": {
+      "status": "draft",
+      "names": {
+        "common": "Sugarwrap",
+        "uncommon": "Teethsticker",
+        "rare": "Sweetsack",
+        "epic": "Pick and Mix Rush",
+        "legendary": "The Sweet That Was Shared Fairly"
+      },
+      "lore": {
+        "common": "Comes in a crinkly wrapper that is impossible to open quietly.",
+        "uncommon": "Sticks to teeth so firmly that talking becomes difficult.",
+        "rare": "Makes everyone who eats one suddenly full of energy.",
+        "epic": "Was shared out at a party so fast that the bag was empty in a minute.",
+        "legendary": "Was split into perfect shares between six children, and nobody argued once."
+      },
+      "moves": {
+        "signature": "Sugar Rush Startle",
+        "legend": "Wrapper Guard",
+        "ultimate": "Pick and Mix"
+      }
+    },
+    "x_caramel": {
+      "status": "draft",
+      "names": {
+        "common": "Gooeycube",
+        "uncommon": "Jawsticker",
+        "rare": "Stretchsweet",
+        "epic": "Sticky Fingers Day",
+        "legendary": "The Caramel That Glued a Family Together"
+      },
+      "lore": {
+        "common": "Is gooey and golden and sticks to the wrapper as it's opened.",
+        "uncommon": "Glues jaws together so firmly that nobody can talk for a minute.",
+        "rare": "Stretches so far when bitten that it becomes a long golden thread.",
+        "epic": "Stuck so many fingers together at a party that everyone held hands by accident.",
+        "legendary": "Was so sticky that it glued a whole family together at the sofa for a film night."
+      },
+      "moves": {
+        "signature": "Sticky Startle",
+        "legend": "Golden Boost",
+        "ultimate": "Sticky Fingers"
+      }
+    },
+    "x_chewing_gum": {
+      "status": "draft",
+      "names": {
+        "common": "Bubbleblower",
+        "uncommon": "Shoestick",
+        "rare": "Chewchew",
+        "epic": "Bubble Pop Surprise",
+        "legendary": "The Gum That Blew the Biggest Bubble"
+      },
+      "lore": {
+        "common": "Gets chewed until it loses its flavour, then chewed for a bit longer anyway.",
+        "uncommon": "Ends up stuck under a desk, a shoe or a cinema seat.",
+        "rare": "Blows bubbles so big that they pop all over the chewer's face.",
+        "epic": "Blew a bubble so big that it popped and covered a whole fringe.",
+        "legendary": "Blew a bubble so huge that a passing bird thought it was a balloon."
+      },
+      "moves": {
+        "signature": "Chew Startle",
+        "legend": "Bubble Bubble Bubble",
+        "ultimate": "Bubble Pop"
+      }
+    },
+    "x_gummy": {
+      "status": "draft",
+      "names": {
+        "common": "Jellybear",
+        "uncommon": "Wobblesweet",
+        "rare": "Chewsquish",
+        "epic": "Gummy Bag Raid",
+        "legendary": "The Gummy That Survived the Bag"
+      },
+      "lore": {
+        "common": "Wobbles when it's held up and squishes when it's bitten.",
+        "uncommon": "Sticks together in a big lump with all the other gummies in the bag.",
+        "rare": "Is so chewy that one sweet lasts a whole walk to school.",
+        "epic": "Got stuck in a big gummy clump that had to be shared with a pair of scissors.",
+        "legendary": "Was the only gummy left in the bag after a whole school trip."
+      },
+      "moves": {
+        "signature": "Wobble Startle",
+        "legend": "Squish Crack",
+        "ultimate": "Gummy Raid"
+      }
+    },
+    "x_jelly_beans": {
+      "status": "draft",
+      "names": {
+        "common": "Beancolour",
+        "uncommon": "Flavourguess",
+        "rare": "Rainbowbean",
+        "epic": "Mystery Flavour Game",
+        "legendary": "The Bean That Was Every Flavour"
+      },
+      "lore": {
+        "common": "Comes in every colour, and nobody can guess what any of them taste like.",
+        "uncommon": "Always has one flavour that nobody likes, left at the bottom of the bag.",
+        "rare": "Makes every bag a guessing game that ends in silly faces.",
+        "epic": "Was used for a flavour game at a party, and everyone made the same face at once.",
+        "legendary": "Tasted of every flavour at once, and nobody could ever agree what it was."
+      },
+      "moves": {
+        "signature": "Flavour Startle",
+        "legend": "Bad Flavour Distraction",
+        "ultimate": "Mystery Bean"
+      }
+    },
+    "x_licorice": {
+      "status": "draft",
+      "names": {
+        "common": "Blackstring",
+        "uncommon": "Twistrope",
+        "rare": "Chewlace",
+        "epic": "Sweet Shop Shoelace",
+        "legendary": "The Licorice Nobody Else Liked"
+      },
+      "lore": {
+        "common": "Is black and chewy and makes everybody's tongue go dark.",
+        "uncommon": "Is either loved or hated, with nobody in between.",
+        "rare": "Is so stretchy that a single string can be wrapped round a wrist.",
+        "epic": "Was tied in a bow at a party, and the whole class tried to copy it.",
+        "legendary": "Was the only sweet left in the bag at every party, and one grandad loved it for fifty years."
+      },
+      "moves": {
+        "signature": "Chew Startle",
+        "legend": "Stretch Crack",
+        "ultimate": "Black Twist"
+      }
+    },
+    "x_lollipop_swirl": {
+      "status": "draft",
+      "names": {
+        "common": "Swirlstick",
+        "uncommon": "Spinlick",
+        "rare": "Rainbowpop",
+        "epic": "Fairground Swirl",
+        "legendary": "The Lolly Bigger Than a Face"
+      },
+      "lore": {
+        "common": "Has a big rainbow swirl on a stick and lasts for hours.",
+        "uncommon": "Gets fluff and hair stuck on it the moment it's put down.",
+        "rare": "Is so big that its owner has to lick it all afternoon.",
+        "epic": "Was licked for a whole day at a fairground and was still only half finished.",
+        "legendary": "Was so big that its owner hid behind it during a game of hide and seek."
+      },
+      "moves": {
+        "signature": "Swirl Startle",
+        "legend": "Sticky Hair Crack",
+        "ultimate": "Fairground Swirl"
+      }
+    },
+    "x_mint": {
+      "status": "draft",
+      "names": {
+        "common": "Coolbreath",
+        "uncommon": "Peppermintpip",
+        "rare": "Freshchill",
+        "epic": "After Dinner Chill",
+        "legendary": "The Mint That Froze a Whole Mouth"
+      },
+      "lore": {
+        "common": "Makes breath cool and fresh and the whole mouth tingle.",
+        "uncommon": "Gets offered round after every dinner whether anyone wants one or not.",
+        "rare": "Is so strong that the whole mouth feels like it is on an iceberg.",
+        "epic": "Was passed round after dinner, and the whole table breathed out a cloud of mint.",
+        "legendary": "Was so minty that its eater breathed out a little cloud of frost."
+      },
+      "moves": {
+        "signature": "Cool Startle",
+        "legend": "Minty Boost",
+        "ultimate": "Mouth Freeze Startle"
+      }
+    },
+    "x_toffee": {
+      "status": "draft",
+      "names": {
+        "common": "Hardtoff",
+        "uncommon": "Toothglue",
+        "rare": "Crackcandy",
+        "epic": "Bonfire Night Toffee",
+        "legendary": "The Toffee That Lasted a Year"
+      },
+      "lore": {
+        "common": "Is hard and golden and needs a little hammer to break it.",
+        "uncommon": "Sticks to teeth so hard that it pulls at them when chewed.",
+        "rare": "Lasts so long in the mouth that it can be sucked all afternoon.",
+        "epic": "Was so sticky at a party that nobody could talk for ten minutes.",
+        "legendary": "Was sucked for a whole year by one very patient grandad, a little bit each Sunday."
+      },
+      "moves": {
+        "signature": "Crack Startle",
+        "legend": "Sticky Stink",
+        "ultimate": "Toffee Glue"
+      }
+    },
+    "x_truffle": {
+      "status": "draft",
+      "names": {
+        "common": "Cocoaball",
+        "uncommon": "Melthand",
+        "rare": "Fancysweet",
+        "epic": "Chocolate Box Pick",
+        "legendary": "The Truffle Everyone Wanted"
+      },
+      "lore": {
+        "common": "Is a little ball of chocolate dusted with cocoa that melts on fingers.",
+        "uncommon": "Melts in the hand before it reaches the mouth.",
+        "rare": "Is so rich that one bite is enough, though nobody stops at one.",
+        "epic": "Was the last truffle in the box, and the whole family played a game to win it.",
+        "legendary": "Was the most wanted sweet at a party, and the winner shared it with everyone anyway."
+      },
+      "moves": {
+        "signature": "Melt Startle",
+        "legend": "Melt Distraction",
+        "ultimate": "Chocolate Pick"
+      }
+    },
+    "x_brownie": {
+      "status": "draft",
+      "names": {
+        "common": "Fudgesquare",
+        "uncommon": "Crustcorner Bite",
+        "rare": "Gooeymiddle",
+        "epic": "Bake Sale Raid",
+        "legendary": "The Brownie the Whole School Wanted"
+      },
+      "lore": {
+        "common": "Has a crackly top and a gooey middle that sticks to the tin.",
+        "uncommon": "Has corners that are fought over and a middle that falls apart.",
+        "rare": "Is so gooey that its eater needs a fork, a spoon and a napkin.",
+        "epic": "Was taken to a bake sale, and every brownie sold in one minute.",
+        "legendary": "Was so delicious that the whole school talked about it until the end of term."
+      },
+      "moves": {
+        "signature": "Gooey Startle",
+        "legend": "Corner Snatch",
+        "ultimate": "Bake Sale"
+      }
+    },
+    "chocolate": {
+      "status": "draft",
+      "names": {
+        "common": "Cocoabar",
+        "uncommon": "Meltsquare",
+        "rare": "Foilpeeler",
+        "epic": "Chocolate Smear",
+        "legendary": "The Bar That Melted Every Heart"
+      },
+      "lore": {
+        "common": "Snaps into neat squares and melts on warm fingers.",
+        "uncommon": "Melts in the pocket into a puddle that ruins a pair of trousers.",
+        "rare": "Is so tasty that one square always turns into three.",
+        "epic": "Melted in a hot car and smeared its whole wrapper into one big chocolate puddle.",
+        "legendary": "Was shared out so lovingly at a party that every person got exactly the same number of squares."
+      },
+      "moves": {
+        "signature": "Snap Startle",
+        "legend": "Melt Startle",
+        "ultimate": "Chocolate Melt"
+      }
+    },
+    "x_fudge": {
+      "status": "draft",
+      "names": {
+        "common": "Fudgecube",
+        "uncommon": "Sugarbrick",
+        "rare": "Sweetslab",
+        "epic": "Seaside Fudge Shop",
+        "legendary": "The Fudge That Sold Out the Pier"
+      },
+      "lore": {
+        "common": "Is soft and crumbly and so sweet that it makes teeth tingle.",
+        "uncommon": "Crumbles into pieces when it's cut, so nobody gets a neat square.",
+        "rare": "Is so sweet that one cube makes the eater giddy for an hour.",
+        "epic": "Was sold on the seaside pier, and the queue stretched to the beach.",
+        "legendary": "Sold out the whole pier on a summer day, and the gulls gathered to sniff the empty trays."
+      },
+      "moves": {
+        "signature": "Sugar Startle",
+        "legend": "Fudge Heat",
+        "ultimate": "Seaside Fudge"
+      }
+    },
+    "cookie": {
+      "status": "draft",
+      "names": {
+        "common": "Chipbiscuit",
+        "uncommon": "Crumbdropper",
+        "rare": "Dunkdrown",
+        "epic": "Milk Dunk Disaster",
+        "legendary": "The Cookie That Fed Every Pocket"
+      },
+      "lore": {
+        "common": "Has chocolate chips scattered through it and crumbs that go everywhere.",
+        "uncommon": "Breaks in half in the milk and sinks to the bottom.",
+        "rare": "Smells so good while baking that the whole house waits in the kitchen.",
+        "epic": "Was dunked so long that it collapsed into the milk, and the glass became a soup.",
+        "legendary": "Was baked in a batch so big that every child at school had one in their pocket."
+      },
+      "moves": {
+        "signature": "Crumble Startle",
+        "legend": "Crumb Distraction",
+        "ultimate": "Milk Dunk"
+      }
+    },
+    "x_fortune_cookie": {
+      "status": "draft",
+      "names": {
+        "common": "Messagecrunch",
+        "uncommon": "Paperfold",
+        "rare": "Luckysnap",
+        "epic": "Little Paper Surprise",
+        "legendary": "The Cookie With the Funniest Message"
+      },
+      "lore": {
+        "common": "Has a tiny paper message inside that is never quite what anyone expected.",
+        "uncommon": "Snaps so loudly when opened that it makes the whole table jump.",
+        "rare": "Gives a message so silly that the whole table reads it aloud.",
+        "epic": "Gave everyone at the table the same message, and they all laughed for an hour.",
+        "legendary": "Gave a message so funny that a grandad laughed until his tea went cold."
+      },
+      "moves": {
+        "signature": "Snap Startle",
+        "legend": "Message Snatch",
+        "ultimate": "Paper Surprise"
+      }
+    },
+    "x_gingerbread_man": {
+      "status": "draft",
+      "names": {
+        "common": "Gingerbiscuit",
+        "uncommon": "Buttonchest",
+        "rare": "Runrunner",
+        "epic": "Gingerbread Chase",
+        "legendary": "The Biscuit That Ran Away"
+      },
+      "lore": {
+        "common": "Has icing buttons down his front and a big smile on his face.",
+        "uncommon": "Loses a leg first, always, whenever someone takes a bite.",
+        "rare": "Looks so cheeky that everyone thinks he might run off the plate.",
+        "epic": "Was baked in a batch that rolled off the tray and across the kitchen floor.",
+        "legendary": "Ran out of the oven so fast that the cook only caught him at the garden gate."
+      },
+      "moves": {
+        "signature": "Ginger Startle",
+        "legend": "Ginger Snap Startle",
+        "ultimate": "Gingerbread Chase"
+      }
+    },
+    "x_macaron": {
+      "status": "draft",
+      "names": {
+        "common": "Pastelpuff",
+        "uncommon": "Shellcrumble",
+        "rare": "Fancymacaron",
+        "epic": "Fancy Tea Pastel",
+        "legendary": "The Macaron That Was Too Pretty to Eat"
+      },
+      "lore": {
+        "common": "Is a pastel-coloured little sandwich with a crisp shell and a soft middle.",
+        "uncommon": "Crumbles all over the plate the moment it's picked up.",
+        "rare": "Is so pretty that people take photos before they dare to eat it.",
+        "epic": "Was laid out at a fancy tea in a rainbow, and nobody wanted to break the line.",
+        "legendary": "Was so pretty that it sat in a cake shop window for a week and nobody dared to buy it."
+      },
+      "moves": {
+        "signature": "Pastel Startle",
+        "legend": "Shell Shell Shell",
+        "ultimate": "Pastel Tea"
+      }
+    },
+    "x_sugar_cookie": {
+      "status": "draft",
+      "names": {
+        "common": "Iceddisc",
+        "uncommon": "Sprinklestar",
+        "rare": "Cutoutcookie",
+        "epic": "Decorating Party Mess",
+        "legendary": "The Cookie Shaped Like a Star"
+      },
+      "lore": {
+        "common": "Is a flat shiny biscuit covered in icing and sprinkles.",
+        "uncommon": "Leaves a trail of sprinkles wherever it goes.",
+        "rare": "Gets decorated so much that there is more icing than biscuit.",
+        "epic": "Was decorated at a party until the kitchen table was covered in sprinkles.",
+        "legendary": "Was cut into a star so perfect that it was hung on the wall instead of eaten."
+      },
+      "moves": {
+        "signature": "Sprinkle Startle",
+        "legend": "Sugar Glaze Heat",
+        "ultimate": "Decorating Party"
+      }
+    },
+    "x_wafer": {
+      "status": "draft",
+      "names": {
+        "common": "Layercrisp",
+        "uncommon": "Cream Stripe",
+        "rare": "Snapcrisp",
+        "epic": "Wafer Crumb Shower",
+        "legendary": "The Wafer That Never Crumbled"
+      },
+      "lore": {
+        "common": "Has thin crispy layers with sweet cream in between.",
+        "uncommon": "Snaps into a shower of crumbs when bitten.",
+        "rare": "Is so crispy that every bite sounds like a small firework.",
+        "epic": "Snapped so loudly at a quiet film that the whole cinema turned round.",
+        "legendary": "Was bitten by a whole class one after another and never crumbled once."
+      },
+      "moves": {
+        "signature": "Snap Startle",
+        "legend": "Layer Snatch",
+        "ultimate": "Crumb Shower"
+      }
+    },
+    "croissant": {
+      "status": "draft",
+      "names": {
+        "common": "Flakepuff",
+        "uncommon": "Buttercurl",
+        "rare": "Pastrymoon",
+        "epic": "Breakfast Flake Storm",
+        "legendary": "The Croissant That Flaked a Whole Cafe"
+      },
+      "lore": {
+        "common": "Is curved like a moon and leaves buttery flakes on every shirt.",
+        "uncommon": "Gets so crumbly that half of it ends up on the plate.",
+        "rare": "Flakes so much that the table looks like it has been snowing.",
+        "epic": "Covered a whole cafe table in flakes at breakfast, and the birds came to the window.",
+        "legendary": "Flaked so much on its way through a cafe that every table got a share."
+      },
+      "moves": {
+        "signature": "Hot Flake Heat",
+        "legend": "Buttery Bonk",
+        "ultimate": "Flake Storm"
+      }
+    },
+    "cupcake": {
+      "status": "draft",
+      "names": {
+        "common": "Frostingtop",
+        "uncommon": "Paperwrapper",
+        "rare": "Sprinklehat",
+        "epic": "Bake Sale Swirl",
+        "legendary": "The Cupcake With the Tallest Icing"
+      },
+      "lore": {
+        "common": "Has a swirl of icing on top that's bigger than the cake underneath.",
+        "uncommon": "Leaves icing on the nose of whoever bites it first.",
+        "rare": "Is so tempting that everyone takes one more than they meant to.",
+        "epic": "Was stacked in a tower for a party and toppled when someone took one from the bottom.",
+        "legendary": "Had icing so tall that it needed its own box to travel to the party."
+      },
+      "moves": {
+        "signature": "Sugar Startle",
+        "legend": "Icing Crack",
+        "ultimate": "Bake Sale Swirl"
+      }
+    },
+    "donut": {
+      "status": "draft",
+      "names": {
+        "common": "Ringsugar",
+        "uncommon": "Jamsquirter",
+        "rare": "Glazering",
+        "epic": "Jam Squirt Surprise",
+        "legendary": "The Donut That Never Dripped Jam"
+      },
+      "lore": {
+        "common": "Has a hole in the middle and sugar that covers every finger.",
+        "uncommon": "Squirts jam out of its side with the first bite.",
+        "rare": "Is so sugary that its eater licks their lips for an hour.",
+        "epic": "Squirted jam across a whole shirt, and the jam made a funny face.",
+        "legendary": "Was eaten in one bite without dripping jam or dropping sugar, which nobody believed."
+      },
+      "moves": {
+        "signature": "Sugar Startle",
+        "legend": "Jam Squirt Stink",
+        "ultimate": "Glaze Ring"
+      }
+    },
+    "fried_egg": {
+      "status": "draft",
+      "names": {
+        "common": "Sunnyside",
+        "uncommon": "Yolkrunner",
+        "rare": "Laceedge",
+        "epic": "Breakfast Sunrise",
+        "legendary": "The Egg That Never Broke Its Yolk"
+      },
+      "lore": {
+        "common": "Sits in the pan with its sunny yolk in the middle.",
+        "uncommon": "Breaks its yolk the moment it's flipped.",
+        "rare": "Has edges so crispy that they crunch with every bite.",
+        "epic": "Was flipped so high that it landed on the cat's head.",
+        "legendary": "Was flipped, served and eaten without its yolk breaking, which no egg has ever managed."
+      },
+      "moves": {
+        "signature": "Sizzle Heat",
+        "legend": "Crispy Edge Heat",
+        "ultimate": "Runny Yolk Stink"
+      }
+    },
+    "x_omelette": {
+      "status": "draft",
+      "names": {
+        "common": "Foldegg",
+        "uncommon": "Fillingfold",
+        "rare": "Fluffpan",
+        "epic": "Breakfast Omelette Flip",
+        "legendary": "The Omelette That Folded Perfectly"
+      },
+      "lore": {
+        "common": "Folds over its filling like a yellow blanket.",
+        "uncommon": "Tears in half when it's flipped, so it turns into scrambled eggs.",
+        "rare": "Is so fluffy that it rises in the pan like a soft cushion.",
+        "epic": "Was flipped so high that it landed on the next-door plate.",
+        "legendary": "Folded so perfectly that the chef cried with joy."
+      },
+      "moves": {
+        "signature": "Hot Egg Heat",
+        "legend": "Fold Startle",
+        "ultimate": "Omelette Flip"
+      }
+    },
+    "x_scrambled_eggs": {
+      "status": "draft",
+      "names": {
+        "common": "Fluffegg",
+        "uncommon": "Spoonstir",
+        "rare": "Egglump",
+        "epic": "Sunday Scramble Rush",
+        "legendary": "The Eggs That Were Perfectly Fluffy"
+      },
+      "lore": {
+        "common": "Is soft and yellow and sticks to the pan if it isn't stirred.",
+        "uncommon": "Gets cold so quickly that the toast is always warmer.",
+        "rare": "Is so fluffy that it nearly floats off the plate.",
+        "epic": "Was scrambled so much at a Sunday breakfast that the whole table got a share.",
+        "legendary": "Was scrambled so perfectly that the eggs looked like little yellow clouds."
+      },
+      "moves": {
+        "signature": "Hot Scramble Heat",
+        "legend": "Stir Startle",
+        "ultimate": "Sunday Scramble"
+      }
+    },
+    "fries": {
+      "status": "draft",
+      "names": {
+        "common": "Chipstick",
+        "uncommon": "Saltshower",
+        "rare": "Ketchupdipper",
+        "epic": "Chip Shop Queue",
+        "legendary": "The Fries That Were Never Cold"
+      },
+      "lore": {
+        "common": "Come in a paper cone, crispy on the outside and soft in the middle.",
+        "uncommon": "Get stolen one by one by whoever is sitting nearest.",
+        "rare": "Are so crispy that they crunch loudly enough to be heard across the room.",
+        "epic": "Were stolen by a seagull on the seafront, and the whole beach chased it.",
+        "legendary": "Stayed hot for a whole walk home from the chip shop, which is unheard of."
+      },
+      "moves": {
+        "signature": "Hot Chip Heat",
+        "legend": "Salty Stink",
+        "ultimate": "Chip Shop Rush"
+      }
+    },
+    "x_frozen_yogurt": {
+      "status": "draft",
+      "names": {
+        "common": "Froyoswirl",
+        "uncommon": "Toppingpile",
+        "rare": "Coldspoon",
+        "epic": "Summer Swirl Cup",
+        "legendary": "The Yoghurt That Never Melted"
+      },
+      "lore": {
+        "common": "Swirls into a cup and gets covered in toppings until it disappears.",
+        "uncommon": "Melts faster than its toppings can be eaten.",
+        "rare": "Gets so many toppings that it looks like a small mountain.",
+        "epic": "Was piled so high with toppings that the cup tipped over.",
+        "legendary": "Stayed frozen through a whole summer's day at the beach, and the ice cream van was jealous."
+      },
+      "moves": {
+        "signature": "Cold Startle",
+        "legend": "Topping Boost",
+        "ultimate": "Summer Swirl"
+      }
+    },
+    "x_gelato_cup": {
+      "status": "draft",
+      "names": {
+        "common": "Spoonscoop",
+        "uncommon": "Pistachiopot",
+        "rare": "Gelatino",
+        "epic": "Holiday Gelato Stop",
+        "legendary": "The Cup That Made Every Holiday"
+      },
+      "lore": {
+        "common": "Comes in a little cup with a tiny spade-shaped spoon.",
+        "uncommon": "Melts down the side of the cup faster than anyone can eat it.",
+        "rare": "Is so creamy that every spoonful slows down its eater.",
+        "epic": "Was the best part of a whole holiday, and the family ate one every day.",
+        "legendary": "Was so good on a holiday that the family planned their whole next trip around it."
+      },
+      "moves": {
+        "signature": "Cold Startle",
+        "legend": "Holiday Rest",
+        "ultimate": "Gelato Stop"
+      }
+    },
+    "ice_cream": {
+      "status": "draft",
+      "names": {
+        "common": "Conecone",
+        "uncommon": "Dripdrop",
+        "rare": "Scoopstack",
+        "epic": "Seaside Drip Race",
+        "legendary": "The Cone That Never Dripped"
+      },
+      "lore": {
+        "common": "Has a scoop of ice cream on a cone that starts to drip at once.",
+        "uncommon": "Drips down the cone and onto its eater's fingers in the sun.",
+        "rare": "Melts so quickly that its eater has to lick it in circles.",
+        "epic": "Was dropped on the sand, and a whole flock of seagulls came running.",
+        "legendary": "Was eaten on a sunny day without a single drip, which nobody believes."
+      },
+      "moves": {
+        "signature": "Cold Startle",
+        "legend": "Sunny Drip Heat",
+        "ultimate": "Drip Race"
+      }
+    },
+    "x_sundae": {
+      "status": "draft",
+      "names": {
+        "common": "Glasstower",
+        "uncommon": "Cherrytop",
+        "rare": "Sprinklemountain",
+        "epic": "Ice Cream Parlour",
+        "legendary": "The Sundae Taller Than a Child"
+      },
+      "lore": {
+        "common": "Has scoops of ice cream, sauce and a cherry, all in a tall glass.",
+        "uncommon": "Has a cherry on top that everyone wants and nobody shares.",
+        "rare": "Is so tall that its eater needs a long spoon to reach the bottom.",
+        "epic": "Was ordered at the ice cream parlour so big that three children shared it.",
+        "legendary": "Was so tall that it was taller than the child eating it."
+      },
+      "moves": {
+        "signature": "Cold Startle",
+        "legend": "Sundae Boost",
+        "ultimate": "Tall Glass Tumble"
+      }
+    },
+    "x_pizza_slice_box": {
+      "status": "draft",
+      "names": {
+        "common": "Slicebox",
+        "uncommon": "Cheesestring",
+        "rare": "Pizzaflop",
+        "epic": "Pizza Box Party",
+        "legendary": "The Box That Fed a Party"
+      },
+      "lore": {
+        "common": "Holds a slice of pizza that flops when it's picked up.",
+        "uncommon": "Leaves a cheese string from the box to the mouth on every bite.",
+        "rare": "Smells so good that everyone near it suddenly wants pizza.",
+        "epic": "Was opened at a party, and every slice was gone before the music started.",
+        "legendary": "Fed a whole party from one box, and somehow there was still a slice left for the pizza delivery rider."
+      },
+      "moves": {
+        "signature": "Hot Cheese Heat",
+        "legend": "Floppy Crack",
+        "ultimate": "Pizza Party Box"
+      }
+    },
+    "popcorn": {
+      "status": "draft",
+      "names": {
+        "common": "Kernelpop",
+        "uncommon": "Butterpuff Snack",
+        "rare": "Cinemacrunch",
+        "epic": "Film Night Spill",
+        "legendary": "The Popcorn That Filled a Cinema"
+      },
+      "lore": {
+        "common": "Pops in the pan and fills the kitchen with a lovely buttery smell.",
+        "uncommon": "Spills on the sofa and stays in the cushions for weeks.",
+        "rare": "Hides one unpopped kernel in every handful, waiting for the softest tooth.",
+        "epic": "Spilled all over the lounge on film night, and the dog had the best evening of its life.",
+        "legendary": "Filled a whole cinema with its smell, and the people outside queued to come in."
+      },
+      "moves": {
+        "signature": "Hot Pop Heat",
+        "legend": "Spill Crack",
+        "ultimate": "Film Night"
+      }
+    },
+    "x_gyro": {
+      "status": "draft",
+      "names": {
+        "common": "Pitawrap",
+        "uncommon": "Saucedrip",
+        "rare": "Spitroast",
+        "epic": "Street Food Feast",
+        "legendary": "The Wrap That Fed a Festival"
+      },
+      "lore": {
+        "common": "Is wrapped in warm pita bread with sauce dripping down the side.",
+        "uncommon": "Drips its sauce onto the shoes of whoever is eating it.",
+        "rare": "Gets wrapped so tightly that the last bite squirts sauce right up its eater's sleeve.",
+        "epic": "Was so popular at a festival that the queue went round the whole field.",
+        "legendary": "Fed a whole festival in one weekend, and the cook was carried round on shoulders."
+      },
+      "moves": {
+        "signature": "Hot Wrap Heat",
+        "legend": "Sauce Snatch",
+        "ultimate": "Street Feast"
+      }
+    },
+    "x_quesadilla_plate": {
+      "status": "draft",
+      "names": {
+        "common": "Cheesefold",
+        "uncommon": "Tortillamelt",
+        "rare": "Wedgecrisp",
+        "epic": "Cheese Pull Contest",
+        "legendary": "The Quesadilla That Pulled Forever"
+      },
+      "lore": {
+        "common": "Is a folded tortilla full of melted cheese, cut into wedges.",
+        "uncommon": "Lets one wedge slide off the plate every time it is carried to the table.",
+        "rare": "Hides a pocket of molten cheese in its middle wedge, so whoever gets it gasps.",
+        "epic": "Was cut into so many wedges at a party that it looked like a giant golden clock.",
+        "legendary": "Pulled a string of cheese so long that it went out of the door and down the path."
+      },
+      "moves": {
+        "signature": "Hot Cheese Heat",
+        "legend": "Cheese Pull Startle",
+        "ultimate": "Cheese Pull"
+      }
+    },
+    "x_shawarma": {
+      "status": "draft",
+      "names": {
+        "common": "Spitslice",
+        "uncommon": "Garlicwrap",
+        "rare": "Pitapile",
+        "epic": "Late Night Takeaway",
+        "legendary": "The Wrap That Was Worth the Queue"
+      },
+      "lore": {
+        "common": "Is sliced from a big turning spit and wrapped with salad and sauce.",
+        "uncommon": "Drips garlic sauce on the floor with every bite.",
+        "rare": "Turns on its spit so hypnotically that the whole queue forgets what it was going to order.",
+        "epic": "Was so popular that the queue outside the shop went round the block.",
+        "legendary": "Was worth a two-hour queue, and every person in the line said so afterwards."
+      },
+      "moves": {
+        "signature": "Hot Wrap Heat",
+        "legend": "Garlic Distraction",
+        "ultimate": "Takeaway Night"
+      }
+    },
+    "taco": {
+      "status": "draft",
+      "names": {
+        "common": "Shellcrunch",
+        "uncommon": "Fillingfaller",
+        "rare": "Salsastack",
+        "epic": "Taco Night Avalanche",
+        "legendary": "The Taco That Held Its Filling"
+      },
+      "lore": {
+        "common": "Crunches loudly at the first bite and then falls apart completely.",
+        "uncommon": "Drops its filling on the plate after every bite.",
+        "rare": "Shatters into so many pieces at the first bite that the plate ends up with more taco than the mouth.",
+        "epic": "Collapsed so badly at taco night that everyone ate theirs with a fork.",
+        "legendary": "Held its filling all the way to the last bite, and the whole table stood up and clapped."
+      },
+      "moves": {
+        "signature": "Crunch Heat",
+        "legend": "Filling Snatch",
+        "ultimate": "Taco Avalanche"
+      }
+    },
+    "x_wrap_sandwich": {
+      "status": "draft",
+      "names": {
+        "common": "Rollwrap",
+        "uncommon": "Tortillatuck",
+        "rare": "Lunchroll Wrap",
+        "epic": "Lunchbox Unroll",
+        "legendary": "The Wrap That Never Unrolled"
+      },
+      "lore": {
+        "common": "Is rolled tight with filling and wrapped in foil for lunch.",
+        "uncommon": "Unrolls at the worst moment and drops its filling on the desk.",
+        "rare": "Holds so much filling that it gets fatter in the middle.",
+        "epic": "Unrolled in a lunchbox, and the whole thing became a salad.",
+        "legendary": "Stayed perfectly rolled through a whole school trip, and the teacher was amazed."
+      },
+      "moves": {
+        "signature": "Hot Wrap Heat",
+        "legend": "Big Wrap",
+        "ultimate": "Lunchbox Unroll"
+      }
+    },
+    "x_apple_pie": {
+      "status": "draft",
+      "names": {
+        "common": "Crustpie",
+        "uncommon": "Applesteam",
+        "rare": "Latticetop",
+        "epic": "Sunday Pie Steam",
+        "legendary": "The Pie That Won the Village Show"
+      },
+      "lore": {
+        "common": "Has a crisscross top and smells of apples and cinnamon.",
+        "uncommon": "Burns the tongue of anyone who can't wait for it to cool.",
+        "rare": "Steams so much when it's cut that the whole kitchen smells of autumn.",
+        "epic": "Was left to cool on a windowsill, and three neighbours and a fox turned up to admire it.",
+        "legendary": "Won the village show three years running, and the judges asked for seconds each time."
+      },
+      "moves": {
+        "signature": "Hot Apple Startle",
+        "legend": "Hot Pie Heat",
+        "ultimate": "Pie Crust Crack"
+      }
+    },
+    "x_bao_bun": {
+      "status": "draft",
+      "names": {
+        "common": "Softbun",
+        "uncommon": "Steampuff",
+        "rare": "Fluffybao",
+        "epic": "Dim Sum Basket",
+        "legendary": "The Bun That Was Fluffier Than a Cloud"
+      },
+      "lore": {
+        "common": "Is soft and white and steamed until it's as squishy as a pillow.",
+        "uncommon": "Sticks to the paper underneath it and tears at the bottom.",
+        "rare": "Is so fluffy that it springs back when it's squeezed.",
+        "epic": "Was steamed so well at a party that everyone wanted to squeeze it like a cushion.",
+        "legendary": "Was so fluffy that a whole table agreed it was softer than a cloud."
+      },
+      "moves": {
+        "signature": "Hot Bun Heat",
+        "legend": "Squish Distraction",
+        "ultimate": "Steamed Basket"
+      }
+    },
+    "x_biscuit_tin": {
+      "status": "draft",
+      "names": {
+        "common": "Tinrattler",
+        "uncommon": "Lidpopper",
+        "rare": "Brokenbiscuit",
+        "epic": "Grandma's Biscuit Tin",
+        "legendary": "The Tin That Held Sewing Things"
+      },
+      "lore": {
+        "common": "Rattles when it's picked up, which means there are still biscuits inside.",
+        "uncommon": "Has only broken biscuits and crumbs at the bottom when it's finally opened.",
+        "rare": "Makes a sound when opened that brings every person in the house to the kitchen.",
+        "epic": "Was opened at a family party, and everyone fought over the chocolate ones.",
+        "legendary": "Was opened with great excitement, but it held sewing things, as everyone's grandmother's tin does."
+      },
+      "moves": {
+        "signature": "Rattle Startle",
+        "legend": "Crumb Crack",
+        "ultimate": "Biscuit Raid"
+      }
+    }
+  }
+}
