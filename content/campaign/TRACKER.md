@@ -37,8 +37,8 @@
 | w05-vehicles-1 | 79 | 79 | done: 28 high / 114 medium / 48 low + 12 patterns | 155 fields (`patches/w05-vehicles-1-editor-auto.json`, half-swaps auto-completed) then `w05-self-fixes.json` | open: templated "N years" Legendaries partly fixed |
 | w06-vehicles-2 | 79 | 79 | done: 38 high / 129 medium / 31 low + 12 patterns | 184 fields (`patches/w06-vehicles-2-editor-auto.json`) then `w06-self-fixes.json` | open: "every Y in town" Epics (pattern) |
 | w07-clothing-and-shoes | 118 | 118 | done: 268 high / 354 medium / 45 low + 14 patterns | 622 fields (`patches/w07-clothing-and-shoes-editor-auto.json`: Epics/Legendaries/Rares largely rewritten) then `w07-self-fixes.json` | open: Legendary name shape Lady/Sir X of the Y |
-| w08-bags-jewellery-and-carry | 94 | 94 | editor running (with w09) | self-fixes | |
-| w09-gadgets-and-computers | 123 | 123 | editor running (with w08) | self-fixes | |
+| w08-bags-jewellery-and-carry | 94 | 94 | done: 92 high / 221 medium / 41 low + 11 patterns | 313 fields (`patches/w08-bags-jewellery-and-carry-editor-auto.json`) then `w08-self-fixes.json` | |
+| w09-gadgets-and-computers | 123 | 123 | done: 132 high / 261 medium / 27 low + 16 patterns | 393 fields (`patches/w09-gadgets-and-computers-editor-auto.json`) then `w09-self-fixes.json` | usb_key L deliberately calls back to C (lint medium accepted) |
 | w10-screens-sound-and-light | 98 | 98 | pending | self-fixes | |
 | w11-office-books-and-art | 112 | 112 | pending | self-fixes | sensitive objects written neutrally for developer review: x_bible (family book, no religious content), x_cigarette/x_cigarette_butt/x_vape (negative framing, litter/quitting), x_incense_stick, x_ballot_box (w08, class pet vote) |
 | w12–w22 | 1,094 | 0 | — | — | not started |
