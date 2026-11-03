@@ -51,7 +51,7 @@
 | w19-kitchen-and-cookware | 112 | 112 | pending | self-fixes | knife, deep fryer, heaters written with grown-up/safety framing |
 | w20-fridges-taps-and-tableware | 93 | 93 | pending | self-fixes | drinkware written alcohol-free (champagne flute, martini glass, shot glass, tankard, wine tumbler, cocktail shaker, beer stein hold juice/milkshake) |
 | w21-sweets-bakery-and-snacks | 91 | 91 | pending | self-fixes | |
-| w22-drinks-pantry-and-meals | 126 | 0 | — | — | not started |
+| w22-drinks-pantry-and-meals | 126 | 126 | pending | self-fixes | drinks alcohol-free (x_wine, x_beer, wine_bottle, hip flask = cocoa); medicines/cleaners/fuel cans kept high-shelf/grown-up only; spread written without its brand name (id x_nutella) |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
