@@ -43,10 +43,10 @@
 | w11-office-books-and-art | 112 | 112 | done: 86 high / 287 medium / 67 low + 11 patterns | 373 fields (`patches/w11-office-books-and-art-editor-auto.json`) then `w11-self-fixes.json` | sensitive objects written neutrally for developer review: x_bible (family book, no religious content), x_cigarette/x_cigarette_butt/x_vape (negative framing, litter/quitting), x_incense_stick, x_ballot_box (w08, class pet vote) |
 | w12-house-odds-and-ends | 101 | 101 | done: 126 high / 352 medium / 48 low + 11 patterns | 478 fields (`patches/w12-house-odds-and-ends-editor-auto.json`) then `w12-self-fixes.json` | many fire objects (matches x4, candles, bonfire, fireworks) written with safety framing |
 | w13-tools-and-sport | 98 | 98 | done: 110 high / 267 medium / 15 low + 12 patterns | 377 fields (`patches/w13-tools-and-sport-editor-auto.json`) then `w13-self-fixes.json` | i_slot = one-armed bandit, reframed by the editor as a retired pier arcade machine (no gambling) |
-| w14-garden-and-plants | 115 | 115 | pending | self-fixes | |
-| w15-trees-fruit-and-veg | 117 | 117 | pending | self-fixes | |
-| w16-toys-and-games | 85 | 85 | pending | self-fixes | |
-| w17-furniture-and-bedding | 100 | 100 | pending | self-fixes | x_church_pew written as a hall bench (no religious content); wheelchair written as empowering/fast |
+| w14-garden-and-plants | 115 | 115 | done: 157 high / 470 medium / 22 low + 10 patterns | 627 fields (`patches/w14-garden-and-plants-editor-auto.json`) then `w14-self-fixes.json` | |
+| w15-trees-fruit-and-veg | 117 | 117 | done: 188 high / 477 medium / 29 low + 10 patterns | 665 fields (`patches/w15-trees-fruit-and-veg-editor-auto.json`) then `w15-self-fixes.json` | |
+| w16-toys-and-games | 85 | 85 | done: 49 high / 407 medium / 30 low + 11 patterns | 456 fields (`patches/w16-toys-and-games-editor-auto.json`) then `w16-self-fixes.json` | |
+| w17-furniture-and-bedding | 100 | 100 | done: 70 high / 141 medium / 6 low + 11 patterns | 211 fields (`patches/w17-furniture-and-bedding-editor-auto.json`) then `w17-self-fixes.json` | x_church_pew written as a hall bench (no religious content); wheelchair written as empowering/fast |
 | w18-music-and-instruments | 56 | 56 | pending | self-fixes | x_church_bell written as a village tower bell (no religious content) |
 | w19-kitchen-and-cookware | 112 | 112 | pending | self-fixes | knife, deep fryer, heaters written with grown-up/safety framing |
 | w20-fridges-taps-and-tableware | 93 | 93 | pending | self-fixes | drinkware written alcohol-free (champagne flute, martini glass, shot glass, tankard, wine tumbler, cocktail shaker, beer stein hold juice/milkshake) |
