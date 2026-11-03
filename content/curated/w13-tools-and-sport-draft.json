@@ -825,6 +825,837 @@
         "kit.tighten_up": "Saw Guard",
         "kit.elbow_grease": "Sawing Boost"
       }
+    },
+    "screwdriver": {
+      "status": "draft",
+      "names": {
+        "common": "Slipdriver",
+        "uncommon": "Wrongheader",
+        "rare": "Paintlidprier",
+        "epic": "Flatpack Assembly Night",
+        "legendary": "Turnwell the Patient"
+      },
+      "lore": {
+        "common": "Slips out of the screw head and skids across the table.",
+        "uncommon": "Is always the wrong kind, flat when you need a cross.",
+        "rare": "Gets used to open paint tins far more than to turn screws.",
+        "epic": "Built a whole wardrobe at midnight with only three screws left over.",
+        "legendary": "Turned every screw on a whole wooden boat, and the boat still floats fifty years later."
+      },
+      "moves": {
+        "signature": "Twist Twist Twist",
+        "legend": "Stripped Screw Crack",
+        "ultimate": "Flatpack Finish",
+        "kit.heavy_swing": "Handle Bonk",
+        "kit.tighten_up": "Screw Tight Guard"
+      }
+    },
+    "shovel": {
+      "status": "draft",
+      "names": {
+        "common": "Clayclinger",
+        "uncommon": "Sandcastler",
+        "rare": "Holemaker Shovel",
+        "epic": "Snow Day Dig-Out",
+        "legendary": "The Shovel That Dug the Pond"
+      },
+      "lore": {
+        "common": "Gets clay stuck to it so that every scoop weighs twice as much.",
+        "uncommon": "Builds sandcastles so big that the bucket is jealous.",
+        "rare": "Digs holes so fast that the dog gives up and lies down.",
+        "epic": "Dug out every car on the street after the snowstorm, and the neighbours brought hot chocolate.",
+        "legendary": "Dug a whole pond in one weekend, and the frogs moved in by Monday."
+      },
+      "moves": {
+        "signature": "Dig Dig Dig",
+        "legend": "Scoop Crack",
+        "ultimate": "Big Dig",
+        "kit.rust_bite": "Muddy Blade Stink",
+        "kit.tighten_up": "Handle Guard",
+        "kit.elbow_grease": "Dig Boost"
+      }
+    },
+    "tape_measure": {
+      "status": "draft",
+      "names": {
+        "common": "Fingersnapper",
+        "uncommon": "Bendtape",
+        "rare": "Overmeasurer",
+        "epic": "Furniture Fit Fiasco",
+        "legendary": "Measurina the Precise"
+      },
+      "lore": {
+        "common": "Snaps back so fast that it catches your fingertip.",
+        "uncommon": "Bends in the middle every time you try to measure something high.",
+        "rare": "Measures everything twice and gives two different answers.",
+        "epic": "Measured a sofa that still didn't fit through the door, and the whole family spent the evening pushing.",
+        "legendary": "Measured the tallest tree in the park by climbing it, one inch at a time."
+      },
+      "moves": {
+        "signature": "Measure Measure Measure",
+        "legend": "Snap Back Crack",
+        "ultimate": "Tape Whip",
+        "kit.rust_bite": "Rusty Tape Bite",
+        "kit.tighten_up": "Lock Button Guard"
+      }
+    },
+    "toolbox": {
+      "status": "draft",
+      "names": {
+        "common": "Latchsnapper",
+        "uncommon": "Missingtool",
+        "rare": "Heavycarry",
+        "epic": "Garage Tool Avalanche",
+        "legendary": "The Box That Fixed the Village"
+      },
+      "lore": {
+        "common": "Rattles all the way to the job, then turns out to be missing the one screwdriver needed.",
+        "uncommon": "Has every tool except the one you need right now.",
+        "rare": "Is so heavy that it needs two people and a lot of groaning.",
+        "epic": "Tipped over in the garage, and every screw, nail and nut rolled under the car.",
+        "legendary": "Fixed every broken thing in the village over fifty years and still has the first spanner."
+      },
+      "moves": {
+        "signature": "Rattle Rattle Rattle",
+        "legend": "Hot Metal Lid",
+        "ultimate": "Tool Avalanche",
+        "kit.heavy_swing": "Toolbox Swing",
+        "kit.rust_bite": "Oily Rag Stink",
+        "kit.tighten_up": "Locked Lid Guard"
+      }
+    },
+    "x_medal_ribbon": {
+      "status": "draft",
+      "names": {
+        "common": "Necktwister",
+        "uncommon": "Ribbonswing",
+        "rare": "Clinkmedal",
+        "epic": "Sports Day Medal Rush",
+        "legendary": "The Ribbon That Held Gold"
+      },
+      "lore": {
+        "common": "Twists round so the medal hangs on the back of your neck.",
+        "uncommon": "Swings its medal so that it clinks against your buttons.",
+        "rare": "Makes its wearer stand a little taller all day.",
+        "epic": "Was hung round every runner's neck at the fun run, and the field jingled.",
+        "legendary": "Held a medal that its owner wore to bed for a whole week."
+      },
+      "moves": {
+        "signature": "Swing Swing Swing",
+        "legend": "Ribbon Twist Crack",
+        "ultimate": "Medal Clink",
+        "kit.power_shot": "Medal Swing",
+        "kit.warm_up": "Proud Boost",
+        "kit.foul_play": "Ribbon Tangle",
+        "kit.fast_break": "Clink Clink Clink"
+      }
+    },
+    "trophy": {
+      "status": "draft",
+      "names": {
+        "common": "Dustcollector",
+        "uncommon": "Handlebreaker",
+        "rare": "Shelfshiner",
+        "epic": "Trophy Cabinet Topple",
+        "legendary": "The Cup That Everyone Wanted"
+      },
+      "lore": {
+        "common": "Collects dust on the top shelf after the first week of being admired.",
+        "uncommon": "Has a handle that snaps off if you lift it too excitedly.",
+        "rare": "Shines so brightly in the cabinet that visitors forget to look at anything else.",
+        "epic": "Was knocked over in the cabinet, and every trophy fell over like dominoes.",
+        "legendary": "Was passed round every winning team for a hundred years, and has every team's name on its base."
+      },
+      "moves": {
+        "signature": "Shine Shine Shine",
+        "legend": "Polished Guard",
+        "ultimate": "Trophy Topple",
+        "kit.power_shot": "Trophy Lift",
+        "kit.foul_play": "Glare Distraction",
+        "kit.fast_break": "Lap Lap Lap"
+      }
+    },
+    "x_whistle_small": {
+      "status": "draft",
+      "names": {
+        "common": "Earshriek",
+        "uncommon": "Pealess",
+        "rare": "Lanyardwhistle",
+        "epic": "Lost Child Whistle",
+        "legendary": "The Whistle That Found Everyone"
+      },
+      "lore": {
+        "common": "Is blown by every child who finds it, right next to someone's ear.",
+        "uncommon": "Has a little pea inside that rattles when it's shaken.",
+        "rare": "Calls every child back from the far end of the beach in one blast.",
+        "epic": "Was blown by every leader on the school trip, and the whole group lined up in seconds.",
+        "legendary": "Called a lost hiker back through the fog, and has hung by the front door ever since."
+      },
+      "moves": {
+        "signature": "Blow Blow Blow",
+        "legend": "Shriek Shriek Shriek",
+        "ultimate": "Whistle Blast",
+        "kit.power_shot": "Big Blast",
+        "kit.warm_up": "Deep Breath Boost",
+        "kit.fast_break": "Toot Toot Toot"
+      }
+    },
+    "x_whistle_sport": {
+      "status": "draft",
+      "names": {
+        "common": "Refereeblast",
+        "uncommon": "Offsidecaller",
+        "rare": "Halftimer",
+        "epic": "Cup Final Whistle",
+        "legendary": "The Referee's Last Whistle"
+      },
+      "lore": {
+        "common": "Blasts at exactly the moment you were about to score.",
+        "uncommon": "Calls offside when nobody can see why.",
+        "rare": "Stops the whole game with one sharp blast.",
+        "epic": "Blew the final whistle in the cup final, and the whole stadium went wild.",
+        "legendary": "Blew the whistle on a thousand matches and was framed at the club when its referee retired."
+      },
+      "moves": {
+        "signature": "Toot Toot Toot",
+        "legend": "Time Out Guard",
+        "ultimate": "Final Whistle",
+        "kit.power_shot": "Penalty Blast",
+        "kit.fast_break": "Blast Blast Blast"
+      }
+    },
+    "wheelbarrow": {
+      "status": "draft",
+      "names": {
+        "common": "Tipoverer",
+        "uncommon": "Squeakwheel Barrow",
+        "rare": "Childride",
+        "epic": "Garden Barrow Race",
+        "legendary": "The Barrow That Built a Garden"
+      },
+      "lore": {
+        "common": "Tips over just as you turn the corner.",
+        "uncommon": "Has a wheel that squeaks with every turn.",
+        "rare": "Gives rides to every child in the family, even when it's full of compost.",
+        "epic": "Raced round the garden with the whole family, and the compost heap was knocked over.",
+        "legendary": "Carried every stone for a whole garden wall, and the wall still stands."
+      },
+      "moves": {
+        "signature": "Bump Bump Bump",
+        "legend": "Load Load Load",
+        "ultimate": "Barrow Tip",
+        "kit.heavy_swing": "Handle Swing",
+        "kit.rust_bite": "Rusty Wheel Bite",
+        "kit.tighten_up": "Steady Legs Guard"
+      }
+    },
+    "wrench": {
+      "status": "draft",
+      "names": {
+        "common": "Knuckleskinner",
+        "uncommon": "Wrongsize",
+        "rare": "Pipefixer",
+        "epic": "Plumbing Emergency",
+        "legendary": "Grippa the Adjustable"
+      },
+      "lore": {
+        "common": "Slips off the nut and skins your knuckles.",
+        "uncommon": "Is always one size too big or too small.",
+        "rare": "Fixes leaky pipes so fast that the plumber asks if it wants a job.",
+        "epic": "Fixed a burst pipe at midnight while the whole family held towels.",
+        "legendary": "Fixed every tap in an old house so well that none has dripped in fifty years."
+      },
+      "moves": {
+        "signature": "Twist Twist Twist Twist",
+        "legend": "Slip Crack",
+        "ultimate": "Pipe Fix",
+        "kit.heavy_swing": "Wrench Swing",
+        "kit.rust_bite": "Rusty Jaw Bite",
+        "kit.elbow_grease": "Tighten Boost"
+      }
+    },
+    "x_beach_spade": {
+      "status": "draft",
+      "names": {
+        "common": "Sandflinger Spade",
+        "uncommon": "Moatdigger",
+        "rare": "Bucketpartner",
+        "epic": "Sandcastle Kingdom",
+        "legendary": "The Spade That Built a Castle Town"
+      },
+      "lore": {
+        "common": "Flings sand into everyone's sandwiches.",
+        "uncommon": "Digs moats round every sandcastle so the sea fills them up.",
+        "rare": "Is never seen without its best friend, the bucket.",
+        "epic": "Built a whole sandcastle town with towers, walls and a bridge before the tide came in.",
+        "legendary": "Dug a hole on the beach so deep that a crab moved in and stayed for the summer."
+      },
+      "moves": {
+        "signature": "Dig Crack",
+        "legend": "Sandy Sandwich Stink",
+        "ultimate": "Moat Flood",
+        "kit.heavy_swing": "Spade Swing",
+        "kit.rust_bite": "Seaweed Stink",
+        "kit.tighten_up": "Bucket Guard",
+        "kit.elbow_grease": "Digging Boost"
+      }
+    },
+    "x_bolt": {
+      "status": "draft",
+      "names": {
+        "common": "Nutloser",
+        "uncommon": "Rustlock",
+        "rare": "Threadstripper",
+        "epic": "Workshop Bolt Hunt",
+        "legendary": "The Bolt That Held the Bridge"
+      },
+      "lore": {
+        "common": "Loses its nut the moment it's dropped.",
+        "uncommon": "Rusts so tightly in place that it will never come out.",
+        "rare": "Strips its own thread so nothing can grip it.",
+        "epic": "Rolled off the workbench, and the whole workshop spent an hour looking for it.",
+        "legendary": "Held together a bridge for a hundred years without a single wobble."
+      },
+      "moves": {
+        "signature": "Bolt Bolt Bolt",
+        "legend": "Locked Tight Guard",
+        "ultimate": "Bolt Shear",
+        "kit.stripped_thread": "Stripped Bolt Crack",
+        "kit.rust_bite": "Rust Bite Bolt",
+        "kit.torque": "Torque Turn"
+      }
+    },
+    "x_bowling_pin": {
+      "status": "draft",
+      "names": {
+        "common": "Wobbletopple",
+        "uncommon": "Strikeloser",
+        "rare": "Pinsetter Pal",
+        "epic": "Bowling Alley Strike",
+        "legendary": "The Pin That Never Fell"
+      },
+      "lore": {
+        "common": "Wobbles for ages before it decides whether to fall.",
+        "uncommon": "Gets knocked down by every bowler, then stands up again to be knocked down.",
+        "rare": "Falls in a perfect strike with all its friends.",
+        "epic": "Fell in a perfect strike on every lane at the bowling party, and everyone cheered.",
+        "legendary": "Survived a whole bowling season standing up, and the bowlers gave it a nickname."
+      },
+      "moves": {
+        "signature": "Topple Topple Topple",
+        "legend": "Wobble Startle",
+        "ultimate": "Strike Topple",
+        "kit.power_shot": "Pin Smash",
+        "kit.warm_up": "Stand Tall Boost",
+        "kit.fast_break": "Fall Fall Fall"
+      }
+    },
+    "x_box_cutter": {
+      "status": "draft",
+      "names": {
+        "common": "Bladeclicker",
+        "uncommon": "Boxopener",
+        "rare": "Carefulblade",
+        "epic": "Moving Day Unpacking",
+        "legendary": "The Blade That Opened a Thousand Boxes"
+      },
+      "lore": {
+        "common": "Clicks its blade out and in so often that everyone says put that away.",
+        "uncommon": "Opens every box on moving day, as long as a grown-up is holding it.",
+        "rare": "Cuts through tape so neatly that the box looks brand new.",
+        "epic": "Unpacked every box in the new house in one day, with a very careful grown-up.",
+        "legendary": "Has opened a thousand boxes without ever scratching what was inside."
+      },
+      "moves": {
+        "signature": "Slice Slice Slice",
+        "legend": "Click Startle",
+        "ultimate": "Hot Blade Slice",
+        "kit.heavy_swing": "Handle Swing Bonk",
+        "kit.rust_bite": "Rusty Blade Stink",
+        "kit.tighten_up": "Safety Lock Guard",
+        "kit.elbow_grease": "Sharp Blade Boost"
+      }
+    },
+    "x_bungee_cord": {
+      "status": "draft",
+      "names": {
+        "common": "Pingbacker",
+        "uncommon": "Roofrackhugger",
+        "rare": "Stretchmonster",
+        "epic": "Holiday Packing Ping",
+        "legendary": "The Cord That Held the Holiday"
+      },
+      "lore": {
+        "common": "Pings back and snaps your wrist when it slips.",
+        "uncommon": "Hugs the bags onto the roof rack.",
+        "rare": "Stretches so far that it seems to have no end.",
+        "epic": "Pinged off the roof rack on the motorway, and the suitcases slid off one by one.",
+        "legendary": "Held a whole family's holiday luggage on the roof for a thousand miles."
+      },
+      "moves": {
+        "signature": "Ping Ping Ping",
+        "legend": "Stretch Crack",
+        "ultimate": "Bungee Snap",
+        "kit.stripped_thread": "Frayed Cord Crack",
+        "kit.rust_bite": "Rusty Hook Bite Cord",
+        "kit.torque": "Pull Tight"
+      }
+    },
+    "x_cable": {
+      "status": "draft",
+      "names": {
+        "common": "Tangledrawer",
+        "uncommon": "Wrongcable",
+        "rare": "Toetripper Cable",
+        "epic": "Cable Drawer Chaos",
+        "legendary": "The Cable That Fits Everything"
+      },
+      "lore": {
+        "common": "Comes out of the drawer with three other cables, a hair clip and a key attached.",
+        "uncommon": "Is exactly ten centimetres too short to reach from the socket to the bed.",
+        "rare": "Lies across the floor and trips everyone who walks past.",
+        "epic": "Was pulled from the cable drawer, and every cable in the house came with it in one big knot.",
+        "legendary": "Fits every gadget in the house, which no cable has ever done before."
+      },
+      "moves": {
+        "signature": "Tangle Tangle Tangle",
+        "legend": "Cable Cable Cable",
+        "ultimate": "Cable Knot",
+        "kit.stripped_thread": "Frayed Wire Crack",
+        "kit.torque": "Cable Whip",
+        "kit.tighten": "Cable Tie Guard"
+      }
+    },
+    "x_cable_car": {
+      "status": "draft",
+      "names": {
+        "common": "Swingbox",
+        "uncommon": "Viewhogger",
+        "rare": "Mountainclimber",
+        "epic": "Mountain Cable Ride",
+        "legendary": "The Car That Carried Everyone Up"
+      },
+      "lore": {
+        "common": "Swings in the wind so that every passenger grips the rail.",
+        "uncommon": "Has the best view on the mountain, and everyone squashes to the window.",
+        "rare": "Climbs the mountain so smoothly that the hikers stop and stare.",
+        "epic": "Carried every skier up the mountain on the first snowy day of the season.",
+        "legendary": "Has carried a million visitors to the top of the same mountain for fifty years."
+      },
+      "moves": {
+        "signature": "Cabin Ram",
+        "legend": "Rusty Cable Whiff",
+        "ultimate": "Summit Swing",
+        "kit.stripped_thread": "Frayed Cable Crack",
+        "kit.rust_bite": "Rusty Wheel Stink",
+        "kit.torque": "Cable Pull"
+      }
+    },
+    "x_chain": {
+      "status": "draft",
+      "names": {
+        "common": "Rattlelink",
+        "uncommon": "Bikeslipper",
+        "rare": "Strongholder",
+        "epic": "Gate Chain Rattle",
+        "legendary": "The Chain That Never Broke"
+      },
+      "lore": {
+        "common": "Clanks against the bike frame on every bump in the road.",
+        "uncommon": "Slips off the bike's gears at the bottom of every hill.",
+        "rare": "Holds so firmly that nothing can break it.",
+        "epic": "Rattled round every bike in the shed, and every bike was locked together.",
+        "legendary": "Held a boat to its mooring through a hundred storms without breaking a single link."
+      },
+      "moves": {
+        "signature": "Rattle Rattle Rattle Rattle",
+        "legend": "Link Link Link",
+        "ultimate": "Chain Whip",
+        "kit.stripped_thread": "Slipped Link Crack",
+        "kit.rust_bite": "Rust Chain Bite",
+        "kit.torque": "Chain Pull",
+        "kit.tighten": "Padlock Guard"
+      }
+    },
+    "x_chisel": {
+      "status": "draft",
+      "names": {
+        "common": "Splinterer",
+        "uncommon": "Malletbuddy",
+        "rare": "Woodcarver",
+        "epic": "Workshop Carving Day",
+        "legendary": "The Chisel That Carved the Gate"
+      },
+      "lore": {
+        "common": "Leaves splinters in the wood it carves.",
+        "uncommon": "Gets borrowed as a paint-tin opener so often that its edge is covered in every colour.",
+        "rare": "Carves shapes into wood that look like they've grown there.",
+        "epic": "Carved a whole set of chess pieces in one weekend.",
+        "legendary": "Carved the gate of the village park with every animal in the forest."
+      },
+      "moves": {
+        "signature": "Chip Chip Chip",
+        "legend": "Carve Crack",
+        "ultimate": "Sawdust Stink",
+        "kit.heavy_swing": "Mallet Swing",
+        "kit.rust_bite": "Blunt Edge Bite",
+        "kit.tighten_up": "Sharpened Guard Chisel",
+        "kit.elbow_grease": "Carving Boost"
+      }
+    },
+    "x_clamp": {
+      "status": "draft",
+      "names": {
+        "common": "Fingerclamp",
+        "uncommon": "Wobblegrip",
+        "rare": "Glueholder",
+        "epic": "Workbench Clamp Crowd",
+        "legendary": "The Clamp That Held a Masterpiece"
+      },
+      "lore": {
+        "common": "Clamps your finger as well as the wood.",
+        "uncommon": "Wobbles loose just as the glue is setting.",
+        "rare": "Holds glued pieces so tightly that they never come apart.",
+        "epic": "Was used by the whole woodwork class at once, and the room looked like a clamp forest.",
+        "legendary": "Held together a violin while the glue set, and the violin played beautifully for a hundred years."
+      },
+      "moves": {
+        "signature": "Clamp Clamp Clamp",
+        "legend": "Grip Flash",
+        "ultimate": "Clamp Crush",
+        "kit.stripped_thread": "Loose Screw Crack",
+        "kit.rust_bite": "Rusty Clamp Bite",
+        "kit.torque": "Screw Tighten",
+        "kit.tighten": "Clamp Guard"
+      }
+    },
+    "x_corkscrew": {
+      "status": "draft",
+      "names": {
+        "common": "Corkcrumbler",
+        "uncommon": "Twistarms",
+        "rare": "Bottlewrestle",
+        "epic": "Party Bottle Pop",
+        "legendary": "The Corkscrew That Never Snapped a Cork"
+      },
+      "lore": {
+        "common": "Crumbles the cork into the bottle every time.",
+        "uncommon": "Raises its arms like a little person cheering as it twists.",
+        "rare": "Wrestles with every stubborn cork until the bottle gives up.",
+        "epic": "Opened every fizzy grape juice at the party, and the corks flew across the room.",
+        "legendary": "Has opened every celebration bottle in the family for fifty years without breaking a cork."
+      },
+      "moves": {
+        "signature": "Twist Twist Pop",
+        "legend": "Arms Up Boost",
+        "ultimate": "Cork Pop",
+        "kit.stripped_thread": "Crumbled Cork Crack",
+        "kit.rust_bite": "Rusty Screw Bite",
+        "kit.torque": "Corkscrew Pull",
+        "kit.tighten": "Twist Grip Guard"
+      }
+    },
+    "x_croquet_mallet": {
+      "status": "draft",
+      "names": {
+        "common": "Hoopmisser",
+        "uncommon": "Lawnwhacker",
+        "rare": "Ballsender",
+        "epic": "Garden Croquet Chaos",
+        "legendary": "The Mallet That Never Missed a Hoop"
+      },
+      "lore": {
+        "common": "Misses the hoop by a hair every single time.",
+        "uncommon": "Whacks the lawn instead of the ball.",
+        "rare": "Sends the opponent's ball flying into the flowerbed.",
+        "epic": "Started a croquet game at the garden party that turned into a battle over the rose bush.",
+        "legendary": "Got the ball through every hoop in one turn, and the garden party stopped to clap."
+      },
+      "moves": {
+        "signature": "Whack Whack Whack",
+        "legend": "Mallet Smash",
+        "ultimate": "Hot Shot Hoop",
+        "kit.power_shot": "Croquet Smash",
+        "kit.foul_play": "Roquet Distraction",
+        "kit.fast_break": "Hoop Hoop Hoop"
+      }
+    },
+    "x_crowbar": {
+      "status": "draft",
+      "names": {
+        "common": "Shinbanger Bar",
+        "uncommon": "Crateopener",
+        "rare": "Stuckprier",
+        "epic": "Crate Opening Party",
+        "legendary": "The Bar That Opened the Treasure"
+      },
+      "lore": {
+        "common": "Bangs into your shins when you carry it.",
+        "uncommon": "Opens every wooden crate with a big creak.",
+        "rare": "Prises open things that have been stuck for years.",
+        "epic": "Opened every crate at the museum delivery, and the curators gasped at each one.",
+        "legendary": "Prised open an old trunk in the attic that held grandma's lost wedding dress."
+      },
+      "moves": {
+        "signature": "Prise Prise Prise",
+        "legend": "Big Lever",
+        "ultimate": "Lid Off Crack",
+        "kit.heavy_swing": "Crowbar Swing",
+        "kit.rust_bite": "Rusty Bar Bite",
+        "kit.tighten_up": "Iron Bar Guard",
+        "kit.elbow_grease": "Leverage Boost"
+      }
+    },
+    "x_downpipe": {
+      "status": "draft",
+      "names": {
+        "common": "Raingurgler",
+        "uncommon": "Leafclogger",
+        "rare": "Drainspout",
+        "epic": "Storm Drain Gush",
+        "legendary": "The Pipe That Saved the Basement"
+      },
+      "lore": {
+        "common": "Gurgles loudly every time it rains.",
+        "uncommon": "Gets clogged with leaves so the gutter overflows.",
+        "rare": "Gushes water out of its bottom so fast that it splashes the windows.",
+        "epic": "Gushed so hard in the storm that the garden became a pond.",
+        "legendary": "Kept the old house dry through a hundred years of storms without a single leak."
+      },
+      "moves": {
+        "signature": "Gush Gush Gush",
+        "legend": "Wet Leaf Stink",
+        "ultimate": "Storm Gush",
+        "kit.tighten_up": "Bracket Guard",
+        "kit.elbow_grease": "Flow Boost"
+      }
+    },
+    "x_elliptical": {
+      "status": "draft",
+      "names": {
+        "common": "Clotheshanger Machine",
+        "uncommon": "Wobblestrider",
+        "rare": "Sweatglider",
+        "epic": "New Year Gym Rush",
+        "legendary": "The Machine That Went Nowhere Smoothly"
+      },
+      "lore": {
+        "common": "Gets used as a clothes hanger more than as an exercise machine.",
+        "uncommon": "Wobbles so much that its user holds on with both hands.",
+        "rare": "Glides so smoothly that its user forgets they're exercising.",
+        "epic": "Was used by every person in the gym on New Year's Day, and the gym ran out of towels.",
+        "legendary": "Took its owner the length of the country without leaving the bedroom."
+      },
+      "moves": {
+        "signature": "Glide Flash",
+        "legend": "Water Break Rest",
+        "ultimate": "Long Stride Glide",
+        "kit.one_more_rep": "One More Minute",
+        "kit.iron_grip": "Handle Grip Squeeze",
+        "kit.protein_shake": "Smoothie Rest",
+        "kit.heavy_lift": "Stride Stomp"
+      }
+    },
+    "x_envelope_opener": {
+      "status": "draft",
+      "names": {
+        "common": "Lettersword",
+        "uncommon": "Desktopknight",
+        "rare": "Slitter",
+        "epic": "Morning Post Slice",
+        "legendary": "Sir Slitsworth of the Writing Desk"
+      },
+      "lore": {
+        "common": "Is waved around like a sword by everyone who picks it up.",
+        "uncommon": "Sits on the desk looking like a tiny knight's weapon.",
+        "rare": "Opens envelopes so neatly that they could be closed again.",
+        "epic": "Opened every letter that arrived on the first day of the holidays, and the desk disappeared under paper.",
+        "legendary": "Has opened every letter that arrived at the same house for a hundred years."
+      },
+      "moves": {
+        "signature": "Slit Slit Slit",
+        "legend": "Swish Swish Swish",
+        "ultimate": "Letter Slice",
+        "kit.heavy_swing": "Sword Swing",
+        "kit.rust_bite": "Rusty Blade Whiff",
+        "kit.tighten_up": "Holder Guard",
+        "kit.elbow_grease": "Sharp Edge Boost"
+      }
+    },
+    "x_fairy_lights": {
+      "status": "draft",
+      "names": {
+        "common": "Tanglemess",
+        "uncommon": "Onebulbout",
+        "rare": "Twinkler",
+        "epic": "Garden Party Twinkle",
+        "legendary": "The Lights That Made the Garden Glow"
+      },
+      "lore": {
+        "common": "Comes out of the box as one giant tangle.",
+        "uncommon": "Stops working because one tiny bulb has gone out.",
+        "rare": "Twinkles so prettily that everyone stops to look.",
+        "epic": "Was strung through every tree at the garden party, and the garden glowed till midnight.",
+        "legendary": "Has lit up the same garden for every family celebration for twenty years."
+      },
+      "moves": {
+        "signature": "Twinkle Flash",
+        "legend": "Tangle Crack",
+        "ultimate": "Twinkle Burst",
+        "kit.stripped_thread": "Dead Bulb Crack",
+        "kit.torque": "String Whip",
+        "kit.tighten": "Plug Guard"
+      }
+    },
+    "x_file_tool": {
+      "status": "draft",
+      "names": {
+        "common": "Nailfiler",
+        "uncommon": "Scrapescreech",
+        "rare": "Edgesmoother",
+        "epic": "Workshop Screech",
+        "legendary": "The File That Smoothed Every Edge"
+      },
+      "lore": {
+        "common": "Makes a scraping screech that sets everyone's teeth on edge.",
+        "uncommon": "Gets borrowed for nails, even though it's meant for metal.",
+        "rare": "Smooths rough edges so well that you can run your finger along them.",
+        "epic": "Screeched so loudly in the workshop that everyone covered their ears.",
+        "legendary": "Has smoothed every edge in a whole workshop for fifty years."
+      },
+      "moves": {
+        "signature": "Scrape Scrape Scrape",
+        "legend": "Screech Screech Screech",
+        "ultimate": "Edge Smooth Strike",
+        "kit.heavy_swing": "File Swipe",
+        "kit.tighten_up": "Handle Guard File"
+      }
+    },
+    "x_garden_hose": {
+      "status": "draft",
+      "names": {
+        "common": "Kinkcurler",
+        "uncommon": "Spraysurprise",
+        "rare": "Lawnsnake",
+        "epic": "Hosepipe Ambush",
+        "legendary": "The Hose That Watered the Whole Street"
+      },
+      "lore": {
+        "common": "Kinks itself so the water stops just when you need it.",
+        "uncommon": "Sprays you in the face when you look down the end to see what's wrong.",
+        "rare": "Lies on the lawn looking like a snake, and the cat avoids it.",
+        "epic": "Started a water fight in the garden that soaked every child on the street.",
+        "legendary": "Watered every garden on the street during the drought, and the flowers stayed bright all summer."
+      },
+      "moves": {
+        "signature": "Spray Spray Spray",
+        "legend": "Water Power Boost",
+        "ultimate": "Hose Whip",
+        "kit.stripped_thread": "Leaky Joint Crack",
+        "kit.rust_bite": "Mossy Hose Stink",
+        "kit.torque": "Kink Twist"
+      }
+    },
+    "x_golf_club": {
+      "status": "draft",
+      "names": {
+        "common": "Divotmaker",
+        "uncommon": "Swingmiss",
+        "rare": "Longdriver",
+        "epic": "Golf Course Chaos",
+        "legendary": "The Club That Got a Hole in One"
+      },
+      "lore": {
+        "common": "Takes a chunk of grass out of the course with every swing.",
+        "uncommon": "Swings so hard and misses the ball completely.",
+        "rare": "Hits the ball so far that nobody can see where it went.",
+        "epic": "Sent a ball into the pond, and every golfer spent the afternoon fishing for it.",
+        "legendary": "Hit a hole in one on the hardest course in the country, and the ball is now framed."
+      },
+      "moves": {
+        "signature": "Swing Swing Swing Swing",
+        "legend": "Divot Snatch",
+        "ultimate": "Hole in One",
+        "kit.power_shot": "Drive Shot",
+        "kit.warm_up": "Practice Swing",
+        "kit.foul_play": "Distraction Waggle"
+      }
+    },
+    "x_golf_tee": {
+      "status": "draft",
+      "names": {
+        "common": "Groundlost",
+        "uncommon": "Peglet",
+        "rare": "Teelauncher",
+        "epic": "Tee Off Line",
+        "legendary": "The Tee That Launched a Champion"
+      },
+      "lore": {
+        "common": "Disappears into the grass after every shot.",
+        "uncommon": "Holds the ball up like a tiny pedestal.",
+        "rare": "Launches the ball so high that it seems to touch the clouds.",
+        "epic": "Was lost by every golfer on the first tee, and the grass was covered in pegs.",
+        "legendary": "Held the ball for the shot that won a famous tournament, and was kept in a glass case."
+      },
+      "moves": {
+        "signature": "Tee Tee Tee",
+        "legend": "Peg Peg Peg",
+        "ultimate": "Tee Off Blast",
+        "kit.power_shot": "Tee Shot",
+        "kit.warm_up": "Line Up Boost",
+        "kit.fast_break": "Bounce Bounce Bounce"
+      }
+    },
+    "x_gutter": {
+      "status": "draft",
+      "names": {
+        "common": "Leafgutter",
+        "uncommon": "Drippyedge",
+        "rare": "Birdbath",
+        "epic": "Autumn Gutter Flood",
+        "legendary": "The Gutter That Never Overflowed"
+      },
+      "lore": {
+        "common": "Fills with leaves every autumn until the rain spills over.",
+        "uncommon": "Drips onto the front doorstep so everyone gets a cold splash.",
+        "rare": "Becomes a bathtub for every bird in the garden.",
+        "epic": "Overflowed in a storm and sent a waterfall down the front of the house.",
+        "legendary": "Has caught every drop of rain on the same house for a hundred years without a single overflow."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Rotting Leaf Stink",
+        "ultimate": "Gutter Overflow",
+        "kit.heavy_swing": "Gutter Clang",
+        "kit.tighten_up": "Bracket Guard Gutter",
+        "kit.elbow_grease": "Clear Out Boost"
+      }
+    },
+    "x_hacksaw_blade": {
+      "status": "draft",
+      "names": {
+        "common": "Snapblade",
+        "uncommon": "Bendysaw",
+        "rare": "Pipecutter",
+        "epic": "Workshop Snap",
+        "legendary": "The Blade That Cut a Bike Lock"
+      },
+      "lore": {
+        "common": "Snaps in half the moment you push too hard.",
+        "uncommon": "Bends so much that every cut wobbles.",
+        "rare": "Cuts through metal pipes as if they were cheese.",
+        "epic": "Snapped so loudly in the workshop that everyone ducked.",
+        "legendary": "Cut through a rusty bike lock that had been stuck for ten years."
+      },
+      "moves": {
+        "signature": "Saw Saw Saw Saw",
+        "legend": "Snap Startle",
+        "ultimate": "Metal Cut",
+        "kit.heavy_swing": "Hacksaw Swing",
+        "kit.rust_bite": "Rusty Teeth Bite",
+        "kit.tighten_up": "Blade Tension Guard",
+        "kit.elbow_grease": "Sawing Boost Boost"
+      }
     }
   }
 }
