@@ -1484,6 +1484,707 @@
         "kit.campfire": "Lakeside Warmth",
         "kit.bug_spray": "Maggot Box Stink"
       }
+    },
+    "x_fishing_rod": {
+      "status": "draft",
+      "names": {
+        "common": "Treecaster",
+        "uncommon": "Bootcatcher",
+        "rare": "Patientpole",
+        "epic": "River Fishing Day",
+        "legendary": "The Rod That Caught a Wellington"
+      },
+      "lore": {
+        "common": "Casts its line straight into the tree behind its owner.",
+        "uncommon": "Catches old boots far more often than fish.",
+        "rare": "Waits so patiently on the riverbank that its owner falls asleep.",
+        "epic": "Was cast by every angler at the river competition, and the river looked like a harp.",
+        "legendary": "Caught a fish so big that it pulled its owner halfway across the river before letting go."
+      },
+      "moves": {
+        "signature": "Cast Cast Crack",
+        "legend": "Patience Boost",
+        "ultimate": "Big Reel In",
+        "kit.mud_slide": "Riverbank Slip",
+        "kit.campfire": "Riverside Fire Warmth",
+        "kit.rough_terrain": "Sturdy Rod Guard"
+      }
+    },
+    "x_flower_bouquet": {
+      "status": "draft",
+      "names": {
+        "common": "Petalshedder",
+        "uncommon": "Vaseoverflow",
+        "rare": "Sneezebunch",
+        "epic": "Wedding Bouquet Toss",
+        "legendary": "The Bouquet That Was Caught by a Dog"
+      },
+      "lore": {
+        "common": "Sheds petals all the way from the shop to the front door.",
+        "uncommon": "Is too big for every vase in the house.",
+        "rare": "Drops one petal every hour, so its owner always knows exactly how old it is.",
+        "epic": "Was tossed at the wedding and flew over every guest's head into the cake.",
+        "legendary": "Was tossed at a wedding and caught by the family dog, who wouldn't let go."
+      },
+      "moves": {
+        "signature": "Petal Pollen Stink",
+        "legend": "Bouquet Bash",
+        "ultimate": "Bouquet Toss",
+        "kit.pollen_puff": "Bouquet Puff",
+        "kit.sap_sip": "Vase Water Siphon",
+        "kit.vine_snare": "Ribbon Snare",
+        "kit.fresh_growth": "Fresh Water Rest"
+      }
+    },
+    "x_football_goal": {
+      "status": "draft",
+      "names": {
+        "common": "Netsnagger",
+        "uncommon": "Postringer",
+        "rare": "Ballswallower",
+        "epic": "Penalty Shootout",
+        "legendary": "The Goal That Never Let a Ball Through"
+      },
+      "lore": {
+        "common": "Snags every ball in the hole in its net.",
+        "uncommon": "Rings like a bell every time the ball hits the post.",
+        "rare": "Swallows the ball so neatly that the goalkeeper doesn't even move.",
+        "epic": "Was the target of a penalty shootout that went on until it was too dark to see.",
+        "legendary": "Stopped every shot in a whole match, and the goalkeeper got all the credit."
+      },
+      "moves": {
+        "signature": "Post Post Post",
+        "legend": "Net Rest",
+        "ultimate": "Crossbar Clang",
+        "kit.mud_slide": "Goalmouth Mud",
+        "kit.rough_terrain": "Net Guard",
+        "kit.bug_spray": "Muddy Net Stink"
+      }
+    },
+    "x_garland": {
+      "status": "draft",
+      "names": {
+        "common": "Wiltinghang",
+        "uncommon": "Doorwreath",
+        "rare": "Flowerchain",
+        "epic": "Festival Flower Chain",
+        "legendary": "The Garland That Spanned the Street"
+      },
+      "lore": {
+        "common": "Wilts a little more every hour it hangs.",
+        "uncommon": "Hangs over every doorway on party days.",
+        "rare": "Is made of so many flowers that it smells like a whole garden.",
+        "epic": "Was strung along every lamp post on festival day, and the whole street smelled of flowers.",
+        "legendary": "Was made so long that it stretched from one end of the village to the other."
+      },
+      "moves": {
+        "signature": "Petal Chain Stink",
+        "legend": "Fresh Flower Rest",
+        "ultimate": "Garland Swing",
+        "kit.pollen_puff": "Flower Chain Puff",
+        "kit.vine_snare": "Garland Wrap",
+        "kit.fresh_growth": "Bloom Again Rest"
+      }
+    },
+    "x_gate": {
+      "status": "draft",
+      "names": {
+        "common": "Creakswinger",
+        "uncommon": "Latchjammer",
+        "rare": "Swingride",
+        "epic": "Farm Gate Breakout",
+        "legendary": "The Gate the Cows Never Opened"
+      },
+      "lore": {
+        "common": "Creaks so loudly that the whole street knows someone's coming.",
+        "uncommon": "Jams its latch so you have to climb over it.",
+        "rare": "Gets swung on by every child, which it doesn't enjoy.",
+        "epic": "Was left open by a walker, and every cow on the farm went for a stroll.",
+        "legendary": "Has kept the same field's cows in for a hundred years without being opened by them once."
+      },
+      "moves": {
+        "signature": "Creak Creak Creak",
+        "legend": "Hot Latch Heat",
+        "ultimate": "Gate Slam",
+        "kit.mud_slide": "Muddy Gateway Crack",
+        "kit.campfire": "Sun Warmed Bars",
+        "kit.rough_terrain": "Latch Guard Gate",
+        "kit.bug_spray": "Cowpat Stink"
+      }
+    },
+    "x_gazebo": {
+      "status": "draft",
+      "names": {
+        "common": "Breezeswayer",
+        "uncommon": "Bunting Holder",
+        "rare": "Shadeparty",
+        "epic": "Garden Party Shade",
+        "legendary": "The Gazebo That Hosted Every Party"
+      },
+      "lore": {
+        "common": "Sways in the breeze so the bunting flutters all day.",
+        "uncommon": "Holds bunting round its edge like a crown.",
+        "rare": "Shades a whole party table on the sunniest day.",
+        "epic": "Sheltered every guest at the garden party when the rain suddenly poured.",
+        "legendary": "Has hosted every birthday party in the same garden for twenty years."
+      },
+      "moves": {
+        "signature": "Sway Sway Sway",
+        "legend": "Shelter Shelter Shelter",
+        "ultimate": "Party Canopy",
+        "kit.mud_slide": "Wet Lawn Crack",
+        "kit.campfire": "Barbecue Heat",
+        "kit.rough_terrain": "Sturdy Frame Guard"
+      }
+    },
+    "x_geranium": {
+      "status": "draft",
+      "names": {
+        "common": "Lemonleaf",
+        "uncommon": "Windowboxer",
+        "rare": "Redburst",
+        "epic": "Windowbox Parade",
+        "legendary": "The Geranium That Bloomed on Every Sill"
+      },
+      "lore": {
+        "common": "Smells of lemon when you brush its leaves.",
+        "uncommon": "Sits in every windowbox on the street.",
+        "rare": "Bursts into bright red flowers that light up the whole window.",
+        "epic": "Bloomed in every windowbox in the village at once, and the streets turned red.",
+        "legendary": "Grew from one cutting into geraniums on every windowsill in the town."
+      },
+      "moves": {
+        "signature": "Lemon Leaf Stink",
+        "legend": "Bright Bloom Boost",
+        "ultimate": "Red Burst",
+        "kit.sap_sip": "Leaf Siphon Geranium",
+        "kit.fresh_growth": "Cutting Rest Geranium"
+      }
+    },
+    "x_grass": {
+      "status": "draft",
+      "names": {
+        "common": "Kneestainer",
+        "uncommon": "Toetickler",
+        "rare": "Mowerdefier",
+        "epic": "Summer Lawn Picnic",
+        "legendary": "The Lawn That Became a Meadow"
+      },
+      "lore": {
+        "common": "Leaves green stains on the knees of every pair of trousers.",
+        "uncommon": "Tickles bare feet on summer mornings.",
+        "rare": "Grows back taller every time it's mown.",
+        "epic": "Grew so long one summer that the children played hide and seek in it.",
+        "legendary": "Was left unmown for one summer and grew into a meadow full of butterflies."
+      },
+      "moves": {
+        "signature": "Grass Stain Stink",
+        "legend": "Blade Blade Blade",
+        "ultimate": "Grass Wave",
+        "kit.pollen_puff": "Grass Pollen Puff",
+        "kit.sap_sip": "Dew Siphon",
+        "kit.vine_snare": "Long Grass Snare",
+        "kit.fresh_growth": "Regrow Rest Grass"
+      }
+    },
+    "x_hibiscus": {
+      "status": "draft",
+      "names": {
+        "common": "Oneday Bloom",
+        "uncommon": "Trumpetflower",
+        "rare": "Tropicalpop",
+        "epic": "Hibiscus Tea Party",
+        "legendary": "The Hibiscus That Bloomed Every Morning"
+      },
+      "lore": {
+        "common": "Opens a new flower in the morning and drops it by evening.",
+        "uncommon": "Has a huge trumpet flower with a long stalk sticking out.",
+        "rare": "Turns any garden into a tropical island.",
+        "epic": "Bloomed so brightly at the garden party that guests put the flowers behind their ears.",
+        "legendary": "Bloomed a new flower every single morning for a whole summer."
+      },
+      "moves": {
+        "signature": "Pollen Stalk Stink",
+        "legend": "Tropical Stink",
+        "ultimate": "Bloom Burst Hibiscus",
+        "kit.sap_sip": "Nectar Siphon Hibiscus",
+        "kit.vine_snare": "Stalk Snare Hibiscus",
+        "kit.fresh_growth": "New Bloom Rest"
+      }
+    },
+    "x_hiking_pole": {
+      "status": "draft",
+      "names": {
+        "common": "Clackpole",
+        "uncommon": "Puddleprober",
+        "rare": "Steadystep",
+        "epic": "Mountain Trail Clack",
+        "legendary": "The Pole That Climbed the Peak"
+      },
+      "lore": {
+        "common": "Clacks on every rock, so the hikers sound like a herd of goats.",
+        "uncommon": "Probes every puddle to see how deep it is.",
+        "rare": "Keeps its hiker steady on the steepest path.",
+        "epic": "Was used by the whole hiking group to cross a stream, and nobody fell in.",
+        "legendary": "Climbed the highest peak in the country with the same hiker every summer for twenty years."
+      },
+      "moves": {
+        "signature": "Clack Clack Clack",
+        "legend": "Steady Step Bash",
+        "ultimate": "Pole Vault",
+        "kit.mud_slide": "Bog Probe Crack",
+        "kit.rough_terrain": "Grip Tip Guard",
+        "kit.bug_spray": "Muddy Strap Stink"
+      }
+    },
+    "x_hurdle": {
+      "status": "draft",
+      "names": {
+        "common": "Knockover",
+        "uncommon": "Kneebasher",
+        "rare": "Growtaller",
+        "epic": "Sports Day Hurdle Race",
+        "legendary": "The Hurdle Nobody Knocked Over"
+      },
+      "lore": {
+        "common": "Gets knocked over by every runner who clips it.",
+        "uncommon": "Bashes the knees of every runner who doesn't jump high enough.",
+        "rare": "Seems to grow taller every time someone runs at it.",
+        "epic": "Was knocked over in every lane at sports day, and the track looked like a game of skittles.",
+        "legendary": "Was cleared by a whole school race without a single runner touching it."
+      },
+      "moves": {
+        "signature": "Clip Clip Clip",
+        "legend": "Hurdle Bash",
+        "ultimate": "Hurdle Topple",
+        "kit.mud_slide": "Muddy Lane Crack",
+        "kit.rough_terrain": "Hurdle Guard"
+      }
+    },
+    "x_hydrangea": {
+      "status": "draft",
+      "names": {
+        "common": "Colourswapper",
+        "uncommon": "Pompomhead",
+        "rare": "Soilteller",
+        "epic": "Seaside Garden Bloom",
+        "legendary": "The Hydrangea That Changed Colour"
+      },
+      "lore": {
+        "common": "Turns pink in one garden and blue in the next, depending on the soil.",
+        "uncommon": "Has flower heads so big that they look like pompoms.",
+        "rare": "Changes colour if a rusty nail is buried beside it.",
+        "epic": "Bloomed in every seaside garden at once, and the coast turned blue.",
+        "legendary": "Changed from pink to blue in one summer, and the gardener has never worked out why."
+      },
+      "moves": {
+        "signature": "Pompom Petal Stink",
+        "legend": "Colour Swap Rest",
+        "ultimate": "Blue Burst",
+        "kit.pollen_puff": "Pompom Puff Hydrangea",
+        "kit.sap_sip": "Soil Siphon",
+        "kit.vine_snare": "Stem Snare Hydrangea"
+      }
+    },
+    "x_iris": {
+      "status": "draft",
+      "names": {
+        "common": "Rainbowpetal",
+        "uncommon": "Swordleaf",
+        "rare": "Bogdweller",
+        "epic": "Pond Edge Bloom",
+        "legendary": "The Iris That Lined the Lake"
+      },
+      "lore": {
+        "common": "Has petals in so many colours that it's named after a rainbow.",
+        "uncommon": "Has long leaves shaped like swords.",
+        "rare": "Grows happily with its feet in the boggiest mud.",
+        "epic": "Bloomed all round the edge of the pond, and the frogs had a purple fence.",
+        "legendary": "Lined the edge of the whole lake with purple, and the swans swam in a ring."
+      },
+      "moves": {
+        "signature": "Petal Stink Iris",
+        "legend": "Sword Leaf Slash",
+        "ultimate": "Iris Bloom",
+        "kit.pollen_puff": "Rainbow Puff",
+        "kit.vine_snare": "Root Snare Iris",
+        "kit.fresh_growth": "Bog Rest"
+      }
+    },
+    "x_ivy": {
+      "status": "draft",
+      "names": {
+        "common": "Wallclimber Ivy",
+        "uncommon": "Gutterstuffer",
+        "rare": "Househugger",
+        "epic": "Ivy Takeover",
+        "legendary": "The Ivy That Covered the Castle"
+      },
+      "lore": {
+        "common": "Climbs up the wall and into the gutters.",
+        "uncommon": "Hugs the house so tightly that the windows disappear.",
+        "rare": "Grows back thicker every time it's cut down.",
+        "epic": "Grew over the whole house in one summer, and the postman couldn't find the letterbox.",
+        "legendary": "Covered a whole castle wall from the moat to the battlements."
+      },
+      "moves": {
+        "signature": "Ivy Stink",
+        "legend": "Wall Grab",
+        "ultimate": "Ivy Smother",
+        "kit.pollen_puff": "Ivy Pollen",
+        "kit.vine_snare": "Ivy Snare",
+        "kit.fresh_growth": "Regrow Ivy"
+      }
+    },
+    "x_jade_plant": {
+      "status": "draft",
+      "names": {
+        "common": "Plumpleaf",
+        "uncommon": "Lucky Jade",
+        "rare": "Slowgrower",
+        "epic": "Windowsill Jade Forest",
+        "legendary": "The Jade That Outlived Everyone"
+      },
+      "lore": {
+        "common": "Has leaves so plump that they look like little green coins.",
+        "uncommon": "Is given as a lucky present at every housewarming.",
+        "rare": "Grows so slowly that its owner thinks it's plastic.",
+        "epic": "Grew so many babies from fallen leaves that the windowsill became a tiny forest.",
+        "legendary": "Was passed down through four generations of the same family, and still sits on the same windowsill."
+      },
+      "moves": {
+        "signature": "Leaf Drop Stink",
+        "legend": "Lucky Boost",
+        "ultimate": "Jade Shower",
+        "kit.sap_sip": "Leaf Water Siphon",
+        "kit.vine_snare": "Stem Snare Jade",
+        "kit.fresh_growth": "Leaf Cutting Rest"
+      }
+    },
+    "x_jasmine": {
+      "status": "draft",
+      "names": {
+        "common": "Nightscent",
+        "uncommon": "Trellistwiner",
+        "rare": "Starflower",
+        "epic": "Summer Night Scent",
+        "legendary": "The Jasmine That Scented the Street"
+      },
+      "lore": {
+        "common": "Smells strongest at night, just as everyone has gone to bed.",
+        "uncommon": "Twines round the trellis so tightly that nobody can untangle it.",
+        "rare": "Has little star-shaped flowers that glow white in the moonlight.",
+        "epic": "Scented the whole street on a summer night, and everyone opened their windows.",
+        "legendary": "Grew over the same garden archway for fifty years, and every bride in the family walked under it."
+      },
+      "moves": {
+        "signature": "Sweet Scent Stink",
+        "legend": "Night Scent Daze",
+        "ultimate": "Starflower Scent",
+        "kit.sap_sip": "Nectar Siphon Jasmine",
+        "kit.vine_snare": "Twining Snare",
+        "kit.fresh_growth": "Summer Rest"
+      }
+    },
+    "x_lavender": {
+      "status": "draft",
+      "names": {
+        "common": "Beehive Bush",
+        "uncommon": "Sleepscent",
+        "rare": "Purplehaze",
+        "epic": "Lavender Field Hum",
+        "legendary": "The Lavender That Made Everyone Sleepy"
+      },
+      "lore": {
+        "common": "Is covered in bees from morning till night.",
+        "uncommon": "Is tucked into pillows to help people sleep.",
+        "rare": "Smells so calm that everyone who walks past yawns.",
+        "epic": "Bloomed across a whole field, and the hills turned purple.",
+        "legendary": "Made a whole sleepover fall asleep at once, just by being in a little bag under the pillow."
+      },
+      "moves": {
+        "signature": "Lavender Stink",
+        "legend": "Sleepy Scent Rest",
+        "ultimate": "Purple Haze Heat",
+        "kit.pollen_puff": "Lavender Puff",
+        "kit.sap_sip": "Scent Siphon Lavender",
+        "kit.fresh_growth": "Calm Rest"
+      }
+    },
+    "x_leaf": {
+      "status": "draft",
+      "names": {
+        "common": "Gutterblocker",
+        "uncommon": "Crunchfoot",
+        "rare": "Windsailer Leaf",
+        "epic": "Autumn Leaf Storm",
+        "legendary": "The Last Leaf on the Tree"
+      },
+      "lore": {
+        "common": "Sticks to the bottom of your shoe and gets walked all the way into the house.",
+        "uncommon": "Crunches under every boot in autumn.",
+        "rare": "Sails on the wind so far that it lands in another town.",
+        "epic": "Blew off every tree in the park in one windy night, and the paths disappeared.",
+        "legendary": "Was the last leaf to fall from the old oak, and held on until the first snow."
+      },
+      "moves": {
+        "signature": "Crunch Stink",
+        "legend": "Wind Flutter Startle",
+        "ultimate": "Leaf Storm",
+        "kit.sap_sip": "Leaf Sap Siphon",
+        "kit.vine_snare": "Wet Leaf Snare",
+        "kit.fresh_growth": "New Leaf Rest"
+      }
+    },
+    "x_lichen": {
+      "status": "draft",
+      "names": {
+        "common": "Rockpainter",
+        "uncommon": "Slowcreeper",
+        "rare": "Airtester",
+        "epic": "Old Wall Patchwork",
+        "legendary": "The Lichen Older Than the Castle"
+      },
+      "lore": {
+        "common": "Paints rocks and walls in yellow and grey splodges.",
+        "uncommon": "Creeps across a boulder so slowly that it takes a hundred years to cover it.",
+        "rare": "Only grows where the air is clean, so it tells everyone the air is fresh.",
+        "epic": "Covered every stone on the old wall in a patchwork of colours.",
+        "legendary": "Has been growing on the same castle wall since before the castle was finished."
+      },
+      "moves": {
+        "signature": "Crusty Stink",
+        "legend": "Sun Baked Crust",
+        "ultimate": "Lichen Spread",
+        "kit.pollen_puff": "Spore Puff Lichen",
+        "kit.sap_sip": "Rain Siphon",
+        "kit.vine_snare": "Rock Grip Snare",
+        "kit.fresh_growth": "Slow Grow Rest"
+      }
+    },
+    "x_lily_flower": {
+      "status": "draft",
+      "names": {
+        "common": "Pollenstainer",
+        "uncommon": "Bigbloom",
+        "rare": "Pondbeauty",
+        "epic": "Pond Lily Bloom",
+        "legendary": "The Lily That Filled the Hall"
+      },
+      "lore": {
+        "common": "Stains everything orange with its pollen.",
+        "uncommon": "Has a bloom so big that it fills the whole vase.",
+        "rare": "Fills a room with a scent so strong that it's smelled from the hallway.",
+        "epic": "Bloomed in every vase at the flower show, and the hall smelled sweet for a week.",
+        "legendary": "Filled a whole hall with scent from a single stem."
+      },
+      "moves": {
+        "signature": "Pollen Stain Stink",
+        "legend": "Petal Petal Petal",
+        "ultimate": "Lily Scent Heat",
+        "kit.pollen_puff": "Orange Pollen Puff",
+        "kit.sap_sip": "Stem Siphon Lily",
+        "kit.fresh_growth": "Bloom Rest Lily"
+      }
+    },
+    "x_lotus": {
+      "status": "draft",
+      "names": {
+        "common": "Mudriser",
+        "uncommon": "Raindroproller",
+        "rare": "Pondqueen",
+        "epic": "Lotus Pond Bloom",
+        "legendary": "The Lotus That Rose From the Mud"
+      },
+      "lore": {
+        "common": "Grows up out of the muddiest pond.",
+        "uncommon": "Has leaves so waterproof that raindrops roll off like marbles.",
+        "rare": "Opens its flower in the morning and closes it at night.",
+        "epic": "Bloomed across a whole pond, and the frogs had a pink carpet.",
+        "legendary": "Rose from the muddiest pond in the park and bloomed the most beautiful flower anyone had seen."
+      },
+      "moves": {
+        "signature": "Pond Mud Stink",
+        "legend": "Sunny Bloom Heat",
+        "ultimate": "Lotus Bloom",
+        "kit.vine_snare": "Root Snare Lotus",
+        "kit.fresh_growth": "Pond Rest"
+      }
+    },
+    "x_magnolia": {
+      "status": "draft",
+      "names": {
+        "common": "Petalcarpet",
+        "uncommon": "Earlybloomer",
+        "rare": "Waxyblossom",
+        "epic": "Spring Petal Carpet",
+        "legendary": "The Magnolia That Bloomed Leafless"
+      },
+      "lore": {
+        "common": "Drops its petals all over the lawn like a carpet.",
+        "uncommon": "Blooms so early that the frost sometimes catches it.",
+        "rare": "Has big waxy flowers that look like porcelain cups.",
+        "epic": "Bloomed across the whole park on the same day, and everyone stopped to take photos.",
+        "legendary": "Bloomed every spring for a hundred years before a single leaf appeared."
+      },
+      "moves": {
+        "signature": "Petal Drop Stink",
+        "legend": "Waxy Guard",
+        "ultimate": "Petal Carpet",
+        "kit.pollen_puff": "Magnolia Puff",
+        "kit.sap_sip": "Bud Siphon",
+        "kit.vine_snare": "Branch Snare"
+      }
+    },
+    "x_maple_leaf": {
+      "status": "draft",
+      "names": {
+        "common": "Spinningseed",
+        "uncommon": "Redturner",
+        "rare": "Syrupsource",
+        "epic": "Autumn Colour Blaze",
+        "legendary": "The Maple That Turned the Hill Red"
+      },
+      "lore": {
+        "common": "Drops spinning seeds that helicopter down onto everyone's head.",
+        "uncommon": "Turns bright red in autumn before every other tree.",
+        "rare": "Comes from a tree whose sap makes sweet syrup.",
+        "epic": "Turned the whole hillside red in one autumn week, and visitors came from miles away.",
+        "legendary": "Turned so red one autumn that the fire brigade came to check."
+      },
+      "moves": {
+        "signature": "Leaf Spin Stink",
+        "legend": "Helicopter Spin",
+        "ultimate": "Red Leaf Storm",
+        "kit.pollen_puff": "Seed Spin Puff",
+        "kit.sap_sip": "Syrup Siphon",
+        "kit.fresh_growth": "Spring Leaf Rest"
+      }
+    },
+    "x_marigold": {
+      "status": "draft",
+      "names": {
+        "common": "Orangeblaze",
+        "uncommon": "Bugshooer",
+        "rare": "Companionplant",
+        "epic": "Vegetable Patch Guard",
+        "legendary": "The Marigold That Guarded the Garden"
+      },
+      "lore": {
+        "common": "Is so bright orange that it glows in the flowerbed.",
+        "uncommon": "Shoos away bugs from the vegetables just by being there.",
+        "rare": "Is planted next to tomatoes as a little bodyguard.",
+        "epic": "Guarded the whole vegetable patch for a summer, and not a single pest got near.",
+        "legendary": "Kept a whole allotment pest-free for twenty years, planted in a ring round the edge."
+      },
+      "moves": {
+        "signature": "Strong Scent Stink",
+        "legend": "Bright Bloom Bash",
+        "ultimate": "Orange Haze",
+        "kit.pollen_puff": "Marigold Puff",
+        "kit.sap_sip": "Pest Snatch",
+        "kit.vine_snare": "Root Guard Snare"
+      }
+    },
+    "x_metal_detector": {
+      "status": "draft",
+      "names": {
+        "common": "Bottlecapper",
+        "uncommon": "Beepbeep Hunter",
+        "rare": "Sandsweeper",
+        "epic": "Beach Treasure Hunt",
+        "legendary": "The Detector That Found the Ring"
+      },
+      "lore": {
+        "common": "Beeps excitedly and finds a bottle cap every time.",
+        "uncommon": "Beeps so often on the beach that its owner digs a hundred holes.",
+        "rare": "Sweeps the sand so carefully that nothing metal escapes it.",
+        "epic": "Found so many coins on the beach that its owner bought everyone an ice cream.",
+        "legendary": "Found a lost wedding ring on the beach after twenty years, and the couple got married again."
+      },
+      "moves": {
+        "signature": "Beep Beep Beep",
+        "legend": "Beep Startle",
+        "ultimate": "Treasure Find",
+        "kit.campfire": "Warm Sand Heat",
+        "kit.rough_terrain": "Coil Guard",
+        "kit.bug_spray": "Seaweed Stink Detector"
+      }
+    },
+    "x_money_tree": {
+      "status": "draft",
+      "names": {
+        "common": "Braidtrunk",
+        "uncommon": "Luckyleaf",
+        "rare": "Coinhopeful",
+        "epic": "Office Plant Hope",
+        "legendary": "The Tree That Never Grew Money"
+      },
+      "lore": {
+        "common": "Has a braided trunk that looks like it's been plaited.",
+        "uncommon": "Is given as a lucky present to every new shop.",
+        "rare": "Has never grown a single coin, despite its name.",
+        "epic": "Was put in every shop on the high street for luck, and the street was full of greenery.",
+        "legendary": "Has sat in the same bank window for fifty years and never grown a penny."
+      },
+      "moves": {
+        "signature": "Leaf Stink Money",
+        "legend": "Lucky Snatch",
+        "ultimate": "Leaf Shower",
+        "kit.pollen_puff": "Leaf Wave Distraction",
+        "kit.sap_sip": "Coin Snatch Leaf",
+        "kit.vine_snare": "Braid Snare"
+      }
+    },
+    "x_monstera": {
+      "status": "draft",
+      "names": {
+        "common": "Holeyleaf",
+        "uncommon": "Roomtaker",
+        "rare": "Aerialrooter",
+        "epic": "Living Room Jungle",
+        "legendary": "The Monstera That Took Over the Flat"
+      },
+      "lore": {
+        "common": "Has holes in its leaves that look like they've been nibbled.",
+        "uncommon": "Takes up half the living room with its giant leaves.",
+        "rare": "Sends out aerial roots that grab onto the curtains.",
+        "epic": "Grew so big in one summer that the family moved the sofa to make room.",
+        "legendary": "Took over a whole flat until the owners moved into the bedroom and gave it the lounge."
+      },
+      "moves": {
+        "signature": "Leaf Hole Stink",
+        "legend": "Leaf Rest Monstera",
+        "ultimate": "Jungle Spread",
+        "kit.pollen_puff": "Big Leaf Puff",
+        "kit.sap_sip": "Root Siphon",
+        "kit.fresh_growth": "New Leaf Unfurl"
+      }
+    },
+    "x_moss": {
+      "status": "draft",
+      "names": {
+        "common": "Squishcarpet",
+        "uncommon": "Shadyspread",
+        "rare": "Stonesoftener",
+        "epic": "Mossy Garden Carpet",
+        "legendary": "The Moss That Covered the Stones"
+      },
+      "lore": {
+        "common": "Squishes underfoot like a damp sponge.",
+        "uncommon": "Spreads across every shady path until it's slippery.",
+        "rare": "Turns hard stones into soft green cushions.",
+        "epic": "Covered the whole garden path in one wet winter, and everyone slipped on it.",
+        "legendary": "Covered every stone in an old wood so softly that walkers took off their shoes."
+      },
+      "moves": {
+        "signature": "Damp Moss Stink",
+        "legend": "Slippery Stink",
+        "ultimate": "Moss Carpet",
+        "kit.pollen_puff": "Spore Puff Moss",
+        "kit.vine_snare": "Moss Slip Snare",
+        "kit.fresh_growth": "Damp Rest Moss"
+      }
     }
   }
 }
