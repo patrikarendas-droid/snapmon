@@ -40,7 +40,8 @@
 | w08-bags-jewellery-and-carry | 94 | 94 | editor running (with w09) | self-fixes | |
 | w09-gadgets-and-computers | 123 | 123 | editor running (with w08) | self-fixes | |
 | w10-screens-sound-and-light | 98 | 98 | pending | self-fixes | |
-| w11–w22 | 1,206 | 0 | — | — | not started |
+| w11-office-books-and-art | 112 | 112 | pending | self-fixes | sensitive objects written neutrally for developer review: x_bible (family book, no religious content), x_cigarette/x_cigarette_butt/x_vape (negative framing, litter/quitting), x_incense_stick, x_ballot_box (w08, class pet vote) |
+| w12–w22 | 1,094 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
