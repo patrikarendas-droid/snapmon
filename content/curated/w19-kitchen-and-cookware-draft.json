@@ -1651,6 +1651,820 @@
         "legend": "Pour Snatch",
         "ultimate": "Big Pour"
       }
+    },
+    "x_garlic_press": {
+      "status": "draft",
+      "names": {
+        "common": "Cloveclamp",
+        "uncommon": "Garlicsqueeze",
+        "rare": "Pongpress",
+        "epic": "Garlic Bread Breath",
+        "legendary": "The Press That Squeezed a Festival"
+      },
+      "lore": {
+        "common": "Squeezes garlic through tiny holes, and the rest stays stuck inside forever.",
+        "uncommon": "Leaves its user's fingers smelling of garlic for the rest of the day.",
+        "rare": "Squeezes garlic so strongly that the whole kitchen smells of it for a week.",
+        "epic": "Squeezed so much garlic for garlic bread that the whole street could smell it.",
+        "legendary": "Squeezed every clove at a garlic festival, and the whole town smelled so strongly that the moths moved away."
+      },
+      "moves": {
+        "signature": "Squeeze Squeeze Squeeze",
+        "legend": "Garlic Breath Distraction",
+        "ultimate": "Clove Crush"
+      }
+    },
+    "x_griddle": {
+      "status": "draft",
+      "names": {
+        "common": "Flattopper",
+        "uncommon": "Pancakefield",
+        "rare": "Grillplain",
+        "epic": "Sunday Fry-Up",
+        "legendary": "The Griddle That Fed a Campsite"
+      },
+      "lore": {
+        "common": "Is a wide flat pan with room for six pancakes and an egg on the side.",
+        "uncommon": "Is always hotter on one side, so the pancakes cook at different speeds.",
+        "rare": "Cooks so much at once that the cook can't keep up with flipping.",
+        "epic": "Made a fry-up for the whole family on a Sunday, and the dog got the last sausage.",
+        "legendary": "Fed a whole campsite breakfast in one go, and every tent came out to queue."
+      },
+      "moves": {
+        "signature": "Hot Griddle Heat",
+        "legend": "Big Breakfast",
+        "ultimate": "Fry-Up Feast"
+      }
+    },
+    "x_grill": {
+      "status": "draft",
+      "names": {
+        "common": "Grillbar",
+        "uncommon": "Stripesizzle",
+        "rare": "Drippan",
+        "epic": "Toast Under the Grill",
+        "legendary": "The Grill That Forgot the Toast"
+      },
+      "lore": {
+        "common": "Glows at the top of the oven and makes toast while the cook looks away.",
+        "uncommon": "Toasts one side of the bread perfectly and leaves the other side white.",
+        "rare": "Turns cheese on toast from golden to charcoal in the time it takes to sneeze.",
+        "epic": "Sent so much smoke from forgotten toast that the smoke alarm cheered it on.",
+        "legendary": "Toasted the perfect slice once, golden on both sides, and the family still talks about it."
+      },
+      "moves": {
+        "signature": "Glow Startle",
+        "legend": "Crispy Crust Snatch",
+        "ultimate": "Under the Grill"
+      }
+    },
+    "x_hot_plate": {
+      "status": "draft",
+      "names": {
+        "common": "Coilglow",
+        "uncommon": "Singleburner",
+        "rare": "Hotring",
+        "epic": "Student Kitchen Supper",
+        "legendary": "The Plate That Cooked Every Meal"
+      },
+      "lore": {
+        "common": "Has one ring that glows red, and is the whole kitchen for somebody living in a tiny flat.",
+        "uncommon": "Takes ages to heat and ages to cool, so the kettle is always waiting.",
+        "rare": "Cooks everything on one ring by taking turns, so dinner arrives in instalments.",
+        "epic": "Cooked a whole three-course dinner on one ring, and the guests clapped after each course.",
+        "legendary": "Cooked every meal for a student for three years and saw them graduate."
+      },
+      "moves": {
+        "signature": "Glow Ring Startle",
+        "legend": "Cool Down Rest",
+        "ultimate": "One Ring Supper"
+      }
+    },
+    "x_induction_hob": {
+      "status": "draft",
+      "names": {
+        "common": "Glasshob",
+        "uncommon": "Beepboil",
+        "rare": "Magnetcook",
+        "epic": "Instant Boil Shock",
+        "legendary": "The Hob That Boiled in Seconds"
+      },
+      "lore": {
+        "common": "Is flat and black and only heats pans that it likes the feel of.",
+        "uncommon": "Beeps angrily whenever a wet spoon is placed on top of it.",
+        "rare": "Boils water so fast that the pasta isn't ready to go in yet.",
+        "epic": "Boiled a pan so quickly that the cook's tea wasn't made when the pasta was done.",
+        "legendary": "Boiled water in three seconds flat, and the kettle sulked in the corner for a week."
+      },
+      "moves": {
+        "signature": "Beep Startle",
+        "legend": "Beep Beep Distraction",
+        "ultimate": "Glass Top Slam"
+      }
+    },
+    "x_kettle_grill": {
+      "status": "draft",
+      "names": {
+        "common": "Dometop",
+        "uncommon": "Charcoalbowl",
+        "rare": "Ventpuffer",
+        "epic": "Back Garden Smokehouse",
+        "legendary": "The Grill That Smoked a Summer"
+      },
+      "lore": {
+        "common": "Sits round and black in the garden like a giant beetle with a lid.",
+        "uncommon": "Puffs smoke out of its vents in the direction of the washing line.",
+        "rare": "Smokes food so slowly that the whole afternoon disappears waiting for it.",
+        "epic": "Smoked a joint of meat all day, and the neighbours came over at teatime just to sniff.",
+        "legendary": "Smoked so many summer dinners that the garden still smells of them in December."
+      },
+      "moves": {
+        "signature": "Vent Puff Startle",
+        "legend": "Lid Guard",
+        "ultimate": "Garden Smoke"
+      }
+    },
+    "x_kitchen_scale": {
+      "status": "draft",
+      "names": {
+        "common": "Gramcounter",
+        "uncommon": "Bowlweigher",
+        "rare": "Tarebeeper",
+        "epic": "Baking Precision Panic",
+        "legendary": "The Scale That Weighed a Feather"
+      },
+      "lore": {
+        "common": "Shows numbers in grams and beeps whenever it's touched.",
+        "uncommon": "Switches itself off halfway through weighing the flour.",
+        "rare": "Is so precise that it shows a change when someone breathes on it.",
+        "epic": "Switched off mid-bake, and the cake turned into a biscuit.",
+        "legendary": "Weighed a single feather, a grain of sugar and a whisker, all correctly on the same day."
+      },
+      "moves": {
+        "signature": "Beep Startle",
+        "legend": "Zero Out Startle",
+        "ultimate": "Precise Weigh"
+      }
+    },
+    "x_lazy_susan": {
+      "status": "draft",
+      "names": {
+        "common": "Spinplate",
+        "uncommon": "Saucetwirl",
+        "rare": "Turntabler",
+        "epic": "Dinner Table Roulette",
+        "legendary": "The Plate That Spun Every Dish"
+      },
+      "lore": {
+        "common": "Spins in the middle of the table so everyone can reach the sauces.",
+        "uncommon": "Spins the wrong way just when someone is reaching for the soy sauce.",
+        "rare": "Spins so freely that a gentle push sends dinner round the table three times.",
+        "epic": "Was spun so hard at a family dinner that the noodles flew off and landed on grandad.",
+        "legendary": "Spun every dish to every guest at a banquet without spilling a drop."
+      },
+      "moves": {
+        "signature": "Spin Heat",
+        "legend": "Sauce Stink",
+        "ultimate": "Dinner Spin"
+      }
+    },
+    "x_measuring_cup_tool": {
+      "status": "draft",
+      "names": {
+        "common": "Cupmarker",
+        "uncommon": "Overpourer",
+        "rare": "Linecheck",
+        "epic": "Recipe Rule Breaker",
+        "legendary": "The Cup That Never Mismeasured"
+      },
+      "lore": {
+        "common": "Has little lines up its side that nobody reads properly.",
+        "uncommon": "Gets used for sugar and then for flour without being washed in between.",
+        "rare": "Makes every recipe turn out perfectly, as long as somebody actually reads the lines.",
+        "epic": "Was overfilled for a cake, and the sponge rose until it touched the oven roof.",
+        "legendary": "Measured every ingredient for a whole bakery for thirty years and never got one wrong."
+      },
+      "moves": {
+        "signature": "Pour Pour Pour",
+        "legend": "Precise Boost",
+        "ultimate": "Perfect Measure"
+      }
+    },
+    "x_mixing_bowl_metal": {
+      "status": "draft",
+      "names": {
+        "common": "Clangbowl",
+        "uncommon": "Shinybatter",
+        "rare": "Ringbowl",
+        "epic": "Cake Batter Echo",
+        "legendary": "The Bowl That Mixed Every Cake"
+      },
+      "lore": {
+        "common": "Is so shiny inside that the baker sees a stretched, silly face every time they look in.",
+        "uncommon": "Spins on the counter when someone stirs too enthusiastically.",
+        "rare": "Rings so loudly when dropped that the whole house thinks something broke.",
+        "epic": "Was dropped during a baking day and rang for a whole minute while everyone covered their ears.",
+        "legendary": "Mixed every family cake for forty years, and still shines like it is brand new."
+      },
+      "moves": {
+        "signature": "Hot Bowl Heat",
+        "legend": "Big Bowl Clang",
+        "ultimate": "Bowl Ring"
+      }
+    },
+    "x_mortar_and_pestle": {
+      "status": "draft",
+      "names": {
+        "common": "Grindstone Bowl",
+        "uncommon": "Pestlepound",
+        "rare": "Herbcrusher",
+        "epic": "Spice Market Pound",
+        "legendary": "The Bowl That Ground a Spice Road"
+      },
+      "lore": {
+        "common": "Sits heavy on the counter, with a stone stick that grinds spices.",
+        "uncommon": "Clunks loudly when its pestle is dropped back inside.",
+        "rare": "Grinds spices so finely that they float out of the bowl like smoke.",
+        "epic": "Pounded so many spices for a curry night that the whole house sneezed.",
+        "legendary": "Ground spices for a whole market for fifty years, and still smells of every single one."
+      },
+      "moves": {
+        "signature": "Spicy Heat",
+        "legend": "Pound Startle",
+        "ultimate": "Spice Grind"
+      }
+    },
+    "x_mouse_pad": {
+      "status": "draft",
+      "names": {
+        "common": "Clickmat",
+        "uncommon": "Cursorpad",
+        "rare": "Wristrest",
+        "epic": "Desk Doodle Mat",
+        "legendary": "The Pad That Carried a Million Clicks"
+      },
+      "lore": {
+        "common": "Lies under the mouse and gets doodled on during long phone calls.",
+        "uncommon": "Curls up at the corner, so the mouse keeps slipping off the edge.",
+        "rare": "Is so smooth that the cursor zooms across the screen with the tiniest nudge.",
+        "epic": "Was doodled on so much during a long meeting that it became an art exhibit.",
+        "legendary": "Has carried a million clicks under its mouse and still lies perfectly flat."
+      },
+      "moves": {
+        "signature": "Click Startle",
+        "legend": "Cursor Distraction",
+        "ultimate": "Million Clicks"
+      }
+    },
+    "x_muffin_tin": {
+      "status": "draft",
+      "names": {
+        "common": "Cupcakebay",
+        "uncommon": "Twelvehole",
+        "rare": "Muffintop",
+        "epic": "Bake Sale Rush",
+        "legendary": "The Tin That Baked a Bake Sale"
+      },
+      "lore": {
+        "common": "Has twelve little holes and always one muffin that comes out wonky.",
+        "uncommon": "Sticks the bottom of every muffin unless it's greased twice.",
+        "rare": "Makes muffins rise so high that they become one big muffin across the top.",
+        "epic": "Baked so many muffins for a bake sale that the tables ran out first.",
+        "legendary": "Baked every muffin for a whole school's bake sale, and the school roof was paid for with crumbs."
+      },
+      "moves": {
+        "signature": "Hot Tin Heat",
+        "legend": "Sticky Stink",
+        "ultimate": "Bake Sale"
+      }
+    },
+    "x_nail_clippers": {
+      "status": "draft",
+      "names": {
+        "common": "Clipclip",
+        "uncommon": "Nailsnipper",
+        "rare": "Pingflinger",
+        "epic": "Bathroom Nail Hunt",
+        "legendary": "The Clippers That Never Flicked a Nail"
+      },
+      "lore": {
+        "common": "Clips with a sharp little click and flings the clipping somewhere unknown.",
+        "uncommon": "Flings nail clippings to places nobody will find until spring cleaning.",
+        "rare": "Snips so cleanly that nails come out perfectly smooth.",
+        "epic": "Flung a clipping so far it landed in a cup of tea across the room.",
+        "legendary": "Clipped every nail in a family of six without flinging a single clipping out of the bin."
+      },
+      "moves": {
+        "signature": "Clip Clip Clip",
+        "legend": "Neat Trim Boost",
+        "ultimate": "Nail Hunt"
+      }
+    },
+    "x_nutcracker": {
+      "status": "draft",
+      "names": {
+        "common": "Shellsnap",
+        "uncommon": "Walnutcrack",
+        "rare": "Nutjaw",
+        "epic": "Fireside Nut Snap",
+        "legendary": "The Cracker That Opened Every Nut"
+      },
+      "lore": {
+        "common": "Cracks nuts with a loud snap and sends shells across the floor.",
+        "uncommon": "Snaps a walnut into dust instead of two neat halves.",
+        "rare": "Cracks the toughest nut so hard that the kernel flies across the room.",
+        "epic": "Cracked so many nuts by the fireside that the dog had shells in his fur for a week.",
+        "legendary": "Cracked every nut in a giant bowl at a family party without crushing a single kernel."
+      },
+      "moves": {
+        "signature": "Snap Snap Snap",
+        "legend": "Kernel Snatch",
+        "ultimate": "Shell Crack"
+      }
+    },
+    "x_paella_pan": {
+      "status": "draft",
+      "names": {
+        "common": "Ricewide",
+        "uncommon": "Saffronpan",
+        "rare": "Crispbottom",
+        "epic": "Village Fiesta Feast",
+        "legendary": "The Pan That Fed a Whole Fiesta"
+      },
+      "lore": {
+        "common": "Is so wide that it hangs off the edge of the hob on both sides.",
+        "uncommon": "Has a crispy layer stuck to the bottom that everybody fights over.",
+        "rare": "Cooks so much rice at once that the cook has to stir with a garden spade.",
+        "epic": "Cooked for a whole street party, and the queue went round the block.",
+        "legendary": "Fed a whole village fiesta from one pan, and the crispy bit was shared by everyone."
+      },
+      "moves": {
+        "signature": "Hot Pan Heat",
+        "legend": "Saffron Heat",
+        "ultimate": "Fiesta Feast"
+      }
+    },
+    "x_pestle": {
+      "status": "draft",
+      "names": {
+        "common": "Grindstick",
+        "uncommon": "Thumpclub",
+        "rare": "Spicepounder",
+        "epic": "Kitchen Drumstick",
+        "legendary": "The Stick That Crushed a Harvest"
+      },
+      "lore": {
+        "common": "Is a heavy little club that pounds spices into powder.",
+        "uncommon": "Rolls off the counter at the slightest nudge and lands on a toe.",
+        "rare": "Pounds so hard that the bowl beneath it rings for minutes.",
+        "epic": "Was used as a drumstick at a kitchen party, and the pans kept the beat.",
+        "legendary": "Crushed a whole harvest of herbs for a festival, and the market smelled sweet for a week."
+      },
+      "moves": {
+        "signature": "Pound Heat",
+        "legend": "Pound Crack",
+        "ultimate": "Spice Thump"
+      }
+    },
+    "x_pet_food_bowl": {
+      "status": "draft",
+      "names": {
+        "common": "Biscuitbowl",
+        "uncommon": "Rattledish",
+        "rare": "Tummyteller",
+        "epic": "Teatime Bowl Bang",
+        "legendary": "The Bowl Everyone Was Waiting For"
+      },
+      "lore": {
+        "common": "Holds pet biscuits and gets nosed round the kitchen floor.",
+        "uncommon": "Rattles so loudly when picked up that every pet comes running.",
+        "rare": "Brings every animal in the house to the kitchen the moment it is touched.",
+        "epic": "Was rattled at teatime, and the cat, the dog and a neighbour's rabbit all arrived.",
+        "legendary": "Has been filled so many times that the pets know the time without a clock."
+      },
+      "moves": {
+        "signature": "Warm Food Heat",
+        "legend": "Dinner Boost",
+        "ultimate": "Teatime Bowl"
+      }
+    },
+    "x_pie_dish": {
+      "status": "draft",
+      "names": {
+        "common": "Crustrim",
+        "uncommon": "Fruitbubbler",
+        "rare": "Pastryplate",
+        "epic": "Apple Pie Overflow",
+        "legendary": "The Dish That Baked the Prize Pie"
+      },
+      "lore": {
+        "common": "Has a crinkled edge where the pastry is pressed down with a fork.",
+        "uncommon": "Bubbles fruit juice over the edge and onto the oven floor.",
+        "rare": "Bakes pastry so crisp that it shatters with a crunch at the first cut.",
+        "epic": "Overflowed with apple pie juice, and the kitchen smelled like a bakery for a week.",
+        "legendary": "Baked a pie that won the village show three years in a row."
+      },
+      "moves": {
+        "signature": "Hot Pie Heat",
+        "legend": "Slice Slice Slice",
+        "ultimate": "Pie Overflow"
+      }
+    },
+    "x_potato_masher": {
+      "status": "draft",
+      "names": {
+        "common": "Mashpaddle",
+        "uncommon": "Lumpfinder",
+        "rare": "Spudsquash",
+        "epic": "Roast Dinner Mash",
+        "legendary": "The Masher That Never Left a Lump"
+      },
+      "lore": {
+        "common": "Squashes potatoes with a satisfying squelch and a little splash.",
+        "uncommon": "Always leaves one hidden lump in the bottom of the pan.",
+        "rare": "Mashes potatoes so hard that they splatter onto the ceiling.",
+        "epic": "Mashed so many potatoes for a roast dinner that the bowl overflowed onto the table.",
+        "legendary": "Mashed potatoes so perfectly smooth that the whole family asked for seconds of mash only."
+      },
+      "moves": {
+        "signature": "Mash Mash Mash",
+        "legend": "Lump Distraction",
+        "ultimate": "Big Mash"
+      }
+    },
+    "x_ramekin": {
+      "status": "draft",
+      "names": {
+        "common": "Littlepot",
+        "uncommon": "Custardcup",
+        "rare": "Souffledish",
+        "epic": "Dessert Rise",
+        "legendary": "The Ramekin That Rose a Perfect Souffle"
+      },
+      "lore": {
+        "common": "Is a tiny white pot that holds just enough pudding for one.",
+        "uncommon": "Comes out of the oven so hot that nobody can pick it up for ages.",
+        "rare": "Makes every pudding look fancy, even when it's just custard.",
+        "epic": "Made a souffle rise so tall that it peeked out of the oven door.",
+        "legendary": "Rose a souffle so perfect that the chef cried and the whole restaurant clapped."
+      },
+      "moves": {
+        "signature": "Hot Pot Heat",
+        "legend": "Pudding Rest",
+        "ultimate": "Souffle Rise"
+      }
+    },
+    "x_roasting_tin": {
+      "status": "draft",
+      "names": {
+        "common": "Roasttray",
+        "uncommon": "Gravymaker",
+        "rare": "Ovenbig",
+        "epic": "Sunday Roast Sizzle",
+        "legendary": "The Tin That Made Every Roast"
+      },
+      "lore": {
+        "common": "Sizzles in the oven holding potatoes, a roast and plenty of gravy juices.",
+        "uncommon": "Is too big for the sink and always gets left to soak overnight.",
+        "rare": "Roasts potatoes so crispy that everyone tries to steal the crunchy ones.",
+        "epic": "Roasted so many potatoes on a Sunday that the family ate leftovers for three days.",
+        "legendary": "Roasted the perfect Sunday dinner every week for forty years."
+      },
+      "moves": {
+        "signature": "Hot Roast Heat",
+        "legend": "Crispy Potato Heat",
+        "ultimate": "Sunday Tin Slam"
+      }
+    },
+    "x_salad_bowl_wooden": {
+      "status": "draft",
+      "names": {
+        "common": "Leafbowl",
+        "uncommon": "Tossbasin",
+        "rare": "Woodgrain",
+        "epic": "Salad Toss Shower",
+        "legendary": "The Bowl That Tossed Every Salad"
+      },
+      "lore": {
+        "common": "Holds a big leafy salad and smells faintly of olive oil.",
+        "uncommon": "Lets lettuce leaves escape whenever someone tosses too hard.",
+        "rare": "Tosses a salad so well that every leaf gets the same amount of dressing.",
+        "epic": "Tossed a salad at a party so high that the lettuce landed on the guests.",
+        "legendary": "Has tossed so many salads that it makes even the grumpiest child eat a tomato."
+      },
+      "moves": {
+        "signature": "Hot Toss Heat",
+        "legend": "Leaf Leaf Leaf",
+        "ultimate": "Salad Toss"
+      }
+    },
+    "x_salad_spinner": {
+      "status": "draft",
+      "names": {
+        "common": "Leafwhirl",
+        "uncommon": "Spinbasket",
+        "rare": "Lettucedryer",
+        "epic": "Kitchen Spin Cycle",
+        "legendary": "The Spinner That Dried Every Leaf"
+      },
+      "lore": {
+        "common": "Spins lettuce dry with a whirring, clattering roar.",
+        "uncommon": "Flings water out of the gap in its lid onto the cook's shirt.",
+        "rare": "Spins so fast that the lettuce comes out dry as paper.",
+        "epic": "Was spun so wildly at a barbecue that it walked off the table by itself.",
+        "legendary": "Dried every leaf for a whole wedding salad in under a minute."
+      },
+      "moves": {
+        "signature": "Hot Spin Heat",
+        "legend": "Water Snatch",
+        "ultimate": "Spin Cycle"
+      }
+    },
+    "x_saucepan_lid": {
+      "status": "draft",
+      "names": {
+        "common": "Steamhat",
+        "uncommon": "Clanglid",
+        "rare": "Rattletop",
+        "epic": "Lid Drop Clatter",
+        "legendary": "The Lid That Fitted Every Pan"
+      },
+      "lore": {
+        "common": "Sits on top of the saucepan and rattles when the water boils.",
+        "uncommon": "Falls off the shelf and clatters on the floor whenever the cupboard opens.",
+        "rare": "Rattles so loudly that the cook can hear it from the garden.",
+        "epic": "Fell off at dinner, and the clatter made the whole family jump.",
+        "legendary": "Fitted every saucepan in the kitchen, which no lid has ever managed."
+      },
+      "moves": {
+        "signature": "Hot Lid Heat",
+        "legend": "Hot Steam Heat",
+        "ultimate": "Lid Clatter"
+      }
+    },
+    "x_scale": {
+      "status": "draft",
+      "names": {
+        "common": "Weightdial",
+        "uncommon": "Wobblescale",
+        "rare": "Needlejump",
+        "epic": "Weigh-In Wobble",
+        "legendary": "The Scale That Was Always Right"
+      },
+      "lore": {
+        "common": "Has a needle that wobbles back and forth before it settles.",
+        "uncommon": "Shows a different weight every time it's used, depending on the angle.",
+        "rare": "Wobbles for so long that everyone forgets what they were weighing.",
+        "epic": "Was used to weigh a cake, a cat and a baby in one afternoon.",
+        "legendary": "Was so accurate that the town's market used it to check all the other scales."
+      },
+      "moves": {
+        "signature": "Wobble Startle",
+        "legend": "Needle Guard",
+        "ultimate": "Weighing Stink"
+      }
+    },
+    "x_serving_bowl": {
+      "status": "draft",
+      "names": {
+        "common": "Sharebowl",
+        "uncommon": "Saladpass",
+        "rare": "Platterbowl",
+        "epic": "Family Dinner Pass",
+        "legendary": "The Bowl Passed Round Every Table"
+      },
+      "lore": {
+        "common": "Gets passed round the table until it reaches whoever wants the last spoonful.",
+        "uncommon": "Is too heavy to pass with one hand, so it gets dropped onto the table with a thud.",
+        "rare": "Holds so much food that the table looks like a feast even with just one dish.",
+        "epic": "Was passed round so many times at a family dinner that it got dizzy.",
+        "legendary": "Has been passed round so many tables that it knows every family's favourite dish."
+      },
+      "moves": {
+        "signature": "Hot Dish Heat",
+        "legend": "Thud Startle",
+        "ultimate": "Pass Around"
+      }
+    },
+    "x_serving_tray": {
+      "status": "draft",
+      "names": {
+        "common": "Carrytray",
+        "uncommon": "Tealister",
+        "rare": "Breakfasttray",
+        "epic": "Breakfast in Bed",
+        "legendary": "The Tray That Carried Every Treat"
+      },
+      "lore": {
+        "common": "Carries cups, plates and biscuits all at once, balanced on two hands.",
+        "uncommon": "Tilts at the worst moment, so the teacups slide to one end.",
+        "rare": "Carries so much at once that the carrier has to walk very slowly.",
+        "epic": "Carried breakfast in bed on a birthday, and every crumb stayed on.",
+        "legendary": "Has carried a thousand birthday breakfasts and never spilled a single cup of tea."
+      },
+      "moves": {
+        "signature": "Tea Tray Heat",
+        "legend": "Breakfast Rest",
+        "ultimate": "Breakfast in Bed Tray"
+      }
+    },
+    "x_smoker": {
+      "status": "draft",
+      "names": {
+        "common": "Smokebox",
+        "uncommon": "Woodchip",
+        "rare": "Slowcurl",
+        "epic": "Garden Smokehouse",
+        "legendary": "The Smoker That Cooked a Whole Day"
+      },
+      "lore": {
+        "common": "Puffs out sweet woody smoke all afternoon in the corner of the garden.",
+        "uncommon": "Sends smoke drifting over the fence just as the neighbours put out washing.",
+        "rare": "Cooks food so slowly that it's ready the day after it's started.",
+        "epic": "Smoked so much food for a party that the garden looked like a misty morning.",
+        "legendary": "Smoked a meal so good that a whole town queued for a taste."
+      },
+      "moves": {
+        "signature": "Smoke Startle",
+        "legend": "Smoke Distraction",
+        "ultimate": "Slow Smoke"
+      }
+    },
+    "x_steamer_basket": {
+      "status": "draft",
+      "names": {
+        "common": "Bambooweave",
+        "uncommon": "Dumplingnest",
+        "rare": "Steamlid",
+        "epic": "Dim Sum Tower",
+        "legendary": "The Basket That Steamed a Banquet"
+      },
+      "lore": {
+        "common": "Sits over a pan of boiling water and fills the kitchen with soft steam.",
+        "uncommon": "Lets dumplings stick to its bottom unless lined with a leaf.",
+        "rare": "Steams so quickly that the dumplings are ready before the plates are out.",
+        "epic": "Was stacked so high for a dim sum lunch that it nearly touched the ceiling.",
+        "legendary": "Steamed a whole banquet for a family celebration, and every dumpling was perfect."
+      },
+      "moves": {
+        "signature": "Steam Heat",
+        "legend": "Steam Crack",
+        "ultimate": "Steam Tower Stack"
+      }
+    },
+    "x_stock_pot": {
+      "status": "draft",
+      "names": {
+        "common": "Bigpot",
+        "uncommon": "Bonesimmer",
+        "rare": "Soupcauldron",
+        "epic": "All Day Simmer",
+        "legendary": "The Pot That Fed a Village"
+      },
+      "lore": {
+        "common": "Is so big that it needs two hands, a strong back and a lot of water.",
+        "uncommon": "Simmers on the cooker all day and fogs up every window.",
+        "rare": "Holds so much soup that the family eats it for a week.",
+        "epic": "Made so much soup for a party that the guests left with jars.",
+        "legendary": "Fed a whole village after a storm, and every bowl was hot and full."
+      },
+      "moves": {
+        "signature": "Hot Pot Heat",
+        "legend": "Bubble Startle",
+        "ultimate": "Big Simmer"
+      }
+    },
+    "x_stove_top": {
+      "status": "draft",
+      "names": {
+        "common": "Fourring",
+        "uncommon": "Burnerclick",
+        "rare": "Panjuggler",
+        "epic": "Teatime Rush Hour",
+        "legendary": "The Stove That Cooked Every Dinner"
+      },
+      "lore": {
+        "common": "Has four rings, and the one that works best is always in use.",
+        "uncommon": "Clicks and clicks before its gas catches with a soft whoomph.",
+        "rare": "Cooks four things at once, so the cook needs four hands.",
+        "epic": "Cooked a whole family feast on four rings at once, and not a single pan boiled over.",
+        "legendary": "Cooked so many dinners that its knobs now turn themselves to the right setting when someone says what's for tea."
+      },
+      "moves": {
+        "signature": "Click Startle",
+        "legend": "Four Ring Fury",
+        "ultimate": "Teatime Rush"
+      }
+    },
+    "x_sugar_bowl_dish": {
+      "status": "draft",
+      "names": {
+        "common": "Sweetbowl",
+        "uncommon": "Spoonhider",
+        "rare": "Cubeholder",
+        "epic": "Teatime Sugar Spill",
+        "legendary": "The Bowl That Sweetened Every Tea"
+      },
+      "lore": {
+        "common": "Holds sugar and a little spoon that always ends up sticky.",
+        "uncommon": "Gets a wet teaspoon stuck in it, so the sugar forms lumps.",
+        "rare": "Spills sugar across the table every time it is passed.",
+        "epic": "Was knocked over at a tea party, and the ants held a party of their own.",
+        "legendary": "Has sweetened so many cups of tea that the teapot thinks it's a member of the family."
+      },
+      "moves": {
+        "signature": "Sugar Rush Heat",
+        "legend": "Sugar Sugar Sugar",
+        "ultimate": "Sugar Spill"
+      }
+    },
+    "x_tagine": {
+      "status": "draft",
+      "names": {
+        "common": "Conelid",
+        "uncommon": "Slowstew",
+        "rare": "Clayhat",
+        "epic": "Spice Market Stew",
+        "legendary": "The Pot That Stewed a Feast"
+      },
+      "lore": {
+        "common": "Has a tall pointed lid like a wizard's hat that keeps the steam inside.",
+        "uncommon": "Gets its lid lifted by everyone who walks past, just to have a sniff.",
+        "rare": "Makes stew so tender that it melts the moment it touches a fork.",
+        "epic": "Stewed so slowly at a party that the guests had played three games before eating.",
+        "legendary": "Stewed a feast so delicious that the whole street gathered at the window to sniff."
+      },
+      "moves": {
+        "signature": "Hot Stew Heat",
+        "legend": "Lid Lift Distraction",
+        "ultimate": "Slow Stew"
+      }
+    },
+    "x_tongs": {
+      "status": "draft",
+      "names": {
+        "common": "Clackgrab",
+        "uncommon": "Sausagepincher",
+        "rare": "Snaptongs",
+        "epic": "Barbecue Clack Duel",
+        "legendary": "The Tongs That Never Dropped a Sausage"
+      },
+      "lore": {
+        "common": "Clack together twice before every grab, as if warming up.",
+        "uncommon": "Drop the sausage right before it reaches the plate.",
+        "rare": "Grab everything in reach, including the cook's sleeve.",
+        "epic": "Clacked so loudly at a barbecue that every guest copied them with their hands.",
+        "legendary": "Turned a hundred sausages at a barbecue without ever dropping one."
+      },
+      "moves": {
+        "signature": "Clack Clack Clack",
+        "legend": "Grab Grab Grab",
+        "ultimate": "Barbecue Clack"
+      }
+    },
+    "x_tweezers": {
+      "status": "draft",
+      "names": {
+        "common": "Splinterpicker",
+        "uncommon": "Pinchpoint",
+        "rare": "Finetip",
+        "epic": "Bathroom Splinter Hunt",
+        "legendary": "The Tweezers That Found Every Splinter"
+      },
+      "lore": {
+        "common": "Pinch things that are too small for fingers, like splinters and tiny beads.",
+        "uncommon": "Drop whatever they've picked up just as it's lifted.",
+        "rare": "Find splinters that nobody else can even see.",
+        "epic": "Found a splinter after a whole family search with a torch.",
+        "legendary": "Removed every splinter from a whole scout troop after one woodland adventure."
+      },
+      "moves": {
+        "signature": "Pinch Pinch Pinch",
+        "legend": "Splinter Distraction",
+        "ultimate": "Splinter Hunt"
+      }
+    },
+    "x_yoga_mat": {
+      "status": "draft",
+      "names": {
+        "common": "Stretchroll",
+        "uncommon": "Grippad",
+        "rare": "Calmspread",
+        "epic": "Sunrise Stretch",
+        "legendary": "The Mat That Taught a Family to Bend"
+      },
+      "lore": {
+        "common": "Rolls out with a slap and smells faintly of rubber.",
+        "uncommon": "Curls back up while its owner is trying to do a stretch.",
+        "rare": "Makes anyone standing on it feel calm and suddenly flexible.",
+        "epic": "Was used for a family yoga session that ended with everyone stuck in a pretzel.",
+        "legendary": "Taught a whole family to touch their toes, including the grandad who had not done so in forty years."
+      },
+      "moves": {
+        "signature": "Stretch Startle",
+        "legend": "Big Stretch Slap",
+        "ultimate": "Sunrise Stretch"
+      }
     }
   }
 }
