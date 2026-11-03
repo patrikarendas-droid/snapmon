@@ -13,6 +13,8 @@
 // monster names. `withoutCurated` is unchanged and still matches with curated content off.
 // Recognition audit (2026-11): re-recorded with "record-visual" (35 objects get an honest design, 2 objects added);
 // `textFrozen` proves names, stats, moves and texts of every v0.4.8 object are unchanged, curated on and off.
+// v0.5.0 (full writing activation, all 2,308 objects curated): re-recorded with "record-curated" — curated-on hashes only;
+// curated-off output (`withoutCurated`, `textFrozen.off`) is unchanged and still checked.
 const crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/generator-snapshot.json');
 const G = require('./load')();
@@ -66,6 +68,13 @@ if (process.argv[2] === 'record') {
 // vinyl record → cord, champagne flute → lute, honeycomb/combine harvester → comb, gingerbread man → ginger, string
 // lights → ring light) now take their correct rule or category: their lore group, moves and flavour text change.
 if (process.argv[2] === 'record-text') { const out = { ...on, withoutCurated: off, textFrozen: { on: textOn, off: textOff } }; fs.writeFileSync(FIX, JSON.stringify(out, null, 1)); console.log('recorded (text)', JSON.stringify(out.textFrozen)); process.exit(0); }
+// "record-curated" (v0.5.0, full writing activation): curated text changed ON PURPOSE for all 2,308 objects. Allowed only
+// while curated-OFF output is byte-identical to both earlier recordings (whole output and the frozen v0.4.8 text), which
+// proves the generator, stats, moves and mechanics are unchanged; then only the curated-ON hashes are re-recorded.
+if (process.argv[2] === 'record-curated') {
+  if (!(want.withoutCurated && want.withoutCurated.sha256 === off.sha256 && want.textFrozen && want.textFrozen.off === textOff)) { console.log('FAIL: refusing — with curated text off the output changed'); process.exit(1); }
+  const out = { ...on, withoutCurated: want.withoutCurated, textFrozen: { on: textOn, off: want.textFrozen.off } }; fs.writeFileSync(FIX, JSON.stringify(out, null, 1)); console.log('recorded (curated on only)', JSON.stringify(out)); process.exit(0);
+}
 // "record-visual": artwork/objects changed on purpose (recognition audit). Allowed only while the frozen TEXT of every
 // v0.4.8 object is unchanged (checked above); then the whole-output hashes, including withoutCurated, are re-recorded.
 if (process.argv[2] === 'record-visual') {

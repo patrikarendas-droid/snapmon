@@ -1,0 +1,2337 @@
+{
+  "schema": 1,
+  "batch": "w02-mammals-2",
+  "entries": {
+    "i_schipperke": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bargecaptain",
+        "uncommon": "Little Skipper",
+        "rare": "Deckpatrol",
+        "epic": "Canal Commander",
+        "legendary": "Captain Schipp of the Black Barge"
+      },
+      "lore": {
+        "common": "Barks at every boat that dares to sail past its window, even toy boats in the bath.",
+        "uncommon": "Rides at the front of the canal barge and barks orders the boatman pretends to follow.",
+        "rare": "Patrols the deck so thoroughly that not a single crumb has ever reached the river.",
+        "epic": "Chased one rat the full length of a cargo ship, through every cabin. The crew found the rat asleep in the captain's hat.",
+        "legendary": "Was made honorary harbour master of the whole canal. Every barge must now stop, show its sandwiches and wait to be sniffed."
+      },
+      "moves": {
+        "signature": "Deck Dash",
+        "legend": "Captain's Cabin Rest",
+        "ultimate": "All Hands on Deck"
+      }
+    },
+    "i_scotch_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stubbornbeard",
+        "uncommon": "Kiltwalker",
+        "rare": "Dignified Scot",
+        "epic": "Highland Huff",
+        "legendary": "Laird McWhiskers, the Unbudging"
+      },
+      "lore": {
+        "common": "Refuses to walk in the rain, the wind or any direction you suggest.",
+        "uncommon": "Trots along with its nose in the air as if it owns the pavement, the street and the town.",
+        "rare": "Dug up the castle lawn hunting one mole, then presented the hole to the gardener as a gift.",
+        "epic": "Barked at a bagpipe until it stopped. The whole Highland band now plays only when the terrier is asleep.",
+        "legendary": "Was offered the keys to the castle and turned them down because the castle was not tidy enough."
+      },
+      "moves": {
+        "signature": "Stubborn Charge",
+        "legend": "Biscuit Swipe",
+        "ultimate": "Highland Huff Storm"
+      }
+    },
+    "i_scottish_deerhound": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sofasprawl",
+        "uncommon": "Glenstrider",
+        "rare": "Gentlelegs",
+        "epic": "Highland Gale",
+        "legendary": "Morag, Strider of the Glens"
+      },
+      "lore": {
+        "common": "Lies across the entire sofa with its long legs, then sighs when you ask for a corner.",
+        "uncommon": "Walks so softly on its long legs that the sheep don't notice it until it says hello.",
+        "rare": "Can outrun the wind on a highland hill, then stops to sniff a single flower.",
+        "epic": "Stood up to say hello and rested its chin on the roof of the bus. The bus waited politely until it had finished.",
+        "legendary": "Was asked to carry a message from one end of the Highlands to the other. Arrived before the sender had finished writing it."
+      },
+      "moves": {
+        "signature": "Glen Bound",
+        "legend": "Misty Distraction",
+        "ultimate": "Highland Wind Run"
+      }
+    },
+    "i_sealyham_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bushybrow",
+        "uncommon": "Facepuller",
+        "rare": "Badger Bother",
+        "epic": "Sett Smudger",
+        "legendary": "Sir Sealyham the Jester"
+      },
+      "lore": {
+        "common": "Its eyebrows are so bushy that it has to lift them to see what it is barking at.",
+        "uncommon": "Pulls silly faces until everyone at the table laughs and drops a sausage.",
+        "rare": "Can squeeze into any badger hole, then refuses to come out until it has been offered a snack.",
+        "epic": "Went down a badger sett in a white coat and came out brown. The badgers now think it is one of them and send it party invitations.",
+        "legendary": "Was appointed official jester of a Welsh castle. Has never repeated a joke, mainly because it can't remember them."
+      },
+      "moves": {
+        "signature": "Terrier Tumble",
+        "legend": "Bushy-Brow Distraction",
+        "ultimate": "Jester's Encore"
+      }
+    },
+    "i_shetland_sheepdog": {
+      "status": "reviewed",
+      "names": {
+        "common": "Leafalarm",
+        "uncommon": "Duckherder",
+        "rare": "Partyherder",
+        "epic": "Island Round-Up",
+        "legendary": "Sheltie Belle of the Northern Isles"
+      },
+      "lore": {
+        "common": "Barks at every leaf that falls in autumn and treats each one as an emergency.",
+        "uncommon": "Herds the ducks on the pond into a neat queue, then looks back for applause.",
+        "rare": "Herds the children at every birthday party into one corner of the garden, then barks until the cake comes out.",
+        "epic": "Rounded up every pony on the island and parked them by size, from smallest to slightly less small.",
+        "legendary": "Herded the ferry passengers into a queue so neat that the island ferry now leaves early every single day."
+      },
+      "moves": {
+        "signature": "Sheltie Spring",
+        "legend": "Island Tumble",
+        "ultimate": "Northern Isles Round-Up"
+      }
+    },
+    "i_shih_tzu": {
+      "status": "reviewed",
+      "names": {
+        "common": "Topknotty",
+        "uncommon": "Palace Puff",
+        "rare": "Lionflop",
+        "epic": "Snorepuff",
+        "legendary": "Princess Shih of the Golden Pillow"
+      },
+      "lore": {
+        "common": "Its topknot droops over its eyes until someone ties it up with a ribbon. Then it sulks about the ribbon.",
+        "uncommon": "Waddles regally through the house as if expecting servants to open every door.",
+        "rare": "Its silky coat sweeps the floor so well that the house has not needed hoovering in a year.",
+        "epic": "Snored so loudly through the wedding dinner that the band played along to keep in time.",
+        "legendary": "Was given its own wing of the palace, its own garden and its own chef. Still sleeps in the laundry basket."
+      },
+      "moves": {
+        "signature": "Royal Pounce",
+        "legend": "Regal Glare",
+        "ultimate": "Palace Puff Parade"
+      }
+    },
+    "i_siberian_husky": {
+      "status": "reviewed",
+      "names": {
+        "common": "Drama Howler",
+        "uncommon": "Fence Escaper",
+        "rare": "Blue-Eye Stare",
+        "epic": "Sled Stampede",
+        "legendary": "Siberia Sasha, the Great Escaper"
+      },
+      "lore": {
+        "common": "Complains loudly and dramatically when you say \"bath\". And \"walk\". And \"hello\".",
+        "uncommon": "Digs a cool hole in the flowerbed on every warm day and lies in it like it's on holiday.",
+        "rare": "Its pale blue eyes stare so deep into your soul that you give it half your sandwich.",
+        "epic": "Led a sled team in the wrong direction because it smelled sausages. The race now has a new finish line.",
+        "legendary": "Escaped from every kennel, garden and fenced field in the country, then came home to howl about how boring it all was."
+      },
+      "moves": {
+        "signature": "Sled Dash",
+        "legend": "Howling Flurry",
+        "ultimate": "Arctic Breakout"
+      }
+    },
+    "i_silky_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Silktail",
+        "uncommon": "Bluecoat",
+        "rare": "Boldsnoot",
+        "epic": "Garden Blitz",
+        "legendary": "Lady Silkworth, Terror of Snakes"
+      },
+      "lore": {
+        "common": "Barks at the kookaburra every morning. The kookaburra laughs back, and it has never once won.",
+        "uncommon": "Its blue-and-tan coat shines so smoothly that people think it has been ironed.",
+        "rare": "Faces down snakes in the outback with a stern little bark. The snakes slither off embarrassed.",
+        "epic": "Chased a whole flock of cockatoos off the school roof. They moved onto the headmaster's car instead.",
+        "legendary": "Had its silky coat brushed so long and straight that the town theatre hired it as the curtain. Takes a bow every night."
+      },
+      "moves": {
+        "signature": "Silky Snap",
+        "legend": "Stern Little Bark",
+        "ultimate": "Outback Patrol"
+      }
+    },
+    "i_soft_coated_wheaten_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wheatpup",
+        "uncommon": "Strokecoat",
+        "rare": "Frizzcloud",
+        "epic": "Bandstand Frizz",
+        "legendary": "Wheaten Wendy, Queen of Hellos"
+      },
+      "lore": {
+        "common": "Jumps up to kiss your face every time you come home, even if you only went to the bin.",
+        "uncommon": "Its coat is so soft that strangers ask to stroke it, and it always says yes.",
+        "rare": "Its coat frizzes into a cloud in the rain, so on wet days the farmer keeps trying to shear it.",
+        "epic": "Shook itself dry after a swim at the summer fair and frizzed every hairdo at the bandstand.",
+        "legendary": "Said hello so hard at the airport that every plane had to circle until it calmed down."
+      },
+      "moves": {
+        "signature": "Greeting Leap",
+        "legend": "Fluffy Brace",
+        "ultimate": "Welcome Whirl"
+      }
+    },
+    "i_staffordshire_bullterrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wigglestaff",
+        "uncommon": "Nannypup",
+        "rare": "Grinhauler",
+        "epic": "Sofa Wrecker",
+        "legendary": "Stafford Sam, the Smiling Bulldozer"
+      },
+      "lore": {
+        "common": "Wags its whole body so hard that it falls over at the end of every greeting.",
+        "uncommon": "Watches over the children at the playground and sits beside anyone who looks lonely.",
+        "rare": "Grins so widely that strangers grin back, then carries a whole log home from the park in that grin.",
+        "epic": "Played so happily on the sofa that the sofa is now in two pieces.",
+        "legendary": "Pulled a broken-down bus up a hill to the school gates and then asked every child for a pat."
+      },
+      "moves": {
+        "signature": "Shoulder Shove",
+        "legend": "Wiggle Distraction",
+        "ultimate": "Smiling Bulldozer"
+      }
+    },
+    "i_standard_poodle": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pomp Poodle",
+        "uncommon": "Lakepaddler",
+        "rare": "Puzzlesolver",
+        "epic": "Grand Poodle Gala",
+        "legendary": "Dame Poodleton of the Lakeside"
+      },
+      "lore": {
+        "common": "Its fancy haircut takes two hours at the groomer and is ruined in one puddle.",
+        "uncommon": "Retrieves ducks from the lake, then dries its pompoms under the hand dryer at the café.",
+        "rare": "Can solve any puzzle toy in seconds and then hides the treats for later.",
+        "epic": "Shook its pompoms dry at the lakeside café and every customer got a free shower.",
+        "legendary": "Swam across the lake, won the show and was home before tea, without a single curl out of place."
+      },
+      "moves": {
+        "signature": "Pompom Charge",
+        "legend": "Lakeside Rest",
+        "ultimate": "Grand Gala"
+      }
+    },
+    "i_standard_schnauzer": {
+      "status": "reviewed",
+      "names": {
+        "common": "Beardguard",
+        "uncommon": "Wise Whiskers",
+        "rare": "Rat Boss",
+        "epic": "Farmyard Sheriff",
+        "legendary": "Herr Schnauzermann the Clever"
+      },
+      "lore": {
+        "common": "Barks at the dishwasher every time it beeps, then waits for it to apologise.",
+        "uncommon": "Seems to understand every word you say and pretends not to hear the word \"bath\".",
+        "rare": "Cleared the farm of rats, foxes and one very surprised badger in a single morning.",
+        "epic": "Guarded the whole farmyard so carefully that the hens now ask it before laying an egg.",
+        "legendary": "Took charge of a sleepy village, kept every gate shut and every hen counted, and was made sheriff without a vote."
+      },
+      "moves": {
+        "signature": "Beard Butt",
+        "legend": "Rotten Rat Whiff",
+        "ultimate": "Farmyard Patrol"
+      }
+    },
+    "i_sussex_spaniel": {
+      "status": "reviewed",
+      "names": {
+        "common": "Frownfloof",
+        "uncommon": "Lowbarker",
+        "rare": "Thornfrowner",
+        "epic": "Fete Frowner",
+        "legendary": "Sir Sussex the Serious"
+      },
+      "lore": {
+        "common": "Always looks deeply worried, even while eating its favourite biscuit.",
+        "uncommon": "Barks quietly to itself while hunting, as if it is narrating a nature programme.",
+        "rare": "Pushed through a thorn hedge that every other dog refused to touch, then frowned at the thorns.",
+        "epic": "Frowned so seriously at the village fete that the coconut shy closed early out of respect.",
+        "legendary": "Was named the most serious dog in history after attending a hundred birthday parties without once smiling. It enjoyed them all."
+      },
+      "moves": {
+        "signature": "Low Rush",
+        "legend": "Sun-Baked Ear Slap",
+        "ultimate": "Serious Stampede"
+      }
+    },
+    "i_tibetan_mastiff": {
+      "status": "reviewed",
+      "names": {
+        "common": "Nightshift Woof",
+        "uncommon": "Maneguard",
+        "rare": "Snowleopard Bother",
+        "epic": "Himalayan Thunder",
+        "legendary": "Old Thundermane, Keeper of the Pass"
+      },
+      "lore": {
+        "common": "Sleeps all day and barks all night, so the house is never sure whose schedule it is on.",
+        "uncommon": "Has a mane like a lion and a sense of dignity to match. Refuses to wear a raincoat.",
+        "rare": "Guarded a mountain village so well that the snow leopards sent a letter of complaint.",
+        "epic": "Barked once in the high valley and the echo knocked the snow off every roof.",
+        "legendary": "Guarded one mountain gate so faithfully that it now checks tickets for the whole range. Even the snow needs a pass."
+      },
+      "moves": {
+        "signature": "Lion Charge",
+        "legend": "Musty Mane Shake",
+        "ultimate": "Himalayan Thunder Roar"
+      }
+    },
+    "i_tibetan_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Snowshoe",
+        "uncommon": "Luckypaw",
+        "rare": "Cliffwag",
+        "epic": "Mountain Mopstorm",
+        "legendary": "Lucky Lhakpa, Finder of Keys"
+      },
+      "lore": {
+        "common": "Its big flat feet act like snowshoes, so it walks on top of the snow and laughs at you sinking.",
+        "uncommon": "Is considered lucky, so people keep patting it before exams.",
+        "rare": "Climbed a frozen cliff that the goats wouldn't try, just to look back and wag.",
+        "epic": "Shook its shaggy coat in the village square and caused a small snowstorm.",
+        "legendary": "Brought so much luck to a mountain village that every lost key in the valley turned up the same afternoon."
+      },
+      "moves": {
+        "signature": "Snowshoe Bound",
+        "legend": "Lucky Biscuit Grab",
+        "ultimate": "Mountain Mopstorm Dash"
+      }
+    },
+    "i_toy_poodle": {
+      "status": "reviewed",
+      "names": {
+        "common": "Teacup Prissy",
+        "uncommon": "Prance Petite",
+        "rare": "Cupboard Genius",
+        "epic": "Tiny Twirl Show",
+        "legendary": "Mimi, Queen of the Handbag"
+      },
+      "lore": {
+        "common": "Rides in a handbag everywhere and complains if the handbag doesn't match.",
+        "uncommon": "Prances along the pavement on its tiptoes as if the ground is slightly beneath it.",
+        "rare": "Learned to open the treat cupboard and now runs the kitchen.",
+        "epic": "Twirled so beautifully at the dog show that the ice dancers asked for lessons.",
+        "legendary": "Taught itself to walk on its back legs so well that it queues at the bakery on its own, and the baker now bows back."
+      },
+      "moves": {
+        "signature": "Prancing Pounce",
+        "legend": "Tiptoe Power-Up",
+        "ultimate": "Twirl Tornado"
+      }
+    },
+    "i_toy_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Ratwhistle",
+        "uncommon": "Teenytrot",
+        "rare": "Alert Whisker",
+        "epic": "Small Siren",
+        "legendary": "Tiny Tobias the Watchful"
+      },
+      "lore": {
+        "common": "Shivers on a warm day, under a blanket, by the fire, and still asks for your jumper.",
+        "uncommon": "Hears a mouse in the attic from the garden and runs in to report it.",
+        "rare": "Its ears are so big and pointy that they pick up the radio. It barks along to the weather forecast.",
+        "epic": "Barked so loudly at a burglar that the burglar ran into the police station to ask for protection.",
+        "legendary": "Kept a whole castle free of mice for its entire life. Was given a tiny castle of its own as thanks."
+      },
+      "moves": {
+        "signature": "Tiny Tackle",
+        "legend": "Shadow Snap",
+        "ultimate": "Small Siren Wail"
+      }
+    },
+    "i_vizsla": {
+      "status": "reviewed",
+      "names": {
+        "common": "Shadowstick",
+        "uncommon": "Goldenshadow",
+        "rare": "Pointing Rusty",
+        "epic": "Field Fever",
+        "legendary": "Countess Vizslana the Clingy"
+      },
+      "lore": {
+        "common": "Follows you from room to room, including the bathroom, and looks offended when you close the door.",
+        "uncommon": "Its golden-rust coat glows in the sunshine, so it is easy to spot sitting on your favourite chair.",
+        "rare": "Points at a pheasant with such focus that it forgets to blink for five minutes.",
+        "epic": "Ran through a whole country estate so fast that the gardeners thought a comet had landed.",
+        "legendary": "Pointed at a pheasant from a hot-air balloon and held the point so hard that the balloon drifted over to it. The pheasant was very surprised."
+      },
+      "moves": {
+        "signature": "Golden Rush",
+        "legend": "Sunbeam Scorch",
+        "ultimate": "Field Fever Dash"
+      }
+    },
+    "i_walker_hound": {
+      "status": "reviewed",
+      "names": {
+        "common": "Moonbayer",
+        "uncommon": "Lunch Overtaker",
+        "rare": "Loudmouth Lou",
+        "epic": "Picnic Beater",
+        "legendary": "Treeing Tess, the Fastest Voice"
+      },
+      "lore": {
+        "common": "Bays at the moon, the street lamp and the neighbour's porch light. It's not fussy.",
+        "uncommon": "Runs so fast after a scent that it overtakes the hunters, their horses and their lunch.",
+        "rare": "Its voice carries so far that people two valleys away come to see who's lost.",
+        "epic": "Followed one scent so fast through the county that it arrived at the picnic before the picnic did.",
+        "legendary": "Treed a raccoon so often that the raccoon now leaves a note on the tree saying where it has gone."
+      },
+      "moves": {
+        "signature": "Hound Sprint",
+        "legend": "Treeside Stand",
+        "ultimate": "Night Chase"
+      }
+    },
+    "i_weimaraner": {
+      "status": "reviewed",
+      "names": {
+        "common": "Amber Eyes",
+        "uncommon": "Silver Shadow",
+        "rare": "Fridge Opener",
+        "epic": "Cake Raider",
+        "legendary": "Duke Weimar, the Silver Hunter"
+      },
+      "lore": {
+        "common": "Leans against your legs during dinner and stares with its amber eyes until you share.",
+        "uncommon": "Its silver coat makes it look like a ghost in the early morning mist. The postman runs.",
+        "rare": "Opened the fridge with its nose and left it open, so the whole kitchen is now the same temperature as the milk.",
+        "epic": "Raided the counter at a wedding and ate the top tier of the cake. Every photo shows a grey dog wearing icing.",
+        "legendary": "Learned to open every door in the office building, then let the whole street's dogs in for a meeting in the boardroom."
+      },
+      "moves": {
+        "signature": "Silver Lunge",
+        "legend": "Sandwich Siphon",
+        "ultimate": "Ghostly Gallop Run"
+      }
+    },
+    "i_welsh_springer_spaniel": {
+      "status": "reviewed",
+      "names": {
+        "common": "Redspring",
+        "uncommon": "Little Dragon",
+        "rare": "Valley Flusher",
+        "epic": "Maze Breaker",
+        "legendary": "Dewi, the Leaping Dragon Dog"
+      },
+      "lore": {
+        "common": "Springs into every bush on the walk, then comes out looking surprised that it was a bush.",
+        "uncommon": "Its red-and-white coat makes it look like a little dragon. It plays along.",
+        "rare": "Flushes every bird out of the hedge, then politely waits for them to settle back in.",
+        "epic": "Sprang into a hedge maze and out the other side, straight through. The maze now has a dog-shaped shortcut.",
+        "legendary": "Was adopted as the mascot of a whole country's rugby team and bounced so hard after a win that the stadium shook."
+      },
+      "moves": {
+        "signature": "Springing Bound",
+        "legend": "Hedge Snatch",
+        "ultimate": "Dragon Dog Leap"
+      }
+    },
+    "i_west_highland_white_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Westiepuff",
+        "uncommon": "Oneminute White",
+        "rare": "Brave Whitey",
+        "epic": "Bubble Piper",
+        "legendary": "Wee Hamish, Digger of the Highlands"
+      },
+      "lore": {
+        "common": "Digs a hole in the flowerbed, sits in it and waits to be photographed.",
+        "uncommon": "Its white coat stays white for exactly one minute after a bath.",
+        "rare": "Squeezed down a rabbit hole and came up in the neighbour's greenhouse holding a tomato.",
+        "epic": "Got so muddy at the Highland Games that it took the whole pipe band to wash it. The bagpipes were full of bubbles.",
+        "legendary": "Dug a tunnel straight through a Highland hill to get to the other side faster. The hill is now a short cut."
+      },
+      "moves": {
+        "signature": "White Flash",
+        "legend": "Hill Hole Crash",
+        "ultimate": "Highland Dig-Out"
+      }
+    },
+    "i_whippet": {
+      "status": "reviewed",
+      "names": {
+        "common": "Couchsprinter",
+        "uncommon": "Blanket Burrower",
+        "rare": "Racing Noodle",
+        "epic": "Beach Jumper",
+        "legendary": "Whizz, the Fastest Sleeper"
+      },
+      "lore": {
+        "common": "Sprints round the garden at top speed for one minute, then sleeps for six hours.",
+        "uncommon": "Shivers under two blankets and asks for a third.",
+        "rare": "Runs so fast that it reaches the ball before it has stopped bouncing.",
+        "epic": "Wore a woolly jumper to the beach on the hottest day of the year and still asked for a towel to lie on.",
+        "legendary": "Ran a lap of the track so fast that it lapped itself and got confused about who had won."
+      },
+      "moves": {
+        "signature": "Whippet Dash",
+        "legend": "Sun-Toasted Sprint",
+        "ultimate": "Lightning Lap"
+      }
+    },
+    "i_white_wolf": {
+      "status": "reviewed",
+      "names": {
+        "common": "Snowhowl",
+        "uncommon": "Frostpaw",
+        "rare": "Icefield Hunter",
+        "epic": "Blizzard Chorus",
+        "legendary": "Aurora, White Queen of the Ice"
+      },
+      "lore": {
+        "common": "Howls whenever the freezer door is opened because it smells like home.",
+        "uncommon": "Blends into the snow so perfectly that it sneaks up on its own pack.",
+        "rare": "Can cross a frozen lake without a single crack, while the polar bears are still testing the ice.",
+        "epic": "Howled so loudly over the Arctic that the icebergs drifted closer to listen.",
+        "legendary": "Howled on the longest night of the winter, and the northern lights came out to see who was making that noise."
+      },
+      "moves": {
+        "signature": "Snowfield Lunge",
+        "legend": "Musky Den Stink",
+        "ultimate": "Blizzard Howl"
+      }
+    },
+    "i_wire_haired_fox_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pogo Terrier",
+        "uncommon": "Window Warden",
+        "rare": "Burrowbolt",
+        "epic": "Riderless Racer",
+        "legendary": "Sir Bristleworth the Bold"
+      },
+      "lore": {
+        "common": "Bounces straight up and down like a spring until somebody throws the ball.",
+        "uncommon": "Stands on its back legs at the window and reports every passing cat in a loud, wiry bark.",
+        "rare": "Shot down a fox's burrow so fast that the fox came out the back door to see what was going on.",
+        "epic": "Chased the hunt's horses round the field and won the race without a rider.",
+        "legendary": "Was hired to sweep the town's chimneys with its wiry coat. Came out black, shook once, and the whole street needed washing."
+      },
+      "moves": {
+        "signature": "Bristle Bounce",
+        "legend": "Hot-Headed Leap",
+        "ultimate": "Burrow Bolt Blast"
+      }
+    },
+    "i_yorkshire_terrier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bowtopper Yorkie",
+        "uncommon": "Mill Mouser",
+        "rare": "Bossypaw",
+        "epic": "Small Dog Fury",
+        "legendary": "Lady Yorkshire Pudding, the Bossy"
+      },
+      "lore": {
+        "common": "Wears a bow on its head and barks at anyone who doesn't compliment it.",
+        "uncommon": "Used to chase mice out of the old wool mills and still checks every cupboard for them.",
+        "rare": "Bosses around dogs ten times its size, and they listen.",
+        "epic": "Barked at a herd of cows until they walked backwards out of the field.",
+        "legendary": "Grew its silky show coat so long that it needs two page-boys to carry it on walks. It still stops to bark at pigeons."
+      },
+      "moves": {
+        "signature": "Bossy Bark",
+        "legend": "Bow-Tied Pride",
+        "ultimate": "Small Dog Fury Storm"
+      }
+    },
+    "elephant": {
+      "status": "reviewed",
+      "names": {
+        "common": "Trunkspray",
+        "uncommon": "Memory Keeper",
+        "rare": "Peanut Picker",
+        "epic": "Mudbath Monsoon",
+        "legendary": "Grandmammoth, Who Never Forgets"
+      },
+      "lore": {
+        "common": "Sprays water at everyone in the zoo queue, then flaps its ears to pretend it was the wind.",
+        "uncommon": "Remembers every person who ever gave it a peanut and the ones who didn't.",
+        "rare": "Can pick up a single peanut or a whole tree with its trunk. Usually picks the peanut.",
+        "epic": "Took a mud bath so enthusiastically that the whole safari camp now needs a car wash.",
+        "legendary": "Rumbled so low that every elephant across the continent felt it in their feet. They all turned up at once for the buffet."
+      },
+      "moves": {
+        "legend": "Ear-Flap Distraction",
+        "ultimate": "Stampede Parade"
+      }
+    },
+    "fox": {
+      "status": "reviewed",
+      "names": {
+        "common": "Binraider",
+        "uncommon": "Snowpouncer",
+        "rare": "Midnight Shrieker",
+        "epic": "Henhouse Heist",
+        "legendary": "Reynalda, the Cleverest Tail"
+      },
+      "lore": {
+        "common": "Steals one shoe from every doorstep on the street, never the matching one.",
+        "uncommon": "Dives head-first into deep snow to catch a mouse and comes up with a snowy moustache.",
+        "rare": "Screams in the garden at midnight so dramatically that the whole street thinks a film is being made.",
+        "epic": "Outsmarted every hen house in the county in a single week. The hens now sleep with the doors locked from inside.",
+        "legendary": "Talked its way into running the farm, the henhouse and the village bakery, all on the same afternoon."
+      },
+      "moves": {
+        "signature": "Snow Pounce",
+        "legend": "Fiery Tail Flick",
+        "ultimate": "Henhouse Heist Run"
+      }
+    },
+    "x_wolf_pup": {
+      "status": "reviewed",
+      "names": {
+        "common": "Squeakhowl",
+        "uncommon": "Pack Tagalong",
+        "rare": "Tailchewer",
+        "epic": "Moonpractice Chorus",
+        "legendary": "Lupina, the Youngest Alpha"
+      },
+      "lore": {
+        "common": "Practises howling at the moon but only manages a squeak, then pretends it was a cough.",
+        "uncommon": "Follows the grown-up wolves everywhere, copying their walk with very big paws.",
+        "rare": "Chews its big sister's tail during the hunt and gets the whole pack lost.",
+        "epic": "Howled so enthusiastically during its first full moon that every dog in the valley joined in by mistake.",
+        "legendary": "Became leader of the pack at only six months old by finding the best stick anyone had ever seen."
+      },
+      "moves": {
+        "signature": "Puppy Pounce Howl",
+        "legend": "Little Shadow Snap",
+        "ultimate": "Full Moon Debut"
+      }
+    },
+    "giraffe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Treetrimmer",
+        "uncommon": "Purple Tongue",
+        "rare": "Lookout Neck",
+        "epic": "Skyline Strider",
+        "legendary": "Lady Longneck, Who Sees Tomorrow"
+      },
+      "lore": {
+        "common": "Eats the leaves off the top of every tree in the park, so they all look like they've had bad haircuts.",
+        "uncommon": "Licks its own ears with its long purple tongue and offers to do yours.",
+        "rare": "Spots what everyone is having for dinner two streets away and turns up at the right window, every night.",
+        "epic": "Walked through the city and accidentally untangled every telephone wire with its neck.",
+        "legendary": "Grew so tall that it got a job as the city's weather forecaster. It just looks over the clouds and reports back."
+      },
+      "moves": {
+        "signature": "Neck Swing",
+        "legend": "Tall Stance",
+        "ultimate": "Skyline Stomp"
+      }
+    },
+    "goat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Eatseverything",
+        "uncommon": "Cliffclimber",
+        "rare": "Headbutter",
+        "epic": "Mountain Muncher",
+        "legendary": "Billy Bramblebeard, Eater of All"
+      },
+      "lore": {
+        "common": "Eats the washing off the line, the pegs and half the line.",
+        "uncommon": "Climbs onto the roof of the shed, the car and the farmer's tractor to get a better view.",
+        "rare": "Headbutts anything that looks at it twice, including its reflection in the window.",
+        "epic": "Ate a path straight through the hedge maze and opened a shortcut for the tourists.",
+        "legendary": "Climbed the tallest mountain in the land and then ate the flag at the top."
+      },
+      "moves": {
+        "signature": "Head Butt",
+        "legend": "Spicy Bramble Breath",
+        "ultimate": "Mountain Munch"
+      }
+    },
+    "x_guinea_pig_pet": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fridgecaller",
+        "uncommon": "Popcornpaw",
+        "rare": "Purr Motor",
+        "epic": "Hay Hurricane",
+        "legendary": "Lady Wheekington of the Hay Palace"
+      },
+      "lore": {
+        "common": "Squeaks at the top of its voice every time it hears the fridge door, even at midnight.",
+        "uncommon": "Jumps in the air with happiness like popcorn in a pan. The cat is very confused.",
+        "rare": "Rumbles like a tiny motorbike when it is cross. The neighbours keep calling the garage.",
+        "epic": "Chewed through its hay so fast that the pet shop now orders a whole haystack every Monday.",
+        "legendary": "Squeaked so persuasively that the whole family now eats only salad, to keep it company."
+      },
+      "moves": {
+        "signature": "Popcorn Bump",
+        "legend": "Fridge Door Squeak",
+        "ultimate": "Lettuce Riot"
+      }
+    },
+    "hamster": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wheelrunner",
+        "uncommon": "Cheekstuffer",
+        "rare": "Escape Artist Ham",
+        "epic": "Midnight Marathon",
+        "legendary": "Shredwick, the Nest Builder"
+      },
+      "lore": {
+        "common": "Runs on its squeaky wheel all night and sleeps all day, so nobody else does either.",
+        "uncommon": "Stuffs so much food into its cheeks that its head is twice the size it was this morning.",
+        "rare": "Escaped from its cage, explored the whole house and was back before anybody noticed.",
+        "epic": "Ran on its wheel so hard that it powered the lights in the house for a whole evening.",
+        "legendary": "Shredded the whole class's homework to build the cosiest nest in school. The teacher now accepts \"the hamster ate it\"."
+      },
+      "moves": {
+        "signature": "Cheek Charge",
+        "legend": "Seed Spit Distraction",
+        "ultimate": "Wheel of Doom"
+      }
+    },
+    "hippo": {
+      "status": "reviewed",
+      "names": {
+        "common": "Yawnbig",
+        "uncommon": "Mudwallow",
+        "rare": "Tailspinner",
+        "epic": "River Belly Flop",
+        "legendary": "Big Bertie the River Boss"
+      },
+      "lore": {
+        "common": "Yawns so widely that everyone else in the room starts yawning too, including the furniture.",
+        "uncommon": "Wallows in mud all day and refuses to have a bath, then complains that it's sticky.",
+        "rare": "Spins its tail like a fan while it does its business, and the whole riverbank ducks.",
+        "epic": "Did a belly flop into the river and the wave washed every boat onto the bank.",
+        "legendary": "Sat in the middle of the river for a whole summer and became the most popular island on the river."
+      },
+      "moves": {
+        "signature": "River Charge",
+        "legend": "Chomp Chomp Chomp",
+        "ultimate": "River Belly Flop Splash"
+      }
+    },
+    "horse": {
+      "status": "reviewed",
+      "names": {
+        "common": "Applemunch",
+        "uncommon": "Hoofclatter",
+        "rare": "Galloper",
+        "epic": "Stampede Thunder",
+        "legendary": "Silver Mane, the Swiftest Steed"
+      },
+      "lore": {
+        "common": "Eats your apple, then nudges your pocket to see if you have another one.",
+        "uncommon": "Clatters its hooves on the stable door every morning until somebody brings breakfast.",
+        "rare": "Gallops so fast that its mane is still in the field when the horse is at the gate.",
+        "epic": "Fell asleep standing up in the middle of the parade route. The whole parade tiptoed round it.",
+        "legendary": "Raced the wind across the countryside and won by a nose. The wind demanded a rematch and lost again."
+      },
+      "moves": {
+        "signature": "Hoof Kick",
+        "legend": "Fiery Gallop",
+        "ultimate": "Thunder Stampede"
+      }
+    },
+    "lion": {
+      "status": "reviewed",
+      "names": {
+        "common": "Napmane",
+        "uncommon": "Hurricane Hair",
+        "rare": "Prideboss",
+        "epic": "Waterhole Hog",
+        "legendary": "Big Snoozemane, the Lazy King"
+      },
+      "lore": {
+        "common": "Sleeps twenty hours a day and roars about how tired it is for the other four.",
+        "uncommon": "Shakes its mane after a bath and looks like it got caught in a hurricane.",
+        "rare": "Roars so loudly that zebras miles away hide behind a bush.",
+        "epic": "Sat on the only waterhole all day, so every animal on the savannah queued with a bucket.",
+        "legendary": "Ruled the whole savannah for a decade without once getting up from its favourite rock. Everyone came to it."
+      },
+      "moves": {
+        "signature": "Lion Pounce",
+        "legend": "Zebra Snack Snatch",
+        "ultimate": "Savannah Roar"
+      }
+    },
+    "i_capuchin": {
+      "status": "reviewed",
+      "names": {
+        "common": "Nuttapper",
+        "uncommon": "Antperfume",
+        "rare": "Zipcracker",
+        "epic": "Jungle Workshop",
+        "legendary": "Professor Capuchino the Clever"
+      },
+      "lore": {
+        "common": "Taps every nut it finds to check if it's ripe, then knocks on your door too.",
+        "uncommon": "Rubs squashed ants into its fur as bug spray, then wonders why nobody sits next to it.",
+        "rare": "Learned to open zips, buttons and padlocks. Nothing in your bag is safe.",
+        "epic": "Built a little workshop in the rainforest and started making tools for every monkey in the trees.",
+        "legendary": "Taught a whole forest of monkeys to crack nuts with stones. Now there are no nuts left and a lot of very good stones."
+      },
+      "moves": {
+        "signature": "Stone Smash",
+        "legend": "Hot Nut Throw",
+        "ultimate": "Jungle Workshop Chaos"
+      }
+    },
+    "i_colobus": {
+      "status": "reviewed",
+      "names": {
+        "common": "Thumbless",
+        "uncommon": "Babyswapper",
+        "rare": "Leafburper",
+        "epic": "Capewing",
+        "legendary": "Duchess Colobina of the Silver Cape"
+      },
+      "lore": {
+        "common": "Has no thumbs, so it eats with its whole hand and makes a terrible mess of every leaf.",
+        "uncommon": "Hands its baby round the whole troop to babysit, then has a long, quiet lie-down.",
+        "rare": "Eats leaves that would give any other monkey a tummy ache, then burps at the ones who try.",
+        "epic": "Leapt across the whole forest canopy in one afternoon, cape flowing, and every bird applauded.",
+        "legendary": "Wore its white cape so elegantly that it was invited to open the forest's grand fashion show. Ate the decorations."
+      },
+      "moves": {
+        "signature": "Cape Leap",
+        "legend": "Leaf Siphon",
+        "ultimate": "Canopy Cape Storm"
+      }
+    },
+    "x_gorilla_ape": {
+      "status": "reviewed",
+      "names": {
+        "common": "Chestdrummer",
+        "uncommon": "Gentle Giant Go",
+        "rare": "Silverback Sid",
+        "epic": "Jungle Drumroll",
+        "legendary": "Gorillo, the Gentle Silverback"
+      },
+      "lore": {
+        "common": "Burps after every meal to tell the troop it's happy. The troop burps back.",
+        "uncommon": "Is very strong but peels a banana more delicately than a chef.",
+        "rare": "Hums happily while eating, so loudly that the whole troop knows exactly who found the best celery.",
+        "epic": "Drummed on its chest during a thunderstorm and the thunder stopped to listen.",
+        "legendary": "Became the calmest leader in the jungle by settling every argument with one gentle, very heavy hug."
+      },
+      "moves": {
+        "signature": "Chest Pound Tackle",
+        "legend": "Silverback Swagger",
+        "ultimate": "Jungle Drum Solo"
+      }
+    },
+    "i_guenon": {
+      "status": "reviewed",
+      "names": {
+        "common": "Cheekpouch",
+        "uncommon": "Colourface",
+        "rare": "Funnyface",
+        "epic": "Market Mischief",
+        "legendary": "Gwenna, the Painted Chatterer"
+      },
+      "lore": {
+        "common": "Stuffs its cheek pouches full of fruit for later, then forgets and eats yours.",
+        "uncommon": "Has a face so colourful that the parrots think it is one of them.",
+        "rare": "Pulls such funny faces at the rival troop that they forget what they were arguing about.",
+        "epic": "Raided a fruit market and organised all the fruit by colour before eating it.",
+        "legendary": "Started a rumour in the morning that every monkey in the forest knew by noon. It was about where the best mangoes were. It was true."
+      },
+      "moves": {
+        "signature": "Chatter Pounce",
+        "legend": "Peppery Fruit Fling",
+        "ultimate": "Treetop Gossip Storm"
+      }
+    },
+    "i_howler_monkey": {
+      "status": "reviewed",
+      "names": {
+        "common": "Loudmouth Howl",
+        "uncommon": "Dawnbellower",
+        "rare": "Echo Throat",
+        "epic": "Jungle Foghorn",
+        "legendary": "Bellowmore, Loudest of All"
+      },
+      "lore": {
+        "common": "Howls at dawn to tell everyone it's morning, even when it is still very dark.",
+        "uncommon": "Sleeps fifteen hours a day to save its voice. Nobody dares wake it.",
+        "rare": "Howled so loudly that a passing plane checked its engines.",
+        "epic": "Howled the morning call so reliably that the jungle airport set its clocks by it. Planes now land on the third howl.",
+        "legendary": "Taught a whole valley of monkeys to howl in harmony. Tourists now pay to hear the morning concert, and bring earplugs."
+      },
+      "moves": {
+        "signature": "Howl Pounce",
+        "legend": "Earsplitting Howl",
+        "ultimate": "Jungle Foghorn Blast"
+      }
+    },
+    "i_indri": {
+      "status": "reviewed",
+      "names": {
+        "common": "Treesinger",
+        "uncommon": "Leapdance",
+        "rare": "Whalevoice",
+        "epic": "Forest Opera",
+        "legendary": "Indira, the Singing Lemur"
+      },
+      "lore": {
+        "common": "Sings at the top of its voice from the treetops at breakfast time, every single day.",
+        "uncommon": "Leaps between trees sideways, like it's doing a little dance on the way.",
+        "rare": "Its song sounds so much like a whale that the whales came to the shore to check.",
+        "epic": "Leapt ten metres between tree trunks, upright, every time. The flying squirrels asked for lessons.",
+        "legendary": "Sang a song that echoed across the whole island and was performed at the national opera house. It insisted on singing from the balcony."
+      },
+      "moves": {
+        "signature": "Sideways Leap",
+        "legend": "Haunting Song",
+        "ultimate": "Island Opera"
+      }
+    },
+    "i_langur": {
+      "status": "reviewed",
+      "names": {
+        "common": "Photobomber",
+        "uncommon": "Longtail Balancer",
+        "rare": "Rooftopper",
+        "epic": "Washing Line Tail",
+        "legendary": "Langurella, Queen of the Rooftops"
+      },
+      "lore": {
+        "common": "Sits on the old town rooftops and drops leaves on the heads of people taking photographs.",
+        "uncommon": "Its tail is longer than its whole body and is very useful for balancing on washing lines.",
+        "rare": "Leapt from rooftop to rooftop across the town and stole a banana from every market stall.",
+        "epic": "Its tail is so long that the whole troop uses it as a washing line. It does not enjoy laundry day.",
+        "legendary": "Guarded the hilltop fort so faithfully that the keeper gave it the only key. It mostly uses it as a toy."
+      },
+      "moves": {
+        "signature": "Rooftop Leap",
+        "legend": "Mouldy Mango Toss",
+        "ultimate": "Temple Roof Romp Rush"
+      }
+    },
+    "i_madagascar_cat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sunbather",
+        "uncommon": "Ringtail",
+        "rare": "Stinktail",
+        "epic": "Tail Waving Wars",
+        "legendary": "Queen Lemuria of the Sunny Rock"
+      },
+      "lore": {
+        "common": "Sits cross-legged facing the sun every morning, like it's doing yoga.",
+        "uncommon": "Waves its striped tail in the air so the whole troop knows where it is.",
+        "rare": "Rubs its tail with smelly perfume and waves it at rivals. They usually leave.",
+        "epic": "Stink-fought the whole neighbouring troop at once. The island had to open every window for a week.",
+        "legendary": "Waved its striped tail so high above the forest that ships at sea use it as a lighthouse."
+      },
+      "moves": {
+        "signature": "Ringtail Leap",
+        "legend": "Tail-Wave Distraction",
+        "ultimate": "Sunny Rock Rumble"
+      }
+    },
+    "i_marmoset": {
+      "status": "reviewed",
+      "names": {
+        "common": "Squeakpaw",
+        "uncommon": "Twinkeeper",
+        "rare": "Gumnibbler",
+        "epic": "Treetop Squeak Storm",
+        "legendary": "Tiny Marmalina, Queen of Twins"
+      },
+      "lore": {
+        "common": "Squeaks at a pitch so high that only the dog can hear it, and the dog is not happy.",
+        "uncommon": "Always has twins, so there are two of it wherever you look.",
+        "rare": "Chews holes in the tree bark to drink the sweet gum, then leaves sticky pawprints on everything.",
+        "epic": "Started a baby-carrying rota so good that the whole troop runs it like a taxi rank. Babies wait at the stop.",
+        "legendary": "Is so small that it slept in a teacup at the jungle café for a week before anyone noticed. Customers kept trying to stir it."
+      },
+      "moves": {
+        "signature": "Tiny Pounce",
+        "legend": "Gum Nap",
+        "ultimate": "Squeak Storm"
+      }
+    },
+    "monkey": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bananapeel",
+        "uncommon": "Treehopper",
+        "rare": "Mischief Maker",
+        "epic": "Banana Raid",
+        "legendary": "Bananagrab, the Mischief King"
+      },
+      "lore": {
+        "common": "Peels a banana from the wrong end, the way monkeys really do, and laughs at you for doing it the hard way.",
+        "uncommon": "Swings from tree to tree, branch to branch, and once from the washing line to the curtains.",
+        "rare": "Steals hats from tourists and wears them all at once.",
+        "epic": "Raided a whole banana plantation and swung away with every bunch before the farmer finished his breakfast.",
+        "legendary": "Swung across the town hall roof by one hand, waved to the crowd and stole the mayor's speech. It was mostly about bananas."
+      },
+      "moves": {
+        "signature": "Swinging Kick",
+        "legend": "Branch Smash",
+        "ultimate": "Banana Bonanza"
+      }
+    },
+    "x_orangutan_ape": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bedmaker",
+        "uncommon": "Leafbrella",
+        "rare": "Treehouse Host",
+        "epic": "Long Call",
+        "legendary": "Old Rusty, Builder of Treetops"
+      },
+      "lore": {
+        "common": "Builds a new bed in the treetops every night and still complains about the springs.",
+        "uncommon": "Holds a big leaf over its head as an umbrella every time it rains.",
+        "rare": "Built a treehouse so comfortable that the neighbours queue to stay the night.",
+        "epic": "Gave one long call from the canopy and every orangutan for a mile looked up and started packing.",
+        "legendary": "Designed a whole treetop city out of branches and leaves. The architects came to take notes."
+      },
+      "moves": {
+        "signature": "Long Arm Swing",
+        "legend": "Muddy Riverbank Fling",
+        "ultimate": "Canopy Collapse"
+      }
+    },
+    "i_patas": {
+      "status": "reviewed",
+      "names": {
+        "common": "Speedypatas",
+        "uncommon": "Savannah Sprinter",
+        "rare": "Grassdasher",
+        "epic": "Dust Cloud Dash",
+        "legendary": "Patricia, Fastest of All Monkeys"
+      },
+      "lore": {
+        "common": "Stands on its back legs in the long grass like a soldier on parade, then wanders off mid-salute.",
+        "uncommon": "Can sprint across the grassland faster than a racing bicycle.",
+        "rare": "Ran away from a cheetah so fast that the cheetah asked for its training plan.",
+        "epic": "Outran the safari jeep and waited at the gate to sell the tourists tickets.",
+        "legendary": "Ran round the savannah so fast that it saw the back of its own head. Says it needs a haircut."
+      },
+      "moves": {
+        "signature": "Sprint Kick",
+        "legend": "Full Speed Crash",
+        "ultimate": "Dust Cloud Dash Storm"
+      }
+    },
+    "i_proboscis_monkey": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bignose",
+        "uncommon": "Honkhonk",
+        "rare": "Nosewaggle",
+        "epic": "River Nose Splash",
+        "legendary": "Sir Schnozzle the Magnificent"
+      },
+      "lore": {
+        "common": "Its nose is so big that it gets in the way when it tries to eat.",
+        "uncommon": "Honks through its nose like a car horn every time it sees a pretty tree.",
+        "rare": "Its round pot belly floats so well that it crosses rivers like a furry rubber ring.",
+        "epic": "Dived into the river from a high branch and its nose made the biggest splash in the jungle.",
+        "legendary": "Sneezed once across the river and the ferry was blown back to the jetty."
+      },
+      "moves": {
+        "signature": "Nose Bump",
+        "legend": "Startling Honk",
+        "ultimate": "Big Nose Belly Splash"
+      }
+    },
+    "i_siamang": {
+      "status": "reviewed",
+      "names": {
+        "common": "Throatballoon",
+        "uncommon": "Duetsinger",
+        "rare": "Swingarms",
+        "epic": "Treetop Duet",
+        "legendary": "Siamara, Voice of the Canopy"
+      },
+      "lore": {
+        "common": "Inflates the pouch in its throat like a balloon and then sings, loudly, when you are trying to sleep.",
+        "uncommon": "Hangs by one arm while eating with the other, and drops the peel on whoever is underneath.",
+        "rare": "Puffs its throat sac up so big in a storm that it floats a little way down the valley.",
+        "epic": "Sang so loudly with its whole family that every monkey in the forest came to see the concert.",
+        "legendary": "Sang so loudly with its partner that a passing echo got stuck in the valley and is still answering them."
+      },
+      "moves": {
+        "signature": "Long Arm Lunge",
+        "legend": "Pouch Puff Guard",
+        "ultimate": "Canopy Concert"
+      }
+    },
+    "i_spider_monkey": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fivelimbs",
+        "uncommon": "Tailgrabber",
+        "rare": "Long-Limb Larry",
+        "epic": "Treetop Tangle",
+        "legendary": "Arachnella, the Tail-Hanger"
+      },
+      "lore": {
+        "common": "Hangs from branches by its tail and drops fruit on passing heads.",
+        "uncommon": "Uses its tail as a fifth arm to pick things up. It never lets go of the snack bag.",
+        "rare": "Can swing so far across the trees that it sometimes forgets where it started.",
+        "epic": "Got tangled in the jungle vines with forty friends and turned the forest into a giant hammock.",
+        "legendary": "Hung by its tail from the tallest tree and picked fruit for the whole troop with both hands. They now order by shouting."
+      },
+      "moves": {
+        "signature": "Tail Swing",
+        "legend": "Dangling Distraction",
+        "ultimate": "Treetop Tangle Twirl"
+      }
+    },
+    "i_squirrel_monkey": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sugarbowl Bouncer",
+        "uncommon": "Troopbounce",
+        "rare": "Picnic Snatcher",
+        "epic": "Sports Shop Bounce",
+        "legendary": "Little Saimiri, Bounce Boss"
+      },
+      "lore": {
+        "common": "Bounces off every surface in the room and lands in the sugar bowl.",
+        "uncommon": "Travels with a troop of fifty friends who all bounce in the same direction.",
+        "rare": "Leapt into a picnic and every sandwich disappeared before the family sat down.",
+        "epic": "Bounced so excitedly in a sports shop that every ball in the place went off at once.",
+        "legendary": "Became leader of the biggest troop in the jungle by bouncing higher than everyone else at the meeting."
+      },
+      "moves": {
+        "signature": "Bouncing Pounce",
+        "legend": "Rest Stop",
+        "ultimate": "Troop Stampede Rush"
+      }
+    },
+    "i_three_toed_sloth": {
+      "status": "reviewed",
+      "names": {
+        "common": "Inchalong",
+        "uncommon": "Mossbeard Sloth",
+        "rare": "Hangaround",
+        "epic": "Slowest Stampede",
+        "legendary": "Sir Hangsworth the Unhurried"
+      },
+      "lore": {
+        "common": "Took two days to cross the garden and then forgot why it went.",
+        "uncommon": "Has moss growing in its fur, so it's slightly green and slightly a plant.",
+        "rare": "Moves so slowly that moss, moths and a family of beetles have all moved into its fur. It has never been less lonely.",
+        "epic": "Started a race against a snail. The race is still going, and the crowd is very excited.",
+        "legendary": "Climbed down once a week for fifty years, so the forest built it a lift. It still takes the stairs, slowly."
+      },
+      "moves": {
+        "signature": "Slow Swipe",
+        "legend": "Mossy Distraction",
+        "ultimate": "Very Slow Slam"
+      }
+    },
+    "i_titi": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tailtwister",
+        "uncommon": "Duetmonkey",
+        "rare": "Cuddlecall",
+        "epic": "Treetop Tango",
+        "legendary": "Titania, Partner of the Tail Twist"
+      },
+      "lore": {
+        "common": "Wraps its tail around its partner's tail and refuses to let go, even when one of them wants a snack.",
+        "uncommon": "Sings a duet with its partner every morning, and they never get the words right.",
+        "rare": "Cuddles its family so tightly in a row on the branch that they look like a fluffy rope.",
+        "epic": "Its babies ride on dad's back, and the idea caught on. Every monkey father in the forest now carries a baby, and nobody has a free hand for snacks.",
+        "legendary": "Has been with the same partner for so long that they finish each other's songs, and their tails are now permanently in a knot."
+      },
+      "moves": {
+        "signature": "Tail Twist Tackle",
+        "legend": "Duet Siphon",
+        "ultimate": "Treetop Tango Dance"
+      }
+    },
+    "panda": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bambooboo",
+        "uncommon": "Rollypanda",
+        "rare": "Sadpatches",
+        "epic": "Somersaulter",
+        "legendary": "Pandarella, the Bamboo Chef"
+      },
+      "lore": {
+        "common": "Eats bamboo for fourteen hours a day, then complains that there's nothing in the fridge.",
+        "uncommon": "Rolls down hills on purpose and looks surprised at the bottom every time.",
+        "rare": "Its black eye patches make it look sad, so zoo visitors keep handing it their sandwiches. It is not sad.",
+        "epic": "Did a somersault so big that it rolled from one end of the bamboo valley to the other.",
+        "legendary": "Peels bamboo so neatly with its extra thumb that the city's top chefs queue for lessons."
+      },
+      "moves": {
+        "signature": "Bamboo Bash",
+        "legend": "Black-Eye Distraction",
+        "ultimate": "Bamboo Grove Tumble"
+      }
+    },
+    "pig": {
+      "status": "reviewed",
+      "names": {
+        "common": "Mudwiggle",
+        "uncommon": "Truffle Snout",
+        "rare": "Squealster",
+        "epic": "Pigpen Party",
+        "legendary": "Sir Hamsworth, Squire of the Sty"
+      },
+      "lore": {
+        "common": "Rolls in the mud just after its bath and then trots indoors to show off.",
+        "uncommon": "Sniffs out truffles hidden under the soil and refuses to share a single crumb.",
+        "rare": "Squeals so loudly at dinnertime that the farmhouse windows rattle.",
+        "epic": "Threw such a muddy party in the farmyard that every animal had to be hosed down the next day.",
+        "legendary": "Won first prize at the county show for the most magnificent pig, then ate the rosette and the judge's sandwiches."
+      },
+      "moves": {
+        "signature": "Snout Shove",
+        "legend": "Hot Mud Squeal",
+        "ultimate": "Mud Puddle Mayhem"
+      }
+    },
+    "rabbit": {
+      "status": "reviewed",
+      "names": {
+        "common": "Thumpfoot",
+        "uncommon": "Hopscotch",
+        "rare": "Carrotcrook",
+        "epic": "Burrow Boom",
+        "legendary": "Lady Bunnington, Queen of the Warren"
+      },
+      "lore": {
+        "common": "Thumps its back feet on the floor whenever it wants your attention. It always wants your attention.",
+        "uncommon": "Hops so fast around the garden that it seems to be in two places at once.",
+        "rare": "Dug under the vegetable patch and pulled every carrot down from below, leaving only the green tops.",
+        "epic": "Dug a warren so huge under the village green that the cricket pitch sank by a metre.",
+        "legendary": "Raised a family so big that the town had to build a second school just for its grandchildren."
+      },
+      "moves": {
+        "signature": "Rabbit Kick",
+        "legend": "Rotten Carrot Pong",
+        "ultimate": "Warren Collapse"
+      }
+    },
+    "sheep": {
+      "status": "reviewed",
+      "names": {
+        "common": "Follower",
+        "uncommon": "Woolball",
+        "rare": "Baaaaster",
+        "epic": "Flock Escape",
+        "legendary": "Dame Woolhilda, Queen of the Fleece"
+      },
+      "lore": {
+        "common": "Follows the sheep in front of it everywhere, including into the duck pond.",
+        "uncommon": "Grows so much wool in a year that the farmer has to cut it out of the hedge.",
+        "rare": "Baas so loudly at the gate every morning that the whole farm wakes up an hour early.",
+        "epic": "Led the entire flock through a gap in the fence and into the village tea shop.",
+        "legendary": "Escaped so often that the farmer gave up and built the fence around the sheep instead of the field."
+      },
+      "moves": {
+        "signature": "Woolly Ram",
+        "legend": "Muddy Fleece Stink",
+        "ultimate": "Flock Escape Stampede"
+      }
+    },
+    "squirrel": {
+      "status": "reviewed",
+      "names": {
+        "common": "Nutstasher",
+        "uncommon": "Feederthief",
+        "rare": "Treeleaper",
+        "epic": "Acorn Avalanche",
+        "legendary": "Hazel, the Acorn Queen"
+      },
+      "lore": {
+        "common": "Buries nuts all over the lawn and then forgets where it put every single one.",
+        "uncommon": "Breaks into the bird feeder every morning, however clever the new design is.",
+        "rare": "Crossed the whole town along the telephone wires without touching the ground, and got to the bakery before the bus.",
+        "epic": "Hid so many acorns in one park that next spring a whole new forest grew there.",
+        "legendary": "Buried so many acorns and forgot them all that half the forest is now its accidental orchard."
+      },
+      "moves": {
+        "signature": "Acorn Throw",
+        "legend": "Nutty Distraction",
+        "ultimate": "Acorn Avalanche Rush"
+      }
+    },
+    "tiger": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stripestalk",
+        "uncommon": "Silentpaw",
+        "rare": "Pond Bather",
+        "epic": "Picnic Paddler",
+        "legendary": "Rajah, the Striped Shadow"
+      },
+      "lore": {
+        "common": "Hides behind the curtain to pounce, but its tail is always sticking out.",
+        "uncommon": "Moves through the long grass so silently that butterflies land on it without noticing.",
+        "rare": "Takes a long bath in the pond every afternoon and growls at anyone who wants the pond back.",
+        "epic": "Swam across the whole river to steal a picnic, then dried off in the sun on the picnic blanket.",
+        "legendary": "Fell asleep in the long grass so perfectly hidden that the safari bus parked on its tail. Nobody has ever reversed so fast."
+      },
+      "moves": {
+        "signature": "Striped Pounce",
+        "legend": "Claw Flurry",
+        "ultimate": "Jungle Thunder Charge"
+      }
+    },
+    "x_anteater": {
+      "status": "reviewed",
+      "names": {
+        "common": "Snifflenose",
+        "uncommon": "Longtongue",
+        "rare": "Termite Feast",
+        "epic": "Furry Bus Shelter",
+        "legendary": "Sir Snuffleby, Eater of a Billion Ants"
+      },
+      "lore": {
+        "common": "Pokes its long nose into every hole in the garden and gets a bit stuck in the hosepipe.",
+        "uncommon": "Its tongue is so long that it can lick the ceiling from the floor.",
+        "rare": "Ate every ant at a picnic in seconds, which was nice, then ate the picnic too.",
+        "epic": "Slept curled under its own bushy tail in the rain, and the town used it as a bus shelter.",
+        "legendary": "Ate so many ants in one day that every ant colony in the land called an emergency meeting."
+      },
+      "moves": {
+        "signature": "Long Nose Poke",
+        "legend": "Tongue Flick Flurry",
+        "ultimate": "Tongue Twister"
+      }
+    },
+    "x_antelope": {
+      "status": "reviewed",
+      "names": {
+        "common": "Springhorn",
+        "uncommon": "Leaplong",
+        "rare": "Grassdancer",
+        "epic": "Savannah Bounce",
+        "legendary": "Oryxa, Leaper of the Plains"
+      },
+      "lore": {
+        "common": "Bounces straight up in the air for no reason, then lands looking pleased with itself.",
+        "uncommon": "Its ears swivel like radar dishes, so it hears a lion yawn a mile away.",
+        "rare": "Bounds across the plains in huge springs, leaving the lions too tired to chase it.",
+        "epic": "Snorted an alarm so loud that the whole savannah ran away, including the lion it was warning about.",
+        "legendary": "Leapt over a whole herd of elephants in one bound. The elephants were so impressed that they applauded with their trunks."
+      },
+      "moves": {
+        "signature": "Spring Kick",
+        "legend": "Hoof Flurry",
+        "ultimate": "Savannah Bounce Charge"
+      }
+    },
+    "x_armadillo": {
+      "status": "reviewed",
+      "names": {
+        "common": "Armourbed",
+        "uncommon": "Sneezedigger",
+        "rare": "Diggadillo",
+        "epic": "Fireworks Hopper",
+        "legendary": "Sir Armour-Dillo, the Rolling Knight"
+      },
+      "lore": {
+        "common": "Sleeps sixteen hours a day inside its own armour. Never needs a duvet, never shares one.",
+        "uncommon": "Digs a burrow so fast that it can disappear in the time it takes to sneeze.",
+        "rare": "Dug a burrow so fast under the fence that the fence ended up on the other side.",
+        "epic": "Jumped straight up in surprise at the fireworks show and landed on stage. The crowd thought it was the finale.",
+        "legendary": "Won the national bowling championship by being the ball. Bowled a perfect game and nobody could argue."
+      },
+      "moves": {
+        "signature": "Rolling Bump",
+        "legend": "Armour Curl",
+        "ultimate": "Desert Bowling Strike"
+      }
+    },
+    "x_badger": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stripesnout",
+        "uncommon": "Setdigger",
+        "rare": "Grumpyboots",
+        "epic": "Midnight Excavator",
+        "legendary": "Old Brock, Lord of the Sett"
+      },
+      "lore": {
+        "common": "Digs up the lawn every night looking for worms, then grumbles at the gardener the next day.",
+        "uncommon": "Airs its bedding outside every sunny morning and tuts at anyone with an untidy burrow.",
+        "rare": "Is so stubborn that it once refused to move off a footpath for a whole tractor.",
+        "epic": "Dug a network of tunnels under the village so huge that the post office now delivers underground.",
+        "legendary": "Has lived in the same sett for so long that it has been officially listed as a historic building."
+      },
+      "moves": {
+        "signature": "Badger Barge",
+        "legend": "Burrow Nap",
+        "ultimate": "Midnight Excavation"
+      }
+    },
+    "x_buffalo": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hornshover",
+        "uncommon": "Dustwallow",
+        "rare": "Roadhill",
+        "epic": "Seismic Herd",
+        "legendary": "Big Boss Bison, the Unstoppable"
+      },
+      "lore": {
+        "common": "Scratches its back on the fence so hard that the fence leans over every week.",
+        "uncommon": "Rolls in the dust to keep cool and creates its own little sandstorm.",
+        "rare": "Stands so still in the road that cars think it's a hill.",
+        "epic": "Stampeded across the plains so loudly that earthquake sensors in every city nearby went off.",
+        "legendary": "Wallowed in the dust so often that its dust bath became the plains' favourite spa. Bookings are full for a year."
+      },
+      "moves": {
+        "signature": "Horn Shove",
+        "legend": "Plains Charge",
+        "ultimate": "Prairie Thunder"
+      }
+    },
+    "x_chimp": {
+      "status": "reviewed",
+      "names": {
+        "common": "Grinmimic",
+        "uncommon": "Toolpoker",
+        "rare": "Pantoot",
+        "epic": "Banana Bargain",
+        "legendary": "Chimperton, Head of Tours"
+      },
+      "lore": {
+        "common": "Copies everything you do, especially when you're trying to look serious.",
+        "uncommon": "Uses a stick to fish termites out of a mound and offers you one. Politely, you say no.",
+        "rare": "Hoots so loudly at feeding time that the whole zoo joins in.",
+        "epic": "Organised the zoo's chimps into a bartering market: two grapes for one banana.",
+        "legendary": "Learned so many signs that it now gives tours of the zoo to the visitors."
+      },
+      "moves": {
+        "signature": "Grinning Lunge",
+        "legend": "Banana Guard",
+        "ultimate": "Zoo Uproar"
+      }
+    },
+    "x_chinchilla": {
+      "status": "reviewed",
+      "names": {
+        "common": "Dustshaker",
+        "uncommon": "Softpaw",
+        "rare": "Bookcase Hopper",
+        "epic": "Fur Escape",
+        "legendary": "Chinchillina, Softest of All"
+      },
+      "lore": {
+        "common": "Rolls in its dust bath and then shakes it all over the clean living room.",
+        "uncommon": "Its fur is so soft that people stroke it and forget what they were doing.",
+        "rare": "Jumps so high off the furniture that it lands on top of the bookcase.",
+        "epic": "Left a patch of fur in the cat's paws to escape. The cat now owns the softest bed in the street, and everyone wants one.",
+        "legendary": "Jumped from the floor to the top of the wardrobe in one go and refused to come down until the furniture was rearranged."
+      },
+      "moves": {
+        "signature": "Fluffy Pounce",
+        "legend": "Hot Dust Shower",
+        "ultimate": "Dust Bath Blizzard Bash"
+      }
+    },
+    "x_dingo": {
+      "status": "reviewed",
+      "names": {
+        "common": "Outbackhowl",
+        "uncommon": "Desertdodger",
+        "rare": "Campsnatcher",
+        "epic": "Red Dust Dash",
+        "legendary": "Dinga, Wild Queen of the Outback"
+      },
+      "lore": {
+        "common": "Howls at the campfire every evening and expects the sausages to be shared.",
+        "uncommon": "Can turn its head almost all the way round, so it always sees you coming with snacks.",
+        "rare": "Climbs trees and fences like a cat to get to the campsite bins, and looks very proud up there.",
+        "epic": "Ran across the outback so fast that the red dust followed it like a cloud for a whole day.",
+        "legendary": "Howled so often over the outback that the echo learned the tune. Campers now hear two dingoes and only see one."
+      },
+      "moves": {
+        "signature": "Outback Pounce",
+        "legend": "Snatch-and-Run Flurry",
+        "ultimate": "Red Dust Rampage"
+      }
+    },
+    "x_donkey": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stubbornhoof",
+        "uncommon": "Heehaw",
+        "rare": "Cartsherpa",
+        "epic": "Beach Ride Boss",
+        "legendary": "Donald Donkerson, the Stubborn Champion"
+      },
+      "lore": {
+        "common": "Stops dead in the middle of the path for no reason and refuses to move until it decides.",
+        "uncommon": "Hee-haws at the exact moment someone starts telling a secret.",
+        "rare": "Carried so many bags up the mountain path that the guide asked it for a job.",
+        "epic": "Gave rides on the beach to every child in town and refused to walk faster than a slow stroll.",
+        "legendary": "Refused to take one more step on the mountain path, so the road crew built the new road round it. The bend is still named after it."
+      },
+      "moves": {
+        "signature": "Stubborn Kick",
+        "legend": "Hay Bale Nap",
+        "ultimate": "Heehaw Hurricane"
+      }
+    },
+    "x_dugong": {
+      "status": "reviewed",
+      "names": {
+        "common": "Seagrasser",
+        "uncommon": "Gentle Muncher",
+        "rare": "Mermaid Mistake",
+        "epic": "Seagrass Meadow",
+        "legendary": "Dugonda, Grazer of the Shallows"
+      },
+      "lore": {
+        "common": "Chews seagrass all day so slowly that the fish get bored waiting.",
+        "uncommon": "Surfaces to breathe standing on its tail, like a sailor checking the weather.",
+        "rare": "Sailors once mistook it for a mermaid. It has never forgiven them.",
+        "epic": "Mowed the entire seagrass meadow in one afternoon. The seahorses are furious about their missing gardens.",
+        "legendary": "Grazed peacefully in the same bay for so long that the town named its harbour, its pub and its football team after it."
+      },
+      "moves": {
+        "signature": "Seagrass Barge",
+        "legend": "Big Belly Bump",
+        "ultimate": "Shallows Stampede"
+      }
+    },
+    "x_ferret": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sockthief",
+        "uncommon": "Ferretdance",
+        "rare": "Tunnelslip",
+        "epic": "Laundry Heist",
+        "legendary": "Fernando the Weasel War Dancer"
+      },
+      "lore": {
+        "common": "Steals every sock in the house and hides them under the sofa.",
+        "uncommon": "Does a funny sideways dance when it's excited, then crashes into the door.",
+        "rare": "Can squeeze through any pipe in the house and pop out of the kitchen sink.",
+        "epic": "Slipped down the back of every sofa in the furniture shop and came out with all the lost coins, two remotes and a very surprised hamster.",
+        "legendary": "Slept so deeply that it was worn as a scarf to the opera, and woke up only for the applause."
+      },
+      "moves": {
+        "signature": "Ferret Dash",
+        "legend": "Wobbly War Dance",
+        "ultimate": "Sock Pile Pong"
+      }
+    },
+    "x_gerbil": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tubechewer",
+        "uncommon": "Footdrummer",
+        "rare": "Cagebuilder",
+        "epic": "Confetti Maker",
+        "legendary": "Gerbilina, the Tunnel Queen"
+      },
+      "lore": {
+        "common": "Chews its cardboard tube to pieces and then looks for a new one to complain about.",
+        "uncommon": "Thumps its back feet to warn everyone about danger, which is usually the vacuum cleaner.",
+        "rare": "Built a tunnel system in its cage so complex that the owner can't find it.",
+        "epic": "Chewed every cardboard box in the post office into confetti. Parcels now arrive in a cloud.",
+        "legendary": "Built the longest tunnel in the pet shop, connecting every cage, and invited everyone to a party."
+      },
+      "moves": {
+        "signature": "Tunnel Pounce",
+        "legend": "Cardboard Nap",
+        "ultimate": "Desert Dig Frenzy"
+      }
+    },
+    "x_gibbon": {
+      "status": "reviewed",
+      "names": {
+        "common": "Armswinger",
+        "uncommon": "Morningsinger",
+        "rare": "Treetopper",
+        "epic": "Wirewalker",
+        "legendary": "Gibbonetta, Swinger of the Canopy"
+      },
+      "lore": {
+        "common": "Swings across the room on the curtains and lands on the biscuit tin.",
+        "uncommon": "Sings at dawn in a long whooping song that wakes the whole forest.",
+        "rare": "Swings from branch to branch so fast that it seems to fly.",
+        "epic": "Walked along a telephone wire on two legs, arms up like a tightrope walker. The circus wants its number.",
+        "legendary": "Swung through every tree in the jungle without once touching the ground, then took a bow on the highest branch."
+      },
+      "moves": {
+        "signature": "Swinging Lunge",
+        "legend": "Distracting Whoop",
+        "ultimate": "Canopy Express Swing"
+      }
+    },
+    "x_hedgehog": {
+      "status": "reviewed",
+      "names": {
+        "common": "Spikeball",
+        "uncommon": "Slugmuncher",
+        "rare": "Pricklecurl",
+        "epic": "Garden Pincushion",
+        "legendary": "Prickles, the Hedge Champion"
+      },
+      "lore": {
+        "common": "Curls into a ball the moment anyone says hello and stays that way for an hour.",
+        "uncommon": "Snuffles loudly through the garden at night eating slugs, like a tiny vacuum cleaner.",
+        "rare": "Rolled under the garden fence and came back with a leaf stuck to every spine.",
+        "epic": "Rolled into the autumn leaf pile and came out wearing all of it; the park now has one tidy lawn and one walking bonfire-sized heap.",
+        "legendary": "Hibernated so soundly that the gardener built a summer house around it. It woke in spring and complained about the curtains."
+      },
+      "moves": {
+        "signature": "Spiky Roll",
+        "legend": "Prickle Pounce",
+        "ultimate": "Garden Pincushion Charge"
+      }
+    },
+    "x_hyena": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gigglegrin",
+        "uncommon": "Scrapgrabber",
+        "rare": "Laughing Loud",
+        "epic": "Savannah Giggle",
+        "legendary": "Grizelda, the Laughing Queen"
+      },
+      "lore": {
+        "common": "Laughs at its own jokes before it even gets to the punchline.",
+        "uncommon": "Gobbles up leftovers so fast that the lions don't even get a sniff.",
+        "rare": "Its clan is run by the females, who marched to the waterhole and took the lions' best spot. The lions are writing a complaint.",
+        "epic": "Crunched up every bone at the safari barbecue so tidily that the lodge sacked its washing-up team.",
+        "legendary": "Told a joke so funny that every animal on the savannah laughed for a week. Nobody remembers the joke."
+      },
+      "moves": {
+        "signature": "Giggling Pounce",
+        "legend": "Thick-Skin Guard",
+        "ultimate": "Laughter Riot"
+      }
+    },
+    "x_jackal": {
+      "status": "reviewed",
+      "names": {
+        "common": "Duskyelp",
+        "uncommon": "Scrapsnatcher",
+        "rare": "Clever Coat",
+        "epic": "Desert Night Chorus",
+        "legendary": "Jackalina, Trickster of the Dunes"
+      },
+      "lore": {
+        "common": "Yelps at the moon every night, slightly off-key, and blames the wind.",
+        "uncommon": "Pinches snacks from bigger animals while they are busy arguing.",
+        "rare": "Pairs up with its partner for life and they yip duets at the fence posts. The fence posts have not replied.",
+        "epic": "Led a chorus of yelping across the desert that woke every camel in the dunes.",
+        "legendary": "Tricked every lion, leopard and hyena on the plain into sharing their dinner with it on the same evening."
+      },
+      "moves": {
+        "signature": "Quick Snap",
+        "legend": "Sly Grin Boost",
+        "ultimate": "Desert Night Raid"
+      }
+    },
+    "x_kangaroo": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pouchpacker",
+        "uncommon": "Hopboxer",
+        "rare": "Carhopper",
+        "epic": "Outback Bounce",
+        "legendary": "Boomer, Champion of the Hop"
+      },
+      "lore": {
+        "common": "Keeps everything in its pouch: keys, a sandwich, a small surprised lizard.",
+        "uncommon": "Balances on its tail and boxes with its front paws whenever someone mentions exercise.",
+        "rare": "Can jump over a car in one hop, then waits on the other side for applause.",
+        "epic": "Hopped across the outback so energetically that every dingo, emu and road sign moved out of the way.",
+        "legendary": "Hopped so far in one bound that it needed a passport at the other end."
+      },
+      "moves": {
+        "signature": "Hop Kick",
+        "legend": "Boxing Flurry",
+        "ultimate": "Outback Bounce Blast"
+      }
+    },
+    "x_kitten_cat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pouncepuff",
+        "uncommon": "Yarnwrangler",
+        "rare": "Curtainclimber",
+        "epic": "Tiny Tornado Tabby",
+        "legendary": "Whiskerella, the Mighty Mite"
+      },
+      "lore": {
+        "common": "Attacks your toes under the duvet at three in the morning. Every night.",
+        "uncommon": "Unravels a whole ball of wool in under a minute and then falls asleep in the tangle.",
+        "rare": "Climbed the curtains to the top and now refuses to come down until breakfast.",
+        "epic": "Sharpened its tiny claws on every armchair in the furniture shop. Everything is now sold as \"vintage\".",
+        "legendary": "Fell asleep in the bakery window and the queue to watch reached the next town. The bread went cold, nobody minded."
+      },
+      "moves": {
+        "signature": "Tiny Pounce Kitten",
+        "legend": "Toe Ambush",
+        "ultimate": "Tiny Tornado Spin"
+      }
+    },
+    "x_lemur": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wideeyes",
+        "uncommon": "Tailbalancer",
+        "rare": "Sunrise Sitter",
+        "epic": "Island Bounce",
+        "legendary": "Lemuriel, the Wide-Eyed Watcher"
+      },
+      "lore": {
+        "common": "Stares at you with huge round eyes until you give it the grape you were about to eat.",
+        "uncommon": "Uses its long tail to balance on the thinnest branches, and the washing line.",
+        "rare": "Rubbed its scent on every tree in the park so thoroughly that the dogs refuse to walk there.",
+        "epic": "Bounced through the island forest so fast that it caused a tiny breeze in every tree.",
+        "legendary": "Huddled with its whole troop into one fluffy ball on a cold night, so big that it rolled down the hill to the village and was mistaken for a sheep."
+      },
+      "moves": {
+        "signature": "Bouncing Lunge",
+        "legend": "Wide-Eyed Stare",
+        "ultimate": "Island Bounce Storm"
+      }
+    },
+    "x_manatee": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slowfloat",
+        "uncommon": "Lettuce Lover",
+        "rare": "Gentlefloat",
+        "epic": "Lagoon Wallow",
+        "legendary": "Manatina, the Gentle Sea Cow"
+      },
+      "lore": {
+        "common": "Floats so slowly that people think it's a large rock and try to sunbathe on it.",
+        "uncommon": "Eats lettuce so loudly that the fish swim over to complain.",
+        "rare": "Is so gentle that boats stop for it, the fish stop for it, even the tide slows down.",
+        "epic": "Floated into the harbour and the whole town stopped work to watch it eat a cabbage.",
+        "legendary": "Visited the power station's warm outflow every winter for so long that the station named its turbines after it."
+      },
+      "moves": {
+        "signature": "Sea Cow Barge",
+        "legend": "Lettuce Nap",
+        "ultimate": "Lagoon Wallow Wave"
+      }
+    },
+    "x_meerkat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lookoutpaw",
+        "uncommon": "Sentrystand",
+        "rare": "Eagle Eye",
+        "epic": "Desert Sentry Squad",
+        "legendary": "Captain Meera of the Sunny Mound"
+      },
+      "lore": {
+        "common": "Stands up on its back legs every time the doorbell rings, then forgets to sit down again.",
+        "uncommon": "Takes turns standing guard on the sand dune while its family naps. Mostly, it naps too.",
+        "rare": "Spotted an eagle from so far away that the eagle hadn't even decided to fly yet.",
+        "epic": "Organised the whole desert into a lookout rota. Every animal now has a shift and a little whistle.",
+        "legendary": "Dug a burrow so grand that the mob has a guest room, a sandpit and a lookout tower with a lift."
+      },
+      "moves": {
+        "signature": "Lookout Leap",
+        "legend": "Mound Slam",
+        "ultimate": "Sentry Squad Strike"
+      }
+    },
+    "x_mole": {
+      "status": "reviewed",
+      "names": {
+        "common": "Molehill Mo",
+        "uncommon": "Velvetdigger",
+        "rare": "Blindtunneler",
+        "epic": "Lawn Earthquake",
+        "legendary": "Professor Molesworth the Tunneller"
+      },
+      "lore": {
+        "common": "Pops up through the middle of the lawn, looks around and disappears without saying sorry.",
+        "uncommon": "Has fur like velvet that can be stroked in either direction, which it insists you try.",
+        "rare": "Dug so many molehills in one night that the garden looks like a bowl of porridge.",
+        "epic": "Tunnelled under the bowling green so thoroughly that the whole thing bounced during a match.",
+        "legendary": "Dug a tunnel under the sea from one country to the next by accident. Waited for a train at the other end."
+      },
+      "moves": {
+        "signature": "Burrow Burst",
+        "legend": "Molehill Flurry",
+        "ultimate": "Lawn Earthquake Dig"
+      }
+    },
+    "x_mongoose": {
+      "status": "reviewed",
+      "names": {
+        "common": "Shedflash",
+        "uncommon": "Eggthrower",
+        "rare": "Snakeduel",
+        "epic": "Snake Showdown",
+        "legendary": "Mungo, Champion of the Snake Dance"
+      },
+      "lore": {
+        "common": "Darts in and out of the garden shed so quickly that the cat thinks it imagined it.",
+        "uncommon": "Cracks eggs by throwing them backwards between its legs at a rock. The kitchen walls are a disaster.",
+        "rare": "Faced down a cobra in the garden and the cobra slithered away to rethink its life.",
+        "epic": "Chased every snake out of the village in one afternoon. The snakes have opened a bowling club instead.",
+        "legendary": "Hid its whole gang in one burrow so tightly that they came out as one big mongoose and argued for an hour about who was the head."
+      },
+      "moves": {
+        "signature": "Quick Snap Mongoose",
+        "legend": "Dazzling Dodge",
+        "ultimate": "Snake Showdown Strike"
+      }
+    },
+    "x_moose_animal": {
+      "status": "reviewed",
+      "names": {
+        "common": "Basketmuncher",
+        "uncommon": "Lakewader",
+        "rare": "Traffic Jam",
+        "epic": "Festive Antlers",
+        "legendary": "Big Moosely, Monarch of the Bog"
+      },
+      "lore": {
+        "common": "Eats the hanging flower baskets in the village, one by one, on its morning walk.",
+        "uncommon": "Wades into the lake up to its chest to eat water plants, then sneezes pondweed on the fishermen.",
+        "rare": "Stood in the middle of the motorway and every car waited politely until it finished chewing.",
+        "epic": "Its antlers got tangled in the village's festival lights, and it walked around glowing for a week.",
+        "legendary": "Swam across the biggest lake in the land with a family of ducks riding between its antlers."
+      },
+      "moves": {
+        "signature": "Antler Shove",
+        "legend": "Antler Flurry",
+        "ultimate": "Forest Traffic Jam Charge"
+      }
+    },
+    "x_mouse": {
+      "status": "reviewed",
+      "names": {
+        "common": "Cheesecreep",
+        "uncommon": "Crumbtracker",
+        "rare": "Skirtingrunner",
+        "epic": "Kitchen Invasion",
+        "legendary": "Montgomery Mousewhisker the Unseen"
+      },
+      "lore": {
+        "common": "Nibbles the corner of every biscuit in the tin, so nobody gets a whole one.",
+        "uncommon": "Finds every crumb in the kitchen, including ones that fell years ago.",
+        "rare": "Escaped every trap in the house and left a tiny thank-you note for the cheese.",
+        "epic": "Led an army of mice into the bakery overnight. The bread now comes with holes as standard.",
+        "legendary": "Lived in the palace pantry for twenty years and ate the finest cheese in the land. Nobody ever saw it."
+      },
+      "moves": {
+        "signature": "Mouse Scamper",
+        "legend": "Squeaky Startle",
+        "ultimate": "Kitchen Invasion Rush"
+      }
+    },
+    "x_opossum": {
+      "status": "reviewed",
+      "names": {
+        "common": "Playdead",
+        "uncommon": "Tailhanger",
+        "rare": "Fiftygrin",
+        "epic": "Thirteen Riders",
+        "legendary": "Olivia Opossum, Queen of Drama"
+      },
+      "lore": {
+        "common": "Pretends to be dead whenever anyone asks it to help with the washing up.",
+        "uncommon": "Hangs upside down from a branch by its tail, then waves at you with all four feet.",
+        "rare": "Grins with all fifty of its teeth when it's nervous, which makes everyone else nervous too.",
+        "epic": "Carried all thirteen of its babies across the high street on its back. The lollipop lady stopped every bus.",
+        "legendary": "Won best actor at the woodland film festival for a performance that lasted a whole afternoon and had no lines."
+      },
+      "moves": {
+        "signature": "Tail Swing Slam",
+        "legend": "Dramatic Faint",
+        "ultimate": "Grand Finale Faint"
+      }
+    },
+    "x_otter": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tummytable",
+        "uncommon": "Handholder",
+        "rare": "Pebblejuggler",
+        "epic": "Riverslider",
+        "legendary": "Ottoline of the Stone Bowl"
+      },
+      "lore": {
+        "common": "Floats on its back in the river, eating a sandwich off its tummy.",
+        "uncommon": "Holds hands with its friends while sleeping so nobody drifts away.",
+        "rare": "Juggles pebbles on the riverbank so well that tourists throw coins into the river.",
+        "epic": "Built a mud slide so long that every otter in the river came for a go. The riverbank is now a water park.",
+        "legendary": "Cracked so many shellfish on its favourite stone that the stone wore into a perfect bowl, and it now eats breakfast out of it."
+      },
+      "moves": {
+        "signature": "River Splash Pounce",
+        "legend": "Belly Slide Slam",
+        "ultimate": "Riverbank Party Splash"
+      }
+    },
+    "x_platypus": {
+      "status": "reviewed",
+      "names": {
+        "common": "Duckbillbeaver",
+        "uncommon": "Eggpuzzle",
+        "rare": "Webpaw",
+        "epic": "Riverbed Riddle",
+        "legendary": "The Odd Lot, Puzzle of Nature"
+      },
+      "lore": {
+        "common": "Has a duck's beak, a beaver's tail and an otter's feet, and still complains that nothing fits.",
+        "uncommon": "Lays eggs, which confuses every other mammal at the party.",
+        "rare": "Finds food in muddy water with its eyes closed, by sensing the tiny buzz of shrimp.",
+        "epic": "Kicked the museum's stuffed duck with its secret ankle spur, and the duck has been nervous ever since.",
+        "legendary": "Was voted the strangest animal in the world and accepted the trophy without anyone knowing which part of it to hand it to."
+      },
+      "moves": {
+        "signature": "Bill Bump",
+        "legend": "Burrow Rest",
+        "ultimate": "Riverbed Riddle Rumble"
+      }
+    },
+    "x_polar_bear_cub": {
+      "status": "reviewed",
+      "names": {
+        "common": "Snowroll",
+        "uncommon": "Iceslider",
+        "rare": "Fluffpaw Cub",
+        "epic": "Iceberg Slide",
+        "legendary": "Nanu, the Little Ice King"
+      },
+      "lore": {
+        "common": "Rolls in the snow and comes up with a perfect snowball stuck to its nose.",
+        "uncommon": "Slides down icy hills on its tummy, then climbs back up for another go. All day.",
+        "rare": "Waits so patiently by an ice hole that the seals start bringing it snacks to make it leave.",
+        "epic": "Fell asleep on an ice floe and drifted into the harbour. The ferry had to queue behind it.",
+        "legendary": "Won the Arctic snowball fight against every polar bear, seal and walrus in one afternoon."
+      },
+      "moves": {
+        "signature": "Snowball Pounce",
+        "legend": "Fluffy Fur Guard",
+        "ultimate": "Cub Tumble"
+      }
+    },
+    "x_porcupine": {
+      "status": "reviewed",
+      "names": {
+        "common": "Quillpoke",
+        "uncommon": "Treechewer",
+        "rare": "Spikeshake",
+        "epic": "Quill Rain",
+        "legendary": "Porcupella, the Prickly Queen"
+      },
+      "lore": {
+        "common": "Leaves quills stuck in every cushion in the house, so nobody sits down any more.",
+        "uncommon": "Chews through tree bark so loudly that the woodpeckers ask for quiet.",
+        "rare": "Raises its quills and rattles them like a maraca until everyone backs away.",
+        "epic": "Shook its quills so hard that it decorated every tree in the forest like a pincushion.",
+        "legendary": "Licked the salt off every road sign in the county. The signs now all say very clean things."
+      },
+      "moves": {
+        "signature": "Quill Poke",
+        "legend": "Quill Rattle",
+        "ultimate": "Quill Rain Storm"
+      }
+    },
+    "x_possum": {
+      "status": "reviewed",
+      "names": {
+        "common": "Roofthumper",
+        "uncommon": "Hisspaw",
+        "rare": "Fruitpincher",
+        "epic": "Pip Postie",
+        "legendary": "Pippa the Rooftop Possum"
+      },
+      "lore": {
+        "common": "Thumps across the roof at night so loudly that the family thinks there's a burglar in the attic.",
+        "uncommon": "Hisses at the cat from the fence every night, then steals the cat's food.",
+        "rare": "Eats every fruit on the backyard tree the night before the family wants to pick them.",
+        "epic": "Raided every fruit tree on the street in one night and left the pips on each doorstep, sorted by house number.",
+        "legendary": "Ran the night-time rooftop network across the whole suburb, with every possum knowing exactly whose roof was whose."
+      },
+      "moves": {
+        "signature": "Roof Pounce",
+        "legend": "Possum Hissing Distraction",
+        "ultimate": "Attic Rumble Run"
+      }
+    },
+    "x_puppy_dog": {
+      "status": "reviewed",
+      "names": {
+        "common": "Shoechewer",
+        "uncommon": "Pawtripper",
+        "rare": "Puppy Eyes",
+        "epic": "Puppy Pile-Up",
+        "legendary": "Biscuit, the Most Adorable Disaster"
+      },
+      "lore": {
+        "common": "Chews your favourite shoe, then looks at you as though the shoe started it.",
+        "uncommon": "Trips over its own big paws every time it runs to say hello.",
+        "rare": "Gave the whole family puppy eyes until everyone agreed it could sleep on the bed.",
+        "epic": "Got into the garden with twenty other puppies and dug up every flower in the street.",
+        "legendary": "Fell asleep in a bakery window for one minute. Customers queued round the block, and the puppy woke up and ate the display."
+      },
+      "moves": {
+        "signature": "Puppy Tumble",
+        "legend": "Puppy Eyes Distraction",
+        "ultimate": "Puppy Pile-Up Rush"
+      }
+    },
+    "x_raccoon": {
+      "status": "reviewed",
+      "names": {
+        "common": "Binbandit",
+        "uncommon": "Masked Washer",
+        "rare": "Lidopener",
+        "epic": "Trash Can Heist",
+        "legendary": "Rocco, the Masked Bin Bandit"
+      },
+      "lore": {
+        "common": "Knocks over the bin every night and leaves the lid neatly on top of the mess.",
+        "uncommon": "Washes its food in the bird bath before eating, even when it's a doughnut.",
+        "rare": "Can open any bin lock, garden gate or cat flap in under a minute.",
+        "epic": "Washed every apple in the orchard in the duck pond before the farmer could pick them. The ducks have started queuing for a turn.",
+        "legendary": "Planned the greatest bin heist in history, emptying a whole city's rubbish in one night. Recycled everything."
+      },
+      "moves": {
+        "signature": "Masked Pounce",
+        "legend": "Raccoon Snack Snatch",
+        "ultimate": "Trash Can Heist Raid"
+      }
+    },
+    "x_rat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gnawtail",
+        "uncommon": "Sewerscout",
+        "rare": "Mazebreaker",
+        "epic": "Tunnel City Rush",
+        "legendary": "Ratticus, Giggler of the Lab"
+      },
+      "lore": {
+        "common": "Gnaws through the cupboard door to get to the cereal, then complains the cereal is stale.",
+        "uncommon": "Knows every pipe and tunnel under the city by heart, and charges a crumb for directions.",
+        "rare": "Solved the maze at the science lab so fast that the scientists asked it for help with their homework.",
+        "epic": "Chewed a shortcut through every wall on the high street. The shops are now one long shop and nobody can find the exit.",
+        "legendary": "Laughed so hard when the scientist tickled it that the whole lab joined in. Research has stopped for giggles."
+      },
+      "moves": {
+        "signature": "Gnaw Pounce",
+        "legend": "Sewer Pong",
+        "ultimate": "Tunnel City Rush Raid"
+      }
+    },
+    "x_reindeer_animal": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clickhoof",
+        "uncommon": "Lichenmuncher",
+        "rare": "Sleighblur",
+        "epic": "Tundra Stampede",
+        "legendary": "Antlerella, Leader of the Herd"
+      },
+      "lore": {
+        "common": "Clicks its knees as it walks, so it can never sneak up on anyone.",
+        "uncommon": "Digs through the snow with its hooves to find moss, and won't share a single bite.",
+        "rare": "Pulls a sleigh so fast that the passengers' hats are still at the start.",
+        "epic": "Led a herd of a thousand reindeer across the frozen north. The snowploughs followed them for once.",
+        "legendary": "Grew antlers so wide that the whole herd sheltered under them in a blizzard. Now it sheds them every spring as a ready-made bus shelter."
+      },
+      "moves": {
+        "signature": "Antler Charge North",
+        "legend": "Lichen Snatch",
+        "ultimate": "Tundra Stampede Run"
+      }
+    },
+    "x_rhino": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hornbump",
+        "uncommon": "Mudarmour",
+        "rare": "Charging Rhino",
+        "epic": "Savannah Bulldozer",
+        "legendary": "Rhinoceroxa, the Unstoppable"
+      },
+      "lore": {
+        "common": "Charges at bushes for no reason, then looks embarrassed when they don't fight back.",
+        "uncommon": "Covers itself in mud to keep cool and then rubs it off on the safari jeep.",
+        "rare": "Can smell a tasty bush from across the plain, but can't see you standing right in front of it.",
+        "epic": "Charged across the savannah so hard that the ground shook and every termite mound fell over.",
+        "legendary": "Squinted at the lighthouse, decided it was a rival rhino and stared it down for a week. The ships now steer by the rhino."
+      },
+      "moves": {
+        "signature": "Horn Charge",
+        "legend": "Horn Flurry",
+        "ultimate": "Savannah Bulldozer Charge"
+      }
+    },
+    "x_sea_lion": {
+      "status": "reviewed",
+      "names": {
+        "common": "Barkflipper",
+        "uncommon": "Ballbalancer",
+        "rare": "Pierlounger",
+        "epic": "Harbour Honk",
+        "legendary": "Sir Flipperton the Show-Off"
+      },
+      "lore": {
+        "common": "Barks loudly at the boats all day and expects them to bark back.",
+        "uncommon": "Balances a ball on its nose and then waits for applause before it lets go.",
+        "rare": "Lounges on the pier so lazily that the fishermen have to step over it.",
+        "epic": "Barked along to the brass band on the pier until the band gave up and the sea lions played the encore.",
+        "legendary": "Swam so fast past the ferry that the passengers thought the ferry was going backwards."
+      },
+      "moves": {
+        "signature": "Flipper Slap",
+        "legend": "Sunbaked Bark",
+        "ultimate": "Harbour Honk Splash"
+      }
+    },
+    "x_seal": {
+      "status": "reviewed",
+      "names": {
+        "common": "Rockbasker",
+        "uncommon": "Splashclapper",
+        "rare": "Bobbinghead",
+        "epic": "Seaside Splash Choir",
+        "legendary": "Selkie, the Grey Sea Singer"
+      },
+      "lore": {
+        "common": "Lies on the rocks all day and only moves when a wave splashes its face.",
+        "uncommon": "Claps its flippers together whenever it sees a fish, and sometimes when it sees a boat.",
+        "rare": "Bobs its head up in the water and stares at swimmers until they get nervous.",
+        "epic": "Started singing on the rocks and every seal on the coast joined in. The lighthouse keeper wore earmuffs.",
+        "legendary": "Bobbed up beside every swimmer on the coast so often that the lifeguards now count the seal first."
+      },
+      "moves": {
+        "signature": "Flipper Flop",
+        "legend": "Splash Splash Splash",
+        "ultimate": "Seaside Splash Choir Wave"
+      }
+    },
+    "x_skunk": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stinkstripe",
+        "uncommon": "Tailraiser",
+        "rare": "Pongcloud",
+        "epic": "Picnic Evacuation",
+        "legendary": "Phewbert, the Striped Stench"
+      },
+      "lore": {
+        "common": "Raises its tail whenever it's surprised, which empties the garden instantly.",
+        "uncommon": "Does a little handstand warning dance before spraying, so you always know it's coming.",
+        "rare": "Sprayed a garden party once and the guests are still airing out their clothes.",
+        "epic": "Dug up the golf course hunting grubs, so every hole is now a hole-in-one.",
+        "legendary": "Cleared the entire city centre of traffic in a minute with one raised tail. The city now uses it on busy days."
+      },
+      "moves": {
+        "signature": "Striped Pounce Skunk",
+        "legend": "Skunk Fresh Air Rest",
+        "ultimate": "Everybody Out!"
+      }
+    },
+    "x_sloth": {
+      "status": "reviewed",
+      "names": {
+        "common": "Upsidedowner",
+        "uncommon": "Lazy Lapper",
+        "rare": "Nestfur",
+        "epic": "River Drifter",
+        "legendary": "Slowmaestro, Champion of Calm"
+      },
+      "lore": {
+        "common": "Hangs upside down from the curtain rail and takes two hours to come down for dinner.",
+        "uncommon": "Is surprisingly good at swimming and does lazy laps of the river while everyone stares.",
+        "rare": "Sleeps so deeply that birds have built nests in its fur.",
+        "epic": "Swam across the river so lazily that the ferry waited and the passengers clapped it in.",
+        "legendary": "Crossed the road so slowly that the council resurfaced the road around it. It still has not reached the other side."
+      },
+      "moves": {
+        "signature": "Slow Hook",
+        "legend": "Mossy Fur Stink",
+        "ultimate": "Treetop Sleepover Slam"
+      }
+    },
+    "x_wallaby": {
+      "status": "reviewed",
+      "names": {
+        "common": "Minihop",
+        "uncommon": "Little Boast",
+        "rare": "Lightstep",
+        "epic": "Hatlifter",
+        "legendary": "Wilhelmina, the Little Hopper"
+      },
+      "lore": {
+        "common": "Hops into the campsite and steals a single crisp, then hops away very pleased.",
+        "uncommon": "Is smaller than a kangaroo and keeps reminding the kangaroos that small is faster.",
+        "rare": "Hops through the bushland so lightly that its footprints are barely there.",
+        "epic": "Bounded through a garden party so quickly that every hat blew off.",
+        "legendary": "Won the hopping race against every kangaroo in the outback, then celebrated with a single very small crisp."
+      },
+      "moves": {
+        "signature": "Little Hop Kick",
+        "legend": "Distracting Hop",
+        "ultimate": "Scrubland Spring Smash"
+      }
+    },
+    "x_walrus": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tuskbeard",
+        "uncommon": "Clamslurper",
+        "rare": "Icelounger",
+        "epic": "Ice Floe Flop",
+        "legendary": "Sir Wallace Whiskers of the North"
+      },
+      "lore": {
+        "common": "Snores so loudly on the ice that the polar bears move to another floe.",
+        "uncommon": "Slurps clams out of their shells so noisily that the fish complain.",
+        "rare": "Used its tusks to haul itself onto an ice floe and then refused to let anybody else on.",
+        "epic": "Flopped onto an ice floe so hard that the floe sailed off across the bay with the walrus on it.",
+        "legendary": "Grew a moustache so magnificent that every sailor in the north saluted it as it swam past."
+      },
+      "moves": {
+        "signature": "Tusk Thrust",
+        "legend": "Ice Floe Flop Crash",
+        "ultimate": "Walrus Whisker Wave"
+      }
+    },
+    "x_weasel": {
+      "status": "reviewed",
+      "names": {
+        "common": "Eggsneak",
+        "uncommon": "Muddywhite",
+        "rare": "Ringslipper",
+        "epic": "Weaseldance",
+        "legendary": "Wendell, the Sly Slinker"
+      },
+      "lore": {
+        "common": "Slips into the hen house at night and leaves with an egg under each arm.",
+        "uncommon": "Turns white in winter, then forgets and stays white in a muddy spring.",
+        "rare": "Can fit through a gap the size of a wedding ring and loves to prove it.",
+        "epic": "Danced its war dance in the village square so wildly that the morris dancers asked for lessons.",
+        "legendary": "Snuck into the royal kitchens, the treasury and the bakery on the same night, and left with only a single egg."
+      },
+      "moves": {
+        "signature": "Sneaky Bite",
+        "legend": "Sly Grin Power",
+        "ultimate": "Barnyard Blitz Rush"
+      }
+    },
+    "x_wildebeest": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gnustomper",
+        "uncommon": "Grassmigrant",
+        "rare": "Herdrunner",
+        "epic": "Great Migration",
+        "legendary": "Wilbur the Wandering Wildebeest"
+      },
+      "lore": {
+        "common": "Bucks and kicks for no reason in the middle of grazing, then carries on chewing as if nothing happened.",
+        "uncommon": "Travels hundreds of miles to find the freshest grass, then complains it's not as good as last year's.",
+        "rare": "Galloped across a river so fast that it barely got its hooves wet.",
+        "epic": "Led a migration of a million wildebeest across the plains. The dust cloud now has its own weather forecast.",
+        "legendary": "Looks as if it was built from spare parts (beard, mane, horns, tail) and has the paperwork to prove they are all its own."
+      },
+      "moves": {
+        "signature": "Hoof Stamp",
+        "legend": "Grassland Rest",
+        "ultimate": "Great Migration Stampede"
+      }
+    },
+    "x_yak": {
+      "status": "reviewed",
+      "names": {
+        "common": "Grunter",
+        "uncommon": "Sofacoat",
+        "rare": "Peakclimber",
+        "epic": "Lakemelter",
+        "legendary": "Yakov, the Shaggiest of Them All"
+      },
+      "lore": {
+        "common": "Grunts at climbers every morning instead of mooing, then looks offended when nobody understands.",
+        "uncommon": "Grows so much shaggy hair that it can sit in the snow like it's on a sofa.",
+        "rare": "Carried a mountaineer's whole kit to the top of the mountain without being asked.",
+        "epic": "Sat on a frozen lake to keep warm and melted a hole big enough for the village to go swimming.",
+        "legendary": "Grunted so deeply on the mountain that the avalanche changed its mind and went back up."
+      },
+      "moves": {
+        "signature": "Shaggy Horn Shove",
+        "legend": "Grumbling Grunt",
+        "ultimate": "Himalayan Haul Charge"
+      }
+    },
+    "zebra": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stripesnack",
+        "uncommon": "Barcode",
+        "rare": "Herdblur",
+        "epic": "Savannah Dazzle",
+        "legendary": "Zara, Queen of Stripes"
+      },
+      "lore": {
+        "common": "Stands next to every zebra crossing in town and insists the stripes belong to it.",
+        "uncommon": "Its stripes make it so hard to count that the zookeepers always get the wrong number.",
+        "rare": "Stood in a herd and dazzled a lion so much that the lion walked into a tree.",
+        "epic": "Started a neck-nibbling grooming line two thousand zebras long, and nobody on the savannah got any sleep for the giggling.",
+        "legendary": "Barks like a small dog when it's excited, and every farm dog in the valley answers."
+      },
+      "moves": {
+        "signature": "Striped Kick",
+        "legend": "Muddy Waterhole Splash",
+        "ultimate": "Savannah Dazzle Stampede"
+      }
+    }
+  }
+}

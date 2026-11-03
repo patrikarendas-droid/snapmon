@@ -5,7 +5,9 @@
 //   node tools/campaign.js brief <batch> [from] [n]   compact writer brief for objects of a batch (facts + move slots)
 //   node tools/campaign.js ingest <batch> <file>  convert a compact draft file (format below) into content/curated/<batch>-draft.json
 //   node tools/campaign.js status                 reconcile every registry id; write content/campaign/STATUS.md (+ status.json)
-//   node tools/campaign.js immutable              check that approved files are byte-identical to the campaign baseline
+//   node tools/campaign.js immutable              check that every live (approved) file is byte-identical to the recorded baseline
+//   node tools/campaign.js rebaseline "<reason>"  after a deliberate, developer-approved edit: record the new hashes + reason
+//   ingest/patch refuse to change entries with status "reviewed" (live) unless --approved-edit is given.
 //   node tools/campaign.js patch <batch> <json>   merge editor-pass fixes {id: {"lore.rare": …}} into the batch draft
 // Compact draft format (one block per object, lines in any order):
 //   @<object id>
@@ -21,7 +23,11 @@ const readJSON = f => JSON.parse(fs.readFileSync(f, 'utf8'));
 const inventory = () => fs.readFileSync(path.join(ROOT, 'content/inventory/inventory.jsonl'), 'utf8').trim().split('\n').map(JSON.parse);
 let T = null; const game = () => { if (T) return T; const ctx = { console, Math, JSON, Date }; vm.createContext(ctx);
   vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js'].map(f => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n') + ';globalThis.T={OBJECTS,curatedMoveSlots,validateCurated,CURATED_LIMITS}', ctx); return (T = ctx.T); };
-const APPROVED = ['content/curated/pilot-01-approved.json', 'content/curated/pilot-02-approved.json'];
+// every live content file is protected (v0.5.0: the 22 campaign batches were released and joined Pilot 01/02)
+const APPROVED = fs.readdirSync(CUR).filter(f => f.endsWith('.json') && !f.endsWith('-draft.json')).sort().map(f => 'content/curated/' + f);
+// a batch's content file: content/curated/<batch>.json once released, <batch>-draft.json while still being written
+const batchFile = batch => fs.existsSync(path.join(CUR, batch + '.json')) ? path.join(CUR, batch + '.json') : path.join(CUR, batch + '-draft.json');
+const APPROVED_EDIT = process.argv.includes('--approved-edit');
 
 // thematic partition of the not-yet-written objects (sorted by look, then name, so neighbours can be told apart)
 const PLAN = [
@@ -81,17 +87,18 @@ function parseCompact(text) {
   return out;
 }
 function allNames(exceptBatch) { const names = new Map();
-  for (const f of fs.readdirSync(CUR).filter(f => f.endsWith('.json'))) { if (exceptBatch && f === exceptBatch + '-draft.json') continue; const d = readJSON(path.join(CUR, f));
+  for (const f of fs.readdirSync(CUR).filter(f => f.endsWith('.json'))) { if (exceptBatch && path.join(CUR, f) === batchFile(exceptBatch)) continue; const d = readJSON(path.join(CUR, f));
     for (const [id, e] of Object.entries(d.entries || {})) for (const v of Object.values(e.names || {})) names.set(v.toLowerCase(), id + ' (' + f + ')'); }
   const pp = path.join(CAMP, 'pilot-01-names-proposal.json'); if (fs.existsSync(pp)) for (const [id, ns] of Object.entries(readJSON(pp).names)) for (const v of Object.values(ns)) names.set(v.toLowerCase(), id + ' (pilot-01 names proposal)');
   return names; }
 
 function ingest(batch, file) {
   const G = game(), ids = new Set(readJSON(path.join(BAT, batch + '.json')).ids), blocks = parseCompact(fs.readFileSync(file, 'utf8')), errs = [];
-  const out = path.join(CUR, batch + '-draft.json'), doc = fs.existsSync(out) ? readJSON(out) : { schema: 1, batch, entries: {} };
+  const out = batchFile(batch), doc = fs.existsSync(out) ? readJSON(out) : { schema: 1, batch, entries: {} };
   const taken = allNames(batch); for (const [id, e] of Object.entries(doc.entries)) if (!blocks[id]) for (const v of Object.values(e.names || {})) taken.set(v.toLowerCase(), id + ' (this batch)');
   for (const [id, e] of Object.entries(blocks)) {
     if (!ids.has(id)) { errs.push(`${id}: not in batch ${batch}`); continue; }
+    if (doc.entries[id] && doc.entries[id].status === 'reviewed') { errs.push(`${id}: is live (reviewed); ingest never regenerates live writing — edit single fields with patch --approved-edit`); continue; }
     if (RAR.some(r => !e.names[r]) || RAR.some(r => !e.lore[r])) errs.push(`${id}: needs 5 names and 5 lore lines`);
     for (const [r, t] of Object.entries(e.lore)) if (/→|\?\?|TODO|\bhmm\b/i.test(t) || !/[.!?'"]$/.test(t)) errs.push(`${id}: lore.${r} looks unfinished: ${t.slice(-60)}`);
     const slots = G.curatedMoveSlots(id); for (const k of Object.keys(e.moves)) if (!(k in slots)) errs.push(`${id}: unknown move key ${k}`);
@@ -112,10 +119,11 @@ function ingest(batch, file) {
 // patch: merge reviewed fixes into a batch draft. File = JSON {"<id>": {"lore.rare": "…", "names.legendary": "…", "moves.ultimate": "…"}}.
 // Patches live in content/campaign/patches/ and are applied after the chunk files (re-ingesting a chunk = re-apply its patches).
 function patch(batch, file) {
-  const G = game(), out = path.join(CUR, batch + '-draft.json'), doc = readJSON(out), p = readJSON(file), errs = [];
+  const G = game(), out = batchFile(batch), doc = readJSON(out), p = readJSON(file), errs = [];
   const taken = allNames(batch); for (const [id, e] of Object.entries(doc.entries)) for (const v of Object.values(e.names || {})) taken.set(v.toLowerCase(), id + ' (this batch)');
   let n = 0;
-  for (const [id, fields] of Object.entries(p)) { const e = doc.entries[id]; if (!e) { errs.push(`${id}: not in ${batch} draft`); continue; }
+  for (const [id, fields] of Object.entries(p)) { const e = doc.entries[id]; if (!e) { errs.push(`${id}: not in ${batch}`); continue; }
+    if (e.status === 'reviewed' && !APPROVED_EDIT) { errs.push(`${id}: is live (reviewed); add --approved-edit for a deliberate, developer-approved correction`); continue; }
     for (const [k, v] of Object.entries(fields)) { const grp = k.slice(0, k.indexOf('.')), key = k.slice(k.indexOf('.') + 1);
       if (!['lore', 'names', 'moves'].includes(grp) || (grp !== 'moves' && !RAR.includes(key)) || (grp === 'moves' && !(key in G.curatedMoveSlots(id)))) { errs.push(`${id}: bad field ${k}`); continue; }
       if (grp === 'names') { const t = taken.get(v.toLowerCase()); if (t && !t.startsWith(id + ' ')) errs.push(`${id}: name "${v}" already used by ${t}`); taken.set(v.toLowerCase(), id + ' (this batch)'); }
@@ -128,40 +136,57 @@ function patch(batch, file) {
   fs.writeFileSync(out, JSON.stringify(doc, null, 2) + '\n'); console.log(`${path.relative(ROOT, out)}: ${n} field(s) patched from ${path.relative(ROOT, file)}`);
 }
 function status(write = true) {
-  const mf = readJSON(path.join(CAMP, 'manifest.json')), rows = inventory(), owners = new Map(), G = game();
+  // Counts come straight from the source fields in content/curated/*.json. "Previously approved" = the 60 Pilot 01/02
+  // objects (pilot-*-approved.json); "campaign" = the 2,248 objects of the 22 batches. Live = status "reviewed".
+  const mf = readJSON(path.join(CAMP, 'manifest.json')), rows = inventory(), owners = new Map();
   for (const f of fs.readdirSync(CUR).filter(f => f.endsWith('.json'))) for (const [id, e] of Object.entries(readJSON(path.join(CUR, f)).entries || {})) { if (!owners.has(id)) owners.set(id, []); owners.get(id).push({ f, e }); }
-  const prop = fs.existsSync(path.join(CAMP, 'pilot-01-names-proposal.json')) ? readJSON(path.join(CAMP, 'pilot-01-names-proposal.json')).names : {};
   const full = e => RAR.every(r => e.names && e.names[r]) && RAR.every(r => e.lore && e.lore[r]);
-  const lines = [], b = [];
-  let approvedFull = 0, p01 = 0, draftFull = 0, missing = [], multi = [], moves = 0, newNames = 0, newLore = 0;
-  for (const r of rows) { const o = owners.get(r.id) || []; if (o.length > 1) multi.push(r.id);
-    const e = o[0] && o[0].e;
-    if (!e) { missing.push(r.id); continue; }
-    if (e.status === 'reviewed') { if (full(e)) approvedFull++; else if (prop[r.id] && RAR.every(x => prop[r.id][x])) { p01++; newNames += 5; } else missing.push(r.id + ' (names)'); continue; }
-    if (full(e)) { draftFull++; newNames += 5; newLore += 5; moves += Object.keys(e.moves || {}).length; } else missing.push(r.id + ' (incomplete)');
-  }
-  for (const nb of mf.partition.newContent) { const f = path.join(CUR, nb.batch + '-draft.json'), d = fs.existsSync(f) ? readJSON(f).entries : {}, n = Object.values(d).filter(full).length;
-    const rv = fs.existsSync(path.join(ROOT, 'content/review', nb.batch + '-issues.json')) ? 'editor pass logged' : '';
-    b.push(`| ${nb.batch} | ${nb.size} | ${n} | ${n === nb.size ? 'written' : n ? 'in progress' : '—'} | ${rv} |`); }
-  const imm = APPROVED.map(f => [f, sha(path.join(ROOT, f)) === mf.baseline[f]]);
-  const s = { objects: rows.length, approvedComplete: approvedFull, pilot01NamesProposed: p01, draftComplete: draftFull, missing: missing.length, multipleOwners: multi, newNamesReady: newNames, newLoreReady: newLore, moveOverridesReady: moves, immutable: Object.fromEntries(imm) };
-  lines.push('# Curated-writing campaign status', '', 'Generated by `node tools/campaign.js status` (do not edit). Everything new is **draft** until the developer approves it.', '',
-    `- Registry objects: **${s.objects}** — approved complete ${s.approvedComplete}, Pilot 01 (approved lore/moves) with names proposed ${s.pilot01NamesProposed}/10, **draft complete ${s.draftComplete}** of ${mf.counts.new}, still missing ${s.missing}`,
-    `- Ready (draft): ${s.newNamesReady} of ${mf.counts.newNames} new names, ${s.newLoreReady} of ${mf.counts.newLore} new lore lines, ${s.moveOverridesReady} move display overrides`,
-    `- Objects with more than one content owner: ${multi.length ? multi.join(', ') : 'none'}`,
-    `- Approved files byte-identical to the campaign baseline: ${imm.map(([f, ok]) => f.split('/').pop() + ' ' + (ok ? 'yes' : '**NO**')).join(', ')}`, '',
-    '| Batch | Objects | Written | State | Editor |', '|---|---|---|---|---|', ...b, '');
+  const mv = e => Object.keys(e.moves || {}).length, pilot = f => /^pilot-0\d-approved\.json$/.test(f);
+  const c = { prevLive: 0, prevComplete: 0, campLive: 0, campDraft: 0, campComplete: 0, campNames: 0, campLore: 0, campMoves: 0, prevMoves: 0, p01Names: 0 };
+  const missing = [], multi = [];
+  for (const r of rows) { const o = owners.get(r.id) || []; if (o.length > 1) multi.push(r.id); if (!o[0]) { missing.push(r.id); continue; }
+    const { f, e } = o[0], live = e.status === 'reviewed';
+    if (pilot(f)) { c.prevLive += live; c.prevComplete += full(e); c.prevMoves += mv(e); if (f.startsWith('pilot-01')) c.p01Names += RAR.filter(x => e.names && e.names[x]).length; }
+    else { c.campLive += live; c.campDraft += !live; c.campComplete += full(e); c.campMoves += mv(e);
+      c.campNames += RAR.filter(x => e.names && e.names[x]).length; c.campLore += RAR.filter(x => e.lore && e.lore[x]).length; }
+    if (!full(e)) missing.push(r.id + ' (incomplete)'); }
+  const b = [];
+  for (const nb of mf.partition.newContent) { const f = batchFile(nb.batch), d = fs.existsSync(f) ? readJSON(f).entries : {}, es = Object.values(d);
+    const n = es.filter(full).length, live = es.filter(e => e.status === 'reviewed').length;
+    const rv = fs.existsSync(path.join(ROOT, 'content/review', nb.batch + '-issues.json')) ? 'editor pass applied' : '';
+    b.push(`| ${nb.batch} | ${nb.size} | ${n} | ${live === nb.size ? 'live' : live ? `${live} live, ${nb.size - live} draft` : n === nb.size ? 'written (draft)' : n ? 'in progress' : '—'} | ${rv} |`); }
+  const imm = APPROVED.map(f => [f, sha(path.join(ROOT, f)) === (mf.baseline || {})[f]]);
+  const s = { objects: rows.length, previouslyApproved: { objects: c.prevComplete, live: c.prevLive, moveOverrides: c.prevMoves, pilot01NamesAdded: c.p01Names },
+    campaign: { objects: mf.counts.new, complete: c.campComplete, live: c.campLive, draft: c.campDraft, names: c.campNames, lore: c.campLore, moveOverrides: c.campMoves },
+    liveTotal: c.prevLive + c.campLive, moveOverridesTotal: c.prevMoves + c.campMoves, missing: missing.length, multipleOwners: multi, immutable: Object.fromEntries(imm) };
+  const lines = ['# Curated-writing status', '', 'Generated by `node tools/campaign.js status` (do not edit). Counts are read from the source fields in `content/curated/*.json`; live = `"status": "reviewed"`.', '',
+    `- Registry objects: **${s.objects}**; live curated writing: **${s.liveTotal}**; missing or incomplete: ${s.missing}; objects with more than one content owner: ${multi.length ? multi.join(', ') : 'none'}`,
+    `- Previously approved (Pilot 01 + Pilot 02, \`pilot-0*-approved.json\`): ${s.previouslyApproved.objects} complete, ${s.previouslyApproved.live} live, ${s.previouslyApproved.moveOverrides} move display overrides; Pilot 01 names added ${s.previouslyApproved.pilot01NamesAdded}/50 (v0.5.0)`,
+    `- Campaign batches w01–w22 (newly written): ${s.campaign.complete}/${s.campaign.objects} complete, **${s.campaign.live} live**, ${s.campaign.draft} draft; ${s.campaign.names} names, ${s.campaign.lore} lore lines, ${s.campaign.moveOverrides} move display overrides`,
+    `- Move display overrides, all live content: ${s.moveOverridesTotal} (${s.previouslyApproved.moveOverrides} previously approved + ${s.campaign.moveOverrides} campaign)`,
+    `- Live files byte-identical to the recorded baseline (\`node tools/campaign.js immutable\`): ${imm.every(([, ok]) => ok) ? `all ${imm.length} yes` : imm.filter(([, ok]) => !ok).map(([f]) => f.split('/').pop() + ' **NO**').join(', ')}`, '',
+    '| Batch | Objects | Complete | State | Editor |', '|---|---|---|---|---|', ...b, ''];
   if (write) { fs.writeFileSync(path.join(CAMP, 'STATUS.md'), lines.join('\n') + '\n'); fs.writeFileSync(path.join(CAMP, 'status.json'), JSON.stringify(s, null, 1) + '\n'); }
-  console.log(lines.slice(4, 8).join('\n'));
+  console.log(lines.slice(4, 9).join('\n'));
   return s;
 }
 function next(batch) { const mf = readJSON(path.join(CAMP, 'manifest.json'));
-  for (const nb of mf.partition.newContent) { if (batch && nb.batch !== batch) continue; const f = path.join(CUR, nb.batch + '-draft.json'), d = fs.existsSync(f) ? readJSON(f).entries : {};
+  for (const nb of mf.partition.newContent) { if (batch && nb.batch !== batch) continue; const f = batchFile(nb.batch), d = fs.existsSync(f) ? readJSON(f).entries : {};
     const ids = readJSON(path.join(BAT, nb.batch + '.json')).ids, todo = ids.filter(id => !d[id]); if (todo.length) { console.log(`${nb.batch}: ${ids.length - todo.length}/${ids.length} written; next index ${ids.indexOf(todo[0])}: ${todo.slice(0, 25).join(' ')}`); return; } }
   console.log('no unwritten objects' + (batch ? ' in ' + batch : '')); }
-function immutable() { const mf = readJSON(path.join(CAMP, 'manifest.json')); let ok = true; for (const f of APPROVED) { const same = sha(path.join(ROOT, f)) === mf.baseline[f]; ok = ok && same; console.log((same ? 'ok   ' : 'FAIL ') + f); } process.exit(ok ? 0 : 1); }
+function immutable() { const mf = readJSON(path.join(CAMP, 'manifest.json')); let ok = true;
+  for (const f of APPROVED) { const same = sha(path.join(ROOT, f)) === (mf.baseline || {})[f]; ok = ok && same; console.log((same ? 'ok   ' : 'FAIL ') + f); }
+  if (!ok) console.log('A live file changed. If the edit was deliberate and approved: node tools/campaign.js rebaseline "<reason>"');
+  process.exit(ok ? 0 : 1); }
+// rebaseline: record the current hashes of every live file, with the reason, after a deliberate approved edit
+function rebaseline(reason) { if (!reason || reason.startsWith('--')) { console.log('usage: node tools/campaign.js rebaseline "<reason>"'); process.exit(1); }
+  const mf = readJSON(path.join(CAMP, 'manifest.json')), changed = APPROVED.filter(f => sha(path.join(ROOT, f)) !== (mf.baseline || {})[f]);
+  mf.baseline = Object.fromEntries(APPROVED.map(f => [f, sha(path.join(ROOT, f))]));
+  (mf.baselineLog = mf.baselineLog || []).push({ date: new Date().toISOString().slice(0, 10), reason, changed });
+  fs.writeFileSync(path.join(CAMP, 'manifest.json'), JSON.stringify(mf, null, 1) + '\n');
+  console.log(`baseline recorded for ${APPROVED.length} live files; changed: ${changed.length ? changed.join(', ') : 'none'}`); }
 
 const [cmd, ...a] = process.argv.slice(2);
-if (cmd === 'init') init(); else if (cmd === 'brief') brief(...a); else if (cmd === 'ingest') ingest(...a); else if (cmd === 'status') status(); else if (cmd === 'patch') patch(...a); else if (cmd === 'next') next(a[0]); else if (cmd === 'immutable') immutable();
+if (cmd === 'init') init(); else if (cmd === 'brief') brief(...a); else if (cmd === 'ingest') ingest(...a); else if (cmd === 'status') status(); else if (cmd === 'patch') patch(...a); else if (cmd === 'next') next(a[0]); else if (cmd === 'immutable') immutable(); else if (cmd === 'rebaseline') rebaseline(a[0]);
 else console.log(fs.readFileSync(__filename, 'utf8').split('\n').slice(1, 15).join('\n'));
 module.exports = { parseCompact, status };

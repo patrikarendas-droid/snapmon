@@ -1,0 +1,1992 @@
+{
+  "schema": 1,
+  "batch": "w05-vehicles-1",
+  "entries": {
+    "airplane": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gatedasher",
+        "uncommon": "Contrailer",
+        "rare": "Luggage Loser",
+        "epic": "Jetstream Rumble",
+        "legendary": "Captain Skylark, Round the World"
+      },
+      "lore": {
+        "common": "Keeps everyone waiting at the gate, then leaves ten minutes early when they're in the café.",
+        "uncommon": "Draws long white lines across the blue sky, and never finishes the picture.",
+        "rare": "Sent everybody's suitcase to a different country, and kept the socks.",
+        "epic": "Took off so loudly that every car alarm in the airport car park joined in.",
+        "legendary": "Flew round the whole world in a single day, then landed and asked why everyone looked so tired."
+      },
+      "moves": {
+        "signature": "Wing Tip Slam",
+        "legend": "Jet Engine Blast",
+        "ultimate": "Runway Finale",
+        "kit.horn_blast": "Cabin Chime Startle",
+        "kit.exhaust_fumes": "Jet Fuel Fumes",
+        "kit.turbo_boost": "Full Throttle"
+      }
+    },
+    "x_biplane": {
+      "status": "reviewed",
+      "names": {
+        "common": "Rattlewing",
+        "uncommon": "Twinwing",
+        "rare": "Cropduster",
+        "epic": "Air Show Barrel Roll",
+        "legendary": "Old Kitty Kestrel, Ace of the Fair"
+      },
+      "lore": {
+        "common": "Coughs and splutters on every take-off, so the farmer's cows lie down in protest.",
+        "uncommon": "Has two sets of wings, in case it loses one, it says.",
+        "rare": "Looped the loop so close to the haystack that it blew the scarecrow's hat off.",
+        "epic": "Flew upside down over the county show and every spectator's ice cream fell on their shoes.",
+        "legendary": "Flew under every bridge on the river in one afternoon, and still landed in time for tea."
+      },
+      "moves": {
+        "signature": "Propeller Swipe",
+        "legend": "Wing Wobble Distraction",
+        "ultimate": "Upside-Down Fly-By",
+        "kit.horn_blast": "Engine Cough Startle",
+        "kit.exhaust_fumes": "Smoky Trail",
+        "kit.turbo_boost": "Open Throttle",
+        "kit.hit_and_run": "Loop Loop Loop"
+      }
+    },
+    "x_glider": {
+      "status": "reviewed",
+      "names": {
+        "common": "Silentwing",
+        "uncommon": "Thermalseeker",
+        "rare": "Cloudbase Climber",
+        "epic": "Cloudbase Climb",
+        "legendary": "Lady Zephyra, Who Never Landed"
+      },
+      "lore": {
+        "common": "Hangs around on the airfield all morning waiting for someone else to pull it into the air.",
+        "uncommon": "Has no engine at all, so it floats so quietly that birds fly alongside to check it's real.",
+        "rare": "Circled up a warm air bubble so high that it ended up above the clouds.",
+        "epic": "Circled silently over the beach all afternoon, and every seagull thought it was a giant gull and followed it home.",
+        "legendary": "Stayed up riding warm air for a whole week. When it finally landed, the pilot had grown a beard and the airfield had a new café."
+      },
+      "moves": {
+        "signature": "Silent Swoop",
+        "legend": "Thermal Steal",
+        "ultimate": "Cloud-Top Dive",
+        "kit.horn_blast": "Whistling Wing",
+        "kit.exhaust_fumes": "Cow Field Breeze",
+        "kit.hit_and_run": "Swoop Swoop Swoop"
+      }
+    },
+    "x_jet_fighter_toy": {
+      "status": "reviewed",
+      "names": {
+        "common": "Zoomzoom",
+        "uncommon": "Couchpilot",
+        "rare": "Missileclick",
+        "epic": "Bedroom Dogfight",
+        "legendary": "Major Whoosh, Ace of the Bedroom"
+      },
+      "lore": {
+        "common": "Is flown round the living room with loud whooshing noises until it crashes into the dog.",
+        "uncommon": "Has a little plastic pilot who hasn't blinked in ten years.",
+        "rare": "Fired its spring-loaded missile across the room and knocked the biscuit off the plate.",
+        "epic": "Fought a dogfight with every toy plane in the house, and the curtains were badly injured.",
+        "legendary": "Was flown in a thousand imaginary missions, crashed in nine hundred, and still has both wings."
+      },
+      "moves": {
+        "signature": "Plastic Nose Dive",
+        "legend": "Spring Missile Crack",
+        "ultimate": "Sofa Strafe",
+        "kit.horn_blast": "Whoosh Noise",
+        "kit.exhaust_fumes": "Pretend Smoke",
+        "kit.hit_and_run": "Zoom Zoom Zoom"
+      }
+    },
+    "x_seaplane": {
+      "status": "reviewed",
+      "names": {
+        "common": "Splashlander",
+        "uncommon": "Floatfeet",
+        "rare": "Lakehopper",
+        "epic": "Bay Splashdown",
+        "legendary": "Commodore Skimmer of the Lakes"
+      },
+      "lore": {
+        "common": "Lands on the lake right where the ducks were having their meeting.",
+        "uncommon": "Has floats for feet, so it wobbles about on the water like a duck on stilts.",
+        "rare": "Hopped from lake to lake all day, delivering post to cabins with no roads.",
+        "epic": "Landed in the bay so splashily that every sailing boat got a free wash.",
+        "legendary": "Landed on the hotel swimming pool to deliver a birthday cake. The guests kept swimming round its floats as if it were a lilo."
+      },
+      "moves": {
+        "signature": "Float Bump",
+        "legend": "Calm Water Rest",
+        "ultimate": "Big Splashdown",
+        "kit.horn_blast": "Splash Startle",
+        "kit.turbo_boost": "Take-Off Run",
+        "kit.hit_and_run": "Skim Skim Skim"
+      }
+    },
+    "x_space_rocket_toy": {
+      "status": "reviewed",
+      "names": {
+        "common": "Countdowner",
+        "uncommon": "Fin Wobble",
+        "rare": "Bedlauncher",
+        "epic": "Bedroom Blast-Off",
+        "legendary": "Commander Starlite of the Bunk Bed"
+      },
+      "lore": {
+        "common": "Counts down from ten every time you pick it up, then refuses to launch.",
+        "uncommon": "Has wobbly plastic fins that never stand up straight on the shelf.",
+        "rare": "Launched off the bunk bed and landed in the laundry basket, mission complete.",
+        "epic": "Blasted off from the garden with one stamp on the air pump and landed on the school roof. The caretaker now keeps a ladder ready.",
+        "legendary": "Pumped so hard it flew over three gardens and the school, then landed back in its own toy box. Its owner calls this a full orbit."
+      },
+      "moves": {
+        "signature": "Nose Cone Bonk",
+        "legend": "Heat Shield",
+        "ultimate": "Launch Pad Liftoff",
+        "kit.horn_blast": "Countdown Beeps",
+        "kit.turbo_boost": "Air Pump Boost",
+        "kit.hit_and_run": "Bounce Bounce Bounce"
+      }
+    },
+    "ambulance": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sirenwail",
+        "uncommon": "Mirrorwriter",
+        "rare": "Corner Racer",
+        "epic": "Rush Hour Rescue",
+        "legendary": "Nightingale, Fastest to the Rescue"
+      },
+      "lore": {
+        "common": "Wails its siren just as you're about to fall asleep, then turns round the next corner.",
+        "uncommon": "Writes its name backwards on the front so other drivers can read it in their mirror.",
+        "rare": "Parted a traffic jam just by flashing its blue lights, like a magic trick.",
+        "epic": "Turned on its siren once at the seaside, and every gull on the beach copied it until sunset.",
+        "legendary": "Got across the busiest city in the world in ten minutes, and the patient had only a splinter."
+      },
+      "moves": {
+        "signature": "Bumper Nudge",
+        "legend": "Jump-Start Siphon",
+        "ultimate": "Blue-Light Dash",
+        "kit.exhaust_fumes": "Diesel Puff",
+        "kit.turbo_boost": "Siren Speed",
+        "kit.hit_and_run": "Swerve Swerve Swerve"
+      }
+    },
+    "x_hot_air_balloon": {
+      "status": "reviewed",
+      "names": {
+        "common": "Burnerroar",
+        "uncommon": "Basketbobber",
+        "rare": "Fieldlander",
+        "epic": "Dawn Drift",
+        "legendary": "Wanderwind, Queen of the Breeze"
+      },
+      "lore": {
+        "common": "Roars its burner right above your head at six in the morning.",
+        "uncommon": "Floats wherever the wind takes it, so it never knows where it will land.",
+        "rare": "Landed in a field of sheep, and the sheep followed it for a mile.",
+        "epic": "Floated over the city with a hundred other balloons, and everyone went to work late.",
+        "legendary": "Floated so high over the mountains that it landed on a summit, and the climbers who had walked up for a week were not pleased."
+      },
+      "moves": {
+        "signature": "Basket Bump",
+        "legend": "Sandbag Shower",
+        "ultimate": "Sudden Descent",
+        "kit.exhaust_fumes": "Propane Whiff",
+        "kit.turbo_boost": "Hot Air Rise",
+        "kit.hit_and_run": "Drift Drift Drift"
+      }
+    },
+    "x_asphalt_paver": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tarspreader",
+        "uncommon": "Hotroad",
+        "rare": "Smoothmaker",
+        "epic": "Fresh Tarmac Flood",
+        "legendary": "Tarmacia, Layer of Highways"
+      },
+      "lore": {
+        "common": "Leaves a hot black road behind it that smells like a burnt pancake.",
+        "uncommon": "Leaves a road so warm behind it that every cat in the street comes to lie on it at teatime.",
+        "rare": "Laid a brand new road down the street in one day, and everyone's car was stuck at home.",
+        "epic": "Paved every pothole in town in one night, and the cyclists cried with happiness.",
+        "legendary": "Laid a road so smooth from coast to coast that drivers could hear their own tyres purring."
+      },
+      "moves": {
+        "signature": "Hot Tar Shove",
+        "legend": "Tar Smell Stink",
+        "ultimate": "Fresh Road Rollout",
+        "kit.horn_blast": "Reverse Beep Startle",
+        "kit.exhaust_fumes": "Hot Tar Fumes",
+        "kit.turbo_boost": "Paving Pace",
+        "kit.hit_and_run": "Pave Pave Pave"
+      }
+    },
+    "bulldozer": {
+      "status": "reviewed",
+      "names": {
+        "common": "Mudpusher",
+        "uncommon": "Blademouth",
+        "rare": "Hillshover",
+        "epic": "Construction Quake",
+        "legendary": "Shovemore, Mover of Mountains"
+      },
+      "lore": {
+        "common": "Pushes the same pile of dirt back and forth all day as if it lost something.",
+        "uncommon": "Lowers its big blade like a grumpy face whenever someone walks past.",
+        "rare": "Pushed a skip, a shed and the foreman's lunch into the same pile before noticing anyone was shouting.",
+        "epic": "Cleared a whole building site in one morning, and the workers had to find something else to do.",
+        "legendary": "Moved a mountain one push at a time, and the mountain now lives two miles further down the valley."
+      },
+      "moves": {
+        "signature": "Blade Push",
+        "legend": "Dirt Pile Crack",
+        "ultimate": "Ground-Shaking Shove",
+        "kit.horn_blast": "Reverse Alarm",
+        "kit.turbo_boost": "Diesel Surge",
+        "kit.hit_and_run": "Push Push Push"
+      }
+    },
+    "x_grader": {
+      "status": "reviewed",
+      "names": {
+        "common": "Longblade",
+        "uncommon": "Beltbuckle Blade",
+        "rare": "Ditchdigger",
+        "epic": "Dirt Road Smoothing",
+        "legendary": "Gravella, Smoother of Lanes"
+      },
+      "lore": {
+        "common": "Smooths out the gravel road, then leaves a little ridge right in the middle for you to bump over.",
+        "uncommon": "Has its blade in the middle of its body, like a giant with a belt buckle.",
+        "rare": "Dug a ditch along the whole lane so neatly that the rainwater ran away with a grin.",
+        "epic": "Smoothed out every dirt road in the county so well that the farmers' eggs stopped breaking.",
+        "legendary": "Cleared a mountain pass of snow with one sweep of its blade, then left a perfectly neat snowman at the top."
+      },
+      "moves": {
+        "signature": "Long Blade Swipe",
+        "legend": "Hot Gravel Spray",
+        "ultimate": "Ridge Ruin",
+        "kit.horn_blast": "Gravel Crunch Startle",
+        "kit.exhaust_fumes": "Dusty Diesel",
+        "kit.turbo_boost": "Grader Gear Up",
+        "kit.hit_and_run": "Scrape Scrape Scrape"
+      }
+    },
+    "x_road_roller": {
+      "status": "reviewed",
+      "names": {
+        "common": "Flattener",
+        "uncommon": "Slowroll",
+        "rare": "Pavementpress",
+        "epic": "Steady Squash",
+        "legendary": "Rolanda, Flattest of All"
+      },
+      "lore": {
+        "common": "Rolls over the same bit of road a hundred times as if it hasn't noticed.",
+        "uncommon": "Moves so slowly that pigeons walk beside it to keep it company.",
+        "rare": "Flattened the fresh tarmac so smooth that skateboarders queued to try it.",
+        "epic": "Rolled over a forgotten garden hose and sprayed the whole street like a giant fountain until teatime.",
+        "legendary": "Rolled out a playground so flat that every marble in it has stayed exactly where it was dropped."
+      },
+      "moves": {
+        "signature": "Roller Squash",
+        "legend": "Engine Idle Rest",
+        "ultimate": "Big Flat Roll",
+        "kit.horn_blast": "Beep Beep Startle",
+        "kit.exhaust_fumes": "Diesel Cloud",
+        "kit.turbo_boost": "Second Gear",
+        "kit.hit_and_run": "Roll Roll Roll"
+      }
+    },
+    "x_skid_steer": {
+      "status": "reviewed",
+      "names": {
+        "common": "Spinbucket",
+        "uncommon": "Tightturner",
+        "rare": "Yardscooper",
+        "epic": "Sandhill Shifter",
+        "legendary": "Pocket Pip, Busiest Digger"
+      },
+      "lore": {
+        "common": "Spins on the spot like it's dancing, then scoops up the wrong pile.",
+        "uncommon": "Swaps its bucket for forks, a brush or a drill in seconds, and swaps just to show off.",
+        "rare": "Fit through a garden gate that every other digger was too big for.",
+        "epic": "Moved a whole hill of sand in one afternoon, and the beach volleyball club moved in.",
+        "legendary": "Did the work of ten bigger diggers in one week, then fitted back into its tiny garage."
+      },
+      "moves": {
+        "signature": "Bucket Scoop",
+        "legend": "Spin Power",
+        "ultimate": "Skidding Scoop",
+        "kit.exhaust_fumes": "Diesel Belch",
+        "kit.turbo_boost": "Rev Up",
+        "kit.hit_and_run": "Spin Spin Spin"
+      }
+    },
+    "x_steamroller": {
+      "status": "reviewed",
+      "names": {
+        "common": "Puffhuff",
+        "uncommon": "Chuggaroll",
+        "rare": "Whistlewhoop",
+        "epic": "Village Flattening",
+        "legendary": "Old Puffington, the Iron Roller"
+      },
+      "lore": {
+        "common": "Puffs clouds of steam over the hedge and makes the washing on the line smell smoky.",
+        "uncommon": "Has a huge iron roller at the front that clanks like an old kettle.",
+        "rare": "Whistled so loudly at the village green that the cricketers dropped the ball.",
+        "epic": "Steamed up the whole village green so thickly that the fête carried on in fog, and three people bought the same cake twice.",
+        "legendary": "Rolled flat a road made entirely of conkers so the village could have a smooth autumn. The squirrels have not forgiven it."
+      },
+      "moves": {
+        "signature": "Iron Roller Squash",
+        "legend": "Steam Whistle Startle",
+        "ultimate": "Steam Cloud Shock",
+        "kit.horn_blast": "Big Whistle",
+        "kit.exhaust_fumes": "Coal Smoke",
+        "kit.hit_and_run": "Chug Chug Chug"
+      }
+    },
+    "x_wheel_loader": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bucketbelly",
+        "uncommon": "Showbucket",
+        "rare": "Heapmaker",
+        "epic": "Quarry Rush",
+        "legendary": "Big Shovelina, Queen of the Quarry"
+      },
+      "lore": {
+        "common": "Scoops up a huge bucket of gravel and drops half of it on the way to the lorry.",
+        "uncommon": "Lifts its bucket high like it's showing off a trophy.",
+        "rare": "Filled a lorry with one scoop, and the lorry sagged on its springs.",
+        "epic": "Moved every gravel pile in the quarry in one day, and the quarry manager spent the evening looking for his car under one.",
+        "legendary": "Built a gravel mountain so tall that the quarry workers put a flag on top."
+      },
+      "moves": {
+        "signature": "Bucket Bash",
+        "legend": "Scoop Scoop Scoop",
+        "ultimate": "Heavy Bucket Drop",
+        "kit.horn_blast": "Reverse Warning",
+        "kit.exhaust_fumes": "Black Exhaust",
+        "kit.turbo_boost": "Big Lift",
+        "kit.hit_and_run": "Load Load Load"
+      }
+    },
+    "bus": {
+      "status": "reviewed",
+      "names": {
+        "common": "Late Twelve",
+        "uncommon": "Doorhisser",
+        "rare": "Doubledecker",
+        "epic": "School Run Rush",
+        "legendary": "Old Number Nine, the Never-Late"
+      },
+      "lore": {
+        "common": "Pulls away from the stop just as you reach it, every single time.",
+        "uncommon": "Hisses and kneels down at every stop like it's bowing to the passengers.",
+        "rare": "Fit forty schoolchildren, two dogs and a tuba on board, and still had room for a pram.",
+        "epic": "Took a wrong turn on the school trip and brought forty children to the zoo instead of the museum. Nobody has complained.",
+        "legendary": "Ran its route for fifty years without being late once, and the clock tower sets its time by it."
+      },
+      "moves": {
+        "signature": "Bumper Bash",
+        "legend": "Bell Ding Startle",
+        "ultimate": "Last Stop Slam",
+        "kit.horn_blast": "Big Horn Honk",
+        "kit.exhaust_fumes": "Diesel Fug",
+        "kit.hit_and_run": "Stop Start Stop"
+      }
+    },
+    "car": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hornhonker",
+        "uncommon": "Parkingpest",
+        "rare": "Roadtripper",
+        "epic": "Motorway Mayhem",
+        "legendary": "Lady Roadster, a Million Miles"
+      },
+      "lore": {
+        "common": "Beeps its horn in the car park just to say hello to other cars.",
+        "uncommon": "Can never find a parking space near the shop, and always parks crooked.",
+        "rare": "Packed a whole family, a tent and a dog into its boot for a camping trip.",
+        "epic": "Got stuck in the biggest traffic jam ever and played the radio so loud that everyone sang along.",
+        "legendary": "Drove a million miles in one lifetime and still has the same fluffy dice hanging from its mirror."
+      },
+      "moves": {
+        "signature": "Bumper Bump",
+        "legend": "Honk Honk Honk",
+        "ultimate": "Hot Engine Rush",
+        "kit.horn_blast": "Horn Toot",
+        "kit.exhaust_fumes": "Smelly Exhaust",
+        "kit.turbo_boost": "Put Foot Down"
+      }
+    },
+    "i_car_wheel": {
+      "status": "reviewed",
+      "names": {
+        "common": "Puddlesplasher",
+        "uncommon": "Hubcapper",
+        "rare": "Rimroller",
+        "epic": "Runaway Tyre",
+        "legendary": "Rota the Unstoppable Wheel"
+      },
+      "lore": {
+        "common": "Rolls through the only puddle in the car park and splashes your clean trousers.",
+        "uncommon": "Has a shiny hubcap that it keeps losing in the hedge.",
+        "rare": "Rolled off the car on a hill and overtook the car on the way down.",
+        "epic": "Got stuck in a giant puddle at the roundabout and sent a wave over every car going round, twice.",
+        "legendary": "Did a million turns without a single puncture, and the garage gave it a gold hubcap. It lost it in a hedge the same day."
+      },
+      "moves": {
+        "signature": "Rubber Bump",
+        "legend": "Hubcap Clatter",
+        "ultimate": "Downhill Roll",
+        "kit.exhaust_fumes": "Rubber Smell",
+        "kit.turbo_boost": "Pump Up",
+        "kit.hit_and_run": "Spin Spin Spin Spin"
+      }
+    },
+    "i_disk_brake": {
+      "status": "reviewed",
+      "names": {
+        "common": "Squealstop",
+        "uncommon": "Hotdisc",
+        "rare": "Padgrinder",
+        "epic": "Screeching Halt",
+        "legendary": "Calipra, Who Stopped the Runaway Bus"
+      },
+      "lore": {
+        "common": "Squeals loudly every time the car stops at the lights, so everyone turns to look.",
+        "uncommon": "Gets so hot after driving down a hill that you could warm your hands on it.",
+        "rare": "Stopped a speeding car so quickly that the shopping slid onto the front seat.",
+        "epic": "Stopped so suddenly at the zebra crossing that every car behind stopped too, all the way back to the next town.",
+        "legendary": "Stopped a runaway bus on the steepest hill in town, and the passengers clapped."
+      },
+      "moves": {
+        "signature": "Disc Clamp",
+        "legend": "Brake Dust Stink",
+        "ultimate": "Emergency Stop",
+        "kit.horn_blast": "Brake Squeal",
+        "kit.exhaust_fumes": "Brake Dust",
+        "kit.turbo_boost": "Grip Boost",
+        "kit.hit_and_run": "Stop Stop Stop"
+      }
+    },
+    "i_gas_pump": {
+      "status": "reviewed",
+      "names": {
+        "common": "Nozzledrip",
+        "uncommon": "Pricetick",
+        "rare": "Clickstopper",
+        "epic": "Forecourt Fuel Frenzy",
+        "legendary": "Petrolina, Fueler of Fleets"
+      },
+      "lore": {
+        "common": "Drips a little petrol on your shoe after every fill-up.",
+        "uncommon": "Ticks up the price so fast that it looks like it's racing.",
+        "rare": "Clicked off at exactly the wrong moment and left everyone in the queue grumbling.",
+        "epic": "Ran dry on the holiday weekend, and the queue of cars stretched past the motorway sign, the service station and a farm.",
+        "legendary": "Clicked off at exactly the round number for every customer for a whole summer, and drivers queued from three towns away to watch."
+      },
+      "moves": {
+        "signature": "Nozzle Bonk",
+        "legend": "Price Tick Distraction",
+        "ultimate": "Fuel Spill Surprise",
+        "kit.horn_blast": "Nozzle Click",
+        "kit.exhaust_fumes": "Petrol Whiff",
+        "kit.turbo_boost": "Full Tank"
+      }
+    },
+    "i_grille": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bugcatcher Grille",
+        "uncommon": "Chromegrin",
+        "rare": "Frontface",
+        "epic": "Kite Swallower",
+        "legendary": "Sir Gleamsworth, Grin of the Highway"
+      },
+      "lore": {
+        "common": "Catches every bug on the motorway and keeps them as souvenirs.",
+        "uncommon": "Looks like a grinning face on the front of the car, especially when the headlights are on.",
+        "rare": "Glinted so brightly in the sun that the car behind had to put on sunglasses.",
+        "epic": "Breathed in so hard through its slats on the motorway that it swallowed a kite, three crisp packets and somebody's sun hat.",
+        "legendary": "Grinned at a grumpy traffic jam until every driver grinned back, and the jam cleared itself out of embarrassment."
+      },
+      "moves": {
+        "signature": "Chrome Bump",
+        "legend": "Grille Polish Pride",
+        "ultimate": "Big Chrome Grin",
+        "kit.horn_blast": "Headlight Flash",
+        "kit.exhaust_fumes": "Squashed Bug Smell",
+        "kit.turbo_boost": "Air Intake Boost",
+        "kit.hit_and_run": "Grin Grin Grin"
+      }
+    },
+    "i_horse_cart": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clipclopper",
+        "uncommon": "Haybaler",
+        "rare": "Cobblebumper",
+        "epic": "Market Day Trot",
+        "legendary": "Old Dobbin's Wagon of Plenty"
+      },
+      "lore": {
+        "common": "Clip-clops down the lane at its own pace, and the cars behind have to wait.",
+        "uncommon": "Carries a load of hay so high that the driver can't see over it.",
+        "rare": "Bounced over the cobbles so hard that all the apples fell out at once.",
+        "epic": "Took the wrong lane at market and led every car in town round the duck pond twice at walking pace.",
+        "legendary": "Carried a whole wedding party across the flooded ford without a single wet shoe, and the horse got the first slice of cake."
+      },
+      "moves": {
+        "signature": "Wheel Bump",
+        "legend": "Hay Pile Pride",
+        "ultimate": "Runaway Trot",
+        "kit.horn_blast": "Harness Bell Jingle",
+        "kit.exhaust_fumes": "Horse Pat Whiff",
+        "kit.turbo_boost": "Gee Up"
+      }
+    },
+    "i_model_t": {
+      "status": "reviewed",
+      "names": {
+        "common": "Crankstart",
+        "uncommon": "Tinlizzie",
+        "rare": "Puttputt",
+        "epic": "Dusty Road Race",
+        "legendary": "Grandad Tin, the First on the Road"
+      },
+      "lore": {
+        "common": "Needs a crank turned at the front to start, and kicks back at anyone who does it wrong.",
+        "uncommon": "Only comes in black, and is quite proud of it.",
+        "rare": "Putt-putted through the town so loudly that the horses all looked up from their hay.",
+        "epic": "Drove the dusty road from one town to the next, and the dust cloud reached the next county.",
+        "legendary": "Was driven home from the museum by mistake and did the school run for a week before anyone noticed."
+      },
+      "moves": {
+        "signature": "Running Board Bump",
+        "legend": "Crank Handle Kick",
+        "ultimate": "Old Engine Backfire",
+        "kit.exhaust_fumes": "Oily Smoke",
+        "kit.turbo_boost": "Advance Spark",
+        "kit.hit_and_run": "Putt Putt Putt"
+      }
+    },
+    "i_oxcart": {
+      "status": "reviewed",
+      "names": {
+        "common": "Creakwheel",
+        "uncommon": "Slowhauler",
+        "rare": "Muddy Rut",
+        "epic": "Harvest Haul",
+        "legendary": "Grand Ox Wagon of the Valley"
+      },
+      "lore": {
+        "common": "Creaks so loudly on every turn of its wheel that the birds fly off.",
+        "uncommon": "Goes at the speed of a walking ox, which is the slowest speed there is.",
+        "rare": "Got stuck in the mud and pulled itself out with one heave from the ox.",
+        "epic": "Carried the whole village's harvest in one trip, and nobody's barn had any room left.",
+        "legendary": "Arrived so late at the harvest fair that it became the first cart at next year's fair. The ox calls this planning."
+      },
+      "moves": {
+        "signature": "Wooden Wheel Bump",
+        "legend": "Creaky Startle",
+        "ultimate": "Ox Heave",
+        "kit.exhaust_fumes": "Barnyard Whiff",
+        "kit.turbo_boost": "Ox Pull",
+        "kit.hit_and_run": "Plod Plod Plod"
+      }
+    },
+    "i_seat_belt": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clickstrap",
+        "uncommon": "Shoulderpinch",
+        "rare": "Lockjolt",
+        "epic": "Click Clack Squad",
+        "legendary": "Guardian Buckle, the Lifesaver"
+      },
+      "lore": {
+        "common": "Locks tight every time you lean forward to reach the radio.",
+        "uncommon": "Twists itself into a knot every time you put it on.",
+        "rare": "Clicked shut so firmly that the dog couldn't escape, even for a sausage.",
+        "epic": "Locked every passenger into the coach at once, and the driver finally had peace.",
+        "legendary": "Has kept millions of people safe without ever once being thanked by name."
+      },
+      "moves": {
+        "signature": "Buckle Slap",
+        "legend": "Lock Click Boost",
+        "ultimate": "Sudden Lock",
+        "kit.exhaust_fumes": "Old Car Whiff",
+        "kit.turbo_boost": "Tighten Up",
+        "kit.hit_and_run": "Click Click Click"
+      }
+    },
+    "cement_mixer": {
+      "status": "reviewed",
+      "names": {
+        "common": "Drumspinner",
+        "uncommon": "Slopper",
+        "rare": "Concretehauler",
+        "epic": "Wet Concrete Wave",
+        "legendary": "Mixella, Builder of Bridges"
+      },
+      "lore": {
+        "common": "Keeps its drum spinning even when it's parked, like it's afraid to stop.",
+        "uncommon": "Pours wet concrete everywhere except where it's supposed to go.",
+        "rare": "Mixed a load so thick that a builder's wellie is still stuck in the new path.",
+        "epic": "Poured the foundations for a whole street in one day, and the street's footprints are now permanent.",
+        "legendary": "Poured the concrete for the biggest bridge in the country, and still had enough left to make a paddling pool."
+      },
+      "moves": {
+        "signature": "Drum Bump",
+        "legend": "Wet Concrete Crack",
+        "ultimate": "Concrete Pour",
+        "kit.horn_blast": "Reverse Beeper",
+        "kit.turbo_boost": "Drum Spin Up",
+        "kit.hit_and_run": "Spin Pour Spin"
+      }
+    },
+    "x_cherry_picker": {
+      "status": "reviewed",
+      "names": {
+        "common": "Liftbucket",
+        "uncommon": "Highreacher",
+        "rare": "Kittenfetcher",
+        "epic": "Street Light Rescue",
+        "legendary": "Lofty Lifta, Reacher of Rooftops"
+      },
+      "lore": {
+        "common": "Lifts the worker up to the street light, then gets stuck halfway down.",
+        "uncommon": "Can reach the top of a three-storey house without leaving the pavement.",
+        "rare": "Rescued a kitten from the top of a tree, and the kitten wanted to go up again.",
+        "epic": "Changed every light bulb on the high street in one night, and the town shone like Christmas.",
+        "legendary": "Reached the clock tower to fix the clock and turned the hands back an hour, so the whole town got a lie-in it never asked for."
+      },
+      "moves": {
+        "signature": "Bucket Bump",
+        "legend": "Hot Bulb Swap",
+        "ultimate": "High Reach Drop",
+        "kit.horn_blast": "Warning Beep",
+        "kit.exhaust_fumes": "Diesel Wheeze",
+        "kit.hit_and_run": "Up Down Up"
+      }
+    },
+    "crane": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hookdangler",
+        "uncommon": "Skyswinger",
+        "rare": "Beamlifter",
+        "epic": "Skyline Swing",
+        "legendary": "Lady Liftalot, Builder of Towers"
+      },
+      "lore": {
+        "common": "Swings its hook right past the office window just as someone is drinking their coffee.",
+        "uncommon": "Stretches its long arm into the sky and wobbles a bit when the wind blows.",
+        "rare": "Lifted a whole swimming pool onto a hotel roof without spilling a drop.",
+        "epic": "Swung a steel beam round the city skyline, and every pigeon moved to a new roof.",
+        "legendary": "Built the tallest tower in the city one beam at a time, then folded itself up and drove away."
+      },
+      "moves": {
+        "signature": "Hook Swing",
+        "legend": "Load Snatch",
+        "ultimate": "Counterweight Drop",
+        "kit.horn_blast": "Lifting Siren",
+        "kit.exhaust_fumes": "Diesel Puffs",
+        "kit.turbo_boost": "Boom Extend",
+        "kit.hit_and_run": "Swing Swing Swing"
+      }
+    },
+    "x_scissor_lift": {
+      "status": "reviewed",
+      "names": {
+        "common": "Zigzagger Lift",
+        "uncommon": "Wobbleplatform",
+        "rare": "Ceilingreacher",
+        "epic": "Warehouse Rise",
+        "legendary": "Elevata, the Folding Tower"
+      },
+      "lore": {
+        "common": "Beeps the whole time it goes up, the whole time it goes down, and a little bit after.",
+        "uncommon": "Folds up and down like a concertina, and squeaks on every fold.",
+        "rare": "Lifted a painter so high that he painted the ceiling and the light fitting by mistake.",
+        "epic": "Rose up to every shelf in the warehouse in one night, and every box was put away.",
+        "legendary": "Raised a dancer so high in the school play that she finished the dance on the theatre roof, to cheers from the pigeons."
+      },
+      "moves": {
+        "signature": "Platform Bump",
+        "legend": "Wobbly Height Crack",
+        "ultimate": "Scissor Lift Sudden Fold",
+        "kit.horn_blast": "Lift Alarm",
+        "kit.exhaust_fumes": "Battery Whiff",
+        "kit.turbo_boost": "Full Extension",
+        "kit.hit_and_run": "Up Down Up Down"
+      }
+    },
+    "dump_truck": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gravelspiller",
+        "uncommon": "Tipper Tom",
+        "rare": "Dumpbed",
+        "epic": "Quarry Tip",
+        "legendary": "Big Dumpling, Mover of Hills"
+      },
+      "lore": {
+        "common": "Leaves a trail of gravel along every road it drives down.",
+        "uncommon": "Lifts its back up and pours everything out with a long, satisfied rumble.",
+        "rare": "Tipped its load on the wrong drive, and a family came home to a mountain of gravel where their car used to be.",
+        "epic": "Dumped so many loads at the quarry in one day that a new hill appeared on the horizon.",
+        "legendary": "Moved enough earth in one year to build a whole island in the bay, and the seagulls moved straight in."
+      },
+      "moves": {
+        "signature": "Tipper Bump",
+        "legend": "Steel Bed Guard",
+        "ultimate": "Full Load Dump",
+        "kit.horn_blast": "Tipping Beep",
+        "kit.turbo_boost": "Heavy Haul",
+        "kit.hit_and_run": "Dump Dump Dump"
+      }
+    },
+    "x_backhoe_loader": {
+      "status": "reviewed",
+      "names": {
+        "common": "Twoended",
+        "uncommon": "Bucketboth",
+        "rare": "Trenchdigger",
+        "epic": "Roadworks Dig",
+        "legendary": "Dig-Dig Doris, Busy at Both Ends"
+      },
+      "lore": {
+        "common": "Digs a hole at one end and fills it in at the other, so nothing ever changes.",
+        "uncommon": "Has a bucket at the front and a digger at the back, and can't decide which way to face.",
+        "rare": "Dug a trench down the whole street to lay a pipe, and found a lost garden gnome.",
+        "epic": "Dug up every road in town for repairs at the same time, and nobody could drive anywhere.",
+        "legendary": "Dug holes with one end and planted trees with the other all down the high street in one night. The town woke up in a forest."
+      },
+      "moves": {
+        "signature": "Front Bucket Bump",
+        "legend": "Trench Crack",
+        "ultimate": "Both-Ends Dig",
+        "kit.horn_blast": "Back-Up Beeper",
+        "kit.exhaust_fumes": "Muddy Exhaust",
+        "kit.hit_and_run": "Dig Scoop Dig"
+      }
+    },
+    "excavator": {
+      "status": "reviewed",
+      "names": {
+        "common": "Holemaker",
+        "uncommon": "Clawarm",
+        "rare": "Sandpitmonster",
+        "epic": "Building Site Dig",
+        "legendary": "Big Diggory, Who Dug the Canal"
+      },
+      "lore": {
+        "common": "Digs a big hole right outside your window at seven in the morning.",
+        "uncommon": "Scratches its own back with its bucket, and sometimes uses it to wave at the crane.",
+        "rare": "Scooped up a whole tree, roots and all, and planted it on the other side of the road.",
+        "epic": "Dug the foundations for a whole shopping centre in one week, and the hole looked like a canyon.",
+        "legendary": "Dug a canal from one town to the next, and the ducks now swim there for their holidays."
+      },
+      "moves": {
+        "signature": "Digger Bite",
+        "legend": "Bucket Crack",
+        "ultimate": "Deep Dig Slam",
+        "kit.exhaust_fumes": "Black Diesel Cloud",
+        "kit.turbo_boost": "Hydraulic Surge",
+        "kit.hit_and_run": "Scoop Scoop Scoop"
+      }
+    },
+    "fire_truck": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sirenblare",
+        "uncommon": "Ladderbird",
+        "rare": "Hosesprayer",
+        "epic": "Fire Station Dash",
+        "legendary": "Engine Number One, Hero of Ash Street"
+      },
+      "lore": {
+        "common": "Fills its tank at the hydrant and soaks the firefighter holding the hose, every single time.",
+        "uncommon": "Its ladder stretches so high that it can wave to people on the top floor.",
+        "rare": "Sprayed its hose so hard that it knocked the leaves off every tree in the street.",
+        "epic": "Raced through the city with every light flashing, and the traffic parted like a river.",
+        "legendary": "Put out a bonfire, a burning barbecue and a birthday cake in one afternoon, and the birthday boy has never forgiven it."
+      },
+      "moves": {
+        "signature": "Water Jet Blast",
+        "legend": "Hydrant Siphon",
+        "ultimate": "Ladder Swing Slam",
+        "kit.horn_blast": "Siren Blare",
+        "kit.exhaust_fumes": "Smoky Exhaust",
+        "kit.turbo_boost": "Emergency Speed",
+        "kit.hit_and_run": "Spray Spray Spray"
+      }
+    },
+    "garbage_truck": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bincrasher",
+        "uncommon": "Squashbox",
+        "rare": "Sofagulper",
+        "epic": "Bin Day Rumble",
+        "legendary": "Rubbish Rosie, Cleaner of Cities"
+      },
+      "lore": {
+        "common": "Crashes the bins about at six in the morning so nobody can sleep in.",
+        "uncommon": "Squashes everything in its back with a big grinding crunch.",
+        "rare": "Swallowed a whole sofa in one go, then asked for more.",
+        "epic": "Crunched the whole festival's rubbish in one night, including the stage, two tents and the mayor's deckchair.",
+        "legendary": "Swallowed a wedding ring by mistake, then crunched through a whole mountain of rubbish to give it back before the cake was cut."
+      },
+      "moves": {
+        "signature": "Bin Bash",
+        "legend": "Hot Exhaust Blast",
+        "ultimate": "Compactor Crunch",
+        "kit.horn_blast": "Reverse Beeps",
+        "kit.turbo_boost": "Next Street Rush",
+        "kit.hit_and_run": "Bin Bin Bin"
+      }
+    },
+    "x_atv": {
+      "status": "reviewed",
+      "names": {
+        "common": "Mudspitter",
+        "uncommon": "Trailbumper",
+        "rare": "Hillclimber",
+        "epic": "Muddy Trail Blitz",
+        "legendary": "Ranger Rumble, King of the Trails"
+      },
+      "lore": {
+        "common": "Spits mud on everyone behind it, especially if they're wearing white.",
+        "uncommon": "Bounces over every bump on the trail, so the rider's teeth rattle.",
+        "rare": "Climbed a hill so steep that the goats stood back and watched.",
+        "epic": "Raced through the forest trails so fast that every deer looked up at once.",
+        "legendary": "Crossed every muddy field in the county in one day and came home so muddy that the farmer planted potatoes on it."
+      },
+      "moves": {
+        "signature": "Bumper Bounce",
+        "legend": "Mud Flick Startle",
+        "ultimate": "Trail Charge",
+        "kit.horn_blast": "Trail Horn",
+        "kit.exhaust_fumes": "Muddy Fumes",
+        "kit.turbo_boost": "Throttle Twist",
+        "kit.hit_and_run": "Bounce Bounce Bounce Bounce"
+      }
+    },
+    "x_buggy": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sandflinger",
+        "uncommon": "Rollcage",
+        "rare": "Dunejumper",
+        "epic": "Beach Buggy Blast",
+        "legendary": "Captain Dunemaster of the Beach"
+      },
+      "lore": {
+        "common": "Kicks up sand all over the picnic blanket every time it goes past.",
+        "uncommon": "Has big chunky tyres and no doors, so you climb in over the side.",
+        "rare": "Jumped off a sand dune and landed so softly that the seagulls clapped.",
+        "epic": "Raced along the whole beach at low tide, and the sandcastles had to be rebuilt.",
+        "legendary": "Drove across the biggest desert in the world and came back with only a little sand in its seat."
+      },
+      "moves": {
+        "signature": "Bumper Crash",
+        "legend": "Sand Spray Spray Spray",
+        "ultimate": "Dune Jump",
+        "kit.horn_blast": "Dune Horn",
+        "kit.hit_and_run": "Jump Jump Jump"
+      }
+    },
+    "go_kart": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lapzoomer",
+        "uncommon": "Bumperbonk",
+        "rare": "Cornercutter",
+        "epic": "Track Day Pile-Up",
+        "legendary": "Pole Position Polly"
+      },
+      "lore": {
+        "common": "Bumps into everyone on the track and says it was the steering.",
+        "uncommon": "Is so low to the ground that you can feel every pebble.",
+        "rare": "Took the corner so tight that it overtook three karts on the inside.",
+        "epic": "Started a bumper chase round the track that ended with every kart in the hay bales.",
+        "legendary": "Drove so many laps one summer that it came round again before its own tyre smoke had cleared, and overtook itself."
+      },
+      "moves": {
+        "signature": "Bumper Bonk",
+        "legend": "Bump Bump Bump",
+        "ultimate": "Hay Bale Crash",
+        "kit.horn_blast": "Kart Horn",
+        "kit.exhaust_fumes": "Two-Stroke Smoke",
+        "kit.hit_and_run": "Overtake Overtake"
+      }
+    },
+    "x_quad_bike": {
+      "status": "reviewed",
+      "names": {
+        "common": "Farmzoomer",
+        "uncommon": "Sheepchaser",
+        "rare": "Gatebasher",
+        "epic": "Field Dash",
+        "legendary": "Quadrina, Fastest on the Farm"
+      },
+      "lore": {
+        "common": "Roars through the farmyard and scatters the chickens every morning.",
+        "uncommon": "Rounds up the sheep faster than the sheepdog, which isn't happy about it.",
+        "rare": "Bashed the gate open with its front rack and didn't stop to close it.",
+        "epic": "Raced across every field on the farm towing a trailer of hay, and left a trail so long that the cows followed it into the farmhouse kitchen.",
+        "legendary": "Rounded up a thousand sheep in one morning, then did it all again because the sheepdog wanted another go."
+      },
+      "moves": {
+        "signature": "Front Rack Bash",
+        "legend": "Farm Power",
+        "ultimate": "Field Charge",
+        "kit.exhaust_fumes": "Farmyard Exhaust",
+        "kit.turbo_boost": "Full Revs",
+        "kit.hit_and_run": "Zoom Zoom Zoom Zoom"
+      }
+    },
+    "x_quad_tractor": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fourwheeler",
+        "uncommon": "Tractortug",
+        "rare": "Plough Puller",
+        "epic": "Big Field Ploughing",
+        "legendary": "Grand Tractoria, Puller of Ploughs"
+      },
+      "lore": {
+        "common": "Leaves enormous muddy tyre prints all the way down the lane, so everyone knows exactly where it went for lunch.",
+        "uncommon": "Has four huge wheels all the same size, so it looks like it's on tiptoes.",
+        "rare": "Pulled a plough so wide that it finished the whole field in four turns.",
+        "epic": "Rolled into the village fête and towed the bouncy castle, the tea tent and the tombola to the next field when it rained.",
+        "legendary": "Pulled a stuck lorry, a stuck bus and a stuck tractor out of the same ditch in one afternoon."
+      },
+      "moves": {
+        "signature": "Tractor Tug",
+        "legend": "Engine Cool-Down",
+        "ultimate": "Plough Through",
+        "kit.horn_blast": "Farm Horn",
+        "kit.exhaust_fumes": "Tractor Smoke",
+        "kit.hit_and_run": "Plough Plough Plough"
+      }
+    },
+    "helicopter": {
+      "status": "reviewed",
+      "names": {
+        "common": "Rotorwhirl",
+        "uncommon": "Hoverblow",
+        "rare": "Rooftop Lander",
+        "epic": "Downdraft Whirlwind",
+        "legendary": "Captain Rotorella of the Rescue"
+      },
+      "lore": {
+        "common": "Hovers over the garden just as you hang the washing out, and blows it all over the street.",
+        "uncommon": "Lands on a big painted H and refuses to land anywhere without one, even on the beach.",
+        "rare": "Landed on the hospital roof so gently that the patients didn't spill their tea.",
+        "epic": "Hovered over the zoo for a news report, and every parrot learned to say whup-whup-whup.",
+        "legendary": "Rescued a lost sheep from a cliff ledge in a storm, and the sheep still won't stop bleating about it."
+      },
+      "moves": {
+        "signature": "Rotor Wash",
+        "legend": "Hot Engine Blast",
+        "ultimate": "Downdraft Slam",
+        "kit.exhaust_fumes": "Jet Fumes",
+        "kit.turbo_boost": "Rotor Spin Up",
+        "kit.hit_and_run": "Hover Hover Hover"
+      }
+    },
+    "i_flagpole": {
+      "status": "reviewed",
+      "names": {
+        "common": "Ropeclanger",
+        "uncommon": "Flagflapper",
+        "rare": "Windwhip",
+        "epic": "Town Square Salute",
+        "legendary": "Grand Banneria, Tallest on the Green"
+      },
+      "lore": {
+        "common": "Clangs its rope against the pole all night when the wind blows, ting-ting-ting.",
+        "uncommon": "Flaps its flag so loudly in a storm that it sounds like applause.",
+        "rare": "Was the only thing still standing after the gale, with its flag pointing straight out.",
+        "epic": "Flew a flag so big over the town square that it shaded the whole market.",
+        "legendary": "Flew a flag so high on the school's birthday that a passing airliner dipped its wings, and the whole school waved back."
+      },
+      "moves": {
+        "signature": "Rope Clang Clang",
+        "legend": "Flap Flap Flap",
+        "ultimate": "Flag Whip Finale",
+        "kit.rush_hour": "Rope Slap Slap",
+        "kit.road_works": "Steady Pole",
+        "kit.gridlock": "Banner Flash"
+      }
+    },
+    "i_harvester": {
+      "status": "reviewed",
+      "names": {
+        "common": "Cornmuncher",
+        "uncommon": "Chaffblower",
+        "rare": "Fieldswallower",
+        "epic": "Harvest Moon Run",
+        "legendary": "Old Reaper Reggie of the Wheat"
+      },
+      "lore": {
+        "common": "Blocks the country lane for miles while it crawls along at walking pace.",
+        "uncommon": "Has a long spout that pours grain into the trailer, and sometimes into the farmer's hat.",
+        "rare": "Swallowed a whole row of wheat in one go and spat out the straw neatly behind it.",
+        "epic": "Harvested every field in the county under the full moon, and the farmers had breakfast early.",
+        "legendary": "Harvested a field in the shape of a giant smiley face, and airline pilots now wave at it on their way past."
+      },
+      "moves": {
+        "signature": "Cutter Bar Swipe",
+        "legend": "Hot Engine Chaff",
+        "ultimate": "Harvest Sweep",
+        "kit.horn_blast": "Harvest Horn",
+        "kit.exhaust_fumes": "Chaff Cloud"
+      }
+    },
+    "i_hay": {
+      "status": "reviewed",
+      "names": {
+        "common": "Itchystalk",
+        "uncommon": "Balebouncer",
+        "rare": "Hillroller Bale",
+        "epic": "Haystack Topple",
+        "legendary": "Golden Bale, Pillow of the Farm"
+      },
+      "lore": {
+        "common": "Gets into your socks, your hair and your sandwich, and itches for the rest of the day.",
+        "uncommon": "Is rolled into giant round bales that farmers stack like cotton reels.",
+        "rare": "Rolled down the hill on its own and knocked over the farm gate.",
+        "epic": "Toppled off the trailer at the crossroads, and the whole village had to stop and help.",
+        "legendary": "Was rolled into a bale so big that the farm used it as a guest house for a family of mice, two hens and a very lazy dog."
+      },
+      "moves": {
+        "signature": "Bale Bump",
+        "legend": "Haystack Nap",
+        "ultimate": "Bale Avalanche",
+        "kit.horn_blast": "Straw Startle",
+        "kit.exhaust_fumes": "Dusty Hay Whiff",
+        "kit.turbo_boost": "Rolling Start"
+      }
+    },
+    "i_manhole_cover": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clunklid",
+        "uncommon": "Steamhole",
+        "rare": "Rattleplate",
+        "epic": "Street Clang",
+        "legendary": "Old Ironface, Guardian of the Sewers"
+      },
+      "lore": {
+        "common": "Clunks loudly every time a car drives over it, day and night.",
+        "uncommon": "Lets out little puffs of steam on cold mornings, as if it's breathing.",
+        "rare": "Rattled so much under a lorry that it popped up and danced on the road.",
+        "epic": "Was lifted for an inspection, and every tennis ball lost in the last fifty years bounced up out of the sewer onto the street.",
+        "legendary": "Was so heavy that the strongest man in town tried to lift it, and it lifted him instead. It still has his handprint."
+      },
+      "moves": {
+        "signature": "Clunk Clunk Clunk",
+        "legend": "Lid Flip",
+        "ultimate": "Sewer Lid Drop",
+        "kit.rush_hour": "Clank Clank Clank",
+        "kit.pothole": "Sunken Lid",
+        "kit.road_works": "Heavy Iron Guard"
+      }
+    },
+    "i_mobile_home": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wobblehouse",
+        "uncommon": "Curtaintwitcher",
+        "rare": "Campsiteparker",
+        "epic": "Holiday Convoy",
+        "legendary": "Grand Rambla, Home on Wheels"
+      },
+      "lore": {
+        "common": "Wobbles so much on the motorway that the cups in the cupboard rattle all the way.",
+        "uncommon": "Has tiny curtains in every window that the owners close as soon as anyone looks.",
+        "rare": "Hit a pothole so hard that every cupboard opened and the breakfast cereal ended up in the shower.",
+        "epic": "Got stuck in the gateway of the campsite, so the whole family had their holiday right there in the lane.",
+        "legendary": "Stayed at the campsite so long that the town gave it a postcode, a postman and a bus stop outside."
+      },
+      "moves": {
+        "signature": "Caravan Bump",
+        "legend": "Jack-Knife Swing",
+        "ultimate": "Holiday Traffic Jam",
+        "kit.horn_blast": "Hooter Honk",
+        "kit.exhaust_fumes": "Towing Fumes",
+        "kit.hit_and_run": "Wobble Wobble Wobble"
+      }
+    },
+    "i_pedestal": {
+      "status": "reviewed",
+      "names": {
+        "common": "Plinthbump",
+        "uncommon": "Plinthy",
+        "rare": "Gallerypride",
+        "epic": "Museum Showcase",
+        "legendary": "Old Plinthworth, Holder of Heroes"
+      },
+      "lore": {
+        "common": "Stands in the gallery so that everyone bumps into its corner.",
+        "uncommon": "Holds up a statue all day without being thanked even once.",
+        "rare": "Held up such a heavy statue that it slowly sank into the floor.",
+        "epic": "Was put out by mistake without its statue, and visitors spent a month admiring the empty pedestal as modern art.",
+        "legendary": "Held up a statue so still for so long that the pigeons decided it was the safest roof in the city and moved in for good."
+      },
+      "moves": {
+        "signature": "Corner Bump Bump",
+        "legend": "Spotlight Steal",
+        "ultimate": "Statue Topple",
+        "kit.rush_hour": "Shuffle Shuffle Shuffle",
+        "kit.pothole": "Marble Chip",
+        "kit.road_works": "Solid Base",
+        "kit.gridlock": "Velvet Rope Block"
+      }
+    },
+    "i_pole": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bumpstick",
+        "uncommon": "Postlean",
+        "rare": "Polevaulter",
+        "epic": "Street Pole Slam",
+        "legendary": "Tallpole, the Unshakeable"
+      },
+      "lore": {
+        "common": "Stands in the middle of the pavement so that people walking with phones bump into it.",
+        "uncommon": "Has been leaned on by so many people that it now leans a little itself.",
+        "rare": "Was used by a boy to vault over a stream, and it landed better than he did.",
+        "epic": "Held up so many festival lights that the high street could be seen from the next town, and moths came from three counties.",
+        "legendary": "Was bumped into by a hundred thousand people looking at their phones, and finally got a phone of its own to stare back at them."
+      },
+      "moves": {
+        "signature": "Bump Bump Bump",
+        "legend": "Sun-Hot Metal",
+        "ultimate": "Pole Topple",
+        "kit.rush_hour": "Ding Ding Ding",
+        "kit.pothole": "Cracked Base",
+        "kit.road_works": "Concrete Footing",
+        "kit.gridlock": "Head Bonk"
+      }
+    },
+    "i_shield": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clangguard",
+        "uncommon": "Dentface",
+        "rare": "Crestbearer",
+        "epic": "Shield Wall",
+        "legendary": "Old Bulwark of the Castle Gate"
+      },
+      "lore": {
+        "common": "Clangs so loudly when it's dropped that the whole castle hears.",
+        "uncommon": "Has so many dents from old battles that you can see your face a dozen times in it.",
+        "rare": "Blocked an arrow so neatly that the archer asked for it back.",
+        "epic": "Was used as a sledge by every child in the castle, and reached the village at the bottom before the knights did.",
+        "legendary": "Bounced a catapulted cabbage back so hard that it landed in the enemy's soup, and the battle stopped for lunch."
+      },
+      "moves": {
+        "signature": "Shield Bash Bash",
+        "legend": "Rusty Dent Stink",
+        "ultimate": "Shield Slam",
+        "kit.rush_hour": "Clang Clang Clang",
+        "kit.pothole": "Dent Crack",
+        "kit.road_works": "Brace Behind",
+        "kit.gridlock": "Shield Glint"
+      }
+    },
+    "i_thresher": {
+      "status": "reviewed",
+      "names": {
+        "common": "Grainshaker",
+        "uncommon": "Chaffcloud",
+        "rare": "Grainsorter",
+        "epic": "Harvest Rattle",
+        "legendary": "Old Flail, the Grain Champion"
+      },
+      "lore": {
+        "common": "Rattles and shakes so hard in the barn that the dust gets into everyone's tea.",
+        "uncommon": "Blows clouds of chaff out of the barn door, and the sparrows love it.",
+        "rare": "Separated a whole cart of wheat in one hour and left a perfect pile of grain.",
+        "epic": "Threshed every farm's harvest in the valley in one week, and the mill ran day and night.",
+        "legendary": "Threshed so fast that the grain shot out through the barn roof, and the hens had breakfast delivered from the sky for a month."
+      },
+      "moves": {
+        "signature": "Shake Rattle",
+        "legend": "Harvest Power",
+        "ultimate": "Grain Storm",
+        "kit.exhaust_fumes": "Barn Dust Cloud",
+        "kit.turbo_boost": "Belt Speed Up",
+        "kit.hit_and_run": "Thresh Thresh Thresh"
+      }
+    },
+    "i_turnstile": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clickspin",
+        "uncommon": "Ticketeater",
+        "rare": "Gatelocker",
+        "epic": "Rush Hour Jam",
+        "legendary": "Grand Spinner, Keeper of the Platform"
+      },
+      "lore": {
+        "common": "Locks just as you push through, and you bump into it with your tummy.",
+        "uncommon": "Eats your ticket and gives it back a second later with a click.",
+        "rare": "Spun so fast in the rush that it sent commuters onto the wrong platform, still holding their coffee.",
+        "epic": "Jammed at rush hour, and the whole station queued back up the stairs.",
+        "legendary": "Spun round so many times in one rush hour that it wound the station clock forward, and everyone got home early."
+      },
+      "moves": {
+        "signature": "Spin Click Click",
+        "legend": "Ticket Jam Crack",
+        "ultimate": "Platform Lockdown",
+        "kit.rush_hour": "Push Push Push",
+        "kit.pothole": "Barrier Crack",
+        "kit.gridlock": "Locked Bar Bonk"
+      }
+    },
+    "ice_cream_truck": {
+      "status": "reviewed",
+      "names": {
+        "common": "Jinglejangle",
+        "uncommon": "Conedropper",
+        "rare": "Summerstreet",
+        "epic": "Heatwave Queue",
+        "legendary": "Sprinkla, Queen of Sunny Street"
+      },
+      "lore": {
+        "common": "Plays its jingle at the end of the street just when dinner is ready.",
+        "uncommon": "Hands out cones so fast that half the sprinkles miss.",
+        "rare": "Played its tune so sweetly that every child on the estate came out in slippers, even the ones in the bath.",
+        "epic": "Parked at the beach on the hottest day and the queue went all the way to the sea.",
+        "legendary": "Kept its freezer so cold in a heatwave that the penguins at the zoo asked to move in."
+      },
+      "moves": {
+        "signature": "Cone Bump",
+        "legend": "Sunbaked Bonnet",
+        "ultimate": "Jingle Jangle Finale",
+        "kit.horn_blast": "Jingle Tune",
+        "kit.exhaust_fumes": "Generator Fumes",
+        "kit.hit_and_run": "Scoop Scoop Scoop Scoop"
+      }
+    },
+    "jeep": {
+      "status": "reviewed",
+      "names": {
+        "common": "Puddlejumper",
+        "uncommon": "Backpackwheel",
+        "rare": "Offroader",
+        "epic": "Safari Splash",
+        "legendary": "Commander Rugged of the Wild Track"
+      },
+      "lore": {
+        "common": "Drives through every puddle on the school run on purpose.",
+        "uncommon": "Has a spare wheel stuck on its back like a big round backpack.",
+        "rare": "Drove through a river so deep that fish swam past the windows.",
+        "epic": "Led a safari across the plains, and every giraffe stopped chewing to stare.",
+        "legendary": "Crossed a whole jungle without a road, and came out the other side with a parrot riding on the bonnet."
+      },
+      "moves": {
+        "signature": "Bull Bar Bump",
+        "legend": "Mud Splash Crack",
+        "ultimate": "River Crossing",
+        "kit.horn_blast": "Safari Honk",
+        "kit.turbo_boost": "Four-Wheel Drive",
+        "kit.hit_and_run": "Splash Splash Splash"
+      }
+    },
+    "x_escalator": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stairglider",
+        "uncommon": "Handrail Racer",
+        "rare": "Steprumble",
+        "epic": "Shopping Mall Slide",
+        "legendary": "Grand Escalia, Endless Stairway"
+      },
+      "lore": {
+        "common": "Stops working just as you step on it, so it turns into a very tall staircase.",
+        "uncommon": "Its handrail moves slightly faster than the steps, so your arm slowly runs away.",
+        "rare": "Swallowed a shoelace at the top and kept the shoe as a souvenir. The lost property office is now mostly left shoes.",
+        "epic": "Ran backwards at the shopping centre and sent every shopper back to the ground floor.",
+        "legendary": "Has moved a billion people up and down at the station and never once climbed a single step itself."
+      },
+      "moves": {
+        "signature": "Step Bump",
+        "legend": "Handrail Pull Crack",
+        "ultimate": "Sudden Stop",
+        "kit.horn_blast": "Emergency Buzzer",
+        "kit.exhaust_fumes": "Hot Motor Whiff"
+      }
+    },
+    "motorcycle": {
+      "status": "reviewed",
+      "names": {
+        "common": "Revroarer",
+        "uncommon": "Wheeliepopper",
+        "rare": "Gapfinder",
+        "epic": "Open Road Thunder",
+        "legendary": "Lady Throttle, Queen of the Highway"
+      },
+      "lore": {
+        "common": "Revs its engine at the traffic lights so loudly that the pigeons take off.",
+        "uncommon": "Pops a wheelie on the empty road, then pretends it was an accident.",
+        "rare": "Squeezed through a traffic jam so narrow that the cars had to breathe in.",
+        "epic": "Led a roaring parade of motorbikes along the coast road, and every seagull flew inland.",
+        "legendary": "Rode the longest road in the world from top to bottom, and arrived with the same fly still stuck to its visor."
+      },
+      "moves": {
+        "signature": "Front Wheel Bump",
+        "legend": "Weave Weave Weave",
+        "ultimate": "Long Road Rumble",
+        "kit.horn_blast": "Beep Beep",
+        "kit.turbo_boost": "Twist the Throttle",
+        "kit.hit_and_run": "Dodge Dodge Dash"
+      }
+    },
+    "x_sidecar": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bumpyrider",
+        "uncommon": "Gogglepassenger",
+        "rare": "Cornerlifter",
+        "epic": "Country Lane Rattle",
+        "legendary": "Sir Sidesaddle of the Picnic Run"
+      },
+      "lore": {
+        "common": "Bounces its passenger over every bump while the rider gets the smooth seat.",
+        "uncommon": "Its passenger always wears goggles and a scarf, even to the corner shop.",
+        "rare": "Lifted right off the road going round a corner, and the passenger waved at everyone.",
+        "epic": "Rattled down every country lane on the picnic run, and the sandwiches were mostly crumbs.",
+        "legendary": "Carried a dog in goggles round the whole country, and the dog is now famous in every village."
+      },
+      "moves": {
+        "signature": "Sidecar Swipe",
+        "legend": "Hot Engine Wobble",
+        "ultimate": "Corner Lift Crash",
+        "kit.horn_blast": "Bulb Horn Honk",
+        "kit.turbo_boost": "Rider Lean",
+        "kit.hit_and_run": "Rattle Rattle Rattle"
+      }
+    },
+    "pickup": {
+      "status": "reviewed",
+      "names": {
+        "common": "Loadhauler",
+        "uncommon": "Tailgater",
+        "rare": "Farmhand Truck",
+        "epic": "Muddy Track Haul",
+        "legendary": "Big Rusty, Haulin' Since Forever"
+      },
+      "lore": {
+        "common": "Always has something rattling around in the back that nobody can find.",
+        "uncommon": "Drops its tailgate for every picnic, barbecue and muddy football match.",
+        "rare": "Carried a sofa, a fridge and a goat home from market in one trip.",
+        "epic": "Pulled every stuck car out of the muddy field at the summer festival.",
+        "legendary": "Carried a whole barn across the valley one plank at a time in one weekend, and the cows inside never noticed."
+      },
+      "moves": {
+        "signature": "Tailgate Slam",
+        "legend": "Headlight Glare",
+        "ultimate": "Heavy Haul Crash",
+        "kit.exhaust_fumes": "Muddy Exhaust Puff",
+        "kit.turbo_boost": "Four by Four",
+        "kit.hit_and_run": "Rattle Rattle Bump"
+      }
+    },
+    "police_car": {
+      "status": "reviewed",
+      "names": {
+        "common": "Nee-Naw",
+        "uncommon": "Blue Flasher",
+        "rare": "Roadblocker Car",
+        "epic": "Chase Through Town",
+        "legendary": "Sergeant Siren of Station Street"
+      },
+      "lore": {
+        "common": "Turns on its siren just to get through the traffic lights, then turns it off again.",
+        "uncommon": "Flashes blue lights so bright that the whole street glows at night.",
+        "rare": "Turned on its lights to stop the traffic for a family of ducks, then escorted them all the way to the pond.",
+        "epic": "Chased a runaway goat through the whole town, and the goat won.",
+        "legendary": "Caught a runaway hot-air balloon by its rope and towed it gently back to the fair, with the passengers still waving."
+      },
+      "moves": {
+        "signature": "Bumper Block",
+        "legend": "Roadblock Ram",
+        "ultimate": "Full Pursuit",
+        "kit.horn_blast": "Siren Whoop",
+        "kit.exhaust_fumes": "Patrol Exhaust",
+        "kit.turbo_boost": "Pursuit Mode",
+        "kit.hit_and_run": "Swerve Block Swerve"
+      }
+    },
+    "x_satellite_model": {
+      "status": "reviewed",
+      "names": {
+        "common": "Dishpointer",
+        "uncommon": "Panelspinner",
+        "rare": "Orbitpretender",
+        "epic": "Signal Scramble",
+        "legendary": "Orbitron, Watcher of the Shelf"
+      },
+      "lore": {
+        "common": "Points its little dish at the ceiling all day, waiting for a signal from the lampshade.",
+        "uncommon": "Has shiny gold foil wings that come off every time someone dusts it.",
+        "rare": "Spun round on its stand so fast that its solar panels flew across the classroom.",
+        "epic": "Was hung from the ceiling with a hundred others for the science fair, and the room became space.",
+        "legendary": "Beeped so convincingly during space week that the headteacher cancelled maths in case it was a real message from space."
+      },
+      "moves": {
+        "signature": "Solar Panel Swipe",
+        "legend": "Wobbly Dish Crack",
+        "ultimate": "Orbit Crash",
+        "kit.horn_blast": "Beep Beep Signal",
+        "kit.turbo_boost": "Full Power Panels",
+        "kit.hit_and_run": "Spin Spin Spin Spin"
+      }
+    },
+    "rv": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slowlaner",
+        "uncommon": "Popuproof",
+        "rare": "Campsitehog",
+        "epic": "Holiday Highway",
+        "legendary": "Grand Wanderhome of the Open Road"
+      },
+      "lore": {
+        "common": "Drives along the coast road at its own pace, and fifty cars follow it like ducklings.",
+        "uncommon": "Pops its roof up at the campsite so it looks like it's surprised.",
+        "rare": "Parked in the best spot at the campsite and opened its awning over half the field.",
+        "epic": "Drove a family of six round the whole country, and nobody fought for more than a minute.",
+        "legendary": "Has visited every beach on the coast and still has the same sand in its door seals from the first trip."
+      },
+      "moves": {
+        "signature": "Back Bumper Bump",
+        "legend": "Pop-Up Roof Startle",
+        "ultimate": "Holiday Rush",
+        "kit.horn_blast": "Toot Toot",
+        "kit.exhaust_fumes": "Holiday Fumes",
+        "kit.turbo_boost": "Downhill Coast"
+      }
+    },
+    "x_barge": {
+      "status": "reviewed",
+      "names": {
+        "common": "Canalcrawler",
+        "uncommon": "Lockwaiter",
+        "rare": "Coalcarrier",
+        "epic": "Canal Jam",
+        "legendary": "Old Mabel, Slowest on the Water"
+      },
+      "lore": {
+        "common": "Chugs along the canal so slowly that the walkers on the towpath overtake it.",
+        "uncommon": "Waits at every lock for the water to rise, then waits a bit more.",
+        "rare": "Carried a load so heavy that it sank down to the waterline and the ducks walked on its deck.",
+        "epic": "Got stuck sideways in the canal and every boat behind it queued until sunset.",
+        "legendary": "Was so long that its front reached the next lock before its back had left the last one, and the lock keeper had to open both at once."
+      },
+      "moves": {
+        "signature": "Hull Bump",
+        "legend": "Diesel Canal Stink",
+        "ultimate": "Lock Gate Slam",
+        "kit.exhaust_fumes": "Chug Smoke",
+        "kit.hit_and_run": "Chug Chug Chug Chug"
+      }
+    },
+    "x_dinghy": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tippytub",
+        "uncommon": "Daggerboarder",
+        "rare": "Capsizer",
+        "epic": "Regatta Wobble",
+        "legendary": "Little Skipper, Bravest of the Bay"
+      },
+      "lore": {
+        "common": "Tips over the moment anyone stands up, then floats there looking innocent.",
+        "uncommon": "Has a daggerboard that slides up and down, and it always slides up exactly when you need it down.",
+        "rare": "Sailed so close to the swans that it accidentally joined their family, and now gets fed bread every Sunday.",
+        "epic": "Raced at the regatta with fifty other dinghies, and all of them tipped over at the same buoy.",
+        "legendary": "Sailed across the whole bay with only a beach towel for a sail, and arrived before the ferry."
+      },
+      "moves": {
+        "signature": "Boom Swing",
+        "legend": "Tack Tack Tack",
+        "ultimate": "Capsize Splash",
+        "kit.exhaust_fumes": "Wet Rope Whiff",
+        "kit.turbo_boost": "Full Sail",
+        "kit.hit_and_run": "Gybe Gybe Gybe"
+      }
+    },
+    "x_ferry": {
+      "status": "reviewed",
+      "names": {
+        "common": "Foghorner",
+        "uncommon": "Cardeck",
+        "rare": "Seasick Sally",
+        "epic": "Harbour Crossing",
+        "legendary": "Grand Ferrina, Crosser of the Strait"
+      },
+      "lore": {
+        "common": "Blows its foghorn the moment you've finally balanced your tea on the rail.",
+        "uncommon": "Swallows cars into its belly and spits them out on the other side.",
+        "rare": "Rolled so much on a windy crossing that everyone's chips slid to one side of the café.",
+        "epic": "Carried a whole travelling funfair across the bay, and the big wheel kept turning for the entire crossing.",
+        "legendary": "Has crossed the same strait ten thousand times and never once forgotten anyone's car."
+      },
+      "moves": {
+        "signature": "Bow Bump",
+        "legend": "Wave Wave Wave",
+        "ultimate": "Ferry Ramp Drop",
+        "kit.horn_blast": "Foghorn Blast",
+        "kit.exhaust_fumes": "Funnel Smoke",
+        "kit.turbo_boost": "Full Ahead",
+        "kit.hit_and_run": "Roll Roll Roll"
+      }
+    },
+    "x_fishing_boat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gullmagnet",
+        "uncommon": "Netdragger",
+        "rare": "Dawnsailer",
+        "epic": "Harbour Haul",
+        "legendary": "Captain Codsworth of the Morning Tide"
+      },
+      "lore": {
+        "common": "Is followed everywhere by a cloud of noisy seagulls hoping for scraps.",
+        "uncommon": "Drags its big nets along the bottom and comes back smelling of the sea.",
+        "rare": "Leaves the harbour before dawn and wakes up every house on the seafront.",
+        "epic": "Came back with so many fish that the whole town had fish and chips for a week.",
+        "legendary": "Caught a boot, a bicycle and a treasure chest in one net, and the treasure turned out to be somebody's old socks."
+      },
+      "moves": {
+        "signature": "Net Swing",
+        "legend": "Gull Cloud Startle",
+        "ultimate": "Big Catch Haul",
+        "kit.horn_blast": "Harbour Hooter",
+        "kit.exhaust_fumes": "Fishy Fumes",
+        "kit.turbo_boost": "Home Before Storm",
+        "kit.hit_and_run": "Cast Cast Cast"
+      }
+    },
+    "i_gondola": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bridgeducker",
+        "uncommon": "Stripepole",
+        "rare": "Canalglider",
+        "epic": "Grand Canal Glide",
+        "legendary": "Signora Serenata of the Canals"
+      },
+      "lore": {
+        "common": "Glides under every low bridge so close that the gondolier has to duck.",
+        "uncommon": "Is pushed along by a single long pole, and goes exactly where it's pointed.",
+        "rare": "Got its pole stuck in the mud, and the gondolier was left hanging on the pole while the gondola drifted off to dinner.",
+        "epic": "Led a parade of gondolas through the city at sunset, and every window opened.",
+        "legendary": "Has carried a thousand couples under the same old bridge and never once tipped anyone in."
+      },
+      "moves": {
+        "signature": "Pole Push",
+        "legend": "Canal Water Stink",
+        "ultimate": "Bridge Squeeze",
+        "kit.horn_blast": "Gondolier Song",
+        "kit.turbo_boost": "Long Pole Push"
+      }
+    },
+    "x_houseboat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Floatinghome",
+        "uncommon": "Plantpotdeck",
+        "rare": "Mooringslipper",
+        "epic": "Riverside Drift",
+        "legendary": "Lady Driftwood, Home on the Water"
+      },
+      "lore": {
+        "common": "Bumps against the riverbank all night, so everyone inside sleeps with a little rock.",
+        "uncommon": "Has so many plant pots on its roof that it looks like a floating garden.",
+        "rare": "Came loose from its mooring and drifted to the next village before anyone woke up.",
+        "epic": "Grew so many tomatoes on its roof that the whole river had salad for a summer, and the ducks complained about the onions.",
+        "legendary": "Has been moored in the same spot for fifty years, and the ducks think it's part of the bank."
+      },
+      "moves": {
+        "signature": "Hull Nudge",
+        "legend": "Bump in the Night",
+        "ultimate": "Mooring Break",
+        "kit.exhaust_fumes": "Wood Stove Smoke",
+        "kit.turbo_boost": "Current Push",
+        "kit.hit_and_run": "Bump Bump Bump Bump"
+      }
+    },
+    "x_inflatable_boat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Squeakyboat",
+        "uncommon": "Puffpaddle",
+        "rare": "Leakyside",
+        "epic": "Beach Bob",
+        "legendary": "Captain Bubblebob, Bravest Bubble"
+      },
+      "lore": {
+        "common": "Squeaks every time you sit in it, so everyone on the beach looks over.",
+        "uncommon": "Needs to be blown up with a pump for an hour before it'll go anywhere.",
+        "rare": "Sprang a tiny leak and slowly sank while everyone pretended not to notice.",
+        "epic": "Drifted out of the bay with a family of ducks on board, and the lifeguards rowed out to fetch it.",
+        "legendary": "Bounced over the biggest wave on the beach and came back with every child still inside."
+      },
+      "moves": {
+        "signature": "Rubber Bump",
+        "legend": "Slow Leak Crack",
+        "ultimate": "Big Wave Bounce",
+        "kit.horn_blast": "Squeak Squeak",
+        "kit.hit_and_run": "Bob Bob Bob"
+      }
+    },
+    "i_lifeboat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slipwayslider",
+        "uncommon": "Foglight Orange",
+        "rare": "Storm Launcher",
+        "epic": "Lifeboat Launch",
+        "legendary": "Beacon of the Lighthouse Cove"
+      },
+      "lore": {
+        "common": "Slides down the slipway with a huge splash, soaking everyone watching from the pier.",
+        "uncommon": "Is painted bright orange so it can be seen through the thickest fog.",
+        "rare": "Rowed out into a storm that kept every other boat in the harbour.",
+        "epic": "Brought a whole ferry's worth of passengers back to the harbour in one night.",
+        "legendary": "Rowed out through a hurricane to rescue a stranded sailor, who turned out to be a very grateful seal."
+      },
+      "moves": {
+        "signature": "Hull Ram",
+        "legend": "Storm Ram",
+        "ultimate": "Breaker Wave Ram",
+        "kit.horn_blast": "Rescue Flare",
+        "kit.hit_and_run": "Row Row Row"
+      }
+    },
+    "x_rowboat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Circlerower",
+        "uncommon": "Oarsplasher",
+        "rare": "Parkpond Paddler",
+        "epic": "Lake Race Splash",
+        "legendary": "Old Oarsworth of the Boating Lake"
+      },
+      "lore": {
+        "common": "Goes round in circles on the park lake every time you row with one oar.",
+        "uncommon": "Creaks and drips so much that you have to bail it out with your shoe.",
+        "rare": "Was rowed across the lake so fast that it overtook the swans.",
+        "epic": "Raced every boat on the boating lake at once, and everyone got splashed.",
+        "legendary": "Was hired for one hour by a very slow rower and came back three weeks later with a family of geese living in it."
+      },
+      "moves": {
+        "signature": "Oar Slap",
+        "legend": "Dock Rest",
+        "ultimate": "Big Lake Splash",
+        "kit.exhaust_fumes": "Damp Wood Whiff",
+        "kit.turbo_boost": "Pull Together",
+        "kit.hit_and_run": "Row Row Row Row"
+      }
+    },
+    "sailboat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Breezeleaner",
+        "uncommon": "Sailflap",
+        "rare": "Windchaser",
+        "epic": "Bay Regatta",
+        "legendary": "Admiral Windward, Wave Wanderer"
+      },
+      "lore": {
+        "common": "Leans over so far in the wind that the picnic slides off the deck.",
+        "uncommon": "Flaps its sail loudly when the wind changes, as if it's complaining.",
+        "rare": "Caught the wind so perfectly that it raced past every motorboat in the bay.",
+        "epic": "Caught a gust so big in the harbour that it towed three crab nets, a fishing line and a very surprised windsurfer out to sea.",
+        "legendary": "Sailed round the whole world without an engine, and came home with a postcard from every country stuck to its sail."
+      },
+      "moves": {
+        "signature": "Boom Swing Smack",
+        "legend": "Hull Brace",
+        "ultimate": "Full Sail Charge",
+        "kit.exhaust_fumes": "Salty Spray",
+        "kit.turbo_boost": "Catch the Wind",
+        "kit.hit_and_run": "Tack Tack Tack Tack"
+      }
+    },
+    "x_submarine_toy": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bathdiver",
+        "uncommon": "Periscopeeker",
+        "rare": "Bubbletrail",
+        "epic": "Bathtub Depths",
+        "legendary": "Captain Deepbubble of the Tub"
+      },
+      "lore": {
+        "common": "Sinks to the bottom of the bath the moment you let go of it.",
+        "uncommon": "Pokes its little periscope out of the bubbles to spy on the rubber duck.",
+        "rare": "Dived under the bubbles and came up behind the boat like a sneak attack.",
+        "epic": "Explored every corner of the paddling pool, and the frogs moved out.",
+        "legendary": "Has been on a thousand bath-time voyages and still hasn't found the bottom of the plughole."
+      },
+      "moves": {
+        "signature": "Periscope Poke",
+        "legend": "Dive Power",
+        "ultimate": "Mouldy Sponge Torpedo",
+        "kit.turbo_boost": "Wind-Up Spin",
+        "kit.hit_and_run": "Dive Dive Dive"
+      }
+    },
+    "x_tugboat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Puffstack",
+        "uncommon": "Shipnudger",
+        "rare": "Harbourhelper",
+        "epic": "Big Ship Tug",
+        "legendary": "Tough Tilly, Strongest in the Harbour"
+      },
+      "lore": {
+        "common": "Puffs smoke from its chimney all day like it's huffing at everyone.",
+        "uncommon": "Is the smallest boat in the harbour but pulls the biggest ships.",
+        "rare": "Pushed a giant cargo ship into its berth with one gentle nudge.",
+        "epic": "Tooted so proudly at the harbour festival that every ship in port tooted back, and the town's windows rattled till midnight.",
+        "legendary": "Pulled the biggest ship in the world off a sandbank, then went home for a cup of tea."
+      },
+      "moves": {
+        "signature": "Bumper Nudge",
+        "legend": "Fender Guard",
+        "ultimate": "Giant Tow",
+        "kit.exhaust_fumes": "Funnel Puffs",
+        "kit.turbo_boost": "Full Pull",
+        "kit.hit_and_run": "Nudge Nudge Nudge"
+      }
+    },
+    "x_yacht": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gleamdeck",
+        "uncommon": "Marinabragger",
+        "rare": "Marina Wash",
+        "epic": "Sunloungerboat",
+        "legendary": "Lady Luxuria of the Harbour"
+      },
+      "lore": {
+        "common": "Parks in the marina and blocks everyone else's view of the sea.",
+        "uncommon": "Has so many shiny bits on its deck that the seagulls use it as a mirror.",
+        "rare": "Made such a big wave leaving the harbour that every little boat bobbed up and down.",
+        "epic": "Sailed into the harbour with fireworks for its birthday, and the whole town stayed up.",
+        "legendary": "Was so big that it brought its own little yacht along, and that one had a little yacht too."
+      },
+      "moves": {
+        "signature": "Bow Spray",
+        "legend": "Wake Wave Crack",
+        "ultimate": "Marina Wake",
+        "kit.horn_blast": "Yacht Horn",
+        "kit.exhaust_fumes": "Engine Room Whiff",
+        "kit.turbo_boost": "Twin Engines",
+        "kit.hit_and_run": "Swerve Swerve"
+      }
+    },
+    "school_bus": {
+      "status": "reviewed",
+      "names": {
+        "common": "Yellowtoot",
+        "uncommon": "Stopsignarm",
+        "rare": "Backseatbouncer",
+        "epic": "School Run Scramble",
+        "legendary": "Yellow Yolanda, Steady Wheels"
+      },
+      "lore": {
+        "common": "Is late on the coldest morning, then arrives early on the day you forget your shoes.",
+        "uncommon": "Pops out a little stop sign on its side, and every car has to wait.",
+        "rare": "Bounced over a speed bump so hard that every child on the back seat hit the ceiling.",
+        "epic": "Picked up every child in the county on the first snowy day, and nobody missed school.",
+        "legendary": "Drove so gently over the speed bumps for a whole term that the egg-and-spoon team practised on the back seat and never dropped one."
+      },
+      "moves": {
+        "signature": "Yellow Bump",
+        "legend": "Bounce Bounce Bounce",
+        "ultimate": "Final Stop",
+        "kit.horn_blast": "School Horn",
+        "kit.turbo_boost": "Late Run",
+        "kit.hit_and_run": "Stop Go Stop"
+      }
+    },
+    "scooter": {
+      "status": "reviewed",
+      "names": {
+        "common": "Anklebasher",
+        "uncommon": "Pavementpest",
+        "rare": "Kicklean",
+        "epic": "Park Path Zoom",
+        "legendary": "Lightning Lilly, Fastest Kid in Town"
+      },
+      "lore": {
+        "common": "Bashes you on the ankle every time you push off.",
+        "uncommon": "Folds up for the bus and then refuses to unfold.",
+        "rare": "Zoomed down the hill so fast that the pigeons had to jump out of the way.",
+        "epic": "Led a gang of scooters round the park, and every jogger stepped onto the grass.",
+        "legendary": "Scooted from one end of town to the other faster than the bus, and waited for it at the stop."
+      },
+      "moves": {
+        "signature": "Kick Push",
+        "legend": "Scorching Wheel Spin",
+        "ultimate": "Hill Run Crash",
+        "kit.horn_blast": "Handlebar Bell",
+        "kit.exhaust_fumes": "Rubber Wheel Whiff",
+        "kit.turbo_boost": "Speed Wobble Boost",
+        "kit.hit_and_run": "Zip Zip Zip"
+      }
+    },
+    "x_rickshaw": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bellringer",
+        "uncommon": "Pedalpuller",
+        "rare": "Alleyslipper",
+        "epic": "Market Day Rush",
+        "legendary": "Rani of the Riverside Roads"
+      },
+      "lore": {
+        "common": "Rings its bell at every corner, whether anyone is there or not.",
+        "uncommon": "Is pulled by pedal power alone, so the rider's legs are very strong.",
+        "rare": "Slipped through the busy market so quickly that it delivered a whole family before the bus.",
+        "epic": "Carried home so many shoppers on festival day that its bell wore out, and it had to shout ding instead.",
+        "legendary": "Pedalled up the steepest hill in the city with a piano in the back, and the passenger played it all the way up."
+      },
+      "moves": {
+        "signature": "Bell Clang Bump",
+        "legend": "Hot Pavement Pedal",
+        "ultimate": "Shortcut Rush",
+        "kit.exhaust_fumes": "Market Whiff",
+        "kit.turbo_boost": "Pedal Hard",
+        "kit.hit_and_run": "Weave Weave Weave Weave"
+      }
+    },
+    "x_tuk_tuk": {
+      "status": "reviewed",
+      "names": {
+        "common": "Putputter",
+        "uncommon": "Tinytaxi",
+        "rare": "Traffic Weaver",
+        "epic": "Three-Wheel Dash",
+        "legendary": "Tukko, Fastest Taxi in the City"
+      },
+      "lore": {
+        "common": "Putt-putts so loudly that you hear it three streets before it arrives.",
+        "uncommon": "Has only three wheels, so it leans round corners like a nervous bird.",
+        "rare": "Leaned so far round a corner on two wheels that the passengers shook hands with a fruit seller.",
+        "epic": "Carried a whole wedding party through the city, with the bride riding on the roof.",
+        "legendary": "Has driven every street in the biggest city a thousand times and still knows the quickest way to the beach."
+      },
+      "moves": {
+        "signature": "Front Wheel Nudge",
+        "legend": "Three-Wheel Ram",
+        "ultimate": "Traffic Gap Dash",
+        "kit.horn_blast": "Squeaky Horn",
+        "kit.exhaust_fumes": "Two-Stroke Puff",
+        "kit.turbo_boost": "Full Throttle Putt"
+      }
+    },
+    "x_inline_skate": {
+      "status": "reviewed",
+      "names": {
+        "common": "Rollwobble",
+        "uncommon": "Brakeless",
+        "rare": "Promenade Glide",
+        "epic": "Seafront Slalom",
+        "legendary": "Slalomina, Queen of the Promenade"
+      },
+      "lore": {
+        "common": "Rolls away from you the moment you put it on, so you have to grab the railing.",
+        "uncommon": "Has a rubber brake on one heel that most riders forget about until they reach the bottom of the hill.",
+        "rare": "Glided so smoothly down the promenade that the seagulls kept pace.",
+        "epic": "Raced down the seafront with a hundred others, and the ice cream sellers stepped back.",
+        "legendary": "Skated the whole length of the coast path in one day, and only fell over once, at the end."
+      },
+      "moves": {
+        "signature": "Wheel Kick",
+        "legend": "Skate Sweaty Sock Stink",
+        "ultimate": "Slalom Crash",
+        "kit.horn_blast": "Clatter Startle",
+        "kit.exhaust_fumes": "Old Sock Whiff",
+        "kit.turbo_boost": "Downhill Glide",
+        "kit.hit_and_run": "Glide Glide Glide"
+      }
+    },
+    "x_roller_skate": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fourwheel Wobble",
+        "uncommon": "Discoroller",
+        "rare": "Rinkspinner",
+        "epic": "Roller Disco",
+        "legendary": "Rosie Rollerqueen of the Rink"
+      },
+      "lore": {
+        "common": "Wobbles so much that you hold onto the wall all the way round the rink.",
+        "uncommon": "Has four wheels and bright laces, and thinks it's very fashionable.",
+        "rare": "Spun round on one foot so fast that the disco lights got dizzy.",
+        "epic": "Started a roller disco in the car park, and the whole street came to skate.",
+        "legendary": "Danced so well at the roller disco that the mirror ball came down from the ceiling to join in."
+      },
+      "moves": {
+        "signature": "Toe Stop Kick",
+        "legend": "Knee Pad Guard",
+        "ultimate": "Roller Rink Finale",
+        "kit.horn_blast": "Wheel Clatter",
+        "kit.exhaust_fumes": "Skate Bag Whiff",
+        "kit.hit_and_run": "Skate Skate Skate"
+      }
+    },
+    "x_segway": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lean-Forward",
+        "uncommon": "Silentglider",
+        "rare": "Galestander",
+        "epic": "City Tour Glide",
+        "legendary": "Balancia, the Ever-Upright"
+      },
+      "lore": {
+        "common": "Rolls forward the moment you lean even a tiny bit, so you spill your coffee.",
+        "uncommon": "Glides along with no sound at all, so it sneaks up on pigeons.",
+        "rare": "Balanced on two wheels in a gale while everyone else blew over.",
+        "epic": "Led a city tour of fifty riders all in a line, and the tourists thought it was a parade.",
+        "legendary": "Went the whole length of the coast on one charge, then leaned forward one last time and rolled into the sea for a paddle."
+      },
+      "moves": {
+        "signature": "Wheel Bump",
+        "legend": "Balance Guard",
+        "ultimate": "Lean and Glide",
+        "kit.exhaust_fumes": "Battery Whiff Puff",
+        "kit.turbo_boost": "Lean Forward"
+      }
+    }
+  }
+}

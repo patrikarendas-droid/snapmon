@@ -21,7 +21,12 @@ for (const [label, id, tpl, lore, sig, word] of [['light switch', 'x_light_switc
   const S = T.freshState(); S.level = 6;
   const monsters = ['common', 'rare', 'legendary'].map((r, i) => T.createMonster(S, { obj: id, rarity: r, word: label, photo: { hue: 0, sat: 0, lit: 0.8 } }));
   ok(monsters.every(m => m.dna.shape === 'obj' && grid(m.dna) !== toolboxGrid), `${label}: new monsters get the object's body`);
-  ok(monsters.every(m => m.name.includes(word)), `${label}: names refer to the object (${monsters.map(m => m.name).join(', ')})`);
+  // since v0.5.0 both objects have approved curated names (Pilot 01); the generated names still refer to the object
+  const curNames = (T.CURATED.data[id] || {}).names || {};
+  ok(monsters.every(m => m.name === curNames[m.rarity]), `${label}: names are the approved curated names (${monsters.map(m => m.name).join(', ')})`);
+  { const C = T.CURATED, f = C.namesEnabled; C.namesEnabled = false;
+    const gen = ['common', 'rare', 'legendary'].map(r => T.createMonster(T.freshState(), { obj: id, rarity: r, word: label, photo: { hue: 0, sat: 0, lit: 0.8 } }));
+    C.namesEnabled = f; ok(gen.every(m => m.name.includes(word)), `${label}: generated names (curated names off) refer to the object (${gen.map(m => m.name).join(', ')})`); }
   const toolSig = T.CATEGORY.tool.sig;
   ok(monsters.every(m => m.abilities[0].name === sig && m.abilities[0].power === toolSig.power && m.abilities[0].hits === toolSig.hits), `${label}: signature move "${sig}" (same numbers as before: combat balance unchanged)`);
   ok(T.loreKitFor(o, o.cat) === T.LORE_GROUP_KITS[lore], `${label}: flavour text comes from the ${lore} kit`);
@@ -120,7 +125,7 @@ for (const cat of ['tool', 'keys', 'laptop', 'food']) {
 {
   const seen = { name: new Map(), title: new Map(), legend: new Map(), ult: new Map(), lore: new Map() }, dup = [];
   for (const o of T.OBJECT_LIST) {
-    const m = mk(o.id, 'legendary', o.name), title = m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : m.name; // a curated Legendary name is its own title
+    const m = mk(o.id, 'legendary', o.name), cur = ((T.CURATED.data[o.id] || {}).names || {}).legendary === m.name, title = !cur && m.name.includes(', ') ? m.name.split(', ').slice(1).join(', ') : m.name; // a curated Legendary name is its own title (whole name; unique across all content)
     const vals = { name: m.name, title, legend: (m.abilities.find(a => a.legend) || {}).name, ult: (m.abilities.find(a => a.ultimate) || {}).name, lore: T.monsterLore({ ...m, seed: 1 }) };
     for (const k in vals) { if (!vals[k] || seen[k].has(vals[k])) dup.push(`${k}: ${o.id} = ${seen[k].get(vals[k])} (${vals[k]})`); seen[k].set(vals[k], o.id); }
   }
@@ -130,9 +135,16 @@ for (const cat of ['tool', 'keys', 'laptop', 'food']) {
 }
 // saved monsters keep what they were found with (family, moves, name are stored on the monster)
 {
-  const S = T.freshState(), old = { ...mk('cutlery_fork', 'rare'), fam: 'mechanical', name: 'Forkygoyle', abilities: [{ name: 'Nail Gun', power: 0.45, hits: 3, cd: 3 }] }; // fork: no curated writing (curated objects take their reviewed text on load: tests/curated-refresh.js)
-  S.monsters = [old]; const round = T.importSave(T.exportSave(S));
+  const C = T.CURATED, flags = [C.enabled, C.movesEnabled, C.namesEnabled];
+  const S = T.freshState(), old = { ...mk('cutlery_fork', 'rare'), fam: 'mechanical', name: 'Forkygoyle', abilities: [{ name: 'Nail Gun', power: 0.45, hits: 3, cd: 3 }] };
+  // without curated writing (every object is curated since v0.5.0, so switch it off to test the plain path)
+  C.enabled = C.movesEnabled = C.namesEnabled = false;
+  S.monsters = [old]; let round = T.importSave(T.exportSave(S));
   ok(round.monsters[0].fam === 'mechanical' && round.monsters[0].abilities[0].name === 'Nail Gun' && round.monsters[0].name === 'Forkygoyle', 'an existing Mechanical fork keeps its family, moves and name through backup and load');
+  [C.enabled, C.movesEnabled, C.namesEnabled] = flags;
+  // with curated writing on, only text may change on load (tests/curated-refresh.js covers the refresh in detail)
+  round = T.importSave(T.exportSave(S)); const r = round.monsters[0], a = r.abilities[0];
+  ok(r.fam === 'mechanical' && a.power === 0.45 && a.hits === 3 && a.cd === 3 && r.rarity === old.rarity && r.level === old.level, `with curated writing on, the fork keeps its family and move numbers (text may refresh: "${r.name}", "${a.name}")`);
 }
 
 console.log(bad ? `\n${bad} PROBLEM(S)` : '\nALL IDENTITY CHECKS PASSED');
