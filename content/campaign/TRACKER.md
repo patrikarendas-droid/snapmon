@@ -41,7 +41,8 @@
 | w09-gadgets-and-computers | 123 | 123 | done: 132 high / 261 medium / 27 low + 16 patterns | 393 fields (`patches/w09-gadgets-and-computers-editor-auto.json`) then `w09-self-fixes.json` | usb_key L deliberately calls back to C (lint medium accepted) |
 | w10-screens-sound-and-light | 98 | 98 | pending | self-fixes | |
 | w11-office-books-and-art | 112 | 112 | pending | self-fixes | sensitive objects written neutrally for developer review: x_bible (family book, no religious content), x_cigarette/x_cigarette_butt/x_vape (negative framing, litter/quitting), x_incense_stick, x_ballot_box (w08, class pet vote) |
-| w12–w22 | 1,094 | 0 | — | — | not started |
+| w12-house-odds-and-ends | 101 | 101 | pending | self-fixes | many fire objects (matches x4, candles, bonfire, fireworks) written with safety framing |
+| w13–w22 | 993 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between

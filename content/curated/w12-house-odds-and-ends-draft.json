@@ -1716,6 +1716,837 @@
         "kit.smoke_screen": "Puff Out Crack",
         "kit.flare_up": "Bright Head Boost"
       }
+    },
+    "x_microscope": {
+      "status": "draft",
+      "names": {
+        "common": "Eyesquinter",
+        "uncommon": "Knobtwiddler",
+        "rare": "Germrevealer",
+        "epic": "Science Class Gasp",
+        "legendary": "The Lens That Found a Tiny Zoo"
+      },
+      "lore": {
+        "common": "Makes everyone close one eye and squint until their face aches.",
+        "uncommon": "Has two knobs, and everyone twists the wrong one until the slide cracks.",
+        "rare": "Shows the pond water is full of wriggling creatures, and nobody drinks from the tap that day.",
+        "epic": "Showed the whole class a drop of rainwater, and thirty children gasped at the same time.",
+        "legendary": "Found a tiny new creature in a puddle in the playground, and it was named after the school."
+      },
+      "moves": {
+        "signature": "Focus Focus Focus",
+        "legend": "Slide Rest",
+        "ultimate": "Microscope Reveal",
+        "kit.reaction": "Lamp Heat",
+        "kit.hypothesis": "Magnify Boost",
+        "kit.acid_drop": "Stain Drop"
+      }
+    },
+    "x_monocle": {
+      "status": "draft",
+      "names": {
+        "common": "Eyesqueeze",
+        "uncommon": "Teacupdropper",
+        "rare": "Gentlemanglint",
+        "epic": "Fancy Party Glint",
+        "legendary": "Sir Monocle the Very Distinguished"
+      },
+      "lore": {
+        "common": "Pops out of the eye whenever its wearer raises an eyebrow in surprise.",
+        "uncommon": "Drops into the teacup at every fancy tea party.",
+        "rare": "Glints in the light so that everyone thinks the wearer is very clever.",
+        "epic": "Popped out at the same moment as every monocle at the fancy dress party, and the floor was covered.",
+        "legendary": "Was worn by a dog in a costume competition, and the dog has been insufferable ever since."
+      },
+      "moves": {
+        "signature": "Glint Glint Glint",
+        "legend": "Pop Pop Pop",
+        "ultimate": "Monocle Pop",
+        "kit.reaction": "Sun Glint Burn",
+        "kit.hypothesis": "Distinguished Boost",
+        "kit.acid_drop": "Teacup Splash Stink",
+        "kit.centrifuge": "Spin Spin Monocle"
+      }
+    },
+    "x_petri_dish": {
+      "status": "draft",
+      "names": {
+        "common": "Furrygrower",
+        "uncommon": "Lidslider",
+        "rare": "Mouldgarden",
+        "epic": "Fridge Science Surprise",
+        "legendary": "The Dish That Grew a Rainbow"
+      },
+      "lore": {
+        "common": "Grows fuzzy spots that nobody wants to look at.",
+        "uncommon": "Has a lid that slides off whenever it's carried.",
+        "rare": "Grows a different coloured mould in every corner, like a tiny garden.",
+        "epic": "Was forgotten in the science fridge over the holidays, and the whole class had a very smelly first day back.",
+        "legendary": "Grew a mould that turned out to be useful, and a scientist got very excited about it."
+      },
+      "moves": {
+        "signature": "Mould Mould Mould",
+        "legend": "Fuzzy Crack",
+        "ultimate": "Culture Shock",
+        "kit.reaction": "Incubator Heat",
+        "kit.hypothesis": "Growth Boost",
+        "kit.acid_drop": "Agar Stink",
+        "kit.centrifuge": "Swab Swab Swab"
+      }
+    },
+    "x_pillar_candle": {
+      "status": "draft",
+      "names": {
+        "common": "Tunnelburner",
+        "uncommon": "Drippyside",
+        "rare": "Flickerdance",
+        "epic": "Candlelit Dinner Party",
+        "legendary": "The Candle That Burned for a Week"
+      },
+      "lore": {
+        "common": "Burns a tunnel down its middle so the wick drowns in wax.",
+        "uncommon": "Drips down one side until it looks like a melting snowman.",
+        "rare": "Makes shadows dance on the wall that look like little monsters.",
+        "epic": "Lit every table at the candlelit dinner, and the restaurant forgot to turn the lights on.",
+        "legendary": "Burned for a whole week during a power cut and kept a family company the entire time."
+      },
+      "moves": {
+        "signature": "Wick Flicker Burn",
+        "legend": "Shadow Dance Startle",
+        "ultimate": "Wax Pool Spill",
+        "kit.smoke_screen": "Wick Smoke Crack",
+        "kit.flare_up": "Steady Light Boost",
+        "kit.melt": "Wax Melt Snatch"
+      }
+    },
+    "x_porta_potty": {
+      "status": "draft",
+      "names": {
+        "common": "Doorsticker",
+        "uncommon": "Queueblocker",
+        "rare": "Smellbooth",
+        "epic": "Festival Queue Chaos",
+        "legendary": "The Loo at the End of the Field"
+      },
+      "lore": {
+        "common": "Has a door that sticks so you have to shout for help.",
+        "uncommon": "Always has the longest queue at any event.",
+        "rare": "Smells so strong that people hold their breath from three metres away.",
+        "epic": "Had a queue at the festival so long that people made friends and swapped phone numbers in it.",
+        "legendary": "Survived a whole muddy festival weekend, and still had a toilet roll left on Sunday."
+      },
+      "moves": {
+        "signature": "Door Bang Startle",
+        "legend": "Queue Slam",
+        "ultimate": "Festival Pong",
+        "kit.bubble_up": "Blue Water Crack",
+        "kit.splash_back": "Splash Startle Back"
+      }
+    },
+    "x_portable_toilet": {
+      "status": "draft",
+      "names": {
+        "common": "Wobblehut",
+        "uncommon": "Lockfail",
+        "rare": "Buildingsitepal",
+        "epic": "Building Site Breakdown",
+        "legendary": "The Toilet That Survived a Storm"
+      },
+      "lore": {
+        "common": "Wobbles every time someone walks past.",
+        "uncommon": "Has a lock that shows engaged even when it's empty.",
+        "rare": "Has been to more building sites than any of the builders.",
+        "epic": "Tipped over on its back at the building site, with nobody inside, luckily.",
+        "legendary": "Stood upright through a gale that blew away three tents, two gazebos and a bouncy castle."
+      },
+      "moves": {
+        "signature": "Wobble Startle",
+        "legend": "Hot Plastic Hut",
+        "ultimate": "Hot Box Blaze",
+        "kit.plunger_pull": "Suck Snatch",
+        "kit.bubble_up": "Gurgle Crack Hut",
+        "kit.porcelain_shell": "Plastic Shell Guard"
+      }
+    },
+    "x_potty": {
+      "status": "draft",
+      "names": {
+        "common": "Trainingseat",
+        "uncommon": "Musicpotty",
+        "rare": "Bigkidcheer",
+        "epic": "Potty Party",
+        "legendary": "The Potty That Made Everyone Proud"
+      },
+      "lore": {
+        "common": "Gets carried into the living room at the worst possible moment.",
+        "uncommon": "Plays a little tune when it's used, and the toddler cheers.",
+        "rare": "Makes every toddler feel like a big kid when they use it.",
+        "epic": "Was celebrated so loudly that the neighbours came round to see what was happening.",
+        "legendary": "Trained four toddlers in one family, and each one got a sticker chart and a cheer."
+      },
+      "moves": {
+        "signature": "Plastic Seat Startle",
+        "legend": "Tune Tune Tune",
+        "ultimate": "Big Kid Cheer",
+        "kit.plunger_pull": "Potty Snatch",
+        "kit.bubble_up": "Splash Crack",
+        "kit.porcelain_shell": "Plastic Guard"
+      }
+    },
+    "x_rain_gauge": {
+      "status": "draft",
+      "names": {
+        "common": "Overflower",
+        "uncommon": "Puddlemeasurer",
+        "rare": "Rainrecorder",
+        "epic": "Wettest Week Record",
+        "legendary": "The Gauge That Measured the Flood"
+      },
+      "lore": {
+        "common": "Overflows in a storm before anyone can read it.",
+        "uncommon": "Gets checked every morning by a grandad who loves telling everyone the number.",
+        "rare": "Measured the rain so carefully that the weather forecaster asked for its numbers.",
+        "epic": "Filled to the top every day in the wettest week ever, and the garden became a pond.",
+        "legendary": "Measured the biggest rainstorm in a hundred years, and its number is in the record books."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Sun-Dried Crack",
+        "ultimate": "Overflow",
+        "kit.iodine_sting": "Murky Water Stink",
+        "kit.check_up": "Measure Crack",
+        "kit.bed_rest": "Glass Tube Guard"
+      }
+    },
+    "x_rear_view_mirror": {
+      "status": "draft",
+      "names": {
+        "common": "Tiltface",
+        "uncommon": "Backseatwatcher",
+        "rare": "Fuzzydicehanger",
+        "epic": "Car Journey Spy",
+        "legendary": "The Mirror That Saw the Sticker Fight"
+      },
+      "lore": {
+        "common": "Tilts so the driver sees the roof instead of the road.",
+        "uncommon": "Watches the back seat so closely that every whisper is heard.",
+        "rare": "Has fuzzy dice hanging from it that swing on every corner.",
+        "epic": "Caught the whole back-seat sticker fight on a long drive, and everyone got told off.",
+        "legendary": "Saw a lost puppy following the car for three miles and got it home safely."
+      },
+      "moves": {
+        "signature": "Mirror Glare Crack",
+        "legend": "Watchful Boost",
+        "ultimate": "Swinging Dice Daze",
+        "kit.glare_back": "Headlight Glare Back",
+        "kit.mirror_image": "Back Seat Guard",
+        "kit.vanity": "Hair Check Mirror"
+      }
+    },
+    "x_rubbish_heap": {
+      "status": "draft",
+      "names": {
+        "common": "Gullcrowd",
+        "uncommon": "Stinkpile",
+        "rare": "Treasuretrash",
+        "epic": "Tip Treasure Hunt",
+        "legendary": "The Heap That Hid a Bicycle"
+      },
+      "lore": {
+        "common": "Is surrounded by seagulls arguing over a crust.",
+        "uncommon": "Smells so bad on hot days that the flies wear nose pegs.",
+        "rare": "Hides a treasure in every corner for those brave enough to look.",
+        "epic": "Was searched by the whole family looking for a lost ring, and they found three bikes and a teapot.",
+        "legendary": "Hid a perfectly good bicycle that a boy repaired and rode for ten years."
+      },
+      "moves": {
+        "signature": "Heap Stink",
+        "legend": "Toss Toss Toss Toss",
+        "ultimate": "Heap Slide",
+        "kit.rot": "Heap Rot",
+        "kit.lid_slam": "Heap Topple"
+      }
+    },
+    "x_sand_timer_clock": {
+      "status": "draft",
+      "names": {
+        "common": "Sandshifter",
+        "uncommon": "Tilttimer",
+        "rare": "Teatimekeeper",
+        "epic": "Board Game Rush",
+        "legendary": "The Clock That Ran on Sand"
+      },
+      "lore": {
+        "common": "Gets knocked over so the sand runs the wrong way.",
+        "uncommon": "Tilts on its stand so the timing is always a bit off.",
+        "rare": "Times the tea brewing so perfectly that every cup is just right.",
+        "epic": "Timed every round of the family board game, and the whole family argued over every second.",
+        "legendary": "Has timed every pot of tea in the same kitchen for fifty years."
+      },
+      "moves": {
+        "signature": "Sand Flash",
+        "legend": "Time Out Startle",
+        "ultimate": "Sand Slide",
+        "kit.alarm_ring": "Glass Ding",
+        "kit.tick_tock": "Trickle Trickle",
+        "kit.rewind": "Flip Over Rest",
+        "kit.deadline": "Last Grains Crack"
+      }
+    },
+    "x_scented_candle": {
+      "status": "draft",
+      "names": {
+        "common": "Smellmixer",
+        "uncommon": "Labelliar",
+        "rare": "Cosyglow",
+        "epic": "Spa Night Glow",
+        "legendary": "The Candle That Smelled of Summer"
+      },
+      "lore": {
+        "common": "Mixes its smell with dinner, so the house smells of lavender lasagne.",
+        "uncommon": "Says sea breeze on the label but smells like washing powder.",
+        "rare": "Makes every room feel so cosy that nobody wants to leave.",
+        "epic": "Was lit in every room at once for a spa night, and the whole house smelled like a garden.",
+        "legendary": "Smelled so much like summer that a family lit it every winter evening to remember their holiday."
+      },
+      "moves": {
+        "signature": "Scent Burn",
+        "legend": "Cosy Boost",
+        "ultimate": "Lavender Lull",
+        "kit.flare_up": "Fresh Wick Boost",
+        "kit.melt": "Scent Siphon"
+      }
+    },
+    "x_skip": {
+      "status": "draft",
+      "names": {
+        "common": "Bigmetalbox",
+        "uncommon": "Junkmagnet",
+        "rare": "Wheelbarrowtarget",
+        "epic": "Street Clear-Out",
+        "legendary": "The Skip That Ate a Whole House"
+      },
+      "lore": {
+        "common": "Takes up the whole driveway, so cars have to park on the grass.",
+        "uncommon": "Fills up with the neighbours' junk the moment it's delivered.",
+        "rare": "Gets a wheelbarrow tipped into it every five minutes.",
+        "epic": "Was filled with every old sofa on the street in one weekend.",
+        "legendary": "Swallowed a whole house's worth of rubbish during a renovation, and still had room for a bathtub."
+      },
+      "moves": {
+        "signature": "Metal Clang Stink",
+        "legend": "Empty Rest",
+        "ultimate": "Skip Overflow",
+        "kit.garbage_toss": "Toss Toss Toss Toss",
+        "kit.lid_slam": "Metal Side Slam",
+        "kit.scavenge": "Junk Grab"
+      }
+    },
+    "x_snow_globe": {
+      "status": "draft",
+      "names": {
+        "common": "Shakeshake",
+        "uncommon": "Snowswirler",
+        "rare": "Tinyvillage",
+        "epic": "Snowstorm Shake",
+        "legendary": "The Globe With a Real Winter Inside"
+      },
+      "lore": {
+        "common": "Gets shaken so hard that the little snowman falls over.",
+        "uncommon": "Swirls its snow round and round until everyone gets dizzy.",
+        "rare": "Holds a whole tiny village that nobody can ever visit.",
+        "epic": "Was shaken by every child in the shop, and the shelf turned into a blizzard.",
+        "legendary": "Was shaken on a hot summer's day, and the whole room felt chilly for an hour."
+      },
+      "moves": {
+        "signature": "Shake Crack",
+        "legend": "Snow Swirl Startle",
+        "ultimate": "Blizzard Shake",
+        "kit.reaction": "Warm Hand Melt",
+        "kit.hypothesis": "Glitter Boost",
+        "kit.centrifuge": "Swirl Swirl Swirl Swirl"
+      }
+    },
+    "x_soda_can_litter": {
+      "status": "draft",
+      "names": {
+        "common": "Cansquash",
+        "uncommon": "Kickcan",
+        "rare": "Rattlecan",
+        "epic": "Recycling Rally",
+        "legendary": "The Can That Was Recycled Forever"
+      },
+      "lore": {
+        "common": "Gets squashed flat by every passing car.",
+        "uncommon": "Gets kicked along the pavement by every bored child.",
+        "rare": "Rattles down the street in the wind like a tiny drum.",
+        "epic": "Was picked up by every volunteer on recycling day, and the bins were full by lunch.",
+        "legendary": "Was recycled so many times that it has been a bike, a can, a plane and a can again."
+      },
+      "moves": {
+        "signature": "Fizzy Stink",
+        "legend": "Recycle Rest",
+        "ultimate": "Can Kick Clatter",
+        "kit.garbage_toss": "Kick Kick Kick",
+        "kit.rot": "Sticky Can Rot",
+        "kit.lid_slam": "Can Crush",
+        "kit.scavenge": "Ring Pull Snatch"
+      }
+    },
+    "x_sparkler": {
+      "status": "draft",
+      "names": {
+        "common": "Wiggler",
+        "uncommon": "Namewriter",
+        "rare": "Gloveneeder",
+        "epic": "Garden Fireworks Night",
+        "legendary": "The Sparkler That Wrote in the Sky"
+      },
+      "lore": {
+        "common": "Fizzes so close to your gloves that everyone tells you to hold it further away.",
+        "uncommon": "Writes your name in the air, which disappears before anyone can read it.",
+        "rare": "Throws sparks in every direction like a tiny fountain of stars.",
+        "epic": "Was lit by the whole family at once in the garden, and the dark sky filled with swirling light.",
+        "legendary": "Wrote a whole birthday message in the air so fast that the camera caught every letter."
+      },
+      "moves": {
+        "signature": "Sparkle Burn",
+        "legend": "Spark Siphon",
+        "ultimate": "Sparkle Swirl",
+        "kit.wax_drip": "Hot Spark Drip",
+        "kit.smoke_screen": "Smoke Wisp Crack",
+        "kit.melt": "Glow Snatch"
+      }
+    },
+    "x_sundial_garden": {
+      "status": "draft",
+      "names": {
+        "common": "Cloudstopper",
+        "uncommon": "Shadowpointer",
+        "rare": "Summertimer",
+        "epic": "Garden Sundial Puzzle",
+        "legendary": "The Dial That Never Needed Winding"
+      },
+      "lore": {
+        "common": "Stops working every time a cloud goes past.",
+        "uncommon": "Points its shadow at the time, but always an hour off in summer.",
+        "rare": "Tells the time so accurately on a sunny day that nobody needs a watch.",
+        "epic": "Confused the whole garden party when the clocks changed, and everyone was late for the cake.",
+        "legendary": "Has told the time in the same garden for three hundred years without a single battery."
+      },
+      "moves": {
+        "signature": "Shadow Flash",
+        "legend": "Sunny Day Rest",
+        "ultimate": "Shadow Strike",
+        "kit.tick_tock": "Shadow Shift Shift",
+        "kit.rewind": "Cloudy Rest",
+        "kit.deadline": "Shadow Crack"
+      }
+    },
+    "x_syringe": {
+      "status": "draft",
+      "names": {
+        "common": "Needleworry",
+        "uncommon": "Quickscratch",
+        "rare": "Bravemaker",
+        "epic": "Vaccine Day Queue",
+        "legendary": "The Scratch That Kept Everyone Well"
+      },
+      "lore": {
+        "common": "Makes everyone look away the moment they see it.",
+        "uncommon": "Is over in a quick scratch before anyone has time to say ouch.",
+        "rare": "Makes even the most nervous child feel brave afterwards, especially with a sticker.",
+        "epic": "Gave the whole school its vaccines in one morning, and everyone got a sticker.",
+        "legendary": "Helped keep a whole town healthy through a long winter, one tiny scratch at a time."
+      },
+      "moves": {
+        "signature": "Prick Prick Prick",
+        "legend": "Brave Sticker Rest",
+        "ultimate": "Big Scratch",
+        "kit.quick_fix": "Sticker Rest",
+        "kit.iodine_sting": "Swab Sting",
+        "kit.check_up": "Check-Up Crack",
+        "kit.bed_rest": "Plaster Guard"
+      }
+    },
+    "x_tea_light_candle": {
+      "status": "draft",
+      "names": {
+        "common": "Tinflame",
+        "uncommon": "Floatcandle",
+        "rare": "Lanternhelper",
+        "epic": "Garden Path Glow",
+        "legendary": "The Light Behind a Hundred Lanterns"
+      },
+      "lore": {
+        "common": "Burns out in an hour and leaves a little tin cup behind.",
+        "uncommon": "Floats in a bowl of water like a tiny boat.",
+        "rare": "Fits inside every lantern in the house and makes them all glow.",
+        "epic": "Lined the whole garden path at the party, and guests followed the glow to the cake.",
+        "legendary": "Lit a hundred paper lanterns at the festival, and the whole river glowed."
+      },
+      "moves": {
+        "signature": "Little Flame Burn",
+        "legend": "Wax Stink",
+        "ultimate": "Lantern Glow Up",
+        "kit.wax_drip": "Tiny Wax Drip",
+        "kit.smoke_screen": "Wisp Crack",
+        "kit.flare_up": "Fresh Tea Light Boost",
+        "kit.melt": "Wax Melt Snatch Snatch"
+      }
+    },
+    "x_telescope": {
+      "status": "draft",
+      "names": {
+        "common": "Eyepieceaway",
+        "uncommon": "Wronggazer",
+        "rare": "Moonfinder",
+        "epic": "Star Party",
+        "legendary": "The Telescope That Found a New Star"
+      },
+      "lore": {
+        "common": "Gets pointed at the neighbour's chimney instead of the stars.",
+        "uncommon": "Shows everything upside down, which takes ages to get used to.",
+        "rare": "Finds the moon so clearly that you can see every crater.",
+        "epic": "Was looked through by every child at the star party, and the queue went down the hill.",
+        "legendary": "Spotted a new comet before anyone else, and the comet was named after the girl who looked."
+      },
+      "moves": {
+        "signature": "Look Look Look Look",
+        "legend": "Star Spot Startle",
+        "ultimate": "Starlight Flash",
+        "kit.hypothesis": "Zoom Boost Star",
+        "kit.acid_drop": "Dew Drop Stink",
+        "kit.centrifuge": "Swing Swing Swing"
+      }
+    },
+    "x_test_tube": {
+      "status": "draft",
+      "names": {
+        "common": "Rackforgetter",
+        "uncommon": "Fizzflooder",
+        "rare": "Colourswitch",
+        "epic": "Science Lab Mix-Up",
+        "legendary": "Doctor Testsworth of the Lab"
+      },
+      "lore": {
+        "common": "Is put down on the table and rolls straight off.",
+        "uncommon": "Fizzes over the top if anything is added too fast.",
+        "rare": "Changes colour so dramatically that the class claps.",
+        "epic": "Was mixed up with every other tube in the lab, and the experiment made pink foam everywhere.",
+        "legendary": "Held the experiment that made a famous scientist realise she'd discovered something new."
+      },
+      "moves": {
+        "signature": "Mix Mix Mix",
+        "legend": "Fizz Bash",
+        "ultimate": "Colour Change Flash",
+        "kit.reaction": "Bunsen Heat Tube",
+        "kit.hypothesis": "Hypothesis Boost",
+        "kit.acid_drop": "Acid Drip",
+        "kit.centrifuge": "Spin Tube Spin"
+      }
+    },
+    "x_test_tube_rack": {
+      "status": "draft",
+      "names": {
+        "common": "Tubeholder",
+        "uncommon": "Wobblyrack",
+        "rare": "Labtidy",
+        "epic": "Science Fair Line-Up",
+        "legendary": "The Rack That Held Twelve Experiments"
+      },
+      "lore": {
+        "common": "Holds every tube except the one that rolls off.",
+        "uncommon": "Wobbles on the bench so all the tubes rattle.",
+        "rare": "Keeps the science lab so tidy that the teacher can find everything.",
+        "epic": "Held every experiment at the science fair in a long colourful row.",
+        "legendary": "Has held the experiments of three generations of science students and never dropped one."
+      },
+      "moves": {
+        "signature": "Rack Crack",
+        "legend": "Tidy Lab Rest",
+        "ultimate": "Rack Rattle",
+        "kit.hypothesis": "Tidy Boost",
+        "kit.acid_drop": "Spill Drip Stink"
+      }
+    },
+    "x_thermometer": {
+      "status": "draft",
+      "names": {
+        "common": "Tonguetickler",
+        "uncommon": "Beepchecker",
+        "rare": "Feverfinder",
+        "epic": "Sick Day Check",
+        "legendary": "The Thermometer That Said You Were Fine"
+      },
+      "lore": {
+        "common": "Tickles under your tongue and makes you giggle.",
+        "uncommon": "Beeps when it's done, but never when you expect.",
+        "rare": "Always says you're perfectly fine just as you were hoping for a day off.",
+        "epic": "Checked every child in the class during flu season, and the school nurse ran out of stickers.",
+        "legendary": "Has checked every family member's temperature for twenty years and never been wrong."
+      },
+      "moves": {
+        "signature": "Beep Beep Beep Beep",
+        "legend": "Fever Crack",
+        "ultimate": "Temperature Spike",
+        "kit.iodine_sting": "Medicine Whiff",
+        "kit.check_up": "Check Check Crack",
+        "kit.bed_rest": "Sick Day Guard"
+      }
+    },
+    "x_toilet_cistern": {
+      "status": "draft",
+      "names": {
+        "common": "Gurglerefill",
+        "uncommon": "Flushchainreach",
+        "rare": "Overflowpipe",
+        "epic": "Midnight Refill Rumble",
+        "legendary": "The Cistern That Sang All Night"
+      },
+      "lore": {
+        "common": "Gurgles so loudly while refilling that the whole house hears.",
+        "uncommon": "Has a chain to pull that's always just out of reach.",
+        "rare": "Drips from its overflow pipe onto the garden path.",
+        "epic": "Refilled so loudly in the middle of the night that everyone in the house woke up.",
+        "legendary": "Has refilled itself a million times in the same house and still sings while it does it."
+      },
+      "moves": {
+        "signature": "Gurgle Startle",
+        "legend": "Flush Flash",
+        "ultimate": "Refill Rumble",
+        "kit.plunger_pull": "Chain Pull Siphon",
+        "kit.bubble_up": "Gurgle Gurgle Crack",
+        "kit.porcelain_shell": "Ceramic Guard",
+        "kit.splash_back": "Overflow Startle"
+      }
+    },
+    "x_toilet_roll_holder": {
+      "status": "draft",
+      "names": {
+        "common": "Springsnap",
+        "uncommon": "Emptyholder",
+        "rare": "Rollspinner",
+        "epic": "Bathroom Roll Rally",
+        "legendary": "The Holder That Was Never Empty"
+      },
+      "lore": {
+        "common": "Springs its little bar out and onto the floor when you change the roll.",
+        "uncommon": "Sits empty for days because nobody wants to change the roll.",
+        "rare": "Spins the roll so fast that it unrolls across the floor.",
+        "epic": "Unrolled the whole roll when the cat batted it, and the bathroom became a paper river.",
+        "legendary": "Was never once left empty in a house of six, which nobody can explain."
+      },
+      "moves": {
+        "signature": "Spring Snap Startle",
+        "legend": "Empty Holder Crack",
+        "ultimate": "Paper River",
+        "kit.plunger_pull": "Roll Snatch",
+        "kit.bubble_up": "Spin Crack",
+        "kit.porcelain_shell": "Holder Guard",
+        "kit.splash_back": "Spring Startle"
+      }
+    },
+    "x_toilet_seat_cover": {
+      "status": "draft",
+      "names": {
+        "common": "Fluffycover",
+        "uncommon": "Slideslipper",
+        "rare": "Bathroomcosy",
+        "epic": "Bathroom Fluff",
+        "legendary": "The Fluffiest Seat in the House"
+      },
+      "lore": {
+        "common": "Slides off the seat whenever someone sits down.",
+        "uncommon": "Is so fluffy that it looks like a small sheep.",
+        "rare": "Makes the bathroom feel so cosy that people stay too long.",
+        "epic": "Was put on every toilet in the house for a cold winter, and the whole family stopped complaining.",
+        "legendary": "Has kept the same seat warm for twenty winters and never once slipped off."
+      },
+      "moves": {
+        "signature": "Fluff Startle",
+        "legend": "Fluff Fluff Fluff",
+        "ultimate": "Cosy Seat Daze",
+        "kit.plunger_pull": "Fluff Snatch",
+        "kit.bubble_up": "Slide Crack",
+        "kit.porcelain_shell": "Fluffy Guard"
+      }
+    },
+    "x_toilet_tank": {
+      "status": "draft",
+      "names": {
+        "common": "Lidrattle",
+        "uncommon": "Runningwater",
+        "rare": "Floatfiddle",
+        "epic": "Night Running Tap",
+        "legendary": "The Tank That Never Stopped Running"
+      },
+      "lore": {
+        "common": "Rattles its heavy lid whenever someone walks past.",
+        "uncommon": "Keeps running water all night until someone jiggles the handle.",
+        "rare": "Has a float inside that everyone fiddles with but nobody understands.",
+        "epic": "Ran all night in the hotel room next door, and nobody slept.",
+        "legendary": "Has been jiggled by the same grandad every night for thirty years."
+      },
+      "moves": {
+        "signature": "Rattle Startle",
+        "legend": "Running Water Flash",
+        "ultimate": "Tank Overflow",
+        "kit.plunger_pull": "Water Snatch",
+        "kit.bubble_up": "Float Crack",
+        "kit.porcelain_shell": "Heavy Lid Guard",
+        "kit.splash_back": "Splash Startle Tank"
+      }
+    },
+    "x_torch_fire": {
+      "status": "draft",
+      "names": {
+        "common": "Flamewaver",
+        "uncommon": "Castlewall",
+        "rare": "Smokytrail",
+        "epic": "Castle Torchlight Tour",
+        "legendary": "The Torch That Lit the Great Hall"
+      },
+      "lore": {
+        "common": "Waves its flame so wildly in the wind that everyone keeps a safe distance.",
+        "uncommon": "Hangs on the castle wall in an iron holder, just like in the stories.",
+        "rare": "Leaves a trail of black smoke along the ceiling.",
+        "epic": "Lit the whole castle during the torchlight tour, and visitors felt like knights.",
+        "legendary": "Lit the great hall for a feast that lasted till dawn, and never went out."
+      },
+      "moves": {
+        "signature": "Flame Wave Burn",
+        "legend": "Torch Bash",
+        "ultimate": "Great Hall Flare",
+        "kit.wax_drip": "Pitch Drip",
+        "kit.smoke_screen": "Black Smoke Crack",
+        "kit.flare_up": "Torch Flare Boost",
+        "kit.melt": "Heat Siphon"
+      }
+    },
+    "x_trash_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Fullbag",
+        "uncommon": "Drippingbag",
+        "rare": "Bintoobig",
+        "epic": "Bin Day Dash",
+        "legendary": "The Bag That Made It Down the Stairs"
+      },
+      "lore": {
+        "common": "Is always full when someone is in a hurry.",
+        "uncommon": "Drips something sticky on the stairs on the way out.",
+        "rare": "Is always just too big for the bin it's supposed to go in.",
+        "epic": "Was carried down every flat's stairs on bin day, and the lift was full of rubbish.",
+        "legendary": "Made it down five flights of stairs without a single rip, and the family cheered."
+      },
+      "moves": {
+        "signature": "Full Bag Stink",
+        "legend": "Drip Crack",
+        "ultimate": "Bag Burst",
+        "kit.garbage_toss": "Swing Swing Swing Swing",
+        "kit.rot": "Bag Rot",
+        "kit.scavenge": "Bag Snatch"
+      }
+    },
+    "x_tripod_head": {
+      "status": "draft",
+      "names": {
+        "common": "Swivelstuck",
+        "uncommon": "Leveller",
+        "rare": "Panmaster",
+        "epic": "Panorama Shoot",
+        "legendary": "The Head That Turned for the View"
+      },
+      "lore": {
+        "common": "Gets stuck mid-swivel so the camera points at the ground.",
+        "uncommon": "Has a tiny bubble level that never settles in the middle.",
+        "rare": "Pans so smoothly that every video looks like a film.",
+        "epic": "Turned slowly round a whole mountain range, and the panorama filled a whole wall.",
+        "legendary": "Filmed the sunrise from the same hill every morning for a year, and the video made everyone cry."
+      },
+      "moves": {
+        "signature": "Pan Flash",
+        "legend": "Head Bonk",
+        "ultimate": "Panorama Sweep",
+        "kit.reaction": "Hot Motor Head",
+        "kit.hypothesis": "Level Boost",
+        "kit.acid_drop": "Grease Drip Stink"
+      }
+    },
+    "x_urinal_stall": {
+      "status": "draft",
+      "names": {
+        "common": "Splashback Stall",
+        "uncommon": "Deodorantblock",
+        "rare": "Tallorshort",
+        "epic": "Stadium Half-Time Rush",
+        "legendary": "The Stall With the Best View"
+      },
+      "lore": {
+        "common": "Splashes back so everyone takes a step back.",
+        "uncommon": "Has a smelly block in it that never seems to shrink.",
+        "rare": "Is always the wrong height for half the people using it.",
+        "epic": "Was used by every football fan at half-time, and the queue went round the stadium.",
+        "legendary": "Has a little window with a view of the mountains, the best in the whole country."
+      },
+      "moves": {
+        "signature": "Splash Startle Stall",
+        "legend": "Partition Guard",
+        "ultimate": "Half-Time Rush",
+        "kit.porcelain_shell": "Porcelain Guard Stall",
+        "kit.splash_back": "Splash Back Back"
+      }
+    },
+    "x_wall_mirror": {
+      "status": "draft",
+      "names": {
+        "common": "Hallwaycheck",
+        "uncommon": "Selfiewall",
+        "rare": "Roommaker",
+        "epic": "Hallway Outfit Check",
+        "legendary": "The Mirror at the Bottom of the Stairs"
+      },
+      "lore": {
+        "common": "Gets a quick hair check from everyone leaving the house.",
+        "uncommon": "Is used for selfies so often that it has fingerprints at selfie height.",
+        "rare": "Makes a small hallway look like a ballroom.",
+        "epic": "Was checked by every guest arriving at the party, and the hallway jammed.",
+        "legendary": "Has watched every family member leave for their first day of school for fifty years."
+      },
+      "moves": {
+        "signature": "Glass Crack Mirror",
+        "legend": "Mirror Guard",
+        "ultimate": "Hallway Jam",
+        "kit.shatter": "Shatter Shatter Mirror",
+        "kit.mirror_image": "Reflection Wall Guard",
+        "kit.vanity": "Hair Check Boost Boost"
+      }
+    },
+    "x_wood_stove": {
+      "status": "draft",
+      "names": {
+        "common": "Logeater",
+        "uncommon": "Glowdoor",
+        "rare": "Kettlewarmer",
+        "epic": "Snowed-In Warmth",
+        "legendary": "The Stove That Kept the Cottage Warm"
+      },
+      "lore": {
+        "common": "Eats logs so fast that someone has to keep going out into the snow.",
+        "uncommon": "Has a glass door that shows the dancing flames.",
+        "rare": "Keeps a kettle on top that's always warm for tea.",
+        "epic": "Kept the whole cottage warm during the snowstorm, and the family played cards all week.",
+        "legendary": "Kept a mountain hut warm through a whole winter, and every hiker who stopped there thanked it."
+      },
+      "moves": {
+        "signature": "Glow Burn",
+        "legend": "Hot Stove Boost",
+        "ultimate": "Chimney Smoke Puff",
+        "kit.wax_drip": "Ember Drop",
+        "kit.smoke_screen": "Woodsmoke Crack",
+        "kit.melt": "Warmth Siphon Stove"
+      }
     }
   }
 }
