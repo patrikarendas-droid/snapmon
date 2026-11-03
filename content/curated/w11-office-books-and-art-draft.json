@@ -1411,6 +1411,705 @@
         "kit.ink_splatter": "Sticker Smudge",
         "kit.deadline_panic": "Dropped Hoop Panic"
       }
+    },
+    "x_id_card": {
+      "status": "draft",
+      "names": {
+        "common": "Badphoto",
+        "uncommon": "Lanyardtwister",
+        "rare": "Doorfriend",
+        "epic": "Front Desk Lockout",
+        "legendary": "The Card That Knew Every Door"
+      },
+      "lore": {
+        "common": "Has the worst photo of its owner ever taken, and everyone sees it.",
+        "uncommon": "Twists round on its lanyard so it always shows the back.",
+        "rare": "Makes every security guard nod you through, even on your worst hair day.",
+        "epic": "Was left at home by the whole team on the same Monday, and the office had to be opened with a chair.",
+        "legendary": "Opened a door that had been locked for fifty years, and behind it was the office's old tea trolley."
+      },
+      "moves": {
+        "signature": "Swipe Swipe Swipe",
+        "legend": "Bad Photo Crack",
+        "ultimate": "Access Denied",
+        "kit.paper_cut": "Card Edge Cuts",
+        "kit.ink_splatter": "Faded Photo Stink",
+        "kit.deadline_panic": "Lost Pass Panic",
+        "kit.coffee_break": "Lanyard Rest"
+      }
+    },
+    "x_incense_stick": {
+      "status": "draft",
+      "names": {
+        "common": "Ashdropper",
+        "uncommon": "Smokecurl",
+        "rare": "Sneezestarter",
+        "epic": "Shop Smoke Cloud",
+        "legendary": "The Stick That Scented a Street"
+      },
+      "lore": {
+        "common": "Drops a little grey worm of ash on the table that crumbles when you touch it.",
+        "uncommon": "Curls its smoke into twisty shapes that float up to the ceiling.",
+        "rare": "Makes everyone in the room sneeze three times, one after the other.",
+        "epic": "Was burned in the gift shop doorway, and the whole street smelled of flowers until bedtime.",
+        "legendary": "Scented a whole market street so sweetly that the bakery complained nobody could smell its bread."
+      },
+      "moves": {
+        "signature": "Glowing Tip Burn",
+        "legend": "Sweet Smoke Cloud",
+        "ultimate": "Smoke Curl Haze",
+        "kit.paper_cut": "Ash Flick",
+        "kit.ink_splatter": "Smoky Stink",
+        "kit.deadline_panic": "Sneeze Startle",
+        "kit.coffee_break": "Stand Rest"
+      }
+    },
+    "x_knitting_needles": {
+      "status": "draft",
+      "names": {
+        "common": "Clickclacker",
+        "uncommon": "Stitchdropper",
+        "rare": "Scarfspinner",
+        "epic": "Knitting Circle Race",
+        "legendary": "Granny Clickety, Queen of Wool"
+      },
+      "lore": {
+        "common": "Clicks so loudly in front of the TV that nobody can hear the news.",
+        "uncommon": "Drops a stitch every ten rows and leaves a little hole.",
+        "rare": "Knits so fast that a scarf grows a foot long during one bus journey.",
+        "epic": "Clicked away with the whole knitting circle until the village hall was full of jumpers.",
+        "legendary": "Knitted a jumper for every child in the village before the first snow."
+      },
+      "moves": {
+        "signature": "Click Click Click",
+        "legend": "Knitting Boost",
+        "ultimate": "Wool Whirl",
+        "kit.pin_prick": "Needle Poke",
+        "kit.patchwork": "Woolly Patch"
+      }
+    },
+    "x_laminator": {
+      "status": "draft",
+      "names": {
+        "common": "Bubblewrapper",
+        "uncommon": "Slowhot",
+        "rare": "Shinesealer",
+        "epic": "Laminate Everything Day",
+        "legendary": "Sir Plasticoat the Everlasting"
+      },
+      "lore": {
+        "common": "Leaves a bubble in the middle of every sheet it seals.",
+        "uncommon": "Takes ten minutes to warm up before it'll do anything.",
+        "rare": "Seals paper so tightly that it becomes waterproof forever.",
+        "epic": "Laminated every sign in the school, including the one that said Do Not Laminate.",
+        "legendary": "Laminated a child's drawing so well that it survived a flood, a dog and thirty years in a drawer."
+      },
+      "moves": {
+        "signature": "Seal Seal Seal",
+        "legend": "Warm Up Rest",
+        "ultimate": "Plastic Coat Crush",
+        "kit.ink_splatter": "Melted Edge Stink",
+        "kit.deadline_panic": "Paper Jam Panic",
+        "kit.coffee_break": "Cool Down Rest"
+      }
+    },
+    "x_laser_pointer": {
+      "status": "draft",
+      "names": {
+        "common": "Catteaser",
+        "uncommon": "Wobblydot",
+        "rare": "Starpointer",
+        "epic": "Living Room Cat Chase",
+        "legendary": "The Dot That No Cat Ever Caught"
+      },
+      "lore": {
+        "common": "Makes the cat chase a red dot up the curtains.",
+        "uncommon": "Wobbles its little dot all over the screen during a talk.",
+        "rare": "Points out stars in the night sky so clearly that everyone sees the right one.",
+        "epic": "Sent every cat in the house chasing the dot round the living room, and the vase didn't make it.",
+        "legendary": "Has been chased by the same cat for ten years, and the cat is still sure it will win."
+      },
+      "moves": {
+        "signature": "Dot Dot Dot",
+        "legend": "Battery Rest",
+        "ultimate": "Red Dot Chase",
+        "kit.paper_cut": "Dot Zip",
+        "kit.ink_splatter": "Battery Smell",
+        "kit.coffee_break": "Pocket Rest"
+      }
+    },
+    "x_leaflet": {
+      "status": "draft",
+      "names": {
+        "common": "Doorstepdrop",
+        "uncommon": "Foldfalls",
+        "rare": "Readnever",
+        "epic": "Leaflet Snowstorm",
+        "legendary": "The Leaflet That Got Read"
+      },
+      "lore": {
+        "common": "Lands on the doormat in a pile every morning.",
+        "uncommon": "Falls out of every magazine you open.",
+        "rare": "Gets recycled before anyone reads a word of it.",
+        "epic": "Blew out of a delivery bag and covered the whole street like a paper snowstorm.",
+        "legendary": "Was finally read by one person, who came to the event and won the tombola."
+      },
+      "moves": {
+        "signature": "Flutter Flutter Flutter",
+        "legend": "Leaflet Snatch",
+        "ultimate": "Leaflet Blitz",
+        "kit.plot_twist": "Small Print Startle",
+        "kit.ink_splash": "Glossy Print Pong",
+        "kit.hardcover_slam": "Folded Swat",
+        "kit.bookmark_ward": "Glossy Guard"
+      }
+    },
+    "x_letter_paper": {
+      "status": "draft",
+      "names": {
+        "common": "Downhillwriter",
+        "uncommon": "Inkblotter",
+        "rare": "Lovelettered",
+        "epic": "Pen Pal Flood",
+        "legendary": "The Letter That Crossed the Ocean"
+      },
+      "lore": {
+        "common": "Makes every line of handwriting slope downhill.",
+        "uncommon": "Soaks up ink so fast that every full stop becomes a blob.",
+        "rare": "Holds words so heartfelt that its reader keeps it in a pocket for years.",
+        "epic": "Was used by a whole class to write to pen pals, and the post office ran out of stamps.",
+        "legendary": "Was written on by one pen pal for fifty years, and the two friends finally met at the airport."
+      },
+      "moves": {
+        "signature": "Scribble Scribble",
+        "legend": "Writing Pad Rest",
+        "ultimate": "Letter Avalanche",
+        "kit.plot_twist": "Secret Message Startle",
+        "kit.ink_splash": "Ink Blot Pong",
+        "kit.bookmark_ward": "Envelope Guard"
+      }
+    },
+    "x_level_tool": {
+      "status": "draft",
+      "names": {
+        "common": "Bubblecentre",
+        "uncommon": "Shelfchecker",
+        "rare": "Wonkyfinder",
+        "epic": "Picture Hanging Day",
+        "legendary": "The Level That Straightened a Town"
+      },
+      "lore": {
+        "common": "Has a bubble that never quite sits in the middle.",
+        "uncommon": "Checks every shelf, then tells you it's wonky after you've drilled the holes.",
+        "rare": "Finds every crooked thing in the house, including the cat lying on the sofa.",
+        "epic": "Straightened every picture in the house in one afternoon, and the house looked brand new.",
+        "legendary": "Straightened every sign in the whole town, and the crooked clock tower too."
+      },
+      "moves": {
+        "signature": "Check Check Check",
+        "legend": "Straight Line Boost",
+        "ultimate": "Wonky Frame Fall",
+        "kit.paper_cut": "Edge Tap",
+        "kit.ink_splatter": "Pencil Mark Smudge",
+        "kit.coffee_break": "Toolbox Rest"
+      }
+    },
+    "x_magazine_stack": {
+      "status": "draft",
+      "names": {
+        "common": "Topplepile",
+        "uncommon": "Coverwrinkle",
+        "rare": "Waitingroom",
+        "epic": "Waiting Room Avalanche",
+        "legendary": "The Stack Taller Than Dad"
+      },
+      "lore": {
+        "common": "Topples over every time someone takes one from the middle.",
+        "uncommon": "Has the same old magazine on top for six months.",
+        "rare": "Grows a new magazine every week, until it's taller than the coffee table.",
+        "epic": "Slid across the whole waiting room floor, and everyone helped tidy it up.",
+        "legendary": "Grew so tall in the dentist's waiting room that it had to be measured, and was taller than the dentist."
+      },
+      "moves": {
+        "signature": "Page Page Page Page",
+        "legend": "Hot Coffee Ring",
+        "ultimate": "Magazine Avalanche",
+        "kit.hardcover_slam": "Rolled Magazine Swat",
+        "kit.bookmark_ward": "Glossy Cover Guard"
+      }
+    },
+    "x_manga": {
+      "status": "draft",
+      "names": {
+        "common": "Backwardsreader",
+        "uncommon": "Volumeteaser",
+        "rare": "Bingereader",
+        "epic": "Bookshop Queue",
+        "legendary": "The Volume That Ended Everything"
+      },
+      "lore": {
+        "common": "Is read from back to front, so everyone starts at the ending.",
+        "uncommon": "Ends every volume on a cliffhanger that makes you scream.",
+        "rare": "Gets read in one night, then the reader stays up waiting for the next one.",
+        "epic": "Had a queue round the bookshop on release day, and the shop ran out by lunch.",
+        "legendary": "Finished a story that ran for twenty years, and readers all over the world cried on the same day."
+      },
+      "moves": {
+        "signature": "Panel Panel Panel Panel",
+        "legend": "Cliffhanger Stink",
+        "ultimate": "Final Volume",
+        "kit.plot_twist": "Big Twist",
+        "kit.ink_splash": "Screentone Splash",
+        "kit.hardcover_slam": "Volume Bonk"
+      }
+    },
+    "x_menu_card": {
+      "status": "draft",
+      "names": {
+        "common": "Stickycover",
+        "uncommon": "Specialsboard",
+        "rare": "Choiceparalysis",
+        "epic": "Restaurant Order Chaos",
+        "legendary": "The Menu That Fed a Village"
+      },
+      "lore": {
+        "common": "Has a sticky cover from every spilled drink.",
+        "uncommon": "Has a list of specials that changes the moment you choose one.",
+        "rare": "Has so many choices that the whole table takes half an hour to order.",
+        "epic": "Got everyone at the wedding dinner ordering the same dish, and the kitchen ran out in minutes.",
+        "legendary": "Has fed a whole village every Sunday for fifty years without changing a single dish."
+      },
+      "moves": {
+        "signature": "Choice Choice Choice",
+        "legend": "Specials Flash",
+        "ultimate": "Order Chaos",
+        "kit.ink_splash": "Gravy Stain Pong",
+        "kit.bookmark_ward": "Laminated Guard"
+      }
+    },
+    "x_newspaper_stack": {
+      "status": "draft",
+      "names": {
+        "common": "Recyclepile",
+        "uncommon": "Inkytower",
+        "rare": "Firelighter Stack",
+        "epic": "Garage Paper Mountain",
+        "legendary": "The Stack That Held the Garage Up"
+      },
+      "lore": {
+        "common": "Piles up by the back door waiting to be recycled.",
+        "uncommon": "Leaves grey ink on everything it touches.",
+        "rare": "Is used to light every fire and still never seems to get smaller.",
+        "epic": "Grew so big in the garage that the car had to park outside.",
+        "legendary": "Was found to hold every edition from fifty years, and the town museum took it away in a lorry."
+      },
+      "moves": {
+        "signature": "Pile Pile Pile",
+        "legend": "Wobble Crack",
+        "ultimate": "Paper Tower Topple",
+        "kit.ink_splash": "Newsprint Pong",
+        "kit.hardcover_slam": "Stack Slam",
+        "kit.bookmark_ward": "String Tie Guard"
+      }
+    },
+    "x_origami": {
+      "status": "draft",
+      "names": {
+        "common": "Crumplefold",
+        "uncommon": "Paperfrog",
+        "rare": "Craneflock",
+        "epic": "Origami Club Menagerie",
+        "legendary": "The Folder of a Thousand Creatures"
+      },
+      "lore": {
+        "common": "Comes out lopsided after forty folds and looks like a crumpled napkin.",
+        "uncommon": "Is folded into a frog that hops when you press its back.",
+        "rare": "Folds itself into a new animal every time someone looks away.",
+        "epic": "Filled the classroom with paper animals in one lesson, and the teacher couldn't find her desk.",
+        "legendary": "Folded a whole zoo from one long sheet of paper without a single cut."
+      },
+      "moves": {
+        "signature": "Fold Fold Fold Fold Fold",
+        "legend": "Paper Crease Heat",
+        "ultimate": "Paper Menagerie",
+        "kit.ink_splash": "Coloured Paper Pong",
+        "kit.hardcover_slam": "Paper Frog Hop",
+        "kit.bookmark_ward": "Crisp Fold Guard"
+      }
+    },
+    "x_paint_tube": {
+      "status": "draft",
+      "names": {
+        "common": "Squeezetoomuch",
+        "uncommon": "Capstuck",
+        "rare": "Colourburst",
+        "epic": "Art Room Splurge",
+        "legendary": "The Tube That Painted a Rainbow"
+      },
+      "lore": {
+        "common": "Squeezes out far too much paint, so it gets on everything.",
+        "uncommon": "Has its cap glued shut with dried paint.",
+        "rare": "Bursts with colour so bright that the whole painting changes.",
+        "epic": "Was squeezed out by the whole art class at once, and the art room floor became a rainbow.",
+        "legendary": "Painted the brightest rainbow ever seen on the school wall, and it is still there."
+      },
+      "moves": {
+        "signature": "Squeeze Squeeze Squeeze",
+        "legend": "Colour Boost",
+        "ultimate": "Paint Splurge",
+        "kit.ink_splatter": "Paint Splurge Stink",
+        "kit.deadline_panic": "Stuck Cap Panic",
+        "kit.coffee_break": "Lid On Rest"
+      }
+    },
+    "x_painting": {
+      "status": "draft",
+      "names": {
+        "common": "Eyesfollower",
+        "uncommon": "Crookedframe",
+        "rare": "Museumstopper",
+        "epic": "Gallery Crowd Gasp",
+        "legendary": "The Painting That Winked"
+      },
+      "lore": {
+        "common": "Has eyes that seem to follow you round the room.",
+        "uncommon": "Hangs slightly crooked, and someone always straightens it.",
+        "rare": "Stops visitors in their tracks for so long that the gallery has a queue behind them.",
+        "epic": "Made the whole gallery gasp at once on opening night.",
+        "legendary": "Was found in an attic, cleaned up, and turned out to be the most famous painting nobody had ever seen."
+      },
+      "moves": {
+        "signature": "Brushstroke Crack",
+        "legend": "Staring Eyes Startle",
+        "ultimate": "Gallery Gasp",
+        "kit.splatter": "Old Varnish Splatter",
+        "kit.masterstroke": "Frame Bash",
+        "kit.inspiration": "Muse Boost",
+        "kit.smudge": "Fingerprint Smudge"
+      }
+    },
+    "x_pamphlet": {
+      "status": "draft",
+      "names": {
+        "common": "Stapledpages",
+        "uncommon": "Raindripper",
+        "rare": "Leaflettalk",
+        "epic": "Town Meeting Flurry",
+        "legendary": "The Pamphlet That Saved the Park"
+      },
+      "lore": {
+        "common": "Has a staple that comes undone on the second page.",
+        "uncommon": "Gets wet in the rain and drips ink on your hands.",
+        "rare": "Persuades whoever reads it to go to a meeting they'd never heard of.",
+        "epic": "Was handed to every person at the market, and the town hall was full that evening.",
+        "legendary": "Persuaded a whole town to save the old park, and the park still has a bench in its honour."
+      },
+      "moves": {
+        "signature": "Hand Out Hand Out",
+        "legend": "Page Page Page Page Page",
+        "ultimate": "Leaflet Storm",
+        "kit.plot_twist": "Bold Headline Startle",
+        "kit.ink_splash": "Rainy Ink Pong",
+        "kit.bookmark_ward": "Staple Guard"
+      }
+    },
+    "x_paper_clip": {
+      "status": "draft",
+      "names": {
+        "common": "Bentclip",
+        "uncommon": "Chainlinker",
+        "rare": "Lockpicker Clip",
+        "epic": "Paper Clip Chain",
+        "legendary": "The Clip That Traded Up to a House"
+      },
+      "lore": {
+        "common": "Gets bent out of shape by every nervous person in a meeting.",
+        "uncommon": "Links into chains so long that they reach across the classroom.",
+        "rare": "Picks every simple lock, even the diary's.",
+        "epic": "Was linked into a chain long enough to go round the whole school.",
+        "legendary": "Was traded for a pen, then a book, then a bike, and ended up as a garden shed."
+      },
+      "moves": {
+        "signature": "Clip Clip Clip Clip",
+        "legend": "Paper Hold Rest",
+        "ultimate": "Clip Chain Whip",
+        "kit.paper_cut": "Bent Wire Poke",
+        "kit.ink_splatter": "Rust Stink",
+        "kit.coffee_break": "Desk Tidy Rest"
+      }
+    },
+    "x_paper_plane": {
+      "status": "draft",
+      "names": {
+        "common": "Nosedive",
+        "uncommon": "Loopflyer",
+        "rare": "Classroomglider",
+        "epic": "Playground Air Show",
+        "legendary": "The Plane That Flew Across the Hall"
+      },
+      "lore": {
+        "common": "Nosedives straight into the floor every time it's thrown.",
+        "uncommon": "Loops the loop and lands on the teacher's desk.",
+        "rare": "Glides so far down the corridor that it reaches the head's office.",
+        "epic": "Was thrown by every child in the playground at once, and the sky was full of paper.",
+        "legendary": "Flew the full length of the school hall during assembly, and the whole school clapped."
+      },
+      "moves": {
+        "signature": "Fold Throw Throw",
+        "legend": "Nose Dive Startle",
+        "ultimate": "Paper Squadron",
+        "kit.plot_twist": "Loop Startle",
+        "kit.ink_splash": "Doodle Wing Pong",
+        "kit.hardcover_slam": "Nose Bonk"
+      }
+    },
+    "x_paper_sheet": {
+      "status": "draft",
+      "names": {
+        "common": "Papercutter Sheet",
+        "uncommon": "Blankpage",
+        "rare": "Fliesaway",
+        "epic": "Office Paper Blizzard",
+        "legendary": "The Sheet That Became Everything"
+      },
+      "lore": {
+        "common": "Gives you a paper cut that hurts more than anything bigger.",
+        "uncommon": "Stays completely blank while you stare at it for an hour.",
+        "rare": "Flies off the desk in the faintest breeze and hides under the fridge.",
+        "epic": "Was blown off every desk in the office when the window opened, and everyone was ankle-deep in paper.",
+        "legendary": "Became a letter, a plane, a hat and a boat on the same afternoon."
+      },
+      "moves": {
+        "signature": "Paper Cut Cut",
+        "legend": "Paper Slap",
+        "ultimate": "Paper Blizzard",
+        "kit.plot_twist": "Blank Page Startle",
+        "kit.bookmark_ward": "Folded Guard"
+      }
+    },
+    "x_paper_stack": {
+      "status": "draft",
+      "names": {
+        "common": "Printerfeed",
+        "uncommon": "Reamheavy",
+        "rare": "Fanflipper",
+        "epic": "Printer Room Pile",
+        "legendary": "The Ream That Printed a Novel"
+      },
+      "lore": {
+        "common": "Feeds into the printer five sheets at a time.",
+        "uncommon": "Is so heavy in its ream that it hurts to carry.",
+        "rare": "Fans out with a satisfying flutter when you flick its edge.",
+        "epic": "Was knocked off the printer table, and the whole office spent lunch gathering it.",
+        "legendary": "Printed every page of a famous novel in one go, and the writer kept it on her desk."
+      },
+      "moves": {
+        "signature": "Flick Flick Flick",
+        "legend": "Paper Dust Stink",
+        "ultimate": "Ream Topple",
+        "kit.ink_splash": "Toner Pong",
+        "kit.hardcover_slam": "Ream Slam",
+        "kit.bookmark_ward": "Paper Wrap Guard"
+      }
+    },
+    "x_photo_album": {
+      "status": "draft",
+      "names": {
+        "common": "Stickypages",
+        "uncommon": "Glossyfade",
+        "rare": "Memorylane",
+        "epic": "Family Album Evening",
+        "legendary": "The Album of a Hundred Birthdays"
+      },
+      "lore": {
+        "common": "Has sticky plastic pages that make a crackling noise.",
+        "uncommon": "Has photos that fade a little more every year.",
+        "rare": "Makes everyone stop and look at old haircuts for an hour.",
+        "epic": "Was opened at the family reunion, and everybody laughed at the same baby photo.",
+        "legendary": "Holds a photo from every birthday for a hundred years in one family."
+      },
+      "moves": {
+        "signature": "Page Crackle Crackle",
+        "legend": "Old Photo Slam",
+        "ultimate": "Memory Lane Pong",
+        "kit.plot_twist": "Baby Photo Surprise",
+        "kit.ink_splash": "Faded Photo Pong",
+        "kit.hardcover_slam": "Album Slam"
+      }
+    },
+    "x_photo_frame": {
+      "status": "draft",
+      "names": {
+        "common": "Facedown",
+        "uncommon": "Glassdust",
+        "rare": "Smilekeeper",
+        "epic": "Mantelpiece Crowd",
+        "legendary": "The Frame That Held the Best Smile"
+      },
+      "lore": {
+        "common": "Falls face down on the mantelpiece every time a door slams.",
+        "uncommon": "Collects dust on its glass so the photo looks foggy.",
+        "rare": "Holds a smile so big that everyone who sees it smiles too.",
+        "epic": "Was crowded onto the mantelpiece with fifty others, and one sneeze knocked them all over.",
+        "legendary": "Held the same family photo for fifty years, and four generations are now standing in it."
+      },
+      "moves": {
+        "signature": "Glass Crack",
+        "legend": "Warm Window Glare",
+        "ultimate": "Frame Topple",
+        "kit.splatter": "Dust Puff",
+        "kit.masterstroke": "Frame Bash",
+        "kit.inspiration": "Smile Boost"
+      }
+    },
+    "x_picture_book": {
+      "status": "draft",
+      "names": {
+        "common": "Pageripper",
+        "uncommon": "Readagain",
+        "rare": "Bedtimeyawn",
+        "epic": "Bedtime Story Marathon",
+        "legendary": "The Book Read a Thousand Times"
+      },
+      "lore": {
+        "common": "Gets its pages ripped by a toddler in a hurry to see the next picture.",
+        "uncommon": "Is asked for again and again, every single night.",
+        "rare": "Makes the grown-up reading it yawn halfway through.",
+        "epic": "Was read so many times at bedtime that the whole family could recite it with their eyes shut.",
+        "legendary": "Was read a thousand times to one child, who grew up to write their own picture books."
+      },
+      "moves": {
+        "signature": "Page Page Page Page Page",
+        "legend": "Bedtime Glow",
+        "ultimate": "Bedtime Marathon",
+        "kit.plot_twist": "Lift The Flap",
+        "kit.ink_splash": "Crayon Pong",
+        "kit.hardcover_slam": "Board Book Bonk",
+        "kit.bookmark_ward": "Thick Page Guard"
+      }
+    },
+    "x_picture_frame": {
+      "status": "draft",
+      "names": {
+        "common": "Nailhole",
+        "uncommon": "Glassreflect",
+        "rare": "Glarebox",
+        "epic": "Hallway Frame Domino",
+        "legendary": "Grand Frameworth of the Staircase"
+      },
+      "lore": {
+        "common": "Leaves a nail hole in the wall every time it's moved.",
+        "uncommon": "Reflects the window so you can't see the picture inside.",
+        "rare": "Makes even the simplest drawing look like it's in a museum.",
+        "epic": "Fell off its hook during the party, and a domino line of frames went down the whole hallway.",
+        "legendary": "Turned a child's crayon drawing into the most admired picture at the art show."
+      },
+      "moves": {
+        "signature": "Frame Bump Crack",
+        "legend": "Frame Guard",
+        "ultimate": "Frame Cascade",
+        "kit.splatter": "Glass Glare Splatter",
+        "kit.inspiration": "Gallery Boost"
+      }
+    },
+    "x_pin_cushion": {
+      "status": "draft",
+      "names": {
+        "common": "Pinbristle",
+        "uncommon": "Tomatoshape",
+        "rare": "Pinpoke Pet",
+        "epic": "Sewing Bee Bristle",
+        "legendary": "The Cushion That Held a Thousand Pins"
+      },
+      "lore": {
+        "common": "Bristles with so many pins that it looks like a hedgehog.",
+        "uncommon": "Is shaped like a little tomato, and guests keep trying to put it in the salad.",
+        "rare": "Pokes a pin into whoever sits on it by mistake.",
+        "epic": "Held every pin at the sewing bee, and nobody lost a single one.",
+        "legendary": "Held the pins for a hundred wedding dresses and never pricked the bride."
+      },
+      "moves": {
+        "signature": "Prick Prick Prick",
+        "legend": "Warm Velvet",
+        "ultimate": "Pin Cushion Pounce",
+        "kit.pin_prick": "Hidden Pin Prick",
+        "kit.thread_bind": "Thread Tangle",
+        "kit.patchwork": "Patch Guard"
+      }
+    },
+    "x_playing_card": {
+      "status": "draft",
+      "names": {
+        "common": "Lostjoker",
+        "uncommon": "Bentcorner",
+        "rare": "Cardsharp",
+        "epic": "Card House Collapse",
+        "legendary": "The Ace That Always Turned Up"
+      },
+      "lore": {
+        "common": "Loses the joker from every pack within a week.",
+        "uncommon": "Gets a bent corner so everyone knows which card it is.",
+        "rare": "Slips up a magician's sleeve and appears in the wrong pocket.",
+        "epic": "Was built into a card house taller than the table, until someone sneezed.",
+        "legendary": "Turned up in every hand of cards for a whole holiday, and the family started calling it lucky."
+      },
+      "moves": {
+        "signature": "Shuffle Crack",
+        "legend": "Bent Corner Crack",
+        "ultimate": "Card House Collapse",
+        "kit.paper_cut": "Card Edge Cuts",
+        "kit.deadline_panic": "Snap Startle"
+      }
+    },
+    "x_pop_up_book": {
+      "status": "draft",
+      "names": {
+        "common": "Tabtearer",
+        "uncommon": "Popslap",
+        "rare": "Castlefolder",
+        "epic": "Pop-Up Theatre",
+        "legendary": "The Book That Built a Castle"
+      },
+      "lore": {
+        "common": "Gets its pull tabs torn off by eager little hands.",
+        "uncommon": "Pops a dragon out so suddenly that it slaps your nose.",
+        "rare": "Builds a whole paper castle when opened, then won't fold back properly.",
+        "epic": "Was opened in the middle of the classroom, and the whole class gasped at the paper theatre.",
+        "legendary": "Built a castle so detailed that an architect studied it to design a real one."
+      },
+      "moves": {
+        "signature": "Pop Pop Pop Pop",
+        "legend": "Paper Castle Guard",
+        "ultimate": "Pop-Up Crack",
+        "kit.ink_splash": "Bright Ink Pong",
+        "kit.hardcover_slam": "Pop-Up Slap",
+        "kit.bookmark_ward": "Folded Wall Guard"
+      }
+    },
+    "x_postcard_stack": {
+      "status": "draft",
+      "names": {
+        "common": "Holidaypile",
+        "uncommon": "Wishyouhere",
+        "rare": "Stampcollector",
+        "epic": "Fridge Postcard Wall",
+        "legendary": "The Postcards From Every Country"
+      },
+      "lore": {
+        "common": "Piles up on the fridge until the door won't close.",
+        "uncommon": "Says wish you were here on every single one.",
+        "rare": "Has a stamp from a country nobody in the family has ever been to.",
+        "epic": "Covered the whole fridge, and then the kitchen wall, and then the ceiling.",
+        "legendary": "Has one postcard from every country in the world, sent by the same aunt over forty years."
+      },
+      "moves": {
+        "signature": "Postcard Postcard Postcard",
+        "legend": "Old Stamp Crack",
+        "ultimate": "Postcard Cascade",
+        "kit.ink_splatter": "Smudgy Postmark",
+        "kit.deadline_panic": "Late Post Panic",
+        "kit.coffee_break": "Fridge Magnet Rest"
+      }
     }
   }
 }
