@@ -1,0 +1,666 @@
+{
+  "schema": 1,
+  "batch": "w15-trees-fruit-and-veg",
+  "entries": {
+    "avocado": {
+      "status": "draft",
+      "names": {
+        "common": "Neverripe",
+        "uncommon": "Stonesurprise",
+        "rare": "Mushmaker",
+        "epic": "Brunch Rush",
+        "legendary": "The Avocado Ripe for Five Minutes"
+      },
+      "lore": {
+        "common": "Is rock hard for a week, then goes brown the moment you look away.",
+        "uncommon": "Has a stone so big that there's hardly any avocado left.",
+        "rare": "Turns itself to mush the instant someone wants to slice it.",
+        "epic": "Ran out at every café in town on the same Sunday, and the brunch queue went round the block.",
+        "legendary": "Was perfectly ripe for exactly five minutes, and the whole family ate it in that window."
+      },
+      "moves": {
+        "signature": "Green Mush Stink",
+        "legend": "Ripe Moment Boost",
+        "ultimate": "Guacamole Splat"
+      }
+    },
+    "broccoli": {
+      "status": "draft",
+      "names": {
+        "common": "Treetopveg",
+        "uncommon": "Plateleaver",
+        "rare": "Steamstinker",
+        "epic": "School Dinner Standoff",
+        "legendary": "The Broccoli That Was Finally Eaten"
+      },
+      "lore": {
+        "common": "Gets pushed to the side of every plate by small hands.",
+        "uncommon": "Looks like a tiny tree, which some children find very worrying.",
+        "rare": "Makes the whole kitchen smell when it's boiled too long.",
+        "epic": "Started a standoff at school dinner that lasted until the bell rang.",
+        "legendary": "Was finally eaten by the fussiest child in the school, and the dinner ladies cheered."
+      },
+      "moves": {
+        "signature": "Steamed Stink",
+        "legend": "Floret Crack",
+        "ultimate": "Tiny Tree Topple"
+      }
+    },
+    "carrot": {
+      "status": "draft",
+      "names": {
+        "common": "Crunchloud",
+        "uncommon": "Snowmannose",
+        "rare": "Seeinthedark",
+        "epic": "Garden Snowman Day",
+        "legendary": "The Carrot That Saw in the Dark"
+      },
+      "lore": {
+        "common": "Crunches so loudly that nobody can hear the television.",
+        "uncommon": "Becomes a snowman's nose every winter.",
+        "rare": "Is said to help you see in the dark, so children eat them before torch games.",
+        "epic": "Was pulled up by every rabbit in the allotment on the same night.",
+        "legendary": "Grew so long that the gardener pulled it up and fell over backwards."
+      },
+      "moves": {
+        "signature": "Crunch Stink",
+        "legend": "Crunch Crunch Crunch",
+        "ultimate": "Root Pull"
+      }
+    },
+    "cherries": {
+      "status": "draft",
+      "names": {
+        "common": "Stonespitter",
+        "uncommon": "Pairhanger",
+        "rare": "Juicestainer",
+        "epic": "Orchard Picking Day",
+        "legendary": "The Cherry That Topped the Cake"
+      },
+      "lore": {
+        "common": "Has a stone that gets spat across the garden.",
+        "uncommon": "Hangs in pairs and gets worn as earrings.",
+        "rare": "Stains every white shirt with dark red juice.",
+        "epic": "Was picked by the whole family in one afternoon, and every mouth was red by teatime.",
+        "legendary": "Sat on top of the biggest cake at the summer fair, and was the last thing eaten."
+      },
+      "moves": {
+        "signature": "Stone Spit Stink",
+        "legend": "Cherry Bomb",
+        "ultimate": "Juice Splash Burst"
+      }
+    },
+    "coconut": {
+      "status": "draft",
+      "names": {
+        "common": "Hammerneeder",
+        "uncommon": "Hairyshell",
+        "rare": "Treeplonker",
+        "epic": "Desert Island Drink",
+        "legendary": "The Coconut That Floated Across the Sea"
+      },
+      "lore": {
+        "common": "Needs a hammer, a screwdriver and a lot of patience to open.",
+        "uncommon": "Has a hairy shell that looks like a tiny monkey.",
+        "rare": "Falls from the palm tree with a plonk that makes everyone jump.",
+        "epic": "Was cracked open at the beach party, and everyone got a sip of coconut water.",
+        "legendary": "Floated across an ocean on its own and grew into a palm tree on a new island."
+      },
+      "moves": {
+        "signature": "Hairy Shell Stink",
+        "legend": "Coconut Water Rest",
+        "ultimate": "Coconut Drop"
+      }
+    },
+    "corn": {
+      "status": "draft",
+      "names": {
+        "common": "Teethstucker",
+        "uncommon": "Butterdrip",
+        "rare": "Popcornmaker",
+        "epic": "Summer Barbecue Corn",
+        "legendary": "The Cob That Popped a Mountain"
+      },
+      "lore": {
+        "common": "Gets stuck in your teeth for the rest of the day.",
+        "uncommon": "Drips butter down your chin when you eat it from the cob.",
+        "rare": "Pops into popcorn so loudly that the dog hides.",
+        "epic": "Was grilled at every barbecue on the street, and the whole town smelled buttery.",
+        "legendary": "Popped enough popcorn in one go to fill the whole cinema."
+      },
+      "moves": {
+        "signature": "Kernel Stink",
+        "legend": "Grilled Heat",
+        "ultimate": "Kernel Pop"
+      }
+    },
+    "cucumber": {
+      "status": "draft",
+      "names": {
+        "common": "Watervegetable",
+        "uncommon": "Eyecooler",
+        "rare": "Picklemaker",
+        "epic": "Spa Day Slices",
+        "legendary": "The Cucumber That Became a Pickle"
+      },
+      "lore": {
+        "common": "Is so watery that it makes the sandwich soggy.",
+        "uncommon": "Is sliced and put on tired eyes at every spa.",
+        "rare": "Turns into a pickle when left in vinegar, and nobody can tell it was a cucumber.",
+        "epic": "Was sliced onto every pair of eyes at the spa day, and everyone fell asleep.",
+        "legendary": "Grew so long in the greenhouse that it won the longest cucumber at the show."
+      },
+      "moves": {
+        "signature": "Watery Stink",
+        "legend": "Cool Slice Rest",
+        "ultimate": "Pickle Splash"
+      }
+    },
+    "eggplant": {
+      "status": "draft",
+      "names": {
+        "common": "Purplegleam",
+        "uncommon": "Spongeoil",
+        "rare": "Mysteryveg",
+        "epic": "Moussaka Night",
+        "legendary": "The Aubergine That Won Over the Family"
+      },
+      "lore": {
+        "common": "Gleams so purple in the fruit bowl that people think it's plastic.",
+        "uncommon": "Soaks up oil like a sponge.",
+        "rare": "Is so confusing that half the family don't know what it is.",
+        "epic": "Was cooked in every house on the street on the same night, and the street smelled wonderful.",
+        "legendary": "Was cooked so well that the whole family asked for it every Friday."
+      },
+      "moves": {
+        "signature": "Purple Stink",
+        "legend": "Glossy Guard",
+        "ultimate": "Aubergine Slam"
+      }
+    },
+    "grapes": {
+      "status": "draft",
+      "names": {
+        "common": "Stalkrunner",
+        "uncommon": "Bunchdropper",
+        "rare": "Peelpicker",
+        "epic": "Vineyard Harvest",
+        "legendary": "The Grapes That Made the Sweetest Juice"
+      },
+      "lore": {
+        "common": "Rolls off the stalk and under the fridge.",
+        "uncommon": "Drops one grape every step you walk.",
+        "rare": "Gets peeled by fussy eaters who don't like the skin.",
+        "epic": "Was picked from the whole vineyard in one weekend, and the pickers had purple hands.",
+        "legendary": "Made a juice so sweet that every child in the village asked for seconds."
+      },
+      "moves": {
+        "signature": "Grape Stink",
+        "legend": "Grape Grape Grape",
+        "ultimate": "Bunch Burst"
+      }
+    },
+    "lemon": {
+      "status": "draft",
+      "names": {
+        "common": "Facepuckerer",
+        "uncommon": "Zestpeeler",
+        "rare": "Eyesquirter",
+        "epic": "Pancake Day Squeeze",
+        "legendary": "The Lemon That Lasted a Year"
+      },
+      "lore": {
+        "common": "Makes everyone pull a face when they taste it.",
+        "uncommon": "Has its skin grated into zest for every cake.",
+        "rare": "Squirts juice straight into your eye when you squeeze it.",
+        "epic": "Was squeezed onto every pancake on pancake day, and the whole kitchen smelled of lemon.",
+        "legendary": "Was so big that it lasted the family a whole year of lemonade."
+      },
+      "moves": {
+        "signature": "Sour Stink",
+        "legend": "Zest Guard",
+        "ultimate": "Lemon Squirt"
+      }
+    },
+    "melon": {
+      "status": "draft",
+      "names": {
+        "common": "Rolltabler",
+        "uncommon": "Seedspill",
+        "rare": "Sliceboat",
+        "epic": "Picnic Melon Slice",
+        "legendary": "The Melon That Rolled Down the Hill"
+      },
+      "lore": {
+        "common": "Rolls off the table if anyone bumps it.",
+        "uncommon": "Spills its seeds everywhere when cut open.",
+        "rare": "Is sliced into boat shapes that everyone sails at the picnic.",
+        "epic": "Was sliced for every child at the picnic, and the grass was covered in rind.",
+        "legendary": "Rolled down the whole hill at the picnic, and everyone chased it to the bottom."
+      },
+      "moves": {
+        "signature": "Melon Juice Stink",
+        "legend": "Sweet Melon Stink",
+        "ultimate": "Melon Roll"
+      }
+    },
+    "onion": {
+      "status": "draft",
+      "names": {
+        "common": "Tearjerker",
+        "uncommon": "Layerpeeler",
+        "rare": "Breathbad",
+        "epic": "Kitchen Tears",
+        "legendary": "The Onion That Made the Chef Cry"
+      },
+      "lore": {
+        "common": "Makes everyone who chops it cry.",
+        "uncommon": "Has so many layers that nobody can count them.",
+        "rare": "Leaves its smell on your hands for the rest of the day.",
+        "epic": "Was chopped by every cook in the restaurant, and the whole kitchen was in tears.",
+        "legendary": "Was so strong that it made a tough old chef cry for the first time in forty years."
+      },
+      "moves": {
+        "signature": "Onion Stink",
+        "legend": "Layer Guard",
+        "ultimate": "Teary Chop"
+      }
+    },
+    "orange": {
+      "status": "draft",
+      "names": {
+        "common": "Peelspiral",
+        "uncommon": "Pithfinger",
+        "rare": "Segmentsharer",
+        "epic": "Half-Time Oranges",
+        "legendary": "The Orange That Was Peeled in One Piece"
+      },
+      "lore": {
+        "common": "Is peeled in one long spiral that breaks just before the end.",
+        "uncommon": "Leaves white pith stuck under your fingernails.",
+        "rare": "Is split into segments and shared with everyone.",
+        "epic": "Was sliced at half-time for both teams, and the field smelled of oranges.",
+        "legendary": "Was peeled in one piece by a grandad who has been practising for fifty years."
+      },
+      "moves": {
+        "signature": "Peel Stink",
+        "legend": "Juice Snatch",
+        "ultimate": "Segment Spray"
+      }
+    },
+    "palm_tree": {
+      "status": "draft",
+      "names": {
+        "common": "Leafrustler",
+        "uncommon": "Coconutdropper",
+        "rare": "Beachshade",
+        "epic": "Tropical Storm Sway",
+        "legendary": "The Palm That Bent but Never Broke"
+      },
+      "lore": {
+        "common": "Rustles its big leaves in the wind like applause.",
+        "uncommon": "Drops coconuts at the worst possible moment.",
+        "rare": "Gives shade to every sunbather on the beach.",
+        "epic": "Bent so far in the storm that its leaves touched the sand.",
+        "legendary": "Bent right over in a hurricane and stood straight again the next morning."
+      },
+      "moves": {
+        "signature": "Trunk Slam",
+        "legend": "Leaf Slap",
+        "ultimate": "Coconut Rain"
+      }
+    },
+    "peach": {
+      "status": "draft",
+      "names": {
+        "common": "Fuzzyskin",
+        "uncommon": "Juicydrip",
+        "rare": "Stonestuck",
+        "epic": "Summer Peach Picnic",
+        "legendary": "The Peach That Dripped Down Every Chin"
+      },
+      "lore": {
+        "common": "Has fuzzy skin that makes your teeth tingle.",
+        "uncommon": "Drips juice down your chin on the first bite.",
+        "rare": "Has a stone stuck so tightly that you have to eat round it.",
+        "epic": "Was eaten by every child at the summer picnic, and the grass was sticky for a week.",
+        "legendary": "Was so juicy that it dripped down every chin at the table."
+      },
+      "moves": {
+        "signature": "Juicy Drip Stink",
+        "legend": "Sweet Boost",
+        "ultimate": "Peach Burst"
+      }
+    },
+    "pear": {
+      "status": "draft",
+      "names": {
+        "common": "Rockhardpear",
+        "uncommon": "Overripemush",
+        "rare": "Pearshaped",
+        "epic": "Pear Tree Harvest",
+        "legendary": "The Pear That Was Perfectly Ripe"
+      },
+      "lore": {
+        "common": "Is rock hard on Monday and mush by Wednesday.",
+        "uncommon": "Goes brown inside even though it looks fine outside.",
+        "rare": "Gives everything its name when things go wrong.",
+        "epic": "Fell from the pear tree in such numbers that the lawn was carpeted.",
+        "legendary": "Was found perfectly ripe on the right day, which almost never happens."
+      },
+      "moves": {
+        "signature": "Pear Stink",
+        "legend": "Sun Ripened Heat",
+        "ultimate": "Pear Drop"
+      }
+    },
+    "pepper": {
+      "status": "draft",
+      "names": {
+        "common": "Seedcore",
+        "uncommon": "Colourswitcher",
+        "rare": "Crunchypepper",
+        "epic": "Rainbow Pepper Salad",
+        "legendary": "The Pepper That Ripened Red"
+      },
+      "lore": {
+        "common": "Has a core full of seeds that spill everywhere.",
+        "uncommon": "Changes colour from green to yellow to red as it ripens.",
+        "rare": "Crunches so loudly that the whole table hears it.",
+        "epic": "Was sliced into every salad at the barbecue, and the table looked like a rainbow.",
+        "legendary": "Ripened from green to red on the windowsill in one week."
+      },
+      "moves": {
+        "signature": "Pepper Stink",
+        "legend": "Spicy Stink",
+        "ultimate": "Pepper Crunch"
+      }
+    },
+    "pineapple": {
+      "status": "draft",
+      "names": {
+        "common": "Spikytop",
+        "uncommon": "Tongueprickler",
+        "rare": "Hawaiianhead",
+        "epic": "Party Table Centrepiece",
+        "legendary": "The Pineapple That Sat on the Throne"
+      },
+      "lore": {
+        "common": "Has a spiky top that pokes everyone who carries it.",
+        "uncommon": "Makes your tongue tingle after eating it.",
+        "rare": "Wears its leaves like a crown, so it thinks it's very important.",
+        "epic": "Sat in the middle of the party table, and everyone took a photo with it.",
+        "legendary": "Was so big that it took two people to carry it home from the market."
+      },
+      "moves": {
+        "signature": "Spiky Juice Stink",
+        "legend": "Crown Flash",
+        "ultimate": "Pineapple Slam"
+      }
+    },
+    "potato": {
+      "status": "draft",
+      "names": {
+        "common": "Eyesprouter",
+        "uncommon": "Mudbaked",
+        "rare": "Mashmaker",
+        "epic": "Bonfire Night Bake",
+        "legendary": "The Potato That Fed a Village"
+      },
+      "lore": {
+        "common": "Grows little sprouts from its eyes when left in the cupboard.",
+        "uncommon": "Comes out of the ground covered in mud.",
+        "rare": "Can be mashed, roasted, chipped or baked, so it's in every dinner.",
+        "epic": "Was baked in the bonfire for every family at the village party.",
+        "legendary": "Grew so many potatoes in one plant that the whole village had roasties for a week."
+      },
+      "moves": {
+        "signature": "Mud Stink",
+        "legend": "Comfort Rest",
+        "ultimate": "Mash Splat"
+      }
+    },
+    "pumpkin": {
+      "status": "draft",
+      "names": {
+        "common": "Gutsmesser",
+        "uncommon": "Lanternface",
+        "rare": "Giantgrower",
+        "epic": "Pumpkin Patch Harvest",
+        "legendary": "The Pumpkin That Won the Show"
+      },
+      "lore": {
+        "common": "Gets its stringy insides scooped out all over the kitchen table.",
+        "uncommon": "Gets carved into a grinning lantern in autumn.",
+        "rare": "Grows so big that it needs a wheelbarrow to move.",
+        "epic": "Was carved by every family on the street, and the whole road glowed orange.",
+        "legendary": "Grew so big that it won the show and was turned into a little cart."
+      },
+      "moves": {
+        "signature": "Pumpkin Stink",
+        "legend": "Lantern Glare",
+        "ultimate": "Pumpkin Roll"
+      }
+    },
+    "strawberry": {
+      "status": "draft",
+      "names": {
+        "common": "Seedskin",
+        "uncommon": "Picnicstar",
+        "rare": "Jamwalker",
+        "epic": "Strawberry Picking Day",
+        "legendary": "The Strawberry That Made the Jam"
+      },
+      "lore": {
+        "common": "Has seeds on the outside, which nobody can stop thinking about.",
+        "uncommon": "Is the star of every summer picnic.",
+        "rare": "Squashes into jam the moment you put it in your pocket.",
+        "epic": "Was picked by every family at the farm on the same sunny day, and the fields were bare by lunch.",
+        "legendary": "Was so perfect that it was the only one used in the champion jam at the summer fair."
+      },
+      "moves": {
+        "signature": "Seed Stink",
+        "legend": "Sunshine Heat",
+        "ultimate": "Jam Squash"
+      }
+    },
+    "tomato": {
+      "status": "draft",
+      "names": {
+        "common": "Squirtseeds",
+        "uncommon": "Ketchupcousin",
+        "rare": "Fruitorveg",
+        "epic": "Food Fight Splat",
+        "legendary": "The Tomato That Settled the Argument"
+      },
+      "lore": {
+        "common": "Squirts its seeds on your shirt when you bite it.",
+        "uncommon": "Is the cousin of every bottle of ketchup.",
+        "rare": "Starts an argument about whether it's a fruit or a vegetable.",
+        "epic": "Was thrown in a giant food fight at the festival, and the whole town turned red.",
+        "legendary": "Grew so many on one plant that the greenhouse had to be extended."
+      },
+      "moves": {
+        "signature": "Seed Squirt Stink",
+        "legend": "Fruit or Veg Crack",
+        "ultimate": "Tomato Splat"
+      }
+    },
+    "tree": {
+      "status": "draft",
+      "names": {
+        "common": "Leafdropping",
+        "uncommon": "Climbtree",
+        "rare": "Birdhotel",
+        "epic": "Autumn Leaf Blizzard",
+        "legendary": "The Oak That Watched the Village Grow"
+      },
+      "lore": {
+        "common": "Drops its leaves just after you've swept the path.",
+        "uncommon": "Is climbed by every child in the street.",
+        "rare": "Is home to so many birds that it sings every morning.",
+        "epic": "Dropped every leaf in one windy night, and the whole street was ankle-deep.",
+        "legendary": "Has stood in the middle of the village for five hundred years and watched every house being built."
+      },
+      "moves": {
+        "signature": "Branch Slam",
+        "legend": "Root Power",
+        "ultimate": "Leaf Blizzard"
+      }
+    },
+    "watermelon": {
+      "status": "draft",
+      "names": {
+        "common": "Seedspitter Melon",
+        "uncommon": "Heavysmile",
+        "rare": "Picnicslicer",
+        "epic": "Summer Seed Contest",
+        "legendary": "The Watermelon That Fed the Street"
+      },
+      "lore": {
+        "common": "Has so many seeds that eating it turns into a spitting game.",
+        "uncommon": "Wobbles on the kitchen counter like it's about to roll away, and someone always lunges.",
+        "rare": "Is sliced into smiles that everyone holds up for photos.",
+        "epic": "Started a seed-spitting contest at the picnic that went on until sunset.",
+        "legendary": "Was so big that one slice fed every child on the street."
+      },
+      "moves": {
+        "signature": "Juice Drip Stink",
+        "legend": "Seed Seed Seed",
+        "ultimate": "Melon Smash"
+      }
+    },
+    "x_apple_tree": {
+      "status": "draft",
+      "names": {
+        "common": "Waspmagnet",
+        "uncommon": "Ladderneeder",
+        "rare": "Blossomshower",
+        "epic": "Orchard Harvest",
+        "legendary": "The Tree That Fed the Whole School"
+      },
+      "lore": {
+        "common": "Attracts every wasp in the garden to its fallen apples.",
+        "uncommon": "Needs a ladder to reach its best apples at the top.",
+        "rare": "Showers the garden with blossom in spring.",
+        "epic": "Dropped so many apples one autumn that the whole street made crumble.",
+        "legendary": "Gave enough apples one year for every child in the school to have one a day."
+      },
+      "moves": {
+        "signature": "Apple Drop Slam",
+        "legend": "Bark Guard",
+        "ultimate": "Apple Rain"
+      }
+    },
+    "x_apricot_fruit": {
+      "status": "draft",
+      "names": {
+        "common": "Velvetskin",
+        "uncommon": "Stonesplitter",
+        "rare": "Sundriedfruit",
+        "epic": "Apricot Jam Day",
+        "legendary": "The Apricot That Glowed Like Sunset"
+      },
+      "lore": {
+        "common": "Has velvety skin that feels like a peach's little cousin.",
+        "uncommon": "Splits open so neatly that the stone pops out.",
+        "rare": "Is dried in the sun until it's chewy and sweet.",
+        "epic": "Was made into jam by the whole family, and every jar on the shelf glowed orange.",
+        "legendary": "Glowed so orange in the evening light that it looked like a little sunset."
+      },
+      "moves": {
+        "signature": "Apricot Stink",
+        "legend": "Apricot Slam",
+        "ultimate": "Sunset Burst"
+      }
+    },
+    "x_asparagus": {
+      "status": "draft",
+      "names": {
+        "common": "Spearsnapper",
+        "uncommon": "Smellymaker",
+        "rare": "Springsprout",
+        "epic": "Spring Spear Harvest",
+        "legendary": "The Spear That Grew Overnight"
+      },
+      "lore": {
+        "common": "Snaps in half where it gets woody.",
+        "uncommon": "Makes everyone who eats it notice something funny later.",
+        "rare": "Shoots up out of the ground so fast in spring that you can watch it grow.",
+        "epic": "Was harvested from the whole field in one week of spring.",
+        "legendary": "Grew a whole spear overnight, and the gardener measured it at breakfast."
+      },
+      "moves": {
+        "signature": "Spear Stink",
+        "legend": "Spring Heat",
+        "ultimate": "Spear Strike"
+      }
+    },
+    "x_bamboo_grove": {
+      "status": "draft",
+      "names": {
+        "common": "Creakgrove",
+        "uncommon": "Pandahotel",
+        "rare": "Groveshade",
+        "epic": "Bamboo Forest Sway",
+        "legendary": "The Grove Taller Than the Tower"
+      },
+      "lore": {
+        "common": "Creaks in the wind like a hundred old doors.",
+        "uncommon": "Is the favourite hotel of every panda.",
+        "rare": "Shades a whole path so the walkers stay cool.",
+        "epic": "Swayed in the wind so loudly that walkers stopped to listen.",
+        "legendary": "Grew taller than the old tower in one summer."
+      },
+      "moves": {
+        "signature": "Bamboo Smash",
+        "legend": "Bamboo Snatch",
+        "ultimate": "Grove Rustle Stink"
+      }
+    },
+    "x_banana_tree": {
+      "status": "draft",
+      "names": {
+        "common": "Bunchhanger",
+        "uncommon": "Leafumbrella",
+        "rare": "Splitleaf",
+        "epic": "Banana Harvest",
+        "legendary": "The Tree That Grew a Giant Bunch"
+      },
+      "lore": {
+        "common": "Hangs bunches so heavy that the tree leans.",
+        "uncommon": "Has leaves so big that they work as umbrellas.",
+        "rare": "Splits its leaves in the wind so they look like feathers.",
+        "epic": "Grew a bunch so heavy that it took the whole farm to carry it.",
+        "legendary": "Grew a bunch of a hundred bananas, and the monkeys threw a party."
+      },
+      "moves": {
+        "signature": "Bunch Slam",
+        "legend": "Leaf Flash",
+        "ultimate": "Banana Drop"
+      }
+    },
+    "x_baobab": {
+      "status": "draft",
+      "names": {
+        "common": "Upsidedowntree",
+        "uncommon": "Waterstore",
+        "rare": "Elephantrub",
+        "epic": "Savannah Shade",
+        "legendary": "The Tree That Was a Thousand Years Old"
+      },
+      "lore": {
+        "common": "Looks like it's been planted upside down with its roots in the air.",
+        "uncommon": "Stores so much water in its trunk that it swells up.",
+        "rare": "Gets rubbed by elephants who scratch their backs on it.",
+        "epic": "Shaded a whole herd of elephants on the hottest day of the year.",
+        "legendary": "Has stood on the same savannah for a thousand years, and every animal knows it."
+      },
+      "moves": {
+        "signature": "Trunk Slam Baobab",
+        "legend": "Bark Crack",
+        "ultimate": "Baobab Drop"
+      }
+    }
+  }
+}
