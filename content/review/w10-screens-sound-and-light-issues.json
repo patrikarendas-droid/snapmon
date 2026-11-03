@@ -2439,13 +2439,6 @@
     },
     {
       "id": "i_ipod",
-      "field": "names.common",
-      "severity": "low",
-      "issue": "Object label is a brand (iPod). The draft text correctly avoids the brand; keep every name and line generic.",
-      "suggestion": "'Wheelspinner' (keep as is)"
-    },
-    {
-      "id": "i_ipod",
       "field": "lore.rare",
       "severity": "medium",
       "issue": "Rare is a success ('Shuffled to the perfect song... danced in the street').",
