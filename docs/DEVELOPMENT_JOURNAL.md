@@ -137,8 +137,10 @@ Last updated: 2026-11-02, release v0.4.9 (recognition/identity audit; tag v0.4.9
   batch → `content/review/<batch>-issues.json`. Nothing reviewed/merged/deployed; v0.4.9 Android playtest still pending.
   Progress (2026-11-03): **all 22 batches written** — 2,248/2,248 new objects, 11,290/11,290 names, 11,240/11,240
   lore lines, 9,934 move display overrides, all DRAFT; Pilot 01 names proposed 10/10; `campaign.js status` reconciles
-  every registry ID; approved files byte-identical to baseline. Editor passes applied w01–w13 (high + meaningful
-  medium); w14–w22 editor passes in progress; every batch is lint-clean (0 high/medium). Sensitive objects written
+  every registry ID; approved files byte-identical to baseline. Independent editor passes applied to all 22 batches
+  (2,712 high / 6,042 medium issues; 8,943 fields patched); lint clean (only the accepted usb_key callback);
+  curated/pipeline/refresh/rules-trace tests pass. Approval package + activation proposal (not performed):
+  `content/campaign/APPROVAL_PACKAGE.md`; review sheets `docs/review/wNN-*-review.md`. Sensitive objects written
   neutrally and listed in TRACKER.md (bible, cigarettes, vape, matches, ballot box, i_slot as pier arcade machine,
   church pew/bell without religious content, all drinkware alcohol-free, medicines/cleaners/fuel as grown-up only,
   x_nutella written without the brand).
