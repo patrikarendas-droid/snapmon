@@ -1,0 +1,842 @@
+{
+  "schema": 1,
+  "batch": "w19-kitchen-and-cookware",
+  "entries": {
+    "x_food_processor_unit": {
+      "status": "draft",
+      "names": {
+        "common": "Chopwhirl",
+        "uncommon": "Bladespinner",
+        "rare": "Pulseroar",
+        "epic": "Soup Night Thunder",
+        "legendary": "The Processor That Made Every Soup"
+      },
+      "lore": {
+        "common": "Whirs loudly for exactly as long as it takes to make the cat leave the room.",
+        "uncommon": "Has nine attachments, and nobody in the house knows what seven of them are for.",
+        "rare": "Turns a whole bag of carrots into confetti in one pulse, whether that was wanted or not.",
+        "epic": "Chopped so much for a party that the fridge was full of dips and nobody could find the milk.",
+        "legendary": "Blended so many soups in one winter that the neighbours could tell the flavour by the noise."
+      },
+      "moves": {
+        "signature": "Pulse Startle",
+        "legend": "Veg Snatch",
+        "ultimate": "Whirling Pulse"
+      }
+    },
+    "x_hand_mixer": {
+      "status": "draft",
+      "names": {
+        "common": "Beaterbuzz",
+        "uncommon": "Batterflick",
+        "rare": "Bowlwhizzer",
+        "epic": "Ceiling Splatter",
+        "legendary": "The Mixer That Whisked a Wedding Cake"
+      },
+      "lore": {
+        "common": "Buzzes in the hand and makes the whole arm feel like it is humming.",
+        "uncommon": "Flicks a little cake batter onto the nearest shirt every time it starts.",
+        "rare": "Whips cream so fast that it turns into butter before anyone can stop it.",
+        "epic": "Was switched to top speed in a full bowl, and the ceiling had cake on it for a week.",
+        "legendary": "Whisked every layer of a five-tier wedding cake and never once needed a rest."
+      },
+      "moves": {
+        "signature": "Whisk Startle",
+        "legend": "Speed Three Startle",
+        "ultimate": "Beater Blitz"
+      }
+    },
+    "x_ice_cream_maker": {
+      "status": "draft",
+      "names": {
+        "common": "Churnbucket",
+        "uncommon": "Scoopwaiter",
+        "rare": "Freezewhirl",
+        "epic": "Garden Party Scoop",
+        "legendary": "The Machine That Made Every Flavour"
+      },
+      "lore": {
+        "common": "Churns slowly for a whole hour while the whole family hovers around it.",
+        "uncommon": "Takes so long that everyone eats biscuits while they wait and is too full for ice cream.",
+        "rare": "Freezes anything put into it, including a spoon that was left inside by mistake.",
+        "epic": "Made ice cream for a whole street party and ran out just as the last child queued.",
+        "legendary": "Made a new flavour every day for a whole summer and never made the same one twice."
+      },
+      "moves": {
+        "signature": "Churn Startle",
+        "legend": "Scoop Snatch",
+        "ultimate": "Big Churn"
+      }
+    },
+    "x_juicer": {
+      "status": "draft",
+      "names": {
+        "common": "Pulpspitter",
+        "uncommon": "Orangepress",
+        "rare": "Squeezemachine",
+        "epic": "Morning Juice Spray",
+        "legendary": "The Juicer That Squeezed an Orchard"
+      },
+      "lore": {
+        "common": "Spits pulp into one cup and juice into another, mostly where they should go.",
+        "uncommon": "Takes ten minutes to make a glass of juice and twenty minutes to clean.",
+        "rare": "Squeezes every drop from anything it touches, so the fruit comes out as dry as paper.",
+        "epic": "Sprayed orange juice across the kitchen at breakfast, and everyone smelled of oranges all day.",
+        "legendary": "Squeezed so much fruit in one summer that a whole orchard came round to say thank you."
+      },
+      "moves": {
+        "signature": "Squeeze Startle",
+        "legend": "Juice Siphon",
+        "ultimate": "Juice Spray"
+      }
+    },
+    "x_stand_mixer": {
+      "status": "draft",
+      "names": {
+        "common": "Doughhook",
+        "uncommon": "Bowlhugger",
+        "rare": "Kneadmachine",
+        "epic": "Kitchen Earthquake",
+        "legendary": "The Mixer That Raised a Bakery"
+      },
+      "lore": {
+        "common": "Sits heavy on the counter and only moves on baking days.",
+        "uncommon": "Rattles its way across the worktop when the dough is too stiff.",
+        "rare": "Kneads dough so powerfully that the whole counter shakes along with it.",
+        "epic": "Shook so hard making bread that it walked itself to the edge of the counter.",
+        "legendary": "Mixed so many cakes for the school fete that the head teacher gave it a medal."
+      },
+      "moves": {
+        "signature": "Rattle Startle",
+        "legend": "Counter Guard",
+        "ultimate": "Dough Quake"
+      }
+    },
+    "bowl": {
+      "status": "draft",
+      "names": {
+        "common": "Cerealkeeper",
+        "uncommon": "Spooncatcher",
+        "rare": "Sloshbowl",
+        "epic": "Porridge Avalanche",
+        "legendary": "The Bowl That Was Never Empty"
+      },
+      "lore": {
+        "common": "Holds cereal, soup and, on bad days, a few loose crumbs at the bottom.",
+        "uncommon": "Rings like a bell whenever a spoon is tapped on its edge.",
+        "rare": "Sloshes anything poured into it over the side the moment it is carried.",
+        "epic": "Was filled with so much porridge that it slid off the table and painted the floor.",
+        "legendary": "Has been filled with so many dinners that it is the first thing anyone grabs when they're hungry."
+      },
+      "moves": {
+        "signature": "Hot Soup Heat",
+        "legend": "Big Bowl Bonk",
+        "ultimate": "Bowl Slosh"
+      }
+    },
+    "x_colander": {
+      "status": "draft",
+      "names": {
+        "common": "Holeyhat",
+        "uncommon": "Pastadripper",
+        "rare": "Steamspout",
+        "epic": "Sink Spaghetti Escape",
+        "legendary": "The Colander That Lost No Noodles"
+      },
+      "lore": {
+        "common": "Has a hundred tiny holes and still lets one piece of pasta slip through.",
+        "uncommon": "Gets worn as a hat by every child who finds it in the cupboard.",
+        "rare": "Pours out steam so thick that whoever is draining the pasta vanishes for a second.",
+        "epic": "Let a whole pan of spaghetti slide into the sink, and dinner was rescued strand by strand.",
+        "legendary": "Drained so much pasta at a big family dinner that the sink applauded with a gurgle."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Steam Distraction",
+        "ultimate": "Pasta Pour"
+      }
+    },
+    "x_colander_bowl": {
+      "status": "draft",
+      "names": {
+        "common": "Rinsebowl",
+        "uncommon": "Fruitdrainer",
+        "rare": "Holeybasin",
+        "epic": "Berry Wash Shower",
+        "legendary": "The Bowl That Washed the Harvest"
+      },
+      "lore": {
+        "common": "Is half bowl and half colander, and nobody can decide which half it prefers.",
+        "uncommon": "Lets water drip through onto the counter whenever someone forgets to hold it over the sink.",
+        "rare": "Rinses fruit so thoroughly that it washes off the stickers as well.",
+        "epic": "Washed every berry from a strawberry farm visit, and the kitchen smelled like summer.",
+        "legendary": "Rinsed a whole allotment harvest in one go, and the slugs gave up and went home."
+      },
+      "moves": {
+        "signature": "Hot Rinse Heat",
+        "legend": "Drip Startle",
+        "ultimate": "Harvest Wash"
+      }
+    },
+    "x_sieve": {
+      "status": "draft",
+      "names": {
+        "common": "Fluffsifter",
+        "uncommon": "Flourcloud",
+        "rare": "Meshtapper",
+        "epic": "Baking Day Snow",
+        "legendary": "The Sieve That Made It Snow Indoors"
+      },
+      "lore": {
+        "common": "Taps out flour in a soft little cloud that drifts across the counter.",
+        "uncommon": "Keeps one lump in its mesh no matter how hard it is tapped.",
+        "rare": "Sifts flour so finely that it floats across the kitchen like a fog.",
+        "epic": "Sifted so much flour for a birthday cake that everyone in the kitchen went grey.",
+        "legendary": "Made it snow in the kitchen in July, and the children built a tiny floury snowman."
+      },
+      "moves": {
+        "signature": "Tap Tap Tap",
+        "legend": "Sifting Rest",
+        "ultimate": "Indoor Snowfall"
+      }
+    },
+    "x_strainer": {
+      "status": "draft",
+      "names": {
+        "common": "Teacatcher",
+        "uncommon": "Leafnet",
+        "rare": "Pipdropper",
+        "epic": "Lumpy Gravy Rescue",
+        "legendary": "The Strainer That Saved the Gravy"
+      },
+      "lore": {
+        "common": "Catches tea leaves and pips before they reach the cup.",
+        "uncommon": "Hangs on the mug's edge and tips in whenever someone looks away.",
+        "rare": "Catches lumps so well that even the lumpiest gravy comes out silky smooth.",
+        "epic": "Rescued the gravy at a family dinner so neatly that nobody knew it had gone wrong.",
+        "legendary": "Saved a whole pot of lumpy custard just in time for the school dinner ladies' party."
+      },
+      "moves": {
+        "signature": "Strain Strain Strain",
+        "legend": "Leaf Guard",
+        "ultimate": "Gravy Rescue"
+      }
+    },
+    "x_coffee_grinder": {
+      "status": "draft",
+      "names": {
+        "common": "Beancrusher",
+        "uncommon": "Morningrattle",
+        "rare": "Grindroar",
+        "epic": "Early Morning Racket",
+        "legendary": "The Grinder That Woke the Building"
+      },
+      "lore": {
+        "common": "Rattles and roars for ten seconds, filling the kitchen with a rich smell.",
+        "uncommon": "Goes off at six in the morning, always when the rest of the house is asleep.",
+        "rare": "Grinds so loudly that everyone in the flat knows it's coffee time.",
+        "epic": "Woke the whole building at dawn, and every neighbour came down with a mug.",
+        "legendary": "Has ground so many beans that the whole street wakes up to its smell before their alarms."
+      },
+      "moves": {
+        "signature": "Grind Startle",
+        "legend": "Bean Bean Bean",
+        "ultimate": "Morning Racket"
+      }
+    },
+    "x_milk_frother": {
+      "status": "draft",
+      "names": {
+        "common": "Foamwand",
+        "uncommon": "Frothbuzzer",
+        "rare": "Bubblewhip",
+        "epic": "Cafe Foam Fountain",
+        "legendary": "The Frother That Made a Cloud"
+      },
+      "lore": {
+        "common": "Buzzes in the jug and turns milk into a fluffy hat for the coffee.",
+        "uncommon": "Sprays a little milk on the wall whenever it is lifted out too soon.",
+        "rare": "Froths so much that the foam rises over the mug like a little mountain.",
+        "epic": "Was left on so long that the foam climbed out of the jug and across the counter.",
+        "legendary": "Made a foam so tall and fluffy that a child said it was a real cloud and tried to pat it."
+      },
+      "moves": {
+        "signature": "Froth Startle",
+        "legend": "Milk Siphon",
+        "ultimate": "Foam Fountain"
+      }
+    },
+    "x_soda_maker": {
+      "status": "draft",
+      "names": {
+        "common": "Fizzpump",
+        "uncommon": "Bubblebuzz",
+        "rare": "Gasgurgle",
+        "epic": "Kitchen Fizz Geyser",
+        "legendary": "The Maker That Fizzed a Party"
+      },
+      "lore": {
+        "common": "Gurgles and buzzes as it fills a bottle with tiny fizzy bubbles.",
+        "uncommon": "Makes water so fizzy that it tickles the nose before it reaches the mouth.",
+        "rare": "Fizzes everything so much that the bottle has to be opened outside.",
+        "epic": "Fizzed a bottle so hard that the kitchen ceiling got a sparkling shower.",
+        "legendary": "Fizzed enough drinks for a whole birthday party, and every guest burped in harmony."
+      },
+      "moves": {
+        "signature": "Fizz Startle",
+        "legend": "Bubbles Bubbles Bubbles",
+        "ultimate": "Fizzing Geyser"
+      }
+    },
+    "x_spice_grinder": {
+      "status": "draft",
+      "names": {
+        "common": "Peppercrank",
+        "uncommon": "Sneezemill",
+        "rare": "Twistgrind",
+        "epic": "Dinner Table Sneeze",
+        "legendary": "The Grinder That Spiced a Feast"
+      },
+      "lore": {
+        "common": "Twists out pepper in tiny flakes that settle on everything.",
+        "uncommon": "Gets twisted over every plate until someone sneezes.",
+        "rare": "Grinds spice so fine that it floats across the table and tickles every nose.",
+        "epic": "Was twisted once too many times at dinner, and the whole table sneezed together.",
+        "legendary": "Spiced a whole wedding feast and every guest said it was the best dinner of their lives."
+      },
+      "moves": {
+        "signature": "Twist Startle",
+        "legend": "Sneeze Startle",
+        "ultimate": "Spice Cloud"
+      }
+    },
+    "x_water_filter_jug": {
+      "status": "draft",
+      "names": {
+        "common": "Clearpourer",
+        "uncommon": "Dripwaiter",
+        "rare": "Filterfill",
+        "epic": "Fridge Door Glug",
+        "legendary": "The Jug That Was Always Full"
+      },
+      "lore": {
+        "common": "Drips slowly through its filter and always takes longer than anyone hoped.",
+        "uncommon": "Is always nearly empty when somebody else used it last.",
+        "rare": "Makes water so clear and cold that everyone forgets about other drinks.",
+        "epic": "Was refilled so often on a hot day that the tap was given a rest.",
+        "legendary": "Was always full, every time anyone looked, and the family still doesn't know who refills it."
+      },
+      "moves": {
+        "signature": "Glug Startle",
+        "legend": "Filter Guard",
+        "ultimate": "Cool Pour"
+      }
+    },
+    "cutlery_fork": {
+      "status": "draft",
+      "names": {
+        "common": "Prongpoker",
+        "uncommon": "Peastabber",
+        "rare": "Drawerclatter",
+        "epic": "Dinner Spear Duel",
+        "legendary": "The Fork That Never Dropped a Pea"
+      },
+      "lore": {
+        "common": "Lives in the drawer with the others and is always the first to be used.",
+        "uncommon": "Clatters on the floor at every meal, and somebody always says \"a visitor is coming\".",
+        "rare": "Spears food so quickly that the last chip on the plate is gone before it is offered.",
+        "epic": "Started a fork duel over the last roast potato, and the dog won.",
+        "legendary": "Lifted a single pea to a toddler's mouth a thousand times without ever dropping it."
+      },
+      "moves": {
+        "signature": "Prong Prong Prong",
+        "legend": "Fork Fork Fork",
+        "ultimate": "Dinner Duel"
+      }
+    },
+    "x_freezer_chest": {
+      "status": "draft",
+      "names": {
+        "common": "Deepfreeze",
+        "uncommon": "Iceburrow",
+        "rare": "Frostlid",
+        "epic": "Garage Frost Vault",
+        "legendary": "The Freezer With Last Year's Peas"
+      },
+      "lore": {
+        "common": "Hums in the garage and holds a frozen mystery at the bottom of every pile.",
+        "uncommon": "Freezes its lid shut so tightly that opening it takes two people.",
+        "rare": "Hides food so deep under ice that anything put in it disappears until spring.",
+        "epic": "Was emptied in a defrost, and the family ate frozen pies for a fortnight.",
+        "legendary": "Still holds a bag of peas from so long ago that its label is in a different alphabet."
+      },
+      "moves": {
+        "signature": "Frost Startle",
+        "legend": "Frosty Crack",
+        "ultimate": "Deep Lid Slam"
+      }
+    },
+    "x_ice_maker": {
+      "status": "draft",
+      "names": {
+        "common": "Cubedropper",
+        "uncommon": "Clinkfall",
+        "rare": "Frostdispenser",
+        "epic": "Party Ice Rush",
+        "legendary": "The Maker That Iced a Heatwave"
+      },
+      "lore": {
+        "common": "Drops ice cubes into its tray with a clatter whenever it feels like it.",
+        "uncommon": "Drops a cube at night, so everyone thinks there is a burglar.",
+        "rare": "Makes so much ice that the freezer drawer won't close any more.",
+        "epic": "Filled a whole party's drinks so fast that the guests had chattering teeth.",
+        "legendary": "Made enough ice to cool a whole street during a heatwave, and the kids built an igloo."
+      },
+      "moves": {
+        "signature": "Clink Startle",
+        "legend": "Frosty Stink",
+        "ultimate": "Cube Cascade"
+      }
+    },
+    "x_mini_fridge": {
+      "status": "draft",
+      "names": {
+        "common": "Snackcube",
+        "uncommon": "Bedsidecool",
+        "rare": "Bedsidechiller",
+        "epic": "Dorm Room Feast",
+        "legendary": "The Fridge That Fed a Whole Floor"
+      },
+      "lore": {
+        "common": "Hums quietly in a bedroom, with one drink and a forgotten yoghurt inside.",
+        "uncommon": "Gets raided at midnight by someone who said they weren't hungry.",
+        "rare": "Keeps snacks so close to the bed that nobody ever goes downstairs again.",
+        "epic": "Held a whole feast for a sleepover, and nobody went to the kitchen once.",
+        "legendary": "Fed a whole student floor for a week of exams and never ran out of milk."
+      },
+      "moves": {
+        "signature": "Hum Startle",
+        "legend": "Chill Rest",
+        "ultimate": "Midnight Feast"
+      }
+    },
+    "x_wine_cooler": {
+      "status": "draft",
+      "names": {
+        "common": "Bottlechill",
+        "uncommon": "Glassdoor",
+        "rare": "Cellarcube",
+        "epic": "Dinner Party Chill",
+        "legendary": "The Cooler That Kept Its Cool"
+      },
+      "lore": {
+        "common": "Hums softly with its bottles lined up behind a glass door.",
+        "uncommon": "Fogs its glass door every time somebody opens it to look.",
+        "rare": "Keeps everything so perfectly cold that nobody dares to change its settings.",
+        "epic": "Kept its cool in a heatwave so well that the family sat beside it to read.",
+        "legendary": "Kept perfectly cool through a power cut, a heatwave and a very long dinner party."
+      },
+      "moves": {
+        "signature": "Glass Door Startle",
+        "legend": "Cool Rest",
+        "ultimate": "Chill Chill"
+      }
+    },
+    "frying_pan": {
+      "status": "draft",
+      "names": {
+        "common": "Sizzleskillet",
+        "uncommon": "Spatterflip",
+        "rare": "Eggflipper",
+        "epic": "Pancake Day Ceiling",
+        "legendary": "The Pan That Flipped Every Pancake"
+      },
+      "lore": {
+        "common": "Sizzles merrily the moment butter touches it.",
+        "uncommon": "Spatters a little hot oil onto the cooker every time.",
+        "rare": "Flips a pancake so high that the cook has to look up to catch it.",
+        "epic": "Flipped a pancake so high on pancake day that it stuck to the ceiling until supper.",
+        "legendary": "Flipped every pancake perfectly for a whole street's pancake race, and won the race too."
+      },
+      "moves": {
+        "signature": "Sizzle Heat",
+        "legend": "Breakfast Rest",
+        "ultimate": "Pancake Flip"
+      }
+    },
+    "knife": {
+      "status": "draft",
+      "names": {
+        "common": "Blockdweller",
+        "uncommon": "Breadslicer",
+        "rare": "Edgekeeper",
+        "epic": "Sunday Roast Carver",
+        "legendary": "The Knife That Carved a Feast"
+      },
+      "lore": {
+        "common": "Sits safely in the knife block until a grown-up needs to slice the bread.",
+        "uncommon": "Gets blunt from slicing tomatoes and needs sharpening every other week.",
+        "rare": "Slices bread so thinly that every slice can be seen through.",
+        "epic": "Carved a whole Sunday roast so neatly that the family argued over who got the last slice.",
+        "legendary": "Carved a huge feast for a family reunion and gave every one of forty plates a perfect slice."
+      },
+      "moves": {
+        "signature": "Slice Slice Slice",
+        "legend": "Hot Edge",
+        "ultimate": "Carving Board"
+      }
+    },
+    "x_bread_maker": {
+      "status": "draft",
+      "names": {
+        "common": "Loafbox",
+        "uncommon": "Doughdrum",
+        "rare": "Morningloaf",
+        "epic": "Kitchen Bakery",
+        "legendary": "The Bread Maker That Woke the House"
+      },
+      "lore": {
+        "common": "Thumps softly in the night as it kneads tomorrow's bread.",
+        "uncommon": "Beeps when the bread is ready, which is always in the middle of a film.",
+        "rare": "Fills the house with such a lovely bread smell that everyone wakes up hungry.",
+        "epic": "Baked a loaf so huge that it pushed the lid open and peeked out.",
+        "legendary": "Baked bread every morning for a year, and nobody in the family needed an alarm clock."
+      },
+      "moves": {
+        "signature": "Beep Startle",
+        "legend": "Fresh Loaf Boost",
+        "ultimate": "Morning Bake"
+      }
+    },
+    "x_bread_toaster_oven": {
+      "status": "draft",
+      "names": {
+        "common": "Minioven",
+        "uncommon": "Crumbtray",
+        "rare": "Grillbox",
+        "epic": "Cheese on Toast Rescue",
+        "legendary": "The Oven That Toasted Everything"
+      },
+      "lore": {
+        "common": "Toasts, grills and bakes in a box no bigger than a shoebox.",
+        "uncommon": "Drops crumbs into its tray until they glow a little when it is on.",
+        "rare": "Bakes things so unevenly that one half is golden and the other half is pale.",
+        "epic": "Made cheese on toast for a whole sleepover, and the smell woke the parents.",
+        "legendary": "Toasted everything from crumpets to cupcakes for twenty years and never burned a slice."
+      },
+      "moves": {
+        "signature": "Ping Startle",
+        "legend": "Crumb Distraction",
+        "ultimate": "Grill Box"
+      }
+    },
+    "x_pizza_oven": {
+      "status": "draft",
+      "names": {
+        "common": "Domefire",
+        "uncommon": "Doughpeeler",
+        "rare": "Stonecrisp",
+        "epic": "Garden Pizza Party",
+        "legendary": "The Oven That Baked a Thousand Pizzas"
+      },
+      "lore": {
+        "common": "Glows orange in the garden and makes everyone suddenly fancy pizza.",
+        "uncommon": "Bakes a pizza in ninety seconds, which is always ten seconds too long.",
+        "rare": "Crisps a pizza base so perfectly that everyone wants one more slice.",
+        "epic": "Baked so many pizzas at a garden party that the guests ran out of plates.",
+        "legendary": "Baked a pizza so big that it had to be carried out on a door."
+      },
+      "moves": {
+        "signature": "Glow Startle",
+        "legend": "Crispy Crust Startle",
+        "ultimate": "Pizza Party"
+      }
+    },
+    "plate": {
+      "status": "draft",
+      "names": {
+        "common": "Dinnerdisk",
+        "uncommon": "Chipwhisker",
+        "rare": "Saucerspin",
+        "epic": "Plate Spinning Act",
+        "legendary": "The Plate That Never Chipped"
+      },
+      "lore": {
+        "common": "Holds dinner, gets washed up and waits in the cupboard for tomorrow.",
+        "uncommon": "Has one tiny chip on the edge that everybody always turns towards somebody else.",
+        "rare": "Makes every meal served on it look slightly bigger and more delicious.",
+        "epic": "Was spun on a finger at a party, and the whole family tried to copy and broke two others.",
+        "legendary": "Has served a thousand dinners and never got a single chip, scratch or crack."
+      },
+      "moves": {
+        "signature": "Hot Plate Heat",
+        "legend": "Gravy Stink",
+        "ultimate": "Plate Spin"
+      }
+    },
+    "pot": {
+      "status": "draft",
+      "names": {
+        "common": "Bubblecauldron",
+        "uncommon": "Lidrattler",
+        "rare": "Soupsimmer",
+        "epic": "Big Stew Rattle",
+        "legendary": "The Pot That Fed Everyone"
+      },
+      "lore": {
+        "common": "Bubbles away on the cooker with its lid rattling like it's trying to talk.",
+        "uncommon": "Boils over the moment the cook turns their back for a second.",
+        "rare": "Rattles its lid so loudly that the whole house knows dinner is nearly ready.",
+        "epic": "Made so much stew for a family party that the leftovers lasted a week.",
+        "legendary": "Made a stew so big and so good that the whole street came round with bowls."
+      },
+      "moves": {
+        "signature": "Hot Stew Heat",
+        "legend": "Lid Rattle Crack",
+        "ultimate": "Lid Pop Crack"
+      }
+    },
+    "i_potpie": {
+      "status": "draft",
+      "names": {
+        "common": "Crustlid",
+        "uncommon": "Gravybubble",
+        "rare": "Pastrypuff",
+        "epic": "Pie Night Steam",
+        "legendary": "The Pie That Was Shared With Everyone"
+      },
+      "lore": {
+        "common": "Has a golden pastry lid with little steam holes in the shape of a smiley face.",
+        "uncommon": "Bubbles gravy out of its edges and onto the oven floor.",
+        "rare": "Lets out such a delicious smell that everyone in the house is at the table before it's out.",
+        "epic": "Was cut open at dinner, and the steam fogged up every pair of glasses at the table.",
+        "legendary": "Was shared with so many people that every slice was tiny, and everyone still said it was delicious."
+      },
+      "moves": {
+        "signature": "Hot Pie Heat",
+        "legend": "Slice Slice Slice",
+        "ultimate": "Pie Night"
+      }
+    },
+    "x_boiler": {
+      "status": "draft",
+      "names": {
+        "common": "Pipegurgler",
+        "uncommon": "Clanktank",
+        "rare": "Wintertap",
+        "epic": "Morning Shower Gamble",
+        "legendary": "The Boiler That Never Broke Down"
+      },
+      "lore": {
+        "common": "Gurgles in the cupboard every morning as it warms up the house.",
+        "uncommon": "Clanks so loudly when it turns on that everyone thinks someone is knocking.",
+        "rare": "Decides by itself whether the shower will be hot or cold today.",
+        "epic": "Went quiet on the coldest day of the year, and the whole family huddled in one bed.",
+        "legendary": "Kept a house warm for thirty winters without one breakdown, and got a thank-you card on its birthday."
+      },
+      "moves": {
+        "signature": "Clank Startle",
+        "legend": "Cold Shower Crack",
+        "ultimate": "Warm Pipes"
+      }
+    },
+    "x_electric_blanket": {
+      "status": "draft",
+      "names": {
+        "common": "Bedwarmer",
+        "uncommon": "Plugglow",
+        "rare": "Toastysheet",
+        "epic": "Winter Night Snuggle",
+        "legendary": "The Blanket That Kept a House Warm"
+      },
+      "lore": {
+        "common": "Hums faintly under the sheet and makes the bed warm before anyone gets in.",
+        "uncommon": "Gets left on until the bed is too hot to lie on, so its owner sleeps on top.",
+        "rare": "Warms the bed so nicely that nobody in the family wants to get up in the morning.",
+        "epic": "Kept a whole family snug when the heating broke, and they all slept on one bed.",
+        "legendary": "Has warmed so many winter nights that the cat now waits beside the plug for it to be switched on."
+      },
+      "moves": {
+        "signature": "Warm Hum Startle",
+        "legend": "Cosy Distraction",
+        "ultimate": "Winter Snuggle"
+      }
+    },
+    "x_electric_blanket_cover": {
+      "status": "draft",
+      "names": {
+        "common": "Heatsleeve",
+        "uncommon": "Glowcover",
+        "rare": "Warmquilt",
+        "epic": "Cosy Duvet Sauna",
+        "legendary": "The Cover That Kept Off the Frost"
+      },
+      "lore": {
+        "common": "Wraps the duvet in warmth and makes the whole bed feel like a cosy nest.",
+        "uncommon": "Takes ages to warm up, then becomes too warm to sleep under.",
+        "rare": "Makes a bed so warm that the cat moves in and refuses to leave.",
+        "epic": "Turned a cold bedroom into a sauna on the first frost of winter.",
+        "legendary": "Kept a family warm on the coldest night of the year, and the frost outside never got in."
+      },
+      "moves": {
+        "signature": "Warm Glow Startle",
+        "legend": "Snug Boost",
+        "ultimate": "Cosy Quilt"
+      }
+    },
+    "x_electric_heater": {
+      "status": "draft",
+      "names": {
+        "common": "Glowbar",
+        "uncommon": "Toesoaker",
+        "rare": "Roomtoaster",
+        "epic": "Winter Office Fight",
+        "legendary": "The Heater Everyone Gathered Round"
+      },
+      "lore": {
+        "common": "Glows orange in the corner and warms the toes of whoever sits nearest.",
+        "uncommon": "Makes a faint dusty smell the first time it is switched on each winter.",
+        "rare": "Draws every person in the room to sit round it in a little circle.",
+        "epic": "Was fought over in a cold office until it was put in the middle and everybody shared it.",
+        "legendary": "Kept a whole village hall warm during a snowstorm, and the choir sang it a song."
+      },
+      "moves": {
+        "signature": "Glow Startle",
+        "legend": "Dusty Smell Stink",
+        "ultimate": "Warm Circle"
+      }
+    },
+    "x_furnace": {
+      "status": "draft",
+      "names": {
+        "common": "Basementroar",
+        "uncommon": "Ductrumble",
+        "rare": "Blowerbox",
+        "epic": "Cold Snap Rumble",
+        "legendary": "The Furnace That Warmed the Street"
+      },
+      "lore": {
+        "common": "Rumbles in the basement and sends warm air whooshing through the vents.",
+        "uncommon": "Starts up with a loud whump that makes the whole house jump.",
+        "rare": "Pushes warm air so hard that the curtains flutter by every vent.",
+        "epic": "Rumbled through a cold snap so steadily that the neighbours came round to warm up.",
+        "legendary": "Warmed the whole house through a week of snowstorms, and the snowmen outside started to melt."
+      },
+      "moves": {
+        "signature": "Whump Startle",
+        "legend": "Rumble Startle",
+        "ultimate": "Warm Air Rush"
+      }
+    },
+    "x_gas_heater": {
+      "status": "draft",
+      "names": {
+        "common": "Blueflame",
+        "uncommon": "Clickignite",
+        "rare": "Patiowarmer",
+        "epic": "Porch Evening Glow",
+        "legendary": "The Heater That Saved the Barbecue"
+      },
+      "lore": {
+        "common": "Clicks three times before its little blue flame comes on.",
+        "uncommon": "Clicks and clicks on cold mornings, always taking longer than anyone wants.",
+        "rare": "Glows so warmly on the patio that people stay outside long after dark.",
+        "epic": "Kept a summer barbecue going through a sudden cold evening, and nobody went inside.",
+        "legendary": "Warmed a whole outdoor wedding so well that the guests danced in their summer clothes in October."
+      },
+      "moves": {
+        "signature": "Click Startle",
+        "legend": "Blue Glow Startle",
+        "ultimate": "Evening Glow"
+      }
+    },
+    "x_heating_pad": {
+      "status": "draft",
+      "names": {
+        "common": "Warmpatch",
+        "uncommon": "Achesoother",
+        "rare": "Snugpad",
+        "epic": "Back Pain Rescue",
+        "legendary": "The Pad That Soothed Every Ache"
+      },
+      "lore": {
+        "common": "Warms up on a sore back or a cold tummy and makes everything feel a bit better.",
+        "uncommon": "Gets tangled in its cord whenever someone rolls over.",
+        "rare": "Soothes aches so well that its owner falls asleep in seconds.",
+        "epic": "Was passed round a whole family with colds, and everyone said it helped the most.",
+        "legendary": "Has soothed so many aches that the dog now lies on it whenever it gets the chance."
+      },
+      "moves": {
+        "signature": "Warm Pad Startle",
+        "legend": "Snug Distraction",
+        "ultimate": "Soothing Warmth"
+      }
+    },
+    "x_oil_heater": {
+      "status": "draft",
+      "names": {
+        "common": "Finradiator",
+        "uncommon": "Slowglow",
+        "rare": "Pingfinner",
+        "epic": "Long Winter Glow",
+        "legendary": "The Heater That Warmed a Winter"
+      },
+      "lore": {
+        "common": "Has fins like a giant toast rack and takes forever to warm up.",
+        "uncommon": "Ticks and pings as it heats, like it's counting under its breath.",
+        "rare": "Stays warm so long after it is turned off that people keep sitting next to it.",
+        "epic": "Warmed a cold bedroom so well that the sleeper took off their bobble hat for the first time all winter.",
+        "legendary": "Kept a whole family warm through the coldest winter in years without ever running out of heat."
+      },
+      "moves": {
+        "signature": "Tick Startle",
+        "legend": "Warm Fin Distraction",
+        "ultimate": "Slow Glow"
+      }
+    },
+    "x_water_heater": {
+      "status": "draft",
+      "names": {
+        "common": "Tankgurgle",
+        "uncommon": "Hottank",
+        "rare": "Bathfiller",
+        "epic": "Bath Night Rush",
+        "legendary": "The Tank That Filled Every Bath"
+      },
+      "lore": {
+        "common": "Gurgles in its cupboard and heats water for baths and washing up.",
+        "uncommon": "Runs out of hot water exactly when the last person gets in the shower.",
+        "rare": "Heats water so quickly that the bath is ready before the bubbles are found.",
+        "epic": "Filled every bath in the house on a muddy football day without running cold.",
+        "legendary": "Ran a bath so perfect that a grandad stayed in it until he was as wrinkly as a raisin and twice as happy."
+      },
+      "moves": {
+        "signature": "Gurgle Startle",
+        "legend": "Hot Water Snatch",
+        "ultimate": "Bath Night"
+      }
+    },
+    "x_air_fryer": {
+      "status": "draft",
+      "names": {
+        "common": "Crispbasket",
+        "uncommon": "Whoosher",
+        "rare": "Chipcrisper",
+        "epic": "Teatime Crunch",
+        "legendary": "The Fryer That Crisped Everything"
+      },
+      "lore": {
+        "common": "Whooshes hot air round its basket and smells of chips for days.",
+        "uncommon": "Beeps when the food is ready, then again a minute later, just in case.",
+        "rare": "Crisps anything put inside so well that even the vegetables taste like chips.",
+        "epic": "Made so many chips for a sleepover that the whole street smelled like a chip shop.",
+        "legendary": "Crisped every food in the house in one day, including a sprout the children actually ate."
+      },
+      "moves": {
+        "signature": "Whoosh Startle",
+        "legend": "Crisp Crack",
+        "ultimate": "Crispy Rush"
+      }
+    }
+  }
+}
