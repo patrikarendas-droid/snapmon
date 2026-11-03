@@ -1,0 +1,4149 @@
+{
+  "batch": "w10-screens-sound-and-light",
+  "editor": "independent agent",
+  "reviewed": 98,
+  "summary": "The batch is safe for children apart from one crash-site Epic (light bar), a cliff-jump Rare (action camera) and a headlight-dazzling Rare (reflector), and its Commons and Uncommons are mostly real, recognisable habits (lens cap left on, controller drift, snooze button, the forty hours of dashcam nothing). Above Uncommon it is the weakest batch so far. About 60 of 98 Legendaries use the banned 'has done X for N years / still has its first bulb / never once' formula, about 40 Rares are the object simply doing its job well (lit the path, guided the boat, balanced the sound), and about 40 Epics are crowd scenes ('lit every desk in the library', 'the whole street sang along'). Most lines in those three rarities need rewriting; a replacement and a paired name are given for each. Clusters blur together: the tape objects share Commons and Epics, the light fixtures all 'lit X so warmly that everyone gathered', and six light objects guide someone lost home. Names: 67 Legendaries are 'Old/Grand/Lady X of the Y', six objects have names swapped or rotated between rarities (paper lantern, reflector, jukebox, CD changer, fuse box, fire extinguisher), and there are trademark echoes (Kodachrome, Polaroo, Gamestation, Spinmaster, Daredevil, Bluetooth). Move mechanics are mostly respected (burn names have heat, drain names snatch), but about 30 move names are garbled repeats ('Moth Moth Moth Moth', 'Flash Flash Flash Flash' on a single hit), and a few varying Ultimates promise one effect ('Game Over Daze', 'Neon Glare', 'Heating Surge'). The good lines to keep and imitate are the dashcam, extension cord, doorbell, fire alarm, speaker Epic and Legendary, and the soundbar Rare.",
+  "patterns": [
+    {
+      "pattern": "Legendary formula 'has done X for N years / still has its first X / never once': the default Legendary in this batch (about 60 of 98). Each is a nice record, not an outrageous feat with a punchline.",
+      "ids": [
+        "camera",
+        "x_film_camera",
+        "x_instant_camera",
+        "i_lens_cap",
+        "x_video_camera",
+        "x_webcam_unit",
+        "x_baby_monitor",
+        "x_photo_booth",
+        "flat_tv",
+        "game_console",
+        "monitor",
+        "binoculars",
+        "i_beacon",
+        "x_ceiling_light",
+        "x_chandelier",
+        "x_chandelier_light",
+        "x_desk_light",
+        "x_floor_light",
+        "x_light_stand",
+        "x_pendant_light",
+        "x_reading_light",
+        "x_ring_light",
+        "x_studio_light",
+        "x_wall_lamp",
+        "x_oil_lantern",
+        "x_candle_holder",
+        "x_neon_sign",
+        "x_night_light",
+        "lightbulb",
+        "x_lava_lamp",
+        "x_reflector",
+        "x_harmonium",
+        "x_mixing_desk",
+        "x_record_player",
+        "x_synth_keyboard",
+        "x_turntable",
+        "i_ipod",
+        "x_mp3_player",
+        "x_overhead_projector",
+        "projector",
+        "x_slide_projector",
+        "x_clock_radio",
+        "x_portable_radio",
+        "radio",
+        "i_cassette",
+        "x_cassette_tape",
+        "x_cd",
+        "x_cd_changer",
+        "x_vinyl_record",
+        "x_jukebox",
+        "x_guitar_amp",
+        "x_karaoke_machine",
+        "x_soundbar",
+        "x_megaphone",
+        "x_megaphone_horn",
+        "x_arcade_machine",
+        "x_atm_machine",
+        "x_slot_machine",
+        "x_ticket_machine",
+        "x_vending_kiosk",
+        "x_battery",
+        "x_charger",
+        "x_power_strip",
+        "x_plug",
+        "x_thermostat",
+        "x_fire_extinguisher",
+        "x_intercom"
+      ],
+      "severity": "high",
+      "suggestion": "Rewrite each as one outrageous feat plus a deflating punchline (replacements are given per object). Never 'for N years', 'still has', 'never once', 'the same family'."
+    },
+    {
+      "pattern": "Rare = the object doing its job well (lit the path, guided the boat, balanced the sound, filmed beautifully, matched the beat). The lessons require a troublesome POWER.",
+      "ids": [
+        "x_camera_lens",
+        "x_cinema_camera",
+        "x_film_camera",
+        "x_instant_camera",
+        "x_security_monitor",
+        "x_baby_monitor",
+        "flat_tv",
+        "binoculars",
+        "i_beacon",
+        "x_chandelier",
+        "x_floor_light",
+        "x_light_stand",
+        "x_pendant_light",
+        "x_wall_lamp",
+        "lantern",
+        "x_lantern_light",
+        "x_torch_light",
+        "x_candle_holder",
+        "x_drum_machine",
+        "x_harmonium",
+        "x_mixing_desk",
+        "x_record_player",
+        "x_turntable",
+        "x_ipod_nano",
+        "x_mp3_player",
+        "projector",
+        "x_projector_lamp",
+        "x_slide_projector",
+        "x_portable_radio",
+        "radio",
+        "x_megaphone",
+        "x_megaphone_horn",
+        "x_battery",
+        "x_thermostat",
+        "x_vinyl_record",
+        "x_cd_changer",
+        "x_desk_light",
+        "x_ceiling_light"
+      ],
+      "severity": "high",
+      "suggestion": "Give each Rare a power that causes trouble (shows the wrong room, plays everything too fast, swaps the chorus, lights only the vegetable-refuser's plate)."
+    },
+    {
+      "pattern": "Epic crowd formula: 'every X at the Y at once', 'lit every desk/corridor/barn dance', 'the whole street/town/hall cheered or sang along', or a crowd plus a comparison ('like a river of stars', 'a hundred halos').",
+      "ids": [
+        "flat_tv",
+        "monitor",
+        "binoculars",
+        "x_security_monitor",
+        "x_baby_monitor",
+        "x_desk_light",
+        "x_reading_light",
+        "x_ring_light",
+        "x_studio_light",
+        "lantern",
+        "x_oil_lantern",
+        "x_paper_lantern",
+        "x_candle_holder",
+        "x_glow_stick",
+        "x_night_light",
+        "x_salt_lamp",
+        "x_reflector",
+        "lightbulb",
+        "x_drum_machine",
+        "x_keytar",
+        "x_mixing_desk",
+        "x_record_player",
+        "i_ipod",
+        "x_ipod_nano",
+        "projector",
+        "x_projector_lamp",
+        "x_portable_radio",
+        "radio",
+        "i_cassette",
+        "x_vinyl_record",
+        "x_guitar_amp",
+        "x_karaoke_machine",
+        "x_megaphone",
+        "x_arcade_machine",
+        "x_atm_machine",
+        "x_slot_machine",
+        "x_ticket_machine",
+        "x_power_bank",
+        "x_plug",
+        "x_clock_radio"
+      ],
+      "severity": "high",
+      "suggestion": "Replace each with one concrete disruption and a joke (the egg box cracks, the cast performs in the living room, the snowman comes in for a drink)."
+    },
+    {
+      "pattern": "Legendary name monotony: 67 of 98 Legendaries are 'Old X of the Y', 'Grand X of the Y' or 'Lady/Sir/Captain X of the Y'. Several stems repeat (Watchwell x2, Lumina x2).",
+      "ids": [
+        "camera",
+        "x_camera_lens",
+        "x_film_camera",
+        "x_instant_camera",
+        "i_lens_cap",
+        "x_video_camera",
+        "flat_tv",
+        "game_console",
+        "binoculars",
+        "i_beacon",
+        "x_drum_machine",
+        "x_harmonium",
+        "x_mixing_desk",
+        "x_record_player",
+        "x_turntable",
+        "x_ceiling_light",
+        "x_chandelier",
+        "x_desk_light",
+        "x_floor_light",
+        "x_light_stand",
+        "x_pendant_light",
+        "x_reading_light",
+        "x_ring_light",
+        "x_studio_light",
+        "x_wall_lamp",
+        "lantern",
+        "lightbulb",
+        "monitor",
+        "x_security_monitor",
+        "i_ipod",
+        "x_mp3_player",
+        "x_overhead_projector",
+        "projector",
+        "x_projector_lamp",
+        "x_slide_projector",
+        "x_clock_radio",
+        "x_portable_radio",
+        "radio",
+        "i_cassette",
+        "x_guitar_amp",
+        "x_karaoke_machine",
+        "x_soundbar",
+        "x_megaphone_horn",
+        "x_arcade_machine",
+        "x_atm_machine",
+        "x_jukebox",
+        "x_photo_booth",
+        "x_slot_machine",
+        "x_ticket_machine",
+        "x_vending_kiosk",
+        "x_baby_monitor",
+        "x_battery",
+        "x_candelabra",
+        "x_candle_holder",
+        "x_cassette_tape",
+        "x_cd",
+        "x_cd_changer",
+        "x_charger",
+        "x_oil_lantern",
+        "x_chandelier_light",
+        "x_keytar",
+        "x_synth_keyboard"
+      ],
+      "severity": "medium",
+      "suggestion": "New Legendary names are given with each rewrite and mix shapes: 'Name, the Epithet', 'Name the Adjective', pun names ('Beatbox Betty', 'Transistor Tess'), and plain titles."
+    },
+    {
+      "pattern": "Lost-and-guided-home frame repeats across the light objects (beacon boat, lantern lost family, lantern light lost sheep and hiker, candle holder traveller, torch lost dog, flashlight lost cat).",
+      "ids": [
+        "i_beacon",
+        "lantern",
+        "x_lantern_light",
+        "x_candle_holder",
+        "x_torch_light",
+        "x_flashlight_torch"
+      ],
+      "severity": "medium",
+      "suggestion": "Keep at most one rescue line in the cluster, and make even that one funny."
+    },
+    {
+      "pattern": "Light-fixture cluster tell-apart: chandelier = crystals and mirrors; chandelier light = candle bulbs and romance; ceiling light = switching on and off; pendant = low and swinging; floor light = tall and looming; desk light = bendy neck; wall lamp = hallway sneaking; reading light = bedtime books; ring light = flattering faces; studio light = heat. Lanterns: lantern = shadows; lantern light = swinging; oil lantern = soot; paper lantern = fragile paper.",
+      "ids": [
+        "x_chandelier",
+        "x_chandelier_light",
+        "x_ceiling_light",
+        "x_pendant_light",
+        "x_floor_light",
+        "x_desk_light",
+        "x_wall_lamp",
+        "x_reading_light",
+        "x_ring_light",
+        "x_studio_light",
+        "lantern",
+        "x_lantern_light",
+        "x_oil_lantern",
+        "x_paper_lantern"
+      ],
+      "severity": "medium",
+      "suggestion": "Change the light lines that are now near each other (they all 'lit X so warmly that everyone gathered') using the per-object replacements, which follow this split."
+    },
+    {
+      "pattern": "Tape cluster near-copies: i_cassette C, x_cassette_tape C and x_tape_deck C (tape chewed or spilled); x_cassette_tape E = x_tape_deck E (recording the Sunday chart for the class); three tape Legendaries 'for N years'. Projectors x4 and cameras also share 'did its job beautifully' Rares.",
+      "ids": [
+        "i_cassette",
+        "x_cassette_tape",
+        "x_tape_deck",
+        "x_overhead_projector",
+        "projector",
+        "x_projector_lamp",
+        "x_slide_projector",
+        "camera",
+        "x_film_camera",
+        "x_instant_camera"
+      ],
+      "severity": "high",
+      "suggestion": "Keep i_cassette C (chewed tape) and change the other two; tell the tape objects apart: cassette = old music and rewinding, cassette tape = recordings and labels, tape deck = copying and clunky buttons."
+    },
+    {
+      "pattern": "Garbled repeated move names (four or five copies of one word, or a doubled word on a single-hit move): 'Moth Moth Moth Moth', 'Flash Flash Flash Flash', 'Skip Skip Skip Skip Skip', 'Pixel Flash Flash', 'Power Snatch Snatch', 'Mix Boost Boost'.",
+      "ids": [
+        "x_ceiling_light",
+        "x_photo_booth",
+        "x_dvd",
+        "x_cd",
+        "x_jukebox",
+        "x_slide_projector",
+        "x_arcade_machine",
+        "x_action_camera",
+        "x_baby_monitor",
+        "x_candelabra",
+        "x_cassette_tape",
+        "x_tape_deck",
+        "x_studio_light",
+        "x_mp3_player",
+        "x_guitar_amp",
+        "x_webcam_unit",
+        "x_reading_light",
+        "x_torch_light",
+        "x_lantern_light",
+        "x_glow_stick",
+        "x_power_bank",
+        "x_power_strip",
+        "x_reflector",
+        "x_thermostat",
+        "x_fire_alarm",
+        "x_intercom",
+        "x_ticket_machine",
+        "x_dashcam",
+        "i_cassette"
+      ],
+      "severity": "medium",
+      "suggestion": "Use at most three copies of a word, and only on the \u00d73 moves; single-hit stun, drain and boost moves get one clear image."
+    },
+    {
+      "pattern": "Brand and trademark echoes in names: Kodachrome, Polaroo (Polaroid), Gamestation (PlayStation), Spinmaster (Spin Master), Daredevil, Bluetooth, Volumeeleven (film catchphrase). The i_ipod / x_ipod_nano labels are brands; their text is correctly generic.",
+      "ids": [
+        "x_film_camera",
+        "x_instant_camera",
+        "game_console",
+        "x_turntable",
+        "x_action_camera",
+        "speaker",
+        "x_guitar_amp",
+        "i_ipod",
+        "x_ipod_nano"
+      ],
+      "severity": "high",
+      "suggestion": "Rename as given per object; keep all text brand-free."
+    },
+    {
+      "pattern": "Ultimates whose effect varies by variant but whose names promise one effect: 'Game Over Daze', 'Giant Picture Glare', 'Neon Glare', 'Spotlight Glare', 'Heating Surge'; plus Ultimates that repeat the Epic name ('Foam Flood', 'Blackout').",
+      "ids": [
+        "game_console",
+        "projector",
+        "x_neon_sign",
+        "x_studio_light",
+        "x_thermostat",
+        "x_fire_extinguisher",
+        "x_fuse_box",
+        "x_headlamp"
+      ],
+      "severity": "medium",
+      "suggestion": "Use effect-neutral finisher images ('Neon Finale', 'Dial Spin Finale') and give each Ultimate its own picture."
+    },
+    {
+      "pattern": "Many lore lines are under 60 characters with no consequence (about 100 lines; e.g. 'Squeaks every time you bend it.', 'Glows over homework every evening.', 'Made a coffee and forgot the cup.').",
+      "ids": [
+        "x_desk_light",
+        "lightbulb",
+        "x_vending_kiosk",
+        "x_candelabra",
+        "x_headlamp",
+        "x_power_bank",
+        "speaker",
+        "x_thermostat",
+        "x_ticket_machine",
+        "x_wall_lamp",
+        "x_pendant_light",
+        "x_cinema_camera",
+        "x_security_monitor"
+      ],
+      "severity": "low",
+      "suggestion": "Aim for 60 to 160 characters: the habit, then a small concrete punchline."
+    }
+  ],
+  "issues": [
+    {
+      "id": "camera",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Took the photo that hangs in every grandparent's hallway'; also near-identical to x_film_camera L (a photo the family still hangs up). Change this side and the film camera side); it needs an outrageous feat.",
+      "suggestion": "'Took a group photo so wide that it fitted the whole town in, and now every house in town gets a copy every New Year, including the bakery.'"
+    },
+    {
+      "id": "camera",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Panorama Pip, Snapper of Towns'"
+    },
+    {
+      "id": "camera",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a success or a mild scene, not large-scale trouble with a punchline ('a thousand photos at the wedding').",
+      "suggestion": "'Flashed at the exact moment the wedding cake was cut, and the whole wedding album came out as one big white blur with a fork in it.'"
+    },
+    {
+      "id": "camera",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Cake-Flash Wedding'"
+    },
+    {
+      "id": "x_camera_lens",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('blurred the background so beautifully'), not a troublesome power.",
+      "suggestion": "'Zooms in on the one thing nobody wants to see, like the spot on your nose, in perfect, crystal-clear detail.'"
+    },
+    {
+      "id": "x_camera_lens",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Nosezoomer'"
+    },
+    {
+      "id": "x_camera_lens",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('climbers used it as their map'); it needs an outrageous feat.",
+      "suggestion": "'Took a photo of a hedgehog so sharp that everyone who looked at it said ouch and checked their fingers.'"
+    },
+    {
+      "id": "x_camera_lens",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Sharpshot the Prickly'"
+    },
+    {
+      "id": "x_camera_lens",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Uncommon only describes what the object normally does ('Twists in and out with a satisfying whirr'); give it a quirk with a small joke.",
+      "suggestion": "'Zooms in by itself whenever someone yawns, so every party photo is a close-up of a tonsil.'"
+    },
+    {
+      "id": "x_camera_lens",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Yawnzoomer'"
+    },
+    {
+      "id": "x_camera_lens",
+      "field": "moves.kit.snapshot_burst",
+      "severity": "low",
+      "issue": "'Burst Burst Burst' is a garbled repeat; give the three hits a readable image.",
+      "suggestion": "'Snap Burst Barrage'"
+    },
+    {
+      "id": "x_cinema_camera",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('filmed a scene so beautifully that the director cried'), not a troublesome power.",
+      "suggestion": "'Shouts CUT in the director's voice at random, so the actors keep freezing halfway through a sneeze.'"
+    },
+    {
+      "id": "x_cinema_camera",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Cutshouter'"
+    },
+    {
+      "id": "x_cinema_camera",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('played in every cinema in the country for a whole year'); it needs an outrageous feat.",
+      "suggestion": "'Filmed one scene for so long that the actors grew real beards, and the sequel had to begin with a shave.'"
+    },
+    {
+      "id": "x_cinema_camera",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Rolling Reelius'"
+    },
+    {
+      "id": "x_cinema_camera",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Uses up a whole reel of film on one scene'); add a concrete consequence.",
+      "suggestion": "'Uses up a whole reel of film on one scene, and the scene is mostly the actor looking for his hat.'"
+    },
+    {
+      "id": "x_film_camera",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('photos so warm and golden that everyone looked like they were on holiday'), not a troublesome power.",
+      "suggestion": "'Swaps its film with someone else's at the shop, so the family album now has a stranger riding a camel in it.'"
+    },
+    {
+      "id": "x_film_camera",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Camelswapper'"
+    },
+    {
+      "id": "x_film_camera",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Took a photo fifty years ago that the family still hangs over the fireplace'; also near-identical to camera L); no outrageous feat or punchline.",
+      "suggestion": "'Took a photo so old-fashioned that everyone in it came out in black and white, including the brand-new red car.'"
+    },
+    {
+      "id": "x_film_camera",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "Pairs with the new Legendary lore. 'Old Kodachrome of the Attic' uses a real trademark (Kodachrome is a Kodak film brand). Replace it even if the lore stays.",
+      "suggestion": "'Grandpa Grainbox' (or another brand-free name if the lore is kept)"
+    },
+    {
+      "id": "x_instant_camera",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('printed a photo so perfect that it went straight on the fridge'), not a troublesome power.",
+      "suggestion": "'Prints what people were thinking instead of what they looked like, so the party photos are mostly cake.'"
+    },
+    {
+      "id": "x_instant_camera",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Thoughtprinter'"
+    },
+    {
+      "id": "x_instant_camera",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('filled a whole wall with photos of the same family over twenty years'); no outrageous feat or punchline.",
+      "suggestion": "'Printed a photo so fast that it came out before the picture was taken, and everyone had to copy their own poses.'"
+    },
+    {
+      "id": "x_instant_camera",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "Pairs with the new Legendary lore. 'Lady Polaroo' echoes the Polaroid trademark and repeats the Lady X of the Y shape.",
+      "suggestion": "'Quickprint, Ahead of Time'"
+    },
+    {
+      "id": "x_instant_camera",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Uncommon only describes what the object normally does ('Spits out a little square picture with a whirr'); give it a quirk with a small joke.",
+      "suggestion": "'Spits its little square picture straight at whoever is nearest, and it always lands face down in the dip.'"
+    },
+    {
+      "id": "i_lens_cap",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Common premise (left on, black photos) at a bigger scale ('fifty black pictures').",
+      "suggestion": "'Popped off at the top of the mountain and rolled all the way down, and the whole hiking group chased it into the cafe.'"
+    },
+    {
+      "id": "i_lens_cap",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Mountain Roll Chase'"
+    },
+    {
+      "id": "i_lens_cap",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has protected the same lens for thirty years and only been lost once'); no outrageous feat or punchline.",
+      "suggestion": "'Stayed on through a whole solar eclipse, so its owner is the only person with no eclipse photos and perfectly safe eyes.'"
+    },
+    {
+      "id": "i_lens_cap",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Capsworth the Eclipse Dodger'"
+    },
+    {
+      "id": "x_video_camera",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is a mistake, not a power, and contradicts itself ('forgot to press record and filmed the floor').",
+      "suggestion": "'Records everything in fast-forward, so Grandma's birthday speech lasts four seconds and sounds like a mouse.'"
+    },
+    {
+      "id": "x_video_camera",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Fastforwarder'"
+    },
+    {
+      "id": "x_video_camera",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a success or a mild scene, not large-scale trouble with a punchline ('the family watched it every Christmas for ten years' is the years formula on an Epic).",
+      "suggestion": "'Filmed the whole school play with the lens cap on, so the cast had to perform it again in the living room.'"
+    },
+    {
+      "id": "x_video_camera",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Living Room Encore'"
+    },
+    {
+      "id": "x_video_camera",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Recorded every birthday for twenty years on the same old tapes'); no outrageous feat or punchline.",
+      "suggestion": "'Recorded a birthday party on a tape so long that it also caught the next ten birthdays and the dog's first swim.'"
+    },
+    {
+      "id": "x_video_camera",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Taperella the Endless'"
+    },
+    {
+      "id": "x_action_camera",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare celebrates cliff-jumping into the sea from a head mount, which children may copy; it is also a stunt, not a power.",
+      "suggestion": "'Sticks to anything that moves, so the family's best holiday film was shot from the back of a seagull.'"
+    },
+    {
+      "id": "x_action_camera",
+      "field": "names.rare",
+      "severity": "high",
+      "issue": "Pairs with the new Rare lore. 'Daredevil Cam' echoes a trademarked superhero name.",
+      "suggestion": "'Seagullcam' (pairs with the new Rare lore)"
+    },
+    {
+      "id": "x_action_camera",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Has filmed every adventure its owner ever had'); it needs an outrageous feat.",
+      "suggestion": "'Was stuck to a tortoise for a whole year and made the slowest, most popular adventure film ever.'"
+    },
+    {
+      "id": "x_action_camera",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "Pairs with the new Legendary lore. 'Captain Daredevil of the Cliff Edge' echoes a trademarked superhero and the cliff-jump stunt.",
+      "suggestion": "'Shellcam the Slow Explorer'"
+    },
+    {
+      "id": "x_action_camera",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Record Flash Flash' repeats a word on a single-hit stun move, which reads like a multi-hit.",
+      "suggestion": "'Record Light Flash'"
+    },
+    {
+      "id": "x_dashcam",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Legendary relies on the watched 'scientists came' frame; otherwise a good feat.",
+      "suggestion": "'Recorded a meteor so clearly that the observatory asked to borrow the car, and the car now has its own telescope.'"
+    },
+    {
+      "id": "x_webcam_unit",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Uncommon premise (freezing faces on a call).",
+      "suggestion": "'Turned on a cat filter during the head teacher's online assembly, and the whole school was led by a kitten for an hour.'"
+    },
+    {
+      "id": "x_webcam_unit",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Kitten Assembly'"
+    },
+    {
+      "id": "x_webcam_unit",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Connected a grandma with her grandchildren every Sunday for ten years'); no outrageous feat or punchline.",
+      "suggestion": "'Lagged so far behind that it showed last Tuesday's meeting instead, and everyone agreed it went much better.'"
+    },
+    {
+      "id": "x_webcam_unit",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lagwell, Keeper of Last Tuesday'"
+    },
+    {
+      "id": "x_webcam_unit",
+      "field": "moves.kit.flash",
+      "severity": "medium",
+      "issue": "'Light Flash Flash' repeats a word on a single-hit stun move.",
+      "suggestion": "'Screen Light Flash'"
+    },
+    {
+      "id": "x_webcam_unit",
+      "field": "moves.kit.snapshot_burst",
+      "severity": "low",
+      "issue": "'Snap Snap Snap Snap' is a garbled four-word repeat (also used by x_photo_booth).",
+      "suggestion": "'Snapshot Snapshot'"
+    },
+    {
+      "id": "x_security_monitor",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Watched every corner of the building all night without blinking'), not a troublesome power.",
+      "suggestion": "'Shows a different room from the one its camera points at, so the guard has watched the staff kitchen all night.'"
+    },
+    {
+      "id": "x_security_monitor",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Wrongroomer'"
+    },
+    {
+      "id": "x_security_monitor",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Watched every camera in the shopping centre at once') instead of one concrete consequence with a joke.",
+      "suggestion": "'Showed one pigeon on every screen at once, and the guards spent the night chasing a single bird round the shopping centre.'"
+    },
+    {
+      "id": "x_security_monitor",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Pigeon Patrol Night'"
+    },
+    {
+      "id": "x_security_monitor",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('the video is now famous' (viral-video framing)); it needs an outrageous feat. The name 'Old Watchwell' is also shared with x_baby_monitor L.",
+      "suggestion": "'Stared at one parked car so hard all night that the car got nervous and quietly moved itself to the next street.'"
+    },
+    {
+      "id": "x_security_monitor",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Eyesworth the Starer'"
+    },
+    {
+      "id": "x_baby_monitor",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Showed the baby asleep in perfect night-vision green'), not a troublesome power.",
+      "suggestion": "'Picks up the baby next door instead, so the parents rush in to comfort a cot that is already fast asleep.'"
+    },
+    {
+      "id": "x_baby_monitor",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Nextdoorlistener'"
+    },
+    {
+      "id": "x_baby_monitor",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Watched every baby in the playgroup at the sleepover') instead of one concrete consequence with a joke.",
+      "suggestion": "'Played one tiny snore through the house so loudly that the whole family got dressed for school at midnight.'"
+    },
+    {
+      "id": "x_baby_monitor",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Midnight School Run'"
+    },
+    {
+      "id": "x_baby_monitor",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has watched over three babies in the same family and never missed a single cry'); no outrageous feat or punchline. Name 'Old Watchwell' also duplicates the stem of x_security_monitor L.",
+      "suggestion": "'Played a lullaby back so softly that both parents fell asleep, and the baby had to switch the monitor off.'"
+    },
+    {
+      "id": "x_baby_monitor",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lullabelle the Babysitter'"
+    },
+    {
+      "id": "x_baby_monitor",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Static Flash Flash' repeats a word on a single-hit stun move.",
+      "suggestion": "'Static Crackle Flash'"
+    },
+    {
+      "id": "x_photo_booth",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Curtainpeeker' does not describe the Common lore (snaps the photo as you sit down).",
+      "suggestion": "'Earlysnapper'"
+    },
+    {
+      "id": "x_photo_booth",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a lucky snapshot, not a power ('Captured the funniest face').",
+      "suggestion": "'Squeezes one extra person into every photo strip, and nobody ever knows who they are.'"
+    },
+    {
+      "id": "x_photo_booth",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Extraface'"
+    },
+    {
+      "id": "x_photo_booth",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has printed a million photo strips, and every family has one stuck on the fridge'); no outrageous feat or punchline.",
+      "suggestion": "'Fitted a whole football team, the referee and the mascot into one tiny booth, and printed them all on one strip.'"
+    },
+    {
+      "id": "x_photo_booth",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Snapstrip, Squeezer of Teams'"
+    },
+    {
+      "id": "x_photo_booth",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Flash Flash Flash Flash' is a garbled repeat on a single-hit stun move.",
+      "suggestion": "'Four-Flash Dazzle'"
+    },
+    {
+      "id": "x_photo_booth",
+      "field": "moves.kit.jackpot",
+      "severity": "low",
+      "issue": "'Snap Snap Snap Snap' is a four-word repeat and collides with x_webcam_unit.",
+      "suggestion": "'Strip Strip Strip'"
+    },
+    {
+      "id": "flat_tv",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('hung on the wall so perfectly that it looked like a window'), not a troublesome power.",
+      "suggestion": "'Switches to the cooking channel whenever anyone is hungry, so dinner is late every single night.'"
+    },
+    {
+      "id": "flat_tv",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Channelflipper'"
+    },
+    {
+      "id": "flat_tv",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Showed the cup final to the whole street crammed into one living room') instead of one concrete consequence with a joke.",
+      "suggestion": "'Showed a penalty kick so realistically that the whole living room dived for the ball, and the sofa never recovered.'"
+    },
+    {
+      "id": "flat_tv",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Sofa Penalty Dive'"
+    },
+    {
+      "id": "flat_tv",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has shown every family film night for ten years and never once needed a repair'); no outrageous feat or punchline.",
+      "suggestion": "'Showed a fireplace video so convincingly that the cat sleeps in front of it and the heating bill went down.'"
+    },
+    {
+      "id": "flat_tv",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Flatfire the Cosy'"
+    },
+    {
+      "id": "game_console",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played ten thousand games with the same family and still loads in seconds'); no outrageous feat or punchline.",
+      "suggestion": "'Paused a game so hard that the whole house paused too, and Dad is still standing in the hall with one sock on.'"
+    },
+    {
+      "id": "game_console",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "Pairs with the new Legendary lore. 'Grand Gamestation' echoes a games-console trademark.",
+      "suggestion": "'Pausewell, Stopper of Houses'"
+    },
+    {
+      "id": "game_console",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic leans on a tournament (contest frame) and 'lasted until sunrise' has no joke.",
+      "suggestion": "'Started an update during the sleepover that lasted so long the guests went home, grew up and came back to play.'"
+    },
+    {
+      "id": "game_console",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Endless Update Sleepover'"
+    },
+    {
+      "id": "game_console",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Game Over Daze' names a stun, but no variant stuns (poison / burn / defence down). Use an effect-neutral finisher.",
+      "suggestion": "'Game Over'"
+    },
+    {
+      "id": "monitor",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Glowed on every desk in the office on the busiest day') instead of one concrete consequence with a joke.",
+      "suggestion": "'Showed the boss's screensaver on the big meeting screen, and the whole office found out he collects garden gnomes.'"
+    },
+    {
+      "id": "monitor",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Gnome Screensaver Day'"
+    },
+    {
+      "id": "monitor",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has shown every email for twenty years and never lost a pixel more'); no outrageous feat or punchline.",
+      "suggestion": "'Had so many windows open that one let in a real breeze, and the office switched its fans off for the summer.'"
+    },
+    {
+      "id": "monitor",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pixelworth of a Hundred Windows'"
+    },
+    {
+      "id": "binoculars",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Spotted a rare bird on the far side of the lake'), not a troublesome power.",
+      "suggestion": "'Makes everything look so close that its owner keeps ducking whenever a bird flies past a mile away.'"
+    },
+    {
+      "id": "binoculars",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Duckandflinch'"
+    },
+    {
+      "id": "binoculars",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Spotted every bird on the reserve in one morning') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was lent to a short-sighted owl at the nature reserve, and the owl has refused to give them back ever since.'"
+    },
+    {
+      "id": "binoculars",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Owl on Loan'"
+    },
+    {
+      "id": "binoculars",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has watched the same family of eagles for twenty years'); no outrageous feat or punchline.",
+      "suggestion": "'Looked so far into the distance that it saw all the way round the world to the back of its owner's own head.'"
+    },
+    {
+      "id": "binoculars",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Farsight the Round-the-World'"
+    },
+    {
+      "id": "binoculars",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Near-copy of w08 x_belt_bag C ('bumps against your hip with every step').",
+      "suggestion": "'Has a strap so long that the binoculars bounce off your knees every time you look up.'"
+    },
+    {
+      "id": "i_beacon",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Guided a lost fishing boat home through the thickest fog'), not a troublesome power.",
+      "suggestion": "'Flashes in a pattern that seagulls cannot resist, so the harbour fills with confused birds every evening.'"
+    },
+    {
+      "id": "i_beacon",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Gullsummoner'"
+    },
+    {
+      "id": "i_beacon",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Lit up the whole harbour when every street light went out' is helpful work, not chaos), not a troublesome power.",
+      "suggestion": "'Flashed so hard into the storm that the clouds blinked first and went home early.'"
+    },
+    {
+      "id": "i_beacon",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Storm Stare-Down'"
+    },
+    {
+      "id": "i_beacon",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has blinked from the same rocky point for a hundred years'); no outrageous feat or punchline.",
+      "suggestion": "'Shone so far out to sea that a whale followed it into the harbour and asked where to park.'"
+    },
+    {
+      "id": "i_beacon",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Brightwatch, Whale Wrangler'"
+    },
+    {
+      "id": "x_ceiling_light",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is an annoying habit (the pull cord swings out of reach), not a power.",
+      "suggestion": "'Switches itself off the second anyone sits down, and back on the moment they stand up to check.'"
+    },
+    {
+      "id": "x_ceiling_light",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Sitdownswitcher'"
+    },
+    {
+      "id": "x_ceiling_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has lit the same kitchen for fifty years and only needed three new bulbs'); no outrageous feat or punchline.",
+      "suggestion": "'Shone so brightly through the night that the neighbour's rooster crowed at midnight for a month.'"
+    },
+    {
+      "id": "x_ceiling_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lumensworth, Rooster Fooler'"
+    },
+    {
+      "id": "x_ceiling_light",
+      "field": "moves.kit.moth_swarm",
+      "severity": "medium",
+      "issue": "'Moth Moth Moth Moth' is a garbled repeat.",
+      "suggestion": "'Moth Swarm Swirl'"
+    },
+    {
+      "id": "x_chandelier",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Scattered rainbows across the walls when the sun hit it' is just what a chandelier does; it also overlaps x_cd U), not a troublesome power.",
+      "suggestion": "'Turns every crystal into a tiny mirror, so nobody at dinner can pull a face behind their napkin.'"
+    },
+    {
+      "id": "x_chandelier",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Prismspy'"
+    },
+    {
+      "id": "x_chandelier",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has hung in the same palace ballroom for two hundred years' (also the palace frame)); no outrageous feat or punchline.",
+      "suggestion": "'Rang its crystals so sweetly during a storm that the thunder stopped to listen and moved next door.'"
+    },
+    {
+      "id": "x_chandelier",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Crystallina, Hush of Thunder'"
+    },
+    {
+      "id": "x_chandelier",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Rainbow Scatter' repeats the Rare name 'Rainbowscatter'.",
+      "suggestion": "'Crystal Shower'"
+    },
+    {
+      "id": "x_chandelier_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has lit the same dining room for a hundred years of family dinners'); no outrageous feat or punchline.",
+      "suggestion": "'Dimmed itself so romantically at an anniversary dinner that Grandad proposed to Grandma again, and she said maybe.'"
+    },
+    {
+      "id": "x_chandelier_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lustrella the Matchmaker'"
+    },
+    {
+      "id": "x_chandelier_light",
+      "field": "moves.kit.moth_swarm",
+      "severity": "low",
+      "issue": "'Bulb Bulb Bulb' does not describe a multi-hit swarm; the slot is the moth swarm.",
+      "suggestion": "'Moth Moth Moth'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon has no trait or joke and is 34 characters ('Glows over homework every evening').",
+      "suggestion": "'Gets so warm over the homework that the cat sleeps on the maths book every evening.'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Catwarmer'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is a squeak (31 characters), not a power.",
+      "suggestion": "'Bends round to read over your shoulder, and tuts at every spelling mistake.'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Shouldertutter'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Lit every desk in the library during exam week') instead of one concrete consequence with a joke.",
+      "suggestion": "'Shone on the homework so hard that the answers faded off the page, and the whole class had a very good excuse.'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Faded Homework Excuse'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has lit the same desk for every homework for three children'); no outrageous feat or punchline.",
+      "suggestion": "'Stretched its neck so far that it reached the street lamp outside, and now the whole road does homework under it.'"
+    },
+    {
+      "id": "x_desk_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Bendworth the Long-Necked'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Lit up the darkest corner of the room so it became the best reading spot'), not a troublesome power.",
+      "suggestion": "'Leans over whoever sits in the armchair, so every visitor feels like they're being interviewed.'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Armchairlooker'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is 45 characters with no consequence or joke ('Lit up every corner of the room at the party').",
+      "suggestion": "'Fell over at the party and lit up the ceiling, so the guests spent all night doing shadow puppets on it.'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Ceiling Shadow Party'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has stood in the same corner for fifty years'); no outrageous feat or punchline.",
+      "suggestion": "'Stood so still in the corner that the family mistook it for Grandad and knitted it a cardigan.'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lanky Lamp in a Cardigan'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Uncommon near-copies x_extension_cord C (a cord everyone trips on).",
+      "suggestion": "'Has a foot switch that everyone stamps on, misses and stamps on again, like a little dance.'"
+    },
+    {
+      "id": "x_floor_light",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Footswitchdancer'"
+    },
+    {
+      "id": "x_light_stand",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Made every face in the photo look perfectly lit'), not a troublesome power.",
+      "suggestion": "'Lights everyone from below at the worst moment, so the wedding photos look like a ghost story.'"
+    },
+    {
+      "id": "x_light_stand",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Spookylighter'"
+    },
+    {
+      "id": "x_light_stand",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Lit up a whole fashion shoot, and every photo came out perfectly' is a success, not chaos), not a troublesome power.",
+      "suggestion": "'Toppled over in the middle of the fashion shoot, and the model's surprised face started a whole new fashion.'"
+    },
+    {
+      "id": "x_light_stand",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Surprised Face Fashion'"
+    },
+    {
+      "id": "x_light_stand",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has stood in the same photo studio for thirty years' (52 characters, no joke)); no outrageous feat or punchline.",
+      "suggestion": "'Stretched its three legs so tall that it lit the whole town from above, and the pigeons complained about the glare.'"
+    },
+    {
+      "id": "x_light_stand",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Tripod Tallulah'"
+    },
+    {
+      "id": "x_light_stand",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Hot Lamp Smell' puts a heat word on a poison move (lessons: no heat words on non-burn moves).",
+      "suggestion": "'Burnt Dust Smell'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon only says what it does ('Swings gently over the kitchen table', 37 characters).",
+      "suggestion": "'Swings like a pendulum every time someone sneezes, and the family sets their watches by it.'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Sneezeswinger'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Lit the kitchen island so warmly that everyone gathered round'), not a troublesome power.",
+      "suggestion": "'Shines only on the plate of whoever is last to finish their vegetables.'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Veggiespotter'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic repeats the Rare (everyone gathers in its light) and is a success, not chaos.",
+      "suggestion": "'Swung so low at the kitchen party that it dipped into the punch bowl and turned everyone's drinks orange.'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Punch Bowl Dip'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has hung over the same kitchen table for forty years'); no outrageous feat or punchline.",
+      "suggestion": "'Hung so low for so long that the kitchen table grew up to meet it, and now dinner is eaten standing.'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pendula the Low-Hanging'"
+    },
+    {
+      "id": "x_pendant_light",
+      "field": "moves.kit.glow_up",
+      "severity": "medium",
+      "issue": "'Warm Glow' puts a heat word on an attack-up move.",
+      "suggestion": "'Bright Glow Boost'"
+    },
+    {
+      "id": "x_reading_light",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Lit every bedtime story in the house on the same night') instead of one concrete consequence with a joke.",
+      "suggestion": "'Clipped onto the wrong book at bedtime, so Dad read the whole family a car manual in his best dragon voice.'"
+    },
+    {
+      "id": "x_reading_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Car Manual Bedtime'"
+    },
+    {
+      "id": "x_reading_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has lit a thousand bedtime stories for the same family'); no outrageous feat or punchline.",
+      "suggestion": "'Read so many books by itself after lights out that it now does all the voices better than Dad.'"
+    },
+    {
+      "id": "x_reading_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pageglow the Night Reader'"
+    },
+    {
+      "id": "x_reading_light",
+      "field": "moves.kit.moth_swarm",
+      "severity": "medium",
+      "issue": "'Moth Swarm Swarm' is a garbled repeat.",
+      "suggestion": "'Moth Loop Swarm'"
+    },
+    {
+      "id": "x_ring_light",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon is the job done well ('Makes every selfie look like it was taken by a pro').",
+      "suggestion": "'Makes faces so smooth that Grandad's video call came back without his eyebrows.'"
+    },
+    {
+      "id": "x_ring_light",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is a success ('everyone asked who the movie star was'), not a troublesome power.",
+      "suggestion": "'Switches on so brightly in a dark room that the houseplants turn to face it and the curtains open by themselves.'"
+    },
+    {
+      "id": "x_ring_light",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Plantturner'"
+    },
+    {
+      "id": "x_ring_light",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Lit every vlogger at the convention, and the hall looked like it had a hundred halos') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was the only light on in the street during a power cut, so the whole street queued for passport photos.'"
+    },
+    {
+      "id": "x_ring_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Power Cut Photo Queue'"
+    },
+    {
+      "id": "x_ring_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has lit ten thousand videos for the same baker'); no outrageous feat or punchline.",
+      "suggestion": "'Made a cake look so perfect on camera that the cake started believing it and refused to be eaten.'"
+    },
+    {
+      "id": "x_ring_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Halowell, Flatterer of Cakes'"
+    },
+    {
+      "id": "x_studio_light",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Lit every set in the TV studio for the big live show') instead of one concrete consequence with a joke.",
+      "suggestion": "'Got so hot during a live cooking show that it baked the presenter's bread before the oven did.'"
+    },
+    {
+      "id": "x_studio_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Live Show Bake'"
+    },
+    {
+      "id": "x_studio_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has lit a thousand TV shows and never once blown a bulb on air'); no outrageous feat or punchline.",
+      "suggestion": "'Lit a weather forecast so brightly that the real sun came out the next day just to compete.'"
+    },
+    {
+      "id": "x_studio_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Glarebeam, Rival of the Sun'"
+    },
+    {
+      "id": "x_studio_light",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Power Snatch Snatch' repeats a word on a single-hit drain move.",
+      "suggestion": "'Power Snatch'"
+    },
+    {
+      "id": "x_studio_light",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Spotlight Glare' names a stun, but the Mutated variant poisons. Use an effect-neutral finisher.",
+      "suggestion": "'Spotlight Finale'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon only describes its shape ('Glows in a little cup shape on the wall', 40 characters).",
+      "suggestion": "'Hums one quiet note all evening, and everyone who walks down the hall ends up humming it too.'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Hallhummer'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Watched the hallway so well that nobody ever tripped'), not a troublesome power.",
+      "suggestion": "'Switches on at the exact moment someone sneaks downstairs for a midnight biscuit.'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Biscuitbetrayer'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare is the object doing its job well ('Lit every corridor in the old hotel during the blackout' is helpful work), not a troublesome power.",
+      "suggestion": "'Flickered so spookily in the old hotel corridor that the guests checked out and a ghost checked in.'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Ghost Check-In'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has lit the same hallway for a hundred years and welcomed every guest home'; also near w12 x_front_door L); no outrageous feat or punchline.",
+      "suggestion": "'Welcomed visitors so warmly that the postman moved into the hallway, and now gets his own letters there.'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Sconcewell the Welcoming'"
+    },
+    {
+      "id": "x_wall_lamp",
+      "field": "moves.kit.glow_up",
+      "severity": "medium",
+      "issue": "'Warm Glow Boost' puts a heat word on an attack-up move.",
+      "suggestion": "'Bright Glow Boost'"
+    },
+    {
+      "id": "lantern",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Lit the garden path so well that nobody fell over the hedgehog'), not a troublesome power.",
+      "suggestion": "'Throws its carrier's shadow ten times bigger, so every night walk meets a wobbly giant on the hedge.'"
+    },
+    {
+      "id": "lantern",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Giantshadow'"
+    },
+    {
+      "id": "lantern",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Lit the whole night walk through the woods for the school trip') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was held up on the school night walk, and every moth in the forest followed the class back onto the coach.'"
+    },
+    {
+      "id": "lantern",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Coach Full of Moths'"
+    },
+    {
+      "id": "lantern",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Lit the way home for a lost family' (the lost-and-guided-home frame used by 6 objects in this batch)); it needs an outrageous feat.",
+      "suggestion": "'Shone so steadily one winter night that the Moon took the evening off and nobody noticed.'"
+    },
+    {
+      "id": "lantern",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lampwick, Stand-In Moon'"
+    },
+    {
+      "id": "x_lantern_light",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Shone so steadily that the lost sheep followed it home'), not a troublesome power.",
+      "suggestion": "'Swings its light so hypnotically that whoever carries it walks in circles until morning.'"
+    },
+    {
+      "id": "x_lantern_light",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Circlewalker'"
+    },
+    {
+      "id": "x_lantern_light",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a success or a mild scene, not large-scale trouble with a punchline ('Led the harvest lantern parade... the whole hill glowed gold').",
+      "suggestion": "'Was swung so hard at the harvest parade that the whole village followed it straight into the duck pond.'"
+    },
+    {
+      "id": "x_lantern_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Duck Pond Parade'"
+    },
+    {
+      "id": "x_lantern_light",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Guided a lost hiker down a misty mountain' (lost-and-guided frame again)); it needs an outrageous feat. Its name 'Lumina' also repeats x_studio_light L 'Grand Lumina'.",
+      "suggestion": "'Swung so far on its handle that it went right round the world and came back from the other side.'"
+    },
+    {
+      "id": "x_lantern_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Swingabout the Round-Trip'"
+    },
+    {
+      "id": "x_lantern_light",
+      "field": "moves.kit.moth_swarm",
+      "severity": "medium",
+      "issue": "'Moth Moth Moth Swing' is a garbled repeat.",
+      "suggestion": "'Moth Circle Swarm'"
+    },
+    {
+      "id": "x_oil_lantern",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Lit every barn dance in the valley') instead of one concrete consequence with a joke.",
+      "suggestion": "'Puffed so much soot at the barn dance that everyone went home looking like chimney sweeps.'"
+    },
+    {
+      "id": "x_oil_lantern",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Sooty Barn Dance'"
+    },
+    {
+      "id": "x_oil_lantern",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has hung in the same barn for a hundred years and seen every calf born'); no outrageous feat or punchline.",
+      "suggestion": "'Burned on one drop of oil all winter, and the barn owl did its homework under it every night.'"
+    },
+    {
+      "id": "x_oil_lantern",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Onedrop, the Thrifty Flame'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped with the Uncommon name: 'Floatglow' does not describe the Common lore.",
+      "suggestion": "'Torntissue'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Swapped with the Common name: 'Torntissue' does not describe the Uncommon lore.",
+      "suggestion": "'Floatglow'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare only floats down a river (41 characters), and releasing lit lanterns is a real fire and litter hazard.",
+      "suggestion": "'Glows brighter whenever someone in the room tells a fib, which makes birthday surprises very hard.'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Fibglow'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Floated with a thousand others at the lantern festival, and the river looked like it was full of stars') instead of one concrete consequence with a joke.",
+      "suggestion": "'Blew off its string at the garden party and bounced down the street, and the whole party chased it to the bus stop.'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Bus Stop Chase'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('was found glowing on a beach two days later'); it needs an outrageous feat.",
+      "suggestion": "'Glowed so softly that a family of fireflies moved in, and now it never needs switching on.'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lumilla, Home of Fireflies'"
+    },
+    {
+      "id": "x_paper_lantern",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'River Float' follows the old river lore; once the Rare changes it no longer fits. Keep it effect-neutral.",
+      "suggestion": "'Paper Glow Finale'"
+    },
+    {
+      "id": "x_flashlight_torch",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Common near-copies x_flashlight_battery C and x_torch_light (torch fades in the dark).",
+      "suggestion": "'Rolls off the table and points straight in your eyes every time you go to pick it up.'"
+    },
+    {
+      "id": "x_flashlight_torch",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Eyepointer'"
+    },
+    {
+      "id": "x_flashlight_torch",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Found a lost cat in the attic' (lost-and-found frame; x_torch_light L finds a dog)); it needs an outrageous feat.",
+      "suggestion": "'Shone so bravely into the cupboard under the stairs that the monster living there moved out and left a thank-you note.'"
+    },
+    {
+      "id": "x_torch_light",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Spotted a puddle on the dark path just before someone stepped in it'), not a troublesome power.",
+      "suggestion": "'Finds every spider in the garden at night and shines on it until everyone screams.'"
+    },
+    {
+      "id": "x_torch_light",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Spiderspotter'"
+    },
+    {
+      "id": "x_torch_light",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Found a family's lost dog in the woods' (lost-and-found frame)); it needs an outrageous feat.",
+      "suggestion": "'Shone up so hard one night that it wrote its name on a cloud, and the cloud still spells it at sunset.'"
+    },
+    {
+      "id": "x_torch_light",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Shinewell, Signer of Clouds'"
+    },
+    {
+      "id": "x_torch_light",
+      "field": "moves.kit.moth_swarm",
+      "severity": "medium",
+      "issue": "'Moth Moth Torch Torch' is a garbled repeat.",
+      "suggestion": "'Moth Swarm Spin'"
+    },
+    {
+      "id": "x_candelabra",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a success or a mild scene, not large-scale trouble with a punchline ('Lit the whole banquet table so beautifully that nobody wanted the lights on').",
+      "suggestion": "'Dripped so much wax at the banquet that the roast chicken came out wearing a little candle hat.'"
+    },
+    {
+      "id": "x_candelabra",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Candle Hat Chicken'"
+    },
+    {
+      "id": "x_candelabra",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Lit the long table at a castle feast... until dawn'); it needs an outrageous feat.",
+      "suggestion": "'Kept five flames so steady in a gale that the castle flag blew away and the candles did not even flicker.'"
+    },
+    {
+      "id": "x_candelabra",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Candela the Unflickering'"
+    },
+    {
+      "id": "x_candelabra",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Flicker Flash Flash' repeats a word on a single-hit stun move.",
+      "suggestion": "'Candle Flicker Flash'"
+    },
+    {
+      "id": "x_candle_holder",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Glowed in the window all night so a traveller could find their way' (lost-and-guided frame)), not a troublesome power.",
+      "suggestion": "'Makes its candle lean sideways, so every shadow in the room looks like it's in a hurry.'"
+    },
+    {
+      "id": "x_candle_holder",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Shadowleaner'"
+    },
+    {
+      "id": "x_candle_holder",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Held the candles for the whole birthday party, and every wish was made') instead of one concrete consequence with a joke.",
+      "suggestion": "'Held so many candles on Grandad's cake that the smoke alarm sang along before anyone else did.'"
+    },
+    {
+      "id": "x_candle_holder",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Smoke Alarm Chorus'"
+    },
+    {
+      "id": "x_candle_holder",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has held a candle in the same window every winter for a hundred years'); no outrageous feat or punchline.",
+      "suggestion": "'Kept a candle burning so slowly that it took all winter to melt one inch, and spring arrived to find it still going.'"
+    },
+    {
+      "id": "x_candle_holder",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Holdwell of the Slow Flame'"
+    },
+    {
+      "id": "x_glow_stick",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was snapped by every child at the fireworks night... full of glowing worms') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was dropped into the school swimming pool, and the swimming lesson turned into a glowing disco.'"
+    },
+    {
+      "id": "x_glow_stick",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Swimming Pool Disco'"
+    },
+    {
+      "id": "x_glow_stick",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Glowed all night in a tent until sunrise' (no feat)); it needs an outrageous feat.",
+      "suggestion": "'Glowed so green at the bottom of the garden that the neighbours reported a tiny alien landing.'"
+    },
+    {
+      "id": "x_glow_stick",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Glowella, Little Green Visitor'"
+    },
+    {
+      "id": "x_glow_stick",
+      "field": "moves.kit.hot_bulb",
+      "severity": "low",
+      "issue": "'Warm Glow' on a glow stick: glow sticks are cold chemical light, so name the heat honestly or keep it silly.",
+      "suggestion": "'Snap Heat Sizzle'"
+    },
+    {
+      "id": "x_glow_stick",
+      "field": "moves.kit.moth_swarm",
+      "severity": "medium",
+      "issue": "'Moth Moth Glow Glow' is a garbled repeat.",
+      "suggestion": "'Moth Glow Swarm'"
+    },
+    {
+      "id": "x_headlamp",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a vague cosmic comparison ('the stars felt a bit left out') with no concrete consequence.",
+      "suggestion": "'Was worn backwards on the school camping trip, so the whole class followed their teacher's head the wrong way to the toilets.'"
+    },
+    {
+      "id": "x_headlamp",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Backwards Camping Trip'"
+    },
+    {
+      "id": "x_headlamp",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Cave Beam Crack' names defence down, but the Mutated variant poisons. Use an effect-neutral finisher.",
+      "suggestion": "'Cave Beam Finale'"
+    },
+    {
+      "id": "x_light_bar",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is set at a 'crash site' (unsuitable for children) and is a crowd-plus-comparison ('the moon looked dim').",
+      "suggestion": "'Flashed so fast at the road-safety day that the lollipop lady started directing traffic with disco moves.'"
+    },
+    {
+      "id": "x_light_bar",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Disco Crossing Day'"
+    },
+    {
+      "id": "x_light_bar",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('guided the ambulance safely home'); it needs an outrageous feat.",
+      "suggestion": "'Flashed so brightly in a traffic jam that every car shuffled aside to let the ice-cream van through first.'"
+    },
+    {
+      "id": "x_neon_sign",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a success or a mild scene, not large-scale trouble with a punchline ('Lit up the whole street of diners, and the night looked like a birthday cake').",
+      "suggestion": "'Flickered its arrow so wildly one night that the delivery vans all tried to park on the diner roof.'"
+    },
+    {
+      "id": "x_neon_sign",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Rooftop Parking'"
+    },
+    {
+      "id": "x_neon_sign",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has glowed over the same diner for sixty years'); no outrageous feat or punchline.",
+      "suggestion": "'Glowed so pink one night that the moon blushed too, and it has looked a little pink ever since.'"
+    },
+    {
+      "id": "x_neon_sign",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Neonella, Moon Blusher'"
+    },
+    {
+      "id": "x_neon_sign",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Neon Glare' names a stun, but normal burns and Spectral poisons. Use an effect-neutral finisher.",
+      "suggestion": "'Neon Finale'"
+    },
+    {
+      "id": "x_night_light",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Glowed in every bedroom of the house during the thunderstorm') instead of one concrete consequence with a joke.",
+      "suggestion": "'Glowed so cosily during a thunderstorm that the thunder curled up on the landing and fell asleep too.'"
+    },
+    {
+      "id": "x_night_light",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Sleepy Thunder Night'"
+    },
+    {
+      "id": "x_night_light",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has kept monsters away from three children's bedrooms for ten years'); no outrageous feat or punchline.",
+      "suggestion": "'Glowed so bravely that the monster under the bed moved out, and now sends a postcard from the seaside every summer.'"
+    },
+    {
+      "id": "x_night_light",
+      "field": "names.common",
+      "severity": "low",
+      "issue": "'Corneglow' looks like a typo; 'Cornerglow' is already taken by w12 x_space_heater_fan, so use a different name.",
+      "suggestion": "'Cornerdimmer'"
+    },
+    {
+      "id": "lightbulb",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a cute success ('everyone said ah'), not a troublesome power.",
+      "suggestion": "'Lights up over the head of anyone with an idea, so nobody in the house can keep a surprise secret.'"
+    },
+    {
+      "id": "lightbulb",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Came back on in every house at the same moment... the whole town cheered') instead of one concrete consequence with a joke.",
+      "suggestion": "'Popped during the school play, so the cast finished it in the dark doing every sound effect with their mouths.'"
+    },
+    {
+      "id": "lightbulb",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Sound Effect Play'"
+    },
+    {
+      "id": "lightbulb",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has stayed lit in the same firehouse for over a hundred years' (a real-world record retold)); no outrageous feat or punchline.",
+      "suggestion": "'Had such a bright idea that it invented a lamp, then a lighthouse, then a very small sun for the garden shed.'"
+    },
+    {
+      "id": "lightbulb",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Wattsworth the Bright Idea'"
+    },
+    {
+      "id": "lightbulb",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Buzzes quietly when it's tired' (31 characters)); add a concrete consequence.",
+      "suggestion": "'Buzzes quietly when it's tired, then flickers like it's yawning until somebody turns it off.'"
+    },
+    {
+      "id": "x_lava_lamp",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has bubbled every evening for fifty years, and the blobs still never touch'); no outrageous feat or punchline.",
+      "suggestion": "'Bubbled so slowly that one blob took a whole year to rise, and the family threw it a party when it reached the top.'"
+    },
+    {
+      "id": "x_salt_lamp",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Common is pleasant, not annoying ('makes the room feel like a sunset').",
+      "suggestion": "'Glows so dimly that every guest asks if it is switched on, and then pokes it to check.'"
+    },
+    {
+      "id": "x_salt_lamp",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Dimpinker'"
+    },
+    {
+      "id": "x_salt_lamp",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Glowed in every room at the spa, and every visitor fell asleep') instead of one concrete consequence with a joke.",
+      "suggestion": "'Calmed the staff meeting so much that nobody could remember what they were arguing about, and lunch started early.'"
+    },
+    {
+      "id": "x_salt_lamp",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Calm Staff Meeting'"
+    },
+    {
+      "id": "x_salt_lamp",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('carved from a mountain of salt millions of years old' is a fact, not a feat); it needs an outrageous feat.",
+      "suggestion": "'Soaked up so much damp on one rainy day that the whole street's washing dried at once.'"
+    },
+    {
+      "id": "x_salt_lamp",
+      "field": "moves.kit.glow_up",
+      "severity": "low",
+      "issue": "'Glow Boost Pink' reads back to front.",
+      "suggestion": "'Pink Glow Boost'"
+    },
+    {
+      "id": "x_salt_lamp",
+      "field": "moves.kit.moth_swarm",
+      "severity": "low",
+      "issue": "'Moth Moth Salt' is a de-duplication artefact; keep a clean swarm name.",
+      "suggestion": "'Moth Moth Moth'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped with the Uncommon name: 'Bikeblinker' does not describe the Common lore.",
+      "suggestion": "'Spokeclicker'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Swapped with the Common name: 'Spokeclicker' does not describe the Uncommon lore.",
+      "suggestion": "'Headlightwinker'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare dazzles a driver ('Bounced a headlight beam right into the driver's eyes'): a road-safety problem for a bike object, and not a power.",
+      "suggestion": "'Shines back so brightly that every cat on the wall stops to stare at it all night.'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Catstarer'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Shone from every bike on the night ride, and the road looked like a river of stars') instead of one concrete consequence with a joke.",
+      "suggestion": "'Caught the headlights so well on the night ride that every car slowed down just to wave at the bikes.'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has kept the same bike safe on night rides for twenty years'); no outrageous feat or punchline.",
+      "suggestion": "'Shone back at a lighthouse so brightly that the lighthouse thought it had a twin, and they still blink at each other every night.'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Glintwick, Lighthouse Twin'"
+    },
+    {
+      "id": "x_reflector",
+      "field": "moves.kit.skip_track",
+      "severity": "low",
+      "issue": "'Click Click Click Click' is a four-word repeat (also x_thermostat).",
+      "suggestion": "'Spoke Click Clatter'"
+    },
+    {
+      "id": "x_drum_machine",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Kept perfect time even when the whole band fell apart'), not a troublesome power.",
+      "suggestion": "'Speeds up a tiny bit every bar, so every song ends with the band sprinting.'"
+    },
+    {
+      "id": "x_drum_machine",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Tempocreeper'"
+    },
+    {
+      "id": "x_drum_machine",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Played the beat for every band at the battle of the bands' (crowd plus contest)) instead of one concrete consequence with a joke.",
+      "suggestion": "'Got stuck on one beat at the wedding, and the guests had to dance until the caretaker found the plug.'"
+    },
+    {
+      "id": "x_drum_machine",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Unpluggable Dance'"
+    },
+    {
+      "id": "x_drum_machine",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Played the beat on a song that topped the charts for a whole summer'); it needs an outrageous feat.",
+      "suggestion": "'Played a beat so catchy that the washing machine, the kettle and the dog all learned it by teatime.'"
+    },
+    {
+      "id": "x_drum_machine",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Beatbox Betty'"
+    },
+    {
+      "id": "x_harmonium",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the instrument working nicely ('sounded like breathing').",
+      "suggestion": "'Breathes in so hard that it sucks the sheet music off the stand, and sometimes the curtains.'"
+    },
+    {
+      "id": "x_harmonium",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Curtainsucker'"
+    },
+    {
+      "id": "x_harmonium",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played at every village dance for a hundred years'); no outrageous feat or punchline.",
+      "suggestion": "'Played one note so long that a whole cow fell asleep standing up, then the farmer, then the tractor.'"
+    },
+    {
+      "id": "x_harmonium",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Wheezella, Singer to Cows'"
+    },
+    {
+      "id": "x_keytar",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare ('made its player prance') is weak and is repeated by the Epic.",
+      "suggestion": "'Makes whoever wears it play every song twice as fast, including the slow one at the wedding.'"
+    },
+    {
+      "id": "x_keytar",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Speedstrummer'"
+    },
+    {
+      "id": "x_keytar",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Pranced through the whole rock show with every musician following it') instead of one concrete consequence with a joke.",
+      "suggestion": "'Played a solo so long that the drummer went home, made tea and came back for the ending.'"
+    },
+    {
+      "id": "x_keytar",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Endless Solo Show'"
+    },
+    {
+      "id": "x_keytar",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Played the solo that made a whole stadium cheer' (48 characters, no joke)); it needs an outrageous feat.",
+      "suggestion": "'Hit a note so high that only bats could hear it, and the bats asked for an encore.'"
+    },
+    {
+      "id": "x_keytar",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Batnote, Darling of Bats'"
+    },
+    {
+      "id": "x_mixing_desk",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Balanced the sound so perfectly that the choir sounded like one voice'), not a troublesome power.",
+      "suggestion": "'Turns up whoever is singing worst, so every concert stars the dad at the back.'"
+    },
+    {
+      "id": "x_mixing_desk",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Dadbooster'"
+    },
+    {
+      "id": "x_mixing_desk",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Mixed every band at the summer festival, and the field sounded perfect') instead of one concrete consequence with a joke.",
+      "suggestion": "'Had one slider nudged by a passing goose, and the festival field heard nothing but bass for an hour.'"
+    },
+    {
+      "id": "x_mixing_desk",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Goose on the Bass'"
+    },
+    {
+      "id": "x_mixing_desk",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has mixed every concert at the same theatre for thirty years'); no outrageous feat or punchline.",
+      "suggestion": "'Mixed a concert so perfectly that the echo came back a week later to say well done.'"
+    },
+    {
+      "id": "x_mixing_desk",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Faderina, Friend of Echoes'"
+    },
+    {
+      "id": "x_record_player",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Spun a record so perfectly that grandma got up to dance'), not a troublesome power.",
+      "suggestion": "'Plays every record a little too fast, so every singer sounds like a squirrel in a hurry.'"
+    },
+    {
+      "id": "x_record_player",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Squirrelspeeder'"
+    },
+    {
+      "id": "x_record_player",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Played every record in the collection at the family party, and nobody sat down') instead of one concrete consequence with a joke.",
+      "suggestion": "'Played a record backwards at the family party, and every guest walked home in reverse.'"
+    },
+    {
+      "id": "x_record_player",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Backwards Party'"
+    },
+    {
+      "id": "x_record_player",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played the same family's records for sixty years and still spins at the right speed'); no outrageous feat or punchline.",
+      "suggestion": "'Played a record so old that the singer on it phoned up to ask for a copy.'"
+    },
+    {
+      "id": "x_record_player",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Groovesworth, Caller of Singers'"
+    },
+    {
+      "id": "x_synth_keyboard",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare near-copies x_guitar_amp R ('the cat left the room / the house').",
+      "suggestion": "'Turns every note into a different animal, so the wedding march came out as a duck, a goat and a sea lion.'"
+    },
+    {
+      "id": "x_synth_keyboard",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Zookeys'"
+    },
+    {
+      "id": "x_synth_keyboard",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has made the sounds for a hundred films and still has its first preset'); no outrageous feat or punchline.",
+      "suggestion": "'Made a thunder sound so real that the weather forecast changed, and the town brought umbrellas to the beach.'"
+    },
+    {
+      "id": "x_synth_keyboard",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Madame Synthwell, Maker of Storms'"
+    },
+    {
+      "id": "x_synth_keyboard",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Big Synth Wave' is fine on effect, but 'wave' echoes the burn-only normal variant less than a neutral swell; optional.",
+      "suggestion": "'Big Synth Swell'"
+    },
+    {
+      "id": "x_turntable",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Matched two beats so perfectly that the dance floor didn't notice'), not a troublesome power.",
+      "suggestion": "'Spins any record it touches at disco speed, including the lullaby, so the baby now breakdances.'"
+    },
+    {
+      "id": "x_turntable",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Discospinner'"
+    },
+    {
+      "id": "x_turntable",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a nightclub scene ('club night') with no joke beyond 'the floor bounced'.",
+      "suggestion": "'Spun so fast at the school disco that the whole hall turned round, and everyone left by the wrong door.'"
+    },
+    {
+      "id": "x_turntable",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Spinning Disco Hall'"
+    },
+    {
+      "id": "x_turntable",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has spun at every school disco for twenty years and never lost the beat'); no outrageous feat or punchline.",
+      "suggestion": "'Scratched a record so hard that it carved a brand-new song into it, and the band had to learn it.'"
+    },
+    {
+      "id": "x_turntable",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "Pairs with the new Legendary lore. 'Grand Spinmaster' matches a toy-company trademark (Spin Master) and repeats the Grand X of the Y shape.",
+      "suggestion": "'Wikka the Remixer'"
+    },
+    {
+      "id": "i_ipod",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a success ('Shuffled to the perfect song... danced in the street').",
+      "suggestion": "'Shuffles to the most embarrassing song the moment its headphones fall out on the bus.'"
+    },
+    {
+      "id": "i_ipod",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Played on every head on the school bus') instead of one concrete consequence with a joke.",
+      "suggestion": "'Got plugged into the school speakers by mistake, and the fire drill happened to a disco remix.'"
+    },
+    {
+      "id": "i_ipod",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Disco Fire Drill'"
+    },
+    {
+      "id": "i_ipod",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('still plays every one'); no outrageous feat or punchline.",
+      "suggestion": "'Fitted so many songs in such a small box that a whole brass band climbed out when it was opened.'"
+    },
+    {
+      "id": "i_ipod",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Clickwheel, Pocket Band'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon repeats the Common premise (so small it gets lost).",
+      "suggestion": "'Is so small that people keep mistaking it for a stick of chewing gum.'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Gumlookalike'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Kept a jogger running for an extra mile with exactly the right song'), not a troublesome power.",
+      "suggestion": "'Plays songs with exactly the wrong beat, so its jogger ends up skipping like a lamb.'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Lambskipper'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Played the playlist for every runner at the park run' (also 'park run' is close to a running-event trademark)) instead of one concrete consequence with a joke.",
+      "suggestion": "'Played a march so loudly at the fun run that every runner finished in step, including a dog that wasn't in the race.'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Fun Run March'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Ran a whole marathon clipped to the same runner's sleeve'); it needs an outrageous feat.",
+      "suggestion": "'Went through the washing machine so many times that every song now comes out with bubbles in it.'"
+    },
+    {
+      "id": "x_ipod_nano",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Nanobubble the Washproof'"
+    },
+    {
+      "id": "x_mp3_player",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Holds every song its owner ever loved on one tiny chip'), not a troublesome power.",
+      "suggestion": "'Slips one song its owner has never heard into every playlist, and it's always a sea shanty.'"
+    },
+    {
+      "id": "x_mp3_player",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Shantysneaker'"
+    },
+    {
+      "id": "x_mp3_player",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played the same family's road trip songs for fifteen summers'); no outrageous feat or punchline.",
+      "suggestion": "'Played one road-trip song so often that the car learned to sing it, and now hums along at traffic lights.'"
+    },
+    {
+      "id": "x_mp3_player",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Megabeat the Car Singer'"
+    },
+    {
+      "id": "x_mp3_player",
+      "field": "moves.kit.bass_drop",
+      "severity": "medium",
+      "issue": "'Bass Thump Thump' repeats a word on a single-hit stun move.",
+      "suggestion": "'Bass Thump Jolt'"
+    },
+    {
+      "id": "x_mp3_player",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Mixtape Marathon' leans on the Epic name 'Road Trip Mixtape'.",
+      "suggestion": "'Mixtape Finale'"
+    },
+    {
+      "id": "x_overhead_projector",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Rare premise (shadow show).",
+      "suggestion": "'Melted a sheet during the lesson, so the whole class learned a map of a country shaped like a sock.'"
+    },
+    {
+      "id": "x_overhead_projector",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Sock-Shaped Country'"
+    },
+    {
+      "id": "x_overhead_projector",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has taught every child in the school for forty years without ever needing a new bulb'); no outrageous feat or punchline.",
+      "suggestion": "'Projected a sum so big across the school hall that next year's class is still solving it.'"
+    },
+    {
+      "id": "x_overhead_projector",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Professor Overhead, Sum Shiner'"
+    },
+    {
+      "id": "projector",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Turned a plain bedroom wall into a giant cinema screen'), not a troublesome power.",
+      "suggestion": "'Shows every film a little too big, so the hero's head is on the ceiling and his feet are in the kitchen.'"
+    },
+    {
+      "id": "projector",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Ceilinghead'"
+    },
+    {
+      "id": "projector",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Showed a film on the side of a house for the whole street') instead of one concrete consequence with a joke.",
+      "suggestion": "'Shone a shark film onto the neighbour's swimming pool, and nobody swam in it all summer.'"
+    },
+    {
+      "id": "projector",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Shark in the Pool'"
+    },
+    {
+      "id": "projector",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has shown a thousand film nights and still has its first bulb'); no outrageous feat or punchline.",
+      "suggestion": "'Projected a sunrise onto the clouds so convincingly that the whole town got up two hours early.'"
+    },
+    {
+      "id": "projector",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Projectoria, Maker of Mornings'"
+    },
+    {
+      "id": "projector",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Giant Picture Glare' names a stun, but no variant stuns (poison / burn / defence down).",
+      "suggestion": "'Giant Picture Show'"
+    },
+    {
+      "id": "x_projector_lamp",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Shone so brightly that the film looked better than real life'), not a troublesome power.",
+      "suggestion": "'Shines so brightly that the shadow of one passing fly fills the whole cinema screen.'"
+    },
+    {
+      "id": "x_projector_lamp",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Flygiant'"
+    },
+    {
+      "id": "x_projector_lamp",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Lit up every lecture hall at the university on the first day of term') instead of one concrete consequence with a joke.",
+      "suggestion": "'Blew during the big film premiere, so the actors had to stand up and perform the ending live.'"
+    },
+    {
+      "id": "x_projector_lamp",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Live Ending Night'"
+    },
+    {
+      "id": "x_projector_lamp",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('the whole village still remembers the night it did'); it needs an outrageous feat.",
+      "suggestion": "'Shone its beam out of the cinema window so far that the next town watched the film on its clouds for free.'"
+    },
+    {
+      "id": "x_projector_lamp",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lampwell, Cloud Cinema'"
+    },
+    {
+      "id": "x_slide_projector",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Spun its carousel round a hundred holiday photos in one go'), not a troublesome power.",
+      "suggestion": "'Slips one embarrassing slide into every show, usually Dad in his swimming trunks.'"
+    },
+    {
+      "id": "x_slide_projector",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Embarrasslider'"
+    },
+    {
+      "id": "x_slide_projector",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a success or a mild scene, not large-scale trouble with a punchline ('Showed every holiday slide the family ever took in one very long evening').",
+      "suggestion": "'Jammed during the holiday show, so the family stared at a picture of one goat for the rest of the evening.'"
+    },
+    {
+      "id": "x_slide_projector",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'One Goat Evening'"
+    },
+    {
+      "id": "x_slide_projector",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has shown the same family's holiday photos for fifty years'); no outrageous feat or punchline.",
+      "suggestion": "'Showed a beach holiday so vividly on the living-room wall that the family came back from the sofa with suntans.'"
+    },
+    {
+      "id": "x_slide_projector",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Carousella, Bringer of Suntans'"
+    },
+    {
+      "id": "x_slide_projector",
+      "field": "moves.kit.skip_track",
+      "severity": "medium",
+      "issue": "'Slide Slide Slide Slide' is a garbled four-word repeat.",
+      "suggestion": "'Slide Change Clatter'"
+    },
+    {
+      "id": "x_clock_radio",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic repeats the Rare (it wakes the whole house) with the 'in every bedroom at once' formula.",
+      "suggestion": "'Tuned itself to a cooking show at six in the morning, and the whole family woke up starving and making pancakes.'"
+    },
+    {
+      "id": "x_clock_radio",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Pancake Alarm'"
+    },
+    {
+      "id": "x_clock_radio",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has woken the same family every school morning for twenty years'); no outrageous feat or punchline.",
+      "suggestion": "'Woke up a bear hibernating in the garden shed, and the bear asked for five more minutes.'"
+    },
+    {
+      "id": "x_clock_radio",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Wakewell, Bear Botherer'"
+    },
+    {
+      "id": "x_clock_radio",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Common near-copies w12 x_digital_alarm U (snooze pressed every morning).",
+      "suggestion": "'Plays the news so quietly that you have to lie perfectly still to hear it, and then you fall back asleep.'"
+    },
+    {
+      "id": "x_clock_radio",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Newsmumbler'"
+    },
+    {
+      "id": "x_portable_radio",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Gave the weather warning just before the storm'), not a troublesome power.",
+      "suggestion": "'Picks up the phone calls from next door between songs, so the whole picnic hears about Auntie's bunions.'"
+    },
+    {
+      "id": "x_portable_radio",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Callcatcher'"
+    },
+    {
+      "id": "x_portable_radio",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Played the big match for everyone on the beach, and they all cheered at once') instead of one concrete consequence with a joke. The old name 'Beach Day Tunes' did not match the match lore either.",
+      "suggestion": "'Lost its signal halfway through the big match, so the whole beach had to make up the score.'"
+    },
+    {
+      "id": "x_portable_radio",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Made-Up Match Score'"
+    },
+    {
+      "id": "x_portable_radio",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played the same family's summer songs on the beach for forty years'); no outrageous feat or punchline.",
+      "suggestion": "'Picked up a station so far away that it played next year's music, and the family already knows the summer hit.'"
+    },
+    {
+      "id": "x_portable_radio",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Transistor Tess, Radio of Tomorrow'"
+    },
+    {
+      "id": "radio",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Found the perfect song to cheer up a rainy afternoon'), not a troublesome power.",
+      "suggestion": "'Changes station by itself the moment anyone starts to sing along.'"
+    },
+    {
+      "id": "radio",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Singstopper'"
+    },
+    {
+      "id": "radio",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Played a song that the whole street sang along to') instead of one concrete consequence with a joke.",
+      "suggestion": "'Read out the weather so gloomily that the sun went back in, and the street barbecue was rained off.'"
+    },
+    {
+      "id": "radio",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Gloomy Forecast Day'"
+    },
+    {
+      "id": "radio",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has sat on the same kitchen shelf for sixty years and still finds every station'); no outrageous feat or punchline.",
+      "suggestion": "'Tuned in so carefully that it found a station run entirely by hedgehogs, and their quiz is very hard.'"
+    },
+    {
+      "id": "radio",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Wireless Winnie, Hedgehog Listener'"
+    },
+    {
+      "id": "i_cassette",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare ('played until the songs went wobbly') near-copies x_tape_deck R (copies that sound underwater) and is not a power.",
+      "suggestion": "'Slows every song down when its batteries get low, so the party ends in one long sleepy yawn.'"
+    },
+    {
+      "id": "i_cassette",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Sleepyslower'"
+    },
+    {
+      "id": "i_cassette",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Played in every car on the school trip at once') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was flipped to side B on the coach, and side B turned out to be Dad practising the bagpipes.'"
+    },
+    {
+      "id": "i_cassette",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Side B Surprise'"
+    },
+    {
+      "id": "i_cassette",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played the same mixtape in the same car for thirty years'); no outrageous feat or punchline.",
+      "suggestion": "'Was rewound with a pencil so fast that it went back in time and recorded a dinosaur.'"
+    },
+    {
+      "id": "i_cassette",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Rewinda, Dinosaur Recorder'"
+    },
+    {
+      "id": "i_cassette",
+      "field": "moves.kit.channel_surf",
+      "severity": "low",
+      "issue": "'Tape Hiss Hiss Hiss' is a garbled repeat.",
+      "suggestion": "'Tape Hiss Crackle'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Common near-copies i_cassette C and x_tape_deck C (tape spills / gets chewed). Change this side and the tape deck side; keep i_cassette.",
+      "suggestion": "'Has its label written in such tiny handwriting that nobody knows which songs are on it.'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Mysterylabel'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a habit (records the adverts too), not a power.",
+      "suggestion": "'Records over the best bit of everything, so Grandad's birthday message now ends with the weather forecast.'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Overrecorder'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic near-copies x_tape_deck E ('Recorded every song in the charts on a Sunday... for the whole class'). Change both sides.",
+      "suggestion": "'Was taped from the radio with the DJ talking over every song, so the whole class sang the DJ's words at the school concert.'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'DJ Over Every Song'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has kept the same family's recordings for forty years in a shoebox'); no outrageous feat or punchline.",
+      "suggestion": "'Recorded a secret message so clearly that the whole town played it backwards, and it said please tidy your room.'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Mixwell, Teller of Secrets'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Play Flash Flash' repeats a word on a single-hit stun move.",
+      "suggestion": "'Play Button Flash'"
+    },
+    {
+      "id": "x_cassette_tape",
+      "field": "moves.kit.remix",
+      "severity": "medium",
+      "issue": "'Mix Boost Boost' repeats a word on a self-boost.",
+      "suggestion": "'Mix Boost'"
+    },
+    {
+      "id": "x_tape_deck",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Common near-copies i_cassette C (chews the tape).",
+      "suggestion": "'Clicks off with a loud clunk the moment the song gets good, and never during the boring bit.'"
+    },
+    {
+      "id": "x_tape_deck",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Clunkstopper'"
+    },
+    {
+      "id": "x_tape_deck",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic near-copies x_cassette_tape E (recording the Sunday chart for the whole class).",
+      "suggestion": "'Played the school concert recording at double speed, and the parents clapped twice as fast to keep up.'"
+    },
+    {
+      "id": "x_tape_deck",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Double-Speed Concert'"
+    },
+    {
+      "id": "x_tape_deck",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Made a mixtape so good that it was played at a wedding forty years later'); it needs an outrageous feat.",
+      "suggestion": "'Made a mixtape so good that the songs on it met up and started a band together.'"
+    },
+    {
+      "id": "x_tape_deck",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Play Flash Flash Flash' repeats a word on a single-hit stun move.",
+      "suggestion": "'Play Light Flash'"
+    },
+    {
+      "id": "x_cd",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a success or a mild scene, not large-scale trouble with a punchline ('Played the birthday mix for the whole party until the speakers got tired').",
+      "suggestion": "'Was hung in the garden to scare the birds, and every magpie in town came to dance in its rainbows.'"
+    },
+    {
+      "id": "x_cd",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Magpie Disco'"
+    },
+    {
+      "id": "x_cd",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Was played so often at the school disco for twenty years that it now hangs framed'); no outrageous feat or punchline.",
+      "suggestion": "'Spun out of the car window so fast that it went round the roundabout and flew back in.'"
+    },
+    {
+      "id": "x_cd",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Discworth the Boomerang'"
+    },
+    {
+      "id": "x_cd",
+      "field": "moves.kit.skip_track",
+      "severity": "low",
+      "issue": "'Skip Skip Skip Skip' is a garbled four-word repeat.",
+      "suggestion": "'Skip Jump Skip'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped with the Uncommon name: 'Discshuffler' does not describe the Common lore.",
+      "suggestion": "'Clunkchange'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Swapped with the Common name: 'Clunkchange' does not describe the Uncommon lore.",
+      "suggestion": "'Discshuffler'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Held every album the family owned and played them all in a row'), not a troublesome power.",
+      "suggestion": "'Swaps the disc halfway through a song, so every chorus belongs to a different band.'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Chorusswapper'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Rotated every disc at the party so smoothly that the music never stopped' is a success), not a troublesome power.",
+      "suggestion": "'Got stuck between two discs at the party, and the guests danced to a lullaby and a brass band at once.'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Lullaby Brass Band'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has rotated the same five albums for twenty years' (50 characters)); no outrageous feat or punchline.",
+      "suggestion": "'Shuffled its five discs so cleverly that it invented a sixth album that nobody ever bought.'"
+    },
+    {
+      "id": "x_cd_changer",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Carouselworth, Sixth-Disc Maker'"
+    },
+    {
+      "id": "x_vinyl_record",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare only shines ('see every groove', 48 characters).",
+      "suggestion": "'Warps in the sun until every song on it sounds seasick, even the lullabies.'"
+    },
+    {
+      "id": "x_vinyl_record",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Seasickwarp'"
+    },
+    {
+      "id": "x_vinyl_record",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Sold out at the record shop... the queue went round the block' (also near w11 x_manga E)) instead of one concrete consequence with a joke.",
+      "suggestion": "'Was skimmed across the picnic like a flying saucer, and landed on the fair's record player still playing.'"
+    },
+    {
+      "id": "x_vinyl_record",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Picnic Flying Disc'"
+    },
+    {
+      "id": "x_vinyl_record",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has been played at every family party for fifty years and still sounds warm'); no outrageous feat or punchline.",
+      "suggestion": "'Has one groove so long that its last song has never finished, and the family plans holidays around it.'"
+    },
+    {
+      "id": "x_vinyl_record",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Common is close to x_record_player C (scratch makes it jump).",
+      "suggestion": "'Gets a fingerprint right on the chorus, so the singer hiccups at the best bit every time.'"
+    },
+    {
+      "id": "x_jukebox",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Names are rotated by one rarity: 'Coinswallow Juke' does not describe the Common lore (the same song over and over).",
+      "suggestion": "'Samesonger'"
+    },
+    {
+      "id": "x_jukebox",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Names are rotated: 'Songrepeater' belongs to the Common; the Uncommon lore is the neon glow.",
+      "suggestion": "'Neonglow'"
+    },
+    {
+      "id": "x_jukebox",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Played a song so perfect that the whole diner stopped eating'), not a troublesome power.",
+      "suggestion": "'Swallows coins and plays whatever it likes, which is always a song about a lonely cowboy.'"
+    },
+    {
+      "id": "x_jukebox",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Coinswallow Juke'"
+    },
+    {
+      "id": "x_jukebox",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played in the same diner for sixty years and still has every record'); no outrageous feat or punchline.",
+      "suggestion": "'Played one record so many times that the record learned to play itself, and the jukebox now just watches.'"
+    },
+    {
+      "id": "x_jukebox",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Jukeline, Coach of Records'"
+    },
+    {
+      "id": "x_jukebox",
+      "field": "moves.kit.jackpot",
+      "severity": "medium",
+      "issue": "'Song Song Song Song' is a garbled four-word repeat.",
+      "suggestion": "'Encore Encore Encore'"
+    },
+    {
+      "id": "x_guitar_amp",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Volumeeleven' is a film catchphrase reference (meme) and does not describe the Uncommon lore (the red warm-up light).",
+      "suggestion": "'Redlightwarm'"
+    },
+    {
+      "id": "x_guitar_amp",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Blasted the garage band so loudly that the whole street stopped to listen' (also near w12 x_garage_door E)) instead of one concrete consequence with a joke.",
+      "suggestion": "'Was turned up so loud at band practice that the garage door opened by itself and the car rolled out to escape.'"
+    },
+    {
+      "id": "x_guitar_amp",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Car Escape Practice'"
+    },
+    {
+      "id": "x_guitar_amp",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has been played at every school concert for twenty years'); no outrageous feat or punchline.",
+      "suggestion": "'Played one chord so loud that it was still echoing round the valley a year later, and the sheep had learned it.'"
+    },
+    {
+      "id": "x_guitar_amp",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Ampworth, Teacher of Sheep'"
+    },
+    {
+      "id": "x_guitar_amp",
+      "field": "moves.kit.bass_drop",
+      "severity": "medium",
+      "issue": "'Bass Thump Thump Thump' repeats a word on a single-hit stun move.",
+      "suggestion": "'Bass Thump Jolt'"
+    },
+    {
+      "id": "x_karaoke_machine",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Micscreech' does not describe the Uncommon lore (fake applause after every song).",
+      "suggestion": "'Fakeclapper'"
+    },
+    {
+      "id": "x_karaoke_machine",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Got every guest at the party singing at once, and the neighbours joined in') instead of one concrete consequence with a joke.",
+      "suggestion": "'Gave the cat a perfect score, so the whole party had to sit through an encore of meowing.'"
+    },
+    {
+      "id": "x_karaoke_machine",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Cat Encore'"
+    },
+    {
+      "id": "x_karaoke_machine",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has hosted a hundred birthday parties and still has the same favourite song'); no outrageous feat or punchline.",
+      "suggestion": "'Scored Grandad's singing so highly that he believed it, and he now tours every village hall in the county.'"
+    },
+    {
+      "id": "x_karaoke_machine",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Karaokina, Maker of Stars'"
+    },
+    {
+      "id": "x_soundbar",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon near-copies x_wall_lamp C ('nobody can ever find' the remote / switch).",
+      "suggestion": "'Makes every whisper on TV sound like it's coming from behind the sofa.'"
+    },
+    {
+      "id": "x_soundbar",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Sofawhisperer'"
+    },
+    {
+      "id": "x_soundbar",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has played every film night for ten years and still shakes the sofa'); no outrageous feat or punchline.",
+      "suggestion": "'Played a film earthquake so realistically that the dog next door dug itself a shelter in the garden.'"
+    },
+    {
+      "id": "x_soundbar",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Soundbarra the Rumbler'"
+    },
+    {
+      "id": "speaker",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "'Bluetoothbeep' uses a trademark (Bluetooth).",
+      "suggestion": "'Connectbeeper'"
+    },
+    {
+      "id": "speaker",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a habit ('Bounced across the table', 41 characters), not a power.",
+      "suggestion": "'Plays from whichever phone is nearest, so the party music keeps turning into Grandma's voicemail.'"
+    },
+    {
+      "id": "speaker",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Phonegrabber'"
+    },
+    {
+      "id": "x_megaphone",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Called the whole crowd to the finish line from across the field'), not a troublesome power.",
+      "suggestion": "'Turns every whisper into a shout, so the whole school knows everybody's secrets by lunch.'"
+    },
+    {
+      "id": "x_megaphone",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Secretshouter'"
+    },
+    {
+      "id": "x_megaphone",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Called every race at sports day, and every child heard their name') instead of one concrete consequence with a joke.",
+      "suggestion": "'Announced the egg-and-spoon race so loudly that every egg in the box cracked at once.'"
+    },
+    {
+      "id": "x_megaphone",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Egg Box Crack'"
+    },
+    {
+      "id": "x_megaphone",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has called the start of every race at the same school for thirty years'); no outrageous feat or punchline.",
+      "suggestion": "'Shouted LUNCH across the playing fields so loudly that the school in the next town came too.'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon near-copies x_megaphone U (squeals and whistles when switched on); the name 'Batterychirp' also does not match.",
+      "suggestion": "'Turns every voice into a robot's, so the lifeguard sounds like a toaster.'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Robotvoicer'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Called the lost dog's name across the beach, and the dog came running'; the name 'Stadiumcall' does not match a beach), not a troublesome power.",
+      "suggestion": "'Calls so loudly across the beach that the tide comes in early to see what the fuss is about.'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Tidecaller'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Announced the start of the regatta to every boat' is doing its job; the name 'Stadium Announcement' does not match a harbour), not a troublesome power.",
+      "suggestion": "'Announced the ice-cream van so loudly that every boat in the harbour raced back to the beach.'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Ice Cream Regatta'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has announced every ferry departure from the same pier for forty years'); no outrageous feat or punchline.",
+      "suggestion": "'Honked so loudly from the pier that a passing ferry honked back, and the two have been best friends ever since.'"
+    },
+    {
+      "id": "x_megaphone_horn",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Hornsworth, Friend of Ferries'"
+    },
+    {
+      "id": "x_arcade_machine",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Kept every arcade machine on the pier beeping at once') instead of one concrete consequence with a joke.",
+      "suggestion": "'Let a seagull beat the high score, and now every seagull on the pier demands a go.'"
+    },
+    {
+      "id": "x_arcade_machine",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Seagull High Score'"
+    },
+    {
+      "id": "x_arcade_machine",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has been played by three generations of the same family'); no outrageous feat or punchline.",
+      "suggestion": "'Was played so well by one grandma that the game ran out of levels and had to invent a new one just for her.'"
+    },
+    {
+      "id": "x_arcade_machine",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pixelina, Level Maker'"
+    },
+    {
+      "id": "x_arcade_machine",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Pixel Flash Flash' repeats a word on a single-hit stun move.",
+      "suggestion": "'Pixel Flash'"
+    },
+    {
+      "id": "x_atm_machine",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a person in the queue, not the machine's power.",
+      "suggestion": "'Pays out in the smallest coins when it's grumpy, so everyone leaves jingling like a piggy bank.'"
+    },
+    {
+      "id": "x_atm_machine",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Coinjingler'"
+    },
+    {
+      "id": "x_atm_machine",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Had a queue round the block on the morning of the summer fair') instead of one concrete consequence with a joke.",
+      "suggestion": "'Gave everyone a receipt instead of money on fair day, so the whole fair was paid for in paper slips.'"
+    },
+    {
+      "id": "x_atm_machine",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Paper Money Fair'"
+    },
+    {
+      "id": "x_atm_machine",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has stood in the same station square for thirty years and only broken down once'); no outrageous feat or punchline.",
+      "suggestion": "'Paid out a whole bag of coins to a squirrel by mistake, and the squirrel now owns a very fancy nest.'"
+    },
+    {
+      "id": "x_atm_machine",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Withdrawsworth the Generous'"
+    },
+    {
+      "id": "x_atm_machine",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Out of Service' has no heat word, but the move burns.",
+      "suggestion": "'Overheated Service'"
+    },
+    {
+      "id": "x_slot_machine",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Gambling object: keep it as a seaside prize-ticket machine (as the draft mostly does); avoid money wins, 'jackpot' payouts or adults betting.",
+      "suggestion": "'Has a lever that every child pulls on the way past, even though it only pays out in paper tickets.'"
+    },
+    {
+      "id": "x_slot_machine",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare near-copies x_arcade_machine R (a shower of prize tickets).",
+      "suggestion": "'Makes three cherries line up on everything nearby, so the fruit bowl now holds nothing but cherries.'"
+    },
+    {
+      "id": "x_slot_machine",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Cherrylinker'"
+    },
+    {
+      "id": "x_slot_machine",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Spun every reel in the seaside arcade at once') instead of one concrete consequence with a joke.",
+      "suggestion": "'Had its lever pulled by a passing beach donkey, and the donkey got three lemons and looked very sour.'"
+    },
+    {
+      "id": "x_slot_machine",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Donkey Lever Pull'"
+    },
+    {
+      "id": "x_slot_machine",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has stood on the same seaside pier for fifty years and still spins its cherries'); no outrageous feat or punchline.",
+      "suggestion": "'Spun its reels so fast that it launched a cherry into the sky, and the cherry still circles the pier at teatime.'"
+    },
+    {
+      "id": "x_slot_machine",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Cherrywheel the Launcher'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare repeats the Common (slow printing, missed train); the name 'Queuebuilder' does not match either.",
+      "suggestion": "'Prints tickets to stations that don't exist, and the passengers somehow get there anyway.'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Nowhereprinter'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Had a queue down the whole platform on the morning of the big match') instead of one concrete consequence with a joke.",
+      "suggestion": "'Printed one ticket so long that the conductor had to check it carriage by carriage.'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Carriage-Long Ticket'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has printed a million tickets at the same station and only jammed twice'); no outrageous feat or punchline.",
+      "suggestion": "'Sold a ticket to somewhere so far away that the train is still going, and it sends a postcard every year.'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Faresworth, Seller of Far Places'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "moves.kit.jackpot",
+      "severity": "low",
+      "issue": "'Ticket Ticket Ticket Ticket' is a garbled four-word repeat.",
+      "suggestion": "'Ticket Ticket Ticket'"
+    },
+    {
+      "id": "x_vending_kiosk",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic ('Ran out of every snack on the busiest day') is a shortage, not chaos with a joke.",
+      "suggestion": "'Dropped every snack at once when someone thumped it, and the office ate crisps for lunch all week.'"
+    },
+    {
+      "id": "x_vending_kiosk",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Thumped Snack Shower'"
+    },
+    {
+      "id": "x_vending_kiosk",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has served the same office for twenty years'); no outrageous feat or punchline.",
+      "suggestion": "'Took one coin from a toddler and gave back a bicycle, and nobody knows how it fitted.'"
+    },
+    {
+      "id": "x_vending_kiosk",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Snackwell the Mysterious'"
+    },
+    {
+      "id": "x_battery",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Common near-copies x_flashlight_battery C and w12 toilet_paper C ('runs out when you need it').",
+      "suggestion": "'Goes in the wrong way round every time, even though there is a little picture showing how.'"
+    },
+    {
+      "id": "x_battery",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Wrongwayrounder'"
+    },
+    {
+      "id": "x_battery",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Brought the dead remote back to life and saved the family film night'), not a troublesome power.",
+      "suggestion": "'Swaps places with a dead battery in the drawer every night, so nobody ever knows which is which.'"
+    },
+    {
+      "id": "x_battery",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Drawerswapper'"
+    },
+    {
+      "id": "x_battery",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Powered every toy in the toybox' is a success), not a troublesome power.",
+      "suggestion": "'Was put in backwards, so the robot dog walked backwards round the birthday party for an hour.'"
+    },
+    {
+      "id": "x_battery",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Backwards Robot Dog'"
+    },
+    {
+      "id": "x_battery",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has powered the same clock for ten years without being changed'); no outrageous feat or punchline.",
+      "suggestion": "'Powered a clock so well that the clock ran on into next week, and the family is now always early.'"
+    },
+    {
+      "id": "x_battery",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Voltworth, Bringer of Next Week'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Fridgeroller' does not describe the Common lore (gives up in the dark); give the name to the new Uncommon.",
+      "suggestion": "'Darkquitter'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon repeats the Common (torch fades in the dark).",
+      "suggestion": "'Rolls off the table and under the fridge the moment it's taken out of the packet.'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Fridgeroller'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is luck ('the only charged one in the house'), not a power.",
+      "suggestion": "'Hops out of the torch whenever a spider appears, and leaves its owner alone in the dark with it.'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Spiderhopper'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Powered every torch at the campsite for the night hike, and nobody got lost' is a success), not a troublesome power.",
+      "suggestion": "'Ran out at the campfire story just as someone shouted BOO, and three tents fell down from the jump.'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Boo Tent Collapse'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Kept a torch shining all night during the big storm'); it needs an outrageous feat.",
+      "suggestion": "'Powered a torch for so long that the torch retired first, and the battery took a new job in the doorbell.'"
+    },
+    {
+      "id": "x_flashlight_battery",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Cellina, Outlaster of Torches'"
+    },
+    {
+      "id": "x_charger",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has charged the same phone every night for six years without a single fault'); no outrageous feat or punchline.",
+      "suggestion": "'Was borrowed so often that it has visited more countries than its owner, and has the luggage stickers to prove it.'"
+    },
+    {
+      "id": "x_charger",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Plugsworth the Well-Travelled'"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a rescue ('Saved its owner's phone'), not a troublesome power.",
+      "suggestion": "'Charges every phone in the room except its owner's, which it pretends not to see.'"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Strangercharger'"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Charged every phone at the festival, and its owner became the most popular person') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was lent to a friend at the festival, then to their friend, then theirs, and came home three weeks later with a tan.'"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Three-Week Lend'"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Charged a phone on a mountain top so its owner could call for help' (an emergency rescue, no joke)); it needs an outrageous feat.",
+      "suggestion": "'Charged a phone so full that the phone started charging the power bank back, and they've argued about it ever since.'"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "moves.kit.surge",
+      "severity": "medium",
+      "issue": "'Battery Surge' has no heat word, but the move burns.",
+      "suggestion": "'Overheat Surge'"
+    },
+    {
+      "id": "x_power_strip",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has powered the same desk for twenty years without ever tripping once'); no outrageous feat or punchline.",
+      "suggestion": "'Grew a new socket every time someone needed one, and now stretches round the whole room like a snake.'"
+    },
+    {
+      "id": "x_plug",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is impossible for one plug and is a crowd formula ('plugged into every socket in the kitchen').",
+      "suggestion": "'Was pulled out by mistake during the bake-off, so every cake in the oven came out exactly half baked.'"
+    },
+    {
+      "id": "x_plug",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Half-Baked Bake-Off'"
+    },
+    {
+      "id": "x_plug",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has been plugged in every morning for thirty years, powering the same kettle'); no outrageous feat or punchline.",
+      "suggestion": "'Was plugged in so firmly that when the family moved house, they had to take the wall with them.'"
+    },
+    {
+      "id": "x_wireless_charger",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a nice trick ('grandma calls magic'), not a troublesome power.",
+      "suggestion": "'Pulls phones across the bedside table towards it like a magnet, and the glass of water too.'"
+    },
+    {
+      "id": "x_wireless_charger",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Tablepuller'"
+    },
+    {
+      "id": "x_wireless_charger",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare is the object doing its job well ('Charged every phone at the sleepover in a long row, and nobody had to share' is a success), not a troublesome power.",
+      "suggestion": "'Charged the sleepover's phones so slowly that everyone had to talk to each other all night.'"
+    },
+    {
+      "id": "x_wireless_charger",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Talking Sleepover'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Kept the house at exactly the right temperature through the coldest week'), not a troublesome power.",
+      "suggestion": "'Sets itself to tropical whenever nobody is looking, so the houseplants have started growing bananas.'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Tropicalsetter'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Common premise (the family fighting over the dial).",
+      "suggestion": "'Was turned up so high at the winter party that the snowman in the garden came inside for a cold drink.'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Snowman Comes Inside'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has kept the same house cosy for thirty winters'); no outrageous feat or punchline.",
+      "suggestion": "'Turned the heating so high one winter that spring came early to the whole street, and the daffodils were furious.'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Thermella, Bringer of Spring'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Heating Surge' promises heat, but no variant burns (poison / defence down / stun).",
+      "suggestion": "'Dial Spin Finale'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Click Click Click Click' is a four-word repeat (also x_reflector).",
+      "suggestion": "'Click Clack Click'"
+    },
+    {
+      "id": "x_fire_extinguisher",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped with the Uncommon name: 'Pinpuller' does not describe the Common lore.",
+      "suggestion": "'Cornerguard'"
+    },
+    {
+      "id": "x_fire_extinguisher",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Swapped with the Common name: 'Cornerguard' does not describe the Uncommon lore.",
+      "suggestion": "'Pinpuller'"
+    },
+    {
+      "id": "x_fire_extinguisher",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Stood by the school door for thirty years and finally saved the day'); no outrageous feat or punchline.",
+      "suggestion": "'Foamed a barbecue so thoroughly that the sausages came out tasting of lemon meringue.'"
+    },
+    {
+      "id": "x_fire_extinguisher",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Sentinella, Foamer of Barbecues'"
+    },
+    {
+      "id": "x_fire_extinguisher",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Foam Flood' repeats the Epic name 'Kitchen Foam Flood'.",
+      "suggestion": "'Foam Finale'"
+    },
+    {
+      "id": "x_fire_extinguisher_bottle",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is the extinguisher doing its job ('stopped a fire in its tracks').",
+      "suggestion": "'Sneezes a puff of white powder whenever someone mentions candles, so birthday parties come out very white.'"
+    },
+    {
+      "id": "x_fuse_box",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped with the Uncommon name: 'Trippy' does not describe the Common lore.",
+      "suggestion": "'Darkcupboard'"
+    },
+    {
+      "id": "x_fuse_box",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Swapped with the Common name: 'Darkcupboard' does not describe the Uncommon lore.",
+      "suggestion": "'Trippy'"
+    },
+    {
+      "id": "x_fuse_box",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Blackout' repeats the Epic name 'Whole House Blackout'.",
+      "suggestion": "'Switch Flip Finale'"
+    },
+    {
+      "id": "x_floppy_disk",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is 'found after thirty years' with a sweet but flat ending.",
+      "suggestion": "'Held a game so tiny that its characters climbed out at night to stretch their legs.'"
+    },
+    {
+      "id": "x_floppy_disk",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Squaresave the Spacious'"
+    },
+    {
+      "id": "x_intercom",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a convenience ('tell the postman... without getting out of bed'), not a power.",
+      "suggestion": "'Mixes up who is calling, so the pizza driver gets invited in for Grandma's tea.'"
+    },
+    {
+      "id": "x_intercom",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Visitormixer'"
+    },
+    {
+      "id": "x_intercom",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has buzzed in every visitor to the old building for forty years'); no outrageous feat or punchline.",
+      "suggestion": "'Crackled so badly that one visitor's hello came out as a perfect opera song, and the whole building clapped.'"
+    },
+    {
+      "id": "x_intercom",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Buzz Buzz Buzz Buzz' is a four-word repeat.",
+      "suggestion": "'Buzz Buzz Buzz'"
+    },
+    {
+      "id": "x_fire_alarm",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Beep Beep Beep Beep' is a four-word repeat.",
+      "suggestion": "'Beep Beep Beep'"
+    },
+    {
+      "id": "x_dvd",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Rare premise (freezing on a frame).",
+      "suggestion": "'Had a bonus feature longer than the film, and the family is still watching the bloopers.'"
+    },
+    {
+      "id": "x_dvd",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Endless Bonus Feature'"
+    },
+    {
+      "id": "x_dvd",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Was watched so many times that its owner can say every line'); it needs an outrageous feat.",
+      "suggestion": "'Was watched so many times that the actors started waving at the family.'"
+    },
+    {
+      "id": "x_dvd",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pixelwave the Familiar'"
+    },
+    {
+      "id": "x_dvd",
+      "field": "moves.kit.skip_track",
+      "severity": "medium",
+      "issue": "'Skip Skip Skip Skip Skip' is a garbled five-word repeat.",
+      "suggestion": "'Chapter Skip Skip'"
+    },
+    {
+      "id": "x_dashcam",
+      "field": "moves.kit.snapshot_burst",
+      "severity": "low",
+      "issue": "'Clip Clip Clip Clip' is a four-word repeat.",
+      "suggestion": "'Clip Clip Clip'"
+    },
+    {
+      "id": "x_power_strip",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Plug Plug Plug Plug' is a four-word repeat (x_charger already has 'Plug Plug Plug').",
+      "suggestion": "'Plug Plug Plug' (or 'Socket Socket Socket')"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Charge Charge Charge Charge' is a four-word repeat (x_battery already uses the three-word form).",
+      "suggestion": "'Charge Charge Charge' (or 'Top-Up Top-Up')"
+    },
+    {
+      "id": "x_vending_kiosk",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Short and flat ('Made a coffee and forgot the cup' (33 characters)); add a concrete consequence.",
+      "suggestion": "'Makes a perfect coffee and forgets the cup, then flashes THANK YOU at the puddle.'"
+    },
+    {
+      "id": "x_candelabra",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Short and flat ('Drips wax all over the tablecloth' (34 characters)); add a concrete consequence.",
+      "suggestion": "'Drips wax all over the tablecloth in little lumps that look exactly like peas.'"
+    },
+    {
+      "id": "x_headlamp",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Short and flat ('Blinds everyone you turn to talk to' (36 characters)); add a concrete consequence.",
+      "suggestion": "'Blinds everyone you turn to talk to, so camping conversations happen with everyone's eyes shut.'"
+    },
+    {
+      "id": "x_power_bank",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Short and flat ('Weighs down your pocket like a brick' (37 characters)); add a concrete consequence.",
+      "suggestion": "'Weighs down your pocket like a brick, so your trousers slowly creep down all day.'"
+    },
+    {
+      "id": "speaker",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Short and flat ('Rattles the shelf with every bass note' (39 characters)); add a concrete consequence.",
+      "suggestion": "'Rattles the shelf with every bass note until the ornaments shuffle off the edge one by one.'"
+    },
+    {
+      "id": "x_thermostat",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Clicks every time the heating turns on' (39 characters)); add a concrete consequence.",
+      "suggestion": "'Clicks so loudly when the heating comes on that the dog barks at it every morning.'"
+    },
+    {
+      "id": "x_ticket_machine",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Refuses every coin that's a bit bent' (37 characters)); add a concrete consequence.",
+      "suggestion": "'Spits out every coin that's a bit bent, so the queue spends ages trying to straighten them.'"
+    },
+    {
+      "id": "x_security_monitor",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Splits its screen into sixteen tiny boxes' (42 characters)); add a concrete consequence.",
+      "suggestion": "'Splits its screen into sixteen tiny boxes, and the guard always watches the one with nothing in it.'"
+    }
+  ]
+}

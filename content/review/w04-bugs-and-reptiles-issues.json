@@ -1,0 +1,1817 @@
+{
+  "batch": "w04-bugs-and-reptiles",
+  "editor": "independent agent",
+  "reviewed": 118,
+  "summary": "The batch is clean on safety, length and brands with few exceptions, and it is full of well-observed, real natural history: dung beetles steering by the stars, monarchs landing on the grandmother's tree, chiton iron teeth, whiptail all-sister families, rattle segments per shed skin used as a doorbell, planarian memory, cicada broods, earwig mothers, the lice 'letter home from school', the hognose snake whose fake death makes the hawk say a few kind words, the horned viper the dune moved round twice, and the vine snake given a plant name by a botanist. Move mechanics are mostly respected: drain moves are all Snatch/Siphon, heals are Rest/Nap/Shed, buffs are Boost/Guard, and multi-hits are plural or repeated. The structural problems are the same as in w02, and worse. (1) Names sit on the wrong rarity in about 50 objects, mostly a straight Common/Uncommon or Uncommon/Rare swap (e.g. long-horned beetle 'Woodborer' on the squeaking line, housefly names shifted one step). (2) About 30 objects scale one habit over three or four rarities (leafhopper jumping, hermit crab shells, diamondback rattling, hognose playing dead, stick insect disguise, earthworm soil, ladybug greenfly). (3) Related objects copy each other: the mantis pair, newt pair, chameleon pair, horned viper/sidewinder, diamondback/rattlesnake, the three toys (washing machine, dog, plastic teeth), the three honey legendaries, two campfire salamanders and four road-crossing amphibians; plus a few cross-batch echoes (lizard U = w03 cockatoo U and w01 pug U). (4) Epics lean on 'Led ...' (15) and 'with a thousand friends' (about 28). (5) Award/contest frames remain (lace medal, black belt, tiny bench, own flower show, scorecards, head-bobbing contest, 'in the land'). (6) Roughly 70 Ultimates repeat the Epic monster name. Hard flags: 'Slowpoke Shell' (trademarked character), 'Cancer the Claw King' (star sign and illness word), 'Hoover' brand on the sea cucumber, a Charlotte's Web echo on the barn spider, 'Vespa' (scooter brand) on the hornet. Fact slips: lice do not hop, fiddler crabs do not snap like pistol shrimp, snakes swallow head-first, ferns do not grow at tree tops. Sensitive: the leatherback eating plastic bags played as grumpiness, the rock python wrapping a sleeper's leg, a salamander thrown on a fire, and the tick name 'Bloodbag'. Counts: 58 high, 125 medium, 33 low across 216 issues, plus 9 patterns; every high and medium issue opens with a concrete replacement.",
+  "patterns": [
+    {
+      "pattern": "Legendary frame 'Has lived/waited on the same X for N years, and...' repeats across the batch (african crocodile, tailed frog, horned viper, lizard, ringneck snake, x_newt, silverfish, mud turtle, chiton, spotted salamander). Fine once or twice; at this count it reads templated.",
+      "ids": [
+        "i_african_crocodile",
+        "i_tailed_frog",
+        "i_horned_viper",
+        "lizard",
+        "i_ringneck_snake",
+        "x_newt",
+        "x_silverfish",
+        "i_mud_turtle",
+        "i_chiton",
+        "i_spotted_salamander"
+      ],
+      "severity": "low",
+      "suggestion": "Keep the best two (horned viper's dune moving round it, tailed frog's polite stream) and give the others a different achievement shape."
+    },
+    {
+      "pattern": "Monster names describe a different rarity's lore (often swapped between Common/Uncommon or shifted by one across C-U-R). Name and lore sit together in the encyclopedia, so this reads as an error.",
+      "ids": [
+        "i_leaf_beetle",
+        "i_long_horned_beetle",
+        "i_trilobite",
+        "i_lycaenid",
+        "i_ringlet",
+        "i_sulphur_butterfly",
+        "x_centipede_insect",
+        "x_earthworm",
+        "i_american_lobster",
+        "crab",
+        "dragonfly",
+        "frog",
+        "i_tailed_frog",
+        "x_toad_creature",
+        "ladybug",
+        "i_african_chameleon",
+        "i_african_crocodile",
+        "i_alligator_lizard",
+        "i_banded_gecko",
+        "i_european_fire_salamander",
+        "i_gila_monster",
+        "i_spotted_salamander",
+        "i_nematode",
+        "snail",
+        "i_diamondback",
+        "i_hognose_snake",
+        "i_indian_cobra",
+        "i_king_snake",
+        "i_ringneck_snake",
+        "snake",
+        "i_black_and_gold_garden_spider",
+        "i_harvestman",
+        "x_scorpion_arachnid",
+        "spider",
+        "x_alligator_toy",
+        "x_aphid",
+        "x_bearded_dragon",
+        "x_chameleon_lizard",
+        "x_chrysalis",
+        "x_dinosaur_toy",
+        "x_flea",
+        "x_fly",
+        "x_housefly",
+        "x_silverfish",
+        "x_termite",
+        "x_wasp_nest",
+        "x_millipede",
+        "i_isopod",
+        "x_monitor_lizard"
+      ],
+      "severity": "high",
+      "suggestion": "Re-pair names with the lore they describe before review; most fixes are a straight C/U or U/R swap (see issues). Write names after the lore, per line."
+    },
+    {
+      "pattern": "One habit scaled over three or four rarities instead of five premises (jumping, rattling, eating, playing dead, sunbathing, shell swapping, disguise, clinging, migrating).",
+      "ids": [
+        "beetle",
+        "i_isopod",
+        "i_lacewing",
+        "i_leafhopper",
+        "i_long_horned_beetle",
+        "i_tiger_beetle",
+        "caterpillar",
+        "x_earthworm",
+        "x_leech",
+        "i_fiddler_crab",
+        "i_hermit_crab",
+        "ladybug",
+        "i_eft",
+        "i_frilled_lizard",
+        "lizard",
+        "i_spotted_salamander",
+        "i_sea_cucumber",
+        "i_diamondback",
+        "x_rattlesnake",
+        "i_hognose_snake",
+        "i_horned_viper",
+        "i_sidewinder",
+        "i_green_mamba",
+        "i_thunder_snake",
+        "x_stick_insect",
+        "x_silverfish",
+        "x_termite",
+        "x_flea",
+        "x_moth_insect"
+      ],
+      "severity": "high",
+      "suggestion": "Keep the best rarity of the repeated habit and give the others a different real trait (moulting, defence smells, eggs, homes, senses, feeding method). Concrete rewrites are in the issues."
+    },
+    {
+      "pattern": "Near-copies between related objects in the batch: mantis pair, newt pair, chameleon pair, horned viper/sidewinder, diamondback/rattlesnake, the three toys (washing machine, dog, plastic teeth), the three honey objects (village honey legendaries, hexagon showing-off), fire salamander/salamander campfire, newt/eft/spotted salamander/toad road crossings, bee C/fly U window, leaf beetle E/caterpillar E, lacewing E/ladybug L, green lizard R/lizard R, axolotl R/common newt L.",
+      "ids": [
+        "i_mantis",
+        "x_praying_mantis",
+        "i_common_newt",
+        "x_newt",
+        "i_african_chameleon",
+        "x_chameleon_lizard",
+        "i_horned_viper",
+        "i_sidewinder",
+        "i_diamondback",
+        "x_rattlesnake",
+        "x_alligator_toy",
+        "x_crocodile_toy",
+        "x_dinosaur_toy",
+        "bee",
+        "x_beehive",
+        "x_honeycomb",
+        "i_european_fire_salamander",
+        "x_salamander",
+        "i_eft",
+        "i_spotted_salamander",
+        "x_toad_creature",
+        "x_fly",
+        "i_leaf_beetle",
+        "caterpillar",
+        "i_lacewing",
+        "ladybug",
+        "i_green_lizard",
+        "lizard",
+        "x_axolotl"
+      ],
+      "severity": "high",
+      "suggestion": "Write related objects side by side and split traits between them (e.g. i_mantis: head-turning and kung-fu poses; x_praying_mantis: egg cases and swaying). Rewrites given per issue."
+    },
+    {
+      "pattern": "Stock Epic frame: 15 Epics open with 'Led ...' and about 28 more lines use 'with a hundred/thousand friends/cousins/others'. Roughly 40% of Epics are the same crowd shape.",
+      "ids": [
+        "bee",
+        "butterfly",
+        "x_millipede",
+        "i_american_lobster",
+        "crab",
+        "frog",
+        "x_toad_creature",
+        "i_agama",
+        "i_common_newt",
+        "i_eft",
+        "lizard",
+        "i_spotted_salamander",
+        "x_slug_creature",
+        "x_alligator_toy",
+        "x_dinosaur_toy",
+        "i_lycaenid",
+        "i_fiddler_crab",
+        "dragonfly",
+        "x_tadpole",
+        "i_sea_slug",
+        "snail",
+        "x_garter_snake",
+        "x_sea_snake",
+        "i_thunder_snake",
+        "i_harvestman",
+        "x_scorpion_arachnid",
+        "x_cicada",
+        "x_firefly",
+        "x_flea",
+        "x_mosquito",
+        "x_tick",
+        "x_woodlouse"
+      ],
+      "severity": "medium",
+      "suggestion": "Use the crowd only where it is the real fact (garter snake dens, cicada broods, synchronous fireflies). Elsewhere give the single creature a large-scale consequence of its own trait."
+    },
+    {
+      "pattern": "Award, contest and race frames in Legendaries and Epics: medal from the apples, black belt from the spiders, tiny bench, own flower show, scorecards, head-bobbing contest, won every race, beat the tortoise, won the sprint, champion names.",
+      "ids": [
+        "i_lacewing",
+        "i_mantis",
+        "x_toad_creature",
+        "ladybug",
+        "dragonfly",
+        "i_agama",
+        "i_whiptail",
+        "snail",
+        "i_wolf_spider",
+        "i_leafhopper",
+        "x_tadpole"
+      ],
+      "severity": "medium",
+      "suggestion": "Replace the reward with a consequence: what the world does differently because of the achievement (rewrites given)."
+    },
+    {
+      "pattern": "Ultimates that repeat the Epic monster name exactly or with a suffix (Charge, Crash, Swirl, Stun, Rush, Strike). About 70 of 118 objects, e.g. Garden Plough, Puddle Ambush, Rainbow Tantrum, Riverbank Ambush, Desert Grip, Canyon Rattle, Library Raid, Honey Flood, Long Grass Ambush.",
+      "ids": [
+        "bee",
+        "beetle",
+        "i_isopod",
+        "i_lacewing",
+        "i_leafhopper",
+        "i_long_horned_beetle",
+        "i_mantis",
+        "i_tiger_beetle",
+        "butterfly",
+        "i_lycaenid",
+        "x_moth_insect",
+        "i_ringlet",
+        "i_sulphur_butterfly",
+        "caterpillar",
+        "x_centipede_insect",
+        "x_earthworm",
+        "x_leech",
+        "x_millipede",
+        "i_american_lobster",
+        "crab",
+        "i_fiddler_crab",
+        "i_hermit_crab",
+        "dragonfly",
+        "x_tadpole",
+        "frog",
+        "x_toad_creature",
+        "i_african_chameleon",
+        "i_african_crocodile",
+        "i_alligator_lizard",
+        "i_american_alligator",
+        "i_american_chameleon",
+        "i_banded_gecko",
+        "i_eft",
+        "i_european_fire_salamander",
+        "i_frilled_lizard",
+        "i_gila_monster",
+        "i_green_lizard",
+        "lizard",
+        "i_spotted_salamander",
+        "i_chiton",
+        "i_sea_cucumber",
+        "i_sea_slug",
+        "x_slug_creature",
+        "snail",
+        "i_diamondback",
+        "x_garter_snake",
+        "i_green_mamba",
+        "i_green_snake",
+        "i_hognose_snake",
+        "i_horned_viper",
+        "i_indian_cobra",
+        "x_honeycomb",
+        "x_silverfish",
+        "x_spider_egg",
+        "x_tick"
+      ],
+      "severity": "medium",
+      "suggestion": "Give each finisher its own image, effect-neutral where variants differ (e.g. earthworm 'Underground Upheaval', leech 'Big Squelch Finale', african crocodile 'Riverbed Roll', chiton 'Iron Tooth Scrape', silverfish 'Bottom Shelf Collapse')."
+    },
+    {
+      "pattern": "Poison moves (signature and kit.sting) mostly carry neutral names with no stink, rot, itch or venom cue (Speed Bite, Zigzag Bite, Snap Grab, Wall Nip, Quick Nip, Jaw Snap, Spiky Pinch, Mud Pinch, Fang Jab). Not wrong, but the brief asks poison to read as stink or rot; the best ones (Stinky Nip, Musty Nibble, Rotten Wood Nibble, Mouldy Nibble, Smelly Squirt) show how.",
+      "ids": [
+        "i_tiger_beetle",
+        "i_mantis",
+        "dragonfly",
+        "i_green_lizard",
+        "i_whiptail",
+        "i_american_lobster",
+        "i_fiddler_crab",
+        "spider",
+        "i_lycaenid",
+        "i_leafhopper"
+      ],
+      "severity": "low",
+      "suggestion": "When touching these objects anyway, add a stink/itch/rot cue: 'Sandy Stink Bite', 'Mouldy Mud Pinch', 'Itchy Fang Jab'."
+    },
+    {
+      "pattern": "Stun moves named as grips or tangles (Claw Clamp, Claw Grip, Sticky Grip, Suction Grip, Leg Tangle, Fern Grab, Quiet Tongue) rather than flash or startle. Acceptable as snares, but 'Quiet Tongue' and 'Fern Grab' read as no effect at all.",
+      "ids": [
+        "i_american_lobster",
+        "crab",
+        "x_leech",
+        "i_chiton",
+        "x_centipede_insect",
+        "x_triceratops",
+        "i_tailed_frog"
+      ],
+      "severity": "low",
+      "suggestion": "Prefer a sudden cue: 'Claw Snap Startle', 'Sudden Suction', 'Silent Tongue Surprise', 'Fern Swipe Startle'."
+    }
+  ],
+  "issues": [
+    {
+      "id": "bee",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of the other honey legendaries in this batch (beehive L: whole village had toast for a decade; honeycomb L: sweeten every cup of tea in the village). Three 'enough honey for the village' lines.",
+      "suggestion": "'Danced the waggle dance so well that the whole hive flew to the ice-cream van instead of the clover. The van now has a queue of very sticky customers.'"
+    },
+    {
+      "id": "bee",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led the whole hive...' stock Epic frame (15 Epics in this batch open with 'Led').",
+      "suggestion": "'Swarmed into the bakery and tasted every doughnut through the glass. The baker now sells them as pre-licked.'"
+    },
+    {
+      "id": "bee",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Hive Hurricane Stun' is the Epic monster name plus the effect word.",
+      "suggestion": "'Sting of a Thousand Wings'"
+    },
+    {
+      "id": "beetle",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Dung ball premise appears at Uncommon, Epic and Legendary: one habit scaled three times.",
+      "suggestion": "'Marched a rhinoceros-beetle army under the patio and lifted every paving stone half a centimetre. The garden table now wobbles on purpose.'"
+    },
+    {
+      "id": "beetle",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "If Epic lore changes, 'Beetle Bulldozer' should follow; Ultimate is also 'Beetle Bulldozer Charge' (Epic name plus Charge).",
+      "suggestion": "'Patio Lifter' for the Epic; Ultimate 'Last Roll of the Dung Ball'"
+    },
+    {
+      "id": "i_isopod",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rolling into a ball appears at Common, Rare and Legendary; Rare is the same habit as Common with a marble.",
+      "suggestion": "'Sucked up so much damp from the cellar floor that the house dried out. The plants upstairs have asked it to move back.'"
+    },
+    {
+      "id": "i_isopod",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Ends 'then complained about the noise', the same punchline as x_dinosaur L ('came out only to complain about the noise').",
+      "suggestion": "'Rolled itself up so tightly that an elephant stood on it by mistake. The elephant apologised first.'"
+    },
+    {
+      "id": "i_isopod",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Damplurker' does not describe the rolling-marble lore it sits on; fine if the Rare becomes the damp line above.",
+      "suggestion": "Keep with the damp rewrite, or 'Pillmarble' for the current line."
+    },
+    {
+      "id": "i_lacewing",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Aphid eating at Rare, Epic and Legendary, and the Legendary is an award ('given a little lace medal'). Also overlaps ladybug L (rose gardens rescued, flower show).",
+      "suggestion": "'Laid each of its eggs on a tiny silk stalk, and a whole orchard of aphids woke up to a forest of lollipops that bite.'"
+    },
+    {
+      "id": "i_lacewing",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of ladybug L ('rescued every rose garden ... from greenfly in one summer ... flower show'). Same premise and same reward.",
+      "suggestion": "'Gathered in the garden shed for winter with a thousand cousins and turned pink-brown together. The gardener thinks the shed has gone rusty.'"
+    },
+    {
+      "id": "i_lacewing",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'the Lace Ghost' borrows the Common's ghost image; fine, but the rewritten egg-stalk Legendary would suit a new epithet.",
+      "suggestion": "'Chrysoperla, Planter of Silk Stalks'"
+    },
+    {
+      "id": "i_leaf_beetle",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of caterpillar E ('Munched through an entire vegetable patch in one night. The gardener now grows only flowers.').",
+      "suggestion": "'Glittered on every bean leaf at once, and the allotment looked so posh that the neighbours started dressing up to water it.'"
+    },
+    {
+      "id": "i_leaf_beetle",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Holepuncher' describes the Common's hole-nibbling, not the Rare's playing-dead line.",
+      "suggestion": "'Dropdead Drop' for the Rare; give the Common 'Holepuncher' instead of 'Leafnibbler'."
+    },
+    {
+      "id": "i_leafhopper",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Jumping at Common, Rare, Epic and Legendary: four rarities scale one habit.",
+      "suggestion": "'Sucked so much sap from the rose bush that it rained sticky drops on the car below for a week. The car wash has blamed the clouds.'"
+    },
+    {
+      "id": "i_leafhopper",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'the Pogo Champion' leans on the champion/contest frame.",
+      "suggestion": "'Cicadella, Bouncer of Parks'"
+    },
+    {
+      "id": "i_long_horned_beetle",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same joke as its own Rare: wood chewed so the fence 'makes a whistling sound', then the oak 'plays it like a flute'. Wood chewing also fills the Legendary.",
+      "suggestion": "'Its long antennae caught every washing line in the garden at once, so it flew off wearing three socks and a tea towel.'"
+    },
+    {
+      "id": "i_long_horned_beetle",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Woodborer' sits on the squeaking line and 'Squeakhorn' (Rare) on the fence-chewing line.",
+      "suggestion": "'Squeakhorn' for the Uncommon; 'Woodborer' for the Rare."
+    },
+    {
+      "id": "i_long_horned_beetle",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "Ultimate 'Forest Woodchopper' is exactly the Epic monster name.",
+      "suggestion": "'Timber Tunnel Collapse'"
+    },
+    {
+      "id": "i_mantis",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Award frame ('given a black belt by the spiders') and repeats the Rare's stillness/patience premise. Also overlaps x_praying_mantis (see pattern).",
+      "suggestion": "'Turned its head right round at a football match and watched both goals at once. The referee has asked it to stop helping.'"
+    },
+    {
+      "id": "i_tiger_beetle",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Speed at Common, Rare, Epic and Legendary. The Rare is a real and lovely fact (it runs too fast to see and has to stop) and should stay; the Epic is the weakest speed line.",
+      "suggestion": "'Dug a burrow in the sand dune and waited at the door with its jaws open. The ants now use a different dune.'"
+    },
+    {
+      "id": "i_tiger_beetle",
+      "field": "moves.kit.molt",
+      "severity": "low",
+      "issue": "Self-heal named 'Shell Shine' sounds like a polish or a flash, not rest.",
+      "suggestion": "'Warm Rock Rest'"
+    },
+    {
+      "id": "i_trilobite",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Fossilfriend' sits on the rockpool scuttle line and 'Seafloor Scuttler' (Uncommon) on the found-in-a-rock line.",
+      "suggestion": "'Seafloor Scuttler' for the Common; 'Fossilfriend' for the Uncommon."
+    },
+    {
+      "id": "i_trilobite",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Fact restated with no punchline ('still turns up in rocks looking smug'), and 'older than the dinosaurs' is also the dragonfly L premise.",
+      "suggestion": "'Survived three of the biggest disasters in Earth history by hiding in mud, then got found by a five-year-old with a toy spade.'"
+    },
+    {
+      "id": "i_trilobite",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "'Found in a rock by a schoolgirl' faintly echoes the real fossil hunter Mary Anning; harmless, but a generic finder is safer.",
+      "suggestion": "'Was found in a rock by a dog digging for a bone, and has been showing off its stony shell ever since.'"
+    },
+    {
+      "id": "butterfly",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led a cloud of...' stock frame; otherwise a good image.",
+      "suggestion": "'Rested on a washing line with a million cousins, and the neighbours thought someone had hung out a stained-glass window.'"
+    },
+    {
+      "id": "i_lycaenid",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Repeats the Uncommon (ants carry the caterpillar home and feed it) with more ants.",
+      "suggestion": "'Was so small and so blue that a bride wore it as a brooch all through the wedding. It left during the speeches.'"
+    },
+    {
+      "id": "i_lycaenid",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names shifted: 'Tinyblue' sits on the ant line and 'Antfriend' (Rare) on the fake-antennae line.",
+      "suggestion": "'Antfriend' for the Uncommon; 'Falsehead' for the Rare."
+    },
+    {
+      "id": "x_moth_insect",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Lamps and porch light at Common, Epic and Legendary: three rarities on one habit.",
+      "suggestion": "'Laid its eggs in the wardrobe, and by spring every jumper in the house had air conditioning.'"
+    },
+    {
+      "id": "x_moth_insect",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Porch Light Stun' is the Epic name plus the effect word; the image is fine, the label is flat.",
+      "suggestion": "'Midnight Bulb Blinder'"
+    },
+    {
+      "id": "i_ringlet",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Eyespotter' sits on the tired-flutter line and 'Grassdrifter' (Uncommon) on the eye-ring line.",
+      "suggestion": "'Grassdrifter' for the Common; 'Eyespotter' for the Uncommon."
+    },
+    {
+      "id": "i_ringlet",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Repeats the Uncommon's eye-spots with no new achievement.",
+      "suggestion": "'Kept flying through a thunderstorm that grounded every other butterfly, and landed at the picnic before the sandwiches got wet.'"
+    },
+    {
+      "id": "i_sulphur_butterfly",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Lemonwing' sits on the puddle line and 'Puddlesipper' (Uncommon) on the lemon-sweet line.",
+      "suggestion": "'Puddlesipper' for the Common; 'Lemonwing' for the Uncommon."
+    },
+    {
+      "id": "i_sulphur_butterfly",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Golden cloud premise repeats the Epic.",
+      "suggestion": "'Sat on a yellow taxi for so long that it got driven across the whole city. It got off exactly at the flower market.'"
+    },
+    {
+      "id": "i_sulphur_butterfly",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Flash Flash Flash' is a plain 45% x3 hit; 'flash' promises a stun it does not have.",
+      "suggestion": "'Flutter Flutter Flutter'"
+    },
+    {
+      "id": "i_sulphur_butterfly",
+      "field": "moves.kit.swarm",
+      "severity": "low",
+      "issue": "Lint: 'Golden Flutter' reads as one action on a 3-hit move.",
+      "suggestion": "'Golden Flutters'"
+    },
+    {
+      "id": "caterpillar",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Eating at Common, Rare, Epic and Legendary, and the Epic is a near-copy of i_leaf_beetle E (gardener grows only/plastic flowers).",
+      "suggestion": "'Hung a silk safety line from every cabbage in the patch, and the gardener got tangled up like a fly.'"
+    },
+    {
+      "id": "caterpillar",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Another eating line; the name 'Cocoonplanner' does not fit it either.",
+      "suggestion": "'Puffed up its fake eye-spots at a blackbird, which flew off thinking it had met a tiny snake.'"
+    },
+    {
+      "id": "caterpillar",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Cabbage Crunch Charge' is the Epic name plus Charge.",
+      "suggestion": "'Last Supper Munch'"
+    },
+    {
+      "id": "x_centipede_insect",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Cornerscuttle' sits on the shoes line and 'Shoetangler' (Rare) on the skirting-board run.",
+      "suggestion": "'Shoetangler' for the Uncommon; 'Cornerscuttle' for the Rare."
+    },
+    {
+      "id": "x_centipede_insect",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Repeats the Uncommon's shoe joke, and 'Bought one shoe for each foot' is a shopping/payment frame with a weak punchline.",
+      "suggestion": "'Raced every spider in the cellar on all its legs at once, and won before the spiders had found their own feet.'"
+    },
+    {
+      "id": "x_centipede_insect",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "Ultimate 'Basement Sprint' is exactly the Epic monster name.",
+      "suggestion": "'Hundred-Leg Stampede'"
+    },
+    {
+      "id": "x_earthworm",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Soil-improving at Uncommon, Rare, Epic and Legendary: four rarities of one premise. Legendary also uses 'every field in the county'.",
+      "suggestion": "'Came up with a million cousins after a storm, and the football pitch was cancelled because the grass was wiggling.'"
+    },
+    {
+      "id": "x_earthworm",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Wigglesoil' sits on the pops-up-in-rain line and 'Rainpopper' (Uncommon) on the soil-eating line.",
+      "suggestion": "'Rainpopper' for the Common; 'Wigglesoil' for the Uncommon."
+    },
+    {
+      "id": "x_earthworm",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Ultimate 'Garden Plough' is exactly the Epic monster name.",
+      "suggestion": "'Underground Upheaval'"
+    },
+    {
+      "id": "x_leech",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Clinging at Common, Rare, Epic and Legendary.",
+      "suggestion": "'Stretched itself across the whole stream like a rubber band, and the ducklings used it as a bridge.'"
+    },
+    {
+      "id": "x_leech",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Stickytoes' implies toes; a leech has suckers.",
+      "suggestion": "'Loopstretch'"
+    },
+    {
+      "id": "x_millipede",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led a parade...' stock frame.",
+      "suggestion": "'Curled up in the porch shoes with a thousand cousins, and every boot in the house now smells faintly of almonds.'"
+    },
+    {
+      "id": "x_millipede",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Leaflitter Lurker' does not describe the leg-ripple line.",
+      "suggestion": "'Legripple'"
+    },
+    {
+      "id": "i_american_lobster",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Tankescapee' sits on the two-claws line and 'Bigclaw' (Rare) on the escape line; Legendary 'Who Walked Out of the Sea' fits neither its own line.",
+      "suggestion": "'Bigclaw' for the Uncommon; 'Tankescapee' for the Rare; 'Homarus, the Hundred-Year Claw' for the Legendary."
+    },
+    {
+      "id": "i_american_lobster",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led a march...' stock frame.",
+      "suggestion": "'Moulted its whole shell in one piece and left it on the pier. The fisherman spent an hour trying to catch it.'"
+    },
+    {
+      "id": "crab",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "'Cancer' is the star sign (astrology) and an illness word; also leans on the overused King ending.",
+      "suggestion": "'Sideways Sal, Seabed Crosser'"
+    },
+    {
+      "id": "crab",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: the toe-pinch line has 'Sidescuttle' and the bubble line has 'Pinchtoe'.",
+      "suggestion": "'Pinchtoe' for the Common; 'Bubblethink' for the Uncommon."
+    },
+    {
+      "id": "crab",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led an army...' stock frame.",
+      "suggestion": "'Dug a burrow under every sandcastle on the beach at once, and the whole beach sank half a metre with a sigh.'"
+    },
+    {
+      "id": "i_fiddler_crab",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Claw waving at Common, Uncommon, Epic and Legendary; Legendary is the Epic orchestra with more crabs.",
+      "suggestion": "'Grew its big claw so heavy that it fell over sideways, then grew a new one on the other side out of spite.'"
+    },
+    {
+      "id": "i_fiddler_crab",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Fact slip: loud snapping is the pistol (snapping) shrimp, not the fiddler crab.",
+      "suggestion": "'Dug a burrow so deep in the mud that it built a little chimney of sand balls on top. The tide knocks it down every day.'"
+    },
+    {
+      "id": "i_hermit_crab",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Shell swapping at Common, Uncommon, Epic and Legendary; Epic market repeats the Uncommon queue, Legendary teapot repeats the Rare bottle cap.",
+      "suggestion": "'Moved into a lost rubber boot and paraded it along the shore. The seagulls followed, waiting for the other boot.'"
+    },
+    {
+      "id": "i_hermit_crab",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Same 'odd object as a house' joke as the Rare (bottle cap).",
+      "suggestion": "'Swapped shells so many times that it once lived in a seashell from every beach on the coast, and still says the first one was best.'"
+    },
+    {
+      "id": "dragonfly",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Judges frame ('frogs held up scorecards').",
+      "suggestion": "'Patrolled the whole campsite at sunset, and the campers could finally eat outdoors without a single mosquito.'"
+    },
+    {
+      "id": "dragonfly",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No punchline, and 'since before the dinosaurs' repeats i_trilobite L.",
+      "suggestion": "'Flew backwards across the whole lake just to show the swans it could. The swans have been practising ever since.'"
+    },
+    {
+      "id": "dragonfly",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Pondpatroller' fits the mosquito-catching Rare better; 'Hoverjewel' fits the hovering Uncommon.",
+      "suggestion": "'Hoverjewel' for the Uncommon; 'Pondpatroller' for the Rare."
+    },
+    {
+      "id": "dragonfly",
+      "field": "moves.kit.sting",
+      "severity": "medium",
+      "issue": "'Mosquito Snatch' is a poison move; 'snatch' promises a drain.",
+      "suggestion": "'Swamp Stink Bite'"
+    },
+    {
+      "id": "x_tadpole",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Future Frog Champion' uses the champion frame; the lore is about being loud.",
+      "suggestion": "'Pollywog, Loudest in the Pond'"
+    },
+    {
+      "id": "frog",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Repeats the Uncommon (croaks so loudly the neighbours buy earplugs) and uses the 'Led' frame.",
+      "suggestion": "'Jumped into the garden pond so hard that every goldfish ended up in the birdbath.'"
+    },
+    {
+      "id": "frog",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Lilypadsitter' does not describe the croaking line.",
+      "suggestion": "'Croakmaker'"
+    },
+    {
+      "id": "i_tailed_frog",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Waterfallfrog' sits on the no-voice line and 'Silentcroak' (Rare) on the cold-water line.",
+      "suggestion": "'Silentcroak' for the Uncommon; 'Coldwater Clinger' for the Rare."
+    },
+    {
+      "id": "x_toad_creature",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Garden Grumbler' sits on the puff-up line and 'Puffbelly' (Rare) on the slug line.",
+      "suggestion": "'Puffbelly' for the Uncommon; 'Slugsnapper' for the Rare."
+    },
+    {
+      "id": "x_toad_creature",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Award frame ('given a tiny bench of its own') and repeats the Rare's slug eating. Toad road crossing in the Epic also overlaps the newt/eft/salamander crossings.",
+      "suggestion": "'Lived under the same flowerpot for forty years, and the house has been sold three times with the toad listed as a fixture.'"
+    },
+    {
+      "id": "ladybug",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "'in the land' plus a reward punchline ('given its very own flower show'); also third greenfly line (Rare, Epic, Legendary).",
+      "suggestion": "'Hid under the window frame with ten thousand cousins for winter, and the house turned red every time someone opened the curtains.'"
+    },
+    {
+      "id": "ladybug",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Spotcount' sits on the finger-walk line and 'Aphidhunter' (Uncommon) on the seven-spots line.",
+      "suggestion": "'Fingertipper' for the Common; 'Spotcount' for the Uncommon."
+    },
+    {
+      "id": "ladybug",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Greenfly eating again (Rare is already greenfly).",
+      "suggestion": "'Played dead on a picnic blanket and left a yellow smelly drop on the sandwich. Nobody ate the sandwich.'"
+    },
+    {
+      "id": "i_african_chameleon",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Colourmood' sits on the slow-rocking line and 'Leafrocker' (Rare) on the cross-colour line.",
+      "suggestion": "'Leafrocker' for the Uncommon; 'Colourmood' for the Rare."
+    },
+    {
+      "id": "i_african_crocodile",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Grinjaws' sits on the eyes-and-nose line and 'Riverlurker' (Rare) on the bird-toothpick grin.",
+      "suggestion": "'Riverlurker' for the Uncommon; 'Grinjaws' for the Rare."
+    },
+    {
+      "id": "i_agama",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Contest frame ('head-bobbing contest'), 'Led' frame, and repeats the Rare's head nodding.",
+      "suggestion": "'Climbed onto the village water tower to sunbathe, and its orange head glowed so brightly that the traffic stopped as if for a red light.'"
+    },
+    {
+      "id": "i_agama",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Repeats the Common push-ups; 'a cheeky drink of dew' is not a punchline.",
+      "suggestion": "'Did push-ups at its own reflection in a parked car for a whole afternoon, and the car alarm finally gave up.'"
+    },
+    {
+      "id": "i_alligator_lizard",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Stiffscale' sits on the tail-drop line and 'Tailtosser' (Uncommon) on the side-fold line.",
+      "suggestion": "'Tailtosser' for the Common; 'Stiffscale' for the Uncommon."
+    },
+    {
+      "id": "i_alligator_lizard",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Tail loss again (Common already drops its tail).",
+      "suggestion": "'Moved into the greenhouse and ate every slug inside, and the tomatoes grew so big the gardener needed a wheelbarrow.'"
+    },
+    {
+      "id": "i_alligator_lizard",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Weak achievement (ate slugs, napped) that also echoes x_toad_creature R.",
+      "suggestion": "'Bit its own tail and held on so tightly that it rolled down the hill like a scaly hoop.'"
+    },
+    {
+      "id": "i_american_alligator",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Bellowing repeats the Uncommon.",
+      "suggestion": "'Sat in the middle of the golf course for a whole day, and every golfer agreed that hole had been cancelled.'"
+    },
+    {
+      "id": "i_american_chameleon",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Dewlap display repeats the Common.",
+      "suggestion": "'Turned brown in fright on a chocolate cake and was nearly served at a birthday party.'"
+    },
+    {
+      "id": "i_banded_gecko",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names shifted by one: 'Stripytoes' (C) on chirp line, 'Nightchirp' (U) on tail-wave line, 'Tailwagger' (R) on tiptoe line.",
+      "suggestion": "'Nightchirp' for the Common; 'Tailwagger' for the Uncommon; 'Stripytoes' for the Rare."
+    },
+    {
+      "id": "i_common_newt",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of x_axolotl R ('Grew back a whole new leg after the fish nibbled it').",
+      "suggestion": "'Spent the whole winter asleep under a flowerpot, then walked back to the same pond in spring without once looking at a map.'"
+    },
+    {
+      "id": "i_common_newt",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "'Led a parade of newts across the lane' near-copies the road-crossing Epics of i_eft, i_spotted_salamander and x_toad_creature.",
+      "suggestion": "'Moved into the garden water butt with a hundred friends, and every watering can came out with a newt in it.'"
+    },
+    {
+      "id": "i_eft",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Wandering at Common, Rare, Epic and Legendary, and the Epic is another mass woodland crossing (see i_common_newt, i_spotted_salamander).",
+      "suggestion": "'Walked into a family picnic so bright orange that a toddler tried to eat it, then spat it straight out. The eft looked very pleased.'"
+    },
+    {
+      "id": "i_eft",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "True fact (efts wander for years) with no punchline.",
+      "suggestion": "'Wandered the woods for three whole years, chose a pond at last, and turned green and dull overnight. Says it is happy being boring now.'"
+    },
+    {
+      "id": "i_european_fire_salamander",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Campfire premise repeats its own Legendary and x_salamander L. Also 'threw it on the fire' is mild cruelty.",
+      "suggestion": "'Sprayed a bitter mist from its skin at a fox, and the fox has eaten only toast since.'"
+    },
+    {
+      "id": "i_european_fire_salamander",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Yellowspot' sits on the hide-until-rain line and 'Logsleeper' (Uncommon) on the yellow-blotch line; Rare 'Rainwalker' fits the Common too.",
+      "suggestion": "'Logsleeper' for the Common; 'Yellowspot' for the Uncommon."
+    },
+    {
+      "id": "i_european_fire_salamander",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Forest Floor Glow' is the Epic name, and 'glow' suggests heat or flash while the effect is defdown (normal, spectral) or poison (mutated).",
+      "suggestion": "'Bitter Mist Barrage'"
+    },
+    {
+      "id": "i_frilled_lizard",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Frill scaring at Common, Rare, Epic and Legendary.",
+      "suggestion": "'Ran across the whole outback on its back legs and beat a kangaroo to the waterhole. The kangaroo demanded a recount.'"
+    },
+    {
+      "id": "i_gila_monster",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names shifted: 'Beadyscale' on the bite-and-hold line, 'Slowchomp' on the fat-tail line, 'Fatfoot' on the beads line.",
+      "suggestion": "'Slowchomp' for the Common; 'Fattail' for the Uncommon; 'Beadyscale' for the Rare."
+    },
+    {
+      "id": "i_gila_monster",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Repeats the Uncommon (few big meals a year).",
+      "suggestion": "'Bit a cowboy boot and held on for a whole afternoon. The cowboy now walks with one boot that hisses.'"
+    },
+    {
+      "id": "i_gila_monster",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Weak, abstract punchline ('the desert was suspiciously quiet').",
+      "suggestion": "'Dug into the cooler at a desert campsite and ate every egg for the week. The campers had cereal three times a day.'"
+    },
+    {
+      "id": "i_green_lizard",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Near-copy of lizard R ('Climbed straight up the side of the house and peered through the window') and close to x_gecko_lizard R.",
+      "suggestion": "'Grabbed a wasp in its jaws, thought better of it, and spent the afternoon spitting politely into a flowerpot.'"
+    },
+    {
+      "id": "lizard",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Sunbathing at Common, Epic and Legendary; 'Led every lizard' frame.",
+      "suggestion": "'Dropped its tail on the patio during a barbecue, and the tail kept wiggling until the guests had all gone home.'"
+    },
+    {
+      "id": "lizard",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Supreme' is a watched suffix; 'Iggy' faintly evokes a real performer.",
+      "suggestion": "'Old Rockwarmer, Keeper of the Hot Spot'"
+    },
+    {
+      "id": "i_spotted_salamander",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Migration at Rare, Epic and Legendary; Epic near-copies i_common_newt and i_eft crossings.",
+      "suggestion": "'Hid under the garden decking with a hundred cousins, and the whole deck lifted a little every time it rained.'"
+    },
+    {
+      "id": "i_spotted_salamander",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Polkadot' sits on the hide-until-rain line and 'Mudnapper' (Uncommon) on the polka-dot line.",
+      "suggestion": "'Mudnapper' for the Common; 'Polkadot' for the Uncommon."
+    },
+    {
+      "id": "i_whiptail",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Race/contest frame ('won every race'); the all-sisters fact is great and should stay.",
+      "suggestion": "'Its whole family are sisters, so at every family party it has to sit next to someone who looks exactly like itself.'"
+    },
+    {
+      "id": "i_whiptail",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "49 characters, below the 60-character floor, and a speed habit like three other rarities.",
+      "suggestion": "'Has pale stripes down its back like a racing car, and takes corners in the dust like one too.'"
+    },
+    {
+      "id": "i_chiton",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Uses the watched '...was furious' ending.",
+      "suggestion": "End with 'The seaweed has moved to the next beach.'"
+    },
+    {
+      "id": "i_flatworm",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Splitting repeats the Uncommon (cut in half, grows back as two).",
+      "suggestion": "'Glided up the side of the aquarium and across the lid, and the goldfish watched it leave the building.'"
+    },
+    {
+      "id": "i_nematode",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Rootknotter' sits on the S-shape line and 'Soilsquirm' (Rare) on the root-knot line.",
+      "suggestion": "'Soilsquirm' for the Uncommon; 'Rootknotter' for the Rare."
+    },
+    {
+      "id": "i_nematode",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Fact with a generic 'nobody notices' ending; no concrete achievement.",
+      "suggestion": "'Lives in a single spoonful of soil with a million relatives, and still finds room to throw a birthday party for every one of them.'"
+    },
+    {
+      "id": "i_sea_cucumber",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Cleaning sand at Uncommon, Epic and Legendary. 'Hoover' is a brand name used in the Epic name, Epic lore, Legendary name/lore and Ultimate.",
+      "suggestion": "'Shot its insides out at a nosy crab, grew them all back by Tuesday, and now tells the story at every rockpool party.'"
+    },
+    {
+      "id": "i_sea_cucumber",
+      "field": "names.epic",
+      "severity": "high",
+      "issue": "'Seabed Hoover' and Legendary 'Who Hoovered the Sea' use the Hoover brand; Ultimate 'Seabed Hoover' too.",
+      "suggestion": "'Seabed Sweeper' (Epic); Ultimate 'Sand Squall'; Legendary 'Holothuria, the Inside-Out'"
+    },
+    {
+      "id": "i_sea_cucumber",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Replace the brand verb and avoid the swimming-pool comparison used elsewhere.",
+      "suggestion": "'Swept so much sand through itself that the bay turned bright white, and the tourists asked who had painted it.'"
+    },
+    {
+      "id": "i_sea_slug",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Looks-fancy premise repeats the Common (clownfish jealous) and Uncommon (party fringe).",
+      "suggestion": "'Ate a whole Portuguese man-of-war, kept every sting, and the jellyfish now swim the long way round its rock.'"
+    },
+    {
+      "id": "x_slug_creature",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Lettuce eating repeats the Uncommon and Epic.",
+      "suggestion": "'Squeezed through a gap the width of a pencil into the fridge and spent the night in the butter. Nobody has used that butter since.'"
+    },
+    {
+      "id": "x_slug_creature",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led a hundred slugs' stock frame.",
+      "suggestion": "'Slimed a silver path across every doorstep on the street, and the postman had to wear football boots.'"
+    },
+    {
+      "id": "snail",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "'Slowpoke Shell' uses a trademarked monster-game character name (already flagged in w02).",
+      "suggestion": "'Shyshell'"
+    },
+    {
+      "id": "snail",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Garden Slime Spiral' does not describe the sunflower-climb line; Ultimate repeats it.",
+      "suggestion": "'Sunflower Bender'; Ultimate 'Slime Spiral Squash'"
+    },
+    {
+      "id": "snail",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Race frame and a reversal of a well-known fable; acceptable once but the batch already leans on races.",
+      "suggestion": "'Carried its house up the garden wall, over the roof and down the chimney, and moved into the kitchen without anyone lifting a box.'"
+    },
+    {
+      "id": "i_diamondback",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of x_rattlesnake E ('Desert Maracas': rattled from every rock in the canyon); rattling also fills Common, Rare and Legendary.",
+      "suggestion": "'Shed its skin on the ranch fence, and the cowboys hung it up as a Christmas-tree garland before they noticed.'"
+    },
+    {
+      "id": "i_diamondback",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Diamondscale' sits on the rattle-at-everything line and 'Rattletail' (Uncommon) on the diamond-jumper line.",
+      "suggestion": "'Rattletail' for the Common; 'Diamondscale' for the Uncommon."
+    },
+    {
+      "id": "x_rattlesnake",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Rattle fame again (Common and Epic are rattles too) and close to i_diamondback L.",
+      "suggestion": "'Found a mouse in a pitch-dark barn by heat alone, and the farmer now borrows it to find his slippers at night.'"
+    },
+    {
+      "id": "x_garter_snake",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No achievement: 'is the most common snake' plus a generic fright.",
+      "suggestion": "'Sprayed its musk at a whole garden party, and the barbecue was moved to the next town.'"
+    },
+    {
+      "id": "i_green_mamba",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Speed at Rare, Epic and Legendary.",
+      "suggestion": "'Hung in a fruit tree so green and still that the farmer picked it with the mangoes. The basket was empty by the time he got home.'"
+    },
+    {
+      "id": "i_green_snake",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Hiding repeats Common and Uncommon; generic 'even the owl' ending.",
+      "suggestion": "'Ate so many crickets in one summer that the meadow went quiet at night, and the campers complained they could not sleep without the noise.'"
+    },
+    {
+      "id": "i_hognose_snake",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Playing dead at Common, Epic and Legendary; Epic and Legendary also both use a funeral image.",
+      "suggestion": "'Dug up every toad in the vegetable patch with its shovel nose, and the gardener thought the potatoes were hopping.'"
+    },
+    {
+      "id": "i_hognose_snake",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Upturnose' on the playing-dead line and 'Deadplayer' on the nose line.",
+      "suggestion": "'Deadplayer' for the Common; 'Upturnose' for the Uncommon."
+    },
+    {
+      "id": "i_horned_viper",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of i_sidewinder E (desert tracks look like writing) and burying in sand is shared with i_sidewinder R; sand burying also fills its own Common, Rare and Legendary.",
+      "suggestion": "'Rubbed its scales together to make a hiss like sizzling bacon, and the whole desert camp went looking for breakfast.'"
+    },
+    {
+      "id": "i_horned_viper",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Sidewinder' is a plain animal label and the name of another object in this batch.",
+      "suggestion": "'Sideslider'"
+    },
+    {
+      "id": "i_sidewinder",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Near-copy of i_horned_viper C/R (buried in sand with only the eyes showing); sidewinding is also the Common and Legendary.",
+      "suggestion": "'Shook its rattle under a dune so quietly that only the beetles heard it, and they all moved house.'"
+    },
+    {
+      "id": "i_sidewinder",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of i_horned_viper E (tracks across the dunes that look like writing).",
+      "suggestion": "'Crossed the car park at noon without burning a scale, and every barefoot tourist asked for lessons.'"
+    },
+    {
+      "id": "i_indian_cobra",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Swaydancer' on the spectacles line and 'Spectaclehood' on the swaying line; Legendary 'Wearer of the Spectacles' fits neither its own line.",
+      "suggestion": "'Spectaclehood' for the Uncommon; 'Swaydancer' for the Rare; 'Naja, Peeker Over Fences' for the Legendary."
+    },
+    {
+      "id": "i_indian_cobra",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Standing tall to look over the fence near-copies x_monitor_lizard L (stands up to look over the garden fence); hood display also fills Common and Epic.",
+      "suggestion": "'Stood up so tall in the rice field that the scarecrow quit and went home.'"
+    },
+    {
+      "id": "i_indian_cobra",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Hood Spread Showdown' near-repeats the Epic name 'Hood Spread Shock'.",
+      "suggestion": "'Grand Hood Unfurl'"
+    },
+    {
+      "id": "i_king_snake",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Fact slip: snakes swallow prey head-first, not tail-first.",
+      "suggestion": "'Head-First Gulp'"
+    },
+    {
+      "id": "i_king_snake",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Bandedbluff' describes the Uncommon's copycat bands, not the airing-cupboard line.",
+      "suggestion": "'Towelcurler' for the Common; 'Bandedbluff' for the Uncommon instead of 'Coralcopycat'."
+    },
+    {
+      "id": "i_king_snake",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rattlesnake eating at Rare, Epic and Legendary.",
+      "suggestion": "'Copied the coral snake so well that the coral snakes started inviting it to family dinners.'"
+    },
+    {
+      "id": "i_ringneck_snake",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Names swapped: 'Collarneck' on the hiding line and 'Gardenshy' on the collar line.",
+      "suggestion": "'Gardenshy' for the Common; 'Collarneck' for the Rare."
+    },
+    {
+      "id": "i_ringneck_snake",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'three generations of children' near-copies x_crocodile_toy L; hiding also fills Common and Epic.",
+      "suggestion": "'Flashed its orange corkscrew tail at a hawk so suddenly that the hawk flew into a washing line.'"
+    },
+    {
+      "id": "i_rock_python",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "A python wrapping round a sleeping person's leg is a frightening image for a child.",
+      "suggestion": "'Wraps itself round the warm water pipe in the barn, and the farmer has to ask nicely before every shower.'"
+    },
+    {
+      "id": "i_rock_python",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "'Swallows dinner whole, lies in the sun looking like it ate a football' is close to x_king_snake L ('garden hose with a secret').",
+      "suggestion": "Keep one of the two; consider 'Swallowed a whole birthday cake and spent the week shaped like a party.'"
+    },
+    {
+      "id": "snake",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Escape artist repeats the Epic zoo escape; Epic name 'Garden Shed Slither' fits the Common shed line, not the Epic.",
+      "suggestion": "'Shed its whole skin inside a zipped sleeping bag, and the camper woke up next to a snake made of tissue paper.'"
+    },
+    {
+      "id": "snake",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Garden Shed Slither' describes the Common's shed, not the zoo escape.",
+      "suggestion": "'Zoo Loop'"
+    },
+    {
+      "id": "i_thunder_snake",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rising after storms at Rare, Epic and Legendary.",
+      "suggestion": "'Got mixed up in a bait box with the earthworms, and the fisherman spent all morning wondering why the fish kept laughing.'"
+    },
+    {
+      "id": "i_water_snake",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Fish catching repeats the Uncommon.",
+      "suggestion": "'Swam into the garden pond, counted the goldfish, and left a polite note saying it would be back on Tuesday.'"
+    },
+    {
+      "id": "i_barn_spider",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Writing a word in a web above the pigsty is a direct echo of a famous copyrighted children's novel character (a barn spider).",
+      "suggestion": "'Spun a web across the barn door so strong that the farmer's hat stayed hanging in it all winter, like a coat peg.'"
+    },
+    {
+      "id": "i_black_and_gold_garden_spider",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Writer of the Zigzag' describes the Rare's zigzag, not the balloon Legendary.",
+      "suggestion": "'Argiope, Keeper of the Balloon'"
+    },
+    {
+      "id": "i_harvestman",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Stiltwalker' fits the Common stilt line; the Uncommon is bobbing.",
+      "suggestion": "'Stiltwalker' for the Common; 'Bobdancer' for the Uncommon."
+    },
+    {
+      "id": "x_scorpion_arachnid",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Shoelurker' describes the Common's shoe line, not the babies-on-back line.",
+      "suggestion": "'Babyjacket'"
+    },
+    {
+      "id": "spider",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names shifted: 'Eightlegs' on the bath line, 'Bathtubber' on the ceiling-drop line, 'Ceilingdangler' on the door-web line.",
+      "suggestion": "'Bathtubber' for the Common; 'Ceilingdangler' for the Uncommon; 'Doorwebber' for the Rare."
+    },
+    {
+      "id": "spider",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Eight-Leg Pounce' is a single action on a 45% x3 move.",
+      "suggestion": "'Eight-Leg Patter'"
+    },
+    {
+      "id": "spider",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'church tower' brings a religious building in; a clock tower works the same.",
+      "suggestion": "'Spun a single silk thread from the clock tower to the bakery, and the whole town queued to walk along it.'"
+    },
+    {
+      "id": "i_wolf_spider",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Babies on its back repeats the Rare, plus a sprint win.",
+      "suggestion": "'Stared down a torch beam on the lawn at night until the torch batteries ran out.'"
+    },
+    {
+      "id": "i_leatherback_turtle",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Turtles eating plastic bags is a real cause of death; playing it as grumpiness makes light of a sad fact for children.",
+      "suggestion": "'Swallows jellyfish whole, then burps so loudly underwater that the whales check their sonar.'"
+    },
+    {
+      "id": "i_leatherback_turtle",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Jellyfish eating again (Common and Rare), and the Epic name 'Ocean Crossing' fits the Legendary.",
+      "suggestion": "'Paddled up the river by mistake and sat in the town fountain until the lifeguards drove it back to sea in a paddling pool.'"
+    },
+    {
+      "id": "i_leatherback_turtle",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "True fact (returns to its own beach) with no punchline.",
+      "suggestion": "'Swam across the entire ocean and back to lay its eggs on the same beach where it hatched, and still complained that the sand had moved.'"
+    },
+    {
+      "id": "i_leatherback_turtle",
+      "field": "moves.kit.tongue_snare",
+      "severity": "medium",
+      "issue": "'Jelly Snatch' is a stun; 'snatch' promises a drain.",
+      "suggestion": "'Jellyfish Jumpscare'"
+    },
+    {
+      "id": "i_mud_turtle",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Mud burying also at Common and Legendary; Epic is the most distinct of the three, so this is a light touch.",
+      "suggestion": "Change the Legendary to a hinge-shell achievement, e.g. 'Shut its shell on a curious fox's nose and kept it shut until the fox said sorry.'"
+    },
+    {
+      "id": "turtle",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Slowness repeats the Uncommon.",
+      "suggestion": "'Has lived for a hundred and fifty years and outlived four garden sheds, two ponds and a very confident hare.'"
+    },
+    {
+      "id": "turtle",
+      "field": "moves.kit.tongue_snare",
+      "severity": "medium",
+      "issue": "'Worm Snatch' is a stun; 'snatch' promises a drain.",
+      "suggestion": "'Shell Pop Startle'"
+    },
+    {
+      "id": "x_alligator_toy",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of x_dinosaur_toy L (survived the washing machine and the dog) and x_crocodile_toy L (still has all its plastic teeth).",
+      "suggestion": "'Floated out of the bath, down the drain and out to sea, and came back in a fisherman's net a year later with a seagull feather in its mouth.'"
+    },
+    {
+      "id": "x_alligator_toy",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of x_dinosaur_toy E ('Led every plastic dinosaur in the playroom...'), same 'Led every toy' frame.",
+      "suggestion": "'Floated so menacingly in the paddling pool that every rubber duck in the garden capsized itself.'"
+    },
+    {
+      "id": "x_alligator_toy",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Squeakjaw' on the floating line and 'Bathtub Gator' on the squeak line.",
+      "suggestion": "'Bathtub Gator' for the Common; 'Squeakjaw' for the Uncommon."
+    },
+    {
+      "id": "x_crocodile_toy",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same 'favourite of generations, still has all its plastic teeth' premise as x_alligator_toy L and x_dinosaur_toy L.",
+      "suggestion": "'Was lost behind the radiator for ten years and came out with a perfectly toasted grin, demanding its old spot on the bed.'"
+    },
+    {
+      "id": "x_dinosaur_toy",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "'Led every plastic dinosaur' frame and near-copy of x_alligator_toy E.",
+      "suggestion": "'Got stuck in the vacuum cleaner and roared every time it was switched on, so the hallway has not been cleaned in a month.'"
+    },
+    {
+      "id": "x_dinosaur_toy",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of x_alligator_toy L (survived washing machine, dog...).",
+      "suggestion": "'Was buried in the sandpit by a toddler and dug up years later by the same toddler, now grown up, who screamed that they had found a real fossil.'"
+    },
+    {
+      "id": "x_dinosaur_toy",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Rugstomper' does not describe the lost-tail Rare.",
+      "suggestion": "'Tailseeker'"
+    },
+    {
+      "id": "x_aphid",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names swapped: 'Rosesucker' on the ant-milking line and 'Antsfriend' on the pregnant-babies line; Common 'Greenfly' is just the object name.",
+      "suggestion": "'Rosesucker' for the Common; 'Antsfriend' for the Uncommon; 'Bunchbreeder' for the Rare."
+    },
+    {
+      "id": "x_aphid",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Population boom repeats the Rare and Epic.",
+      "suggestion": "'Dripped so much honeydew on one parked car that the owner needed a week to open the door, and the ants moved into the glovebox.'"
+    },
+    {
+      "id": "x_axolotl",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Smiling repeats the Common.",
+      "suggestion": "'Gulped down a whole worm so fast with its suction mouth that the worm is still asking what happened.'"
+    },
+    {
+      "id": "x_bearded_dragon",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Beardpuffer' on the heat-lamp line and 'Heatlamp Hog' on the beard line.",
+      "suggestion": "'Heatlamp Hog' for the Common; 'Beardpuffer' for the Rare."
+    },
+    {
+      "id": "x_bearded_dragon",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Beard puffing repeats the Rare; the Legendary heat lamp repeats the Common.",
+      "suggestion": "'Escaped into the airing cupboard and ate every cricket in the house, and the family slept through a whole night for the first time in years.'"
+    },
+    {
+      "id": "x_beehive",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Third 'honey for the whole village' legendary (see bee L, honeycomb L).",
+      "suggestion": "'Sent out a swarm so big that it moved into the school bell tower, and the bell now buzzes at the end of every lesson.'"
+    },
+    {
+      "id": "x_beehive",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Near-copy of x_honeycomb U ('perfect hexagon... won't stop showing off').",
+      "suggestion": "'Air-conditions itself on hot days by having every bee fan its wings at the door, and the neighbours have asked to borrow it.'"
+    },
+    {
+      "id": "x_honeycomb",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Third 'honey for the village' legendary.",
+      "suggestion": "'Was found in a sealed jar after a thousand years, and the honey inside was still good enough for toast.'"
+    },
+    {
+      "id": "x_chameleon_lizard",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of i_african_chameleon E (flashed angry colours at a rival, tree looked like a disco) and the Common eye line near-copies i_african_chameleon C.",
+      "suggestion": "'Sat on a tartan blanket and tried so hard to match it that it went home with a headache.'"
+    },
+    {
+      "id": "x_chameleon_lizard",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Near-copy of i_african_chameleon C (one eye at you, one elsewhere).",
+      "suggestion": "'Grips the curtain rail with its plier feet and refuses to let go at bedtime.'"
+    },
+    {
+      "id": "x_chameleon_lizard",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'the Colour Wizard' does not describe the tongue-shot Legendary.",
+      "suggestion": "'Kameleonie, Tongue Across the Room'"
+    },
+    {
+      "id": "x_chrysalis",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Opening into a butterfly repeats the Epic.",
+      "suggestion": "'Hung under the car wing mirror all winter and travelled six hundred miles, then opened up in a completely different town.'"
+    },
+    {
+      "id": "x_chrysalis",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Wigglebox' fits the Common wiggle, not the gold-dots Rare.",
+      "suggestion": "'Goldspeckle'"
+    },
+    {
+      "id": "x_cicada",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Seventeen-year emergence repeats the Epic.",
+      "suggestion": "'Sang so loudly in the town square that the ice-cream van, the school bell and the fire siren all gave up and went home.'"
+    },
+    {
+      "id": "x_cocoon",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Long silk thread repeats the Rare (end of the street and back).",
+      "suggestion": "'Hatched into a moth in the middle of a wedding, flew out of the bride's bouquet and landed on the cake. The photographer got a promotion.'"
+    },
+    {
+      "id": "x_dinosaur",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'came out only to complain about the noise' repeats i_isopod L's punchline.",
+      "suggestion": "'Survived the end of the dinosaurs by hiding in a very deep cave, and came out to find that everyone had turned into chickens.'"
+    },
+    {
+      "id": "x_dinosaur",
+      "field": "moves.kit.tongue_snare",
+      "severity": "medium",
+      "issue": "'Swamp Tongue Snatch' is a stun; 'snatch' promises a drain, and a tongue grab does not fit a big dinosaur.",
+      "suggestion": "'Swamp Roar Startle'"
+    },
+    {
+      "id": "x_earwig",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Good real fact (mother licks eggs clean) but no punchline.",
+      "suggestion": "'Guarded its eggs under a stone all winter and licked every one clean daily, then told the babies to tidy their own rooms.'"
+    },
+    {
+      "id": "x_firefly",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Heart-warming but no comic turn.",
+      "suggestion": "'Blinked so brightly in the forest that the lost hikers followed it all the way home, then it went straight back for its sandwich.'"
+    },
+    {
+      "id": "x_firefly",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Thousand Lights' implies a flash (stun) and many hits; the spectral form poisons and it is one 210% hit.",
+      "suggestion": "'Midsummer Lantern'"
+    },
+    {
+      "id": "x_flea",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Jumping at Common, Rare and Legendary; the Rare name 'Itchmaker' does not fit the jump line.",
+      "suggestion": "'Moved into the cat's collar and made it scratch so hard it rang its own bell all night.'"
+    },
+    {
+      "id": "x_fly",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Near-copy of bee C (bumps the window, open door beside it).",
+      "suggestion": "'Throws up a tiny drop on your toast before eating it, because it has no teeth and no manners.'"
+    },
+    {
+      "id": "x_fly",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Foodlander' does not describe the newspaper-dodge line.",
+      "suggestion": "'Swatdodger'"
+    },
+    {
+      "id": "x_gnat",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Gnat cloud repeats the Common's little cloud.",
+      "suggestion": "'Followed a cyclist all the way up the hill, and he arrived at the top with a moustache he did not have before.'"
+    },
+    {
+      "id": "x_housefly",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Names shifted by one rarity: 'Sugarstomper' (C) on lampshade line, 'Lampcircler' (U) on leg-rubbing, 'Rubhands' (R) on tasting with feet.",
+      "suggestion": "'Lampcircler' for the Common; 'Rubhands' for the Uncommon; 'Sugarstomper' for the Rare."
+    },
+    {
+      "id": "x_housefly",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Circling the lampshade near-copies x_moth_insect C (bumps the same lamp all night).",
+      "suggestion": "'Lands on the butter the moment the lid comes off, then walks off leaving footprints.'"
+    },
+    {
+      "id": "x_hornet",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Vespa' is also a well-known scooter brand; fine as a genus, but the brand reading is strong.",
+      "suggestion": "'Vespina, the Golden Giant'"
+    },
+    {
+      "id": "x_louse",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Fact slip: head lice cannot hop or jump; they crawl from head to head. Rare name 'Hairhopper' and legend move 'Hair Hop' repeat the error.",
+      "suggestion": "'Crawled from one head to another during story time, when two children leaned in to see the pictures. Nobody saw a thing.'"
+    },
+    {
+      "id": "x_louse",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Hairhopper' repeats the hopping fact slip.",
+      "suggestion": "'Headhitcher'"
+    },
+    {
+      "id": "x_louse",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Hair Hop' repeats the hopping slip.",
+      "suggestion": "'Head Hitch Headbutt'"
+    },
+    {
+      "id": "x_monitor_lizard",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Standing to look over the garden fence near-copies i_indian_cobra L, and has no punchline.",
+      "suggestion": "'Swam out to a fishing boat, climbed aboard and ate all the bait, then sunbathed on the deck while the fisherman rowed it home.'"
+    },
+    {
+      "id": "x_monitor_lizard",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Longclaw' is also a famous sword from a fantasy TV series and does not describe the swimming line.",
+      "suggestion": "'Swimtail'"
+    },
+    {
+      "id": "x_newt",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Near-copy of i_common_newt C (wanders out of the pond, gets lost under the shed).",
+      "suggestion": "'Sits at the bottom of the pond for so long that the fish think it is an ornament.'"
+    },
+    {
+      "id": "x_newt",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Crest showing off near-copies i_common_newt U.",
+      "suggestion": "'Shed its whole skin in one go and ate it, because nothing in the pond goes to waste.'"
+    },
+    {
+      "id": "x_praying_mantis",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Near-copy of i_mantis U ('Turns its head right round to look at you') and its Common echoes i_mantis C (praying arms).",
+      "suggestion": "'Sways gently from side to side like a leaf in the wind, even when there is no wind at all.'"
+    },
+    {
+      "id": "x_praying_mantis",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Statue stillness in a rose bush near-copies i_mantis R/L (waits perfectly still for flies).",
+      "suggestion": "'Laid an egg case on the shed door that hatched two hundred tiny mantises, and the shed has been very well guarded ever since.'"
+    },
+    {
+      "id": "x_salamander",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of i_european_fire_salamander L (walked out of a campfire unharmed).",
+      "suggestion": "'Crawled into a wet boot by the back door and lived there all winter, and the boot was never worn again.'"
+    },
+    {
+      "id": "x_silverfish",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names swapped: 'Bookmuncher' on the dash line and 'Bathtubdasher' on the book-glue line.",
+      "suggestion": "'Bathtubdasher' for the Common; 'Bookmuncher' for the Uncommon."
+    },
+    {
+      "id": "x_silverfish",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Book-glue eating at Uncommon, Epic and Legendary.",
+      "suggestion": "'Wriggled so fast across the bathroom tiles that the cat fell into the bath trying to catch it.'"
+    },
+    {
+      "id": "x_spider_egg",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Hatching repeats the Epic burst; name says 'Mother of Hundreds' while the lore says a thousand, and an egg sac is not a mother.",
+      "suggestion": "'Sent a thousand spiderlings floating off on silk threads, and one landed on the weather forecaster's nose live on TV.' Rename Legendary 'Ovum, Launcher of a Thousand'."
+    },
+    {
+      "id": "x_stick_insect",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Disguise at Common, Rare, Epic and Legendary.",
+      "suggestion": "'Laid a hundred eggs that looked like seeds, and the gardener planted them all in a pot. The pot grew legs.'"
+    },
+    {
+      "id": "x_stick_insect",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Nightnibbler Twig' is nearly the same as x_mosquito R 'Nightnibbler'.",
+      "suggestion": "'Leafgobbler'"
+    },
+    {
+      "id": "x_t_rex",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Short arms repeat the Common.",
+      "suggestion": "'Was the biggest meat-eater the world had ever seen, and its fossil now has to share a museum hall with a pigeon.'"
+    },
+    {
+      "id": "x_termite",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Eating wood from the inside repeats the Rare (chair) and Common (skirting board); name 'Architect of the Savannah' describes the Epic mound, not the barn.",
+      "suggestion": "'Built a mound so big in the savannah that a giraffe used it as a scratching post and an elephant used it as a chair.'"
+    },
+    {
+      "id": "x_tick",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Bloodbag' is needlessly gory for a kids' game.",
+      "suggestion": "'Peaswell'"
+    },
+    {
+      "id": "x_triceratops",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Scaring off meat-eaters repeats the Legendary.",
+      "suggestion": "'Sat down on a fern meadow for lunch and squashed it so flat that the valley became a football pitch.'"
+    },
+    {
+      "id": "x_triceratops",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Ferns grow low, not at the top of trees.",
+      "suggestion": "'Pushed over a tree with its horns just to get to the juicy leaves at the top.'"
+    },
+    {
+      "id": "x_wasp_nest",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Wasp Wall' does not describe the summer-fete line.",
+      "suggestion": "'Fete Wrecker'"
+    },
+    {
+      "id": "lizard",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Near-copy of w03 sulphur-crested cockatoo U ('Raises its yellow crest when it's excited, which is whenever it sees a bin') and w01 pug U (tail spins when excited, whenever it sees cheese).",
+      "suggestion": "'Drops its tail when a cat pounces, and the cat spends the afternoon guarding a wiggling tail while the lizard eats its biscuits.'"
+    },
+    {
+      "id": "x_toad_creature",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Puffing up to look bigger at a dog echoes w01 pomeranian R (puffs itself up whenever a bigger dog walks past).",
+      "suggestion": "'Sheds its skin once a week and eats it straight away, because it hates leaving a mess on the patio.'"
+    },
+    {
+      "id": "i_leafhopper",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Leaps off and lands on the greenhouse roof: close to w01 ibizan hound R (lands on the shed roof) and w02 chinchilla R, and another jump line.",
+      "suggestion": "'Sings to its friends by buzzing through the plant stem, so the tomato plant hums all afternoon and the gardener checks it for batteries.'"
+    },
+    {
+      "id": "x_scorpion_arachnid",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Near-copy of w03 stingray E ('Shuffled out of the sand with a hundred friends...') and the crowd-of-cousins Epic frame.",
+      "suggestion": "'Glowed under the campers' torches so brightly that they used it as a nightlight, until it moved into the sleeping bag.'"
+    },
+    {
+      "id": "i_green_lizard",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Same shape as i_sulphur_butterfly U ('Is so bright yellow that people think it's a dropped lemon sweet') and i_green_snake U.",
+      "suggestion": "'Grabs the end of a blade of grass in its mouth and pulls until it pings, just to hear the noise.'"
+    },
+    {
+      "id": "x_t_rex",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Near-copy of x_dinosaur E (stomped across the valley, every pond rippled).",
+      "suggestion": "'Roared so loudly at a volcano that the volcano went quiet for a thousand years, out of politeness.'"
+    },
+    {
+      "id": "x_spider_egg",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Same 'wrapped in silk, looks like a little...' shape as x_cocoon U.",
+      "suggestion": "'Is hidden in the corner of the shed so cleverly that only the broom ever finds it.'"
+    },
+    {
+      "id": "x_slug_creature",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Same shape as caterpillar C ('Eats a hole in every leaf in the garden, then...').",
+      "suggestion": "'Rasps a perfect round window in every hosta leaf, then hides under the watering can.'"
+    },
+    {
+      "id": "i_banded_gecko",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Same shape as x_mosquito C (noise as you fall asleep, hides when you turn on the light).",
+      "suggestion": "'Chirps from behind the wardrobe every night, and stops the second anyone gets out of bed to look.'"
+    }
+  ]
+}

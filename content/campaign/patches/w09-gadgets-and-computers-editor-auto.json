@@ -1,0 +1,635 @@
+{
+ "calculator": {
+  "lore.epic": "Added up the school dinner bill and got a number so big that the canteen closed for a week to check it.",
+  "names.epic": "Canteen Bill Shock",
+  "lore.legendary": "Divided a birthday cake into thirty perfectly equal slices, and still had a crumb left over for itself.",
+  "names.legendary": "Professor Sumsworth, Cake Divider"
+ },
+ "x_fitness_tracker": {
+  "lore.epic": "Counted the whole stadium doing the wave as exercise, and told everyone they could skip PE for a year.",
+  "names.epic": "Stadium Wave Counter",
+  "lore.legendary": "Counted every step a sloth took in a whole year, all eleven of them, and awarded it a gold star.",
+  "names.legendary": "Coach Pulsebeat of the Sloth House"
+ },
+ "x_gps_device": {
+  "names.rare": "Lanejammer",
+  "lore.legendary": "Found a shortcut so clever that it went through the middle of next week. The family arrived before they set off."
+ },
+ "x_multimeter": {
+  "lore.epic": "Beeped its test so loudly in the school hall that every fire door swung open to see what was wrong.",
+  "names.epic": "Fire Door Fanfare",
+  "lore.legendary": "Tested a potato, found it had more power than the house, and now the family runs the telly on chips.",
+  "names.legendary": "Old Ohmsworth of the Potato Patch"
+ },
+ "x_compass": {
+  "lore.rare": "Points at the nearest lost thing instead of north. It has found four socks and a grandad.",
+  "names.rare": "Sockfinder",
+  "lore.epic": "Spun so hard on the school trip that the whole class walked in a circle for an hour and found their own coach.",
+  "names.epic": "Roundabout Ramble",
+  "lore.legendary": "Pointed north so firmly that it dragged its explorer all the way to the North Pole, still in his pyjamas.",
+  "moves.kit.turbo_mode": "True Bearing Boost"
+ },
+ "x_compass_small": {
+  "lore.rare": "Swings round to point at the nearest snack shop whenever its owner sighs.",
+  "names.rare": "Snackpointer",
+  "lore.epic": "Pointed the whole scout camp to the wrong hill, and they spent the night with some very surprised sheep.",
+  "names.epic": "Wrong Hill Camp",
+  "lore.legendary": "Was swallowed by a goose, which then flew straight north for a whole winter and never got lost once.",
+  "names.legendary": "Little Northstar of the Goose"
+ },
+ "i_magnetic_compass": {
+  "lore.rare": "Pulls every spoon on the ship towards it, so the crew eat their soup with their fingers.",
+  "names.rare": "Spoonpuller",
+  "lore.epic": "Pointed so firmly at a lighthouse that the whole fleet parked round it like cars at a supermarket.",
+  "names.epic": "Lighthouse Car Park",
+  "lore.legendary": "Steered a ship so straight that it sailed off the edge of the map, and the mapmaker had to add more sea."
+ },
+ "x_egg_timer": {
+  "lore.rare": "Turns itself over when nobody is watching, so every egg takes either one minute or an hour.",
+  "names.rare": "Flipsneak",
+  "lore.epic": "Ran its sand backwards at breakfast, and every boiled egg in the cafe turned raw again.",
+  "names.epic": "Backwards Breakfast",
+  "lore.legendary": "Timed an egg so perfectly that it hatched on the very last grain. The chick is called Three Minutes."
+ },
+ "x_kitchen_timer": {
+  "lore.epic": "Rang so loudly at the bake sale that every cake in the hall jumped and sank in the middle.",
+  "names.epic": "Sunken Cake Alarm",
+  "lore.legendary": "Ticked so steadily that the town hall clock started copying it, and the town now runs on kitchen time.",
+  "names.legendary": "Lady Dingwell, Keeper of Town Time",
+  "moves.ultimate": "Countdown Drama"
+ },
+ "x_stopwatch": {
+  "lore.epic": "Stopped at the exact moment the school race began, so sports day lasted until midnight.",
+  "names.epic": "Midnight Sports Day",
+  "lore.legendary": "Timed a snail racing a tortoise for three days and declared a draw. Both want a rematch.",
+  "names.legendary": "Coach Splitsecond of the Snail Race"
+ },
+ "x_stopwatch_sport": {
+  "lore.epic": "Beeped the start signal so early that the swimmers finished before the crowd had sat down.",
+  "names.epic": "False Start Frenzy",
+  "lore.legendary": "Timed a swimmer so fast that the pool water was still sloshing the next morning."
+ },
+ "x_stopwatch_timer": {
+  "lore.legendary": "Counted down to the end of the school day so loudly that the school bell retired.",
+  "names.legendary": "Lady Countdowna of the School Bell"
+ },
+ "x_pocket_watch": {
+  "lore.legendary": "Ran slow for so long that it is now exactly one day behind, and its owner has every birthday twice."
+ },
+ "x_pocket_watch_chain": {
+  "lore.legendary": "Swung its fob so steadily that a whole orchestra followed it like a conductor, and played better than ever.",
+  "names.legendary": "Lord Fobsworth the Conductor"
+ },
+ "desktop_pc": {
+  "lore.common": "Starts an update just as you sit down to play, and finishes just as you are called for dinner.",
+  "lore.epic": "Restarted to install one update and came back on a week later with a new wallpaper of a cat.",
+  "names.epic": "Weeklong Restart",
+  "lore.legendary": "Ran one game for so long without switching off that the characters went on holiday inside it."
+ },
+ "x_server": {
+  "lore.legendary": "Stored so many cat videos that it started purring, and the engineers now bring it a saucer of milk."
+ },
+ "x_server_rack": {
+  "lore.legendary": "Was unplugged for one second, and the whole town remembered how to talk to each other at dinner."
+ },
+ "dial_phone": {
+  "lore.legendary": "Got a wrong number so often that the family made friends with the caller, and she now comes for Sunday lunch.",
+  "moves.ultimate": "Midnight Caller"
+ },
+ "x_ceiling_fan_unit": {
+  "lore.legendary": "Spun so fast at a dinner party that the whole table, plates and all, lifted off and floated to pudding."
+ },
+ "x_extractor_fan": {
+  "names.common": "Rattlevent",
+  "names.uncommon": "Steamsucker",
+  "lore.epic": "Sucked so hard that it pulled the shower curtain, the bath mat and a rubber duck into the wall.",
+  "names.epic": "Rubber Duck Gulp",
+  "lore.legendary": "Sucked a whole thundercloud out of the bathroom after a long shower, and now it rains in the garden whenever grandad washes."
+ },
+ "x_space_heater_fan": {
+  "moves.ultimate": "Big Gust Blast",
+  "lore.epic": "Warmed the office so well that the plants grew bananas and the boss had to wear shorts.",
+  "names.epic": "Office Jungle",
+  "lore.legendary": "Was left on so long that the study now has its own little summer, with a deckchair and a sandcastle."
+ },
+ "x_tower_fan": {
+  "lore.uncommon": "Blows so hard that the curtains wave at the neighbours all night.",
+  "names.uncommon": "Curtainwaver",
+  "lore.rare": "Swivels to face whoever is talking and blows their words away before anyone hears.",
+  "names.rare": "Wordblower",
+  "lore.epic": "Swivelled so fast in the heatwave that it blew the washing line over three gardens.",
+  "lore.legendary": "Blew so steadily all summer that a kite has been flying in the bedroom since June."
+ },
+ "x_drone": {
+  "lore.epic": "Followed an ice-cream van all afternoon, and half the town followed the drone.",
+  "names.epic": "Ice Cream Chase"
+ },
+ "x_drone_controller": {
+  "lore.epic": "Flew its drones into the shape of a giant sandwich, and every seagull in the county came to the park."
+ },
+ "x_garage_remote": {
+  "lore.common": "Only works if you hold it out of the car window and wave it like a magic wand.",
+  "names.common": "Wandwaver"
+ },
+ "x_car_key_fob": {
+  "lore.common": "Is always in the other coat. Whichever coat you are wearing, it is in the other one.",
+  "names.common": "Othercoat",
+  "lore.epic": "Locked the car with the shopping, the dog and itself inside, and the dog honked the horn for help.",
+  "names.epic": "Dog Horn Rescue",
+  "lore.legendary": "Unlocked the car from the other side of town by mistake, and the car drove over to say hello.",
+  "moves.ultimate": "Car Park Chaos"
+ },
+ "x_key_fob": {
+  "lore.legendary": "Was swiped so often that it opened a door that did not exist, and the office now has a secret room.",
+  "moves.legend": "Access Denied Flash"
+ },
+ "x_keyring": {
+  "lore.epic": "Snapped open at the station, and every key rolled onto a different train to a different town.",
+  "names.epic": "Runaway Keys",
+  "lore.legendary": "Held so many keys that one opened a door nobody had found for a hundred years. Behind it was a spare key.",
+  "moves.ultimate": "Key Ring Riot"
+ },
+ "x_padlock_key": {
+  "lore.uncommon": "Turns in the lock perfectly, then refuses to come back out until somebody says thank you.",
+  "lore.epic": "Fitted every bike lock in the school shed, and the bikes swapped owners for a week.",
+  "names.epic": "Bike Shed Shuffle",
+  "lore.legendary": "Was lost so many times that it learned to walk home by itself, and now waits by the bike every morning.",
+  "moves.ultimate": "Rusty Lock Riddle"
+ },
+ "x_tv_remote_unit": {
+  "lore.common": "Changes the channel by itself the moment the football starts.",
+  "names.common": "Selfflicker",
+  "lore.epic": "Pressed its volume button by itself at midnight, and the whole street woke up to a cooking show.",
+  "names.epic": "Midnight Volume",
+  "lore.legendary": "Controlled the television so well that the presenters started waving at the family.",
+  "moves.ultimate": "Volume Max Mayhem"
+ },
+ "x_universal_remote": {
+  "lore.rare": "Switches the oven on whenever someone changes the channel, so dinner is always ready halfway through a film.",
+  "names.rare": "Ovenflicker"
+ },
+ "x_hearing_aid": {
+  "lore.uncommon": "Turns the birdsong up so loud in the garden that grandad nods along like it is a concert.",
+  "names.uncommon": "Birdsonger"
+ },
+ "x_curling_iron": {
+  "lore.legendary": "Curled a straight road into ringlets, and the bus now takes an hour to go one mile.",
+  "names.legendary": "Madame Bouclette of the Ring Road"
+ },
+ "x_hair_straightener": {
+  "lore.epic": "Straightened every child at the sleepover, and the curls were found next morning hiding under the bed.",
+  "lore.legendary": "Straightened the spiral staircase, and grandma now takes the slide down.",
+  "names.legendary": "Lady Sleekwell of the Staircase"
+ },
+ "x_electric_razor": {
+  "lore.epic": "Shaved the garden hedge into the shape of grandad by mistake, and grandad is very proud.",
+  "names.epic": "Hedgebuzz Topiary",
+  "lore.legendary": "Shaved a woolly sheep so neatly that the sheep now asks for the same cut every spring.",
+  "names.legendary": "Sir Buzzworth of the Sheep Pen"
+ },
+ "x_shaver": {
+  "lore.legendary": "Shaved a peach so smoothly that the greengrocer sold it as a nectarine.",
+  "names.legendary": "Old Foilsworth of the Fruit Stall"
+ },
+ "x_razor": {
+  "names.common": "Foamears",
+  "lore.rare": "Shaves one side of the face perfectly and leaves the other side for tomorrow.",
+  "names.rare": "Halfshaver",
+  "lore.epic": "Left so much foam in the bathroom that the family had a snowball fight before breakfast.",
+  "names.epic": "Foam Fight Morning",
+  "moves.kit.turbo_mode": "Fresh Foam Boost"
+ },
+ "x_massage_gun": {
+  "lore.epic": "Pounded the team so hard after the match that their legs kept running all night in their sleep.",
+  "names.epic": "Midnight Legs",
+  "lore.legendary": "Thumped the knot out of an old oak tree, and the tree stood up straight for the first time in a hundred years.",
+  "names.legendary": "Coach Thumper of the Oak"
+ },
+ "x_comb": {
+  "lore.epic": "Gave the whole class side partings on school photo day, and the photographer had to tilt the camera.",
+  "lore.legendary": "Combed a hedge into a perfect parting, and the birds now nest neatly on either side.",
+  "names.legendary": "Old Combsworth of the Hedge"
+ },
+ "x_hair_brush": {
+  "lore.uncommon": "Hides in the bathroom drawer under the hairdryer cord every morning, on purpose.",
+  "names.uncommon": "Drawerlurker",
+  "lore.epic": "Brushed the dog so hard that there was enough fluff to knit a second dog.",
+  "names.epic": "Second Dog Fluff",
+  "lore.legendary": "Brushed the frizz out of a thundercloud, and now it rains in perfectly straight lines.",
+  "names.legendary": "Lady Bristlewell of the Clouds"
+ },
+ "x_makeup_brush": {
+  "lore.epic": "Tickled every nose before the ballet, and the whole cast sneezed in time with the music.",
+  "names.epic": "Sneezing Ballet",
+  "lore.legendary": "Painted rosy cheeks on a snowman so well that it blushed and melted.",
+  "names.legendary": "Madame Blushwell of the Snowman"
+ },
+ "i_face_powder": {
+  "lore.legendary": "Powdered the nose of a clown so well that it vanished, and the circus is still looking for it.",
+  "names.legendary": "Lady Powderpuff, Nose Hider"
+ },
+ "x_electric_toothbrush": {
+  "names.common": "Splatterfoam",
+  "names.uncommon": "Buzzbrush",
+  "lore.epic": "Buzzed so hard that it shook every picture off the bathroom wall and the mirror off its hook.",
+  "lore.rare": "Buzzes every thirty seconds, and the dog has learned to change rooms each time.",
+  "lore.legendary": "Brushed the teeth of a crocodile at the zoo, and now the crocodile smiles at every visitor.",
+  "names.legendary": "Old Brushworth of the Zoo"
+ },
+ "x_toothbrush_holder": {
+  "lore.epic": "Swapped every toothbrush on the family holiday, and nobody noticed until dad used the one for the dog.",
+  "names.epic": "Brush Swap Holiday",
+  "lore.legendary": "Grew so much gunk in the bottom that a tiny garden appeared, and grandma now waters it."
+ },
+ "x_contact_lens_case": {
+  "lore.epic": "Swapped lenses between two friends at the sleepover, and each saw the world exactly like the other.",
+  "names.epic": "Sleepover Swap",
+  "lore.legendary": "Kept a pair of lenses so clean that they can see into next week. Its owner always knows what is for dinner.",
+  "names.legendary": "Little Lenskeeper of Next Week"
+ },
+ "x_glasses_case": {
+  "lore.legendary": "Snapped shut on a seagull stealing chips, and the seagull returned every chip with a little bow.",
+  "names.legendary": "Old Spectaclebox of the Pier",
+  "moves.kit.turbo_mode": "Snap-Ready Boost"
+ },
+ "i_hard_disc": {
+  "lore.epic": "Spun so fast during the backup that it whirred off the desk and did a lap of the classroom.",
+  "names.epic": "Classroom Lap"
+ },
+ "x_hard_drive": {
+  "lore.rare": "Hides your homework in a folder called Spare, inside a folder called Old, inside one called Do Not Open.",
+  "names.rare": "Folderburier",
+  "lore.epic": "Spun up so loudly in the office that everyone thought a plane was landing and hid under their desks.",
+  "names.epic": "Runway Whirr",
+  "lore.legendary": "Spun for so long without stopping that it now powers the desk lamp all by itself."
+ },
+ "x_external_hard_drive": {
+  "lore.rare": "Refuses to eject until you have said please three times. It counts.",
+  "names.rare": "Ejectrefuser",
+  "lore.epic": "Played fifty years of sports day photos on the hall screen at once, and the teachers saw their old haircuts.",
+  "names.epic": "Haircut Slideshow"
+ },
+ "x_flash_drive": {
+  "lore.legendary": "Held so many files that it got heavy, and now needs its own lanyard and a small trolley."
+ },
+ "x_usb_key": {
+  "lore.rare": "Shows a different file every time it is plugged in. The school project became a recipe for flapjacks.",
+  "names.rare": "Fileshuffler",
+  "lore.epic": "Was plugged into the school computer and changed every screen in the building to a photo of a goat.",
+  "names.epic": "Goat Screensaver",
+  "lore.legendary": "Went in the right way round on the first try, once. People still talk about it.",
+  "names.legendary": "Little Byteworth, First Try"
+ },
+ "x_usb_stick": {
+  "lore.rare": "Copies every file it touches and hides the word snack somewhere in each one.",
+  "names.rare": "Snacksneaker",
+  "lore.epic": "Printed every essay at the library at once, and the printers buried the librarian up to her glasses.",
+  "lore.legendary": "Was chewed so much during exams that its teeth marks are now shaped like the answers.",
+  "names.legendary": "Little Stickworth, Exam Chewer"
+ },
+ "x_sd_card": {
+  "lore.rare": "Pops out of the camera at the exact moment the deer walks past.",
+  "names.rare": "Popoutcard",
+  "lore.legendary": "Caught a hedgehog sneaking into the kitchen every night, and the family now leave it a bowl and a tiny napkin."
+ },
+ "x_memory_card": {
+  "lore.common": "Goes into the camera upside down every time, and the camera sulks.",
+  "names.common": "Wrongsider",
+  "lore.uncommon": "Deletes the best photo first whenever it is nearly full, and keeps all the blurry ones.",
+  "names.uncommon": "Bestdeleter",
+  "lore.legendary": "Was found in a seagull nest, full of photos of the whole coastline, all taken by the seagull.",
+  "names.legendary": "Little Megabyte of the Nest"
+ },
+ "x_sim_card": {
+  "lore.legendary": "Made a call from the bottom of the sea, and the fish on the line asked for the football scores.",
+  "names.legendary": "Little Simsworth of the Deep",
+  "lore.epic": "Was swapped into the wrong phone, and grandma spent a week answering the football team chat."
+ },
+ "x_cpu": {
+  "lore.legendary": "Thought so fast that it finished the game before the player pressed start, then asked for a harder one."
+ },
+ "x_motherboard": {
+  "lore.rare": "Has a tiny city on it where the electricity takes the long way round, so the computer is always late.",
+  "lore.epic": "Was built in upside down by the computer club, and now every game plays from the ceiling.",
+  "names.epic": "Upside Down Build",
+  "lore.legendary": "Has so many lights blinking that passing ships now use it as a lighthouse.",
+  "names.legendary": "Grand Circuitra the Lighthouse"
+ },
+ "x_graphics_card": {
+  "lore.legendary": "Drew a sunset on the screen so real that the family put on sun cream."
+ },
+ "x_ram_stick": {
+  "lore.rare": "Remembers everything you typed, including the email you deleted, and reads it out at dinner.",
+  "names.rare": "Tattlestick",
+  "lore.epic": "Was fitted in every school computer, and they started reminding the teachers of things, loudly.",
+  "names.epic": "Know-It-All Upgrade",
+  "lore.legendary": "Remembers where every lost sock in the house has gone, and the socks are not happy about it.",
+  "names.legendary": "Little Ramsworth of Lost Socks"
+ },
+ "x_docking_station": {
+  "lore.legendary": "Connected so many things at once that the desk lamp started sending emails."
+ },
+ "x_usb_hub": {
+  "lore.legendary": "Charged every gadget at a sleepover at once, and the house glowed so brightly that the owls complained.",
+  "names.legendary": "Grand Plugsy of the Sleepover"
+ },
+ "keyboard": {
+  "lore.legendary": "Typed so fast in one night that the letters wore off, and its owner now types by guessing. The emails are better.",
+  "moves.ultimate": "Keysmash Crescendo"
+ },
+ "typewriter": {
+  "names.legendary": "Old Clackworth the Ship Caller",
+  "lore.legendary": "Dinged at the end of a line so loudly that a ship in the harbour thought it was a bell and came in to dock."
+ },
+ "x_chromebook": {
+  "lore.legendary": "Saved the homework to the cloud so hard that it rained worksheets on the playground for a week.",
+  "names.legendary": "Little Lessonbook of the Clouds"
+ },
+ "x_netbook": {
+  "lore.epic": "Fell asleep on a train and woke up three countries away with its report written in all three languages.",
+  "names.epic": "Three Country Snooze",
+  "lore.legendary": "Wrote a novel so slowly on its tiny keys that the main character grew up and moved out."
+ },
+ "mouse": {
+  "lore.legendary": "Was pushed so far across the desk that it reached the kitchen, and now clicks the kettle on.",
+  "names.legendary": "Lord Clickington of the Kitchen"
+ },
+ "x_cordless_phone": {
+  "lore.legendary": "Rang from inside the freezer, where it had been keeping cool all summer, with full battery.",
+  "names.legendary": "Lady Ringwell of the Freezer"
+ },
+ "x_flip_phone": {
+  "lore.rare": "Pulls its aerial out so far that it tunes in to the ice-cream van and plays the jingle at bedtime.",
+  "lore.legendary": "Was found in a drawer after fifteen years with one bar of battery and three unread texts from grandma."
+ },
+ "x_pager": {
+  "lore.legendary": "Buzzed so urgently that the doctor ran across the hospital and arrived before the buzz had finished."
+ },
+ "x_satellite_phone": {
+  "lore.epic": "Rang during the expedition photo on the ice, and a polar bear answered it.",
+  "names.epic": "Polar Bear Hello",
+  "lore.legendary": "Called home from the top of the highest mountain to ask what was for tea, and was put on hold.",
+  "names.legendary": "Captain Farline of the Summit",
+  "moves.legend": "Damp Battery Pong"
+ },
+ "x_walkie_talkie": {
+  "lore.legendary": "Picked up a message from a passing pirate ship, and the children have been learning sea shanties ever since."
+ },
+ "x_walkie_talkie_handset": {
+  "lore.rare": "Broadcasts every sneeze its owner makes to the whole festival crew.",
+  "names.rare": "Sneezecaster",
+  "lore.epic": "Joined a taxi company channel by mistake, and the stewards sent forty taxis to the stadium.",
+  "names.epic": "Forty Taxi Muddle",
+  "lore.legendary": "Said over and out so firmly that the match stopped and the whole crowd went home."
+ },
+ "x_bluetooth_earpiece": {
+  "lore.epic": "Paired with every phone on the train at once, and the whole carriage heard one man ordering pizza.",
+  "names.epic": "Carriage Pizza Order",
+  "lore.legendary": "Took a call for its owner while he slept and booked him a holiday he still has not unpacked from."
+ },
+ "x_earpiece": {
+  "lore.epic": "Picked up a football commentary during the big show, and the actors cheered a goal in the sad scene.",
+  "names.epic": "Goal in Act Two",
+  "lore.legendary": "Whispered the lines so well that the actor fell asleep on stage and still gave his best performance ever."
+ },
+ "tablet": {
+  "lore.legendary": "Got so many sticky fingerprints that it now unlocks itself for any child in the family."
+ },
+ "router": {
+  "names.common": "Hallwaydisco"
+ },
+ "x_3d_printer": {
+  "lore.rare": "Prints a tiny copy of anything it sees, so the house is now full of tiny cats.",
+  "names.rare": "Minicopier",
+  "lore.epic": "Printed a dinosaur overnight so big that it would not fit through the door, so the school fair moved into the garage.",
+  "names.epic": "Garage Dinosaur"
+ },
+ "x_label_printer": {
+  "lore.legendary": "Labelled the dog DOG so neatly that the dog finally knows what it is and has become very proud.",
+  "names.legendary": "Lady Labelworth of the Kennel"
+ },
+ "x_plotter": {
+  "lore.rare": "Draws every plan a little bit bigger, so the shed it planned came out the size of a barn.",
+  "names.rare": "Bigdrawer",
+  "lore.epic": "Kept drawing after the paper ran out, across the floor, up the wall and onto the ceiling.",
+  "names.epic": "Wall-to-Ceiling Plan",
+  "lore.legendary": "Drew a bridge so long that it reached the next town before anyone said stop. The towns now share a picnic."
+ },
+ "printer": {
+  "lore.legendary": "Printed one page so slowly that its owner grew a beard waiting, then printed a picture of the beard."
+ },
+ "x_scanner_bed": {
+  "lore.rare": "Scans your hand whenever you lean on it and prints a ghostly glove.",
+  "names.rare": "Handcopier",
+  "lore.epic": "Scanned the family albums so fast that every photo came out wonky, and now everyone stands slightly tilted.",
+  "names.epic": "Wonky Album",
+  "lore.legendary": "Scanned the cat by accident and printed a copy so lifelike that the dog has chased it for a week."
+ },
+ "x_drawing_tablet": {
+  "lore.legendary": "Drew a door on the screen so well that the cat walked into the monitor looking for the other side."
+ },
+ "x_e_ink_tablet": {
+  "lore.uncommon": "Freezes on the last page you read, so the ending of every book stays a mystery for a week.",
+  "names.uncommon": "Pagefreezer",
+  "names.rare": "Chargerdodger",
+  "lore.rare": "Lasts so long on one charge that it forgot what a charger looks like and hides from it.",
+  "lore.legendary": "Turned its pages so slowly at the beach that the tide came in and read the last chapter first."
+ },
+ "x_amplifier": {
+  "lore.common": "Has a volume knob that somebody always turns up just as the baby falls asleep.",
+  "lore.legendary": "Played one chord so loud at the school concert that the echo is still going round the gym.",
+  "moves.legend": "Dusty Valve Whiff"
+ },
+ "x_amplifier_speaker": {
+  "lore.rare": "Plays the bass so low that only the dog can hear it, and the dog has started dancing.",
+  "names.rare": "Dogdancer",
+  "lore.legendary": "Played a bass note so deep that the moles in the garden came up to ask the name of the song.",
+  "moves.ultimate": "Overheated Bass Blast"
+ },
+ "x_equalizer": {
+  "lore.epic": "Flashed its light bars so fast at the school disco that the whole hall danced in slow motion.",
+  "names.epic": "Slow Motion Disco",
+  "lore.legendary": "Turned the treble up so high that the windows started singing along in harmony."
+ },
+ "x_receiver": {
+  "lore.epic": "Found a station playing only bagpipes and got stuck on it for the whole family party.",
+  "names.epic": "Bagpipe Party",
+  "lore.legendary": "Tuned in to a station so far away that it picked up a radio show hosted by a lighthouse cat."
+ },
+ "i_muzzle": {
+  "lore.epic": "Kept every dog at the vet so calm that the vet fell asleep in the waiting room instead.",
+  "lore.legendary": "Calmed a dog so completely that the postman now stops for a cup of tea.",
+  "names.legendary": "Old Gentlemuzzle of the Doorstep"
+ },
+ "i_oxygen_mask": {
+  "lore.epic": "Dropped down during the drill, and every passenger tried it on as a party hat.",
+  "lore.legendary": "Was worn by the dragon in the school play to stop it breathing on the front row. It got a standing ovation.",
+  "names.legendary": "Captain Airwell of the School Play"
+ },
+ "x_ski_goggles": {
+  "lore.legendary": "Saw through a blizzard so clearly that it spotted a yeti, who asked to borrow them."
+ },
+ "x_smart_glasses": {
+  "lore.epic": "Translated a dog barking at the tech fair, and the dog was very rude about the robots.",
+  "names.epic": "Rude Dog Translator"
+ },
+ "i_snorkel": {
+  "lore.legendary": "Breathed so calmly on the reef that a turtle mistook it for a friend and took it home for tea."
+ },
+ "x_snorkel_mask": {
+  "lore.epic": "Fogged up so badly that its wearer swam to a different beach and sat down at the wrong picnic.",
+  "names.epic": "Wrong Beach Picnic",
+  "lore.legendary": "Showed a child a fish so friendly that the fish now waits by the jetty every summer and waves."
+ },
+ "x_swim_goggles": {
+  "lore.epic": "Leaked so badly at the gala that a goldfish moved in halfway down the pool.",
+  "names.epic": "Goldfish Goggles",
+  "lore.legendary": "Saw so clearly underwater that it found every hair clip ever lost in the pool, all four thousand of them."
+ },
+ "x_vr_headset": {
+  "lore.legendary": "Took grandma to the Moon in virtual reality, and she has refused to come back for tea."
+ },
+ "x_rc_helicopter": {
+  "names.epic": "Living Room Whirlwind"
+ },
+ "i_oil_filter": {
+  "lore.epic": "Burst during an oil change and turned the whole garage into a slip-and-slide for the afternoon.",
+  "names.epic": "Garage Slip-and-Slide",
+  "lore.legendary": "Cleaned the oil of an old tractor so well that it now overtakes the postman on hills."
+ },
+ "i_pencil_sharpener": {
+  "lore.legendary": "Sharpened one pencil so far that only the rubber was left, and it wrote one perfect full stop."
+ },
+ "x_sharpener": {
+  "lore.epic": "Sharpened the restaurant knives so well that the carrots started slicing themselves in a panic.",
+  "names.epic": "Carrot Panic",
+  "lore.legendary": "Sharpened a butter knife so finely that it can slice a soap bubble in half without popping it."
+ },
+ "i_rubber_eraser": {
+  "lore.epic": "Rubbed out the mistakes so hard that it rubbed out the homework, the desk and half of Tuesday.",
+  "names.epic": "Lost Tuesday"
+ },
+ "x_eraser": {
+  "lore.epic": "Wiped the board so clean that it wiped off the timetable, and there were no lessons until lunch.",
+  "lore.legendary": "Wiped a sum off the board so firmly that nobody in town could do long division for a week."
+ },
+ "x_caulk_gun": {
+  "lore.epic": "Sealed every bath in the block of flats, and also the doors, the windows and the builder.",
+  "lore.legendary": "Sealed a leaky boat so well that it now floats upside down, just to show off.",
+  "names.legendary": "Old Sealantworth of the Harbour"
+ },
+ "x_glue_gun": {
+  "lore.epic": "Glued every decoration for the school fair, and the headteacher to the bunting.",
+  "moves.legend": "Glue Stick Slam"
+ },
+ "x_hinge": {
+  "names.rare": "Shedslammer",
+  "lore.legendary": "Creaked the garden gate open so slowly that the postman retired before it finished."
+ },
+ "x_ink_pad": {
+  "lore.rare": "Prints every stamp backwards, but only when the boss is watching.",
+  "names.rare": "Backwardsinker",
+  "lore.epic": "Stamped the post office cat by mistake, and the cat was posted to the seaside.",
+  "names.epic": "Posted Cat",
+  "lore.legendary": "Has inked so many fingerprints that it can tell who ate the biscuits from the crumbs on their thumb."
+ },
+ "x_stamp": {
+  "lore.epic": "Stamped APPROVED on a plan for a slide from the office roof, and the slide was built by Friday.",
+  "names.epic": "Rooftop Slide Approval",
+  "lore.legendary": "Thumped its approval so loudly that the whole town hall clapped. The plan was for a new bin.",
+  "names.legendary": "Old Thumpwell of the Town Hall",
+  "moves.ultimate": "Big Red Approval"
+ },
+ "i_switch": {
+  "lore.rare": "Switches off whatever is most exciting: the telly during a goal, the oven during a cake.",
+  "names.rare": "Spoilswitch",
+  "lore.epic": "Was flipped by a curious child in the control room, and every factory machine played a tune instead.",
+  "lore.legendary": "Turned off every light in town at once, and everybody found their missing slippers by starlight.",
+  "names.legendary": "Old Toggleworth of Lights Out"
+ },
+ "x_lighter": {
+  "lore.rare": "Hides in a different drawer every time a child walks into the kitchen.",
+  "names.rare": "Drawerdodger",
+  "lore.epic": "Clicked so loudly at the school fair that a flock of pigeons flew up and landed on the cake stall.",
+  "names.epic": "Pigeon Cake Panic",
+  "lore.legendary": "Went camping with grandad and was never needed, because grandad rubbed two sticks together for six hours instead.",
+  "moves.ultimate": "Flint Wheel Finale",
+  "moves.kit.turbo_mode": "Thumbwheel Boost"
+ },
+ "x_zippo": {
+  "lore.rare": "Clinks its lid in time with any song, so every sing-along gets a drum solo.",
+  "names.rare": "Drumlid",
+  "lore.epic": "Clacked its lid open and shut so fast at the campsite that every owl in the wood clacked back.",
+  "names.epic": "Owl Clack Chorus",
+  "lore.legendary": "Went round the world in an explorer's pocket and was never lit once, because he only used it to crack walnuts.",
+  "names.legendary": "Old Flintflip the Nutcracker",
+  "moves.ultimate": "Lid Clack Finale"
+ },
+ "x_nerf_gun": {
+  "lore.uncommon": "Fires a dart so softly that it lands right in front of the shooter, every single time.",
+  "names.uncommon": "Softshot",
+  "names.epic": "Cushion Fort Frenzy",
+  "lore.legendary": "Lost so many darts under the sofa that the sofa now fires them back at bedtime.",
+  "names.legendary": "Captain Foamshot of the Sofa",
+  "moves.kit.turbo_mode": "Twenty Pumps Boost"
+ },
+ "x_toy_gun": {
+  "lore.rare": "Fires a little flag that says BANG, and the flag always comes out back to front.",
+  "names.rare": "Flagpopper",
+  "lore.epic": "Popped its caps so loudly at the school fair that the brass band started playing in a panic.",
+  "names.epic": "Brass Band Panic",
+  "lore.legendary": "Popped its flag so high that it stuck on the school flagpole, and the school raises it every sports day.",
+  "names.legendary": "Sheriff Clickpop of the Flagpole",
+  "moves.kit.turbo_mode": "Cap Roll Boost"
+ },
+ "x_water_gun": {
+  "names.rare": "Hedgesquirter"
+ },
+ "x_carpet_cleaner": {
+  "names.rare": "Smileystain",
+  "lore.rare": "Got the blackcurrant out of the white carpet, then put it back in the shape of a smiley face.",
+  "lore.epic": "Shampooed the hotel carpets so thoroughly that they went fluffy, and the guests sank to their knees.",
+  "names.epic": "Fluffy Carpet Swamp",
+  "lore.legendary": "Cleaned a rug so well that it remembered it was a flying carpet and left through the window.",
+  "names.legendary": "Old Shampooer, Carpet Launcher"
+ },
+ "x_floor_polisher": {
+  "lore.legendary": "Polished the town square so well that the pigeons skate to work.",
+  "names.legendary": "Old Shinewell of the Town Square"
+ },
+ "x_steam_cleaner": {
+  "lore.epic": "Steamed the restaurant kitchen so hard that the chef could not find the soup for a week.",
+  "names.epic": "Lost Soup Fog",
+  "lore.legendary": "Steamed a crumpled shirt so flat that it could be posted under the door like a letter.",
+  "names.legendary": "Lady Steamwell of the Letterbox"
+ },
+ "x_robot_vacuum": {
+  "names.epic": "Midnight Vacuum Run",
+  "lore.epic": "Escaped through the cat flap at midnight and vacuumed the whole street, including a sleeping fox.",
+  "lore.legendary": "Was ridden by the cat for so long that the cat now does the cleaning while the robot naps on the sofa."
+ },
+ "x_sandpaper": {
+  "lore.legendary": "Smoothed a mountain path so well that the goats slid all the way down to the village for breakfast.",
+  "names.legendary": "Old Gritwell, Goat Slider"
+ },
+ "x_set_top_box": {
+  "lore.epic": "Recorded every channel at once on the night of the big final, then played them all back at the same time.",
+  "lore.legendary": "Has recorded so many shows that it knows how every one ends, and gives the endings away at breakfast."
+ },
+ "x_streaming_stick": {
+  "lore.epic": "Buffered at the big finale on every screen in the street, and the whole street groaned at once.",
+  "names.epic": "Street-Wide Buffer",
+  "lore.legendary": "Remembers where you stopped so well that it now finishes your sentences, but only with spoilers."
+ },
+ "x_pill_box": {
+  "names.common": "Rattlerattle",
+  "names.uncommon": "Daylabel",
+  "lore.rare": "Gets the days muddled and insists it is Thursday all week. Grandma has given up arguing.",
+  "names.rare": "Daymuddler",
+  "lore.epic": "Rattled so loudly on the coach trip that the grandparents started a conga line down the aisle.",
+  "names.epic": "Coach Trip Conga",
+  "lore.legendary": "Rattled such a catchy beat that grandma started a band, and her pill box plays the maracas on tour.",
+  "names.legendary": "Granny Rattlewell on Tour",
+  "moves.ultimate": "Seven Lid Pop"
+ }
+}

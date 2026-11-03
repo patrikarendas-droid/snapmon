@@ -1,0 +1,3773 @@
+{
+ "batch": "w16-toys-and-games",
+ "editor": "independent agent",
+ "reviewed": 85,
+ "summary": "The weakest batch of the campaign so far, and it reads as written tired. Commons and most Uncommons are fine small habits (the drain-seeking ball, the hedge, the cork in the piggy bank, the dice that never rolls a six), but from Rare upwards most objects simply do their job: the racket smashes, the shin guard stops kicks, the pacifier calms, the teether is chewed, the starting block launches. About 60 Rares have no troublesome power and no punchline. About 45 Epics are the same crowd frame ('was X-ed by every child / player / guest at the Y, and the whole Z ...'), and the Legendaries split into sports wins and records (about 15), generations and endurance ('four generations', 'for fifty years', 'never leaked once', about 12) and quiet successes with no joke. 'The X That Y' is the shape of 75 of the 85 Legendary names. There are copy-paste clusters: the only tree on the beach / in the park (kite, boomerang), the roof (ball, tennis ball, shuttlecock), the drain / gutter (ball, bowling ball), the shot from the other end of the court (basketball, handball), and the baby cluster (bottle, pacifier, teether, rattle, music box, mobile) all ending in sleeping babies or generations. x_rocking_toy repeats w17's rocking horse. About 20 Ultimates that change effect per variant carry a heat, flash or stink word. Safety: the pool float rider asleep drifting across a lake, toddlers tasting play dough, a dodgeball aimed at heads. Replacements and paired names are given for every high and medium item; the w16 Rares, Epics and Legendaries need a near-complete rewrite, and the replacements below supply one.",
+ "patterns": [
+  {
+   "pattern": "Rare = the object doing its job well (no troublesome power, no punchline): racket smashes, shin guard stops kicks, knee pads soften falls, elbow pads save elbows, pacifier calms, teether gets chewed, starting block launches, sticker goes on the chart, flippers make you fast.",
+   "ids": [
+    "ball",
+    "x_magic_8_ball",
+    "x_marble",
+    "x_stress_ball",
+    "balloon",
+    "x_confetti",
+    "baseball_bat",
+    "basketball",
+    "x_coloring_book",
+    "x_baby_bottle",
+    "x_sports_bottle",
+    "x_crayon_box",
+    "x_jack_in_the_box",
+    "x_music_box_toy",
+    "x_sand_bucket",
+    "i_pinwheel",
+    "game_controller",
+    "handheld_console",
+    "x_sweatband",
+    "x_pinata",
+    "x_rocking_toy",
+    "x_play_dough",
+    "kite",
+    "x_toy_dinosaur",
+    "x_toy_kitchen",
+    "piggy_bank",
+    "x_building_blocks",
+    "x_checkers",
+    "x_chess_board",
+    "x_dice",
+    "x_domino",
+    "puzzle",
+    "x_rubik_cube",
+    "racket",
+    "robot_toy",
+    "x_toy_robot_dog",
+    "x_wind_up_toy",
+    "x_toy_boat",
+    "skateboard",
+    "x_flippers",
+    "x_elbow_pads",
+    "x_knee_pads",
+    "x_shin_guard",
+    "tennis_ball",
+    "x_chess_piece",
+    "x_party_horn",
+    "x_baby_doll",
+    "x_ball_pit_ball",
+    "x_barbie_doll",
+    "x_basketball_hoop",
+    "x_boomerang",
+    "x_bowling_ball",
+    "x_bubble_wand",
+    "x_dodgeball",
+    "x_doll_house",
+    "x_handball",
+    "x_kaleidoscope",
+    "x_lego_figure",
+    "x_marionette",
+    "x_mouthguard",
+    "x_pacifier",
+    "x_puppet",
+    "x_rattle",
+    "x_slinky",
+    "x_softball",
+    "x_starting_block",
+    "x_sticker",
+    "x_swim_ring",
+    "x_teether",
+    "x_toy_soldier",
+    "x_ventriloquist_dummy"
+   ],
+   "severity": "high",
+   "suggestion": "Each Rare below is replaced with a power that causes trouble (the dice that always finds the longest snake, the boomerang that follows its thrower into the bath, the mouthguard that turns words into sneezes)."
+  },
+  {
+   "pattern": "Crowd-scene Epics: 'was used by every X at the Y (at once), and the whole Z ...' with no joke beyond the crowd.",
+   "ids": [
+    "x_magic_8_ball",
+    "x_stress_ball",
+    "balloon",
+    "i_pinwheel",
+    "kite",
+    "i_mask",
+    "robot_toy",
+    "x_wind_up_toy",
+    "x_toy_boat",
+    "skateboard",
+    "x_flippers",
+    "x_elbow_pads",
+    "x_knee_pads",
+    "x_shin_guard",
+    "x_mouthguard",
+    "x_tea_set_toy",
+    "x_rattle",
+    "x_music_box_toy",
+    "x_baby_bottle",
+    "x_party_horn",
+    "x_medicine_ball",
+    "x_baby_doll",
+    "x_doll_house",
+    "x_ball_pit_ball",
+    "racket",
+    "x_sports_bottle",
+    "x_rubik_cube",
+    "x_chess_piece",
+    "x_checkers",
+    "x_coloring_book",
+    "x_bowling_ball",
+    "x_sweatband",
+    "x_swim_ring",
+    "x_toy_soldier",
+    "x_domino",
+    "puzzle",
+    "x_dice",
+    "x_dodgeball",
+    "x_softball",
+    "x_starting_block"
+   ],
+   "severity": "high",
+   "suggestion": "Replace with one concrete consequence and a joke (the bus driver turning on the wipers for the rattle, the pinata's lollipops in next door's guttering, the dog striped like a tiger by the crayon box)."
+  },
+  {
+   "pattern": "Sports-win and record Legendaries: won the final, scored the winning goal, broke the school record, perfect game, made every shot.",
+   "ids": [
+    "basketball",
+    "x_handball",
+    "soccer_ball",
+    "game_controller",
+    "racket",
+    "x_marble",
+    "x_shot_put",
+    "x_starting_block",
+    "x_bowling_ball",
+    "x_softball",
+    "x_dodgeball",
+    "x_chess_piece",
+    "x_checkers"
+   ],
+   "severity": "high",
+   "suggestion": "Each needs an outrageous feat with a punchline instead (the shot put landing in next year's sports day, the softball landing in another time zone)."
+  },
+  {
+   "pattern": "Generations and endurance Legendaries: 'four generations', 'for fifty years without', 'never leaked once', 'for a hundred years', 'a thousand falls'.",
+   "ids": [
+    "x_rocking_toy",
+    "x_tea_set_toy",
+    "x_music_box_toy",
+    "x_rattle",
+    "x_pacifier",
+    "x_teether",
+    "x_jack_in_the_box",
+    "x_sports_bottle",
+    "x_kaleidoscope",
+    "x_toy_soldier",
+    "x_elbow_pads",
+    "x_knee_pads",
+    "x_sticker",
+    "i_pinwheel",
+    "x_basketball_hoop"
+   ],
+   "severity": "high",
+   "suggestion": "Replaced below."
+  },
+  {
+   "pattern": "Legendary name monotony: 75 of 85 are 'The X That/Who Y' or 'The X of Y'.",
+   "ids": [
+    "ball",
+    "x_magic_8_ball",
+    "x_marble",
+    "x_stress_ball",
+    "balloon",
+    "x_confetti",
+    "baseball_bat",
+    "basketball",
+    "x_coloring_book",
+    "x_baby_bottle",
+    "x_sports_bottle",
+    "x_crayon_box",
+    "x_jack_in_the_box",
+    "x_music_box_toy",
+    "x_sand_bucket",
+    "i_pinwheel",
+    "game_controller",
+    "handheld_console",
+    "x_sweatband",
+    "i_wig",
+    "x_pinata",
+    "x_rocking_toy",
+    "x_play_dough",
+    "kite",
+    "x_toy_dinosaur",
+    "piggy_bank",
+    "ping_pong_table",
+    "x_building_blocks",
+    "x_checkers",
+    "x_chess_board",
+    "x_dice",
+    "x_domino",
+    "puzzle",
+    "x_lego_brick",
+    "x_rubik_cube",
+    "racket",
+    "robot_toy",
+    "x_toy_robot_dog",
+    "x_wind_up_toy",
+    "x_toy_boat",
+    "skateboard",
+    "soccer_ball",
+    "x_elbow_pads",
+    "x_knee_pads",
+    "x_shin_guard",
+    "x_tea_set_toy",
+    "tennis_ball",
+    "x_chess_piece",
+    "x_party_horn",
+    "x_ball_pit_ball",
+    "x_barbie_doll",
+    "x_basketball_hoop",
+    "x_bowling_ball",
+    "x_bubble_wand",
+    "x_cricket_ball",
+    "x_dodgeball",
+    "x_doll_house",
+    "x_exercise_ball",
+    "x_handball",
+    "x_kaleidoscope",
+    "x_lego_figure",
+    "x_marionette",
+    "x_medicine_ball",
+    "x_mobile_toy",
+    "x_mouthguard",
+    "x_pacifier",
+    "x_pool_float",
+    "x_puppet",
+    "x_rattle",
+    "x_shot_put",
+    "x_shuttlecock",
+    "x_slinky",
+    "x_softball",
+    "x_starting_block",
+    "x_sticker",
+    "x_swim_ring",
+    "x_teether",
+    "x_toy_soldier",
+    "x_ventriloquist_dummy"
+   ],
+   "severity": "high",
+   "suggestion": "New Legendary names below use 'Name the Epithet', 'Name, the Epithet', titles and puns; about ten 'The X That Y' names are left where they still read well."
+  },
+  {
+   "pattern": "Copy-paste premises across objects: the only tree on the beach / in the park (kite C, boomerang U); the roof (ball L, tennis ball R, shuttlecock U); rolling straight into the drain / gutter (ball C, bowling ball C); a shot from the other end of the court in the final (basketball L, handball L); generations of babies (rattle, music box, pacifier, teether, tea set, rocking toy); lullaby sleep (music box R/E/L, mobile toy E/L).",
+   "ids": [
+    "kite",
+    "x_boomerang",
+    "ball",
+    "tennis_ball",
+    "x_shuttlecock",
+    "x_bowling_ball",
+    "basketball",
+    "x_handball",
+    "x_rattle",
+    "x_music_box_toy",
+    "x_pacifier",
+    "x_teether",
+    "x_tea_set_toy",
+    "x_rocking_toy",
+    "x_mobile_toy"
+   ],
+   "severity": "high",
+   "suggestion": "One owner keeps each premise; the others are replaced below."
+  },
+  {
+   "pattern": "Cross-batch duplicate: x_rocking_toy (looks like a horse) repeats w17 x_rocking_horse (galloping across the room, rocked by generations).",
+   "ids": [
+    "x_rocking_toy"
+   ],
+   "severity": "medium",
+   "suggestion": "x_rocking_toy is rewritten here (biscuit creeping, seasick goldfish, the house that rocks); w17's rocking horse keeps the galloping."
+  },
+  {
+   "pattern": "Ultimates whose effect varies by variant carry a heat, flash or stink word that is wrong for at least one variant (Gallop Heat, Top Corner Heat, Home Run Heat, Wig Swap Flash, Double Six Flash, Game Over Pong, Leaky Bag Pong and others).",
+   "ids": [
+    "x_rocking_toy",
+    "soccer_ball",
+    "x_softball",
+    "x_starting_block",
+    "x_toy_soldier",
+    "x_pool_float",
+    "x_flippers",
+    "x_exercise_ball",
+    "x_handball",
+    "x_bubble_wand",
+    "x_shuttlecock",
+    "i_wig",
+    "x_dice",
+    "x_lego_brick",
+    "x_rubik_cube",
+    "x_barbie_doll",
+    "x_lego_figure",
+    "x_chess_piece",
+    "x_teether",
+    "x_ventriloquist_dummy",
+    "x_medicine_ball",
+    "game_controller",
+    "x_sports_bottle",
+    "x_mouthguard"
+   ],
+   "severity": "medium",
+   "suggestion": "Effect-neutral names given per object."
+  },
+  {
+   "pattern": "Names that describe a different line or repeat another rarity: baby bottle Midnightfeed (R) / Midnight Feed (E); handheld 'Cardigan Pocket'; dino 'Roarbutton' on the nodding head; checkers 'Doublejump' on the crowning line; dice 'Tableroller'; medicine ball U 'Floorthud' (repeats C); pacifier 'Pramthrower' on the hiding line; marble 'Cleverlosesit' (garbled).",
+   "ids": [
+    "x_baby_bottle",
+    "handheld_console",
+    "x_toy_dinosaur",
+    "x_checkers",
+    "x_dice",
+    "x_medicine_ball",
+    "x_pacifier",
+    "x_marble",
+    "piggy_bank",
+    "x_sand_bucket",
+    "x_mobile_toy",
+    "x_sticker"
+   ],
+   "severity": "medium",
+   "suggestion": "Renamed below."
+  },
+  {
+   "pattern": "Templated 'the whole X' phrasing in about 40 lines ('wakes the whole house', 'the whole sleepover goes quiet', 'the whole beach whirred', 'the whole street came out').",
+   "ids": [
+    "x_marble",
+    "ball",
+    "x_magic_8_ball",
+    "i_pinwheel",
+    "x_party_horn",
+    "x_puppet",
+    "x_mobile_toy"
+   ],
+   "severity": "low",
+   "suggestion": "Most go with the rewrites; keep it to one or two in the batch."
+  },
+  {
+   "pattern": "Several Commons and Uncommons are under 60 characters (Outsideline 33, Fuzzlost 30, Wristsoaker 37, Sockstuffer 37). They are acceptable habits but would land better with a small consequence.",
+   "ids": [
+    "x_coloring_book",
+    "tennis_ball",
+    "x_sweatband",
+    "x_ball_pit_ball",
+    "x_bubble_wand",
+    "x_kaleidoscope",
+    "x_lego_figure"
+   ],
+   "severity": "low",
+   "suggestion": "Optional."
+  }
+ ],
+ "issues": [
+  {
+   "id": "ball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Bouncing at an odd angle is not yet a troublesome power and has no punchline.",
+   "suggestion": "'Always bounces towards the most breakable thing in sight, even if it has to go round a corner to find it.'"
+  },
+  {
+   "id": "ball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Vasefinder'"
+  },
+  {
+   "id": "ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A list of things hit and a street coming out: no joke, and it now repeats the Rare.",
+   "suggestion": "'Went over next door's fence so often that the grandad there kept it and started a team. They are top of the league.'"
+  },
+  {
+   "id": "ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Next Door United'"
+  },
+  {
+   "id": "ball",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Still the school's most famous ball' is a quiet ending; it also shares the roof with the tennis ball and shuttlecock.",
+   "suggestion": "'Was kicked so high at a school match that it came down a week later, covered in frost, with a seagull still sitting on it.'"
+  },
+  {
+   "id": "ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Skyward Sid'"
+  },
+  {
+   "id": "ball",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "Short (49) but a good habit.",
+   "suggestion": "'Disappears into the same hedge every single game, and comes back out with a different ball.'"
+  },
+  {
+   "id": "x_bouncy_ball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "'As if it's getting angrier' is a habit with no consequence.",
+   "suggestion": "'Bounces a little higher every time it lands, so a ball dropped at breakfast is still being chased at lunch.'"
+  },
+  {
+   "id": "x_bouncy_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Everyone ducking behind the table is a crowd reaction with no joke.",
+   "suggestion": "'Ricocheted round the kitchen for ten minutes and knocked every fridge magnet into alphabetical order.'"
+  },
+  {
+   "id": "x_bouncy_ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Ball Who Never Stopped' is the batch's stock shape and the lore is about bouncing back up a tower.",
+   "suggestion": "'Zingo the Lift Refuser'"
+  },
+  {
+   "id": "x_bouncy_ball",
+   "field": "moves.kit.toy_tantrum",
+   "severity": "low",
+   "issue": "'Bounce Bounce Bounce' is also the ball's signature name; a different repeat keeps the two objects apart.",
+   "suggestion": "'Boing Boing Boing'"
+  },
+  {
+   "id": "x_magic_8_ball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "'So spooky the whole sleepover goes quiet' is a crowd reaction, not a power.",
+   "suggestion": "'Reads the question on your face before you ask it, then answers 'not telling' just to watch you squirm.'"
+  },
+  {
+   "id": "x_magic_8_ball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Mindpeeker'"
+  },
+  {
+   "id": "x_magic_8_ball",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "A hundred questions and screaming at every yes is a crowd scene without a joke.",
+   "suggestion": "'Said no to every single question at a sleepover, so a whole room of children stayed up until dawn trying to get one yes.'"
+  },
+  {
+   "id": "x_magic_8_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Nine Hundred Noes'"
+  },
+  {
+   "id": "x_magic_8_ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Generic 'The Ball That Answered Everything'; the lore is about snow coming true.",
+   "suggestion": "'Shaky the Snowcaller'"
+  },
+  {
+   "id": "x_marble",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Cleverlosesit' is garbled.",
+   "suggestion": "'Skirtingsneak'"
+  },
+  {
+   "id": "x_marble",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A galaxy swirl is a description, not a power (also flagged cosmic below Legendary).",
+   "suggestion": "'Rolls uphill whenever anyone tries to tidy it away, and it always reaches the top of the stairs first.'"
+  },
+  {
+   "id": "x_marble",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Uphillroller'"
+  },
+  {
+   "id": "x_marble",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Rolling down the corridor has no consequence.",
+   "suggestion": "'Escaped the marble run during assembly, and the head teacher slid all the way to the stage on it, still talking.'"
+  },
+  {
+   "id": "x_marble",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Winning every playground game is a sports-win Legendary with a mild ending.",
+   "suggestion": "'Was flicked so hard in the playground that it went all the way round the world and hit its owner's other marble from behind.'"
+  },
+  {
+   "id": "x_marble",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Rollo the Long Way Round'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Repeats the Common (a face pulled when squeezed).",
+   "suggestion": "'Takes a little longer to puff back up every day, as if it is sulking about being squeezed.'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Slowpuffer'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Calming people is its job, and the line has no punchline.",
+   "suggestion": "'Soaks up the grumpiness of whoever squeezes it, then grumbles about it all night in the drawer.'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Grumblesponge'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'Every pupil during exam week, half of them burst' is a crowd scene, and bursting is a sour note.",
+   "suggestion": "'Absorbed a whole office's stress on deadline day, swelled to the size of a sofa and had to be rolled out of the fire door.'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Deadline Swell'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Calming an office repeats the new Epic and has no feat.",
+   "suggestion": "'Took the stress of a whole country on one terrible Monday, went flat as a pancake, and Tuesday was lovely for everybody.'"
+  },
+  {
+   "id": "x_stress_ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Big Squish, Keeper of Mondays'"
+  },
+  {
+   "id": "balloon",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Sailing off over the rooftops is just what balloons do.",
+   "suggestion": "'Rubs itself on jumpers to build up static, then zaps the birthday child right on the nose.'"
+  },
+  {
+   "id": "balloon",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Staticzapper'"
+  },
+  {
+   "id": "balloon",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Fifty balloons and a colourful sky is a crowd scene.",
+   "suggestion": "'Was tied to the shopping trolley and lifted it off the car park, so Mum had to walk it home like a kite.'"
+  },
+  {
+   "id": "balloon",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Trolley Lifter'"
+  },
+  {
+   "id": "balloon",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Crossing the sea with a message still attached is real life, with no punchline.",
+   "suggestion": "'Floated all the way round the world and drifted back in through the same window a year later, just in time for cake.'"
+  },
+  {
+   "id": "balloon",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bobbin the Round Trip'"
+  },
+  {
+   "id": "x_confetti",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Clogging the vacuum is a Common-level habit.",
+   "suggestion": "'Doubles when swept, so every dustpan comes back with more confetti than the floor had.'"
+  },
+  {
+   "id": "x_confetti",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sweepdoubler'"
+  },
+  {
+   "id": "x_confetti",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'The whole street sparkled for a week' is a soft ending with no joke.",
+   "suggestion": "'Went off a week early inside a birthday card, and the post office is still sparkling at Easter.'"
+  },
+  {
+   "id": "x_confetti",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Post Office Sparkle'"
+  },
+  {
+   "id": "x_confetti",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Being found a year later is the Uncommon scaled up (hiding in hair and corners).",
+   "suggestion": "'Was thrown so high at one wedding that it is still coming down, and the couple's grandchildren keep finding bits in their hair.'"
+  },
+  {
+   "id": "x_confetti",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Glitterfall the Endless'"
+  },
+  {
+   "id": "baseball_bat",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Hitting the ball far is the bat doing its job.",
+   "suggestion": "'Makes every ball it hits buzz like a wasp, so the fielders run away instead of trying to catch it.'"
+  },
+  {
+   "id": "baseball_bat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Waspwhacker'"
+  },
+  {
+   "id": "baseball_bat",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "'The ducks were furious' is a stock warning-sign ending.",
+   "suggestion": "'Smashed a ball over the park fence into the duck pond, and the ducks have been using it as a football ever since.'"
+  },
+  {
+   "id": "baseball_bat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Long generic 'The X That Y'; the lore (landing in the next town's game and winning it) is good.",
+   "suggestion": "'Crackwood the Long Hitter'"
+  },
+  {
+   "id": "basketball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Shaking the hoop is the ball doing its job.",
+   "suggestion": "'Swerves away from the hoop at the last second whenever its owner's friends are watching.'"
+  },
+  {
+   "id": "basketball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Shyswerver'"
+  },
+  {
+   "id": "basketball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A bent hoop has no joke.",
+   "suggestion": "'Was slam-dunked so hard that it went through the court floor and came up in the school kitchen, inside the custard.'"
+  },
+  {
+   "id": "basketball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Custard Dunk'"
+  },
+  {
+   "id": "basketball",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A shot from the other end of the court in the final copies the handball Legendary and is a sports win.",
+   "suggestion": "'Went in from so far away that the scoreboard ran out of numbers and gave the point to the ball.'"
+  },
+  {
+   "id": "basketball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Swish Almighty'"
+  },
+  {
+   "id": "basketball",
+   "field": "moves.kit.curveball",
+   "severity": "low",
+   "issue": "Stun move; 'No Look Pass' promises no startle.",
+   "suggestion": "'Fake Out Flash'"
+  },
+  {
+   "id": "x_coloring_book",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being half finished is a Common-level habit.",
+   "suggestion": "'Colours in its own pages overnight, always in the wrong colours: purple grass, green faces and a tartan sky.'"
+  },
+  {
+   "id": "x_coloring_book",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Nightcolourer'"
+  },
+  {
+   "id": "x_coloring_book",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A class colouring rainbows is a crowd scene with no joke.",
+   "suggestion": "'Leaked its outlines onto the kitchen table, so the family now eats dinner off a colouring-in of a farm.'"
+  },
+  {
+   "id": "x_coloring_book",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Table Colouring'"
+  },
+  {
+   "id": "x_coloring_book",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Being coloured perfectly and framed is a quiet success.",
+   "suggestion": "'Its unfinished drawings stepped off the page one rainy day, and a half-coloured giraffe ate the curtains.'"
+  },
+  {
+   "id": "x_coloring_book",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Scribbleworth the Wild'"
+  },
+  {
+   "id": "x_coloring_book",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "Short (33).",
+   "suggestion": "'Gets coloured outside every single line, then blames the crayons.'"
+  },
+  {
+   "id": "x_baby_bottle",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Spitupper' does not match the line (thrown out of the pram).",
+   "suggestion": "'Pramflinger'"
+  },
+  {
+   "id": "x_baby_bottle",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "'Needed at three in the morning' has no power, and its name Midnightfeed nearly repeats the Epic name Midnight Feed.",
+   "suggestion": "'Warms itself to exactly the right temperature, but only once everyone in the house is awake.'"
+  },
+  {
+   "id": "x_baby_bottle",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Wakewarmer'"
+  },
+  {
+   "id": "x_baby_bottle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every bottle at the toddler group at once is a crowd scene.",
+   "suggestion": "'Squirted milk across the kitchen in one long arc and filled the cat's bowl from the high chair.'"
+  },
+  {
+   "id": "x_baby_bottle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Long Squirt'"
+  },
+  {
+   "id": "x_baby_bottle",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "The first full night is warm but has no outrageous feat or punchline.",
+   "suggestion": "'Got a baby to sleep so well that she slept through her own first birthday party, and the guests ate the cake in whispers.'"
+  },
+  {
+   "id": "x_baby_bottle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Hushbottle the Great'"
+  },
+  {
+   "id": "x_sports_bottle",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Leaking into the bag is a Common-level habit.",
+   "suggestion": "'Squirts sideways whenever anyone but its owner drinks from it, so nobody else has ever had a sip.'"
+  },
+  {
+   "id": "x_sports_bottle",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sidesquirter'"
+  },
+  {
+   "id": "x_sports_bottle",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Fine as a consequence; a slightly bigger image would help.",
+   "suggestion": "'Was squeezed at half-time and fired a jet so far that it put out the barbecue at the other end of the park.'"
+  },
+  {
+   "id": "x_sports_bottle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for ten years and never leaked once').",
+   "suggestion": "'Was squeezed so hard on the hottest sports day ever that it watered the whole pitch, and the grass came up green by the final whistle.'"
+  },
+  {
+   "id": "x_sports_bottle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gushwell the Groundsman'"
+  },
+  {
+   "id": "x_sports_bottle",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Pong' is a stink word, but the Spectral variant burns; the name must be effect-neutral.",
+   "suggestion": "'Big Squeeze Shot'"
+  },
+  {
+   "id": "x_crayon_box",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Waxy hands is a Common-level habit.",
+   "suggestion": "'Swaps the paper wrappers at night, so the crayon labelled blue always draws orange.'"
+  },
+  {
+   "id": "x_crayon_box",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Labelswapper'"
+  },
+  {
+   "id": "x_crayon_box",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A rainbow wall is the obvious outcome; no joke.",
+   "suggestion": "'Was left with a toddler for five minutes, and the dog came out of the bedroom striped like a tiger.'"
+  },
+  {
+   "id": "x_crayon_box",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Tiger Dog Afternoon'"
+  },
+  {
+   "id": "x_crayon_box",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Generic shape; the lore ('one nobody had a name for') is good.",
+   "suggestion": "'Spectra the Unnamed Hue'"
+  },
+  {
+   "id": "x_crayon_box",
+   "field": "moves.kit.squeak_toy",
+   "severity": "low",
+   "issue": "Garbled repeat.",
+   "suggestion": "'Crayon Snap Startle'"
+  },
+  {
+   "id": "x_jack_in_the_box",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Grinning so the cat runs is weak for a Rare.",
+   "suggestion": "'Pops out at the worst possible moment, always mid-sip or mid-sneeze, and never when it has just been wound.'"
+  },
+  {
+   "id": "x_jack_in_the_box",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Wrongtimepopper'"
+  },
+  {
+   "id": "x_jack_in_the_box",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Screaming then laughing at a party is a crowd reaction.",
+   "suggestion": "'Popped out so high at a birthday party that it stuck in the ceiling light and nodded at the guests all evening.'"
+  },
+  {
+   "id": "x_jack_in_the_box",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Ceiling Jack'"
+  },
+  {
+   "id": "x_jack_in_the_box",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for a hundred years').",
+   "suggestion": "'Popped out once with such a spring that it bounced to the top of the town clock, and now jumps out every hour on the hour.'"
+  },
+  {
+   "id": "x_jack_in_the_box",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Jackclock the Hourly Pop'"
+  },
+  {
+   "id": "x_music_box_toy",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Lullaby sleep repeats in R, E and L, and again in x_mobile_toy.",
+   "suggestion": "'Speeds up its tune whenever someone dances to it, until the little dancer on top is spinning like a top.'"
+  },
+  {
+   "id": "x_music_box_toy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Tempoteaser'"
+  },
+  {
+   "id": "x_music_box_toy",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every baby asleep at once is a crowd scene and copies the mobile.",
+   "suggestion": "'Was wound up in a busy shop, and the whole queue slowed down and waltzed to the till.'"
+  },
+  {
+   "id": "x_music_box_toy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Queue Waltz'"
+  },
+  {
+   "id": "x_music_box_toy",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('three generations of babies').",
+   "suggestion": "'Played its tune so beautifully that the tiny dancer climbed out of the lid and joined a real ballet company.'"
+  },
+  {
+   "id": "x_music_box_toy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pirouetta the Runaway Dancer'"
+  },
+  {
+   "id": "x_music_box_toy",
+   "field": "moves.kit.block_tower",
+   "severity": "low",
+   "issue": "Garbled word order.",
+   "suggestion": "'Music Lid Guard'"
+  },
+  {
+   "id": "x_sand_bucket",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Perfect towers are its job; the new line adds a consequence.",
+   "suggestion": "'Turns any sand it touches into perfect towers, even the sand in someone's shoes, which is uncomfortable.'"
+  },
+  {
+   "id": "x_sand_bucket",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "The name says 'Kingdom Build' (a stock frame) and the lore is about shells.",
+   "suggestion": "'Filled itself with the tide and carried half the sea back to the car, and the boot is still sloshing.'"
+  },
+  {
+   "id": "x_sand_bucket",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Boot Full of Sea'"
+  },
+  {
+   "id": "x_sand_bucket",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "The lifeguard climbing the castle is a mild ending.",
+   "suggestion": "'Built a sandcastle so tall that the tide came in, took one look at it and went back out again.'"
+  },
+  {
+   "id": "x_sand_bucket",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Turretina the Tide-Turner'"
+  },
+  {
+   "id": "i_pinwheel",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "'Spins so fast that it hums' is short and has no trouble.",
+   "suggestion": "'Spins fast enough to blow out birthday candles from across the room, which is very unfair on the birthday child.'"
+  },
+  {
+   "id": "i_pinwheel",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Candlegust'"
+  },
+  {
+   "id": "i_pinwheel",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A hundred pinwheels whirring is a crowd scene.",
+   "suggestion": "'Spun so hard in a gale that it lifted off the sandcastle and flew like a helicopter into the ice cream van.'"
+  },
+  {
+   "id": "i_pinwheel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Seaside Whirlybird'"
+  },
+  {
+   "id": "i_pinwheel",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('a whole summer without stopping once').",
+   "suggestion": "'Spun so fast during a storm that it blew the clouds away, and the beach had sunshine for a fortnight.'"
+  },
+  {
+   "id": "i_pinwheel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Galeforce Gloria'"
+  },
+  {
+   "id": "game_controller",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Wrapping a wire round ankles is a habit, and most controllers are wireless.",
+   "suggestion": "'Presses buttons by itself whenever its owner is winning, and it always picks the one that pauses the game.'"
+  },
+  {
+   "id": "game_controller",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Pausepresser'"
+  },
+  {
+   "id": "game_controller",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Winning a tournament final is a sports-win Legendary.",
+   "suggestion": "'Found a secret level so deep in a game that the people who made it phoned up to ask how to get out.'"
+  },
+  {
+   "id": "game_controller",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Combo the Level Finder'"
+  },
+  {
+   "id": "game_controller",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Pong' is a stink word, but the Spectral variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Game Over'"
+  },
+  {
+   "id": "handheld_console",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Cardigan Pocket' has nothing to do with the cracked-screen line.",
+   "suggestion": "'Crackcorner'"
+  },
+  {
+   "id": "handheld_console",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Making a journey feel short is the console doing its job.",
+   "suggestion": "'Pauses the world whenever its owner pauses the game, so the whole table is frozen mid-chew.'"
+  },
+  {
+   "id": "handheld_console",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Worldpauser'"
+  },
+  {
+   "id": "handheld_console",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A quiet back seat is the job again, with no joke.",
+   "suggestion": "'Was played so quietly on a ten-hour drive that the parents forgot the children were there and sang the whole way.'"
+  },
+  {
+   "id": "handheld_console",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Back Seat Concert'"
+  },
+  {
+   "id": "handheld_console",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Survival list (a thousand journeys, puddles, the washing machine) with no punchline.",
+   "suggestion": "'Was played on the longest car journey ever and finished every game ever made, so it started making its own.'"
+  },
+  {
+   "id": "handheld_console",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pocketmax the Final Boss'"
+  },
+  {
+   "id": "x_sweatband",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Looking old-fashioned is not a power.",
+   "suggestion": "'Squeezes all its sweat back out at the worst moment, straight onto the hand shaking the winner's.'"
+  },
+  {
+   "id": "x_sweatband",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Wristwringer'"
+  },
+  {
+   "id": "x_sweatband",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Soaking every player at the club is a crowd scene.",
+   "suggestion": "'Got so full on the hottest day that it rained on the umpire, and the match was stopped for bad weather.'"
+  },
+  {
+   "id": "x_sweatband",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Umpire Drizzle'"
+  },
+  {
+   "id": "x_sweatband",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Without dripping once' is an endurance ending.",
+   "suggestion": "'Was wrung out after one long final into the club pond, and the ducks there now play in headbands.'"
+  },
+  {
+   "id": "x_sweatband",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Soakmaster General'"
+  },
+  {
+   "id": "i_wig",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Long generic shape; the lore is fine.",
+   "suggestion": "'Mopsy, Master of Disguise'"
+  },
+  {
+   "id": "i_wig",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant burns; must be effect-neutral.",
+   "suggestion": "'Wig Swap'"
+  },
+  {
+   "id": "x_pinata",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Bursting with sweets is the pinata doing its job.",
+   "suggestion": "'Refills itself every time it is hung back up, but always with sprouts instead of sweets.'"
+  },
+  {
+   "id": "x_pinata",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sproutfiller'"
+  },
+  {
+   "id": "x_pinata",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Bursting at a party repeats the Rare idea and has no joke.",
+   "suggestion": "'Burst so hard at a birthday party that next door's guttering is still full of lollipops.'"
+  },
+  {
+   "id": "x_pinata",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Gutter Full of Lollies'"
+  },
+  {
+   "id": "x_pinata",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Surviving a hundred hits before bursting is a mild escalation of the Common.",
+   "suggestion": "'Was finally burst by the whole school, and inside was a smaller pinata, then a smaller one, all the way down to one sweet.'"
+  },
+  {
+   "id": "x_pinata",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Infinita the Last Sweet'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Galloping across a field repeats w17's rocking horse.",
+   "suggestion": "'Rocks itself when nobody is watching, and every morning it is a little closer to the biscuit tin.'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Biscuitcreeper'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Crossing the room and bumping the door copies the w17 rocking horse Epic and has no joke.",
+   "suggestion": "'Rocked so hard at playgroup that the whole floor rocked with it, and the goldfish was seasick.'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Seasick Playgroup'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('four generations of the same family').",
+   "suggestion": "'Was rocked so hard for so long that the house now rocks with it, and the family has to hold on to their tea.'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Rocksworth the Restless'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant stuns; must be effect-neutral.",
+   "suggestion": "'Gallop Away'"
+  },
+  {
+   "id": "x_rocking_toy",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Garbled.",
+   "suggestion": "'Rocker Pinch'"
+  },
+  {
+   "id": "i_mask",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A whole parade feeling like a festival is a crowd scene with no joke.",
+   "suggestion": "'Was worn on school photo day, so the class picture has one row of very polite tigers.'"
+  },
+  {
+   "id": "i_mask",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'School Photo Tigers'"
+  },
+  {
+   "id": "x_play_dough",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Toddlers tasting play dough is unsafe behaviour to show, and it is not a power.",
+   "suggestion": "'Comes alive at night as whatever it was last shaped into, and the dough dinosaur keeps eating the dough sandwiches.'"
+  },
+  {
+   "id": "x_play_dough",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Nightsculpt'"
+  },
+  {
+   "id": "x_play_dough",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A playgroup zoo is the obvious outcome; the Legendary name also says 'Zoo' while its lore is about a library case.",
+   "suggestion": "'Was rolled into one giant ball and rolled down the hall, collecting two shoes, a recorder and the head teacher's keys.'"
+  },
+  {
+   "id": "x_play_dough",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Doughball Roll'"
+  },
+  {
+   "id": "x_play_dough",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A model in a library case is a quiet success.",
+   "suggestion": "'Was shaped into a model of the town so perfect that the postman started delivering letters to it.'"
+  },
+  {
+   "id": "x_play_dough",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Mouldwell the Maker'"
+  },
+  {
+   "id": "kite",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Flying high is the kite's job.",
+   "suggestion": "'Drags its flyer along the beach by the heels and will not stop until it reaches the ice cream van.'"
+  },
+  {
+   "id": "kite",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Beachdragger'"
+  },
+  {
+   "id": "kite",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A hundred kites at a festival is a crowd scene.",
+   "suggestion": "'Caught such a gust that it lifted a towel, a sandwich and somebody's sun hat into the sky on the same string.'"
+  },
+  {
+   "id": "kite",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Beach Lift'"
+  },
+  {
+   "id": "kite",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A pilot waving is a mild ending.",
+   "suggestion": "'Flew so high that a flock of geese started following it south, and now it can't land because it's the leader.'"
+  },
+  {
+   "id": "kite",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Captain Updraft'"
+  },
+  {
+   "id": "kite",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Poison move; string does not stink.",
+   "suggestion": "'Seaweed String Pong'"
+  },
+  {
+   "id": "x_toy_dinosaur",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Roarbutton' does not match the line (a nodding head).",
+   "suggestion": "'Nodhead'"
+  },
+  {
+   "id": "x_toy_dinosaur",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being dug up as a fossil is cute but not a power, and the idea is better as the Legendary.",
+   "suggestion": "'Grows a little every time it is left in the bath, and now nobody can find a bath big enough for it.'"
+  },
+  {
+   "id": "x_toy_dinosaur",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bathgrower'"
+  },
+  {
+   "id": "x_toy_dinosaur",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Surviving the washing machine is a survival formula (also used by the handheld).",
+   "suggestion": "'Was buried in the sandpit so long that a museum dug it up and put it next to its very surprised great-great-grandad.'"
+  },
+  {
+   "id": "x_toy_dinosaur",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Rexington the Exhibit'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Plastic food everywhere repeats the Common (plastic peas).",
+   "suggestion": "'Has an oven door that slams so hard that the plastic chicken jumps out of the tray.'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Ovenslammer'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Serving tea to every teddy is the job, and it repeats the tea set.",
+   "suggestion": "'Makes pretend food smell real, so the whole house wakes up hungry for plastic sausages.'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sizzlefaker'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Grown-ups ordering dinner is the setup without a punchline.",
+   "suggestion": "'Opened a restaurant in the playroom and got a bad review from the cat, who sent the soup back twice.'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Playroom Bistro'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A grandad trying to eat the plastic cake is an Epic-sized joke.",
+   "suggestion": "'Cooked pretend dinners so well that the family's real oven handed in its notice.'"
+  },
+  {
+   "id": "x_toy_kitchen",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Chef Plastique'"
+  },
+  {
+   "id": "piggy_bank",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Shakeemptier' does not match the cork line.",
+   "suggestion": "'Corktummy'"
+  },
+  {
+   "id": "piggy_bank",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A patient shake is an annoyance, not a power.",
+   "suggestion": "'Gets heavier every time someone thinks about spending, so nobody can lift it before the summer holidays.'"
+  },
+  {
+   "id": "piggy_bank",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Heavysaver'"
+  },
+  {
+   "id": "piggy_bank",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every child shaking it and coins everywhere is a crowd scene.",
+   "suggestion": "'Was shaken upside down at a birthday party and coughed out a button, a bus ticket and a very old sweet.'"
+  },
+  {
+   "id": "piggy_bank",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Shake-Out Surprise'"
+  },
+  {
+   "id": "piggy_bank",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Saving for a bicycle is a quiet success.",
+   "suggestion": "'Saved so many coins that it bought the bank on the high street, and now the cashiers have to oink.'"
+  },
+  {
+   "id": "piggy_bank",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Porkington the Banker'"
+  },
+  {
+   "id": "ping_pong_table",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A long tournament and sandwiches has no joke.",
+   "suggestion": "'Hosted a garage rally so long that the car moved out and parked on the street in protest.'"
+  },
+  {
+   "id": "ping_pong_table",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Garage Rally'"
+  },
+  {
+   "id": "ping_pong_table",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Long generic shape; the lore (tea in the middle of the rally) is good.",
+   "suggestion": "'Endless Eddie, the Rally Table'"
+  },
+  {
+   "id": "ping_pong_table",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Poison move; 'Net Stink' is an odd image.",
+   "suggestion": "'Sweaty Bat Pong'"
+  },
+  {
+   "id": "x_building_blocks",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Growing taller than the toddler is the tower doing its job.",
+   "suggestion": "'Rebuilds itself into a wall across the doorway overnight, so nobody can get to the toy box.'"
+  },
+  {
+   "id": "x_building_blocks",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Wallbuilder'"
+  },
+  {
+   "id": "x_building_blocks",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Scattering blocks is the obvious outcome, with no joke.",
+   "suggestion": "'Toppled from a tower as tall as the fridge and landed spelling NO on the floor.'"
+  },
+  {
+   "id": "x_building_blocks",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Topple Word'"
+  },
+  {
+   "id": "x_building_blocks",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Nobody dared breathe' is a mild ending.",
+   "suggestion": "'Was stacked so high that the top block sticks out of the chimney, and the birds use it as a lookout.'"
+  },
+  {
+   "id": "x_building_blocks",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Stackhenge the Tall'"
+  },
+  {
+   "id": "x_checkers",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "The name Doublejump sits on the crowning line, and being crowned is the game itself.",
+   "suggestion": "'Crowns itself king whenever nobody is looking, then moves backwards with a smug little click.'"
+  },
+  {
+   "id": "x_checkers",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Selfcrowner'"
+  },
+  {
+   "id": "x_checkers",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every park bench and watching pigeons is a crowd scene.",
+   "suggestion": "'Was played so slowly in the park that pigeons nested on the board and had to be counted as pieces.'"
+  },
+  {
+   "id": "x_checkers",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Pigeon Gambit'"
+  },
+  {
+   "id": "x_checkers",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'A grandad who had never lost in fifty years' is the endurance formula, and the name says 'Crowned Twice'.",
+   "suggestion": "'Jumped every piece on the board in one move, then off the table, and won the game next door as well.'"
+  },
+  {
+   "id": "x_checkers",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Leapwell the Great'"
+  },
+  {
+   "id": "x_chess_board",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Pulling a face is short and weak for a Rare.",
+   "suggestion": "'Shuffles one piece a square whenever the players blink, then insists it was always there.'"
+  },
+  {
+   "id": "x_chess_board",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Squareshifter'"
+  },
+  {
+   "id": "x_chess_board",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Generic shape; the lore is fine.",
+   "suggestion": "'Checkmatilda'"
+  },
+  {
+   "id": "x_dice",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Tableroller' does not match the line (shows a different number).",
+   "suggestion": "'Numberfibber'"
+  },
+  {
+   "id": "x_dice",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A lucky double is a mild trick.",
+   "suggestion": "'Always rolls exactly the number that lands its player on the longest snake.'"
+  },
+  {
+   "id": "x_dice",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Snakefinder'"
+  },
+  {
+   "id": "x_dice",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A family arguing is a stock ending.",
+   "suggestion": "'Rolled off the board, under the fridge and into next door's game, where it won them the whole thing.'"
+  },
+  {
+   "id": "x_dice",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Next Door Roll'"
+  },
+  {
+   "id": "x_dice",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A hundred sixes and checking for magic has a weak punchline.",
+   "suggestion": "'Rolled a seven on its very first throw, and nobody has been able to find the seventh side since.'"
+  },
+  {
+   "id": "x_dice",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Sevenface the Impossible'"
+  },
+  {
+   "id": "x_dice",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Double Six'"
+  },
+  {
+   "id": "x_dice",
+   "field": "moves.kit.toy_tantrum",
+   "severity": "medium",
+   "issue": "'Roll Roll Roll Roll' collides with the signature 'Roll Roll Roll'.",
+   "suggestion": "'Tumble Tumble Tumble'"
+  },
+  {
+   "id": "x_domino",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Linking into a chain is the job.",
+   "suggestion": "'Knocks over anything standing in a row: books, bottles and every plant pot on the windowsill.'"
+  },
+  {
+   "id": "x_domino",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Rowtoppler'"
+  },
+  {
+   "id": "x_domino",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Falling round the hall repeats the Legendary (a run from kitchen to garden).",
+   "suggestion": "'Set off a run so long that the last one flicked the kettle switch, and the tea was ready on time.'"
+  },
+  {
+   "id": "x_domino",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Tea Machine Run'"
+  },
+  {
+   "id": "x_domino",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as the Epic, only longer.",
+   "suggestion": "'Started a run that went round the whole town and finished by knocking on its own front door.'"
+  },
+  {
+   "id": "x_domino",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Toppleton the First'"
+  },
+  {
+   "id": "puzzle",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A sky where every piece looks the same is a description.",
+   "suggestion": "'Changes two pieces' shapes overnight, so the last piece never fits the last gap.'"
+  },
+  {
+   "id": "puzzle",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Gapdodger'"
+  },
+  {
+   "id": "puzzle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Cheering at the last piece has no joke.",
+   "suggestion": "'Was spread over the dining table for a whole week, so the family had Sunday dinner on the stairs.'"
+  },
+  {
+   "id": "puzzle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Table Takeover'"
+  },
+  {
+   "id": "puzzle",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Generic shape; the lore is fine.",
+   "suggestion": "'Completa the Whole Picture'"
+  },
+  {
+   "id": "x_lego_brick",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A cat moving into a castle tower is a mild ending.",
+   "suggestion": "'Clicked itself onto the bottom of the house one night, and now the whole house can be rebuilt as a boat.'"
+  },
+  {
+   "id": "x_lego_brick",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Clickton the Housebuilder'"
+  },
+  {
+   "id": "x_lego_brick",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Brick Build'"
+  },
+  {
+   "id": "x_lego_brick",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Burn move; a stab is not heat.",
+   "suggestion": "'Hot Stud Sizzle'"
+  },
+  {
+   "id": "x_rubik_cube",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being solved quickly by one kid is not a power.",
+   "suggestion": "'Twists one row back every time someone puts it down, so it is never quite solved.'"
+  },
+  {
+   "id": "x_rubik_cube",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Untwister'"
+  },
+  {
+   "id": "x_rubik_cube",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A playground cube craze is a crowd scene.",
+   "suggestion": "'Got so mixed up that its colours slid onto the school uniform, and the whole class came home checked.'"
+  },
+  {
+   "id": "x_rubik_cube",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Checked Uniform Day'"
+  },
+  {
+   "id": "x_rubik_cube",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A blindfolded one-handed solve is a real-world feat, not an outrageous one.",
+   "suggestion": "'Was solved so fast that it went back in time and was never mixed up in the first place.'"
+  },
+  {
+   "id": "x_rubik_cube",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Twistopher the Unmixed'"
+  },
+  {
+   "id": "x_rubik_cube",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant burns; must be effect-neutral.",
+   "suggestion": "'Final Twist'"
+  },
+  {
+   "id": "racket",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Smashing hard is the racket doing its job.",
+   "suggestion": "'Hums a high note whenever it hits the sweet spot, and every dog in the next street howls back.'"
+  },
+  {
+   "id": "racket",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Humstringer'"
+  },
+  {
+   "id": "racket",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Winning every match is a sports-win Legendary with no joke.",
+   "suggestion": "'Hit a ball so high in a summer match that it came down in the winter, and the umpire called it out.'"
+  },
+  {
+   "id": "racket",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Topspin Tilly'"
+  },
+  {
+   "id": "robot_toy",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Knocking over drinks is a Common-level habit.",
+   "suggestion": "'Copies whatever the nearest grown-up is doing, so it has started doing the ironing, badly.'"
+  },
+  {
+   "id": "robot_toy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Mimicbot'"
+  },
+  {
+   "id": "robot_toy",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every robot marching and the cat fleeing is a crowd scene.",
+   "suggestion": "'Tidied the whole bedroom in the night, putting every toy in the bin and the bin in the wardrobe.'"
+  },
+  {
+   "id": "robot_toy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Night Tidy'"
+  },
+  {
+   "id": "robot_toy",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Starring in a talent show is a contest frame with no punchline.",
+   "suggestion": "'Learned to talk, then learned to argue, and has now won every argument with the kitchen radio.'"
+  },
+  {
+   "id": "robot_toy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Professor Bleep'"
+  },
+  {
+   "id": "x_toy_robot_dog",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Forgetting to bring the ball back is a habit.",
+   "suggestion": "'Barks at the doorbell a second before it rings, and somehow it is always right.'"
+  },
+  {
+   "id": "x_toy_robot_dog",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Doorbellbarker'"
+  },
+  {
+   "id": "x_toy_robot_dog",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A dog show with confused judges is a stock contest frame.",
+   "suggestion": "'Was taken for a real walk and chased a real squirrel up a tree, and is now stuck on the bottom branch, beeping.'"
+  },
+  {
+   "id": "x_toy_robot_dog",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Squirrel Chase'"
+  },
+  {
+   "id": "x_toy_robot_dog",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "The lore (three real dogs trying to make friends) does not match the name ('Fooled the Cat') and has no feat.",
+   "suggestion": "'Fooled the cat so completely that the cat now takes it for a walk every morning on a lead.'"
+  },
+  {
+   "id": "x_toy_robot_dog",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wagatron the Walked'"
+  },
+  {
+   "id": "x_wind_up_toy",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Clicking and whirring is a description.",
+   "suggestion": "'Winds itself up at night and marches into the kitchen, where it is found every morning in the butter.'"
+  },
+  {
+   "id": "x_wind_up_toy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Butterwaddler'"
+  },
+  {
+   "id": "x_wind_up_toy",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Racing every wind-up toy with the cat chasing is a crowd scene.",
+   "suggestion": "'Was wound up one turn too far and walked out of the front door, down the road and onto the bus.'"
+  },
+  {
+   "id": "x_wind_up_toy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Runaway Commute'"
+  },
+  {
+   "id": "x_wind_up_toy",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Generic shape; the lore's deflating punchline works.",
+   "suggestion": "'Clockwork Cuthbert'"
+  },
+  {
+   "id": "x_toy_boat",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Drifting off and being rescued is a habit.",
+   "suggestion": "'Makes its own tiny waves in the bath that soak everyone in the room except the child in it.'"
+  },
+  {
+   "id": "x_toy_boat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bathwaver'"
+  },
+  {
+   "id": "x_toy_boat",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every boat on the pond with ducks joining in is a crowd scene.",
+   "suggestion": "'Won the pond race by giving a duck a lift, and now the duck expects one every Sunday.'"
+  },
+  {
+   "id": "x_toy_boat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Duck Taxi'"
+  },
+  {
+   "id": "x_toy_boat",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Being found by a fisherman is a quiet ending.",
+   "suggestion": "'Sailed out of the bath, down the plughole and across the sea, and sent home a postcard from a beach.'"
+  },
+  {
+   "id": "x_toy_boat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Admiral Plughole'"
+  },
+  {
+   "id": "skateboard",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Flying off a ramp is the board's job, and 'the crowd gasps' is a crowd reaction.",
+   "suggestion": "'Rolls itself back to the top of the hill every night, so its rider's day always starts with a downhill.'"
+  },
+  {
+   "id": "skateboard",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Uphillskater'"
+  },
+  {
+   "id": "skateboard",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every board in town rumbling the ramps is a crowd scene.",
+   "suggestion": "'Rolled downhill through the market and came out the other end carrying a melon, a hat and somebody's sandwich.'"
+  },
+  {
+   "id": "skateboard",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Market Run'"
+  },
+  {
+   "id": "skateboard",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A trick named after the board is a quiet success.",
+   "suggestion": "'Did an ollie so high that it landed on top of the town hall and has been the weather vane ever since.'"
+  },
+  {
+   "id": "skateboard",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ollie Skywards'"
+  },
+  {
+   "id": "x_flippers",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Swimming fast is the flippers' job.",
+   "suggestion": "'Makes its wearer swim so fast that they keep overtaking the lifeguard, who is not pleased about it.'"
+  },
+  {
+   "id": "x_flippers",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Lifeguardpasser'"
+  },
+  {
+   "id": "x_flippers",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every snorkeller on the holiday is a crowd scene.",
+   "suggestion": "'Kicked up so much sand on holiday that the bay stayed cloudy for a week and the fish had to wear goggles.'"
+  },
+  {
+   "id": "x_flippers",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cloudy Bay'"
+  },
+  {
+   "id": "x_flippers",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Mutated variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Flipper Kick'"
+  },
+  {
+   "id": "soccer_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Playing until the floodlights come on has no joke.",
+   "suggestion": "'Was booted so hard that it knocked the crossbar off, and the match finished with a washing line instead.'"
+  },
+  {
+   "id": "soccer_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Washing Line Goal'"
+  },
+  {
+   "id": "soccer_ball",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Winning the cup from the halfway line is a sports-win Legendary.",
+   "suggestion": "'Was kicked so hard that it went round the world and back into the same net, and the referee gave it two goals.'"
+  },
+  {
+   "id": "soccer_ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Roundabout Rocket'"
+  },
+  {
+   "id": "soccer_ball",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Normal variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Top Corner'"
+  },
+  {
+   "id": "x_elbow_pads",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Saving elbows is the pads' job.",
+   "suggestion": "'Bounces its wearer back up off the ground like a rubber ball, which is great until there's a pond nearby.'"
+  },
+  {
+   "id": "x_elbow_pads",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Boingelbow'"
+  },
+  {
+   "id": "x_elbow_pads",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Saving every elbow at the skate park is the job plus a crowd.",
+   "suggestion": "'Was so padded that its owner tripped in the playground, rolled the full length of it and reached the dinner queue first.'"
+  },
+  {
+   "id": "x_elbow_pads",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Dinner Queue Roll'"
+  },
+  {
+   "id": "x_elbow_pads",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('a thousand tumbles').",
+   "suggestion": "'Took a fall so hard that the playground got the bruise, and it still has a soft patch in the shape of an elbow.'"
+  },
+  {
+   "id": "x_elbow_pads",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Padsworth the Unbruised'"
+  },
+  {
+   "id": "x_knee_pads",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Softening falls is the pads' job.",
+   "suggestion": "'Turns every kneel into a long, smooth knee slide, right across the kitchen and into the bin.'"
+  },
+  {
+   "id": "x_knee_pads",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Kneeslider'"
+  },
+  {
+   "id": "x_knee_pads",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Saving every knee at the rink is the job plus a crowd.",
+   "suggestion": "'Slid its wearer across a whole wedding dance floor on their knees, all the way under the cake table.'"
+  },
+  {
+   "id": "x_knee_pads",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Dance Floor Slide'"
+  },
+  {
+   "id": "x_knee_pads",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('a thousand falls without a single scrape').",
+   "suggestion": "'Took a fall so hard that the pavement now has two knee-shaped dents, and the town has put a sign up.'"
+  },
+  {
+   "id": "x_knee_pads",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Kneelix the Uncrackable'"
+  },
+  {
+   "id": "x_shin_guard",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Stopping kicks is the guard's job.",
+   "suggestion": "'Clangs like a bell whenever it is kicked, so every tackle sounds like the end of a boxing round.'"
+  },
+  {
+   "id": "x_shin_guard",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Clangshin'"
+  },
+  {
+   "id": "x_shin_guard",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Taking every kick and feeling nothing is the job plus a crowd.",
+   "suggestion": "'Got kicked so hard that the striker's boot bounced off and the ball went in at the other end.'"
+  },
+  {
+   "id": "x_shin_guard",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bounce-Off Goal'"
+  },
+  {
+   "id": "x_shin_guard",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Surviving the hardest kicker with no crack is a mild ending.",
+   "suggestion": "'Was kicked by a cow during a match in a field, and it was the cow that said sorry.'"
+  },
+  {
+   "id": "x_shin_guard",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Shinwall the Unkickable'"
+  },
+  {
+   "id": "x_shin_guard",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Burn move; sweat is not heat.",
+   "suggestion": "'Hot Shin Scorch'"
+  },
+  {
+   "id": "x_tea_set_toy",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every teddy in the street is a crowd scene.",
+   "suggestion": "'Hosted a teddy tea party so posh that the teddies now refuse to sit with the plastic dinosaurs.'"
+  },
+  {
+   "id": "x_tea_set_toy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Posh Teddy Party'"
+  },
+  {
+   "id": "x_tea_set_toy",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('four generations of teddies').",
+   "suggestion": "'Held a tea party so polite that every teddy stood up when Grandma came in, and one of them bowed.'"
+  },
+  {
+   "id": "x_tea_set_toy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pinkie Up, Hostess of Bears'"
+  },
+  {
+   "id": "tennis_ball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Landing on the roof is a habit and repeats the ball and shuttlecock.",
+   "suggestion": "'Sticks to any dog's mouth like glue, so a game of fetch never actually ends.'"
+  },
+  {
+   "id": "tennis_ball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Droolglue'"
+  },
+  {
+   "id": "tennis_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every dog chasing at once is a crowd scene.",
+   "suggestion": "'Was thrown at the dog park and brought back by a goose, a seal and a very confused jogger.'"
+  },
+  {
+   "id": "tennis_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Wrong Fetchers'"
+  },
+  {
+   "id": "tennis_ball",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Generic shape; the lore ('now mostly drool') works.",
+   "suggestion": "'Old Slobber the Ten Thousandth'"
+  },
+  {
+   "id": "tennis_ball",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "Four repeats reads garbled; the signature hits three times.",
+   "suggestion": "'Bounce Bounce Bounce Back'"
+  },
+  {
+   "id": "x_chess_piece",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Marching across the board to become a queen repeats the Legendary.",
+   "suggestion": "'Knocks over the other king with a tiny wobble, then pretends it was the wind.'"
+  },
+  {
+   "id": "x_chess_piece",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Kingtipper'"
+  },
+  {
+   "id": "x_chess_piece",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Going missing from every set in the school is a crowd scene.",
+   "suggestion": "'Was sucked up by the vacuum cleaner mid-game, and the game was finished with a salt shaker as queen.'"
+  },
+  {
+   "id": "x_chess_piece",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Salt Shaker Queen'"
+  },
+  {
+   "id": "x_chess_piece",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Same premise as the Rare, with a plain ending.",
+   "suggestion": "'Was promoted so many times that it became a queen, then a king, then president of the chess club.'"
+  },
+  {
+   "id": "x_chess_piece",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pawnelope the Promoted'"
+  },
+  {
+   "id": "x_chess_piece",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant poisons; must be effect-neutral.",
+   "suggestion": "'Promotion'"
+  },
+  {
+   "id": "x_party_horn",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A squeal setting dogs off is a Common-level habit.",
+   "suggestion": "'Unrolls further every time it is blown, until it can tap someone on the shoulder from across the room.'"
+  },
+  {
+   "id": "x_party_horn",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Longreacher'"
+  },
+  {
+   "id": "x_party_horn",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every guest at a countdown is a crowd scene.",
+   "suggestion": "'Was blown in the library by mistake, and the librarian had to go and lie down.'"
+  },
+  {
+   "id": "x_party_horn",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Library Toot'"
+  },
+  {
+   "id": "x_party_horn",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Starting a loud party is a quiet ending.",
+   "suggestion": "'Tooted so loudly at one birthday that it woke every hibernating hedgehog in the county, and they all wanted cake.'"
+  },
+  {
+   "id": "x_party_horn",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Hootenanny the Horn'"
+  },
+  {
+   "id": "x_baby_doll",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being pushed in a pram is the doll's job.",
+   "suggestion": "'Cries whenever anyone else gets a cuddle, and it has never needed batteries to do it.'"
+  },
+  {
+   "id": "x_baby_doll",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Cuddlesulker'"
+  },
+  {
+   "id": "x_baby_doll",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every doll getting a bandage is a crowd scene.",
+   "suggestion": "'Was dressed by every child at playgroup in turn, and came home wearing nine hats and one shoe.'"
+  },
+  {
+   "id": "x_baby_doll",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Nine Hat Homecoming'"
+  },
+  {
+   "id": "x_baby_doll",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "'Over twenty years' is the endurance formula, though 'loved bald' is a real punchline. Optional.",
+   "suggestion": "'Was loved so hard by one child that it went bald by its first birthday, and now wears a knitted hat with pride.'"
+  },
+  {
+   "id": "x_ball_pit_ball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Many colours is a description.",
+   "suggestion": "'Multiplies at night, so the ball pit is always a little fuller in the morning than when it closed.'"
+  },
+  {
+   "id": "x_ball_pit_ball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Pitfiller'"
+  },
+  {
+   "id": "x_ball_pit_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every child throwing at once is a crowd scene.",
+   "suggestion": "'Left the soft play in every child's pocket, and the car park now has a ball pit of its own.'"
+  },
+  {
+   "id": "x_ball_pit_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Car Park Ball Pit'"
+  },
+  {
+   "id": "x_ball_pit_ball",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Being found in the car park is a small ending, and the new Epic owns the car park.",
+   "suggestion": "'Rolled out of the soft play, across town and into the football final, where it was used for the second half.'"
+  },
+  {
+   "id": "x_ball_pit_ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pitbreaker the Wanderer'"
+  },
+  {
+   "id": "x_barbie_doll",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Changing outfits is a habit and repeats the Legendary.",
+   "suggestion": "'Borrows its owner's real socks to wear as capes, so every morning somebody is missing one.'"
+  },
+  {
+   "id": "x_barbie_doll",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sockcaper'"
+  },
+  {
+   "id": "x_barbie_doll",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A fashion show on the dining table has no joke.",
+   "suggestion": "'Held a fashion show on the dining table during dinner, and Dad's peas were moved to the front row.'"
+  },
+  {
+   "id": "x_barbie_doll",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Catwalk Dinner'"
+  },
+  {
+   "id": "x_barbie_doll",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Generic shape; the lore is fine.",
+   "suggestion": "'Couture Clementine'"
+  },
+  {
+   "id": "x_barbie_doll",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant burns; must be effect-neutral.",
+   "suggestion": "'Quick Change'"
+  },
+  {
+   "id": "x_barbie_doll",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Garbled.",
+   "suggestion": "'Hair Clip Snatch'"
+  },
+  {
+   "id": "x_basketball_hoop",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Standing on the driveway is not a power.",
+   "suggestion": "'Wobbles its rim at the last second, so every easy shot spins out and every silly one goes in.'"
+  },
+  {
+   "id": "x_basketball_hoop",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Rimwobbler'"
+  },
+  {
+   "id": "x_basketball_hoop",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Playing until the street lights come on has no joke.",
+   "suggestion": "'Was slam-dunked so hard that it now hangs at toddler height, and the toddler is unbeatable.'"
+  },
+  {
+   "id": "x_basketball_hoop",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Toddler Height Hoop'"
+  },
+  {
+   "id": "x_basketball_hoop",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Saw a thousand baskets' is a count, not a feat.",
+   "suggestion": "'Caught every shot one summer, even the ones aimed at the bin, and the bin went on strike.'"
+  },
+  {
+   "id": "x_basketball_hoop",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Swishington the Hungry'"
+  },
+  {
+   "id": "x_boomerang",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "'The only tree in the whole park' copies the kite's Common.",
+   "suggestion": "'Comes back with other people's things: a sun hat, half a sandwich and once a very surprised kite.'"
+  },
+  {
+   "id": "x_boomerang",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Snatchback'"
+  },
+  {
+   "id": "x_boomerang",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Coming back is the boomerang's job.",
+   "suggestion": "'Comes back to its thrower wherever they go, even if they have gone home and are in the bath.'"
+  },
+  {
+   "id": "x_boomerang",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bathfinder'"
+  },
+  {
+   "id": "x_boomerang",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Fine lore; the name could carry more character.",
+   "suggestion": "'Returno the Loyal'"
+  },
+  {
+   "id": "x_bowling_ball",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "'Rolls straight into the gutter' mirrors the ball's 'Rolls straight into the drain'.",
+   "suggestion": "'Lets everyone pick it up first and only then reveals how heavy it is, with a thud the whole lane hears.'"
+  },
+  {
+   "id": "x_bowling_ball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A thunder rumble is a description.",
+   "suggestion": "'Curves into the next lane at the last second and knocks down somebody else's pins.'"
+  },
+  {
+   "id": "x_bowling_ball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Lanehopper'"
+  },
+  {
+   "id": "x_bowling_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every pin on every lane and 'the alley went wild' is a crowd scene.",
+   "suggestion": "'Rolled so slowly at a birthday party that everyone had cake and came back before it reached the pins.'"
+  },
+  {
+   "id": "x_bowling_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Birthday Slowroll'"
+  },
+  {
+   "id": "x_bowling_ball",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A perfect game is a sports-win Legendary.",
+   "suggestion": "'Bowled a strike so perfect that the pins stood back up just to fall over again for the photo.'"
+  },
+  {
+   "id": "x_bowling_ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Thunderbowl Theo'"
+  },
+  {
+   "id": "x_bubble_wand",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A child-sized bubble is the wand's job.",
+   "suggestion": "'Blows bubbles that bounce instead of popping, and one has been bouncing round the kitchen since Tuesday.'"
+  },
+  {
+   "id": "x_bubble_wand",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bouncebubble'"
+  },
+  {
+   "id": "x_bubble_wand",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Children chasing bubbles till dark is a soft ending.",
+   "suggestion": "'Blew a bubble round the garden gnome, which floated over three gardens and landed in a paddling pool.'"
+  },
+  {
+   "id": "x_bubble_wand",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Gnome Balloon'"
+  },
+  {
+   "id": "x_bubble_wand",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Popping on the chimney is a mild ending.",
+   "suggestion": "'Blew a bubble so big that the whole house floated inside it to the seaside and popped just in time for chips.'"
+  },
+  {
+   "id": "x_bubble_wand",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bubbles Magnifico'"
+  },
+  {
+   "id": "x_bubble_wand",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Big Bubble Burst'"
+  },
+  {
+   "id": "x_cricket_ball",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Generic shape; the lore is fine.",
+   "suggestion": "'Redstreak, the Lost Six'"
+  },
+  {
+   "id": "x_dodgeball",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "'Finds everyone's head, even when they duck' encourages head shots, which dodgeball rules forbid.",
+   "suggestion": "'Always finds the one person who isn't playing, usually the teacher with a cup of tea.'"
+  },
+  {
+   "id": "x_dodgeball",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Pairs with the new Common lore.",
+   "suggestion": "'Teacupfinder'"
+  },
+  {
+   "id": "x_dodgeball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A showdown until the bell has no joke.",
+   "suggestion": "'Was thrown so hard that it bounced round the gym for a whole lesson, and the class went to lunch while it was still going.'"
+  },
+  {
+   "id": "x_dodgeball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Lunchtime Ricochet'"
+  },
+  {
+   "id": "x_dodgeball",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Hitting every player in one throw is a plain power-up of the Rare.",
+   "suggestion": "'Was dodged so well by one boy that it gave up, sat down on the bench and asked to be a beach ball.'"
+  },
+  {
+   "id": "x_dodgeball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bouncer Bartholomew'"
+  },
+  {
+   "id": "x_doll_house",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A tiny world is a description.",
+   "suggestion": "'Rearranges its tiny furniture every night, so the dolls are always having breakfast in the bath.'"
+  },
+  {
+   "id": "x_doll_house",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Furnitureshuffler'"
+  },
+  {
+   "id": "x_doll_house",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A party for every doll is a crowd scene.",
+   "suggestion": "'Sprang a tiny leak in its tiny roof, and the dolls held a very serious meeting about tiny buckets.'"
+  },
+  {
+   "id": "x_doll_house",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Tiny Roof Leak'"
+  },
+  {
+   "id": "x_doll_house",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Wedding photos for the album is a quiet ending.",
+   "suggestion": "'Grows a tiny new room every year, and is now bigger than the real house, so the family lives in the attic.'"
+  },
+  {
+   "id": "x_doll_house",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Mansionette the Ever-Growing'"
+  },
+  {
+   "id": "x_exercise_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A lamp falling over is a small consequence.",
+   "suggestion": "'Was sat on during a video call and bounced its owner out of the picture every ten seconds, so the meeting blamed the internet.'"
+  },
+  {
+   "id": "x_exercise_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Video Call Bounce'"
+  },
+  {
+   "id": "x_exercise_ball",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Generic shape; the lore is good.",
+   "suggestion": "'Boingo the Office Chair'"
+  },
+  {
+   "id": "x_exercise_ball",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Mutated variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Big Roll'"
+  },
+  {
+   "id": "x_handball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Odd angles off a wall is generic and repeats the ball.",
+   "suggestion": "'Sticks to the hand of whoever throws it, so the goalkeeper catches the ball and the thrower too.'"
+  },
+  {
+   "id": "x_handball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Stickyhand'"
+  },
+  {
+   "id": "x_handball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "The net shaking has no joke.",
+   "suggestion": "'Was thrown so hard in the final that it took the goalkeeper's gloves with it into the net.'"
+  },
+  {
+   "id": "x_handball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Glove Snatch Goal'"
+  },
+  {
+   "id": "x_handball",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A throw from the other end of the court in the final copies the basketball Legendary.",
+   "suggestion": "'Was passed so fast round the team that it came back to the first player before she had let go.'"
+  },
+  {
+   "id": "x_handball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Passquick the Untouchable'"
+  },
+  {
+   "id": "x_handball",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Goal Thunder'"
+  },
+  {
+   "id": "x_kaleidoscope",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Beautiful patterns are the job; the new line adds a consequence.",
+   "suggestion": "'Shows its patterns on the inside of your eyelids too, so everyone who looks in it dreams in triangles.'"
+  },
+  {
+   "id": "x_kaleidoscope",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Not wanting to give it back has no joke.",
+   "suggestion": "'Got stuck on one pattern and beamed it onto the bedroom ceiling, and the family now sleeps under a giant paper snowflake.'"
+  },
+  {
+   "id": "x_kaleidoscope",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Ceiling Snowflake'"
+  },
+  {
+   "id": "x_kaleidoscope",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for fifty years, never the same one twice').",
+   "suggestion": "'Was twisted so many times that it ran out of patterns, so now it shows next week's weather instead.'"
+  },
+  {
+   "id": "x_kaleidoscope",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Prismo, Seer of Next Week'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Losing a hat under the sofa is a Common-level habit.",
+   "suggestion": "'Walks off the shelf at night and is found the next morning at the bottom of the cereal box.'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Cerealexplorer'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "An adventure across the living room has no joke.",
+   "suggestion": "'Lined up every toy in the box outside the bathroom one morning, and the real family had to queue behind them.'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Toy Box Queue'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'According to its owner' is the stock own-story frame, with no feat.",
+   "suggestion": "'Was lost down the back of the sofa so long that it built a little town in there, with a post office.'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Mayor Sofabottom'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant burns; must be effect-neutral.",
+   "suggestion": "'Brick Town'"
+  },
+  {
+   "id": "x_lego_figure",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Garbled.",
+   "suggestion": "'Tiny Click Flash'"
+  },
+  {
+   "id": "x_marionette",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Making people forget the strings is the job.",
+   "suggestion": "'Pulls its puppeteer around by the strings when it gets excited, so the show ends in a different room.'"
+  },
+  {
+   "id": "x_marionette",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Puppeteertugger'"
+  },
+  {
+   "id": "x_marionette",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Children not letting it stop has no joke.",
+   "suggestion": "'Tangled the whole puppet theatre into one big knot mid-show, and the audience cheered for the knot.'"
+  },
+  {
+   "id": "x_marionette",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Theatre Knot'"
+  },
+  {
+   "id": "x_marionette",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Long generic shape; the lore is one of the batch's best.",
+   "suggestion": "'Freestring the Dancer'"
+  },
+  {
+   "id": "x_medicine_ball",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Floorthud' repeats the Common (Heavyball Thud) and does not fit the 'daring anyone' line.",
+   "suggestion": "'Cornerdarer'"
+  },
+  {
+   "id": "x_medicine_ball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every player throwing at once is a crowd scene.",
+   "suggestion": "'Was dropped in the gym so hard that the basketballs in the cupboard bounced for an hour.'"
+  },
+  {
+   "id": "x_medicine_ball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cupboard Quake'"
+  },
+  {
+   "id": "x_medicine_ball",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Bouncing down the corridor is a small ending.",
+   "suggestion": "'Was only ever lifted by the caretaker, who has been able to open every jam jar in town since.'"
+  },
+  {
+   "id": "x_medicine_ball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Thudmore the Unliftable'"
+  },
+  {
+   "id": "x_medicine_ball",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Daze' is a stun word, but two variants burn; must be effect-neutral.",
+   "suggestion": "'Floor Thud'"
+  },
+  {
+   "id": "x_mobile_toy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Sang Six Babies Asleep' does not match the lore (the street yawning, the ice cream van going home).",
+   "suggestion": "'Yawnwhirl the Street Sleeper'"
+  },
+  {
+   "id": "x_mouthguard",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Saving teeth is the job.",
+   "suggestion": "'Turns every word its wearer says into a sneeze, so the referee keeps saying bless you.'"
+  },
+  {
+   "id": "x_mouthguard",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sneezespeaker'"
+  },
+  {
+   "id": "x_mouthguard",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every player in the final keeping their teeth is the job plus a crowd.",
+   "suggestion": "'Was boiled to fit so perfectly that it now whistles the team song whenever its owner breathes.'"
+  },
+  {
+   "id": "x_mouthguard",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Whistling Gumshield'"
+  },
+  {
+   "id": "x_mouthguard",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A whole career and a glass case is a quiet success.",
+   "suggestion": "'Was so tough that a shark bit it on holiday and swam off with a sore tooth.'"
+  },
+  {
+   "id": "x_mouthguard",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Chompstop the Shark-Proof'"
+  },
+  {
+   "id": "x_mouthguard",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Shout' reads as a stun, but two variants poison and one burns; needs an effect-neutral name.",
+   "suggestion": "'Gumshield Grin'"
+  },
+  {
+   "id": "x_pacifier",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Pramthrower' does not match the line (hiding down the side of the cot).",
+   "suggestion": "'Cotsider'"
+  },
+  {
+   "id": "x_pacifier",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Calming a baby is the job.",
+   "suggestion": "'Gets spat out so hard that it lands in the next room, usually in somebody's cup of tea.'"
+  },
+  {
+   "id": "x_pacifier",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Teacupshot'"
+  },
+  {
+   "id": "x_pacifier",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('four babies, one after another').",
+   "suggestion": "'Calmed a baby so well that she slept through a thunderstorm, a brass band and Grandad's sneeze.'"
+  },
+  {
+   "id": "x_pacifier",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Hushabye Pip'"
+  },
+  {
+   "id": "x_pool_float",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A fleet hiding the pool is a crowd scene.",
+   "suggestion": "'Was blown up so big for a pool party that it pushed all the water out, and next door's lawn is now a paddling pool.'"
+  },
+  {
+   "id": "x_pool_float",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Pool Overflow Party'"
+  },
+  {
+   "id": "x_pool_float",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A rider asleep on a float drifting across a lake shows unsafe water behaviour.",
+   "suggestion": "'Was blown up with so much air that it floated over the hedge, and is now a very small cloud.'"
+  },
+  {
+   "id": "x_pool_float",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Cumulo the Floating'"
+  },
+  {
+   "id": "x_pool_float",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Big Splash'"
+  },
+  {
+   "id": "x_puppet",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Making the room laugh is the job.",
+   "suggestion": "'Says out loud whatever its owner is too polite to say, and somehow everyone blames the sock.'"
+  },
+  {
+   "id": "x_puppet",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Blurtsock'"
+  },
+  {
+   "id": "x_puppet",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "The whole school laughing is a crowd scene.",
+   "suggestion": "'Told the head teacher in assembly that her shoes were on the wrong feet, and they were.'"
+  },
+  {
+   "id": "x_puppet",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Assembly Announcement'"
+  },
+  {
+   "id": "x_puppet",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Making the grumpiest man laugh is a mild ending.",
+   "suggestion": "'Told a joke so funny that the statue in the park laughed and dropped its umbrella.'"
+  },
+  {
+   "id": "x_puppet",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Chuckles Von Sock'"
+  },
+  {
+   "id": "x_rattle",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Making babies giggle is the job.",
+   "suggestion": "'Rattles louder the closer anyone in the house gets to a nap, and loudest of all for Grandad.'"
+  },
+  {
+   "id": "x_rattle",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Napwrecker'"
+  },
+  {
+   "id": "x_rattle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every baby at playgroup at once is a crowd scene.",
+   "suggestion": "'Was shaken so hard on the bus that the driver thought it was hail and turned on the wipers.'"
+  },
+  {
+   "id": "x_rattle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bus Hailstorm'"
+  },
+  {
+   "id": "x_rattle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('four generations').",
+   "suggestion": "'Rattled so loudly that it set off every car alarm in the street, which made the baby laugh even harder.'"
+  },
+  {
+   "id": "x_rattle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Clatterbelle the Alarming'"
+  },
+  {
+   "id": "x_shot_put",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A school record standing for fifty years is a sports-record Legendary.",
+   "suggestion": "'Was thrown so far at sports day that it landed in next year's sports day, and won that too.'"
+  },
+  {
+   "id": "x_shot_put",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Heavy Henrietta'"
+  },
+  {
+   "id": "x_shuttlecock",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "A rally so long that everyone sat down repeats the Legendary.",
+   "suggestion": "'Flew into the sports hall vent and came out of the fan in the head teacher's office.'"
+  },
+  {
+   "id": "x_shuttlecock",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Vent Escape'"
+  },
+  {
+   "id": "x_shuttlecock",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "An hour without touching the ground is the endurance formula.",
+   "suggestion": "'Was hit so high that a passing goose took it home to show the family, and they have been playing ever since.'"
+  },
+  {
+   "id": "x_shuttlecock",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Featherby the High'"
+  },
+  {
+   "id": "x_shuttlecock",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant stuns; must be effect-neutral.",
+   "suggestion": "'Shuttle Smash'"
+  },
+  {
+   "id": "x_slinky",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Stretching to the door is the job.",
+   "suggestion": "'Walks up the stairs as well as down, usually in the middle of the night, very loudly.'"
+  },
+  {
+   "id": "x_slinky",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Stairclimber'"
+  },
+  {
+   "id": "x_slinky",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Walking down every step repeats the Common and the Legendary.",
+   "suggestion": "'Stretched from the top floor to the front door and caught the post on its way in.'"
+  },
+  {
+   "id": "x_slinky",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Postal Spring'"
+  },
+  {
+   "id": "x_slinky",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Walking down the town hall stairs is the Common scaled up.",
+   "suggestion": "'Walked down the stairs, out of the door and down a mountain, and reached the seaside a week later.'"
+  },
+  {
+   "id": "x_slinky",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Coilin the Wanderer'"
+  },
+  {
+   "id": "x_softball",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Popping into the glove is the job.",
+   "suggestion": "'Goes soft whenever anyone tries to hit it and hard whenever anyone tries to catch it.'"
+  },
+  {
+   "id": "x_softball",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Glovestinger'"
+  },
+  {
+   "id": "x_softball",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A game until sunset has no joke.",
+   "suggestion": "'Was hit into a pond, and a frog caught it and threw it to second base.'"
+  },
+  {
+   "id": "x_softball",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Frog on Second'"
+  },
+  {
+   "id": "x_softball",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A home run over the fence is a sports-win Legendary.",
+   "suggestion": "'Was hit so far that it landed in another time zone, and the batter had to fly there to touch home.'"
+  },
+  {
+   "id": "x_softball",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Longhaul Lulu'"
+  },
+  {
+   "id": "x_softball",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Home Run Swing'"
+  },
+  {
+   "id": "x_starting_block",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Launching fast is the job.",
+   "suggestion": "'Fires its runner off before the starting gun, then acts as if nothing happened.'"
+  },
+  {
+   "id": "x_starting_block",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Falsestarter'"
+  },
+  {
+   "id": "x_starting_block",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every runner launching at once has no joke.",
+   "suggestion": "'Launched a sprinter so hard that she finished the race before the crowd had sat down.'"
+  },
+  {
+   "id": "x_starting_block",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Early Finish'"
+  },
+  {
+   "id": "x_starting_block",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "An unbeaten record is a sports-record Legendary.",
+   "suggestion": "'Launched a runner so fast that she got home before she had set off, and had tea waiting for herself.'"
+  },
+  {
+   "id": "x_starting_block",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Blastoff Betty'"
+  },
+  {
+   "id": "x_starting_block",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Normal variant lowers defence; must be effect-neutral.",
+   "suggestion": "'Sprint Launch'"
+  },
+  {
+   "id": "x_sticker",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Going on the chart is the job.",
+   "suggestion": "'Moves itself to the best spot on the sticker chart overnight, so one child always seems to be winning.'"
+  },
+  {
+   "id": "x_sticker",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Chartcreeper'"
+  },
+  {
+   "id": "x_sticker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Sticker Book Swap' does not match the Epic lore (stuck to the head teacher's back).",
+   "suggestion": "'Head Teacher's Back'"
+  },
+  {
+   "id": "x_sticker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('stayed there for ten years').",
+   "suggestion": "'Stuck so well that it held a fence together through a storm, and the town now asks it to look after the bridge.'"
+  },
+  {
+   "id": "x_sticker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gloria the Unpeelable'"
+  },
+  {
+   "id": "x_swim_ring",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being duck-shaped is a description.",
+   "suggestion": "'Floats its rider in slow circles towards the ice cream kiosk, whichever way they paddle.'"
+  },
+  {
+   "id": "x_swim_ring",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Kioskdrifter'"
+  },
+  {
+   "id": "x_swim_ring",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A pool full of bobbing ducks is a crowd scene.",
+   "suggestion": "'Was blown up so tight that its rider skipped across the pool like a stone and landed in the paddling pool.'"
+  },
+  {
+   "id": "x_swim_ring",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Skimming Stone'"
+  },
+  {
+   "id": "x_swim_ring",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A toddler's first swim is warm but has no feat.",
+   "suggestion": "'Floated so well that a lost baby whale used it to get home, and still sends a postcard every summer.'"
+  },
+  {
+   "id": "x_swim_ring",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Hoopla the Whale Friend'"
+  },
+  {
+   "id": "x_teether",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Squeaking when chewed is weak for a Rare.",
+   "suggestion": "'Stays freezing cold for a week after one night in the fridge, and gives brain freeze to anyone who touches it.'"
+  },
+  {
+   "id": "x_teether",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Chillchomper'"
+  },
+  {
+   "id": "x_teether",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('three babies in the same family').",
+   "suggestion": "'Was chewed so bravely through one teething night that the baby woke up with all its teeth at once, grinning.'"
+  },
+  {
+   "id": "x_teether",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gnashley the Brave'"
+  },
+  {
+   "id": "x_teether",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word and 'Chew Chew' reads as a multi-hit, but this is one hit and the Spectral variant burns.",
+   "suggestion": "'Big Chomp'"
+  },
+  {
+   "id": "x_toy_soldier",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Marching in a line is the job.",
+   "suggestion": "'Salutes whenever a grown-up walks in, then marches off with one of their biscuits.'"
+  },
+  {
+   "id": "x_toy_soldier",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Biscuitsaluter'"
+  },
+  {
+   "id": "x_toy_soldier",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Every soldier parading has no joke.",
+   "suggestion": "'Marched the whole box across the bedroom in the night and was found at dawn guarding the fridge.'"
+  },
+  {
+   "id": "x_toy_soldier",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Fridge Guard Parade'"
+  },
+  {
+   "id": "x_toy_soldier",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for fifty years without blinking').",
+   "suggestion": "'Stood guard so bravely that the fox who raids the bins saluted it and moved to another street.'"
+  },
+  {
+   "id": "x_toy_soldier",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Corporal Steadfast'"
+  },
+  {
+   "id": "x_toy_soldier",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant stuns; must be effect-neutral.",
+   "suggestion": "'Parade March'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "'Creepily' is a frightening note for a child; the line works without it.",
+   "suggestion": "'Grins in the corner so widely that the cat will not walk past it.'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Owners claiming its jokes is a weak trick.",
+   "suggestion": "'Talks back when its owner's mouth is shut, usually to say what everyone was thinking.'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Backtalker'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Stealing the show at a talent contest is a contest frame.",
+   "suggestion": "'Answered the phone in its owner's voice and booked the whole family a holiday at the wrong seaside.'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Wrong Holiday Call'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A slightly jealous comedian is a mild ending.",
+   "suggestion": "'Told a joke so good that its owner laughed with his mouth wide open, and nobody could tell which one was the dummy.'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Chuckles O'Clack'"
+  },
+  {
+   "id": "x_ventriloquist_dummy",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Flash' is a stun word, but the Spectral variant poisons; must be effect-neutral.",
+   "suggestion": "'Punchline'"
+  }
+ ]
+}

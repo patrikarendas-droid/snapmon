@@ -15,14 +15,33 @@ const T = load(), W = require('../tools/curated-workflow');
 const readDoc = f => ({ rel: f, doc: JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')) });
 
 // 1. live content untouched
-ok(sha('content/curated/pilot-01-approved.json') === 'ced698205fb806ef2930cdfa1c4eb844ac2f95d591bf47635a4b77db226baca7', 'Pilot 01 approved file is byte-identical to v0.4.6/v0.4.7');
+// v0.5.0: Pilot 01 gained its 50 approved names (content/campaign/PILOT01_NAMES_INTEGRATION.md); with the names removed
+// it is exactly the v0.4.6 approved content, so lore, moves and status are untouched
+{ const p01 = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/curated/pilot-01-approved.json'), 'utf8')), es = Object.values(p01.entries);
+  ok(sha('content/curated/pilot-01-approved.json') === 'a8186977dd2e33b52de51942116f824f40c58962a289370d2a07b4f4007010e1', 'Pilot 01 approved file is the v0.5.0 version (names added)');
+  ok(es.length === 10 && es.every(e => e.names && Object.keys(e.names).length === 5), 'Pilot 01: 10 objects with 5 approved names each');
+  es.forEach(e => delete e.names);
+  ok(crypto.createHash('sha256').update(JSON.stringify(p01)).digest('hex') === 'cbe9034e0db5b588458fd2ad7b047906d48db9b6d076834f4095931621e0c46a', 'Pilot 01 without the names is exactly the v0.4.6 approved content (lore, moves, status)'); }
+ok(sha('content/curated/pilot-02-approved.json').startsWith('592b6ddfb9c7'), 'Pilot 02 approved file is byte-identical to v0.4.8');
 {
   const live = T.CURATED.data, ids = Object.keys(live), withNames = ids.filter(id => live[id].names);
-  ok(ids.length === 60 && ids.every(id => live[id].status === 'reviewed'), `live src/curated-data.js: ${ids.length} reviewed objects (Pilot 01 + Pilot 02), nothing else`);
-  ok(withNames.length === 50 && withNames.every(id => Object.keys(live[id].names).length === 5), `live names: ${withNames.length} objects with 5 names each (Pilot 02; Pilot 01 has none and keeps generated names)`);
+  ok(ids.length === T.OBJECT_LIST.length && ids.length === 2308 && ids.every(id => live[id].status === 'reviewed' && T.OBJECTS[id]), `live src/curated-data.js: ${ids.length} reviewed objects (every registry object, v0.5.0)`);
+  ok(withNames.length === ids.length && withNames.every(id => Object.keys(live[id].names).length === 5), `live names: ${withNames.length} objects with 5 names each`);
+  // every campaign batch file is live exactly as written (source JSON in content/curated/ is the editable truth)
+  const camp = fs.readdirSync(path.join(ROOT, 'content/curated')).filter(f => /^w\d\d-.*\.json$/.test(f)); let n = 0, diff = [];
+  for (const f of camp) for (const [id, e] of Object.entries(JSON.parse(fs.readFileSync(path.join(ROOT, 'content/curated', f), 'utf8')).entries)) { n++;
+    const l = live[id]; if (e.status !== 'reviewed' || !l || JSON.stringify(l.names) !== JSON.stringify(e.names) || JSON.stringify(l.lore) !== JSON.stringify(e.lore) || JSON.stringify(l.moves || {}) !== JSON.stringify(e.moves || {})) diff.push(id); }
+  ok(camp.length === 22 && n === 2248 && !diff.length, `22 campaign batch files, ${n} entries, all reviewed and live with exactly their source names, lore and move names${diff.length ? ': ' + diff.slice(0, 3) : ''}`);
   const curSrc = fs.readFileSync(path.join(ROOT, 'src/curated.js'), 'utf8'), body = n => curSrc.slice(curSrc.indexOf('function ' + n), curSrc.indexOf('\n}', curSrc.indexOf('function ' + n)));
   ok(/status === 'reviewed'/.test(body('curatedMonsterName')) && /namesEnabled/.test(body('curatedMonsterName')), 'the runtime name lookup reads only reviewed entries, behind its own switch (CURATED.namesEnabled)');
 }
+
+// 1b. live entries are guarded: campaign patch refuses them without --approved-edit (and changes nothing)
+{ const tmp = path.join(require('os').tmpdir(), 'snapmon-guard-' + process.pid + '.json'), f = path.join(ROOT, 'content/curated/w01-mammals-1.json'), before = fs.readFileSync(f, 'utf8');
+  const id = Object.keys(JSON.parse(before).entries)[0]; fs.writeFileSync(tmp, JSON.stringify({ [id]: { 'lore.common': 'A guard test line that must never be written to the live file.' } }));
+  let out = ''; try { out = execFileSync('node', [path.join(ROOT, 'tools/campaign.js'), 'patch', 'w01-mammals-1', tmp], { encoding: 'utf8' }); } catch (e) { out = String(e.stdout || e.message); }
+  fs.unlinkSync(tmp);
+  ok(/is live \(reviewed\)/.test(out) && /nothing written/.test(out) && fs.readFileSync(f, 'utf8') === before, 'live (reviewed) entries cannot be patched without --approved-edit; the file is untouched'); }
 
 // 2. inventory
 let check = ''; try { check = execFileSync('node', [path.join(ROOT, 'tools/inventory.js'), '--check'], { encoding: 'utf8' }); } catch (e) { check = String(e.stdout || e.message); }
@@ -32,7 +51,7 @@ const ids = rows.map(r => r.id);
 ok(rows.length === T.OBJECT_LIST.length && new Set(ids).size === ids.length && ids.every((id, i) => !i || ids[i - 1] < id), `inventory: one row per registry object (${rows.length}), unique, sorted`);
 ok(rows.every(r => W.RAR.every(x => typeof r.names[x] === 'string' && typeof r.lore[x] === 'string') && ['signature', 'legend', 'ultimate'].every(k => r.moves.some(m => m.key === k))), 'every row has 5 current names, 5 procedural texts and signature/legend/ultimate slots');
 const apple = rows.find(r => r.id === 'apple'), ped = rows.find(r => r.id === 'toaster');
-ok(apple.curated.lore.status === 'reviewed' && apple.curated.lore.rarities.length === 5 && apple.curated.names.status === 'not-started' && ped.curated.status === 'reviewed' && ped.curated.names.status === 'reviewed' && ped.curated.names.rarities.length === 5, 'coverage per layer: Pilot 01 lore reviewed, names not started; Pilot 02 names and lore reviewed');
+ok(apple.curated.lore.status === 'reviewed' && apple.curated.lore.rarities.length === 5 && apple.curated.names.status === 'reviewed' && ped.curated.status === 'reviewed' && ped.curated.names.status === 'reviewed' && ped.curated.names.rarities.length === 5 && rows.every(r => r.curated.lore.status === 'reviewed' && r.curated.names.status === 'reviewed'), 'coverage per layer: every object has reviewed lore and names (Pilot 01 names since v0.5.0)');
 ok(rows.find(r => r.id === 'x_energy_drink').moves.find(m => m.key === 'ultimate').variantsDiffer === true, 'inventory records when an Ultimate effect differs by variant');
 
 // 3. draft monster names: schema

@@ -1,0 +1,3479 @@
+{
+  "batch": "w11-office-books-and-art",
+  "editor": "independent agent",
+  "reviewed": 112,
+  "summary": "A much stronger batch than w10: most objects have five recognisable, object-specific premises with real punchlines (calendar that cancelled Monday, notepad's 'call Gran' becoming 'cool gorilla', street sign the town renamed itself after, laminating the Do Not Laminate sign, the shredder that really ate the homework, the projector screen hat). Safety is handled well overall: cigarette, butt and vape are smelly and littery, never glamorous; incense has no religion; the Bible is written as a neutral family book (flagged for the developer's decision). The fixes needed: (1) Legendary names are almost all 'The X That Y' (102 of 112), so naming needs a pass; (2) about 30 Legendaries use the 'for N years / kept for fifty years' formula or are quiet successes; (3) about a dozen Epics are paper avalanches, snowstorms or dominoes; (4) several objects scale one trait across three rarities (greeting card signatures, hole-puncher confetti, receipt-roll length, rubber-band ball, hairpin buns); (5) cross-object copies inside the clusters (greeting card R = pop-up book R, crochet R = knitting R, three bride Legendaries, three lock-picking lines, three floor-spike lines, cigarette L = vape L, cigarette butt = w12 litter). Sensitive fixes: vape flavour appeal, the stained glass's 500-year (church) window, the laser pointer aimed at the sky, the newspaper stack used to light fires, and the paper crane's hospital Legendary. Move mechanics are mostly right, but about 40 poison moves are named as smudges or splashes (poison means stink), about 20 names are garbled repeats, and several Ultimates repeat the Epic name. Replacements and paired names are given for every high and medium item.",
+  "patterns": [
+    {
+      "pattern": "Legendary name monotony: 102 of 112 Legendaries are 'The X That/Who Y' or 'The X of Y'. This is the batch's main naming problem.",
+      "ids": [
+        "x_calendar_page",
+        "x_file_folder",
+        "x_folder",
+        "x_journal",
+        "x_notebook_pad",
+        "x_notepad",
+        "x_ring_binder",
+        "x_sticky_note",
+        "bookshelf",
+        "x_cardboard",
+        "x_paper_crane",
+        "envelope",
+        "i_street_sign",
+        "x_atlas",
+        "x_map",
+        "newspaper",
+        "sewing_machine",
+        "x_hole_puncher",
+        "x_stapler_remover",
+        "x_tape_gun",
+        "x_banknote",
+        "x_banner",
+        "x_bible",
+        "x_binder_clip",
+        "x_birthday_card",
+        "x_book_stand",
+        "x_bookend",
+        "x_booklet",
+        "x_bookmark",
+        "x_brochure",
+        "x_canvas",
+        "x_canvas_print",
+        "x_chalk",
+        "x_cigarette",
+        "x_comic",
+        "x_cookbook",
+        "x_crochet_hook",
+        "x_dictionary",
+        "x_easel",
+        "x_flag",
+        "x_flyer",
+        "x_glue_stick",
+        "x_greeting_card",
+        "x_hair_clip",
+        "x_hair_tie",
+        "x_hairpin",
+        "x_hula_hoop",
+        "x_id_card",
+        "x_incense_stick",
+        "x_laser_pointer",
+        "x_leaflet",
+        "x_letter_paper",
+        "x_level_tool",
+        "x_magazine_stack",
+        "x_manga",
+        "x_menu_card",
+        "x_newspaper_stack",
+        "x_origami",
+        "x_paint_tube",
+        "x_painting",
+        "x_pamphlet",
+        "x_paper_clip",
+        "x_paper_plane",
+        "x_paper_sheet",
+        "x_paper_stack",
+        "x_photo_album",
+        "x_photo_frame",
+        "x_picture_book",
+        "x_pin_cushion",
+        "x_playing_card",
+        "x_pop_up_book",
+        "x_postcard_stack",
+        "x_poster",
+        "x_projector_screen",
+        "x_protractor",
+        "x_push_pin",
+        "x_receipt",
+        "x_receipt_roll",
+        "x_rubber_band",
+        "x_ruler_tool",
+        "x_safety_pin",
+        "x_scrapbook",
+        "x_set_square",
+        "x_sewing_needle",
+        "x_shredder",
+        "x_sketchbook",
+        "x_soldering_iron",
+        "x_stained_glass",
+        "x_stylus",
+        "x_tapestry",
+        "x_thimble",
+        "x_thimble_small",
+        "x_thumbtack",
+        "x_ticket",
+        "x_toothpick",
+        "x_trading_card",
+        "x_vape",
+        "x_wall_art",
+        "x_whiteboard"
+      ],
+      "severity": "high",
+      "suggestion": "Per-object names are given wherever the Legendary lore changes (about 70). For the kept lines, cut 'The X That...' down to at most a fifth of the batch: use 'Name, the Epithet', 'Name the Adjective', pun names and titles, as the replacements show."
+    },
+    {
+      "pattern": "Paper-spill Epics: about a dozen Epics are 'everything fell / avalanche / snowstorm / blizzard / domino / ankle-deep paper'.",
+      "ids": [
+        "x_calendar_page",
+        "x_file_folder",
+        "x_folder",
+        "x_ring_binder",
+        "bookshelf",
+        "x_bookend",
+        "x_birthday_card",
+        "x_hole_puncher",
+        "x_stapler_remover",
+        "x_leaflet",
+        "newspaper",
+        "x_paper_sheet",
+        "x_paper_stack",
+        "x_receipt",
+        "x_magazine_stack",
+        "x_push_pin",
+        "x_picture_frame",
+        "x_photo_frame",
+        "x_shredder"
+      ],
+      "severity": "high",
+      "suggestion": "Keep at most four (file folder cabinet, folder on the bus, bookshelf dominoes, calendar page office snow) and change the rest (replacements given)."
+    },
+    {
+      "pattern": "Legendary formula 'has done X for N years / kept for fifty years / never once / still there': about 30 Legendaries.",
+      "ids": [
+        "x_notebook_pad",
+        "x_bookend",
+        "x_bookmark",
+        "x_chalkboard",
+        "x_birthday_card",
+        "x_easel",
+        "x_flag",
+        "x_hula_hoop",
+        "x_menu_card",
+        "x_photo_album",
+        "x_photo_frame",
+        "x_postcard_stack",
+        "x_poster",
+        "x_push_pin",
+        "x_receipt",
+        "x_scrapbook",
+        "x_sewing_needle",
+        "x_soldering_iron",
+        "x_stained_glass",
+        "x_tapestry",
+        "x_thimble",
+        "x_thumbtack",
+        "x_ticket",
+        "x_tie_clip",
+        "x_hair_tie",
+        "x_laser_pointer",
+        "x_letter_paper",
+        "x_diary"
+      ],
+      "severity": "high",
+      "suggestion": "Replace each with an outrageous feat and a punchline (replacements given)."
+    },
+    {
+      "pattern": "One trait scaled across three rarities: greeting card (signed by everyone U/E/L), hole puncher (confetti C/E/L), receipt roll (long receipt C/E/L), rubber band (ball R/E/L), hairpin (buns U/E/L), plus two-rarity repeats in calendar page, atlas, magazine stack, flyer, ticket, tie clip, thimble small, picture book, paper clip, stained glass.",
+      "ids": [
+        "x_greeting_card",
+        "x_hole_puncher",
+        "x_receipt_roll",
+        "x_rubber_band",
+        "x_hairpin",
+        "x_calendar_page",
+        "x_atlas",
+        "x_magazine_stack",
+        "x_flyer",
+        "x_ticket",
+        "x_tie_clip",
+        "x_thimble_small",
+        "x_picture_book",
+        "x_paper_clip",
+        "x_stained_glass",
+        "x_wall_art"
+      ],
+      "severity": "high",
+      "suggestion": "Five premises per object; replacements are given for the repeated rarities."
+    },
+    {
+      "pattern": "Cross-object near-copies: greeting card R = pop-up book R (paper castle that won't fold back); crochet hook R = knitting needles R (scarf on one bus ride); hula hoop E = trading card E (craze through every school in town); hair clip E = hair tie E (every ponytail); three bride Legendaries (hair clip, safety pin, pin cushion); three lock-picking lines (hairpin R, paper clip R, credit card L); three floor-spike lines (hairpin C, push pin U, thumbtack C); brochure C = leaflet C; newspaper C = newspaper stack U; file folder R = folder R; cigarette L = vape L; cigarette butt C and L = w12 x_litter U and L; easel E = w12 i_tripod E; comic E = w08 x_bento_box E.",
+      "ids": [
+        "x_greeting_card",
+        "x_pop_up_book",
+        "x_crochet_hook",
+        "x_knitting_needles",
+        "x_hula_hoop",
+        "x_trading_card",
+        "x_hair_clip",
+        "x_hair_tie",
+        "x_safety_pin",
+        "x_pin_cushion",
+        "x_hairpin",
+        "x_paper_clip",
+        "x_credit_card",
+        "x_push_pin",
+        "x_thumbtack",
+        "x_brochure",
+        "x_leaflet",
+        "newspaper",
+        "x_newspaper_stack",
+        "x_file_folder",
+        "x_folder",
+        "x_cigarette",
+        "x_vape",
+        "x_cigarette_butt",
+        "x_easel",
+        "x_comic"
+      ],
+      "severity": "high",
+      "suggestion": "The issue on each object says which side to change; keep the side that is more specific to its object (pop-up book castle, knitting bus scarf, paper clip lock)."
+    },
+    {
+      "pattern": "Cluster tell-apart. Notebooks: diary = lock and secrets; journal = explorer notes; notebook pad = school notes; notepad = phone messages; planner = schedules. Folders: file folder = filing cabinet; folder = school bag; ring binder = rings and dividers. Cards: birthday card = tune and money; greeting card = messages and size. Frames: photo frame = the photo's mood; picture frame = making things look valuable; wall art = abstract; painting = following eyes. Thimbles: thimble = tapping and pushing; small thimble = tiny uses. Pins: push pin = notices; thumbtack = scattering tin; safety pin = rescues; pin cushion = hedgehog look.",
+      "ids": [
+        "x_diary",
+        "x_journal",
+        "x_notebook_pad",
+        "x_notepad",
+        "x_planner",
+        "x_file_folder",
+        "x_folder",
+        "x_ring_binder",
+        "x_birthday_card",
+        "x_greeting_card",
+        "x_photo_frame",
+        "x_picture_frame",
+        "x_wall_art",
+        "x_painting",
+        "x_thimble",
+        "x_thimble_small",
+        "x_push_pin",
+        "x_thumbtack",
+        "x_safety_pin",
+        "x_pin_cushion"
+      ],
+      "severity": "medium",
+      "suggestion": "The per-object replacements follow this split."
+    },
+    {
+      "pattern": "Poison moves named as smudges, splodges or splashes (about 40, mostly kit.ink_splatter). Under the house rules poison means stink.",
+      "ids": [
+        "x_calendar",
+        "x_calendar_page",
+        "x_clipboard",
+        "x_diary",
+        "x_notebook_pad",
+        "x_notepad",
+        "x_sticky_note",
+        "envelope",
+        "sewing_machine",
+        "x_label_maker",
+        "x_binder_clip",
+        "x_canvas",
+        "x_canvas_print",
+        "x_cigarette",
+        "x_credit_card",
+        "x_crochet_hook",
+        "x_easel",
+        "x_greeting_card",
+        "x_hula_hoop",
+        "x_knitting_needles",
+        "x_level_tool",
+        "x_manga",
+        "x_map",
+        "x_painting",
+        "x_picture_frame",
+        "x_pin_cushion",
+        "x_postcard_stack",
+        "x_protractor",
+        "x_receipt",
+        "x_receipt_roll",
+        "x_ruler_tool",
+        "x_set_square",
+        "x_sketchbook",
+        "x_stained_glass",
+        "x_stylus",
+        "x_thimble_small",
+        "x_trading_card"
+      ],
+      "severity": "medium",
+      "suggestion": "Add a smell word (pong, whiff, stale, musty, rusty, fumes): replacements are given per move."
+    },
+    {
+      "pattern": "Garbled repeated move names: four or five copies of one word ('Fold Fold Fold Fold Fold', 'Page Page Page Page Page', 'Pin Pin Pin Pin Pin', 'Clip Clip Clip Clip Clip'), or a doubled word on single-hit moves ('Thread Thread Thread', 'Story Boost Boost', 'Snap Startle Snap'), plus de-duplication suffixes ('Muse Boost Art', 'Desk Rest Ruler', 'Wrist Rest Band').",
+      "ids": [
+        "x_origami",
+        "x_picture_book",
+        "x_pamphlet",
+        "x_safety_pin",
+        "x_tie_clip",
+        "x_map",
+        "x_brochure",
+        "newspaper",
+        "x_magazine_stack",
+        "x_manga",
+        "x_pop_up_book",
+        "x_push_pin",
+        "x_receipt_roll",
+        "x_ticket",
+        "x_paper_clip",
+        "x_book_stand",
+        "x_flag",
+        "x_hair_clip",
+        "x_ring_binder",
+        "x_calendar",
+        "x_tapestry",
+        "x_toothpick",
+        "x_wall_art",
+        "x_ruler_tool",
+        "x_rubber_band"
+      ],
+      "severity": "medium",
+      "suggestion": "At most three copies, only on \u00d73 moves; replacements given."
+    },
+    {
+      "pattern": "Sensitive objects. Cigarette and butt: no glamour, smoke shown as smell and litter (good); the Legendaries model quitting and beach cleaning, but they copy each other and w12. Vape: the Uncommon and Rare name advertise strawberry flavour (fix). Incense: no religion (good). Bible: neutral family book (good); developer decision flagged. Stained glass: the Legendary's 500 years implies a church (fix). Also: the laser-pointer Rare aims at the sky, the newspaper-stack Rare lights fires, three lines teach lock-picking, and the paper-crane Legendary is set around a child in hospital.",
+      "ids": [
+        "x_cigarette",
+        "x_cigarette_butt",
+        "x_vape",
+        "x_incense_stick",
+        "x_bible",
+        "x_stained_glass",
+        "x_laser_pointer",
+        "x_newspaper_stack",
+        "x_hairpin",
+        "x_paper_clip",
+        "x_credit_card",
+        "x_paper_crane",
+        "x_banknote"
+      ],
+      "severity": "high",
+      "suggestion": "Replacements are given; none adds glamour, religion or unsafe how-to."
+    },
+    {
+      "pattern": "Ultimates that repeat the Epic name ('Card Avalanche', 'Card House Collapse', 'Message Mix-Up Stink', 'Yellow Out', 'Order Chaos', 'Paper Storm', 'Wall Takeover') or promise one effect when variants differ ('Hot Hair Clamp', 'Receipt Pile Daze', 'Shiny Clip Glare', 'Chalk Dust Cloud', 'Beach Litter Pong', 'Hot Tip Spark', 'Staple Snatch'); fixed-burn moves with no heat ('Crane Swarm Flight', 'Torch Under Duvet', 'Snap Sting', 'Bedtime Glow').",
+      "ids": [
+        "x_birthday_card",
+        "x_playing_card",
+        "x_notepad",
+        "x_sticky_note",
+        "x_menu_card",
+        "newspaper",
+        "x_poster",
+        "x_hair_clip",
+        "x_receipt",
+        "x_tie_clip",
+        "x_chalk",
+        "x_cigarette_butt",
+        "x_soldering_iron",
+        "x_stapler_remover",
+        "x_paper_crane",
+        "x_comic",
+        "x_hair_tie",
+        "x_picture_book",
+        "x_safety_pin",
+        "x_laser_pointer"
+      ],
+      "severity": "medium",
+      "suggestion": "Give each Ultimate its own effect-neutral image; add a heat word to every burn move."
+    },
+    {
+      "pattern": "Many Commons and Uncommons are under 60 characters (about 90 lines, e.g. 'Stabs olives at every party.', 'Sits on your finger like a tiny hat.'). Most are fine habits; the shortest need a small consequence.",
+      "ids": [
+        "x_toothpick",
+        "x_thimble",
+        "x_tape_gun",
+        "x_leaflet",
+        "x_bookmark",
+        "x_ticket",
+        "x_glue_stick",
+        "x_paint_tube",
+        "x_receipt"
+      ],
+      "severity": "low",
+      "suggestion": "Aim for 60 to 160 characters."
+    }
+  ],
+  "issues": [
+    {
+      "id": "x_calendar",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Page Flip Flip Flip' is a garbled repeat.",
+      "suggestion": "'Page Flip Flap'"
+    },
+    {
+      "id": "x_calendar",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Felt Tip Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Felt Tip Pong'"
+    },
+    {
+      "id": "x_calendar_page",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare and Legendary share one premise (tearing itself off to skip days). Keep the Legendary, change the Rare.",
+      "suggestion": "'Swaps its own pictures overnight, so March has a snowman and December has a beach.'"
+    },
+    {
+      "id": "x_calendar_page",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Pictureswapper'"
+    },
+    {
+      "id": "x_calendar_page",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Smudged Date' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Stale Ink Date'"
+    },
+    {
+      "id": "x_clipboard",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Biro Blot' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Biro Blot Pong'"
+    },
+    {
+      "id": "x_diary",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Kept a secret for forty years, then was found by a granddaughter' (years frame, gentle ending)); it needs an outrageous feat.",
+      "suggestion": "'Locked itself so tightly that the bank borrowed its tiny key to guard the gold.'"
+    },
+    {
+      "id": "x_diary",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Confida the Uncrackable'"
+    },
+    {
+      "id": "x_diary",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Gel Pen Splodge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Scented Gel Pong'"
+    },
+    {
+      "id": "x_file_folder",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare near-copies x_folder R (hides the papers you need). Change this side; keep x_folder.",
+      "suggestion": "'Sorts the papers inside by colour every night, so the tax form now lives next to a tomato soup recipe.'"
+    },
+    {
+      "id": "x_file_folder",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Colourfiler'"
+    },
+    {
+      "id": "x_folder",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Held every worksheet from one whole school year and was entered into the school museum'); it needs an outrageous feat.",
+      "suggestion": "'Grew so fat with worksheets that it needed its own seat on the school bus, and its own ticket.'"
+    },
+    {
+      "id": "x_journal",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Held the notes of an explorer who found a hidden waterfall'); it needs an outrageous feat.",
+      "suggestion": "'Described a hidden waterfall so well that explorers searched for a year, then found it in its owner's back garden.'"
+    },
+    {
+      "id": "x_journal",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Wanderquill, Garden Explorer'"
+    },
+    {
+      "id": "x_notebook_pad",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a neat skill ('Rips out pages so neatly'), not a troublesome power.",
+      "suggestion": "'Copies the doodles from the next desk onto its own pages, so maths homework comes back covered in horses.'"
+    },
+    {
+      "id": "x_notebook_pad",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Doodlecopier'"
+    },
+    {
+      "id": "x_notebook_pad",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Was revised from by three brothers in a row, and all three got top marks'); no outrageous feat or punchline.",
+      "suggestion": "'Remembered its notes so well that it sat the exam by itself, and got a better mark than its owner.'"
+    },
+    {
+      "id": "x_notebook_pad",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Smudgy Notes' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Smelly Marker Notes'"
+    },
+    {
+      "id": "x_notepad",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Wrote down a phone number that won the family a holiday'); it needs an outrageous feat.",
+      "suggestion": "'Wrote call Gran so messily that a real gorilla rang back, and Gran says they chat every Sunday now.'"
+    },
+    {
+      "id": "x_notepad",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Scribbleton, Gorilla Caller'"
+    },
+    {
+      "id": "x_notepad",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Message Mix-Up Stink' repeats the Epic name 'Message Mix-Up'.",
+      "suggestion": "'Scribble Storm'"
+    },
+    {
+      "id": "x_notepad",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Biro Splodge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Leaky Biro Pong'"
+    },
+    {
+      "id": "x_planner",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('the bride arrived exactly as the bells rang' (a success; the bells also hint at a church setting)); it needs an outrageous feat.",
+      "suggestion": "'Booked the sunset for half past seven, and the sun turned up exactly on time.'"
+    },
+    {
+      "id": "x_planner",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Schedula, Booker of Sunsets'"
+    },
+    {
+      "id": "x_ring_binder",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic near-copies x_folder E and x_file_folder E (papers spill everywhere). Change this side.",
+      "suggestion": "'Snapped its rings round the school register, so nobody could be marked in and the whole school was officially absent.'"
+    },
+    {
+      "id": "x_ring_binder",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Unregistered School Day'"
+    },
+    {
+      "id": "x_ring_binder",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('the student who owned it became a teacher'); it needs an outrageous feat.",
+      "suggestion": "'Grew so many dividers that it found a subject nobody had ever taught, and now the school has lessons in it on Fridays.'"
+    },
+    {
+      "id": "x_ring_binder",
+      "field": "moves.kit.paper_cut",
+      "severity": "medium",
+      "issue": "'Page Cut Cut Cut' is a garbled repeat.",
+      "suggestion": "'Page Cut Cut'"
+    },
+    {
+      "id": "x_sticky_note",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Yellow Out' repeats the Epic name 'Office Yellow Out'.",
+      "suggestion": "'Yellow Paper Storm'"
+    },
+    {
+      "id": "x_sticky_note",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Marker Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Marker Pen Pong'"
+    },
+    {
+      "id": "x_bible",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Sensitive object: the draft is written as a neutral family book (heavy, thin pages, family names) with no religious content, which is the safe approach. Flag for the developer to decide whether this object gets curated text at all.",
+      "suggestion": "'Held the names of seven generations in its front pages, and the newest baby was added this year.' (keep as is, pending developer decision)"
+    },
+    {
+      "id": "x_bible",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare repeats the Legendary premise (family names and birthdays in the front) and near-copies x_photo_album L.",
+      "suggestion": "'Falls open at the page where someone once pressed a flower, and sneezes dried petals onto the table.'"
+    },
+    {
+      "id": "x_bible",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Petalsneezer'"
+    },
+    {
+      "id": "x_bible",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Page Turn Turn' is a clumsy repeat.",
+      "suggestion": "'Page Turn Rustle'"
+    },
+    {
+      "id": "x_cardboard",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Rare is a good use of cardboard ('fastest sledge on the hill'), not a power.",
+      "suggestion": "'Folds itself into whatever box the cat wants, then into a different one the moment the cat climbs in.'"
+    },
+    {
+      "id": "x_paper_crane",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary is built on a child in hospital: tragedy-adjacent and not funny.",
+      "suggestion": "'Was folded so perfectly that a flock of real cranes landed on the roof to ask it for directions.'"
+    },
+    {
+      "id": "x_paper_crane",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Origawing, Leader of the Flock'"
+    },
+    {
+      "id": "x_paper_crane",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was folded a thousand times by a whole school') instead of one concrete consequence with a joke.",
+      "suggestion": "'Flapped its paper wings so hard at the school fair that the bunting took off and flew to the next town.'"
+    },
+    {
+      "id": "x_paper_crane",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Bunting Takeoff'"
+    },
+    {
+      "id": "x_paper_crane",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Crane Swarm Flight' has no heat word, but the move burns.",
+      "suggestion": "'Hot Air Crane Flight'"
+    },
+    {
+      "id": "envelope",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Arrived with five hundred others on the same birthday') instead of one concrete consequence with a joke.",
+      "suggestion": "'Licked its own flap shut on the postman's sleeve, so he delivered the whole street with one arm.'"
+    },
+    {
+      "id": "envelope",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'One-Armed Postman'"
+    },
+    {
+      "id": "envelope",
+      "field": "moves.kit.ink_splash",
+      "severity": "low",
+      "issue": "'Smudged Address' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Soggy Stamp Pong'"
+    },
+    {
+      "id": "x_atlas",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was opened on every desk in the geography lesson, and the whole class planned a trip') instead of one concrete consequence with a joke.",
+      "suggestion": "'Fell open on the teacher's foot, and the class spent a week learning a country that turned out to be a coffee stain.'"
+    },
+    {
+      "id": "x_atlas",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Coffee Stain Country'"
+    },
+    {
+      "id": "x_atlas",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary repeats the Rare premise (falls open on the right country).",
+      "suggestion": "'Added a tiny island to its own map, and when sailors finally found it, a deckchair was waiting.'"
+    },
+    {
+      "id": "x_atlas",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Atlassia, Inventor of Islands'"
+    },
+    {
+      "id": "newspaper",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Page Page Page Page' is a garbled four-word repeat.",
+      "suggestion": "'Page Page Page'"
+    },
+    {
+      "id": "newspaper",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Paper Storm' repeats the Epic name 'Sunday Paper Storm'.",
+      "suggestion": "'Headline Whirlwind'"
+    },
+    {
+      "id": "bookshelf",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Fine on its own, but it is one of eight 'domino / avalanche / everything fell' Epics in this batch (see pattern); keep this one and change the others.",
+      "suggestion": "'Tipped one book over, then another, and the whole library fell like dominoes.' (keep)"
+    },
+    {
+      "id": "x_bookend",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Domino Stopper' does not describe the Rare lore (squeezes the books so tight nobody can get one out).",
+      "suggestion": "'Booksqueezer'"
+    },
+    {
+      "id": "x_bookend",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is another 'everything fell over' scene, near-identical to bookshelf E.",
+      "suggestion": "'Leaned on the books so hard that the shelf slid through the wall, and the neighbours started borrowing them.'"
+    },
+    {
+      "id": "x_bookend",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Through-the-Wall Shelf'"
+    },
+    {
+      "id": "x_bookend",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Held up a whole wall of books for fifty years, and the library named a shelf after it'); no outrageous feat or punchline.",
+      "suggestion": "'Held up a row of encyclopedias so well that the shelf underneath retired, and it has held them in mid-air ever since.'"
+    },
+    {
+      "id": "x_bookend",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Heavybase, the Shelfless'"
+    },
+    {
+      "id": "x_book_stand",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Library Reading Rush' does not describe the Epic lore (recipes at a bake sale, coated in icing).",
+      "suggestion": "'Icing-Coated Stand'"
+    },
+    {
+      "id": "x_book_stand",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Legendary is gentle with no feat ('kept the place for three days').",
+      "suggestion": "'Held a book open so firmly in a gale that the pages could not turn, and the whole picnic heard chapter three forty times.'"
+    },
+    {
+      "id": "x_book_stand",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pageclamp the Unturnable'"
+    },
+    {
+      "id": "x_book_stand",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Clip Clip Clip Clip' is a garbled four-word repeat.",
+      "suggestion": "'Clip Clip Clip'"
+    },
+    {
+      "id": "x_booklet",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Explained a robot kit so clearly that a seven-year-old built it'); it needs an outrageous feat.",
+      "suggestion": "'Explained a robot kit so clearly that the robot read it too, and built itself a little brother.'"
+    },
+    {
+      "id": "x_booklet",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Manualina, Maker of Robots'"
+    },
+    {
+      "id": "x_bookmark",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a habit (the tassel tickles your nose), near-copy of w07 i_mortarboard C.",
+      "suggestion": "'Moves itself back ten pages every night, so its reader has now read the same chapter forty times.'"
+    },
+    {
+      "id": "x_bookmark",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Pageslider'"
+    },
+    {
+      "id": "x_bookmark",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('where a reader had left it a hundred years before, still on the same page'); no outrageous feat or punchline.",
+      "suggestion": "'Kept its page so stubbornly that the library was rebuilt round the book rather than move it.'"
+    },
+    {
+      "id": "x_bookmark",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Tasselwick the Unmovable'"
+    },
+    {
+      "id": "x_brochure",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped with the Uncommon name: 'Glossyfold' does not describe the Common lore.",
+      "suggestion": "'Doormatlander'"
+    },
+    {
+      "id": "x_brochure",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Swapped with the Common name: 'Doormatlander' does not describe the Uncommon lore.",
+      "suggestion": "'Glossyfold'"
+    },
+    {
+      "id": "x_brochure",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was read by everyone at the bus stop, and the whole queue booked the same holiday') instead of one concrete consequence with a joke.",
+      "suggestion": "'Showed a beach so sunny that the bus shelter it was left in came out with a tan line.'"
+    },
+    {
+      "id": "x_brochure",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Sunburnt Bus Shelter'"
+    },
+    {
+      "id": "x_brochure",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Made a family save up for twenty years'); it needs an outrageous feat.",
+      "suggestion": "'Made a holiday sound so good that the island on its cover sent a postcard asking to visit the family.'"
+    },
+    {
+      "id": "x_brochure",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Brochella, Island Inviter'"
+    },
+    {
+      "id": "x_brochure",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Fold Fold Fold Fold' is a garbled four-word repeat (x_map has the same).",
+      "suggestion": "'Fold Fold Fold'"
+    },
+    {
+      "id": "x_leaflet",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Common near-copies x_brochure C (lands on the doormat every morning).",
+      "suggestion": "'Slides under the doormat instead of on top, so nobody finds it until the spring clean.'"
+    },
+    {
+      "id": "x_leaflet",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a habit (recycled unread), not a power.",
+      "suggestion": "'Folds itself into a paper hat on whoever picks it up, and they wear it all day without noticing.'"
+    },
+    {
+      "id": "x_leaflet",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Hatfolder'"
+    },
+    {
+      "id": "x_leaflet",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is another paper-snowstorm scene (see pattern).",
+      "suggestion": "'Advertised a pizza deal so loudly that the whole street ordered at once, and the pizza shop ran out of dough by six.'"
+    },
+    {
+      "id": "x_leaflet",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Pizza Night Rush'"
+    },
+    {
+      "id": "x_canvas",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Epic ends on a prize ('won the school art prize'), a stock contest frame.",
+      "suggestion": "'Was splattered by a whole art class in one afternoon, and the cleaners framed the floor underneath it instead.'"
+    },
+    {
+      "id": "x_canvas",
+      "field": "moves.kit.splatter",
+      "severity": "low",
+      "issue": "'Paint Splatter' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Turps Splatter'"
+    },
+    {
+      "id": "x_canvas_print",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare and Legendary share one premise (fools someone into thinking it is the original).",
+      "suggestion": "'Copies whoever stands in front of it into the picture, so the famous lady now has Dad's moustache.'"
+    },
+    {
+      "id": "x_canvas_print",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Moustachecopier'"
+    },
+    {
+      "id": "x_canvas_print",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Gallery Wall Wobble' does not describe the Epic lore (hung all the way up the staircase).",
+      "suggestion": "'Staircase Gallery'"
+    },
+    {
+      "id": "x_canvas_print",
+      "field": "moves.kit.splatter",
+      "severity": "low",
+      "issue": "'Varnish Splatter' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Sticky Varnish Whiff'"
+    },
+    {
+      "id": "x_chalkboard",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Taught every child in a village for a hundred years, and still has a sum on it'); no outrageous feat or punchline.",
+      "suggestion": "'Taught a parrot its times tables so well that the parrot now runs the school maths club.'"
+    },
+    {
+      "id": "x_chalkboard",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Professor Slate, Parrot Tutor'"
+    },
+    {
+      "id": "x_comic",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Torchreader' does not describe the Rare lore (shouting KAPOW on the train).",
+      "suggestion": "'Kapowshouter'"
+    },
+    {
+      "id": "x_comic",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a crowd craze ('went round every class in a week') and near-copies w08 x_bento_box E (a swap that goes round the school).",
+      "suggestion": "'Was left on the school bus, and by home time the driver was announcing every corner in speech bubbles.'"
+    },
+    {
+      "id": "x_comic",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Speech Bubble Bus'"
+    },
+    {
+      "id": "x_comic",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Inspired its reader to draw her own comic, which is now sold in every shop'); it needs an outrageous feat.",
+      "suggestion": "'Ended on a cliffhanger so tense that its reader's goldfish waited at the edge of the bowl for a month.'"
+    },
+    {
+      "id": "x_comic",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Inkblast, the Cliffhanger'"
+    },
+    {
+      "id": "x_comic",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Torch Under Duvet' has no heat word, but the move burns.",
+      "suggestion": "'Hot Torch Under Duvet'"
+    },
+    {
+      "id": "x_cookbook",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Kitchen Chaos' leans on the Epic name 'Kitchen Disaster'.",
+      "suggestion": "'Recipe Ruin'"
+    },
+    {
+      "id": "x_dictionary",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a contest success ('the school won the final').",
+      "suggestion": "'Was dropped in assembly and fell open on a word so long that the head teacher is still pronouncing it.'"
+    },
+    {
+      "id": "x_dictionary",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Longest Word Assembly'"
+    },
+    {
+      "id": "x_dictionary",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Knew every word in the language and still found room for a new one'); it needs an outrageous feat.",
+      "suggestion": "'Invented a word so useful that everyone started saying it, and now it sits in all the other dictionaries looking smug.'"
+    },
+    {
+      "id": "x_dictionary",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lexicona, Inventor of Words'"
+    },
+    {
+      "id": "x_dictionary",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Spelling Bee Sting' follows the old contest Epic; a sting also suggests poison on stun variants.",
+      "suggestion": "'Big Word Blast'"
+    },
+    {
+      "id": "x_encyclopedia",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare is the object doing its job well ('Saved every pupil's homework the night the internet went down' is a rescue), not a troublesome power.",
+      "suggestion": "'Was used as stepping stones across a flooded kitchen, and the family learned about volcanoes on the way to the kettle.'"
+    },
+    {
+      "id": "x_encyclopedia",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Kitchen Stepping Stones'"
+    },
+    {
+      "id": "x_encyclopedia",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a quiz win (contest frame); also the name says twenty-four volumes while the Common says twenty.",
+      "suggestion": "'Answered a question that nobody had asked yet, and three weeks later somebody asked it.'"
+    },
+    {
+      "id": "x_flag",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was waved at sports day by every family, and the whole field fluttered') instead of one concrete consequence with a joke.",
+      "suggestion": "'Flapped so hard at sports day that it pulled its pole out of the ground and won the sack race on its own.'"
+    },
+    {
+      "id": "x_flag",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Runaway Flagpole'"
+    },
+    {
+      "id": "x_flag",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Started a thousand races at the same school and only got tangled once'); no outrageous feat or punchline.",
+      "suggestion": "'Waved the start of a race so fast that the runners finished before the whistle, and had to run it again backwards.'"
+    },
+    {
+      "id": "x_flag",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Flap Flap Flap Flap' is a garbled four-word repeat.",
+      "suggestion": "'Flap Flap Flap'"
+    },
+    {
+      "id": "x_flyer",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary repeats the Epic premise (the lost cat search).",
+      "suggestion": "'Was photocopied so many times that the last copy showed a completely different cat, and that cat came home too.'"
+    },
+    {
+      "id": "x_flyer",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Copycat, the Photocopied'"
+    },
+    {
+      "id": "x_glue_stick",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare is the object doing its job well ('Stuck every picture on the school display board... nothing fell off for a year' is a success), not a troublesome power.",
+      "suggestion": "'Was left without its lid in the art cupboard, and every crayon in school stuck together into one giant rainbow log.'"
+    },
+    {
+      "id": "x_glue_stick",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Rainbow Crayon Log'"
+    },
+    {
+      "id": "x_glue_stick",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Glued together a whole collage of the town that now hangs in the town hall'); it needs an outrageous feat.",
+      "suggestion": "'Glued a falling leaf back onto its tree so well that the tree kept it all winter, and the other trees were jealous.'"
+    },
+    {
+      "id": "x_glue_stick",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Gluella, Keeper of Leaves'"
+    },
+    {
+      "id": "x_greeting_card",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare near-copies x_pop_up_book R (pops up a paper castle that won't fold back).",
+      "suggestion": "'Rewrites its own message to suit whoever opens it, so the plumber got a card saying Get Well Soon, Grandma.'"
+    },
+    {
+      "id": "x_greeting_card",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Messageswapper'"
+    },
+    {
+      "id": "x_greeting_card",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic and Legendary repeat the Uncommon premise (signed by everyone). Three rarities, one trait.",
+      "suggestion": "'Was so big that it would not fit through any door, so the whole birthday party was held in the front garden.'"
+    },
+    {
+      "id": "x_greeting_card",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Too Big for Doors'"
+    },
+    {
+      "id": "x_greeting_card",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary repeats the signing premise again ('signed by everyone in the town').",
+      "suggestion": "'Sent its love so hard that it arrived the day before it was posted.'"
+    },
+    {
+      "id": "x_greeting_card",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Postmarked Yesterday'"
+    },
+    {
+      "id": "x_greeting_card",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Smudgy Signature' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Inky Signature Pong'"
+    },
+    {
+      "id": "x_birthday_card",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is another domino of cards falling (see pattern).",
+      "suggestion": "'Played its tinny tune inside the postbox, and the postman delivered the whole street while dancing.'"
+    },
+    {
+      "id": "x_birthday_card",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Postbox Disco'"
+    },
+    {
+      "id": "x_birthday_card",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Sang its tune every time it was opened for ten years'); no outrageous feat or punchline.",
+      "suggestion": "'Sang its birthday tune so many times in one day that the whole family turned a year older, and it had to send them all apology cards.'"
+    },
+    {
+      "id": "x_birthday_card",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Chirpella, Ager of Families'"
+    },
+    {
+      "id": "x_birthday_card",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Card Avalanche' is exactly the Epic name.",
+      "suggestion": "'Mantelpiece Tumble'"
+    },
+    {
+      "id": "x_map",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Fold Fold Fold Fold' is a garbled four-word repeat.",
+      "suggestion": "'Fold Unfold Fold'"
+    },
+    {
+      "id": "x_map",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Rain Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Damp Map Whiff'"
+    },
+    {
+      "id": "sewing_machine",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Stitched a hem so fast that the curtain was finished before the kettle boiled'), not a troublesome power.",
+      "suggestion": "'Sews everything within reach, including the tablecloth to its owner's skirt.'"
+    },
+    {
+      "id": "sewing_machine",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Stitchgrabber'"
+    },
+    {
+      "id": "sewing_machine",
+      "field": "moves.kit.pin_prick",
+      "severity": "low",
+      "issue": "'Needle Prick' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Oily Needle Prick'"
+    },
+    {
+      "id": "x_hole_puncher",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Common, Epic and Legendary all scale one trait (paper circles / confetti). Keep the Common, change Epic and Legendary.",
+      "suggestion": "'Punched two extra holes in the school timetable, and the whole school went to the wrong lessons for a week.'"
+    },
+    {
+      "id": "x_hole_puncher",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Timetable Holes'"
+    },
+    {
+      "id": "x_hole_puncher",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary is the confetti trait again ('enough paper circles for a whole wedding').",
+      "suggestion": "'Punched a hole so neat in a rainy sky that the sun came through it, and the picnic went ahead.'"
+    },
+    {
+      "id": "x_hole_puncher",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Punchella, Hole in the Clouds'"
+    },
+    {
+      "id": "x_label_maker",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('a lost book was found after fifty years'); it needs an outrageous feat.",
+      "suggestion": "'Labelled the clouds so clearly that the weather forecaster now just reads them out.'"
+    },
+    {
+      "id": "x_label_maker",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Labelina, Namer of Clouds'"
+    },
+    {
+      "id": "x_label_maker",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Smudgy Print' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Inky Label Pong'"
+    },
+    {
+      "id": "x_stapler_remover",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Rescues pages from staples so neatly that the holes vanish'), not a troublesome power.",
+      "suggestion": "'Pulls out every staple in the room at once, so the noticeboard, the homework and the teacher's cardigan all fall apart.'"
+    },
+    {
+      "id": "x_stapler_remover",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Staplesnatcher'"
+    },
+    {
+      "id": "x_stapler_remover",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a job done well plus the paper-snowstorm frame.",
+      "suggestion": "'Unstapled the school play's script the night before, so the actors performed every page in a different order.'"
+    },
+    {
+      "id": "x_stapler_remover",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Shuffled Script Night'"
+    },
+    {
+      "id": "x_stapler_remover",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary ends with a crown (the 'crowned' stock frame); a thousand reports is just volume.",
+      "suggestion": "'Pulled one staple from the corner of the office calendar, and the whole year fell off the wall at once.'"
+    },
+    {
+      "id": "x_stapler_remover",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pincher Rex, Year Remover'"
+    },
+    {
+      "id": "x_stapler_remover",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Staple Snatch' promises a drain, but the variants do defence down, burn and stun.",
+      "suggestion": "'Staple Jaw Finale'"
+    },
+    {
+      "id": "x_tape_gun",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a talent ('finds the end of the tape every time'), not a troublesome power.",
+      "suggestion": "'Tapes down anything that stops moving, so moving day ended with the sofa taped to the ceiling.'"
+    },
+    {
+      "id": "x_tape_gun",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Tapeanything'"
+    },
+    {
+      "id": "x_banknote",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Common jokes about the face on the note winking; that face is a real person (a monarch). Keep real people out.",
+      "suggestion": "'Gets folded and refolded so many times that it opens like a tiny accordion.'"
+    },
+    {
+      "id": "x_banknote",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Accordionfold'"
+    },
+    {
+      "id": "x_banknote",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Folderfinder' does not describe the Rare lore (turns up in old coat pockets).",
+      "suggestion": "'Coatpocketer'"
+    },
+    {
+      "id": "x_paper_sheet",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is another paper-blizzard scene.",
+      "suggestion": "'Got printed on both sides at once, so the head teacher's letter told every parent the school was closed and open.'"
+    },
+    {
+      "id": "x_paper_sheet",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Open and Closed Letter'"
+    },
+    {
+      "id": "x_paper_stack",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a pleasant flutter, not a power.",
+      "suggestion": "'Gives a paper cut to anyone who tries to count it, so nobody knows how many sheets are left.'"
+    },
+    {
+      "id": "x_paper_stack",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Uncountable'"
+    },
+    {
+      "id": "x_paper_stack",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is another 'knocked over, everyone gathered paper' scene.",
+      "suggestion": "'Was used to level the wobbly table at the big meeting, and when someone needed paper the whole meeting fell over.'"
+    },
+    {
+      "id": "x_paper_stack",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Wobbly Table Meeting'"
+    },
+    {
+      "id": "x_paper_stack",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Printed every page of a famous novel in one go'); it needs an outrageous feat.",
+      "suggestion": "'Stacked itself so high that the top sheet reached the clouds, and the weather now prints its forecasts on it.'"
+    },
+    {
+      "id": "x_paper_stack",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Reamtower, Printer of Weather'"
+    },
+    {
+      "id": "x_photo_album",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Holds a photo from every birthday for a hundred years' (also near x_bible R)); no outrageous feat or punchline.",
+      "suggestion": "'Showed a baby photo so embarrassing that the baby, now a grandad, tried to post the album to the Moon.'"
+    },
+    {
+      "id": "x_photo_album",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Blushbook, Keeper of Baby Photos'"
+    },
+    {
+      "id": "x_photo_frame",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is pleasant ('Holds a smile so big that everyone smiles too'), not a power.",
+      "suggestion": "'Changes the smile in its photo to match the mood of the room, and sulks when nobody dusts it.'"
+    },
+    {
+      "id": "x_photo_frame",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Sulkframe'"
+    },
+    {
+      "id": "x_photo_frame",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was crowded onto the mantelpiece with fifty others, and one sneeze knocked them all over') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was turned round by the cat every night, so the family woke up to a different uncle on the mantelpiece each morning.'"
+    },
+    {
+      "id": "x_photo_frame",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Uncle of the Day'"
+    },
+    {
+      "id": "x_photo_frame",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Held the same family photo for fifty years'); no outrageous feat or punchline.",
+      "suggestion": "'Fitted so many relatives into one photo that the frame had to grow an extension, and the dog is now in the attic part.'"
+    },
+    {
+      "id": "x_photo_frame",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Snapframe, Holder of Relatives'"
+    },
+    {
+      "id": "x_picture_frame",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Rare is flattering, not troublesome; it also overlaps x_canvas_print.",
+      "suggestion": "'Makes whatever is inside it look priceless, so a crisp packet on the wall nearly sold for a fortune.'"
+    },
+    {
+      "id": "x_picture_frame",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Pricelessmaker'"
+    },
+    {
+      "id": "x_picture_frame",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is another domino of falling frames.",
+      "suggestion": "'Fell off its hook during the party and landed perfectly round the dog, who is now the family portrait.'"
+    },
+    {
+      "id": "x_picture_frame",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Framed Dog Portrait'"
+    },
+    {
+      "id": "x_picture_frame",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Turned a child's crayon drawing into the most admired picture at the art show'); it needs an outrageous feat.",
+      "suggestion": "'Framed a sunset so beautifully that the sun refused to set without it, and evenings now last an extra hour.'"
+    },
+    {
+      "id": "x_picture_frame",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Frameworth, Keeper of Sunsets'"
+    },
+    {
+      "id": "x_picture_frame",
+      "field": "moves.kit.splatter",
+      "severity": "medium",
+      "issue": "'Glass Glare Splatter' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Dusty Glass Whiff'"
+    },
+    {
+      "id": "x_playing_card",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Card House Collapse' is exactly the Epic name.",
+      "suggestion": "'Full House Fold'"
+    },
+    {
+      "id": "x_trading_card",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Shinyhunter' does not describe the Common lore (soft corners) and is collecting-game slang.",
+      "suggestion": "'Softcorner'"
+    },
+    {
+      "id": "x_trading_card",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic near-copies x_hula_hoop E ('Started a ... craze that went through every school in town').",
+      "suggestion": "'Was swapped so many times in one break that it came back to its owner worth twice as much.'"
+    },
+    {
+      "id": "x_trading_card",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('its owner kept it in a frame by the bed'); it needs an outrageous feat.",
+      "suggestion": "'Was so rare that the other cards in the pack asked for its autograph.'"
+    },
+    {
+      "id": "x_trading_card",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Shiny Foil Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'New Foil Whiff'"
+    },
+    {
+      "id": "x_postcard_stack",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('sent by the same aunt over forty years'); no outrageous feat or punchline.",
+      "suggestion": "'Had so many postcards from one aunt that the family worked out she'd been everywhere at once, and she won't say how.'"
+    },
+    {
+      "id": "x_postcard_stack",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Auntie Everywhere'"
+    },
+    {
+      "id": "x_postcard_stack",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Smudgy Postmark' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Soggy Postmark Pong'"
+    },
+    {
+      "id": "x_pop_up_book",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('an architect studied it to design a real one'); it needs an outrageous feat.",
+      "suggestion": "'Popped up a castle so big that it could not be closed again, and the family now lives in it at weekends.'"
+    },
+    {
+      "id": "x_pop_up_book",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Pop Pop Pop Pop' is a garbled four-word repeat.",
+      "suggestion": "'Pop Pop Pop'"
+    },
+    {
+      "id": "x_picture_book",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Uncommon premise (read again and again).",
+      "suggestion": "'Had its flaps lifted so many times that the hiding animals packed up and moved into the next book on the shelf.'"
+    },
+    {
+      "id": "x_picture_book",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Flap Animals Move Out'"
+    },
+    {
+      "id": "x_picture_book",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('grew up to write their own picture books'); it needs an outrageous feat.",
+      "suggestion": "'Was read so many times that it learned the story by heart, and now reads itself aloud while the grown-ups snore.'"
+    },
+    {
+      "id": "x_picture_book",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Readaloud, the Self-Reading Book'"
+    },
+    {
+      "id": "x_picture_book",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Page Page Page Page Page' is a garbled five-word repeat.",
+      "suggestion": "'Page Page Page'"
+    },
+    {
+      "id": "x_picture_book",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Bedtime Glow' has no heat word, but the move burns.",
+      "suggestion": "'Warm Bedtime Glow'"
+    },
+    {
+      "id": "x_manga",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Had a queue round the bookshop on release day' (also near w10 x_vinyl_record E)) instead of one concrete consequence with a joke.",
+      "suggestion": "'Was dropped in the bath, and its sound effects floated off the page and filled the bathroom with BOOMs.'"
+    },
+    {
+      "id": "x_manga",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Bathtub Sound Effects'"
+    },
+    {
+      "id": "x_manga",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('readers all over the world cried on the same day'); it needs an outrageous feat.",
+      "suggestion": "'Ended its story so perfectly that the characters asked for a holiday, and the next volume was just them at the beach.'"
+    },
+    {
+      "id": "x_manga",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Lumi, Last Volume'"
+    },
+    {
+      "id": "x_manga",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Panel Panel Panel Panel' is a garbled four-word repeat.",
+      "suggestion": "'Panel Panel Panel'"
+    },
+    {
+      "id": "x_manga",
+      "field": "moves.kit.ink_splash",
+      "severity": "low",
+      "issue": "'Screentone Splash' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Screentone Pong'"
+    },
+    {
+      "id": "x_menu_card",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has fed a whole village every Sunday for fifty years without changing a single dish'); no outrageous feat or punchline.",
+      "suggestion": "'Described a pudding so well that diners felt full just reading it, and the restaurant now only sells menus.'"
+    },
+    {
+      "id": "x_menu_card",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Puddingpage the Filling'"
+    },
+    {
+      "id": "x_menu_card",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Order Chaos' repeats the Epic name 'Restaurant Order Chaos'.",
+      "suggestion": "'Specials Shuffle'"
+    },
+    {
+      "id": "x_magazine_stack",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Coverwrinkle' does not describe the Uncommon lore (the same old magazine on top for six months).",
+      "suggestion": "'Stalecover'"
+    },
+    {
+      "id": "x_magazine_stack",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare and Legendary share one premise (the stack keeps growing taller). Keep the Legendary.",
+      "suggestion": "'Hides the one magazine you want at the very bottom, and moves it to the top the moment you leave.'"
+    },
+    {
+      "id": "x_magazine_stack",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Bottomhider'"
+    },
+    {
+      "id": "x_magazine_stack",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic ('everyone helped tidy it up') is another avalanche with no joke.",
+      "suggestion": "'Was so out of date that the waiting room read about a heatwave and turned up in shorts in December.'"
+    },
+    {
+      "id": "x_magazine_stack",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'December Shorts Day'"
+    },
+    {
+      "id": "x_magazine_stack",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Page Page Page Page' is a garbled four-word repeat.",
+      "suggestion": "'Page Flick Flick'"
+    },
+    {
+      "id": "x_newspaper_stack",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon near-copies newspaper C (grey ink on everything).",
+      "suggestion": "'Has one string tied round it so tight that nobody can slide a paper out.'"
+    },
+    {
+      "id": "x_newspaper_stack",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Stringtight'"
+    },
+    {
+      "id": "x_newspaper_stack",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare teaches lighting fires with newspaper (fire safety) and is not a power.",
+      "suggestion": "'Grows taller every time someone says they'll recycle it tomorrow.'"
+    },
+    {
+      "id": "x_newspaper_stack",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Tomorrowpile'"
+    },
+    {
+      "id": "x_newspaper_stack",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('the town museum took it away in a lorry'); it needs an outrageous feat.",
+      "suggestion": "'Was stacked so high that the top paper was tomorrow's, and the family brought umbrellas a day early.'"
+    },
+    {
+      "id": "x_newspaper_stack",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Tomorrow's Tower'"
+    },
+    {
+      "id": "x_origami",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Fold Fold Fold Fold Fold' is a garbled five-word repeat.",
+      "suggestion": "'Fold Crease Fold'"
+    },
+    {
+      "id": "x_paint_tube",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is vague ('Bursts with colour so bright that the whole painting changes').",
+      "suggestion": "'Squirts paint at whoever squeezes it hardest, so art class always ends with one very blue teacher.'"
+    },
+    {
+      "id": "x_paint_tube",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Bluesquirter'"
+    },
+    {
+      "id": "x_paint_tube",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was squeezed out by the whole art class at once') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was stepped on in the art room, and a trail of red footprints led straight to the culprit, the class hamster.'"
+    },
+    {
+      "id": "x_paint_tube",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Hamster Footprints'"
+    },
+    {
+      "id": "x_paint_tube",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Painted the brightest rainbow ever seen on the school wall, and it is still there'); it needs an outrageous feat.",
+      "suggestion": "'Painted a door on the school wall so realistically that the caretaker now has to unlock it every morning.'"
+    },
+    {
+      "id": "x_paint_tube",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Squeezella, Painter of Doors'"
+    },
+    {
+      "id": "x_painting",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is a crowd reaction with no joke ('Made the whole gallery gasp at once', 53 characters).",
+      "suggestion": "'Followed one visitor round the gallery with its eyes so hard that it fell off its hook and landed in the gift shop.'"
+    },
+    {
+      "id": "x_painting",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Gift Shop Tumble'"
+    },
+    {
+      "id": "x_painting",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'The Painting That Winked' does not describe the Legendary lore (found in an attic, the most famous painting nobody had seen).",
+      "suggestion": "'Atticus the Lost Masterpiece'"
+    },
+    {
+      "id": "x_painting",
+      "field": "moves.kit.splatter",
+      "severity": "low",
+      "issue": "'Old Varnish Splatter' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Old Varnish Pong'"
+    },
+    {
+      "id": "x_pamphlet",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was handed to every person at the market, and the town hall was full') instead of one concrete consequence with a joke.",
+      "suggestion": "'Described a lost tortoise so well that the whole market searched for it, and found it asleep on the cheese stall.'"
+    },
+    {
+      "id": "x_pamphlet",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Cheese Stall Tortoise'"
+    },
+    {
+      "id": "x_pamphlet",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a campaigning success with no joke ('Persuaded a whole town to save the old park'), close to politics.",
+      "suggestion": "'Persuaded the town's pigeons to hold a meeting, and now they gather every Tuesday to demand more bread.'"
+    },
+    {
+      "id": "x_pamphlet",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Persuasia, Speaker to Pigeons'"
+    },
+    {
+      "id": "x_pamphlet",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Page Page Page Page Page' is a garbled five-word repeat.",
+      "suggestion": "'Page Flutter Flutter'"
+    },
+    {
+      "id": "x_pamphlet",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Hand Out Hand Out' is clumsy.",
+      "suggestion": "'Hand Out Barrage'"
+    },
+    {
+      "id": "x_paper_clip",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Uncommon (linked into chains).",
+      "suggestion": "'Was bent into a little sculpture during a dull meeting, and a gallery bought it for more than the company made that year.'"
+    },
+    {
+      "id": "x_paper_clip",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Meeting Sculpture'"
+    },
+    {
+      "id": "x_paper_clip",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Traded Up to a House' contradicts the lore (it ends up as a garden shed), and repeats The X That shape.",
+      "suggestion": "'Swapsy, Trader of Sheds'"
+    },
+    {
+      "id": "x_paper_clip",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Clip Clip Clip Clip' is a garbled four-word repeat.",
+      "suggestion": "'Clip Clip Clip'"
+    },
+    {
+      "id": "x_paper_plane",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was thrown by every child in the playground at once') instead of one concrete consequence with a joke.",
+      "suggestion": "'Glided onto the roof of a bus and rode all the way to the seaside, then sent back a postcard.'"
+    },
+    {
+      "id": "x_paper_plane",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Bus Roof Glider'"
+    },
+    {
+      "id": "x_paper_plane",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Flew the full length of the school hall during assembly, and the whole school clapped'); it needs an outrageous feat.",
+      "suggestion": "'Was thrown in the playground on Monday and landed on Friday, after stopping for lunch in France.'"
+    },
+    {
+      "id": "x_paper_plane",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Sky Captain Crease'"
+    },
+    {
+      "id": "x_receipt",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is another paper-snowfall scene.",
+      "suggestion": "'Was found in a coat pocket a year later, and the shop refunded a sofa the family had sat on all winter.'"
+    },
+    {
+      "id": "x_receipt",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Year-Late Refund'"
+    },
+    {
+      "id": "x_receipt",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Was kept for twenty years in a shoebox'); no outrageous feat or punchline.",
+      "suggestion": "'Faded so completely that the whole shop forgot the sale had happened, and gave everyone their money back.'"
+    },
+    {
+      "id": "x_receipt",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Fadewell, Undoer of Sales'"
+    },
+    {
+      "id": "x_receipt",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Receipt Pile Daze' names a stun, but Spectral and Mutated do defence down and poison.",
+      "suggestion": "'Receipt Pile Finale'"
+    },
+    {
+      "id": "x_receipt",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Thermal Ink Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Thermal Ink Pong'"
+    },
+    {
+      "id": "x_receipt_roll",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Common, Epic and Legendary all scale one trait (a receipt so long it trails / stretches / makes a finish ribbon). Keep the Legendary.",
+      "suggestion": "'Curls up so tightly that it springs off the till and rolls away under the counter.'"
+    },
+    {
+      "id": "x_receipt_roll",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Curlspringer'"
+    },
+    {
+      "id": "x_receipt_roll",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is the long-receipt trait again ('stretched from the till to the door').",
+      "suggestion": "'Printed a joke at the bottom of every receipt by mistake, and the supermarket queue laughed so hard nobody paid.'"
+    },
+    {
+      "id": "x_receipt_roll",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Punchline Receipts'"
+    },
+    {
+      "id": "x_receipt_roll",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Print Print Print Print' is a garbled four-word repeat.",
+      "suggestion": "'Print Print Print'"
+    },
+    {
+      "id": "x_receipt_roll",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Thermal Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Warm Paper Pong'"
+    },
+    {
+      "id": "x_ticket",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Rare premise (winning the raffle).",
+      "suggestion": "'Got its number smudged, so three hundred people thought they had won the raffle, and the prize was one goldfish.'"
+    },
+    {
+      "id": "x_ticket",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'One Goldfish Raffle'"
+    },
+    {
+      "id": "x_ticket",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Was kept by a fan for fifty years'); no outrageous feat or punchline.",
+      "suggestion": "'Was torn so neatly by the usher that both halves went to the show, and each one claimed the same seat.'"
+    },
+    {
+      "id": "x_ticket",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore. 'The Golden Ticket Holder' echoes a famous children's-book prop.",
+      "suggestion": "'Halfstub the Twice-Seated'"
+    },
+    {
+      "id": "x_ticket",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Tear Tear Tear Tear' is a garbled four-word repeat.",
+      "suggestion": "'Tear Tear Tear'"
+    },
+    {
+      "id": "x_easel",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Stood with fifty others in the park' (also near-copy of w12 i_tripod E)) instead of one concrete consequence with a joke.",
+      "suggestion": "'Blew over at the park painting day and stamped a wet sunset onto the back of a passing horse.'"
+    },
+    {
+      "id": "x_easel",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Sunset on a Horse'"
+    },
+    {
+      "id": "x_easel",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Stood on the same clifftop through every season while a painter painted the same view a thousand times'); no outrageous feat or punchline.",
+      "suggestion": "'Held a canvas so steady in a hurricane that the painting came out calm, and the hurricane stopped to look.'"
+    },
+    {
+      "id": "x_easel",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Stormstand the Unshaken'"
+    },
+    {
+      "id": "x_easel",
+      "field": "moves.kit.splatter",
+      "severity": "low",
+      "issue": "'Paint Splash' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Turps Splash'"
+    },
+    {
+      "id": "x_sketchbook",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is an interview success ('the teachers clapped').",
+      "suggestion": "'Had its drawings escape one night, and the family woke to a sketchy cat chasing the real one round the kitchen.'"
+    },
+    {
+      "id": "x_sketchbook",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Escaped Drawings Night'"
+    },
+    {
+      "id": "x_sketchbook",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Filled up with drawings that became a whole gallery exhibition'); it needs an outrageous feat.",
+      "suggestion": "'Drew the cat so perfectly that the real cat moved out, and now the drawing gets fed twice a day.'"
+    },
+    {
+      "id": "x_sketchbook",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Sketchella, Rival of Cats'"
+    },
+    {
+      "id": "x_sketchbook",
+      "field": "moves.kit.ink_splash",
+      "severity": "low",
+      "issue": "'Charcoal Splash' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Fixative Pong'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary 'for five hundred years' is the years formula and strongly implies a church window (sensitive: keep church out).",
+      "suggestion": "'Coloured a puddle so beautifully that the ducks queued to have their baths in it.'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Prismella, Painter of Puddles'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a quiet crowd moment ('everyone stood still to watch') with no joke.",
+      "suggestion": "'Coloured the sunset so brightly that the whole school photo came out tartan.'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Tartan School Photo'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare repeats the Common premise (coloured light moving across the room).",
+      "suggestion": "'Paints a coloured glow onto whoever stands in its light, and it takes three baths to wash off.'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Colourstainer'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Colour Flood' repeats the Epic name 'Sunset Colour Flood'.",
+      "suggestion": "'Coloured Light Finale'"
+    },
+    {
+      "id": "x_stained_glass",
+      "field": "moves.kit.splatter",
+      "severity": "low",
+      "issue": "'Colour Splash' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Old Putty Whiff'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the tapestry doing its job ('Kept the draughty castle hall so warm').",
+      "suggestion": "'Changes its stitched story when nobody is looking, so the knight now loses to a duck.'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Storyswapper'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a crowd gasp with no joke ('the whole hall gasped').",
+      "suggestion": "'Was unrolled for the castle open day and turned out to be so long that the visitors had to read it from a bus.'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Tapestry Bus Tour'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has told the same story on the same castle wall for six hundred years'); no outrageous feat or punchline.",
+      "suggestion": "'Stitched a dragon so convincing that the castle's knights still won't walk past it after dark.'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Stitchwyrm of the Great Hall'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Thread Thread Thread' repeats a word on a single-hit defence-down move (reads like a multi-hit).",
+      "suggestion": "'Loose Thread Unravel'"
+    },
+    {
+      "id": "x_tapestry",
+      "field": "moves.kit.inspiration",
+      "severity": "medium",
+      "issue": "'Story Boost Boost' repeats a word on a self-boost.",
+      "suggestion": "'Story Boost'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon repeats the Common (it gets moved) and near-copies x_picture_frame C (nail hole when moved).",
+      "suggestion": "'Is so abstract that every visitor argues about which way up it goes.'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Whichwayup'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was hung with fifty other pieces in a living room') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was hung upside down at the museum, and three art experts wrote whole books about why.'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Upside-Down Masterpiece'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('the child grew up to be a famous artist'); it needs an outrageous feat.",
+      "suggestion": "'Was so modern that the cleaner threw it away, and the dustbin is now on display in a gallery.'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Binella, Modern Masterpiece'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "moves.kit.inspiration",
+      "severity": "low",
+      "issue": "'Muse Boost Art' carries a de-duplication suffix.",
+      "suggestion": "'Muse Boost'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "moves.kit.smudge",
+      "severity": "low",
+      "issue": "'Fingerprint Smudge Art' carries a de-duplication suffix.",
+      "suggestion": "'Fingerprint Smudge'"
+    },
+    {
+      "id": "x_wall_art",
+      "field": "moves.kit.splatter",
+      "severity": "low",
+      "issue": "'Paint Splatter Art' carries a suffix and names no stink on a poison move.",
+      "suggestion": "'Paint Fume Splatter'"
+    },
+    {
+      "id": "x_poster",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a reaction ('Makes every visitor stop and say who's that'), not a power.",
+      "suggestion": "'Peels itself off the wall whenever its band comes on the radio, and dances on the bedroom floor.'"
+    },
+    {
+      "id": "x_poster",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Peeldancer'"
+    },
+    {
+      "id": "x_poster",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Stayed on the same bedroom wall for thirty years'); no outrageous feat or punchline.",
+      "suggestion": "'Faded in the sun until the band on it became a different band, and the new band is better.'"
+    },
+    {
+      "id": "x_poster",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Fadeworth, Band Swapper'"
+    },
+    {
+      "id": "x_poster",
+      "field": "moves.kit.smudge",
+      "severity": "high",
+      "issue": "'Blu-Tack Smudge' uses a trademark.",
+      "suggestion": "'Sticky Putty Smudge'"
+    },
+    {
+      "id": "x_poster",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Wall Takeover' repeats the Epic name 'Bedroom Wall Takeover'.",
+      "suggestion": "'Poster Peel Finale'"
+    },
+    {
+      "id": "x_binder_clip",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Staple Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Rusty Staple Pong'"
+    },
+    {
+      "id": "x_hair_clip",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is a job done well and near-copies x_hair_tie E (every ponytail held together).",
+      "suggestion": "'Snapped shut on the school photographer's fringe, so the whole class photo was taken by the caretaker.'"
+    },
+    {
+      "id": "x_hair_clip",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Photographer's Fringe'"
+    },
+    {
+      "id": "x_hair_clip",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary is a bride's hairdo held all day: a success, and one of three bride Legendaries (with x_safety_pin, x_pin_cushion).",
+      "suggestion": "'Held a fringe so firmly that its owner went through a wind tunnel and came out looking like the school photo.'"
+    },
+    {
+      "id": "x_hair_clip",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Clawdia, Tamer of Fringes'"
+    },
+    {
+      "id": "x_hair_clip",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Snap Snap Snap Snap' is a garbled four-word repeat.",
+      "suggestion": "'Snap Snap Snap'"
+    },
+    {
+      "id": "x_hair_clip",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Hot Hair Clamp' promises heat, but the Spectral variant stuns. Use an effect-neutral finisher.",
+      "suggestion": "'Claw Clamp Finale'"
+    },
+    {
+      "id": "x_hair_tie",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Tied up every ponytail on the netball team') instead of one concrete consequence with a joke.",
+      "suggestion": "'Pinged off a ponytail in assembly and landed in the head teacher's tea, and nobody owned up for a month.'"
+    },
+    {
+      "id": "x_hair_tie",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Assembly Ping'"
+    },
+    {
+      "id": "x_hair_tie",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Was never lost once in ten years'); no outrageous feat or punchline.",
+      "suggestion": "'Pinged off a ponytail so hard that it landed on the Moon, and is now the only hair tie whose location is known.'"
+    },
+    {
+      "id": "x_hair_tie",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Snap Sting' has no heat word, but the move burns.",
+      "suggestion": "'Elastic Burn'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Common near-copies x_thumbtack C and x_push_pin U (point-up on the floor for bare feet).",
+      "suggestion": "'Slides out of a bun one by one, so its owner leaves a little trail behind her like breadcrumbs.'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Trailscatter'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare teaches lock-picking ('Picked a lock... just like in the films'); x_paper_clip R and x_credit_card L do the same.",
+      "suggestion": "'Springs out of a bun the moment its owner walks on stage, and takes the whole hairdo with it.'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Bunspringer'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is a job done well and repeats the Uncommon and Legendary premise (holding buns).",
+      "suggestion": "'Was used to fix the ballet curtain, and pinged loose in the final dance so the curtain came down on the swan.'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Curtain Down Finale'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary is the bun premise a third time, with a gift as the ending.",
+      "suggestion": "'Pulled a thorn out of a lion's paw at the zoo, and the lion now wears it in its mane.'"
+    },
+    {
+      "id": "x_hairpin",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pinella, Friend of Lions'"
+    },
+    {
+      "id": "x_hula_hoop",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Twirled round its owner's waist for an hour without stopping'), not a troublesome power.",
+      "suggestion": "'Spins so fast that whoever is inside it lifts off the ground like a little helicopter.'"
+    },
+    {
+      "id": "x_hula_hoop",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Hoopcopter'"
+    },
+    {
+      "id": "x_hula_hoop",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic is a crowd craze, near-identical to x_trading_card E.",
+      "suggestion": "'Rolled off down the school field and took the whole PE lesson chasing it all the way to the ice-cream van.'"
+    },
+    {
+      "id": "x_hula_hoop",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Runaway Hoop Chase'"
+    },
+    {
+      "id": "x_hula_hoop",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Was spun for a whole summer by the same child and never once dropped'); no outrageous feat or punchline.",
+      "suggestion": "'Was spun round the middle of the Earth for a dare, and the whole planet wobbled to keep it up.'"
+    },
+    {
+      "id": "x_hula_hoop",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Hoopla, Belt of the Planet'"
+    },
+    {
+      "id": "x_hula_hoop",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Sticker Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Plastic Pong'"
+    },
+    {
+      "id": "x_safety_pin",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary is another bride's dress saved: a success, one of three bride Legendaries.",
+      "suggestion": "'Held a bouncy castle together for a whole birthday party, and the children only noticed when it started to squeak.'"
+    },
+    {
+      "id": "x_safety_pin",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Captain Clasp of the Castle'"
+    },
+    {
+      "id": "x_safety_pin",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Costume Rescue' is a rescue word on an attack (lessons: no heal or rescue words on attacks).",
+      "suggestion": "'Pin Point Finale'"
+    },
+    {
+      "id": "x_safety_pin",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Pin Pin Pin Pin Pin' is a garbled five-word repeat.",
+      "suggestion": "'Pin Pin Pin'"
+    },
+    {
+      "id": "x_pin_cushion",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare is the object doing its job well ('Held every pin at the sewing bee, and nobody lost a single one' is a job done well), not a troublesome power.",
+      "suggestion": "'Was left on a bus seat, and the driver stopped at the hedgehog rescue centre in case it was one of theirs.'"
+    },
+    {
+      "id": "x_pin_cushion",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Hedgehog Bus Stop'"
+    },
+    {
+      "id": "x_pin_cushion",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary is the bride frame again ('never pricked the bride').",
+      "suggestion": "'Held so many pins that it turned magnetic, and now every lost key in town turns up stuck to it.'"
+    },
+    {
+      "id": "x_pin_cushion",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Prickles, Magnet of Keys'"
+    },
+    {
+      "id": "x_pin_cushion",
+      "field": "moves.kit.pin_prick",
+      "severity": "low",
+      "issue": "'Hidden Pin Prick' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Rusty Pin Prick'"
+    },
+    {
+      "id": "x_push_pin",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Uncommon near-copies x_thumbtack C (point-up on the floor).",
+      "suggestion": "'Holds up a notice so long after it's out of date that the school fair is still being advertised in March.'"
+    },
+    {
+      "id": "x_push_pin",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Pairs with the new Uncommon lore.",
+      "suggestion": "'Lastyearpin'"
+    },
+    {
+      "id": "x_push_pin",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Held up the school's most important notice for twenty years without falling once'); no outrageous feat or punchline.",
+      "suggestion": "'Pinned the school timetable so firmly that the clock gave up and followed it instead.'"
+    },
+    {
+      "id": "x_push_pin",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pushella, Boss of the Clock'"
+    },
+    {
+      "id": "x_push_pin",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Pin Pin Pin Pin' is a garbled four-word repeat.",
+      "suggestion": "'Pin Pin Pin'"
+    },
+    {
+      "id": "x_thumbtack",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Fingerpricker' does not describe the Rare lore (hops out of its tin and scatters).",
+      "suggestion": "'Tinhopper'"
+    },
+    {
+      "id": "x_thumbtack",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Pinned up the whole classroom display in one morning, and every picture stayed' is a job done well), not a troublesome power.",
+      "suggestion": "'Was spilled in the school corridor, so the whole school had to tiptoe to lunch like ballet dancers.'"
+    },
+    {
+      "id": "x_thumbtack",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Tiptoe Corridor'"
+    },
+    {
+      "id": "x_thumbtack",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Held up the school's giant map for thirty years without letting it slip'); no outrageous feat or punchline.",
+      "suggestion": "'Pinned the end of a rainbow to the school wall so it couldn't fade, and the playground has been very colourful since.'"
+    },
+    {
+      "id": "x_thumbtack",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Tackleton, Pinner of Rainbows'"
+    },
+    {
+      "id": "x_sewing_needle",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a job done well and near-copies sewing_machine L (a quilt for the village).",
+      "suggestion": "'Was dropped in the toy box, and every teddy came out with its ears sewn on a little tighter.'"
+    },
+    {
+      "id": "x_sewing_needle",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Teddy Ear Fix'"
+    },
+    {
+      "id": "x_sewing_needle",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has sewn ten thousand buttons back on and never once broken'; the name ('Stitched a Quilt Village') does not match either); no outrageous feat or punchline.",
+      "suggestion": "'Threaded itself through the eye of a storm and stitched it so tight that it fizzled into a breeze.'"
+    },
+    {
+      "id": "x_sewing_needle",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Needlewick, Stitcher of Storms'"
+    },
+    {
+      "id": "x_thimble",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Pushes the needle through the thickest cloth without a single ouch'), not a troublesome power.",
+      "suggestion": "'Taps on the table so impatiently that the sewing machine speeds up just to stop the noise.'"
+    },
+    {
+      "id": "x_thimble",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Tabletapper'"
+    },
+    {
+      "id": "x_thimble",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was worn by every sewer at the sewing circle, and not a single finger was pricked') instead of one concrete consequence with a joke.",
+      "suggestion": "'Tapped out a rhythm so catchy that the knitting circle next door dropped their needles and started a conga.'"
+    },
+    {
+      "id": "x_thimble",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Knitting Circle Conga'"
+    },
+    {
+      "id": "x_thimble",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has protected a grandma's finger through a hundred quilts'); no outrageous feat or punchline.",
+      "suggestion": "'Pushed a needle through a castle curtain so thick that it came out the other side next Tuesday.'"
+    },
+    {
+      "id": "x_thimble",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Thimbletop, Pusher Through Time'"
+    },
+    {
+      "id": "x_thimble",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Short and flat ('Sits on your finger like a tiny hat' (36 characters, no annoyance)); add a concrete consequence.",
+      "suggestion": "'Sits on your finger like a tiny hat, and falls off the moment you need it most.'"
+    },
+    {
+      "id": "x_thimble_small",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic repeats the Uncommon premise (a doll's cup / a tea party cup).",
+      "suggestion": "'Was borrowed as a bucket by a beetle at the beach, and the beetle built the tallest sandcastle in the bay.'"
+    },
+    {
+      "id": "x_thimble_small",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Beetle Sandcastle'"
+    },
+    {
+      "id": "x_thimble_small",
+      "field": "moves.kit.pin_prick",
+      "severity": "low",
+      "issue": "'Tiny Prick' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Tiny Rusty Prick'"
+    },
+    {
+      "id": "x_tie_clip",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Held every tie straight at the wedding, and the photos were perfect') instead of one concrete consequence with a joke.",
+      "suggestion": "'Clipped the groom's tie to the wedding cake by mistake, so the first dance happened round the table.'"
+    },
+    {
+      "id": "x_tie_clip",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Cake-Clipped Groom'"
+    },
+    {
+      "id": "x_tie_clip",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has kept the same grandad's tie out of his soup for forty years' (also repeats the Rare soup premise)); no outrageous feat or punchline.",
+      "suggestion": "'Clipped a runaway kite string to a lamp post, and the kite now flies over the town every day like a pet.'"
+    },
+    {
+      "id": "x_tie_clip",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Clipwell, Tamer of Kites'"
+    },
+    {
+      "id": "x_tie_clip",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Clip Clip Clip Clip Clip' is a garbled five-word repeat.",
+      "suggestion": "'Clip Clip Clip'"
+    },
+    {
+      "id": "x_tie_clip",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Shiny Clip Glare' names a stun, but no variant stuns (burn / burn / defence down).",
+      "suggestion": "'Shiny Clip Finale'"
+    },
+    {
+      "id": "x_crochet_hook",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare near-copies x_knitting_needles R (a scarf grows during one bus ride).",
+      "suggestion": "'Hooks any loose thread it passes, so jumpers unravel whenever their owners walk by.'"
+    },
+    {
+      "id": "x_crochet_hook",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Threadsnagger'"
+    },
+    {
+      "id": "x_crochet_hook",
+      "field": "moves.kit.pin_prick",
+      "severity": "low",
+      "issue": "'Hook Prick' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Woolly Hook Prick'"
+    },
+    {
+      "id": "x_knitting_needles",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a kind success and overlaps x_crochet_hook L (wool for the whole village).",
+      "suggestion": "'Knitted a jumper for a sheep that had just been sheared, and the sheep wore it to the farm show.'"
+    },
+    {
+      "id": "x_knitting_needles",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Clickety, Knitter for Sheep'"
+    },
+    {
+      "id": "x_knitting_needles",
+      "field": "moves.kit.pin_prick",
+      "severity": "low",
+      "issue": "'Needle Poke' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Musty Wool Poke'"
+    },
+    {
+      "id": "x_level_tool",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare is the object doing its job well ('Straightened every picture in the house... the house looked brand new' is a success), not a troublesome power.",
+      "suggestion": "'Found the kitchen table wonky, so the family sawed a leg, then another, until dinner was served on the floor.'"
+    },
+    {
+      "id": "x_level_tool",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Floor-Level Dinner'"
+    },
+    {
+      "id": "x_level_tool",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Straightened every sign in the whole town'); it needs an outrageous feat.",
+      "suggestion": "'Got its bubble so perfectly in the middle that the sea went flat for a day, and the surfers sent a complaint.'"
+    },
+    {
+      "id": "x_level_tool",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Bubbleton, Flattener of Seas'"
+    },
+    {
+      "id": "x_level_tool",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Pencil Mark Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Sawdust Pong'"
+    },
+    {
+      "id": "x_set_square",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Draws lines so straight that they look printed'), not a troublesome power.",
+      "suggestion": "'Turns every corner it touches into a perfect right angle, including the round birthday cake.'"
+    },
+    {
+      "id": "x_set_square",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Cakesquarer'"
+    },
+    {
+      "id": "x_set_square",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was used by the whole drawing class, and every drawing came out perfectly square') instead of one concrete consequence with a joke.",
+      "suggestion": "'Was used to plan the school garden, and every flower now grows at exactly ninety degrees.'"
+    },
+    {
+      "id": "x_set_square",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Square Flower Garden'"
+    },
+    {
+      "id": "x_set_square",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('every corner is exactly right'); it needs an outrageous feat.",
+      "suggestion": "'Made a corner so perfect that a spider moved in and spun the world's first square web.'"
+    },
+    {
+      "id": "x_set_square",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Cornerella, Spider Architect'"
+    },
+    {
+      "id": "x_set_square",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Ink Line Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Inky Line Pong'"
+    },
+    {
+      "id": "x_protractor",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Measures angles so exactly that the maths teacher checked hers against it'), not a troublesome power.",
+      "suggestion": "'Turns any corner it is laid on into a curve, so the classroom now has a round door.'"
+    },
+    {
+      "id": "x_protractor",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Cornerbender'"
+    },
+    {
+      "id": "x_protractor",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Pencil Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Pencil Shaving Pong'"
+    },
+    {
+      "id": "x_ruler_tool",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Epic is a crowd duel ('spread to every desk').",
+      "suggestion": "'Was twanged on the edge of the desk so hard that the whole class's pencil pots took off like rockets.'"
+    },
+    {
+      "id": "x_ruler_tool",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Pencil Pot Launch'"
+    },
+    {
+      "id": "x_ruler_tool",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a world-record attempt (contest frame) with no joke.",
+      "suggestion": "'Measured the distance to the Moon one ruler at a time, and only had to stop for lunch twice.'"
+    },
+    {
+      "id": "x_ruler_tool",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Inchworth, Measurer of the Moon'"
+    },
+    {
+      "id": "x_ruler_tool",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Pencil Line Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Rubber Crumb Pong'"
+    },
+    {
+      "id": "x_ruler_tool",
+      "field": "moves.kit.coffee_break",
+      "severity": "low",
+      "issue": "'Desk Rest Ruler' carries a de-duplication suffix.",
+      "suggestion": "'Pencil Case Rest'"
+    },
+    {
+      "id": "x_rubber_band",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare, Epic and Legendary all scale one trait (a rubber band ball that bounces). Keep the Epic.",
+      "suggestion": "'Twangs a note so low that every window in the classroom hums along.'"
+    },
+    {
+      "id": "x_rubber_band",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Twanghummer'"
+    },
+    {
+      "id": "x_rubber_band",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary is the rubber band ball again.",
+      "suggestion": "'Stretched round a runaway hot-air balloon and pinged it gently back down onto the school field.'"
+    },
+    {
+      "id": "x_rubber_band",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Stretchella, Catcher of Balloons'"
+    },
+    {
+      "id": "x_rubber_band",
+      "field": "moves.kit.coffee_break",
+      "severity": "low",
+      "issue": "'Wrist Rest Band' carries a de-duplication suffix.",
+      "suggestion": "'Drawer Rest'"
+    },
+    {
+      "id": "x_whiteboard",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a squeak (near x_chalk C and x_chalkboard C), not a power.",
+      "suggestion": "'Wipes itself clean the moment the teacher turns round, so the homework never gets copied down.'"
+    },
+    {
+      "id": "x_whiteboard",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Selfwiper'"
+    },
+    {
+      "id": "x_whiteboard",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('every idea on it came true'); it needs an outrageous feat.",
+      "suggestion": "'Had DO NOT WIPE written on it so long ago that the school was rebuilt round it, and it still hasn't been wiped.'"
+    },
+    {
+      "id": "x_whiteboard",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Donotwipe the Untouched'"
+    },
+    {
+      "id": "x_shredder",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Confettimaker Shredder' reuses x_hole_puncher C 'Confettimaker' with a suffix.",
+      "suggestion": "'Curlycutter'"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Fixed a broken toy by joining two tiny wires'), not a troublesome power.",
+      "suggestion": "'Sticks every wire it touches together for good, so the headphones are now part of the radio.'"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Wirewelder'"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare is the object doing its job well ('Fixed every broken gadget at the repair cafe in one afternoon' is a success), not a troublesome power.",
+      "suggestion": "'Fixed the school bell so well that it now rings every five minutes, and lessons are very short.'"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Five-Minute Lessons'"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Fixed a thousand radios over fifty years in the same little shop'); no outrageous feat or punchline.",
+      "suggestion": "'Soldered a radio so cleverly that it picks up dolphins chatting, and they mostly talk about fish.'"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Sparkwire, Dolphin Listener'"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "moves.kit.deadline_panic",
+      "severity": "low",
+      "issue": "'Hot Tip Startle' puts a heat word on a stun move.",
+      "suggestion": "'Sudden Sizzle Startle' (sizzle is a sound here; or 'Solder Spit Startle')"
+    },
+    {
+      "id": "x_soldering_iron",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Hot Tip Spark' promises heat, but only the Mutated variant burns.",
+      "suggestion": "'Soldering Finale'"
+    },
+    {
+      "id": "x_laminator",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Warm Up Rest' puts a heat word on a heal move.",
+      "suggestion": "'Standby Rest'"
+    },
+    {
+      "id": "x_stylus",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Epic uses the crowd / 'every X at the Y at once' formula ('Was used by the whole class on doodle day, and every tablet filled with dragons') instead of one concrete consequence with a joke.",
+      "suggestion": "'Drew a line off the edge of the tablet and kept going across the table, the wall and the cat.'"
+    },
+    {
+      "id": "x_stylus",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "Pairs with the new Epic lore.",
+      "suggestion": "'Off-the-Screen Line'"
+    },
+    {
+      "id": "x_stylus",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('Drew every frame of a cartoon that played on children's TV'); it needs an outrageous feat.",
+      "suggestion": "'Drew a cartoon dog so lively that it barked at the postman through the screen.'"
+    },
+    {
+      "id": "x_stylus",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Doodlebark the Animator'"
+    },
+    {
+      "id": "x_stylus",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Digital Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Screen Grease Pong'"
+    },
+    {
+      "id": "x_credit_card",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary teaches lock-picking with a card ('used to pick a lock'); see x_hairpin and x_paper_clip.",
+      "suggestion": "'Paid so smoothly that the shop paid it instead, and it still gets a thank-you letter every month.'"
+    },
+    {
+      "id": "x_credit_card",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Tapwell the Refunded'"
+    },
+    {
+      "id": "x_credit_card",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Receipt Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Faded Receipt Pong'"
+    },
+    {
+      "id": "x_toothpick",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Legendary is a pleasant success with no punchline ('build a model bridge that held a pile of books' (real classroom project, no punchline)); it needs an outrageous feat.",
+      "suggestion": "'Picked the teeth of a crocodile at the zoo, and the crocodile now smiles at every visitor.'"
+    },
+    {
+      "id": "x_toothpick",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pickwell, Crocodile Dentist'"
+    },
+    {
+      "id": "x_toothpick",
+      "field": "moves.kit.deadline_panic",
+      "severity": "medium",
+      "issue": "'Snap Startle Snap' repeats a word on a single-hit stun move.",
+      "suggestion": "'Snap Startle'"
+    },
+    {
+      "id": "x_toothpick",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Stabs olives at every party' (28 characters)); add a concrete consequence.",
+      "suggestion": "'Stabs olives at every party, and the last olive always shoots across the room.'"
+    },
+    {
+      "id": "x_laser_pointer",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare points a laser at the night sky: unsafe to model for children (aircraft, eyes), and it is a success, not a power.",
+      "suggestion": "'Leaves its red dot on the wall even after it's switched off, and the cat has been guarding it for a week.'"
+    },
+    {
+      "id": "x_laser_pointer",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Pairs with the new Rare lore.",
+      "suggestion": "'Dotleaver'"
+    },
+    {
+      "id": "x_laser_pointer",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has been chased by the same cat for ten years'); no outrageous feat or punchline.",
+      "suggestion": "'Led a cat on a chase round the whole town and back in one evening, and the cat came home fitter than the dog.'"
+    },
+    {
+      "id": "x_laser_pointer",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Red Dot Chase' is a fixed poison move with no stink.",
+      "suggestion": "'Battery Whiff Chase'"
+    },
+    {
+      "id": "x_chalk",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Chalk Dust Cloud' reads as a stink cloud, but normal poisons, Spectral burns and Mutated stuns.",
+      "suggestion": "'Chalk Line Finale'"
+    },
+    {
+      "id": "x_letter_paper",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Rare is a nice quality ('words so heartfelt'), not a troublesome power.",
+      "suggestion": "'Turns every Dear into Darling overnight, which made the letter to the bank very awkward.'"
+    },
+    {
+      "id": "x_letter_paper",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Was written on by one pen pal for fifty years'); no outrageous feat or punchline.",
+      "suggestion": "'Was sent to a pen pal so far away that it came all the way round the world back to its writer, who wrote back.'"
+    },
+    {
+      "id": "x_letter_paper",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Quillwell, Pen Pal to Itself'"
+    },
+    {
+      "id": "x_scrapbook",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary uses the banned 'has done X for N years / still has its original / never once' formula ('Has a page for every summer for fifty years'); no outrageous feat or punchline.",
+      "suggestion": "'Kept a pressed flower so carefully that it bloomed again, and now the scrapbook has to be watered.'"
+    },
+    {
+      "id": "x_scrapbook",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'Pastelwick, Gardener of Pages'"
+    },
+    {
+      "id": "x_cigarette",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Bincandidate' does not describe the Rare lore (makes everyone cough).",
+      "suggestion": "'Coughmaker'"
+    },
+    {
+      "id": "x_cigarette",
+      "field": "moves.kit.ink_splatter",
+      "severity": "low",
+      "issue": "'Ash Smudge' is a poison move, and poison reads as stink; a smudge or splash promises no smell.",
+      "suggestion": "'Stale Ash Pong'"
+    },
+    {
+      "id": "x_cigarette_butt",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Common near-copies w12 x_litter U ('Gets dropped by people who should know better').",
+      "suggestion": "'Hides between the paving stones where no broom can reach it.'"
+    },
+    {
+      "id": "x_cigarette_butt",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Pairs with the new Common lore.",
+      "suggestion": "'Slabhider'"
+    },
+    {
+      "id": "x_cigarette_butt",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary near-copies w12 x_litter L ('the very last wrapper on the cleanest beach... binned with a cheer'). Change this side.",
+      "suggestion": "'Was found by a beach-cleaning robot that was so offended it chased it all the way to the bin.'"
+    },
+    {
+      "id": "x_cigarette_butt",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'The Robot-Chased Stub'"
+    },
+    {
+      "id": "x_cigarette_butt",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Beach Litter Pong' names a stink, but normal is defence down and Spectral burns.",
+      "suggestion": "'Beach Bin Finale'"
+    },
+    {
+      "id": "x_vape",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Uncommon describes a fruit flavour ('fake strawberries'), which makes the object sound appealing to children.",
+      "suggestion": "'Leaves a sickly sweet smell in the car that even the air freshener complains about.'"
+    },
+    {
+      "id": "x_vape",
+      "field": "names.rare",
+      "severity": "high",
+      "issue": "'Strawberryhaze' advertises a flavour; keep the vape unglamorous.",
+      "suggestion": "'Roomfogger'"
+    },
+    {
+      "id": "x_vape",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Legendary near-copies x_cigarette L (thrown in the bin for good by an owner who now goes running / walking).",
+      "suggestion": "'Made such a thick fog at the bus stop that the lighthouse switched on and a fishing boat parked in the high street.'"
+    },
+    {
+      "id": "x_vape",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "Pairs with the new Legendary lore.",
+      "suggestion": "'The Bus Stop Foghorn'"
+    },
+    {
+      "id": "x_incense_stick",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Sensitive object handled well: no religious setting (gift shop, market), smoke shown as a nuisance. Keep it that way.",
+      "suggestion": "'Drops a little grey worm of ash on the table that crumbles when you touch it.' (keep)"
+    },
+    {
+      "id": "x_incense_stick",
+      "field": "moves.kit.paper_cut",
+      "severity": "low",
+      "issue": "'Ash Flick' is singular on a \u00d73 move.",
+      "suggestion": "'Ash Flick Flick'"
+    },
+    {
+      "id": "x_tape_gun",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Seals a box in one long noisy swoop' (36 characters)); add a concrete consequence.",
+      "suggestion": "'Seals a box in one long noisy swoop, and always tapes the scissors inside it.'"
+    },
+    {
+      "id": "x_bookmark",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Saves your page, but in the wrong book' (39 characters)); add a concrete consequence.",
+      "suggestion": "'Saves your page, but in the wrong book, so bedtime stories jump from pirates to a cookery chapter.'"
+    },
+    {
+      "id": "x_ticket",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Has its tab torn off by a grumpy usher' (39 characters)); add a concrete consequence.",
+      "suggestion": "'Has its tab torn off by a grumpy usher, always right through the seat number.'"
+    },
+    {
+      "id": "x_glue_stick",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Twists up too far so the glue snaps off' (40 characters)); add a concrete consequence.",
+      "suggestion": "'Twists up too far so the glue snaps off and lands, sticky side down, on the carpet.'"
+    },
+    {
+      "id": "x_paint_tube",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Short and flat ('Has its cap glued shut with dried paint' (40 characters)); add a concrete consequence.",
+      "suggestion": "'Has its cap glued shut with dried paint, so it gets squeezed from the bottom until it bursts.'"
+    }
+  ]
+}

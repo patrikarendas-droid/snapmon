@@ -1,0 +1,5376 @@
+{
+ "batch": "w07-clothing-and-shoes",
+ "editor": "independent agent",
+ "reviewed": 118,
+ "summary": "The batch is safe on length and mostly kid-friendly, and its Commons and Uncommons are often well observed (boot hiding its partner, bowler hat rolling down the high street, hat-head, sock with a holey toe at a friend's house, socks-with-sandals grandad, shoelace losing its aglet, jeans pocket fluff). Above Uncommon, though, it falls back on formulas. About 90 Epics are crowd lines ('was worn by every X at Y, and the Z looked like…' / 'with every X at once') with a simile instead of a consequence, and about 90 Legendaries are longevity tallies ('has been worn for N years and still has its original…') with no outrageous achievement and no punchline. Most Rares describe the item doing its job ('Kept a climber's face warm') rather than a troublesome power. Together these mean roughly three of five rarities per object need rewriting. Names are misaligned in about 15 objects, often off by one (bathing cap, jeans, brassiere, headband, crown, tiara, helmet). Epic names are event titles, and Legendary names mostly follow one 'Lady/Sir/Madame X of the Y' shape. Near-duplicate objects share premises (two pyjamas, two swim trunks, maillot/swimsuit, robe/bathrobe, high heel/stiletto, cleats/football boot, balaclava/ski mask, bow/ribbon), and stock gags repeat (biscuit tin copied word for word, horses with earplugs, mirror polish, soup dipping, shrinking in the wash). Hard flags: Christmas in stockings E and L, church-coded vestment lines and 'Candle-Hot Procession', swimwear and underwear hints (kilt C, tights 'Crotchsag', maillot 'Wedgiewriggle', bikini C, swim trunks R, 'Nursery Blowout', 'Thong Strap Flick'), brand or character echoes (Old Flipper, Wedgewood, Golden Boot, Pyjamarama, Velveteen), and famous-person hooks. Move mechanics are mostly respected for legend moves (heal, buff, drain and ×3 names fit). The problems are about 18 garbled signature names ('Strap Snatch Snap Snap'), a 'Snatch' on boot's plain-hit signature, Ultimates that copy the Epic name (three exact copies), and variant Ultimates with effect-specific names ('Frozen Pond Spin' on a burn). Every high and medium issue carries a concrete replacement, and each new name is checked to be unique and within length limits.",
+ "patterns": [
+  {
+   "pattern": "Epic formula: 'Was worn by every X at Y, and the Z looked like…' or '… with every X at once'. Roughly 90 of 118 Epics use a crowd of identical items as the whole joke, usually ending in a simile (field of mushrooms, bowl of sweets, sea of tents, row of turtles) instead of a consequence.",
+   "ids": [
+    "x_bandana",
+    "i_bathing_cap",
+    "i_bearskin",
+    "x_beret",
+    "x_bowler_hat",
+    "x_bucket_hat",
+    "x_earmuffs",
+    "x_fedora",
+    "hat",
+    "x_headband",
+    "i_mortarboard",
+    "i_shower_cap",
+    "x_sun_hat",
+    "x_visor",
+    "x_wig_hair",
+    "helmet",
+    "jacket",
+    "scarf",
+    "i_academic_gown",
+    "i_breastplate",
+    "i_chain_mail",
+    "i_cuirass",
+    "i_sarong",
+    "shirt",
+    "i_vestment",
+    "x_mittens_pair",
+    "x_bow",
+    "tie",
+    "x_ankle_boot",
+    "x_ballet_flat",
+    "x_bathrobe",
+    "x_bikini",
+    "x_brogue",
+    "x_cape",
+    "x_cardigan_sweater",
+    "x_chelsea_boot",
+    "x_cleats",
+    "x_cloak",
+    "x_clog_shoe",
+    "x_croc",
+    "x_crop_top",
+    "x_derby_shoe",
+    "x_dungarees",
+    "x_espadrille",
+    "x_fleece",
+    "x_flip_flop",
+    "x_football_boot",
+    "x_high_heel",
+    "x_hiking_shoe",
+    "x_ice_skate",
+    "x_jumpsuit",
+    "x_kilt",
+    "x_knee_high_boot",
+    "x_lanyard",
+    "x_leggings",
+    "x_mask_costume",
+    "x_moccasin",
+    "x_mule",
+    "x_nightgown",
+    "x_onesie",
+    "x_overalls",
+    "x_oxford_shoe",
+    "x_parka",
+    "x_platform_shoe",
+    "x_poncho",
+    "x_puffer_jacket",
+    "x_pump_shoe",
+    "x_robe",
+    "x_sandal_pair",
+    "x_shoe_horn",
+    "x_shoe_tree",
+    "x_shoelace",
+    "x_ski_boot",
+    "x_slipper_shoe",
+    "x_snow_boot",
+    "x_spikes_shoe",
+    "x_stiletto",
+    "x_suspenders",
+    "x_swim_trunks",
+    "x_swimsuit",
+    "x_tank_top",
+    "x_tunic",
+    "x_turtleneck",
+    "x_underwear",
+    "x_uniform",
+    "x_vest",
+    "x_wetsuit",
+    "x_windbreaker"
+   ],
+   "severity": "high",
+   "suggestion": "Give each Epic one object doing something huge with a concrete fallout (for example bucket hat: 'Flipped over at the festival and was used as a real bucket. It carried enough mud to build a second stage.'). Rotate mechanisms: physics (pool plug pulled, snow sliding off a roof), silly logistics (lunch on a stuck ski lift), literal misunderstanding (shoe tree grows into a tree). Per-object replacements are in the issues."
+  },
+  {
+   "pattern": "Legendary formula: 'Has been worn/walked/kept … for N years and still has its original X' (or 'never once …'). About 90 Legendaries are longevity or tally lines with no outrageous achievement and no punchline.",
+   "ids": [
+    "dress",
+    "x_bandana",
+    "i_bathing_cap",
+    "i_bearskin",
+    "x_beret",
+    "x_bowler_hat",
+    "x_bucket_hat",
+    "x_crown",
+    "x_earmuffs",
+    "x_fedora",
+    "hat",
+    "x_headband",
+    "i_shower_cap",
+    "i_ski_mask",
+    "x_sun_hat",
+    "x_tiara",
+    "x_visor",
+    "x_wig_hair",
+    "helmet",
+    "jacket",
+    "jeans",
+    "scarf",
+    "i_academic_gown",
+    "i_bib",
+    "i_brassiere",
+    "i_breastplate",
+    "i_chain_mail",
+    "i_maillot",
+    "i_theater_curtain",
+    "i_velvet",
+    "i_vestment",
+    "x_mittens_pair",
+    "x_bow",
+    "tie",
+    "x_ankle_boot",
+    "x_badge",
+    "x_ballet_flat",
+    "x_bathrobe",
+    "x_belt",
+    "x_bikini",
+    "x_brogue",
+    "x_cardigan_sweater",
+    "x_chelsea_boot",
+    "x_climbing_shoe",
+    "x_cloak",
+    "x_clog_shoe",
+    "x_croc",
+    "x_crop_top",
+    "x_derby_shoe",
+    "x_dungarees",
+    "x_espadrille",
+    "x_fleece",
+    "x_football_boot",
+    "x_high_heel",
+    "x_hiking_shoe",
+    "x_ice_skate",
+    "x_jumpsuit",
+    "x_kilt",
+    "x_knee_high_boot",
+    "x_lanyard",
+    "x_leggings",
+    "x_mask_costume",
+    "x_moccasin",
+    "x_nightgown",
+    "x_onesie",
+    "x_overalls",
+    "x_oxford_shoe",
+    "x_pajamas",
+    "x_parka",
+    "x_platform_shoe",
+    "x_poncho",
+    "x_puffer_jacket",
+    "x_pump_shoe",
+    "x_robe",
+    "x_sandal_pair",
+    "x_shoe_horn",
+    "x_shoe_tree",
+    "x_shoelace",
+    "x_ski_boot",
+    "x_slipper_shoe",
+    "x_snow_boot",
+    "x_spikes_shoe",
+    "x_stiletto",
+    "x_stockings",
+    "x_swim_trunks",
+    "x_swimsuit",
+    "x_tank_top",
+    "x_tights",
+    "x_tunic",
+    "x_turtleneck",
+    "x_underwear",
+    "x_uniform",
+    "x_vest",
+    "x_wedge_shoe",
+    "x_wetsuit",
+    "x_windbreaker"
+   ],
+   "severity": "high",
+   "suggestion": "Each Legendary needs one concrete, outrageous feat plus a deflating punchline (for example jeans: 'Went so long without a wash that they now stand in the corner on their own. Last week they went to the shops alone.'). Keep cosmic scale to about a third of the batch. Per-object replacements are in the issues."
+  },
+  {
+   "pattern": "Rares describe the item doing its normal job well ('Kept a skier's face warm', 'Gripped the muddiest pitch', 'Kept a farmer clean') instead of a troublesome power.",
+   "ids": [
+    "boot",
+    "dress",
+    "x_balaclava",
+    "x_bandana",
+    "i_bathing_cap",
+    "i_bearskin",
+    "x_beret",
+    "x_bowler_hat",
+    "x_bucket_hat",
+    "x_crown",
+    "x_headband",
+    "i_shower_cap",
+    "i_ski_mask",
+    "x_sun_hat",
+    "x_tiara",
+    "x_visor",
+    "helmet",
+    "jacket",
+    "scarf",
+    "i_bib",
+    "i_diaper",
+    "i_maillot",
+    "i_pajama",
+    "i_sarong",
+    "i_vestment",
+    "i_wool",
+    "x_gloves_pair",
+    "x_bow",
+    "x_ballet_flat",
+    "x_belt",
+    "x_bikini",
+    "x_cardigan_sweater",
+    "x_chelsea_boot",
+    "x_cleats",
+    "x_climbing_shoe",
+    "x_cloak",
+    "x_clog_shoe",
+    "x_crop_top",
+    "x_derby_shoe",
+    "x_espadrille",
+    "x_high_heel",
+    "x_hiking_shoe",
+    "x_jumpsuit",
+    "x_kilt",
+    "x_knee_high_boot",
+    "x_leggings",
+    "x_mule",
+    "x_overalls",
+    "x_pajamas",
+    "x_parka",
+    "x_poncho",
+    "x_pump_shoe",
+    "x_roller_shoe",
+    "x_sandal_pair",
+    "x_shoe_tree",
+    "x_ski_boot",
+    "x_snow_boot",
+    "x_stiletto",
+    "x_stockings",
+    "x_swim_trunks",
+    "x_swimsuit",
+    "x_underwear",
+    "x_uniform",
+    "x_wetsuit"
+   ],
+   "severity": "high",
+   "suggestion": "Turn the function into a power with a cost to someone (for example sun hat: 'Follows the sun round the garden by itself, dragging its owner along. Grandpa has been round the house nine times today.')."
+  },
+  {
+   "pattern": "Names sit on the wrong rarity (often off by one): for example bathing cap C/U swapped, jeans C 'Kneeripper' on the shrink line, brassiere names shifted one rarity, crown R 'Slidedown' on the cake line, tiara R 'Hairslipper' on the pigeon line, helmet R 'Helmethair'.",
+   "ids": [
+    "i_bathing_cap",
+    "i_bearskin",
+    "x_bucket_hat",
+    "x_crown",
+    "x_earmuffs",
+    "x_headband",
+    "x_tiara",
+    "helmet",
+    "jeans",
+    "scarf",
+    "i_bib",
+    "i_brassiere",
+    "i_theater_curtain",
+    "x_pump_shoe",
+    "x_suspenders"
+   ],
+   "severity": "high",
+   "suggestion": "Write each name after its own lore line. Each re-paired name is listed as its own issue (for example jeans: Common 'Shrinker', Rare 'Kneeripper')."
+  },
+  {
+   "pattern": "Epic names are event or scene titles ('Swimming Pool Lap', 'Office Corridor Clatter', 'Sunday Lounge', 'Summer Heatwave'), not creatures; most of them also stop fitting once the Epic is rewritten.",
+   "ids": [
+    "boot",
+    "dress",
+    "x_balaclava",
+    "x_bandana",
+    "i_bathing_cap",
+    "i_bearskin",
+    "x_beret",
+    "x_bowler_hat",
+    "x_bucket_hat",
+    "x_crown",
+    "x_earmuffs",
+    "x_fedora",
+    "hat",
+    "x_headband",
+    "i_mortarboard",
+    "i_shower_cap",
+    "i_ski_mask",
+    "x_sun_hat",
+    "x_tiara",
+    "x_visor",
+    "x_wig_hair",
+    "helmet",
+    "jacket",
+    "jeans",
+    "scarf",
+    "i_academic_gown",
+    "i_breastplate",
+    "i_chain_mail",
+    "i_cuirass",
+    "i_diaper",
+    "i_maillot",
+    "i_pajama",
+    "i_sarong",
+    "i_swimming_trunks",
+    "shirt",
+    "i_theater_curtain",
+    "i_vestment",
+    "x_mittens_pair",
+    "x_socks_pair",
+    "x_bow",
+    "tie",
+    "x_ankle_boot",
+    "x_ballet_flat",
+    "x_bathrobe",
+    "x_belt",
+    "x_bikini",
+    "x_brogue",
+    "x_cape",
+    "x_cardigan_sweater",
+    "x_chelsea_boot",
+    "x_cleats",
+    "x_climbing_shoe",
+    "x_cloak",
+    "x_clog_shoe",
+    "x_croc",
+    "x_crop_top",
+    "x_derby_shoe",
+    "x_dungarees",
+    "x_espadrille",
+    "x_fleece",
+    "x_flip_flop",
+    "x_football_boot",
+    "x_high_heel",
+    "x_hiking_shoe",
+    "x_ice_skate",
+    "x_jumpsuit",
+    "x_kilt",
+    "x_knee_high_boot",
+    "x_lanyard",
+    "x_leggings",
+    "x_mask_costume",
+    "x_moccasin",
+    "x_mule",
+    "x_nightgown",
+    "x_onesie",
+    "x_overalls",
+    "x_oxford_shoe",
+    "x_pajamas",
+    "x_parka",
+    "x_platform_shoe",
+    "x_poncho",
+    "x_puffer_jacket",
+    "x_pump_shoe",
+    "x_robe",
+    "x_roller_shoe",
+    "x_sandal_pair",
+    "x_sari",
+    "x_shoe_horn",
+    "x_shoe_tree",
+    "x_shoelace",
+    "x_ski_boot",
+    "x_slipper_shoe",
+    "x_snow_boot",
+    "x_spikes_shoe",
+    "x_stiletto",
+    "x_stockings",
+    "x_suspenders",
+    "x_swim_trunks",
+    "x_swimsuit",
+    "x_tank_top",
+    "x_tights",
+    "x_tunic",
+    "x_turtleneck",
+    "x_underwear",
+    "x_uniform",
+    "x_vest",
+    "x_wetsuit",
+    "x_windbreaker"
+   ],
+   "severity": "medium",
+   "suggestion": "Use creature-like names tied to the new Epic (for example 'Plugpuller', 'Puddlequake', 'Shoe Orchard', 'Slugscarer')."
+  },
+  {
+   "pattern": "Legendary names repeat one shape, 'Title X-ington of the Place' (Lady/Madame/Sir/Lord/Captain/Old … of the …), in about 90 of 118 names, against the tracker lesson to vary name shapes.",
+   "ids": [
+    "dress",
+    "i_bathing_cap",
+    "i_bearskin",
+    "x_beret",
+    "x_bowler_hat",
+    "x_bucket_hat",
+    "x_earmuffs",
+    "x_fedora",
+    "x_headband",
+    "i_shower_cap",
+    "i_ski_mask",
+    "x_sun_hat",
+    "x_tiara",
+    "x_visor",
+    "x_wig_hair",
+    "helmet",
+    "jacket",
+    "i_academic_gown",
+    "i_bib",
+    "i_brassiere",
+    "i_breastplate",
+    "i_chain_mail",
+    "i_diaper",
+    "i_maillot",
+    "i_pajama",
+    "i_sarong",
+    "i_theater_curtain",
+    "i_velvet",
+    "x_gloves_pair",
+    "x_bow",
+    "x_ankle_boot",
+    "x_badge",
+    "x_ballet_flat",
+    "x_bathrobe",
+    "x_belt",
+    "x_bikini",
+    "x_brogue",
+    "x_cape",
+    "x_chelsea_boot",
+    "x_climbing_shoe",
+    "x_clog_shoe",
+    "x_croc",
+    "x_crop_top",
+    "x_derby_shoe",
+    "x_dungarees",
+    "x_espadrille",
+    "x_fleece",
+    "x_flip_flop",
+    "x_high_heel",
+    "x_hiking_shoe",
+    "x_ice_skate",
+    "x_jumpsuit",
+    "x_kilt",
+    "x_knee_high_boot",
+    "x_lanyard",
+    "x_leggings",
+    "x_moccasin",
+    "x_mule",
+    "x_nightgown",
+    "x_onesie",
+    "x_overalls",
+    "x_oxford_shoe",
+    "x_pajamas",
+    "x_parka",
+    "x_platform_shoe",
+    "x_poncho",
+    "x_puffer_jacket",
+    "x_pump_shoe",
+    "x_raincoat_jacket",
+    "x_ribbon",
+    "x_robe",
+    "x_sandal_pair",
+    "x_shoe_horn",
+    "x_shoe_tree",
+    "x_ski_boot",
+    "x_slipper_shoe",
+    "x_snow_boot",
+    "x_stiletto",
+    "x_stockings",
+    "x_suspenders",
+    "x_swimsuit",
+    "x_tank_top",
+    "x_tights",
+    "x_tunic",
+    "x_turtleneck",
+    "x_underwear",
+    "x_uniform",
+    "x_wedge_shoe",
+    "x_wetsuit",
+    "x_windbreaker"
+   ],
+   "severity": "medium",
+   "suggestion": "Vary the shapes: plain epithet ('The Bottomless Overcoat', 'The Crown That Crowned a Cat'), name and deed ('Lady Bootella, Sea Strider', 'Old Buckleworth, Tower Holder'), or a single strong name. Keep 'of the …' for at most a quarter."
+  },
+  {
+   "pattern": "Signature moves: almost every Clothing signature is '<part> Snatch', and about 18 are garbled or doubled ('Brim Snatch Snatch', 'Strap Snatch Snap Snap', 'Strap Snatch Strap'), which also falsely suggests a multi-hit.",
+   "ids": [
+    "boot",
+    "hat",
+    "scarf",
+    "i_maillot",
+    "i_sarong",
+    "shirt",
+    "x_bikini",
+    "x_crop_top",
+    "x_dungarees",
+    "x_knee_high_boot",
+    "x_leggings",
+    "x_nightgown",
+    "x_platform_shoe",
+    "x_raincoat_jacket",
+    "x_ribbon",
+    "x_suspenders",
+    "x_swim_trunks",
+    "x_swimsuit",
+    "x_tights",
+    "x_tunic",
+    "x_underwear"
+   ],
+   "severity": "medium",
+   "suggestion": "Use one clean drain verb per object and vary it (tug, grab, yank, twang, pinch, borrow), for example 'Hat Grab', 'Tassel Tug', 'Elastic Twang'. Shoe signatures are plain hits and must not use 'Snatch' (boot)."
+  },
+  {
+   "pattern": "Ultimates reuse the Epic monster name or its key words (roller shoe, shoe horn and snow boot are exact copies; many others are near copies such as 'Festival Field Bounce', 'Steamy Street Mystery', 'Corridor Clatter').",
+   "ids": [
+    "x_bucket_hat",
+    "x_crown",
+    "x_fedora",
+    "i_ski_mask",
+    "x_ankle_boot",
+    "x_bathrobe",
+    "x_brogue",
+    "x_climbing_shoe",
+    "x_clog_shoe",
+    "x_espadrille",
+    "x_high_heel",
+    "x_ice_skate",
+    "x_kilt",
+    "x_moccasin",
+    "x_mule",
+    "x_pajamas",
+    "x_roller_shoe",
+    "x_sandal_pair",
+    "x_shoe_horn",
+    "x_shoe_tree",
+    "x_snow_boot",
+    "x_uniform"
+   ],
+   "severity": "high",
+   "suggestion": "Give each finisher its own image (for example 'Full Speed Wheelie', 'Big Slide-In', 'Big Fur Stomp', 'Case Closed')."
+  },
+  {
+   "pattern": "Variant-dependent Ultimates whose names commit to one effect: cold words on burn variants ('Frozen Pond Spin', 'Snow Day Trudge'), 'Daze' on stun/defdown mixes, 'Smelly' on poison/stun, 'Barrage' or 'Lap After Lap' on single hits, cosy words on attacks ('Armchair Snuggle', 'Sofa Snuggle Heat').",
+   "ids": [
+    "x_balaclava",
+    "i_bathing_cap",
+    "x_crown",
+    "i_ski_mask",
+    "x_visor",
+    "x_gloves_pair",
+    "x_socks_pair",
+    "x_cardigan_sweater",
+    "x_ice_skate",
+    "x_lanyard",
+    "x_onesie",
+    "x_pajamas",
+    "x_snow_boot",
+    "x_uniform"
+   ],
+   "severity": "medium",
+   "suggestion": "Use effect-neutral finisher names when variants differ (for example 'Showstopper Spin', 'Sock Surprise', 'Big Snowball', 'Big Button Pop')."
+  },
+  {
+   "pattern": "Laundry and washing-machine premises are overused across the batch: shrinking (jeans C/E, wool R, crop top U, vest R), lost or tangled in the wash (socks C/E/L, brassiere C/R, underwear R/E, shirt U/E, pyjamas E, tights E).",
+   "ids": [
+    "jeans",
+    "i_wool",
+    "x_crop_top",
+    "x_vest",
+    "x_socks_pair",
+    "i_brassiere",
+    "x_underwear",
+    "shirt",
+    "x_pajamas",
+    "x_tights"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep at most one laundry premise per object and no more than about 6 in the batch; the replacements in the issues move the rest to other traits."
+  },
+  {
+   "pattern": "Near-duplicate objects reuse each other's premises: i_pajama / x_pajamas, i_swimming_trunks / x_swim_trunks, i_maillot / x_swimsuit, x_bathrobe / x_robe, x_high_heel / x_stiletto, x_cleats / x_football_boot, x_balaclava / i_ski_mask, x_bow / x_ribbon, i_breastplate / i_cuirass / i_chain_mail.",
+   "ids": [
+    "i_pajama",
+    "x_pajamas",
+    "i_swimming_trunks",
+    "x_swim_trunks",
+    "i_maillot",
+    "x_swimsuit",
+    "x_bathrobe",
+    "x_robe",
+    "x_high_heel",
+    "x_stiletto",
+    "x_cleats",
+    "x_football_boot",
+    "x_balaclava",
+    "i_ski_mask",
+    "x_bow",
+    "x_ribbon",
+    "i_breastplate",
+    "i_cuirass",
+    "i_chain_mail"
+   ],
+   "severity": "high",
+   "suggestion": "Before writing each pair, list each object's premises side by side and give every pair its own angle (for example robe: door-hanging uncle and teabag pocket; bathrobe: trailing belt and fluffy hallway)."
+  },
+  {
+   "pattern": "Repeated stock gags inside the batch: biscuit tin (nightgown R = slipper R word for word), 'horses wore earplugs' (chain mail E = cuirass E), mirror polish (breastplate U, cuirass U, brogue R, pump U), dipping in soup (tie C, lanyard C, vestment C, academic gown C), over-your-eyes Commons (bandana, bucket hat, fedora, headband, crown, onesie), squinting/sunglasses (crown U and E, badge R, sari R, tights R), 'still smells of sun cream' (sun hat L, sarong L).",
+   "ids": [
+    "x_nightgown",
+    "x_slipper_shoe",
+    "i_chain_mail",
+    "i_cuirass",
+    "i_breastplate",
+    "x_brogue",
+    "x_pump_shoe",
+    "tie",
+    "x_lanyard",
+    "i_vestment",
+    "i_academic_gown",
+    "x_bandana",
+    "x_bucket_hat",
+    "x_fedora",
+    "x_headband",
+    "x_crown",
+    "x_onesie",
+    "x_badge",
+    "x_sari",
+    "x_tights",
+    "x_sun_hat",
+    "i_sarong"
+   ],
+   "severity": "medium",
+   "suggestion": "Use each gag once in the batch. The over-your-eyes Commons are left in place for bandana and fedora, but the writer should vary at least two more (for example bucket hat: 'Collects rain in its brim and pours it down your neck when you nod.')."
+  },
+  {
+   "pattern": "Uncommons that are plain descriptions with no joke ('Is made of a thousand tiny metal rings', 'Is spun from a sheep's fleece', 'Has stretchy sides so you can slip it on', 'Zips up from your toes to your chin').",
+   "ids": [
+    "i_chain_mail",
+    "i_wool",
+    "x_chelsea_boot",
+    "x_clog_shoe",
+    "x_jumpsuit",
+    "x_knee_high_boot",
+    "x_moccasin",
+    "x_puffer_jacket",
+    "x_sari",
+    "x_shoe_horn",
+    "x_vest"
+   ],
+   "severity": "medium",
+   "suggestion": "Add the twist or attitude (for example chain mail: 'Catches every crumb in its rings. A knight can eat breakfast out of it at lunchtime.')."
+  },
+  {
+   "pattern": "Taste, religion, brands and real people: Christmas stockings and a church-coded vestment; swimwear and underwear jokes that hint at exposure (kilt C, tights C, maillot C, bikini C, swim trunks R, 'Nursery Blowout', 'Thong Strap Flick'); brand or character echoes (Old Flipper, Wedgewood, Golden Boot, Velveteen, Pyjamarama, a grey wanderer's cloak; the croc object itself is a brand name, so keep 'Croc' out of names and lore); implied real people (a famous climber, a famous swimmer, a famous dancer, dinner with royalty).",
+   "ids": [
+    "x_stockings",
+    "i_vestment",
+    "x_kilt",
+    "x_tights",
+    "i_maillot",
+    "x_bikini",
+    "x_swim_trunks",
+    "i_diaper",
+    "x_flip_flop",
+    "x_wedge_shoe",
+    "x_football_boot",
+    "i_velvet",
+    "x_pajamas",
+    "x_cloak",
+    "x_croc",
+    "x_balaclava",
+    "i_bathing_cap",
+    "x_shoe_tree",
+    "x_oxford_shoe"
+   ],
+   "severity": "high",
+   "suggestion": "Apply the per-object replacements: secular framing for the vestment (town hall, not ceremony or candles), no Christmas in stockings, swimwear and underwear jokes about knots, colours, floating and laundry only, and no famous-person hooks."
+  }
+ ],
+ "issues": [
+  {
+   "id": "boot",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "'Puddlestomper' describes puddles, but the Common lore is hiding its partner under the bed.",
+   "suggestion": "'Pairhider'"
+  },
+  {
+   "id": "boot",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Laceknotter' no longer fits once the knot premise moves out; it also nearly duplicates football boot 'Laceknotter Boot'.",
+   "suggestion": "'Homeward Welly'"
+  },
+  {
+   "id": "boot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Epic name should match the new puddle-eruption premise and sound like a creature, not an event title.",
+   "suggestion": "'Puddlequake'"
+  },
+  {
+   "id": "boot",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Near-copy within the batch: shoelace U ('double knot that nobody can undo') and football boot C (knot you have to cut) use the same joke.",
+   "suggestion": "'Walks home by itself from any field, always by the muddiest route. Then waits on the doormat looking innocent.'"
+  },
+  {
+   "id": "boot",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Tracking mud is a Common habit, not a troublesome power.",
+   "suggestion": "'Leaves muddy footprints that keep walking after it stops. They have reached the bathroom twice and the loft once.'"
+  },
+  {
+   "id": "boot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is the puddle habit made bigger, and 'Muddy Hall Stampede' names a different scene.",
+   "suggestion": "'Stamped once on the school field and every puddle in town jumped out of its hole. The lollipop lady is still mopping.'"
+  },
+  {
+   "id": "boot",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A long walk with a small hole is an achievement without a punchline.",
+   "suggestion": "'Walked a thousand miles home after being left at a campsite. Its first act was to kick mud on whoever forgot it.'"
+  },
+  {
+   "id": "boot",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "The signature is a plain 135% hit with no drain, so 'Snatch' promises an effect it does not have.",
+   "suggestion": "'Muddy Heel Stomp'"
+  },
+  {
+   "id": "dress",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Zipperstuck' no longer describes the Rare.",
+   "suggestion": "'Pocketsprout'"
+  },
+  {
+   "id": "dress",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Party Twirl' is an event title; the name should fit the helicopter spin.",
+   "suggestion": "'Twirlicopter'"
+  },
+  {
+   "id": "dress",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "A stuck zip is a Common-level mishap, not a troublesome power.",
+   "suggestion": "'Grows a new pocket wherever one is needed. Grandma has found forty sweets in it and a lost hamster.'"
+  },
+  {
+   "id": "dress",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic repeats the Common twirl, has no consequence and no joke ('everyone stopped to watch').",
+   "suggestion": "'Spun so fast at the wedding that it took off like a helicopter. The bouquet is still on the town hall roof.'"
+  },
+  {
+   "id": "dress",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A list of parties and 'still looks brand new' is the longevity formula with no punchline.",
+   "suggestion": "'Spun so beautifully at the ball that the clock stopped to watch. The party got an extra hour, and still ran out of cake.'"
+  },
+  {
+   "id": "x_balaclava",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Snowmouth' does not describe the new Rare.",
+   "suggestion": "'Holeknitter'"
+  },
+  {
+   "id": "x_balaclava",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Blizzard Bundle' does not fit the new premise.",
+   "suggestion": "'Snowman Muffler'"
+  },
+  {
+   "id": "x_balaclava",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping a face warm is what it is for, not a power; it is also a near-copy of ski mask R.",
+   "suggestion": "'Knits a new hole wherever you need to scratch. By lunchtime it is mostly holes and its owner is mostly face.'"
+  },
+  {
+   "id": "x_balaclava",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Formula ('Kept every child in the school warm') with no joke; near-copy of ski mask E ('Kept the whole ski school warm').",
+   "suggestion": "'Stretched over a whole village of snowmen to keep them cosy. By lunch the village was one big woolly puddle.'"
+  },
+  {
+   "id": "x_balaclava",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'A famous climber' on 'the highest mountain in the world' points at a real person; frozen eyebrows is not a punchline.",
+   "suggestion": "'Kept a mountain top so warm that it stopped snowing there. Skiers now queue at the summit in shorts.'"
+  },
+  {
+   "id": "x_balaclava",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Blizzard Wrap' is fine, but the variants are poison/defdown, so cold imagery is decoration rather than effect.",
+   "suggestion": "'Big Woolly Wrap'"
+  },
+  {
+   "id": "x_bandana",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Sweatwiper' does not fit the new Rare.",
+   "suggestion": "'Sneezeguard'"
+  },
+  {
+   "id": "x_bandana",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Name should fit the dust-storm Epic.",
+   "suggestion": "'Dustwhipper'"
+  },
+  {
+   "id": "x_bandana",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Bandito' leans on an outlaw stereotype.",
+   "suggestion": "'Bandana Bill of the Prairie'"
+  },
+  {
+   "id": "x_bandana",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Wiping builders' sweat is helpful, not a troublesome power.",
+   "suggestion": "'Ties itself over the face of anyone who sneezes nearby. The library now looks like a gang of very polite outlaws.'"
+  },
+  {
+   "id": "x_bandana",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every fan … at once' formula; 'Cowboy Dust Cloud' names a different scene.",
+   "suggestion": "'Flapped so hard on a windy hill that it whipped up a dust storm. The whole village now sneezes in the same direction.'"
+  },
+  {
+   "id": "x_bandana",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for twenty years' longevity line with no punchline.",
+   "suggestion": "'Lassoed a runaway cattle stampede with one corner. The cows agreed to walk home if it promised to stop flapping.'"
+  },
+  {
+   "id": "x_bandana",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Stun move; 'Flick' is weak for a startle.",
+   "suggestion": "'Sudden Flap'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Name and lore swapped: Common lore is hair pulling, but the name is 'Earsqueezer'.",
+   "suggestion": "'Hairpuller'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "Name and lore swapped: Uncommon lore squeezes the head until the ears pop.",
+   "suggestion": "'Earsqueezer'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Name must describe the new Rare.",
+   "suggestion": "'Dolphinsqueak'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Swimming Pool Lap' is an event title, not a creature, and does not fit the new Epic.",
+   "suggestion": "'Plugpuller'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping hair dry for an hour is not a troublesome power; 'Flowercap' is unrelated to it.",
+   "suggestion": "'Squeaks like a dolphin underwater. The lifeguard has closed the pool twice to look for it.'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'was worn by every swimmer … and the pool looked like…' formula.",
+   "suggestion": "'Stuck to the bottom of the pool so hard that it pulled the plug out. The swimming club finished the race on the grass.'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a famous swimmer' implies a real person; no punchline.",
+   "suggestion": "'Swam across the sea by itself and reached the far side first. Its swimmer arrived an hour later, cold and very cross.'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Swim Cap Snap Crack' stacks three words; defdown needs only one.",
+   "suggestion": "'Rubber Split'"
+  },
+  {
+   "id": "i_bathing_cap",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Lap After Lap' suggests a repeated hit, but the Ultimate is one hit whose effect varies (burn, burn, stun); needs an effect-neutral single image.",
+   "suggestion": "'Deep End Plunge'"
+  },
+  {
+   "id": "i_bearskin",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Tallfur' describes height, but the Common lore is tickling the guards' noses.",
+   "suggestion": "'Nosetickler'"
+  },
+  {
+   "id": "i_bearskin",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Sightblocker' does not describe the Uncommon (ducking under every doorway); the height name belongs here.",
+   "suggestion": "'Tallfur'"
+  },
+  {
+   "id": "i_bearskin",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Guardhat' is generic and does not fit the growl.",
+   "suggestion": "'Growlbusby'"
+  },
+  {
+   "id": "i_bearskin",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Parade Ground March' is an event title; fit the growth premise.",
+   "suggestion": "'Skyscraper Busby'"
+  },
+  {
+   "id": "i_bearskin",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Standing still in a gale is a trait, not a troublesome power.",
+   "suggestion": "'Growls like a real bear whenever a tourist pulls a face. The ice-cream van now parks round the corner.'"
+  },
+  {
+   "id": "i_bearskin",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Marched with a hundred other bearskins … the street looked like' crowd formula.",
+   "suggestion": "'Grew so tall overnight that the guard behind it could not see. He marched straight into the palace pond, still in step.'"
+  },
+  {
+   "id": "i_bearskin",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for fifty years without ever wobbling' longevity line with no punchline.",
+   "suggestion": "'Stood so still for so long that a family of birds moved in on top. The guards now change shifts on tiptoe.'"
+  },
+  {
+   "id": "x_beret",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Cafesitter' does not fit the new Rare.",
+   "suggestion": "'Doodlebrim'"
+  },
+  {
+   "id": "x_beret",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Name should fit the tilting Epic.",
+   "suggestion": "'Café Tilter'"
+  },
+  {
+   "id": "x_beret",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "The talent belongs to the painter, not the beret; no trouble.",
+   "suggestion": "'Paints a tiny moustache on every portrait it walks past. The art gallery has stopped letting it in.'"
+  },
+  {
+   "id": "x_beret",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'was worn by every artist in the square at once' formula.",
+   "suggestion": "'Tilted so far over one ear that the whole café tilted with it. Every croissant slid off the tables and into the river.'"
+  },
+  {
+   "id": "x_beret",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Longevity line ('three generations… every colour ever made'), no punchline.",
+   "suggestion": "'Painted a sunset so real that the actual sun went down early to compare. The whole town had dinner at four.'"
+  },
+  {
+   "id": "x_bowler_hat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'City Commute Bob' does not fit the flying-flock Epic.",
+   "suggestion": "'Hatflock'"
+  },
+  {
+   "id": "x_bowler_hat",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Politeness that spreads is mild and has no trouble or power.",
+   "suggestion": "'Tips itself to every single person in the street. Its owner arrives at work an hour late with a very sore neck.'"
+  },
+  {
+   "id": "x_bowler_hat",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Bobbed along with a thousand other bowlers… the platform looked like' crowd formula.",
+   "suggestion": "'Lifted off in a gust and every bowler in town followed like a flock of birds. The pigeons have filed a complaint.'"
+  },
+  {
+   "id": "x_bowler_hat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'same morning train … for forty years' longevity line with no punchline.",
+   "suggestion": "'Caught the morning train without its owner and went to work alone. It now has a desk, a pay rise and the window seat.'"
+  },
+  {
+   "id": "x_bucket_hat",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Festivaltop' does not describe the Uncommon (rain dripping off in every direction).",
+   "suggestion": "'Dripbrim'"
+  },
+  {
+   "id": "x_bucket_hat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Muddy Festival Bounce' does not fit the new Epic.",
+   "suggestion": "'Mudbucket'"
+  },
+  {
+   "id": "x_bucket_hat",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Surviving festivals is not a power; uses the stock number three.",
+   "suggestion": "'Holds a whole bucket of rain on its brim and tips it over whoever laughs at it. The campsite has run out of dry people.'"
+  },
+  {
+   "id": "x_bucket_hat",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'was worn by every person in the festival crowd at once, and the field looked like' formula.",
+   "suggestion": "'Flipped over at the festival and was used as a real bucket. It carried enough mud to build a second stage.'"
+  },
+  {
+   "id": "x_bucket_hat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for twenty years and has a badge from every one' longevity line.",
+   "suggestion": "'Collected so much rain at one festival that it became a pond. A family of ducks moved in and will not leave.'"
+  },
+  {
+   "id": "x_bucket_hat",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Festival Field Bounce' reuses the Epic name 'Muddy Festival Bounce'.",
+   "suggestion": "'Big Brim Flop'"
+  },
+  {
+   "id": "x_crown",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Slidedown' describes the Common (slides over your ears), not the Rare.",
+   "suggestion": "'Bossytop'"
+  },
+  {
+   "id": "x_crown",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Name should fit the runaway crown.",
+   "suggestion": "'Rolling Royal'"
+  },
+  {
+   "id": "x_crown",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Golden Circlet of Ages' does not fit the new Legendary.",
+   "suggestion": "'The Crown That Crowned a Cat'"
+  },
+  {
+   "id": "x_crown",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Being hidden in a cake is something done TO the crown, not a power.",
+   "suggestion": "'Makes whoever wears it give silly royal orders. Grandpa wore it for ten minutes and banned Tuesdays.'"
+  },
+  {
+   "id": "x_crown",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Same premise as the Uncommon (sparkling so bright people squint).",
+   "suggestion": "'Rolled off during the parade and down the hill like a golden wheel. Half the town chased it and the parade ended at the bakery.'"
+  },
+  {
+   "id": "x_crown",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'worn at coronations for a thousand years and still polished' is the longevity formula.",
+   "suggestion": "'Was put on the palace cat by mistake. The cat has now ruled for nine years and has only ever banned baths.'"
+  },
+  {
+   "id": "x_crown",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Defdown move; 'Dazzle' reads as a stun.",
+   "suggestion": "'Jewel Distraction'"
+  },
+  {
+   "id": "x_crown",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Royal Glitter' echoes the Epic name 'Royal Parade Glitter' and suggests a dazzle, but the variants are poison and burn.",
+   "suggestion": "'Heavy Is the Head'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Muffledmuff' does not describe the bear-like pom-poms, and the Uncommon is a plain description.",
+   "suggestion": "'Bearears'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Name must fit the new Rare.",
+   "suggestion": "'Radiomuff'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Name should fit the new Epic.",
+   "suggestion": "'Hushmuffle'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Lady Muffington of the Ice Rink' does not fit the new Legendary.",
+   "suggestion": "'Muffington the Storm Hush'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Fact slip: earmuffs muffle what you hear, not 'every word you say'.",
+   "suggestion": "'Muffles every question you are asked, so you answer the wrong one all day.'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Not hearing the bell repeats the Common muffling premise.",
+   "suggestion": "'Picks up the radio through its fluff. Plays the football scores into your ears during the maths test.'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by the whole ice-skating club' crowd formula; muffling premise again.",
+   "suggestion": "'Clamped itself over the school fire alarm. The whole school had a lovely quiet fire drill that nobody knew about.'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'through forty winters' longevity line with no punchline.",
+   "suggestion": "'Sat on top of a thundercloud and muffled the whole storm. The cloud now only rains in whispers.'"
+  },
+  {
+   "id": "x_earmuffs",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Frosty Silence Stink' is a three-image pile-up for a poison move.",
+   "suggestion": "'Old Fluff Whiff'"
+  },
+  {
+   "id": "x_fedora",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Shadowbrim' does not fit the new Rare.",
+   "suggestion": "'Snoopbrim'"
+  },
+  {
+   "id": "x_fedora",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Rainy Street Mystery' is an event title and no longer fits.",
+   "suggestion": "'Noonshadow'"
+  },
+  {
+   "id": "x_fedora",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Fooling a cat is a mild trait; the Rare needs trouble.",
+   "suggestion": "'Solves mysteries nobody asked about. Has told the whole street exactly who leaves the bin lid open.'"
+  },
+  {
+   "id": "x_fedora",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every detective at the mystery party' crowd formula.",
+   "suggestion": "'Pulled its brim so low over the town that it was night by lunchtime. The owls went to work early.'"
+  },
+  {
+   "id": "x_fedora",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Has solved fifty cases' is a tally, with a weak badge payoff.",
+   "suggestion": "'Solved the greatest mystery in the city: who keeps moving the garden gnomes. They had gone on holiday and sent postcards.'"
+  },
+  {
+   "id": "x_fedora",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Steamy Street Mystery' reuses the Epic name 'Rainy Street Mystery'.",
+   "suggestion": "'Case Closed'"
+  },
+  {
+   "id": "hat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Windy Day Chase' does not fit the new Epic.",
+   "suggestion": "'Bunnybrim'"
+  },
+  {
+   "id": "hat",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every other hat in town' formula, and the wind premise repeats the Common.",
+   "suggestion": "'Pulled a rabbit out of itself at a birthday party, then another, then forty. The garden is now mostly rabbits.'"
+  },
+  {
+   "id": "hat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'five generations … still fits every one of them' longevity formula.",
+   "suggestion": "'Blew off one windy morning and landed on every head in town in turn. By night it had been worn by four thousand people and a horse.'"
+  },
+  {
+   "id": "hat",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Brim Snatch Snatch' doubles a word by mistake and implies a repeat the drain move does not have.",
+   "suggestion": "'Hat Grab'"
+  },
+  {
+   "id": "x_headband",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Common lore is the band sliding over your eyes; 'Sweatstopper' does not describe it.",
+   "suggestion": "'Slidedownband'"
+  },
+  {
+   "id": "x_headband",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon lore is surprised eyebrows; 'Slidedownband' belongs to the Common.",
+   "suggestion": "'Browlifter'"
+  },
+  {
+   "id": "x_headband",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Hairhold' does not describe the Rare.",
+   "suggestion": "'Sweatwringer'"
+  },
+  {
+   "id": "x_headband",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Gym Class Burst' does not fit the new Epic.",
+   "suggestion": "'Pingband'"
+  },
+  {
+   "id": "x_headband",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Coach Sweatwell of the Gym' does not fit the marathon line.",
+   "suggestion": "'Sweatwell, the Straight Runner'"
+  },
+  {
+   "id": "x_headband",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Soaking up sweat is its job, not a troublesome power.",
+   "suggestion": "'Saves up a whole match of sweat and wrings it out over the umpire. The tennis club now hands out umbrellas.'"
+  },
+  {
+   "id": "x_headband",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every runner … and the finish line looked like' formula.",
+   "suggestion": "'Was stretched across the finish line at sports day and pinged the winner back to the start. He has now won twice.'"
+  },
+  {
+   "id": "x_headband",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every marathon for twenty years and still stretches' longevity formula.",
+   "suggestion": "'Kept one runner's hair out of his eyes for a whole marathon. He ran so straight that he finished in the next town.'"
+  },
+  {
+   "id": "i_mortarboard",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Graduation Toss' is an event title.",
+   "suggestion": "'Skyboard'"
+  },
+  {
+   "id": "i_mortarboard",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'tossed in the air by every graduate at once' formula.",
+   "suggestion": "'Was thrown so high at graduation that it landed on a passing plane. It has since graduated in four more countries.'"
+  },
+  {
+   "id": "i_mortarboard",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Knowing a lot is a claim without a punchline.",
+   "suggestion": "'Has sat through so many speeches that it now gives them. Last year it spoke for six hours and gave itself a degree in snoring.'"
+  },
+  {
+   "id": "i_shower_cap",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Shampoosaver' does not fit the floating Rare.",
+   "suggestion": "'Steamfloater'"
+  },
+  {
+   "id": "i_shower_cap",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Bathroom Steam' is a place, not a creature.",
+   "suggestion": "'Steamdome'"
+  },
+  {
+   "id": "i_shower_cap",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping a hairdo dry is its job, not a power.",
+   "suggestion": "'Puffs up with steam until it floats off out of the window. The neighbours keep bringing it back, slightly damp.'"
+  },
+  {
+   "id": "i_shower_cap",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by everyone in the hotel on the same morning' crowd formula.",
+   "suggestion": "'Blew up so big in the hotel steam room that it covered every guest like a tent. Nobody got wet, and nobody found the door.'"
+  },
+  {
+   "id": "i_shower_cap",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for thirty years' longevity formula, no punchline.",
+   "suggestion": "'Stayed on through a storm at sea, a waterfall and a car wash. The curls underneath have never felt a single raindrop.'"
+  },
+  {
+   "id": "i_ski_mask",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "Uncommon lore is the woolly-ninja look; 'Goggleholder' is a plain function.",
+   "suggestion": "'Woollyninja'"
+  },
+  {
+   "id": "i_ski_mask",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Frostbreath' does not fit the new Rare.",
+   "suggestion": "'Gogglefogger'"
+  },
+  {
+   "id": "i_ski_mask",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Ski Slope Shiver' contradicts the melting Epic.",
+   "suggestion": "'Slopemelter'"
+  },
+  {
+   "id": "i_ski_mask",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of balaclava R (kept a face warm); not a power.",
+   "suggestion": "'Fogs up every pair of goggles it gets near. The ski instructor has taught a whole lesson to a tree.'"
+  },
+  {
+   "id": "i_ski_mask",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of balaclava E ('kept every child warm'); no joke.",
+   "suggestion": "'Breathed out so much warm air on the slope that the snow melted into a river. The ski school finished the day in boats.'"
+  },
+  {
+   "id": "i_ski_mask",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Skiing every mountain with no snow up its nose is a tally with a weak payoff.",
+   "suggestion": "'Raced an avalanche down the mountain and won by a nose. The avalanche wants a rematch and is still climbing back up.'"
+  },
+  {
+   "id": "i_ski_mask",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Ski Slope Whiteout' suggests blinding (stun), but the variants are poison and defdown; it also echoes the Epic name.",
+   "suggestion": "'Woolly Pile-Up'"
+  },
+  {
+   "id": "x_sun_hat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Neckshade' does not fit the new Rare.",
+   "suggestion": "'Sunchaser'"
+  },
+  {
+   "id": "x_sun_hat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Beach Day Shade' is an event title.",
+   "suggestion": "'Shadeosaurus'"
+  },
+  {
+   "id": "x_sun_hat",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping a gardener cool is its job, not a power.",
+   "suggestion": "'Follows the sun round the garden by itself, dragging its owner along. Grandpa has been round the house nine times today.'"
+  },
+  {
+   "id": "x_sun_hat",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Shaded every grandma at the beach' crowd formula; no joke.",
+   "suggestion": "'Opened its brim so wide on the beach that it shaded the whole sea. The fish asked for the sun back by teatime.'"
+  },
+  {
+   "id": "x_sun_hat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every summer for forty years … smells of suncream' longevity formula, and a near-copy of sarong L.",
+   "suggestion": "'Blocked the sun for a whole summer so its owner never got a freckle. The tomatoes went on strike.'"
+  },
+  {
+   "id": "x_tiara",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Hairslipper' describes the Common (slips out of your hair), not the Rare.",
+   "suggestion": "'Wavemaker'"
+  },
+  {
+   "id": "x_tiara",
+   "field": "names.epic",
+   "severity": "low",
+   "issue": "'Ballroom Sparkle' is an event title for a decent Epic.",
+   "suggestion": "'Chandelier Sulker'"
+  },
+  {
+   "id": "x_tiara",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Princess Glimmerina of the Ball' does not fit the new Legendary.",
+   "suggestion": "'Glimmerina, Pigeon Princess'"
+  },
+  {
+   "id": "x_tiara",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Being stolen by a pigeon is passive, not a power.",
+   "suggestion": "'Makes whoever wears it wave like royalty at everything. Dad waved at the bin lorry for twenty minutes.'"
+  },
+  {
+   "id": "x_tiara",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every royal ball for a hundred years … never lost a single jewel' longevity formula.",
+   "suggestion": "'Was worn by a pigeon for a whole year after a ball. The pigeon now refuses crumbs unless they come on a plate.'"
+  },
+  {
+   "id": "x_visor",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Tennistop' does not describe the Rare.",
+   "suggestion": "'Sunflicker'"
+  },
+  {
+   "id": "x_visor",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Centre Court Glare' contradicts the shade Epic.",
+   "suggestion": "'Courtshade'"
+  },
+  {
+   "id": "x_visor",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Shading eyes is its job, not a power.",
+   "suggestion": "'Bounces sunlight into the other player's eyes at exactly the wrong moment. The umpire has asked it to face the wall.'"
+  },
+  {
+   "id": "x_visor",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every player … the court looked like' formula.",
+   "suggestion": "'Shaded centre court so well that the grass thought it was night and went to sleep. The final was played in the car park.'"
+  },
+  {
+   "id": "x_visor",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Has watched every final … for thirty years' has no achievement and no punchline.",
+   "suggestion": "'Has watched so many finals that it now calls the lines itself. It is never wrong, and the umpire has taken up knitting.'"
+  },
+  {
+   "id": "x_visor",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Baseline Squint' implies glare (stun); variants are defdown and poison.",
+   "suggestion": "'Baseline Smash'"
+  },
+  {
+   "id": "x_wig_hair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Windblowoff' does not fit the new Rare.",
+   "suggestion": "'Styleshifter'"
+  },
+  {
+   "id": "x_wig_hair",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Theatre Wig Swap' does not fit the new Epic.",
+   "suggestion": "'Curlstorm'"
+  },
+  {
+   "id": "x_wig_hair",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Blowing onto a dog is passive and mild for a Rare.",
+   "suggestion": "'Grows a new hairstyle every night. Monday a beehive, Tuesday a quiff, Wednesday something the cat tried to adopt.'"
+  },
+  {
+   "id": "x_wig_hair",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'was swapped between every actor' is the crowd formula and has no visible consequence.",
+   "suggestion": "'Grew so big in the final scene that the actors got lost in its curls. The curtain came down so they could be combed out.'"
+  },
+  {
+   "id": "x_wig_hair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for a hundred years and still has every curl' longevity formula.",
+   "suggestion": "'Played every part in one night: king, queen, villain and horse. It took eleven bows and asked for a twelfth.'"
+  },
+  {
+   "id": "helmet",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Helmethair' describes the Common (squashed hair), not the Rare.",
+   "suggestion": "'Boingdome'"
+  },
+  {
+   "id": "helmet",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Building Site Bump' is an event title.",
+   "suggestion": "'Sitewobbler'"
+  },
+  {
+   "id": "helmet",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Bouncing off a branch unnoticed is not troublesome.",
+   "suggestion": "'Bounces off everything twice as hard as it hits it. Its owner headed a football into the next town.'"
+  },
+  {
+   "id": "helmet",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every worker on the building site' crowd formula.",
+   "suggestion": "'Bumped a doorframe so hard that the whole building site wobbled. The crane driver now wears two helmets.'"
+  },
+  {
+   "id": "helmet",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a hundred tumbles and still has the same sticker' longevity formula.",
+   "suggestion": "'Took a falling piano on the head and played a perfect note. Its owner walked away humming.'"
+  },
+  {
+   "id": "jacket",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Puffer Parade' refers to puffers (a different object) and an event.",
+   "suggestion": "'Collarcloud'"
+  },
+  {
+   "id": "jacket",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Grand Overcoat of the Coat Rack' does not fit the new Legendary.",
+   "suggestion": "'The Bottomless Overcoat'"
+  },
+  {
+   "id": "jacket",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Pockets again (repeats the Common), and holding things is not a power.",
+   "suggestion": "'Takes itself off the hook and goes to school without you. Its marks are now better than yours.'"
+  },
+  {
+   "id": "jacket",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'hung on the same coat hook as every other jacket' formula.",
+   "suggestion": "'Turned its collar up so high that it hid the whole office. Everyone went home early because nobody could find the boss.'"
+  },
+  {
+   "id": "jacket",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'passed down through three brothers and still has' longevity formula.",
+   "suggestion": "'Has an inside pocket so deep that the family moved in. Grandma has the room by the zip and complains of draughts.'"
+  },
+  {
+   "id": "jeans",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Name and lore swapped: Common lore is shrinking in the wash.",
+   "suggestion": "'Shrinker'"
+  },
+  {
+   "id": "jeans",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "Name and lore swapped: Rare lore is ripping at the knee.",
+   "suggestion": "'Kneeripper'"
+  },
+  {
+   "id": "jeans",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Washday Shrink' no longer fits.",
+   "suggestion": "'Bluewash'"
+  },
+  {
+   "id": "jeans",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A rip that becomes fashionable is mild; push it into a power.",
+   "suggestion": "'Rips at the knee whenever a teacher looks. The rip then grows a second knee, which also wants to be fashionable.'"
+  },
+  {
+   "id": "jeans",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Repeats the Common shrinking premise.",
+   "suggestion": "'Turned the washing machine blue, then the bathroom, then the dog. The whole house now matches the jeans.'"
+  },
+  {
+   "id": "jeans",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'worn for twenty years and faded … every patch' longevity formula.",
+   "suggestion": "'Went so long without a wash that they now stand in the corner on their own. Last week they went to the shops alone.'"
+  },
+  {
+   "id": "scarf",
+   "field": "names.rare",
+   "severity": "high",
+   "issue": "'Doorcatcher' describes the Common (caught in the car door) and nearly duplicates cape 'Doorcatcher Cape'.",
+   "suggestion": "'Wintergrip'"
+  },
+  {
+   "id": "scarf",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Wintry Wrap-Up' does not fit the towel Epic.",
+   "suggestion": "'Poolsponge'"
+  },
+  {
+   "id": "scarf",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Wrapping too tight is a habit, not a power.",
+   "suggestion": "'Wraps itself round anyone who says they are cold and will not let go until spring. The postman is still wearing it.'"
+  },
+  {
+   "id": "scarf",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'went round the whole school choir at once' formula and a near-copy of the Legendary (reaches the end of the street) and wool L.",
+   "suggestion": "'Soaked up the whole paddling pool in one go, then the bath. The garden hose is now afraid of it.'"
+  },
+  {
+   "id": "scarf",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of wool L (a scarf so long it went round the whole village) and the longevity frame.",
+   "suggestion": "'Wrapped the town clock tower one winter to keep it warm. The clock got so cosy it fell asleep, and nobody was late for a month.'"
+  },
+  {
+   "id": "scarf",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Woolly Snatch Snatch' doubles a word by mistake.",
+   "suggestion": "'Tassel Tug'"
+  },
+  {
+   "id": "i_academic_gown",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Graduation Procession' is an event title.",
+   "suggestion": "'Billowbat'"
+  },
+  {
+   "id": "i_academic_gown",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Sleeves in dinner is a near-copy of vestment C, tie C and lanyard C (all dip into soup).",
+   "suggestion": "'Flaps its huge sleeves whenever its owner talks, and the pigeons outside flap back.'"
+  },
+  {
+   "id": "i_academic_gown",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Led a procession of a thousand gowns' crowd formula with a weak duck payoff.",
+   "suggestion": "'Spread its sleeves in a gust and lifted the whole graduating class off the lawn. They landed in the library and stayed to study.'"
+  },
+  {
+   "id": "i_academic_gown",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every head of the university for two hundred years and still swishes' longevity formula.",
+   "suggestion": "'Has worn so many professors that it now gives the lectures itself. Nobody noticed, except that the jokes got better.'"
+  },
+  {
+   "id": "i_bib",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Dribblecatcher' does not describe the Uncommon (comes undone before pudding).",
+   "suggestion": "'Puddingslip'"
+  },
+  {
+   "id": "i_bib",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Tieontrouble' does not describe the Rare.",
+   "suggestion": "'Splatbacker'"
+  },
+  {
+   "id": "i_bib",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Staying mostly white is not a power.",
+   "suggestion": "'Catches flying food and flings it straight back. The highchair has won every food fight since.'"
+  },
+  {
+   "id": "i_bib",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Catching crumbs is small for an Epic and 'Spaghetti Splatter' names a different food.",
+   "suggestion": "'Stretched out to catch a whole party's spaghetti at once. The ceiling stayed clean, and the dog has never forgiven it.'"
+  },
+  {
+   "id": "i_bib",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'four babies … still has the same duck' longevity formula.",
+   "suggestion": "'Caught every crumb a baby dropped for two whole years. The floor has never needed sweeping and the dog had to get a job.'"
+  },
+  {
+   "id": "i_brassiere",
+   "field": "names.common",
+   "severity": "high",
+   "issue": "Off-by-one names: Common lore is tangling with the socks in the wash.",
+   "suggestion": "'Washtangle'"
+  },
+  {
+   "id": "i_brassiere",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "Off-by-one names: Uncommon lore is the fiddly hooks.",
+   "suggestion": "'Hookfiddler'"
+  },
+  {
+   "id": "i_brassiere",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Name must fit the new Rare.",
+   "suggestion": "'Kitecatcher'"
+  },
+  {
+   "id": "i_brassiere",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of its own Common (hooking onto laundry in the wash).",
+   "suggestion": "'Hooks itself onto anything that passes the washing line. So far it has caught a kite, a pigeon and next door's cat.'"
+  },
+  {
+   "id": "i_brassiere",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Tasteful, but the neighbours finding it is a mild embarrassment joke; keep it light.",
+   "suggestion": "Keep the lore; consider renaming the Epic 'Flapline' so it sounds like a creature."
+  },
+  {
+   "id": "i_brassiere",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'survived a thousand washes and still has every hook' longevity formula.",
+   "suggestion": "'Blew off the line in a gale and flew all day like a kite with two sails. It landed folded, in the right drawer.'"
+  },
+  {
+   "id": "i_breastplate",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Eggfryer'"
+  },
+  {
+   "id": "i_breastplate",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Castle Wall Clang' is an event title.",
+   "suggestion": "'Clangalot'"
+  },
+  {
+   "id": "i_breastplate",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Polished mirror premise is shared with cuirass U, brogue R and pump U.",
+   "suggestion": "'Gets so hot in the sun that the knight fries his breakfast egg on it.'"
+  },
+  {
+   "id": "i_breastplate",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with a hundred other knights' crowd formula; echo without consequence.",
+   "suggestion": "'Clanged so loudly when its knight fell off his horse that the drawbridge slammed shut. The knights have been stuck outside since Tuesday.'"
+  },
+  {
+   "id": "i_breastplate",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Protecting knights and standing in a hall has no punchline.",
+   "suggestion": "'Bounced a dragon's sneeze straight back up its nose. The dragon has carried a hanky ever since.'"
+  },
+  {
+   "id": "i_chain_mail",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Crumbrings'"
+  },
+  {
+   "id": "i_chain_mail",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Battle Rattle' does not fit the new Epic.",
+   "suggestion": "'Rattlesplash'"
+  },
+  {
+   "id": "i_chain_mail",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Is made of a thousand tiny metal rings' is a description, not a joke.",
+   "suggestion": "'Catches every crumb in its rings. A knight can eat breakfast out of it at lunchtime.'"
+  },
+  {
+   "id": "i_chain_mail",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of cuirass E ('the horses wore earplugs'); earplugs also used in w01, w02 and w04; crowd formula.",
+   "suggestion": "'Shook itself like a wet dog after the rain and soaked every knight at the feast. The king's soup is now mostly puddle.'"
+  },
+  {
+   "id": "i_chain_mail",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Being made patiently and never breaking has no punchline.",
+   "suggestion": "'Was taken apart ring by ring by a magpie and rebuilt as a nest. The magpie now goes jousting on Saturdays.'"
+  },
+  {
+   "id": "i_cuirass",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Catslide'"
+  },
+  {
+   "id": "i_cuirass",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Tournament Clatter' does not fit the new Epic and uses the stock tournament frame.",
+   "suggestion": "'Piebeamer'"
+  },
+  {
+   "id": "i_cuirass",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Mirror-polish premise is a near-copy of breastplate U (and brogue R, pump U).",
+   "suggestion": "'Is curved so smoothly that the castle cats use it as a slide.'"
+  },
+  {
+   "id": "i_cuirass",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Near-copy of chain mail E ('the horses wore earplugs'); crowd formula ('with fifty other knights').",
+   "suggestion": "'Caught the midday sun and beamed it across the castle. The cook's pies baked themselves before anyone lit the oven.'"
+  },
+  {
+   "id": "i_diaper",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Leakstopper' does not fit the new Rare.",
+   "suggestion": "'Babyfloat'"
+  },
+  {
+   "id": "i_diaper",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Nursery Blowout' uses slang for a nappy accident; not tasteful for kids.",
+   "suggestion": "'Bin Toppler'"
+  },
+  {
+   "id": "i_diaper",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Lasting a car journey is not a power.",
+   "suggestion": "'Fills with so much air that the baby floats. Bath time now needs a lifeguard and a rubber duck on patrol.'"
+  },
+  {
+   "id": "i_diaper",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Applause is reused from the Rare's cheering, and the payoff is mild.",
+   "suggestion": "'Kept a baby dry on a sailing trip all the way round the world. The baby came home and asked for a boat of its own.'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Wedgiewriggle' is not tasteful for kids.",
+   "suggestion": "'Twiststrap'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Name must fit the new Rare.",
+   "suggestion": "'Lanedragger'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Swimming Gala Splash' is an event title.",
+   "suggestion": "'Bouncelane'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Swimwear riding up is not tasteful enough for kids.",
+   "suggestion": "'Twists its straps into a knot every time you climb out of the pool.'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A smooth dive is a talent with no trouble.",
+   "suggestion": "'Swims faster than its swimmer and drags her down the lane. She has won races she never meant to enter.'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Formula ('Swam in every race… the pool looked like a bowl of colourful fish'), a near-copy of bathing cap E ('bowl of bobbing sweets').",
+   "suggestion": "'Stretched across the whole pool like a lane rope. The swimmers bounced off it all afternoon and nobody finished.'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'never faded a shade' longevity formula.",
+   "suggestion": "'Swam so many lengths in one summer that the pool got shorter. The council had to repaint the lines.'"
+  },
+  {
+   "id": "i_maillot",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Strap Snatch Snatch' doubles a word by mistake.",
+   "suggestion": "'Strap Tug'"
+  },
+  {
+   "id": "i_pajama",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Name must fit the new Rare.",
+   "suggestion": "'Snoozetouch'"
+  },
+  {
+   "id": "i_pajama",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Sleepover Pillow Fight' is an event title.",
+   "suggestion": "'Featherstorm'"
+  },
+  {
+   "id": "i_pajama",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping a child warm is its job, not a power; 'Pillowpatter' does not describe it.",
+   "suggestion": "'Puts anyone who touches it to sleep in ten seconds. The doctor came round and is still snoring on the sofa.'"
+  },
+  {
+   "id": "i_pajama",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A long pillow fight has no consequence.",
+   "suggestion": "'Started a pillow fight so big that the feathers came down as snow. The school closed for a snow day.'"
+  },
+  {
+   "id": "i_pajama",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Knowing secrets is a claim without a punchline.",
+   "suggestion": "'Has heard every secret whispered at a hundred sleepovers. It now runs the most-read newspaper in the street.'"
+  },
+  {
+   "id": "i_sarong",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Beach Market Swirl' does not fit the new Epic.",
+   "suggestion": "'Shoreblanket'"
+  },
+  {
+   "id": "i_sarong",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Seagulls watching is not trouble.",
+   "suggestion": "'Catches the breeze like a sail and drags its wearer down the beach. She got to the ice-cream van first, backwards.'"
+  },
+  {
+   "id": "i_sarong",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was sold in every colour… the whole shore turned into a rainbow' crowd formula.",
+   "suggestion": "'Unfolded on the windy beach until it covered the whole shore. The crabs held a party underneath.'"
+  },
+  {
+   "id": "i_sarong",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Longevity formula and a near-copy of sun hat L ('still smells faintly of sun cream').",
+   "suggestion": "'Was tied to a mast when the sail tore and blew a fishing boat all the way home. The fish were very disappointed.'"
+  },
+  {
+   "id": "i_sarong",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Knot Snatch Snatch' doubles a word by mistake.",
+   "suggestion": "'Knot Tug'"
+  },
+  {
+   "id": "i_swimming_trunks",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Quickdry'"
+  },
+  {
+   "id": "i_swimming_trunks",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Beach Belly Flop' does not fit the new Epic.",
+   "suggestion": "'Balloontrunks'"
+  },
+  {
+   "id": "i_swimming_trunks",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Near-copy of swim trunks C (wet patch on every seat); the two trunks objects share their premises.",
+   "suggestion": "'Dries in the sun in four seconds flat, just in time to be pushed back into the pool.'"
+  },
+  {
+   "id": "i_swimming_trunks",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Repeats the Rare's splash (cannonball, then belly flop, then biggest splash).",
+   "suggestion": "'Ballooned up with air and floated the whole family across the lake. Dad steered with his feet.'"
+  },
+  {
+   "id": "i_swimming_trunks",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Third splash premise in a row; 'biggest splash in history' is a claim without a punchline.",
+   "suggestion": "'Jumped off the top board and did so many flips that it landed tomorrow. Its owner had to wait a day to get dressed.'"
+  },
+  {
+   "id": "shirt",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Laundry Day Pile' does not fit the new Epic.",
+   "suggestion": "'Untucker'"
+  },
+  {
+   "id": "shirt",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Laundry mix-up formula ('with every other shirt') and a near-copy of pajamas E (whole family wears the wrong ones).",
+   "suggestion": "'Untucked itself in the school photo and every shirt in the row did the same. The picture is now mostly elbows.'"
+  },
+  {
+   "id": "shirt",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Longevity frame ('worn so many times') with a mild payoff.",
+   "suggestion": "'Was worn so often that it learned to fold itself. It now does the whole family's ironing, and complains.'"
+  },
+  {
+   "id": "shirt",
+   "field": "moves.kit.static_cling",
+   "severity": "low",
+   "issue": "Defdown move; 'Shock' reads as stun.",
+   "suggestion": "'Static Cling Crumple'"
+  },
+  {
+   "id": "shirt",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Sleeve Snatch Snatch' doubles a word by mistake.",
+   "suggestion": "'Sleeve Grab'"
+  },
+  {
+   "id": "i_theater_curtain",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Dusttrapper' does not describe the Common (stuck halfway on opening night).",
+   "suggestion": "'Halfwaystuck'"
+  },
+  {
+   "id": "i_theater_curtain",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Grand Opening Night' is an event title.",
+   "suggestion": "'Sulkdrape'"
+  },
+  {
+   "id": "i_theater_curtain",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Rising to a gasp has no consequence or joke.",
+   "suggestion": "'Came down in the middle of the play and refused to go back up. The audience watched it for an hour and clapped.'"
+  },
+  {
+   "id": "i_theater_curtain",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'opened on ten thousand shows' is the longevity frame; the bow is a small payoff.",
+   "suggestion": "'Upstaged a famous actor by closing on him mid-song. The audience loved it, and the curtain now has its own dressing room.'"
+  },
+  {
+   "id": "i_theater_curtain",
+   "field": "moves.kit.wrap_up",
+   "severity": "low",
+   "issue": "Stun move; 'Wrap' is not a startle.",
+   "suggestion": "'Spotlight Flash'"
+  },
+  {
+   "id": "i_velvet",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Velveteen' echoes a well-known children's book title.",
+   "suggestion": "'Lady Plushwell of the Drawing Room'"
+  },
+  {
+   "id": "i_velvet",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A list ('princesses, poets and one very sleepy dog') with 'still feels soft' is the longevity formula.",
+   "suggestion": "'Was so soft that a whole castle fell asleep on it for a hundred years. The dragon outside gave up and opened a café.'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Name must fit the new Common.",
+   "suggestion": "'Beepthread'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Name must fit the new Rare.",
+   "suggestion": "'Stiffrobe'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Grand Ceremony Swirl' keeps the religious framing.",
+   "suggestion": "'Trainsweeper'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Sleeves in soup is a near-copy of the academic gown, tie and lanyard Commons.",
+   "suggestion": "'Has so much gold thread that it sets off the metal detector at every door.'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Long hall and flickering candles read as a church service (religion); also no trouble.",
+   "suggestion": "'Is so stiff with embroidery that it stands up on its own. It has been mistaken for its wearer twice.'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "A 'ceremonial procession' in a vestment is religious, and the line uses the crowd formula.",
+   "suggestion": "'Swept down the town hall steps with a train so long that it reached the bus stop. Two buses waited to let it pass.'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has every single gold thread' longevity formula.",
+   "suggestion": "'Shone with so much gold that a dragon tried to sleep on it. The dragon now has a very sparkly back and a sore neck.'"
+  },
+  {
+   "id": "i_vestment",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Candle-Hot Procession' is religious imagery.",
+   "suggestion": "'Hot Gold Hem'"
+  },
+  {
+   "id": "i_wool",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Rollaway Ball'"
+  },
+  {
+   "id": "i_wool",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Shrinkwash' no longer fits.",
+   "suggestion": "'Selfknitter'"
+  },
+  {
+   "id": "i_wool",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Is spun from a sheep's fleece into a soft fluffy ball' is a description, not a joke.",
+   "suggestion": "'Keeps unrolling across the floor to see where it ends. It always ends under the fridge.'"
+  },
+  {
+   "id": "i_wool",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Shrinking in the wash is a near-copy of jeans C, crop top U and vest R; not a power.",
+   "suggestion": "'Knits itself into a jumper overnight, always with one arm too long. The cat wears the spare.'"
+  },
+  {
+   "id": "i_wool",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of scarf L (a scarf long enough to go round the village or street).",
+   "suggestion": "'Was rolled out so far by the kitten that it reached the next country. The kitten came home a year later with a passport.'"
+  },
+  {
+   "id": "x_gloves_pair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Grippalm' does not fit the new Rare.",
+   "suggestion": "'Fingerpointer'"
+  },
+  {
+   "id": "x_gloves_pair",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Gripping handlebars is its job, not a power.",
+   "suggestion": "'Points at whatever its owner is secretly thinking about. It pointed at the cake all through the wedding speeches.'"
+  },
+  {
+   "id": "x_gloves_pair",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Uses the 'world record' contest frame; good idea, weak payoff.",
+   "suggestion": "'Stayed together as a pair for twenty years. Every lost glove in town now writes to it for advice.'"
+  },
+  {
+   "id": "x_gloves_pair",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Barrage' promises many hits, but the Ultimate is one hit, and its effect varies (poison, poison, stun).",
+   "suggestion": "'Big Snowball'"
+  },
+  {
+   "id": "x_mittens_pair",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Snow Day Scuffle' does not fit the new Epic.",
+   "suggestion": "'Meltmitt'"
+  },
+  {
+   "id": "x_mittens_pair",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Granny Knit's Never-Lost Mittens' does not fit the new Legendary.",
+   "suggestion": "'The Snowman's Best Mittens'"
+  },
+  {
+   "id": "x_mittens_pair",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Snowball fight with 'every child in the street' is crowd formula and a near-copy of gloves E (snowballs).",
+   "suggestion": "'Got so warm in the snow fight that the whole street melted. The snowmen are now puddles with carrot noses.'"
+  },
+  {
+   "id": "x_mittens_pair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'knitted forty years ago and has kept four children's hands warm' longevity formula.",
+   "suggestion": "'Held hands with a snowman all winter so it would not feel lonely. In spring the snowman left it a carrot.'"
+  },
+  {
+   "id": "x_mittens_pair",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Radiator' is a heat word on a heal move.",
+   "suggestion": "'Pocket Nap'"
+  },
+  {
+   "id": "x_socks_pair",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Washing Machine Vanish' no longer fits.",
+   "suggestion": "'Stairslider'"
+  },
+  {
+   "id": "x_socks_pair",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Last of His Pair' no longer fits.",
+   "suggestion": "'Sir Sockington, Star of the Show'"
+  },
+  {
+   "id": "x_socks_pair",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Common, Epic and Legendary all use the odd-sock-in-the-wash premise.",
+   "suggestion": "'Slid down the stairs like a sledge and kept going out of the front door. It was found three streets away, still sliding.'"
+  },
+  {
+   "id": "x_socks_pair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Odd-sock premise for a third time.",
+   "suggestion": "'Was worn as a puppet and gave such a speech that the audience cried. It now has an agent and an understudy sock.'"
+  },
+  {
+   "id": "x_socks_pair",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "The variants are poison, poison and stun; 'Smelly' commits to poison, so the name is not effect-neutral.",
+   "suggestion": "'Sock Surprise'"
+  },
+  {
+   "id": "x_bow",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Presenttopper' does not fit the new Rare.",
+   "suggestion": "'Napwrapper'"
+  },
+  {
+   "id": "x_bow",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Birthday Ribbon Rush' is an event title.",
+   "suggestion": "'Partybinder'"
+  },
+  {
+   "id": "x_bow",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being too pretty to open has no trouble.",
+   "suggestion": "'Ties itself onto anything that stays still for a minute. Grandpa woke up from his nap gift-wrapped.'"
+  },
+  {
+   "id": "x_bow",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was tied on every present at the birthday party' crowd formula.",
+   "suggestion": "'Tied the whole birthday party into one enormous present. Nobody got out until the birthday girl pulled one end.'"
+  },
+  {
+   "id": "x_bow",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A list ending in 'knows every knot' has no achievement or punchline; 'tied in … puppies' is odd.",
+   "suggestion": "'Tied itself round the whole town on a birthday morning. The mayor had to unwrap the high street before the shops could open.'"
+  },
+  {
+   "id": "tie",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Knotstrangler' carries a violent meaning for a kids' game.",
+   "suggestion": "'Lunchloosener'"
+  },
+  {
+   "id": "tie",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Office Party Wrangle' no longer fits.",
+   "suggestion": "'Breathholder'"
+  },
+  {
+   "id": "tie",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Windsor' also echoes the royal family name.",
+   "suggestion": "'Sir Knotworth the Unundone'"
+  },
+  {
+   "id": "tie",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Ties round heads at an office party is a grown-up party cliché and the crowd formula.",
+   "suggestion": "'Was knotted so tight that the whole office held its breath. The meeting finished in two minutes and everyone went home early.'"
+  },
+  {
+   "id": "tie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every morning for forty years' longevity formula.",
+   "suggestion": "'Was tied in a knot so clever that nobody could undo it for forty years. Grandad now sleeps in it and calls it a scarf.'"
+  },
+  {
+   "id": "x_ankle_boot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'City Street Stride' does not fit the new Epic.",
+   "suggestion": "'Clockheel'"
+  },
+  {
+   "id": "x_ankle_boot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Crowd formula ('down every street… the pavements clicked like a clock'); fashion week is reused by stiletto E.",
+   "suggestion": "'Clicked down the high street so steadily that every clock in town set itself by it. The town now wakes when it walks.'"
+  },
+  {
+   "id": "x_ankle_boot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has its original heels' longevity formula.",
+   "suggestion": "'Strutted through the city so stylishly that the statues turned to look. One of them has not turned back since.'"
+  },
+  {
+   "id": "x_ankle_boot",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Boulevard Stride' echoes the Epic name ('City Street Stride').",
+   "suggestion": "'Statue Stopper'"
+  },
+  {
+   "id": "x_badge",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Shinyglint' does not fit the new Rare.",
+   "suggestion": "'Jobpin'"
+  },
+  {
+   "id": "x_badge",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Grand Medallion of the Jacket' does not fit the new Legendary.",
+   "suggestion": "'The Badge That Promoted a Goat'"
+  },
+  {
+   "id": "x_badge",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Glinting so people squint is a near-copy of crown U and sari R.",
+   "suggestion": "'Turns its wearer into whatever job it says. A boy wore HEAD CHEF and now cooks all the school dinners.'"
+  },
+  {
+   "id": "x_badge",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'three generations … still shines like new' longevity formula.",
+   "suggestion": "'Was pinned on a goat by mistake, and the goat was made head teacher. Exam results are up and the lawn is very short.'"
+  },
+  {
+   "id": "x_badge",
+   "field": "moves.kit.static_cling",
+   "severity": "medium",
+   "issue": "'Pin Pin Pin' implies three hits, but static_cling is a single defdown hit.",
+   "suggestion": "'Pinprick Distraction'"
+  },
+  {
+   "id": "x_ballet_flat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Floorsqueaker' does not fit the new Rare.",
+   "suggestion": "'Spinaway'"
+  },
+  {
+   "id": "x_ballet_flat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Ballet Recital Twirl' is an event title.",
+   "suggestion": "'Floordriller'"
+  },
+  {
+   "id": "x_ballet_flat",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A squeak is a Common habit, not a troublesome power.",
+   "suggestion": "'Spins its wearer whenever music plays. Grandma got stuck at the supermarket till for a whole song.'"
+  },
+  {
+   "id": "x_ballet_flat",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'in perfect time with every dancer' crowd formula; no joke.",
+   "suggestion": "'Spun so fast on stage that it drilled straight through the floor. The rest of the ballet happened in the basement.'"
+  },
+  {
+   "id": "x_ballet_flat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'never once missed a step' is a tally with no punchline.",
+   "suggestion": "'Danced so lightly that it crossed the lake without touching the water. The swans have asked for lessons.'"
+  },
+  {
+   "id": "x_bathrobe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Sunday Lounge' is a time of day, not a creature.",
+   "suggestion": "'Hallfiller'"
+  },
+  {
+   "id": "x_bathrobe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn round the house all Sunday by the whole family' crowd formula.",
+   "suggestion": "'Puffed up so fluffy that it filled the whole hallway. The family has climbed over it to reach the kitchen all week.'"
+  },
+  {
+   "id": "x_bathrobe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every morning for twenty years and still smells like warm toast' longevity formula.",
+   "suggestion": "'Has spent so many lazy mornings in the kitchen that it makes breakfast by itself. The toast is always a little fluffy.'"
+  },
+  {
+   "id": "x_bathrobe",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Sunday Lounge Slam' reuses the Epic name.",
+   "suggestion": "'Fluffy Belt Whip'"
+  },
+  {
+   "id": "x_belt",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Trouserrescuer' does not fit the new Rare.",
+   "suggestion": "'Chipguard'"
+  },
+  {
+   "id": "x_belt",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Holiday Notch' no longer fits.",
+   "suggestion": "'Snakebuckle'"
+  },
+  {
+   "id": "x_belt",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Trouser Rack' does not fit the new Legendary.",
+   "suggestion": "'Old Buckleworth, Tower Holder'"
+  },
+  {
+   "id": "x_belt",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Holding up trousers is its job, not a power.",
+   "suggestion": "'Snaps like a whip whenever someone reaches for the last chip. Nobody in the house has had a last chip in years.'"
+  },
+  {
+   "id": "x_belt",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Common, Epic and Legendary all use the big-dinner notch premise.",
+   "suggestion": "'Slid off and lay in the garden pretending to be a snake. The whole street is still waiting at the window for the zoo.'"
+  },
+  {
+   "id": "x_belt",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'held up the same trousers for forty years' longevity formula, and the dinner premise again.",
+   "suggestion": "'Wrapped round the leaning tower one night and pulled it straight. The tower is now perfectly upright and a bit embarrassed.'"
+  },
+  {
+   "id": "x_belt",
+   "field": "moves.legend",
+   "severity": "medium",
+   "issue": "'Buckle Snatch Back' collides with the signature 'Buckle Snatch'.",
+   "suggestion": "'Notch Pinch'"
+  },
+  {
+   "id": "x_bikini",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Beach Volley Splash' does not fit the new Epic.",
+   "suggestion": "'Beachspiker'"
+  },
+  {
+   "id": "x_bikini",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "A swimwear knot coming undone on the beach hints at a wardrobe malfunction; not tasteful for kids.",
+   "suggestion": "'Twists its straps into a knot every time it goes into the beach bag.'"
+  },
+  {
+   "id": "x_bikini",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Getting heavy with sand is a habit, not a power.",
+   "suggestion": "'Builds a sandcastle on the towel whenever nobody is looking. The seagulls have started paying rent.'"
+  },
+  {
+   "id": "x_bikini",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every team on the sand' crowd formula; cheering is not a consequence.",
+   "suggestion": "'Spiked a beach ball so hard that it bounced off the lighthouse. The boats now steer by the ball.'"
+  },
+  {
+   "id": "x_bikini",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'never once lost a strap' longevity formula.",
+   "suggestion": "'Built a sandcastle so big at low tide that the sea could not get round it. The tide went home sulking.'"
+  },
+  {
+   "id": "x_bikini",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Strap Snatch Snap' is a garbled stack of words.",
+   "suggestion": "'Strap Twang'"
+  },
+  {
+   "id": "x_brogue",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Polishpride' does not fit the new Rare.",
+   "suggestion": "'Tapbrogue'"
+  },
+  {
+   "id": "x_brogue",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Office Corridor Clatter' is an event title.",
+   "suggestion": "'Clatterboss'"
+  },
+  {
+   "id": "x_brogue",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Mirror-polish premise is a near-copy of breastplate U, cuirass U and pump U.",
+   "suggestion": "'Taps out messages through its little holes as it walks. It told the whole office who ate the last doughnut.'"
+  },
+  {
+   "id": "x_brogue",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'down every office corridor' crowd formula.",
+   "suggestion": "'Clattered so loudly that every desk in the office clattered back. Nothing got done and the boss called it teamwork.'"
+  },
+  {
+   "id": "x_brogue",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'resoled ten times … every day for thirty years' longevity formula.",
+   "suggestion": "'Walked into the wrong office every day for a year and nobody noticed. It is now the manager.'"
+  },
+  {
+   "id": "x_brogue",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Corridor Clatter' reuses the Epic name.",
+   "suggestion": "'Boardroom Stomp'"
+  },
+  {
+   "id": "x_cape",
+   "field": "names.common",
+   "severity": "low",
+   "issue": "'Doorcatcher Cape' nearly duplicates scarf 'Doorcatcher'.",
+   "suggestion": "'Doorsnag Cape'"
+  },
+  {
+   "id": "x_cape",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Playground Rescue' does not fit the new Epic.",
+   "suggestion": "'Fencehopper'"
+  },
+  {
+   "id": "x_cape",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Garden Wall' no longer fits.",
+   "suggestion": "'Captain Swoosh of the Moon'"
+  },
+  {
+   "id": "x_cape",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every child at the dress-up party' crowd formula.",
+   "suggestion": "'Flew its wearer off the shed and over every fence in the street, then got bored. He walked home from the next village.'"
+  },
+  {
+   "id": "x_cape",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Repeats the Epic's swoop, with a mild payoff.",
+   "suggestion": "'Flew its wearer to the Moon and back before tea. He was still told off for not finishing his peas.'"
+  },
+  {
+   "id": "x_cardigan_sweater",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Pocketstuffer' does not fit the new Rare.",
+   "suggestion": "'Copyknit'"
+  },
+  {
+   "id": "x_cardigan_sweater",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Grandad's Armchair' is furniture, not a creature.",
+   "suggestion": "'Woollyweb'"
+  },
+  {
+   "id": "x_cardigan_sweater",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Pockets holding things is not a power; uses the stock number three.",
+   "suggestion": "'Unravels at night and knits a tiny copy of itself. There are now nine cardigans and one confused granny.'"
+  },
+  {
+   "id": "x_cardigan_sweater",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every grandparent at the family reunion' crowd formula.",
+   "suggestion": "'Unravelled at the family party until the living room was one big woolly web. Grandad is still stuck in the armchair.'"
+  },
+  {
+   "id": "x_cardigan_sweater",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'knitted fifty years ago and still has the same buttons' longevity formula.",
+   "suggestion": "'Has been buttoned wrong for fifty years, so now the whole family buttons everything one hole down. Even the shop has started.'"
+  },
+  {
+   "id": "x_cardigan_sweater",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Snuggle' sounds like rest or heal on an attack whose effect varies (poison, poison, defdown).",
+   "suggestion": "'Big Button Pop'"
+  },
+  {
+   "id": "x_chelsea_boot",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Stompsmart' does not fit the new Rare.",
+   "suggestion": "'Snapside'"
+  },
+  {
+   "id": "x_chelsea_boot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Rainy City Strut' is an event title.",
+   "suggestion": "'Floodstrutter'"
+  },
+  {
+   "id": "x_chelsea_boot",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Has stretchy sides so you can slip it on' is a description, not a joke.",
+   "suggestion": "'Stretches to fit anyone, so the whole family keeps borrowing it. It has not been home since Tuesday.'"
+  },
+  {
+   "id": "x_chelsea_boot",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Staying dry is its job, not a power.",
+   "suggestion": "'Snaps its elastic at anyone who steps on its toes. Nobody stands near it in the lift.'"
+  },
+  {
+   "id": "x_chelsea_boot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every other boot in town' crowd formula.",
+   "suggestion": "'Strutted through a puddle so big that the high street flooded behind it. The shops sold umbrellas until midnight.'"
+  },
+  {
+   "id": "x_chelsea_boot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'same city streets for thirty years and still looks freshly polished' longevity formula.",
+   "suggestion": "'Slipped off so easily that it went to a party without its owner. It came home at dawn with laces it did not need.'"
+  },
+  {
+   "id": "x_cleats",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Turfgripper' does not fit the new Rare.",
+   "suggestion": "'Rootstud'"
+  },
+  {
+   "id": "x_cleats",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Cup Final Charge' does not fit the new Epic.",
+   "suggestion": "'Turfplougher'"
+  },
+  {
+   "id": "x_cleats",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Reword so the name fits the new Legendary.",
+   "suggestion": "'Golden Studs, Next Season's Scorer'"
+  },
+  {
+   "id": "x_cleats",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Mud clumps are a near-copy of football boot U ('brings half the pitch home').",
+   "suggestion": "'Clacks on the kitchen tiles like a tap dancer, and the dog joins in.'"
+  },
+  {
+   "id": "x_cleats",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Gripping a pitch is its job, not a power.",
+   "suggestion": "'Digs in so hard that it plants its owner like a tree. The coach had to lift him off the pitch with a spade.'"
+  },
+  {
+   "id": "x_cleats",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every player in the cup final' crowd formula.",
+   "suggestion": "'Ran down the pitch so fast that it ploughed a row in the turf. The groundskeeper planted potatoes in it.'"
+  },
+  {
+   "id": "x_cleats",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Near-copy of football boot L (cup-final and career goal tallies); the Legendary needs a punchline.",
+   "suggestion": "'Kicked a ball so high that it came down at the first match of next season. The referee counted it.'"
+  },
+  {
+   "id": "x_climbing_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Cliffgripper' does not fit the new Rare.",
+   "suggestion": "'Fridgeclimber'"
+  },
+  {
+   "id": "x_climbing_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Bouldering Wall Scramble' is an event title.",
+   "suggestion": "'Flatscaler'"
+  },
+  {
+   "id": "x_climbing_shoe",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Gripping a ledge is a talent with no trouble.",
+   "suggestion": "'Climbs anything it sees, with or without you. It has been found on the fridge, the bookcase and the cat.'"
+  },
+  {
+   "id": "x_climbing_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Climbing every route has no consequence.",
+   "suggestion": "'Climbed the outside of a block of flats to fetch a lost balloon. Every floor handed it a cup of tea on the way up.'"
+  },
+  {
+   "id": "x_climbing_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'without slipping once' is a tally with no punchline.",
+   "suggestion": "'Climbed the tallest cliff in the country upside down. At the top it found a sign: LIFT OUT OF ORDER.'"
+  },
+  {
+   "id": "x_climbing_shoe",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Rock Face Scramble' echoes the Epic name.",
+   "suggestion": "'Summit Grab'"
+  },
+  {
+   "id": "x_cloak",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Rainshrugger' does not fit the new Rare.",
+   "suggestion": "'Brotherblind'"
+  },
+  {
+   "id": "x_cloak",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Midnight Forest Walk' is an event title.",
+   "suggestion": "'Leafswirler'"
+  },
+  {
+   "id": "x_cloak",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Wanderer's Grey Cloak' echoes a famous fantasy wizard and no longer fits.",
+   "suggestion": "'The Stormdodger Cloak'"
+  },
+  {
+   "id": "x_cloak",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping its wearer dry is its job, not a power.",
+   "suggestion": "'Makes its wearer invisible, but only to their little brother. He has been looking for her since spring.'"
+  },
+  {
+   "id": "x_cloak",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every storyteller at the midnight festival' crowd formula; whispering forest is vague.",
+   "suggestion": "'Swirled so hard in the forest that every leaf blew off the trees. Autumn arrived two weeks early.'"
+  },
+  {
+   "id": "x_cloak",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'kept its wearer warm through a hundred winters' longevity formula.",
+   "suggestion": "'Pulled its hood up so fast that it hid a whole mountain from a storm. The storm walked past and soaked the next valley.'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Puddleboat'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Gardenclogger' does not fit the new Rare.",
+   "suggestion": "'Clogflinger'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Clog Dance Clatter' is an event title.",
+   "suggestion": "'Tulipwaker'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Is carved out of a single piece of wood' is a description, not a joke.",
+   "suggestion": "'Floats in every puddle like a little boat, and the ducks keep climbing in.'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping feet dry is its job, not a power.",
+   "suggestion": "'Kicks off so hard that it flies into next door's garden. The neighbours now return it with a cake each time.'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every clog in the village square' crowd formula.",
+   "suggestion": "'Clomped so loudly on the cobbles that every tulip in the field opened up. The bees have never worked so hard.'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'never needed a new sole' longevity formula.",
+   "suggestion": "'Clomped so hard in one dance that it rang the town bell from the square. Everyone came for lunch at ten in the morning.'"
+  },
+  {
+   "id": "x_clog_shoe",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Clatter Dance' echoes the Epic name.",
+   "suggestion": "'Wooden Wallop'"
+  },
+  {
+   "id": "x_costume",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Longevity formula ('for three generations… and still fits').",
+   "suggestion": "'Turned its wearer into such a good dragon that the fire brigade came round. They stayed for cake.'"
+  },
+  {
+   "id": "x_croc",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Garden Rubber Stampede' is an event title.",
+   "suggestion": "'Slugscarer'"
+  },
+  {
+   "id": "x_croc",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Garden Path' no longer fits.",
+   "suggestion": "'Lady Clogalot, the Frog Ferry'"
+  },
+  {
+   "id": "x_croc",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every gardener at the flower show' crowd formula.",
+   "suggestion": "'Squeaked so loudly in the garden that every slug packed up and left. Next door's lettuces are now very crowded.'"
+  },
+  {
+   "id": "x_croc",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'worn the same comfy groove … for twenty years' longevity formula.",
+   "suggestion": "'Floated down the river after a flood and became a boat for a family of frogs. They now run river tours on Sundays.'"
+  },
+  {
+   "id": "x_crop_top",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Shrinkfit' no longer fits.",
+   "suggestion": "'Clapalong'"
+  },
+  {
+   "id": "x_crop_top",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Summer Festival Strut' is an event title.",
+   "suggestion": "'Fairshaker'"
+  },
+  {
+   "id": "x_crop_top",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Shrinking in the wash is a near-copy of jeans C, wool R and vest R.",
+   "suggestion": "'Makes its wearer clap along to every song, even the fire alarm.'"
+  },
+  {
+   "id": "x_crop_top",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping cool is not a power.",
+   "suggestion": "'Glows in the dark so brightly that the school disco has turned off its lights for good.'"
+  },
+  {
+   "id": "x_crop_top",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every crop top in the crowd' crowd formula.",
+   "suggestion": "'Danced so hard at the summer fair that the bouncy castle joined in. It bounced off down the road, still full of children.'"
+  },
+  {
+   "id": "x_crop_top",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has the same glittery star' longevity formula.",
+   "suggestion": "'Danced every night for a whole summer and taught the Moon to do the twist. The tides have been wobbly ever since.'"
+  },
+  {
+   "id": "x_crop_top",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Hem Snatch Snatch' doubles a word by mistake.",
+   "suggestion": "'Hem Tug'"
+  },
+  {
+   "id": "x_derby_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Schoolstrider' does not fit the new Rare.",
+   "suggestion": "'Answersqueak'"
+  },
+  {
+   "id": "x_derby_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Assembly Hall March' is an event title.",
+   "suggestion": "'Speechstopper'"
+  },
+  {
+   "id": "x_derby_shoe",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Loud striding is mild, not a troublesome power.",
+   "suggestion": "'Squeaks the answer to every test question, but always one question late.'"
+  },
+  {
+   "id": "x_derby_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every pair of school shoes' crowd formula.",
+   "suggestion": "'Marched into assembly so loudly that the head teacher forgot his speech. The school sang the dinner menu instead.'"
+  },
+  {
+   "id": "x_derby_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'passed down through five brothers and still has its original laces' longevity formula.",
+   "suggestion": "'Walked to school so many years in a row that it now goes on its own. It has a perfect attendance award and no feet.'"
+  },
+  {
+   "id": "x_dungarees",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Allotment Muck-Up' does not fit the new Epic.",
+   "suggestion": "'Carrotdigger'"
+  },
+  {
+   "id": "x_dungarees",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Old Dungaree Dan' nearly duplicates jeans 'Old Denim Dan'.",
+   "suggestion": "'Dungaree Dot of the Allotment'"
+  },
+  {
+   "id": "x_dungarees",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every gardener at the allotment' crowd formula.",
+   "suggestion": "'Dug up the whole allotment looking for one lost carrot. It found forty potatoes, a gnome, and the carrot in its own pocket.'"
+  },
+  {
+   "id": "x_dungarees",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Has been through every muddy garden… and is still going' has no achievement or punchline.",
+   "suggestion": "'Has so many pockets that a whole vegetable patch grew in them. Tomatoes come up through the bib every August.'"
+  },
+  {
+   "id": "x_dungarees",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Strap Snatch Strap' is a garbled stack of words.",
+   "suggestion": "'Strap Grab'"
+  },
+  {
+   "id": "x_espadrille",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Summerstroller' does not fit the new Rare.",
+   "suggestion": "'Ropelasso'"
+  },
+  {
+   "id": "x_espadrille",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Seaside Promenade' is a place, not a creature.",
+   "suggestion": "'Harbourknot'"
+  },
+  {
+   "id": "x_espadrille",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "A breezy stroll has no trouble or power.",
+   "suggestion": "'Unravels its rope sole to lasso anything it wants. So far it has caught a hat, a kite and a runaway beach ball.'"
+  },
+  {
+   "id": "x_espadrille",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by everyone at the harbour summer fair' crowd formula.",
+   "suggestion": "'Unwound its rope sole so far that it tied every boat in the harbour together. The fishing fleet went out as one big raft.'"
+  },
+  {
+   "id": "x_espadrille",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every summer for thirty years' longevity line with no punchline.",
+   "suggestion": "'Was mistaken for a rope and used to tie up a ship all summer. The ship is still there, and so is the shoe.'"
+  },
+  {
+   "id": "x_espadrille",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Harbour Promenade' echoes the Epic name.",
+   "suggestion": "'Rope Sole Whirl'"
+  },
+  {
+   "id": "x_fleece",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Campfiresmell' does not fit the new Rare.",
+   "suggestion": "'Hedgecatcher'"
+  },
+  {
+   "id": "x_fleece",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Hiking Trip Huddle' does not fit the new Epic.",
+   "suggestion": "'Frizzstorm'"
+  },
+  {
+   "id": "x_fleece",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A lingering campfire smell is a Common-level habit.",
+   "suggestion": "'Collects every leaf, twig and burr on a walk and brings them indoors. Its owner came home wearing half a hedge.'"
+  },
+  {
+   "id": "x_fleece",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by everyone on the school hiking trip' crowd formula.",
+   "suggestion": "'Built up so much static on the school trip that every child's hair stood on end. The class photo looks like a field of dandelions.'"
+  },
+  {
+   "id": "x_fleece",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still zips up perfectly' longevity formula.",
+   "suggestion": "'Sparked so much static on a mountain that it lit the hut lamps for a whole winter. The hikers rub it before dinner.'"
+  },
+  {
+   "id": "x_fleece",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "Defdown move; 'Shock' reads as a stun.",
+   "suggestion": "'Bobble Crackle'"
+  },
+  {
+   "id": "x_flip_flop",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Sandflinger Flop' does not fit the new Rare.",
+   "suggestion": "'Congaflop'"
+  },
+  {
+   "id": "x_flip_flop",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Poolside Slap' does not fit the new Epic.",
+   "suggestion": "'Slideflopper'"
+  },
+  {
+   "id": "x_flip_flop",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Old Flipper' echoes a famous TV dolphin.",
+   "suggestion": "'Old Flapfoot of the Seaside'"
+  },
+  {
+   "id": "x_flip_flop",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Flicking sand is a Common-level habit.",
+   "suggestion": "'Slaps out a rhythm so catchy that strangers follow it down the beach. It once led a conga line into the sea.'"
+  },
+  {
+   "id": "x_flip_flop",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every holiday-maker at once' crowd formula.",
+   "suggestion": "'Flew off a foot at the top of the water slide and went down alone. It finished first and refused to get out of the pool.'"
+  },
+  {
+   "id": "x_flip_flop",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Longevity formula ('every beach holiday for twenty years').",
+   "suggestion": "'Lost its partner in the sea and swam after it across the whole ocean. They met on a beach in another country and stayed for the summer.'"
+  },
+  {
+   "id": "x_flip_flop",
+   "field": "moves.kit.lace_lash",
+   "severity": "medium",
+   "issue": "'Thong' also means underwear in many countries; avoid in a kids' game.",
+   "suggestion": "'Toe Strap Flick'"
+  },
+  {
+   "id": "x_football_boot",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Laceknotter Boot' nearly duplicates boot 'Laceknotter' and no longer fits.",
+   "suggestion": "'Garagebanger'"
+  },
+  {
+   "id": "x_football_boot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Muddy Pitch Sprint' does not fit the new Epic.",
+   "suggestion": "'Worldkicker'"
+  },
+  {
+   "id": "x_football_boot",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Golden Boot' is the name of a real football award.",
+   "suggestion": "'Goldentoe, Scorer of a Thousand'"
+  },
+  {
+   "id": "x_football_boot",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Knot-you-must-cut is a near-copy of boot U and shoelace U.",
+   "suggestion": "'Kicks a ball against the garage door every evening until the whole street knows the score.'"
+  },
+  {
+   "id": "x_football_boot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every player behind it' crowd formula; no consequence.",
+   "suggestion": "'Kicked the ball so hard that it went round the world and hit the goalkeeper from behind. The goal still counts.'"
+  },
+  {
+   "id": "x_football_boot",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A career tally without a punchline; near-copy of cleats L.",
+   "suggestion": "'Scored a thousand goals in one long career, all from the bench. Nobody has worked out how.'"
+  },
+  {
+   "id": "x_football_boot",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Top Bins' is football slang that many children will not know.",
+   "suggestion": "'Top Corner Volley'"
+  },
+  {
+   "id": "x_high_heel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Red Carpet Clack' does not fit the new Epic.",
+   "suggestion": "'Pigeonclacker'"
+  },
+  {
+   "id": "x_high_heel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Madame Stiletto' nearly duplicates stiletto 'Madame Stilettina' and no longer fits.",
+   "suggestion": "'Madame Lofty of the Lighthouse'"
+  },
+  {
+   "id": "x_high_heel",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Being tall at a parade is a trait, not trouble.",
+   "suggestion": "'Makes its wearer taller every hour of the party. By midnight she was looking down on the chandelier.'"
+  },
+  {
+   "id": "x_high_heel",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every star at the gala' crowd formula (the lint also counts 'star' as cosmic).",
+   "suggestion": "'Clacked across the town square so loudly that every pigeon took off at once. The statue was clean for the first time in years.'"
+  },
+  {
+   "id": "x_high_heel",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'worn to a hundred galas and still has the same sparkle' longevity formula.",
+   "suggestion": "'Made its wearer so tall at the harbour ball that ships took her for the lighthouse. Two of them steered over to say hello.'"
+  },
+  {
+   "id": "x_high_heel",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Red Carpet Stride' echoes the Epic name.",
+   "suggestion": "'Sky-High Stride'"
+  },
+  {
+   "id": "x_hiking_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Boggrabber' does not fit the new Rare.",
+   "suggestion": "'Longwayround'"
+  },
+  {
+   "id": "x_hiking_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Mountain Trail March' does not fit the new Epic.",
+   "suggestion": "'Hillflattener'"
+  },
+  {
+   "id": "x_hiking_shoe",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Staying dry in a bog is its job, not a power.",
+   "suggestion": "'Always knows the way home, but only the long way. Its owner has now seen every hill in the county twice.'"
+  },
+  {
+   "id": "x_hiking_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with a whole school trip' crowd formula; 'nobody needed a carry' is no consequence.",
+   "suggestion": "'Stomped up the same hill so often that it wore the top flat. The hill is now a very popular picnic table.'"
+  },
+  {
+   "id": "x_hiking_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has the same red laces' longevity formula.",
+   "suggestion": "'Climbed every peak in the country, then the shed roof, because it was there. Grandad still cannot get it down.'"
+  },
+  {
+   "id": "x_ice_skate",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Frozen Pond Glide' does not fit the new Epic.",
+   "suggestion": "'Pondspinner'"
+  },
+  {
+   "id": "x_ice_skate",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every skater in the village' crowd formula; no consequence.",
+   "suggestion": "'Spun so fast on the frozen pond that it drilled a hole and a fish popped out. The fish now takes skating lessons.'"
+  },
+  {
+   "id": "x_ice_skate",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has its very first blade' longevity formula.",
+   "suggestion": "'Skated across a lake so fast that the water froze just in front of it. It reached the far side in July.'"
+  },
+  {
+   "id": "x_ice_skate",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "'Frozen Pond Spin' uses a cold word on a move that burns in two variants (normal and spectral burn, mutated defdown), and it echoes the Epic name.",
+   "suggestion": "'Showstopper Spin'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "names.common",
+   "severity": "low",
+   "issue": "'Zipperdown' does not fit the new Common.",
+   "suggestion": "'Oddleg'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Allinone' does not fit the new Rare.",
+   "suggestion": "'Zipeveryone'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Workshop Rush' does not fit the new Epic.",
+   "suggestion": "'Zipblaster'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "Toilet humour; mild but avoidable.",
+   "suggestion": "'Always has one leg rolled up higher than the other, and nobody knows how.'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Zips up from your toes to your chin in one go' is a description, not a joke.",
+   "suggestion": "'Zips up from toes to chin so fast that it once zipped the cat in too.'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping a mechanic clean is its job, not a power.",
+   "suggestion": "'Zips up anyone who stands still for too long. The dog, the cat and the hoover now wear matching suits.'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every worker in the hangar at once' crowd formula.",
+   "suggestion": "'Zipped up so fast in the hangar that it shot its wearer into the sky. He landed on the runway like a very small plane.'"
+  },
+  {
+   "id": "x_jumpsuit",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Being worn on the longest flight is passive and has no punchline.",
+   "suggestion": "'Flew a plane across the ocean when the pilot nodded off. It landed perfectly and asked for more peanuts.'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Breezeswirl' no longer fits.",
+   "suggestion": "'Thistlecatcher'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Pleatswisher' does not fit the new Rare.",
+   "suggestion": "'Pipeswisher'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Highland Fling' is a dance name, not a creature.",
+   "suggestion": "'Whirlfling'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "'Swirls in the breeze at the most embarrassing moments' hints at showing underwear; not tasteful.",
+   "suggestion": "'Catches every thistle on the hill and brings it indoors to sit on.'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Cheering for proud pleats is not a troublesome power.",
+   "suggestion": "'Plays a little bagpipe tune whenever it swishes. The whole village knows when its owner sneaks to the fridge.'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every kilt at the games' crowd formula.",
+   "suggestion": "'Danced a Highland fling so fast that it spun up a whirlwind. The bagpipes are still stuck up a tree in the next glen.'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every family wedding for a hundred years and still has every pleat' longevity formula.",
+   "suggestion": "'Tossed a tree trunk so far that it landed on a castle and became its flagpole. The laird is delighted and slightly worried.'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Tartan Dazzle Distraction' is three words for one defdown effect, and 'Dazzle' reads as stun.",
+   "suggestion": "'Tartan Distraction'"
+  },
+  {
+   "id": "x_kilt",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Highland Fling Daze' echoes the Epic name.",
+   "suggestion": "'Pleat Whirl Daze'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Stompstrut' does not fit the new Rare.",
+   "suggestion": "'Chinhigh'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Autumn Leaf Stride' does not fit the new Epic.",
+   "suggestion": "'Leafkicker'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Boulevard' repeats ankle boot's 'of the Boulevard' and no longer fits.",
+   "suggestion": "'Lady Bootella, Sea Strider'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Hugs your legs all the way up to the knees' is a description, not a joke.",
+   "suggestion": "'Hugs its wearer's legs so tightly that she waddles like a penguin.'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Staying dry is its job, not a power.",
+   "suggestion": "'Grows a little taller every time someone says it is too tall. It now reaches its owner's chin.'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every boot in the park' crowd formula.",
+   "suggestion": "'Kicked through the autumn leaves so hard that they filled the sky. The trees put them back on wrong.'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a thousand miles … never once had a broken zip' longevity formula.",
+   "suggestion": "'Strode across a river without wetting its owner, then a lake, then the sea. She went shopping in France.'"
+  },
+  {
+   "id": "x_knee_high_boot",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Toe Point Kick Kick' doubles a word by mistake.",
+   "suggestion": "'Pointy Toe Kick'"
+  },
+  {
+   "id": "x_lanyard",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Name must fit the new Common.",
+   "suggestion": "'Chinslapper'"
+  },
+  {
+   "id": "x_lanyard",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Conference Shuffle' does not fit the new Epic.",
+   "suggestion": "'Allaccess'"
+  },
+  {
+   "id": "x_lanyard",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Dangling in soup is a near-copy of tie C.",
+   "suggestion": "'Swings round and slaps you on the chin every time you run for the lift.'"
+  },
+  {
+   "id": "x_lanyard",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by everyone at the big conference' crowd formula.",
+   "suggestion": "'Opened every door in the building at once. The office cat now has its own desk and a parking space.'"
+  },
+  {
+   "id": "x_lanyard",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for twenty years and never once been lost' longevity formula.",
+   "suggestion": "'Opened a door in the office that nobody knew was there. Behind it were all the pens anyone had ever lost.'"
+  },
+  {
+   "id": "x_lanyard",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Daze' commits to stun, but the mutated variant is defdown; needs an effect-neutral name.",
+   "suggestion": "'Big Badge Swing'"
+  },
+  {
+   "id": "x_leggings",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Yogastretch' does not fit the new Rare.",
+   "suggestion": "'Remotereacher'"
+  },
+  {
+   "id": "x_leggings",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Gym Class Bend' does not fit the new Epic.",
+   "suggestion": "'Slingstretch'"
+  },
+  {
+   "id": "x_leggings",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Gym' does not fit the new Legendary.",
+   "suggestion": "'Lady Stretchwell, the Bridge'"
+  },
+  {
+   "id": "x_leggings",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "A perfect yoga pose has no trouble and repeats the Uncommon stretch.",
+   "suggestion": "'Stretches so far that its owner can reach the remote from the sofa, and next door's remote too.'"
+  },
+  {
+   "id": "x_leggings",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by everyone in the fitness class' crowd formula.",
+   "suggestion": "'Stretched between two trees like a giant slingshot and launched a whole yoga class over the pond. They landed in perfect poses.'"
+  },
+  {
+   "id": "x_leggings",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a thousand yoga classes and never once lost its stretch' longevity formula.",
+   "suggestion": "'Stretched from one bank of the river to the other and became a bridge. The ducks use it every morning.'"
+  },
+  {
+   "id": "x_leggings",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Stretch Snatch Snap' is a garbled stack of words.",
+   "suggestion": "'Stretch Snatch'"
+  },
+  {
+   "id": "x_mask_costume",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Masked Ball Reveal' does not fit the new Epic.",
+   "suggestion": "'Mixupmask'"
+  },
+  {
+   "id": "x_mask_costume",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Being too mysterious to guess repeats the Uncommon; 'Faceswapper' promises a swap the lore does not have.",
+   "suggestion": "'Swaps faces with whoever looks at it. The head teacher spent a whole assembly as a tiger.'"
+  },
+  {
+   "id": "x_mask_costume",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every guest at the masked ball' crowd formula.",
+   "suggestion": "'Made everyone at the masked ball forget who they were. They all went home to the wrong houses and nobody complained.'"
+  },
+  {
+   "id": "x_mask_costume",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every year for a century and still has every sequin' longevity formula.",
+   "suggestion": "'Slipped into the grand ball without a ticket and danced all night with the mayor. He still has not noticed it was on a mop.'"
+  },
+  {
+   "id": "x_moccasin",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Forest Trail Creep' does not fit the new Epic.",
+   "suggestion": "'Treehusher'"
+  },
+  {
+   "id": "x_moccasin",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Has tiny beads … in a pattern of flowers' is a description, not a joke.",
+   "suggestion": "'Has beads stitched on top that the magpies keep trying to steal, one at a time, while it walks.'"
+  },
+  {
+   "id": "x_moccasin",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every walker at once' crowd formula.",
+   "suggestion": "'Crept through the forest so quietly that the trees forgot it was there and fell asleep. Spring came a week late.'"
+  },
+  {
+   "id": "x_moccasin",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for forty years and still fits like a glove' longevity formula.",
+   "suggestion": "'Has walked so softly for so long that it leaves no footprints at all. The snails have been trying to follow it for years.'"
+  },
+  {
+   "id": "x_moccasin",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Forest Creep' echoes the Epic name.",
+   "suggestion": "'Silent Pounce'"
+  },
+  {
+   "id": "x_mule",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Backlessstrut' (triple s) is hard to read and does not fit the new Rare.",
+   "suggestion": "'Wandermule'"
+  },
+  {
+   "id": "x_mule",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Cafe Terrace Clack' is an event title.",
+   "suggestion": "'Chairdancer'"
+  },
+  {
+   "id": "x_mule",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Confident strutting is not a troublesome power.",
+   "suggestion": "'Kicks itself off under café tables and wanders. It has been found in the kitchen, the cellar and behind the till.'"
+  },
+  {
+   "id": "x_mule",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every shoe in town' crowd formula.",
+   "suggestion": "'Clacked across the terrace so loudly that the café chairs started dancing. Lunch was served on the move.'"
+  },
+  {
+   "id": "x_mule",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Walking home across three streets is too small for a Legendary.",
+   "suggestion": "'Was kicked off under a café table in Paris and walked home across the whole country. It arrived for breakfast, wanting croissants.'"
+  },
+  {
+   "id": "x_mule",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Terrace Clack' echoes the Epic name.",
+   "suggestion": "'Backless Wallop'"
+  },
+  {
+   "id": "x_nightgown",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Dreamswish' does not fit the new Rare.",
+   "suggestion": "'Glownightie'"
+  },
+  {
+   "id": "x_nightgown",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Midnight Snack Raid' no longer fits.",
+   "suggestion": "'Busstopwalker'"
+  },
+  {
+   "id": "x_nightgown",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of slipper R (same 'nobody heard the biscuit tin open'); biscuit tins are also in w01, w02, w03 and Pilot 02.",
+   "suggestion": "'Glows softly at midnight, so nobody in the house needs a night light. The moths have started visiting.'"
+  },
+  {
+   "id": "x_nightgown",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A raid of the fridge repeats the midnight-snack premise and uses the crowd frame.",
+   "suggestion": "'Sleepwalked its wearer to the bus stop at midnight. She caught the first bus and got to work early, in her nightgown.'"
+  },
+  {
+   "id": "x_nightgown",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'three grandmas in a row and still smells of lavender' longevity formula.",
+   "suggestion": "'Floated off the landing one windy night and drifted over the town like a cloud. It rained gently on every allotment.'"
+  },
+  {
+   "id": "x_nightgown",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Hem Snatch Swish' is a garbled stack of words.",
+   "suggestion": "'Hem Snatch'"
+  },
+  {
+   "id": "x_onesie",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Sleepover Snuggle' does not fit the new Epic.",
+   "suggestion": "'Bearnapper'"
+  },
+  {
+   "id": "x_onesie",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every child at the sleepover, and the room looked like a zoo' formula.",
+   "suggestion": "'Made a whole sleepover feel so much like bears that they hibernated. They woke up in April asking for honey.'"
+  },
+  {
+   "id": "x_onesie",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a hundred movie nights and still has its little tail' longevity formula.",
+   "suggestion": "'Was so cosy that a real bear borrowed it for the winter. It came back washed, folded and smelling of honey.'"
+  },
+  {
+   "id": "x_onesie",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Heat' commits to burn but the mutated variant stuns; 'Snuggle' sounds like rest on an attack.",
+   "suggestion": "'Big Bear Squeeze'"
+  },
+  {
+   "id": "x_overalls",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Farmstride' does not fit the new Rare.",
+   "suggestion": "'Mudbouncer'"
+  },
+  {
+   "id": "x_overalls",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Barnyard Muck-Out' does not fit the new Epic.",
+   "suggestion": "'Haystacker'"
+  },
+  {
+   "id": "x_overalls",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping a farmer clean is its job, not a power.",
+   "suggestion": "'Bounces mud straight back at whoever splashed it. The pigs have stopped trying.'"
+  },
+  {
+   "id": "x_overalls",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every farmer at the barn dance' crowd formula.",
+   "suggestion": "'Pitched so much hay at the barn dance that the barn filled to the roof. The band kept playing from inside a haystack.'"
+  },
+  {
+   "id": "x_overalls",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'forty years and still has every clip' longevity formula.",
+   "suggestion": "'Worked the farm so long that the cows now follow it, not the farmer. He has to wear it to get the milk.'"
+  },
+  {
+   "id": "x_oxford_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Graduation Stride' is an event title.",
+   "suggestion": "'Diplomastrider'"
+  },
+  {
+   "id": "x_oxford_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every student in the year' crowd formula; no consequence.",
+   "suggestion": "'Strode across the stage at graduation so confidently that it was handed everyone's certificates. It is now the most qualified shoe in town.'"
+  },
+  {
+   "id": "x_oxford_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A list of events ending in 'dinner with royalty' (real people) with no punchline.",
+   "suggestion": "'Was so smart that it was invited to the grand dinner without its owner. It sat at the top table and used the right fork.'"
+  },
+  {
+   "id": "x_pajamas",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Breakfastwearer' does not fit the new Rare.",
+   "suggestion": "'Pyjamaday'"
+  },
+  {
+   "id": "x_pajamas",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Name must fit the new Epic.",
+   "suggestion": "'Mondaysnoozer'"
+  },
+  {
+   "id": "x_pajamas",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'Pyjamarama' is the title of a published children's book and game.",
+   "suggestion": "'Lord Snugglesoft of the Sofa'"
+  },
+  {
+   "id": "x_pajamas",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Wearing pyjamas all day is a habit, not a power.",
+   "suggestion": "'Makes every day a pyjama day for the whole house. The plumber came to fix the sink and stayed for cartoons.'"
+  },
+  {
+   "id": "x_pajamas",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Laundry mix-up with the whole family is a near-copy of shirt E; 'Lazy Sunday Lounge' names a different scene.",
+   "suggestion": "'Was so comfy that the whole town stayed home in pyjamas on Monday. The mayor gave the news from bed.'"
+  },
+  {
+   "id": "x_pajamas",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every lazy Sunday for ten years' longevity formula.",
+   "suggestion": "'Is so soft that clouds float down to touch it. The garden is foggy every morning and very comfy.'"
+  },
+  {
+   "id": "x_pajamas",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Sunday Lounge Daze' echoes the Epic name, and 'Daze' commits to stun while the mutated variant is defdown.",
+   "suggestion": "'Big Lie-In'"
+  },
+  {
+   "id": "x_parka",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon and avoid the 'Zipstuck' duplicate.",
+   "suggestion": "'Tunnelhood'"
+  },
+  {
+   "id": "x_parka",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Snowproof' does not fit the new Rare.",
+   "suggestion": "'Hoodsnap'"
+  },
+  {
+   "id": "x_parka",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Blizzard Walk' does not fit the new Epic.",
+   "suggestion": "'Foxden'"
+  },
+  {
+   "id": "x_parka",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Stuck zip is a near-copy of dress R, jacket U and costume C; 'Zipstuck Parka' nearly duplicates costume 'Zipstuck'.",
+   "suggestion": "'Has a hood so deep that you can only see out through a tiny tunnel of fur.'"
+  },
+  {
+   "id": "x_parka",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping warm is its job, not a power.",
+   "suggestion": "'Pulls its hood shut whenever someone says something boring. Maths lessons are now very quiet.'"
+  },
+  {
+   "id": "x_parka",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every child on the snowy school trip' crowd formula with no joke.",
+   "suggestion": "'Was so warm on the snowy school trip that a whole fox family moved in. The class came home with five extra pupils.'"
+  },
+  {
+   "id": "x_parka",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'twenty Arctic winters and still has its fluffy hood' longevity formula.",
+   "suggestion": "'Kept its owner so warm at the North Pole that the ice melted round him. He now has a private swimming pool.'"
+  },
+  {
+   "id": "x_platform_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Disco Night Stomp' is an event title.",
+   "suggestion": "'Glitterstomper'"
+  },
+  {
+   "id": "x_platform_shoe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Dance Floor' no longer fits.",
+   "suggestion": "'Madame Platforma of the Lamp Posts'"
+  },
+  {
+   "id": "x_platform_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every platform shoe in town' crowd formula.",
+   "suggestion": "'Stomped so hard at the disco that the glitter ball fell and rolled down the high street. The town danced after it until dawn.'"
+  },
+  {
+   "id": "x_platform_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'forty years and still has its original glitter' longevity formula.",
+   "suggestion": "'Grew so tall that its wearer now changes the street-lamp bulbs by hand. The council has offered her a job.'"
+  },
+  {
+   "id": "x_platform_shoe",
+   "field": "moves.kit.kick_flurry",
+   "severity": "low",
+   "issue": "Four words for a three-hit move.",
+   "suggestion": "'Stomp Stomp Stomp'"
+  },
+  {
+   "id": "x_platform_shoe",
+   "field": "moves.legend",
+   "severity": "medium",
+   "issue": "Four move names are stomps (signature, legend, Ultimate, kit flurry); the legend collides with the signature.",
+   "suggestion": "'Sole Slam'"
+  },
+  {
+   "id": "x_platform_shoe",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "The signature, legend and Ultimate are all '... Stomp'; give the signature its own image.",
+   "suggestion": "'Platform Kick'"
+  },
+  {
+   "id": "x_poncho",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Fringeflick' does not fit the new Rare.",
+   "suggestion": "'Popuptent'"
+  },
+  {
+   "id": "x_poncho",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Festival Downpour' does not fit the new Epic.",
+   "suggestion": "'Gustglider'"
+  },
+  {
+   "id": "x_poncho",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Turning heads at a festival is not trouble.",
+   "suggestion": "'Turns into a tent at the first drop of rain, whether its wearer is ready or not. He spent a whole bus ride camping.'"
+  },
+  {
+   "id": "x_poncho",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Crowd formula ('Was worn by everyone at the rainy festival… sea of colourful tents'), a near-copy of bucket hat E.",
+   "suggestion": "'Caught a gust on the mountain and glided its wearer down to the village like a paraglider. He arrived in time for lunch.'"
+  },
+  {
+   "id": "x_poncho",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for thirty years and kept its wearer dry' longevity formula.",
+   "suggestion": "'Spread out so wide in a storm that it kept a whole herd of llamas dry. The llamas now refuse to go out without it.'"
+  },
+  {
+   "id": "x_puffer_jacket",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Winter Puff Parade' does not fit the new Epic.",
+   "suggestion": "'Liftwedger'"
+  },
+  {
+   "id": "x_puffer_jacket",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "'feels like wearing a duvet' is a description; it needs a small twist.",
+   "suggestion": "'Is so puffy that every hug bounces you both back a step, like two bumper cars.'"
+  },
+  {
+   "id": "x_puffer_jacket",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Packing small is a talent; add the trouble.",
+   "suggestion": "'Squashes into a tiny bag, then puffs back to full size wherever it likes. It burst a lunchbox open on the school bus.'"
+  },
+  {
+   "id": "x_puffer_jacket",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by everyone at the ski lodge, and the bar looked like' formula; a bar is not a kids' setting.",
+   "suggestion": "'Puffed up so much on the ski lift that it wedged itself between two chairs. Everyone had lunch dangling in the air.'"
+  },
+  {
+   "id": "x_puffer_jacket",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'never lost a feather' longevity formula.",
+   "suggestion": "'Puffed up so big on a cold night that it floated off like a hot-air balloon. Its owner enjoyed the view and landed for breakfast.'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Common lore pinches the little toe; 'Slipheel' does not describe it.",
+   "suggestion": "'Toepincher'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Waltztapper'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Gracestep' does not describe the new Rare.",
+   "suggestion": "'Waltzgrabber'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Ballroom Glide' is an event title.",
+   "suggestion": "'Chandelierspin'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Shine premise is a near-copy of breastplate U, cuirass U and brogue R.",
+   "suggestion": "'Taps its heels whenever it hears a waltz, even on the bus, even at the dentist.'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "An extra song from the band is not trouble.",
+   "suggestion": "'Drags its wearer into a dance with whoever is nearest. She has waltzed with a waiter, a doorman and a hat stand.'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every dancer at the big ball' crowd formula; no consequence.",
+   "suggestion": "'Spun so fast in the ballroom that the chandelier spun with it. The guests danced in circles until breakfast.'"
+  },
+  {
+   "id": "x_pump_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a hundred balls and still has its original shine' longevity formula.",
+   "suggestion": "'Danced through the whole night of the ball and kept going for a week. The band took turns to sleep.'"
+  },
+  {
+   "id": "x_raincoat_jacket",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Postmen appear in six earlier batches; a month of rain is a mild payoff.",
+   "suggestion": "'Stretched over the whole bus stop in a storm and kept the queue dry. The driver refused to leave without it.'"
+  },
+  {
+   "id": "x_raincoat_jacket",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Hood Snatch Snatch' doubles a word by mistake.",
+   "suggestion": "'Hood Yank'"
+  },
+  {
+   "id": "x_ribbon",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Giftbinder' does not fit the new Rare.",
+   "suggestion": "'Sparrowlure'"
+  },
+  {
+   "id": "x_ribbon",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A parcel that needs scissors is a near-copy of bow U (knot that tightens); the bow and ribbon objects share premises.",
+   "suggestion": "'Flutters so prettily that sparrows follow it home. Eleven of them now live in the hair-tie drawer.'"
+  },
+  {
+   "id": "x_ribbon",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Uses the contest frame ('the winning cake') and has no outrageous achievement.",
+   "suggestion": "'Lassoed a runaway hot-air balloon at the village fair with one loop. The balloon now goes for walks on a lead, like a dog.'"
+  },
+  {
+   "id": "x_ribbon",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Ribbon Snatch Snatch' doubles a word by mistake, and 'Ribbon Snatch' is already bow's signature.",
+   "suggestion": "'Ribbon Yank'"
+  },
+  {
+   "id": "x_robe",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Name must fit the new Common.",
+   "suggestion": "'Hookuncle'"
+  },
+  {
+   "id": "x_robe",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Teapocket'"
+  },
+  {
+   "id": "x_robe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Hotel Lounge Shuffle' does not fit the new Epic.",
+   "suggestion": "'Dryerburst'"
+  },
+  {
+   "id": "x_robe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Spa' no longer fits.",
+   "suggestion": "'Velvetrobe, the Wedding Robe'"
+  },
+  {
+   "id": "x_robe",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Near-copy of bathrobe C (belt or cord trails and catches under the door).",
+   "suggestion": "'Hangs on the back of the door at night and looks exactly like a sleepy uncle.'"
+  },
+  {
+   "id": "x_robe",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Near-copy of bathrobe U (so fluffy you never want to take it off).",
+   "suggestion": "'Always has one cold teabag in its pocket, and nobody knows how it gets there.'"
+  },
+  {
+   "id": "x_robe",
+   "field": "lore.rare",
+   "severity": "low",
+   "issue": "Funny, but passive (something done to it) and hints at taking hotel robes.",
+   "suggestion": "'Flaps its sleeves in the hotel breeze and steals the slippers off every bed, so it always has a spare pair.'"
+  },
+  {
+   "id": "x_robe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every guest at once… looked full of fluffy ghosts' crowd formula.",
+   "suggestion": "'Got so fluffy in the hotel tumble dryer that it filled the laundry room. The staff dug their way out with coat hangers.'"
+  },
+  {
+   "id": "x_robe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every day for thirty years' longevity formula.",
+   "suggestion": "'Was so comfortable that its owner wore it to his own wedding. The bride wore one too, and they matched.'"
+  },
+  {
+   "id": "x_roller_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Mallswooper' does not fit the new Rare.",
+   "suggestion": "'Hillroller'"
+  },
+  {
+   "id": "x_roller_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Shopping Centre Swerve' is an event title.",
+   "suggestion": "'Swervewheel'"
+  },
+  {
+   "id": "x_roller_shoe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Mall' does not match the airport line.",
+   "suggestion": "'Wheelie Wendy of the Airport'"
+  },
+  {
+   "id": "x_roller_shoe",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Waving at a guard is mild, not a troublesome power.",
+   "suggestion": "'Rolls off downhill whenever its wearer stops to tie a lace. She has reached the bottom of every hill in town by accident.'"
+  },
+  {
+   "id": "x_roller_shoe",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Not bumping anyone is the absence of chaos.",
+   "suggestion": "'Swerved through the shopping centre so fast that every escalator started running backwards. Shoppers ended up where they began.'"
+  },
+  {
+   "id": "x_roller_shoe",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Beating a moving walkway is small for a Legendary.",
+   "suggestion": "'Rolled through the airport so fast that it got to the next country before its plane. It was waiting at arrivals with a sign.'"
+  },
+  {
+   "id": "x_roller_shoe",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "The Ultimate 'Shopping Centre Swerve' is exactly the Epic monster name.",
+   "suggestion": "'Full Speed Wheelie'"
+  },
+  {
+   "id": "x_sandal_pair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Toewiggle' does not fit the new Rare.",
+   "suggestion": "'Tanstraps'"
+  },
+  {
+   "id": "x_sandal_pair",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Seaside Stroll' does not fit the new Epic.",
+   "suggestion": "'Gullhusher'"
+  },
+  {
+   "id": "x_sandal_pair",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Wiggling toes in the sun has no trouble and no power.",
+   "suggestion": "'Leaves a sandal-shaped tan that lasts all year. Its owner looks as if he wears them in the bath.'"
+  },
+  {
+   "id": "x_sandal_pair",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with a crowd of tourists' crowd formula.",
+   "suggestion": "'Squelched so loudly along the seafront that the seagulls stopped stealing chips to listen. The chip shop had its best day ever.'"
+  },
+  {
+   "id": "x_sandal_pair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has the same sand in its straps' longevity formula.",
+   "suggestion": "'Walked the seafront for so many summers that the sand now follows it home. The front garden has become a beach.'"
+  },
+  {
+   "id": "x_sandal_pair",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Seafront Stroll' echoes the Epic name.",
+   "suggestion": "'Sandy Stampede'"
+  },
+  {
+   "id": "x_sari",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Silkdrape' is a plain description.",
+   "suggestion": "'Flagtail'"
+  },
+  {
+   "id": "x_sari",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Borderglint' does not fit the new Rare.",
+   "suggestion": "'Moodborder'"
+  },
+  {
+   "id": "x_sari",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Wedding Dance Swirl' is an event title.",
+   "suggestion": "'Dancesweeper'"
+  },
+  {
+   "id": "x_sari",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Drapes so gracefully… flows like water' is a description with no joke.",
+   "suggestion": "'Lets its long end flutter behind like a flag, and every small child in the room tries to catch it.'"
+  },
+  {
+   "id": "x_sari",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Glinting so a room lights up is a near-copy of crown U and badge R.",
+   "suggestion": "'Has a border that changes colour with its wearer's mood. Everyone at dinner knew Auntie wanted more pudding.'"
+  },
+  {
+   "id": "x_sari",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "A song played three times is small chaos and uses the stock number three.",
+   "suggestion": "'Swirled so wide at the wedding dance that it swept every guest onto the floor. Even the cake ended up dancing.'"
+  },
+  {
+   "id": "x_sari",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Longevity formula ('handed down… and still has every gold thread'), a near-copy of vestment L.",
+   "suggestion": "'Was so long that it became a sail and carried a whole wedding party across the river. For once, everyone arrived on time.'"
+  },
+  {
+   "id": "x_shoe_horn",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Shoe Shop Rush' is an event title.",
+   "suggestion": "'Bootlauncher'"
+  },
+  {
+   "id": "x_shoe_horn",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Has a long handle so you don't have to bend' is a description.",
+   "suggestion": "'Has such a long handle that everyone uses it to switch off the light from bed.'"
+  },
+  {
+   "id": "x_shoe_horn",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Helped every customer at the shoe shop sale' crowd formula; no consequence.",
+   "suggestion": "'Slid a foot into a boot so fast that the boot shot across the shop and out of the window. Sales doubled.'"
+  },
+  {
+   "id": "x_shoe_horn",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'for fifty years without ever bending' longevity formula.",
+   "suggestion": "'Helped a giant into a shoe the size of a boat. The giant was so pleased that he moved his family into it.'"
+  },
+  {
+   "id": "x_shoe_horn",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "The Ultimate 'Shoe Shop Rush' is exactly the Epic monster name.",
+   "suggestion": "'Big Slide-In'"
+  },
+  {
+   "id": "x_shoe_tree",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Shapekeeper' does not fit the new Rare.",
+   "suggestion": "'Shoestretcher'"
+  },
+  {
+   "id": "x_shoe_tree",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Wardrobe Tidy-Up' does not fit the new Epic.",
+   "suggestion": "'Shoe Orchard'"
+  },
+  {
+   "id": "x_shoe_tree",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping shoes in shape is its job, not a power.",
+   "suggestion": "'Stretches any shoe it sits in. Dad's old trainers are now big enough for the dog to sleep in.'"
+  },
+  {
+   "id": "x_shoe_tree",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Filled every shoe in the wardrobe at once' crowd formula; 'like soldiers' is no consequence.",
+   "suggestion": "'Sprouted leaves in the wardrobe and grew into a real tree. The shoes now hang from its branches like fruit.'"
+  },
+  {
+   "id": "x_shoe_tree",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a famous dancer's shoes for forty years' points at a real person and is the longevity formula.",
+   "suggestion": "'Kept a pair of boots in such perfect shape that they got bored and walked off on their own. They still send postcards.'"
+  },
+  {
+   "id": "x_shoe_tree",
+   "field": "moves.kit.kick_flurry",
+   "severity": "low",
+   "issue": "'Shape Shape Shape' repeats a noun, not an action.",
+   "suggestion": "'Poke Poke Poke'"
+  },
+  {
+   "id": "x_shoe_tree",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Wardrobe Tidy' echoes the Epic name.",
+   "suggestion": "'Cedar Crunch'"
+  },
+  {
+   "id": "x_shoelace",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Playground Trip-Up' does not fit the new Epic.",
+   "suggestion": "'Queuetangler'"
+  },
+  {
+   "id": "x_shoelace",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Came undone on every shoe in the playground at once' crowd formula.",
+   "suggestion": "'Tied the laces of the whole lunch queue together. The school walked to lunch like one long caterpillar.'"
+  },
+  {
+   "id": "x_shoelace",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'tied a million times and still has its plastic tip' longevity formula.",
+   "suggestion": "'Tied a knot so perfect that sailors come from far away to look at it. Nobody dares untie it, so the shoe has not moved in years.'"
+  },
+  {
+   "id": "x_shoelace",
+   "field": "moves.kit.heel_stomp",
+   "severity": "low",
+   "issue": "Heel_stomp is a heavy 120% hit; 'Flick' sounds light.",
+   "suggestion": "'Aglet Whack'"
+  },
+  {
+   "id": "x_ski_boot",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Slopeheavy' does not fit the new Rare.",
+   "suggestion": "'Clampboot'"
+  },
+  {
+   "id": "x_ski_boot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Ski Lodge Clomp' is an event title.",
+   "suggestion": "'Roofslider'"
+  },
+  {
+   "id": "x_ski_boot",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "'of the Piste' repeats ski mask's 'of the Piste'.",
+   "suggestion": "'Old Clompington, the Pool Jumper'"
+  },
+  {
+   "id": "x_ski_boot",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping toes warm is its job, not a power.",
+   "suggestion": "'Clamps on so tight that its wearer cannot take it off until spring. He went to school in it all term.'"
+  },
+  {
+   "id": "x_ski_boot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every skier at once' crowd formula.",
+   "suggestion": "'Clomped across the lodge so heavily that all the snow slid off the roof at once. The lodge vanished until teatime.'"
+  },
+  {
+   "id": "x_ski_boot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has its first buckle' longevity formula.",
+   "suggestion": "'Skied straight off the top of the mountain and landed in the valley pool. It now does ski jumps for the swimmers.'"
+  },
+  {
+   "id": "x_slipper_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Floorshuffler' does not fit the new Rare.",
+   "suggestion": "'Shufflesteer'"
+  },
+  {
+   "id": "x_slipper_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Morning Shuffle' does not fit the new Epic.",
+   "suggestion": "'Staticshuffle'"
+  },
+  {
+   "id": "x_slipper_shoe",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Near-copy of nightgown R (identical biscuit-tin line); biscuit tins are also in w01, w02, w03 and Pilot 02.",
+   "suggestion": "'Steers its owner's feet wherever it fancies. Grandad set off for the kitchen and arrived in the garden shed.'"
+  },
+  {
+   "id": "x_slipper_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with the whole family every morning' crowd formula.",
+   "suggestion": "'Shuffled across the carpet so fast that it made enough static to light the whole house. The electricity bill has never been lower.'"
+  },
+  {
+   "id": "x_slipper_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every evening for twenty years' longevity formula.",
+   "suggestion": "'Kept grandad's feet so warm that he walked to the shop through the snow in it. The snow melted in a path behind him.'"
+  },
+  {
+   "id": "x_snow_boot",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Drifttrekker' does not fit the new Rare.",
+   "suggestion": "'Yetiprint'"
+  },
+  {
+   "id": "x_snow_boot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Snow Day Trudge' does not fit the new Epic.",
+   "suggestion": "'Snowstamper'"
+  },
+  {
+   "id": "x_snow_boot",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Not slipping in a drift is its job, not a power.",
+   "suggestion": "'Leaves footprints so big that people think a yeti has visited. The town now holds a yeti festival every winter.'"
+  },
+  {
+   "id": "x_snow_boot",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every child on the snowiest day' crowd formula.",
+   "suggestion": "'Stamped off the snow so hard at the school door that it set off an avalanche in the playground. Everyone got the day off to dig.'"
+  },
+  {
+   "id": "x_snow_boot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'forty Arctic winters and still has its fluffy top' longevity formula.",
+   "suggestion": "'Walked all the way to the North Pole to post one letter. The letter got there first.'"
+  },
+  {
+   "id": "x_snow_boot",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "The Ultimate 'Snow Day Trudge' is exactly the Epic monster name, and 'Snow' is a cold word on a variant that burns.",
+   "suggestion": "'Big Fur Stomp'"
+  },
+  {
+   "id": "x_spikes_shoe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Race Day Dash' does not fit the new Epic.",
+   "suggestion": "'Selflapper'"
+  },
+  {
+   "id": "x_spikes_shoe",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every runner at sports day' crowd formula.",
+   "suggestion": "'Ran round the track so fast that it lapped itself and tripped over its own footprints. Sports day had to start again.'"
+  },
+  {
+   "id": "x_spikes_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A record time has no punchline.",
+   "suggestion": "'Ran the hundred metres so fast that it finished before the race was announced. It is still waiting for the others.'"
+  },
+  {
+   "id": "x_stiletto",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Fashion Week Strut' is an event title.",
+   "suggestion": "'Balloonpopper'"
+  },
+  {
+   "id": "x_stiletto",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Runway' no longer fits.",
+   "suggestion": "'Madame Stilettina of the Tightrope'"
+  },
+  {
+   "id": "x_stiletto",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Pinning a leaf is a trait, not trouble.",
+   "suggestion": "'Pins down anything that tries to blow away. The picnic has never been safer, but the kite has not flown in years.'"
+  },
+  {
+   "id": "x_stiletto",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Fashion-week cameras flashing is the crowd frame with no chaos; fashion week is reused by ankle boot E.",
+   "suggestion": "'Strutted down the runway so sharply that it popped every balloon at the show. The photographers thought it was fireworks.'"
+  },
+  {
+   "id": "x_stiletto",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'walked a thousand runways and never once wobbled' longevity formula.",
+   "suggestion": "'Walked a tightrope across the town square on one heel. The circus has asked it to stop showing off.'"
+  },
+  {
+   "id": "x_stockings",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Shimmerleg' does not fit the new Rare.",
+   "suggestion": "'Pingleg'"
+  },
+  {
+   "id": "x_stockings",
+   "field": "names.epic",
+   "severity": "high",
+   "issue": "'Fireplace Stocking Stuff' keeps the Christmas framing.",
+   "suggestion": "'Stretchline'"
+  },
+  {
+   "id": "x_stockings",
+   "field": "names.legendary",
+   "severity": "high",
+   "issue": "'of the Mantel' keeps the Christmas framing.",
+   "suggestion": "'Lady Silkstocking of the Pantry'"
+  },
+  {
+   "id": "x_stockings",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Shimmering under stage lights is not trouble.",
+   "suggestion": "'Snaps back like a catapult when it is pulled. It fired a pea right across the dinner table.'"
+  },
+  {
+   "id": "x_stockings",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "A stocking stuffed with treats by the fireplace is Christmas (religion is on the never list).",
+   "suggestion": "'Stretched across the whole garden and became a washing line. The neighbours have started pegging their socks on it.'"
+  },
+  {
+   "id": "x_stockings",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Christmas again (hanging by the fireplace waiting for treats) plus the longevity formula.",
+   "suggestion": "'Ran so many ladders in one night that a family of mice used them to climb the pantry shelf. They now live behind the jam.'"
+  },
+  {
+   "id": "x_suspenders",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Pingstrap' describes the Common's ping, not the Uncommon (holding up trousers that are too big).",
+   "suggestion": "'Trouserlifter'"
+  },
+  {
+   "id": "x_suspenders",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Barn Dance Bounce' does not fit the new Epic.",
+   "suggestion": "'Pingpult'"
+  },
+  {
+   "id": "x_suspenders",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Bow Tie' does not match the lore.",
+   "suggestion": "'Sir Braceworth of the Big Top'"
+  },
+  {
+   "id": "x_suspenders",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every pair of braces in the village' crowd formula; no consequence.",
+   "suggestion": "'Pinged its owner so high at the barn dance that he landed in the hayloft. He watched the rest of the dance from up there.'"
+  },
+  {
+   "id": "x_suspenders",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Holding up a clown's trousers is a mild payoff for a Legendary.",
+   "suggestion": "'Pinged a clown clean over the big top. He landed in the ringmaster's chair, and the circus has been his ever since.'"
+  },
+  {
+   "id": "x_suspenders",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Strap Ping Snatch' stacks three words; 'Ping' alone also suits the drain.",
+   "suggestion": "'Brace Ping'"
+  },
+  {
+   "id": "x_swim_trunks",
+   "field": "names.common",
+   "severity": "low",
+   "issue": "'Wetbum' is mild, but keep swimwear names away from bottoms.",
+   "suggestion": "'Wetseat'"
+  },
+  {
+   "id": "x_swim_trunks",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Waveriser' does not fit the new Rare.",
+   "suggestion": "'Bobbletrunks'"
+  },
+  {
+   "id": "x_swim_trunks",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Lake Swim Splash' is an event title.",
+   "suggestion": "'Lakeemptier'"
+  },
+  {
+   "id": "x_swim_trunks",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Riding a wave 'without losing them' hints at losing swimwear; not tasteful for kids, and not a power.",
+   "suggestion": "'Floats its wearer like a duck, so he can never dive under. The other swimmers use him as a buoy.'"
+  },
+  {
+   "id": "x_swim_trunks",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every swimmer at the summer camp at once' crowd formula with no consequence.",
+   "suggestion": "'Jumped into the lake so hard that all the water jumped out. The fish waited on the bank while it filled back up.'"
+  },
+  {
+   "id": "x_swim_trunks",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has its original drawstring' longevity formula.",
+   "suggestion": "'Swam across the lake so fast that its wearer came out dry on the other side. The towel feels very unwanted.'"
+  },
+  {
+   "id": "x_swim_trunks",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Waistband Snatch Snap' is a garbled stack of words.",
+   "suggestion": "'Waistband Twang'"
+  },
+  {
+   "id": "x_swimsuit",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Lengthswimmer' does not fit the new Rare.",
+   "suggestion": "'Poolhider'"
+  },
+  {
+   "id": "x_swimsuit",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Swimming Lesson Splash' is an event title.",
+   "suggestion": "'Endswapper'"
+  },
+  {
+   "id": "x_swimsuit",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "A hundred lengths is a talent with no trouble.",
+   "suggestion": "'Changes colour to match the pool, so nobody can find its wearer at home time.'"
+  },
+  {
+   "id": "x_swimsuit",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every child in the class at once' crowd formula with no consequence.",
+   "suggestion": "'Splashed in so hard that the deep end swapped places with the shallow end. Nobody could touch the bottom anywhere.'"
+  },
+  {
+   "id": "x_swimsuit",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a whole childhood and still fits' longevity formula.",
+   "suggestion": "'Swam up the river and back before breakfast, and the river had to sit down. It now only flows in the afternoons.'"
+  },
+  {
+   "id": "x_swimsuit",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Strap Snatch Snap Snap' is a garbled stack of words.",
+   "suggestion": "'Strap Snatch'"
+  },
+  {
+   "id": "x_tank_top",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Sleeveless Sam' reads as a person's name rather than a creature.",
+   "suggestion": "'Sunshoulder'"
+  },
+  {
+   "id": "x_tank_top",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Summer Heatwave' is weather, not a creature.",
+   "suggestion": "'Beachcooler'"
+  },
+  {
+   "id": "x_tank_top",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Seafront' no longer fits.",
+   "suggestion": "'Old Sleeveless, Mountain Flexer'"
+  },
+  {
+   "id": "x_tank_top",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'the only thing anyone wore during the longest heatwave' crowd formula with no joke.",
+   "suggestion": "'Flapped its armholes so hard in the heatwave that it cooled the whole beach. The seagulls put on scarves.'"
+  },
+  {
+   "id": "x_tank_top",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'still has the same faded logo' longevity formula.",
+   "suggestion": "'Showed off its owner's arms so proudly that a mountain flexed back. Climbers say the bump on top is new.'"
+  },
+  {
+   "id": "x_tights",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Crotchsag' is not tasteful for kids.",
+   "suggestion": "'Twistseam'"
+  },
+  {
+   "id": "x_tights",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Balloonstick'"
+  },
+  {
+   "id": "x_tights",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Colourleg' does not fit the new Rare.",
+   "suggestion": "'Skiplegs'"
+  },
+  {
+   "id": "x_tights",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Name must fit the new Epic.",
+   "suggestion": "'Tightrope Tights'"
+  },
+  {
+   "id": "x_tights",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'of the Stage' no longer fits.",
+   "suggestion": "'Lady Tightswell of the Aquarium'"
+  },
+  {
+   "id": "x_tights",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "A sagging crotch is not tasteful for kids.",
+   "suggestion": "'Twists round as you walk, so the seam ends up running down your shin.'"
+  },
+  {
+   "id": "x_tights",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "A ladder is a near-copy of stockings C.",
+   "suggestion": "'Crackles with so much static that every balloon at the party sticks to its wearer.'"
+  },
+  {
+   "id": "x_tights",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Wearing sunglasses at a bright colour repeats the squint joke (crown U, badge R).",
+   "suggestion": "'Stretches into a skipping rope for anyone who asks. The whole playground has a turn before lunch.'"
+  },
+  {
+   "id": "x_tights",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "A tangled drawer is small, and 'School Play Tangle' names a different scene.",
+   "suggestion": "'Stretched across the stage as a tightrope in the school play. The cast walked it, and the wizard fell into the orchestra.'"
+  },
+  {
+   "id": "x_tights",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a hundred school plays and still has the same bright colour' longevity formula.",
+   "suggestion": "'Was pulled on by an octopus at the aquarium, all eight legs at once. The octopus now refuses to go out without them.'"
+  },
+  {
+   "id": "x_tights",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Ladder Snatch Snatch' doubles a word by mistake.",
+   "suggestion": "'Ladder Pull'"
+  },
+  {
+   "id": "x_tunic",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'History Day Parade' is an event title.",
+   "suggestion": "'Custardstormer'"
+  },
+  {
+   "id": "x_tunic",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every child on history day' crowd formula; no consequence.",
+   "suggestion": "'Made a whole class believe they were knights. They stormed the school kitchen and captured the custard.'"
+  },
+  {
+   "id": "x_tunic",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every castle fair for a hundred years … still has its collar' longevity formula.",
+   "suggestion": "'Was mistaken for a real knight's tunic and put in the castle museum. It now gives the tours and tells all the jokes.'"
+  },
+  {
+   "id": "x_tunic",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Hem Snatch Tuck' is a garbled stack of words.",
+   "suggestion": "'Hem Grab'"
+  },
+  {
+   "id": "x_turtleneck",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Winter Lecture' is an event, not a creature.",
+   "suggestion": "'Headswallower'"
+  },
+  {
+   "id": "x_turtleneck",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Was worn by every professor at the winter lecture… a row of turtles' formula.",
+   "suggestion": "'Pulled itself over its wearer's head in the middle of a lecture. The hall laughed so hard that the professor did the same.'"
+  },
+  {
+   "id": "x_turtleneck",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'the same professor every winter for forty years' has no achievement or punchline.",
+   "suggestion": "'Swallowed its wearer's head so completely that he spent the winter inside. He read twelve books and came out a genius.'"
+  },
+  {
+   "id": "x_underwear",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Daily Fresh' sounds like a product slogan and does not describe turning pink in the wash.",
+   "suggestion": "'Pinkwasher'"
+  },
+  {
+   "id": "x_underwear",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Washday Line' does not fit the new Epic.",
+   "suggestion": "'Statuehat'"
+  },
+  {
+   "id": "x_underwear",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "A one-off pink wash is a mishap, not a power.",
+   "suggestion": "'Turns the colour of whatever it is washed with. It has been every colour of the rainbow since Tuesday.'"
+  },
+  {
+   "id": "x_underwear",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every pair in the family, and the neighbours counted them' crowd formula; counting underwear is mildly embarrassing.",
+   "suggestion": "'Blew off the washing line and landed on the head of the town statue. The council says it is now part of the statue.'"
+  },
+  {
+   "id": "x_underwear",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'a thousand washes and still a perfectly good waistband' longevity formula.",
+   "suggestion": "'Stretched its elastic so far that it became the finish tape at the town race. The winner snapped it and it flew all the way home.'"
+  },
+  {
+   "id": "x_underwear",
+   "field": "moves.signature",
+   "severity": "medium",
+   "issue": "'Elastic Snatch Snap' is a garbled stack of words.",
+   "suggestion": "'Elastic Twang'"
+  },
+  {
+   "id": "x_uniform",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Marchstep' does not fit the new Rare.",
+   "suggestion": "'Saluter'"
+  },
+  {
+   "id": "x_uniform",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'School Assembly Line' is an event title.",
+   "suggestion": "'Stiffmarcher'"
+  },
+  {
+   "id": "x_uniform",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Marching in time is a skill, not a troublesome power.",
+   "suggestion": "'Makes anyone who wears it stand up straight and salute. Grandad saluted the fridge for a whole hour.'"
+  },
+  {
+   "id": "x_uniform",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Lined up… with a thousand others, and nobody could tell anyone apart' crowd formula.",
+   "suggestion": "'Ironed itself so stiffly that it marched to school without its owner. It got a gold star for good behaviour.'"
+  },
+  {
+   "id": "x_uniform",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every parade for fifty years and still has its shiny buttons' longevity formula.",
+   "suggestion": "'Polished its buttons so brightly that the whole parade marched into its own reflection. The band is still saluting itself.'"
+  },
+  {
+   "id": "x_uniform",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Daze' commits to stun, but the mutated variant is poison; the name also echoes bearskin's Epic 'Parade Ground March'.",
+   "suggestion": "'Stand to Attention!'"
+  },
+  {
+   "id": "x_vest",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Sunbaggy' does not fit the new Rare.",
+   "suggestion": "'Frostmelter'"
+  },
+  {
+   "id": "x_vest",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Cold Snap Layer' does not fit the new Epic.",
+   "suggestion": "'Familyvest'"
+  },
+  {
+   "id": "x_vest",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "'Adds one more warm layer' is a description.",
+   "suggestion": "'Is so warm that its wearer refuses to take off his coat, his scarf or the vest, even in July.'"
+  },
+  {
+   "id": "x_vest",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Going baggy in the wash is a near-copy of the laundry premise (jeans C, wool R, crop top U).",
+   "suggestion": "'Holds in so much heat that its wearer can melt the frost off the car with a hug.'"
+  },
+  {
+   "id": "x_vest",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Kept the whole family warm' is the crowd formula with no joke.",
+   "suggestion": "'Was so warm in the coldest week that the whole family lived in it together. Dad's head came out of the left armhole.'"
+  },
+  {
+   "id": "x_vest",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'knitted by granny forty years ago' is the longevity formula and a near-copy of the mittens and cardigan Legendaries.",
+   "suggestion": "'Kept its wearer so warm at the South Pole that the penguins queued to stand next to him.'"
+  },
+  {
+   "id": "x_wedge_shoe",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Name must fit the new Common.",
+   "suggestion": "'Corkcrumb'"
+  },
+  {
+   "id": "x_wedge_shoe",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Summersway' does not fit the new Rare.",
+   "suggestion": "'Corkbobber'"
+  },
+  {
+   "id": "x_wedge_shoe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Wedgewood' echoes a well-known pottery brand.",
+   "suggestion": "'Madame Corkwell of the Garden Party'"
+  },
+  {
+   "id": "x_wedge_shoe",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Wobbling on cobbles is a near-copy of high heel C and U.",
+   "suggestion": "'Leaves a trail of cork crumbs everywhere, so you can always find your way back to it.'"
+  },
+  {
+   "id": "x_wedge_shoe",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Not sinking into the lawn is no power, and the Legendary repeats it.",
+   "suggestion": "'Floats like a cork, so its wearer bobs straight back up whenever she tries to dive. She has tried eleven times.'"
+  },
+  {
+   "id": "x_wedge_shoe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'never once sunk into the lawn' longevity formula, a near-copy of the Rare.",
+   "suggestion": "'Bobbed out to sea after a garden party and came back a week later with a seagull captain. The seagull now comes to every party.'"
+  },
+  {
+   "id": "x_wetsuit",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Seaskin' does not fit the new Rare.",
+   "suggestion": "'Sealslip'"
+  },
+  {
+   "id": "x_wetsuit",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Surf School Rush' does not fit the new Epic.",
+   "suggestion": "'Dolphincaller'"
+  },
+  {
+   "id": "x_wetsuit",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping a surfer warm is its job, not a power.",
+   "suggestion": "'Is so slippery that it slides its wearer straight off every surfboard. The seals laugh every single time.'"
+  },
+  {
+   "id": "x_wetsuit",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Paddled out with the whole surf school at once' crowd formula.",
+   "suggestion": "'Squeaked so loudly going on that every dolphin in the bay came to look. Surf school became dolphin watching.'"
+  },
+  {
+   "id": "x_wetsuit",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Riding a big wave and grinning has no punchline.",
+   "suggestion": "'Rode a wave so big that it surfed into next week. It came home sunburnt, with a postcard from Thursday.'"
+  },
+  {
+   "id": "x_windbreaker",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Name must fit the new Uncommon.",
+   "suggestion": "'Gustpuff'"
+  },
+  {
+   "id": "x_windbreaker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Beach Walk Flap' does not fit the new Epic.",
+   "suggestion": "'Kitejacket'"
+  },
+  {
+   "id": "x_windbreaker",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "A zip pinging the chin is a near-copy of suspenders C.",
+   "suggestion": "'Fills up with wind like a balloon and makes its wearer walk on tiptoe.'"
+  },
+  {
+   "id": "x_windbreaker",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'with every walker at once' crowd formula.",
+   "suggestion": "'Caught a gust on the beach and lifted its wearer like a kite. He waved to the gulls and landed on the pier for lunch.'"
+  },
+  {
+   "id": "x_windbreaker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'every windy cliff path in the country' is a tally with no punchline.",
+   "suggestion": "'Stood in the way of a gale on the cliff top. The wind said sorry and went the long way round.'"
+  }
+ ]
+}

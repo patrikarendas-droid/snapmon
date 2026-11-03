@@ -1,0 +1,2081 @@
+{
+  "schema": 1,
+  "batch": "w20-fridges-taps-and-tableware",
+  "entries": {
+    "air_conditioner": {
+      "status": "reviewed",
+      "names": {
+        "common": "Coolhummer",
+        "uncommon": "Dripvent",
+        "rare": "Icebrow",
+        "epic": "House Shover",
+        "legendary": "Augustfrost, the Summer Snower"
+      },
+      "lore": {
+        "common": "Hums in the window and drips a little water onto the pavement below.",
+        "uncommon": "Blows cold air straight at whoever sits in the one comfy chair.",
+        "rare": "Breathes frost on anyone who says 'it's a bit warm in here', and they walk out with icicles on their eyebrows.",
+        "epic": "Blew so hard in a heatwave that it pushed the whole house a metre into the shade. The postman now knocks on the wrong door.",
+        "legendary": "Blew a cold snap out of the window so big that it snowed on one street in August, and the children built a snowman in swimming shorts."
+      },
+      "moves": {
+        "signature": "Chill Startle",
+        "legend": "Cool Boost",
+        "ultimate": "Big Chill"
+      }
+    },
+    "x_bath_bomb": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fizzball",
+        "uncommon": "Glitterbubble",
+        "rare": "Lavenderfizz",
+        "epic": "Plum Bather",
+        "legendary": "Captain Fizzlaunch"
+      },
+      "lore": {
+        "common": "Fizzes and spins in the bath, turning the water a surprising colour.",
+        "uncommon": "Leaves glitter in the bath that turns up on everyone for a week.",
+        "rare": "Fizzes in any water it touches, so the dog's bowl, the fish tank and the kettle all smell of lavender.",
+        "epic": "Turned the bath bright purple, and the person in it came out purple for the day.",
+        "legendary": "Fizzed so hard that it launched the bath through the roof like a rocket. The bather landed in next door's paddling pool, still holding the soap."
+      },
+      "moves": {
+        "signature": "Fizz Fizz Fizz",
+        "legend": "Bomb Bubble Bubble Bubble",
+        "ultimate": "Fizzquake"
+      }
+    },
+    "bathtub": {
+      "status": "reviewed",
+      "names": {
+        "common": "Soakbasin",
+        "uncommon": "Tap End Dodger",
+        "rare": "Rudegurgle",
+        "epic": "Ceiling Waterfall",
+        "legendary": "Commodore Bathsworth"
+      },
+      "lore": {
+        "common": "Takes forty minutes to fill and four seconds to go cold the moment anyone gets in.",
+        "uncommon": "Gets too hot at the tap end, so its bather sits at the other.",
+        "rare": "Gurgles rude noises down the plughole whenever a guest is in the bath, and everyone downstairs pretends not to hear.",
+        "epic": "Overflowed for so long that the kitchen below got a ceiling waterfall, and Dad stood under it with the shampoo.",
+        "legendary": "Sailed down the high street on bath night with its bather still in it, and stopped politely at every red light."
+      },
+      "moves": {
+        "signature": "Splash Splash Splash",
+        "legend": "Long Soak Rest",
+        "ultimate": "Bath Overflow"
+      }
+    },
+    "blender": {
+      "status": "reviewed",
+      "names": {
+        "common": "Whirljug",
+        "uncommon": "Counterwalker",
+        "rare": "Slurpvortex",
+        "epic": "Smoothie Lid Launch",
+        "legendary": "Stormblend, the Weather Whisk"
+      },
+      "lore": {
+        "common": "Roars like a jet engine for ten seconds and makes a smoothie.",
+        "uncommon": "Walks across the counter on its own while it blends, always heading for the edge.",
+        "rare": "Sucks in anything left beside it, so the shopping list, a tea towel and Grandad's glasses came out as one green smoothie.",
+        "epic": "Launched its lid mid-blend, and the kitchen got a strawberry ceiling.",
+        "legendary": "Blended a thunderstorm on picnic day. Everyone got sunshine, plus a fizzy drink that rumbled."
+      },
+      "moves": {
+        "signature": "Whirl Whirl Whirl",
+        "legend": "Hot Motor Heat",
+        "ultimate": "Smoothie Whirlpool"
+      }
+    },
+    "x_fountain_pen_ink": {
+      "status": "reviewed",
+      "names": {
+        "common": "Leakmaker",
+        "uncommon": "Blotblobber",
+        "rare": "Uncrossable",
+        "epic": "Group Essay Spill",
+        "legendary": "Nibscribe the Self-Written"
+      },
+      "lore": {
+        "common": "Turns every pen it fills into a slightly leaky pen, always in a white shirt pocket.",
+        "uncommon": "Leaves a blue ring on every desk it has ever stood on.",
+        "rare": "Refuses to be crossed out: every line struck through it turns into a neat underline instead.",
+        "epic": "Tipped over on the exam papers, and the whole class's answers ran together into one giant blue essay that got a B.",
+        "legendary": "Wrote a whole novel by itself overnight. The hero is a fountain pen, and it wins in the end."
+      },
+      "moves": {
+        "signature": "Blot Blot Blot",
+        "legend": "Big Ink Spill",
+        "ultimate": "Ink Flood"
+      }
+    },
+    "x_birdbath": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pigeonhog",
+        "uncommon": "Featherpool",
+        "rare": "Crow Tenor",
+        "epic": "Robin Ice Rink",
+        "legendary": "Splashmore, the Flock Detour"
+      },
+      "lore": {
+        "common": "Gets used by one bird at a time, and that bird is always the biggest, grumpiest pigeon.",
+        "uncommon": "Gets so splashed by sparrows that it needs refilling twice a day.",
+        "rare": "Gives any bird that bathes in it a voice it can't control, so the crows now sing opera at five in the morning.",
+        "epic": "Froze solid one winter, and the ducks used it as an ice rink. A robin now gives skating lessons.",
+        "legendary": "Was so popular that a whole migrating flock changed its route south to stop by. They now spend the winter in the back garden."
+      },
+      "moves": {
+        "signature": "Splish Splash Splosh",
+        "legend": "Feather Rest",
+        "ultimate": "Birdbath Rush"
+      }
+    },
+    "bucket": {
+      "status": "reviewed",
+      "names": {
+        "common": "Handlerattle",
+        "uncommon": "Shoedripper",
+        "rare": "Lastsplash",
+        "epic": "Beach Day Sandcastle",
+        "legendary": "Bailmore, the Sea Scooper"
+      },
+      "lore": {
+        "common": "Clanks its handle every time it's set down on the floor.",
+        "uncommon": "Has a small crack that drips water into every shoe.",
+        "rare": "Is never fully empty: there is always one more splash left in it, aimed at the last dry sock.",
+        "epic": "Built a sandcastle so tall that the tide paused just to look at it.",
+        "legendary": "Scooped up the whole sea in one go at the beach, and only put it back when the lifeguard blew his whistle."
+      },
+      "moves": {
+        "signature": "Slosh Slosh Slosh",
+        "legend": "Handle Boost",
+        "ultimate": "Bucket Dump"
+      }
+    },
+    "x_well": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wishhole",
+        "uncommon": "Pennydrop",
+        "rare": "Askback",
+        "epic": "Penny Hiccup",
+        "legendary": "Deepwish, the Exact Granter"
+      },
+      "lore": {
+        "common": "Echoes back anything said into it, only a little bit slower.",
+        "uncommon": "Swallows every coin thrown in and never says what it did with them.",
+        "rare": "Answers any question shouted down it, but always with another question.",
+        "epic": "Hiccuped up every coin ever thrown into it, and the village fete was showered with pennies for an hour.",
+        "legendary": "Granted a boy's wish for 'a bucket of ice cream' exactly. The bucket is the size of a lake and is still on its way up."
+      },
+      "moves": {
+        "signature": "Echo Echo Echo",
+        "legend": "Deep Echo Crack",
+        "ultimate": "Wishing Well"
+      }
+    },
+    "x_rain_barrel_tank": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gutterfill",
+        "uncommon": "Downpipe",
+        "rare": "Cloudsender",
+        "epic": "Gnome Voyage",
+        "legendary": "Barrelda, Who Owns the Rain"
+      },
+      "lore": {
+        "common": "Sits under the drainpipe catching rain for the garden.",
+        "uncommon": "Gets a layer of leaves on top that turns the water slightly brown.",
+        "rare": "Sends a little rain cloud after anyone who forgets to water the plants, so they get the watering instead.",
+        "epic": "Overflowed so far in a storm that the garden gnome sailed past the kitchen window on a lettuce leaf.",
+        "legendary": "Collected one raindrop from every cloud in the sky, and now the weather has to ask its permission before it rains."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Old Leaf Stink",
+        "ultimate": "Gutter Gush"
+      }
+    },
+    "x_soup_can": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lidhanger",
+        "uncommon": "Ringpuller",
+        "rare": "Selfsimmer",
+        "epic": "Hill Roller",
+        "legendary": "Souptronaut, the Moon Lunch"
+      },
+      "lore": {
+        "common": "Gets opened by a tin opener that always stops just before the last little bit.",
+        "uncommon": "Has a ring pull that always snaps off halfway round.",
+        "rare": "Heats itself the moment anyone nearby says 'I'm cold', so the supermarket soup aisle is always steaming.",
+        "epic": "Rolled out of a shopping bag at the top of a hill, and the whole bus queue chased it to the bottom.",
+        "legendary": "Was opened on the Moon by an astronaut, and the soup floated out in one perfect red ball. He drank it with a straw."
+      },
+      "moves": {
+        "signature": "Hot Soup Heat",
+        "legend": "Ring Pull Crack",
+        "ultimate": "Rainy Day Lunch"
+      }
+    },
+    "x_water_tank": {
+      "status": "reviewed",
+      "names": {
+        "common": "Loftgurgle",
+        "uncommon": "Pipetank",
+        "rare": "Upsideshower",
+        "epic": "Stairfall Slide",
+        "legendary": "Loftlake, the Upstairs Sea"
+      },
+      "lore": {
+        "common": "Gurgles in the loft every time someone runs a tap downstairs.",
+        "uncommon": "Groans at night like a ghost when the pipes are filling.",
+        "rare": "Pushes water up instead of down, so the shower sometimes rains from the floor.",
+        "epic": "Burst on a frosty night, and the stairs turned into a waterfall the family slid down at breakfast.",
+        "legendary": "Held a whole lake in the loft without the ceiling sagging, and the family now goes upstairs to fish."
+      },
+      "moves": {
+        "signature": "Gurgle Gurgle Gurgle",
+        "legend": "Groan Startle",
+        "ultimate": "Loftquake"
+      }
+    },
+    "coffee_cup": {
+      "status": "reviewed",
+      "names": {
+        "common": "Chindribbler",
+        "uncommon": "Coldsipper",
+        "rare": "Misspeller",
+        "epic": "Fan Club Fuzz",
+        "legendary": "Dash Latte, the Early Finisher"
+      },
+      "lore": {
+        "common": "Has a lid that dribbles coffee down the chin with every single sip.",
+        "uncommon": "Goes cold while its owner answers one quick email.",
+        "rare": "Spells its owner's name wrong in marker pen, and they answer to the wrong name for the rest of the day.",
+        "epic": "Was left on a desk so long that it grew a skin and a small fan club.",
+        "legendary": "Woke a whole office so fast that they finished Friday's work by Monday lunchtime and had nothing to do all week."
+      },
+      "moves": {
+        "signature": "Hot Sip Heat",
+        "legend": "Caffeine Boost",
+        "ultimate": "Morning Wake-Up"
+      }
+    },
+    "coffee_machine": {
+      "status": "reviewed",
+      "names": {
+        "common": "Brewgurgle",
+        "uncommon": "Beanmachine",
+        "rare": "Steamsnitch",
+        "epic": "Eleven O",
+        "legendary": "Espressimo, Speeder of Clocks"
+      },
+      "lore": {
+        "common": "Gurgles and hisses every morning while a queue forms in front of it.",
+        "uncommon": "Runs out of beans just as the busiest person reaches the front.",
+        "rare": "Hisses gossip in its steam: every puff spells out who took the last biscuit.",
+        "epic": "Broke down one Monday, and the whole office was asleep by eleven.",
+        "legendary": "Brewed a coffee so strong that the town clock started ticking twice as fast. Lunch is now at half past nine."
+      },
+      "moves": {
+        "signature": "Hiss Startle",
+        "legend": "Gurgle Startle",
+        "ultimate": "Morning Brew"
+      }
+    },
+    "x_ironing_board": {
+      "status": "reviewed",
+      "names": {
+        "common": "Creaseflattener",
+        "uncommon": "Legsnapper",
+        "rare": "Notchclimber",
+        "epic": "Stair Surfer",
+        "legendary": "Creasebridge the Long-Legged"
+      },
+      "lore": {
+        "common": "Unfolds with a creak and a clatter, and stands on three wobbly legs.",
+        "uncommon": "Snaps its legs shut when somebody is halfway through a shirt.",
+        "rare": "Raises itself one notch whenever nobody is looking, until the ironer needs a stepladder.",
+        "epic": "Snapped open at the top of the stairs, and the whole family surfed down to breakfast on it.",
+        "legendary": "Unfolded into a bridge when the river bridge closed, and the whole town crossed to work on its padded cover."
+      },
+      "moves": {
+        "signature": "Creak Startle",
+        "legend": "Crease Crease Crease",
+        "ultimate": "Laundry Collapse",
+        "kit.frost_breath": "Leg Wobble",
+        "kit.ice_cube_barrage": "Creak Creak Creak"
+      }
+    },
+    "dishwasher": {
+      "status": "reviewed",
+      "names": {
+        "common": "Platewasher",
+        "uncommon": "Rinsecycle",
+        "rare": "Spoonhoarder",
+        "epic": "Kitchen Sauna",
+        "legendary": "Cyclone Rinsewell"
+      },
+      "lore": {
+        "common": "Hums and sloshes after dinner, cleaning plates that somebody rinsed anyway.",
+        "uncommon": "Puts one fork through to the end of a cycle completely dirty.",
+        "rare": "Keeps one teaspoon from every wash somewhere inside itself, and now owns forty.",
+        "epic": "Was opened mid-cycle, and the steam fogged the whole kitchen like a sauna.",
+        "legendary": "Washed a whole bouncy castle in one cycle after a birthday party, and it came out folded and smelling of lemons."
+      },
+      "moves": {
+        "signature": "Slosh Startle",
+        "legend": "Big Wash",
+        "ultimate": "Final Rinse Cycle"
+      }
+    },
+    "fan": {
+      "status": "reviewed",
+      "names": {
+        "common": "Whirblade",
+        "uncommon": "Breezeturner",
+        "rare": "Robovoice",
+        "epic": "Wish Thief Breeze",
+        "legendary": "Breezeboss, the Cloud Shooer"
+      },
+      "lore": {
+        "common": "Turns its head slowly from side to side, giving everyone a turn of breeze.",
+        "uncommon": "Blows papers off the desk whenever it gets to the left side.",
+        "rare": "Makes anyone who talks into it sound like a robot for the rest of the day.",
+        "epic": "Spun so hard that it blew out the birthday candles from across the room before anyone could make a wish.",
+        "legendary": "Blew the clouds away from sports day so hard that it rained on the teachers' car park instead."
+      },
+      "moves": {
+        "signature": "Whirr Startle",
+        "legend": "Breeze Guard",
+        "ultimate": "Big Breeze"
+      }
+    },
+    "fire_hydrant": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pavementplug",
+        "uncommon": "Dogdestination",
+        "rare": "Barbecue Doser",
+        "epic": "Ice Cream Afloat",
+        "legendary": "Hydros, Who Put Out the Sunset"
+      },
+      "lore": {
+        "common": "Stands on the pavement looking short and important, with a cap on its head.",
+        "uncommon": "Is visited by every dog on the street, every single day.",
+        "rare": "Senses a fire three streets away and soaks the barbecue before the sausages are done.",
+        "epic": "Burst its cap on a heatwave afternoon and floated the ice-cream van gently down the high street.",
+        "legendary": "Put out a sunset once because it looked like a fire. The town had to wait until morning for the next one."
+      },
+      "moves": {
+        "signature": "Spray Spray Spray",
+        "legend": "Pressure Boost",
+        "ultimate": "Street Spray"
+      }
+    },
+    "x_champagne_flute": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stemwobble",
+        "uncommon": "Elbowtipper",
+        "rare": "Floatfizz",
+        "epic": "Wedding Burp",
+        "legendary": "Fluteria, Duet of Chandeliers"
+      },
+      "lore": {
+        "common": "Wobbles on its thin stem every time someone says the word 'toast'.",
+        "uncommon": "Gets knocked over by every elbow at every party.",
+        "rare": "Bubbles so hard that whoever holds it floats a few centimetres off the floor during the toast.",
+        "epic": "Popped all its bubbles at once in the middle of a wedding speech, and the burp echoed round the hall for a full minute.",
+        "legendary": "Clinked a note so pure that the chandelier answered, and now they sing a duet at every party."
+      },
+      "moves": {
+        "signature": "Sunbeam Glint",
+        "legend": "Stem Guard",
+        "ultimate": "Grand Toast",
+        "kit.caffeine_kick": "Fizz Boost"
+      }
+    },
+    "i_cocktail_shaker": {
+      "status": "reviewed",
+      "names": {
+        "common": "Juiceshaker",
+        "uncommon": "Clinkjar",
+        "rare": "Shakeanything",
+        "epic": "Party Maraca",
+        "legendary": "Rattlemix the Indoor Snow"
+      },
+      "lore": {
+        "common": "Rattles with ice and fruit juice, making the whole kitchen clatter.",
+        "uncommon": "Leaks a little juice from its lid whenever it's shaken too hard.",
+        "rare": "Turns anything poured into it into a milkshake, including the orange juice, the soup and Gran's tea.",
+        "epic": "Was shaken so hard at a party that it turned into a maraca, and the band kept it on stage until midnight.",
+        "legendary": "Mixed a fruit drink so cold that it snowed inside the glass, and the guests drank it wearing mittens."
+      },
+      "moves": {
+        "signature": "Hot Ginger Shake",
+        "legend": "Shaker Lid Guard",
+        "ultimate": "Party Mix",
+        "kit.caffeine_kick": "Shake It Up"
+      }
+    },
+    "glass": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fingerprint",
+        "uncommon": "Coasterlifter",
+        "rare": "Brimrefiller",
+        "epic": "Rim Choir",
+        "legendary": "Clearwater the Unseen"
+      },
+      "lore": {
+        "common": "Holds water and the fingerprints of whoever drank from it last.",
+        "uncommon": "Sticks to its coaster when lifted, then drops it on the table with a clatter.",
+        "rare": "Fills itself back up to the brim whenever someone says they've had enough.",
+        "epic": "Was rung round its rim at dinner until the whole table joined in a song.",
+        "legendary": "Became so perfectly clear that it vanished altogether, and the family has been drinking from thin air ever since."
+      },
+      "moves": {
+        "signature": "Hot Sip Heat",
+        "legend": "Glass Ring Distraction",
+        "ultimate": "Rim Song"
+      }
+    },
+    "i_rotisserie": {
+      "status": "reviewed",
+      "names": {
+        "common": "Spinroast",
+        "uncommon": "Chickenturner",
+        "rare": "Twirlspit",
+        "epic": "Tombola Chicken",
+        "legendary": "Gyrogold, Who Turned the World"
+      },
+      "lore": {
+        "common": "Turns a chicken round and round so slowly that everyone watches it.",
+        "uncommon": "Drips juices into its tray, which smells delicious and looks dreadful.",
+        "rare": "Spins anything near it, so the till, the mop and the price signs all turn slowly round with the chickens.",
+        "epic": "Spun so fast at the summer fair that two chickens flew off the spit and landed in the tombola.",
+        "legendary": "Turned the whole world round once by accident, and the town had two breakfasts that day."
+      },
+      "moves": {
+        "signature": "Turn Startle",
+        "legend": "Turn Guard",
+        "ultimate": "Spit Spin Slam",
+        "kit.cold_storage": "Glass Door Shield",
+        "kit.frost_breath": "Grease Drip",
+        "kit.ice_cube_barrage": "Turn Turn Turn"
+      }
+    },
+    "iron": {
+      "status": "reviewed",
+      "names": {
+        "common": "Steampress",
+        "uncommon": "Creasebuster",
+        "rare": "Hissplate",
+        "epic": "Ribbon Cutter Crease",
+        "legendary": "Smoothwell, Flattener of Roads"
+      },
+      "lore": {
+        "common": "Hisses steam whenever it's set down, as if it's had enough.",
+        "uncommon": "Leaves a shiny patch on trousers when it gets too hot.",
+        "rare": "Presses clothes so flat that they could be posted under a door.",
+        "epic": "Pressed a crease so sharp into Dad's trousers that he cut the ribbon at the school fair with his knee.",
+        "legendary": "Ironed out every bump in the village road in one afternoon. The speed bumps have filed a complaint."
+      },
+      "moves": {
+        "signature": "Hiss Startle",
+        "legend": "Crease Snatch",
+        "ultimate": "Steam Press",
+        "kit.cold_storage": "Upright Stand",
+        "kit.frost_breath": "Shiny Trouser Crack",
+        "kit.ice_cube_barrage": "Puff Puff Puff"
+      }
+    },
+    "x_towel_rack": {
+      "status": "reviewed",
+      "names": {
+        "common": "Towelhook",
+        "uncommon": "Damphanger",
+        "rare": "Towelswapper",
+        "epic": "Burrito Dog",
+        "legendary": "Railmore, the Loft Ladder"
+      },
+      "lore": {
+        "common": "Holds towels until somebody throws theirs on the floor instead.",
+        "uncommon": "Holds so many towels at once that none of them ever get dry.",
+        "rare": "Swaps everyone's towels in the night, so Dad dries himself on the tiny flannel.",
+        "epic": "Fired every towel off at once when the heating came on, and the dog came to breakfast wrapped like a burrito.",
+        "legendary": "Grew so many rails overnight that it became a ladder to the loft, and the family now climbs it to fetch the suitcases."
+      },
+      "moves": {
+        "signature": "Towel Towel Towel",
+        "legend": "Hang Boost",
+        "ultimate": "Towel Startle"
+      }
+    },
+    "mug": {
+      "status": "reviewed",
+      "names": {
+        "common": "Brewholder",
+        "uncommon": "Handlecrack",
+        "rare": "Loyalbrew",
+        "epic": "Sink Pond",
+        "legendary": "The Mug That Brewed Itself"
+      },
+      "lore": {
+        "common": "Holds a cup of tea and a ring stain from every one before it.",
+        "uncommon": "Gets chipped on the handle but is still everyone's favourite.",
+        "rare": "Keeps tea hot only for its owner: anyone else who picks it up gets it stone cold.",
+        "epic": "Was left in the office sink so long that a goldfish moved in, and now it has its own name on the tea rota.",
+        "legendary": "Has been refilled so many times that it now holds tea on its own."
+      },
+      "moves": {
+        "signature": "Hot Tea Heat",
+        "legend": "Tea Tea Tea",
+        "ultimate": "Tea Round"
+      }
+    },
+    "noodles": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slurpstring",
+        "uncommon": "Brothswirl",
+        "rare": "Laceknotter",
+        "epic": "Tablecloth Trick",
+        "legendary": "Longnood, the Endless Strand"
+      },
+      "lore": {
+        "common": "Slurps loudly into mouths and splashes broth on every shirt.",
+        "uncommon": "Gets wrapped round the fork in a big messy knot.",
+        "rare": "Ties anyone's shoelaces together from across the table with one long noodle.",
+        "epic": "Was slurped so hard that the tablecloth went up with the last noodle, and the plates stayed exactly where they were.",
+        "legendary": "Was one noodle so long that it went round the world and came back to the same bowl. It still needed salt."
+      },
+      "moves": {
+        "signature": "Hot Broth Heat",
+        "legend": "Big Slurp",
+        "ultimate": "Noodle Splash"
+      }
+    },
+    "oven": {
+      "status": "reviewed",
+      "names": {
+        "common": "Ovendoor",
+        "uncommon": "Glowbox",
+        "rare": "Dialnudger",
+        "epic": "Ceiling Cake",
+        "legendary": "Bakesworth, Builder of Bread Houses"
+      },
+      "lore": {
+        "common": "Glows inside while the cake rises and everyone peeks through the door.",
+        "uncommon": "Is always hotter at the back, so one side of everything is crispy.",
+        "rare": "Turns its own dial up when nobody is looking, so every cake comes out a little more toasted than planned.",
+        "epic": "Baked a birthday cake that rose so high that it lifted the ceiling, and the upstairs bath ended up in the icing.",
+        "legendary": "Baked a loaf so big that the village moved into it for the winter. The front door is a crust."
+      },
+      "moves": {
+        "signature": "Ding Startle",
+        "legend": "Door Peek Distraction",
+        "ultimate": "Big Bake",
+        "kit.cold_storage": "Oven Glove Guard",
+        "kit.frost_breath": "Fogged Glass Door",
+        "kit.ice_cube_barrage": "Tray Clatter Clatter"
+      }
+    },
+    "pitcher": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pourjug",
+        "uncommon": "Lemonadejug",
+        "rare": "Wishpour",
+        "epic": "Summer Picnic Pour",
+        "legendary": "Lemonella, the Long-Distance Pour"
+      },
+      "lore": {
+        "common": "Holds cold lemonade with ice cubes clinking against its side.",
+        "uncommon": "Drips down its spout every time it's put back on the table.",
+        "rare": "Pours whatever drink someone secretly wants instead of the one they asked for, so Gran keeps getting hot chocolate.",
+        "epic": "Overflowed every glass at a picnic, and the ants had a lemonade party.",
+        "legendary": "Poured lemonade so smoothly that it filled a glass on the far side of the sports field without spilling a drop on the way."
+      },
+      "moves": {
+        "signature": "Hot Cocoa Pour",
+        "legend": "Cool Rest",
+        "ultimate": "Pour Crack"
+      }
+    },
+    "x_soap_dish": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slipperysoap",
+        "uncommon": "Soapslide",
+        "rare": "Sudsdish",
+        "epic": "Suds Skating Rink",
+        "legendary": "Gripstone, the Unslipped"
+      },
+      "lore": {
+        "common": "Holds the soap until someone reaches for it with a wet hand.",
+        "uncommon": "Fills up with a little puddle of soapy water that turns the soap soft.",
+        "rare": "Lets soap slide off so fast that it shoots across the bathroom floor.",
+        "epic": "Turned the bathroom floor into a skating rink of suds, and the family slid to school in their socks.",
+        "legendary": "Kept its grip on the soap through a storm that blew the whole bathroom away. The soap was still dry."
+      },
+      "moves": {
+        "signature": "Slip Slip Slip",
+        "legend": "Soap Guard",
+        "ultimate": "Soap Slide"
+      }
+    },
+    "radiator": {
+      "status": "reviewed",
+      "names": {
+        "common": "Warmrib",
+        "uncommon": "Gurgleplate",
+        "rare": "Shrinkheater",
+        "epic": "Bathroom Banana Farm",
+        "legendary": "Toasty Ironrib, the Bear Warmer"
+      },
+      "lore": {
+        "common": "Gurgles and clanks when the heating comes on in the morning.",
+        "uncommon": "Is always hot at the top and cold at the bottom.",
+        "rare": "Shrinks anything left on it by one size, including the school jumper and Dad's favourite socks.",
+        "epic": "Heated the bathroom so much one winter night that the house plants thought it was summer and grew bananas.",
+        "legendary": "Kept a house so warm that a polar bear left the Arctic and moved into the airing cupboard."
+      },
+      "moves": {
+        "signature": "Clank Startle",
+        "legend": "Sweaty Sock Stink",
+        "ultimate": "Warm Crack",
+        "kit.frost_breath": "Rattling Valve",
+        "kit.ice_cube_barrage": "Clank Clank Clank"
+      }
+    },
+    "x_rubber_duckie_bath": {
+      "status": "reviewed",
+      "names": {
+        "common": "Earsquirter",
+        "uncommon": "Bathbobber",
+        "rare": "Tubsteerer",
+        "epic": "Bath Time Captain",
+        "legendary": "Squeakquake, the Bath Jumper"
+      },
+      "lore": {
+        "common": "Fills up with bathwater and squirts it straight into the ear of whoever squeezes it.",
+        "uncommon": "Always floats to the end of the bath away from the child.",
+        "rare": "Steers the bath like a boat, so the bather drifts to the tap end whether they like it or not.",
+        "epic": "Commanded such a fierce sea battle against the shampoo bottles that the bathroom floor sank under the waves.",
+        "legendary": "Let out one squeak so loud that the bathwater jumped out of the tub and landed back in again, still warm."
+      },
+      "moves": {
+        "signature": "Squeak Squeak Squeak",
+        "legend": "Warm Bath Heat",
+        "ultimate": "Rubber Armada"
+      }
+    },
+    "sink": {
+      "status": "reviewed",
+      "names": {
+        "common": "Plugpull",
+        "uncommon": "Dishpile",
+        "rare": "Ringgulper",
+        "epic": "Foam Party Flood",
+        "legendary": "Plugmaw, the Great Unblocker"
+      },
+      "lore": {
+        "common": "Drips its tap once every few seconds, all night long.",
+        "uncommon": "Fills up with washing up whenever anyone turns their back.",
+        "rare": "Swallows rings, earrings and teaspoons down its plughole, then gurgles happily for hours.",
+        "epic": "Overflowed with bubbles during washing up, and the whole kitchen became a foam party.",
+        "legendary": "Unblocked itself with one mighty gulp, and every lost teaspoon in town came shooting back up the plughole."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Plug Startle",
+        "ultimate": "Dish Mountain"
+      }
+    },
+    "teapot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Spoutpour",
+        "uncommon": "Lidclink",
+        "rare": "Mannerspout",
+        "epic": "Biscuit Walkout",
+        "legendary": "Brewster, the Storm Soother"
+      },
+      "lore": {
+        "common": "Pours tea in a long curve from its spout, mostly into the cup.",
+        "uncommon": "Has a lid that rattles whenever the kettle boils, as if it is cheering it on.",
+        "rare": "Spills a little on the table on purpose whenever someone forgets to say please.",
+        "epic": "Brewed tea so strong at a garden party that the biscuits stood up on their own and walked out.",
+        "legendary": "Brewed a pot so comforting that a thunderstorm stopped overhead to sit down and have a cup."
+      },
+      "moves": {
+        "signature": "Hot Pour Heat",
+        "legend": "Brew Boost",
+        "ultimate": "Stewed Tea Stink"
+      }
+    },
+    "vending_machine": {
+      "status": "reviewed",
+      "names": {
+        "common": "Coingulper",
+        "uncommon": "Coinspitter",
+        "rare": "Raisinpicker",
+        "epic": "Hallway Picnic",
+        "legendary": "Snackmaster Nine, Flavour Inventor"
+      },
+      "lore": {
+        "common": "Hums in the hallway with its lights on and its snacks in neat rows.",
+        "uncommon": "Rejects the same coin five times in a row and then takes it without a fuss.",
+        "rare": "Ignores the buttons and hands out whatever it thinks people need, which is mostly raisins.",
+        "epic": "Dropped every snack at once when a fly landed on the button, and the school hallway became a free picnic.",
+        "legendary": "Stocked itself overnight with snacks nobody has ever invented, and the crisps taste of Wednesday."
+      },
+      "moves": {
+        "signature": "Beep Startle",
+        "legend": "Stale Snack Stink",
+        "ultimate": "Snack Drop"
+      }
+    },
+    "waffle_iron": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gridpress",
+        "uncommon": "Batteroozer",
+        "rare": "Gridprinter",
+        "epic": "Dancefloor Waffle",
+        "legendary": "Gridiron Grand, the Hill Presser"
+      },
+      "lore": {
+        "common": "Clamps shut on batter and makes a grid of little squares.",
+        "uncommon": "Oozes batter out of its sides whenever it is overfilled.",
+        "rare": "Prints a waffle grid on anything it touches, so the tea towel, the newspaper and the cat's bed come out in neat squares.",
+        "epic": "Made a waffle so big that it became the dance floor at the birthday party, and the syrup made everyone stick.",
+        "legendary": "Pressed the snowy hill into perfect squares overnight, so the whole town went sledging down a giant waffle."
+      },
+      "moves": {
+        "signature": "Clamp Startle",
+        "legend": "Grid Guard",
+        "ultimate": "Batter Ooze Stink"
+      }
+    },
+    "water_cooler": {
+      "status": "reviewed",
+      "names": {
+        "common": "Glugjug",
+        "uncommon": "Officegather",
+        "rare": "Gossipgulp",
+        "epic": "Big Burp Balloon",
+        "legendary": "Bubblesworth, Keeper of Secrets"
+      },
+      "lore": {
+        "common": "Glugs a big bubble up its bottle every time a cup is filled.",
+        "uncommon": "Gathers a little crowd round it every afternoon.",
+        "rare": "Burps out the last secret said beside it, in one loud gulp, just as the boss walks past.",
+        "epic": "Burped a bubble so big that it floated off with the office plant and was last seen over the car park.",
+        "legendary": "Held so many office secrets that when it burped them all out at once, the whole company swapped jobs."
+      },
+      "moves": {
+        "signature": "Glug Startle",
+        "legend": "Office Boost",
+        "ultimate": "Water Break"
+      }
+    },
+    "watering_can": {
+      "status": "reviewed",
+      "names": {
+        "common": "Rosesprinkler",
+        "uncommon": "Spoutshower",
+        "rare": "Overgrower",
+        "epic": "Giant Gnome",
+        "legendary": "Sprinkla the Cloud Gardener"
+      },
+      "lore": {
+        "common": "Showers plants gently with its rose and drips on its owner's feet.",
+        "uncommon": "Is too heavy to lift when full, so it gets filled only halfway.",
+        "rare": "Makes whatever it waters grow a bit too fast, so the lawn needs mowing every hour.",
+        "epic": "Watered the garden gnome by mistake, and it grew so tall that it now waves at passing planes.",
+        "legendary": "Watered a single bean that grew through the clouds, and the giant at the top asked for a refill."
+      },
+      "moves": {
+        "signature": "Shower Shower Shower",
+        "legend": "Garden Rest",
+        "ultimate": "Rain Dance"
+      }
+    },
+    "x_air_purifier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Dustsucker",
+        "uncommon": "Whirclean",
+        "rare": "Smellthief",
+        "epic": "Spring Cleaning Hum",
+        "legendary": "Purair, Revealer of Mountains"
+      },
+      "lore": {
+        "common": "Hums quietly in the corner, cleaning air nobody can see.",
+        "uncommon": "Lights up red whenever someone makes toast too dark.",
+        "rare": "Sucks up every smell in the house, including dinner, so the chips are always a surprise.",
+        "epic": "Cleared the house after a burnt dinner, and the smoke alarm stopped sulking.",
+        "legendary": "Cleaned the air over town so well that everyone could see the mountains for the first time. One turned out to be a cloud."
+      },
+      "moves": {
+        "signature": "Hum Startle",
+        "legend": "Filter Heat",
+        "ultimate": "Fresh Air"
+      }
+    },
+    "x_bath_tap": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hotcold",
+        "uncommon": "Mousesqueak",
+        "rare": "Hotfoot Tap",
+        "epic": "Duck Launcher",
+        "legendary": "The Tap That Was Always Just Right"
+      },
+      "lore": {
+        "common": "Has one tap for hot and one for cold, and neither is ever quite right.",
+        "uncommon": "Squeaks like a mouse whenever it's turned, so the cat waits beside the bath.",
+        "rare": "Goes from cold to boiling in a second, so the bather has to dance.",
+        "epic": "Was turned so far that it shot the rubber duck through the bathroom window and into next door's pond.",
+        "legendary": "Ran a bath that was exactly the right temperature, which no tap had ever managed before."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Tap Splash Splash Splash",
+        "ultimate": "Bath Fill"
+      }
+    },
+    "x_beans": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tomatobean",
+        "uncommon": "Beanescaper",
+        "rare": "Tootle Bean",
+        "epic": "Tin-Shaped Dinner",
+        "legendary": "Haricot Grand, Feeder of Giants"
+      },
+      "lore": {
+        "common": "Comes in a tin with orange sauce and ends up on a slice of toast.",
+        "uncommon": "Always has one bean that escapes the spoon and hides under the toast.",
+        "rare": "Makes anyone who eats it toot a little tune, and it is always the same tune.",
+        "epic": "Slid out of the tin in one perfect cylinder, and the family used it as a door stop for a week.",
+        "legendary": "Fed a hungry giant on a snowy night from one tin, and the giant has been tooting the same tune ever since."
+      },
+      "moves": {
+        "signature": "Hot Bean Heat",
+        "legend": "Sauce Splash Distraction",
+        "ultimate": "Bean Feast"
+      }
+    },
+    "x_beer_stein": {
+      "status": "reviewed",
+      "names": {
+        "common": "Liddedmug",
+        "uncommon": "Nosesnapper",
+        "rare": "Handlehug",
+        "epic": "Home Time Clang",
+        "legendary": "Flipwell, the Round-Trip Lid"
+      },
+      "lore": {
+        "common": "Is a huge mug with a little metal lid that flips up and down.",
+        "uncommon": "Snaps its lid shut on the nose of whoever drinks from it.",
+        "rare": "Makes everyone who lifts it want to sing a loud song.",
+        "epic": "Was clinked so hard at the summer fair that it rang like a bell, and the school came out thinking it was home time.",
+        "legendary": "Flipped its lid so hard that the lid flew round the world and landed back on top, slightly sunburnt."
+      },
+      "moves": {
+        "signature": "Hot Cocoa Clonk",
+        "legend": "Beer Stein Lid Guard",
+        "ultimate": "Lid Flip Finale"
+      }
+    },
+    "x_bidet": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bathroomsurprise",
+        "uncommon": "Splashbowl",
+        "rare": "Mysterybasin",
+        "epic": "Balcony Launcher",
+        "legendary": "The Bowl Nobody Knew How to Use"
+      },
+      "lore": {
+        "common": "Sits next to the toilet in holiday flats and confuses every visitor.",
+        "uncommon": "Gets used as a foot bath by every child who finds it.",
+        "rare": "Changes what it is for every time someone asks, and nobody has ever got the same answer twice.",
+        "epic": "Was turned on full by a curious toddler and launched the soap, the flannel and Dad's sunglasses onto the balcony.",
+        "legendary": "Was used for so many things on one holiday that it was a sink, a foot bath and a fish pond."
+      },
+      "moves": {
+        "signature": "Splash Splash Splash",
+        "legend": "Surprise Boost",
+        "ultimate": "Holiday Mystery"
+      }
+    },
+    "x_bone_china_cup": {
+      "status": "reviewed",
+      "names": {
+        "common": "Teacupfine",
+        "uncommon": "Tinyhandle",
+        "rare": "Pinkypourer",
+        "epic": "Snail-Pace Saucer",
+        "legendary": "Porcelina, Tamer of Pirates"
+      },
+      "lore": {
+        "common": "Is so thin that light shines through it when it's held up.",
+        "uncommon": "Has a handle so tiny that only one finger fits, and it is never the right finger.",
+        "rare": "Makes everyone who drinks from it hold their little finger out.",
+        "epic": "Was carried across a garden party so carefully that a snail overtook the person carrying it.",
+        "legendary": "Made everyone so polite with one sip that a pirate ship moored up for tea and handed back all its treasure."
+      },
+      "moves": {
+        "signature": "Scalded Saucer",
+        "legend": "Pinkie Rest",
+        "ultimate": "Visitor Tea"
+      }
+    },
+    "x_burrito_bowl": {
+      "status": "reviewed",
+      "names": {
+        "common": "Ricepile",
+        "uncommon": "Salsasplash",
+        "rare": "Hotterbite",
+        "epic": "Wheelie Lunch",
+        "legendary": "Grande Bowlero, the Party Holder"
+      },
+      "lore": {
+        "common": "Has rice, beans and a little bit of everything piled high in it.",
+        "uncommon": "Gets so full that the first forkful sends half of it over the side.",
+        "rare": "Makes every forkful hotter than the last, so the final bite comes with its own fire alarm.",
+        "epic": "Was packed so heavy that the delivery bike did a wheelie all the way down the high street.",
+        "legendary": "Held a whole birthday party inside it: rice, beans, a band and a bouncy castle made of tortilla."
+      },
+      "moves": {
+        "signature": "Hot Bowl Heat",
+        "legend": "Salsa Stink",
+        "ultimate": "Tortilla Tumble"
+      }
+    },
+    "x_camping_mug": {
+      "status": "reviewed",
+      "names": {
+        "common": "Dentrocker",
+        "uncommon": "Fireside Mug",
+        "rare": "Squirrelcaller",
+        "epic": "Marshmallow Beacon",
+        "legendary": "Enamelda, Who Bounced Off Clouds"
+      },
+      "lore": {
+        "common": "Is so dented that it rocks on the table like a boat in a storm.",
+        "uncommon": "Clinks on everything in the rucksack and keeps everyone awake.",
+        "rare": "Calls every squirrel in the forest with one clink, and they all want a sip.",
+        "epic": "Was left on the camp stove so long that it glowed, and the whole campsite toasted marshmallows on it.",
+        "legendary": "Fell off a mountain top, bounced off two clouds and landed upright beside the tent, still full of tea."
+      },
+      "moves": {
+        "signature": "Hot Tin Heat",
+        "legend": "Chipped Crack",
+        "ultimate": "Morning Tea"
+      }
+    },
+    "x_cereal": {
+      "status": "reviewed",
+      "names": {
+        "common": "Crunchflake",
+        "uncommon": "Milksoaker",
+        "rare": "Boxrattler",
+        "epic": "Saturday Morning Crunch",
+        "legendary": "Crunchdawn, the Early Sun"
+      },
+      "lore": {
+        "common": "Rattles in its box and crunches loudly in the bowl.",
+        "uncommon": "Goes soggy in exactly the time it takes to find a spoon.",
+        "rare": "Lures every person in the house downstairs with the rattle of its box before the bowl is even out.",
+        "epic": "Was poured so fast that it went all over the table, and the dog had breakfast too.",
+        "legendary": "Crunched so loudly that it woke the street, the street woke the town, and the town woke the sun an hour early."
+      },
+      "moves": {
+        "signature": "Fresh-Toasted Flakes",
+        "legend": "Soggy Distraction",
+        "ultimate": "Oven-Fresh Crunch",
+        "kit.boiling_broth": "Hot Milk Splash",
+        "kit.noodle_whip": "Flake Flake Flake"
+      }
+    },
+    "x_clothes_dryer_rack": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sockhanger",
+        "uncommon": "Dampframe",
+        "rare": "Foldrack",
+        "epic": "Laundry Day Maze",
+        "legendary": "Hangwell, the Flying Laundry"
+      },
+      "lore": {
+        "common": "Unfolds in the lounge and covers itself in damp socks and pants.",
+        "uncommon": "Takes up so much room that everyone squeezes past it sideways.",
+        "rare": "Dries clothes so slowly in winter that they are ready just in time for the next wash.",
+        "epic": "Was so full of washing that the family had to crawl under it to reach the sofa.",
+        "legendary": "Held so much washing on a windy day that it took off like a kite and dried the clothes over the whole coast."
+      },
+      "moves": {
+        "signature": "Damp Startle",
+        "legend": "Sock Startle",
+        "ultimate": "Laundry Maze",
+        "kit.ice_cube_barrage": "Peg Peg Peg"
+      }
+    },
+    "x_coleslaw": {
+      "status": "reviewed",
+      "names": {
+        "common": "Cabbagecrunch",
+        "uncommon": "Mayoslaw",
+        "rare": "Shredslaw",
+        "epic": "Coleslaw Wig",
+        "legendary": "Shreddington, Slicer of Fields"
+      },
+      "lore": {
+        "common": "Crunches in a creamy heap next to every barbecue plate.",
+        "uncommon": "Gets left in the fridge until it goes a bit sad and watery.",
+        "rare": "Shreds anything it is served beside, so the burger arrives in thin strips and the napkin comes as confetti.",
+        "epic": "Slid off a paper plate at the barbecue and landed on Grandad's head like a creamy wig.",
+        "legendary": "Shredded a whole cabbage field in one afternoon, and the farmer had to sell it as the world's biggest side salad."
+      },
+      "moves": {
+        "signature": "Hot Mustard Crunch",
+        "legend": "Coleslaw Crunch Startle",
+        "ultimate": "Side Dish",
+        "kit.noodle_whip": "Shred Shred Shred"
+      }
+    },
+    "x_creamer": {
+      "status": "reviewed",
+      "names": {
+        "common": "Milkjug Mini",
+        "uncommon": "Dribblespout",
+        "rare": "Grumpcurdler",
+        "epic": "Cafe Drizzle",
+        "legendary": "Swirlwind, the Teacup Twister"
+      },
+      "lore": {
+        "common": "Holds a little milk for the tea and dribbles some down its own side.",
+        "uncommon": "Pours one drop too many every time, so the tea goes pale.",
+        "rare": "Curdles the coffee of anyone who is grumpy, so the whole office knows who got out of bed on the wrong side.",
+        "epic": "Poured so many milk clouds into one cafe's cups that it started to drizzle on the customers.",
+        "legendary": "Poured a swirl that spun so fast it became a tiny tornado and tidied the whole cafe before closing time."
+      },
+      "moves": {
+        "signature": "Warm Milk Heat",
+        "legend": "Hot Swirl Heat",
+        "ultimate": "Cream Tornado"
+      }
+    },
+    "x_curry": {
+      "status": "reviewed",
+      "names": {
+        "common": "Spicebowl",
+        "uncommon": "Fibchilli",
+        "rare": "Steamspeaker",
+        "epic": "Hedgehog Hairdo Night",
+        "legendary": "Madras Blaze, the Winter Melter"
+      },
+      "lore": {
+        "common": "Bubbles in its bowl with a smell that reaches next door.",
+        "uncommon": "Is always hotter than the cook said it would be.",
+        "rare": "Makes anyone who eats it puff out a little cloud of steam with every word, like a friendly dragon.",
+        "epic": "Was so spicy at curry night that everyone's hair stood on end, and the family photo looks like a row of hedgehogs.",
+        "legendary": "Was cooked so hot that the snow melted off the whole street, and the neighbours came out in shorts in January."
+      },
+      "moves": {
+        "signature": "Spicy Heat",
+        "legend": "Spice Boost",
+        "ultimate": "Curry Night"
+      }
+    },
+    "x_dehumidifier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Dampdrinker",
+        "uncommon": "Airwringer",
+        "rare": "Plantparcher",
+        "epic": "Cloud Dismisser",
+        "legendary": "The Machine That Dried the House"
+      },
+      "lore": {
+        "common": "Hums in the corner, slowly filling its little tank with water from the air.",
+        "uncommon": "Beeps when its tank is full, usually at two in the morning.",
+        "rare": "Drinks the water out of anything nearby, so the bath shrinks, the tea goes thick and the houseplants glare at it.",
+        "epic": "Pulled so much damp out of a rainy afternoon that the clouds outside gave up and went home early.",
+        "legendary": "Dried a whole damp house in a week, and the mould packed its bags and left."
+      },
+      "moves": {
+        "signature": "Beep Startle",
+        "legend": "Drying Boost",
+        "ultimate": "Dry Air"
+      }
+    },
+    "x_dish_rack": {
+      "status": "reviewed",
+      "names": {
+        "common": "Platestand",
+        "uncommon": "Drippingrack",
+        "rare": "Platesorter",
+        "epic": "Cymbal Solo Crash",
+        "legendary": "Stackhenge, the Moon-High Rack"
+      },
+      "lore": {
+        "common": "Holds wet plates and cups while they drip onto the draining board.",
+        "uncommon": "Has one slot that is never the right size for the plate.",
+        "rare": "Rearranges the plates overnight from biggest to smallest, so nobody can find their own mug in the morning.",
+        "epic": "Collapsed under a pile of party plates, and the kitchen sounded like a cymbal solo.",
+        "legendary": "Stacked the plates so high that the tower reached the Moon, and the astronauts finally had somewhere to put their cups."
+      },
+      "moves": {
+        "signature": "Drip Startle",
+        "legend": "Plate Clatter Startle",
+        "ultimate": "Crockery Crash"
+      }
+    },
+    "x_drinking_fountain": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sipspout",
+        "uncommon": "Nosesquirter",
+        "rare": "Queuejudge",
+        "epic": "Long Swim Day",
+        "legendary": "Gulpstream, the Cloud Waterer"
+      },
+      "lore": {
+        "common": "Shoots a little arc of water up for anyone thirsty enough to lean in.",
+        "uncommon": "Shoots water straight up the nose of whoever presses it too hard.",
+        "rare": "Runs ice cold for anyone who pushed in the queue and pleasantly cool for everyone who waited.",
+        "epic": "Got stuck on full on sports day and filled the long-jump pit, so the long jump became the long swim.",
+        "legendary": "Sprayed a jet so high that it watered the clouds, and the school now gets its own little shower every break time."
+      },
+      "moves": {
+        "signature": "Squirt Squirt Squirt",
+        "legend": "Cool Drink Rest",
+        "ultimate": "Bubbler Geyser"
+      }
+    },
+    "x_egg_cup": {
+      "status": "reviewed",
+      "names": {
+        "common": "Eggholder",
+        "uncommon": "Yolkdipper",
+        "rare": "Facedrawer",
+        "epic": "Boomerang Egg",
+        "legendary": "Hatchwell, the Breakfast Chick"
+      },
+      "lore": {
+        "common": "Holds a boiled egg upright and waits for toast soldiers.",
+        "uncommon": "Wobbles so that the egg rolls out when the top is tapped.",
+        "rare": "Draws a little face on any egg put in it, and the faces always look surprised when the top comes off.",
+        "epic": "Was topped so hard that the egg flew off, bounced round the kitchen and landed back in the cup, still runny.",
+        "legendary": "Kept a breakfast egg so warm and safe that it hatched, and the chick now sits in the cup every morning waiting for toast."
+      },
+      "moves": {
+        "signature": "Hot Egg Heat",
+        "legend": "Toast Soldier Heat",
+        "ultimate": "Top Off Smash"
+      }
+    },
+    "x_enamel_mug": {
+      "status": "reviewed",
+      "names": {
+        "common": "Chipmug",
+        "uncommon": "Speckleblue",
+        "rare": "Smoketaster",
+        "epic": "Rowboat Bailer",
+        "legendary": "Kettlebrave, the Self-Boiler"
+      },
+      "lore": {
+        "common": "Chips off one more white speckle every time it is dropped, and it is dropped a lot.",
+        "uncommon": "Gets too hot to hold when it's filled with tea straight from the fire.",
+        "rare": "Makes any drink in it taste of woodsmoke, even orange juice at the kitchen table.",
+        "epic": "Was used to bail out a leaky rowing boat and got the whole family back to shore, with tea leaves in their socks.",
+        "legendary": "Sat by so many campfires that it learned to boil water on its own, and now it makes tea whenever it hears a tent zip."
+      },
+      "moves": {
+        "signature": "Hot Tin Heat",
+        "legend": "Adventure Boost",
+        "ultimate": "Lakeside Tea"
+      }
+    },
+    "x_espresso_cup": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fingercup",
+        "uncommon": "Shotcup",
+        "rare": "Fasttalker",
+        "epic": "Train Overtaker",
+        "legendary": "Ristretto, Waker of Volcanoes"
+      },
+      "lore": {
+        "common": "Comes on its own tiny saucer and looks like a cup made for a doll's tea party.",
+        "uncommon": "Gets drunk in one sip before anyone can even put it down.",
+        "rare": "Makes anyone who sips it talk twice as fast, so a five-minute phone call is over in two and a half.",
+        "epic": "Was sipped so fast before a train that its owner overtook the train and had to wait for it at the next station.",
+        "legendary": "Held one drop of coffee so strong that a sleeping volcano woke up, yawned and asked for another."
+      },
+      "moves": {
+        "signature": "Hot Shot Heat",
+        "legend": "Quick Sip Startle",
+        "ultimate": "Espresso Cup Morning Rush"
+      }
+    },
+    "x_foot_spa": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bubblefoot",
+        "uncommon": "Toebuzzer",
+        "rare": "Soletickler",
+        "epic": "Ceiling Slippers",
+        "legendary": "Bubblesole, Tickler of Toes"
+      },
+      "lore": {
+        "common": "Buzzes and bubbles under tired feet after a long day.",
+        "uncommon": "Splashes water across the floor whenever it's switched on too high.",
+        "rare": "Tickles the soles of anyone who puts their feet in, and they can't stop giggling until the water goes cold.",
+        "epic": "Bubbled so hard on full power that it shot Grandad's slippers into the ceiling light, where they still hang.",
+        "legendary": "Bubbled the old dog's paws so well that he came out with a puppy's bounce and beat the postman to the door for the first time ever."
+      },
+      "moves": {
+        "signature": "Bubble Startle",
+        "legend": "Big Bubble",
+        "ultimate": "Foot Soak",
+        "kit.cold_storage": "Towel Wrap Guard",
+        "kit.frost_breath": "Toe Tickle",
+        "kit.ice_cube_barrage": "Bubble Bubble Bubble"
+      }
+    },
+    "x_fried_rice": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wokrice",
+        "uncommon": "Peapicker",
+        "rare": "Grainflinger",
+        "epic": "Rooftop Takeaway",
+        "legendary": "Wokstar, the Orbiting Grain"
+      },
+      "lore": {
+        "common": "Has peas, egg and little crispy bits all mixed into its rice.",
+        "uncommon": "Has one pea that falls off the fork every time.",
+        "rare": "Flicks grains of rice off the plate whenever a fork comes near, and they end up in everyone's hair.",
+        "epic": "Was tossed so high in the wok that half of it landed on the roof, and the pigeons have been loyal customers ever since.",
+        "legendary": "Was tossed so high that it went into orbit and came back down one grain at a time for a week, like tasty snow."
+      },
+      "moves": {
+        "signature": "Hot Rice Heat",
+        "legend": "Soy Sauce Stink",
+        "ultimate": "Wok Toss Tornado"
+      }
+    },
+    "x_garden_tap": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hosetap",
+        "uncommon": "Dripspigot",
+        "rare": "Outdoortap",
+        "epic": "Hose Snake",
+        "legendary": "Spigotto, the Uphill Spring"
+      },
+      "lore": {
+        "common": "Sits on the outside wall and drips onto the path.",
+        "uncommon": "Is always too stiff to turn on and too loose to turn off.",
+        "rare": "Gushes so hard when opened that the hose leaps out of its owner's hand.",
+        "epic": "Was turned on so hard that the hose wriggled across the lawn like a snake and chased the cat up a tree.",
+        "legendary": "Pushed water uphill so hard that it filled a lake at the top of the mountain, and the town now goes up there to paddle."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Stiff Tap Distraction",
+        "ultimate": "Gush Crack"
+      }
+    },
+    "x_granola": {
+      "status": "reviewed",
+      "names": {
+        "common": "Oatcluster",
+        "uncommon": "Nutcrunch",
+        "rare": "Clusterglue",
+        "epic": "Granola Bench",
+        "legendary": "Oatstride, the Endless Hike"
+      },
+      "lore": {
+        "common": "Crunches in the bowl in little honey-sweet clusters.",
+        "uncommon": "Leaves bits stuck in teeth all the way until lunch.",
+        "rare": "Glues honey clusters to everything it touches, so the spoon, the bowl and the dog end up stuck together.",
+        "epic": "Was baked into one cluster so big that the family now uses it as a garden bench.",
+        "legendary": "Fuelled a hiker so well that he walked up a mountain, down the other side and halfway across the sea before noticing."
+      },
+      "moves": {
+        "signature": "Hot Honey Drizzle",
+        "legend": "Crunch Startle",
+        "ultimate": "Oat Avalanche",
+        "kit.boiling_broth": "Hot Honey Glaze",
+        "kit.noodle_whip": "Clump Clump Clump"
+      }
+    },
+    "x_gravy_boat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gravyship",
+        "uncommon": "Wrongseat",
+        "rare": "Saucesteerer",
+        "epic": "Pea Lifeboat Crew",
+        "legendary": "The Good Ship Gravy"
+      },
+      "lore": {
+        "common": "Sails round the dinner table full of gravy, dripping from its spout.",
+        "uncommon": "Always ends up in front of the one person at the table who doesn't want any gravy.",
+        "rare": "Floats on the gravy it has poured and steers itself to whoever likes gravy least.",
+        "epic": "Poured so much gravy at Sunday lunch that the peas formed a lifeboat crew to rescue the sausages.",
+        "legendary": "Was launched as a real ship and sailed round the world serving gravy to every lighthouse keeper on the way."
+      },
+      "moves": {
+        "signature": "Hot Gravy Heat",
+        "legend": "Gravy Guard",
+        "ultimate": "Gravy Tidal Wave",
+        "kit.caffeine_kick": "Gravy Train Boost"
+      }
+    },
+    "x_humidifier": {
+      "status": "reviewed",
+      "names": {
+        "common": "Mistpuffer",
+        "uncommon": "Steamycloud",
+        "rare": "Mistwriter",
+        "epic": "Bedroom Rainforest",
+        "legendary": "Nimbusette, the Indoor Cloud"
+      },
+      "lore": {
+        "common": "Puffs a soft mist into the air of the bedroom.",
+        "uncommon": "Fogs up the windows so that nobody can see out in the morning.",
+        "rare": "Turns any word spoken near it into a puff of mist that hangs in the air until someone reads it.",
+        "epic": "Was left on all night, and the bedroom woke up as a rainforest with a parrot on the wardrobe.",
+        "legendary": "Made a cloud so fluffy that the cat climbed onto it, and it has floated round the house ever since, refusing to come down."
+      },
+      "moves": {
+        "signature": "Mist Startle",
+        "legend": "Fog Distraction",
+        "ultimate": "Bedroom Cloud"
+      }
+    },
+    "x_juice_glass": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pulpkeeper",
+        "uncommon": "Boxtoppler",
+        "rare": "Orangeglass",
+        "epic": "Morning Message",
+        "legendary": "Little Dawn Tumbler"
+      },
+      "lore": {
+        "common": "Saves the bits at the bottom for the very last sip, every single time.",
+        "uncommon": "Gets knocked over by the cereal box nearly every morning.",
+        "rare": "Makes juice look so bright that the sun comes out to have a look.",
+        "epic": "Tipped over at breakfast, and the juice spelled out GOOD MORNING across the table before soaking into the toast.",
+        "legendary": "Was held up to the window so often that the sun mistook it for a little sun and now rises in it every morning."
+      },
+      "moves": {
+        "signature": "Sun-Warmed Squeeze",
+        "legend": "Juice Guard",
+        "ultimate": "Orange Tide"
+      }
+    },
+    "x_lasagna": {
+      "status": "reviewed",
+      "names": {
+        "common": "Layerbake",
+        "uncommon": "Cheesecrust",
+        "rare": "Layerswapper",
+        "epic": "Sagging Table",
+        "legendary": "Stackarella, Queen of Layers"
+      },
+      "lore": {
+        "common": "Has layers of pasta, sauce and cheese that slide apart when it's cut.",
+        "uncommon": "Is too hot to eat for at least twenty minutes after it comes out.",
+        "rare": "Swaps the order of its layers when nobody is looking, so the cheese ends up on the bottom and the pasta on top.",
+        "epic": "Was carried to a party so heavy that the table sagged in the middle, and the jelly slid down to meet it.",
+        "legendary": "Was stacked so high that a lift had to be built to reach the top layer, and the lift attendant gets the crispy corner."
+      },
+      "moves": {
+        "signature": "Hot Cheese Heat",
+        "legend": "Lasagna Layer Guard",
+        "ultimate": "Layer Collapse"
+      }
+    },
+    "x_loofah": {
+      "status": "reviewed",
+      "names": {
+        "common": "Scrubsponge",
+        "uncommon": "Bathscratcher",
+        "rare": "Showervine",
+        "epic": "Spotless Rugby Team",
+        "legendary": "Loofaro, Scrubber of Shipwrecks"
+      },
+      "lore": {
+        "common": "Is scratchy and spongy and hangs on a string in the shower.",
+        "uncommon": "Takes days to dry and never quite stops dripping.",
+        "rare": "Grows back like the plant it came from if left on a sunny windowsill, and has started climbing the shower curtain.",
+        "epic": "Scrubbed a mud-covered rugby team so clean that the referee couldn't tell which side was which.",
+        "legendary": "Scrubbed an old shipwreck so clean that it floated back up and sailed itself into the harbour."
+      },
+      "moves": {
+        "signature": "Scrub Scrub Scrub",
+        "legend": "Scrub Guard",
+        "ultimate": "Bath Scrub"
+      }
+    },
+    "x_mac_and_cheese": {
+      "status": "reviewed",
+      "names": {
+        "common": "Cheesepasta",
+        "uncommon": "Macmelt",
+        "rare": "Cheesemelter",
+        "epic": "Cheese Bowling Night",
+        "legendary": "Cheddarlagoon the Great"
+      },
+      "lore": {
+        "common": "Is cheesy and creamy, and its crust gets fought over.",
+        "uncommon": "Gets cold so fast that the cheese turns solid.",
+        "rare": "Melts any cheese within a metre, so the sandwich beside it and the party cheese board slide onto the floor.",
+        "epic": "Set solid overnight at a sleepover, and the children used the bowl as a bowling ball.",
+        "legendary": "Was baked in a pan so big that the village used it as a swimming pool, and the lifeguard ate the crust."
+      },
+      "moves": {
+        "signature": "Hot Cheese Heat",
+        "legend": "Cheesy Slam",
+        "ultimate": "Comfort Supper"
+      }
+    },
+    "x_martini_glass": {
+      "status": "reviewed",
+      "names": {
+        "common": "Triangleglass",
+        "uncommon": "Stemsparkle",
+        "rare": "Bluepourer",
+        "epic": "Olive Cannon",
+        "legendary": "Stiletta, Who Stood Through the Quake"
+      },
+      "lore": {
+        "common": "Has a wide pointy bowl that tips over at the slightest wobble.",
+        "uncommon": "Is so wide that half its drink spills before it reaches the table.",
+        "rare": "Turns any drink poured into it bright blue, even milk, even soup.",
+        "epic": "Was clinked so hard at a fancy dinner that its olive shot across the room and landed in the guest of honour's soup.",
+        "legendary": "Stood upright on its pointy foot through an earthquake at a fancy dinner, and was the only thing in the room still standing."
+      },
+      "moves": {
+        "signature": "Spicy Rim Sting",
+        "legend": "Fancy Boost",
+        "ultimate": "Gala Toast"
+      }
+    },
+    "x_measuring_jug": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lineglass",
+        "uncommon": "Pourguide",
+        "rare": "Moodmeter",
+        "epic": "Flood Counter",
+        "legendary": "The Jug That Measured Everything"
+      },
+      "lore": {
+        "common": "Has lines for millilitres, cups and pints, and every one of them is slightly wrong.",
+        "uncommon": "Gets used for juice once and for gravy the next day.",
+        "rare": "Measures more than liquids: pour in a bad mood and it tells you exactly how many millilitres of grumpy you are.",
+        "epic": "Was used to bail out a flooded kitchen and counted every drop: 412 litres, two goldfish and a sock.",
+        "legendary": "Measured the rain in the garden so carefully one summer that the weather forecaster rang to ask for its numbers."
+      },
+      "moves": {
+        "signature": "Hot Pour Heat",
+        "legend": "Line Distraction",
+        "ultimate": "Big Measure"
+      }
+    },
+    "x_milk_glass": {
+      "status": "reviewed",
+      "names": {
+        "common": "Moustacheglass",
+        "uncommon": "Milkwhite",
+        "rare": "Bedtimeglass",
+        "epic": "Whisker Moustache",
+        "legendary": "Calcia, Lifter of Buses"
+      },
+      "lore": {
+        "common": "Leaves a white moustache on everyone who drinks from it.",
+        "uncommon": "Gets left on the bedside table and goes a bit sour by the morning.",
+        "rare": "Makes anyone who drinks a whole glass feel strong enough to carry the shopping in one trip.",
+        "epic": "Gave the cat a milk moustache so big that it was mistaken for a tiny grandad at the bus stop.",
+        "legendary": "Built bones so strong in one gulp that its drinker carried the broken-down school bus home on his back."
+      },
+      "moves": {
+        "signature": "Warm Milk Heat",
+        "legend": "Big Gulp",
+        "ultimate": "Gulp of Glory"
+      }
+    },
+    "x_oatmeal": {
+      "status": "reviewed",
+      "names": {
+        "common": "Oatbowl",
+        "uncommon": "Swellbowl",
+        "rare": "Oatcement",
+        "epic": "Canoe Paddle Stir",
+        "legendary": "Honeywarm, the Snowman"
+      },
+      "lore": {
+        "common": "Is warm and gloopy and is always eaten with a heap of honey.",
+        "uncommon": "Swells up in the bowl, so a small serving always turns into a big one.",
+        "rare": "Sets as hard as cement if it is left alone, and the builders next door now borrow it for walls.",
+        "epic": "Was cooked in a pot so big at scout camp that the whole troop had to stir it with a canoe paddle.",
+        "legendary": "Was so warming that a snowman ate a bowl and came indoors to sit by the fire."
+      },
+      "moves": {
+        "signature": "Hot Oat Heat",
+        "legend": "Sticky Pan Distraction",
+        "ultimate": "Warm Bowl Heat"
+      }
+    },
+    "x_paella": {
+      "status": "reviewed",
+      "names": {
+        "common": "Saffronrice",
+        "uncommon": "Prawnpeeker",
+        "rare": "Panglue",
+        "epic": "Parking Space Pan",
+        "legendary": "Saffronia, the Seaside Pan"
+      },
+      "lore": {
+        "common": "Is golden yellow with peas, peppers and a crispy bottom.",
+        "uncommon": "Has one prawn on top that everyone pretends not to want.",
+        "rare": "Sticks the pan to the stove so firmly that it has to be served where it stands, and the guests eat round the cooker.",
+        "epic": "Was cooked in a pan so wide that it needed its own parking space at the beach party.",
+        "legendary": "Was cooked in a pan so big that a fishing boat sailed into it by mistake, and the crew stayed for lunch."
+      },
+      "moves": {
+        "signature": "Hot Rice Heat",
+        "legend": "Crispy Startle",
+        "ultimate": "Fiesta Feast Pan"
+      }
+    },
+    "x_pho": {
+      "status": "reviewed",
+      "names": {
+        "common": "Brothbowl",
+        "uncommon": "Herbdropper",
+        "rare": "Glassfogger",
+        "epic": "Tightrope Waiter",
+        "legendary": "Brothwell, the Noodle Spring"
+      },
+      "lore": {
+        "common": "Steams with broth, noodles and a pile of fresh herbs on top.",
+        "uncommon": "Drops its fresh herbs into the broth one by one, until the last spoonful is a salad.",
+        "rare": "Fogs up the glasses of anyone who leans over it, and they stay fogged until the bowl is empty.",
+        "epic": "Was filled so full that the waiter carried it across the restaurant like a tightrope walker, and the whole room held its breath.",
+        "legendary": "Simmered so long that its broth became a hot spring, and the town now goes there to bathe among the noodles."
+      },
+      "moves": {
+        "signature": "Hot Broth Heat",
+        "legend": "Slurp Distraction",
+        "ultimate": "Steamy Lunch"
+      }
+    },
+    "x_plunger_tool": {
+      "status": "reviewed",
+      "names": {
+        "common": "Suckerstick",
+        "uncommon": "Plopper",
+        "rare": "Suctiongrip",
+        "epic": "Pipe Spaghetti",
+        "legendary": "Schlurp, the Moon Puller"
+      },
+      "lore": {
+        "common": "Stands by the toilet waiting for an emergency, which it secretly enjoys.",
+        "uncommon": "Makes a loud schlurp sound whenever it's pulled up.",
+        "rare": "Sticks itself to whatever it touches, so the fridge, the cat flap and the front door have all been plunged.",
+        "epic": "Pulled so hard on a blocked drain that the whole street's pipes came up like spaghetti.",
+        "legendary": "Stuck to the Moon by accident and pulled it a little closer, so the tides are slightly higher on bath night."
+      },
+      "moves": {
+        "signature": "Plop Plop Plop",
+        "legend": "Suction Boost",
+        "ultimate": "Mighty Schlurp"
+      }
+    },
+    "x_porridge": {
+      "status": "reviewed",
+      "names": {
+        "common": "Oatgloop",
+        "uncommon": "Neverjustright",
+        "rare": "Raspberryblower",
+        "epic": "Upside-Down Breakfast",
+        "legendary": "Justright, the Bears"
+      },
+      "lore": {
+        "common": "Bubbles in the pan and sticks to the bottom if left for a moment.",
+        "uncommon": "Is always either too hot or too cold, never quite right.",
+        "rare": "Blows a raspberry at anyone who tries to eat it before it has cooled down.",
+        "epic": "Set so solid at breakfast that the bowl turned over in one piece, and the family used it as a hat stand.",
+        "legendary": "Was finally just right, not too hot and not too cold, and three bears walked fifty miles to complain about it."
+      },
+      "moves": {
+        "signature": "Hot Porridge Heat",
+        "legend": "Gloop Startle",
+        "ultimate": "Just Right"
+      }
+    },
+    "x_ramen_bowl": {
+      "status": "reviewed",
+      "names": {
+        "common": "Noodledeep",
+        "uncommon": "Egghider",
+        "rare": "Bowlwhistler",
+        "epic": "Staircase Noodles",
+        "legendary": "Slurpmoon, the Echoing Bowl"
+      },
+      "lore": {
+        "common": "Has noodles, broth and a perfectly cooked egg floating on top.",
+        "uncommon": "Hides its egg under the noodles whenever a spoon comes near.",
+        "rare": "Whistles like a kettle when it's ready, and keeps whistling until somebody says thank you.",
+        "epic": "Was made with so many noodles that they hung over the side and down the stairs, and the dog had a midnight feast.",
+        "legendary": "Was slurped so loudly that the sound bounced off the Moon and came back as an order for two more bowls."
+      },
+      "moves": {
+        "signature": "Hot Broth Heat",
+        "legend": "Slurp Crack",
+        "ultimate": "Noodle Whirlpool"
+      }
+    },
+    "x_range_hood": {
+      "status": "reviewed",
+      "names": {
+        "common": "Steamgulper",
+        "uncommon": "Fanhood",
+        "rare": "Hatgulper",
+        "epic": "Street Roast Smell",
+        "legendary": "Whooshwell, the Pancake Thief"
+      },
+      "lore": {
+        "common": "Hums over the cooker and sucks up steam and smells.",
+        "uncommon": "Drips a little grease onto the cooker if its filter isn't cleaned.",
+        "rare": "Sucks up more than steam: tea towels, recipe cards and once the cook's hat have all gone up the chimney.",
+        "epic": "Sucked up the smell of a Sunday roast and blew it over the street, and the neighbours turned up with plates.",
+        "legendary": "Sucked a pancake off the pan mid-flip, and it was found next morning on top of the town clock."
+      },
+      "moves": {
+        "signature": "Hum Startle",
+        "legend": "Filter Guard",
+        "ultimate": "Smoke Clear",
+        "kit.frost_breath": "Greasy Filter Drip",
+        "kit.ice_cube_barrage": "Whoosh Whoosh Whoosh"
+      }
+    },
+    "x_rice_bowl": {
+      "status": "reviewed",
+      "names": {
+        "common": "Chimebowl",
+        "uncommon": "Chopstickrest",
+        "rare": "Fluffloat",
+        "epic": "Soy Sauce Burial",
+        "legendary": "Grainsworth, the Bottomless Bowl"
+      },
+      "lore": {
+        "common": "Rings like a little bell when chopsticks tap it, so everyone knows who wants seconds.",
+        "uncommon": "Gets a grain of rice stuck to its rim that nobody notices.",
+        "rare": "Keeps its rice so warm and fluffy that it gets fluffier every day until it floats off the table.",
+        "epic": "Was piled so high that the grains rolled off like an avalanche and buried the soy sauce up to its lid.",
+        "legendary": "Refilled itself for every hungry person in the village, and the rice cooker took early retirement."
+      },
+      "moves": {
+        "signature": "Hot Rice Heat",
+        "legend": "Grain Grain Grain",
+        "ultimate": "Rice Mound"
+      }
+    },
+    "x_risotto": {
+      "status": "reviewed",
+      "names": {
+        "common": "Creamyrice",
+        "uncommon": "Stockstirrer",
+        "rare": "Endless Stirrer",
+        "epic": "Dinner Party Stir",
+        "legendary": "Arborio Grand, Drinker of Rivers"
+      },
+      "lore": {
+        "common": "Needs stirring every minute, so the cook can never leave the pan.",
+        "uncommon": "Takes forty minutes to make and three minutes to eat.",
+        "rare": "Makes the cook's arm keep stirring by itself, hours after dinner, even in bed.",
+        "epic": "Was stirred so long at a dinner party that the guests fell asleep before it was ready.",
+        "legendary": "Soaked up a whole river one spoonful at a time, and the cook still said it needed more stock."
+      },
+      "moves": {
+        "signature": "Hot Stock Heat",
+        "legend": "Creamy Heat",
+        "ultimate": "Dinner Stir"
+      }
+    },
+    "x_sewing_machine_table": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pedalwhirr",
+        "uncommon": "Stitchtable",
+        "rare": "Sleevestitcher",
+        "epic": "Inside-Out Play",
+        "legendary": "Hemma, Patcher of the Sky"
+      },
+      "lore": {
+        "common": "Hums and whirrs as the needle goes up and down at speed.",
+        "uncommon": "Tangles its thread underneath whenever someone is in a hurry.",
+        "rare": "Sews anything left near the needle, so the curtains, the tablecloth and the cat's blanket are all joined together.",
+        "epic": "Stitched a whole school play's costumes overnight but sewed every one inside out, so the play was performed backwards.",
+        "legendary": "Stitched a patch on the sky where it was leaking, and it hasn't rained on sports day since."
+      },
+      "moves": {
+        "signature": "Whirr Startle",
+        "legend": "Big Stitch",
+        "ultimate": "Costume Rush",
+        "kit.frost_breath": "Tangled Thread",
+        "kit.ice_cube_barrage": "Stitch Stitch Stitch"
+      }
+    },
+    "x_sewing_table": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pinbox Table",
+        "uncommon": "Fabricpile",
+        "rare": "Buttonswapper",
+        "epic": "Long Kitchen",
+        "legendary": "Inchworm Grand, the Long Tape"
+      },
+      "lore": {
+        "common": "Is covered in pins, fabric scraps and a tape measure that won't roll up.",
+        "uncommon": "Has a drawer full of buttons that spills whenever it's opened.",
+        "rare": "Swaps the buttons on any shirt left on it, so every shirt comes back with odd ones.",
+        "epic": "Measured the house with its tape measure while the family slept, and the kitchen came out two metres longer.",
+        "legendary": "Measured a snake so long that its tape measure ran out of numbers and started using letters."
+      },
+      "moves": {
+        "signature": "Pin Startle",
+        "legend": "Hot Iron Heat",
+        "ultimate": "Button Blizzard"
+      }
+    },
+    "x_shot_glass": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tinyglass",
+        "uncommon": "Eggconfuser",
+        "rare": "Jugshrinker",
+        "epic": "Spider Bungalow",
+        "legendary": "Thimbleton, the Pocket Storm"
+      },
+      "lore": {
+        "common": "Is a tiny heavy glass with a thick bottom that clinks on the table.",
+        "uncommon": "Is so small that it gets mistaken for an egg cup, and the egg sits on top looking worried.",
+        "rare": "Shrinks any drink poured into it, so a whole jug of juice fits inside and comes out as one sip.",
+        "epic": "Was turned upside down to catch a spider, and the spider moved in and put up curtains.",
+        "legendary": "Holds a whole thundercloud squeezed into one tiny glass, and it rumbles if anyone puts it down too hard."
+      },
+      "moves": {
+        "signature": "Hot Chilli Sip",
+        "legend": "Tiny Clink Startle",
+        "ultimate": "Tiny Thunderclap"
+      }
+    },
+    "x_shower": {
+      "status": "reviewed",
+      "names": {
+        "common": "Dripcurtain",
+        "uncommon": "Showersong",
+        "rare": "Roomsoaker",
+        "epic": "Morning Shower Shock",
+        "legendary": "Cloudbath, the Shower of Showers"
+      },
+      "lore": {
+        "common": "Starts cold for ten seconds before deciding to be warm.",
+        "uncommon": "Changes temperature whenever someone flushes the toilet.",
+        "rare": "Rains on whoever is standing next to the shower too, wherever they are in the house.",
+        "epic": "Went cold in the middle of a hair wash, and the shriek woke the neighbours.",
+        "legendary": "Rained so warmly one winter morning that a cloud flew in through the window to have a shower."
+      },
+      "moves": {
+        "signature": "Splash Splash Splash",
+        "legend": "Drip Drip Drip",
+        "ultimate": "Flush Surprise"
+      }
+    },
+    "x_shower_head": {
+      "status": "reviewed",
+      "names": {
+        "common": "Spraynozzle",
+        "uncommon": "Dripnozzle",
+        "rare": "Onionshower",
+        "epic": "Secret Door Blast",
+        "legendary": "Torrento, Washer of Towers"
+      },
+      "lore": {
+        "common": "Sprays water in a dozen little jets, two of which go sideways.",
+        "uncommon": "Gets blocked by limescale until it only works on one side.",
+        "rare": "Changes the smell of the water every morning, and Tuesdays always smell of onions.",
+        "epic": "Was set to full power and peeled the wallpaper off the bathroom, revealing a door nobody knew was there.",
+        "legendary": "Sprayed so hard one morning that the water went backwards up the pipes and gave the water tower a shower."
+      },
+      "moves": {
+        "signature": "Spray Spray Spray",
+        "legend": "Limescale Stink",
+        "ultimate": "Full Pressure Finale"
+      }
+    },
+    "x_soup_mug": {
+      "status": "reviewed",
+      "names": {
+        "common": "Soupcup",
+        "uncommon": "Steammug",
+        "rare": "Flavourswapper",
+        "epic": "Foggy Bus Ride",
+        "legendary": "Springcaller, the Winter Chaser"
+      },
+      "lore": {
+        "common": "Holds soup instead of tea, which confuses visitors.",
+        "uncommon": "Gets too hot to hold, so its owner wraps it in their sleeve.",
+        "rare": "Swaps its soup for a different flavour whenever someone stirs it the wrong way round.",
+        "epic": "Steamed so much on a cold bus that the windows fogged, and the driver followed the smell of tomato to the depot.",
+        "legendary": "Chased a whole winter out of town with one steaming mugful, and spring turned up a month early with a runny nose."
+      },
+      "moves": {
+        "signature": "Hot Soup Heat",
+        "legend": "Steam Crack",
+        "ultimate": "Rainy Day Mug"
+      }
+    },
+    "x_sponge": {
+      "status": "reviewed",
+      "names": {
+        "common": "Squishscrub",
+        "uncommon": "Dishsoaker",
+        "rare": "Colourslurp",
+        "epic": "Window-Sized Sponge",
+        "legendary": "Squeezelda, Drinker of Floods"
+      },
+      "lore": {
+        "common": "Squishes and soaks and gets smaller every week.",
+        "uncommon": "Starts to smell a bit funny if it is not left out to dry.",
+        "rare": "Takes on the colour of whatever it wipes, so it has been tomato red, spinach green and, once, tartan.",
+        "epic": "Swelled up so much in the sink after a dinner party that the kitchen window had to come out to get it outside.",
+        "legendary": "Soaked up a whole flood in one go and wrung it out over the desert, which now has a lake and a beach."
+      },
+      "moves": {
+        "signature": "Squish Squish Squish",
+        "legend": "Drying Rest",
+        "ultimate": "Big Wring Out"
+      }
+    },
+    "x_sugar_bowl": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lumpholder",
+        "uncommon": "Cubekeeper",
+        "rare": "Sweetreach",
+        "epic": "Tea Party Sugar Spill",
+        "legendary": "Lumpella, Sweetener of Lemons"
+      },
+      "lore": {
+        "common": "Holds sugar lumps and a pair of tiny tongs that nobody can use properly.",
+        "uncommon": "Gets a wet spoon dipped into it, so the sugar turns into rocks.",
+        "rare": "Sweetens every drink within arm's reach, so the coffee, the gravy and the soup all taste of sugar.",
+        "epic": "Lost every sugar lump to a sneaky toddler at a tea party, and nobody's tea was sweet that day.",
+        "legendary": "Sweetened a lemon so thoroughly that it packed its bags and went to live with the oranges."
+      },
+      "moves": {
+        "signature": "Caramel Scorch",
+        "legend": "Lump Lump Lump",
+        "ultimate": "Sugar Spill Party"
+      }
+    },
+    "x_tankard": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pewtermug",
+        "uncommon": "Handleheavy",
+        "rare": "Huzzahmug",
+        "epic": "Apple Drop Clang",
+        "legendary": "Pewterwatch, the Lookout"
+      },
+      "lore": {
+        "common": "Is heavy and made of pewter, with a handle big enough for a whole fist.",
+        "uncommon": "Clanks on the table so loudly that everyone looks up.",
+        "rare": "Makes whoever lifts it shout 'huzzah!",
+        "epic": "Was banged on the table at the harvest fair so hard that every apple fell off the trees in the orchard next door.",
+        "legendary": "Spotted a dragon through its glass bottom just in time, and the whole village had the kettle on before it landed."
+      },
+      "moves": {
+        "signature": "Hot Apple Juice Slosh",
+        "legend": "Clink Snatch",
+        "ultimate": "Harvest Clink"
+      }
+    },
+    "x_tea_cup_and_saucer": {
+      "status": "reviewed",
+      "names": {
+        "common": "Saucerrattle",
+        "uncommon": "Teacupclink",
+        "rare": "Leafreader",
+        "epic": "Runaway Teacup",
+        "legendary": "Rattlemorse, the Cake Caller"
+      },
+      "lore": {
+        "common": "Clinks on its saucer every time it's lifted for a sip.",
+        "uncommon": "Spills a little tea into the saucer whenever it's carried.",
+        "rare": "Reads the future in its tea leaves, but only about biscuits.",
+        "epic": "Rattled on its saucer so hard at a tea party that it walked off the table and down the garden path.",
+        "legendary": "Rattled on its saucer in such perfect code that it ordered a cake from the bakery across the road."
+      },
+      "moves": {
+        "signature": "Hot Tea Heat",
+        "legend": "Saucer Tea Break Rest",
+        "ultimate": "Afternoon Tea"
+      }
+    },
+    "x_tea_set": {
+      "status": "reviewed",
+      "names": {
+        "common": "Teaparty",
+        "uncommon": "Matchingcups",
+        "rare": "Guestsenser",
+        "epic": "Teddy Tea Queue",
+        "legendary": "Chinaclatter, the Endless Party"
+      },
+      "lore": {
+        "common": "Has a teapot, cups and saucers that all match, except one.",
+        "uncommon": "Has one cup with a chip that always goes to the visitor.",
+        "rare": "Sets itself out on the table whenever visitors are coming, before anyone knows they are coming.",
+        "epic": "Threw a tea party for the garden's teddy bears so grand that the real neighbours queued at the fence to get in.",
+        "legendary": "Hosted one tea party for so long that the guests' grandchildren arrived for the final cup, and the cake was still fresh."
+      },
+      "moves": {
+        "signature": "Hot Tea Heat",
+        "legend": "Chip Crack",
+        "ultimate": "Saucer Stampede"
+      }
+    },
+    "x_toilet_brush": {
+      "status": "reviewed",
+      "names": {
+        "common": "Ankletickler",
+        "uncommon": "Bristleguard",
+        "rare": "Shantybrush",
+        "epic": "Bathroom Scrub-Up",
+        "legendary": "First Mate Bristlewell"
+      },
+      "lore": {
+        "common": "Leans out from behind the toilet to tickle the ankles of anyone sitting down.",
+        "uncommon": "Drips onto the floor whenever it's put back too quickly.",
+        "rare": "Makes the toilet hum a sea shanty every time it is scrubbed.",
+        "epic": "Scrubbed a whole bathroom before a party, and the guests complimented the toilet.",
+        "legendary": "Scrubbed every toilet on a cruise ship in one night, and the captain made it first mate."
+      },
+      "moves": {
+        "signature": "Scrub Scrub Scrub",
+        "legend": "Bristle Guard",
+        "ultimate": "Sparkle Scrub"
+      }
+    },
+    "x_travel_cup": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lidsipper",
+        "uncommon": "Commutecup",
+        "rare": "Tonguescald",
+        "epic": "Train Platform Sip",
+        "legendary": "Hotflask the Deep-Sea Sipper"
+      },
+      "lore": {
+        "common": "Keeps coffee warm on the way to work and spills a bit at every bump.",
+        "uncommon": "Has a lid that never quite clicks shut.",
+        "rare": "Keeps tea so warm that it's still too hot to drink by the time work starts.",
+        "epic": "Was dropped on the platform and bounced back up without spilling a drop.",
+        "legendary": "Kept its coffee hot for so long that divers found it on the seabed years later, still steaming."
+      },
+      "moves": {
+        "signature": "Hot Sip Heat",
+        "legend": "Hot Lid Heat",
+        "ultimate": "Commute Sip"
+      }
+    },
+    "x_water_fountain": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pondspout",
+        "uncommon": "Coinsplasher",
+        "rare": "Shapespray",
+        "epic": "Foam Park",
+        "legendary": "Splashenda, the Dancing Water"
+      },
+      "lore": {
+        "common": "Splashes water in the park with a little arc that sparkles in the sun.",
+        "uncommon": "Sprays water onto everyone who walks past on a windy day.",
+        "rare": "Sprays its water into the shape of whatever the nearest child is thinking about, which is mostly ice cream.",
+        "epic": "Had bubble bath tipped into it by a prankster, and the park disappeared under foam up to the top of the swings.",
+        "legendary": "Danced its water so well at the park's birthday that the statue in the middle climbed down to join in."
+      },
+      "moves": {
+        "signature": "Splash Splash Splash",
+        "legend": "Spray Spray Spray",
+        "ultimate": "Grand Jet Finale"
+      }
+    },
+    "x_water_pump": {
+      "status": "reviewed",
+      "names": {
+        "common": "Handlepump",
+        "uncommon": "Squeakhandle",
+        "rare": "Treasurepump",
+        "epic": "Brass Band Soak",
+        "legendary": "Old Squeaker, Raiser of Rivers"
+      },
+      "lore": {
+        "common": "Squeaks loudly whenever its handle is pumped up and down.",
+        "uncommon": "Takes ten pumps before any water comes out.",
+        "rare": "Pumps up whatever is underground, so sometimes it's water, sometimes buried treasure and once a very confused worm.",
+        "epic": "Was pumped so hard at the village fair that a jet shot over the bunting and soaked the brass band mid-tune.",
+        "legendary": "Pumped up an underground river so fast that the village had a new stream by lunchtime and a ferry by teatime."
+      },
+      "moves": {
+        "signature": "Squeak Squeak Squeak",
+        "legend": "Big Pump",
+        "ultimate": "Village Pump"
+      }
+    },
+    "x_wine_tumbler": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stemless",
+        "uncommon": "Wobblecup",
+        "rare": "Thirstroller",
+        "epic": "Picnic Strike",
+        "legendary": "Stillwell, Rider of Rollercoasters"
+      },
+      "lore": {
+        "common": "Has no stem, so it sits low and round on the picnic blanket.",
+        "uncommon": "Wobbles in circles for ages after being put down, like a spinning top.",
+        "rare": "Rolls itself across the table to whoever is thirstiest, even if they are on the far side of the room.",
+        "epic": "Rolled off a picnic blanket at the top of a hill and knocked over a whole game of skittles at the bottom.",
+        "legendary": "Held its juice dead level through a whole rollercoaster ride, and the juice was the only one on the ride that didn't scream."
+      },
+      "moves": {
+        "signature": "Picnic Sun Glare",
+        "legend": "Wine Tumbler Picnic Rest",
+        "ultimate": "Grand Roll Over"
+      }
+    }
+  }
+}

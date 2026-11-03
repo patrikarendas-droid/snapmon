@@ -12,8 +12,9 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
 // the old save, generated the way v0.4.7 did it for these objects (no Pilot 02 content)
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape }; vm.createContext(ctx);
 vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') + ';globalThis.T={createMonster,freshState,recordSighting,setRNG:f=>{RNG=f}}', ctx);
-const T = ctx.T, P02 = require('../content/curated/pilot-02-approved.json').entries;
-const longest = Object.keys(P02).sort((a, b) => P02[b].names.legendary.length - P02[a].names.legendary.length).slice(0, 2); // longest Legendary names
+const T = ctx.T, P02 = {}; // v0.5.0: every reviewed entry from content/curated/*.json (all 2,308 objects are live)
+for (const f of fs.readdirSync(path.join(__dirname, '../content/curated')).filter(f => f.endsWith('.json'))) Object.assign(P02, JSON.parse(fs.readFileSync(path.join(__dirname, '../content/curated', f), 'utf8')).entries);
+const longest = Object.keys(P02).sort((a, b) => P02[b].names.legendary.length - P02[a].names.legendary.length || (a < b ? -1 : 1)).slice(0, 2); // longest Legendary names of all live content
 const picks = [['toaster', 'legendary', 'shiny'], ['dog', 'epic', 'spectral'], ['umbrella', 'rare', 'mutated'], ['banana', 'common', null], ['apple', 'legendary', null], ['mug', 'rare', null], ...longest.map(id => [id, 'legendary', null])];
 const S0 = T.freshState(); S0.level = 12; S0.coins = 777; let n = 0;
 for (const [obj, rarity, variant] of picks) { let s = 7 + n; T.setRNG(() => { s = (s * 16807) % 2147483647; return s / 2147483647; }); const m = T.createMonster(S0, { obj, rarity, variant, word: obj }); m.id = 'm' + (++n); m.level = 10 + n; S0.monsters.push(m); T.recordSighting(S0, m); }
@@ -42,8 +43,7 @@ const RAW = JSON.stringify(S0);
   ok(s1.monsters.every((m, i) => m.level === S0.monsters[i].level && JSON.stringify(m.stats) === JSON.stringify(S0.monsters[i].stats) && m.rarity === S0.monsters[i].rarity && m.variant === S0.monsters[i].variant && JSON.stringify(m.dna) === JSON.stringify(S0.monsters[i].dna)) && s1.coins === 777 && s1.level === 12, 'levels, stats, rarity, variants, colours/DNA, coins and hunter level unchanged');
   ok(s1.monsters[1].nick === 'Biscuit', 'nickname kept');
   const named = s1.monsters.filter(m => P02[m.obj]);
-  ok(named.every(m => m.name === P02[m.obj].names[m.rarity] && m.lore === P02[m.obj].lore[m.rarity]), `Pilot 02 monsters renamed: ${named.map(m => m.name).join(', ')}`);
-  ok(s1.monsters[4].name === S0.monsters[4].name && s1.monsters[5].name === S0.monsters[5].name, `Pilot 01 apple keeps "${s1.monsters[4].name}"; mug keeps "${s1.monsters[5].name}"`);
+  ok(named.length === s1.monsters.length && named.every(m => m.name === P02[m.obj].names[m.rarity] && m.lore === P02[m.obj].lore[m.rarity]), `every saved monster renamed to its approved writing (Pilot 01, Pilot 02, campaign): ${named.map(m => m.name).join(', ')}`);
 
   /* 2) Captured grid and monster sheets */
   await p.click('[data-act="tab"][data-arg="dex"]'); await p.waitForTimeout(300);

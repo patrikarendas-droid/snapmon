@@ -1,0 +1,1761 @@
+{
+ "batch": "w17-furniture-and-bedding",
+ "editor": "independent agent",
+ "reviewed": 100,
+ "summary": "Much stronger than w16 line by line: most objects have concrete, object-true premises with human reactions (the armchair that made grandad miss his own party, the bed the dog brought toast to, the folding screen dropping mid costume change, the kitchen island that retired the dining table, the kneeling chair that straightened a dog, the hat stand that steals hats). The problems are structural. (1) Names are attached to the wrong lines in about 25 objects: Uncommon and Rare names were shuffled (room divider, locker, dog bed, hammock, bench seat, folding chair, picnic table, pet bed, piano bench and others), so Lightblocker sits on the room-splitting line and Flipover on the swaying one. (2) About 30 Legendaries use the template 'Has [done] so many X that it [knows / can tell / could] Y' (coffee table, desk, kitchen counter, nightstand, picnic table, piano bench, footrest, bench seat, mattress topper, pet bed, vanity stool and more), and another dozen use 'for N years / never once / four generations'. (3) Several objects scale one trait over three rarities (coffee table toes, console table keys, cabinet lids, towel rail warmth, pouffe rolling, deckchair that won't open, nesting tables' extra table). (4) Cluster copies: the spinning seats (swivel stool U = hammock chair U, three Epics spinning a toddler), wobbling stools (stool R = step stool R), sleep mask = eye mask, good china (credenza, hutch), pigeonholes (bureau, secretary desk), standing desk = sit-stand desk Epics. Safety: the ladder shelf invites toddlers to climb it, the bean bag Legendary has a teenager jumping off the top bunk, stools wobble while stood on, children spun on stools, the bunk bed's 'two in the gap', the bunk Ultimate 'Lights Out Leap'; the folding screen's 'three shepherds' and the pew's 'Kneelerbench' bring back church content that the tracker says was removed. 'Tall Tipple Tip' is an alcohol word. Moves: about 75 signatures are '<Noun> Startle' (truthful but monotonous), and a handful of Ultimates use rest/sleep/cure words or repeat the Epic name. Replacements are given for every high and medium item.",
+ "patterns": [
+  {
+   "pattern": "Names sit on the wrong rarity's line (Uncommon/Rare names shuffled, or a name describing another line).",
+   "ids": [
+    "armchair",
+    "bean_bag",
+    "bed",
+    "x_headboard",
+    "x_room_divider",
+    "x_shoe_rack",
+    "x_spice_rack",
+    "x_wine_rack",
+    "x_umbrella_stand",
+    "cabinet",
+    "coffee_table",
+    "x_bistro_table",
+    "x_kitchen_counter",
+    "dresser",
+    "x_credenza",
+    "x_sideboard_unit",
+    "folding_chair",
+    "locker",
+    "nightstand",
+    "picnic_table",
+    "pool_table",
+    "x_bench_seat",
+    "x_body_pillow",
+    "x_cat_bed",
+    "x_comforter",
+    "x_dog_bed",
+    "x_drafting_chair",
+    "x_hammock",
+    "x_hot_water_bottle",
+    "x_park_seat",
+    "x_pet_bed",
+    "x_piano_bench",
+    "x_vanity_stool",
+    "sleeping_bag",
+    "x_hutch",
+    "x_dining_table"
+   ],
+   "severity": "high",
+   "suggestion": "Re-pair names after the lore (write the name for each line, not in a row). Per-field names are given below."
+  },
+  {
+   "pattern": "Legendary template: 'Has [done] so many X that it [knows / can tell / could / now ...] Y'.",
+   "ids": [
+    "bench",
+    "coffee_table",
+    "x_card_table",
+    "x_console_table",
+    "desk",
+    "x_kitchen_counter",
+    "x_bureau",
+    "x_towel_rail",
+    "nightstand",
+    "picnic_table",
+    "rocking_chair",
+    "x_bench_seat",
+    "x_church_pew",
+    "x_footrest",
+    "x_hat_stand",
+    "x_piano_bench",
+    "x_pet_bed",
+    "x_ottoman",
+    "x_mattress_topper",
+    "x_sideboard_unit",
+    "x_vanity_stool",
+    "x_director_chair",
+    "x_drafting_chair",
+    "x_comforter",
+    "x_hot_water_bottle",
+    "four_poster",
+    "cabinet",
+    "x_step_stool",
+    "x_park_seat",
+    "sleeping_bag"
+   ],
+   "severity": "high",
+   "suggestion": "Most are replaced with a feat and a punchline below; a few with a real punchline are left as low notes."
+  },
+  {
+   "pattern": "Endurance and generations Legendaries: 'for twenty years without', 'for sixty years until', 'four generations', 'every day for five years', 'never once'.",
+   "ids": [
+    "x_sofa_bed_frame",
+    "x_bed_frame",
+    "dresser",
+    "x_credenza",
+    "x_secretary_desk",
+    "x_folding_stool",
+    "x_pouffe",
+    "x_umbrella_stand",
+    "x_wine_rack",
+    "x_bedspread",
+    "x_rocking_horse",
+    "x_spice_rack",
+    "x_magazine_rack"
+   ],
+   "severity": "high",
+   "suggestion": "Replaced below (lockers that open the whole corridor, a stool at the top of a mountain, a bureau writing its own complaint letters)."
+  },
+  {
+   "pattern": "One trait scaled across three or four rarities.",
+   "ids": [
+    "coffee_table",
+    "x_console_table",
+    "cabinet",
+    "x_towel_rail",
+    "x_pouffe",
+    "x_deckchair",
+    "x_nesting_tables",
+    "x_umbrella_stand",
+    "x_magazine_rack",
+    "x_card_table",
+    "x_folding_chair",
+    "x_duvet_cover",
+    "x_folding_stool",
+    "x_papasan_chair",
+    "x_pet_bed",
+    "x_body_pillow",
+    "x_rocking_horse",
+    "x_filing_cabinet"
+   ],
+   "severity": "high",
+   "suggestion": "Change the line flagged per object."
+  },
+  {
+   "pattern": "Cluster duplicates: spinning seats (swivel stool U = hammock chair U; swivel stool, stool and hammock chair Epics all spin a toddler); wobbling stools (stool R = step stool R); eye mask = sleep mask (midday dark, sleeping through dawn/festival); good china (credenza U/L, hutch R/L); pigeonholes (bureau C, secretary desk U); standing desk E = sit-stand desk E; the card table and folding chair both 'live behind the door'; coffee table E = footrest E (every shin).",
+   "ids": [
+    "x_swivel_stool",
+    "x_hammock_chair",
+    "stool",
+    "x_step_stool",
+    "x_sleep_mask",
+    "x_credenza",
+    "x_hutch",
+    "x_standing_desk",
+    "folding_chair",
+    "x_footrest",
+    "x_park_seat"
+   ],
+   "severity": "high",
+   "suggestion": "Replacements below keep one owner per premise."
+  },
+  {
+   "pattern": "Safety: climbing furniture (ladder shelf R), jumping off a top bunk (bean bag L), standing on a wobbling stool (stool R, step stool R), spinning toddlers on stools (stool E, swivel stool E, hammock chair E), overloading a bunk bed (bunk bed L) and 'Lights Out Leap'.",
+   "ids": [
+    "x_ladder_shelf",
+    "bean_bag",
+    "stool",
+    "x_step_stool",
+    "x_swivel_stool",
+    "x_hammock_chair",
+    "bunk_bed",
+    "x_bed_frame",
+    "x_hutch"
+   ],
+   "severity": "high",
+   "suggestion": "Replaced below."
+  },
+  {
+   "pattern": "Religious and alcohol leftovers: 'three shepherds' in the school play (nativity), 'Kneelerbench' on the hall-bench pew, 'Tall Tipple Tip', 'Cellar Heat' on the wine rack.",
+   "ids": [
+    "x_folding_screen",
+    "x_church_pew",
+    "x_bar_table",
+    "x_wine_rack"
+   ],
+   "severity": "medium",
+   "suggestion": "Replaced below."
+  },
+  {
+   "pattern": "Legendary name shapes: about 60 'The X That Y' plus a cluster of titles (Lord, Lady, Baroness, Countess, Grand Duke, Grand Marshal, Grand Unfolder, Sir, Her Majesty).",
+   "ids": [
+    "barber_chair",
+    "bean_bag",
+    "x_daybed_frame",
+    "x_sofa_bed_frame",
+    "x_shoe_rack",
+    "four_poster",
+    "high_chair",
+    "throne",
+    "x_chaise_longue"
+   ],
+   "severity": "medium",
+   "suggestion": "New Legendary names below avoid both; keep at most four titles in the batch."
+  },
+  {
+   "pattern": "Ultimates with rest, sleep, cure or guard words on attacks, or repeating the Epic name (Long Siesta, Cold Feet Cure, Feet Up, Catnap Curl, Quilt Cover, Combination Lock, Coat Mountain, Office Rodeo, Kitchen Carousel Twirl, Steamy Bath).",
+   "ids": [
+    "x_daybed_frame",
+    "x_hot_water_bottle",
+    "x_footrest",
+    "x_cat_bed",
+    "x_bedspread",
+    "safe",
+    "x_coat_rack",
+    "x_saddle_chair",
+    "x_swivel_stool",
+    "x_towel_rail",
+    "bunk_bed"
+   ],
+   "severity": "medium",
+   "suggestion": "Effect-neutral names given per object."
+  },
+  {
+   "pattern": "About 75 signatures are '<Noun> Startle' (stun on Leg Sweep / Lullaby). Truthful, but the batch reads as one move.",
+   "ids": [
+    "bench",
+    "cabinet",
+    "desk",
+    "x_bureau",
+    "stool"
+   ],
+   "severity": "low",
+   "suggestion": "Vary with flash, jolt, bump, clatter, creak words."
+  },
+  {
+   "pattern": "Flat 'waits / sits / stands ... waiting for' Commons with no joke (bench, rocking horse, footrest, hammock, coat rack, pool table, vanity stool, step stool, sawhorse).",
+   "ids": [
+    "bench",
+    "x_rocking_horse",
+    "x_footrest",
+    "x_hammock",
+    "x_coat_rack",
+    "pool_table",
+    "x_vanity_stool",
+    "x_step_stool",
+    "x_sawhorse"
+   ],
+   "severity": "low",
+   "suggestion": "Fixed where the line is flagged; aim for a small consequence."
+  }
+ ],
+ "issues": [
+  {
+   "id": "armchair",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Crumbkeeper' does not match the Uncommon (groaning like an old dog).",
+   "suggestion": "'Groanseat'"
+  },
+  {
+   "id": "barber_chair",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A nervous boy asking for the same cut is a quiet ending, and the name ('Rising Seat') belongs to the Epic.",
+   "suggestion": "'Spun so fast one Saturday that it gave everyone in the queue a haircut at once, and they all came out looking like the barber.'"
+  },
+  {
+   "id": "barber_chair",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Whirligig the Speed Barber'"
+  },
+  {
+   "id": "bean_bag",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Floppod' does not match the Common (rustling through films).",
+   "suggestion": "'Filmrustler'"
+  },
+  {
+   "id": "bean_bag",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "A teenager jumping off the top bunk is unsafe behaviour to show.",
+   "suggestion": "'Swallowed a whole birthday party during musical statues, and nobody has moved since, so everyone won.'"
+  },
+  {
+   "id": "bed",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Fiveminuter' does not match the Uncommon (hiding a sock in its sheets).",
+   "suggestion": "'Sockstasher'"
+  },
+  {
+   "id": "x_bed_frame",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Squeaking when sat on repeats the Common (creaking when rolled on).",
+   "suggestion": "'Slides one inch across the room every night, and by Friday it is under the window.'"
+  },
+  {
+   "id": "x_bed_frame",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bedslider'"
+  },
+  {
+   "id": "x_bed_frame",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Collapsing as the last child jumps on shows bed-jumping as the fun part.",
+   "suggestion": "'Dropped one inch onto its slats in the middle of a sleepover ghost story, and the room screamed and then giggled till dawn.'"
+  },
+  {
+   "id": "x_bed_frame",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Survival list (house moves, bouncing children, a dog using it as a trampoline).",
+   "suggestion": "'Was carried up so many staircases on house moves that it learned to climb them, and now lets itself into the spare room.'"
+  },
+  {
+   "id": "x_daybed_frame",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Long Siesta' is a rest word on an attack.",
+   "suggestion": "'Window Seat Sprawl'"
+  },
+  {
+   "id": "x_headboard",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Banging the wall repeats the Common (thumping the wall), and the Rare and Epic names are swapped.",
+   "suggestion": "'Pops a padded button off whenever someone leans back to read, straight into their cocoa.'"
+  },
+  {
+   "id": "x_headboard",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Losing every button now belongs to the Rare and the Legendary; the Epic name (Dawn Drumbeat) is about thumping.",
+   "suggestion": "'Thumped the wall so hard during one restless night that next door's crooked pictures all hung straight.'"
+  },
+  {
+   "id": "x_sofa_bed_frame",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for twenty years and never once').",
+   "suggestion": "'Unfolded so far for one big family visit that it reached the kitchen, and the cousins made toast without getting up.'"
+  },
+  {
+   "id": "x_sofa_bed_frame",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "A title shape; fine but the batch has many.",
+   "suggestion": "'Unfoldo the Endless'"
+  },
+  {
+   "id": "bench",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Remembers every first date by heart' is the 'so many that it remembers' template.",
+   "suggestion": "'Got up one morning and walked to the seaside, because everyone who sat on it kept saying they wished they were there.'"
+  },
+  {
+   "id": "x_folding_screen",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "'Three shepherds' is a nativity-play image (religious content the tracker removed) and uses the stock number three.",
+   "suggestion": "'Fell flat during the school play costume change, and two pirates and a carrot took a very surprised bow.'"
+  },
+  {
+   "id": "x_folding_screen",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Wobbling over at a sneeze repeats the Uncommon (folding flat at the worst moment).",
+   "suggestion": "'Casts a shadow of whatever is behind it, only bigger and sillier, so the laundry pile looks like a dancing bear.'"
+  },
+  {
+   "id": "x_folding_screen",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Shadowshow'"
+  },
+  {
+   "id": "x_ladder_shelf",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Inviting every toddler to climb it shows unsafe climbing of furniture.",
+   "suggestion": "'Grows an extra rung whenever someone needs more shelf space, and it is slowly reaching the ceiling.'"
+  },
+  {
+   "id": "x_ladder_shelf",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Rungsprouter'"
+  },
+  {
+   "id": "x_ladder_shelf",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'Never Climbed' points at climbing, and the lore is about holding up the wall.",
+   "suggestion": "'Leanwell, Prop of the House'"
+  },
+  {
+   "id": "x_magazine_rack",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "The unfinished crossword repeats the Legendary.",
+   "suggestion": "'Curls the cover of every new magazine like a croissant, so nothing ever lies flat again.'"
+  },
+  {
+   "id": "x_magazine_rack",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Curlcover'"
+  },
+  {
+   "id": "x_room_divider",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Spacesplitter' sits on the light-blocking line.",
+   "suggestion": "'Lightblocker'"
+  },
+  {
+   "id": "x_room_divider",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Lightblocker' sits on the room-splitting line.",
+   "suggestion": "'Spacesplitter'"
+  },
+  {
+   "id": "x_shoe_rack",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Laceholder' does not match the Rare (football-boot smell).",
+   "suggestion": "'Bootponger'"
+  },
+  {
+   "id": "x_spice_rack",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Labelfader' does not match the Rare (pepper clouds).",
+   "suggestion": "'Pepperpuffer'"
+  },
+  {
+   "id": "x_spice_rack",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "An old jar of nutmeg is an age line with no feat.",
+   "suggestion": "'Mixed its jars so cleverly one night that it invented a new flavour, and the whole town now puts it on cornflakes.'"
+  },
+  {
+   "id": "x_spice_rack",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Saffronia the Flavourmaker'"
+  },
+  {
+   "id": "x_wine_rack",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Corkcellar' does not match the Rare (rattling with the washing machine).",
+   "suggestion": "'Spinrattler'"
+  },
+  {
+   "id": "x_wine_rack",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Survival list (house move, toddler, two earthquakes, no crack).",
+   "suggestion": "'Rattled so musically during one washing machine spin that a passing band signed it up as their drummer.'"
+  },
+  {
+   "id": "x_wine_rack",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Clinkety Clank the Drummer'"
+  },
+  {
+   "id": "x_wine_rack",
+   "field": "moves.legend",
+   "severity": "medium",
+   "issue": "Cellars are cold, so 'Cellar Heat' sends a cold image on a burn move.",
+   "suggestion": "'Sunny Shelf Sizzle'"
+  },
+  {
+   "id": "x_umbrella_stand",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "A puddle repeats the Common (drips), and the name Brollykeeper is plain.",
+   "suggestion": "'Opens one umbrella indoors every week, just to see who gets nervous about bad luck.'"
+  },
+  {
+   "id": "x_umbrella_stand",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Indoorbrolly'"
+  },
+  {
+   "id": "x_umbrella_stand",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Puddlemaker' belongs to the old Uncommon; the Rare is the pond smell.",
+   "suggestion": "'Pondponger'"
+  },
+  {
+   "id": "x_umbrella_stand",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Never once let one be forgotten' is the endurance formula.",
+   "suggestion": "'Grew so fond of umbrellas that it started borrowing them from the neighbours, and now owns every brolly in the street.'"
+  },
+  {
+   "id": "x_umbrella_stand",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Umbrellina the Collector'"
+  },
+  {
+   "id": "bunk_bed",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Two on top, two below and two in the gap' shows overloading a bunk bed.",
+   "suggestion": "'Was so much fun that the parents swapped and slept in it, and the children got the big bed and a lie-in.'"
+  },
+  {
+   "id": "bunk_bed",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Topsy Bunkworth'"
+  },
+  {
+   "id": "bunk_bed",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "'Lights Out Leap' suggests leaping from a bunk.",
+   "suggestion": "'Lights Out Lark'"
+  },
+  {
+   "id": "cabinet",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Hiding lids repeats the Legendary, and the name Dustdrawer matches neither.",
+   "suggestion": "'Opens its door just wide enough for one biscuit, then shuts it on the hand reaching for the second.'"
+  },
+  {
+   "id": "cabinet",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Biscuitguarder'"
+  },
+  {
+   "id": "cabinet",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Could open a small lid museum' is the 'so many that it could' template.",
+   "suggestion": "'Collected odd lids for years until one day they all found their boxes at once, and the kitchen has never been so quiet.'"
+  },
+  {
+   "id": "cabinet",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lidwig the Reuniter'"
+  },
+  {
+   "id": "coffee_table",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Shinknocker' sits on the line about holding mugs and feet.",
+   "suggestion": "'Mugmountain'"
+  },
+  {
+   "id": "coffee_table",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Catching every shin repeats the Rare (stubbed toes) and the Legendary (toes), and the footrest Epic.",
+   "suggestion": "'Grew so many mug rings over one rainy weekend that a visitor tried to play darts on it.'"
+  },
+  {
+   "id": "coffee_table",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Mug Ring Weekend'"
+  },
+  {
+   "id": "coffee_table",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Can tell who is walking by the sound of the ouch' is the 'so many that it can tell' template on the same toe trait.",
+   "suggestion": "'Moved so far one night that it ended up in next door's lounge, and nobody there noticed for a week.'"
+  },
+  {
+   "id": "coffee_table",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Shinbane the Wanderer'"
+  },
+  {
+   "id": "x_bar_table",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "'Tipple' means an alcoholic drink.",
+   "suggestion": "'Tall Table Tip'"
+  },
+  {
+   "id": "x_bistro_table",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Cafecorner' sits on the tilting-saucer line.",
+   "suggestion": "'Saucertilt'"
+  },
+  {
+   "id": "x_bistro_table",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Saucertilt' sits on the squeezed-into-a-corner line.",
+   "suggestion": "'Cafecorner'"
+  },
+  {
+   "id": "x_bistro_table",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'So many coffees that the pigeons know it by name' is the template, and the name (room for one croissant) needs its own premise.",
+   "suggestion": "'Squeezed a whole wedding breakfast onto its tiny top, plate by plate, and still had room for one croissant.'"
+  },
+  {
+   "id": "x_card_table",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Folding mid-game repeats the Rare (collapsing on a winning hand).",
+   "suggestion": "'Hosted a game of snap so fierce that it slapped down a card of its own and won.'"
+  },
+  {
+   "id": "x_card_table",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Snap Champion'"
+  },
+  {
+   "id": "x_card_table",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Could tell which grandad cheats' is the 'so many that it could' template.",
+   "suggestion": "'Dealt itself a hand one night, and has been beating the whole family at cards ever since.'"
+  },
+  {
+   "id": "x_card_table",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Jack of Tables'"
+  },
+  {
+   "id": "x_console_table",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Swallowing keys repeats the Rare and the Legendary.",
+   "suggestion": "'Held so much post over one holiday that the front door would only open an inch, and the family posted themselves in.'"
+  },
+  {
+   "id": "x_console_table",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Holiday Post Jam'"
+  },
+  {
+   "id": "x_console_table",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Knows the house's secrets' is the template on the same key trait.",
+   "suggestion": "'Kept the hallway so tidy for so long that the hallway was promoted to a second living room.'"
+  },
+  {
+   "id": "x_console_table",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Slimline Sylvia'"
+  },
+  {
+   "id": "desk",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Could write one itself' is the 'so many that it could' template.",
+   "suggestion": "'Did its owner's homework one night in perfect handwriting, then got a lower mark than usual.'"
+  },
+  {
+   "id": "x_drafting_table",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Without a single mistake' has no punchline.",
+   "suggestion": "'Drew a whole new town without a single mistake, then forgot the roads, and the people are still trying to get out.'"
+  },
+  {
+   "id": "x_kitchen_counter",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Toastcatcher' does not match the Uncommon (post, keys and an onion).",
+   "suggestion": "'Onionlander'"
+  },
+  {
+   "id": "x_kitchen_counter",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Knows every family member by the sound of their toast' is the template.",
+   "suggestion": "'Made breakfast all by itself one morning: perfect toast, perfect eggs, and a cup of tea for the dog.'"
+  },
+  {
+   "id": "x_kitchen_counter",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crumbella the Cook'"
+  },
+  {
+   "id": "x_nesting_tables",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "The hidden third table repeats the Epic (one more table nobody knew existed), plus 'for forty years'.",
+   "suggestion": "'Kept pulling out tables all through a huge party, and the last one was the size of a stamp, holding a single pea.'"
+  },
+  {
+   "id": "x_nesting_tables",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Tinytable, Last of the Line'"
+  },
+  {
+   "id": "x_sawhorse",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Flat 'waiting for a plank' Common with no joke.",
+   "suggestion": "'Stands in the shed on four splayed legs and kicks over the paint tin whenever anyone walks past.'"
+  },
+  {
+   "id": "x_secretary_desk",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for sixty years until it was finally posted').",
+   "suggestion": "'Hid a secret drawer so well that it found it again by accident, and was so surprised that it slammed shut for a week.'"
+  },
+  {
+   "id": "x_secretary_desk",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "Cubbyholes repeat the bureau's pigeonholes Common.",
+   "suggestion": "'Has a dozen tiny cubbyholes, and keeps moving the stamps into a different one every night.'"
+  },
+  {
+   "id": "x_sit_stand_desk",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Seeing over the partitions has no punchline.",
+   "suggestion": "'Rose so high one day that its owner could see over every desk in the building, and was promoted by mistake.'"
+  },
+  {
+   "id": "x_standing_desk",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "A whole team on its feet repeats the sit-stand desk Epic (office exercise).",
+   "suggestion": "'Locked itself at full height on a Friday, and the team ate lunch round it standing on one leg like flamingos.'"
+  },
+  {
+   "id": "x_standing_desk",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Flamingo Lunch'"
+  },
+  {
+   "id": "dining_chair",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Tipping back on two legs repeats the Epic and shows chair-tipping as a power.",
+   "suggestion": "'Grows one leg slightly shorter whenever there is a guest, so the guest wobbles through the whole dinner.'"
+  },
+  {
+   "id": "dining_chair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Wobbleguest'"
+  },
+  {
+   "id": "dining_chair",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Nobody else dares to take it' is a quiet ending.",
+   "suggestion": "'Pulled itself out for the dog one Sunday, and now the dog sits at the head of the table and expects gravy.'"
+  },
+  {
+   "id": "dining_table",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Elbowtable' does not match the Rare (a new wobble before important dinners).",
+   "suggestion": "'Wobbleleaf'"
+  },
+  {
+   "id": "x_bureau",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Could tell the story of every shopping trip since 1970' is the template.",
+   "suggestion": "'Swallowed so many bills that it started writing letters of complaint to the companies itself, in ink.'"
+  },
+  {
+   "id": "x_bureau",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Rolltop Rupert'"
+  },
+  {
+   "id": "dresser",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Sockhoarder' sits on the jumper line (socks are the Common).",
+   "suggestion": "'Jumperkeeper'"
+  },
+  {
+   "id": "dresser",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Mirrortop' does not match the Rare (slamming a drawer by itself).",
+   "suggestion": "'Drawerslammer'"
+  },
+  {
+   "id": "dresser",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for twenty years without a single lonely one').",
+   "suggestion": "'Matched every lost sock in the house in one night, including one from next door's washing line.'"
+  },
+  {
+   "id": "x_credenza",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Lowcupboard' does not match the Rare (biscuits vanishing).",
+   "suggestion": "'Biscuitvanisher'"
+  },
+  {
+   "id": "x_credenza",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for fifty years') and repeats its own Uncommon and the hutch (good china kept safe).",
+   "suggestion": "'Was so long that the office used it as a bowling lane at the summer party, and it had the best night of its life.'"
+  },
+  {
+   "id": "x_credenza",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lowrider Len'"
+  },
+  {
+   "id": "x_hutch",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Keeping cups so high that nobody can reach them without a chair suggests climbing, and repeats the Legendary's untouchable cups.",
+   "suggestion": "'Rattles a polite warning whenever anyone reaches for the good cups, like a very small burglar alarm.'"
+  },
+  {
+   "id": "x_hutch",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Cupwarden'"
+  },
+  {
+   "id": "x_sideboard_unit",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Coasterkeeper' does not match the Uncommon (old takeaway menus).",
+   "suggestion": "'Menuhoarder'"
+  },
+  {
+   "id": "x_sideboard_unit",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Napkinstore' does not match the Rare (blending into the buffet).",
+   "suggestion": "'Buffetblender'"
+  },
+  {
+   "id": "filing_cabinet",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Misfiling repeats the Common.",
+   "suggestion": "'Locks its bottom drawer from the inside whenever anyone says the word urgent.'"
+  },
+  {
+   "id": "filing_cabinet",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Urgentlocker'"
+  },
+  {
+   "id": "filing_cabinet",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "A retirement party is a quiet ending.",
+   "suggestion": "'Filed every paper in the building so perfectly that it filed the staff too, alphabetically, by lunchtime.'"
+  },
+  {
+   "id": "folding_chair",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "'Lives flat behind the door until there are more guests' copies the card table Common.",
+   "suggestion": "'Hides in the shed all winter and comes out in summer with a spider who refuses to leave.'"
+  },
+  {
+   "id": "folding_chair",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Picnicseat' sits on the finger-pinching line.",
+   "suggestion": "'Fingerclap'"
+  },
+  {
+   "id": "folding_chair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Fingerclap' sits on the speech line.",
+   "suggestion": "'Speechsitter'"
+  },
+  {
+   "id": "folding_chair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Stopping a dull speech repeats the Rare.",
+   "suggestion": "'Was so light and snappy that the wind took it off the beach, across the bay, and it opened itself up on the other side.'"
+  },
+  {
+   "id": "folding_chair",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Snapwing the Flying Seat'"
+  },
+  {
+   "id": "four_poster",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'So many bedtime stories that its curtains tell them back' is the template.",
+   "suggestion": "'Closed its curtains so tight on a stormy night that it sailed off like a ship and was docked at the seaside by breakfast.'"
+  },
+  {
+   "id": "high_chair",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Became the happiest chair in the house' has no feat or punchline.",
+   "suggestion": "'Flicked a spoonful of yoghurt so far that it hit a dog in the next street, who came round for more.'"
+  },
+  {
+   "id": "x_rocking_horse",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Galloping out into the garden repeats the Rare (galloping across the room).",
+   "suggestion": "'Rocked so wildly at a birthday party that the cake slid off the table and landed perfectly on the cat.'"
+  },
+  {
+   "id": "x_rocking_horse",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Cake Slide Party'"
+  },
+  {
+   "id": "x_rocking_horse",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('three generations') with imaginary oceans.",
+   "suggestion": "'Rocked so far one night that it really reached the seaside, and came home with sand in its mane and a donkey friend.'"
+  },
+  {
+   "id": "x_rocking_horse",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Dapplejack the Seafarer'"
+  },
+  {
+   "id": "i_mosquito_net",
+   "field": "moves.legend",
+   "severity": "medium",
+   "issue": "'Bite Blocker' reads as a guard move, but it is a plain hit.",
+   "suggestion": "'Net Drop Thump'"
+  },
+  {
+   "id": "x_towel_rail",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Warming every towel repeats the Rare and Legendary (one warmth trait over three rarities).",
+   "suggestion": "'Got so hot one winter morning that the bathroom turned into a sauna, and Grandad refused to come out.'"
+  },
+  {
+   "id": "x_towel_rail",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bathroom Sauna'"
+  },
+  {
+   "id": "x_towel_rail",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'So many towels that it is the most loved thing' is the template.",
+   "suggestion": "'Hung one towel up so neatly that it never needed folding again, and the airing cupboard went on strike.'"
+  },
+  {
+   "id": "x_towel_rail",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Toastbar the Folder'"
+  },
+  {
+   "id": "x_towel_rail",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Heat word, but the Spectral variant lowers defence and the Mutated variant poisons.",
+   "suggestion": "'Rail Rattle'"
+  },
+  {
+   "id": "locker",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Codelock' sits on the gym-kit line.",
+   "suggestion": "'Sockvault'"
+  },
+  {
+   "id": "locker",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Sockvault' sits on the forgotten-combination line.",
+   "suggestion": "'Codelock'"
+  },
+  {
+   "id": "locker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('every day for five years').",
+   "suggestion": "'Opened so smoothly one exam morning that every locker in the school opened with it, and the corridor rained PE kits.'"
+  },
+  {
+   "id": "nightstand",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Drawerdreamer' does not match the Rare (hiding the charger).",
+   "suggestion": "'Chargerhider'"
+  },
+  {
+   "id": "nightstand",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'So many glasses of water that it never spilled one' is the template.",
+   "suggestion": "'Caught a falling alarm clock, a phone and a glass of water in one night without spilling a drop, like a sleepy juggler.'"
+  },
+  {
+   "id": "nightstand",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bedside Benedict'"
+  },
+  {
+   "id": "picnic_table",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Splinterseat' sits on the sticky-patch line (the splinter is the Uncommon).",
+   "suggestion": "'Stickypatch'"
+  },
+  {
+   "id": "picnic_table",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Benchstep' sits on the splinter line.",
+   "suggestion": "'Splinterseat'"
+  },
+  {
+   "id": "picnic_table",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'So many picnics that the ants queue' is the template; the punchline is good.",
+   "suggestion": "'Hosted a picnic so polite that the ants formed a queue and the wasps waited to be offered a sandwich.'"
+  },
+  {
+   "id": "pool_table",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Flat 'waiting for someone to rack up' Common.",
+   "suggestion": "'Has one leg propped on a folded birthday card, so every single ball drifts to the left.'"
+  },
+  {
+   "id": "pool_table",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Pocketgulper' sits on the chalk-dust line.",
+   "suggestion": "'Chalkduster'"
+  },
+  {
+   "id": "rocking_chair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'A hundred years of stories, still knows how they end' is the template.",
+   "suggestion": "'Rocked so evenly that a passing orchestra used it to keep time, and it is now the band's oldest member.'"
+  },
+  {
+   "id": "rocking_chair",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Grandmother Tock'"
+  },
+  {
+   "id": "safe",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Combination Lock' reads as a guard move on an attack.",
+   "suggestion": "'Vault Door Slam'"
+  },
+  {
+   "id": "sleeping_bag",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'So many trips that it still smells of every campfire' is the template, and the name (never rolled back up) belongs to the Common.",
+   "suggestion": "'Zipped up so snugly on a mountain that its owner slept all winter and woke in spring next to a very confused bear.'"
+  },
+  {
+   "id": "sleeping_bag",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Snugglebear the Hibernator'"
+  },
+  {
+   "id": "stool",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Wobbling while someone stands on it to reach a cupboard shows unsafe use, and copies the step stool Rare.",
+   "suggestion": "'Grows a few inches for anyone short who sits on it, and shrinks a few for everyone else.'"
+  },
+  {
+   "id": "stool",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Heightfiddler'"
+  },
+  {
+   "id": "stool",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Spinning fast with a toddler on it is unsafe and copies the swivel stool and hammock chair Epics.",
+   "suggestion": "'Wobbled so nervously at a kitchen party that every guest held their drink with both hands, just in case.'"
+  },
+  {
+   "id": "stool",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Nervous Party'"
+  },
+  {
+   "id": "x_bedspread",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Generations formula ('four generations, every tassel').",
+   "suggestion": "'Made a bed so perfectly in one flick that the hotel down the road tried to hire it as a manager.'"
+  },
+  {
+   "id": "x_bedspread",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Flickwell the Bedmaker'"
+  },
+  {
+   "id": "x_bedspread",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Quilt Cover' reads as a guard move on an attack.",
+   "suggestion": "'Big Flick'"
+  },
+  {
+   "id": "x_bench_seat",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Cushionbench' sits on the hiding-things-under-the-lid line.",
+   "suggestion": "'Liftlid'"
+  },
+  {
+   "id": "x_bench_seat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Liftlid' sits on the cloud-watching line.",
+   "suggestion": "'Cloudgazer'"
+  },
+  {
+   "id": "x_bench_seat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'So many readers that it knows the end of every book' is the template.",
+   "suggestion": "'Lifted its lid one rainy day and gave back a whole lost summer: buckets, spades and a sandcastle still standing.'"
+  },
+  {
+   "id": "x_body_pillow",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Keeping its shape for ten years is the endurance formula, and the name ('Took Half the Bed') repeats the Uncommon and Epic.",
+   "suggestion": "'Was hugged so hard on a stormy night that it hugged back, and its owner has never slept better or been so squashed.'"
+  },
+  {
+   "id": "x_body_pillow",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Snugglesworth the Hugger'"
+  },
+  {
+   "id": "x_cat_bed",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Box Instead Sulk' sits on the 'finally used after six months' line.",
+   "suggestion": "'Six Month Tiptoe'"
+  },
+  {
+   "id": "x_cat_bed",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Bed the Cat Finally Used' belongs to the Epic; the Legendary is every cat on the street.",
+   "suggestion": "'Catnapolis, Bed of Strangers'"
+  },
+  {
+   "id": "x_cat_bed",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Catnap' is a rest word on an attack.",
+   "suggestion": "'Cat Bed Pounce'"
+  },
+  {
+   "id": "x_church_pew",
+   "field": "names.uncommon",
+   "severity": "high",
+   "issue": "'Kneelerbench' names a church kneeler; the pew is written as a hall bench.",
+   "suggestion": "'Shinyslider'"
+  },
+  {
+   "id": "x_coat_rack",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Coat Mountain' repeats the Epic name (Hallway Coat Mountain).",
+   "suggestion": "'Coat Topple'"
+  },
+  {
+   "id": "x_comforter",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Comforter That Hid Three Children' belongs to the Epic.",
+   "suggestion": "'Puffington the Boilerbeater'"
+  },
+  {
+   "id": "x_comforter",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'So many winters that the snow gave up trying' is the template.",
+   "suggestion": "'Kept a family so warm one winter that they turned the heating off, and the boiler wrote them a sad letter.'"
+  },
+  {
+   "id": "x_deckchair",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Being a puzzle to set up repeats the Uncommon and the Legendary (it will not open).",
+   "suggestion": "'Leans back one notch further every ten minutes until its sitter is lying flat, staring at the sky.'"
+  },
+  {
+   "id": "x_deckchair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Reclinecreeper'"
+  },
+  {
+   "id": "x_dog_bed",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Toyhider' sits on the spinning line.",
+   "suggestion": "'Circlespinner'"
+  },
+  {
+   "id": "x_dog_bed",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Circlespinner' sits on the toy-hiding line.",
+   "suggestion": "'Toyhider'"
+  },
+  {
+   "id": "x_drafting_chair",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Footringer' sits on the spinning line.",
+   "suggestion": "'Spinstool'"
+  },
+  {
+   "id": "x_drafting_chair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Spinstool' sits on the rolling-away line.",
+   "suggestion": "'Leanroller'"
+  },
+  {
+   "id": "x_duvet_cover",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "The wrestling match repeats the Epic.",
+   "suggestion": "'Turns itself inside out during the night, so its sleeper wakes up inside the cover with the duvet on top.'"
+  },
+  {
+   "id": "x_duvet_cover",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Insideouter'"
+  },
+  {
+   "id": "x_folding_stool",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Sinking into the riverbank repeats the Uncommon.",
+   "suggestion": "'Opened itself in the car boot on the way to the beach, and the family arrived with a stool where the picnic should be.'"
+  },
+  {
+   "id": "x_folding_stool",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Car Boot Surprise'"
+  },
+  {
+   "id": "x_folding_stool",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for twenty years without breaking once').",
+   "suggestion": "'Was carried up a mountain and opened at the very top, so for one minute it was the highest seat in the country.'"
+  },
+  {
+   "id": "x_folding_stool",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Summit Sally'"
+  },
+  {
+   "id": "x_folding_stool",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "Repeats the old Epic name.",
+   "suggestion": "'Muddy Bank Sink'"
+  },
+  {
+   "id": "x_footrest",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Catching every shin copies the coffee table Epic and the Uncommon's tripping.",
+   "suggestion": "'Had so many feet put up on it at a party that it relaxed completely and started snoring under the slippers.'"
+  },
+  {
+   "id": "x_footrest",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Can tell how hard someone's day was' is the template.",
+   "suggestion": "'Put its own feet up one evening, and the armchair had to make the tea.'"
+  },
+  {
+   "id": "x_footrest",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Slippersworth the Idle'"
+  },
+  {
+   "id": "x_footrest",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Feet Up' is a rest phrase on an attack.",
+   "suggestion": "'Footrest Flop'"
+  },
+  {
+   "id": "x_hammock",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Treecradle' sits on the flipping-over line.",
+   "suggestion": "'Flipover'"
+  },
+  {
+   "id": "x_hammock",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Flipover' sits on the swaying line.",
+   "suggestion": "'Treecradle'"
+  },
+  {
+   "id": "x_hammock_chair",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Spinning its sitter to face the wall copies the swivel stool Uncommon.",
+   "suggestion": "'Collects every leaf, petal and lost tennis ball that drifts past, and gives them to whoever sits down next.'"
+  },
+  {
+   "id": "x_hammock_chair",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Leafcatcher'"
+  },
+  {
+   "id": "x_hammock_chair",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Spinning a toddler is unsafe and copies two other Epics.",
+   "suggestion": "'Swayed so gently that a robin landed on it for a rest and rode it for a whole afternoon.'"
+  },
+  {
+   "id": "x_hammock_chair",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Robin Rest Stop'"
+  },
+  {
+   "id": "x_hot_water_bottle",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Glugwarmer' does not match the Uncommon (cold at the bottom of the bed).",
+   "suggestion": "'Bottomcooler'"
+  },
+  {
+   "id": "x_hot_water_bottle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'So many winters that its cover has been knitted three times' is the template.",
+   "suggestion": "'Got so cosy one snowy night that the snowman outside knocked on the window to ask for a go.'"
+  },
+  {
+   "id": "x_hot_water_bottle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Toastina, Friend of Snowmen'"
+  },
+  {
+   "id": "x_hot_water_bottle",
+   "field": "moves.ultimate",
+   "severity": "high",
+   "issue": "'Cold Feet Cure' is a cold word plus a heal word on an attack.",
+   "suggestion": "'Rubber Belly Bump'"
+  },
+  {
+   "id": "x_ottoman",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Needs a map to remember what is in there' is the template.",
+   "suggestion": "'Opened its lid one evening and out came a lost cat, a lost dog and the uncle who popped round for tea in March.'"
+  },
+  {
+   "id": "x_papasan_chair",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Pulling its sitter into the cushion repeats the Common.",
+   "suggestion": "'Pulls its cushion over anyone who dozes off, like a lid, and they wake up feeling like a pie.'"
+  },
+  {
+   "id": "x_papasan_chair",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Piecruster'"
+  },
+  {
+   "id": "x_papasan_chair",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Holding a whole sleepover repeats the Epic.",
+   "suggestion": "'Was so deep that a teenager went in looking for the remote and came out an hour later with three remotes and a lost hamster.'"
+  },
+  {
+   "id": "x_papasan_chair",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bowlbert the Bottomless'"
+  },
+  {
+   "id": "x_park_seat",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Duckwatcher' does not match the Uncommon (warm on one side, cold on the other).",
+   "suggestion": "'Halfwarm'"
+  },
+  {
+   "id": "x_park_seat",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Gathering pensioners and pigeons copies the bench Rare (pigeons), and the name Ironarm fits neither.",
+   "suggestion": "'Shuffles itself into the only shade on a hot day and into the only puddle on a wet one.'"
+  },
+  {
+   "id": "x_park_seat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Shadechaser'"
+  },
+  {
+   "id": "x_park_seat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for fifty years').",
+   "suggestion": "'Was sat on by so many tired walkers that it grew a footrest, then a cup holder, and finally a little roof.'"
+  },
+  {
+   "id": "x_park_seat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ironside the Improved'"
+  },
+  {
+   "id": "x_pet_bed",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Pawpillow' sits on the fur line.",
+   "suggestion": "'Furmagnet'"
+  },
+  {
+   "id": "x_pet_bed",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Furmagnet' sits on the dragged-into-the-sun line.",
+   "suggestion": "'Sunspotter'"
+  },
+  {
+   "id": "x_pet_bed",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Being fought over repeats the Rare, and 'officially the cosiest' is the template.",
+   "suggestion": "'Was so cosy that a fox crept in one winter night, and the family found it curled up next to the cat, both snoring.'"
+  },
+  {
+   "id": "x_pet_bed",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Snoozeheap, Bed of Truce'"
+  },
+  {
+   "id": "x_piano_bench",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "'Musicseat' sits on the sheet-music line.",
+   "suggestion": "'Sheetstore'"
+  },
+  {
+   "id": "x_piano_bench",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Sheetstore' sits on the squeaking line.",
+   "suggestion": "'Squeakseat'"
+  },
+  {
+   "id": "x_piano_bench",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'Can hum every practice piece' is the template.",
+   "suggestion": "'Squeaked one note so perfectly in a concert that the orchestra tuned to it.'"
+  },
+  {
+   "id": "x_piano_bench",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Maestro Squeakins'"
+  },
+  {
+   "id": "x_pouffe",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Rolling repeats the Rare, Epic and Legendary (one trait over four rarities).",
+   "suggestion": "'Sinks a little lower every time anyone sits on it, and is slowly turning into a rug.'"
+  },
+  {
+   "id": "x_pouffe",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Rugbecomer'"
+  },
+  {
+   "id": "x_pouffe",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Endurance formula ('for twenty years and never once burst').",
+   "suggestion": "'Rolled out of the front door on a windy day and was last seen bowling along the beach, with the seagulls cheering.'"
+  },
+  {
+   "id": "x_saddle_chair",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Office Rodeo' repeats the Epic name exactly.",
+   "suggestion": "'Bucking Spin'"
+  },
+  {
+   "id": "x_sleep_mask",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Making daytime dark so the wearer thinks it is night copies the eye mask Common.",
+   "suggestion": "'Shows its wearer the dream before they fall asleep, so they always know how it ends.'"
+  },
+  {
+   "id": "x_sleep_mask",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Dreampeeker'"
+  },
+  {
+   "id": "x_sleep_mask",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Sleeping through the dawn copies the eye mask Legendary (sleeping through a festival).",
+   "suggestion": "'Kept the dawn out so well that the cockerel next door overslept too, and the whole farm had a lie-in.'"
+  },
+  {
+   "id": "x_step_stool",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Wobbling as someone grabs the top jar shows unsafe use and copies the stool Rare.",
+   "suggestion": "'Folds itself up the moment nobody is using it and hides behind the fridge.'"
+  },
+  {
+   "id": "x_step_stool",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Fridgeskulker'"
+  },
+  {
+   "id": "x_step_stool",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Knows exactly where the treats are hidden' is the template.",
+   "suggestion": "'Gave a small child just enough height to see over the garden fence, and she has been in charge of the street ever since.'"
+  },
+  {
+   "id": "x_step_stool",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Littlelift the Lofty'"
+  },
+  {
+   "id": "x_swivel_stool",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Turning its sitter to face the wall copies the hammock chair Uncommon.",
+   "suggestion": "'Squeaks on every spin, and plays a different note for every person who sits on it.'"
+  },
+  {
+   "id": "x_swivel_stool",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Squeakspinner'"
+  },
+  {
+   "id": "x_swivel_stool",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Spinning a toddler fifty times is unsafe and copies the stool and hammock chair Epics.",
+   "suggestion": "'Spun so long at a kitchen party that it unscrewed itself and rose slowly towards the ceiling.'"
+  },
+  {
+   "id": "x_swivel_stool",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Ceiling Rise'"
+  },
+  {
+   "id": "x_swivel_stool",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "'The whole kitchen turned into a carousel' repeats the old Epic.",
+   "suggestion": "'Spun so fast that it drilled down into the cellar and came back up with a jar of jam nobody knew was there.'"
+  },
+  {
+   "id": "x_swivel_stool",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Spindrift the Driller'"
+  },
+  {
+   "id": "x_swivel_stool",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Repeats the old Epic name (Kitchen Carousel).",
+   "suggestion": "'Big Twirl'"
+  },
+  {
+   "id": "x_throw_blanket",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Still smells faintly of popcorn' is a quiet ending.",
+   "suggestion": "'Was thrown over the sofa so gracefully that it floated, and the cat rode it round the lounge like a flying carpet.'"
+  },
+  {
+   "id": "x_throw_blanket",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Drapella the Flying'"
+  },
+  {
+   "id": "x_throw_blanket",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Warm Heat Wrap' says heat twice.",
+   "suggestion": "'Toasty Wrap Up'"
+  },
+  {
+   "id": "x_vanity_stool",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Puffseat' does not match the Uncommon (hiding an earring).",
+   "suggestion": "'Earringhider'"
+  },
+  {
+   "id": "x_vanity_stool",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "'Knows every outfit that worked' is the template.",
+   "suggestion": "'Got someone ready so beautifully for a party that the mirror asked for a photo.'"
+  },
+  {
+   "id": "wheelchair",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Ramp Racer' nearly repeats the Rare name Rampracer.",
+   "suggestion": "'Kerb Hop Dash'"
+  },
+  {
+   "id": "x_sawhorse",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Tea Break Rest' is also the w16 tea set's legend move.",
+   "suggestion": "'Sawdust Siesta'"
+  }
+ ]
+}

@@ -10,9 +10,12 @@
    TinyCLIP on single-thread WASM for everyone, manual confirmation (no countdown), save compatibility, game balance
    (`tests/rules-trace.js`). Android first.
 5. Detailed specs: `README.md`, `docs/RECOGNITION.md`, `docs/RELEASING.md`, `docs/ANDROID.md`.
-6. **Curated monster writing** (names, flavour text, move names): follow `docs/SNAPMON_WRITING_BIBLE.md` and the
-   workflow in `docs/CONTENT_WRITING_GUIDE.md` ("Batch workflow"). Coverage: `docs/review/COVERAGE.md`; batches are
-   fixed lists in `content/batches/`; progress is `node tools/curated.js progress <batch>`. All new content stays
-   `"status": "draft"`: only the developer approves entries (`"reviewed"`); never set it yourself, never regenerate or
-   overwrite approved text, never add drafts to `src/curated-data.js`. Monster names from reviewed entries are live (since the Pilot 02
-   integration); saved monsters refresh to the latest reviewed writing once per content revision (`tests/curated-refresh.js`).
+6. **Curated monster writing** (names, flavour text, move names) is **live for all 2,308 objects since v0.5.0**. Source:
+   human-readable JSON in `content/curated/` keyed by object id → rarity / move slot; the game reads only the generated
+   `src/curated-data.js`. Corrections are single fields, each approved by the developer, via "Correcting live writing"
+   in `docs/CONTENT_WRITING_GUIDE.md` (`patch … --approved-edit` → validate → build → `rebaseline` → tests → release).
+   Never regenerate, bulk-rewrite or "improve" approved text on your own; never set `"reviewed"` yourself on new
+   drafts; never add drafts to `src/curated-data.js`. Style: `docs/SNAPMON_WRITING_BIBLE.md`. Counts:
+   `node tools/campaign.js status`; coverage: `docs/review/COVERAGE.md`. Saved monsters refresh their text once per
+   content revision (`tests/curated-refresh.js`). Next agreed task: a developer catalogue (journal section 4) — only
+   when explicitly started.

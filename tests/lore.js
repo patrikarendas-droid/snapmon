@@ -5,11 +5,12 @@ let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } e
 const RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
 const ids = Object.keys(G.OBJECTS);
 // 1) every object × rarity (several seeds, with and without a photo colour) yields clean text
+//    (a/an check: 'a one-pram band', 'a unicorn', 'a useful', 'a euro' are correct English)
 let problems = [], n = 0;
 for (const id of ids) for (const r of RAR) for (const seed of [1, 77, 4242]) {
   const pal = seed === 77 ? { conf: 'confident', primary: [seed % 360, 60, 50] } : null;
   const t = G.monsterLore({ obj: id, rarity: r, seed, photo: pal ? { pal } : null, fam: 'food', name: 'X, the Eternal Feast' }); n++;
-  if (!t || /[{}]|undefined|\bnull\b|\bNaN\b|\s{2}|\b[Aa] [aeiouAEIOU]/.test(t) || t.length > 260) problems.push(id + '/' + r + ': ' + t);
+  if (!t || /[{}]|undefined|\bnull\b|\bNaN\b|\s{2}|\b[Aa] (?!one\b|once\b|uni|use|eu)[aeiouAEIOU]/.test(t) || t.length > 260) problems.push(id + '/' + r + ': ' + t);
 }
 ok(!problems.length, `${n} texts for ${ids.length} objects × 5 rarities have no unfilled or broken parts${problems.length ? ': ' + problems.slice(0, 3).join(' | ') : ''}`);
 // 2) deterministic and rarity-specific
@@ -17,7 +18,10 @@ const m = r => G.monsterLore({ obj: 'apple', rarity: r, seed: 99, fam: 'food' })
 ok(m('legendary') === m('legendary'), 'the same monster always gets the same text');
 let differs = 0; for (const id of ids.slice(0, 300)) if (G.monsterLore({ obj: id, rarity: 'common', seed: 5 }) !== G.monsterLore({ obj: id, rarity: 'legendary', seed: 5 })) differs++;
 ok(differs === 300, `Legendary text differs from Common text for the same object (${differs}/300)`);
+// (the procedural generator varies; since v0.5.0 every object has fixed curated text, so check the generator itself)
+const curOn = G.CURATED.enabled; G.CURATED.enabled = false;
 const distinct = new Set(Array.from({ length: 40 }, (_, i) => G.monsterLore({ obj: 'mug', rarity: 'rare', seed: i * 7919 })));
+G.CURATED.enabled = curOn;
 ok(distinct.size >= 6, `monsters of the same object and rarity get varied text (${distinct.size} variants in 40)`);
 // 3) the object is reflected (name, signature move or category kit)
 const t = G.monsterLore({ obj: 'forklift', rarity: 'epic', seed: 3, abilities: [{ name: 'Pallet Hoist' }] });

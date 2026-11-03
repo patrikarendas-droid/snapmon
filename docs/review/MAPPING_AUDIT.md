@@ -61,7 +61,7 @@ Visual-only fixes (VIS_FIXES in `src/objects.js`: body only; names, texts, famil
 
 ## Flags
 
-30 flags: 15 high, 15 medium, 0 low; **0 high flags without a decision** (tests fail if > 0).
+32 flags: 17 high, 15 medium, 0 low; **0 high flags without a decision** (tests fail if > 0).
 
 ### animal-to-object (2, high)
 
@@ -69,6 +69,13 @@ Visual-only fixes (VIS_FIXES in `src/objects.js`: body only; names, texts, famil
 |---|---|---|
 | crane | ImageNet animal class #134 "crane" (bird:water) → crane (Mobile crane, car) | ImageNet classes 134 (bird) and 517 (machine) are both named "crane"; the table is keyed by name, so they cannot be separated. Kept as the Mobile crane. |
 | kite | ImageNet animal class #21 "kite" (bird:perch) → kite (Kite, toy) | ImageNet class 21 is the bird "kite"; ImageNet has no toy-kite class, so photos of toy kites also come back as "kite". Kept as the toy Kite (far more likely to be photographed). |
+
+### curated-unreachable (2, high)
+
+| Key | Detail | Decision |
+|---|---|---|
+| x_mouse | Mouse has reviewed writing but no recogniser label reaches it | animal Mouse: "mouse" → computer Mouse (see alias-collision:mouse); the animal is reached via "mouse (animal)" on Hamster. Writing kept for a future own label. |
+| x_washer | Washer has reviewed writing but no recogniser label reaches it | hardware Washer: "washer" → Washing machine (see alias-collision:washer). Writing kept for a future own label. |
 
 ### sibling-shadow (13, high)
 

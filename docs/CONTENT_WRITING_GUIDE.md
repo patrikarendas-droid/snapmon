@@ -1,17 +1,19 @@
 # Content writing guide: curated monster writing
 
 Hand-written, reviewed monster writing for specific objects: flavour text, move names and monster names.
-**Status (2026-11-02): Pilot 01 (10 objects: flavour text, move names) live since v0.4.6; Pilot 02 (50 objects:
-names, flavour text, move names) integrated on `feature/curated-pipeline-pilot02`, awaiting final approval.** Every
-other object uses the generated name and text. Only entries the developer approves and marks `"reviewed"` reach the
-game; drafts never do. Monster names are live for reviewed entries that have them (see "Monster names").
+**Status (v0.5.0, 2026-11-03): curated writing is LIVE for all 2,308 objects** — names, flavour text (5 rarities) and
+move names: Pilot 01 (10, `pilot-01-approved.json`, names since v0.5.0), Pilot 02 (50, `pilot-02-approved.json`) and
+the 22 campaign batches (2,248, `content/curated/wNN-<theme>.json`). Every entry is `"status": "reviewed"`. Later work
+is single-field corrections (see "Correcting live writing"), not new campaigns.
 
 The editorial standard (humour, rarity rules, names, moves) is **[`SNAPMON_WRITING_BIBLE.md`](SNAPMON_WRITING_BIBLE.md)**.
 Coverage of every object and layer: [`review/COVERAGE.md`](review/COVERAGE.md).
 
 ## Where content lives
 
-- One or more files in `content/curated/`, e.g. `content/curated/pilot-01.json`. Any `*.json` there is checked.
+- Files in `content/curated/`: `pilot-01-approved.json`, `pilot-02-approved.json`, `w01-mammals-1.json` … `w22-drinks-pantry-and-meals.json`
+  (one owner file per object id; `node tools/curated.js lookup <words>` finds the id). Any `*.json` there is checked.
+  A future new batch is written as `<batch>-draft.json` and renamed when it is released.
 - A complete example (a dummy, never loaded): [`docs/curated-example.json`](curated-example.json).
 - Batch manifests (the fixed list of ids in a batch): `content/batches/<batch>.json`. Writer packs:
   `content/packs/<batch>/`. Editor issue lists: `content/review/<batch>-issues.json`. Review sheets:
@@ -199,10 +201,27 @@ Rarity is a **different premise**, not the same sentence with bigger adjectives:
 `createMonster` uses `names[rarity]` from a reviewed entry (`curatedMonsterName`, switch `CURATED.namesEnabled`, set
 by `build --enable`); deterministic, no random numbers, no effect on family, rarity, stats or moves. A Legendary's
 curated name replaces the generated "Name, title" whole (the battle header shows the part before a comma and
-shortens long names with an ellipsis). Objects without reviewed names keep the generated name (Pilot 01 for now).
+shortens long names with an ellipsis). Objects without reviewed names keep the generated name (since v0.5.0 every object has reviewed names).
 Existing monsters take the curated name on refresh; nicknames win on screen. The encyclopedia sheet shows the curated
 name for the highest rarity seen, otherwise the name first seen. Tests: `tests/curated-refresh.js`,
 `tests/e2e-curated.js` (412 px), `tests/identity.js` (Legendary names unique across all objects).
+
+## Correcting live writing (one object, one field)
+
+The source of truth is the JSON in `content/curated/`, keyed by object id: `names.<rarity>`, `lore.<rarity>` and
+`moves.<slot>` (`signature`, `legend`, `ultimate`, `kit.<slot>`; slots of an object: `node tools/campaign.js brief <batch>
+<index> 1` or the inventory). A future catalogue's suggestions map 1:1 to these keys. Every correction is approved by
+the developer first.
+
+1. Edit the field in `content/curated/<file>.json` by hand, or write `{"<id>": {"lore.rare": "…"}}` and run
+   `node tools/campaign.js patch <batch> fixes.json --approved-edit` (checks name uniqueness, move slots, duplicates;
+   without `--approved-edit` it refuses live entries; `ingest` never regenerates live entries).
+2. `node tools/curated.js validate` and `node tools/curated.js lint --batch <batch>`.
+3. `node tools/curated.js build --enable --out src/curated-data.js` (new `CURATED.revision`) and `node tools/build.js`.
+4. `node tools/campaign.js rebaseline "<what changed and who approved it>"` (records the new file hashes; `immutable`
+   fails on any unrecorded change), `node tools/campaign.js status`, `node tools/inventory.js`.
+5. Tests (`docs/RELEASING.md`; re-record curated-on snapshots with `node tests/generator-snapshot.js record-curated`,
+   which refuses if curated-off output changed), version bump, release. Saved monsters pick up the new text once.
 
 ## Activation and adding a new batch (active since v0.4.6, Pilot 01)
 

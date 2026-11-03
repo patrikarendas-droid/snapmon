@@ -1,0 +1,1653 @@
+{
+  "batch": "w05-vehicles-1",
+  "editor": "independent agent",
+  "reviewed": 79,
+  "summary": "A safe, warm and readable batch: no gore, lines are short, and many single jokes land well (bus pulling away as you reach the stop, escalator that never climbed a step itself, toy jet 'crashed in nine hundred and still has both wings', submarine still looking for the bottom of the plughole, crane lifting a swimming pool onto a hotel roof, the builder's wellie stuck in the new path, the police goat chase that the goat won). Move mechanics are mostly respected: drain, heal, buff, stun and poison names fit, kit moves are sensibly re-skinned for non-engines (horse pat whiff, brake dust stink, coal smoke), and most variant Ultimates are effect-neutral. The structural problems are three. (1) Legendaries are templated: 29 of 79 are 'has done X for N years / since great-grandad / three generations', often ending on 'still has its original...' or 'never once...', with no outrageous achievement or punchline (barge, flagpole, pole, pedestal, shield, manhole cover, lifeboat, rowboat, scissor lift, oxcart, thresher...). (2) Monster names are paired with the wrong rarity's lore in about 30 objects, often as clean swaps (bus, car wheel, pole, lifeboat, rowboat, tugboat, backhoe, biplane, ambulance, scooter, satellite). (3) Premises repeat: inside objects (car wheel runaway x3, tugboat towing x4, dinghy capsizing x3, segway balance, backhoe C=L, barge C=L, bulldozer R=L, turnstile R=E, quad bike U=E), and across objects (paver U = road roller U; ambulance C = fire truck C = ferry C; ambulance R/E = fire truck E; horse cart E = oxcart E; dinghy U = sailboat U; rv/mobile home/station wagon Legendaries; rickshaw L = tuk tuk L; police R = bollard R; helicopter U = w03 hummingbird U). Epics lean on 'every Y in town / whole town / led a convoy / with a hundred others' (57 of 79 match), and several Rares are helpful talents rather than troublesome powers. Hard flags: trademark or real-person echoes (crane 'Lifting Klaxon', skid steer 'Little Bob', bulldozer 'Big Bertha', 'Montgolfiera', lifeboat 'Grace', 'Mister Sprinkles', scooter 'Hot Wheel Spin'), a church wedding setting (horse cart), a political echo ('never left a child behind'), a child alone at sea in a storm (dinghy L), rescue words on attack Ultimates (fire truck, lifeboat), and a few effect-specific Ultimate names on varying Ultimates (grille 'Glare', rowboat 'Sunny'). Every high and medium item has a concrete replacement; names were checked for length and uniqueness against all curated content and the Pilot 01 proposal.",
+  "patterns": [
+    {
+      "pattern": "Templated Legendaries: 'has done X for N years / since great-grandad / three generations', usually ending on 'still has its original...' or 'never once...', with no outrageous achievement or punchline.",
+      "ids": [
+        "x_steamroller",
+        "bus",
+        "i_gas_pump",
+        "i_grille",
+        "i_horse_cart",
+        "i_model_t",
+        "i_oxcart",
+        "x_scissor_lift",
+        "fire_truck",
+        "garbage_truck",
+        "x_quad_bike",
+        "i_flagpole",
+        "i_harvester",
+        "i_manhole_cover",
+        "i_pedestal",
+        "i_pole",
+        "i_shield",
+        "i_thresher",
+        "pickup",
+        "police_car",
+        "x_barge",
+        "x_fishing_boat",
+        "x_houseboat",
+        "i_lifeboat",
+        "x_rowboat",
+        "school_bus",
+        "x_rickshaw",
+        "x_roller_skate",
+        "x_segway"
+      ],
+      "severity": "high",
+      "suggestion": "Keep at most a handful batch-wide. Write a single concrete outrageous act with a punchline (bible: 'Picked up a house to find the remote. It was in the sofa'). Replacements for the weakest are in the issues list."
+    },
+    {
+      "pattern": "Monster names describe another rarity's lore (often a clean swap between Common and Uncommon, or a rotation of three). Name and lore sit together in the encyclopedia, so this reads as an error.",
+      "ids": [
+        "airplane",
+        "x_biplane",
+        "x_glider",
+        "ambulance",
+        "x_grader",
+        "x_skid_steer",
+        "x_steamroller",
+        "x_wheel_loader",
+        "bus",
+        "i_car_wheel",
+        "i_gas_pump",
+        "i_grille",
+        "x_cherry_picker",
+        "x_backhoe_loader",
+        "excavator",
+        "garbage_truck",
+        "i_hay",
+        "i_pole",
+        "i_thresher",
+        "jeep",
+        "x_escalator",
+        "x_satellite_model",
+        "i_gondola",
+        "x_houseboat",
+        "i_lifeboat",
+        "x_rowboat",
+        "x_yacht",
+        "scooter",
+        "x_segway"
+      ],
+      "severity": "high",
+      "suggestion": "Write names after the lore, line by line (tracker lesson). Exact re-pairings are given per object."
+    },
+    {
+      "pattern": "One premise carried over several rarities of the same object instead of five premises.",
+      "ids": [
+        "i_car_wheel",
+        "x_tugboat",
+        "x_dinghy",
+        "x_segway",
+        "x_backhoe_loader",
+        "x_barge",
+        "bulldozer",
+        "i_turnstile",
+        "x_quad_bike",
+        "x_glider",
+        "x_road_roller",
+        "x_grader",
+        "x_space_rocket_toy",
+        "ambulance",
+        "i_disk_brake",
+        "i_grille",
+        "x_skid_steer",
+        "helicopter",
+        "i_manhole_cover",
+        "x_houseboat",
+        "x_seaplane",
+        "x_quad_tractor"
+      ],
+      "severity": "high",
+      "suggestion": "Let one trait own at most two rarities; use other real traits of the object (parts, sounds, owners, jobs, where it lives). Per-object rewrites are in the issues list."
+    },
+    {
+      "pattern": "Near-copies between objects in this batch, and with w01-w04.",
+      "ids": [
+        "x_asphalt_paver",
+        "x_road_roller",
+        "ambulance",
+        "fire_truck",
+        "x_ferry",
+        "i_horse_cart",
+        "i_oxcart",
+        "police_car",
+        "x_dinghy",
+        "sailboat",
+        "rv",
+        "i_mobile_home",
+        "x_rickshaw",
+        "x_tuk_tuk",
+        "motorcycle",
+        "x_cherry_picker",
+        "x_scissor_lift",
+        "i_grille",
+        "x_steamroller",
+        "x_skid_steer",
+        "excavator",
+        "helicopter",
+        "i_harvester",
+        "i_thresher",
+        "ice_cream_truck",
+        "bus"
+      ],
+      "severity": "high",
+      "suggestion": "Pairs: paver U = road roller U ('moves so slowly that ... walk beside it'); ambulance C = fire truck C = ferry C ('just as you fall asleep'); ambulance R/E = fire truck E (traffic parts); horse cart E = oxcart E (whole harvest in one trip); police R = w06 bollard R (runaway shopping trolley); dinghy U = sailboat U (flapping sail, names Sailflapper/Sailflap) and dinghy E = sailboat E (regatta); rv L ~ mobile home L ~ w06 station wagon L (every campsite/beach, original cushions/sand); rv R ~ mobile home R; rickshaw L = tuk tuk L; motorcycle R = tuk tuk R; cherry picker C = scissor lift C = w06 gondola lift C (stuck halfway); grille L = steamroller L = w06 classic car L = hearse L (polished every Sunday/morning for decades); skid steer C = excavator U (spins like dancing); harvester U = thresher U (chaff); ice cream van R ~ bus C; helicopter U ~ w03 hummingbird U. Rewrite one side of each pair (issues name which)."
+    },
+    {
+      "pattern": "Epic shape: 'every Y in town / the whole town / led a convoy/parade / with a hundred others', often with no disruption or no punchline (a fact plus 'everyone waved').",
+      "ids": [
+        "x_asphalt_paver",
+        "bus",
+        "x_wheel_loader",
+        "i_gas_pump",
+        "garbage_truck",
+        "x_rickshaw",
+        "x_ferry",
+        "i_mobile_home",
+        "i_pole",
+        "i_pedestal",
+        "i_shield",
+        "x_steamroller",
+        "x_glider",
+        "x_atv",
+        "jeep",
+        "x_inline_skate",
+        "motorcycle",
+        "sailboat",
+        "x_dinghy"
+      ],
+      "severity": "medium",
+      "suggestion": "An Epic needs large-scale chaos with a concrete funny consequence. Vary the frame: a single place going wrong, a chain reaction, a misunderstanding."
+    },
+    {
+      "pattern": "Legendary name formulas: most Legendaries start with Grand/Old/Lady/Sir/Captain/Big/Commander/Little, and stems repeat (Bertha x2, Puff- x2 here and more in w06, Rosie, Reggie, Rusty, '-alot', 'Queen of the ...').",
+      "ids": [
+        "airplane",
+        "x_biplane",
+        "x_glider",
+        "x_space_rocket_toy",
+        "x_hot_air_balloon",
+        "bulldozer",
+        "x_skid_steer",
+        "x_steamroller",
+        "x_wheel_loader",
+        "bus",
+        "car",
+        "i_grille",
+        "i_horse_cart",
+        "i_oxcart",
+        "crane",
+        "dump_truck",
+        "excavator",
+        "x_buggy",
+        "x_quad_tractor",
+        "helicopter",
+        "i_flagpole",
+        "i_harvester",
+        "i_manhole_cover",
+        "i_mobile_home",
+        "i_pedestal",
+        "i_shield",
+        "i_thresher",
+        "i_turnstile",
+        "jeep",
+        "x_escalator",
+        "motorcycle",
+        "x_sidecar",
+        "pickup",
+        "rv",
+        "x_barge",
+        "x_dinghy",
+        "x_ferry",
+        "x_fishing_boat",
+        "x_houseboat",
+        "x_inflatable_boat",
+        "x_rowboat",
+        "x_submarine_toy",
+        "x_yacht",
+        "school_bus"
+      ],
+      "severity": "medium",
+      "suggestion": "Vary shapes: a pun-name alone, a name plus a deed, a title that is a joke in itself. Avoid reusing a personal name across objects."
+    },
+    {
+      "pattern": "Trademarks, characters and real people.",
+      "ids": [
+        "crane",
+        "x_skid_steer",
+        "bulldozer",
+        "x_hot_air_balloon",
+        "i_lifeboat",
+        "ambulance",
+        "ice_cream_truck",
+        "scooter"
+      ],
+      "severity": "high",
+      "suggestion": "Klaxon (trademark), Little Bob digger (Bob the Builder), Big Bertha (WWI gun), Montgolfiera (Montgolfier brothers), Grace at a lighthouse (Grace Darling), Nightingale (Florence Nightingale, low), Mister Sprinkles (ice-cream-van trade-name pattern), Hot Wheel Spin (Hot Wheels). Object labels Segway, Model T and Jeep are brand names in the inventory; the writing correctly avoids repeating them."
+    },
+    {
+      "pattern": "Commons built on the same everyday nuisance: a slow vehicle in the lane at walking pace, or noise early in the morning / just as you fall asleep.",
+      "ids": [
+        "i_harvester",
+        "x_quad_tractor",
+        "rv",
+        "x_barge",
+        "i_horse_cart",
+        "x_road_roller",
+        "x_asphalt_paver",
+        "garbage_truck",
+        "x_hot_air_balloon",
+        "excavator",
+        "ambulance",
+        "fire_truck",
+        "x_ferry",
+        "x_fishing_boat"
+      ],
+      "severity": "medium",
+      "suggestion": "Keep the best one or two (tractor, garbage truck) and give the others a nuisance tied to their own parts."
+    },
+    {
+      "pattern": "Rares that are helpful skills or pleasant events rather than a troublesome power.",
+      "ids": [
+        "x_seaplane",
+        "x_glider",
+        "helicopter",
+        "i_lifeboat",
+        "x_escalator",
+        "x_hot_air_balloon",
+        "x_biplane",
+        "i_oxcart",
+        "x_inline_skate",
+        "x_fishing_boat",
+        "x_cherry_picker",
+        "car",
+        "x_yacht",
+        "x_tugboat"
+      ],
+      "severity": "medium",
+      "suggestion": "Rare = a memorable power that causes trouble (seed artillery, replaying real life to watch people trip twice)."
+    },
+    {
+      "pattern": "Move names that contradict the mechanics: rescue or heat words on attacks and buffs, and status-specific words on variant Ultimates.",
+      "ids": [
+        "fire_truck",
+        "i_lifeboat",
+        "i_grille",
+        "x_rowboat",
+        "x_space_rocket_toy",
+        "x_submarine_toy",
+        "x_jet_fighter_toy"
+      ],
+      "severity": "medium",
+      "suggestion": "Rescue Rush/Run -> an attack image; Glare/Sunny on varying Ultimates -> effect-neutral; Heat Shield (defup) -> a brace; Bubble Bath Torpedo (poison) -> something smelly."
+    },
+    {
+      "pattern": "Animal-reaction punchlines used as a crutch: every cow/goat/deer/giraffe/seagull looks up, watches or follows.",
+      "ids": [
+        "x_glider",
+        "x_atv",
+        "jeep",
+        "x_hot_air_balloon",
+        "motorcycle",
+        "x_biplane",
+        "x_inline_skate"
+      ],
+      "severity": "low",
+      "suggestion": "Fine occasionally; prefer a human reaction or a concrete consequence."
+    },
+    {
+      "pattern": "Hit-and-run (x3) names with four or five repeats ('Spin Spin Spin Spin', 'Bounce Bounce Bounce Bounce', 'Chug Chug Chug Chug').",
+      "ids": [
+        "i_car_wheel",
+        "x_atv",
+        "ice_cream_truck",
+        "x_rickshaw",
+        "x_barge",
+        "x_rowboat",
+        "sailboat",
+        "x_houseboat",
+        "x_quad_bike",
+        "x_satellite_model"
+      ],
+      "severity": "low",
+      "suggestion": "Three repeats match three hits; vary with a different last word ('Chug Chug Bump')."
+    }
+  ],
+  "issues": [
+    {
+      "id": "airplane",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Seatkicker' describes kicking seats, but the Common lore is about leaving the gate early while passengers are in the café.",
+      "suggestion": "'Gatedasher'"
+    },
+    {
+      "id": "x_biplane",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names are paired with the wrong lines: 'Loop-de-Loop' sits on the two-sets-of-wings Uncommon, 'Cropduster' on the loop-the-loop Rare (no crop dusting anywhere).",
+      "suggestion": "'Twinwing' for Uncommon; 'Loop-de-Loop' moves to Rare."
+    },
+    {
+      "id": "x_biplane",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Blowing a scarecrow's hat off is a stunt, not a troublesome power.",
+      "suggestion": "Consider a bigger consequence, e.g. it blows the whole haystack into the farmer's kitchen."
+    },
+    {
+      "id": "x_glider",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare, Epic and Legendary all scale one trait (soaring high/far/long quietly); the Epic has no disruption and a non-reaction punchline (cows didn't look up).",
+      "suggestion": "'Circled silently over the beach all afternoon, and every seagull thought it was a giant gull and followed it home.' Name: 'Gullherder Glide'."
+    },
+    {
+      "id": "x_glider",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Another 'stays up a long time' line; 'the eagles asked how' is soft, and eagles reappear in w06 gondola lift Rare.",
+      "suggestion": "'Stayed up riding warm air for a whole week. When it finally landed, the pilot had grown a beard and the airfield had a new café.'"
+    },
+    {
+      "id": "x_glider",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Hilltopper' does not describe the Rare (climbing a thermal above the clouds); 'Cloudbase Climb' on the Epic describes exactly that Rare.",
+      "suggestion": "'Cloudbase Climber' for Rare; the Epic gets its own name once rewritten (see Epic)."
+    },
+    {
+      "id": "x_glider",
+      "field": "moves.kit.exhaust_fumes",
+      "severity": "low",
+      "issue": "A glider has no exhaust, and 'Breeze' reads fresh on a poison move.",
+      "suggestion": "'Muck-Spread Updraft' keeps the cow field and makes the stink explicit."
+    },
+    {
+      "id": "x_jet_fighter_toy",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Strafe' means firing guns from the air; a little martial for a toy in a kids' game.",
+      "suggestion": "'Sofa Swoop'."
+    },
+    {
+      "id": "x_jet_fighter_toy",
+      "field": "moves.kit.exhaust_fumes",
+      "severity": "low",
+      "issue": "'Pretend Smoke' cannot poison anything; the joke undercuts the effect.",
+      "suggestion": "'Hot Plastic Whiff' or 'Melted Plastic Pong'."
+    },
+    {
+      "id": "x_seaplane",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Same premise as the Rare (delivering things to places with no roads/airport).",
+      "suggestion": "'Landed on the hotel swimming pool to deliver a birthday cake. The guests kept swimming round its floats as if it were a lilo.'"
+    },
+    {
+      "id": "x_seaplane",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Delivering post is a helpful talent, not a troublesome power.",
+      "suggestion": "Give it a nuisance, e.g. its floats scoop up half the lake and drop it on the jetty."
+    },
+    {
+      "id": "x_space_rocket_toy",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Same launch-and-land-somewhere premise as the Rare (bunk bed to laundry basket; garden to next door's pond).",
+      "suggestion": "'Blasted off from the garden with one stamp on the air pump and landed on the school roof. The caretaker now keeps a ladder ready.'"
+    },
+    {
+      "id": "x_space_rocket_toy",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'according to its owner' is the hedged 'according to its own story' frame the tracker bans; no concrete achievement.",
+      "suggestion": "'Pumped so hard it flew over three gardens and the school, then landed back in its own toy box. Its owner calls this a full orbit.'"
+    },
+    {
+      "id": "x_space_rocket_toy",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "Heat word on a non-burn (self defup) move, against the tracker lesson.",
+      "suggestion": "'Nose Cone Brace'."
+    },
+    {
+      "id": "ambulance",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Flashblue' sits on the mirror-writing Uncommon; 'Corner Racer' sits on the Rare about parting traffic with blue lights. Neither name matches its line.",
+      "suggestion": "'Mirrorwriter' for Uncommon; Rare 'Bluelight Parter'."
+    },
+    {
+      "id": "ambulance",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same premise as its own Rare (traffic parting for the blue lights) and as fire_truck Epic ('traffic parted like a river').",
+      "suggestion": "'Turned on its siren once at the seaside, and every gull on the beach copied it until sunset.' Name: 'Gullsiren Chorus'."
+    },
+    {
+      "id": "ambulance",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Nightingale' strongly evokes Florence Nightingale, a real person.",
+      "suggestion": "'Bluebell Dash, Fastest to the Rescue'."
+    },
+    {
+      "id": "x_hot_air_balloon",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Basket Bumps' collides with the signature 'Basket Bump' on the same monster.",
+      "suggestion": "'Sandbag Shower' (plural, fits ×3)."
+    },
+    {
+      "id": "x_hot_air_balloon",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Montgolfiera' is built on the Montgolfier brothers' surname (real people).",
+      "suggestion": "'Wanderwind, Queen of the Breeze'"
+    },
+    {
+      "id": "x_hot_air_balloon",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No punchline; 'with nothing but X and Y' is a template shared with motorcycle L and sailboat L.",
+      "suggestion": "'Floated so high over the mountains that it landed on a summit, and the climbers who had walked up for a week were not pleased.'"
+    },
+    {
+      "id": "x_hot_air_balloon",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Sheep following it is cute but not a troublesome power.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_asphalt_paver",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Near-copy of road roller Uncommon ('Moves so slowly that ... walk beside it').",
+      "suggestion": "'Leaves a road so warm behind it that every cat in the street comes to lie on it at teatime.' Keeps the name 'Hotroad', which then fits."
+    },
+    {
+      "id": "x_asphalt_paver",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Bertha' repeats bulldozer 'Big Bertha' (itself the nickname of a WWI siege gun).",
+      "suggestion": "'Tarmacia, Layer of Highways'"
+    },
+    {
+      "id": "x_asphalt_paver",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "'Every pothole in town' is the generic 'every Y in town' Epic shape.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "bulldozer",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Same premise as the Legendary (pushes a hill/mountain, it ends up somewhere else).",
+      "suggestion": "'Pushed a skip, a shed and the foreman's lunch into the same pile before noticing anyone was shouting.' Name: 'Pileshover'."
+    },
+    {
+      "id": "bulldozer",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "'Big Bertha' is the nickname of a famous WWI siege gun and duplicates the paver's 'Bertha'.",
+      "suggestion": "'Shovemore, Mover of Mountains'"
+    },
+    {
+      "id": "bulldozer",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Weak punchline (workers find something else to do).",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_grader",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Gravelsmoother' sits on the blade-in-the-middle Uncommon; it describes the Common.",
+      "suggestion": "'Beltbuckle Blade'"
+    },
+    {
+      "id": "x_grader",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Smoothing appears in Common, Epic and Legendary; the marble test is also road roller Legendary.",
+      "suggestion": "'Cleared a mountain pass of snow with one sweep of its blade, then left a perfectly neat snowman at the top.' Name: 'Gravella, Clearer of Passes'."
+    },
+    {
+      "id": "x_grader",
+      "field": "names.epic",
+      "severity": "low",
+      "issue": "'Dirt Road Smoothing' is an activity, not a creature name.",
+      "suggestion": "'Eggsaver'."
+    },
+    {
+      "id": "x_road_roller",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Flatness carries Rare, Epic and Legendary, and 'every road in the town flat' duplicates steamroller Epic.",
+      "suggestion": "'Rolled over a forgotten garden hose and sprayed the whole street like a giant fountain until teatime.' Name: 'Hosesquasher'."
+    },
+    {
+      "id": "x_skid_steer",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Common and Uncommon are both 'spins on the spot'.",
+      "suggestion": "'Swaps its bucket for forks, a brush or a drill in seconds, and swaps just to show off.' Name: 'Quickswapper'."
+    },
+    {
+      "id": "x_skid_steer",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "'Little Bob ... Digger' evokes Bob the Builder (trademarked character); toy truck repeats 'Big Bob'.",
+      "suggestion": "'Pocket Pip, Busiest Digger'"
+    },
+    {
+      "id": "x_skid_steer",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Building Site Spin' does not describe the Epic (moving a sand hill, volleyball club moves in).",
+      "suggestion": "'Sandhill Shifter'"
+    },
+    {
+      "id": "x_skid_steer",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Sand-becomes-a-beach overlaps dump truck Rare.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_steamroller",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Duplicates road roller's 'rolled the street flat' Epic; no punchline ('every bump disappeared').",
+      "suggestion": "'Steamed up the whole village green so thickly that the fête carried on in fog, and three people bought the same cake twice.'"
+    },
+    {
+      "id": "x_steamroller",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "'Since great-grandad was a boy' generations formula plus 'polished every Sunday' (grille L, classic car L, hearse L).",
+      "suggestion": "'Rolled flat a road made entirely of conkers so the village could have a smooth autumn. The squirrels have not forgiven it.'"
+    },
+    {
+      "id": "x_steamroller",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Iron Drum' does not describe the whistle Rare.",
+      "suggestion": "'Whistlewhoop'"
+    },
+    {
+      "id": "x_steamroller",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Puffington' stem repeats in inflatable boat L, steam locomotive L ('Puffabella') and toy train L ('Puffkin').",
+      "suggestion": "'Old Ironsides, the Conker Crusher' if the Legendary is rewritten."
+    },
+    {
+      "id": "x_wheel_loader",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Gravelgulper' sits on the trophy-pose Uncommon.",
+      "suggestion": "'Showbucket'"
+    },
+    {
+      "id": "x_wheel_loader",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "No punchline ('looked like a different place').",
+      "suggestion": "'Moved every gravel pile in the quarry in one day, and the quarry manager spent the evening looking for his car under one.'"
+    },
+    {
+      "id": "bus",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Names swapped: 'Doorhisser' is on the leaves-as-you-arrive Common, 'Late Twelve' on the hissing-and-kneeling Uncommon.",
+      "suggestion": "'Late Twelve' for Common; 'Doorhisser' for Uncommon."
+    },
+    {
+      "id": "bus",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Muddled punchline ('ran out of sand space') and the whole-town-to-the-seaside premise repeats in train E, ferry E and tram E.",
+      "suggestion": "'Took a wrong turn on the school trip and brought forty children to the zoo instead of the museum. Nobody has complained.' Name: 'Wrong Turn Charlie'."
+    },
+    {
+      "id": "bus",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'For fifty years without being late' is the N-years Legendary formula; fine on its own, but see the pattern.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "car",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Packing the boot is capacity, not a troublesome power; station wagon R is a near-copy.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "car",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Honk Honk Honk' and kit 'Horn Toot' are the same image on the Legendary; taxi also uses 'Honk Honk Honk'.",
+      "suggestion": "'Bumper Bump Bump'."
+    },
+    {
+      "id": "i_car_wheel",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Names swapped: 'Hubcapper' is on the puddle Common, 'Puddlesplasher' on the hubcap Uncommon.",
+      "suggestion": "'Puddlesplasher' for Common; 'Hubcapper' for Uncommon."
+    },
+    {
+      "id": "i_car_wheel",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Rare, Epic and Legendary are all 'wheel comes loose and rolls away'.",
+      "suggestion": "'Got stuck in a giant puddle at the roundabout and sent a wave over every car going round, twice.' Name: 'Roundabout Ripple'."
+    },
+    {
+      "id": "i_car_wheel",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Still the runaway premise (third time).",
+      "suggestion": "'Did a million turns without a single puncture, and the garage gave it a gold hubcap. It lost it in a hedge the same day.' Name: 'Rota, the Golden Hubcap'."
+    },
+    {
+      "id": "i_car_wheel",
+      "field": "moves.kit.hit_and_run",
+      "severity": "low",
+      "issue": "Four repeats on a three-hit move.",
+      "suggestion": "'Spin Spin Spin'."
+    },
+    {
+      "id": "i_disk_brake",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Same squeal premise as the Common, louder.",
+      "suggestion": "'Stopped so suddenly at the zebra crossing that every car behind stopped too, all the way back to the next town.'"
+    },
+    {
+      "id": "i_gas_pump",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "No punchline ('still had fuel to spare').",
+      "suggestion": "'Ran dry on the holiday weekend, and the queue of cars stretched past the motorway sign, the service station and a farm.' Name: 'Forecourt Queue'."
+    },
+    {
+      "id": "i_gas_pump",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For forty years' N-years formula; soft punchline.",
+      "suggestion": "'Clicked off at exactly the round number for every customer for a whole summer, and drivers queued from three towns away to watch.'"
+    },
+    {
+      "id": "i_gas_pump",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Hosehugger' does not describe clicking off at the wrong moment.",
+      "suggestion": "'Clickstopper'"
+    },
+    {
+      "id": "i_grille",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Same grinning premise as the Uncommon.",
+      "suggestion": "'Breathed in so hard through its slats on the motorway that it swallowed a kite, three crisp packets and somebody's sun hat.'"
+    },
+    {
+      "id": "i_grille",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Headlight Glare' describes neither the current grin Epic nor the grille.",
+      "suggestion": "'Kite Swallower'"
+    },
+    {
+      "id": "i_grille",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "'Polished every Sunday for forty years' near-copies classic car L ('polished every Sunday for sixty years'), hearse L and steamroller L.",
+      "suggestion": "'Grinned at a grumpy traffic jam until every driver grinned back, and the jam cleared itself out of embarrassment.'"
+    },
+    {
+      "id": "i_grille",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "The Ultimate varies (stun / poison / burn), but 'Glare' promises a flash.",
+      "suggestion": "'Big Chrome Grin'"
+    },
+    {
+      "id": "i_horse_cart",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Near-copy of oxcart Epic (the whole harvest in one trip).",
+      "suggestion": "'Took the wrong lane at market and led every car in town round the duck pond twice at walking pace.' Name: 'Duck Pond Detour'."
+    },
+    {
+      "id": "i_horse_cart",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Church setting (religion) plus the 'for a hundred years' formula; limousine L also does brides.",
+      "suggestion": "'Carried a whole wedding party across the flooded ford without a single wet shoe, and the horse got the first slice of cake.'"
+    },
+    {
+      "id": "i_model_t",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Parade/contest frame; 'starting first time' repeats in tractor L, pickup L and classic car R.",
+      "suggestion": "'Was driven home from the museum by mistake and did the school run for a week before anyone noticed.'"
+    },
+    {
+      "id": "i_model_t",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Dust cloud reaching the next county is a weak Epic.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_oxcart",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For two hundred years' formula; no punchline.",
+      "suggestion": "'Arrived so late at the harvest fair that it became the first cart at next year's fair. The ox calls this planning.'"
+    },
+    {
+      "id": "i_oxcart",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Getting unstuck is not a troublesome power.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_seat_belt",
+      "field": "moves.kit.exhaust_fumes",
+      "severity": "low",
+      "issue": "A seat belt has no exhaust; 'Old Car Whiff' is a stretch.",
+      "suggestion": "'Sweaty Strap Whiff'."
+    },
+    {
+      "id": "i_seat_belt",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Shoulderpinch' does not quite describe twisting into a knot.",
+      "suggestion": "'Twistknot'."
+    },
+    {
+      "id": "i_seat_belt",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'Never once being thanked' repeats pedestal Uncommon; Legendary is gentle rather than outrageous.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_cherry_picker",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Lampfixer' sits on the kitten-rescue Rare; light bulbs are the Epic.",
+      "suggestion": "'Kittenfetcher'"
+    },
+    {
+      "id": "x_cherry_picker",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Weak punchline (fixed a clock just in time).",
+      "suggestion": "'Reached the clock tower to fix the clock and turned the hands back an hour, so the whole town got a lie-in it never asked for.'"
+    },
+    {
+      "id": "crane",
+      "field": "moves.kit.horn_blast",
+      "severity": "high",
+      "issue": "'Klaxon' is a trademark.",
+      "suggestion": "'Lifting Siren'"
+    },
+    {
+      "id": "x_scissor_lift",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Near-copy of cherry picker Common (stops halfway); gondola lift C repeats it again.",
+      "suggestion": "'Beeps the whole time it goes up, the whole time it goes down, and a little bit after.' Name: 'Beepalong Lift'."
+    },
+    {
+      "id": "x_scissor_lift",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For twenty years ... never once dropped' formula; no punchline.",
+      "suggestion": "'Raised a dancer so high in the school play that she finished the dance on the theatre roof, to cheers from the pigeons.'"
+    },
+    {
+      "id": "dump_truck",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Sand-into-a-beach overlaps skid steer Epic; Epic and Legendary are both 'made a new hill/island'.",
+      "suggestion": "'Tipped its load on the wrong drive, and a family came home to a mountain of gravel where their car used to be.' Name: 'Wrongdrive Tipper'."
+    },
+    {
+      "id": "x_backhoe_loader",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as its own Common (digs holes then fills them back in).",
+      "suggestion": "'Dug holes with one end and planted trees with the other all down the high street in one night. The town woke up in a forest.' Name: 'Dig-Dig Doris, Planter at Both Ends'."
+    },
+    {
+      "id": "x_backhoe_loader",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Swapped: 'Trenchdigger' is on the two-ended Uncommon, 'Bucketboth' on the trench Rare.",
+      "suggestion": "'Bucketboth' for Uncommon; 'Trenchdigger' for Rare."
+    },
+    {
+      "id": "excavator",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Spinning-like-it's-dancing copies skid steer Common.",
+      "suggestion": "'Scratches its own back with its bucket, and sometimes uses it to wave at the crane.'"
+    },
+    {
+      "id": "excavator",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Clawarm' is on the hole-digging Common and 'Holemaker' on the spinning Uncommon.",
+      "suggestion": "'Holemaker' for Common; 'Clawarm' for Uncommon."
+    },
+    {
+      "id": "fire_truck",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Near-copy of ambulance Common (siren just as someone falls asleep); ferry C repeats it.",
+      "suggestion": "'Fills its tank at the hydrant and soaks the firefighter holding the hose, every single time.' Name: 'Hydrant Soaker'."
+    },
+    {
+      "id": "fire_truck",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For fifty years ... same shiny bell' N-years/original-item formula.",
+      "suggestion": "'Put out a bonfire, a burning barbecue and a birthday cake in one afternoon, and the birthday boy has never forgiven it.'"
+    },
+    {
+      "id": "fire_truck",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Rescue word on an attack (tracker lesson).",
+      "suggestion": "'Ladder Swing Slam'"
+    },
+    {
+      "id": "garbage_truck",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Earlybird Bins' is on the sofa-swallowing Rare; the early bins are the Common.",
+      "suggestion": "'Sofagulper'"
+    },
+    {
+      "id": "garbage_truck",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "No punchline ('the streets sparkled').",
+      "suggestion": "'Crunched the whole festival's rubbish in one night, including the stage, two tents and the mayor's deckchair.'"
+    },
+    {
+      "id": "garbage_truck",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For forty years ... every Tuesday' formula; no outrageous achievement.",
+      "suggestion": "'Swallowed a wedding ring by mistake, then crunched through a whole mountain of rubbish to give it back before the cake was cut.'"
+    },
+    {
+      "id": "garbage_truck",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Six-in-the-morning noise also in street sweeper C, hot air balloon C, excavator C.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_atv",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No punchline ('without a single puncture').",
+      "suggestion": "'Crossed every muddy field in the county in one day and came home so muddy that the farmer planted potatoes on it.'"
+    },
+    {
+      "id": "x_atv",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "'Every deer looked up' crutch (see pattern).",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_buggy",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'Only a little sand in its seat' is a soft punchline for a Legendary.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "go_kart",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Trophy/won-every-lap frame (tracker bans contests and trophies).",
+      "suggestion": "'Drove so many laps one summer that it came round again before its own tyre smoke had cleared, and overtook itself.'"
+    },
+    {
+      "id": "x_quad_bike",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same premise as its own Uncommon (rounding up sheep).",
+      "suggestion": "'Raced across every field on the farm towing a trailer of hay, and left a trail so long that the cows followed it into the farmhouse kitchen.'"
+    },
+    {
+      "id": "x_quad_bike",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'Every day for twenty years' formula.",
+      "suggestion": "'Rounded up a thousand sheep in one morning, then did it all again because the sheepdog wanted another go.'"
+    },
+    {
+      "id": "x_quad_tractor",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Slow-tractor-in-the-lane Common also in harvester C, tractor C and combine harvester C.",
+      "suggestion": "'Leaves enormous muddy tyre prints all the way down the lane, so everyone knows exactly where it went for lunch.'"
+    },
+    {
+      "id": "x_quad_tractor",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Rare and Epic are both ploughing.",
+      "suggestion": "'Rolled into the village fête and towed the bouncy castle, the tea tent and the tombola to the next field when it rained.' Name: 'Bouncy Castle Tug'."
+    },
+    {
+      "id": "helicopter",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Near-copy of w03 hummingbird Uncommon (flies up, sideways, backwards).",
+      "suggestion": "'Lands on a big painted H and refuses to land anywhere without one, even on the beach.' Name: 'Helipad Fusspot'."
+    },
+    {
+      "id": "helicopter",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Same downdraft-blows-things premise as the Common.",
+      "suggestion": "'Hovered over the zoo for a news report, and every parrot learned to say whup-whup-whup.' Name: 'Parrot Teacher'."
+    },
+    {
+      "id": "helicopter",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Landing gently is a skill, not a troublesome power.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_flagpole",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For a hundred years ... seen every child' formula; near-copy of street lamp L ('seen every child in the village').",
+      "suggestion": "'Flew a flag so high on the school's birthday that a passing airliner dipped its wings, and the whole school waved back.'"
+    },
+    {
+      "id": "i_harvester",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Chaff cloud copies thresher Uncommon.",
+      "suggestion": "'Has a long spout that pours grain into the trailer, and sometimes into the farmer's hat.' Name: 'Spoutpourer'."
+    },
+    {
+      "id": "i_harvester",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'In the land' stock frame and 'in a hundred years'; bread punchline repeats combine harvester L and seed drill L.",
+      "suggestion": "'Harvested a field in the shape of a giant smiley face, and airline pilots now wave at it on their way past.'"
+    },
+    {
+      "id": "i_harvester",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Reaper' evokes the Grim Reaper; 'Reggie' repeats tractor L.",
+      "suggestion": "'Smiley Sam of the Wheat'."
+    },
+    {
+      "id": "i_hay",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Haysleeper' is on the rolling-down-the-hill Rare.",
+      "suggestion": "'Hillroller Bale'"
+    },
+    {
+      "id": "i_hay",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No punchline (fed cows, a bale left over).",
+      "suggestion": "'Was rolled into a bale so big that the farm used it as a guest house for a family of mice, two hens and a very lazy dog.'"
+    },
+    {
+      "id": "i_hay",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Description without a joke; 'like cotton reels' is reused in hay baler E.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_manhole_cover",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Clanging under traffic repeats the Common.",
+      "suggestion": "'Was lifted for an inspection, and every tennis ball lost in the last fifty years bounced up out of the sewer onto the street.' Name: 'Ballspring Lid'."
+    },
+    {
+      "id": "i_manhole_cover",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For a hundred years' formula; no punchline.",
+      "suggestion": "'Was so heavy that the strongest man in town tried to lift it, and it lifted him instead. It still has his handprint.'"
+    },
+    {
+      "id": "i_mobile_home",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Parking badly at the campsite duplicates camper van (rv) Rare.",
+      "suggestion": "'Hit a pothole so hard that every cupboard opened and the breakfast cereal ended up in the shower.'"
+    },
+    {
+      "id": "i_mobile_home",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Convoy along the coast road copies convertible E and motorcycle E, and rv Common.",
+      "suggestion": "'Got stuck in the gateway of the campsite, so the whole family had their holiday right there in the lane.'"
+    },
+    {
+      "id": "i_mobile_home",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of rv Legendary (every campsite/beach, still has the original cushions/sand).",
+      "suggestion": "'Stayed at the campsite so long that the town gave it a postcode, a postman and a bus stop outside.'"
+    },
+    {
+      "id": "i_mobile_home",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Curtaintwitcher' means a nosy neighbour; the lore is the owners closing curtains.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_pedestal",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "No disruption, weak punchline.",
+      "suggestion": "'Was put out by mistake without its statue, and visitors spent a month admiring the empty pedestal as modern art.'"
+    },
+    {
+      "id": "i_pedestal",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For three hundred years' formula; no punchline.",
+      "suggestion": "'Held up a statue so still for so long that the pigeons decided it was the safest roof in the city and moved in for good.'"
+    },
+    {
+      "id": "i_pedestal",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "'Without being thanked' repeats seat belt L.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_pole",
+      "field": "names.uncommon",
+      "severity": "high",
+      "issue": "Swapped: 'Polevaulter' is on the leaning Uncommon, 'Postlean' on the pole-vault Rare.",
+      "suggestion": "'Postlean' for Uncommon; 'Polevaulter' for Rare."
+    },
+    {
+      "id": "i_pole",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "No joke and no disruption (held up decorations).",
+      "suggestion": "'Held up so many festival lights that the high street could be seen from the next town, and moths came from three counties.' Name: 'Fairylight Pole'."
+    },
+    {
+      "id": "i_pole",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For a hundred years' formula.",
+      "suggestion": "'Was bumped into by a hundred thousand people looking at their phones, and finally got a phone of its own to stare back at them.'"
+    },
+    {
+      "id": "i_shield",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Shield Wall' is martial and has no punchline.",
+      "suggestion": "'Was used as a sledge by every child in the castle, and reached the village at the bottom before the knights did.' Name: 'Castle Sledge'."
+    },
+    {
+      "id": "i_shield",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For five hundred years' formula; 'still looks ready' is not an achievement.",
+      "suggestion": "'Bounced a catapulted cabbage back so hard that it landed in the enemy's soup, and the battle stopped for lunch.'"
+    },
+    {
+      "id": "i_thresher",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'Since great-great-grandma's day' generations formula.",
+      "suggestion": "'Threshed so fast that the grain shot out through the barn roof, and the hens had breakfast delivered from the sky for a month.'"
+    },
+    {
+      "id": "i_thresher",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Barnrattler' is on the separating Rare; the rattling is the Common.",
+      "suggestion": "'Grainsorter'"
+    },
+    {
+      "id": "i_thresher",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Grain Champion' is a contest word.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_turnstile",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rare (locked shut, crowd queues again) and Epic (jammed, station queues) are the same premise.",
+      "suggestion": "'Spun so fast in the rush that it sent commuters onto the wrong platform, still holding their coffee.' Name: 'Wrongplatform'."
+    },
+    {
+      "id": "i_turnstile",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Weak punchline (still clicks).",
+      "suggestion": "'Spun round so many times in one rush hour that it wound the station clock forward, and everyone got home early.'"
+    },
+    {
+      "id": "i_turnstile",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Lockdown' carries recent-pandemic connotations.",
+      "suggestion": "'Platform Shutdown'."
+    },
+    {
+      "id": "ice_cream_truck",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Cornedropper' looks like a misspelling of cone.",
+      "suggestion": "'Conedropper'"
+    },
+    {
+      "id": "ice_cream_truck",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Near-copy of bus Common (drives off just as you reach it); not a power.",
+      "suggestion": "'Played its tune so sweetly that every child on the estate came out in slippers, even the ones in the bath.' Name: 'Pied Jingler'."
+    },
+    {
+      "id": "ice_cream_truck",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Mister Sprinkles' follows the ice-cream-van trade-name pattern (Mister Softee, Mr Whippy).",
+      "suggestion": "'Sprinkla, Queen of Sunny Street'"
+    },
+    {
+      "id": "ice_cream_truck",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'Every child in town' Epic-shape on a Legendary; weak punchline.",
+      "suggestion": "'Kept its freezer so cold in a heatwave that the penguins at the zoo asked to move in.'"
+    },
+    {
+      "id": "jeep",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Muddybumper' is on the spare-wheel-backpack Uncommon.",
+      "suggestion": "'Backpackwheel'"
+    },
+    {
+      "id": "jeep",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Giraffe stares: animal-reaction crutch, no disruption.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_escalator",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Steprumble' is on the handrail Uncommon; 'Handrail Racer' sits on the Rare.",
+      "suggestion": "'Handrail Racer' for Uncommon."
+    },
+    {
+      "id": "x_escalator",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Not a troublesome power (no child got lost).",
+      "suggestion": "'Swallowed a shoelace at the top and kept the shoe as a souvenir. The lost property office is now mostly left shoes.' Name: 'Laceswallower'."
+    },
+    {
+      "id": "motorcycle",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No concrete punchline ('on a single tank of courage'); 'nothing but X' template.",
+      "suggestion": "'Rode the longest road in the world from top to bottom, and arrived with the same fly still stuck to its visor.'"
+    },
+    {
+      "id": "motorcycle",
+      "field": "moves.kit.hit_and_run",
+      "severity": "medium",
+      "issue": "A single 'Dash' on a three-hit move (linter agrees).",
+      "suggestion": "'Dodge Dodge Dash'"
+    },
+    {
+      "id": "pickup",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'Three generations' formula and 'starts on the first turn' (tractor L, Model T L).",
+      "suggestion": "'Carried a whole barn across the valley one plank at a time in one weekend, and the cows inside never noticed.'"
+    },
+    {
+      "id": "pickup",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Pulling stuck cars out repeats tractor R and quad tractor L.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "police_car",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Near-copy of w06 bollard Rare (stopped a runaway shopping trolley).",
+      "suggestion": "'Turned on its lights to stop the traffic for a family of ducks, then escorted them all the way to the pond.'"
+    },
+    {
+      "id": "police_car",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For forty years ... knows every ... by name' formula (tram L repeats it).",
+      "suggestion": "'Caught a runaway hot-air balloon by its rope and towed it gently back to the fair, with the passengers still waving.'"
+    },
+    {
+      "id": "police_car",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Using the siren to skip the lights paints police as rule-breakers for kids; mild.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_satellite_model",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names rotated: 'Panelspinner' is on the dish-pointing Common, 'Dishpointer' on the foil-wings Uncommon, 'Orbitpretender' on the spinning Rare.",
+      "suggestion": "'Dishpointer' for Common; 'Foilwing' for Uncommon; 'Panelspinner' for Rare."
+    },
+    {
+      "id": "x_satellite_model",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Unclear premise (tells children satellites wave back); no achievement.",
+      "suggestion": "'Beeped so convincingly during space week that the headteacher cancelled maths in case it was a real message from space.'"
+    },
+    {
+      "id": "rv",
+      "field": "lore.common",
+      "severity": "low",
+      "issue": "Slow-vehicle Common (see pattern).",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_barge",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same slowness premise as its own Common.",
+      "suggestion": "'Was so long that its front reached the next lock before its back had left the last one, and the lock keeper had to open both at once.' Name: 'Old Mabel, Longest on the Water'."
+    },
+    {
+      "id": "x_dinghy",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Near-copy of sailboat Uncommon (flaps its sail, as if it's waving/complaining).",
+      "suggestion": "'Has a daggerboard that slides up and down, and it always slides up exactly when you need it down.'"
+    },
+    {
+      "id": "x_dinghy",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Sailflapper' is almost identical to sailboat's 'Sailflap'.",
+      "suggestion": "'Daggerboarder'"
+    },
+    {
+      "id": "x_dinghy",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Common, Rare and Epic are all capsizing.",
+      "suggestion": "'Sailed so close to the swans that it accidentally joined their family, and now gets fed bread every Sunday.' Name: 'Swanfriend'."
+    },
+    {
+      "id": "x_dinghy",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "A child alone in a storm is a safety worry for a kids' game, and there is no punchline.",
+      "suggestion": "'Sailed across the whole bay with only a beach towel for a sail, and arrived before the ferry.' Name: 'Little Skipper, Towel-Sailer'."
+    },
+    {
+      "id": "x_dinghy",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Regatta premise repeats sailboat E.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_ferry",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "'Just as you're falling asleep' repeats ambulance C and fire truck C.",
+      "suggestion": "'Blows its foghorn the moment you've finally balanced your tea on the rail.'"
+    },
+    {
+      "id": "x_ferry",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Whole-town-in-one-trip with no punchline (bus E, tram E, funicular E).",
+      "suggestion": "'Carried a whole travelling funfair across the bay, and the big wheel kept turning for the entire crossing.' Name: 'Funfair Floater'."
+    },
+    {
+      "id": "x_fishing_boat",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For sixty years ... biggest catch of the season' is N-years plus contest.",
+      "suggestion": "'Caught a boot, a bicycle and a treasure chest in one net, and the treasure turned out to be somebody's old socks.'"
+    },
+    {
+      "id": "x_fishing_boat",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Waking the seafront at dawn is a Common-level nuisance.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_gondola",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Canalglider' is on the bridge-ducking Common; 'Bridgeducker' is on the narrow-canal Rare.",
+      "suggestion": "'Bridgeducker' for Common."
+    },
+    {
+      "id": "i_gondola",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Squeezing through the narrowest canal is close to the Common's tight bridges.",
+      "suggestion": "'Got its pole stuck in the mud, and the gondolier was left hanging on the pole while the gondola drifted off to dinner.' Name: 'Mudpole Drifter'."
+    },
+    {
+      "id": "i_gondola",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'A thousand couples ... never once' count formula.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_houseboat",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same drifting-away premise as the Rare.",
+      "suggestion": "'Grew so many tomatoes on its roof that the whole river had salad for a summer, and the ducks complained about the onions.' Name: 'Floating Allotment'."
+    },
+    {
+      "id": "x_houseboat",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Mooringstayer' says the opposite of the Rare (it came loose).",
+      "suggestion": "'Mooringslipper'"
+    },
+    {
+      "id": "x_inflatable_boat",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Captain Puffington' near-duplicates steamroller 'Old Puffington'.",
+      "suggestion": "'Captain Bubblebob, Bravest Bubble'"
+    },
+    {
+      "id": "x_inflatable_boat",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Soft punchline ('every child still inside').",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "i_lifeboat",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped: 'Storm Launcher' is on the slipway Common, 'Slipwayslider' on the storm Rare.",
+      "suggestion": "'Slipwayslider' for Common; 'Storm Launcher' for Rare."
+    },
+    {
+      "id": "i_lifeboat",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Rescuerower' is on the bright-orange Uncommon.",
+      "suggestion": "'Foglight Orange'"
+    },
+    {
+      "id": "i_lifeboat",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Grace' at a lighthouse evokes Grace Darling, a real person.",
+      "suggestion": "'Beacon of the Lighthouse Cove'"
+    },
+    {
+      "id": "i_lifeboat",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For a hundred years' formula; no punchline.",
+      "suggestion": "'Rowed out through a hurricane to rescue a stranded sailor, who turned out to be a very grateful seal.'"
+    },
+    {
+      "id": "i_lifeboat",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Rescue word on an attack (tracker lesson).",
+      "suggestion": "'Breaker Wave Ram'"
+    },
+    {
+      "id": "i_lifeboat",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "Heroic but joke-free.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_rowboat",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "Swapped: 'Oarsplasher' is on the going-in-circles Common, 'Circlerower' on the leaky Uncommon.",
+      "suggestion": "'Circlerower' for Common; 'Shoebailer' for Uncommon."
+    },
+    {
+      "id": "x_rowboat",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'Since your great-grandparents were courting' generations formula; no punchline.",
+      "suggestion": "'Was hired for one hour by a very slow rower and came back three weeks later with a family of geese living in it.'"
+    },
+    {
+      "id": "x_rowboat",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Varies (burn, burn, stun); 'Sunny' is a heat word that misleads on the stun variant.",
+      "suggestion": "'Big Lake Splash'"
+    },
+    {
+      "id": "sailboat",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'On nothing but wind and stubbornness' template (balloon L, motorcycle L); no punchline.",
+      "suggestion": "'Sailed round the whole world without an engine, and came home with a postcard from every country stuck to its sail.'"
+    },
+    {
+      "id": "sailboat",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Regatta premise duplicates dinghy Epic.",
+      "suggestion": "'Caught a gust so big in the harbour that it towed three crab nets, a fishing line and a very surprised windsurfer out to sea.' Name: 'Harbour Gust'."
+    },
+    {
+      "id": "sailboat",
+      "field": "moves.kit.exhaust_fumes",
+      "severity": "low",
+      "issue": "'Salty Spray' is not a stink.",
+      "suggestion": "'Seaweed Whiff'."
+    },
+    {
+      "id": "x_submarine_toy",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Fixed poison, but bubble bath is clean (bible: avoid clean/fresh on poison).",
+      "suggestion": "'Mouldy Sponge Torpedo'"
+    },
+    {
+      "id": "x_submarine_toy",
+      "field": "names.uncommon",
+      "severity": "low",
+      "issue": "'Periscopeeker' reads as a typo.",
+      "suggestion": "'Periscope Peeker'."
+    },
+    {
+      "id": "x_tugboat",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Swapped: 'Shipnudger' is on the smoke-puffing Common, 'Puffstack' on the small-but-strong Uncommon.",
+      "suggestion": "'Puffstack' for Common; 'Shipnudger' for Uncommon."
+    },
+    {
+      "id": "x_tugboat",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Uncommon, Rare, Epic and Legendary are all 'small tug pulls/pushes a huge ship'.",
+      "suggestion": "'Tooted so proudly at the harbour festival that every ship in port tooted back, and the town's windows rattled till midnight.' Name: 'Harbour Hooter'."
+    },
+    {
+      "id": "x_yacht",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Sunloungerboat' is on the big-wake Rare; 'Marina Wash' is on the fireworks Epic. Both are on the wrong line.",
+      "suggestion": "'Marina Wash' for Rare; 'Fireworks Deck' for Epic."
+    },
+    {
+      "id": "x_yacht",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Weak punchline ('said it was rather tired').",
+      "suggestion": "'Was so big that it brought its own little yacht along, and that one had a little yacht too.'"
+    },
+    {
+      "id": "school_bus",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For forty years ... never left a child behind' is the N-years formula and echoes the US 'No Child Left Behind' law (politics).",
+      "suggestion": "'Drove so gently over the speed bumps for a whole term that the egg-and-spoon team practised on the back seat and never dropped one.'"
+    },
+    {
+      "id": "school_bus",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Old Number Seven' copies the shape of bus 'Old Number Nine'.",
+      "suggestion": "'Yellow Yolanda, Steady Wheels'"
+    },
+    {
+      "id": "school_bus",
+      "field": "moves.ultimate",
+      "severity": "low",
+      "issue": "'Final Stop' sits close to bus 'Last Stop Slam' and sounds a bit morbid.",
+      "suggestion": "'Bus Stop Bump'."
+    },
+    {
+      "id": "scooter",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names rotated: 'Kicklean' on the ankle Common, 'Pavementpest' on the folding Uncommon, 'Anklebasher' on the downhill Rare.",
+      "suggestion": "'Anklebasher' for Common; 'Stuckfold' for Uncommon; 'Hillzoomer' for Rare."
+    },
+    {
+      "id": "scooter",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Hot Wheel' echoes the Hot Wheels trademark.",
+      "suggestion": "'Scorching Wheel Spin'"
+    },
+    {
+      "id": "scooter",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Fastest Kid in Town' names a child, not the scooter.",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_rickshaw",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Near-copy of tuk tuk Legendary (same city streets for decades, still knows the quickest way).",
+      "suggestion": "'Pedalled up the steepest hill in the city with a piano in the back, and the passenger played it all the way up.'"
+    },
+    {
+      "id": "x_rickshaw",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "No joke.",
+      "suggestion": "'Carried home so many shoppers on festival day that its bell wore out, and it had to shout ding instead.'"
+    },
+    {
+      "id": "x_tuk_tuk",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Squeezing through a traffic jam copies motorcycle Rare.",
+      "suggestion": "'Leaned so far round a corner on two wheels that the passengers shook hands with a fruit seller.' Name: 'Twowheel Leaner'."
+    },
+    {
+      "id": "x_inline_skate",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Seagulls keeping pace is not a troublesome power (convertible R repeats seagulls alongside).",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_roller_skate",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'For thirty years ... original pink laces' formula; laces already used in the Uncommon.",
+      "suggestion": "'Danced so well at the roller disco that the mirror ball came down from the ceiling to join in.'"
+    },
+    {
+      "id": "x_roller_skate",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "Third 'Rosie' (garbage truck, tractor trailer).",
+      "suggestion": "Optional; no change required."
+    },
+    {
+      "id": "x_segway",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same balancing premise as the Rare.",
+      "suggestion": "'Went the whole length of the coast on one charge, then leaned forward one last time and rolled into the sea for a paddle.' Name: 'Balancia, Coast Glider'."
+    },
+    {
+      "id": "x_segway",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Tourguide Wheels' is on the gale-balancing Rare; the tour is the Epic.",
+      "suggestion": "'Galestander'"
+    },
+    {
+      "id": "x_segway",
+      "field": "moves.kit.exhaust_fumes",
+      "severity": "low",
+      "issue": "Electric, no exhaust; 'Battery Whiff' repeats scissor lift.",
+      "suggestion": "Optional; no change required."
+    }
+  ]
+}

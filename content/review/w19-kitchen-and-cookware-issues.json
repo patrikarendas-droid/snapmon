@@ -1,0 +1,4220 @@
+{
+ "batch": "w19-kitchen-and-cookware",
+ "editor": "independent agent",
+ "reviewed": 112,
+ "summary": "The most fatigued batch so far. Commons and Uncommons are often good kitchen observation (the food processor's nine attachments, colander hat, microwave-style double beeps, the induction hob that only heats pans it likes, the lazy susan spinning the wrong way, the paella pan hanging off the hob, the oven mitt fish puppet), and some Legendaries are strong (freezer peas labelled in another alphabet, the slugs giving up, the grandad wrinkly as a raisin, the knife marks that spell a recipe, the lid that fits every pan, the pizza carried out on a door). The problems: (1) about 70 Legendaries are 'never dropped / never spilled / for thirty years / so many X that' or quiet successes, and about 14 are 'fed a whole street / village / wedding / campsite'; all 112 Legendary names are 'The X That Y'; (2) Rares are often the object doing its job well; Epics are often 'made so much X for a party'; (3) one trait scaled over three or four rarities in about 20 objects (sieve flour, coffee grinder waking, garlic smell, popcorn volume, pancakes, foam, sneezing, slow-cooker smell, pet-bowl summoning, nail-clipping flinging); (4) cluster copies: exercise mat = yoga mat, kettle grill = smoker, steamer = steamer basket, three 'always full' bowls, and the heater group's 'kept everyone warm in a snowstorm' Legendaries; (5) cross-batch copies: sugar bowl dish = w20 x_sugar_bowl almost line for line, salad bowl = w15 x_salad_bowl, fruit bowl and Pilot 02 banana (ripening), popcorn maker = w15 corn, bread maker = w20 oven, sandwich toaster = w21 calzone, pie dish = w21 apple pie, crepe pan = w13 plane, boiler = w20 radiator, electric blanket = w17 throw blanket. Safety: the stove top's delayed gas 'whoomph', the toaster oven's glowing crumbs and the electric blanket left on until too hot are rewritten; the bathroom scale's weight jokes (moody numbers, 'oh dear') are moved off body weight. Knife, deep fryer and heaters are otherwise framed safely. Mechanics: most renamed moves are truthful, but default fridge kit names ('Frost Breath', 'Cold Storage', 'Ice Cube Barrage') were kept on about 25 heating and cooking appliances, and kitchen kit names ('Taste Test', 'Hot Ladle', 'Stir Up', 'Clatter') on mats, scales, clippers, tweezers, a mouse pad and a boxing glove; replacements are given. Several Ultimates repeat the Epic name (pizza oven exactly, yoga mat exactly) or carry heat/cold/rescue words that do not fit every variant. All replacements were checked by script for length, ASCII and global name uniqueness.",
+ "patterns": [
+  {
+   "pattern": "Legendary formula: 'never dropped / never spilled / never lost / for N years / has done so many X that' (about 45) or a quiet success with no punchline (about 25).",
+   "ids": [
+    "x_hand_mixer",
+    "x_ice_cream_maker",
+    "cutlery_fork",
+    "x_bread_maker",
+    "x_bread_toaster_oven",
+    "plate",
+    "x_boiler",
+    "x_electric_blanket",
+    "x_heating_pad",
+    "whisk",
+    "x_baking_tray",
+    "x_bottle_opener",
+    "x_cake_tin",
+    "x_lazy_susan",
+    "x_measuring_cup_tool",
+    "x_mixing_bowl_metal",
+    "x_mortar_and_pestle",
+    "x_mouse_pad",
+    "x_nail_clippers",
+    "x_pet_food_bowl",
+    "x_roasting_tin",
+    "x_serving_bowl",
+    "x_serving_tray",
+    "x_tongs",
+    "x_funnel",
+    "rice_cooker",
+    "x_fondue_pot",
+    "x_coffee_grinder",
+    "x_sugar_bowl_dish",
+    "x_food_processor_unit",
+    "x_juicer",
+    "x_colander",
+    "x_wine_cooler",
+    "x_butter_dish",
+    "x_can_opener",
+    "x_chopsticks",
+    "x_egg_cooker",
+    "x_grill",
+    "x_hot_plate",
+    "x_kitchen_scale",
+    "x_nutcracker",
+    "x_oil_heater",
+    "x_pestle",
+    "x_potato_masher",
+    "x_ramekin",
+    "x_salad_spinner",
+    "x_smoker",
+    "x_spice_grinder",
+    "x_tweezers",
+    "x_cheese_board",
+    "i_potpie",
+    "x_pressure_cooker_unit",
+    "x_soda_maker"
+   ],
+   "severity": "high",
+   "suggestion": "Each is replaced with a concrete outrageous feat and a punchline."
+  },
+  {
+   "pattern": "Feeding-a-crowd Legendaries: pot, casserole, chafing dish, stock pot, paella pan, griddle, mini fridge, barbecue, steamer, steamer basket, knife, hot plate (plus banana split in w18).",
+   "ids": [
+    "pot",
+    "x_casserole_dish",
+    "x_chafing_dish",
+    "x_stock_pot",
+    "x_paella_pan",
+    "x_griddle",
+    "x_mini_fridge",
+    "x_barbecue",
+    "x_steamer",
+    "x_steamer_basket",
+    "knife"
+   ],
+   "severity": "high",
+   "suggestion": "Keep at most one (hot plate wedding on one ring); the rest are replaced."
+  },
+  {
+   "pattern": "Legendary names: all 112 are 'The X That Y' / 'The X With Y'.",
+   "ids": [
+    "x_food_processor_unit",
+    "x_hand_mixer",
+    "x_ice_cream_maker",
+    "x_juicer",
+    "x_stand_mixer",
+    "bowl",
+    "x_colander",
+    "x_colander_bowl",
+    "x_sieve",
+    "x_strainer",
+    "x_coffee_grinder",
+    "x_milk_frother",
+    "x_soda_maker",
+    "x_spice_grinder",
+    "x_water_filter_jug",
+    "cutlery_fork",
+    "x_freezer_chest",
+    "x_ice_maker",
+    "x_mini_fridge",
+    "x_wine_cooler",
+    "frying_pan",
+    "knife",
+    "x_bread_maker",
+    "x_bread_toaster_oven",
+    "x_pizza_oven",
+    "plate",
+    "pot",
+    "i_potpie",
+    "x_boiler",
+    "x_electric_blanket",
+    "x_electric_blanket_cover",
+    "x_electric_heater",
+    "x_furnace",
+    "x_gas_heater",
+    "x_heating_pad",
+    "x_oil_heater",
+    "x_water_heater",
+    "x_air_fryer",
+    "x_deep_fryer",
+    "x_egg_cooker",
+    "x_pressure_cooker_unit",
+    "rice_cooker",
+    "x_slow_cooker_unit",
+    "x_steamer",
+    "x_yogurt_maker",
+    "x_boxing_glove",
+    "x_oven_mitt",
+    "spatula",
+    "x_popcorn_maker",
+    "x_sandwich_toaster",
+    "whisk",
+    "x_baking_dish",
+    "x_baking_tray",
+    "x_barbecue",
+    "x_bath_mat",
+    "x_bathroom_scale",
+    "x_bottle_opener",
+    "x_butter_dish",
+    "x_cake_tin",
+    "x_can_opener",
+    "x_casserole_dish",
+    "x_cat_bowl",
+    "x_chafing_dish",
+    "x_cheese_board",
+    "x_cheese_grater",
+    "x_chopsticks",
+    "x_crepe_pan",
+    "x_cutting_board",
+    "x_dog_bowl",
+    "x_doormat",
+    "x_electric_grill",
+    "x_exercise_mat",
+    "x_fondue_pot",
+    "x_fruit_bowl",
+    "x_funnel",
+    "x_garlic_press",
+    "x_griddle",
+    "x_grill",
+    "x_hot_plate",
+    "x_induction_hob",
+    "x_kettle_grill",
+    "x_kitchen_scale",
+    "x_lazy_susan",
+    "x_measuring_cup_tool",
+    "x_mixing_bowl_metal",
+    "x_mortar_and_pestle",
+    "x_mouse_pad",
+    "x_muffin_tin",
+    "x_nail_clippers",
+    "x_nutcracker",
+    "x_paella_pan",
+    "x_pestle",
+    "x_pet_food_bowl",
+    "x_pie_dish",
+    "x_potato_masher",
+    "x_ramekin",
+    "x_roasting_tin",
+    "x_salad_bowl_wooden",
+    "x_salad_spinner",
+    "x_saucepan_lid",
+    "x_scale",
+    "x_serving_bowl",
+    "x_serving_tray",
+    "x_smoker",
+    "x_steamer_basket",
+    "x_stock_pot",
+    "x_stove_top",
+    "x_sugar_bowl_dish",
+    "x_tagine",
+    "x_tongs",
+    "x_tweezers",
+    "x_yoga_mat"
+   ],
+   "severity": "high",
+   "suggestion": "A replacement name is given for every Legendary, mixing epithets, titles (Captain Pressure, Duke of Sweetness, Count Garlicula) and puns (Cumulo Foamus, Biscuitopolis, Kernel Colossus)."
+  },
+  {
+   "pattern": "One trait scaled over three or four rarities: sieve (flour C/R/E/L), coffee grinder (waking U/R/E/L), garlic press (smell U/R/E/L), popcorn maker (volume C/R/E/L), frying pan (pancakes R/E/L), milk frother (foam R/E/L), spice grinder (sneezing U/R/E), stand mixer (shaking U/R/E), strainer (sauce rescue R/E/L), slow cooker (smell U/E/L), pet food bowl (summoning U/R/E), nail clippers (flinging C/U/E/L), cheese grater, fondue pot, induction hob, sugar bowl dish.",
+   "ids": [
+    "x_sieve",
+    "x_coffee_grinder",
+    "x_garlic_press",
+    "x_popcorn_maker",
+    "frying_pan",
+    "x_milk_frother",
+    "x_spice_grinder",
+    "x_stand_mixer",
+    "x_strainer",
+    "x_slow_cooker_unit",
+    "x_pet_food_bowl",
+    "x_nail_clippers",
+    "x_cheese_grater",
+    "x_fondue_pot",
+    "x_induction_hob"
+   ],
+   "severity": "high",
+   "suggestion": "Five premises per object; replacements given for the repeated rarities."
+  },
+  {
+   "pattern": "Cross-batch copies: sugar bowl dish U/R/E/L = w20 x_sugar_bowl; salad bowl wooden U/E = w15 x_salad_bowl C/E; fruit bowl R = Pilot 02 banana R; popcorn maker L = w15 corn L; bread maker E = w20 oven L; sandwich toaster E = w21 calzone E; pie dish L = w21 apple pie L; crepe pan L = w13 i_plane L and w21 crepe L; boiler U = w20 radiator E; electric blanket R/E = w17 throw blanket R/E; yogurt maker R = w20 coffee machine R; steamer U = w20 humidifier U; dog bowl C = w20 ramen bowl L; spatula E = w22 sippy cup E; serving bowl E = w08 suitcase R; paella E = w21 shawarma E.",
+   "ids": [
+    "x_sugar_bowl_dish",
+    "x_salad_bowl_wooden",
+    "x_fruit_bowl",
+    "x_popcorn_maker",
+    "x_bread_maker",
+    "x_sandwich_toaster",
+    "x_pie_dish",
+    "x_crepe_pan",
+    "x_boiler",
+    "x_electric_blanket",
+    "x_yogurt_maker",
+    "x_steamer",
+    "x_dog_bowl",
+    "spatula",
+    "x_serving_bowl",
+    "x_paella_pan"
+   ],
+   "severity": "high",
+   "suggestion": "This batch side is changed in every case (replacements given)."
+  },
+  {
+   "pattern": "Cluster tell-apart. Mats: exercise mat = sit-ups and star jumps, yoga mat = poses and bending, bath mat = wet feet, doormat = WELCOME and mud, mouse pad = glide. Grills: barbecue = sausages and smoke screens, kettle grill = round beetle on legs, smoker = slow wood smoke, electric grill = indoor stripes, grill = toast under the grill. Steamers: steamer = glasses and puddings, steamer basket = sleepy dumplings and stacking, pressure cooker = hiss and speed. Bowls: bowl = depth, cat bowl = never full enough, dog bowl = slops, buries, shines, pet food bowl = trip hazard and treaties, fruit bowl = hoarding, serving bowl = passing round. Heaters: each Legendary now has its own image (palm tree frost, calendar penguins, swallows, summer fete, snowmen melting, roof snowman).",
+   "ids": [
+    "x_exercise_mat",
+    "x_yoga_mat",
+    "x_bath_mat",
+    "x_doormat",
+    "x_mouse_pad",
+    "x_barbecue",
+    "x_kettle_grill",
+    "x_smoker",
+    "x_electric_grill",
+    "x_grill",
+    "x_steamer",
+    "x_steamer_basket",
+    "x_pressure_cooker_unit",
+    "bowl",
+    "x_cat_bowl",
+    "x_dog_bowl",
+    "x_pet_food_bowl",
+    "x_fruit_bowl",
+    "x_serving_bowl",
+    "x_boiler",
+    "x_electric_heater",
+    "x_furnace",
+    "x_gas_heater",
+    "x_oil_heater",
+    "x_electric_blanket",
+    "x_electric_blanket_cover",
+    "x_heating_pad"
+   ],
+   "severity": "medium",
+   "suggestion": "The per-object replacements follow this split."
+  },
+  {
+   "pattern": "Rares that are the object doing its job well (egg cooker precise, rice cooker fluffy, baking tray even, cake tin flat, nail clippers smooth, oven mitt protective, funnel smooth, pizza oven crisp, ramekin fancy, salad bowl even dressing, serving tray, serving bowl, water filter jug, cutting board).",
+   "ids": [
+    "x_egg_cooker",
+    "rice_cooker",
+    "x_baking_tray",
+    "x_cake_tin",
+    "x_nail_clippers",
+    "x_oven_mitt",
+    "x_funnel",
+    "x_pizza_oven",
+    "x_ramekin",
+    "x_salad_bowl_wooden",
+    "x_serving_tray",
+    "x_serving_bowl",
+    "x_water_filter_jug",
+    "x_cutting_board"
+   ],
+   "severity": "medium",
+   "suggestion": "Give each a troublesome power; replacements given."
+  },
+  {
+   "pattern": "Party-volume Epics ('made so much X for a party that ...') and ceiling-splatter Epics (hand mixer, frying pan, soda maker; w20 blender).",
+   "ids": [
+    "x_ice_cream_maker",
+    "pot",
+    "x_casserole_dish",
+    "x_stock_pot",
+    "x_crepe_pan",
+    "x_cutting_board",
+    "x_pizza_oven",
+    "x_potato_masher",
+    "x_roasting_tin",
+    "x_tagine",
+    "x_hand_mixer",
+    "x_soda_maker",
+    "rice_cooker"
+   ],
+   "severity": "medium",
+   "suggestion": "Keep frying pan (pancake on the ceiling); replace the rest."
+  },
+  {
+   "pattern": "Default kit names that contradict the object: fridge kit 'Frost Breath' / 'Cold Storage' / 'Ice Cube Barrage' kept on heaters, blankets, fryers, ovens, cookers and toasters; kitchen kit 'Taste Test' / 'Hot Ladle' / 'Stir Up' / 'Clatter' kept on mats, scales, clippers, tweezers, a mouse pad and a boxing glove.",
+   "ids": [
+    "x_air_fryer",
+    "x_bath_mat",
+    "x_bathroom_scale",
+    "x_boiler",
+    "x_boxing_glove",
+    "x_bread_maker",
+    "x_bread_toaster_oven",
+    "x_cat_bowl",
+    "x_coffee_grinder",
+    "x_deep_fryer",
+    "x_doormat",
+    "x_egg_cooker",
+    "x_electric_blanket",
+    "x_electric_blanket_cover",
+    "x_electric_heater",
+    "x_exercise_mat",
+    "x_food_processor_unit",
+    "x_furnace",
+    "x_gas_heater",
+    "x_hand_mixer",
+    "x_heating_pad",
+    "x_mouse_pad",
+    "x_nail_clippers",
+    "x_oil_heater",
+    "x_pizza_oven",
+    "x_popcorn_maker",
+    "x_pressure_cooker_unit",
+    "x_sandwich_toaster",
+    "x_slow_cooker_unit",
+    "x_spice_grinder",
+    "x_stand_mixer",
+    "x_steamer",
+    "x_tweezers",
+    "x_water_heater",
+    "x_yoga_mat",
+    "x_yogurt_maker"
+   ],
+   "severity": "high",
+   "suggestion": "Per-slot replacements given, checked against each kit move's mechanics (defdown = crack/distract/soften, self defup = guard/lock/armour, 45% x3 = plural/repeated, heal = rest, stun = jolt/beep, burn = heat)."
+  },
+  {
+   "pattern": "Ultimate names: exact or near repeats of the Epic name (pizza oven, yoga mat, fork, chopsticks, cat bowl, stove top, baking tray, pie dish, potpie) and words that misstate variants (sieve snow on a burn variant; furnace, stock pot heat words with no burn; strainer, oven mitt rescue words; heating pad soothing).",
+   "ids": [
+    "x_pizza_oven",
+    "x_yoga_mat",
+    "cutlery_fork",
+    "x_chopsticks",
+    "x_cat_bowl",
+    "x_stove_top",
+    "x_baking_tray",
+    "x_pie_dish",
+    "i_potpie",
+    "x_sieve",
+    "x_furnace",
+    "x_stock_pot",
+    "x_strainer",
+    "x_oven_mitt",
+    "x_heating_pad"
+   ],
+   "severity": "medium",
+   "suggestion": "Effect-neutral replacements given."
+  },
+  {
+   "pattern": "Safety and sensitivity: stove top U (delayed gas ignition 'whoomph'), toaster oven U (glowing crumbs), electric blanket U (left on until too hot), bathroom scale U/R/E (body-weight jokes for children). Knife (grown-up only, butter-knife Legendary), deep fryer (grown-ups only), gas heater, ramekin and oven mitt lines are acceptable. Wine cooler and bottle opener stay alcohol-free (no drink named).",
+   "ids": [
+    "x_stove_top",
+    "x_bread_toaster_oven",
+    "x_electric_blanket",
+    "x_bathroom_scale",
+    "knife",
+    "x_deep_fryer",
+    "x_gas_heater",
+    "x_wine_cooler",
+    "x_bottle_opener"
+   ],
+   "severity": "high",
+   "suggestion": "Replacements given for the first four; the rest need no change."
+  },
+  {
+   "pattern": "Burn signatures named with heat words on unheated dishes ('Fruit Heat', 'Hot Toss Heat', 'Hot Spin Heat', 'Spin Heat', 'Warm Dinner Heat'): truthful but strained; and 'Hot X Heat' is the shape of about 35 signatures.",
+   "ids": [
+    "bowl",
+    "x_colander_bowl",
+    "frying_pan",
+    "plate",
+    "pot",
+    "i_potpie",
+    "rice_cooker",
+    "x_baking_dish",
+    "x_baking_tray",
+    "x_butter_dish",
+    "x_cake_tin",
+    "x_casserole_dish",
+    "x_cat_bowl",
+    "x_chafing_dish",
+    "x_cheese_board",
+    "x_crepe_pan",
+    "x_dog_bowl",
+    "x_fondue_pot",
+    "x_fruit_bowl",
+    "x_griddle",
+    "x_lazy_susan",
+    "x_mixing_bowl_metal",
+    "x_mortar_and_pestle",
+    "x_muffin_tin",
+    "x_paella_pan",
+    "x_pestle",
+    "x_pet_food_bowl",
+    "x_pie_dish",
+    "x_ramekin",
+    "x_roasting_tin",
+    "x_salad_bowl_wooden",
+    "x_salad_spinner",
+    "x_saucepan_lid",
+    "x_serving_bowl",
+    "x_serving_tray",
+    "x_steamer_basket",
+    "x_stock_pot",
+    "x_sugar_bowl_dish",
+    "x_tagine"
+   ],
+   "severity": "low",
+   "suggestion": "Vary with 'Scald', 'Sizzle', 'Toast', 'Steam' or the hot food itself."
+  }
+ ],
+ "issues": [
+  {
+   "id": "x_food_processor_unit",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (neighbours tell the soup by the noise; 'blended so many' formula)",
+   "suggestion": "'Chopped an onion so fast that the onion cried before the cook did, and now onions arrive with their own tissues.'"
+  },
+  {
+   "id": "x_food_processor_unit",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Chopstorm the Swift' for the Legendary"
+  },
+  {
+   "id": "x_food_processor_unit",
+   "field": "moves.kit.frost_breath",
+   "severity": "low",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a food processor; rename it to fit the object (defdown: distract/crack).",
+   "suggestion": "'Attachment Muddle'"
+  },
+  {
+   "id": "x_food_processor_unit",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "low",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a food processor; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Carrot Confetti Volley'"
+  },
+  {
+   "id": "x_hand_mixer",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (cake on the ceiling) repeats the Uncommon's batter flicking and the batch's ceiling-splatter Epics (frying pan, soda maker, w20 blender).",
+   "suggestion": "'Was switched to top speed and danced itself out of the bowl, across the counter and into the sink, still whisking.'"
+  },
+  {
+   "id": "x_hand_mixer",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sink Dancer' for the Epic"
+  },
+  {
+   "id": "x_hand_mixer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('never once needed a rest')",
+   "suggestion": "'Whisked egg whites so stiff that the builders used the meringue to fix the garden wall.'"
+  },
+  {
+   "id": "x_hand_mixer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Whiskmaster Stiffpeak' for the Legendary"
+  },
+  {
+   "id": "x_hand_mixer",
+   "field": "moves.kit.frost_breath",
+   "severity": "low",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a hand mixer; rename it to fit the object (defdown: soften).",
+   "suggestion": "'Soft Peak Wobble'"
+  },
+  {
+   "id": "x_ice_cream_maker",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (ran out as the last child queued)",
+   "suggestion": "'Churned so hard at a street party that it froze the paddling pool next door, and the children went ice-skating in July.'"
+  },
+  {
+   "id": "x_ice_cream_maker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Paddling Pool Freezer' for the Epic"
+  },
+  {
+   "id": "x_ice_cream_maker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('never made the same one twice')",
+   "suggestion": "'Made ice cream so cold that the heatwave stopped for a scoop and went home in a cardigan.'"
+  },
+  {
+   "id": "x_ice_cream_maker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Churnhilda the Cold' for the Legendary"
+  },
+  {
+   "id": "x_juicer",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (an orchard came round to say thank you) has no clear joke.",
+   "suggestion": "'Squeezed a single lemon so hard that it filled a swimming pool, and every swimmer came out puckered.'"
+  },
+  {
+   "id": "x_juicer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pulpwick the Pool-Filler' for the Legendary"
+  },
+  {
+   "id": "x_stand_mixer",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Uncommon, Rare and Epic all scale one trait (shaking and walking across the counter). Keep the Epic.",
+   "suggestion": "'Kneads so stubbornly that it once kneaded the dough, the tea towel and a library book into one loaf.'"
+  },
+  {
+   "id": "x_stand_mixer",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Towelkneader' for the Rare"
+  },
+  {
+   "id": "x_stand_mixer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the medal frame the tracker bans ('the head teacher gave it a medal'), and the name 'Raised a Bakery' does not match.",
+   "suggestion": "'Kneaded a dough so springy that the bread was used as the bouncy castle at the school fete.'"
+  },
+  {
+   "id": "x_stand_mixer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Big Bouncy Dough' for the Legendary"
+  },
+  {
+   "id": "x_stand_mixer",
+   "field": "moves.kit.cold_storage",
+   "severity": "low",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a stand mixer; rename it to fit the object (self defup: lock/brace).",
+   "suggestion": "'Bowl Lock'"
+  },
+  {
+   "id": "x_stand_mixer",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "low",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a stand mixer; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Dough Hook Thumps'"
+  },
+  {
+   "id": "bowl",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('The Bowl That Was Never Empty', the first thing anyone grabs) is quiet and its premise and name repeat the fruit bowl, water filter jug and cat bowl Legendaries.",
+   "suggestion": "'Was so deep that the cereal at the bottom was from last Tuesday, and a submarine was sent to fetch it.'"
+  },
+  {
+   "id": "bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bowlder the Bottomless' for the Legendary"
+  },
+  {
+   "id": "x_colander",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('the sink applauded with a gurgle')",
+   "suggestion": "'Strained a whole river by accident while rinsing peas, and caught three fish, a wellington boot and a postcard.'"
+  },
+  {
+   "id": "x_colander",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Strainwell the Holey' for the Legendary"
+  },
+  {
+   "id": "x_colander_bowl",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (the kitchen smelled like summer) is a mood, not a consequence.",
+   "suggestion": "'Sprayed rinse water through every hole at once, and the kitchen had its own rainbow for an hour.'"
+  },
+  {
+   "id": "x_colander_bowl",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Kitchen Rainbow' for the Epic"
+  },
+  {
+   "id": "x_colander_bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Rinsemaster of the Allotment' for the Legendary"
+  },
+  {
+   "id": "x_sieve",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Common, Rare, Epic and Legendary are all flour clouds. Keep the Common and the Legendary snowman.",
+   "suggestion": "'Sifts so finely that it separates the sugar from the salt, the sand from the beach and the truth from a fib.'"
+  },
+  {
+   "id": "x_sieve",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Fibsifter' for the Rare"
+  },
+  {
+   "id": "x_sieve",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is the fourth flour-cloud line in one object.",
+   "suggestion": "'Was used to sift the nursery sandpit and found three lost shoes, a tooth and the teacher's car keys.'"
+  },
+  {
+   "id": "x_sieve",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sandpit Sifter' for the Epic"
+  },
+  {
+   "id": "x_sieve",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Flurrina the Indoor Blizzard' for the Legendary"
+  },
+  {
+   "id": "x_sieve",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Indoor Snowfall' is a cold word on an Ultimate whose normal variant burns (burn/stun/stun).",
+   "suggestion": "'Big Flour Puff'"
+  },
+  {
+   "id": "x_strainer",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all rescue lumpy sauce. Keep the Epic gravy rescue.",
+   "suggestion": "'Catches so much that it once caught the teabag, the spoon and a ring that had been missing for a month.'"
+  },
+  {
+   "id": "x_strainer",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Ringcatcher' for the Rare"
+  },
+  {
+   "id": "x_strainer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (saved lumpy custard) repeats the Rare and Epic rescue premise.",
+   "suggestion": "'Strained a whole thunderstorm through its mesh, so the picnic only got tiny, polite raindrops.'"
+  },
+  {
+   "id": "x_strainer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Meshley the Drizzle-Maker' for the Legendary"
+  },
+  {
+   "id": "x_strainer",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Gravy Rescue' is a rescue word on an attack (defdown/defdown/poison).",
+   "suggestion": "'Lumpy Gravy Splat'"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Uncommon, Rare, Epic and Legendary all wake people up. Keep the Uncommon six-a.m. habit.",
+   "suggestion": "'Grinds so fine that the coffee dust gets into every crack, and the bread tastes of mornings for a week.'"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Beandust' for the Rare"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (woke the building) is the third waking line.",
+   "suggestion": "'Ground beans so fast that the kitchen smelled like a cafe, and three strangers walked in and sat down to order.'"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Accidental Cafe' for the Epic"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (the street wakes up to its smell) is the fourth waking line and the 'has ground so many beans' formula.",
+   "suggestion": "'Ground beans so strong that the sleepiest teenager in the house got up before the alarm, made the bed and asked for jobs.'"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Beanstorm the Rouser' for the Legendary"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "moves.kit.frost_breath",
+   "severity": "low",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a coffee grinder; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Bean Dust Distraction'"
+  },
+  {
+   "id": "x_coffee_grinder",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "low",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a coffee grinder; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Rattling Bean Volley'"
+  },
+  {
+   "id": "x_milk_frother",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare, Epic and Legendary all grow tall foam. Keep the Legendary cloud.",
+   "suggestion": "'Froths anything it is dipped into, including the soup, the gravy and the bath.'"
+  },
+  {
+   "id": "x_milk_frother",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (foam climbed across the counter) is the third foam-volume line.",
+   "suggestion": "'Buzzed so fast in an empty jug that it spun across the counter, into the sink and frothed the washing-up.'"
+  },
+  {
+   "id": "x_milk_frother",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Washing-Up Whirl' for the Epic"
+  },
+  {
+   "id": "x_milk_frother",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Cumulo Foamus' for the Legendary"
+  },
+  {
+   "id": "x_soda_maker",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (a sparkling ceiling shower) repeats the Rare's overfizzing and the batch's ceiling Epics.",
+   "suggestion": "'Fizzed the water so hard that the bubbles lifted the bottle off the counter and it bobbed round the kitchen like a balloon.'"
+  },
+  {
+   "id": "x_soda_maker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bottle Balloon' for the Epic"
+  },
+  {
+   "id": "x_soda_maker",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (one party's drinks) is too small a feat for Legendary.",
+   "suggestion": "'Fizzed the garden pond by accident, and the frogs have burped in harmony every evening since.'"
+  },
+  {
+   "id": "x_soda_maker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Burpington the Bubbler' for the Legendary"
+  },
+  {
+   "id": "x_spice_grinder",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Uncommon, Rare and Epic are all sneezing. Keep the Uncommon and Epic.",
+   "suggestion": "'Grinds pepper so hot that the plates sweat and the gravy asks for a glass of water.'"
+  },
+  {
+   "id": "x_spice_grinder",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Platesweater' for the Rare"
+  },
+  {
+   "id": "x_spice_grinder",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('the best dinner of their lives')",
+   "suggestion": "'Spiced a soup so fiercely that it boiled without the hob, and the hob took the evening off.'"
+  },
+  {
+   "id": "x_spice_grinder",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pepperina the Blazing' for the Legendary"
+  },
+  {
+   "id": "x_spice_grinder",
+   "field": "moves.kit.cold_storage",
+   "severity": "low",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a spice grinder; rename it to fit the object (self defup: lock).",
+   "suggestion": "'Lid Twist Lock'"
+  },
+  {
+   "id": "x_spice_grinder",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "low",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a spice grinder; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Peppercorn Volley'"
+  },
+  {
+   "id": "x_water_filter_jug",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('water so clear and cold that everyone forgets other drinks') is not a power.",
+   "suggestion": "'Filters so thoroughly that it takes out the taste, the smell and very nearly the water.'"
+  },
+  {
+   "id": "x_water_filter_jug",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Overfilter' for the Rare"
+  },
+  {
+   "id": "x_water_filter_jug",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (refilled so often the tap had a rest) has no consequence.",
+   "suggestion": "'Filtered a paddling pool so clear that the children kept losing each other in it.'"
+  },
+  {
+   "id": "x_water_filter_jug",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Invisible Pool' for the Epic"
+  },
+  {
+   "id": "x_water_filter_jug",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('The Jug That Was Always Full') repeats the bowl and fruit bowl 'always full' Legendaries and names.",
+   "suggestion": "'Filtered a muddy puddle into water so clean that the puddle got a job as a mirror.'"
+  },
+  {
+   "id": "x_water_filter_jug",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Clearwater Clarence' for the Legendary"
+  },
+  {
+   "id": "cutlery_fork",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('a thousand times without ever dropping it')",
+   "suggestion": "'Twirled spaghetti so hard that it wound up the bowl, the tablecloth and the cat's tail.'"
+  },
+  {
+   "id": "cutlery_fork",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Prongo the Twirler' for the Legendary"
+  },
+  {
+   "id": "cutlery_fork",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Dinner Duel' repeats the Epic name 'Dinner Spear Duel'. Variants stun/poison/defdown: keep it neutral.",
+   "suggestion": "'Last Potato Lunge'"
+  },
+  {
+   "id": "x_freezer_chest",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (ate frozen pies for a fortnight after a defrost) is muddled and has no joke.",
+   "suggestion": "'Was defrosted at last, and out came three ice lollies, last winter's snowman and a very confused fish finger.'"
+  },
+  {
+   "id": "x_freezer_chest",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Defrost Surprise' for the Epic"
+  },
+  {
+   "id": "x_freezer_chest",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Frostbeard the Ancient' for the Legendary"
+  },
+  {
+   "id": "x_ice_maker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Cubert the Igloo-Builder' for the Legendary"
+  },
+  {
+   "id": "x_mini_fridge",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('fed a whole student floor')",
+   "suggestion": "'Held more snacks than the corner shop, and the corner shop now comes to it for supplies.'"
+  },
+  {
+   "id": "x_mini_fridge",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Chillbox the Plentiful' for the Legendary"
+  },
+  {
+   "id": "x_mini_fridge",
+   "field": "names.rare",
+   "severity": "low",
+   "issue": "'Bedsidechiller' is almost the same name as the Uncommon 'Bedsidecool'.",
+   "suggestion": "'Stairdodger' for the Rare"
+  },
+  {
+   "id": "x_wine_cooler",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (kept cool through a power cut, a heatwave and a dinner party)",
+   "suggestion": "'Stayed so calm and cool that the family started bringing their arguments to it, and it settles them by fogging up.'"
+  },
+  {
+   "id": "x_wine_cooler",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Coolhead the Peacekeeper' for the Legendary"
+  },
+  {
+   "id": "x_wine_cooler",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Chill Chill' is a garbled repeat on a single-hit move.",
+   "suggestion": "'Foggy Glass Door'"
+  },
+  {
+   "id": "frying_pan",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary are all pancake flips (and the batch also has spatula, crepe pan and griddle pancakes). Keep the Epic ceiling pancake.",
+   "suggestion": "'Grows a non-stick coat so slippery that the eggs slide off, across the floor and out of the cat flap.'"
+  },
+  {
+   "id": "frying_pan",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Eggskater' for the Rare"
+  },
+  {
+   "id": "frying_pan",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is a third pancake flip and uses the race/contest frame ('won the race too').",
+   "suggestion": "'Fried an egg the size of a trampoline, and the children bounced on it until lunch.'"
+  },
+  {
+   "id": "frying_pan",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Sizzleford the Vast' for the Legendary"
+  },
+  {
+   "id": "frying_pan",
+   "field": "lore.uncommon",
+   "severity": "low",
+   "issue": "Safety note: 'spatters a little hot oil' is mild and aimed at the cooker, but a hot-oil-free habit is easy.",
+   "suggestion": "'Slides to the hottest part of the hob on its own and has to be dragged back by the handle.'"
+  },
+  {
+   "id": "knife",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic ('argued over who got the last slice') duplicates the sandwich toaster Legendary ('argued over who got the last bite').",
+   "suggestion": "'Carved a Sunday roast so neatly that the slices fanned out like a deck of cards, and grandad dealt them.'"
+  },
+  {
+   "id": "knife",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('forty plates a perfect slice'); a butter-knife feat keeps it safe and funny.",
+   "suggestion": "'Buttered a slice of toast so smoothly from edge to edge that it was hung in a gallery.'"
+  },
+  {
+   "id": "knife",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Butterblade the Smooth' for the Legendary"
+  },
+  {
+   "id": "knife",
+   "field": "moves.legend",
+   "severity": "low",
+   "issue": "'Hot Edge' is a heat word (correct for burn) but suggests a heated blade.",
+   "suggestion": "'Hot Butter Edge'"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (a lovely smell wakes everyone) is the batch's smell template and duplicates the slow cooker Uncommon.",
+   "suggestion": "'Bakes a loaf in the shape of whatever it dreamed about, and last night it dreamed about a bicycle.'"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Dreambaker' for the Rare"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (the loaf pushed the lid open and peeked out) copies w20 oven Legendary ('pushed the oven door open and peeked out').",
+   "suggestion": "'Added so much yeast that the dough climbed out, went down the hall and was found asleep on the sofa.'"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Runaway Dough' for the Epic"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('every morning for a year')",
+   "suggestion": "'Baked a loaf so fluffy that it floated up the chimney, and the birds have had breakfast in the clouds ever since.'"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Floaf the Airborne' for the Legendary"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a bread maker; rename it to fit the object (self defup: armour).",
+   "suggestion": "'Crust Armour'"
+  },
+  {
+   "id": "x_bread_maker",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a bread maker; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Paddle Thump Thump'"
+  },
+  {
+   "id": "x_bread_toaster_oven",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Safety: crumbs glowing in the tray is a real fire hazard presented as a cute habit.",
+   "suggestion": "'Pings so quietly that the toast is always found cold an hour later.'"
+  },
+  {
+   "id": "x_bread_toaster_oven",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Quietping' for the Uncommon"
+  },
+  {
+   "id": "x_bread_toaster_oven",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('for twenty years and never burned a slice')",
+   "suggestion": "'Toasted a crumpet so golden that the sunflowers in the garden turned to face it.'"
+  },
+  {
+   "id": "x_bread_toaster_oven",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crumpetus the Radiant' for the Legendary"
+  },
+  {
+   "id": "x_bread_toaster_oven",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a toaster oven; rename it to fit the object (self defup: brace).",
+   "suggestion": "'Tin Box Brace'"
+  },
+  {
+   "id": "x_bread_toaster_oven",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a toaster oven; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Crumb Crumb Crumb'"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('everyone wants one more slice') is the object doing its job.",
+   "suggestion": "'Gets so hot that the pizza is done before anyone chooses a topping, so every pizza comes out plain.'"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Toohotto' for the Rare"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (the guests ran out of plates)",
+   "suggestion": "'Baked pizzas so fast at a garden party that they stacked up to the bedroom window, and the cat ate from upstairs.'"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Pizza Tower' for the Epic"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Oven That Baked a Thousand Pizzas' does not match the lore (one pizza carried out on a door), which is good and stays.",
+   "suggestion": "'Doorpizza the Enormous' for the Legendary"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Pizza Party' repeats the Epic name 'Garden Pizza Party'. Variants poison/stun/poison: keep it neutral.",
+   "suggestion": "'Glowing Dome'"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a pizza oven; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Brick Dome Guard'"
+  },
+  {
+   "id": "x_pizza_oven",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a pizza oven; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Pepperoni Pelting'"
+  },
+  {
+   "id": "plate",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('a thousand dinners and never got a single chip'), and it repeats the Uncommon chip.",
+   "suggestion": "'Was spun so well at a party that it is still spinning on top of the ceiling fan three summers later.'"
+  },
+  {
+   "id": "plate",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Dinner Discus the Unbroken' for the Legendary"
+  },
+  {
+   "id": "pot",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (rattles its lid so loudly) repeats the Common (lid rattling like it is trying to talk).",
+   "suggestion": "'Boils so hard that the soup bubbles over into the next pan, which then gets the blame.'"
+  },
+  {
+   "id": "pot",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Blameboiler' for the Rare"
+  },
+  {
+   "id": "pot",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (leftovers lasted a week; the stock pot Rare says the same)",
+   "suggestion": "'Bubbled a stew so thick that the wooden spoon stood up, waved and had to be pulled out with both hands.'"
+  },
+  {
+   "id": "pot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Spoonswallower' for the Epic"
+  },
+  {
+   "id": "pot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('the whole street came round with bowls')",
+   "suggestion": "'Boiled a single potato so hard that it came out mashed, buttered and already on a plate.'"
+  },
+  {
+   "id": "pot",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Cauldrona the Quick' for the Legendary"
+  },
+  {
+   "id": "i_potpie",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (a delicious smell brings everyone to the table) is the smell template and the object doing its job.",
+   "suggestion": "'Keeps its filling so hot that the first bite always turns into a small dragon impression.'"
+  },
+  {
+   "id": "i_potpie",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Dragonbite' for the Rare"
+  },
+  {
+   "id": "i_potpie",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (tiny slices shared with everyone)",
+   "suggestion": "'Grew so much pastry over its filling that the pie became a tent, and the family camped in it.'"
+  },
+  {
+   "id": "i_potpie",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crustopher the Mighty' for the Legendary"
+  },
+  {
+   "id": "i_potpie",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Pie Night' repeats the Epic name 'Pie Night Steam'. Variants defdown/stun/stun: keep it neutral.",
+   "suggestion": "'Gravy Geyser'"
+  },
+  {
+   "id": "x_boiler",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon (clanks so loudly that everyone thinks someone is knocking) copies w20 radiator Epic (clanked so loudly the family thought somebody was knocking).",
+   "suggestion": "'Needs its pressure topped up every week, and sulks with a red light until somebody does it.'"
+  },
+  {
+   "id": "x_boiler",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Sulklight' for the Uncommon"
+  },
+  {
+   "id": "x_boiler",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (the family huddled in one bed) duplicates the electric blanket Epic (they all slept on one bed).",
+   "suggestion": "'Fired up so fiercely after a repair that every radiator rang like a bell and the towels dried in seconds.'"
+  },
+  {
+   "id": "x_boiler",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Radiator Ringer' for the Epic"
+  },
+  {
+   "id": "x_boiler",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('thirty winters without one breakdown', a thank-you card)",
+   "suggestion": "'Heated the house so well one winter that the snow slid off the roof in one piece and landed as a snowman.'"
+  },
+  {
+   "id": "x_boiler",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pipewarm Percy' for the Legendary"
+  },
+  {
+   "id": "x_boiler",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a boiler; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Airlock Gurgle'"
+  },
+  {
+   "id": "x_boiler",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a boiler; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Pipe Knock Knock'"
+  },
+  {
+   "id": "x_boiler",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Warm Pipes' is a heat word on an Ultimate that only burns in one variant (stun/stun/burn).",
+   "suggestion": "''Banging Pipes''"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Safety: leaving an electric blanket on until the bed is too hot models a real fire-risk habit.",
+   "suggestion": "'Has a little control with three settings, and the family argues every night about which one.'"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Settingsquarrel' for the Uncommon"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare (nobody wants to get up) copies w17 x_throw_blanket Rare (refuses to get up even for tea).",
+   "suggestion": "'Warms only one side of the bed, so its owner wakes up half toast and half ice lolly.'"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (the heating broke, the family slept on one bed) copies w17 x_throw_blanket Epic and the boiler Epic.",
+   "suggestion": "'Was switched on by mistake in a heatwave, and the bed was used to rise bread dough for a week.'"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Dough Prover' for the Epic"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('has warmed so many winter nights that the cat waits by the plug')",
+   "suggestion": "'Warmed a bed so well that a hedgehog woke from hibernation in February, thought it was spring and went jogging.'"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Snugglebun, Bringer of Spring' for the Legendary"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a electric blanket; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Cold Feet Jab'"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a electric blanket; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Duvet Fort'"
+  },
+  {
+   "id": "x_electric_blanket",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a electric blanket; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Pillow Pat Pat Pat'"
+  },
+  {
+   "id": "x_electric_blanket_cover",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('the frost outside never got in')",
+   "suggestion": "'Kept a bed so warm that the frost on the window gave up and drew a palm tree instead.'"
+  },
+  {
+   "id": "x_electric_blanket_cover",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Frostbane the Cosy' for the Legendary"
+  },
+  {
+   "id": "x_electric_blanket_cover",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a heated cover; rename it to fit the object (defdown: crackle).",
+   "suggestion": "'Static Crackle'"
+  },
+  {
+   "id": "x_electric_blanket_cover",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a heated cover; rename it to fit the object (self defup: armour).",
+   "suggestion": "'Quilt Armour'"
+  },
+  {
+   "id": "x_electric_blanket_cover",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a heated cover; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Plump Plump Plump'"
+  },
+  {
+   "id": "x_electric_blanket_cover",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Cosy Quilt' does not sound like an attack (defdown/defdown/burn).",
+   "suggestion": "''Static Duvet Snap''"
+  },
+  {
+   "id": "x_electric_heater",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (people sit round it in a circle) is not a power and invites crowding round a heater.",
+   "suggestion": "'Warms only the person furthest away, so everyone keeps swapping chairs all evening.'"
+  },
+  {
+   "id": "x_electric_heater",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Chairswapper' for the Rare"
+  },
+  {
+   "id": "x_electric_heater",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is the batch's kept-everyone-warm-in-a-snowstorm frame (boiler, furnace, oil heater, gas heater, blankets).",
+   "suggestion": "'Warmed a cold office so quickly that the penguins on the wall calendar asked for sun cream.'"
+  },
+  {
+   "id": "x_electric_heater",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Glowberta the Toasty' for the Legendary"
+  },
+  {
+   "id": "x_electric_heater",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a heater; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Draught Dodge'"
+  },
+  {
+   "id": "x_electric_heater",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a heater; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Safety Grille'"
+  },
+  {
+   "id": "x_furnace",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (the neighbours came round to warm up) is a crowd scene without a joke.",
+   "suggestion": "'Roared on so hard in a cold snap that the cat's whiskers curled and the curtains stood out like flags all night.'"
+  },
+  {
+   "id": "x_furnace",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Furnace That Warmed the Street' does not match the lore (the house, the snowmen melting), which is good and stays.",
+   "suggestion": "'Snowmelter Magnus' for the Legendary"
+  },
+  {
+   "id": "x_furnace",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a furnace; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Draught Rattle'"
+  },
+  {
+   "id": "x_furnace",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a furnace; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Vent Puff Puff Puff'"
+  },
+  {
+   "id": "x_furnace",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Warm Air Rush' is a heat word on an Ultimate that never burns (stun/defdown/defdown).",
+   "suggestion": "'Big Whump'"
+  },
+  {
+   "id": "x_gas_heater",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (people stay outside after dark) is a comfort, not a troublesome power.",
+   "suggestion": "'Glows so cosily that every moth in the garden comes to sit under it like a tiny audience.'"
+  },
+  {
+   "id": "x_gas_heater",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Mothgatherer' for the Rare"
+  },
+  {
+   "id": "x_gas_heater",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (summer clothes at an October wedding) is the warm-in-winter frame again.",
+   "suggestion": "'Warmed a patio so well that the swallows decided not to fly south and stayed for the winter barbecues.'"
+  },
+  {
+   "id": "x_gas_heater",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bluebell, Keeper of Swallows' for the Legendary"
+  },
+  {
+   "id": "x_gas_heater",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a gas heater; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Safety Guard'"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (passed round a family with colds) is gentle and has no consequence.",
+   "suggestion": "'Was used to warm the car seat on a frosty morning, and the car refused to start until it had a turn too.'"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Car Seat Snuggler' for the Epic"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('has soothed so many aches that the dog lies on it')",
+   "suggestion": "'Soothed a grumpy grandad's back so well that he danced at the bus stop and the bus waited to watch.'"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Nana Snugglepad' for the Legendary"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a heating pad; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Tangled Cord Trip'"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a heating pad; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Cosy Cover Guard'"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a heating pad; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Pat Pat Pat'"
+  },
+  {
+   "id": "x_heating_pad",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Soothing Warmth' is a heal word on an attack (defdown/poison/burn).",
+   "suggestion": "'Tangled Cord Tumble'"
+  },
+  {
+   "id": "x_oil_heater",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('without ever running out of heat')",
+   "suggestion": "'Stayed warm so long that it was still cosy at the summer fete, where it melted every ice lolly in reach.'"
+  },
+  {
+   "id": "x_oil_heater",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Finnegan the Slow Burn' for the Legendary"
+  },
+  {
+   "id": "x_oil_heater",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a oil heater; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Fin Tick Distraction'"
+  },
+  {
+   "id": "x_oil_heater",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a oil heater; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Fin Wall Guard'"
+  },
+  {
+   "id": "x_water_heater",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "'The Tank That Filled Every Bath' does not match the lore (one perfect bath for grandad), which is good and stays.",
+   "suggestion": "'Raisinmaker the Kind' for the Legendary"
+  },
+  {
+   "id": "x_water_heater",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a water heater; rename it to fit the object (self defup: a lagging jacket is a real guard).",
+   "suggestion": "'Lagging Jacket'"
+  },
+  {
+   "id": "x_water_heater",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a water heater; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Gurgle Gurgle Gurgle'"
+  },
+  {
+   "id": "x_air_fryer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Crispin the Convincer' for the Legendary"
+  },
+  {
+   "id": "x_air_fryer",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a air fryer; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Basket Rattle'"
+  },
+  {
+   "id": "x_air_fryer",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a air fryer; rename it to fit the object (self defup: lock).",
+   "suggestion": "'Basket Lock'"
+  },
+  {
+   "id": "x_deep_fryer",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (the family hovers by the door) is a reaction, not a power.",
+   "suggestion": "'Crisps chips so loudly that the smoke alarm, the doorbell and the dog all go off at once.'"
+  },
+  {
+   "id": "x_deep_fryer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Goldchip the Perfect' for the Legendary"
+  },
+  {
+   "id": "x_deep_fryer",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a deep fryer; rename it to fit the object (defdown: crack).",
+   "suggestion": "'Batter Crack'"
+  },
+  {
+   "id": "x_deep_fryer",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a deep fryer; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Lid Down Guard'"
+  },
+  {
+   "id": "x_egg_cooker",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the object simply doing its job well; Rare needs a troublesome power. (eggs come out exactly as asked)",
+   "suggestion": "'Cooks eggs so precisely that it refuses to make a runny one for anybody who was rude to it.'"
+  },
+  {
+   "id": "x_egg_cooker",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Yolkjudge' for the Rare"
+  },
+  {
+   "id": "x_egg_cooker",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a thousand eggs; the hens applaud)",
+   "suggestion": "'Boiled an egg so perfectly that it hatched into a full cooked breakfast with toast soldiers.'"
+  },
+  {
+   "id": "x_egg_cooker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Eggbert the Exact' for the Legendary"
+  },
+  {
+   "id": "x_egg_cooker",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a egg cooker; rename it to fit the object (defdown: crack).",
+   "suggestion": "'Shell Crack'"
+  },
+  {
+   "id": "x_egg_cooker",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a egg cooker; rename it to fit the object (self defup: lock).",
+   "suggestion": "'Lid Lock'"
+  },
+  {
+   "id": "x_egg_cooker",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a egg cooker; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Rattling Eggs'"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Names are swapped: 'Steamwhistle' is on the lid-locking Uncommon and 'Lidlocker' on the fast-cooking Rare.",
+   "suggestion": "'Lidlocker' for the Uncommon"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the fast-cooking Rare once 'Lidlocker' moves to the Uncommon.",
+   "suggestion": "'Speedstew' for the Rare"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (whistled like a train) repeats the Common (whistles like a train about to leave).",
+   "suggestion": "'Let off steam so hard at teatime that the kitchen wallpaper peeled off and rolled itself up neatly.'"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Wallpaper Peeler' for the Epic"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (stew in ten minutes, time for a game)",
+   "suggestion": "'Cooked dinner so fast that it was served the night before, and the family ate it twice.'"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Captain Pressure' for the Legendary"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a pressure cooker; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Steam Valve Distraction'"
+  },
+  {
+   "id": "x_pressure_cooker_unit",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a pressure cooker; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Hiss Hiss Hiss'"
+  },
+  {
+   "id": "rice_cooker",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the object simply doing its job well; Rare needs a troublesome power. (fluffy rice)",
+   "suggestion": "'Clicks to warm mode the moment anyone lifts the lid, then starts again from the beginning out of spite.'"
+  },
+  {
+   "id": "rice_cooker",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Spiteclicker' for the Rare"
+  },
+  {
+   "id": "rice_cooker",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke.",
+   "suggestion": "'Cooked so much rice for a family feast that the lid floated up on a fluffy white cloud of it.'"
+  },
+  {
+   "id": "rice_cooker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('every day for twenty years and never burned a single grain')",
+   "suggestion": "'Cooked rice so sticky that the family built a snowman out of it and still had plenty left for dinner.'"
+  },
+  {
+   "id": "rice_cooker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Sticky Ricardo' for the Legendary"
+  },
+  {
+   "id": "x_slow_cooker_unit",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Uncommon, Epic and Legendary are all the smell of dinner greeting people.",
+   "suggestion": "'Cooked so slowly that the carrots planted in the garden that morning grew up in time to join the stew.'"
+  },
+  {
+   "id": "x_slow_cooker_unit",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Garden-to-Pot' for the Epic"
+  },
+  {
+   "id": "x_slow_cooker_unit",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (woke everyone with the smell) is the third smell line.",
+   "suggestion": "'Made a stew so tender that it fell apart, then fell back together as a perfect pie.'"
+  },
+  {
+   "id": "x_slow_cooker_unit",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Dawdle the Tender' for the Legendary"
+  },
+  {
+   "id": "x_slow_cooker_unit",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a slow cooker; rename it to fit the object (defdown: soften).",
+   "suggestion": "'Fall-Apart Soften'"
+  },
+  {
+   "id": "x_slow_cooker_unit",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a slow cooker; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Lid On Guard'"
+  },
+  {
+   "id": "x_slow_cooker_unit",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a slow cooker; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Bubble Bubble Bubble'"
+  },
+  {
+   "id": "x_steamer",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon (fogs the windows) copies w20 x_humidifier Uncommon, the stock pot Uncommon and the approved Pilot 02 kettle Rare.",
+   "suggestion": "'Steams up the cook's glasses every time the lid comes off, so dinner is served by feel.'"
+  },
+  {
+   "id": "x_steamer",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Glassesfogger' for the Uncommon"
+  },
+  {
+   "id": "x_steamer",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (dumplings for a whole banquet) duplicates the steamer basket Legendary and the feeding frame.",
+   "suggestion": "'Steamed a pudding so light that it rose out of the basket and was caught by the washing line.'"
+  },
+  {
+   "id": "x_steamer",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Puddingfloat the Light' for the Legendary"
+  },
+  {
+   "id": "x_steamer",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a steamer; rename it to fit the object (defdown: distract).",
+   "suggestion": "'Steamed Glasses'"
+  },
+  {
+   "id": "x_steamer",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a steamer; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Basket Stack Guard'"
+  },
+  {
+   "id": "x_steamer",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a steamer; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Dumpling Volley'"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (the spoon stands up in it) copies w20 coffee_machine Rare (the spoon stands up on its own).",
+   "suggestion": "'Turns any milk left near it into yoghurt overnight, including the cat's saucer and the cereal.'"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Milkturner' for the Rare"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (the family started to love fruit) is gentle and echoes w20 blender Legendary.",
+   "suggestion": "'Made so much yoghurt in one week that the fridge had to be emptied of everything else, including the light.'"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Fridge Filler' for the Epic"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary ('asked to teach the supermarket a lesson') is muddled.",
+   "suggestion": "'Made a yoghurt so creamy that the cows came to the window to ask how it was done.'"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Culturo the Creamy' for the Legendary"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a yoghurt maker that keeps milk warm; rename it to fit the object (defdown: soften).",
+   "suggestion": "'Wobbly Set'"
+  },
+  {
+   "id": "x_yogurt_maker",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a yoghurt maker that keeps milk warm; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Pot Lid Guard'"
+  },
+  {
+   "id": "x_boxing_glove",
+   "field": "lore.common",
+   "severity": "medium",
+   "issue": "Common (smells like a gym bag) is the same premise as the Epic (gym bag pong cleared the changing room).",
+   "suggestion": "'Is so puffy that its wearer cannot open a door, a crisp packet or a bottle of water.'"
+  },
+  {
+   "id": "x_boxing_glove",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the trophy frame ('hung on the wall with a gold ribbon') and is a quiet win.",
+   "suggestion": "'Punched the air so hard that it knocked a cloud into a new shape, and the weather map had to be redrawn.'"
+  },
+  {
+   "id": "x_boxing_glove",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Knockabout the Cloudpuncher' for the Legendary"
+  },
+  {
+   "id": "x_boxing_glove",
+   "field": "moves.kit.stir_up",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Stir Up' on a boxing glove (45% x3).",
+   "suggestion": "'One-Two-Three Combo'"
+  },
+  {
+   "id": "x_boxing_glove",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on a boxing glove (self heal: rest).",
+   "suggestion": "'Corner Stool Rest'"
+  },
+  {
+   "id": "x_boxing_glove",
+   "field": "moves.kit.clatter",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Clatter' on a boxing glove (stun: sudden noise).",
+   "suggestion": "'Bell Ding Jolt'"
+  },
+  {
+   "id": "x_oven_mitt",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (lifts the hottest tray like a cold plate) is the mitt doing its job.",
+   "suggestion": "'Is so thick that its wearer can lift a hot tray but cannot let go of it, so trays get carried round for ages.'"
+  },
+  {
+   "id": "x_oven_mitt",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Neverletgo' for the Rare"
+  },
+  {
+   "id": "x_oven_mitt",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (rescued a roast) and Legendary (saved Sunday lunch) are the same rescue premise.",
+   "suggestion": "'Was used as a puppet at a dinner party, and the puppet told everyone the roast was late.'"
+  },
+  {
+   "id": "x_oven_mitt",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Puppet Show Mitt' for the Epic"
+  },
+  {
+   "id": "x_oven_mitt",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a list of rescues ('a Sunday lunch, a birthday cake and a tray of cookies') with no feat.",
+   "suggestion": "'Lifted the whole oven out of the wall to reach one biscuit that had fallen down the back.'"
+  },
+  {
+   "id": "x_oven_mitt",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Grabwell the Heatproof' for the Legendary"
+  },
+  {
+   "id": "x_oven_mitt",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Oven Rescue' is a rescue word on an attack (poison/burn/poison).",
+   "suggestion": "'Fish Puppet Chomp'"
+  },
+  {
+   "id": "spatula",
+   "field": "names.common",
+   "severity": "medium",
+   "issue": "Names are swapped: the Common lore scrapes the bowl ('Bowllicker'), the Rare flips everything ('Flipblade').",
+   "suggestion": "'Bowllicker' for the Common"
+  },
+  {
+   "id": "spatula",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the Rare flipping lore.",
+   "suggestion": "'Flipblade' for the Rare"
+  },
+  {
+   "id": "spatula",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (into the dog's bowl) copies w22 x_sippy_cup Epic (bounced into the dog's bowl).",
+   "suggestion": "'Flipped a pancake so hard that it wrapped itself round the lampshade, and the kitchen glowed golden.'"
+  },
+  {
+   "id": "spatula",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the record frame ('the record still stands') and adds more pancakes to a pancake-heavy batch.",
+   "suggestion": "'Flipped an omelette so high that it came down folded, filled and with a sprig of parsley on top.'"
+  },
+  {
+   "id": "spatula",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Flippington the Fearless' for the Legendary"
+  },
+  {
+   "id": "x_popcorn_maker",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Common, Rare, Epic and Legendary are all popcorn volume. Keep the Common and Epic.",
+   "suggestion": "'Butters the popcorn so generously that the bowl slides across the table on its own.'"
+  },
+  {
+   "id": "x_popcorn_maker",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (enough corn for a whole cinema) copies w15 corn Legendary and w21 popcorn Legendary.",
+   "suggestion": "'Popped a single kernel so big that the cinema now uses it as a spare seat.'"
+  },
+  {
+   "id": "x_popcorn_maker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Kernel Colossus' for the Legendary"
+  },
+  {
+   "id": "x_popcorn_maker",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a popcorn maker; rename it to fit the object (defdown: crack).",
+   "suggestion": "'Kernel Crack'"
+  },
+  {
+   "id": "x_popcorn_maker",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a popcorn maker; rename it to fit the object (self defup: guard).",
+   "suggestion": "'Dome Lid Guard'"
+  },
+  {
+   "id": "x_popcorn_maker",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a popcorn maker; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Flying Kernels'"
+  },
+  {
+   "id": "x_sandwich_toaster",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (cheese like an erupting volcano) copies w21 x_calzone Epic and repeats the Uncommon cheese ooze.",
+   "suggestion": "'Pressed a toastie so flat that it was posted to a cousin abroad in an ordinary envelope.'"
+  },
+  {
+   "id": "x_sandwich_toaster",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Flatpack Toastie' for the Epic"
+  },
+  {
+   "id": "x_sandwich_toaster",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('a whole family argued over the last bite', also the knife Epic)",
+   "suggestion": "'Pressed a toastie so hard that the cheese turned into a diamond, and the family still argues about who eats it.'"
+  },
+  {
+   "id": "x_sandwich_toaster",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crimpson the Presser' for the Legendary"
+  },
+  {
+   "id": "x_sandwich_toaster",
+   "field": "moves.kit.frost_breath",
+   "severity": "medium",
+   "issue": "Default kit name 'Frost Breath' is a cold/fridge word on a sandwich toaster; rename it to fit the object (defdown: crack).",
+   "suggestion": "'Crimped Crust Crack'"
+  },
+  {
+   "id": "x_sandwich_toaster",
+   "field": "moves.kit.cold_storage",
+   "severity": "medium",
+   "issue": "Default kit name 'Cold Storage' is a cold/fridge word on a sandwich toaster; rename it to fit the object (self defup: clamp).",
+   "suggestion": "'Clamp Shut'"
+  },
+  {
+   "id": "x_sandwich_toaster",
+   "field": "moves.kit.ice_cube_barrage",
+   "severity": "medium",
+   "issue": "Default kit name 'Ice Cube Barrage' is a cold/fridge word on a sandwich toaster; rename it to fit the object (45% x3: plural).",
+   "suggestion": "'Toastie Crumbs'"
+  },
+  {
+   "id": "whisk",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon (sprays batter) duplicates the hand mixer Uncommon (flicks batter).",
+   "suggestion": "'Keeps one lump of batter trapped inside its loops where no tap can reach.'"
+  },
+  {
+   "id": "whisk",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Lumpkeeper' for the Uncommon"
+  },
+  {
+   "id": "whisk",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('never got tired once')",
+   "suggestion": "'Whisked the duck pond by accident, and the ducks came out as fluffy as meringues.'"
+  },
+  {
+   "id": "whisk",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Whiskerton the Whirlwind' for the Legendary"
+  },
+  {
+   "id": "x_baking_dish",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (corners chiselled out) repeats the Uncommon crispy corners.",
+   "suggestion": "'Holds its heat so long that the lasagne is still bubbling at bedtime, so seconds have to wait until morning.'"
+  },
+  {
+   "id": "x_baking_dish",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Oven Corner Crispy' does not match the Epic lore (it took three people to lift).",
+   "suggestion": "'Three Person Lasagne' for the Epic"
+  },
+  {
+   "id": "x_baking_dish",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (licked clean, no washing) duplicates the dog bowl Legendary and w20 ramen bowl.",
+   "suggestion": "'Baked a lasagne with so many layers that it was mistaken for a building and given a postcode.'"
+  },
+  {
+   "id": "x_baking_dish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lasagnor the Layered' for the Legendary"
+  },
+  {
+   "id": "x_baking_tray",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the object simply doing its job well; Rare needs a troublesome power. (perfect biscuits every time)",
+   "suggestion": "'Bakes everything to the shape of its warp, so every biscuit comes out curved like a crisp.'"
+  },
+  {
+   "id": "x_baking_tray",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Warpbaker' for the Rare"
+  },
+  {
+   "id": "x_baking_tray",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('has baked so many biscuits that it can smell when they are ready')",
+   "suggestion": "'Baked a single biscuit the size of a car park, and the school used it as a playground for a week.'"
+  },
+  {
+   "id": "x_baking_tray",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Biscuitopolis' for the Legendary"
+  },
+  {
+   "id": "x_baking_tray",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Biscuit Bake' repeats the Epic name 'Biscuit Bake-Off'. Variants burn/poison/defdown: keep it neutral.",
+   "suggestion": "'Warped Tray Wallop'"
+  },
+  {
+   "id": "x_barbecue",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (a smoke cloud over the fence) repeats the Common (smells over every fence) and the kettle grill and smoker lines.",
+   "suggestion": "'Sent smoke so thick over a street party that the guests played hide-and-seek in it, and the winner is still hiding.'"
+  },
+  {
+   "id": "x_barbecue",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Smokescreen Supper' for the Epic"
+  },
+  {
+   "id": "x_barbecue",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('fed a whole neighbourhood')",
+   "suggestion": "'Grilled a sausage so long that it was used as a skipping rope at the school fete.'"
+  },
+  {
+   "id": "x_barbecue",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Sausagio the Grand' for the Legendary"
+  },
+  {
+   "id": "x_bath_mat",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (held a splash fight like a sponge) is the same soaking premise as the Rare and Legendary.",
+   "suggestion": "'Was stepped on by the whole family after a muddy football match and now keeps five footprints that never wash out.'"
+  },
+  {
+   "id": "x_bath_mat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Footprint Keeper' for the Epic"
+  },
+  {
+   "id": "x_bath_mat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Big Squelch' for the Legendary"
+  },
+  {
+   "id": "x_bath_mat",
+   "field": "moves.kit.stir_up",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Stir Up' on a bath mat (45% x3).",
+   "suggestion": "'Soggy Stomps'"
+  },
+  {
+   "id": "x_bath_mat",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on a bath mat (self heal).",
+   "suggestion": "'Drip Dry Rest'"
+  },
+  {
+   "id": "x_bath_mat",
+   "field": "moves.kit.clatter",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Clatter' on a bath mat (stun).",
+   "suggestion": "'Cold Tile Shock'"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Weight jokes aimed at children (a moody number) and the line copies the w16 x_dice Common and the x_scale Uncommon; move the scale's humour away from body weight.",
+   "suggestion": "'Beeps loudly at three in the morning whenever the cat walks across it.'"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare (makes its user step off and on five times) is weight anxiety; make it about luggage instead.",
+   "suggestion": "'Weighs holiday suitcases so honestly that every trip starts with three jumpers worn at once.'"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Suitcase Judge' for the Rare"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (the whole family on it, it showed 'oh dear') is a weight-shaming joke.",
+   "suggestion": "'Was used as a stepping stone across a flooded bathroom, and now beeps nervously whenever it hears a tap.'"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Stepping Stone' for the Epic"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "The kind 'lovely' Legendary is fine and stays; vary the 'The X That Y' name.",
+   "suggestion": "'Lovely Lou the Kind' for the Legendary"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "moves.kit.stir_up",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Stir Up' on a bathroom scale (45% x3).",
+   "suggestion": "'Toe Tap Tap Tap'"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on a bathroom scale (self heal: rewind).",
+   "suggestion": "'Reset to Zero'"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "moves.kit.clatter",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Clatter' on a bathroom scale (stun: beep).",
+   "suggestion": "'Midnight Beep'"
+  },
+  {
+   "id": "x_bathroom_scale",
+   "field": "moves.kit.hot_ladle",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Hot Ladle' on a bathroom scale (burn: needs a heat word).",
+   "suggestion": "'Heated Floor Sizzle'"
+  },
+  {
+   "id": "x_bottle_opener",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (caps rained on the blanket) repeats the Rare (flicks caps across the room).",
+   "suggestion": "'Opened every bottle at a picnic at once, and the fizz lifted the tablecloth like a hovercraft.'"
+  },
+  {
+   "id": "x_bottle_opener",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Fizz Hovercraft' for the Epic"
+  },
+  {
+   "id": "x_bottle_opener",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('the same drawer for forty years and has never once gone missing')",
+   "suggestion": "'Opened a stuck jar, a stuck window and a stuck conversation at one family dinner.'"
+  },
+  {
+   "id": "x_bottle_opener",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Popcap, the Great Unsticker' for the Legendary"
+  },
+  {
+   "id": "x_butter_dish",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (the butter slid off the table) repeats the Rare (butter slides across the plate).",
+   "suggestion": "'Kept the butter so hard in winter that the toast tore, the knife bent and the toaster went on strike.'"
+  },
+  {
+   "id": "x_butter_dish",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Rock Butter' for the Epic"
+  },
+  {
+   "id": "x_butter_dish",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('toast everywhere was saved')",
+   "suggestion": "'Softened its butter so perfectly that a slice of toast slid out of the house and all the way to the bus stop.'"
+  },
+  {
+   "id": "x_butter_dish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Spreadmore the Silken' for the Legendary"
+  },
+  {
+   "id": "x_cake_tin",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the object simply doing its job well; Rare needs a troublesome power. (flat-topped cakes)",
+   "suggestion": "'Springs its clip open whenever it hears the word cake, ready or not.'"
+  },
+  {
+   "id": "x_cake_tin",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('every family birthday cake for thirty years without a single one sinking')",
+   "suggestion": "'Baked a birthday cake so tall that the family needed the lift in the block of flats to reach the icing.'"
+  },
+  {
+   "id": "x_cake_tin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Tiered Titan' for the Legendary"
+  },
+  {
+   "id": "x_cake_tin",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Caketin Tom' reads like a placeholder.",
+   "suggestion": "'Lopsider' for the Uncommon"
+  },
+  {
+   "id": "x_can_opener",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('without slipping once, and the beans were amazed')",
+   "suggestion": "'Cranked round a can so many times that it opened the can, the cupboard and the corner shop's shutter.'"
+  },
+  {
+   "id": "x_can_opener",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crankshaw the Opener' for the Legendary"
+  },
+  {
+   "id": "x_casserole_dish",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (three nights of stew, nobody complained)",
+   "suggestion": "'Was so heavy at a family dinner that the table bowed in the middle and the peas rolled down to grandad.'"
+  },
+  {
+   "id": "x_casserole_dish",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Table Bender' for the Epic"
+  },
+  {
+   "id": "x_casserole_dish",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('fed a whole wedding party')",
+   "suggestion": "'Was so heavy that it sank through the kitchen floor into the cellar, still bubbling, and the cellar has smelled of dinner ever since.'"
+  },
+  {
+   "id": "x_casserole_dish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ironclad the Unliftable' for the Legendary"
+  },
+  {
+   "id": "x_cat_bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Lore is good and stays; the name 'The Bowl That Was Never Empty Enough' echoes bowl, fruit bowl and jug.",
+   "suggestion": "'Meowsterpiece the Thanked' for the Legendary"
+  },
+  {
+   "id": "x_cat_bowl",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Breakfast Demand Yowl' contains the Epic name 'Breakfast Demand'. Variants burn/defdown/burn: keep it neutral.",
+   "suggestion": "'Dawn Chorus Yowl'"
+  },
+  {
+   "id": "x_cat_bowl",
+   "field": "moves.kit.lid_clang",
+   "severity": "low",
+   "issue": "A cat bowl has no lid.",
+   "suggestion": "'Bowl Rattle Clang'"
+  },
+  {
+   "id": "x_chafing_dish",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (kept a hotel's breakfast warm) has no joke.",
+   "suggestion": "'Lifted its lid at a hotel buffet so dramatically that a hundred tourists photographed the beans.'"
+  },
+  {
+   "id": "x_chafing_dish",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bean Paparazzi' for the Epic"
+  },
+  {
+   "id": "x_chafing_dish",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('fed a thousand guests')",
+   "suggestion": "'Kept a tray of sausages warm for so long that they became a local landmark with a little sign.'"
+  },
+  {
+   "id": "x_chafing_dish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Steamwarden the Eternal' for the Legendary"
+  },
+  {
+   "id": "x_cheese_board",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a cheese from every country; nobody could pick a favourite)",
+   "suggestion": "'Held a cheese so strong that the party moved outside, then down the road, then to the next town.'"
+  },
+  {
+   "id": "x_cheese_board",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pongsworth the Ripe' for the Legendary"
+  },
+  {
+   "id": "x_cheese_grater",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary all grate a lot of cheese fast. Keep the Epic snowdrift.",
+   "suggestion": "'Keeps the tastiest cheese shreds for itself and only hands over the dry ones.'"
+  },
+  {
+   "id": "x_cheese_grater",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Shredhoarder' for the Rare"
+  },
+  {
+   "id": "x_cheese_grater",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (a whole wheel without stopping) is the third volume line.",
+   "suggestion": "'Grated a carrot so finely that the shreds were planted and grew back as forty carrots.'"
+  },
+  {
+   "id": "x_cheese_grater",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Shredrick the Fine' for the Legendary"
+  },
+  {
+   "id": "x_chopsticks",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (lifted one grain, the table clapped)",
+   "suggestion": "'Caught every grain of a dropped bowl of rice before a single one reached the floor.'"
+  },
+  {
+   "id": "x_chopsticks",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Twinpinch the Nimble' for the Legendary"
+  },
+  {
+   "id": "x_chopsticks",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Noodle Duel' repeats the Epic name 'Noodle Slurp Duel'. Variants defdown/poison/poison: keep it neutral.",
+   "suggestion": "'Grain by Grain'"
+  },
+  {
+   "id": "x_crepe_pan",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare (crepes almost see-through) copies w21 x_crepe Legendary ('paper thin') and its own Legendary.",
+   "suggestion": "'Spreads the batter so wide that the crepe flops over the edge and onto the cook's slippers.'"
+  },
+  {
+   "id": "x_crepe_pan",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (still swirling at midnight)",
+   "suggestion": "'Made a crepe so wide at a party that it was used as a tablecloth, then eaten for dessert.'"
+  },
+  {
+   "id": "x_crepe_pan",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Tablecloth Crepe' for the Epic"
+  },
+  {
+   "id": "x_crepe_pan",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (read the newspaper through it) copies w13 i_plane Legendary, and the name copies w21 'The Crepe That Was Paper Thin'.",
+   "suggestion": "'Swirled its batter so fast that the crepe wrapped round the whole kitchen, and the cook had to eat his way out.'"
+  },
+  {
+   "id": "x_crepe_pan",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wrapsody the Thin' for the Legendary"
+  },
+  {
+   "id": "x_cutting_board",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (veg spills on the floor) is an accident, not a power.",
+   "suggestion": "'Keeps the smell of every onion ever cut on it, so the fruit salad always makes people cry.'"
+  },
+  {
+   "id": "x_cutting_board",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (guests too full for pudding)",
+   "suggestion": "'Was taken to the beach as a surfboard and rode a wave all the way into the ice-cream queue.'"
+  },
+  {
+   "id": "x_cutting_board",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Beach Board' for the Epic"
+  },
+  {
+   "id": "x_cutting_board",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Lore (knife marks spell a recipe) is good and stays; vary the name.",
+   "suggestion": "'Recipe Etcher the Wise' for the Legendary"
+  },
+  {
+   "id": "x_dog_bowl",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Common (licked shiny like a mirror) is the same premise as the Legendary and copies w20 x_ramen_bowl Legendary.",
+   "suggestion": "'Slops water over the edge every time the dog drinks, so the kitchen floor is always a small pond.'"
+  },
+  {
+   "id": "x_dog_bowl",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (sloshes water) would repeat the new Common; give it a power.",
+   "suggestion": "'Gets buried in the garden by the dog whenever it holds the wrong dinner, and dug up again for the right one.'"
+  },
+  {
+   "id": "x_dog_bowl",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bowlburier' for the Rare"
+  },
+  {
+   "id": "x_dog_bowl",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (dropped at the owner's feet) repeats the Uncommon (carried round by the dog).",
+   "suggestion": "'Was carried by the dog to a picnic three fields away, and the picnickers filled it out of politeness.'"
+  },
+  {
+   "id": "x_dog_bowl",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Picnic Gatecrasher' for the Epic"
+  },
+  {
+   "id": "x_dog_bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Lore (shines bright enough to signal ships) is good and stays; vary the name.",
+   "suggestion": "'Lighthouse Licky' for the Legendary"
+  },
+  {
+   "id": "x_doormat",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (the carpets stayed clean) has no joke.",
+   "suggestion": "'Said WELCOME so convincingly that a lost sheep, two tortoises and the postman's dog came in for tea.'"
+  },
+  {
+   "id": "x_doormat",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Overwelcomer' for the Epic"
+  },
+  {
+   "id": "x_doormat",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary keeps a 'for ten years' frame; the hoover punchline is good, so lose the years.",
+   "suggestion": "'Kept a house so clean that the hoover took early retirement and moved to the seaside.'"
+  },
+  {
+   "id": "x_doormat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wipeworth the Welcoming' for the Legendary"
+  },
+  {
+   "id": "x_doormat",
+   "field": "moves.kit.stir_up",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Stir Up' on a doormat (45% x3).",
+   "suggestion": "'Boot Scrape Scrape'"
+  },
+  {
+   "id": "x_doormat",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on a doormat (self heal).",
+   "suggestion": "'Shake Out Rest'"
+  },
+  {
+   "id": "x_doormat",
+   "field": "moves.kit.clatter",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Clatter' on a doormat (stun).",
+   "suggestion": "'Doorbell Jolt'"
+  },
+  {
+   "id": "x_electric_grill",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat.",
+   "suggestion": "'Grilled sausages so convincingly that the sun came out to see the barbecue, then went back in when it found it was indoors.'"
+  },
+  {
+   "id": "x_electric_grill",
+   "field": "names.legendary",
+   "severity": "low",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Stripes the Sizzler' for the Legendary"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Exercise mat and yoga mat are near copies (curling ends, an urge to stretch, a family session, teaching toes). Give the exercise mat workouts, the yoga mat poses.",
+   "suggestion": "'Counts every sit-up out loud, and never counts the last one, so the workout never ends.'"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sit-up Counter' for the Rare"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "names.uncommon",
+   "severity": "low",
+   "issue": "'Yogapad' belongs to the yoga mat.",
+   "suggestion": "'Wrongroller' for the Uncommon"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (taught a family to touch their toes) duplicates the yoga mat Legendary and uses 'for ten years'.",
+   "suggestion": "'Was used for so many star jumps in one morning that the ceiling below grew a crack shaped like a star.'"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Jumpjack the Starry' for the Legendary"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "moves.kit.stir_up",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Stir Up' on an exercise mat (45% x3).",
+   "suggestion": "'Burpee Burpee Burpee'"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "moves.kit.clatter",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Clatter' on an exercise mat (stun).",
+   "suggestion": "'Whistle Blast'"
+  },
+  {
+   "id": "x_exercise_mat",
+   "field": "moves.kit.hot_ladle",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Hot Ladle' on an exercise mat (burn).",
+   "suggestion": "'Hot Sweat Slap'"
+  },
+  {
+   "id": "x_yoga_mat",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary keeps the 'in forty years' frame; sharpen the punchline (exercise mat now has its own Legendary).",
+   "suggestion": "'Taught a whole family to touch their toes, including a grandad who had not seen his own since the moon landing.'"
+  },
+  {
+   "id": "x_yoga_mat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bendigo the Supple' for the Legendary"
+  },
+  {
+   "id": "x_yoga_mat",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Sunrise Stretch' is exactly the Epic name. Variants poison/defdown/defdown: keep it neutral.",
+   "suggestion": "'Pretzel Twist'"
+  },
+  {
+   "id": "x_yoga_mat",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on a yoga mat (self heal).",
+   "suggestion": "'Deep Breath Rest'"
+  },
+  {
+   "id": "x_yoga_mat",
+   "field": "moves.kit.clatter",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Clatter' on a yoga mat (stun).",
+   "suggestion": "'Rubber Slap Jolt'"
+  },
+  {
+   "id": "x_yoga_mat",
+   "field": "moves.kit.hot_ladle",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Hot Ladle' on a yoga mat (burn).",
+   "suggestion": "'Hot Yoga Heat'"
+  },
+  {
+   "id": "x_fondue_pot",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Uncommon, Rare and Epic are all lost bread cubes.",
+   "suggestion": "'Bubbles so thickly that every fork comes out trailing a cheese string as long as the table.'"
+  },
+  {
+   "id": "x_fondue_pot",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('for five hours and never lost a single fork')",
+   "suggestion": "'Held a cheese so deep that a fork lost at a party two winters ago came back up, still holding its bread.'"
+  },
+  {
+   "id": "x_fondue_pot",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gruyere the Swallower' for the Legendary"
+  },
+  {
+   "id": "x_fruit_bowl",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon (a few fruit flies) is the same premise as the Epic (a fruit-fly airport).",
+   "suggestion": "'Collects keys, coins and one sock until there is no room left for fruit.'"
+  },
+  {
+   "id": "x_fruit_bowl",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Keyhoarder' for the Uncommon"
+  },
+  {
+   "id": "x_fruit_bowl",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare (ripens everything at once) copies the approved Pilot 02 banana Rare and the w18 banana bunch Rare.",
+   "suggestion": "'Hides the last banana under the apples, so everyone eats an apple and the banana goes brown.'"
+  },
+  {
+   "id": "x_fruit_bowl",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bananahider' for the Rare"
+  },
+  {
+   "id": "x_fruit_bowl",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('The Bowl That Was Always Full') repeats the bowl and water filter jug Legendaries and w22 x_pasta_box Legendary.",
+   "suggestion": "'Turned a single lemon into a lemon tree overnight, and now the kitchen needs a ladder at breakfast.'"
+  },
+  {
+   "id": "x_fruit_bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Orchard Overlord' for the Legendary"
+  },
+  {
+   "id": "x_fruit_bowl",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Fruit Heat' is truthful (burn) but empty.",
+   "suggestion": "'Sun-Warmed Plum'"
+  },
+  {
+   "id": "x_funnel",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon (overflows) is the same premise as the Epic (overflowed, the counter became a lake).",
+   "suggestion": "'Gets used as a megaphone by whoever finds it first, usually to announce dinner.'"
+  },
+  {
+   "id": "x_funnel",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Megafunnel' for the Uncommon"
+  },
+  {
+   "id": "x_funnel",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (pours smoothly) is the object doing its job.",
+   "suggestion": "'Pours everything into the wrong bottle, so the squash tastes of vinegar and the vinegar tastes of squash.'"
+  },
+  {
+   "id": "x_funnel",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Oil Change Overflow' does not match the Epic lore (filling a jug).",
+   "suggestion": "'Counter Lake' for the Epic"
+  },
+  {
+   "id": "x_funnel",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('a thousand bottles without spilling a single drop')",
+   "suggestion": "'Poured a whole rainstorm into one watering can, and the garden was watered for the summer.'"
+  },
+  {
+   "id": "x_funnel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Stormcatcher Spout' for the Legendary"
+  },
+  {
+   "id": "x_garlic_press",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Uncommon, Rare, Epic and Legendary are all garlic smell. Keep the Uncommon fingers and the Legendary festival.",
+   "suggestion": "'Squeezes garlic so hard that it shoots across the room and sticks to the window.'"
+  },
+  {
+   "id": "x_garlic_press",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Clovelauncher' for the Rare"
+  },
+  {
+   "id": "x_garlic_press",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (the whole street could smell it) is the third smell line.",
+   "suggestion": "'Jammed shut on a clove and took the whole family pulling on both handles like a tug of war.'"
+  },
+  {
+   "id": "x_garlic_press",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Tug of War Press' for the Epic"
+  },
+  {
+   "id": "x_garlic_press",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Count Garlicula' for the Legendary"
+  },
+  {
+   "id": "x_griddle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('fed a whole campsite')",
+   "suggestion": "'Fried a breakfast so wide that the sausages had to be turned by a team on bicycles.'"
+  },
+  {
+   "id": "x_griddle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Plancha Grande' for the Legendary"
+  },
+  {
+   "id": "x_grill",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (one perfect slice the family talks about) is quiet, and its name 'The Grill That Forgot the Toast' contradicts it.",
+   "suggestion": "'Grilled cheese so fast that it melted before it was sliced, and the slices dropped straight onto the toast.'"
+  },
+  {
+   "id": "x_grill",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Broiler Baron' for the Legendary"
+  },
+  {
+   "id": "x_hot_plate",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a student graduated)",
+   "suggestion": "'Cooked a whole wedding banquet on one ring, one pan at a time, and the guests had the main course at breakfast.'"
+  },
+  {
+   "id": "x_hot_plate",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Coilbert the Patient' for the Legendary"
+  },
+  {
+   "id": "x_induction_hob",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare, Epic and Legendary are all boiling fast. Keep the Legendary (the kettle sulked).",
+   "suggestion": "'Refuses to heat any pan it has not been introduced to, so the cook has to say the pan's name first.'"
+  },
+  {
+   "id": "x_induction_hob",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is the second boiling-fast line.",
+   "suggestion": "'Switched on its child lock during dinner, and the whole family stood round the cold soup hunting for the right button.'"
+  },
+  {
+   "id": "x_induction_hob",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Child Lock Standoff' for the Epic"
+  },
+  {
+   "id": "x_induction_hob",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Flashboil the Magnetic' for the Legendary"
+  },
+  {
+   "id": "x_kettle_grill",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare (smokes so slowly the afternoon disappears) copies the smoker Rare (ready the day after).",
+   "suggestion": "'Rolls across the patio on its little legs whenever the wind blows, chasing the guests round the garden.'"
+  },
+  {
+   "id": "x_kettle_grill",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Patioroller' for the Rare"
+  },
+  {
+   "id": "x_kettle_grill",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (neighbours came to sniff) is a smell scene, and its name 'Back Garden Smokehouse' nearly copies the smoker Epic name 'Garden Smokehouse'.",
+   "suggestion": "'Shut its lid so tightly on the burgers that the family had to sing to it before it would open again.'"
+  },
+  {
+   "id": "x_kettle_grill",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sulky Dome' for the Epic"
+  },
+  {
+   "id": "x_kettle_grill",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (the garden smells in December) is the smell frame again.",
+   "suggestion": "'Was mistaken for a giant beetle by a flock of starlings, who now follow it wherever it rolls.'"
+  },
+  {
+   "id": "x_kettle_grill",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Beetlebrow the Smoky' for the Legendary"
+  },
+  {
+   "id": "x_kitchen_scale",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (switched off mid-bake) repeats the Uncommon (switches itself off halfway).",
+   "suggestion": "'Weighed the flour so honestly that it refused to round down, and the cake recipe now has decimal points.'"
+  },
+  {
+   "id": "x_kitchen_scale",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Decimal Baker' for the Epic"
+  },
+  {
+   "id": "x_kitchen_scale",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (weighed a feather and a whisker) is the Rare's precision again with no punchline.",
+   "suggestion": "'Weighed a cloud by holding a bowl out of the window, and the weather forecast now quotes it.'"
+  },
+  {
+   "id": "x_kitchen_scale",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Gramwise, Weigher of Clouds' for the Legendary"
+  },
+  {
+   "id": "x_lazy_susan",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('without spilling a drop')",
+   "suggestion": "'Spun so fast at a banquet that every guest ended up with someone else's dinner, and nobody wanted to swap back.'"
+  },
+  {
+   "id": "x_lazy_susan",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Whirlysue the Restless' for the Legendary"
+  },
+  {
+   "id": "x_measuring_cup_tool",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('perfect, as long as somebody reads the lines') is not a power.",
+   "suggestion": "'Measures everything slightly wrong in its own favour, so every cake comes out a little bigger.'"
+  },
+  {
+   "id": "x_measuring_cup_tool",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('for thirty years and never got one wrong')",
+   "suggestion": "'Measured out a cup of sunshine for a recipe, and the cake stayed warm in the middle all winter.'"
+  },
+  {
+   "id": "x_measuring_cup_tool",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Brimwell the Generous' for the Legendary"
+  },
+  {
+   "id": "x_mixing_bowl_metal",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (rang for a minute when dropped) repeats the Rare (rings loudly when dropped).",
+   "suggestion": "'Caught the sun on the windowsill and beamed it into the neighbour's lounge, so they have been waving back for a week.'"
+  },
+  {
+   "id": "x_mixing_bowl_metal",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Sunbeam Bouncer' for the Epic"
+  },
+  {
+   "id": "x_mixing_bowl_metal",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('every family cake for forty years, still shines like new')",
+   "suggestion": "'Mixed a batter so smooth that the cake came out with the baker's reflection in the icing.'"
+  },
+  {
+   "id": "x_mixing_bowl_metal",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Mirrorbowl the Shiny' for the Legendary"
+  },
+  {
+   "id": "x_mortar_and_pestle",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (the whole house sneezed) repeats the spice grinder's sneezing.",
+   "suggestion": "'Pounded spices so hard that the counter cracked, the kettle jumped and the curry was ready before the rice.'"
+  },
+  {
+   "id": "x_mortar_and_pestle",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Counter Cracker' for the Epic"
+  },
+  {
+   "id": "x_mortar_and_pestle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('for fifty years')",
+   "suggestion": "'Ground up a pebble that fell in by mistake so finely that the family used it as birthday glitter.'"
+  },
+  {
+   "id": "x_mortar_and_pestle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Stonegrind the Glittering' for the Legendary"
+  },
+  {
+   "id": "x_pestle",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (the market smelled sweet for a week)",
+   "suggestion": "'Pounded so hard at a festival stall that it struck oil, and the stall sold salad dressing all afternoon.'"
+  },
+  {
+   "id": "x_pestle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Oil Strike Ollie' for the Legendary"
+  },
+  {
+   "id": "x_mouse_pad",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "'Wristrest' does not match the Rare lore (so smooth the cursor zooms).",
+   "suggestion": "'Zoompad' for the Rare"
+  },
+  {
+   "id": "x_mouse_pad",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('a million clicks and still lies perfectly flat')",
+   "suggestion": "'Was so smooth that the mouse slid off the desk, out of the window and was found clicking in the next town.'"
+  },
+  {
+   "id": "x_mouse_pad",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Glidewell the Slick' for the Legendary"
+  },
+  {
+   "id": "x_mouse_pad",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on a mouse pad (self heal).",
+   "suggestion": "'Screen Saver Rest'"
+  },
+  {
+   "id": "x_mouse_pad",
+   "field": "moves.kit.hot_ladle",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Hot Ladle' on a mouse pad (burn).",
+   "suggestion": "'Warm Laptop Glow'"
+  },
+  {
+   "id": "x_muffin_tin",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (bake sale tables ran out) repeats the Legendary bake sale.",
+   "suggestion": "'Baked muffins so tall that they leaned on each other and toppled off the windowsill like dominoes.'"
+  },
+  {
+   "id": "x_muffin_tin",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Muffin Dominoes' for the Epic"
+  },
+  {
+   "id": "x_muffin_tin",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the payment punchline the tracker bans ('the school roof was paid for with crumbs').",
+   "suggestion": "'Baked a single muffin so big that the school now uses its top as the roof of the bandstand.'"
+  },
+  {
+   "id": "x_muffin_tin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Grand Muffinarch' for the Legendary"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "lore.common",
+   "severity": "high",
+   "issue": "Common, Uncommon and Epic are all flung clippings; the Legendary is the same trait reversed. Keep the Uncommon and the Epic cup of tea.",
+   "suggestion": "'Click so sharply that the cat leaves the room every time they come out of the drawer.'"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (nails come out smooth) is the object doing its job.",
+   "suggestion": "'Clip so fast that one hand is finished before its owner notices, and the other hand gets jealous.'"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Quickclip' for the Rare"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('without flinging a single clipping')",
+   "suggestion": "'Were dropped in the garden and trimmed every hedge in the street, and the gardener is still confused.'"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Hedgetrimmer Snip' for the Legendary"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "moves.kit.stir_up",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Stir Up' on nail clippers (45% x3).",
+   "suggestion": "'Nip Nip Nip'"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on nail clippers (self heal).",
+   "suggestion": "'Nail File Rest'"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "moves.kit.clatter",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Clatter' on nail clippers (stun).",
+   "suggestion": "'Sharp Click Jolt'"
+  },
+  {
+   "id": "x_nail_clippers",
+   "field": "moves.kit.hot_ladle",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Hot Ladle' on nail clippers (burn).",
+   "suggestion": "'Friction Sizzle'"
+  },
+  {
+   "id": "x_nutcracker",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('without crushing a single kernel')",
+   "suggestion": "'Cracked a walnut so cleanly that the garden frogs now use both halves as boats.'"
+  },
+  {
+   "id": "x_nutcracker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Walnut Admiral' for the Legendary"
+  },
+  {
+   "id": "x_paella_pan",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic ('the queue went round the block') copies w21 x_shawarma Epic and x_empanada Epic.",
+   "suggestion": "'Was too wide for the kitchen door, so the party was cooked on the lawn just as the sprinklers came on.'"
+  },
+  {
+   "id": "x_paella_pan",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Lawn Paella' for the Epic"
+  },
+  {
+   "id": "x_paella_pan",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('fed a whole village fiesta')",
+   "suggestion": "'Cooked a paella so big that the crispy bottom was rolled up and used as a picnic blanket.'"
+  },
+  {
+   "id": "x_paella_pan",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Saffronio the Vast' for the Legendary"
+  },
+  {
+   "id": "x_pet_food_bowl",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Uncommon, Rare and Epic all rattle and summon every pet; the cat and dog bowls tread the same ground.",
+   "suggestion": "'Hides the best biscuits at the very bottom, so the dog flips it over every single time to find them.'"
+  },
+  {
+   "id": "x_pet_food_bowl",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Toetripper' for the Rare"
+  },
+  {
+   "id": "x_pet_food_bowl",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (the cat, the dog and a rabbit arrived) is the third summoning line.",
+   "suggestion": "'Was filled so high at teatime that the cat, the dog and the hamster had to agree a rota.'"
+  },
+  {
+   "id": "x_pet_food_bowl",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Rota Bowl' for the Epic"
+  },
+  {
+   "id": "x_pet_food_bowl",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('filled so many times that the pets know the time')",
+   "suggestion": "'Got the dog and the cat to share one meal, and the peace treaty is framed on the fridge.'"
+  },
+  {
+   "id": "x_pet_food_bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pawpact the Peacemaker' for the Legendary"
+  },
+  {
+   "id": "x_pie_dish",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon (bubbles juice onto the oven floor) duplicates the potpie Uncommon (bubbles gravy onto the oven floor).",
+   "suggestion": "'Has a little china bird in the middle that whistles when the pie is done, usually during the news.'"
+  },
+  {
+   "id": "x_pie_dish",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Piebird' for the Uncommon"
+  },
+  {
+   "id": "x_pie_dish",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (won the village show three years in a row) copies w21 x_apple_pie Legendary and uses the contest frame.",
+   "suggestion": "'Baked a pie with a crust so high that it had its own weather, and it rained apple juice inside.'"
+  },
+  {
+   "id": "x_pie_dish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crustacious the Lofty' for the Legendary"
+  },
+  {
+   "id": "x_pie_dish",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Pie Overflow' repeats the Epic name 'Apple Pie Overflow'. Variants stun/stun/defdown: keep it neutral.",
+   "suggestion": "'Pie Bird Whistle'"
+  },
+  {
+   "id": "x_potato_masher",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (the bowl overflowed onto the table)",
+   "suggestion": "'Mashed so hard at a roast dinner that the table jumped, the peas rolled off and the gravy boat set sail.'"
+  },
+  {
+   "id": "x_potato_masher",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('seconds of mash only')",
+   "suggestion": "'Mashed a whole sack of potatoes into one smooth cloud, and the family napped on it after lunch.'"
+  },
+  {
+   "id": "x_potato_masher",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Mashwell the Smooth' for the Legendary"
+  },
+  {
+   "id": "x_ramekin",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (makes pudding look fancy) is not a power.",
+   "suggestion": "'Holds exactly one portion and not a spoonful more, so every second helping ends up on the tablecloth.'"
+  },
+  {
+   "id": "x_ramekin",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (a perfect souffle) repeats the Epic souffle rise and has a quiet punchline (the chef cried).",
+   "suggestion": "'Held a custard so wobbly that it set off the earthquake alarm at the museum next door.'"
+  },
+  {
+   "id": "x_ramekin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Wobblebert the Small' for the Legendary"
+  },
+  {
+   "id": "x_roasting_tin",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (leftovers for three days)",
+   "suggestion": "'Roasted potatoes so crunchy that the crunch set off the smoke alarm, which then asked for one.'"
+  },
+  {
+   "id": "x_roasting_tin",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('every week for forty years')",
+   "suggestion": "'Roasted a parsnip so crispy that it kept crunching for a whole minute after it was swallowed.'"
+  },
+  {
+   "id": "x_roasting_tin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Roastrum the Crackling' for the Legendary"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon (lettuce escapes when tossed) copies w15 x_salad_bowl Common (spills lettuce every time it is tossed).",
+   "suggestion": "'Has soaked up so much dressing over the years that every salad tastes a little of last summer.'"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Dressingsoaker' for the Uncommon"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the object simply doing its job well; Rare needs a troublesome power. (every leaf gets the same dressing)",
+   "suggestion": "'Sprouts a tiny new leaf from its own wood every spring, and nobody knows what tree it thinks it is.'"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Leafsprouter' for the Rare"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (tossed so high the lettuce landed on the guests) is the w15 salad bowl toss again.",
+   "suggestion": "'Floated off down the river at a picnic, still full of salad, and the ducks had a very healthy lunch.'"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'River Salad' for the Epic"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (makes the grumpiest child eat a tomato) echoes w15 x_salad_bowl and w20 blender Legendaries.",
+   "suggestion": "'Grew back into a tree overnight, and now the salad is served from its branches.'"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Oakleaf the Regrown' for the Legendary"
+  },
+  {
+   "id": "x_salad_spinner",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('dry as paper') duplicates the juicer Rare ('as dry as paper').",
+   "suggestion": "'Spins so hard that the lettuce comes out dizzy and refuses to lie flat on the plate.'"
+  },
+  {
+   "id": "x_salad_spinner",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Dizzyleaf' for the Rare"
+  },
+  {
+   "id": "x_salad_spinner",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a wedding salad in under a minute)",
+   "suggestion": "'Spun so fast that it took off from the counter and was spotted circling the garden like a flying saucer.'"
+  },
+  {
+   "id": "x_salad_spinner",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Whirlybird the Saucer' for the Legendary"
+  },
+  {
+   "id": "x_saucepan_lid",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (rattles loudly) repeats the Common (rattles when the water boils).",
+   "suggestion": "'Steams up so thickly that the cook cannot see into the pan and pours custard into the gravy.'"
+  },
+  {
+   "id": "x_saucepan_lid",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Steamblinder' for the Rare"
+  },
+  {
+   "id": "x_saucepan_lid",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (fell off and made everyone jump) repeats the Uncommon (falls off the shelf).",
+   "suggestion": "'Was used as a shield in a kitchen pillow fight and blocked a whole flying trifle.'"
+  },
+  {
+   "id": "x_saucepan_lid",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Trifle Shield' for the Epic"
+  },
+  {
+   "id": "x_saucepan_lid",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Lore (fits every pan) is a good joke and stays; vary the name.",
+   "suggestion": "'Universal Lidwig' for the Legendary"
+  },
+  {
+   "id": "x_scale",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (wobbles so long) repeats the Common (a needle that wobbles before it settles).",
+   "suggestion": "'Adds a little weight to anything it dislikes, so the sprouts always weigh twice as much as the chocolate.'"
+  },
+  {
+   "id": "x_scale",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Lore (the market checks its scales against it) can stay; vary the name.",
+   "suggestion": "'Justina the Balanced' for the Legendary"
+  },
+  {
+   "id": "x_serving_bowl",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (the table looks like a feast) is not a power.",
+   "suggestion": "'Never fits in any cupboard, so it lives on top of the fridge and drops on whoever opens the door.'"
+  },
+  {
+   "id": "x_serving_bowl",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Fridgetopper' for the Rare"
+  },
+  {
+   "id": "x_serving_bowl",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic ('passed round so many times that it got dizzy') copies w08 suitcase Rare ('so many times that it got dizzy').",
+   "suggestion": "'Was passed round a family dinner so fast that it went twice round the table and once round the garden.'"
+  },
+  {
+   "id": "x_serving_bowl",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('passed round so many tables that it knows every family')",
+   "suggestion": "'Was passed round a wedding table so many times that it ended up married to the gravy boat.'"
+  },
+  {
+   "id": "x_serving_bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Handaround Hattie' for the Legendary"
+  },
+  {
+   "id": "x_serving_tray",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (the carrier walks slowly) is not a power.",
+   "suggestion": "'Catches the light so brightly that whoever carries it is dazzled and walks into the door.'"
+  },
+  {
+   "id": "x_serving_tray",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Doorwalker' for the Rare"
+  },
+  {
+   "id": "x_serving_tray",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (every crumb stayed on) has no consequence.",
+   "suggestion": "'Was used as a sledge on the first snow day and beat the next-door toboggan to the bottom of the hill.'"
+  },
+  {
+   "id": "x_serving_tray",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Snow Day Sledge' for the Epic"
+  },
+  {
+   "id": "x_serving_tray",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('a thousand birthday breakfasts and never spilled a single cup')",
+   "suggestion": "'Carried breakfast in bed so smoothly that the boiled egg stayed asleep the whole way.'"
+  },
+  {
+   "id": "x_serving_tray",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Steady Eddie the Bearer' for the Legendary"
+  },
+  {
+   "id": "x_smoker",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon (smoke over the fence onto the neighbours' washing) copies the kettle grill Uncommon (smoke towards the washing line).",
+   "suggestion": "'Needs feeding with wood chips every hour, and grumbles smoke at whoever forgets.'"
+  },
+  {
+   "id": "x_smoker",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a town queued for a taste)",
+   "suggestion": "'Smoked a cheese so slowly that it grew a beard and started telling stories.'"
+  },
+  {
+   "id": "x_smoker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Fogsworth the Slow' for the Legendary"
+  },
+  {
+   "id": "x_steamer_basket",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare (ready before the plates are out) duplicates the pressure cooker Rare (ready before the table is set).",
+   "suggestion": "'Steams so gently that the dumplings fall asleep inside and have to be woken for dinner.'"
+  },
+  {
+   "id": "x_steamer_basket",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Dumplingdozer' for the Rare"
+  },
+  {
+   "id": "x_steamer_basket",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary (steamed a whole banquet) duplicates the steamer Legendary and the feeding frame.",
+   "suggestion": "'Stacked itself so high for a family feast that the top basket had to be served by the window cleaner.'"
+  },
+  {
+   "id": "x_steamer_basket",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Dimsumia the Tall' for the Legendary"
+  },
+  {
+   "id": "x_stock_pot",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. (guests left with jars)",
+   "suggestion": "'Was so big that a toddler used it as a boat in the garden, with the cat as captain.'"
+  },
+  {
+   "id": "x_stock_pot",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Garden Boat' for the Epic"
+  },
+  {
+   "id": "x_stock_pot",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is the batch's feeding-a-crowd frame ('fed a whole street / village / wedding / campsite', about 14 Legendaries). ('fed a whole village after a storm')",
+   "suggestion": "'Made a stock so rich that one spoonful turned the garden pond into soup, and the frogs asked for bread rolls.'"
+  },
+  {
+   "id": "x_stock_pot",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Stockwell the Rich' for the Legendary"
+  },
+  {
+   "id": "x_stock_pot",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "'Big Simmer' is a heat word on an Ultimate that never burns (stun/poison/poison).",
+   "suggestion": "'Brimming Pot Slam'"
+  },
+  {
+   "id": "x_stove_top",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Safety: 'clicks and clicks before its gas catches with a soft whoomph' describes delayed gas ignition, a real hazard, as a cute habit.",
+   "suggestion": "'Has one knob that always works the wrong ring, so the empty pan heats up and the soup stays cold.'"
+  },
+  {
+   "id": "x_stove_top",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic ('not a single pan boiled over') is a quiet success.",
+   "suggestion": "'Cooked four dinners at once for four fussy eaters, and all four swapped plates at the table.'"
+  },
+  {
+   "id": "x_stove_top",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Four-Ring Fortune Teller' for the Legendary"
+  },
+  {
+   "id": "x_stove_top",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Teatime Rush' repeats the Epic name 'Teatime Rush Hour'. Variants poison/burn/poison: keep it neutral.",
+   "suggestion": "'Four Ring Circus'"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon (a wet spoon turns the sugar to lumps) copies w20 x_sugar_bowl Uncommon; in fact Uncommon to Legendary all copy w20 x_sugar_bowl (spills, tea party, sweetened every tea).",
+   "suggestion": "'Attracts one ant every morning, who brings a friend, who brings a cousin.'"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Antmagnet' for the Uncommon"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare (spills sugar when passed) copies w20 x_sugar_bowl Rare.",
+   "suggestion": "'Makes any tea it touches so sweet that the teaspoon starts to dissolve.'"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Spoonmelter' for the Rare"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic (knocked over at a tea party) copies w20 x_sugar_bowl Epic.",
+   "suggestion": "'Was emptied into the salt cellar by mistake, and the chips at dinner tasted like doughnuts.'"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Salt Swapper' for the Epic"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('has sweetened so many cups of tea') copies w20 x_sugar_bowl Legendary and is the 'so many' formula.",
+   "suggestion": "'Sweetened a lemon so thoroughly that it now insists on being called an orange.'"
+  },
+  {
+   "id": "x_sugar_bowl_dish",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Duke of Sweetness' for the Legendary"
+  },
+  {
+   "id": "x_tagine",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (stew melts on the fork) duplicates the slow cooker Rare (falls apart when a fork looks at it).",
+   "suggestion": "'Points its tall lid at whoever is hungriest, and it is never wrong.'"
+  },
+  {
+   "id": "x_tagine",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'made so much X for a party that ...' scene without a real consequence or joke. ('played three games before eating')",
+   "suggestion": "'Was mistaken for a wizard hat at a fancy-dress party and worn all night, stew and all.'"
+  },
+  {
+   "id": "x_tagine",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Party Wizard Hat' for the Epic"
+  },
+  {
+   "id": "x_tagine",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (the street gathered to sniff) is the smell frame again.",
+   "suggestion": "'Kept its lid on so long that the stew inside invented a new spice and named it after itself.'"
+  },
+  {
+   "id": "x_tagine",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Conehat the Mysterious' for the Legendary"
+  },
+  {
+   "id": "x_tongs",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (guests copied the clack) has no consequence.",
+   "suggestion": "'Clacked so hungrily at a seaside barbecue that every crab on the beach clacked back.'"
+  },
+  {
+   "id": "x_tongs",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Crab Caller' for the Epic"
+  },
+  {
+   "id": "x_tongs",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / never dropped a single' formula; it needs an outrageous feat with a punchline. ('a hundred sausages without ever dropping one')",
+   "suggestion": "'Lifted a whole garden table to fetch one sausage that had rolled under it, and the guests kept eating.'"
+  },
+  {
+   "id": "x_tongs",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Clackjaw the Lifter' for the Legendary"
+  },
+  {
+   "id": "x_tweezers",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (found a splinter after a family search) is a quiet success.",
+   "suggestion": "'Picked up every grain of spilt glitter after a birthday party, one at a time, until breakfast.'"
+  },
+  {
+   "id": "x_tweezers",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Glitter Picker' for the Epic"
+  },
+  {
+   "id": "x_tweezers",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a scout troop's splinters)",
+   "suggestion": "'Pulled a splinter out of a tree so gently that the tree said thank you with an apple.'"
+  },
+  {
+   "id": "x_tweezers",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Tweezle the Gentle' for the Legendary"
+  },
+  {
+   "id": "x_tweezers",
+   "field": "moves.kit.taste_test",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Taste Test' on tweezers (self heal).",
+   "suggestion": "'Steady Hand Rest'"
+  },
+  {
+   "id": "x_tweezers",
+   "field": "moves.kit.hot_ladle",
+   "severity": "medium",
+   "issue": "Kitchen kit name 'Hot Ladle' on tweezers (burn).",
+   "suggestion": "'Hot Pinch'"
+  },
+  {
+   "id": "x_dog_bowl",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Warm Dinner Heat' is truthful (burn) but strained on an unheated dish.",
+   "suggestion": "'Sunbaked Bowl Heat'"
+  },
+  {
+   "id": "x_salad_spinner",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Spin Heat' is truthful (burn) but strained on an unheated dish.",
+   "suggestion": "'Sun-Hot Spin'"
+  },
+  {
+   "id": "x_salad_bowl_wooden",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Hot Toss Heat' is truthful (burn) but strained on an unheated dish.",
+   "suggestion": "'Warm Dressing Heat'"
+  },
+  {
+   "id": "x_lazy_susan",
+   "field": "moves.signature",
+   "severity": "low",
+   "issue": "'Spin Heat' is truthful (burn) but strained on an unheated dish.",
+   "suggestion": "'Hot Sauce Spin'"
+  }
+ ]
+}

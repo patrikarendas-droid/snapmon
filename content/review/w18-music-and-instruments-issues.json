@@ -1,0 +1,1838 @@
+{
+ "batch": "w18-music-and-instruments",
+ "editor": "independent agent",
+ "reviewed": 56,
+ "summary": "A tired batch. The Commons and Uncommons are mostly fine object habits (accordion clearing its throat, drum at 7am on Saturday, double bass needing a bus seat, recorder practised in the kitchen, theremin frightening the cat, sousaphone spun by the wind), and a few Epics land (cajon bouncing sausages, bagpipes lining up sheep, trumpet spinning the tombola, guitar pick in the singer's hair). The problems are structural: (1) about 30 Rares are the template 'plays so X that everyone nearby does Y', a crowd reaction instead of a troublesome power; (2) Epics are 'played at an event so X that the crowd Y' scenes; (3) Legendaries are mostly 'has done X so many times / for fifty years / never once' or a quiet success, and 54 of 56 Legendary names are 'The X That Y'; (4) an echo-across-the-hills frame repeats (djembe, bagpipes, trumpet, church bell, w10 guitar amp) and a parade frame repeats (conga, sousaphone, shaker, euphonium); (5) copies of approved or other-batch content: banana bunch Rare = Pilot 02 banana Rare, singing bowl and sitar Uncommons = Pilot 02 tuning fork, music box = w08 x_music_box and w16 x_music_box_toy, metronome Uncommon = w10 drum machine, banana split Epic = w22 milkshake. Sensitive: the church bell is meant to be a village tower bell, but its Uncommon (Sunday morning) and Epic (wedding peal) imply church. Mechanics: move names are mostly truthful (poison=stink, burn=heat, stun=startle); fixes are Ultimates that repeat Epic names (electric bass, toy piano, recorder, cymbal, handbell, wind chime) and a recorder 'spit valve', which recorders do not have. Signatures are almost all 'X Startle' (pattern, low). All replacements were checked by script: lore 60-160 characters, ASCII, names within limits and unique across all content/curated/*.json and the Pilot 01 names proposal.",
+ "patterns": [
+  {
+   "pattern": "Rare template 'plays so X that everyone nearby does Y': a crowd reaction instead of a troublesome power (about 30 of 56 Rares).",
+   "ids": [
+    "accordion",
+    "violin",
+    "x_bagpipes",
+    "x_banana_bunch",
+    "x_banana_split",
+    "x_bell",
+    "x_castanets",
+    "x_cowbell",
+    "x_cymbal",
+    "x_djembe",
+    "x_electric_bass",
+    "x_euphonium",
+    "x_handbell",
+    "x_harmonica_instrument",
+    "x_harmonica_small",
+    "x_hi_hat",
+    "x_kazoo",
+    "x_lute",
+    "x_melodica",
+    "x_plantain_chips",
+    "x_rain_stick",
+    "x_shaker",
+    "x_sheet_music",
+    "x_sitar",
+    "x_sousaphone",
+    "x_theremin",
+    "x_timpani",
+    "x_triangle",
+    "x_wind_chime",
+    "x_xylophone_toy"
+   ],
+   "severity": "high",
+   "suggestion": "Give each Rare a power that causes trouble (sucks napkins off tables, sours the milk, pops soap bubbles, snaps shut on sandwiches). Replacements are given per object."
+  },
+  {
+   "pattern": "Legendary names: 54 of 56 are 'The X That/Of Y' (only accordion and drum differ).",
+   "ids": [
+    "x_music_stand",
+    "x_sheet_music",
+    "x_music_box_instrument",
+    "x_metronome",
+    "x_metronome_clock",
+    "x_bongo_drums",
+    "x_cajon",
+    "x_conga",
+    "x_djembe",
+    "x_timpani",
+    "x_toy_drum",
+    "x_double_bass",
+    "x_electric_bass",
+    "guitar",
+    "x_lute",
+    "x_mandolin",
+    "x_sitar",
+    "harp",
+    "microphone",
+    "piano",
+    "x_theremin",
+    "x_toy_piano",
+    "x_xylophone_toy",
+    "x_bagpipes",
+    "x_bugle",
+    "x_didgeridoo",
+    "x_euphonium",
+    "x_harmonica_instrument",
+    "x_harmonica_small",
+    "x_kazoo",
+    "x_melodica",
+    "x_piccolo",
+    "x_recorder",
+    "x_sousaphone",
+    "trumpet",
+    "violin",
+    "x_banana_bunch",
+    "x_banana_peel",
+    "x_banana_split",
+    "x_bell",
+    "x_castanets",
+    "x_church_bell",
+    "x_cowbell",
+    "x_cymbal",
+    "x_guitar_pick",
+    "x_handbell",
+    "x_hi_hat",
+    "x_plantain_chips",
+    "x_rain_stick",
+    "x_shaker",
+    "x_singing_bowl",
+    "x_triangle",
+    "x_wind_chime",
+    "xylophone"
+   ],
+   "severity": "high",
+   "suggestion": "Replacement names for every Legendary are given, mixing epithets ('Name the Y', 'Name, the Y'), titles (Baron, Signor, Professor, Countess) and puns (Crashendo, Buzzalot, Plinkerton)."
+  },
+  {
+   "pattern": "Legendary formula 'has done X so many times / for N years / never once / never missed' or a quiet success with no punchline.",
+   "ids": [
+    "accordion",
+    "x_music_stand",
+    "x_music_box_instrument",
+    "x_metronome",
+    "x_metronome_clock",
+    "x_bongo_drums",
+    "x_timpani",
+    "x_cymbal",
+    "x_hi_hat",
+    "x_handbell",
+    "x_harmonica_instrument",
+    "x_wind_chime",
+    "x_guitar_pick",
+    "x_bell",
+    "microphone",
+    "piano",
+    "x_banana_bunch",
+    "x_toy_piano",
+    "x_xylophone_toy",
+    "violin",
+    "x_mandolin",
+    "guitar"
+   ],
+   "severity": "high",
+   "suggestion": "Each is replaced with a concrete outrageous feat and a punchline."
+  },
+  {
+   "pattern": "Echo and parade frames: 'heard across the valley / the next village came out' (djembe, bagpipes, trumpet, church bell; w10 guitar amp) and 'led the parade / carnival' (conga, sousaphone, shaker, euphonium; w05 gondola).",
+   "ids": [
+    "x_djembe",
+    "x_bagpipes",
+    "trumpet",
+    "x_church_bell",
+    "x_conga",
+    "x_sousaphone",
+    "x_shaker",
+    "x_euphonium"
+   ],
+   "severity": "medium",
+   "suggestion": "Church bell keeps its seven villages and conga keeps its endless parade; the others are changed."
+  },
+  {
+   "pattern": "Copies of approved or other-batch lines: banana bunch R = Pilot 02 banana R; singing bowl U and sitar U = Pilot 02 tuning fork C; music box U/E/L = w08 x_music_box R/E and w16 x_music_box_toy L; metronome U = w10 drum machine R; banana split E = w22 milkshake E; plantain chips U = w21 samosa U; euphonium L = w05 gondola E.",
+   "ids": [
+    "x_banana_bunch",
+    "x_singing_bowl",
+    "x_sitar",
+    "x_music_box_instrument",
+    "x_metronome",
+    "x_banana_split",
+    "x_plantain_chips",
+    "x_euphonium"
+   ],
+   "severity": "high",
+   "suggestion": "Replacements given; none reuses the other object's image."
+  },
+  {
+   "pattern": "One trait scaled over three rarities: conga (conga line U/E/L), rain stick (fake rain U/R/E), banana bunch (ripening U/R/E), bell (dinner call R/E), sitar (lost time R/E/L), bugle (wake-up E/L), timpani/cymbal (ended every song).",
+   "ids": [
+    "x_conga",
+    "x_rain_stick",
+    "x_banana_bunch",
+    "x_bell",
+    "x_sitar",
+    "x_bugle",
+    "x_timpani",
+    "x_cymbal"
+   ],
+   "severity": "high",
+   "suggestion": "Five premises per object; replacements given for the repeated rarities."
+  },
+  {
+   "pattern": "Epic names that do not match their lore (sheet music 'Grade Exam Panic', djembe 'Village Gathering', guitar 'Bedroom Rock Star' on a campfire line, harmonica 'Porch Step Blues' on a station platform) and name-lore mismatches lower down (music stand U, sheet music U, harp U, euphonium R).",
+   "ids": [
+    "x_sheet_music",
+    "x_djembe",
+    "guitar",
+    "x_harmonica_instrument",
+    "x_music_stand",
+    "harp",
+    "x_euphonium"
+   ],
+   "severity": "medium",
+   "suggestion": "Names re-paired to the lore; write names after the lore."
+  },
+  {
+   "pattern": "Ultimates that repeat the Epic name (electric bass, toy piano, recorder, cymbal, handbell, wind chime, sousaphone; partly bagpipes, bugle, shaker, trumpet).",
+   "ids": [
+    "x_electric_bass",
+    "x_toy_piano",
+    "x_recorder",
+    "x_cymbal",
+    "x_handbell",
+    "x_wind_chime",
+    "x_sousaphone",
+    "x_bagpipes",
+    "x_bugle",
+    "x_shaker",
+    "trumpet"
+   ],
+   "severity": "medium",
+   "suggestion": "Effect-neutral replacements given where variants differ."
+  },
+  {
+   "pattern": "Signature monotony: 51 of 56 signatures are '<Sound> Startle' (truthful for the stun signature, but identical in shape across the batch).",
+   "ids": [
+    "accordion",
+    "x_music_stand",
+    "x_music_box_instrument",
+    "x_metronome",
+    "x_metronome_clock",
+    "x_bongo_drums",
+    "x_cajon",
+    "x_conga",
+    "x_djembe",
+    "drum",
+    "x_timpani",
+    "x_double_bass",
+    "x_electric_bass",
+    "guitar",
+    "x_lute",
+    "x_mandolin",
+    "x_sitar",
+    "harp",
+    "microphone",
+    "piano",
+    "x_theremin",
+    "x_bagpipes",
+    "x_bugle",
+    "x_didgeridoo",
+    "x_euphonium",
+    "x_harmonica_instrument",
+    "x_kazoo",
+    "x_melodica",
+    "x_piccolo",
+    "x_recorder",
+    "x_sousaphone",
+    "trumpet",
+    "violin",
+    "x_banana_bunch",
+    "x_banana_peel",
+    "x_banana_split",
+    "x_bell",
+    "x_castanets",
+    "x_church_bell",
+    "x_cowbell",
+    "x_cymbal",
+    "x_guitar_pick",
+    "x_handbell",
+    "x_hi_hat",
+    "x_plantain_chips",
+    "x_rain_stick",
+    "x_shaker",
+    "x_singing_bowl",
+    "x_triangle",
+    "x_wind_chime",
+    "xylophone"
+   ],
+   "severity": "low",
+   "suggestion": "Vary with 'Flash', 'Jolt', 'Blare', 'Clang' or a sound alone ('Bop Bop', 'Tock')."
+  },
+  {
+   "pattern": "Sensitive: x_church_bell is written as a village tower bell per the tracker, but 'early on a Sunday morning' and a wedding peal imply church services.",
+   "ids": [
+    "x_church_bell"
+   ],
+   "severity": "medium",
+   "suggestion": "Saturday wake-up and fete-day replacements given."
+  },
+  {
+   "pattern": "Banana objects (bunch, peel, split, plantain chips) sit in this batch by visual class; their lore is written for the real food, which is right.",
+   "ids": [
+    "x_banana_bunch",
+    "x_banana_peel",
+    "x_banana_split",
+    "x_plantain_chips"
+   ],
+   "severity": "low",
+   "suggestion": "No change needed beyond the per-object fixes."
+  }
+ ],
+ "issues": [
+  {
+   "id": "accordion",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch.",
+   "suggestion": "'Breathes in so hard between chords that it sucks every napkin off the next table.'"
+  },
+  {
+   "id": "accordion",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Napkin Gulper' for the Rare"
+  },
+  {
+   "id": "accordion",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a crowd conga ('went round three streets') with no real consequence.",
+   "suggestion": "'Played so long at the street fair that it stretched to the length of a bus and had to be carried home in sections.'"
+  },
+  {
+   "id": "accordion",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Bus-Length Bellows' for the Epic"
+  },
+  {
+   "id": "accordion",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary is 'never ran out of breath once', the banned 'never once' shape, and a quiet endurance feat.",
+   "suggestion": "'Took one breath so deep at the harbour festival that it swallowed the sea breeze, and the sailing race had to wait for the song to end.'"
+  },
+  {
+   "id": "x_music_stand",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Foldingfrank' does not match the Uncommon lore (it sinks lower during practice).",
+   "suggestion": "'Slowsinker' for the Uncommon"
+  },
+  {
+   "id": "x_music_stand",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('a hundred concerts without dropping a single page')",
+   "suggestion": "'Stood firm through a gale at an outdoor concert. The orchestra blew away, but the music stayed open at page two.'"
+  },
+  {
+   "id": "x_music_stand",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ironstand the Unbudging' for the Legendary"
+  },
+  {
+   "id": "x_sheet_music",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Dogearpage' does not match the Uncommon lore (a coffee ring).",
+   "suggestion": "'Coffeering' for the Uncommon"
+  },
+  {
+   "id": "x_sheet_music",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('slips off the stand at the worst moment') is a mild habit and overlaps the music stand's 'hardest bar' line; it needs a troublesome power.",
+   "suggestion": "'Rearranges its own notes while nobody is looking, so every piece ends as a different song.'"
+  },
+  {
+   "id": "x_sheet_music",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Noteshuffler' for the Rare"
+  },
+  {
+   "id": "x_sheet_music",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Grade Exam Panic' does not match the Epic lore (it blew out of the window).",
+   "suggestion": "'Windowblown Score' for the Epic"
+  },
+  {
+   "id": "x_sheet_music",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a pianist sight-read it perfectly)",
+   "suggestion": "'Its notes marched off the page one night and formed a choir on the windowsill. They only know scales.'"
+  },
+  {
+   "id": "x_sheet_music",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Professor Crotchet' for the Legendary"
+  },
+  {
+   "id": "x_music_box_instrument",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon (winds down mid-note) copies w08 x_music_box Rare (slows down until the last note takes a minute).",
+   "suggestion": "'Plays its tune perfectly until somebody listens closely, then hits one wrong note on purpose.'"
+  },
+  {
+   "id": "x_music_box_instrument",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Wrongnoter' for the Uncommon"
+  },
+  {
+   "id": "x_music_box_instrument",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic ('the whole room went quiet to hear it') copies w08 x_music_box Epic (the orchestra stopped to listen) and has no joke.",
+   "suggestion": "'Was wound a thousand turns too many and played without stopping through a whole wedding, speeches included.'"
+  },
+  {
+   "id": "x_music_box_instrument",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Overwound Wonder' for the Epic"
+  },
+  {
+   "id": "x_music_box_instrument",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('the same song every night for sixty years') is the years formula and copies w16 x_music_box_toy Legendary (three generations, same tune).",
+   "suggestion": "'Its tiny dancer spun so fast that she took off, flew twice round the room and landed back on top with a curtsy.'"
+  },
+  {
+   "id": "x_music_box_instrument",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Twirlina the High Flyer' for the Legendary"
+  },
+  {
+   "id": "x_metronome",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon (speeds up slightly) copies w10 x_drum_machine Rare (speeds up a tiny bit every bar).",
+   "suggestion": "'Stops ticking the moment the teacher leaves the room and starts again when she comes back.'"
+  },
+  {
+   "id": "x_metronome",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Teachertick' for the Uncommon"
+  },
+  {
+   "id": "x_metronome",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('ticked so steadily for fifty years'), and it overlaps the metronome clock Rare (clocks fall into step).",
+   "suggestion": "'Kept such strict time that the school choir hiccupped in perfect rhythm, and they performed it as an encore.'"
+  },
+  {
+   "id": "x_metronome",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Count Allegro, Keeper of Hiccups' for the Legendary"
+  },
+  {
+   "id": "x_metronome_clock",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('the band refuses to play without it')",
+   "suggestion": "'Chimed noon in the middle of a concert so exactly on the beat that the orchestra made it the final note, and now it takes a bow every hour.'"
+  },
+  {
+   "id": "x_metronome_clock",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Tempus Ticktock' for the Legendary"
+  },
+  {
+   "id": "x_metronome_clock",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Epic punchline is weak ('nobody went the wrong way round the park').",
+   "suggestion": "'Kept time for the marching band so firmly that the ducks in the park lake swam in step behind them.'"
+  },
+  {
+   "id": "x_bongo_drums",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic uses cosmic scale below Legendary ('the sun came out to listen'; lint flag) and is a mood scene, not a consequence.",
+   "suggestion": "'Played so fast at a beach party that the sand started bouncing, and every sandcastle shuffled into the sea.'"
+  },
+  {
+   "id": "x_bongo_drums",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (people check if it is coming before accepting invitations)",
+   "suggestion": "'Played a rhythm so catchy that the waves started breaking on the beat, and the surfers now need a drummer to count them in.'"
+  },
+  {
+   "id": "x_bongo_drums",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Bop and Bop, the Tide Twins' for the Legendary"
+  },
+  {
+   "id": "x_cajon",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (the audience thought a band was hiding behind it)",
+   "suggestion": "'Was sat on by a whole school choir at once, and the thump it gave back showed up on the town earthquake meter.'"
+  },
+  {
+   "id": "x_cajon",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Boxquake, the Unsquashable' for the Legendary"
+  },
+  {
+   "id": "x_conga",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Uncommon, Epic and Legendary are all one premise (the conga line / parade). Keep the Legendary (the front home for tea is a good joke), change the Epic.",
+   "suggestion": "'Thumped so deeply at a carnival that the manhole covers hopped in time and a sewer worker climbed out to join the band.'"
+  },
+  {
+   "id": "x_conga",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Manhole Thumper' for the Epic"
+  },
+  {
+   "id": "x_conga",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Congaline the Endless' for the Legendary"
+  },
+  {
+   "id": "x_djembe",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch.",
+   "suggestion": "'Slaps back. Anyone who hits it out of time gets a sharp little sting in the palm.'"
+  },
+  {
+   "id": "x_djembe",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic name ('Village Gathering') does not match the lore, and the school-assembly frame repeats didgeridoo, recorder and cymbal Epics.",
+   "suggestion": "'Drummed so hard at a garden party that every apple fell off the trees at once, and the party became a crumble.'"
+  },
+  {
+   "id": "x_djembe",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Crumble Thunder' for the Epic"
+  },
+  {
+   "id": "x_djembe",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary repeats the batch's 'heard across the hills / the next village came out' echo frame (djembe, bagpipes, trumpet, church bell, w10 guitar amp).",
+   "suggestion": "'Played a rhythm so strong that the whole town took it as its heartbeat, and every doctor now hears ba-dum-tak through the stethoscope.'"
+  },
+  {
+   "id": "x_djembe",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ba-Dum-Tak the Great' for the Legendary"
+  },
+  {
+   "id": "drum",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic repeats the Uncommon's Saturday-morning wake-up premise.",
+   "suggestion": "'Was hit so hard in a garage solo that the sticks flew out of the window, and the neighbour returned them with a bag of earplugs.'"
+  },
+  {
+   "id": "drum",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Stick Launcher' for the Epic"
+  },
+  {
+   "id": "drum",
+   "field": "lore.legendary",
+   "severity": "low",
+   "issue": "'Clouds parted to listen' is a stock reaction; a sharper punchline is available. Name shape is good.",
+   "suggestion": "'Played a solo so loud at a festival that the thunderstorm overhead went quiet and asked for lessons.'"
+  },
+  {
+   "id": "x_timpani",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('the front row grips their seats')",
+   "suggestion": "'Booms so low that every jelly within a mile wobbles, and the school canteen has given up on pudding.'"
+  },
+  {
+   "id": "x_timpani",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Jellywobbler' for the Rare"
+  },
+  {
+   "id": "x_timpani",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('ended so many symphonies that audiences clap when it is lifted') is the 'has done X so many times' formula and duplicates the cymbal Legendary.",
+   "suggestion": "'Played a finale so huge that the concert hall roof lifted off, took a bow and settled back one seat to the left.'"
+  },
+  {
+   "id": "x_timpani",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Big Copper, the Roof Raiser' for the Legendary"
+  },
+  {
+   "id": "x_toy_drum",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (woke the house, nobody minded because of cake), and it echoes the drum Uncommon.",
+   "suggestion": "'Was banged so hard at a birthday that the candles blew themselves out, and the toddler got the wish.'"
+  },
+  {
+   "id": "x_toy_drum",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Rat-a-Tat the Unstoppable' for the Legendary"
+  },
+  {
+   "id": "x_double_bass",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'played at an event so X that the crowd did Y' scene without a concrete consequence or joke. ('swayed for an hour without noticing')",
+   "suggestion": "'Played a note so low at a jazz club that the ice cracked in every glass and the goldfish in the lobby swam in circles.'"
+  },
+  {
+   "id": "x_double_bass",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a player used a stepladder to tune it)",
+   "suggestion": "'Played such a low note that a whale three seas away answered, and now they are pen pals.'"
+  },
+  {
+   "id": "x_double_bass",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lowdown Leviathan' for the Legendary"
+  },
+  {
+   "id": "x_electric_bass",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('the drummer forgets to count')",
+   "suggestion": "'Plays so low that the speakers walk across the stage by themselves.'"
+  },
+  {
+   "id": "x_electric_bass",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Speakerwalker' for the Rare"
+  },
+  {
+   "id": "x_electric_bass",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic uses the contest frame ('battle of the bands', trophies).",
+   "suggestion": "'Thumped so hard in a garage rehearsal that every paint tin on the shelf popped its lid, and the walls came out purple.'"
+  },
+  {
+   "id": "x_electric_bass",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Venuemover, the Low End' for the Legendary"
+  },
+  {
+   "id": "x_electric_bass",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Garage Groove' repeats the Epic name 'Garage Band Groove'. Variants: stun/stun/defdown, so keep it effect-neutral.",
+   "suggestion": "'Floor-Shaker Riff'"
+  },
+  {
+   "id": "guitar",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (campfire singalong) repeats the Rare's campfire premise, and the name 'Bedroom Rock Star' does not match it.",
+   "suggestion": "'Played one power chord in a bedroom so loudly that every sock in the drawer stood up.'"
+  },
+  {
+   "id": "guitar",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (played every request)",
+   "suggestion": "'Played a chord so perfect that every guitar in town tuned itself to match, including one that was still a tree.'"
+  },
+  {
+   "id": "guitar",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Maestro Sixstring' for the Legendary"
+  },
+  {
+   "id": "x_lute",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('everyone stops chewing to listen')",
+   "suggestion": "'Plays such old songs that anyone listening speaks in thee and thou for the rest of the day.'"
+  },
+  {
+   "id": "x_lute",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Forsoothstring' for the Rare"
+  },
+  {
+   "id": "x_lute",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary repeats the Epic's knights premise and uses the king/castle frame the tracker warns against.",
+   "suggestion": "'Played a ballad so old-fashioned that a ruined castle rebuilt itself to listen, then asked it to stay as the house band.'"
+  },
+  {
+   "id": "x_lute",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Minstrel Mortarmend' for the Legendary"
+  },
+  {
+   "id": "x_mandolin",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (the village came out on their balconies)",
+   "suggestion": "'Serenaded a lighthouse so sweetly that it now winks at every boat that passes.'"
+  },
+  {
+   "id": "x_mandolin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Signor Tremolo' for the Legendary"
+  },
+  {
+   "id": "x_sitar",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon ('keeps humming after it is played') copies the singing bowl Uncommon and approved Pilot 02 x_tuning_fork Common.",
+   "suggestion": "'Has a neck so long that it knocks the lampshade every time it is picked up.'"
+  },
+  {
+   "id": "x_sitar",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Lampknocker' for the Uncommon"
+  },
+  {
+   "id": "x_sitar",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (listeners lose track of time) is the same premise as the Epic (the audience missed the last bus).",
+   "suggestion": "'Bends its notes so far that the curtains, the cat and the spaghetti all bend along.'"
+  },
+  {
+   "id": "x_sitar",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Notebender' for the Rare"
+  },
+  {
+   "id": "x_sitar",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (played through the night) repeats the Epic's lost-time premise; 'Longneck' is also its own Common name pattern.",
+   "suggestion": "'Played one raga so slowly that a snail crossed the garden and back before the second note.'"
+  },
+  {
+   "id": "x_sitar",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Sitarius the Unhurried' for the Legendary"
+  },
+  {
+   "id": "harp",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "'Cloudstrummer' does not match the Uncommon lore (re-tuning when the room warms).",
+   "suggestion": "'Fussytuner' for the Uncommon"
+  },
+  {
+   "id": "harp",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'played at an event so X that the crowd did Y' scene without a concrete consequence or joke. (guests forgot the cake)",
+   "suggestion": "'Played so softly at a wedding that the guests fell asleep, and the bride had to throw the bouquet at a snoring uncle.'"
+  },
+  {
+   "id": "harp",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Wedding Snoozer' for the Epic"
+  },
+  {
+   "id": "harp",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (the river slowed down to listen) is a gentle reaction, not a feat with a punchline.",
+   "suggestion": "'Played a tune by the river so beautiful that the river turned round and flowed backwards for an encore.'"
+  },
+  {
+   "id": "harp",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Harpsong, River Turner' for the Legendary"
+  },
+  {
+   "id": "microphone",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('sung into by so many people')",
+   "suggestion": "'Picked up a whisper so well that a whole stadium heard the secret, and now everyone knows who ate the last biscuit.'"
+  },
+  {
+   "id": "microphone",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Loudmouth Magnifico' for the Legendary"
+  },
+  {
+   "id": "piano",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('played at so many weddings')",
+   "suggestion": "'Fell out of the movers van on a hill, rolled all the way down playing a scale, and stopped at the right house.'"
+  },
+  {
+   "id": "piano",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Eighty-Eight the Unbreakable' for the Legendary"
+  },
+  {
+   "id": "x_theremin",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare only describes how a theremin works (played without touching); it needs a troublesome power.",
+   "suggestion": "'Plays a spooky tune whenever anyone yawns near it, so every bedtime comes with music.'"
+  },
+  {
+   "id": "x_theremin",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Yawnwailer' for the Rare"
+  },
+  {
+   "id": "x_theremin",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary ('nobody saw the player touch a thing') is just how a theremin is played, so there is no feat.",
+   "suggestion": "'Was played by an octopus at the aquarium, and the eight-armed concert was so spooky that the sharks hid.'"
+  },
+  {
+   "id": "x_theremin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Octowail the Untouched' for the Legendary"
+  },
+  {
+   "id": "x_toy_piano",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (played a symphony; the grand piano felt jealous)",
+   "suggestion": "'Played its twelve keys so fiercely at a concert that the grand piano resigned and became a coffee table.'"
+  },
+  {
+   "id": "x_toy_piano",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Plinkerton the Usurper' for the Legendary"
+  },
+  {
+   "id": "x_toy_piano",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Nursery Concert' repeats the Epic name 'Nursery Recital'. Variants stun/poison/stun: keep it neutral.",
+   "suggestion": "'Twelve Key Tantrum'"
+  },
+  {
+   "id": "x_xylophone_toy",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('nobody can stop smiling')",
+   "suggestion": "'Swaps its bars round every night, so every song comes out as a different nursery rhyme.'"
+  },
+  {
+   "id": "x_xylophone_toy",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Barswapper' for the Rare"
+  },
+  {
+   "id": "x_xylophone_toy",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'played at an event so X that the crowd did Y' scene without a concrete consequence or joke. (the teachers had to join in)",
+   "suggestion": "'Was played so hard at playgroup that a bar flew off, bounced off the goldfish bowl and landed in the teacher's tea.'"
+  },
+  {
+   "id": "x_xylophone_toy",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Barflinger' for the Epic"
+  },
+  {
+   "id": "x_xylophone_toy",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a perfect scale)",
+   "suggestion": "'Was played so happily by a toddler that the rainbow outside rearranged its colours to match the bars.'"
+  },
+  {
+   "id": "x_xylophone_toy",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Plonkbow the Rainbow-Fixer' for the Legendary"
+  },
+  {
+   "id": "x_bagpipes",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (every dog howls) repeats the drum Rare (every dog in the street howls).",
+   "suggestion": "'Keeps playing for a full minute after the piper stops, and nobody knows how to switch it off.'"
+  },
+  {
+   "id": "x_bagpipes",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Afterdrone' for the Rare"
+  },
+  {
+   "id": "x_bagpipes",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary repeats the batch's 'heard across the hills / the next village came out' echo frame (djembe, bagpipes, trumpet, church bell, w10 guitar amp).",
+   "suggestion": "'Was squeezed so hard at the highland games that it puffed up like a balloon and floated the piper across the loch, still playing.'"
+  },
+  {
+   "id": "x_bagpipes",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Lochfloater the Windbag' for the Legendary"
+  },
+  {
+   "id": "x_bugle",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary repeats the Epic (waking the whole camp) and uses a cosmic reflex (the sun rose early).",
+   "suggestion": "'Played the dinner call so convincingly that a whole herd of cows came in from the field and sat down at the tables.'"
+  },
+  {
+   "id": "x_bugle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Brassmouth the Summoner' for the Legendary"
+  },
+  {
+   "id": "x_didgeridoo",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic (the hall's chairs buzzed) repeats the Rare (floorboards hum, cutlery trembles) and the school-assembly frame.",
+   "suggestion": "'Droned so deeply in the garden that every worm came up to see what was happening, and the blackbirds threw a party.'"
+  },
+  {
+   "id": "x_didgeridoo",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Wormwaker' for the Epic"
+  },
+  {
+   "id": "x_didgeridoo",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary ('twenty minutes without a pause') is an endurance stat with a weak punchline.",
+   "suggestion": "'Droned so deep that the bath upstairs turned into a whirlpool, and the rubber duck went round for a week.'"
+  },
+  {
+   "id": "x_didgeridoo",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Rumbleroot the Bathquaker' for the Legendary"
+  },
+  {
+   "id": "x_euphonium",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. Its name 'Bandstand Burp' belongs to the Uncommon's burp, not this line.",
+   "suggestion": "'Plays so warmly that ice creams melt in the front row, and the bandstand has a puddle by the second tune.'"
+  },
+  {
+   "id": "x_euphonium",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Conemelter' for the Rare"
+  },
+  {
+   "id": "x_euphonium",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('every window opened to hear it') copies w05 i_gondola Epic (every window opened) and is a parade scene.",
+   "suggestion": "'Played so mellow a tune that a grumpy bull in the next field lay down, rolled over and asked for a tummy rub.'"
+  },
+  {
+   "id": "x_euphonium",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Baron Mellowtone' for the Legendary"
+  },
+  {
+   "id": "x_harmonica_instrument",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('even happy listeners sigh')",
+   "suggestion": "'Plays such sad blues that the milk in the fridge goes sour out of sympathy.'"
+  },
+  {
+   "id": "x_harmonica_instrument",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Milksourer' for the Rare"
+  },
+  {
+   "id": "x_harmonica_instrument",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "'Porch Step Blues' does not match the Epic lore (a station platform).",
+   "suggestion": "'Last Train Wailer' for the Epic"
+  },
+  {
+   "id": "x_harmonica_instrument",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('for thirty years and never missed a whistle')",
+   "suggestion": "'Played a blues so lonely that a passing train stopped, reversed and gave it a lift home.'"
+  },
+  {
+   "id": "x_harmonica_instrument",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Old Boxcar Blues' for the Legendary"
+  },
+  {
+   "id": "x_harmonica_small",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('whole playgrounds start to hum')",
+   "suggestion": "'Is so small that it gets sneezed out of a pocket by accident, playing a chord on the way.'"
+  },
+  {
+   "id": "x_harmonica_small",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sneezechord' for the Rare"
+  },
+  {
+   "id": "x_harmonica_small",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Epic is a 'played at an event so X that the crowd did Y' scene without a concrete consequence or joke. (ducks came out to hear it)",
+   "suggestion": "'Fell down a drain and played a tune every time the wind blew, so the whole street danced round the drain for a week.'"
+  },
+  {
+   "id": "x_harmonica_small",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Drainpiper' for the Epic"
+  },
+  {
+   "id": "x_harmonica_small",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the contest frame ('won a talent show').",
+   "suggestion": "'Played a chord so huge from inside a pocket that the trousers did a little dance on their own.'"
+  },
+  {
+   "id": "x_harmonica_small",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pocket Thunder' for the Legendary"
+  },
+  {
+   "id": "x_kazoo",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('a giggling contest') is a mood, not a troublesome power, and uses the contest frame.",
+   "suggestion": "'Turns any speech into a buzz, so the head teacher's announcements sound like a very cross bee.'"
+  },
+  {
+   "id": "x_kazoo",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Speechbuzzer' for the Rare"
+  },
+  {
+   "id": "x_kazoo",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (violinists asked to borrow it)",
+   "suggestion": "'Buzzed so convincingly that a whole hive of bees moved in and now hums the harmony.'"
+  },
+  {
+   "id": "x_kazoo",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Buzzalot the Beeloved' for the Legendary"
+  },
+  {
+   "id": "x_kazoo",
+   "field": "lore.common",
+   "severity": "low",
+   "issue": "Common is 45 characters and shares the 'like a bee' image with the singing bowl Common.",
+   "suggestion": "'Buzzes whenever somebody hums into it, and tickles their lips until they laugh.'"
+  },
+  {
+   "id": "x_melodica",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('every child wants a turn')",
+   "suggestion": "'Blows back. Anyone who puffs too hard gets a little squeak of air right up the nose.'"
+  },
+  {
+   "id": "x_melodica",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Nosepuffer' for the Rare"
+  },
+  {
+   "id": "x_melodica",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (a bus-stop band booked for a festival)",
+   "suggestion": "'Played the piano part and the trumpet part at once so well that the real piano and trumpet left together in a huff.'"
+  },
+  {
+   "id": "x_melodica",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Pianoflute the Double' for the Legendary"
+  },
+  {
+   "id": "x_piccolo",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary leans on 'it is said' (generic mystery) instead of a concrete feat.",
+   "suggestion": "'Hit a note so high that every bat in town flew in to complain, and now it gives them singing lessons.'"
+  },
+  {
+   "id": "x_piccolo",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Squeakerella the Highest' for the Legendary"
+  },
+  {
+   "id": "x_recorder",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary ('played in tune once') is a good joke but too small for Legendary; make the reaction outrageous.",
+   "suggestion": "'Played one song perfectly in tune, and the music teacher was so shocked that she has been on holiday ever since.'"
+  },
+  {
+   "id": "x_recorder",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Miss Perfect Pitch' for the Legendary"
+  },
+  {
+   "id": "x_recorder",
+   "field": "moves.legend",
+   "severity": "medium",
+   "issue": "Recorders have no spit valve (a brass part), a wrong fact players will notice. Poison = stink is right, keep it.",
+   "suggestion": "'Damp Mouthpiece Pong'"
+  },
+  {
+   "id": "x_recorder",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Assembly Squeal' repeats the Epic name 'School Assembly Squeal'. Variants poison/poison/defdown: keep it neutral.",
+   "suggestion": "'Descant Disaster'"
+  },
+  {
+   "id": "x_sousaphone",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('every drum has to work twice as hard')",
+   "suggestion": "'Has a bell so big that it catches rain, leaves and once a small football, and toots them all back out.'"
+  },
+  {
+   "id": "x_sousaphone",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bellcatcher' for the Rare"
+  },
+  {
+   "id": "x_sousaphone",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a parade feat (marching without missing a note) that repeats the conga, shaker and euphonium parades; the pigeon is the good part, so build on it.",
+   "suggestion": "'Oompahed so deeply that a family of pigeons moved into its bell and now come out to bow at the end of every march.'"
+  },
+  {
+   "id": "x_sousaphone",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Oompah Grandee' for the Legendary"
+  },
+  {
+   "id": "x_sousaphone",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "Ultimate 'Parade Oompah' nearly repeats the Epic name 'Marching Oompah'.",
+   "suggestion": "''Brass Snake Squeeze''"
+  },
+  {
+   "id": "trumpet",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary repeats the batch's 'heard across the hills / the next village came out' echo frame (djembe, bagpipes, trumpet, church bell, w10 guitar amp). ('echoed for a whole minute across the hills')",
+   "suggestion": "'Blew a fanfare so grand that every pigeon in the square landed in rows and saluted.'"
+  },
+  {
+   "id": "trumpet",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Fanfaronade the Bold' for the Legendary"
+  },
+  {
+   "id": "violin",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('people forget the squeaky practice months') is a mood, not a power.",
+   "suggestion": "'Plays a high note so sharp that it pops every soap bubble in the room.'"
+  },
+  {
+   "id": "violin",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Bubblepopper' for the Rare"
+  },
+  {
+   "id": "violin",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('every single guest cried happy tears')",
+   "suggestion": "'Played a tune so sad that the onions in the kitchen stopped making people cry, out of respect.'"
+  },
+  {
+   "id": "violin",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Fiddlesticks the Heartbreaker' for the Legendary"
+  },
+  {
+   "id": "x_banana_bunch",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Rare ('ripens every fruit in the bowl beside it') copies the approved Pilot 02 banana Rare ('Ripens every other fruit in the bowl overnight').",
+   "suggestion": "'Makes every lunchbox it touches taste of banana, the cheese sandwiches included.'"
+  },
+  {
+   "id": "x_banana_bunch",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Lunchbox Flavourer' for the Rare"
+  },
+  {
+   "id": "x_banana_bunch",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Uncommon, Rare and Epic all scale one trait (ripening all at once).",
+   "suggestion": "'Was left in a hot car and came out as banana bread on the back seat.'"
+  },
+  {
+   "id": "x_banana_bunch",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Backseat Bakery' for the Epic"
+  },
+  {
+   "id": "x_banana_bunch",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (stayed yellow for a month)",
+   "suggestion": "'Grows one extra banana every time it is counted, and the fruit bowl is now a fruit wardrobe.'"
+  },
+  {
+   "id": "x_banana_bunch",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Yellowhorde the Countless' for the Legendary"
+  },
+  {
+   "id": "x_banana_peel",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (the teacher danced) repeats the Rare (a little dance before landing).",
+   "suggestion": "'Sent a whole marathon sliding past the finish line, and the slowest runner won by standing still.'"
+  },
+  {
+   "id": "x_banana_peel",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Grand Skidmaster Peel' for the Legendary"
+  },
+  {
+   "id": "x_banana_split",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('everyone decides they want dessert') is a mood, not a power.",
+   "suggestion": "'Splits in two whenever two people reach for it, and each half insists it is the bigger one.'"
+  },
+  {
+   "id": "x_banana_split",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Halfandhalf' for the Rare"
+  },
+  {
+   "id": "x_banana_split",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic ('the whole table needed spoons to finish it') copies w22 x_milkshake Epic ('the whole table needed spoons').",
+   "suggestion": "'Was built so long at an ice-cream parlour that it reached the door, and customers had to step over the cherry.'"
+  },
+  {
+   "id": "x_banana_split",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Doorstep Sundae' for the Epic"
+  },
+  {
+   "id": "x_banana_split",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary ('fed a whole birthday party') is the feeding-a-crowd frame used by a dozen w19 Legendaries.",
+   "suggestion": "'Was so cold that the whole beach got brain freeze at once, and the heatwave was called off.'"
+  },
+  {
+   "id": "x_banana_split",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Countess Coldspoon' for the Legendary"
+  },
+  {
+   "id": "x_bell",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (everyone runs for dinner) is the same premise as the Epic (rung for dinner, neighbours came).",
+   "suggestion": "'Rings by itself whenever someone tells a fib, which has made birthdays very awkward.'"
+  },
+  {
+   "id": "x_bell",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Fibringer' for the Rare"
+  },
+  {
+   "id": "x_bell",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('has rung so many times in its life')",
+   "suggestion": "'Rang at a fib told on the far side of town, so loudly that the fibber owned up before the echo stopped.'"
+  },
+  {
+   "id": "x_bell",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Ding Dong the Truthful' for the Legendary"
+  },
+  {
+   "id": "x_castanets",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('anyone nearby starts stamping')",
+   "suggestion": "'Clacks so fast that nearby teeth start chattering along, even on a hot day.'"
+  },
+  {
+   "id": "x_castanets",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Castagna the Lightning' for the Legendary"
+  },
+  {
+   "id": "x_church_bell",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Sensitive object: 'early on a Sunday morning' implies a church service; the tracker says this bell is a village tower bell with no religious content.",
+   "suggestion": "'Rings so early on a Saturday that the whole village wakes up and blames the cockerel.'"
+  },
+  {
+   "id": "x_church_bell",
+   "field": "lore.epic",
+   "severity": "medium",
+   "issue": "Sensitive: a wedding peal from this bell reads as a church wedding.",
+   "suggestion": "'Swung so hard on fete day that the tower swayed and the weathervane turned to face the cake stall.'"
+  },
+  {
+   "id": "x_church_bell",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Fete Day Swinger' for the Epic"
+  },
+  {
+   "id": "x_church_bell",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Old Bong of Seven Villages' for the Legendary"
+  },
+  {
+   "id": "x_cowbell",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare (every cow turns to look) is a reaction, not a troublesome power.",
+   "suggestion": "'Clangs so loudly that the cow cannot hear the farmer, and pretends it never could.'"
+  },
+  {
+   "id": "x_cowbell",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. (brought the herd home in a neat line)",
+   "suggestion": "'Clanged so bossily that the whole herd made it head cow, and it now gets the first patch of clover.'"
+  },
+  {
+   "id": "x_cowbell",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Clangmoo the Herdboss' for the Legendary"
+  },
+  {
+   "id": "x_cymbal",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('the whole audience jumps')",
+   "suggestion": "'Shimmers so long after one crash that the next song has to start in its key.'"
+  },
+  {
+   "id": "x_cymbal",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary ('ended so many songs that the band can't finish without it') is the 'so many times' formula and duplicates the timpani Legendary.",
+   "suggestion": "'Crashed so hard that it split a raincloud in two, and the concert had sunshine on one side and drizzle on the other.'"
+  },
+  {
+   "id": "x_cymbal",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Crashendo the Splitter' for the Legendary"
+  },
+  {
+   "id": "x_cymbal",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Grand Crash' repeats the Epic name 'Grand Crash Moment'. Variants poison/poison/burn: keep it neutral.",
+   "suggestion": "'Shimmer Smash'"
+  },
+  {
+   "id": "x_guitar_pick",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('a thousand gigs without ever being lost')",
+   "suggestion": "'Hid so well that it was found inside a sealed guitar, a locked safe and a boiled egg.'"
+  },
+  {
+   "id": "x_guitar_pick",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Plectra the Vanisher' for the Legendary"
+  },
+  {
+   "id": "x_handbell",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('a whole hall goes quiet')",
+   "suggestion": "'Rings whenever anyone in the class is daydreaming, which makes Friday afternoons very noisy.'"
+  },
+  {
+   "id": "x_handbell",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Daydreamringer' for the Rare"
+  },
+  {
+   "id": "x_handbell",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('every sports day for fifty years')",
+   "suggestion": "'Rang the end of break so firmly that the whole playground froze mid-game, football included, until it was put away.'"
+  },
+  {
+   "id": "x_handbell",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Breaktime Belle' for the Legendary"
+  },
+  {
+   "id": "x_handbell",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Bell Choir' repeats the Epic name 'Handbell Choir'. Variants defdown/defdown/burn: keep it neutral.",
+   "suggestion": "'Last Bell of Term'"
+  },
+  {
+   "id": "x_hi_hat",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('the bass player just follows')",
+   "suggestion": "'Snaps shut on anything left between its cymbals, including a drummer's sandwich and once a tie.'"
+  },
+  {
+   "id": "x_hi_hat",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sandwichsnapper' for the Rare"
+  },
+  {
+   "id": "x_hi_hat",
+   "field": "lore.epic",
+   "severity": "low",
+   "issue": "Epic is a 'played at an event so X that the crowd did Y' scene without a concrete consequence or joke.",
+   "suggestion": "'Ticked so fast at a jazz night that the waiters fell into step and served the whole room in four minutes.'"
+  },
+  {
+   "id": "x_hi_hat",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('kept the beat for so many bands')",
+   "suggestion": "'Played itself so well that the drummer went on holiday, and nobody noticed for three tours.'"
+  },
+  {
+   "id": "x_hi_hat",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Tsst the Tireless' for the Legendary"
+  },
+  {
+   "id": "x_plantain_chips",
+   "field": "lore.uncommon",
+   "severity": "medium",
+   "issue": "Uncommon (a trail of crumbs down the sofa) copies w21 x_samosa Uncommon.",
+   "suggestion": "'Snaps in half the moment it touches the dip, every single time.'"
+  },
+  {
+   "id": "x_plantain_chips",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('just one more until the bag is empty') is an ordinary snack habit, not a power.",
+   "suggestion": "'Breaks into so many salty crumbs that the sofa, the bed and the dog are all seasoned by bedtime.'"
+  },
+  {
+   "id": "x_plantain_chips",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Crumbseasoner' for the Rare"
+  },
+  {
+   "id": "x_plantain_chips",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary ('a bag that never ran out') is the bottomless-container frame shared with w19 bowl, fruit bowl and water filter jug.",
+   "suggestion": "'Crunched so loudly in a library that every book fell off the shelves, in alphabetical order.'"
+  },
+  {
+   "id": "x_plantain_chips",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Grand Crunchduke' for the Legendary"
+  },
+  {
+   "id": "x_rain_stick",
+   "field": "lore.rare",
+   "severity": "high",
+   "issue": "Uncommon, Rare and Epic all repeat one premise (people think it is raining).",
+   "suggestion": "'Patters so softly that anyone listening falls asleep in under a minute, including whoever is holding it.'"
+  },
+  {
+   "id": "x_rain_stick",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Drowsypatter' for the Rare"
+  },
+  {
+   "id": "x_rain_stick",
+   "field": "lore.epic",
+   "severity": "high",
+   "issue": "Epic is the same fake-rain premise as the Uncommon and Rare.",
+   "suggestion": "'Got wedged in a car roof rack, and the car drove through town sounding like its own private storm.'"
+  },
+  {
+   "id": "x_rain_stick",
+   "field": "names.epic",
+   "severity": "medium",
+   "issue": "Pairs with the new Epic lore.",
+   "suggestion": "'Roof Rack Storm' for the Epic"
+  },
+  {
+   "id": "x_rain_stick",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Legendary name is another 'The X That Y' title; vary the shape.",
+   "suggestion": "'Drizzlewand the Drought-Breaker' for the Legendary"
+  },
+  {
+   "id": "x_shaker",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('toddlers start wiggling')",
+   "suggestion": "'Shakes itself whenever it hears music, so every advert on the telly comes with percussion.'"
+  },
+  {
+   "id": "x_shaker",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (led a carnival parade) repeats the Epic samba and the conga/sousaphone parade Legendaries.",
+   "suggestion": "'Was shaken so hard that its beads burst out, bounced down the street and formed their own tiny band.'"
+  },
+  {
+   "id": "x_shaker",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Maraca Magnifica' for the Legendary"
+  },
+  {
+   "id": "x_singing_bowl",
+   "field": "lore.uncommon",
+   "severity": "high",
+   "issue": "Uncommon ('keeps humming long after it is put down') copies the sitar Uncommon and approved Pilot 02 x_tuning_fork Common ('Hums for ages after you tap it').",
+   "suggestion": "'Gets used as a fruit bowl by visitors, then hums loudly the moment anyone takes an apple.'"
+  },
+  {
+   "id": "x_singing_bowl",
+   "field": "names.uncommon",
+   "severity": "medium",
+   "issue": "Pairs with the new Uncommon lore.",
+   "suggestion": "'Applehummer' for the Uncommon"
+  },
+  {
+   "id": "x_singing_bowl",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('the cat sat beside it the entire time')",
+   "suggestion": "'Hummed so calmly that the traffic outside slowed to walking pace, and nobody minded being late.'"
+  },
+  {
+   "id": "x_singing_bowl",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Calmhum the Traffic-Tamer' for the Legendary"
+  },
+  {
+   "id": "x_singing_bowl",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Hum Stink' is truthful (poison) but awkward.",
+   "suggestion": "''Musty Rim Hum''"
+  },
+  {
+   "id": "x_triangle",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare ('tings so brightly that everyone notices') is not a power.",
+   "suggestion": "'Tings so brightly that every spoon in the drawer rings back, always on the wrong beat.'"
+  },
+  {
+   "id": "x_triangle",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary (stole the show with one ting) is the same premise as the Epic (cheered louder than the trumpets).",
+   "suggestion": "'Went ting once so perfectly that the conductor put down the baton, and the triangle has been conducting ever since.'"
+  },
+  {
+   "id": "x_triangle",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Tingaling the Triumphant' for the Legendary"
+  },
+  {
+   "id": "x_wind_chime",
+   "field": "lore.rare",
+   "severity": "medium",
+   "issue": "Rare is the 'plays so X that everyone nearby does Y' template (a crowd reaction, not a troublesome power); it is repeated across most of the batch. ('people stop to listen on the path')",
+   "suggestion": "'Jangles at the faintest breath, so even a sneeze in the next garden sets it off.'"
+  },
+  {
+   "id": "x_wind_chime",
+   "field": "names.rare",
+   "severity": "medium",
+   "issue": "Pairs with the new Rare lore.",
+   "suggestion": "'Sneezejangler' for the Rare"
+  },
+  {
+   "id": "x_wind_chime",
+   "field": "lore.legendary",
+   "severity": "high",
+   "issue": "Legendary uses the banned 'for N years / never once / has done X so many times that' formula; it needs an outrageous feat with a punchline. ('for twenty years and never repeated one')",
+   "suggestion": "'Caught a breeze so mighty that it played the whole storm like a song, and the weather forecast now comes with sheet music.'"
+  },
+  {
+   "id": "x_wind_chime",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Galeharp the Forecaster' for the Legendary"
+  },
+  {
+   "id": "x_wind_chime",
+   "field": "moves.ultimate",
+   "severity": "medium",
+   "issue": "Ultimate 'Storm Jangle' repeats the Epic name 'Stormy Night Jangle'. Variants burn/burn/poison: keep it neutral.",
+   "suggestion": "'Breeze Ballad'"
+  },
+  {
+   "id": "xylophone",
+   "field": "lore.legendary",
+   "severity": "medium",
+   "issue": "Legendary is a pleasant success with no punchline; it needs an outrageous feat. ('every note in every key', the orchestra cheered)",
+   "suggestion": "'Played a scale so fast that the notes arrived before the mallets hit them, and the audience clapped before it began.'"
+  },
+  {
+   "id": "xylophone",
+   "field": "names.legendary",
+   "severity": "medium",
+   "issue": "Pairs with the new Legendary lore.",
+   "suggestion": "'Marimbo the Quickest' for the Legendary"
+  },
+  {
+   "id": "x_conga",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Carnival Stomp' is fine for a stun hit but echoes the old Epic name.",
+   "suggestion": "'Drumskin Thunder'"
+  },
+  {
+   "id": "x_bagpipes",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Highland Drone' half-repeats the Epic name 'Highland Morning Wail'.",
+   "suggestion": "'Glen Drone'"
+  },
+  {
+   "id": "x_bugle",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Hot Brass Reveille' repeats 'Reveille' from the Epic name 'Campsite Reveille'.",
+   "suggestion": "'Hot Brass Blast'"
+  },
+  {
+   "id": "x_shaker",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Samba Startle' half-repeats the Epic name 'Samba Shake'.",
+   "suggestion": "'Bead Storm Startle'"
+  },
+  {
+   "id": "trumpet",
+   "field": "moves.ultimate",
+   "severity": "low",
+   "issue": "'Fanfare Startle' half-repeats the Epic name 'Royal Fanfare'.",
+   "suggestion": "'Valve Blast Startle'"
+  }
+ ]
+}

@@ -1,0 +1,2664 @@
+{
+  "schema": 1,
+  "batch": "w07-clothing-and-shoes",
+  "entries": {
+    "boot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pairhider",
+        "uncommon": "Homeward Welly",
+        "rare": "Mudtracker",
+        "epic": "Puddlequake",
+        "legendary": "Old Bootsworth, Thousand-Mile Walker"
+      },
+      "lore": {
+        "common": "Hides its partner under the bed every morning just as you're late for school.",
+        "uncommon": "Walks home by itself from any field, always by the muddiest route. Then waits on the doormat looking innocent.",
+        "rare": "Leaves muddy footprints that keep walking after it stops. They have reached the bathroom twice and the loft once.",
+        "epic": "Stamped once on the school field and every puddle in town jumped out of its hole. The lollipop lady is still mopping.",
+        "legendary": "Walked a thousand miles home after being left at a campsite. Its first act was to kick mud on whoever forgot it."
+      },
+      "moves": {
+        "signature": "Muddy Heel Stomp",
+        "legend": "Puddle Siphon",
+        "ultimate": "Big Boot Stomp"
+      }
+    },
+    "dress": {
+      "status": "reviewed",
+      "names": {
+        "common": "Twirlskirt",
+        "uncommon": "Hemsnagger",
+        "rare": "Pocketsprout",
+        "epic": "Twirlicopter",
+        "legendary": "Lady Swishington of the Ballroom"
+      },
+      "lore": {
+        "common": "Spins round so wide when you twirl that it knocks the cake off the table.",
+        "uncommon": "Catches its hem on every door handle on the way out of the party.",
+        "rare": "Grows a new pocket wherever one is needed. Grandma has found forty sweets in it and a lost hamster.",
+        "epic": "Spun so fast at the wedding that it took off like a helicopter. The bouquet is still on the town hall roof.",
+        "legendary": "Spun so beautifully at the ball that the clock stopped to watch. The party got an extra hour, and still ran out of cake."
+      },
+      "moves": {
+        "signature": "Hem Snag",
+        "legend": "Perfume Cloud",
+        "ultimate": "Grand Twirl"
+      }
+    },
+    "x_balaclava": {
+      "status": "reviewed",
+      "names": {
+        "common": "Itchface",
+        "uncommon": "Eyeholes",
+        "rare": "Holeknitter",
+        "epic": "Snowman Muffler",
+        "legendary": "Woolly Wilbur of the Winter Peaks"
+      },
+      "lore": {
+        "common": "Itches your nose all morning, and it's the one place you can't scratch.",
+        "uncommon": "Leaves only your eyes showing, so nobody recognises you at the bus stop.",
+        "rare": "Knits a new hole wherever you need to scratch. By lunchtime it is mostly holes and its owner is mostly face.",
+        "epic": "Stretched over a whole village of snowmen to keep them cosy. By lunch the village was one big woolly puddle.",
+        "legendary": "Kept a mountain top so warm that it stopped snowing there. Skiers now queue at the summit in shorts."
+      },
+      "moves": {
+        "signature": "Wool Snatch",
+        "legend": "Warm Breath Glow",
+        "ultimate": "Blizzard Wrap"
+      }
+    },
+    "x_bandana": {
+      "status": "reviewed",
+      "names": {
+        "common": "Kerchief Knot",
+        "uncommon": "Neckflapper",
+        "rare": "Sneezeguard",
+        "epic": "Dustwhipper",
+        "legendary": "Bandito Bandana of the Prairie"
+      },
+      "lore": {
+        "common": "Slips down over your eyes every time you run.",
+        "uncommon": "Flaps round your neck in the wind like a little flag.",
+        "rare": "Ties itself over the face of anyone who sneezes nearby. The library now looks like a gang of very polite outlaws.",
+        "epic": "Flapped so hard on a windy hill that it whipped up a dust storm. The whole village now sneezes in the same direction.",
+        "legendary": "Lassoed a runaway cattle stampede with one corner. The cows agreed to walk home if it promised to stop flapping."
+      },
+      "moves": {
+        "signature": "Knot Snatch",
+        "legend": "Bandana Flick",
+        "ultimate": "Prairie Wave"
+      }
+    },
+    "i_bathing_cap": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hairpuller",
+        "uncommon": "Earsqueezer",
+        "rare": "Dolphinsqueak",
+        "epic": "Plugpuller",
+        "legendary": "Captain Rubbercap of the Lido"
+      },
+      "lore": {
+        "common": "Pulls your hair every time you take it off after swimming.",
+        "uncommon": "Squeezes your head so tightly that your ears pop.",
+        "rare": "Squeaks like a dolphin underwater. The lifeguard has closed the pool twice to look for it.",
+        "epic": "Stuck to the bottom of the pool so hard that it pulled the plug out. The swimming club finished the race on the grass.",
+        "legendary": "Swam across the sea by itself and reached the far side first. Its swimmer arrived an hour later, cold and very cross."
+      },
+      "moves": {
+        "signature": "Rubber Snap Snatch",
+        "legend": "Swim Cap Snap Crack",
+        "ultimate": "Deep End Plunge"
+      }
+    },
+    "i_bearskin": {
+      "status": "reviewed",
+      "names": {
+        "common": "Nosetickler",
+        "uncommon": "Tallfur",
+        "rare": "Growlbusby",
+        "epic": "Skyscraper Busby",
+        "legendary": "Grand Fuzzbusby of the Palace Guard"
+      },
+      "lore": {
+        "common": "Tickles the nose of every guard standing next to it, and none of them are allowed to sneeze.",
+        "uncommon": "Is so tall and furry that its owner has to duck under every doorway.",
+        "rare": "Growls like a real bear whenever a tourist pulls a face. The ice-cream van now parks round the corner.",
+        "epic": "Grew so tall overnight that the guard behind it could not see. He marched straight into the palace pond, still in step.",
+        "legendary": "Stood so still for so long that a family of birds moved in on top. The guards now change shifts on tiptoe."
+      },
+      "moves": {
+        "signature": "Fluffy Swipe",
+        "legend": "Furry Fortress",
+        "ultimate": "Tall Hat March"
+      }
+    },
+    "x_beret": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tiltytop",
+        "uncommon": "Artisthat",
+        "rare": "Doodlebrim",
+        "epic": "Cafe Tilter",
+        "legendary": "Madame Berangere of the Riverbank"
+      },
+      "lore": {
+        "common": "Slides off to one side no matter how carefully you put it on.",
+        "uncommon": "Makes everyone who wears it think they are a great painter.",
+        "rare": "Paints a tiny moustache on every portrait it walks past. The art gallery has stopped letting it in.",
+        "epic": "Tilted so far over one ear that the whole café tilted with it. Every croissant slid off the tables and into the river.",
+        "legendary": "Painted a sunset so real that the actual sun went down early to compare. The whole town had dinner at four."
+      },
+      "moves": {
+        "signature": "Felt Snatch",
+        "legend": "Beret Bash",
+        "ultimate": "Paint Splodge Stink"
+      }
+    },
+    "x_bowler_hat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Roundtop",
+        "uncommon": "Umbrellamate",
+        "rare": "Doffhat",
+        "epic": "Hatflock",
+        "legendary": "Sir Bowlerby of the Morning Train"
+      },
+      "lore": {
+        "common": "Rolls off your head on the windiest day and down the high street.",
+        "uncommon": "Goes everywhere with an umbrella, and won't be seen without one.",
+        "rare": "Tips itself to every single person in the street. Its owner arrives at work an hour late with a very sore neck.",
+        "epic": "Lifted off in a gust and every bowler in town followed like a flock of birds. The pigeons have filed a complaint.",
+        "legendary": "Caught the morning train without its owner and went to work alone. It now has a desk, a name badge and the window seat."
+      },
+      "moves": {
+        "signature": "Brim Snatch",
+        "legend": "Polite Tip Distraction",
+        "ultimate": "Steamy Commuter Crush"
+      }
+    },
+    "x_bucket_hat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Floppybrim",
+        "uncommon": "Dripbrim",
+        "rare": "Rainsheddle",
+        "epic": "Mudbucket",
+        "legendary": "Old Floppington of the Fields"
+      },
+      "lore": {
+        "common": "Flops down over your eyes every time you try to look up.",
+        "uncommon": "Has a floppy brim all the way round so the rain drips off in every direction.",
+        "rare": "Holds a whole bucket of rain on its brim and tips it over whoever laughs at it. The campsite has run out of dry people.",
+        "epic": "Flipped over at the festival and was used as a real bucket. It carried enough mud to build a second stage.",
+        "legendary": "Collected so much rain at one festival that it became a pond. A family of ducks moved in and will not leave."
+      },
+      "moves": {
+        "signature": "Floppy Brim Snatch",
+        "legend": "Muddy Festival Whiff",
+        "ultimate": "Big Brim Flop"
+      }
+    },
+    "x_crown": {
+      "status": "reviewed",
+      "names": {
+        "common": "Heavyhead",
+        "uncommon": "Jewelglint",
+        "rare": "Bossytop",
+        "epic": "Rolling Royal",
+        "legendary": "The Crown That Crowned a Cat"
+      },
+      "lore": {
+        "common": "Is so heavy that it slides down over your ears every time you nod.",
+        "uncommon": "Sparkles so brightly in the sun that everyone has to squint at you.",
+        "rare": "Makes whoever wears it give silly royal orders. Grandpa wore it for ten minutes and banned Tuesdays.",
+        "epic": "Rolled off during the parade and down the hill like a golden wheel. Half the town chased it and the parade ended at the bakery.",
+        "legendary": "Was put on the palace cat by mistake. The cat has now ruled for nine years and has only ever banned baths."
+      },
+      "moves": {
+        "signature": "Jewel Snatch",
+        "legend": "Dazzle Distraction",
+        "ultimate": "Heavy Is the Head",
+        "kit.wrap_up": "Gold Glint Daze",
+        "kit.static_cling": "Heavy Gold Crack",
+        "kit.layer_up": "Velvet Lining Guard"
+      }
+    },
+    "x_earmuffs": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fluffyears",
+        "uncommon": "Bearears",
+        "rare": "Radiomuff",
+        "epic": "Hushmuffle",
+        "legendary": "Muffington the Storm Hush"
+      },
+      "lore": {
+        "common": "Muffles every question you are asked, so you answer the wrong one all day.",
+        "uncommon": "Has two fluffy pom-poms that make you look like a bear.",
+        "rare": "Picks up the radio through its fluff. Plays the football scores into your ears during the maths test.",
+        "epic": "Clamped itself over the school fire alarm. The whole school had a lovely quiet fire drill that nobody knew about.",
+        "legendary": "Sat on top of a thundercloud and muffled the whole storm. The cloud now only rains in whispers."
+      },
+      "moves": {
+        "signature": "Fluffy Snatch",
+        "legend": "Muffled Hearing",
+        "ultimate": "Frosty Silence Stink"
+      }
+    },
+    "x_fedora": {
+      "status": "reviewed",
+      "names": {
+        "common": "Brimtipper",
+        "uncommon": "Detectivehat",
+        "rare": "Snoopbrim",
+        "epic": "Noonshadow",
+        "legendary": "Inspector Fedorius of the Fog"
+      },
+      "lore": {
+        "common": "Tips forward over your eyes every time you look mysterious.",
+        "uncommon": "Makes everyone who wears it suddenly want to solve a mystery.",
+        "rare": "Solves mysteries nobody asked about. Has told the whole street exactly who leaves the bin lid open.",
+        "epic": "Pulled its brim so low over the town that it was night by lunchtime. The owls went to work early.",
+        "legendary": "Solved the greatest mystery in the city: who keeps moving the garden gnomes. They had gone on holiday and sent postcards."
+      },
+      "moves": {
+        "signature": "Brim Tip Snatch",
+        "legend": "Shadow Brim Distraction",
+        "ultimate": "Case Closed"
+      }
+    },
+    "hat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Gustgrabber",
+        "uncommon": "Hatheadmaker",
+        "rare": "Capswapper",
+        "epic": "Bunnybrim",
+        "legendary": "Old Topper, Hat of All Hats"
+      },
+      "lore": {
+        "common": "Flies off your head on every windy day and leads you on a chase down the street.",
+        "uncommon": "Leaves your hair squashed flat when you take it off, so you have to keep it on.",
+        "rare": "Swapped heads with every hat at the party when nobody was looking.",
+        "epic": "Pulled a rabbit out of itself at a birthday party, then another, then forty. The garden is now mostly rabbits.",
+        "legendary": "Blew off one windy morning and landed on every head in town in turn. By night it had been worn by four thousand people and a horse."
+      },
+      "moves": {
+        "signature": "Hat Grab",
+        "legend": "Hat Trick Boost",
+        "ultimate": "Gust Lift-Off"
+      }
+    },
+    "x_headband": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slidedownband",
+        "uncommon": "Browlifter",
+        "rare": "Sweatwringer",
+        "epic": "Pingband",
+        "legendary": "Sweatwell, the Straight Runner"
+      },
+      "lore": {
+        "common": "Slides down over your eyes just as you're about to catch the ball.",
+        "uncommon": "Holds back your hair so tightly that your eyebrows look surprised.",
+        "rare": "Saves up a whole match of sweat and wrings it out over the umpire. The tennis club now hands out umbrellas.",
+        "epic": "Was stretched across the finish line at sports day and pinged the winner back to the start. He has now won twice.",
+        "legendary": "Kept one runner's hair out of his eyes for a whole marathon. He ran so straight that he finished in the next town."
+      },
+      "moves": {
+        "signature": "Stretch Snatch",
+        "legend": "Headband Cool Down Rest",
+        "ultimate": "Sports Day Sprint"
+      }
+    },
+    "i_mortarboard": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tassleflicker",
+        "uncommon": "Squarehead",
+        "rare": "Capthrower",
+        "epic": "Skyboard",
+        "legendary": "Doctor Squaresworth, the Very Learned"
+      },
+      "lore": {
+        "common": "Its tassel swings in front of your nose and makes you sneeze.",
+        "uncommon": "Has a flat square top that slides off whenever you look down.",
+        "rare": "Was thrown in the air at graduation and landed on the head of the headmistress.",
+        "epic": "Was thrown so high at graduation that it landed on a passing plane. It has since graduated in four more countries.",
+        "legendary": "Has sat through so many speeches that it now gives them. Last year it spoke for six hours and gave itself a degree in snoring."
+      },
+      "moves": {
+        "signature": "Tassel Snatch",
+        "legend": "Hot Lecture Hall",
+        "ultimate": "Cap Toss"
+      }
+    },
+    "i_shower_cap": {
+      "status": "reviewed",
+      "names": {
+        "common": "Crinklecap",
+        "uncommon": "Steamybubble",
+        "rare": "Steamfloater",
+        "epic": "Steamdome",
+        "legendary": "Lady Ploppington of the Bathroom"
+      },
+      "lore": {
+        "common": "Crinkles so loudly in the shower that you can't hear yourself singing.",
+        "uncommon": "Looks like a see-through bubble on your head, and everyone laughs.",
+        "rare": "Puffs up with steam until it floats off out of the window. The neighbours keep bringing it back, slightly damp.",
+        "epic": "Blew up so big in the hotel steam room that it covered every guest like a tent. Nobody got wet, and nobody found the door.",
+        "legendary": "Stayed on through a storm at sea, a waterfall and a car wash. The curls underneath have never felt a single raindrop."
+      },
+      "moves": {
+        "signature": "Elastic Snatch",
+        "legend": "Shower Cap Drip Drip Drip",
+        "ultimate": "Steamy Shower Blast"
+      }
+    },
+    "i_ski_mask": {
+      "status": "reviewed",
+      "names": {
+        "common": "Snowface",
+        "uncommon": "Goggleholder",
+        "rare": "Gogglefogger",
+        "epic": "Slopemelter",
+        "legendary": "Captain Frostface of the Piste"
+      },
+      "lore": {
+        "common": "Gets damp from your breath and then freezes stiff on the ski lift.",
+        "uncommon": "Covers everything but your eyes, so you look like a woolly ninja.",
+        "rare": "Fogs up every pair of goggles it gets near. The ski instructor has taught a whole lesson to a tree.",
+        "epic": "Breathed out so much warm air on the slope that the snow melted into a river. The ski school finished the day in boats.",
+        "legendary": "Raced an avalanche down the mountain and won by a nose. The avalanche wants a rematch and is still climbing back up."
+      },
+      "moves": {
+        "signature": "Woolly Snatch",
+        "legend": "Damp Breath Whiff",
+        "ultimate": "Woolly Pile-Up"
+      }
+    },
+    "x_sun_hat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Floppyshade",
+        "uncommon": "Beachbrim",
+        "rare": "Sunchaser",
+        "epic": "Shadeosaurus",
+        "legendary": "Lady Sunbrella of the Seaside"
+      },
+      "lore": {
+        "common": "Blows off into the sea the moment you get to the beach.",
+        "uncommon": "Has a brim so wide that the whole family can sit in its shade.",
+        "rare": "Follows the sun round the garden by itself, dragging its owner along. Grandpa has been round the house nine times today.",
+        "epic": "Opened its brim so wide on the beach that it shaded the whole sea. The fish asked for the sun back by teatime.",
+        "legendary": "Blocked the sun for a whole summer so its owner never got a freckle. The tomatoes went on strike."
+      },
+      "moves": {
+        "signature": "Wide Brim Snatch",
+        "legend": "Shady Rest",
+        "ultimate": "Sunburn Blaze"
+      }
+    },
+    "x_tiara": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sparklepin",
+        "uncommon": "Princessband",
+        "rare": "Wavemaker",
+        "epic": "Ballroom Sparkle",
+        "legendary": "Glimmerina, Pigeon Princess"
+      },
+      "lore": {
+        "common": "Slips out of your hair and falls into the punch bowl.",
+        "uncommon": "Sparkles in every photo, so nobody can see your face.",
+        "rare": "Makes whoever wears it wave like royalty at everything. Dad waved at the bin lorry for twenty minutes.",
+        "epic": "Sparkled so much at the ball that the chandelier felt jealous.",
+        "legendary": "Was worn by a pigeon for a whole year after a ball. The pigeon now refuses crumbs unless they come on a plate."
+      },
+      "moves": {
+        "signature": "Sparkle Snatch",
+        "legend": "Glitter Glitter Glitter",
+        "ultimate": "Tiara Twirl Finale",
+        "kit.wrap_up": "Diamond Glint Daze",
+        "kit.static_cling": "Hair Clip Pinch",
+        "kit.loose_thread": "Jewel Pluck",
+        "kit.layer_up": "Silver Band Guard"
+      }
+    },
+    "x_visor": {
+      "status": "reviewed",
+      "names": {
+        "common": "Brimonly",
+        "uncommon": "Glareblocker",
+        "rare": "Sunflicker",
+        "epic": "Courtshade",
+        "legendary": "Coach Shadewell of the Tennis Club"
+      },
+      "lore": {
+        "common": "Has no top, so the sun burns your head while your eyes stay shaded.",
+        "uncommon": "Blocks the glare so well that you can watch the ball against the sun.",
+        "rare": "Bounces sunlight into the other player's eyes at exactly the wrong moment. The umpire has asked it to face the wall.",
+        "epic": "Shaded centre court so well that the grass thought it was night and went to sleep. The final was played in the car park.",
+        "legendary": "Has watched so many finals that it now calls the lines itself. It is never wrong, and the umpire has taken up knitting."
+      },
+      "moves": {
+        "signature": "Brim Flick Snatch",
+        "legend": "Sun Glare Crack",
+        "ultimate": "Baseline Squint"
+      }
+    },
+    "x_wig_hair": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slipwig",
+        "uncommon": "Curlyfake",
+        "rare": "Styleshifter",
+        "epic": "Curlstorm",
+        "legendary": "Madame Perruque of the Grand Theatre"
+      },
+      "lore": {
+        "common": "Slips sideways on your head during the school play.",
+        "uncommon": "Has curls so bouncy that they wobble when you talk.",
+        "rare": "Grows a new hairstyle every night. Monday a beehive, Tuesday a quiff, Wednesday something the cat tried to adopt.",
+        "epic": "Grew so big in the final scene that the actors got lost in its curls. The curtain came down so they could be combed out.",
+        "legendary": "Played every part in one night: king, queen, villain and horse. It took eleven bows and asked for a twelfth."
+      },
+      "moves": {
+        "signature": "Curl Snatch",
+        "legend": "Hairpin Guard",
+        "ultimate": "Big Wig Swap"
+      }
+    },
+    "helmet": {
+      "status": "reviewed",
+      "names": {
+        "common": "Strapsquasher",
+        "uncommon": "Headbonker",
+        "rare": "Boingdome",
+        "epic": "Sitewobbler",
+        "legendary": "Captain Hardshell of the Crash"
+      },
+      "lore": {
+        "common": "Squashes your hair flat and leaves a line round your forehead.",
+        "uncommon": "Bonks against every door frame because you forget you're wearing it.",
+        "rare": "Bounces off everything twice as hard as it hits it. Its owner headed a football into the next town.",
+        "epic": "Bumped a doorframe so hard that the whole building site wobbled. The crane driver now wears two helmets.",
+        "legendary": "Took a falling piano on the head and played a perfect note. Its owner walked away humming."
+      },
+      "moves": {
+        "signature": "Bonk Snatch",
+        "legend": "Clonk Startle",
+        "ultimate": "Head First Charge",
+        "kit.wrap_up": "Visor Snap",
+        "kit.static_cling": "Hard Shell Crack",
+        "kit.loose_thread": "Strap Grab",
+        "kit.layer_up": "Padding Guard"
+      }
+    },
+    "jacket": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pocketkeeper",
+        "uncommon": "Zipperjammer",
+        "rare": "Hookmisser",
+        "epic": "Collarcloud",
+        "legendary": "The Bottomless Overcoat"
+      },
+      "lore": {
+        "common": "Hides your keys in a pocket you didn't even know it had.",
+        "uncommon": "Jams its zip at the bottom so you have to wriggle out of it like a snake.",
+        "rare": "Takes itself off the hook and goes to school without you. Its marks are now better than yours.",
+        "epic": "Turned its collar up so high that it hid the whole office. Everyone went home early because nobody could find the boss.",
+        "legendary": "Has an inside pocket so deep that the family moved in. Grandma has the room by the zip and complains of draughts."
+      },
+      "moves": {
+        "signature": "Pocket Pick",
+        "legend": "Collar Up Boost",
+        "ultimate": "Zip Jam"
+      }
+    },
+    "jeans": {
+      "status": "reviewed",
+      "names": {
+        "common": "Shrinker",
+        "uncommon": "Pocketfluff",
+        "rare": "Kneeripper",
+        "epic": "Bluewash",
+        "legendary": "Old Denim Dan, Faded Favourite"
+      },
+      "lore": {
+        "common": "Comes out of the washing machine one size smaller every single time.",
+        "uncommon": "Has pockets full of fluff, old tissues and a forgotten sweet.",
+        "rare": "Rips at the knee whenever a teacher looks. The rip then grows a second knee, which also wants to be fashionable.",
+        "epic": "Turned the washing machine blue, then the bathroom, then the dog. The whole house now matches the jeans.",
+        "legendary": "Went so long without a wash that they now stand in the corner on their own. Last week they went to the shops alone."
+      },
+      "moves": {
+        "signature": "Denim Snatch",
+        "legend": "Ripped Knee Crack",
+        "ultimate": "Big Washday"
+      }
+    },
+    "scarf": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tangleneck",
+        "uncommon": "Dripdrier",
+        "rare": "Wintergrip",
+        "epic": "Poolsponge",
+        "legendary": "Granny's Endless Woolly Scarf"
+      },
+      "lore": {
+        "common": "Catches in the car door every time you get out.",
+        "uncommon": "Dries your hands, your face and the dog, all on the same day.",
+        "rare": "Wraps itself round anyone who says they are cold and will not let go until spring. The postman is still wearing it.",
+        "epic": "Soaked up the whole paddling pool in one go, then the bath. The garden hose is now afraid of it.",
+        "legendary": "Wrapped the town clock tower one winter to keep it warm. The clock got so cosy it fell asleep, and nobody was late for a month."
+      },
+      "moves": {
+        "signature": "Tassel Tug",
+        "legend": "Towel Snatch",
+        "ultimate": "Wrapped Up Tight"
+      }
+    },
+    "i_academic_gown": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sleeveswisher",
+        "uncommon": "Floorsweeper",
+        "rare": "Floatinggown",
+        "epic": "Billowbat",
+        "legendary": "Professor Robesworth of the Old Hall"
+      },
+      "lore": {
+        "common": "Flaps its huge sleeves whenever its owner talks, and the pigeons outside flap back.",
+        "uncommon": "Is so long that it sweeps the floor of every corridor it walks down.",
+        "rare": "Billowed out so dramatically on the stage that the professor nearly floated away.",
+        "epic": "Spread its sleeves in a gust and lifted the whole graduating class off the lawn. They landed in the library and stayed to study.",
+        "legendary": "Has worn so many professors that it now gives the lectures itself. Nobody noticed, except that the jokes got better."
+      },
+      "moves": {
+        "signature": "Sleeve Snatch",
+        "legend": "Sleeve Swipe Crack",
+        "ultimate": "Robe Billow Daze"
+      }
+    },
+    "i_bib": {
+      "status": "reviewed",
+      "names": {
+        "common": "Mealmuck",
+        "uncommon": "Puddingslip",
+        "rare": "Splatbacker",
+        "epic": "Spaghetti Splatter",
+        "legendary": "Sir Bibbington, Hero of the Highchair"
+      },
+      "lore": {
+        "common": "Catches everything except the food that falls in your lap.",
+        "uncommon": "Ties at the back of your neck, then comes undone just before pudding.",
+        "rare": "Catches flying food and flings it straight back. The highchair has won every food fight since.",
+        "epic": "Stretched out to catch a whole party's spaghetti at once. The ceiling stayed clean, and the dog has never forgiven it.",
+        "legendary": "Caught every crumb a baby dropped for two whole years. The floor has never needed sweeping and the dog had to get a job."
+      },
+      "moves": {
+        "signature": "Dribble Snatch",
+        "legend": "Gravy Stain Crack",
+        "ultimate": "Food Fight"
+      }
+    },
+    "i_brassiere": {
+      "status": "reviewed",
+      "names": {
+        "common": "Washtangle",
+        "uncommon": "Hookfiddler",
+        "rare": "Kitecatcher",
+        "epic": "Washing Line Flap",
+        "legendary": "Madame Lacelace of the Laundry"
+      },
+      "lore": {
+        "common": "Comes out of the washing machine tangled round every sock in the load.",
+        "uncommon": "Has tiny hooks at the back that are very fiddly to do up in a hurry.",
+        "rare": "Hooks itself onto anything that passes the washing line. So far it has caught a kite, a pigeon and next door's cat.",
+        "epic": "Flapped on the washing line in a gale, and the neighbours found it in their garden.",
+        "legendary": "Blew off the line in a gale and flew all day like a kite with two sails. It landed folded, in the right drawer."
+      },
+      "moves": {
+        "signature": "Strap Snatch",
+        "legend": "Strap Snap Startle",
+        "ultimate": "Laundry Day Tangle"
+      }
+    },
+    "i_breastplate": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clankchest",
+        "uncommon": "Eggfryer",
+        "rare": "Arrowbounce",
+        "epic": "Clangalot",
+        "legendary": "Sir Steelheart, Shield of the Knight"
+      },
+      "lore": {
+        "common": "Clanks so loudly when you walk that everyone knows you're coming.",
+        "uncommon": "Gets so hot in the sun that the knight fries his breakfast egg on it.",
+        "rare": "Bounced an arrow straight back at the archer who fired it.",
+        "epic": "Clanged so loudly when its knight fell off his horse that the drawbridge slammed shut. The knights have been stuck outside since Tuesday.",
+        "legendary": "Bounced a dragon's sneeze straight back up its nose. The dragon has carried a hanky ever since."
+      },
+      "moves": {
+        "signature": "Steel Snatch",
+        "legend": "Chest Bump",
+        "ultimate": "Knightly Charge",
+        "kit.wrap_up": "Polished Glint",
+        "kit.static_cling": "Steel Dent",
+        "kit.loose_thread": "Buckle Pluck"
+      }
+    },
+    "i_chain_mail": {
+      "status": "reviewed",
+      "names": {
+        "common": "Jinglelink",
+        "uncommon": "Crumbrings",
+        "rare": "Heavyvest",
+        "epic": "Rattlesplash",
+        "legendary": "Sir Linksworth of the Iron Rings"
+      },
+      "lore": {
+        "common": "Jingles with every step, so knights can never sneak up on anyone.",
+        "uncommon": "Catches every crumb in its rings. A knight can eat breakfast out of it at lunchtime.",
+        "rare": "Stopped a sword's swipe and only lost one tiny ring.",
+        "epic": "Shook itself like a wet dog after the rain and soaked every knight at the feast. The king's soup is now mostly puddle.",
+        "legendary": "Was taken apart ring by ring by a magpie and rebuilt as a nest. The magpie now goes jousting on Saturdays."
+      },
+      "moves": {
+        "signature": "Ring Snatch",
+        "legend": "Jingle Jingle Jingle",
+        "ultimate": "Iron Ring Clatter",
+        "kit.wrap_up": "Chain Rattle Daze",
+        "kit.static_cling": "Ring Gap Crack",
+        "kit.loose_thread": "Link Pluck"
+      }
+    },
+    "i_cuirass": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clankbelly",
+        "uncommon": "Catslide",
+        "rare": "Swordglancer",
+        "epic": "Piebeamer",
+        "legendary": "Sir Burnish, the Unbent"
+      },
+      "lore": {
+        "common": "Clanks against the table every time its knight leans over to reach the salt.",
+        "uncommon": "Is curved so smoothly that the castle cats use it as a slide.",
+        "rare": "Made a sword slide off its curved front and into a hay bale.",
+        "epic": "Caught the midday sun and beamed it across the castle. The cook's pies baked themselves before anyone lit the oven.",
+        "legendary": "Was hit by a hundred lances in one tournament and came out with only a slightly sad dent."
+      },
+      "moves": {
+        "signature": "Steel Rim Snatch",
+        "legend": "Sun-Hot Steel",
+        "ultimate": "Forge-Hot Charge",
+        "kit.wrap_up": "Polished Glare",
+        "kit.loose_thread": "Buckle Pluck",
+        "kit.layer_up": "Steel Plate Guard"
+      }
+    },
+    "i_diaper": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tapeflapper",
+        "uncommon": "Crinklebottom",
+        "rare": "Babyfloat",
+        "epic": "Bin Toppler",
+        "legendary": "Captain Absorbo of the Changing Mat"
+      },
+      "lore": {
+        "common": "Comes untaped at exactly the wrong moment, usually in the middle of the supermarket.",
+        "uncommon": "Crinkles so loudly when the baby crawls that everyone knows where it is.",
+        "rare": "Fills with so much air that the baby floats. Bath time now needs a lifeguard and a rubber duck on patrol.",
+        "epic": "Was changed twelve times in one day during the big family visit, and the bin gave up.",
+        "legendary": "Kept a baby dry on a sailing trip all the way round the world. The baby came home and asked for a boat of its own."
+      },
+      "moves": {
+        "signature": "Tab Snatch",
+        "legend": "Crinkle Distraction",
+        "ultimate": "Nappy Bin Pong"
+      }
+    },
+    "i_maillot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Twiststrap",
+        "uncommon": "Poolstretch",
+        "rare": "Lanedragger",
+        "epic": "Bouncelane",
+        "legendary": "Lady Maillot of the Lido"
+      },
+      "lore": {
+        "common": "Twists its straps into a knot every time you climb out of the pool.",
+        "uncommon": "Stretches so much that it fits on every swimmer in the family.",
+        "rare": "Swims faster than its swimmer and drags her down the lane. She has won races she never meant to enter.",
+        "epic": "Stretched across the whole pool like a lane rope. The swimmers bounced off it all afternoon and nobody finished.",
+        "legendary": "Swam so many lengths in one summer that the pool got shorter. The council had to repaint the lines."
+      },
+      "moves": {
+        "signature": "Strap Tug",
+        "legend": "Splash Startle",
+        "ultimate": "Gala Final Length"
+      }
+    },
+    "i_pajama": {
+      "status": "reviewed",
+      "names": {
+        "common": "Buttonmiss",
+        "uncommon": "Cartoonsleeper",
+        "rare": "Snoozetouch",
+        "epic": "Featherstorm",
+        "legendary": "Lord Snoozewell of the Bunk Bed"
+      },
+      "lore": {
+        "common": "Is buttoned up wrongly every night, so one side always hangs lower.",
+        "uncommon": "Has little cartoons all over it that seem to dance when you're nearly asleep.",
+        "rare": "Puts anyone who touches it to sleep in ten seconds. The doctor came round and is still snoring on the sofa.",
+        "epic": "Started a pillow fight so big that the feathers came down as snow. The school closed for a snow day.",
+        "legendary": "Has heard every secret whispered at a hundred sleepovers. It now runs the most-read newspaper in the street."
+      },
+      "moves": {
+        "signature": "Cosy Snatch",
+        "legend": "Pillow Pillow Pillow",
+        "ultimate": "Lights-Out Ambush"
+      }
+    },
+    "i_sarong": {
+      "status": "reviewed",
+      "names": {
+        "common": "Knotslipper",
+        "uncommon": "Beachwrap",
+        "rare": "Breezeflutter",
+        "epic": "Shoreblanket",
+        "legendary": "Lady Sarongella of the Shore"
+      },
+      "lore": {
+        "common": "Comes undone at the knot just as you stand up from your beach towel.",
+        "uncommon": "Can be worn as a skirt, a scarf, a picnic blanket or a sunshade.",
+        "rare": "Catches the breeze like a sail and drags its wearer down the beach. She got to the ice-cream van first, backwards.",
+        "epic": "Unfolded on the windy beach until it covered the whole shore. The crabs held a party underneath.",
+        "legendary": "Was tied to a mast when the sail tore and blew a fishing boat all the way home. The fish were very disappointed."
+      },
+      "moves": {
+        "signature": "Knot Tug",
+        "legend": "Hot Sand Swish",
+        "ultimate": "Breezy Swirl",
+        "kit.static_cling": "Wet Cloth Cling",
+        "kit.loose_thread": "Fringe Pluck",
+        "kit.layer_up": "Double Wrap Guard"
+      }
+    },
+    "i_swimming_trunks": {
+      "status": "reviewed",
+      "names": {
+        "common": "Drawstringdrift",
+        "uncommon": "Quickdry",
+        "rare": "Cannonballer",
+        "epic": "Balloontrunks",
+        "legendary": "Big Splashworth of the Diving Board"
+      },
+      "lore": {
+        "common": "Its drawstring always disappears back inside the waistband.",
+        "uncommon": "Dries in the sun in four seconds flat, just in time to be pushed back into the pool.",
+        "rare": "Did a cannonball off the side of the pool so big that the lifeguard got soaked.",
+        "epic": "Ballooned up with air and floated the whole family across the lake. Dad steered with his feet.",
+        "legendary": "Jumped off the top board and did so many flips that it landed tomorrow. Its owner had to wait a day to get dressed."
+      },
+      "moves": {
+        "signature": "Drawstring Snatch",
+        "legend": "Diving Board Boost",
+        "ultimate": "Cannonball Plunge"
+      }
+    },
+    "shirt": {
+      "status": "reviewed",
+      "names": {
+        "common": "Labelscratch",
+        "uncommon": "Washbasket Flipper",
+        "rare": "Ketchupmagnet",
+        "epic": "Untucker",
+        "legendary": "Old Comfy, Favourite of All Time"
+      },
+      "lore": {
+        "common": "Its label scratches the back of your neck all day long.",
+        "uncommon": "Comes out of the washing basket inside out every single time.",
+        "rare": "Attracted every drop of ketchup at the barbecue, and never a drop on the plate.",
+        "epic": "Untucked itself in the school photo and every shirt in the row did the same. The picture is now mostly elbows.",
+        "legendary": "Was worn so often that it learned to fold itself. It now does the whole family's ironing, and complains."
+      },
+      "moves": {
+        "signature": "Sleeve Grab",
+        "legend": "Stain Stain Stain",
+        "ultimate": "Sweaty Gym Shirt",
+        "kit.static_cling": "Static Shock Cling",
+        "kit.layer_up": "Vest Underneath"
+      }
+    },
+    "i_theater_curtain": {
+      "status": "reviewed",
+      "names": {
+        "common": "Halfwaystuck",
+        "uncommon": "Slowparter",
+        "rare": "Velvetsweep",
+        "epic": "Sulkdrape",
+        "legendary": "Madame Rideau of the Royal Stage"
+      },
+      "lore": {
+        "common": "Gets stuck halfway open on opening night, so the audience sees only half the actors.",
+        "uncommon": "Opens so slowly that the actors have to stand still and wait.",
+        "rare": "Swept across the stage so fast that it knocked off the villain's hat.",
+        "epic": "Came down in the middle of the play and refused to go back up. The audience watched it for an hour and clapped.",
+        "legendary": "Upstaged the lead actor by closing on him mid-song. The audience loved it, and the curtain now has its own dressing room."
+      },
+      "moves": {
+        "signature": "Velvet Snatch",
+        "legend": "Curtain Drop Distraction",
+        "ultimate": "Final Curtain",
+        "kit.wrap_up": "Curtain Call Wrap",
+        "kit.static_cling": "Dusty Velvet Cling"
+      }
+    },
+    "i_velvet": {
+      "status": "reviewed",
+      "names": {
+        "common": "Furrywrong",
+        "uncommon": "Thumbtracer",
+        "rare": "Softcatcher",
+        "epic": "Plush Cushion Pile",
+        "legendary": "Lady Plushwell of the Drawing Room"
+      },
+      "lore": {
+        "common": "Feels lovely one way and horrible the other, so everyone strokes it in the right direction.",
+        "uncommon": "Shows every thumbprint you make, so it looks like someone has been writing on it.",
+        "rare": "Grabbed every cat hair in the house and refused to let any of them go.",
+        "epic": "Covered every cushion in the grand house, and the guests sank in up to their elbows.",
+        "legendary": "Was so soft that a whole castle fell asleep on it for a hundred years. The dragon outside gave up and opened a café."
+      },
+      "moves": {
+        "signature": "Plush Snatch",
+        "legend": "Soft Fur Snatch",
+        "ultimate": "Cushion Smother"
+      }
+    },
+    "i_vestment": {
+      "status": "reviewed",
+      "names": {
+        "common": "Beepthread",
+        "uncommon": "Goldthread",
+        "rare": "Stiffrobe",
+        "epic": "Trainsweeper",
+        "legendary": "The Embroidered Robe of Ages"
+      },
+      "lore": {
+        "common": "Has so much gold thread that it sets off the metal detector at every door.",
+        "uncommon": "Is embroidered with so much gold thread that it glitters under every lamp.",
+        "rare": "Is so stiff with embroidery that it stands up on its own. It has been mistaken for its wearer twice.",
+        "epic": "Swept down the town hall steps with a train so long that it reached the bus stop. Two buses waited to let it pass.",
+        "legendary": "Shone with so much gold that a dragon tried to sleep on it. The dragon now has a very sparkly back and a sore neck."
+      },
+      "moves": {
+        "signature": "Hem Sweep Snatch",
+        "legend": "Musty Old Robe",
+        "ultimate": "Hot Gold Hem"
+      }
+    },
+    "i_wool": {
+      "status": "reviewed",
+      "names": {
+        "common": "Itchtangle",
+        "uncommon": "Rollaway Ball",
+        "rare": "Selfknitter",
+        "epic": "Knitting Basket Chaos",
+        "legendary": "Old Ewe's Endless Skein"
+      },
+      "lore": {
+        "common": "Tangles itself into a giant knot every time the kitten is in the room.",
+        "uncommon": "Keeps unrolling across the floor to see where it ends. It always ends under the fridge.",
+        "rare": "Knits itself into a jumper overnight, always with one arm too long. The cat wears the spare.",
+        "epic": "Rolled out of the knitting basket and wound itself round every chair leg in the house.",
+        "legendary": "Was rolled out so far by the kitten that it reached the next country. The kitten came home a year later with a passport."
+      },
+      "moves": {
+        "signature": "Yarn Snatch",
+        "legend": "Warm Wool Glow",
+        "ultimate": "Toasty Knit Wrap"
+      }
+    },
+    "x_gloves_pair": {
+      "status": "reviewed",
+      "names": {
+        "common": "Lonelyglove",
+        "uncommon": "Fingermiss",
+        "rare": "Fingerpointer",
+        "epic": "Snowball Season",
+        "legendary": "Lady Glovington of the Hat Stand"
+      },
+      "lore": {
+        "common": "Loses one of itself on every bus ride, so there's always one lonely glove left.",
+        "uncommon": "Never has your fingers in the right holes the first time.",
+        "rare": "Points at whatever its owner is secretly thinking about. It pointed at the cake all through the wedding speeches.",
+        "epic": "Made a hundred snowballs in one afternoon, and the snowman was very nervous.",
+        "legendary": "Stayed together as a pair for twenty years. Every lost glove in town now writes to it for advice."
+      },
+      "moves": {
+        "signature": "Finger Snatch",
+        "legend": "Glove Slap",
+        "ultimate": "Big Snowball"
+      }
+    },
+    "x_mittens_pair": {
+      "status": "reviewed",
+      "names": {
+        "common": "Thumbonly",
+        "uncommon": "Stringtied",
+        "rare": "Snowcaker",
+        "epic": "Meltmitt",
+        "legendary": "The Snowman"
+      },
+      "lore": {
+        "common": "Has only a thumb hole, so you can't pick up anything smaller than a snowball.",
+        "uncommon": "Is tied together with a string through your coat sleeves so it can never get lost.",
+        "rare": "Got so caked with snow that it turned into two little snowmen.",
+        "epic": "Got so warm in the snow fight that the whole street melted. The snowmen are now puddles with carrot noses.",
+        "legendary": "Held hands with a snowman all winter so it would not feel lonely. In spring the snowman left it a carrot."
+      },
+      "moves": {
+        "signature": "Woolly Thumb Snatch",
+        "legend": "Radiator Nap",
+        "ultimate": "Snow Fort Charge"
+      }
+    },
+    "x_socks_pair": {
+      "status": "reviewed",
+      "names": {
+        "common": "Oddsock",
+        "uncommon": "Holeytoe",
+        "rare": "Stinkfoot",
+        "epic": "Stairslider",
+        "legendary": "Sir Sockington, Star of the Show"
+      },
+      "lore": {
+        "common": "Always comes out of the washing machine with only one of itself.",
+        "uncommon": "Gets a hole in the big toe just when you're about to take your shoes off at a friend's house.",
+        "rare": "Smelled so bad after football that the dog ran out of the room.",
+        "epic": "Slid down the stairs like a sledge and kept going out of the front door. It was found three streets away, still sliding.",
+        "legendary": "Was worn as a puppet and gave such a speech that the audience cried. It now has an agent and an understudy sock."
+      },
+      "moves": {
+        "signature": "Toe Hole Snatch",
+        "legend": "Sock Sock Sock",
+        "ultimate": "Sock Surprise"
+      }
+    },
+    "x_bow": {
+      "status": "reviewed",
+      "names": {
+        "common": "Floppyloop",
+        "uncommon": "Knotpuller",
+        "rare": "Napwrapper",
+        "epic": "Partybinder",
+        "legendary": "Lady Bowella of the Gift Wrap"
+      },
+      "lore": {
+        "common": "Comes undone at the worst moment and trails behind like a tail.",
+        "uncommon": "Gets pulled into a tighter knot every time someone tries to untie it.",
+        "rare": "Ties itself onto anything that stays still for a minute. Grandpa woke up from his nap gift-wrapped.",
+        "epic": "Tied the whole birthday party into one enormous present. Nobody got out until the birthday girl pulled one end.",
+        "legendary": "Tied itself round the whole town on a birthday morning. The mayor had to unwrap the high street before the shops could open."
+      },
+      "moves": {
+        "signature": "Ribbon Snatch",
+        "legend": "Loop Dazzle",
+        "ultimate": "Ribbon Whirl"
+      }
+    },
+    "tie": {
+      "status": "reviewed",
+      "names": {
+        "common": "Soupdipper",
+        "uncommon": "Lunchloosener",
+        "rare": "Clipfloater",
+        "epic": "Breathholder",
+        "legendary": "Sir Windsor Knotworth"
+      },
+      "lore": {
+        "common": "Dips itself into your soup every time you lean forward.",
+        "uncommon": "Is tied too tight in the morning and pulled loose by lunch.",
+        "rare": "Flapped over its owner's shoulder in the wind and slapped him on the ear.",
+        "epic": "Was knotted so tight that the whole office held its breath. The meeting finished in two minutes and everyone went home early.",
+        "legendary": "Was tied in a knot so clever that nobody could undo it for forty years. Grandad now sleeps in it and calls it a scarf."
+      },
+      "moves": {
+        "signature": "Tie Snatch",
+        "legend": "Knot Pride",
+        "ultimate": "Tight Knot Tug",
+        "kit.wrap_up": "Tie Flap Slap",
+        "kit.static_cling": "Static Tie Cling"
+      }
+    },
+    "x_ankle_boot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Zipperpinch",
+        "uncommon": "Puddlehopper",
+        "rare": "Heelclicker",
+        "epic": "Clockheel",
+        "legendary": "Madame Boottine of the Boulevard"
+      },
+      "lore": {
+        "common": "Pinches your ankle every time you zip it up.",
+        "uncommon": "Hops over puddles on tiptoes so its suede doesn't get wet.",
+        "rare": "Clicked its heels so loudly in the hallway that the dog thought someone was knocking.",
+        "epic": "Clicked down the high street so steadily that every clock in town set itself by it. The town now wakes when it walks.",
+        "legendary": "Strutted through the city so stylishly that the statues turned to look. One of them has not turned back since."
+      },
+      "moves": {
+        "signature": "Heel Click Kick",
+        "legend": "Zip Snap Crack",
+        "ultimate": "Boulevard Stride"
+      }
+    },
+    "x_badge": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pinpricker",
+        "uncommon": "Collectorbadge",
+        "rare": "Jobpin",
+        "epic": "Badge Swap Frenzy",
+        "legendary": "The Badge That Promoted a Goat"
+      },
+      "lore": {
+        "common": "Pricks your finger every time you pin it on.",
+        "uncommon": "Is collected by the hundred and pinned to every inch of a school bag.",
+        "rare": "Turns its wearer into whatever job it says. A boy wore HEAD CHEF and now cooks all the school dinners.",
+        "epic": "Started a badge swap at the fair, and every jacket in town came home covered.",
+        "legendary": "Was pinned on a goat by mistake, and the goat was made head teacher. Exam results are up and the lawn is very short."
+      },
+      "moves": {
+        "signature": "Pin Snatch",
+        "legend": "Shiny Glint Flash",
+        "ultimate": "Hot Pin Prick",
+        "kit.static_cling": "Pinprick Distraction",
+        "kit.loose_thread": "Clasp Pluck",
+        "kit.layer_up": "Metal Back Guard"
+      }
+    },
+    "x_ballet_flat": {
+      "status": "reviewed",
+      "names": {
+        "common": "Slipoff",
+        "uncommon": "Tiptoeprancer",
+        "rare": "Spinaway",
+        "epic": "Floordriller",
+        "legendary": "Prima Pirouette of the Stage"
+      },
+      "lore": {
+        "common": "Slips off your heel every time you run for the bus.",
+        "uncommon": "Makes everyone who wears it walk on tiptoe as if they're on a stage.",
+        "rare": "Spins its wearer whenever music plays. Grandma got stuck at the supermarket till for a whole song.",
+        "epic": "Spun so fast on stage that it drilled straight through the floor. The rest of the ballet happened in the basement.",
+        "legendary": "Danced so lightly that it crossed the lake without touching the water. The swans have asked for lessons."
+      },
+      "moves": {
+        "signature": "Toe Point Kick",
+        "legend": "Twirl Twirl Twirl",
+        "ultimate": "Curtain Call Spin"
+      }
+    },
+    "x_bathrobe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Belttrailer",
+        "uncommon": "Fluffwrap",
+        "rare": "Doorbell Answerer",
+        "epic": "Hallfiller",
+        "legendary": "Lord Fluffington of the Bathroom"
+      },
+      "lore": {
+        "common": "Its belt trails on the floor and gets caught under the door.",
+        "uncommon": "Is so fluffy and warm that you never want to take it off.",
+        "rare": "Answered the door to the postman so confidently that he thought it was a business suit.",
+        "epic": "Puffed up so fluffy that it filled the whole hallway. The family has climbed over it to reach the kitchen all week.",
+        "legendary": "Has spent so many lazy mornings in the kitchen that it makes breakfast by itself. The toast is always a little fluffy."
+      },
+      "moves": {
+        "signature": "Belt Snatch",
+        "legend": "Lazy Morning Rest",
+        "ultimate": "Fluffy Belt Whip"
+      }
+    },
+    "x_belt": {
+      "status": "reviewed",
+      "names": {
+        "common": "Notchtight",
+        "uncommon": "Buckleclank",
+        "rare": "Chipguard",
+        "epic": "Snakebuckle",
+        "legendary": "Old Buckleworth, Tower Holder"
+      },
+      "lore": {
+        "common": "Is always one notch too tight after a big dinner.",
+        "uncommon": "Clanks its buckle on the chair every time you sit down.",
+        "rare": "Snaps like a whip whenever someone reaches for the last chip. Nobody in the house has had a last chip in years.",
+        "epic": "Slid off and lay in the garden pretending to be a snake. The whole street is still waiting at the window for the zoo.",
+        "legendary": "Wrapped round the leaning tower one night and pulled it straight. The tower is now perfectly upright and a bit embarrassed."
+      },
+      "moves": {
+        "signature": "Buckle Snatch",
+        "legend": "Notch Pinch",
+        "ultimate": "Belt Whip"
+      }
+    },
+    "x_bikini": {
+      "status": "reviewed",
+      "names": {
+        "common": "Strapknot",
+        "uncommon": "Tanline",
+        "rare": "Sandfiller",
+        "epic": "Beachspiker",
+        "legendary": "Lady Sunsplash of the Shore"
+      },
+      "lore": {
+        "common": "Twists its straps into a knot every time it goes into the beach bag.",
+        "uncommon": "Leaves funny white tan lines after a day in the sun.",
+        "rare": "Builds a sandcastle on the towel whenever nobody is looking. The seagulls have started queuing to visit.",
+        "epic": "Spiked a beach ball so hard that it bounced off the lighthouse. The boats now steer by the ball.",
+        "legendary": "Built a sandcastle so big at low tide that the sea could not get round it. The tide went home sulking."
+      },
+      "moves": {
+        "signature": "Strap Twang",
+        "legend": "Beach Volley Spike",
+        "ultimate": "Big Wave Splash"
+      }
+    },
+    "x_brogue": {
+      "status": "reviewed",
+      "names": {
+        "common": "Librarysqueak",
+        "uncommon": "Holepattern",
+        "rare": "Tapbrogue",
+        "epic": "Clatterboss",
+        "legendary": "Sir Brogueworth of the Boardroom"
+      },
+      "lore": {
+        "common": "Squeaks on every step down the quiet library corridor.",
+        "uncommon": "Has little holes punched in patterns all over it, which collect every speck of dust.",
+        "rare": "Taps out messages through its little holes as it walks. It told the whole office who ate the last doughnut.",
+        "epic": "Clattered so loudly that every desk in the office clattered back. Nothing got done and the boss called it teamwork.",
+        "legendary": "Walked into the wrong office every day for a year and nobody noticed. It is now the manager."
+      },
+      "moves": {
+        "signature": "Toe Cap Kick",
+        "legend": "Polishing Rag Heat",
+        "ultimate": "Boardroom Stomp"
+      }
+    },
+    "x_cape": {
+      "status": "reviewed",
+      "names": {
+        "common": "Doorcatcher Cape",
+        "uncommon": "Swooshflap",
+        "rare": "Heroswirl",
+        "epic": "Fencehopper",
+        "legendary": "Captain Swoosh of the Moon"
+      },
+      "lore": {
+        "common": "Catches in every door on the way out of the house.",
+        "uncommon": "Flaps dramatically behind you whenever you run, even indoors.",
+        "rare": "Made its wearer feel so heroic that he rescued a cat from a very low branch.",
+        "epic": "Flew its wearer off the shed and over every fence in the street, then got bored. He walked home from the next village.",
+        "legendary": "Flew its wearer to the Moon and back before tea. He was still told off for not finishing his peas."
+      },
+      "moves": {
+        "signature": "Cape Snatch",
+        "legend": "Swoosh Swoosh Swoosh",
+        "ultimate": "Heroic Swoop"
+      }
+    },
+    "x_cardigan_sweater": {
+      "status": "reviewed",
+      "names": {
+        "common": "Sleevesnagger",
+        "uncommon": "Elbowpatch",
+        "rare": "Copyknit",
+        "epic": "Woollyweb",
+        "legendary": "Granny Knitsworth's Favourite Cardigan"
+      },
+      "lore": {
+        "common": "Gets its sleeve caught on every door handle, then unravels a little bit more each time.",
+        "uncommon": "Has leather patches on its elbows that make everyone look like a professor.",
+        "rare": "Unravels at night and knits a tiny copy of itself. There are now nine cardigans and one confused granny.",
+        "epic": "Unravelled at the family party until the living room was one big woolly web. Grandad is still stuck in the armchair.",
+        "legendary": "Has been buttoned wrong for fifty years, so now the whole family buttons everything one hole down. Even the shop has started."
+      },
+      "moves": {
+        "signature": "Button Snatch",
+        "legend": "Pocket Surprise",
+        "ultimate": "Big Button Pop"
+      }
+    },
+    "x_chelsea_boot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tabpuller",
+        "uncommon": "Elasticside",
+        "rare": "Snapside",
+        "epic": "Floodstrutter",
+        "legendary": "Lord Chelsington of the High Street"
+      },
+      "lore": {
+        "common": "Needs its little tab pulled so hard that you fall over backwards putting it on.",
+        "uncommon": "Stretches to fit anyone, so the whole family keeps borrowing it. It has not been home since Tuesday.",
+        "rare": "Snaps its elastic at anyone who steps on its toes. Nobody stands near it in the lift.",
+        "epic": "Strutted through a puddle so big that the high street flooded behind it. The shops sold umbrellas until midnight.",
+        "legendary": "Slipped off so easily that it went to a party without its owner. It came home at dawn with laces it did not need."
+      },
+      "moves": {
+        "signature": "Heel Tap Kick",
+        "legend": "Stretchy Side Guard",
+        "ultimate": "Puddle Strut"
+      }
+    },
+    "x_cleats": {
+      "status": "reviewed",
+      "names": {
+        "common": "Mudstudder",
+        "uncommon": "Studclacker",
+        "rare": "Rootstud",
+        "epic": "Turfplougher",
+        "legendary": "Golden Studs, Scorer of the Final"
+      },
+      "lore": {
+        "common": "Clacks on the kitchen tiles like a tap dancer, and the dog joins in.",
+        "uncommon": "Clacks so loudly on the changing room floor that the whole team marches.",
+        "rare": "Digs in so hard that it plants its owner like a tree. The coach had to lift him off the pitch with a spade.",
+        "epic": "Ran down the pitch so fast that it ploughed a row in the turf. The groundskeeper planted potatoes in it.",
+        "legendary": "Kicked a ball so high that it came down at the first match of next season. The referee counted it."
+      },
+      "moves": {
+        "signature": "Stud Kick",
+        "legend": "Mud Clump Snatch",
+        "ultimate": "Top Corner Strike"
+      }
+    },
+    "x_climbing_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Toescruncher",
+        "uncommon": "Chalkdust",
+        "rare": "Fridgeclimber",
+        "epic": "Flatscaler",
+        "legendary": "Lady Crimpwell of the Rock Face"
+      },
+      "lore": {
+        "common": "Squeezes your toes so tightly that you hobble back to the car.",
+        "uncommon": "Is always covered in chalk dust that gets all over the car seats.",
+        "rare": "Climbs anything it sees, with or without you. It has been found on the fridge, the bookcase and the cat.",
+        "epic": "Climbed the outside of a block of flats to fetch a lost balloon. Every floor handed it a cup of tea on the way up.",
+        "legendary": "Climbed the tallest cliff in the country upside down. At the top it found a sign: LIFT OUT OF ORDER."
+      },
+      "moves": {
+        "signature": "Toe Crimp Kick",
+        "legend": "Hot Rock Grip",
+        "ultimate": "Rock Face Scramble"
+      }
+    },
+    "x_cloak": {
+      "status": "reviewed",
+      "names": {
+        "common": "Puddlehem",
+        "uncommon": "Cloakswirl",
+        "rare": "Brotherblind",
+        "epic": "Leafswirler",
+        "legendary": "The Stormdodger Cloak"
+      },
+      "lore": {
+        "common": "Drags its hem through every puddle, so it comes home heavier than it left.",
+        "uncommon": "Swirls round its wearer in the wind like a little storm.",
+        "rare": "Makes its wearer invisible, but only to their little brother. He has been looking for her since spring.",
+        "epic": "Swirled so hard in the forest that every leaf blew off the trees. Autumn arrived two weeks early.",
+        "legendary": "Pulled its hood up so fast that it hid a whole mountain from a storm. The storm walked past and soaked the next valley."
+      },
+      "moves": {
+        "signature": "Hood Snatch",
+        "legend": "Cloak Swirl Swat",
+        "ultimate": "Lantern-Warm Wrap"
+      }
+    },
+    "x_clog_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clompclomp",
+        "uncommon": "Puddleboat",
+        "rare": "Clogflinger",
+        "epic": "Tulipwaker",
+        "legendary": "Old Klompen of the Tulip Fields"
+      },
+      "lore": {
+        "common": "Clomps so loudly on the stairs that the whole house wakes up.",
+        "uncommon": "Floats in every puddle like a little boat, and the ducks keep climbing in.",
+        "rare": "Kicks off so hard that it flies into next door's garden. The neighbours now return it with a cake each time.",
+        "epic": "Clomped so loudly on the cobbles that every tulip in the field opened up. The bees have never worked so hard.",
+        "legendary": "Clomped so hard in one dance that it rang the town bell from the square. Everyone came for lunch at ten in the morning."
+      },
+      "moves": {
+        "signature": "Wooden Toe Kick",
+        "legend": "Hot Clog Clomp",
+        "ultimate": "Clatter Dance"
+      }
+    },
+    "x_costume": {
+      "status": "reviewed",
+      "names": {
+        "common": "Zipstuck",
+        "uncommon": "Tailtrailer",
+        "rare": "Characterchanger",
+        "epic": "Fancy Dress Frenzy",
+        "legendary": "The Grand Masquerader"
+      },
+      "lore": {
+        "common": "Gets its zip stuck at the back so you need two friends to get out of it.",
+        "uncommon": "Has a long stuffed tail that knocks the drinks off every table at the party.",
+        "rare": "Made its wearer act exactly like a pirate for a whole afternoon, and nobody could stop them.",
+        "epic": "Turned up at the fancy dress party with fifty copies of itself, and nobody knew who was who.",
+        "legendary": "Turned its wearer into such a good dragon that the fire brigade came round. They stayed for cake."
+      },
+      "moves": {
+        "signature": "Costume Snatch",
+        "legend": "In-Character Boost",
+        "ultimate": "Party Spotlight"
+      }
+    },
+    "x_croc": {
+      "status": "reviewed",
+      "names": {
+        "common": "Squeakclog",
+        "uncommon": "Holeyfoot",
+        "rare": "Pebblecatcher",
+        "epic": "Slugscarer",
+        "legendary": "Lady Clogalot, the Frog Ferry"
+      },
+      "lore": {
+        "common": "Squeaks on the kitchen floor with every single step.",
+        "uncommon": "Has so many holes that your socks poke out in little bumps.",
+        "rare": "Collected every pebble on the path inside its holes, and rattled all the way home.",
+        "epic": "Squeaked so loudly in the garden that every slug packed up and left. Next door's lettuces are now very crowded.",
+        "legendary": "Floated down the river after a flood and became a boat for a family of frogs. They now run river tours on Sundays."
+      },
+      "moves": {
+        "signature": "Rubber Toe Kick",
+        "legend": "Squeaky Sole Crack",
+        "ultimate": "Garden Path Stomp",
+        "kit.lace_lash": "Strap Flick",
+        "kit.stinky_insole": "Sweaty Rubber Stink",
+        "kit.kick_flurry": "Squeak Squeak Squeak"
+      }
+    },
+    "x_crop_top": {
+      "status": "reviewed",
+      "names": {
+        "common": "Bellybreeze",
+        "uncommon": "Clapalong",
+        "rare": "Gymglow",
+        "epic": "Fairshaker",
+        "legendary": "Lady Midriff of the Dance Floor"
+      },
+      "lore": {
+        "common": "Rides up every time you raise your arms to wave.",
+        "uncommon": "Makes its wearer clap along to every song, even the fire alarm.",
+        "rare": "Glows in the dark so brightly that the school disco has turned off its lights for good.",
+        "epic": "Danced so hard at the summer fair that the bouncy castle joined in. It bounced off down the road, still full of children.",
+        "legendary": "Danced every night for a whole summer and taught the Moon to do the twist. The tides have been wobbly ever since."
+      },
+      "moves": {
+        "signature": "Hem Tug",
+        "legend": "Sweat Snatch",
+        "ultimate": "Dance Floor Strut"
+      }
+    },
+    "x_derby_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Laceflopper",
+        "uncommon": "Shinecheck",
+        "rare": "Answersqueak",
+        "epic": "Speechstopper",
+        "legendary": "Sir Derbyshire of the School Corridor"
+      },
+      "lore": {
+        "common": "Its laces come undone halfway to school every single morning.",
+        "uncommon": "Gets checked for shine by the headteacher every Monday.",
+        "rare": "Squeaks the answer to every test question, but always one question late.",
+        "epic": "Marched into assembly so loudly that the head teacher forgot his speech. The school sang the dinner menu instead.",
+        "legendary": "Walked to school so many years in a row that it now goes on its own, and the teacher marks it present."
+      },
+      "moves": {
+        "signature": "Shiny Toe Kick",
+        "legend": "Sweaty Sock Smell",
+        "ultimate": "Corridor March"
+      }
+    },
+    "x_dungarees": {
+      "status": "reviewed",
+      "names": {
+        "common": "Strapslipper",
+        "uncommon": "Pocketbib",
+        "rare": "Paintsplatter",
+        "epic": "Carrotdigger",
+        "legendary": "Dungaree Dot of the Allotment"
+      },
+      "lore": {
+        "common": "Its strap slips off your shoulder every time you bend down.",
+        "uncommon": "Has a pocket on the front for a pencil, a ruler and a snail.",
+        "rare": "Got so splattered with paint in art class that it became a work of art itself.",
+        "epic": "Dug up the whole allotment looking for one lost carrot. It found forty potatoes, a gnome, and the carrot in its own pocket.",
+        "legendary": "Has so many pockets that a whole vegetable patch grew in them. Tomatoes come up through the bib every August."
+      },
+      "moves": {
+        "signature": "Strap Grab",
+        "legend": "Muddy Knee Stink",
+        "ultimate": "Mud Splat Finale"
+      }
+    },
+    "x_espadrille": {
+      "status": "reviewed",
+      "names": {
+        "common": "Ropesole",
+        "uncommon": "Beachslide",
+        "rare": "Ropelasso",
+        "epic": "Harbourknot",
+        "legendary": "Senora Alpargata of the Harbour"
+      },
+      "lore": {
+        "common": "Gets its rope sole soaked in the first puddle and squelches for the rest of the day.",
+        "uncommon": "Slips on and off so easily that it keeps slipping off on the beach steps.",
+        "rare": "Unravels its rope sole to lasso anything it wants. So far it has caught a hat, a kite and a runaway beach ball.",
+        "epic": "Unwound its rope sole so far that it tied every boat in the harbour together. The fishing fleet went out as one big raft.",
+        "legendary": "Was mistaken for a rope and used to tie up a ship all summer. The ship is still there, and so is the shoe."
+      },
+      "moves": {
+        "signature": "Rope Sole Kick",
+        "legend": "Stroll Stroll Stroll",
+        "ultimate": "Harbour Promenade"
+      }
+    },
+    "x_fleece": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fluffbobbler",
+        "uncommon": "Staticspark",
+        "rare": "Hedgecatcher",
+        "epic": "Frizzstorm",
+        "legendary": "Old Polarfluff of the Mountain Hut"
+      },
+      "lore": {
+        "common": "Grows little fluff balls all over it after one wash.",
+        "uncommon": "Gives you a small static shock every time you take it off.",
+        "rare": "Collects every leaf, twig and burr on a walk and brings them indoors. Its owner came home wearing half a hedge.",
+        "epic": "Built up so much static on the school trip that every child's hair stood on end. The class photo looks like a field of dandelions.",
+        "legendary": "Sparked so much static on a mountain that it lit the hut lamps for a whole winter. The hikers rub it before dinner."
+      },
+      "moves": {
+        "signature": "Fluff Snatch",
+        "legend": "Static Shock Crack",
+        "ultimate": "Static Zap"
+      }
+    },
+    "x_flip_flop": {
+      "status": "reviewed",
+      "names": {
+        "common": "Thwackheel",
+        "uncommon": "Toepost",
+        "rare": "Congaflop",
+        "epic": "Slideflopper",
+        "legendary": "Old Flapfoot of the Seaside"
+      },
+      "lore": {
+        "common": "Slaps against your heel with every step, so everyone hears you coming.",
+        "uncommon": "Has a little post between your toes that rubs a bit after an hour.",
+        "rare": "Slaps out a rhythm so catchy that strangers follow it down the beach. It once led a conga line into the sea.",
+        "epic": "Flew off a foot at the top of the water slide and went down alone. It finished first and refused to get out of the pool.",
+        "legendary": "Lost its partner in the sea and swam after it across the whole ocean. They met on a beach in another country and stayed for the summer."
+      },
+      "moves": {
+        "signature": "Heel Slap",
+        "legend": "Toe Post Distraction",
+        "ultimate": "Wet Tile Skid",
+        "kit.lace_lash": "Toe Strap Flick",
+        "kit.kick_flurry": "Flip Flop Flip Flop"
+      }
+    },
+    "x_football_boot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Garagebanger",
+        "uncommon": "Studmud",
+        "rare": "Freekicker",
+        "epic": "Worldkicker",
+        "legendary": "Thousand-Goal Gripper"
+      },
+      "lore": {
+        "common": "Kicks a ball against the garage door every evening until the whole street knows the score.",
+        "uncommon": "Brings half the football pitch home in its studs.",
+        "rare": "Curled a free kick round the wall and into the top corner.",
+        "epic": "Kicked the ball so hard that it went round the world and hit the goalkeeper from behind. The goal still counts.",
+        "legendary": "Scored a thousand goals in one long career, all from the bench. Nobody has worked out how."
+      },
+      "moves": {
+        "signature": "Toe Poke Kick",
+        "legend": "Hot Streak Shot",
+        "ultimate": "Top Bins Volley"
+      }
+    },
+    "x_high_heel": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wobbleheel",
+        "uncommon": "Cobblecatcher",
+        "rare": "Tallstrider",
+        "epic": "Pigeonclacker",
+        "legendary": "Madame Lofty of the Lighthouse"
+      },
+      "lore": {
+        "common": "Wobbles on every step so you hold onto the wall.",
+        "uncommon": "Gets its heel stuck between every cobblestone in the old town.",
+        "rare": "Makes its wearer taller every hour of the party. By midnight she was looking down on the chandelier.",
+        "epic": "Clacked across the town square so loudly that every pigeon took off at once. The statue was clean for the first time in years.",
+        "legendary": "Made its wearer so tall at the harbour ball that ships took her for the lighthouse. Two of them steered over to say hello."
+      },
+      "moves": {
+        "signature": "Pointed Toe Kick",
+        "legend": "Clack Clack Clack",
+        "ultimate": "Red Carpet Stride"
+      }
+    },
+    "x_hiking_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Blisterbuddy",
+        "uncommon": "Trailgripper",
+        "rare": "Longwayround",
+        "epic": "Hillflattener",
+        "legendary": "Old Trailblazer of the Peaks"
+      },
+      "lore": {
+        "common": "Gives you a blister on the first day of every new hike.",
+        "uncommon": "Has a sole so grippy that it climbs muddy hills without slipping.",
+        "rare": "Always knows the way home, but only the long way. Its owner has now seen every hill in the county twice.",
+        "epic": "Stomped up the same hill so often that it wore the top flat. The hill is now a very popular picnic table.",
+        "legendary": "Climbed every peak in the country, then the shed roof, because it was there. Grandad still cannot get it down."
+      },
+      "moves": {
+        "signature": "Grippy Sole Kick",
+        "legend": "Waterproof Guard",
+        "ultimate": "Summit Stomp"
+      }
+    },
+    "x_ice_skate": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wobblyankle",
+        "uncommon": "Bladeshiner",
+        "rare": "Eightcarver",
+        "epic": "Pondspinner",
+        "legendary": "Lady Glissade of the Ice Rink"
+      },
+      "lore": {
+        "common": "Makes your ankles wobble on the ice like a newborn deer.",
+        "uncommon": "Has a blade so sharp that it leaves little white lines across the ice.",
+        "rare": "Carved a perfect figure of eight into the ice so deep that the ice-smoothing machine had to go round it twice.",
+        "epic": "Spun so fast on the frozen pond that it drilled a hole and a fish popped out. The fish now takes skating lessons.",
+        "legendary": "Skated across a lake so fast that the water froze just in front of it. It reached the far side in July."
+      },
+      "moves": {
+        "signature": "Blade Kick",
+        "legend": "Friction Heat Spin",
+        "ultimate": "Showstopper Spin"
+      }
+    },
+    "x_jumpsuit": {
+      "status": "reviewed",
+      "names": {
+        "common": "Zipperdown",
+        "uncommon": "Pitstopper Suit",
+        "rare": "Zipeveryone",
+        "epic": "Zipblaster",
+        "legendary": "Commander Coverall of the Hangar"
+      },
+      "lore": {
+        "common": "Has to be taken off completely every time you need the toilet.",
+        "uncommon": "Zips up from toes to chin so fast that it once zipped the cat in too.",
+        "rare": "Zips up anyone who stands still for too long. The dog, the cat and the hoover now wear matching suits.",
+        "epic": "Zipped up so fast in the hangar that it shot its wearer into the sky. He landed on the runway like a very small plane.",
+        "legendary": "Flew a plane across the ocean when the pilot nodded off. It landed perfectly and asked for more peanuts."
+      },
+      "moves": {
+        "signature": "Zip Snatch",
+        "legend": "Pocket Snatch",
+        "ultimate": "Overall Zip-Up"
+      }
+    },
+    "x_kilt": {
+      "status": "reviewed",
+      "names": {
+        "common": "Thistlecatcher",
+        "uncommon": "Tartanpride",
+        "rare": "Pipeswisher",
+        "epic": "Whirlfling",
+        "legendary": "Laird Tartanworth of the Glens"
+      },
+      "lore": {
+        "common": "Catches every thistle on the hill and brings it indoors to sit on.",
+        "uncommon": "Has a tartan pattern that tells everyone which family you belong to.",
+        "rare": "Plays a little bagpipe tune whenever it swishes. The whole village knows when its owner sneaks to the fridge.",
+        "epic": "Danced a Highland fling so fast that it spun up a whirlwind. The bagpipes are still stuck up a tree in the next glen.",
+        "legendary": "Tossed a tree trunk so far that it landed on a castle and became its flagpole. The laird is delighted and slightly worried."
+      },
+      "moves": {
+        "signature": "Pleat Snatch",
+        "legend": "Tartan Dazzle Distraction",
+        "ultimate": "Highland Fling Daze"
+      }
+    },
+    "x_knee_high_boot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Zipstruggle",
+        "uncommon": "Calfhugger",
+        "rare": "Chinhigh",
+        "epic": "Leafkicker",
+        "legendary": "Lady Bootella, Sea Strider"
+      },
+      "lore": {
+        "common": "Takes ten minutes to zip up and another ten to zip down.",
+        "uncommon": "Hugs its wearer's legs so tightly that she waddles like a penguin.",
+        "rare": "Grows a little taller every time someone says it is too tall. It now reaches its owner's chin.",
+        "epic": "Kicked through the autumn leaves so hard that they filled the sky. The trees put them back on wrong.",
+        "legendary": "Strode across a river without wetting its owner, then a lake, then the sea. She went shopping in France."
+      },
+      "moves": {
+        "signature": "Pointy Toe Kick",
+        "legend": "Stomp Stomp Stomp",
+        "ultimate": "Autumn Stride",
+        "kit.lace_lash": "Zip Pull Snap",
+        "kit.stinky_insole": "Long Day Pong"
+      }
+    },
+    "x_lanyard": {
+      "status": "reviewed",
+      "names": {
+        "common": "Chinslapper",
+        "uncommon": "Doorbeeper",
+        "rare": "Keyswinger",
+        "epic": "Allaccess",
+        "legendary": "Grand Passholder of the Office"
+      },
+      "lore": {
+        "common": "Swings round and slaps you on the chin every time you run for the lift.",
+        "uncommon": "Beeps you through every door in the office building.",
+        "rare": "Swung its keys round in a circle so fast that it unlocked the wrong car.",
+        "epic": "Opened every door in the building at once. The office cat now has its own desk and a parking space.",
+        "legendary": "Opened a door in the office that nobody knew was there. Behind it were all the pens anyone had ever lost."
+      },
+      "moves": {
+        "signature": "Cord Snatch",
+        "legend": "Access All Areas",
+        "ultimate": "Big Badge Swing"
+      }
+    },
+    "x_leggings": {
+      "status": "reviewed",
+      "names": {
+        "common": "Kneebaggy",
+        "uncommon": "Stretchsquat",
+        "rare": "Remotereacher",
+        "epic": "Slingstretch",
+        "legendary": "Lady Stretchwell, the Bridge"
+      },
+      "lore": {
+        "common": "Goes baggy at the knees after one day of wear.",
+        "uncommon": "Stretches so far that you can do a full squat without a wobble.",
+        "rare": "Stretches so far that its owner can reach the remote from the sofa, and next door's remote too.",
+        "epic": "Stretched between two trees like a giant slingshot and launched a whole yoga class over the pond. They landed in perfect poses.",
+        "legendary": "Stretched from one bank of the river to the other and became a bridge. The ducks use it every morning."
+      },
+      "moves": {
+        "signature": "Stretch Snatch",
+        "legend": "Static Flash",
+        "ultimate": "Leggings Big Stretch"
+      }
+    },
+    "x_mask_costume": {
+      "status": "reviewed",
+      "names": {
+        "common": "Eyeholemiss",
+        "uncommon": "Mysteryface",
+        "rare": "Faceswapper",
+        "epic": "Mixupmask",
+        "legendary": "The Golden Masquerade Mask"
+      },
+      "lore": {
+        "common": "Has eye holes that never line up with your actual eyes.",
+        "uncommon": "Hides your face so well that your own dog barks at you.",
+        "rare": "Swaps faces with whoever looks at it. The head teacher spent a whole assembly as a tiger.",
+        "epic": "Made everyone at the masked ball forget who they were. They all went home to the wrong houses and nobody complained.",
+        "legendary": "Slipped into the grand ball without a ticket and danced all night with the mayor. He still has not noticed it was on a mop."
+      },
+      "moves": {
+        "signature": "Mask Snatch",
+        "legend": "Mystery Face Startle",
+        "ultimate": "Grand Unmasking"
+      }
+    },
+    "x_moccasin": {
+      "status": "reviewed",
+      "names": {
+        "common": "Softsole",
+        "uncommon": "Beadstitcher",
+        "rare": "Silentstep",
+        "epic": "Treehusher",
+        "legendary": "Old Quietfoot of the Woodland"
+      },
+      "lore": {
+        "common": "Is so soft that you feel every pebble on the path.",
+        "uncommon": "Has beads stitched on top that the magpies keep trying to steal, one at a time, while it walks.",
+        "rare": "Walked through the forest so silently that the deer didn't look up.",
+        "epic": "Crept through the forest so quietly that the trees forgot it was there and fell asleep. Spring came a week late.",
+        "legendary": "Has walked so softly for so long that it leaves no footprints at all. The snails have been trying to follow it for years."
+      },
+      "moves": {
+        "signature": "Soft Toe Kick",
+        "legend": "Silent Step Snatch",
+        "ultimate": "Forest Creep",
+        "kit.lace_lash": "Tassel Flick",
+        "kit.kick_flurry": "Step Step Step"
+      }
+    },
+    "x_mule": {
+      "status": "reviewed",
+      "names": {
+        "common": "Heelflapper",
+        "uncommon": "Slipandslide",
+        "rare": "Wandermule",
+        "epic": "Chairdancer",
+        "legendary": "Madame Mulette of the Terrace"
+      },
+      "lore": {
+        "common": "Flaps off your heel every few steps because it has no back.",
+        "uncommon": "Slides across the polished floor like it's on ice.",
+        "rare": "Kicks itself off under café tables and wanders. It has been found in the kitchen, the cellar and behind the till.",
+        "epic": "Clacked across the terrace so loudly that the café chairs started dancing. Lunch was served on the move.",
+        "legendary": "Was kicked off under a café table in Paris and walked home across the whole country. It arrived for breakfast, wanting croissants."
+      },
+      "moves": {
+        "signature": "Toe Slap Kick",
+        "legend": "Heel Flap Distraction",
+        "ultimate": "Terrace Clack",
+        "kit.lace_lash": "Buckle Flick",
+        "kit.kick_flurry": "Flap Flap Flap"
+      }
+    },
+    "x_nightgown": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hemstumble",
+        "uncommon": "Moonlightglide",
+        "rare": "Glownightie",
+        "epic": "Busstopwalker",
+        "legendary": "Lady Slumberella of the Landing"
+      },
+      "lore": {
+        "common": "Is so long that you trip on its hem going down the stairs.",
+        "uncommon": "Glides along the landing at night like a little ghost.",
+        "rare": "Glows softly at midnight, so nobody in the house needs a night light. The moths have started visiting.",
+        "epic": "Sleepwalked its wearer to the bus stop at midnight. She caught the first bus and got to work early, in her nightgown.",
+        "legendary": "Floated off the landing one windy night and drifted over the town like a cloud. It rained gently on every allotment."
+      },
+      "moves": {
+        "signature": "Hem Snatch",
+        "legend": "Sleepy Distraction",
+        "ultimate": "Warm Milk Finale"
+      }
+    },
+    "x_onesie": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hoodears",
+        "uncommon": "Zipperbum",
+        "rare": "Snugglepaws",
+        "epic": "Bearnapper",
+        "legendary": "Captain Cosytail of the Sofa"
+      },
+      "lore": {
+        "common": "Has little ears on its hood that flop into your eyes.",
+        "uncommon": "Has a zip at the back that you can't reach on your own.",
+        "rare": "Made its wearer feel so much like a bear that they growled at breakfast.",
+        "epic": "Made a whole sleepover feel so much like bears that they hibernated. They woke up in April asking for honey.",
+        "legendary": "Was so cosy that a real bear borrowed it for the winter. It came back washed, folded and smelling of honey."
+      },
+      "moves": {
+        "signature": "Hood Ear Snatch",
+        "legend": "Toasty Hug",
+        "ultimate": "Big Bear Squeeze"
+      }
+    },
+    "x_overalls": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clipclatter",
+        "uncommon": "Toolpocket",
+        "rare": "Mudbouncer",
+        "epic": "Haystacker",
+        "legendary": "Old Farmer Overall of the Barn"
+      },
+      "lore": {
+        "common": "Its metal clips clatter against the table every time you sit down.",
+        "uncommon": "Has a pocket for every tool in the shed.",
+        "rare": "Bounces mud straight back at whoever splashed it. The pigs have stopped trying.",
+        "epic": "Pitched so much hay at the barn dance that the barn filled to the roof. The band kept playing from inside a haystack.",
+        "legendary": "Worked the farm so long that the cows now follow it, not the farmer. He has to wear it to get the milk."
+      },
+      "moves": {
+        "signature": "Clip Snatch",
+        "legend": "Tough Denim Guard",
+        "ultimate": "Hay Fork Heave"
+      }
+    },
+    "x_oxford_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Polishproud",
+        "uncommon": "Lacelock",
+        "rare": "Interviewer",
+        "epic": "Diplomastrider",
+        "legendary": "Sir Oxford of the Grand Hall"
+      },
+      "lore": {
+        "common": "Needs polishing every morning or it sulks.",
+        "uncommon": "Has laces that tie so neatly that it looks like a present.",
+        "rare": "Walked into a job interview so confidently that its owner got the job.",
+        "epic": "Strode across the stage at graduation so confidently that it was handed everyone's certificates. It is now the most qualified shoe in town.",
+        "legendary": "Was so smart that it was invited to the grand dinner without its owner. It sat at the top table and used the right fork."
+      },
+      "moves": {
+        "signature": "Polished Toe Kick",
+        "legend": "Confidence Boost",
+        "ultimate": "Grand Hall Stride"
+      }
+    },
+    "x_pajamas": {
+      "status": "reviewed",
+      "names": {
+        "common": "Mismatchtop",
+        "uncommon": "Elasticslip",
+        "rare": "Pyjamaday",
+        "epic": "Mondaysnoozer",
+        "legendary": "Lord Snugglesworth of the Sofa"
+      },
+      "lore": {
+        "common": "Never has the top and bottoms from the same set.",
+        "uncommon": "Its elastic waistband slips down every time you run up the stairs.",
+        "rare": "Makes every day a pyjama day for the whole house. The plumber came to fix the sink and stayed for cartoons.",
+        "epic": "Was so comfy that the whole town stayed home in pyjamas on Monday. The mayor gave the news from bed.",
+        "legendary": "Is so soft that clouds float down to touch it. The garden is foggy every morning and very comfy."
+      },
+      "moves": {
+        "signature": "Waistband Snatch",
+        "legend": "Pillow Thump",
+        "ultimate": "Big Lie-In"
+      }
+    },
+    "x_parka": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fluffhood",
+        "uncommon": "Tunnelhood",
+        "rare": "Hoodsnap",
+        "epic": "Foxden",
+        "legendary": "Grand Parkington of the Arctic"
+      },
+      "lore": {
+        "common": "Its fluffy hood tickles your face all day.",
+        "uncommon": "Has a hood so deep that you can only see out through a tiny tunnel of fur.",
+        "rare": "Pulls its hood shut whenever someone says something boring. Maths lessons are now very quiet.",
+        "epic": "Was so warm on the snowy school trip that a whole fox family moved in. The class came home with five extra pupils.",
+        "legendary": "Kept its owner so warm at the North Pole that the ice melted round him. He now has a private swimming pool."
+      },
+      "moves": {
+        "signature": "Hood Fur Snatch",
+        "legend": "Fur Hood Flash",
+        "ultimate": "Snowdrift Trudge"
+      }
+    },
+    "x_platform_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Stompgiant",
+        "uncommon": "Tallsole",
+        "rare": "Discodazzler",
+        "epic": "Glitterstomper",
+        "legendary": "Madame Platforma of the Lamp Posts"
+      },
+      "lore": {
+        "common": "Makes you so tall that you bump your head on the door frame.",
+        "uncommon": "Has a sole so thick that you can't feel the ground at all.",
+        "rare": "Danced at the disco so well that the floor lit up under it.",
+        "epic": "Stomped so hard at the disco that the glitter ball fell and rolled down the high street. The town danced after it until dawn.",
+        "legendary": "Grew so tall that its wearer now changes the street-lamp bulbs by hand. The council has offered her a job."
+      },
+      "moves": {
+        "signature": "Platform Stomp",
+        "legend": "Sole Slam",
+        "ultimate": "Disco Floor Stomp",
+        "kit.stinky_insole": "Disco Sweat Stink",
+        "kit.kick_flurry": "Stomp Stomp Stomp Stomp"
+      }
+    },
+    "x_poncho": {
+      "status": "reviewed",
+      "names": {
+        "common": "Headhole",
+        "uncommon": "Rainshedder",
+        "rare": "Popuptent",
+        "epic": "Gustglider",
+        "legendary": "Old Ponchito of the Mountains"
+      },
+      "lore": {
+        "common": "Gets stuck on your head every time you try to put it on.",
+        "uncommon": "Sheds the rain all round you like a little tent.",
+        "rare": "Turns into a tent at the first drop of rain, whether its wearer is ready or not. He spent a whole bus ride camping.",
+        "epic": "Caught a gust on the mountain and glided its wearer down to the village like a paraglider. He arrived in time for lunch.",
+        "legendary": "Spread out so wide in a storm that it kept a whole herd of llamas dry. The llamas now refuse to go out without it."
+      },
+      "moves": {
+        "signature": "Fringe Snatch",
+        "legend": "Damp Wool Whiff",
+        "ultimate": "Rain Cape Swirl"
+      }
+    },
+    "x_puffer_jacket": {
+      "status": "reviewed",
+      "names": {
+        "common": "Puffyarms",
+        "uncommon": "Duvetcoat",
+        "rare": "Squashpacker",
+        "epic": "Liftwedger",
+        "legendary": "Captain Puffington of the Ski Lodge"
+      },
+      "lore": {
+        "common": "Makes your arms stick out so you can't put your hands in your pockets.",
+        "uncommon": "Is so puffy and warm that it feels like wearing a duvet.",
+        "rare": "Squashes into a tiny bag, then puffs back to full size wherever it likes. It burst a lunchbox open on the school bus.",
+        "epic": "Puffed up so much on the ski lift that it wedged itself between two chairs. Everyone had lunch dangling in the air.",
+        "legendary": "Puffed up so big on a cold night that it floated off like a hot-air balloon. Its owner enjoyed the view and landed for breakfast."
+      },
+      "moves": {
+        "signature": "Puffy Sleeve Snatch",
+        "legend": "Duvet Nap",
+        "ultimate": "Puff Puff Squash"
+      }
+    },
+    "x_pump_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Toepincher",
+        "uncommon": "Waltztapper",
+        "rare": "Waltzgrabber",
+        "epic": "Chandelierspin",
+        "legendary": "Lady Pumpington of the Dance Hall"
+      },
+      "lore": {
+        "common": "Pinches your little toe after the first dance, then refuses to come off when your feet swell.",
+        "uncommon": "Taps its heels whenever it hears a waltz, even on the bus, even at the dentist.",
+        "rare": "Drags its wearer into a dance with whoever is nearest. She has waltzed with a waiter, a doorman and a hat stand.",
+        "epic": "Spun so fast in the ballroom that the chandelier spun with it. The guests danced in circles until breakfast.",
+        "legendary": "Danced through the whole night of the ball and kept going for a week. The band took turns to sleep."
+      },
+      "moves": {
+        "signature": "Heel Slip Kick",
+        "legend": "Shine Flash",
+        "ultimate": "Last Waltz Spin",
+        "kit.lace_lash": "Bow Flick",
+        "kit.stinky_insole": "Long Dance Pong"
+      }
+    },
+    "x_raincoat_jacket": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hoodblower",
+        "uncommon": "Rustlecoat",
+        "rare": "Puddleproof",
+        "epic": "Storm Drain Splash",
+        "legendary": "Captain Drizzle of the Bus Stop"
+      },
+      "lore": {
+        "common": "Blows its hood back off your head the moment the rain starts.",
+        "uncommon": "Rustles so loudly with every step that you can't sneak anywhere.",
+        "rare": "Stood under a waterfall at the park and came out with a perfectly dry jumper underneath.",
+        "epic": "Splashed through the flooded high street so boldly that the ducks followed it to the bus stop.",
+        "legendary": "Stretched over the whole bus stop in a storm and kept the queue dry. The driver refused to leave without it."
+      },
+      "moves": {
+        "signature": "Hood Yank",
+        "legend": "Downpour Boost",
+        "ultimate": "Drainpipe Gush"
+      }
+    },
+    "x_ribbon": {
+      "status": "reviewed",
+      "names": {
+        "common": "Curlytangle",
+        "uncommon": "Bowtail",
+        "rare": "Sparrowlure",
+        "epic": "Maypole Twist",
+        "legendary": "Lady Ribbonella of the Fair"
+      },
+      "lore": {
+        "common": "Curls itself into a tangle in the drawer, so it never comes out straight.",
+        "uncommon": "Trails from every ponytail like a little swishing tail.",
+        "rare": "Flutters so prettily that sparrows follow it home. Eleven of them now live in the hair-tie drawer.",
+        "epic": "Twisted round the maypole with fifty other ribbons until the dancers were tied up too.",
+        "legendary": "Lassoed a runaway hot-air balloon at the village fair with one loop. The balloon now goes for walks on a lead, like a dog."
+      },
+      "moves": {
+        "signature": "Ribbon Yank",
+        "legend": "Ribbon Swirl Distraction",
+        "ultimate": "Ribbon Knot Squeeze"
+      }
+    },
+    "x_robe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Hookuncle",
+        "uncommon": "Teapocket",
+        "rare": "Spacoat",
+        "epic": "Dryerburst",
+        "legendary": "Velvetrobe, the Wedding Robe"
+      },
+      "lore": {
+        "common": "Hangs on the back of the door at night and looks exactly like a sleepy uncle.",
+        "uncommon": "Always has one cold teabag in its pocket, and it turns up again after every wash.",
+        "rare": "Came home from the hotel in a suitcase, which nobody has ever explained.",
+        "epic": "Got so fluffy in the hotel tumble dryer that it filled the laundry room. The staff dug their way out with coat hangers.",
+        "legendary": "Was so comfortable that its owner wore it to his own wedding. The bride wore one too, and they matched."
+      },
+      "moves": {
+        "signature": "Cord Snatch",
+        "legend": "Shuffle Shuffle Shuffle",
+        "ultimate": "Steamy Spa Wrap"
+      }
+    },
+    "x_roller_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Heelwheel",
+        "uncommon": "Corridorglide",
+        "rare": "Hillroller",
+        "epic": "Swervewheel",
+        "legendary": "Wheelie Wendy of the Airport"
+      },
+      "lore": {
+        "common": "Hides a wheel in its heel and sends you sliding when you only wanted to walk.",
+        "uncommon": "Glides down the school corridor so fast that the teacher shouts slow down.",
+        "rare": "Rolls off downhill whenever its wearer stops to tie a lace. She has reached the bottom of every hill in town by accident.",
+        "epic": "Swerved through the shopping centre so fast that every escalator started running backwards. Shoppers ended up where they began.",
+        "legendary": "Rolled through the airport so fast that it got to the next country before its plane. It was waiting at arrivals with a sign."
+      },
+      "moves": {
+        "signature": "Heel Wheel Kick",
+        "legend": "Corridor Glide Crack",
+        "ultimate": "Full Speed Wheelie",
+        "kit.lace_lash": "Wheel Pop Startle",
+        "kit.stinky_insole": "Sweaty Sole Stink"
+      }
+    },
+    "x_sandal_pair": {
+      "status": "reviewed",
+      "names": {
+        "common": "Strapsquelch",
+        "uncommon": "Sockcrime",
+        "rare": "Tanstraps",
+        "epic": "Gullhusher",
+        "legendary": "Old Saunter of the Seafront"
+      },
+      "lore": {
+        "common": "Squelches with every step when its straps get wet.",
+        "uncommon": "Is worn with socks by every grandad on holiday, to everyone's horror.",
+        "rare": "Leaves a sandal-shaped tan that lasts all year. Its owner looks as if he wears them in the bath.",
+        "epic": "Squelched so loudly along the seafront that the seagulls stopped stealing chips to listen. The chip shop had its best day ever.",
+        "legendary": "Walked the seafront for so many summers that the sand now follows it home. The front garden has become a beach."
+      },
+      "moves": {
+        "signature": "Strap Slap Kick",
+        "legend": "Sunny Toe Boost",
+        "ultimate": "Seafront Stroll",
+        "kit.lace_lash": "Buckle Snap"
+      }
+    },
+    "x_sari": {
+      "status": "reviewed",
+      "names": {
+        "common": "Pleatfolder",
+        "uncommon": "Silkdrape",
+        "rare": "Moodborder",
+        "epic": "Dancesweeper",
+        "legendary": "The Golden-Bordered Silk"
+      },
+      "lore": {
+        "common": "Takes half an hour of folding and pinning before it's ready to go.",
+        "uncommon": "Lets its long end flutter behind like a flag, and every small child in the room tries to catch it.",
+        "rare": "Has a border that changes colour with its wearer's mood. Everyone at dinner knew Auntie wanted more pudding.",
+        "epic": "Swirled so wide at the wedding dance that it swept every guest onto the floor. Even the cake ended up dancing.",
+        "legendary": "Was so long that it became a sail and carried a whole wedding party across the river. For once, everyone arrived on time."
+      },
+      "moves": {
+        "signature": "Pleat Snatch",
+        "legend": "Silk Swish Slap",
+        "ultimate": "Wedding Swirl"
+      }
+    },
+    "x_shoe_horn": {
+      "status": "reviewed",
+      "names": {
+        "common": "Heelslider",
+        "uncommon": "Longhandle",
+        "rare": "Backscratcher",
+        "epic": "Bootlauncher",
+        "legendary": "Old Hornsworth of the Hall Stand"
+      },
+      "lore": {
+        "common": "Disappears from the hall just when you're late and your shoe won't go on.",
+        "uncommon": "Has such a long handle that everyone uses it to switch off the light from bed.",
+        "rare": "Was used as a back scratcher so often that it forgot about shoes.",
+        "epic": "Slid a foot into a boot so fast that the boot shot across the shop and out of the window. Sales doubled.",
+        "legendary": "Helped a giant into a shoe the size of a boat. The giant was so pleased that he moved his family into it."
+      },
+      "moves": {
+        "signature": "Horn Slide",
+        "legend": "Heel Slip Crack",
+        "ultimate": "Big Slide-In",
+        "kit.lace_lash": "Handle Flick",
+        "kit.stinky_insole": "Old Shoe Whiff",
+        "kit.kick_flurry": "Slide Slide Slide"
+      }
+    },
+    "x_shoe_tree": {
+      "status": "reviewed",
+      "names": {
+        "common": "Toestuffer",
+        "uncommon": "Cedarsmell",
+        "rare": "Shoestretcher",
+        "epic": "Shoe Orchard",
+        "legendary": "Sir Cedarwood of the Shoe Rack"
+      },
+      "lore": {
+        "common": "Gets left inside your shoe so you put your foot in and jump.",
+        "uncommon": "Makes the whole wardrobe smell of cedar wood.",
+        "rare": "Stretches any shoe it sits in. Dad's old trainers are now big enough for the dog to sleep in.",
+        "epic": "Sprouted leaves in the wardrobe and grew into a real tree. The shoes now hang from its branches like fruit.",
+        "legendary": "Kept a pair of boots in such perfect shape that they got bored and walked off on their own. They still send postcards."
+      },
+      "moves": {
+        "signature": "Cedar Toe Jab",
+        "legend": "Stuff Stuff Stuff",
+        "ultimate": "Wardrobe Tidy",
+        "kit.heel_stomp": "Wooden Heel Bonk",
+        "kit.lace_lash": "Spring Snap",
+        "kit.kick_flurry": "Shape Shape Shape"
+      }
+    },
+    "x_shoelace": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tripstring",
+        "uncommon": "Doubleknot",
+        "rare": "Aglet Fray",
+        "epic": "Queuetangler",
+        "legendary": "Lady Laceworth, Knot Queen"
+      },
+      "lore": {
+        "common": "Comes undone on every walk and trips you up on the stairs.",
+        "uncommon": "Gets tied in a double knot that nobody can undo.",
+        "rare": "Lost its little plastic end and now refuses to go through any hole.",
+        "epic": "Tied the laces of the whole lunch queue together. The school walked to lunch like one long caterpillar.",
+        "legendary": "Tied a knot so perfect that sailors come from far away to look at it. Nobody dares untie it, so the shoe has not moved in years."
+      },
+      "moves": {
+        "signature": "Lace Whip",
+        "legend": "Knot Crack",
+        "ultimate": "Trip-Up Tangle",
+        "kit.heel_stomp": "Aglet Flick",
+        "kit.stinky_insole": "Old Lace Whiff",
+        "kit.kick_flurry": "Loop Loop Loop"
+      }
+    },
+    "x_ski_boot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clompwalk",
+        "uncommon": "Bucklesqueeze",
+        "rare": "Clampboot",
+        "epic": "Roofslider",
+        "legendary": "Old Clompington of the Piste"
+      },
+      "lore": {
+        "common": "Makes you walk like a robot every time you leave the slopes.",
+        "uncommon": "Has buckles so tight that your feet go numb.",
+        "rare": "Clamps on so tight that its wearer cannot take it off until spring. He went to school in it all term.",
+        "epic": "Clomped across the lodge so heavily that all the snow slid off the roof at once. The lodge vanished until teatime.",
+        "legendary": "Skied straight off the top of the mountain and landed in the valley pool. It now does ski jumps for the swimmers."
+      },
+      "moves": {
+        "signature": "Buckle Kick",
+        "legend": "Lodge Nap",
+        "ultimate": "Black Run Charge"
+      }
+    },
+    "x_slipper_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Fluffslipper",
+        "uncommon": "Dogsnatcher",
+        "rare": "Shufflesteer",
+        "epic": "Staticshuffle",
+        "legendary": "Lord Comfyfoot of the Hearthrug"
+      },
+      "lore": {
+        "common": "Slips off under the sofa every evening and hides until morning.",
+        "uncommon": "Gets carried off by the dog every single day.",
+        "rare": "Steers its owner's feet wherever it fancies. Grandad set off for the kitchen and arrived in the garden shed.",
+        "epic": "Shuffled across the carpet so fast that it made enough static to light the whole house. The electricity bill has never been lower.",
+        "legendary": "Kept grandad's feet so warm that he walked to the shop through the snow in it. The snow melted in a path behind him."
+      },
+      "moves": {
+        "signature": "Soft Heel Kick",
+        "legend": "Slipper Slap",
+        "ultimate": "Sofa Shuffle",
+        "kit.heel_stomp": "Fluffy Stomp",
+        "kit.lace_lash": "Pompom Flick"
+      }
+    },
+    "x_snow_boot": {
+      "status": "reviewed",
+      "names": {
+        "common": "Snowfiller",
+        "uncommon": "Fleecelined",
+        "rare": "Yetiprint",
+        "epic": "Snowstamper",
+        "legendary": "Old Furtop of the Frozen North"
+      },
+      "lore": {
+        "common": "Lets snow in at the top so your socks get soaked.",
+        "uncommon": "Has fleece inside so warm that your feet sweat.",
+        "rare": "Leaves footprints so big that people think a yeti has visited. The town now holds a yeti festival every winter.",
+        "epic": "Stamped off the snow so hard at the school door that it set off an avalanche in the playground. Everyone got the day off to dig.",
+        "legendary": "Walked all the way to the North Pole to post one letter. The letter got there first."
+      },
+      "moves": {
+        "signature": "Snowy Toe Kick",
+        "legend": "Wet Sock Whiff",
+        "ultimate": "Big Fur Stomp"
+      }
+    },
+    "x_spikes_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Trackspike",
+        "uncommon": "Sprintgrip",
+        "rare": "Starterbolt",
+        "epic": "Selflapper",
+        "legendary": "Lightning Lane, Fastest on the Track"
+      },
+      "lore": {
+        "common": "Leaves little holes in the grass all the way to the car.",
+        "uncommon": "Grips the running track so well that you take off like a rocket.",
+        "rare": "Leapt out of the starting blocks so fast that the starter's pistol was still echoing.",
+        "epic": "Ran round the track so fast that it lapped itself and tripped over its own footprints. Sports day had to start again.",
+        "legendary": "Ran the hundred metres so fast that it finished before the race was announced. It is still waiting for the others."
+      },
+      "moves": {
+        "signature": "Spike Kick",
+        "legend": "Spike Crack",
+        "ultimate": "Finish Line Dash",
+        "kit.lace_lash": "Lace Snap Startle"
+      }
+    },
+    "x_stiletto": {
+      "status": "reviewed",
+      "names": {
+        "common": "Heelsinker",
+        "uncommon": "Clickclack",
+        "rare": "Dartheel",
+        "epic": "Balloonpopper",
+        "legendary": "Madame Stilettina of the Tightrope"
+      },
+      "lore": {
+        "common": "Sinks into the lawn at every garden party.",
+        "uncommon": "Clicks and clacks on the marble floor so loudly that everyone turns round.",
+        "rare": "Pins down anything that tries to blow away. The picnic has never been safer, but the kite has not flown in years.",
+        "epic": "Strutted down the runway so sharply that it popped every balloon at the show. The photographers thought it was fireworks.",
+        "legendary": "Walked a tightrope across the town square on one heel. The circus has asked it to stop showing off."
+      },
+      "moves": {
+        "signature": "Heel Tip Kick",
+        "legend": "Poise Guard",
+        "ultimate": "Runway Strut"
+      }
+    },
+    "x_stockings": {
+      "status": "reviewed",
+      "names": {
+        "common": "Laddersnag",
+        "uncommon": "Slipdown",
+        "rare": "Pingleg",
+        "epic": "Stretchline",
+        "legendary": "Lady Silkstocking of the Pantry"
+      },
+      "lore": {
+        "common": "Gets a ladder up the leg the first time you put it on.",
+        "uncommon": "Slides down your legs all day so you keep tugging it back up.",
+        "rare": "Snaps back like a catapult when it is pulled. It fired a pea right across the dinner table.",
+        "epic": "Stretched across the whole garden and became a washing line. The neighbours have started pegging their socks on it.",
+        "legendary": "Ran so many ladders in one night that a family of mice used them to climb the pantry shelf. They now live behind the jam."
+      },
+      "moves": {
+        "signature": "Ladder Snatch",
+        "legend": "Silk Layer Guard",
+        "ultimate": "Ladder Run"
+      }
+    },
+    "x_suspenders": {
+      "status": "reviewed",
+      "names": {
+        "common": "Clippinger",
+        "uncommon": "Trouserlifter",
+        "rare": "Trouserhoister",
+        "epic": "Pingpult",
+        "legendary": "Sir Braceworth of the Big Top"
+      },
+      "lore": {
+        "common": "Pings off your trousers when you bend over and hits you on the chin.",
+        "uncommon": "Holds up trousers that are much too big for you.",
+        "rare": "Hoisted its owner's trousers so high that his socks showed.",
+        "epic": "Pinged its owner so high at the barn dance that he landed in the hayloft. He watched the rest of the dance from up there.",
+        "legendary": "Pinged a clown clean over the big top. He landed in the ringmaster's chair, and the circus has been his ever since."
+      },
+      "moves": {
+        "signature": "Strap Ping Snatch",
+        "legend": "Ping Crack",
+        "ultimate": "Big Ping"
+      }
+    },
+    "x_swim_trunks": {
+      "status": "reviewed",
+      "names": {
+        "common": "Wetbum",
+        "uncommon": "Patternloud",
+        "rare": "Bobbletrunks",
+        "epic": "Lakeemptier",
+        "legendary": "Big Splash Barry of the Lake"
+      },
+      "lore": {
+        "common": "Leaves a wet patch on every seat you sit on after a swim.",
+        "uncommon": "Has the loudest pattern on the beach, and everyone knows who you are.",
+        "rare": "Floats its wearer like a duck, so he can never dive under. The other swimmers use him as a buoy.",
+        "epic": "Jumped into the lake so hard that all the water jumped out. The fish waited on the bank while it filled back up.",
+        "legendary": "Swam across the lake so fast that its wearer came out dry on the other side. The towel feels very unwanted."
+      },
+      "moves": {
+        "signature": "Waistband Twang",
+        "legend": "Towel Rest",
+        "ultimate": "Big Splash Daze"
+      }
+    },
+    "x_swimsuit": {
+      "status": "reviewed",
+      "names": {
+        "common": "Strapsnap",
+        "uncommon": "Chlorinefade",
+        "rare": "Poolhider",
+        "epic": "Endswapper",
+        "legendary": "Lady Aquarina of the Pool"
+      },
+      "lore": {
+        "common": "Its straps snap against your shoulder when you pull them.",
+        "uncommon": "Fades a little more after every swim in the chlorine pool.",
+        "rare": "Changes colour to match the pool, so nobody can find its wearer at home time.",
+        "epic": "Splashed in so hard that the deep end swapped places with the shallow end. Nobody could touch the bottom anywhere.",
+        "legendary": "Swam up the river and back before breakfast, and the river had to sit down. It now only flows in the afternoons."
+      },
+      "moves": {
+        "signature": "Strap Snatch",
+        "legend": "Pool Splash Startle",
+        "ultimate": "Swimming Gala Finale"
+      }
+    },
+    "x_tank_top": {
+      "status": "reviewed",
+      "names": {
+        "common": "Armholebig",
+        "uncommon": "Sleeveless Sam",
+        "rare": "Flexshow",
+        "epic": "Beachcooler",
+        "legendary": "Old Sleeveless, Mountain Flexer"
+      },
+      "lore": {
+        "common": "Has armholes so big that it slides around all day.",
+        "uncommon": "Has no sleeves, so your shoulders get sunburnt.",
+        "rare": "Let its wearer flex their arms at the beach so proudly that the lifeguard flexed back.",
+        "epic": "Flapped its armholes so hard in the heatwave that it cooled the whole beach. The seagulls put on scarves.",
+        "legendary": "Showed off its owner's arms so proudly that a mountain flexed back. Climbers say the bump on top is new."
+      },
+      "moves": {
+        "signature": "Armhole Snatch",
+        "legend": "Sunshine Startle",
+        "ultimate": "Shoulder Shrug"
+      }
+    },
+    "x_tights": {
+      "status": "reviewed",
+      "names": {
+        "common": "Twistseam",
+        "uncommon": "Balloonstick",
+        "rare": "Skiplegs",
+        "epic": "Tightrope Tights",
+        "legendary": "Lady Tightswell of the Aquarium"
+      },
+      "lore": {
+        "common": "Twists round as you walk, so the seam ends up running down your shin.",
+        "uncommon": "Crackles with so much static that every balloon at the party sticks to its wearer.",
+        "rare": "Stretches into a skipping rope for anyone who asks. The whole playground has a turn before lunch.",
+        "epic": "Stretched across the stage as a tightrope in the school play. The cast walked it, and the wizard fell into the orchestra.",
+        "legendary": "Was pulled on by an octopus at the aquarium, all eight legs at once. The octopus now refuses to go out without them."
+      },
+      "moves": {
+        "signature": "Ladder Pull",
+        "legend": "Hot Radiator Static",
+        "ultimate": "Sweaty Tights Tangle"
+      }
+    },
+    "x_tunic": {
+      "status": "reviewed",
+      "names": {
+        "common": "Beltknot",
+        "uncommon": "Tunictuck",
+        "rare": "Castlecostume",
+        "epic": "Custardstormer",
+        "legendary": "Sir Tunicus of the Castle"
+      },
+      "lore": {
+        "common": "Comes untied at the belt so it flaps like a little tent.",
+        "uncommon": "Has to be tucked into everything, and is always half out.",
+        "rare": "Turned its wearer into a knight so convincing that the castle guide asked for directions.",
+        "epic": "Made a whole class believe they were knights. They stormed the school kitchen and captured the custard.",
+        "legendary": "Was mistaken for a real knight's tunic and put in the castle museum. It now gives the tours and tells all the jokes."
+      },
+      "moves": {
+        "signature": "Hem Grab",
+        "legend": "Knightly Pride",
+        "ultimate": "History Day Stink"
+      }
+    },
+    "x_turtleneck": {
+      "status": "reviewed",
+      "names": {
+        "common": "Chinswallower",
+        "uncommon": "Neckitch",
+        "rare": "Polarneck",
+        "epic": "Headswallower",
+        "legendary": "Professor Rollneck of the Old Library"
+      },
+      "lore": {
+        "common": "Swallows your chin whenever you look down.",
+        "uncommon": "Itches your neck all day long.",
+        "rare": "Kept its wearer's neck so warm that they took off their scarf in a snowstorm.",
+        "epic": "Pulled itself over its wearer's head in the middle of a lecture. The hall laughed so hard that the professor did the same.",
+        "legendary": "Swallowed its wearer's head so completely that he spent the winter inside. He read twelve books and came out a genius."
+      },
+      "moves": {
+        "signature": "Rollneck Snatch",
+        "legend": "Itchy Crack",
+        "ultimate": "Neck Swallow"
+      }
+    },
+    "x_underwear": {
+      "status": "reviewed",
+      "names": {
+        "common": "Elastisnap",
+        "uncommon": "Laundryfloor",
+        "rare": "Pinkwasher",
+        "epic": "Statuehat",
+        "legendary": "Old Pantaloon of the Washing Line"
+      },
+      "lore": {
+        "common": "Its elastic snaps when you're running for the bus.",
+        "uncommon": "Is always found on the bathroom floor, never in the laundry basket.",
+        "rare": "Turns the colour of whatever it is washed with. It has been every colour of the rainbow since Tuesday.",
+        "epic": "Blew off the washing line and landed on the head of the town statue. The council says it is now part of the statue.",
+        "legendary": "Stretched its elastic so far that it became the finish tape at the town race. The winner snapped it and it flew all the way home."
+      },
+      "moves": {
+        "signature": "Elastic Twang",
+        "legend": "Pink Wash Crack",
+        "ultimate": "Washing Line Flap"
+      }
+    },
+    "x_uniform": {
+      "status": "reviewed",
+      "names": {
+        "common": "Tiecrooked",
+        "uncommon": "Badgeproud",
+        "rare": "Saluter",
+        "epic": "Stiffmarcher",
+        "legendary": "Commander Smartsleeve of the Square"
+      },
+      "lore": {
+        "common": "Always has its tie crooked by the end of the school day.",
+        "uncommon": "Has a badge on the pocket that it shows off to everyone.",
+        "rare": "Makes anyone who wears it stand up straight and salute. Grandad saluted the fridge for a whole hour.",
+        "epic": "Ironed itself so stiffly that it marched to school without its owner. It got a gold star for good behaviour.",
+        "legendary": "Polished its buttons so brightly that the whole parade marched into its own reflection. The band is still saluting itself."
+      },
+      "moves": {
+        "signature": "Badge Snatch",
+        "legend": "Inspection Crack",
+        "ultimate": "Stand to Attention!"
+      }
+    },
+    "x_vest": {
+      "status": "reviewed",
+      "names": {
+        "common": "Vestunder",
+        "uncommon": "Warmlayer",
+        "rare": "Frostmelter",
+        "epic": "Familyvest",
+        "legendary": "Granny's Woolly Vest of Wonder"
+      },
+      "lore": {
+        "common": "Is always worn under your shirt, even in the summer.",
+        "uncommon": "Is so warm that its wearer refuses to take off his coat, his scarf or the vest, even in July.",
+        "rare": "Holds in so much heat that its wearer can melt the frost off the car with a hug.",
+        "epic": "Was so warm in the coldest week that the whole family lived in it together. Dad's head came out of the left armhole.",
+        "legendary": "Kept its wearer so warm at the South Pole that the penguins queued to stand next to him."
+      },
+      "moves": {
+        "signature": "Vest Snatch",
+        "legend": "Cosy Layer Rest",
+        "ultimate": "Cold Snap Daze"
+      }
+    },
+    "x_wedge_shoe": {
+      "status": "reviewed",
+      "names": {
+        "common": "Corkcrumb",
+        "uncommon": "Corksole",
+        "rare": "Corkbobber",
+        "epic": "Garden Party Strut",
+        "legendary": "Madame Corkwell of the Garden Party"
+      },
+      "lore": {
+        "common": "Leaves a trail of cork crumbs everywhere, so you can always find your way back to it.",
+        "uncommon": "Has a cork sole so light that it feels like walking on air.",
+        "rare": "Floats like a cork, so its wearer bobs straight back up whenever she tries to dive. She has tried eleven times.",
+        "epic": "Danced on the wooden deck at the summer wedding until every board squeaked along in tune.",
+        "legendary": "Bobbed out to sea after a garden party and came back a week later with a seagull captain. The seagull now comes to every party."
+      },
+      "moves": {
+        "signature": "Cork Toe Kick",
+        "legend": "Wedge Snatch",
+        "ultimate": "Lawn Party Strut"
+      }
+    },
+    "x_wetsuit": {
+      "status": "reviewed",
+      "names": {
+        "common": "Peeloff",
+        "uncommon": "Neoprenepinch",
+        "rare": "Sealslip",
+        "epic": "Dolphincaller",
+        "legendary": "Captain Neoprene of the Big Wave"
+      },
+      "lore": {
+        "common": "Takes twenty minutes to peel off after a swim, inside out.",
+        "uncommon": "Pinches every hair on your arm as you put it on.",
+        "rare": "Is so slippery that it slides its wearer straight off every surfboard. The seals laugh every single time.",
+        "epic": "Squeaked so loudly going on that every dolphin in the bay came to look. Surf school became dolphin watching.",
+        "legendary": "Rode a wave so big that it surfed into next week. It came home sunburnt, with a postcard from Thursday."
+      },
+      "moves": {
+        "signature": "Neoprene Snatch",
+        "legend": "Seawater Siphon",
+        "ultimate": "Big Wave Ride"
+      }
+    },
+    "x_windbreaker": {
+      "status": "reviewed",
+      "names": {
+        "common": "Flapjacket",
+        "uncommon": "Gustpuff",
+        "rare": "Gustbuster",
+        "epic": "Kitejacket",
+        "legendary": "Lord Gustwell of the Cliff Path"
+      },
+      "lore": {
+        "common": "Flaps so loudly in the wind that you can't hear anyone talk.",
+        "uncommon": "Fills up with wind like a balloon and makes its wearer walk on tiptoe.",
+        "rare": "Blocked the wind on the clifftop so well that its wearer could eat a sandwich in a gale.",
+        "epic": "Caught a gust on the beach and lifted its wearer like a kite. He waved to the gulls and landed on the pier for lunch.",
+        "legendary": "Stood in the way of a gale on the cliff top. The wind said sorry and went the long way round."
+      },
+      "moves": {
+        "signature": "Zip Pull Snatch",
+        "legend": "Damp Jacket Pong",
+        "ultimate": "Gale Force Gust"
+      }
+    }
+  }
+}

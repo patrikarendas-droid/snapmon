@@ -15,7 +15,7 @@ ok(JSON.stringify(S) === before, 'making test monsters changes nothing in the sa
 const real = G.RARITY; ok(real.common.weight === 46 && real.legendary.weight === 1, 'real rarity weights unchanged (46/28/20/5/1)');
 // the real generator is used: same object identity, design, lore and stats system
 const t = G.createTestMonster(S, 'x_security_camera', { hue: 0, sat: 0, lit: .8 }, { label: 'security camera' });
-ok(t.test === true && /^test-/.test(t.id) && t.obj === 'x_security_camera' && t.dna.shape === 'obj' && /Camera/.test(t.name) && typeof t.lore === 'string', `test monsters come from the normal generator (${t.name}) and are marked test`);
+ok(t.test === true && /^test-/.test(t.id) && t.obj === 'x_security_camera' && t.dna.shape === 'obj' && t.name === ((G.CURATED.data.x_security_camera || {}).names || {})[t.rarity] && typeof t.lore === 'string', `test monsters come from the normal generator (${t.name}: the approved curated name since v0.5.0) and are marked test`);
 // isolated roster: separate storage key, not in the save or the backup code
 G.TestRoster.clear(); G.TestRoster.add(t);
 ok(G.TestRoster.list().length === 1 && G.TestRoster.list()[0].test === true, 'test monsters are stored in the separate test roster');

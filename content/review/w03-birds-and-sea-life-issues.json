@@ -1,0 +1,2586 @@
+{
+  "batch": "w03-birds-and-sea-life",
+  "editor": "independent agent",
+  "reviewed": 120,
+  "summary": "w03 is safe and readable, and most lines are short, child-friendly and built on genuinely real animal facts (indigo buntings steering by stars, turnstones flipping stones, crows using traffic to crack nuts, dipper walking underwater, hawk screech dubbed for eagles, betta bubble nests, puffin fish moustache, aquarium filter humming a note under the fridge). The biggest weakness is structural: about thirty objects scale one signature trait across three to five rarities (cockatoo bins, turnstone stones, ouzel underwater walking, redshank alarms, spoonbill stirring, dowitcher probing, jacamar butterflies, ptarmigan camouflage, egret stillness, black stork shyness), so the ladders feel like one joke with bigger numbers. Second, close relatives are often interchangeable: eagle/bald eagle (nest E and soaring L), egret C = heron U, kingfisher L = little blue heron L, coho L = salmon L, duck/duckling/coot traffic and pond-boss lines, crow E = raven E, African grey/parrot/starling mimicry, black grouse E = prairie chicken E word for word, whale C = grey whale U, rock beauty and angelfish sharing 'Coral Catwalk'. Third, Epics lean on one template ('Led a parade/flock of N...', about 29 crowd Epics), and Legendaries cluster around migration-homecoming, longevity and 'became famous/official', with many lacking a punchline (whale shark, coral, white stork, goldfish bowl, fish). Hard flags: a brand name (bee eater 'Melitta'), a trademarked character on a move (falcon 'Hawkeye Glare'), a biblical name (hummingbird 'Zippora'), death or cooking jokes (prawn pink in hot water, salmon seeing relatives in sushi, vulture circling tired people, cod 'Batterhopeful'), a film-plot and flushing echo (fish E), a w01 punchline copy (pelican 'fishermen... sandwiches'), a cold word on a burn move (narwhal 'Icy Tusk Burn'), and fact slips (bustard as a poor flier, glowing starfish, manta 'sting', gar older than the dinosaurs, slow sea turtle, century-old grey whale). Monster names are paired with the wrong rarity's lore in about 50 objects (mostly adjacent swaps), the same defect w02 had; concrete re-pairings are given. Move mechanics are mostly respected: drain, heal, buff and multi-hit names fit, and most variant-differing Ultimates are effect-neutral. The fixes are cold words on burn Ultimates (junco, ptarmigan, narwhal), three Ultimates identical to the Epic name, 'Thinking Pulse' on a 3-hit move, 'Shut Tight' on a defence-down move, and a few near-collisions with kit moves. Every high and medium item has a drop-in replacement.",
+  "patterns": [
+    {
+      "pattern": "Epic template: 'Led a parade/flock/line/run/shoal/dance of N...' opens 20 Epics, plus 'Arrived with a flock so...' (4) and 'with a hundred/fifty/ten thousand friends' (5). That is about a quarter of all Epics on one frame. Many end in 'the whole sky/lake/park turned X'.",
+      "ids": [
+        "bird",
+        "i_indigo_bunting",
+        "i_junco",
+        "i_sulphur_crested_cockatoo",
+        "x_crane_bird",
+        "duck",
+        "i_european_gallinule",
+        "i_coho",
+        "penguin",
+        "starfish",
+        "x_cod",
+        "x_duckling",
+        "x_flamingo",
+        "x_gosling",
+        "x_macaw",
+        "x_quail",
+        "x_salmon",
+        "x_seagull",
+        "x_seahorse",
+        "x_tuna",
+        "i_brambling",
+        "i_lorikeet",
+        "x_parakeet",
+        "x_swallow",
+        "i_red_backed_sandpiper",
+        "x_manta_ray",
+        "x_stingray",
+        "x_vulture",
+        "x_stork"
+      ],
+      "severity": "medium",
+      "suggestion": "Keep at most 5 crowd Epics in the batch. Give the others one creature causing one concrete disaster (see the per-object replacements). Drop 'the whole sky turned...' (brambling, macaw, stork, starling) to one use."
+    },
+    {
+      "pattern": "One headline trait scaled across three to five rarities instead of five premises (the commonest problem in this batch).",
+      "ids": [
+        "i_sulphur_crested_cockatoo",
+        "i_ruddy_turnstone",
+        "i_water_ouzel",
+        "i_redshank",
+        "i_spoonbill",
+        "i_dowitcher",
+        "i_oystercatcher",
+        "i_bulbul",
+        "i_coucal",
+        "i_jacamar",
+        "i_ptarmigan",
+        "i_ruffed_grouse",
+        "i_black_grouse",
+        "i_prairie_chicken",
+        "i_indigo_bunting",
+        "i_hornbill",
+        "i_american_egret",
+        "i_black_stork",
+        "i_white_stork",
+        "i_european_gallinule",
+        "i_limpkin",
+        "i_barracouta",
+        "i_rock_beauty",
+        "x_anemone",
+        "x_nautilus",
+        "x_cockatoo",
+        "x_emu",
+        "x_canary",
+        "x_scallop",
+        "x_pufferfish",
+        "x_guppy"
+      ],
+      "severity": "high",
+      "suggestion": "Let the signature trait own at most two rarities and use other real traits (nest, diet, body, family life, famous fact) for the rest. Replacements are in the issues list."
+    },
+    {
+      "pattern": "Close relatives share premises, so their lore is interchangeable.",
+      "ids": [
+        "i_bald_eagle",
+        "x_eagle",
+        "x_hawk",
+        "i_american_egret",
+        "x_heron",
+        "i_little_blue_heron",
+        "x_kingfisher",
+        "i_coho",
+        "x_salmon",
+        "x_trout",
+        "duck",
+        "x_duckling",
+        "i_american_coot",
+        "x_crow",
+        "x_raven",
+        "i_african_grey",
+        "x_parrot",
+        "x_starling",
+        "x_macaw",
+        "i_indigo_bunting",
+        "i_black_grouse",
+        "i_prairie_chicken",
+        "whale",
+        "i_grey_whale",
+        "i_rock_beauty",
+        "x_angelfish",
+        "i_dowitcher",
+        "x_kiwi_bird",
+        "i_red_backed_sandpiper",
+        "x_crane_bird",
+        "x_flamingo",
+        "x_stork",
+        "i_white_stork",
+        "i_black_stork"
+      ],
+      "severity": "high",
+      "suggestion": "Pairs that collide: eagle/bald eagle (nest E, soaring L), egret C/heron U (garden ornament), kingfisher L/little blue heron L (fish in every river/pond in one day), coho L/salmon L (homing), duck U+E/duckling E (traffic-stopping line), duck L/coot L (pond boss, bread queue), crow E/raven E ('Organised every X into a gang'), African grey U/parrot E (embarrassing words), African grey R/starling R (doorbell), macaw R/indigo bunting C ('painted'), black grouse E/prairie chicken E (dance-off), whale C/grey whale U (spout timing), rock beauty/angelfish (Coral Catwalk), dowitcher E/kiwi E (holes), dowitcher U/sandpiper C (wave running), crane C/flamingo C+L (one leg), stork R/albatross R (no flap). The issues list says which side to change."
+    },
+    {
+      "pattern": "Rare template: 'struck/snapped a fish so fast that the fish didn't notice'.",
+      "ids": [
+        "i_american_egret",
+        "x_heron",
+        "i_little_blue_heron",
+        "i_barracouta",
+        "i_gar"
+      ],
+      "severity": "high",
+      "suggestion": "Keep heron R (splash after swallowing) and little blue heron R; rewrite the other three (replacements given)."
+    },
+    {
+      "pattern": "Legendary clusters. (a) Migration/homecoming ('flew around the world, landed on the same beach/field/barn'). (b) Longevity ('lived N years and remembers everyone'). (c) 'Became the official/symbol/most famous...' (12 Legendaries start with 'Became').",
+      "ids": [
+        "i_red_backed_sandpiper",
+        "x_stork",
+        "x_swallow",
+        "x_albatross",
+        "x_salmon",
+        "i_coho",
+        "x_eel",
+        "x_sea_turtle",
+        "i_grey_whale",
+        "x_hummingbird",
+        "x_tuna",
+        "x_carp",
+        "i_sturgeon",
+        "x_macaw",
+        "i_brain_coral",
+        "x_nautilus",
+        "i_gar",
+        "x_trout",
+        "x_cod",
+        "x_cockatoo",
+        "x_angelfish",
+        "x_goldfish_bowl",
+        "x_orca",
+        "x_raven",
+        "i_coucal",
+        "i_junco",
+        "i_american_egret",
+        "x_kiwi_bird",
+        "x_scallop",
+        "i_rock_beauty",
+        "x_hawk",
+        "x_toucan",
+        "x_catfish",
+        "x_duckling"
+      ],
+      "severity": "medium",
+      "suggestion": "No more than 3 to 4 of each shape per batch. Migration stays for the swallow, eel, salmon and sea turtle, where it is iconic; albatross, sandpiper, stork, coho and grey whale get other premises (several replacements given). Prefer an achievement with a twist ('Is a cuckoo that actually raises its own chicks...') over 'became famous'."
+    },
+    {
+      "pattern": "Lines that state a true fact with no comic consequence (no punchline). Common in Legendaries.",
+      "ids": [
+        "i_bald_eagle",
+        "x_whale_shark",
+        "jellyfish",
+        "x_coral",
+        "i_white_stork",
+        "x_goldfish_bowl",
+        "octopus",
+        "x_quail",
+        "x_kingfisher",
+        "fish",
+        "x_krill",
+        "i_indigo_bunting",
+        "x_stork",
+        "x_swallow",
+        "i_hornbill",
+        "i_ptarmigan",
+        "x_sea_turtle",
+        "i_gar",
+        "x_manta_ray",
+        "x_falcon"
+      ],
+      "severity": "medium",
+      "suggestion": "Each line needs a concrete reaction (a person, place or thing that responds). The real facts are good material, so keep them as setups and add the turn, as in the replacements."
+    },
+    {
+      "pattern": "Dawn noise Commons: screeching or singing at sunrise opens many bird ladders.",
+      "ids": [
+        "x_macaw",
+        "i_sulphur_crested_cockatoo",
+        "i_lorikeet",
+        "i_bulbul",
+        "x_canary",
+        "x_cockatoo",
+        "owl",
+        "x_parakeet",
+        "bird",
+        "x_seagull",
+        "x_crane_bird"
+      ],
+      "severity": "medium",
+      "suggestion": "Keep it for the canary (cover off the cage) and macaw at most; replacements are given for the sulphur-crested cockatoo, bulbul and others."
+    },
+    {
+      "pattern": "Monster names paired with the wrong rarity's lore (the same defect w02 had): often a swap of two adjacent names, sometimes a rotation of three.",
+      "ids": [
+        "bird",
+        "i_african_grey",
+        "i_bald_eagle",
+        "i_bee_eater",
+        "i_brambling",
+        "i_bulbul",
+        "i_coucal",
+        "i_hornbill",
+        "i_junco",
+        "i_lorikeet",
+        "i_prairie_chicken",
+        "i_sulphur_crested_cockatoo",
+        "x_krill",
+        "i_american_egret",
+        "i_black_stork",
+        "i_bustard",
+        "i_dowitcher",
+        "duck",
+        "i_european_gallinule",
+        "i_limpkin",
+        "i_little_blue_heron",
+        "i_oystercatcher",
+        "i_red_backed_sandpiper",
+        "i_redshank",
+        "i_sturgeon",
+        "i_rock_beauty",
+        "octopus",
+        "penguin",
+        "whale",
+        "starfish",
+        "x_sea_turtle",
+        "x_angelfish",
+        "x_aquarium",
+        "x_budgie",
+        "x_cockatoo",
+        "x_emu",
+        "x_falcon",
+        "x_flamingo",
+        "x_macaw",
+        "x_manta_ray",
+        "x_narwhal",
+        "x_orca",
+        "x_parrot",
+        "x_puffin",
+        "x_salmon",
+        "x_seagull",
+        "x_seahorse",
+        "x_vulture",
+        "x_woodpecker",
+        "x_hawk",
+        "x_gosling",
+        "x_crane_bird"
+      ],
+      "severity": "medium",
+      "suggestion": "Re-pair names to their own rarity's line (concrete names are given per object). Whenever a lore line is replaced from this review, re-check that rarity's name; several replacement names here already target the new lines."
+    },
+    {
+      "pattern": "Name formulas and repeated name stems. Legendary titles: Lady ×5, Old ×4, Professor ×3, Captain ×3, Sir ×2, Grand ×2, Admiral (duck epithet and penguin), Commander (coot), Queen (hornbill); 103 of 120 Legendaries carry a ', the ...' or 'of the ...' epithet. Stems: 'Rainbow' in about 12 names; 'Raider' in 3 Epics (Lake/Hive/Reef Raider); 'Bigbeak' (hornbill R, macaw R); 'Redlegs' (redshank C, stork U); 'Chip-' (bird, seagull); 'Coral Catwalk' (rock beauty, angelfish); 'Drum' names for the ruffed grouse and woodpecker (Forest Drumroll / Forest Drum Solo, Drummond, the Forest Drummer / Picus, the Hammering Drummer).",
+      "ids": [
+        "i_spoonbill",
+        "i_rock_beauty",
+        "i_american_egret",
+        "i_partridge",
+        "i_sulphur_crested_cockatoo",
+        "owl",
+        "octopus",
+        "i_african_grey",
+        "fish",
+        "x_parrot",
+        "i_oystercatcher",
+        "duck",
+        "penguin",
+        "i_american_coot",
+        "i_bald_eagle",
+        "i_bee_eater",
+        "i_barracouta",
+        "i_ruffed_grouse",
+        "x_woodpecker",
+        "x_macaw",
+        "i_hornbill"
+      ],
+      "severity": "medium",
+      "suggestion": "Cap each title word at 2 per batch and let about a third of Legendaries go without an epithet. Rename one of each stem pair (concrete names are in the issues list). Woodpecker E could become 'Shed Ventilator' and its L 'Picus, Window Fitter of the Oak'."
+    },
+    {
+      "pattern": "Move-name formulas: heals are 'X Rest' (15 times), defence-down legend moves are 'X Distraction' (6) or 'X Muddle' (5), and almost every Ultimate is the Epic monster name plus Swoop/Surge/Rush/Strike (3 are identical to the Epic name). Clash-avoiding suffixes were bolted on ('Splash Dive Duck', 'Riverbank Rest Goose', 'Shell Brace Turtle').",
+      "ids": [
+        "duck",
+        "i_european_gallinule",
+        "i_red_backed_sandpiper",
+        "i_ruddy_turnstone",
+        "penguin",
+        "dolphin",
+        "shark",
+        "starfish",
+        "x_catfish",
+        "x_quail",
+        "x_pheasant",
+        "x_flamingo",
+        "i_ruffed_grouse",
+        "i_indigo_bunting",
+        "x_gosling",
+        "x_sea_turtle",
+        "owl",
+        "x_narwhal"
+      ],
+      "severity": "low",
+      "suggestion": "Vary the heal words (patch, refill, preen, nap, dry off) and the defence-down words (crack, soften, unravel, ruffle). Give Ultimates their own image rather than echoing the Epic name."
+    },
+    {
+      "pattern": "Cross-batch and in-batch repeated punchlines and props: fishermen (10 lines), sunglasses (ostrich L, parakeet L, salmon E), ferry (dolphin R/E, cod E, orca E), thank-you card (limpkin L, electric ray L, plus w01/w02), 'in the land' (duck L, fish L, spoonbill L; 10 times in w01/w02), 'in one afternoon/morning/day' (21 lines), rent (anemone U, coral U, woodpecker L), 'thought a storm/cloud had arrived' (coot E, sandpiper E, manta E), weddings (cockatoo E, peacock E), dance-offs and festivals (black grouse, prairie chicken, bulbul, ruffed grouse), pelican E vs w01 'fishermen having sandwiches for tea'.",
+      "ids": [
+        "x_pelican",
+        "x_ostrich",
+        "x_parakeet",
+        "x_salmon",
+        "dolphin",
+        "x_cod",
+        "x_orca",
+        "i_limpkin",
+        "i_electric_ray",
+        "duck",
+        "fish",
+        "i_spoonbill",
+        "x_anemone",
+        "x_coral",
+        "x_woodpecker",
+        "i_american_coot",
+        "i_red_backed_sandpiper",
+        "x_manta_ray",
+        "x_cockatoo",
+        "x_peacock",
+        "i_black_grouse",
+        "i_prairie_chicken",
+        "i_bulbul",
+        "i_ruffed_grouse"
+      ],
+      "severity": "medium",
+      "suggestion": "Use each prop and punchline once per batch. Replacements in the issues list already remove most of the duplicates."
+    },
+    {
+      "pattern": "Sentence engine 'so X that...' appears in 119 of 600 lines; together with 'every X in the Y' (36) it makes the batch read uniformly.",
+      "ids": [
+        "i_prairie_chicken",
+        "i_ptarmigan",
+        "x_guppy",
+        "x_catfish",
+        "x_starling",
+        "x_canary",
+        "x_heron",
+        "x_krill"
+      ],
+      "severity": "low",
+      "suggestion": "Vary the shape: a plain action plus a deadpan second sentence, a claim plus a deflation ('Says it is waiting for fashion to come back round'), or an attitude line."
+    }
+  ],
+  "issues": [
+    {
+      "id": "i_bee_eater",
+      "field": "names.legendary",
+      "severity": "high",
+      "issue": "'Melitta' is a well-known coffee-filter brand.",
+      "suggestion": "'Waggle, Bane of the Busy Bee'"
+    },
+    {
+      "id": "x_falcon",
+      "field": "moves.legend",
+      "severity": "high",
+      "issue": "'Hawkeye' is a trademarked comic-book character name (and names the wrong bird). Mechanic: stun 30%.",
+      "suggestion": "'Peregrine Flash' (flash = stun word)."
+    },
+    {
+      "id": "x_prawn",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Turning pink in hot water means being cooked alive: a death/cruelty joke for a child audience.",
+      "suggestion": "'Is so see-through that you can watch its breakfast going down. It really wishes you would look away.'"
+    },
+    {
+      "id": "x_salmon",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Seeing its relatives in sushi rolls at the fish counter is a death/eating joke.",
+      "suggestion": "'Turns up at the river mouth every autumn and waits for the tide like it is queuing for a bus.'"
+    },
+    {
+      "id": "x_narwhal",
+      "field": "moves.legend",
+      "severity": "high",
+      "issue": "'Icy' is a cold word on a burn move (100% · burn 40%).",
+      "suggestion": "'Sizzling Tusk'"
+    },
+    {
+      "id": "x_pelican",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Repeats the w01 punchline almost word for word ('The fishermen are having sandwiches for tea'); 'in one afternoon' is also a batch-wide frame.",
+      "suggestion": "'Herded the fish into the shallows with fifty friends in a perfect horseshoe. The harbour master has asked them to run the fishing fleet.' (real cooperative fishing)"
+    },
+    {
+      "id": "x_hummingbird",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Zippora' reads as the biblical name Zipporah (a religious figure).",
+      "suggestion": "'Zipzing, the Humming Jewel'"
+    },
+    {
+      "id": "x_pheasant",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Roadrunner' is another real bird and a famous cartoon character; confusing on a pheasant.",
+      "suggestion": "'Lanedasher'"
+    },
+    {
+      "id": "x_toucan",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "'the chief's soup' risks a tribal-chief stereotype in a jungle setting.",
+      "suggestion": "'Flipped a mango into the air, caught it, and flicked the stone straight into the zookeeper's tea.'"
+    },
+    {
+      "id": "fish",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Bowl, bath, drain, sea is the plot of a famous animated film, and it nudges children towards flushing pet fish.",
+      "suggestion": "'Jumped out of its bowl into the big tank next door and declared itself the new boss. The angelfish take turns to complain.'"
+    },
+    {
+      "id": "x_vulture",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Circling 'whenever someone looks slightly tired' means waiting for someone to die: a death joke. It is also the same premise as the Epic.",
+      "suggestion": "'Spreads its huge wings in the morning sun to warm up, as if it is waiting for a round of applause.' (real sunning posture)"
+    },
+    {
+      "id": "x_vulture",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same premise as the Common (circling until animals worry they are dying), with the same death implication.",
+      "suggestion": "'Rode one warm air current with fifty friends, and the hot-air balloons had to queue behind them.'"
+    },
+    {
+      "id": "x_vulture",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Circlewaiter' keeps the waiting-for-death idea; once the Common changes it no longer matches either.",
+      "suggestion": "'Sunspreader'"
+    },
+    {
+      "id": "x_manta_ray",
+      "field": "moves.kit.barb_sting",
+      "severity": "medium",
+      "issue": "Manta rays have no stinging barb (that is the stingray). Mechanic: poison 50%.",
+      "suggestion": "'Slimy Wing Swipe'"
+    },
+    {
+      "id": "i_bustard",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Wrong fact: great bustards are strong fliers. They are heavy, but they do not land a few metres after take-off. The Legendary repeats the same 'bad flier' idea.",
+      "suggestion": "'Walks everywhere very slowly to save energy, and is deeply offended whenever a hare overtakes it.'"
+    },
+    {
+      "id": "i_bustard",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Same 'can barely fly' premise as the Common, and it contradicts the Rare (one of the heaviest birds that flies well).",
+      "suggestion": "'Took off at one end of the plain and landed at the other. The ground has asked for some warning next time.'"
+    },
+    {
+      "id": "i_bustard",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Repeats the Uncommon (puffing up its feathers), and the linter flags cosmic scale below Legendary ('blocked out the sun').",
+      "suggestion": "'Landed on the village cricket pitch with such a thump that the bails fell off at both ends.'"
+    },
+    {
+      "id": "starfish",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Wrong fact: starfish do not glow or guide sailors. It is a star pun with no joke.",
+      "suggestion": "'Grew a whole new starfish from one lost arm. The two of them still argue about which one is the original.' (real for some species)"
+    },
+    {
+      "id": "starfish",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Regrowing an arm is the Legendary's trait (after the fix); give the Uncommon another real trait.",
+      "suggestion": "'Has a tiny eye at the tip of every arm, so it always knows who is sneaking up, from any direction.'"
+    },
+    {
+      "id": "starfish",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Fiveharm' reads as 'five harm', probably a typo for Fivearm.",
+      "suggestion": "'Fivearm'"
+    },
+    {
+      "id": "i_gar",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Gars did not exist 'before the dinosaurs' (they appear later); 'according to the fish' does not save it.",
+      "suggestion": "'Has looked exactly the same for a hundred million years, and says it is waiting for fashion to come back round.'"
+    },
+    {
+      "id": "i_grey_whale",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Grey whales do not live for a century, and the line has no punchline.",
+      "suggestion": "'Swims from the icy north to the warm south and back every year, and still gets grumpy if another whale is in its favourite lagoon.'"
+    },
+    {
+      "id": "x_sea_turtle",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Sea turtles are not slow swimmers (that is the land tortoise).",
+      "suggestion": "'Naps on the reef for so long between swims that the fish have opened a little cafe on its shell.'"
+    },
+    {
+      "id": "i_bald_eagle",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Bald eagles do not nap while soaring. The albatross Rare uses the same idea, and the line has no punchline.",
+      "suggestion": "'Has a fierce face but a squeaky little call, so it glares extra hard to make up for it.'"
+    },
+    {
+      "id": "i_bald_eagle",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Liberty' ties the bird to its role as a national emblem (political overtone); 'Lord of Skies' is a stock title.",
+      "suggestion": "'Whitehead, Keeper of the Lake'"
+    },
+    {
+      "id": "i_junco",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Snowfield' is a cold word on an all-burn Ultimate.",
+      "suggestion": "'Sunny Hedge Scorch'"
+    },
+    {
+      "id": "i_ptarmigan",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Whiteout' is a snow/cold word, but the spectral and mutated variants burn; it needs an effect-neutral name.",
+      "suggestion": "'Mountain Mischief Storm'"
+    },
+    {
+      "id": "x_narwhal",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Identical to the Epic monster name, and 'Arctic' is cold while the spectral variant burns.",
+      "suggestion": "'Tusk Twirl Showdown'"
+    },
+    {
+      "id": "owl",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Identical to the Epic monster name 'Midnight Hoot Choir'.",
+      "suggestion": "'Midnight Hoot Ambush'"
+    },
+    {
+      "id": "x_pheasant",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "Identical to the Epic monster name 'Country Lane Chaos'.",
+      "suggestion": "'Hedgerow Hullabaloo'"
+    },
+    {
+      "id": "i_brain_coral",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "The move hits 3 times (45% ×3), but 'Thinking Pulse' sounds like one blow.",
+      "suggestion": "'Think Think Think'"
+    },
+    {
+      "id": "x_whale_shark",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "Poison move (90% · poison 50%); 'Gulp' suggests drain, not poison.",
+      "suggestion": "'Stale Plankton Burp'"
+    },
+    {
+      "id": "x_clam",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Shut Tight' sounds like a self-defence brace, but the move lowers the enemy's defence (60% · defdown 70%).",
+      "suggestion": "'Grit in the Eye'"
+    },
+    {
+      "id": "fish",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Fin Slap Splash' nearly collides with this fish's own kit move 'Fin Slap' (Epic).",
+      "suggestion": "'Bowl Splash'"
+    },
+    {
+      "id": "x_prawn",
+      "field": "moves.kit.fin_slap",
+      "severity": "medium",
+      "issue": "'Flicking Tail' nearly collides with the signature 'Tail Flick Slap'.",
+      "suggestion": "'Antenna Whip'"
+    },
+    {
+      "id": "x_anemone",
+      "field": "moves.kit.fin_slap",
+      "severity": "medium",
+      "issue": "'Tentacle Swipe' nearly collides with the signature 'Tentacle Slap'.",
+      "suggestion": "'Frond Swipe'"
+    },
+    {
+      "id": "x_clam",
+      "field": "moves.kit.fin_slap",
+      "severity": "medium",
+      "issue": "'Shell Clap' nearly collides with the signature 'Shell Snap'.",
+      "suggestion": "'Clam Clout'"
+    },
+    {
+      "id": "x_sea_sponge",
+      "field": "moves.kit.fin_slap",
+      "severity": "low",
+      "issue": "'Squelch Slap' is very close to the signature 'Soggy Slap'.",
+      "suggestion": "'Squelch Bump'"
+    },
+    {
+      "id": "x_gosling",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Goose' looks bolted on to avoid a name clash; it reads badly.",
+      "suggestion": "'Down Feather Nap'"
+    },
+    {
+      "id": "duck",
+      "field": "moves.signature",
+      "severity": "medium",
+      "issue": "'Duck' looks bolted on to avoid a name clash.",
+      "suggestion": "'Dabble Dive'"
+    },
+    {
+      "id": "x_sea_turtle",
+      "field": "moves.legend",
+      "severity": "medium",
+      "issue": "'Turtle' looks bolted on to avoid a name clash (with the prawn's 'Shell Brace').",
+      "suggestion": "'Shell Tuck'"
+    },
+    {
+      "id": "i_coucal",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Drum Roll' suggests a multi-hit, but the Ultimate is a single 210% blow.",
+      "suggestion": "'Marsh Booming Blast'"
+    },
+    {
+      "id": "i_ruffed_grouse",
+      "field": "moves.ultimate",
+      "severity": "medium",
+      "issue": "'Drumroll' suggests a multi-hit, but the Ultimate is a single 210% blow.",
+      "suggestion": "'Log Thunder Blast'"
+    },
+    {
+      "id": "bird",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Flurry' suggests several hits on a single-hit defence-down move; at 26 characters it is also near the limit.",
+      "suggestion": "'Ruffled Feathers'"
+    },
+    {
+      "id": "dolphin",
+      "field": "moves.kit.barb_sting",
+      "severity": "low",
+      "issue": "'Nose Bump' does not suggest poison (poison 50%). The id is dolphin.",
+      "suggestion": "'Fishy Breath Bump' (or keep: it is not contradictory)"
+    },
+    {
+      "id": "i_jacamar",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "The Bible uses 'Flash' for stun; this move lowers defence.",
+      "suggestion": "'Glinting Wing Distraction'"
+    },
+    {
+      "id": "x_macaw",
+      "field": "moves.legend",
+      "severity": "low",
+      "issue": "'Shadowy' is an odd word for one of the brightest birds alive.",
+      "suggestion": "'Rainbow Feint'"
+    },
+    {
+      "id": "x_eagle",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Interchangeable with bald eagle E (a cliff nest so big it looks like a hut or a house).",
+      "suggestion": "'Flapped once over the ski slope, and every skier went down the mountain twice as fast as they meant to.'"
+    },
+    {
+      "id": "x_eagle",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Interchangeable with bald eagle L (soared so high it saw tomorrow's weather / two sunrises).",
+      "suggestion": "'Has been drawn on so many flags and shields that it now refuses to be painted from its bad side.'"
+    },
+    {
+      "id": "i_bald_eagle",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Same premise as eagle R (snatching a fish from a rival), and the salmon-and-bear scene is also in coho R and E.",
+      "suggestion": "'Only gets its white head at five years old, and spends the years before that insisting it is not a teenager.'"
+    },
+    {
+      "id": "x_hawk",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Same premise as the Legendary (films borrowing its screech for other birds). Keep the Legendary, which is the stronger line.",
+      "suggestion": "'Has a brick-red tail and flicks it like a cape every time it lands on a fence post.'"
+    },
+    {
+      "id": "x_hawk",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Repeats the Common (circling overhead), just over a motorway.",
+      "suggestion": "'Circled above the school sports day so long that every child ran the egg-and-spoon race looking up.'"
+    },
+    {
+      "id": "x_hawk",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "'Harrier' is a different bird of prey and 'Haunted' has nothing to do with the lore.",
+      "suggestion": "'Screecher Supreme, Voice of Every Eagle'"
+    },
+    {
+      "id": "x_hawk",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Thermalrider' does not match the Uncommon lore (screech, now the red tail).",
+      "suggestion": "'Redcape'"
+    },
+    {
+      "id": "i_american_egret",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Identical premise to heron U (stands so still that people think it is a garden ornament). Stillness also returns in the Epic and the Legendary.",
+      "suggestion": "'Stands perfectly still in the pond for so long that people think it is a garden ornament.' (keep here; heron U changes instead, see below)"
+    },
+    {
+      "id": "i_american_egret",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Third stillness premise for this object (Common, Epic and Legendary).",
+      "suggestion": "'Shuffled its feet in the shallows so hard that every fish in the marsh shot onto the bank and asked for a towel.' (real foot-stirring)"
+    },
+    {
+      "id": "i_american_egret",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Fourth stillness line ('standing perfectly still through a hurricane'), and 'became the symbol of' is a batch-wide frame.",
+      "suggestion": "'Grew such magnificent white plumes that every swan on the lake booked a hairdresser.'"
+    },
+    {
+      "id": "i_american_egret",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "The 'struck a fish so fast' Rare is shared with heron, little blue heron, gar and barracouta.",
+      "suggestion": "'Tosses every fish in the air to swallow it head-first. Misses about once a week and calls it a juggling trick.'"
+    },
+    {
+      "id": "i_american_egret",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Fishstatue' describes stillness, but the Rare lore is a fast strike (now the fish toss).",
+      "suggestion": "'Fishjuggler'"
+    },
+    {
+      "id": "x_heron",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Identical premise to egret C (mistaken for a garden ornament).",
+      "suggestion": "'Flies with its neck folded into an S, so it always looks like it has just remembered something embarrassing.'"
+    },
+    {
+      "id": "x_heron",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Statuestand' matches the old line; after the fix it no longer fits.",
+      "suggestion": "'Foldneck'"
+    },
+    {
+      "id": "i_little_blue_heron",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "'Stalked so patiently' copies heron L (patience pays off).",
+      "suggestion": "'Waded into the town fountain and fished so calmly that tourists threw coins at it. It has bought itself a very small boat.'"
+    },
+    {
+      "id": "i_little_blue_heron",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Slowstepper' does not match the Uncommon lore (white turning blue).",
+      "suggestion": "'Whitetoblue'"
+    },
+    {
+      "id": "x_kingfisher",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Interchangeable with little blue heron L (caught a fish in every river/pond in the county in one day).",
+      "suggestion": "'Dug a tunnel into the riverbank so long that it came out in the village bakery. It now dives for doughnuts.' (real burrow nester)"
+    },
+    {
+      "id": "x_kingfisher",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "A true fact with no chaos and no punchline (copied for a train nose).",
+      "suggestion": "'Dived so cleanly that engineers copied its beak for a high-speed train. Now it races the train every morning and wins.'"
+    },
+    {
+      "id": "i_gar",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Shares the 'snapped a fish so fast' Rare with egret, heron, little blue heron and barracouta.",
+      "suggestion": "'Gulps air at the surface so loudly that anglers spin round looking for whoever burped.' (gars breathe air)"
+    },
+    {
+      "id": "i_barracouta",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Shares the 'snapped a fish so fast' Rare; speed also fills the Uncommon, Epic and Legendary.",
+      "suggestion": "'Bites straight through fishing line, then hangs around the boat to see whether you have any more.'"
+    },
+    {
+      "id": "i_barracouta",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Third speed premise (Uncommon, Epic and Legendary all say 'very fast').",
+      "suggestion": "'Followed a fishing boat all the way into harbour and tried to buy a ticket for the return trip.'"
+    },
+    {
+      "id": "i_coho",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Interchangeable with salmon L (swims home to the exact place it was born). Coho is a salmon, so it needs its own traits.",
+      "suggestion": "'Turned such a bright red for its journey home that the lighthouse switched off and let the coho do the job.' (coho turn red with a hooked jaw)"
+    },
+    {
+      "id": "i_coho",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Bears again (Rare and Epic), and bears also appear in bald eagle R; 'Led a run of a thousand' is the batch Epic template.",
+      "suggestion": "'Jumped so many waterfalls in one week that the river put up a sign saying PLEASE USE THE STAIRS.'"
+    },
+    {
+      "id": "x_salmon",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Homing by smell is the same premise as its Legendary (found the exact pebble where it hatched).",
+      "suggestion": "'Was born in a river, grew up in the sea, and still complains that the sea is far too salty.'"
+    },
+    {
+      "id": "x_salmon",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led a shoal' template plus 'sunglasses' (also in ostrich L and parakeet L).",
+      "suggestion": "'Leapt up the salmon ladder so fast that the fish counter at the dam ran out of numbers.'"
+    },
+    {
+      "id": "x_salmon",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Homesniffer' describes homing, not the Common line.",
+      "suggestion": "'Tidequeuer'"
+    },
+    {
+      "id": "x_trout",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Rainbowtrout' is just the species label.",
+      "suggestion": "'Shimmerstripe'"
+    },
+    {
+      "id": "x_trout",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Repeats the Common (dodging anglers and hooks).",
+      "suggestion": "'Swam up the waterfall into the mountain lake and has been its only fish for so long that it thinks it invented water.'"
+    },
+    {
+      "id": "x_trout",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "A leaping-away-from-fishers Rare like salmon R and coho R; fine on its own, repetitive in the family.",
+      "suggestion": "'Leapt clean over the angler's net and splashed back right behind him.' (keep, or swap to another trait)"
+    },
+    {
+      "id": "i_sulphur_crested_cockatoo",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Bins in Uncommon, Rare, Epic and Legendary: one trait scaled up.",
+      "suggestion": "'Chewed through every wooden balcony railing on the street in one week. The builders now arrive with metal ones and a nervous look.'"
+    },
+    {
+      "id": "i_sulphur_crested_cockatoo",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same bin premise as the Rare, just country-wide; 'the government' also brushes politics.",
+      "suggestion": "'Lived past a hundred, outlasting three owners, two houses and every bin lid ever designed to stop it.'"
+    },
+    {
+      "id": "i_sulphur_crested_cockatoo",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "A fourth bin line.",
+      "suggestion": "'Raises its yellow crest when it is excited, so the whole street knows it has found something it should not have.'"
+    },
+    {
+      "id": "i_sulphur_crested_cockatoo",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Binlidder' describes the Rare (bin lids), not the Common (dawn screech).",
+      "suggestion": "'Sunrise Shrieker'"
+    },
+    {
+      "id": "i_sulphur_crested_cockatoo",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Dawn screeching is shared with the macaw, lorikeet, bulbul and canary Commons.",
+      "suggestion": "'Hangs upside down from the gutter to stare in at breakfast, then screams when nobody shares.'"
+    },
+    {
+      "id": "x_cockatoo",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Dancing in the Uncommon, Epic and Legendary.",
+      "suggestion": "'Unscrewed every handle in the kitchen while the family slept. Breakfast took an hour to get into.'"
+    },
+    {
+      "id": "x_cockatoo",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Third dancing line ('danced every night for eighty years').",
+      "suggestion": "'Gives off so much fine feather dust that the whole house looks freshly floured. The bakery next door asked for the recipe.' (real powder-down)"
+    },
+    {
+      "id": "x_cockatoo",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Cuddlebeak' matches the Common (cuddles), not the Uncommon (dancing).",
+      "suggestion": "'Beatbobber'"
+    },
+    {
+      "id": "x_cockatoo",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Crestdancer' matches the Uncommon/Rare, not the Common.",
+      "suggestion": "'Cuddlescreech'"
+    },
+    {
+      "id": "i_african_grey",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Same premise as the Common (imitating household appliances), and also the starling's Common and Rare.",
+      "suggestion": "'Can count to six and name every colour, so it always knows exactly how many biscuits you hid, and where.' (real research)"
+    },
+    {
+      "id": "i_african_grey",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Wordhoarder' does not fit either the old or the new Rare.",
+      "suggestion": "'Biscuitcounter'"
+    },
+    {
+      "id": "x_parrot",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same premise as African grey U (repeats embarrassing words in front of guests).",
+      "suggestion": "'Taught every parrot in the pet shop to shout SHOP! at once. The owner has run to the counter four hundred times today.'"
+    },
+    {
+      "id": "x_parrot",
+      "field": "lore.common",
+      "severity": "medium",
+      "issue": "Squawking from your shoulder repeats the pirate-shoulder Legendary.",
+      "suggestion": "'Chews every pencil, remote and wooden spoon in the house into neat little splinters.'"
+    },
+    {
+      "id": "x_parrot",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Pirate Pal' describes the Legendary, not the Rare (fake 'who's there?').",
+      "suggestion": "'Knockknocker'"
+    },
+    {
+      "id": "x_starling",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "The doorbell imitation is the same premise as its own Common and as African grey R.",
+      "suggestion": "'Walks across the lawn stabbing its beak in and opening it wide, like a very busy garden fork.' (real open-bill probing)"
+    },
+    {
+      "id": "x_starling",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same murmuration premise as the Epic.",
+      "suggestion": "'Copied the ice-cream van tune so perfectly that every child on the estate ran outside. The van is thinking about a new song.'"
+    },
+    {
+      "id": "x_crow",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "'Organised every crow in town into a gang' shares its frame with raven E ('Organised every raven in the city into a group').",
+      "suggestion": "'Organised every crow in town into a gang that collects lost keys. The lost-property office is overwhelmed.' (keep; raven E changes instead)"
+    },
+    {
+      "id": "x_raven",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same frame as crow E ('Organised every X into a group/gang that...'), so the two read as one joke.",
+      "suggestion": "'Played catch with a fox across the castle lawn for an hour. The tourists bought tickets and the fox wants its share.' (ravens play with other animals)"
+    },
+    {
+      "id": "x_raven",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Talkacorn' is confusing (acorn?) and does not suggest copying words.",
+      "suggestion": "'Wordpincher'"
+    },
+    {
+      "id": "x_macaw",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "'Feathers so bright that people think it was painted' is the same as indigo bunting C.",
+      "suggestion": "'Licks the clay riverbank every morning to settle its tummy after too many unripe seeds. Calls it pudding.' (real clay licks)"
+    },
+    {
+      "id": "x_macaw",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Bigbeak Macaw' collides with hornbill R 'Bigbeak' and contains the label.",
+      "suggestion": "'Claylicker'"
+    },
+    {
+      "id": "x_macaw",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Nutcracker Mac' matches the Uncommon (nuts), not the Common (sunrise scream); 'Mac' also sounds like a brand.",
+      "suggestion": "'Dawnscreamer'"
+    },
+    {
+      "id": "x_macaw",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Rainbowscream' matches the Common.",
+      "suggestion": "'Nutcrusher'"
+    },
+    {
+      "id": "x_parakeet",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as the Epic (the flock takes over the park), and 'sunglasses' is a repeated punchline.",
+      "suggestion": "'Built one shared nest for a hundred families in a single tree. The tree was given its own postcode.'"
+    },
+    {
+      "id": "duck",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Ruling every pond is the same premise as coot L (bosses the ducks into queues), and it echoes the approved rubber duck L (king of all ducks); 'every pond in the land' is a repeated frame.",
+      "suggestion": "'Slept with one eye open for so long that it watched the whole park being rebuilt. It has notes about the new benches.' (real unihemispheric sleep)"
+    },
+    {
+      "id": "duck",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Ducklinghead' does not match the Rare (water off a duck's back) and blurs into the Duckling object.",
+      "suggestion": "'Drybacker'"
+    },
+    {
+      "id": "duck",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Sir ... Admiral' doubles the title formula; penguin and coot use Admiral and Commander too.",
+      "suggestion": "'Quacksworth, Keeper of One Open Eye'"
+    },
+    {
+      "id": "x_duckling",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "A line of ducklings stopping the traffic on the high street copies duck U and E.",
+      "suggestion": "'Jumped out of its nest high in a tree and bounced off the lawn like a ball. The neighbours opened a trampoline park in its honour.' (real for tree-nesting ducklings)"
+    },
+    {
+      "id": "x_duckling",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Duckling Parade' contains the label and matches the old line.",
+      "suggestion": "'Bouncebill'"
+    },
+    {
+      "id": "i_american_coot",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as duck L (in charge of every pond, bread queues), and it repeats its own Rare (bossing ducks).",
+      "suggestion": "'Built a floating nest out of reeds and crisp packets so big that the park added it to the map as an island.' (coots really use litter)"
+    },
+    {
+      "id": "i_american_coot",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Repeats the Common (splashy running), and 'thought a storm had arrived' is also in sandpiper E and manta E.",
+      "suggestion": "'Fought a rival coot by sitting back and kicking water at it for an hour. The rowing club stopped to cheer.'"
+    },
+    {
+      "id": "x_stork",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same thermal-spiralling premise as the Rare; 'whole sky turned...' is a repeated frame.",
+      "suggestion": "'Built a nest on top of an electricity pylon so big that the engineers added a special platform just for it.' (real)"
+    },
+    {
+      "id": "x_stork",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Redlegs Stork' collides with redshank C 'Redlegs' and contains the label.",
+      "suggestion": "'Stiltstrider'"
+    },
+    {
+      "id": "x_stork",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "'Fly for hours without a single flap' is the albatross R line, nearly word for word.",
+      "suggestion": "'Has no real voice, so it clatters its beak like a wooden rattle whenever it wants to join a conversation.'"
+    },
+    {
+      "id": "i_white_stork",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Nests in the Common, Rare and Epic; 'uses the nest as a weather vane' also makes no physical sense.",
+      "suggestion": "'Decorates its nest with whatever it finds, and the village has quietly lost one sock from every washing line.'"
+    },
+    {
+      "id": "i_white_stork",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No punchline: it just restates the old baby-delivery folklore.",
+      "suggestion": "'Delivered so many bundles to the village, according to the old stories, that the postman has asked it to cover weekends.'"
+    },
+    {
+      "id": "i_white_stork",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "After the fix, beak clattering moves to plain stork R; keep one of the two. If stork R keeps the clatter, change this one.",
+      "suggestion": "'Walks behind the plough all morning like a supervisor, then flies off before the work is finished.'"
+    },
+    {
+      "id": "i_black_stork",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Shyness in the Common, Uncommon, Epic and Legendary ('Private' sign).",
+      "suggestion": "'Wears a bright red beak and red legs with an all-black suit, and insists it is not dressed for a party.'"
+    },
+    {
+      "id": "i_black_stork",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Fourth shy/unseen line, and it borrows the white stork's chimney.",
+      "suggestion": "'Crossed the whole Sahara on warm air without a single flap, then complained about the sand in its feathers.'"
+    },
+    {
+      "id": "i_black_stork",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Chimney-sitting is a white-stork trait; black storks are shy forest birds. It also does not match the lore.",
+      "suggestion": "'Redbill Recluse'"
+    },
+    {
+      "id": "i_black_stork",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Babycarrier' is white-stork folklore and does not match the Rare (wading quietly).",
+      "suggestion": "'Brookstepper'"
+    },
+    {
+      "id": "x_crane_bird",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Paper cranes again (Rare and Legendary), and 'every school' is generic.",
+      "suggestion": "'Flew over the highest mountains in the world with its flock, then grumbled that they could have been a bit lower.' (demoiselle cranes cross the Himalayas)"
+    },
+    {
+      "id": "x_crane_bird",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Standing on one leg is the flamingo's Common and Legendary.",
+      "suggestion": "'Throws sticks in the air and catches them for no reason, then looks round to see who was impressed.' (part of real crane dances)"
+    },
+    {
+      "id": "x_crane_bird",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Dancing repeats the Uncommon; 'Led a dance of a thousand' is the batch Epic template.",
+      "suggestion": "'Gathered with ten thousand cranes on one lake, and their trumpeting rattled every window in the valley for a week.'"
+    },
+    {
+      "id": "x_crane_bird",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Onelegger' matches the removed one-leg line.",
+      "suggestion": "'Sticktosser'"
+    },
+    {
+      "id": "x_flamingo",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same one-leg premise as the Common.",
+      "suggestion": "'Built a mud nest shaped like a little volcano, and soon every flamingo on the lake copied it. The lake now looks like a tiny mountain range.' (real)"
+    },
+    {
+      "id": "x_flamingo",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Onelegpoise' matches the Common; 'Shrimpsnacker' (Rare) matches the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Shrimpblush'"
+    },
+    {
+      "id": "x_flamingo",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Onelegpoise' matches the Common; 'Shrimpsnacker' (Rare) matches the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Upsidedown Sifter'"
+    },
+    {
+      "id": "x_flamingo",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led a dance of a thousand' template; flamingo marching displays are real but the 'lake turned pink' frame repeats.",
+      "suggestion": "'Marched sideways in a tight crowd with a thousand flamingos, and the boating lake had to close for the parade.'"
+    },
+    {
+      "id": "i_red_backed_sandpiper",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Sandscurry' matches the Common (running from waves), not the Uncommon (red summer feathers).",
+      "suggestion": "'Summer Redback'"
+    },
+    {
+      "id": "i_red_backed_sandpiper",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same flock-swirl premise as the Rare; 'thought a cloud had landed' repeats coot and manta.",
+      "suggestion": "'Paddled its feet in the mud so fast that worms popped up all along the beach to see what the noise was.'"
+    },
+    {
+      "id": "i_red_backed_sandpiper",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Redback Rusher' does not match the Rare (flock swirl); 'Redback' is also a venomous spider's name.",
+      "suggestion": "'Swirlflock'"
+    },
+    {
+      "id": "x_albatross",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same structure as sandpiper L ('Flew around the world without stopping/landing, then landed and asked...'), and it repeats its own Rare (endless gliding).",
+      "suggestion": "'Is still raising chicks at seventy and has worn out four sets of leg rings. The scientists bring each new ring as a birthday present.' (real: Wisdom the albatross)"
+    },
+    {
+      "id": "i_dowitcher",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "'Runs just ahead of every wave' is sandpiper C.",
+      "suggestion": "'Has a beak almost as long as its body and keeps knocking on things it did not mean to.'"
+    },
+    {
+      "id": "i_dowitcher",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Probing again (Common, Rare, Epic and Legendary).",
+      "suggestion": "'Feels worms through the mud with the very tip of its beak, so it finds dinner with its eyes shut, and often does.'"
+    },
+    {
+      "id": "i_dowitcher",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Interchangeable with kiwi E (probed so many holes that the ground made a pattern).",
+      "suggestion": "'Landed on the mudflat with ten thousand friends all stitching at once. The dog walkers thought the beach had started to purr.'"
+    },
+    {
+      "id": "i_dowitcher",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Sewing Beak' matches the Common; 'Shorescurry' (Rare) matches the old Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Longbeak Bumper'"
+    },
+    {
+      "id": "i_dowitcher",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Sewing Beak' matches the Common; 'Shorescurry' (Rare) matches the old Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Blindprober'"
+    },
+    {
+      "id": "x_kiwi_bird",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Interchangeable with dowitcher E (holes poked in a pattern), and it repeats its own Common (poking into soil).",
+      "suggestion": "'Snuffled so loudly round the campsite at night that every tent zipped itself shut.'"
+    },
+    {
+      "id": "whale",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same song premise as the Uncommon.",
+      "suggestion": "'Swallowed a krill swarm the size of a swimming pool in one gulp, then burped up a small rain cloud.'"
+    },
+    {
+      "id": "whale",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Breachbelly' matches the Rare/Epic; 'Deepsinger' (Rare) matches the Uncommon. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Deepsinger'"
+    },
+    {
+      "id": "whale",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Breachbelly' matches the Rare/Epic; 'Deepsinger' (Rare) matches the Uncommon. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Breachbelly'"
+    },
+    {
+      "id": "i_grey_whale",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Spouting just as people lean in is whale C.",
+      "suggestion": "'Swims right up to the little boats in the lagoon and waits to have its head scratched like a very large dog.' (real friendly greys)"
+    },
+    {
+      "id": "i_grey_whale",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "After the Uncommon fix, the boat approach would repeat; also there is no Epic-scale consequence.",
+      "suggestion": "'Scooped up so much seabed in one dive that it left whale-shaped pits for the crabs to move into.' (real feeding pits)"
+    },
+    {
+      "id": "i_rock_beauty",
+      "field": "names.epic",
+      "severity": "high",
+      "issue": "'Coral Catwalk' collides with angelfish E 'Coral Catwalk Fin'. The rock beauty is an angelfish, so both objects read as one.",
+      "suggestion": "'Sponge Muncher' (matches the new Epic below)"
+    },
+    {
+      "id": "i_rock_beauty",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Vanity or posing in all five rarities (mirror, jealous coral, photographers, fashion show, velvet rope).",
+      "suggestion": "'Turns from yellow with a black spot as a baby to mostly black as a grown-up, and says it is just going through a phase.' (real)"
+    },
+    {
+      "id": "i_rock_beauty",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Fashion show: a fourth vanity line.",
+      "suggestion": "'Nibbled every sponge on the reef in one week, and the divers came up asking where all the furniture had gone.' (rock beauties eat sponges)"
+    },
+    {
+      "id": "i_rock_beauty",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Mirrorfin' matches the Common.",
+      "suggestion": "'Phasefin'"
+    },
+    {
+      "id": "x_angelfish",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Coral Catwalk Fin' collides with rock beauty and does not match the Epic (pet-shop customers).",
+      "suggestion": "'Showroom Glider'"
+    },
+    {
+      "id": "i_ruddy_turnstone",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Turning over every stone in the Common, Epic and Legendary: the same joke, bigger each time.",
+      "suggestion": "'Ate the leftover chips off every bench on the seafront before the seagulls woke up. The seagulls now set alarms.' (turnstones really scavenge)"
+    },
+    {
+      "id": "i_ruddy_turnstone",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Third 'turned over every stone' line.",
+      "suggestion": "'Flew from the Arctic to Australia and flipped one stone at every stop, just in case. Says it has nearly finished.'"
+    },
+    {
+      "id": "x_blackbird",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same premise as the Common (tossing leaves for worms), and 'in one afternoon' is a batch frame.",
+      "suggestion": "'Stripped every cherry off the orchard the night before picking day. The farmer harvested a lot of stones.'"
+    },
+    {
+      "id": "i_water_ouzel",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Walking underwater in the Uncommon, Rare, Epic and Legendary.",
+      "suggestion": "'Blinks its bright white eyelids while bobbing, like a tiny lighthouse flashing messages to the fish.' (real white nictitating membrane)"
+    },
+    {
+      "id": "i_water_ouzel",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Third underwater-walking line.",
+      "suggestion": "'Built its mossy nest right behind a waterfall, so every visitor gets soaked just to say hello.' (real)"
+    },
+    {
+      "id": "i_water_ouzel",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Fourth underwater-walking line.",
+      "suggestion": "'Sang right through the roar of the loudest waterfall in the mountains, and the waterfall turned itself down to listen.' (dippers sing over torrents)"
+    },
+    {
+      "id": "i_water_ouzel",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Underwaterwalk' reads as a phrase rather than a creature, and it matches the Uncommon.",
+      "suggestion": "'Blinkbob'"
+    },
+    {
+      "id": "i_redshank",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Alarm calls in the Common, Rare, Epic and Legendary.",
+      "suggestion": "'Sweeps its beak through the shallows like a metal detector and beeps proudly whenever it finds a shrimp.'"
+    },
+    {
+      "id": "i_redshank",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Fourth alarm/warden line; 'so many seasons' gives no punchline.",
+      "suggestion": "'Nested beside the eighteenth hole and made every golfer tiptoe past for a whole summer. Nobody has ever played so quietly.'"
+    },
+    {
+      "id": "i_redshank",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Redlegs' matches the Uncommon (red legs) and 'Alarmbird' (Uncommon) matches the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Alarmbird'"
+    },
+    {
+      "id": "i_redshank",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Redlegs' matches the Uncommon (red legs) and 'Alarmbird' (Uncommon) matches the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Redlegs'"
+    },
+    {
+      "id": "i_spoonbill",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Stirring in the Uncommon, Rare, Epic and Legendary.",
+      "suggestion": "'Has a bald greenish head, which it says keeps it cool and is definitely a fashion choice.' (true of the roseate spoonbill)"
+    },
+    {
+      "id": "i_spoonbill",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Third stirring line.",
+      "suggestion": "'Roosted with two hundred friends in one tree, which turned so pink that the tourists photographed it as blossom.'"
+    },
+    {
+      "id": "i_spoonbill",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'The finest restaurant in the land' uses the repeated 'in the land' frame (w01/w02 too).",
+      "suggestion": "'Was hired by the finest restaurant in town to stir its soup. Nobody else has been allowed near the pot since.'"
+    },
+    {
+      "id": "i_oystercatcher",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Mussels in the Uncommon, Epic and Legendary; calls in the Common and Rare.",
+      "suggestion": "'Laid its eggs in the middle of the seafront car park, and the whole town parked somewhere else for a month.' (they nest on gravel and roofs)"
+    },
+    {
+      "id": "i_oystercatcher",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Same loud-piping premise as the Common.",
+      "suggestion": "'Hammers limpets off the rocks with such a rat-a-tat that the woodpeckers want to know who the new drummer is.'"
+    },
+    {
+      "id": "i_oystercatcher",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Shellcracker Ollie' matches the Uncommon (opening mussels), not the Common (peep peep peep); the human first name is also odd.",
+      "suggestion": "'Peeppeeper'"
+    },
+    {
+      "id": "i_brambling",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same giant-flock premise as the Epic ('Led a winter flock of millions').",
+      "suggestion": "'Swaps its orange winter feathers for a smart black head every spring, and was let into a fancy restaurant without a tie.'"
+    },
+    {
+      "id": "i_brambling",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "The names are rotated: 'Beechseeker' fits the Rare, 'Flockfinch' the Common, 'Winterorange' the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Feederflock'"
+    },
+    {
+      "id": "i_brambling",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "The names are rotated: 'Beechseeker' fits the Rare, 'Flockfinch' the Common, 'Winterorange' the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Winterorange'"
+    },
+    {
+      "id": "i_brambling",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "The names are rotated: 'Beechseeker' fits the Rare, 'Flockfinch' the Common, 'Winterorange' the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Beechseeker'"
+    },
+    {
+      "id": "i_bulbul",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Singing in the Common, Rare, Epic and Legendary.",
+      "suggestion": "'Has a bright red patch under its tail and sits facing away from you so you cannot miss it.' (red-vented bulbul)"
+    },
+    {
+      "id": "i_bulbul",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Fourth singing line; the orchestra listening is not a punchline.",
+      "suggestion": "'Built its nest in a hanging flowerpot and would not let anyone water the plant all spring. The petunias are very thirsty.' (real)"
+    },
+    {
+      "id": "i_bulbul",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Crestbopper' does not match the Rare lore.",
+      "suggestion": "'Redpatch'"
+    },
+    {
+      "id": "i_coucal",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Its call fills the Uncommon, Rare, Epic and Legendary.",
+      "suggestion": "'Clambers through the hedge so clumsily that the gardener thinks a dog is stuck in it.' (coucals are clumsy climbers)"
+    },
+    {
+      "id": "i_coucal",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Fourth call line ('official drum of the marsh'); 'official' is a batch frame.",
+      "suggestion": "'Is a cuckoo that actually raises its own chicks, and tells every other cuckoo about it, loudly, all summer.' (real)"
+    },
+    {
+      "id": "i_coucal",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Bushstomper' fits the new Rare; 'Coopcooper' (Rare) fits the Uncommon call. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Coopcooper'"
+    },
+    {
+      "id": "i_coucal",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Bushstomper' fits the new Rare; 'Coopcooper' (Rare) fits the Uncommon call. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Bushstomper'"
+    },
+    {
+      "id": "i_hornbill",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same loud-wings premise as the Rare.",
+      "suggestion": "'Stripped a whole fig tree in one visit, and the forest had to wait until next year for pudding.'"
+    },
+    {
+      "id": "i_hornbill",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Sealing itself in a tree is also the Legendary premise.",
+      "suggestion": "'Has a big hollow helmet on its beak, so its calls echo like someone shouting into a bucket.' (casque)"
+    },
+    {
+      "id": "i_hornbill",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Bigbeak' does not match the Rare (whooshing wings) and collides with the macaw's name.",
+      "suggestion": "'Whooshwing'"
+    },
+    {
+      "id": "i_hornbill",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "After the Uncommon fix, 'Mudsealer' belongs to the Legendary.",
+      "suggestion": "'Buckethelm'"
+    },
+    {
+      "id": "i_indigo_bunting",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Its blue colour is the premise of the Common, Rare and Legendary.",
+      "suggestion": "'Learns its song from the bird next door, so whole streets of buntings sing with the same accent.' (real)"
+    },
+    {
+      "id": "i_indigo_bunting",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Star navigation repeats the Uncommon; 'Led a flock' is the Epic template, and the linter flags cosmic scale.",
+      "suggestion": "'Turned up at the woodland edge with a hundred blue friends, and the bluebell walk was cancelled because nobody could tell which was which.'"
+    },
+    {
+      "id": "i_indigo_bunting",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Brightfeather' fits the old colour line; it needs a song name.",
+      "suggestion": "'Copysong'"
+    },
+    {
+      "id": "i_jacamar",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Butterflies in the Common, Rare, Epic and Legendary.",
+      "suggestion": "'Sits so still on one branch that it can wait an hour for the perfect insect, then claims it was meditating.'"
+    },
+    {
+      "id": "i_jacamar",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Third butterfly line.",
+      "suggestion": "'Dug its nest tunnel into a termite mound, and the termites spent a week asking who had moved in upstairs.' (some jacamars do)"
+    },
+    {
+      "id": "i_junco",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Same premise as the Rare (its arrival means winter has started); 'official' is a batch frame.",
+      "suggestion": "'Has worn the same grey suit with a white belly every day of its life, and was finally voted best dressed by the snowmen.'"
+    },
+    {
+      "id": "i_junco",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Snowbird' fits the Rare (arrives with the first snow) and 'Groundhopper' fits the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Groundhopper'"
+    },
+    {
+      "id": "i_junco",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Snowbird' fits the Rare (arrives with the first snow) and 'Groundhopper' fits the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Snowbird'"
+    },
+    {
+      "id": "i_partridge",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "The pear tree and carol is also the Legendary premise.",
+      "suggestion": "'Runs instead of flying away, then hides behind a cow as if it was never there.'"
+    },
+    {
+      "id": "i_partridge",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Bursting out of a hedge repeats the Rare (and pheasant R and ruffed grouse R).",
+      "suggestion": "'Laid twenty eggs in one nest and the whole field had to tiptoe for a month.' (grey partridges have huge clutches)"
+    },
+    {
+      "id": "i_partridge",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Peartreesit' belongs to the Legendary once the Common changes.",
+      "suggestion": "'Cowdodger'"
+    },
+    {
+      "id": "i_prairie_chicken",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "'Held a dance-off on the prairie' is the black grouse Epic, word for word; dancing is also in the Uncommon and Legendary.",
+      "suggestion": "'Booms from the same hill every spring, and has done for so long that the map now calls it Boom Hill.' (real lek sites)"
+    },
+    {
+      "id": "i_prairie_chicken",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "Booming repeats the Common.",
+      "suggestion": "'Raises two feather tufts on its head like horns, and is very disappointed when nobody runs away.' (real pinnae)"
+    },
+    {
+      "id": "i_prairie_chicken",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Orangepuff' fits the Common (orange sacs); 'Prairiedancer' (Rare) fits the Uncommon dance. (part of a re-pairing across rarities)",
+      "suggestion": "'Prairiedancer'"
+    },
+    {
+      "id": "i_prairie_chicken",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Orangepuff' fits the Common (orange sacs); 'Prairiedancer' (Rare) fits the Uncommon dance. (part of a re-pairing across rarities)",
+      "suggestion": "'Hornpuff'"
+    },
+    {
+      "id": "i_black_grouse",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Dancing in the Rare, Epic and Legendary.",
+      "suggestion": "'Has bright red eyebrows that swell up when it shows off, so it always looks surprised at itself.' (real wattles)"
+    },
+    {
+      "id": "i_black_grouse",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "'Held a dance-off on the moor' copies the prairie chicken Epic.",
+      "suggestion": "'Held a staring match with a rival for so long that the sheep built a little grandstand.'"
+    },
+    {
+      "id": "i_black_grouse",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Lekdancer' needs to match the new Rare.",
+      "suggestion": "'Redbrow'"
+    },
+    {
+      "id": "i_ptarmigan",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Camouflage in the Common, Rare, Epic and Legendary.",
+      "suggestion": "'Dives into a snowdrift to sleep in a snug little cave, and will not come out for anyone holding a shovel.' (real snow roosting)"
+    },
+    {
+      "id": "i_ptarmigan",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Third camouflage line.",
+      "suggestion": "'Croaked so much like a creaky door that every mountain hut on the pass checked its hinges.' (real croaking call)"
+    },
+    {
+      "id": "i_ruffed_grouse",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Drumming in the Common, Epic and Legendary; 'festival' is a repeated frame.",
+      "suggestion": "'Walked across the whole snowy forest on its fringed winter toes, and the snowshoe hares asked for the pattern.' (real toe fringes)"
+    },
+    {
+      "id": "i_partridge",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'The most famous Christmas song in history' overstates it, but the line is fine.",
+      "suggestion": "'Got itself into a famous Christmas song and has refused to leave the pear tree since.'"
+    },
+    {
+      "id": "x_chick",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Following again (Uncommon: the vacuum; Legendary: the tractor).",
+      "suggestion": "'Hatched, looked around and announced it was in charge. The farmyard has run on time ever since.'"
+    },
+    {
+      "id": "x_chick",
+      "field": "names.legendary",
+      "severity": "medium",
+      "issue": "After the Legendary fix the tractor epithet no longer fits; the name was also long.",
+      "suggestion": "'Little Clucky, Boss of the Barnyard'"
+    },
+    {
+      "id": "x_chick",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Barnyard Peeping' is awkward and not creature-like.",
+      "suggestion": "'Fluffquake'"
+    },
+    {
+      "id": "x_gosling",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Hissing at things repeats the Common.",
+      "suggestion": "'Paddled off for its first swim the day it hatched, and spent the afternoon telling the ducks how easy it was.'"
+    },
+    {
+      "id": "x_gosling",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Marchingpeep' fits the Uncommon, not the Rare.",
+      "suggestion": "'Firstpaddle'"
+    },
+    {
+      "id": "penguin",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Belly sliding repeats the Common; 'Led ten thousand' is the batch Epic template.",
+      "suggestion": "'Jumped off the ice edge first, and ten thousand penguins followed it into the sea like a very long, very wet queue.'"
+    },
+    {
+      "id": "penguin",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Bellyglider' fits the Common and 'Huddlepal' (Rare) fits the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Huddlepal'"
+    },
+    {
+      "id": "penguin",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Bellyglider' fits the Common and 'Huddlepal' (Rare) fits the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Corkpopper'"
+    },
+    {
+      "id": "owl",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same hooting premise as the Common.",
+      "suggestion": "'Moved into the old barn, and every mouse in the county stayed indoors for the whole winter.'"
+    },
+    {
+      "id": "x_emu",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Speed in the Rare, Epic and Legendary.",
+      "suggestion": "'Walked along a fence for a thousand kilometres looking for a gap, and the farmers named the fence after it.' (Australia has a real emu fence)"
+    },
+    {
+      "id": "x_emu",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Bigfeet' does not match the Uncommon (chest drumming); 'Drumboom' (Rare) does. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Drumboom'"
+    },
+    {
+      "id": "x_emu",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Bigfeet' does not match the Uncommon (chest drumming); 'Drumboom' (Rare) does. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Jeepbeater'"
+    },
+    {
+      "id": "x_ostrich",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Speed again (Epic and Legendary); 'sunglasses' is a repeated punchline.",
+      "suggestion": "'Has eyes bigger than its brain, the biggest of any land animal, and still cannot remember where it put its egg.' (true)"
+    },
+    {
+      "id": "x_swordfish",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "A duel or tournament in the Common, Epic and Legendary.",
+      "suggestion": "'Warms its own eyes to see in the cold deep sea, and spotted a lost anchor from half a mile away.' (real eye heaters)"
+    },
+    {
+      "id": "x_puffin",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "A beak full of fish repeats the Uncommon.",
+      "suggestion": "'Has met the same partner at the same burrow every spring for twenty years, and still brings her a flower, which is a fish.'"
+    },
+    {
+      "id": "x_puffin",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Cliffwaddle' fits the Common, not the Rare (flying underwater).",
+      "suggestion": "'Seaflapper'"
+    },
+    {
+      "id": "x_quail",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Family group or covey in the Uncommon, Epic and Legendary; 'Led a covey' is the Epic template.",
+      "suggestion": "'Laid so many eggs in one spring that the farm shop now sells only tiny boxes.'"
+    },
+    {
+      "id": "x_scallop",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Swimming by clapping is the Common premise again.",
+      "suggestion": "'Grows a new ring on its shell every year, so it knows its exact age and announces it at every birthday.' (real growth rings)"
+    },
+    {
+      "id": "x_sea_sponge",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Same as the Common (soaks a rock pool dry), just bigger.",
+      "suggestion": "'Pumped so much seawater through itself in one day that the tide came in ten minutes late.' (sponges really filter huge volumes)"
+    },
+    {
+      "id": "x_seahorse",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Clinging or refusing to move is also the Common premise, and racing repeats the Rare.",
+      "suggestion": "'Changed colour to match every shade of seaweed in the bay. The divers have been looking for it since last summer.'"
+    },
+    {
+      "id": "x_seahorse",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Weedclinger' fits the Common, not the Rare (a slow race).",
+      "suggestion": "'Snailrace'"
+    },
+    {
+      "id": "x_stingray",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Hiding under the sand repeats the Common.",
+      "suggestion": "'Sucks clams out of the sand like a vacuum cleaner and leaves the empty shells in a tidy pile.'"
+    },
+    {
+      "id": "x_guppy",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Breeding a huge family repeats the Uncommon and Epic.",
+      "suggestion": "'Was sent to a tropical island to eat mosquitoes, and ate so many that the island now sleeps without nets.' (real mosquito control)"
+    },
+    {
+      "id": "x_goldfish_bowl",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Magnifying the goldfish repeats the Common (the bowl distorts the view).",
+      "suggestion": "'Hums when you run a wet finger round its rim, so the goldfish has started requesting songs.'"
+    },
+    {
+      "id": "x_goldfish_bowl",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No punchline or achievement.",
+      "suggestion": "'Has held the same goldfish for twenty years, and the goldfish still thinks every lap is a brand new holiday.'"
+    },
+    {
+      "id": "x_clam",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Squirting water repeats the Uncommon.",
+      "suggestion": "'Clamped onto a paddler's welly and would not let go, so she spent the whole holiday walking with a loud click.'"
+    },
+    {
+      "id": "x_nautilus",
+      "field": "lore.common",
+      "severity": "high",
+      "issue": "Bobbing up and down is the Common, Uncommon (buoyancy) and Rare (rising from the deep).",
+      "suggestion": "'Sticks to a rock with its tentacles to sleep, and snores out bubbles all night.'"
+    },
+    {
+      "id": "x_nautilus",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "Rising from the deep repeats its buoyancy premise.",
+      "suggestion": "'Has ninety little tentacles and no suckers, so it holds hands with everything by accident.' (real)"
+    },
+    {
+      "id": "x_coral",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Building a huge reef repeats the Epic, and there is no punchline.",
+      "suggestion": "'Spawned with every coral on the reef on one moonlit night, and the sea turned into a snow globe.' (real mass spawning)"
+    },
+    {
+      "id": "x_anemone",
+      "field": "lore.rare",
+      "severity": "high",
+      "issue": "The clownfish lodger appears in the Uncommon, Rare and Legendary.",
+      "suggestion": "'Fires sticky threads at anything that touches it, so every curious shrimp gets a surprise handshake.'"
+    },
+    {
+      "id": "x_anemone",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Third clownfish line (a hotel full of clownfish guests).",
+      "suggestion": "'Walked very slowly across the reef on its one foot to find a better view. It took a year, and the view was worth it.' (anemones can creep)"
+    },
+    {
+      "id": "i_brain_coral",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Slow thinking repeats the Uncommon.",
+      "suggestion": "'Has been growing for nine hundred years and is now the size of a car. The fish call it the library.'"
+    },
+    {
+      "id": "jellyfish",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Drifting without direction repeats the Common.",
+      "suggestion": "'Turns back into a baby whenever it gets old, and refuses to tell anyone its real age.' (the immortal jellyfish)"
+    },
+    {
+      "id": "jellyfish",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "A fact with no joke.",
+      "suggestion": "'Has no brain at all and still beats everyone at floating. Says thinking is overrated.'"
+    },
+    {
+      "id": "x_pufferfish",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Puffing up in a tight space repeats the Common.",
+      "suggestion": "'Drew a giant pattern in the sand with its fins to impress a date, and the divers thought aliens had landed.' (real pufferfish sand circles)"
+    },
+    {
+      "id": "shark",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Teeth (no dentist) repeats the Uncommon.",
+      "suggestion": "'Has swum the oceans since before there were trees, and still thinks trees are a passing fad.' (true)"
+    },
+    {
+      "id": "x_orca",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "A family song repeats the Uncommon (family dialect).",
+      "suggestion": "'Led the family pod for nearly a hundred years, and still decides where everyone has lunch.' (real matriarchs)"
+    },
+    {
+      "id": "dolphin",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "A ferry in the Rare and Epic; a tricks-for-tourists line.",
+      "suggestion": "'Taught its whole pod to surf the bow waves of every boat in the bay. The sailing school has lost all its pupils to them.'"
+    },
+    {
+      "id": "x_catfish",
+      "field": "lore.uncommon",
+      "severity": "high",
+      "issue": "Whiskers again (the Common feels with whiskers; the Uncommon tastes with them).",
+      "suggestion": "'Has taste buds all over its body, so it can taste the mud just by lying in it, and it loves the taste.' (true)"
+    },
+    {
+      "id": "x_catfish",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Angler fame repeats the Rare (fishermen's stories).",
+      "suggestion": "'Has lived under the old bridge for so long that the town put it on the welcome sign. It still eats the bread meant for the ducks.'"
+    },
+    {
+      "id": "x_cod",
+      "field": "names.common",
+      "severity": "high",
+      "issue": "'Batterhopeful' means 'hoping to be fried', which is a death joke, and it contradicts the Common (fleeing from chips).",
+      "suggestion": "'Chipdodger'"
+    },
+    {
+      "id": "x_cod",
+      "field": "lore.rare",
+      "severity": "medium",
+      "issue": "A net that tears itself open in fear is confusing.",
+      "suggestion": "'Has a single whisker on its chin and strokes it like a very wise old professor.' (real chin barbel)"
+    },
+    {
+      "id": "x_cod",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Led a shoal' template; it repeats the Uncommon (huge shoals).",
+      "suggestion": "'Laid millions of eggs in one go, and the North Sea briefly looked like tapioca.'"
+    },
+    {
+      "id": "x_dodo",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Returning to its island repeats the Epic, and the line is self-contradictory (found a forest, then planted the first tree).",
+      "suggestion": "'Became the most famous bird that nobody has seen in ages, and has started signing autographs anyway.'"
+    },
+    {
+      "id": "x_pheasant",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Running up and down the lane repeats the Common.",
+      "suggestion": "'Crowed and clattered its wings so loudly at dawn that every rooster in the valley gave up in shame.'"
+    },
+    {
+      "id": "x_parakeet",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "Fine; flagging only that the Legendary changes.",
+      "suggestion": "'Rosa Ringneck, Boss of the City Park' (keep)"
+    },
+    {
+      "id": "i_limpkin",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Wailing repeats the Uncommon.",
+      "suggestion": "'Left so many empty snail shells on the riverbank that hermit crabs came inland to go house-hunting.'"
+    },
+    {
+      "id": "i_limpkin",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Eating every snail repeats the Rare.",
+      "suggestion": "'Limped so stylishly through the swamp that every heron started copying the walk. It is now a dance craze.'"
+    },
+    {
+      "id": "i_limpkin",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "The names are rotated: 'Wailwader' fits the Uncommon, 'Snailsnatcher' the Rare, 'Limpstep' the Common. (part of a re-pairing across rarities)",
+      "suggestion": "'Limpstep'"
+    },
+    {
+      "id": "i_limpkin",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "The names are rotated: 'Wailwader' fits the Uncommon, 'Snailsnatcher' the Rare, 'Limpstep' the Common. (part of a re-pairing across rarities)",
+      "suggestion": "'Wailwader'"
+    },
+    {
+      "id": "i_limpkin",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "The names are rotated: 'Wailwader' fits the Uncommon, 'Snailsnatcher' the Rare, 'Limpstep' the Common. (part of a re-pairing across rarities)",
+      "suggestion": "'Snailsnatcher'"
+    },
+    {
+      "id": "i_european_gallinule",
+      "field": "lore.epic",
+      "severity": "high",
+      "issue": "Walking on lily pads in the Common, Epic and Legendary.",
+      "suggestion": "'Climbed the reeds like a ladder and was found on top of the boathouse roof, looking innocent.' (swamphens climb)"
+    },
+    {
+      "id": "i_european_gallinule",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "Third lily-pad walk.",
+      "suggestion": "'Holds its food in one foot like a sandwich, and was finally invited to the lakeside cafe, where it ordered everything with its toes.' (real)"
+    },
+    {
+      "id": "i_european_gallinule",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Lilywalker' fits the Common; 'Longtoes' (Rare) does not match the Rare (purple shine). (part of a re-pairing across rarities)",
+      "suggestion": "'Tailflicker'"
+    },
+    {
+      "id": "i_european_gallinule",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Lilywalker' fits the Common; 'Longtoes' (Rare) does not match the Rare (purple shine). (part of a re-pairing across rarities)",
+      "suggestion": "'Purpleshine'"
+    },
+    {
+      "id": "x_toucan",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "'Its beak became so famous... souvenir shops' evokes famous toucan brand mascots and has no punchline.",
+      "suggestion": "'Uses its huge beak as a radiator to cool down, and kept the rainforest cafe chilly all summer.' (real)"
+    },
+    {
+      "id": "i_bee_eater",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "Generic: 'colourful feathers' fits the lorikeet, macaw or kingfisher.",
+      "suggestion": "'Digs its nest tunnel in a sandy riverbank, so it comes out every morning with sand in its feathers and a grumpy face.' (real)"
+    },
+    {
+      "id": "i_bee_eater",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Eating so many bees that flowers must pollinate themselves is a gloomy ecology note, and it repeats the bee-catching in the Common, Rare and Epic.",
+      "suggestion": "'Flew in from Africa every summer for so long that the bees started arriving a week late on purpose.'"
+    },
+    {
+      "id": "i_bee_eater",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Rainbowbeak' fits the Uncommon, not the Rare (long-range catch).",
+      "suggestion": "'Longsnap'"
+    },
+    {
+      "id": "bird",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Chipthief' does not match the Common (nesting in the gutter); chip theft is the seagull's joke and overlaps 'Chipswiper'.",
+      "suggestion": "'Gutternester'"
+    },
+    {
+      "id": "bird",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Window Tapper' matches the Uncommon (tapping on the window), not the Epic.",
+      "suggestion": "'Wire Sagger' (for the new Epic below)"
+    },
+    {
+      "id": "bird",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Weak consequence ('the statue has never been so busy'), plus the 'Led every X' template.",
+      "suggestion": "'Gathered every sparrow in town on one telephone wire, which sagged so low that the postman had to limbo under it.'"
+    },
+    {
+      "id": "bird",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Its singing wakes the whole neighbourhood, which overlaps blackbird L (the town's bedtime song); 'out of business' is a stock punchline.",
+      "suggestion": "'Sang so sweetly from the TV aerial that the whole street turned its radios off for the summer. The radio station sent a sulky letter.'"
+    },
+    {
+      "id": "bird",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "A four-in-the-morning dawn chorus duplicates seagull R (four in the morning) and the approved smoke detector line.",
+      "suggestion": "'Starts the dawn chorus before the milk float, and expects the whole street to join in.'"
+    },
+    {
+      "id": "i_bald_eagle",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Whitecrest' fits the Rare (white head) and 'Skysoarer' fits the old Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Squeakglare'"
+    },
+    {
+      "id": "i_bald_eagle",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Whitecrest' fits the Rare (white head) and 'Skysoarer' fits the old Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Whitecrest'"
+    },
+    {
+      "id": "i_bald_eagle",
+      "field": "names.epic",
+      "severity": "medium",
+      "issue": "'Lake Raider' does not match the Epic (a nest as big as a hut); 'Raider' is also the Epic name of the bee eater and barracouta.",
+      "suggestion": "'Hutnester'"
+    },
+    {
+      "id": "i_bee_eater",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Stingwhacker' fits the Common (bashing a bee on a branch); after the Uncommon fix it should match the burrow.",
+      "suggestion": "'Sandtunneller'"
+    },
+    {
+      "id": "i_lorikeet",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Brushtongue' fits the Uncommon (paintbrush tongue), not the Rare (cafe juice raid).",
+      "suggestion": "'Juicegulper'"
+    },
+    {
+      "id": "x_krill",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Whalefood' is about being eaten and fits the Epic, not the Rare (pink swarm).",
+      "suggestion": "'Pinksea'"
+    },
+    {
+      "id": "x_krill",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Swarm premise in the Rare, Epic and Legendary; 'seen from a satellite' is reflexive cosmic scale; 'everyone went home' is flat.",
+      "suggestion": "'Has more of itself in the ocean than there are people on land, and still gets lost in a teaspoon.' (callback to the Common)"
+    },
+    {
+      "id": "i_bustard",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Strutpuff' fits the Uncommon puff; after the fixes the Common is slow walking.",
+      "suggestion": "'Slowstrut'"
+    },
+    {
+      "id": "octopus",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Eightarms' does not match the Rare (colour change).",
+      "suggestion": "'Chessboard Chameleon'"
+    },
+    {
+      "id": "octopus",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Eight hobbies, one per arm, with no punchline.",
+      "suggestion": "'Learned eight hobbies at once, one per arm, and still dropped the knitting the moment someone opened a jar.'"
+    },
+    {
+      "id": "i_sturgeon",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "Names rotated: 'Bonyback' fits the Uncommon (armour plates), 'Mudsifter' the Common, 'Riverbarge' the Epic rather than the Rare (a leap). (part of a re-pairing across rarities)",
+      "suggestion": "'Mudsifter'"
+    },
+    {
+      "id": "i_sturgeon",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Names rotated: 'Bonyback' fits the Uncommon (armour plates), 'Mudsifter' the Common, 'Riverbarge' the Epic rather than the Rare (a leap). (part of a re-pairing across rarities)",
+      "suggestion": "'Bonyback'"
+    },
+    {
+      "id": "i_sturgeon",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Names rotated: 'Bonyback' fits the Uncommon (armour plates), 'Mudsifter' the Common, 'Riverbarge' the Epic rather than the Rare (a leap). (part of a re-pairing across rarities)",
+      "suggestion": "'Boatbumper'"
+    },
+    {
+      "id": "i_sturgeon",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Sturgeon do not walk on the riverbed.",
+      "suggestion": "'Has armour plates instead of scales and cruises along the riverbed like a tank.'"
+    },
+    {
+      "id": "x_sea_turtle",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Beachhatcher' fits the Epic (hatchlings), not the Rare (gliding past a speedboat).",
+      "suggestion": "'Flipperglide'"
+    },
+    {
+      "id": "x_angelfish",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Pairpaddler' fits the Uncommon (always with the same partner), not the Rare (vanishing in the weeds).",
+      "suggestion": "'Weedghost'"
+    },
+    {
+      "id": "x_budgie",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Mirrorbell' fits the Uncommon and 'Seedflinger' fits the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Seedflinger'"
+    },
+    {
+      "id": "x_budgie",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Mirrorbell' fits the Uncommon and 'Seedflinger' fits the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Mirrorbell'"
+    },
+    {
+      "id": "x_falcon",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Diverocket' fits the Rare (diving faster than sound) and 'Glovesitter' fits the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Glovesitter'"
+    },
+    {
+      "id": "x_falcon",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Diverocket' fits the Rare (diving faster than sound) and 'Glovesitter' fits the Common. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Diverocket'"
+    },
+    {
+      "id": "x_falcon",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Pigeons scattering is weak and generic for any raptor.",
+      "suggestion": "'Moved onto the tallest office block in the city, and the window cleaners now book appointments around its nap.' (urban peregrines)"
+    },
+    {
+      "id": "x_manta_ray",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Wingflapper' fits the Rare breach and 'Cleanstation' fits the Uncommon. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Cleanstation'"
+    },
+    {
+      "id": "x_manta_ray",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Wingflapper' fits the Rare breach and 'Cleanstation' fits the Uncommon. Swap them. (part of a re-pairing across rarities)",
+      "suggestion": "'Wingflapper'"
+    },
+    {
+      "id": "x_manta_ray",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Weak premise (seagulls taking swimming lessons is a non sequitur).",
+      "suggestion": "'Has the biggest brain of any fish and recognises itself in a mirror, so it spends ages fixing its fins before every dive.' (real mirror tests)"
+    },
+    {
+      "id": "x_narwhal",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Icebreaker' fits the Common and 'Unicornish' (Rare) fits the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Unicornish'"
+    },
+    {
+      "id": "x_narwhal",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Icebreaker' fits the Common and 'Unicornish' (Rare) fits the Uncommon. (part of a re-pairing across rarities)",
+      "suggestion": "'Seabedstirrer'"
+    },
+    {
+      "id": "x_narwhal",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "'Tied every iceberg in a knot' is a non sequitur.",
+      "suggestion": "'Held an underwater jousting match with twenty other narwhals. The icebergs now have notches like a measuring stick.'"
+    },
+    {
+      "id": "x_orca",
+      "field": "names.common",
+      "severity": "medium",
+      "issue": "'Waveslammer' fits the Rare (wave-washing seals), not the Common (spyhop).",
+      "suggestion": "'Spyhopper'"
+    },
+    {
+      "id": "x_seagull",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "Rotated: 'Rooftopscream' fits the Rare, 'Icecreamthief' the Epic; 'Chipswiper' also echoes bird 'Chipthief'. (part of a re-pairing across rarities)",
+      "suggestion": "'Wormstomper'"
+    },
+    {
+      "id": "x_seagull",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "Rotated: 'Rooftopscream' fits the Rare, 'Icecreamthief' the Epic; 'Chipswiper' also echoes bird 'Chipthief'. (part of a re-pairing across rarities)",
+      "suggestion": "'Rooftopscream'"
+    },
+    {
+      "id": "x_vulture",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Cleanupcrew' fits the Legendary, not the Rare (picnic spotting).",
+      "suggestion": "'Picnicspotter'"
+    },
+    {
+      "id": "x_woodpecker",
+      "field": "names.uncommon",
+      "severity": "medium",
+      "issue": "'Housepecker' fits the Common (drainpipe) or Rare (shed), not the Uncommon (tongue wrapped round its skull).",
+      "suggestion": "'Tonguewrap'"
+    },
+    {
+      "id": "x_aquarium",
+      "field": "names.rare",
+      "severity": "medium",
+      "issue": "'Glassnose' does not match the Rare (the bubbler lift).",
+      "suggestion": "'Bubblelift'"
+    },
+    {
+      "id": "x_carp",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Lilylurk' does not match the Rare (ducks resting on it).",
+      "suggestion": "'Duckisland'"
+    },
+    {
+      "id": "fish",
+      "field": "names.rare",
+      "severity": "low",
+      "issue": "'Glugglug' is vague for the Rare (ate so fast it spun).",
+      "suggestion": "'Gobblespin'"
+    },
+    {
+      "id": "fish",
+      "field": "lore.legendary",
+      "severity": "high",
+      "issue": "No punchline: a list of bowl ornaments. 'In the land' is a repeated frame.",
+      "suggestion": "'Lived forty years in the same bowl, outlasting three castles and two plastic divers, and is still surprised by the castle.' (callback to the Common)"
+    },
+    {
+      "id": "fish",
+      "field": "names.legendary",
+      "severity": "low",
+      "issue": "'Goldfin' sits close to a famous film villain's name.",
+      "suggestion": "'Captain Bubbles of the Fishbowl' (or keep)"
+    },
+    {
+      "id": "i_african_grey",
+      "field": "moves.signature",
+      "severity": "low",
+      "issue": "'Mimic Dive' means nothing for a plain diving hit.",
+      "suggestion": "'Grey Dive'"
+    },
+    {
+      "id": "x_whale_shark",
+      "field": "lore.uncommon",
+      "severity": "medium",
+      "issue": "A fact with no joke.",
+      "suggestion": "'Is the biggest fish in the ocean but only eats the tiniest things in it. Its dinner plate would be a thimble.'"
+    },
+    {
+      "id": "x_whale_shark",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "No punchline ('the sea turned a little clearer').",
+      "suggestion": "'Swam so slowly past the dive boat that the divers had lunch, a nap and a second dive before its tail went by.'"
+    },
+    {
+      "id": "x_canary",
+      "field": "lore.epic",
+      "severity": "medium",
+      "issue": "Singing in the Common, Rare, Epic and Legendary; give one rarity another trait.",
+      "suggestion": "'Is so yellow that the miners kept it as a lucky charm, and it now refuses to go anywhere without a tiny helmet.'"
+    },
+    {
+      "id": "x_quail",
+      "field": "lore.legendary",
+      "severity": "medium",
+      "issue": "Commanding the covey repeats the Uncommon; no punchline.",
+      "suggestion": "'Crossed the whole sea at night in one flock, and the lighthouse keeper counted them instead of sheep and slept for a week.'"
+    },
+    {
+      "id": "x_dodo",
+      "field": "lore.uncommon",
+      "severity": "low",
+      "issue": "Confusing: why doorbells?",
+      "suggestion": "'Came back from history and keeps trying to pay for things with very old coins.'"
+    },
+    {
+      "id": "x_dodo",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Mild extinction joke ('extinct display'). Acceptable, but watch the tone.",
+      "suggestion": "Keep, or: 'Waddled into the museum and stood very still next to its own statue. Nobody has spotted the difference.'"
+    },
+    {
+      "id": "x_tuna",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "Fast ocean travel repeats the Rare (beat the cargo ship).",
+      "suggestion": "'Swam across a whole ocean in a few weeks, then turned round because it forgot to lock the reef.'"
+    },
+    {
+      "id": "x_turkey",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "'The farmer thinks he's going mad' is a mental-health phrase; 'the farmer' also repeats across batches.",
+      "suggestion": "'Gobbled at the farmyard until every animal gobbled back. The farmer now answers the phone with a gobble.'"
+    },
+    {
+      "id": "x_peacock",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "The tail display dominates the Rare, Epic and Legendary.",
+      "suggestion": "'Screamed HELP so convincingly from the garden wall that the fire brigade came twice. It was only saying good morning.' (real call)"
+    },
+    {
+      "id": "x_eel",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "Slipping between waters in the Uncommon and Rare.",
+      "suggestion": "'Changes colour from glassy to yellow to silver as it grows up, and complains every time its clothes stop fitting.' (real life stages)"
+    },
+    {
+      "id": "i_electric_ray",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'Sent a thank-you card' also appears in limpkin and in w01/w02.",
+      "suggestion": "'Powered an underwater research station for a month without being asked. The scientists named the plug socket after it.'"
+    },
+    {
+      "id": "x_albatross",
+      "field": "lore.epic",
+      "severity": "low",
+      "issue": "The linter flags cosmic scale below Legendary ('the sun had gone in').",
+      "suggestion": "'Spread its wings across the harbour, and every boat thought a cloud had parked overhead.'"
+    },
+    {
+      "id": "x_woodpecker",
+      "field": "lore.legendary",
+      "severity": "low",
+      "issue": "'Charged the owls rent' repeats the rent idea in anemone U and coral U.",
+      "suggestion": "'Drilled a perfect round window in the old oak, and the owls moved in before it had finished the curtains.'"
+    },
+    {
+      "id": "x_seagull",
+      "field": "lore.rare",
+      "severity": "low",
+      "issue": "'Four in the morning' is also in bird R.",
+      "suggestion": "'Screams from the rooftop before dawn so the whole seaside town wakes before the fishing boats.'"
+    }
+  ]
+}

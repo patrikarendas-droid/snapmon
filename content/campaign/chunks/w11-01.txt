@@ -1,0 +1,224 @@
+@x_calendar
+N: Monthforgetter | Birthdayringer | Datehopper | Double-Booked Day | The Calendar Who Cancelled Monday
+1: Stays on last month's page until someone notices in the middle of the next one.
+2: Has a little ring drawn round every birthday, so nobody can pretend they forgot.
+3: Shuffles its own dates, so the dentist appointment keeps landing on the trip to the zoo.
+4: Double-booked the whole family for one Saturday, and they went to a wedding, a football match and a party in the same clothes.
+5: Crossed out Monday so firmly that the whole office took the day off, and nobody has worked out how to undo it.
+M: signature=Page Flip Flip Flip; legend=Overdue Reminder Stink; ultimate=Calendar Shuffle; kit.paper_cut=Page Cut Cut; kit.ink_splatter=Felt Tip Smudge; kit.deadline_panic=Due Date Panic
+@x_calendar_page
+N: Torncorner | Dogearflap | Dayskipper | Tear-Off Blizzard | The Page That Made It Friday
+1: Gets torn off a day early by someone who can't wait for the weekend.
+2: Curls up at the corner like a little dog's ear.
+3: Tears itself off at midnight, so everyone wakes up a day ahead.
+4: Was torn off so fast before the holiday that the whole office snowed with paper days.
+5: Tore itself off five times in one night, and the whole school arrived for the summer holidays on a Tuesday in spring.
+M: signature=Tear Tear Tear; legend=Date Flash; ultimate=Tear-Off Flurry; kit.paper_cut=Paper Edge Cut; kit.ink_splatter=Smudged Date; kit.deadline_panic=Tomorrow Panic
+@x_clipboard
+N: Fingerclipper | Ticksheet | Importantlooker | Inspection Day Panic | Sir Clipsworth the Self-Appointed
+1: Snaps its clip on your fingers every time you add a new sheet.
+2: Has a list with little ticks on it that never quite gets finished.
+3: Makes whoever holds it look so important that doors open and nobody asks questions.
+4: Was carried round the school by a pupil for one afternoon, and three teachers tidied their desks just in case.
+5: Walked a lost tourist into the town hall meeting, and the tourist ended up chairing it.
+M: signature=Clip Clip Clip; legend=Hot Clipboard Clamp; ultimate=Inspection Sweep; kit.paper_cut=Sheet Edge Cuts; kit.ink_splatter=Biro Blot; kit.deadline_panic=Clipboard Glare; kit.coffee_break=Tea Break
+@x_diary
+N: Lockfiddler | Keyloser | Secretsquealer | Sleepover Secrets | Dearest Confida, Keeper of Crushes
+1: Has a little lock that pops open if you just look at it hard enough.
+2: Has a tiny key that vanishes the night you most need it.
+3: Falls open at the most embarrassing page whenever a brother walks past.
+4: Was read aloud at the sleepover by mistake, and five friendships were fixed by morning.
+5: Kept a secret for forty years, then was found by a granddaughter who wrote the next page.
+M: signature=Lock Lock Lock; legend=Secret Page Flash; ultimate=Diary Reveal; kit.ink_splatter=Gel Pen Splodge; kit.coffee_break=Pillow Rest
+@x_file_folder
+N: Papershedder | Wrongtabbed | Misfiler | Cabinet Avalanche | The Folder Nobody Could Find
+1: Sheds a sheet of paper every time it's lifted.
+2: Has a label on its tab that doesn't match what's inside.
+3: Hides important papers in the wrong drawer and then looks innocent.
+4: Was pulled from the bottom of the stack, and the whole filing cabinet fell over like a waterfall of paper.
+5: Hid the same lost form for ten years, then turned up the day after it was no longer needed.
+M: signature=Sheet Sheet Sheet; legend=Lost File Flash; ultimate=Paper Avalanche; kit.paper_cut=Sharp Edge Cuts; kit.ink_splatter=Coffee Ring Stink; kit.deadline_panic=Missing File Panic
+@x_folder
+N: Bandsnapper | Paperbulger | Homeworkhider | School Bag Explosion | The Fattest Folder in Year Six
+1: Snaps its elastic band on your thumb when you close it.
+2: Bulges with so many worksheets that it won't close properly.
+3: Swallows the homework you need and spits out the one from last term.
+4: Burst open on the bus, and every worksheet from the whole year flew out of the window.
+5: Held every worksheet from one whole school year and was entered into the school museum.
+M: signature=Snap Snap Snap; legend=Bulge Crack; ultimate=Worksheet Burst; kit.paper_cut=Paper Edge Cuts; kit.ink_splatter=Leaky Pen Stink; kit.coffee_break=Desk Drawer Rest
+@x_journal
+N: Doodlemargin | Leatherbound | Idealogger | Expedition Notes | The Journal That Found the Waterfall
+1: Gets doodles in every margin before a single real word is written.
+2: Has a soft leather cover that gets nicer every time it's held.
+3: Wrote down an idea at midnight that its owner didn't remember having.
+4: Was left open in the rain, and every page became a watercolour painting.
+5: Held the notes of an explorer who found a hidden waterfall, with the map drawn on page four.
+M: signature=Scribble Scribble Scribble; legend=Leather Cover Slap; ultimate=Lost Page Reveal; kit.deadline_panic=Writer's Block Panic; kit.coffee_break=Bookmark Rest
+@x_notebook_pad
+N: Spiraltangle | Lastpage | Pagerip | Exam Revision Storm | The Notebook That Passed Every Test
+1: Tangles its spiral in your jumper sleeve.
+2: Always runs out of pages one line before the end of the lesson.
+3: Rips out pages so neatly that it leaves no fringe, and nobody believes it.
+4: Was copied from by the whole class on the night before the exam, and the photocopier gave up.
+5: Was revised from by three brothers in a row, and all three got top marks.
+M: signature=Spiral Spiral Spiral; legend=Rip Out Crack; ultimate=Cram Session; kit.paper_cut=Paper Snick Snick; kit.ink_splatter=Smudgy Notes; kit.deadline_panic=Exam Panic; kit.coffee_break=Last Page Rest
+@x_notepad
+N: Phonedoodler | Shoppinglister | Lostlist | Message Mix-Up | The Pad That Remembered Everything
+1: Gets covered in doodles every time someone is on the phone.
+2: Has the shopping list on it, but always stays at home on the kitchen counter.
+3: Writes messages so messily that "call Gran" becomes "cool gorilla".
+4: Mixed up the family's messages so badly that the plumber was invited to Sunday lunch.
+5: Wrote down a phone number that won the family a holiday, and is now kept in a frame.
+M: signature=Doodle Doodle Doodle; legend=Bright Idea Boost; ultimate=Message Mix-Up Stink; kit.ink_splatter=Biro Splodge; kit.deadline_panic=Lost List Panic; kit.coffee_break=Phone Call Rest
+@x_planner
+N: Colourcoder | Overplanner | Timesqueezer | Holiday Itinerary | Lady Schedula the Unstoppable
+1: Is coloured in with twelve different pens before a single plan is made.
+2: Plans so many things in one day that there's no time for lunch.
+3: Squeezes an extra hour into every Saturday, and nobody knows where it comes from.
+4: Planned a family holiday so tightly that they saw nine castles and no beaches.
+5: Planned a whole wedding to the minute, and the bride arrived exactly as the bells rang.
+M: signature=Plan Plan Plan; legend=Free Hour Rest; ultimate=Itinerary Overload; kit.paper_cut=Tab Cut Cut; kit.deadline_panic=Overbooked Panic; kit.coffee_break=Planned Break
+@x_ring_binder
+N: Ringpincher | Holetearer | Dividermaze | Coursework Collapse | The Binder of Forty Subjects
+1: Pinches your fingers every time its rings snap shut.
+2: Rips the holes in every sheet so the pages hang loose.
+3: Grows a new coloured divider overnight, until nobody can find maths.
+4: Snapped open at the bottom of the stairs and spread a whole year of coursework from the hall to the kitchen.
+5: Held every lesson from a whole school career, and the student who owned it became a teacher.
+M: signature=Ring Ring Ring; legend=Sun-Warm Plastic; ultimate=Ring Snap Spill; kit.paper_cut=Page Cut Cut Cut; kit.ink_splatter=Highlighter Stink; kit.coffee_break=Shelf Rest
+@x_sticky_note
+N: Fallsoffer | Fridgeflapper | Everywhere Note | Office Yellow Out | The Note That Ran the House
+1: Falls off the wall as soon as you read it.
+2: Covers the fridge door so thickly that the fridge looks yellow.
+3: Appears on everything in the house overnight, including the cat.
+4: Covered every window in the office for a joke, and the boss thought it was a sunny day.
+5: Reminded a whole family to do everything for a month until the house ran itself.
+M: signature=Stick Stick Stick; legend=Note Slap; ultimate=Yellow Out; kit.paper_cut=Corner Cuts; kit.ink_splatter=Marker Smudge; kit.coffee_break=Peel Off Rest
+@bookshelf
+N: Wobbleshelf | Bookbender | Secretdoor | Library Domino | The Bookcase That Opened a Room
+1: Wobbles when you take a book out from the bottom.
+2: Sags in the middle under the heaviest books.
+3: Swings open like a secret door when the right book is tilted.
+4: Tipped one book over, then another, and the whole library fell like dominoes.
+5: Revealed a hidden room behind it that held a lost tea set, a cat and a very old piano.
+M: signature=Book Book Book; legend=Topple Topple Topple; ultimate=Secret Door Swing; kit.plot_twist=Hidden Room Startle; kit.ink_splash=Dusty Book Pong; kit.hardcover_slam=Shelf Slam
+@x_cardboard
+N: Soggycorner | Fortbuilder | Slidesled | Cardboard City | The Cardboard Castle King
+1: Goes soggy at the corner the moment it touches a puddle.
+2: Is turned into a fort with windows and a door by every child who finds it.
+3: Becomes the fastest sledge on the hill whenever it snows.
+4: Was made into a whole cardboard city in the garden, and the cat moved into the town hall.
+5: Built a castle so tall in the living room that the family ate dinner in its great hall for a week.
+M: signature=Corner Corner Corner; legend=Sun-Dried Crackle; ultimate=Soggy Collapse; kit.ink_splash=Marker Pong; kit.hardcover_slam=Flat Box Slam; kit.bookmark_ward=Folded Wall
+@x_paper_crane
+N: Foldfumbler | Tailpullflap | Wishfolder | Thousand Crane Garden | The Crane That Granted Wishes
+1: Comes out wonky and lopsided every time someone tries to fold it.
+2: Flaps its paper wings when you pull its tail.
+3: Grants a tiny wish to whoever folds it perfectly, or so its owner believes.
+4: Was folded a thousand times by a whole school, and the string of cranes went round the playground.
+5: Was folded by a grandad for each day his granddaughter was in hospital, and she came home to a sky of them.
+M: signature=Fold Fold Fold; legend=Ink Stain Stink; ultimate=Crane Swarm Flight; kit.plot_twist=Wing Flap Startle; kit.ink_splash=Marker Pong; kit.hardcover_slam=Folded Beak Jab
+@envelope
+N: Papercutter | Tonguelicker | Windowpeeker | Doormat Disappearance | The Letter That Found Its Way
+1: Gives you a paper cut every time you open it in a hurry.
+2: Has a sticky edge that tastes terrible when you lick it.
+3: Has a little window that shows exactly who it's from, so you know it's a bill.
+4: Arrived with five hundred others on the same birthday, and the doormat disappeared.
+5: Was posted forty years ago, lost behind a sorting machine, and arrived on the right birthday anyway.
+M: signature=Flap Flap Flap; legend=Stamp Snatch; ultimate=Letter Flood; kit.plot_twist=Surprise Letter; kit.ink_splash=Smudged Address; kit.hardcover_slam=Parcel Slap; kit.bookmark_ward=Sealed Guard
+@i_street_sign
+N: Wrongnamed | Graffitiface | Twistpost | Junction Muddle | The Sign That Renamed the Street
+1: Has been spelt wrong for thirty years, and nobody can be bothered to fix it.
+2: Gets stickers on it every week, and the council peels them off every Monday.
+3: Twists in the wind until it points down the wrong road.
+4: Was turned round at the crossroads, and every delivery van in town spent the day in a cul-de-sac.
+5: Was misspelt so long that the town gave up and changed the street's name to match it.
+M: signature=Point Point Point; legend=Name Pride; ultimate=Signpost Spin; kit.plot_twist=Wrong Turn Twist; kit.ink_splash=Spray Paint Pong; kit.hardcover_slam=Post Bonk; kit.bookmark_ward=Metal Plate Guard
+@x_atlas
+N: Heavylap | Pagefoldout | Mapmagic | Geography Lesson | The Atlas That Planned Every Holiday
+1: Is so heavy that it squashes your legs flat when you read it on your lap.
+2: Has a fold-out page that never folds back the same way.
+3: Opens on a random country whenever it's dropped, and its owner wants to go there.
+4: Was opened on every desk in the geography lesson, and the whole class planned a trip to the same island.
+5: Planned fifty holidays for one family by falling open on the right page each summer.
+M: signature=Page Page Page; legend=Old Paper Pong; ultimate=Continent Crunch; kit.paper_cut=Map Edge Cuts; kit.ink_splatter=Faded Ink Stink; kit.coffee_break=Armchair Rest
+@x_map
+N: Refoldfail | Wrongwayup | Treasurecross | Walking Holiday Detour | The Map With an Extra X
+1: Can never be folded back the way it came out of the shop.
+2: Is always held upside down by the person in charge.
+3: Shows a path that doesn't exist, and somehow everyone finds it anyway.
+4: Led a whole walking group the wrong way round a lake, and they found the best tea shop in the county.
+5: Had an X drawn on it by a grandad as a joke, and his grandchildren dug up a real tin of old coins.
+M: signature=Fold Fold Fold Fold; legend=Map Map Map; ultimate=Big Detour; kit.paper_cut=Crease Cut; kit.ink_splatter=Rain Smudge; kit.deadline_panic=Lost Panic; kit.coffee_break=Picnic Stop
+@newspaper
+N: Inkyfingers Paper | Crosswordhog | Windflyer | Sunday Paper Storm | The Paper That Printed Tomorrow
+1: Leaves grey ink on everyone's fingers and on the white sofa.
+2: Gets its crossword done in pen by grandad before anyone else can try.
+3: Flies off the bench on a windy day and wraps itself round a passing cyclist.
+4: Blew out of every paper box in the street on the windiest Sunday, and the whole town wore headlines.
+5: Printed a story about a lost dog on Monday, and by Tuesday the dog had read it and come home.
+M: signature=Headline Headline Headline; legend=Page Page Page Page; ultimate=Paper Storm; kit.ink_splash=Wet Ink Pong; kit.hardcover_slam=Rolled Paper Swat; kit.bookmark_ward=Folded Guard
+@sewing_machine
+N: Threadsnarl | Footpedaller | Hemracer | Costume Week Rush | The Machine That Stitched a Town
+1: Snarls its thread into a bird's nest under the fabric.
+2: Is driven by a foot pedal that its owner presses like a racing car.
+3: Stitched a hem so fast that the curtain was finished before the kettle boiled.
+4: Made every costume for the school play in one week, including a dragon and a talking teapot.
+5: Stitched a patchwork quilt so big that it covered the whole village green for the summer fair.
+M: signature=Stitch Stitch Stitch; legend=Bobbin Rest; ultimate=Stitch Storm; kit.pin_prick=Needle Prick; kit.knit_together=Mend Rest; kit.thread_bind=Thread Snare
+@x_hole_puncher
+N: Confettimaker | Threesheetjam | Holepuncher Pro | Office Confetti Storm | The Puncher That Made It Snow
+1: Spills its little paper circles all over the floor when you open it.
+2: Jams if you put more than three sheets in it.
+3: Punches holes slightly off-centre, so every page hangs crooked.
+4: Was emptied out of the office window for a joke, and the car park looked like it had snowed.
+5: Punched enough paper circles for a whole wedding's confetti, and saved the bride buying any.
+M: signature=Punch Punch Punch; legend=Hot Lever Press; ultimate=Paper Dot Blizzard; kit.paper_cut=Punch Cut Cut; kit.deadline_panic=Jam Panic; kit.coffee_break=Empty Out Rest
+@x_label_maker
+N: Labelhappy | Typoprinter | Stickystrip | Kitchen Label Frenzy | Sir Labelworth the Thorough
+1: Labels the light switch, the door and the dog's bowl.
+2: Prints every label with a typo, so the jar says SUGRA.
+3: Sticks its label so firmly that it never comes off, even in the dishwasher.
+4: Labelled everything in the kitchen in one afternoon, including the kettle, the toaster and Dad.
+5: Labelled every shelf in the giant library so well that a lost book was found after fifty years.
+M: signature=Print Print Print; legend=Label Crack; ultimate=Sticker Blitz; kit.ink_splatter=Smudgy Print; kit.deadline_panic=Out of Tape Panic; kit.coffee_break=Battery Rest
+@x_stapler_remover
+N: Jawsnapper | Fingerpinch | Paperrescuer | Staple Rescue Mission | The Jaws of the Office
+1: Snaps its little jaws like a crocodile on your fingers.
+2: Pinches the paper and tears a corner off along with the staple.
+3: Rescues pages from staples so neatly that the holes vanish.
+4: Freed every page from a mountain of stapled reports, and the office looked like a paper snowstorm.
+5: Unstapled a thousand reports in one afternoon and was given a little crown made of staples.
+M: signature=Bite Bite Bite; legend=Jaw Guard; ultimate=Staple Snatch; kit.paper_cut=Torn Corner Cuts; kit.ink_splatter=Smudge Stink; kit.deadline_panic=Pinch Panic; kit.coffee_break=Desk Rest
+@x_tape_gun
+N: Screechtape | Boxsealer | Edgefinder Gun | Moving Day Seal | The Tape Gun That Taped the Van
+1: Screeches so loudly when it's pulled that everyone covers their ears.
+2: Seals a box in one long noisy swoop.
+3: Finds the end of the tape every time, which no human can do.
+4: Sealed every box on moving day so well that nobody could open them for a week.
+5: Taped a whole van shut by mistake, with the moving men still inside eating sandwiches.
+M: signature=Rip Rip Rip; legend=Hot Tape Screech; ultimate=Tape Wrap; kit.paper_cut=Tape Edge Cut; kit.ink_splatter=Marker Pong; kit.deadline_panic=Tape Screech Startle
+@x_banknote
+N: Pocketwasher | Crumplenote | Folderfinder | Pocket Money Day | The Note That Came Back
+1: Goes through the washing machine in a jeans pocket and comes out crinkly.
+2: Gets folded so small that it disappears in the wallet.
+3: Turns up in old coat pockets just when someone needs it most.
+4: Blew down the high street on a windy day, and twenty people chased it.
+5: Was spent at the market, travelled the country for ten years, and came back to its owner in change.
+M: signature=Crinkle Crinkle Crinkle; legend=Pocket Rest; ultimate=Windy Chase; kit.paper_cut=Note Edge Cuts; kit.ink_splatter=Old Note Stink; kit.coffee_break=Wallet Rest
+@x_banner
+N: Saggyrope | Windsailer | Welcomeflapper | Street Party Flap | The Banner That Lifted Off
+1: Sags in the middle so the words read WELC... OME.
+2: Fills with wind like a sail and tries to fly away.
+3: Flapped its welcome message so loudly that the guests arrived early.
+4: Was hung across the whole street for the party, and every lorry had to drive under it on tiptoe.
+5: Was blown away in a gale and landed across the finish line of a marathon, just in time.
+M: signature=Flap Flap Flap; legend=Welcome Flash; ultimate=Banner Wrap; kit.plot_twist=Gust Startle; kit.ink_splash=Paint Pong; kit.bookmark_ward=Rope Guard
+@x_bible
+N: Thinpage | Heavytome | Familytree | Dusty Shelf Thump | The Great Family Book
+1: Has pages so thin that they stick together and tear if you rush.
+2: Is so heavy that it needs two hands and a table.
+3: Has every family birthday from a hundred years ago written in the front cover.
+4: Fell off the top shelf during spring cleaning and shook every ornament in the room.
+5: Held the names of seven generations in its front pages, and the newest baby was added this year.
+M: signature=Page Turn Turn; legend=Bookmark Rest; ultimate=Heavy Cover Drop; kit.plot_twist=Pressed Flower Surprise; kit.ink_splash=Old Ink Pong; kit.hardcover_slam=Heavy Book Slam; kit.bookmark_ward=Ribbon Guard

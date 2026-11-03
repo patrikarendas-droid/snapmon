@@ -24,7 +24,10 @@ const filled = g => g.px.filter(v => v).length;
   const und = flags.filter(f => f.sev === 'high' && !f.decision);
   ok(!und.length, `every high-severity audit flag has a recorded decision${und.length ? ': ' + und.slice(0, 5).map(f => f.rule + ':' + f.key).join(', ') : ''}`);
   ok(!flags.some(f => f.rule === 'regression'), `all ${A.FIXED.length} fixed label → object cases still resolve as fixed`);
-  ok(!flags.some(f => f.rule === 'route-disagreement' || f.rule === 'missing-object' || f.rule === 'curated-unreachable'), 'no route disagreement, no missing object, every curated object is reachable from a recogniser');
+  ok(!flags.some(f => f.rule === 'route-disagreement' || f.rule === 'missing-object'), 'no route disagreement, no missing object');
+  // since v0.5.0 every object is curated: an object without a label of its own is allowed only with a recorded decision
+  const unreach = flags.filter(f => f.rule === 'curated-unreachable');
+  ok(unreach.every(f => f.decision) && unreach.length <= 2, `every curated object is reachable from a recogniser, except ${unreach.length} with a recorded decision (${unreach.map(f => f.key).join(', ')})`);
 }
 // 2. no object id disappears (saved monsters reference them); the two audit objects exist
 {

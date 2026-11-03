@@ -1,0 +1,901 @@
+{
+ "avocado": {
+  "lore.epic": "Squashed itself into guacamole in the shopping bag, and the whole lift at the shopping centre went green.",
+  "names.epic": "Guacamole Lift",
+  "lore.legendary": "Was perfectly ripe for exactly five minutes, so the whole family flew home from holiday to eat it in time.",
+  "names.legendary": "Five-Minute Wonder"
+ },
+ "broccoli": {
+  "names.common": "Plateleaver",
+  "names.uncommon": "Treetopveg",
+  "lore.rare": "Hides inside the mashed potato and jumps out on the very last forkful.",
+  "names.rare": "Mashlurker",
+  "lore.legendary": "Grew so big on the allotment that a family of squirrels moved in, thinking it was a real tree.",
+  "names.legendary": "Mighty Floretta"
+ },
+ "carrot": {
+  "lore.epic": "Was pulled up by a rabbit so strong that the whole row came up after it like a string of sausages.",
+  "names.epic": "Rabbit Tug",
+  "lore.legendary": "Grew so long underground that it came out on the other side of the world, and a farmer there keeps watering it.",
+  "names.legendary": "Throughroot"
+ },
+ "cherries": {
+  "lore.rare": "Comes in pairs, and if you eat one, the other follows you round the kitchen until you eat it too.",
+  "names.rare": "Lonelytwin",
+  "lore.epic": "Spat a stone so hard at the summer fair that it rang the bell on the strongman game.",
+  "names.epic": "Stone Bell",
+  "lore.legendary": "Sat on top of a cake so tall that it had its own weather, and came down wearing a tiny snow cap.",
+  "names.legendary": "Cherie on Top"
+ },
+ "coconut": {
+  "lore.epic": "Took a whole beach party, two spades and a lifeguard to open, and then it was empty.",
+  "names.epic": "Coconut Letdown",
+  "lore.legendary": "Floated across the whole ocean to a beach that already had far too many coconuts, so it went home again.",
+  "names.legendary": "Homesick Coconut"
+ },
+ "corn": {
+  "lore.rare": "Hears everything through its ears, so the whole field knows the farmer's secrets by lunchtime.",
+  "names.rare": "Eavescorn",
+  "lore.epic": "Grew so tall that the maze cut through its field swallowed a school trip until teatime.",
+  "names.epic": "Maize Maze",
+  "lore.legendary": "Popped enough popcorn in one go to fill the cinema, so the film had to be shown on the outside wall.",
+  "names.legendary": "Popcornelius"
+ },
+ "cucumber": {
+  "lore.rare": "Disguises itself as a courgette whenever someone wants a salad, and as a cucumber whenever they want soup.",
+  "names.rare": "Doublecuke",
+  "lore.epic": "Grew so many in one greenhouse that the door burst open and they rolled down the lane like logs.",
+  "names.epic": "Cucumber Logroll",
+  "lore.legendary": "Stayed so cool on the hottest day of the year that the whole town queued to stand in its shade.",
+  "names.legendary": "Cool as a Cucumber"
+ },
+ "eggplant": {
+  "lore.rare": "Changes its name depending on who is talking, so the family argue about aubergine or eggplant all through dinner.",
+  "names.rare": "Aubergeist",
+  "lore.epic": "Gleamed so purple at the market that a magpie stole it and flew it home with great difficulty.",
+  "names.epic": "Magpie Prize",
+  "lore.legendary": "Grew so big and shiny that the town used it as a mirror, and everyone looked slightly purple for a week.",
+  "names.legendary": "Aubergleam"
+ },
+ "grapes": {
+  "lore.rare": "Grows two new grapes every time one is eaten, so the bunch never gets any smaller.",
+  "names.rare": "Neverbunch",
+  "lore.epic": "Was trodden in a barrel at the harvest party, and the guests' feet stayed purple until spring.",
+  "names.epic": "Purplefoot Party",
+  "lore.legendary": "Grew a bunch so long that it hung from the hilltop vineyard all the way down into the village square.",
+  "names.legendary": "Vinefall",
+  "moves.legend": "Grape Pop Startle"
+ },
+ "lemon": {
+  "lore.epic": "Was squeezed so hard on pancake day that the juice hit the ceiling, and the kitchen pulled a sour face for a week.",
+  "names.epic": "Sour Ceiling",
+  "lore.legendary": "Was so sour that the whole lemonade stand puckered shut, and the street could only whistle until teatime.",
+  "names.legendary": "Pucker, the Sourest"
+ },
+ "melon": {
+  "lore.rare": "Grows a smiley face on its rind overnight, so nobody has the heart to cut it.",
+  "names.rare": "Smilerind",
+  "lore.epic": "Rolled off the market stall, across the car park and onto the bus, which took it home.",
+  "names.epic": "Bus Riding Melon",
+  "lore.legendary": "Was knocked on so often to check if it was ripe that it learned to knock back. It now answers the front door.",
+  "names.legendary": "Knock Knock Melon"
+ },
+ "onion": {
+  "lore.epic": "Made the whole cinema cry during a comedy, and the film won a prize for best sad film.",
+  "names.epic": "Comedy Weeper",
+  "lore.legendary": "Peeled itself for a whole week, layer by layer, and right at the end there was a tiny, very proud pearl onion.",
+  "names.legendary": "Layer Upon Layer"
+ },
+ "orange": {
+  "lore.rare": "Has one more segment than it should, and it is always the one that squirts you in the eye.",
+  "names.rare": "Ghostsegment",
+  "lore.epic": "Rolled out of the half-time bag onto the pitch and scored the winning goal.",
+  "names.epic": "Half-Time Hero",
+  "lore.legendary": "Was peeled in one spiral so long that it reached across town and was cut as the ribbon to open the new bridge.",
+  "names.legendary": "Grand Opening Peel"
+ },
+ "palm_tree": {
+  "lore.rare": "Fans its big leaves so hard on a hot day that the beach towels blow into the sea.",
+  "names.rare": "Towelblower",
+  "lore.epic": "Bent right over in a storm and flicked every coconut onto the lifeguard hut roof like a drum solo.",
+  "names.epic": "Coconut Drummer",
+  "lore.legendary": "Grew so tall on a tiny island that ships use it as a lighthouse, and it has started winking at them.",
+  "names.legendary": "Palmira the Lighthouse"
+ },
+ "peach": {
+  "lore.rare": "Ripens at the very moment its owner leaves for a week's holiday, every single time.",
+  "names.rare": "Holidayripe",
+  "lore.epic": "Was so juicy that one bite flooded the picnic blanket, and the ants arrived in tiny boats.",
+  "names.epic": "Ant Boat Flood",
+  "lore.legendary": "Grew so sweet that the bees gave up making honey and simply came to visit it.",
+  "names.legendary": "Peachy Keen"
+ },
+ "pear": {
+  "lore.rare": "Makes anything near it go pear-shaped, so the birthday cake slid sideways before the candles were lit.",
+  "lore.epic": "Dropped onto the car roof just as the alarm was set, and the whole street woke up at midnight.",
+  "names.epic": "Car Alarm Pear",
+  "lore.legendary": "Fell from the tallest tree and bounced all the way to the farmers' market, where it sold itself.",
+  "names.legendary": "Pearadise"
+ },
+ "pepper": {
+  "lore.rare": "Hides one hot pepper in every bag of sweet ones, and it always ends up on Grandad's plate.",
+  "names.rare": "Sneakyhot",
+  "lore.epic": "Was stuffed with so much rice that it burst in the oven and decorated the ceiling.",
+  "names.epic": "Ceiling Stuffing",
+  "lore.legendary": "Grew so many colours at once that a rainbow came down to check it was not a relative.",
+  "names.legendary": "Rainbow"
+ },
+ "pineapple": {
+  "lore.rare": "Wears its leaves like a crown, and every other fruit in the bowl now bows whenever it is picked up.",
+  "names.rare": "Crowntop",
+  "lore.epic": "Rolled off the party table and spiked every balloon in the room on its way to the door.",
+  "names.epic": "Spiky Gatecrasher",
+  "lore.legendary": "Was crowned so convincingly that the fruit bowl held a coronation, and the bananas still carry its train.",
+  "names.legendary": "Ananas the Crowned"
+ },
+ "potato": {
+  "lore.rare": "Grows eyes that really look around, so the cupboard always knows who has been stealing the crisps.",
+  "names.rare": "Spudwatcher",
+  "lore.epic": "Sprouted so wildly in the cupboard that it pushed the door open and walked out into the garden.",
+  "names.epic": "Cupboard Escapee",
+  "lore.legendary": "Mashed itself so smoothly that the town used it to fill every pothole in the road.",
+  "names.legendary": "Pothole Mash"
+ },
+ "pumpkin": {
+  "lore.rare": "Grins a little wider every night after it is carved, until it is grinning at the neighbours across the road.",
+  "names.rare": "Widegrin",
+  "lore.epic": "Rolled off the doorstep on a windy night and bowled down the street, knocking over every bin like skittles.",
+  "names.epic": "Bin Skittler",
+  "lore.legendary": "Grew so big that the family hollowed it out and moved in. The postman now delivers to the stalk.",
+  "names.legendary": "Squashington Manor"
+ },
+ "strawberry": {
+  "lore.epic": "Got squashed under the picnic blanket so thoroughly that the blanket is now pink and smells of summer.",
+  "names.epic": "Pink Blanket",
+  "lore.legendary": "Made one jar of jam so good that every slice of toast in town jumped out of the toaster to meet it.",
+  "names.legendary": "Toastcaller"
+ },
+ "tomato": {
+  "lore.uncommon": "Hides behind its leaves until it is perfectly red, then shows off to every passer-by.",
+  "names.uncommon": "Showoffred",
+  "lore.legendary": "Settled the fruit-or-vegetable argument for good by growing a banana. Nobody has dared mention it since.",
+  "names.legendary": "Bananatomato"
+ },
+ "tree": {
+  "lore.rare": "Shifts its roots in the night, so the garden path is a little lumpier every morning.",
+  "names.rare": "Rootshifter",
+  "lore.epic": "Shook so hard in a storm that every conker in the park fell at once, and the squirrels declared a holiday.",
+  "names.epic": "Conker Downpour",
+  "lore.legendary": "Grew so old and so wise that the village owls bring it their problems, and it always tells them to wait and see.",
+  "names.legendary": "Grandfather Oakum",
+  "moves.ultimate": "Leaf Whirl"
+ },
+ "watermelon": {
+  "lore.rare": "Gets heavier every time someone tries to carry it, so it always ends up being rolled home.",
+  "names.rare": "Rollhome Melon",
+  "lore.epic": "Rolled off the beach table and was used as the ball for a whole game of beach football without cracking.",
+  "names.epic": "Beach Ball Melon",
+  "lore.legendary": "Grew so big that the town cut a door in it and used it as the summer paddling pool.",
+  "names.legendary": "Melon Lido"
+ },
+ "x_apple_tree": {
+  "lore.uncommon": "Drops its apples one at a time all night long, so the lawn goes thud until morning.",
+  "names.uncommon": "Nightthudder",
+  "lore.rare": "Hides its best apple behind a leaf at the very top, and moves it every time the ladder comes out.",
+  "names.rare": "Ladderdodger",
+  "lore.epic": "Dropped an apple into the paddling pool, and the children's apple-bobbing game lasted until bedtime.",
+  "names.epic": "Apple Bobber",
+  "lore.legendary": "Kept the doctor away so well that the village surgery closed and the doctor took up gardening.",
+  "names.legendary": "Doctor Away"
+ },
+ "x_apricot_fruit": {
+  "lore.rare": "Dries itself into a chewy little cushion whenever it is left in the sun, then refuses to be a fruit again.",
+  "names.rare": "Sundried Sulker",
+  "lore.epic": "Ripened so fast in a heatwave that the whole tree turned into jam before anyone could pick it.",
+  "names.epic": "Treetop Jam",
+  "lore.legendary": "Glowed so orange at dusk that the sun went down early, thinking someone else had taken over.",
+  "names.legendary": "Apricosa the Sunsetter"
+ },
+ "x_asparagus": {
+  "lore.rare": "Grows so straight that the builders next door borrow it as a spirit level.",
+  "names.rare": "Levelspear",
+  "lore.epic": "Was served in a tall bundle at a posh dinner and toppled over every plate like a game of pick-up sticks.",
+  "names.epic": "Spear Topple",
+  "lore.legendary": "Grew one spear so tall that the town hung its flag on it, and the flag is now slightly green.",
+  "names.legendary": "Flagspear"
+ },
+ "x_bamboo_grove": {
+  "lore.rare": "Hides a whole path inside it and moves the path a little every night, so hikers come out somewhere new.",
+  "names.rare": "Pathswapper",
+  "lore.epic": "Grew so tall overnight that it lifted the picnic table into the air with the picnic still on it.",
+  "names.epic": "Picnic Lifter",
+  "lore.legendary": "Grew a stem so tall that the Moon got stuck on it for a night, and the town had to shake it loose.",
+  "names.legendary": "Moonsnag"
+ },
+ "x_banana_tree": {
+  "lore.rare": "Swats anyone who tries to pick a bunch before it is ready with one of its giant leaves.",
+  "names.rare": "Leafswatter",
+  "lore.epic": "Grew a bunch so heavy that the tree bent right over and offered it to the people at the bus stop.",
+  "names.epic": "Bus Stop Bunch",
+  "lore.legendary": "Grew a leaf so huge that a whole village sheltered under it in the monsoon, and the rain sounded like applause.",
+  "names.legendary": "Leafroof Lola"
+ },
+ "x_baobab": {
+  "lore.rare": "Flips over at night, so the birds wake up perched on its roots and the roots wake up in the sky.",
+  "names.rare": "Topsyturvy",
+  "lore.epic": "Held so much water in a drought that the elephants queued at it like a drinking fountain.",
+  "names.epic": "Elephant Fountain",
+  "lore.legendary": "Grew so wide that the town opened a post office inside its trunk, and the queue goes round the outside.",
+  "names.legendary": "Post Office Baobab"
+ },
+ "x_basil": {
+  "lore.rare": "Makes every room it is in smell of pizza, so everyone keeps checking the oven.",
+  "names.rare": "Pizzascent",
+  "lore.epic": "Grew so bushy in the window box that the pigeons nested in it and came out smelling of pasta.",
+  "names.epic": "Pasta Pigeons",
+  "lore.legendary": "Made a pesto so good that the spaghetti started twirling itself onto the forks.",
+  "names.legendary": "Basilio the Pesto Maestro"
+ },
+ "x_beet": {
+  "names.uncommon": "Sinkdyer",
+  "lore.epic": "Rolled off the table at school dinner and left a pink trail all the way to the head teacher's office.",
+  "names.epic": "Pink Trail",
+  "lore.legendary": "Dyed the river pink for a whole summer, and the swans refused to come out until it was white again.",
+  "names.legendary": "Beetrix the Dyer",
+  "moves.ultimate": "Beet Juice Splat"
+ },
+ "x_birch_tree": {
+  "lore.epic": "Peeled so much papery bark in a gale that the whole school did its homework on it.",
+  "names.epic": "Paperbark Gale",
+  "lore.legendary": "Was so white that the snow mistook it for a friend and stayed on it until July.",
+  "names.legendary": "Snowfriend Birch"
+ },
+ "x_blackberry": {
+  "lore.epic": "Grew over the parked car so fast that its owner had to pick his way to the door and came out with purple hands.",
+  "names.epic": "Bramble Car",
+  "lore.legendary": "Grew so fast that it swallowed a whole lane, and the delivery van came out the other side a week later, full of jam.",
+  "names.legendary": "Jamlane Bramble"
+ },
+ "x_blueberry": {
+  "lore.rare": "Turns anyone's tongue blue, so nobody can ever lie about eating the last muffin.",
+  "names.rare": "Tonguetell",
+  "lore.epic": "Burst in the washing machine and dyed the whole family's school shirts blue for a term.",
+  "names.epic": "Blue Wash",
+  "lore.legendary": "Gave a whole school blue tongues on picture day, and the photos still hang in the hall.",
+  "names.legendary": "Blue Tongue Day"
+ },
+ "x_bok_choy": {
+  "lore.rare": "Bounces out of the wok every time it is tossed and lands on the cook's head.",
+  "names.rare": "Wokhopper",
+  "lore.epic": "Sizzled so loudly at the street market that the drummers in the parade lost the beat.",
+  "names.epic": "Sizzle Parade",
+  "lore.legendary": "Was tossed so high in the wok that it came down in the next town's soup.",
+  "names.legendary": "Wokstar"
+ },
+ "x_branch": {
+  "lore.rare": "Moves an inch every night, so the treehouse door never lines up with the ladder.",
+  "names.rare": "Branchwander",
+  "lore.epic": "Fell in a storm and landed exactly across two garden fences, so the neighbours now share a bench.",
+  "names.epic": "Neighbour Bench",
+  "lore.legendary": "Was a dog's fetch stick for so long that the dog learned to throw it back.",
+  "names.legendary": "Fetchback"
+ },
+ "x_brussels_sprout": {
+  "names.uncommon": "Forkdodger",
+  "lore.rare": "Rolls itself onto the plate of whoever said they hated it, every single time.",
+  "names.rare": "Hatechaser",
+  "lore.legendary": "Rolled off the holiday table, out of the door and down to the shop, where it put itself back on the shelf.",
+  "names.legendary": "Great Sprout Escape"
+ },
+ "x_bush": {
+  "lore.common": "Scratches the side of the car every time it parks in the drive.",
+  "names.common": "Carscratcher",
+  "lore.legendary": "Grew so round that the wind rolled it down the hill like a tumbleweed, and it is now a roundabout.",
+  "names.legendary": "Roundabout Bush"
+ },
+ "x_cassava": {
+  "names.common": "Toughskin",
+  "names.uncommon": "Rootdigger Cassava",
+  "lore.rare": "Insists on being cooked properly before anyone eats it, and sends back every plate that is not.",
+  "names.rare": "Cookmefirst",
+  "lore.epic": "Grew roots so long that they came up in the neighbour's garden, and both families claimed it.",
+  "names.epic": "Boundary Root",
+  "lore.legendary": "Grew so much underground that the whole field rose up, and the farmer's house now has a sea view.",
+  "names.legendary": "Hillmaker Root"
+ },
+ "x_cedar": {
+  "lore.rare": "Smells so strongly of pencils that everyone near it starts doing their homework.",
+  "names.rare": "Homeworker",
+  "lore.epic": "Was turned into a chest so moth-proof that the moths of the town held a protest outside it.",
+  "names.epic": "Mothproof Chest",
+  "lore.legendary": "Grew so wide on the mountain that the clouds have to walk round it.",
+  "names.legendary": "Cloudparter"
+ },
+ "x_celery": {
+  "lore.rare": "Has so many strings that the music teacher tuned it and played a lullaby on it.",
+  "names.rare": "Stringharp",
+  "lore.epic": "Crunched so loudly at the school concert that the orchestra lost its place and played the song backwards.",
+  "names.epic": "Concert Crunch",
+  "lore.legendary": "Grew a stalk so tall that the giraffe at the zoo stopped eating leaves and asked for celery.",
+  "names.legendary": "Giraffe",
+  "moves.legend": "Sizzling Stalk"
+ },
+ "x_chard": {
+  "lore.legendary": "Grew stalks in so many colours that the paint shop came to copy them and sold out of every one.",
+  "names.legendary": "Beta the Bright"
+ },
+ "x_cherry_tree": {
+  "lore.common": "Hangs its cherries just out of reach of the shortest person in the house.",
+  "names.common": "Reachtease",
+  "lore.rare": "Spits cherry stones at anyone who climbs it without asking first.",
+  "names.rare": "Pitflinger",
+  "lore.epic": "Dropped so many cherries on the school roof that the gutters ran pink at home time.",
+  "names.epic": "Pink Gutter",
+  "lore.legendary": "Grew its cherries so high that a hot-air balloon came to pick them, and the pilot came back with a red mouth.",
+  "names.legendary": "Skypicker"
+ },
+ "x_chili": {
+  "lore.rare": "Hides in the mildest dish on the table, so the curry is safe and the salad is not.",
+  "names.rare": "Saladsneak",
+  "lore.epic": "Was so hot that the chef's moustache curled up and the kitchen smoke alarm went off on its own.",
+  "names.epic": "Moustache Curler",
+  "lore.legendary": "Was so hot that a dragon came all the way down the mountain to ask it for cooking tips.",
+  "names.legendary": "Dragon"
+ },
+ "x_christmas_tree_decorated": {
+  "lore.rare": "Switches its lights to flashing the moment anyone sits down to watch a film.",
+  "names.rare": "Blinkbother",
+  "lore.epic": "Was decorated so heavily that it slowly tipped over and gift-wrapped the cat.",
+  "names.epic": "Tinsel Topple",
+  "lore.legendary": "Wore so many fairy lights that the town's power went out, so it lit the whole street by itself.",
+  "names.legendary": "Tannenbaum the Twinkling"
+ },
+ "x_coconut_tree": {
+  "lore.rare": "Walks a few steps along the beach when the tide comes in, so the sunbathers keep losing their spot.",
+  "names.rare": "Beachwalker",
+  "lore.epic": "Bent so far in a storm that it catapulted its coconuts to the next island, which threw them back.",
+  "names.epic": "Coconut Catapult",
+  "lore.legendary": "Grew so tall that its coconuts take a whole day to land, so it drops tomorrow's ones today.",
+  "names.legendary": "Coconutfall"
+ },
+ "x_cranberry": {
+  "lore.rare": "Floats to the top of anything: the bath, the soup and the agenda of every meeting.",
+  "names.rare": "Topfloater",
+  "lore.epic": "Rolled out of the sauce jar at the holiday dinner and bounced round the table into Grandad's glass.",
+  "names.epic": "Saucejar Bouncer",
+  "lore.legendary": "Bounced so high off the kitchen floor that it landed on the Moon, and the Moon has been slightly pink ever since.",
+  "names.legendary": "Moonbounce Berry",
+  "lore.common": "Is so sour that the whole fruit bowl puckers, and the apples have moved to the other side."
+ },
+ "x_currant": {
+  "lore.rare": "Gets mistaken for a raisin by everyone, and has started correcting them in a very small voice.",
+  "names.rare": "Notaraisin",
+  "lore.epic": "Was packed into a bun so tightly that the bun was mostly currants, and it bounced when it was dropped.",
+  "names.epic": "Bouncing Bun",
+  "lore.legendary": "Was so tiny that it rolled into the gap between two seconds, and the town clock has been one second slow ever since.",
+  "names.legendary": "Leap Second"
+ },
+ "x_cypress": {
+  "lore.rare": "Grows so tall and thin that it turns up in every holiday photo, exactly behind someone's head.",
+  "names.rare": "Headspire",
+  "lore.epic": "Blocked the wind so well that the kite festival behind it had to be called off for lack of breeze.",
+  "names.epic": "Windstopper Row",
+  "lore.legendary": "Grew so tall and pointed that it popped a passing cloud, and the village got a quick shower.",
+  "names.legendary": "Spirella the Cloudpopper"
+ },
+ "x_date": {
+  "lore.rare": "Makes anything it is added to taste like pudding, even the soup.",
+  "names.rare": "Dessertifier",
+  "lore.epic": "Glued itself to a camel's knee at the market, and the camel walked funny all the way home.",
+  "names.epic": "Camel Knee",
+  "lore.legendary": "Was so sticky that it glued two sand dunes together, and the desert wind still cannot pull them apart.",
+  "names.legendary": "Dune Glue",
+  "names.uncommon": "Longstone"
+ },
+ "x_dead_tree": {
+  "lore.rare": "Has no leaves of its own, so every autumn it borrows other trees' leaves and wears them for a day.",
+  "names.rare": "Leafborrower",
+  "lore.epic": "Fell over so slowly that the whole town had time to come and watch, and to bring sandwiches.",
+  "names.epic": "Slow Topple",
+  "lore.legendary": "Became home to so many owls, beetles and bats that it now has a waiting list.",
+  "names.legendary": "Hollowmere Hotel"
+ },
+ "x_dill": {
+  "lore.rare": "Turns any jar it is put in into a pickle jar, so the jam now tastes of gherkin.",
+  "names.rare": "Jarpickler",
+  "lore.epic": "Got into the birthday cake by mistake, and the guests are still deciding whether it was a pickle.",
+  "names.epic": "Pickle Cake",
+  "lore.legendary": "Made one gherkin so famous that it now has its own fan club and a tiny hat.",
+  "names.legendary": "Gherkin",
+  "moves.kit.green_juice": "Green Juice Rest"
+ },
+ "x_dragon_fruit": {
+  "lore.rare": "Breathes out a little puff of pink mist when it is sliced, so everyone checks the kettle.",
+  "names.rare": "Puffdragon",
+  "lore.epic": "Was sliced open at the picnic, and its black seeds looked so like ants that everyone moved indoors.",
+  "names.epic": "Seed Scare",
+  "lore.legendary": "Hatched. Nobody is quite sure what came out, but the garden shed has been very warm ever since.",
+  "names.legendary": "Mystery Hatchling",
+  "moves.ultimate": "Dragon Egg Hatch"
+ },
+ "x_driftwood": {
+  "lore.epic": "Washed up in such a heap that the town built a pier from it, and the pier keeps trying to float home.",
+  "names.epic": "Floating Pier",
+  "lore.legendary": "Has washed up on every beach in the world and has a sticker from each one.",
+  "names.legendary": "Wanderwood the Traveller"
+ },
+ "x_durian": {
+  "lore.legendary": "Was opened on top of a mountain, and the clouds moved to the next valley.",
+  "names.legendary": "Mountain Clearer"
+ },
+ "x_edamame": {
+  "names.uncommon": "Podpiler",
+  "lore.rare": "Fires its beans straight into open mouths across the table, but only the mouth of whoever is talking.",
+  "names.rare": "Beanaimer",
+  "lore.epic": "Popped so many beans at the sushi bar that the conveyor belt carried them round for an hour.",
+  "names.epic": "Conveyor Beans",
+  "lore.legendary": "Popped every bean in the pod at once like fireworks, and the town cancelled its own display.",
+  "names.legendary": "Bean Fireworks"
+ },
+ "x_fig_fruit": {
+  "lore.rare": "Hides its flowers inside itself and will not tell anyone where they are.",
+  "names.rare": "Secretflower",
+  "lore.epic": "Dropped so many ripe figs on the patio that the sandals stuck to the ground and had to be left there.",
+  "names.epic": "Sticky Patio",
+  "lore.legendary": "Ripened on such a hot wall that it dried into a fig roll right there on the branch.",
+  "names.legendary": "Branch-Baked Fig"
+ },
+ "x_fir_tree": {
+  "lore.rare": "Holds snow on its branches until someone walks underneath, then lets go.",
+  "names.rare": "Snowdumper",
+  "lore.epic": "Grew so thick that the deer use it as a bus shelter in the rain, the whole herd at once.",
+  "names.epic": "Deer Shelter",
+  "lore.legendary": "Grew so tall that its top is always in winter, even in July. Its bottom branches wear sunglasses.",
+  "names.legendary": "Two-Season Fir",
+  "moves.ultimate": "Needle Drop"
+ },
+ "x_firewood": {
+  "lore.rare": "Refuses to light until everyone gives up, then roars the moment they open the window to let the smoke out.",
+  "names.rare": "Lastminute Log",
+  "lore.epic": "Stacked itself so neatly in the night that the woodpile is now taller than the cottage.",
+  "names.epic": "Tower Stack",
+  "lore.legendary": "Was so heavy that it took the whole family to carry it in, and it now lives in the living room as a bench.",
+  "names.legendary": "Living Room Log"
+ },
+ "x_ginger": {
+  "lore.rare": "Makes everyone who eats it say 'ooh' at the same moment, so a quiet dinner sounds like fireworks night.",
+  "names.rare": "Oohmaker",
+  "lore.epic": "Was grated into the gingerbread so generously that the gingerbread men jumped off the tray and ran out of the door.",
+  "names.epic": "Runaway Biscuits",
+  "lore.legendary": "Spiced a single biscuit so strongly that it kept a whole snowy village warm for a week.",
+  "names.legendary": "Zingiber the Warm"
+ },
+ "x_ginger_root": {
+  "lore.rare": "Points its knobbly fingers at whoever left it in the fridge, every time they open the door.",
+  "names.rare": "Knucklepointer",
+  "lore.legendary": "Grew such long knobbly fingers that it learned to knit, and made the whole vegetable box scarves.",
+  "names.legendary": "Knobbletoes the Knitter"
+ },
+ "x_gooseberry": {
+  "lore.rare": "Is the odd one out at every picnic, and sits right between the couple on the blanket.",
+  "names.rare": "Thirdwheeler",
+  "lore.epic": "Was so sour that one bite made the whole village choir pull faces in the middle of a song.",
+  "names.epic": "Sour Choir",
+  "names.legendary": "Sweet Gussie"
+ },
+ "x_green_bean": {
+  "lore.common": "Hangs in such a tangle that the one you want is always behind two others.",
+  "names.common": "Tanglebean",
+  "lore.epic": "Grew so many beans that the allotment shed filled up and the gardener had to climb out of the window.",
+  "names.epic": "Bean Shed",
+  "lore.legendary": "Climbed so high that it reached the castle in the clouds, and came back down with a goose.",
+  "names.legendary": "Jackstalk"
+ },
+ "x_guava": {
+  "lore.rare": "Smells so sweet that it lures every fruit fly in town into the kitchen, then pretends it was not calling.",
+  "names.rare": "Flycaller",
+  "lore.epic": "Was cut open at breakfast, and it was so pink inside that the whole table gasped and the cat fell off its chair.",
+  "names.epic": "Pink Gasp",
+  "lore.legendary": "Ripened with such a sweet smell that passing ships turned round, thinking the island was having a party.",
+  "names.legendary": "Shipturner"
+ },
+ "x_hedge": {
+  "lore.rare": "Grows a little taller every time the neighbours wave, until nobody can see each other.",
+  "names.rare": "Wavecutter",
+  "lore.legendary": "Was trimmed into a castle so well that a family of foxes moved in and put up a tiny flag.",
+  "names.legendary": "Foxhole Fortress"
+ },
+ "x_herbs": {
+  "lore.rare": "Swaps the labels on its pots in the night, so the mint is the parsley and the soup tastes of toothpaste.",
+  "names.rare": "Herbmuddler",
+  "lore.epic": "Grew so bushy on the windowsill that the kitchen window disappeared, and the house smells like a garden centre.",
+  "names.epic": "Window Jungle",
+  "lore.legendary": "Flavoured the air so strongly that every dinner in the street tasted wonderful, even the burnt ones.",
+  "names.legendary": "Herbert the Flavourer",
+  "moves.ultimate": "Herb Whirl"
+ },
+ "x_horseradish": {
+  "lore.epic": "Was grated so strong that the whole table sneezed at once, and the gravy boat sailed off the end.",
+  "names.epic": "Gravy Boat Sneeze",
+  "lore.legendary": "Cleared one blocked nose so hard that the sneeze blew the fog off the whole town.",
+  "names.legendary": "Armoracia the Nose Blaster"
+ },
+ "x_jalapeno": {
+  "lore.rare": "Changes how hot it is depending on who is watching: mild for the cook and fiery for the guest.",
+  "names.rare": "Heatshifter",
+  "lore.epic": "Was sliced onto the sleepover pizza, and every child's ears glowed so red that nobody needed a torch.",
+  "names.epic": "Torch Ears",
+  "names.legendary": "Capsicum Trickster",
+  "moves.ultimate": "Pepper Surprise"
+ },
+ "x_kale": {
+  "lore.rare": "Crunches up in the oven and then refuses ever to be called a vegetable again.",
+  "names.rare": "Crisplette",
+  "lore.epic": "Was blended into a smoothie so thick that the blender gave up and went for a lie down.",
+  "names.epic": "Blender Breaker",
+  "lore.legendary": "Grew so curly in the cold that the hairdresser next door copied it, and now half the town has kale hair.",
+  "names.legendary": "Kale Hair Day"
+ },
+ "x_kiwi": {
+  "lore.rare": "Stares at whoever is about to eat it with its seedy green eye, until they put the spoon down.",
+  "lore.epic": "Rolled out of the fruit bowl so fuzzy that the dog brought it back like a tennis ball.",
+  "names.epic": "Fetch Fruit",
+  "lore.legendary": "Was mistaken for a kiwi bird by a whole flock of kiwi birds, and is now their leader.",
+  "names.legendary": "Captain Fuzz"
+ },
+ "x_kumquat": {
+  "lore.epic": "Rolled off the party table into the punch bowl and bobbed there all night, turning the punch sour.",
+  "names.epic": "Punch Bobber",
+  "lore.legendary": "Was so sour in the middle that whoever ate it whistled for a week, and the dogs never left them alone.",
+  "names.legendary": "Whistlequat"
+ },
+ "x_leek": {
+  "lore.rare": "Grows a little bigger every time the gardener next door walks past, just to annoy him.",
+  "names.rare": "Rivalleek",
+  "lore.epic": "Grew so big that the gardener rode it home from the allotment like a horse.",
+  "names.epic": "Gallopleek",
+  "names.legendary": "Allium the Enormous"
+ },
+ "x_lemon_tree": {
+  "lore.rare": "Drops a lemon into every glass of water left near it, so nobody ever gets a plain drink.",
+  "names.rare": "Glassdropper",
+  "lore.epic": "Dropped so many lemons in the heatwave that the garden pond turned into lemonade and the frogs got hiccups.",
+  "names.epic": "Lemonade Pond",
+  "lore.legendary": "Gave life so many lemons that life gave up and made lemonade.",
+  "names.legendary": "Life"
+ },
+ "x_log_pile": {
+  "lore.epic": "Was taken apart for the fire, and so many creatures came out that the family put it all back.",
+  "names.epic": "Creature Exodus",
+  "lore.legendary": "Housed so many hedgehogs that they formed a marching band and parade round the garden at midnight.",
+  "names.legendary": "Hedgehog Bandstand"
+ },
+ "x_lychee": {
+  "lore.epic": "Shot its stone across the restaurant into the waiter's top pocket, and he took it home as a souvenir.",
+  "names.epic": "Pocket Stone",
+  "lore.legendary": "Was threaded onto a pearl necklace by mistake and went to a grand ball before anyone noticed.",
+  "names.legendary": "Pearl Pretender"
+ },
+ "x_mango": {
+  "lore.uncommon": "Never shows when it is ripe, so everyone stands in the shop squeezing it like an accordion.",
+  "names.uncommon": "Squeezetease",
+  "lore.rare": "Turns into a hedgehog when it is cut, then curls up on the plate and refuses to be eaten.",
+  "lore.epic": "Dripped so much juice on the hot pavement that it became a sticky trap for every flip-flop in the street.",
+  "names.epic": "Flip-Flop Trap",
+  "lore.legendary": "Was cut into a hedgehog the size of a sofa, and the real hedgehogs came from miles around to pay their respects.",
+  "names.legendary": "Sofa-Sized Hedgehog"
+ },
+ "x_maple_tree": {
+  "lore.rare": "Turns its sap into syrup inside the trunk, so every woodpecker in the wood gets sweet hiccups.",
+  "names.rare": "Hiccupsap",
+  "lore.epic": "Was tapped so eagerly that the syrup came out like a fountain, and the pancake breakfast floated away.",
+  "names.epic": "Syrup Fountain",
+  "lore.legendary": "Made so much syrup in one spring that the river ran sweet, and the fish now stick together.",
+  "names.legendary": "Sweetriver"
+ },
+ "x_mint_leaves": {
+  "lore.rare": "Freshens the breath of anyone who walks past, so nobody in the house can tell who ate the garlic.",
+  "names.rare": "Garlicguard",
+  "lore.epic": "Was dropped into the lemonade at the fair, and the whole tent got so fresh that everyone's teeth squeaked.",
+  "names.epic": "Squeaky Teeth",
+  "lore.legendary": "Freshened the air so well that the town rubbish tip smelled of toothpaste all summer.",
+  "names.legendary": "Toothpaste Tip"
+ },
+ "x_nectarine_fruit": {
+  "lore.uncommon": "Shines so smoothly in the fruit bowl that the peaches have started feeling hairy.",
+  "names.uncommon": "Shinyskin",
+  "lore.epic": "Rolled into the paddling pool and floated there so smugly that the rubber ducks moved out.",
+  "names.epic": "Duck Evictor",
+  "lore.legendary": "Was so smooth that the fruit bowl used it as a mirror, and the bananas now check their spots in it.",
+  "names.legendary": "Bowl Mirror"
+ },
+ "x_oak_tree": {
+  "lore.rare": "Drops acorns only on the squirrels who forgot where they buried the last ones.",
+  "names.rare": "Acornjudge",
+  "lore.legendary": "Grew one acorn so big that the squirrels had to roll it home together, and they are still eating it.",
+  "names.legendary": "Quercus the Mighty",
+  "moves.ultimate": "Acorn Barrage"
+ },
+ "x_okra": {
+  "lore.rare": "Goes slimy at the exact moment someone says it is not slimy.",
+  "names.rare": "Slimetimer",
+  "lore.epic": "Thickened the festival gumbo so much that it had to be served in slices.",
+  "names.epic": "Gumbo Slices",
+  "lore.legendary": "Grew so many slippery pods that the slugs of the county came to it for lessons.",
+  "names.legendary": "Slug Professor"
+ },
+ "x_olive": {
+  "lore.rare": "Tastes like a grape to everyone who is expecting a grape, and that is the trouble.",
+  "names.rare": "Grapefooler",
+  "lore.epic": "Rolled down the restaurant steps, and the waiter chased it all the way to the harbour.",
+  "names.epic": "Harbour Chase",
+  "lore.legendary": "Was pressed into oil so smooth that the town's squeaky gate has not squeaked since.",
+  "names.legendary": "Silent Gate Olive"
+ },
+ "x_olive_tree": {
+  "lore.rare": "Flashes its silver leaves in the sun to dazzle the pickers, so half the olives are never found.",
+  "names.rare": "Pickerdazzle",
+  "lore.epic": "Twisted its trunk so hard in a storm that it turned to face the sea, and refuses to turn back.",
+  "names.epic": "Seaward Twist",
+  "lore.legendary": "Is so old that it remembers when the hill was flat, and keeps reminding the hill.",
+  "names.legendary": "Old Twisty the Ancient"
+ },
+ "x_orange_tree": {
+  "lore.rare": "Rolls an orange down the drive towards whoever is having a bad day.",
+  "names.rare": "Cheerroller",
+  "lore.epic": "Dropped so many oranges on the hill that the street below became an orange river, and the postman floated home.",
+  "names.epic": "Orange River",
+  "lore.legendary": "Gave so much juice that the town fountain was switched to orange, and the pigeons have never been healthier.",
+  "names.legendary": "Fountain Squeezer"
+ },
+ "x_papaya": {
+  "names.uncommon": "Bottomripe",
+  "lore.rare": "Softens any meat it touches, so the barbecue sausages fell apart before they reached the plate.",
+  "names.rare": "Tenderiser",
+  "lore.epic": "Fell from its tree onto the beach volleyball game, and the match became a fruit salad.",
+  "names.epic": "Volleyball Splat",
+  "lore.legendary": "Ripened so perfectly that the sunrise waited for it, and the morning started ten minutes late.",
+  "names.legendary": "Late Sunrise"
+ },
+ "x_parsley": {
+  "lore.epic": "Was sprinkled on the wedding cake by a confused chef, and the guests are still picking green bits out of their teeth.",
+  "names.epic": "Green Cake",
+  "names.legendary": "Petroselina the Eaten"
+ },
+ "x_parsnip": {
+  "lore.rare": "Pretends to be a carrot in the dark, so the snowman ends up with a pale nose.",
+  "names.rare": "Nosefaker",
+  "lore.epic": "Roasted so sweetly that the whole dinner was eaten before anyone remembered the gravy.",
+  "names.epic": "Sweet Roast Rush",
+  "lore.legendary": "Got so sweet in the frost that the snowmen in the field queued up to swap their carrots for it.",
+  "names.legendary": "Snowman"
+ },
+ "x_passion_fruit": {
+  "lore.rare": "Turns any pudding tropical, so the school custard now has a suntan.",
+  "names.rare": "Tropicaliser",
+  "lore.epic": "Was dropped into the yoghurt factory, and every pot in the country came out crunchy for a week.",
+  "names.epic": "Crunchy Yoghurt",
+  "lore.legendary": "Wrinkled into such perfect ripeness that the town's grandads asked for its secret. It said 'more sitting down'.",
+  "names.legendary": "Passiflora the Wrinkled"
+ },
+ "x_pea_pod": {
+  "lore.rare": "Zips itself shut again whenever someone tries to open it, like a stubborn purse.",
+  "names.rare": "Zippod",
+  "lore.epic": "Popped open in the school canteen and sent peas bouncing into every child's custard.",
+  "names.epic": "Custard Peas",
+  "lore.legendary": "Grew a pea so big that a princess slept on it, forty mattresses up, and still did not get a wink.",
+  "names.legendary": "Princessbother",
+  "moves.ultimate": "Scalding Pea",
+  "names.common": "Peaskitter"
+ },
+ "x_persimmon": {
+  "lore.rare": "Holds on to its branch all winter and refuses to fall until everyone has stopped looking.",
+  "names.rare": "Winterclinger",
+  "lore.epic": "Dropped all at once in the first frost and bounced down the street like orange tennis balls.",
+  "names.epic": "Frost Drop",
+  "lore.legendary": "Hung on so long that the tree grew new leaves round it, and even the tree cannot say which year it belongs to.",
+  "names.legendary": "Last Year"
+ },
+ "x_pine": {
+  "lore.rare": "Whispers in the wind so convincingly that hikers turn round to answer it.",
+  "names.rare": "Whisperpine",
+  "lore.epic": "Scented the whole forest so strongly that every walker came out smelling like a brand-new car.",
+  "names.epic": "Pine Fresh Forest",
+  "lore.legendary": "Grew so high up the mountain that it holds the summit flag, and the climbers have to ask its permission.",
+  "names.legendary": "Flagkeeper Pine"
+ },
+ "x_plum_fruit": {
+  "names.common": "Splitskin",
+  "lore.rare": "Hides its ripe plums behind the hard ones, so every picker gets the hard ones.",
+  "names.rare": "Plumhider",
+  "lore.epic": "Dropped so many plums on the parked car that it drove away looking like a purple leopard.",
+  "names.epic": "Purple Leopard",
+  "lore.legendary": "Dried so slowly in the sun that it became a prune, then changed its mind and became a plum again.",
+  "names.legendary": "Damson the Undecided",
+  "names.uncommon": "Toothstopper"
+ },
+ "x_pomelo": {
+  "lore.epic": "Rolled off the market stall, was mistaken for a bowling ball and knocked down every skittle in the alley.",
+  "names.epic": "Bowling Pomelo",
+  "lore.legendary": "Has a peel so thick that a family of mice lives in it and has never met the fruit inside.",
+  "names.legendary": "Mouse Mansion"
+ },
+ "x_prune": {
+  "lore.rare": "Wrinkles everything it is kept next to, so the raisins look younger beside it.",
+  "names.rare": "Wrinkler",
+  "lore.epic": "Soaked overnight in the breakfast bowl and swelled up so much that it lifted the lid off the cereal box.",
+  "names.epic": "Soak Swell",
+  "lore.legendary": "Was so wrinkly that a map maker traced its creases and drew a whole new mountain range.",
+  "names.legendary": "Mapmaker Prune"
+ },
+ "x_quince": {
+  "lore.rare": "Perfumes the whole cupboard so strongly that the biscuits now taste of quince.",
+  "names.rare": "Cupboardscent",
+  "lore.epic": "Was so hard to cut that the cook borrowed the woodcutter's axe, and the kitchen table split in two.",
+  "names.epic": "Table Splitter",
+  "lore.legendary": "Cooked down into a jelly so firm that the town used it to fix the wobbly bridge.",
+  "names.legendary": "Bridge Jelly"
+ },
+ "x_radish": {
+  "lore.epic": "Grew so fast in the school garden that the class had to harvest it in the middle of maths.",
+  "names.epic": "Maths Lesson Harvest",
+  "lore.legendary": "Was so peppery that one slice cleared the whole class's colds, and the school nurse went on holiday.",
+  "names.legendary": "Coldbuster"
+ },
+ "x_raisin": {
+  "lore.rare": "Pretends to be a chocolate chip in every cookie, and disappoints everyone.",
+  "names.rare": "Chipfaker",
+  "lore.epic": "Fell out of a lunchbox into the school radiator and slowly turned back into a grape.",
+  "names.epic": "Radiator Grape",
+  "lore.legendary": "Told the young grapes such stories about lying in the sun that they all asked to be dried.",
+  "names.legendary": "Sultana the Storyteller"
+ },
+ "x_redwood": {
+  "lore.rare": "Drinks so much fog that the town below it never has a misty morning, and the photographers are furious.",
+  "lore.epic": "Dropped a cone from the very top, and it took so long to land that the walkers had a picnic while they waited.",
+  "names.epic": "Long Cone Drop",
+  "lore.legendary": "Grew so tall that it has its own weather at the top, and the squirrels up there wear woolly hats.",
+  "names.legendary": "Woolly Hat Heights"
+ },
+ "x_rosemary": {
+  "names.uncommon": "Roastrusher",
+  "lore.rare": "Is said to help the memory, so it remembers every single time someone forgot to water it.",
+  "names.rare": "Rememberleaf",
+  "lore.epic": "Grew so bushy over the path that the postman came out of it smelling like Sunday lunch.",
+  "names.epic": "Postman Roast",
+  "lore.legendary": "Remembered so much that it reminded the whole town of every birthday, and nobody has missed one since.",
+  "names.legendary": "Rosemary Remembers"
+ },
+ "x_salad_bowl": {
+  "lore.rare": "Hides all the croutons at the bottom, so whoever serves last gets every one.",
+  "names.rare": "Croutonhoarder",
+  "lore.epic": "Was tossed so eagerly at the barbecue that the lettuce landed on the neighbour's hedge.",
+  "names.epic": "Hedge Salad",
+  "names.legendary": "Empty Bowl Wonder",
+  "moves.signature": "Hot Vinegar Splash"
+ },
+ "x_shrub": {
+  "lore.rare": "Grows back in the shape of whoever last trimmed it, so the garden now has a bush that looks like Grandad.",
+  "names.rare": "Copyshrub",
+  "lore.epic": "Grew so fast round the bird bath that the birds now have to book a table.",
+  "names.epic": "Bird Bath Bistro",
+  "lore.legendary": "Grew so wide and so round that the garden is now a shrub with a small house in the middle.",
+  "names.legendary": "Shrubhouse"
+ },
+ "x_spinach": {
+  "lore.rare": "Gives a little burst of strength to whoever eats it, so every jam jar in the house is now open.",
+  "names.rare": "Jaropener",
+  "lore.epic": "Was eaten by the school tug-of-war team, and they pulled the other team, the rope and the goalposts across the field.",
+  "names.epic": "Tug Team Leaf",
+  "lore.legendary": "Gave a tortoise so much energy that it won the town fun run, and it still has not stopped.",
+  "names.legendary": "Tortoise Turbo",
+  "moves.ultimate": "Spinach Punch"
+ },
+ "x_spring_onion": {
+  "lore.rare": "Makes everyone's breath so strong that the dentist works with the window open.",
+  "names.rare": "Windowopener",
+  "lore.epic": "Was chopped so finely at the noodle bar that a breeze blew it into every bowl in the street.",
+  "names.epic": "Noodle Breeze",
+  "lore.legendary": "Grew so many stalks at once that the noodle bar used it as a broom, and the floor now smells delicious.",
+  "names.legendary": "Noodle Broom"
+ },
+ "x_sprouts": {
+  "lore.rare": "Wriggles its little tails in the jar, so everyone checks that it is not full of worms.",
+  "names.rare": "Jarwriggler",
+  "lore.legendary": "Sprouted so fast in a forgotten lunchbox that it grew a tiny garden, complete with a tiny fence.",
+  "names.legendary": "Lunchbox Gardenia"
+ },
+ "x_spruce": {
+  "names.common": "Sapdripper",
+  "lore.uncommon": "Smells so strongly of the winter holidays that people start wrapping presents in June.",
+  "names.uncommon": "Junewrapper",
+  "lore.rare": "Hums when it is tapped, so the woodpeckers keep stopping to listen and never finish a hole.",
+  "lore.legendary": "Was made into a violin that played so well that the forest it came from swayed in time.",
+  "names.legendary": "Picea the Fiddler"
+ },
+ "x_star_fruit": {
+  "lore.rare": "Catches the light so well that its slices twinkle on the plate, and the moths circle the dinner table.",
+  "names.rare": "Twinkleslice",
+  "lore.epic": "Was sliced into stars for the school play, and the cast had to eat the sky before the second act.",
+  "names.epic": "Edible Sky",
+  "lore.legendary": "Was mistaken for a real star by a lost ship, which followed it all the way to the fruit market.",
+  "names.legendary": "Lodestar Fruit",
+  "moves.ultimate": "Five-Point Burst"
+ },
+ "x_taro": {
+  "lore.rare": "Grows leaves so big and waterproof that the frogs use them as umbrellas and will not give them back.",
+  "names.rare": "Frogbrella",
+  "lore.epic": "Turned a whole cafe's bubble tea purple, and the customers' tongues matched the cafe sign for a week.",
+  "names.epic": "Purple Tongue Cafe",
+  "lore.legendary": "Was so knobbly and hairy that the school mistook it for the class hamster and sent it home for the holidays.",
+  "names.legendary": "Class Hamster"
+ },
+ "x_thyme": {
+  "lore.rare": "Makes time pass slower in the kitchen, so the soup takes ages and the cook is always late.",
+  "names.rare": "Slowthyme",
+  "lore.epic": "Was stirred into the stew so late that the stew had already been eaten yesterday.",
+  "names.epic": "Yesterday Stew",
+  "lore.legendary": "Had so much thyme on its hands that it stopped the town clock and let everyone have a lie-in.",
+  "names.legendary": "Thymekeeper"
+ },
+ "x_tofu": {
+  "lore.rare": "Tastes of whatever is next to it, so the fruit salad ended up tasting of garlic.",
+  "names.rare": "Flavourthief",
+  "lore.epic": "Wobbled so much on the plate that the table, the chairs and the guests started wobbling too.",
+  "names.epic": "Wobble Party",
+  "lore.legendary": "Wobbled so hard that it set off the town's earthquake alarm, and the jelly factory got the blame.",
+  "names.legendary": "Tremora the Wobbler"
+ },
+ "x_topiary": {
+  "lore.rare": "Changes its animal shape overnight, so the peacock is a rabbit by morning.",
+  "names.rare": "Shapeswapper",
+  "lore.epic": "Was trimmed into a lion so convincing that the postman would not come through the gate.",
+  "names.epic": "Hedge Lion",
+  "lore.legendary": "Was trimmed into an elephant so lifelike that it walked off to the zoo and asked to be let in.",
+  "names.legendary": "Hedgephant"
+ },
+ "x_tree_stump": {
+  "lore.rare": "Pretends to be a stool, then grows a mushroom exactly where you were going to sit.",
+  "names.rare": "Stoolfaker",
+  "lore.legendary": "Grew back into a whole tree overnight after being chopped down, and the woodcutter said sorry.",
+  "names.legendary": "Comeback Stump"
+ },
+ "x_turnip": {
+  "lore.rare": "Rolls under the kitchen table whenever anyone mentions soup.",
+  "names.rare": "Soupdodger",
+  "names.epic": "Runaway Root",
+  "lore.legendary": "Grew so big that the family, the dog, the cat and a mouse all had to pull it up, and the mouse took the credit.",
+  "names.legendary": "Brassica the Enormous"
+ },
+ "x_twig": {
+  "lore.common": "Snaps loudly under your foot at exactly the moment you are trying to sneak up on someone.",
+  "lore.rare": "Turns into a wand in any child's hand, but only does tiny spells, like untying shoelaces.",
+  "names.rare": "Tinyspell",
+  "lore.epic": "Fell into the stream, raced the paper boats all the way to the sea, and won.",
+  "names.epic": "Stream Racer",
+  "lore.legendary": "Was waved so hard by one child that the rain stopped, and the school sports day went ahead after all.",
+  "names.legendary": "Wandsworth the Weather-Wand"
+ },
+ "x_willow_tree": {
+  "lore.rare": "Weeps onto anyone who sits underneath it, then says it was only the dew.",
+  "names.rare": "Weepdropper",
+  "lore.epic": "Dipped its branches into the river and fished out every lost football in the town.",
+  "names.epic": "Football Fisher",
+  "lore.legendary": "Wept so much in one summer that the river rose, and the whole town went to work by boat.",
+  "names.legendary": "Boat-to-Work Willow"
+ },
+ "x_yam": {
+  "lore.rare": "Pretends to be a sweet potato at the shop, and nobody can prove otherwise.",
+  "names.rare": "Yamposter",
+  "lore.epic": "Was so heavy that the harvest cart tipped over and the yam rolled to the front of the parade.",
+  "names.epic": "Cart Tipper",
+  "lore.legendary": "Was roasted so sweetly that the pudding trolley sent it a note saying it had gone too far.",
+  "names.legendary": "Pudding"
+ },
+ "x_yuzu": {
+  "lore.epic": "Floated in the bath so happily that it refused to get out, and the family had to shower for a week.",
+  "names.epic": "Bath Squatter",
+  "lore.legendary": "Scented the steam from one bath so strongly that the whole street had a warm, lemony fog for a day.",
+  "names.legendary": "Lemon Fog"
+ }
+}
