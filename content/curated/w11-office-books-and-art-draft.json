@@ -1,0 +1,711 @@
+{
+  "schema": 1,
+  "batch": "w11-office-books-and-art",
+  "entries": {
+    "x_calendar": {
+      "status": "draft",
+      "names": {
+        "common": "Monthforgetter",
+        "uncommon": "Birthdayringer",
+        "rare": "Datehopper",
+        "epic": "Double-Booked Day",
+        "legendary": "The Calendar Who Cancelled Monday"
+      },
+      "lore": {
+        "common": "Stays on last month's page until someone notices in the middle of the next one.",
+        "uncommon": "Has a little ring drawn round every birthday, so nobody can pretend they forgot.",
+        "rare": "Shuffles its own dates, so the dentist appointment keeps landing on the trip to the zoo.",
+        "epic": "Double-booked the whole family for one Saturday, and they went to a wedding, a football match and a party in the same clothes.",
+        "legendary": "Crossed out Monday so firmly that the whole office took the day off, and nobody has worked out how to undo it."
+      },
+      "moves": {
+        "signature": "Page Flip Flip Flip",
+        "legend": "Overdue Reminder Stink",
+        "ultimate": "Calendar Shuffle",
+        "kit.paper_cut": "Page Cut Cut",
+        "kit.ink_splatter": "Felt Tip Smudge",
+        "kit.deadline_panic": "Due Date Panic"
+      }
+    },
+    "x_calendar_page": {
+      "status": "draft",
+      "names": {
+        "common": "Torncorner",
+        "uncommon": "Dogearflap",
+        "rare": "Dayskipper",
+        "epic": "Tear-Off Blizzard",
+        "legendary": "The Page That Made It Friday"
+      },
+      "lore": {
+        "common": "Gets torn off a day early by someone who can't wait for the weekend.",
+        "uncommon": "Curls up at the corner like a little dog's ear.",
+        "rare": "Tears itself off at midnight, so everyone wakes up a day ahead.",
+        "epic": "Was torn off so fast before the holiday that the whole office snowed with paper days.",
+        "legendary": "Tore itself off five times in one night, and the whole school arrived for the summer holidays on a Tuesday in spring."
+      },
+      "moves": {
+        "signature": "Tear Tear Tear",
+        "legend": "Date Flash",
+        "ultimate": "Tear-Off Flurry",
+        "kit.paper_cut": "Paper Edge Cut",
+        "kit.ink_splatter": "Smudged Date",
+        "kit.deadline_panic": "Tomorrow Panic"
+      }
+    },
+    "x_clipboard": {
+      "status": "draft",
+      "names": {
+        "common": "Fingerclipper",
+        "uncommon": "Ticksheet",
+        "rare": "Importantlooker",
+        "epic": "Inspection Day Panic",
+        "legendary": "Sir Clipsworth the Self-Appointed"
+      },
+      "lore": {
+        "common": "Snaps its clip on your fingers every time you add a new sheet.",
+        "uncommon": "Has a list with little ticks on it that never quite gets finished.",
+        "rare": "Makes whoever holds it look so important that doors open and nobody asks questions.",
+        "epic": "Was carried round the school by a pupil for one afternoon, and three teachers tidied their desks just in case.",
+        "legendary": "Walked a lost tourist into the town hall meeting, and the tourist ended up chairing it."
+      },
+      "moves": {
+        "signature": "Clip Clip Clip",
+        "legend": "Hot Clipboard Clamp",
+        "ultimate": "Inspection Sweep",
+        "kit.paper_cut": "Sheet Edge Cuts",
+        "kit.ink_splatter": "Biro Blot",
+        "kit.deadline_panic": "Clipboard Glare",
+        "kit.coffee_break": "Tea Break"
+      }
+    },
+    "x_diary": {
+      "status": "draft",
+      "names": {
+        "common": "Lockfiddler",
+        "uncommon": "Keyloser",
+        "rare": "Secretsquealer",
+        "epic": "Sleepover Secrets",
+        "legendary": "Dearest Confida, Keeper of Crushes"
+      },
+      "lore": {
+        "common": "Has a little lock that pops open if you just look at it hard enough.",
+        "uncommon": "Has a tiny key that vanishes the night you most need it.",
+        "rare": "Falls open at the most embarrassing page whenever a brother walks past.",
+        "epic": "Was read aloud at the sleepover by mistake, and five friendships were fixed by morning.",
+        "legendary": "Kept a secret for forty years, then was found by a granddaughter who wrote the next page."
+      },
+      "moves": {
+        "signature": "Lock Lock Lock",
+        "legend": "Secret Page Flash",
+        "ultimate": "Diary Reveal",
+        "kit.ink_splatter": "Gel Pen Splodge",
+        "kit.coffee_break": "Pillow Rest"
+      }
+    },
+    "x_file_folder": {
+      "status": "draft",
+      "names": {
+        "common": "Papershedder",
+        "uncommon": "Wrongtabbed",
+        "rare": "Misfiler",
+        "epic": "Cabinet Avalanche",
+        "legendary": "The Folder Nobody Could Find"
+      },
+      "lore": {
+        "common": "Sheds a sheet of paper every time it's lifted.",
+        "uncommon": "Has a label on its tab that doesn't match what's inside.",
+        "rare": "Hides important papers in the wrong drawer and then looks innocent.",
+        "epic": "Was pulled from the bottom of the stack, and the whole filing cabinet fell over like a waterfall of paper.",
+        "legendary": "Hid the same lost form for ten years, then turned up the day after it was no longer needed."
+      },
+      "moves": {
+        "signature": "Sheet Sheet Sheet",
+        "legend": "Lost File Flash",
+        "ultimate": "Paper Avalanche",
+        "kit.paper_cut": "Sharp Edge Cuts",
+        "kit.ink_splatter": "Coffee Ring Stink",
+        "kit.deadline_panic": "Missing File Panic"
+      }
+    },
+    "x_folder": {
+      "status": "draft",
+      "names": {
+        "common": "Bandsnapper",
+        "uncommon": "Paperbulger",
+        "rare": "Homeworkhider",
+        "epic": "School Bag Explosion",
+        "legendary": "The Fattest Folder in Year Six"
+      },
+      "lore": {
+        "common": "Snaps its elastic band on your thumb when you close it.",
+        "uncommon": "Bulges with so many worksheets that it won't close properly.",
+        "rare": "Swallows the homework you need and spits out the one from last term.",
+        "epic": "Burst open on the bus, and every worksheet from the whole year flew out of the window.",
+        "legendary": "Held every worksheet from one whole school year and was entered into the school museum."
+      },
+      "moves": {
+        "signature": "Snap Snap Snap",
+        "legend": "Bulge Crack",
+        "ultimate": "Worksheet Burst",
+        "kit.paper_cut": "Paper Edge Cuts",
+        "kit.ink_splatter": "Leaky Pen Stink",
+        "kit.coffee_break": "Desk Drawer Rest"
+      }
+    },
+    "x_journal": {
+      "status": "draft",
+      "names": {
+        "common": "Doodlemargin",
+        "uncommon": "Leatherbound",
+        "rare": "Idealogger",
+        "epic": "Expedition Notes",
+        "legendary": "The Journal That Found the Waterfall"
+      },
+      "lore": {
+        "common": "Gets doodles in every margin before a single real word is written.",
+        "uncommon": "Has a soft leather cover that gets nicer every time it's held.",
+        "rare": "Wrote down an idea at midnight that its owner didn't remember having.",
+        "epic": "Was left open in the rain, and every page became a watercolour painting.",
+        "legendary": "Held the notes of an explorer who found a hidden waterfall, with the map drawn on page four."
+      },
+      "moves": {
+        "signature": "Scribble Scribble Scribble",
+        "legend": "Leather Cover Slap",
+        "ultimate": "Lost Page Reveal",
+        "kit.deadline_panic": "Writer's Block Panic",
+        "kit.coffee_break": "Bookmark Rest"
+      }
+    },
+    "x_notebook_pad": {
+      "status": "draft",
+      "names": {
+        "common": "Spiraltangle",
+        "uncommon": "Lastpage",
+        "rare": "Pagerip",
+        "epic": "Exam Revision Storm",
+        "legendary": "The Notebook That Passed Every Test"
+      },
+      "lore": {
+        "common": "Tangles its spiral in your jumper sleeve.",
+        "uncommon": "Always runs out of pages one line before the end of the lesson.",
+        "rare": "Rips out pages so neatly that it leaves no fringe, and nobody believes it.",
+        "epic": "Was copied from by the whole class on the night before the exam, and the photocopier gave up.",
+        "legendary": "Was revised from by three brothers in a row, and all three got top marks."
+      },
+      "moves": {
+        "signature": "Spiral Spiral Spiral",
+        "legend": "Rip Out Crack",
+        "ultimate": "Cram Session",
+        "kit.paper_cut": "Paper Snick Snick",
+        "kit.ink_splatter": "Smudgy Notes",
+        "kit.deadline_panic": "Exam Panic",
+        "kit.coffee_break": "Last Page Rest"
+      }
+    },
+    "x_notepad": {
+      "status": "draft",
+      "names": {
+        "common": "Phonedoodler",
+        "uncommon": "Shoppinglister",
+        "rare": "Lostlist",
+        "epic": "Message Mix-Up",
+        "legendary": "The Pad That Remembered Everything"
+      },
+      "lore": {
+        "common": "Gets covered in doodles every time someone is on the phone.",
+        "uncommon": "Has the shopping list on it, but always stays at home on the kitchen counter.",
+        "rare": "Writes messages so messily that \"call Gran\" becomes \"cool gorilla\".",
+        "epic": "Mixed up the family's messages so badly that the plumber was invited to Sunday lunch.",
+        "legendary": "Wrote down a phone number that won the family a holiday, and is now kept in a frame."
+      },
+      "moves": {
+        "signature": "Doodle Doodle Doodle",
+        "legend": "Bright Idea Boost",
+        "ultimate": "Message Mix-Up Stink",
+        "kit.ink_splatter": "Biro Splodge",
+        "kit.deadline_panic": "Lost List Panic",
+        "kit.coffee_break": "Phone Call Rest"
+      }
+    },
+    "x_planner": {
+      "status": "draft",
+      "names": {
+        "common": "Colourcoder",
+        "uncommon": "Overplanner",
+        "rare": "Timesqueezer",
+        "epic": "Holiday Itinerary",
+        "legendary": "Lady Schedula the Unstoppable"
+      },
+      "lore": {
+        "common": "Is coloured in with twelve different pens before a single plan is made.",
+        "uncommon": "Plans so many things in one day that there's no time for lunch.",
+        "rare": "Squeezes an extra hour into every Saturday, and the clocks are still trying to work out where it came from.",
+        "epic": "Planned a family holiday so tightly that they saw nine castles and no beaches.",
+        "legendary": "Planned a whole wedding to the minute, and the bride arrived exactly as the bells rang."
+      },
+      "moves": {
+        "signature": "Plan Plan Plan",
+        "legend": "Free Hour Rest",
+        "ultimate": "Itinerary Overload",
+        "kit.paper_cut": "Tab Cut Cut",
+        "kit.deadline_panic": "Overbooked Panic",
+        "kit.coffee_break": "Planned Break"
+      }
+    },
+    "x_ring_binder": {
+      "status": "draft",
+      "names": {
+        "common": "Ringpincher",
+        "uncommon": "Holetearer",
+        "rare": "Dividermaze",
+        "epic": "Coursework Collapse",
+        "legendary": "The Binder of Forty Subjects"
+      },
+      "lore": {
+        "common": "Pinches your fingers every time its rings snap shut.",
+        "uncommon": "Rips the holes in every sheet so the pages hang loose.",
+        "rare": "Grows a new coloured divider overnight, until nobody can find maths.",
+        "epic": "Snapped open at the bottom of the stairs and spread a whole year of coursework from the hall to the kitchen.",
+        "legendary": "Held every lesson from a whole school career, and the student who owned it became a teacher."
+      },
+      "moves": {
+        "signature": "Ring Ring Ring",
+        "legend": "Sun-Warm Plastic",
+        "ultimate": "Ring Snap Spill",
+        "kit.paper_cut": "Page Cut Cut Cut",
+        "kit.ink_splatter": "Highlighter Stink",
+        "kit.coffee_break": "Shelf Rest"
+      }
+    },
+    "x_sticky_note": {
+      "status": "draft",
+      "names": {
+        "common": "Fallsoffer",
+        "uncommon": "Fridgeflapper",
+        "rare": "Everywhere Note",
+        "epic": "Office Yellow Out",
+        "legendary": "The Note That Ran the House"
+      },
+      "lore": {
+        "common": "Falls off the wall as soon as you read it.",
+        "uncommon": "Covers the fridge door so thickly that the fridge looks yellow.",
+        "rare": "Multiplies overnight, so one reminder on the fridge becomes forty by breakfast.",
+        "epic": "Covered every window in the office for a joke, and the boss thought it was a sunny day.",
+        "legendary": "Reminded a whole family to do everything for a month until the house ran itself."
+      },
+      "moves": {
+        "signature": "Stick Stick Stick",
+        "legend": "Note Slap",
+        "ultimate": "Yellow Out",
+        "kit.paper_cut": "Corner Cuts",
+        "kit.ink_splatter": "Marker Smudge",
+        "kit.coffee_break": "Peel Off Rest"
+      }
+    },
+    "bookshelf": {
+      "status": "draft",
+      "names": {
+        "common": "Wobbleshelf",
+        "uncommon": "Bookbender",
+        "rare": "Secretdoor",
+        "epic": "Library Domino",
+        "legendary": "The Bookcase That Opened a Room"
+      },
+      "lore": {
+        "common": "Wobbles when you take a book out from the bottom.",
+        "uncommon": "Sags in the middle under the heaviest books.",
+        "rare": "Swings open like a secret door when the right book is tilted.",
+        "epic": "Tipped one book over, then another, and the whole library fell like dominoes.",
+        "legendary": "Revealed a hidden room behind it that held a lost tea set, a cat and a very old piano."
+      },
+      "moves": {
+        "signature": "Book Book Book",
+        "legend": "Topple Topple Topple",
+        "ultimate": "Secret Door Swing",
+        "kit.plot_twist": "Hidden Room Startle",
+        "kit.ink_splash": "Dusty Book Pong",
+        "kit.hardcover_slam": "Shelf Slam"
+      }
+    },
+    "x_cardboard": {
+      "status": "draft",
+      "names": {
+        "common": "Soggycorner",
+        "uncommon": "Fortbuilder",
+        "rare": "Slidesled",
+        "epic": "Cardboard City",
+        "legendary": "The Cardboard Castle King"
+      },
+      "lore": {
+        "common": "Goes soggy at the corner the moment it touches a puddle.",
+        "uncommon": "Is turned into a fort with windows and a door by every child who finds it.",
+        "rare": "Becomes the fastest sledge on the hill whenever it snows.",
+        "epic": "Was made into a whole cardboard city in the garden, and the cat moved into the town hall.",
+        "legendary": "Built a castle so tall in the living room that the family ate dinner in its great hall for a week."
+      },
+      "moves": {
+        "signature": "Corner Corner Corner",
+        "legend": "Sun-Dried Crackle",
+        "ultimate": "Soggy Collapse",
+        "kit.ink_splash": "Marker Pong",
+        "kit.hardcover_slam": "Flat Box Slam",
+        "kit.bookmark_ward": "Folded Wall"
+      }
+    },
+    "x_paper_crane": {
+      "status": "draft",
+      "names": {
+        "common": "Foldfumbler",
+        "uncommon": "Tailpullflap",
+        "rare": "Wishfolder",
+        "epic": "Thousand Crane Garden",
+        "legendary": "The Crane That Granted Wishes"
+      },
+      "lore": {
+        "common": "Comes out wonky and lopsided every time someone tries to fold it.",
+        "uncommon": "Flaps its paper wings when you pull its tail.",
+        "rare": "Grants a tiny wish to whoever folds it perfectly, or so its owner believes.",
+        "epic": "Was folded a thousand times by a whole school, and the string of cranes went round the playground.",
+        "legendary": "Was folded by a grandad for each day his granddaughter was in hospital, and she came home to a sky of them."
+      },
+      "moves": {
+        "signature": "Fold Fold Fold",
+        "legend": "Ink Stain Stink",
+        "ultimate": "Crane Swarm Flight",
+        "kit.plot_twist": "Wing Flap Startle",
+        "kit.ink_splash": "Marker Pong",
+        "kit.hardcover_slam": "Folded Beak Jab"
+      }
+    },
+    "envelope": {
+      "status": "draft",
+      "names": {
+        "common": "Papercutter",
+        "uncommon": "Tonguelicker",
+        "rare": "Windowpeeker",
+        "epic": "Doormat Disappearance",
+        "legendary": "The Letter That Found Its Way"
+      },
+      "lore": {
+        "common": "Gives you a paper cut every time you open it in a hurry.",
+        "uncommon": "Has a sticky edge that tastes terrible when you lick it.",
+        "rare": "Has a little window that shows exactly who it's from, so you know it's a bill.",
+        "epic": "Arrived with five hundred others on the same birthday, and the doormat disappeared.",
+        "legendary": "Was posted forty years ago, lost behind a sorting machine, and arrived on the right birthday anyway."
+      },
+      "moves": {
+        "signature": "Flap Flap Flap",
+        "legend": "Stamp Snatch",
+        "ultimate": "Letter Flood",
+        "kit.plot_twist": "Surprise Letter",
+        "kit.ink_splash": "Smudged Address",
+        "kit.hardcover_slam": "Parcel Slap",
+        "kit.bookmark_ward": "Sealed Guard"
+      }
+    },
+    "i_street_sign": {
+      "status": "draft",
+      "names": {
+        "common": "Wrongnamed",
+        "uncommon": "Graffitiface",
+        "rare": "Twistpost",
+        "epic": "Junction Muddle",
+        "legendary": "The Sign That Renamed the Street"
+      },
+      "lore": {
+        "common": "Has been spelt wrong for thirty years, and nobody can be bothered to fix it.",
+        "uncommon": "Gets stickers on it every week, and the council peels them off every Monday.",
+        "rare": "Twists in the wind until it points down the wrong road.",
+        "epic": "Was turned round at the crossroads, and every delivery van in town spent the day in a cul-de-sac.",
+        "legendary": "Was misspelt so long that the town gave up and changed the street's name to match it."
+      },
+      "moves": {
+        "signature": "Point Point Point",
+        "legend": "Name Pride",
+        "ultimate": "Signpost Spin",
+        "kit.plot_twist": "Wrong Turn Twist",
+        "kit.ink_splash": "Spray Paint Pong",
+        "kit.hardcover_slam": "Post Bonk",
+        "kit.bookmark_ward": "Metal Plate Guard"
+      }
+    },
+    "x_atlas": {
+      "status": "draft",
+      "names": {
+        "common": "Heavylap",
+        "uncommon": "Pagefoldout",
+        "rare": "Mapmagic",
+        "epic": "Geography Lesson",
+        "legendary": "The Atlas That Planned Every Holiday"
+      },
+      "lore": {
+        "common": "Is so heavy that it squashes your legs flat when you read it on your lap.",
+        "uncommon": "Has a fold-out page that never folds back the same way.",
+        "rare": "Opens on a random country whenever it's dropped, and its owner wants to go there.",
+        "epic": "Was opened on every desk in the geography lesson, and the whole class planned a trip to the same island.",
+        "legendary": "Planned fifty holidays for one family by falling open on the right page each summer."
+      },
+      "moves": {
+        "signature": "Page Page Page",
+        "legend": "Old Paper Pong",
+        "ultimate": "Continent Crunch",
+        "kit.paper_cut": "Map Edge Cuts",
+        "kit.ink_splatter": "Faded Ink Stink",
+        "kit.coffee_break": "Armchair Rest"
+      }
+    },
+    "x_map": {
+      "status": "draft",
+      "names": {
+        "common": "Refoldfail",
+        "uncommon": "Wrongwayup",
+        "rare": "Treasurecross",
+        "epic": "Walking Holiday Detour",
+        "legendary": "The Map With an Extra X"
+      },
+      "lore": {
+        "common": "Can never be folded back the way it came out of the shop.",
+        "uncommon": "Is always held upside down by the person in charge.",
+        "rare": "Shows a path that doesn't exist, and somehow everyone finds it anyway.",
+        "epic": "Led a whole walking group the wrong way round a lake, and they found the best tea shop in the county.",
+        "legendary": "Had an X drawn on it by a grandad as a joke, and his grandchildren dug up a real tin of old coins."
+      },
+      "moves": {
+        "signature": "Fold Fold Fold Fold",
+        "legend": "Map Map Map",
+        "ultimate": "Big Detour",
+        "kit.paper_cut": "Crease Cut",
+        "kit.ink_splatter": "Rain Smudge",
+        "kit.deadline_panic": "Lost Panic",
+        "kit.coffee_break": "Picnic Stop"
+      }
+    },
+    "newspaper": {
+      "status": "draft",
+      "names": {
+        "common": "Inkyfingers Paper",
+        "uncommon": "Crosswordhog",
+        "rare": "Windflyer",
+        "epic": "Sunday Paper Storm",
+        "legendary": "The Paper That Printed Tomorrow"
+      },
+      "lore": {
+        "common": "Leaves grey ink on everyone's fingers and on the white sofa.",
+        "uncommon": "Gets its crossword done in pen by grandad before anyone else can try.",
+        "rare": "Flies off the bench on a windy day and wraps itself round a passing cyclist.",
+        "epic": "Blew out of every paper box in the street on the windiest Sunday, and the whole town wore headlines.",
+        "legendary": "Printed a story about a lost dog on Monday, and by Tuesday the dog had read it and come home."
+      },
+      "moves": {
+        "signature": "Headline Headline Headline",
+        "legend": "Page Page Page Page",
+        "ultimate": "Paper Storm",
+        "kit.ink_splash": "Wet Ink Pong",
+        "kit.hardcover_slam": "Rolled Paper Swat",
+        "kit.bookmark_ward": "Folded Guard"
+      }
+    },
+    "sewing_machine": {
+      "status": "draft",
+      "names": {
+        "common": "Threadsnarl",
+        "uncommon": "Footpedaller",
+        "rare": "Hemracer",
+        "epic": "Costume Week Rush",
+        "legendary": "The Machine That Stitched a Town"
+      },
+      "lore": {
+        "common": "Snarls its thread into a bird's nest under the fabric.",
+        "uncommon": "Is driven by a foot pedal that its owner presses like a racing car.",
+        "rare": "Stitched a hem so fast that the curtain was finished before the kettle boiled.",
+        "epic": "Made every costume for the school play in one week, including a dragon and a talking teapot.",
+        "legendary": "Stitched a patchwork quilt so big that it covered the whole village green for the summer fair."
+      },
+      "moves": {
+        "signature": "Stitch Stitch Stitch",
+        "legend": "Bobbin Rest",
+        "ultimate": "Stitch Storm",
+        "kit.pin_prick": "Needle Prick",
+        "kit.knit_together": "Mend Rest",
+        "kit.thread_bind": "Thread Snare"
+      }
+    },
+    "x_hole_puncher": {
+      "status": "draft",
+      "names": {
+        "common": "Confettimaker",
+        "uncommon": "Threesheetjam",
+        "rare": "Holepuncher Pro",
+        "epic": "Office Confetti Storm",
+        "legendary": "The Puncher That Made It Snow"
+      },
+      "lore": {
+        "common": "Spills its little paper circles all over the floor when you open it.",
+        "uncommon": "Jams if you put more than three sheets in it.",
+        "rare": "Punches holes slightly off-centre, so every page hangs crooked.",
+        "epic": "Was emptied out of the office window for a joke, and the car park looked like it had snowed.",
+        "legendary": "Punched enough paper circles for a whole wedding's confetti, and saved the bride buying any."
+      },
+      "moves": {
+        "signature": "Punch Punch Punch",
+        "legend": "Hot Lever Press",
+        "ultimate": "Paper Dot Blizzard",
+        "kit.paper_cut": "Punch Cut Cut",
+        "kit.deadline_panic": "Jam Panic",
+        "kit.coffee_break": "Empty Out Rest"
+      }
+    },
+    "x_label_maker": {
+      "status": "draft",
+      "names": {
+        "common": "Labelhappy",
+        "uncommon": "Typoprinter",
+        "rare": "Stickystrip",
+        "epic": "Kitchen Label Frenzy",
+        "legendary": "Sir Labelworth the Thorough"
+      },
+      "lore": {
+        "common": "Labels the light switch, the door and the dog's bowl.",
+        "uncommon": "Prints every label with a typo, so the jar says SUGRA.",
+        "rare": "Sticks its label so firmly that it never comes off, even in the dishwasher.",
+        "epic": "Labelled everything in the kitchen in one afternoon, including the kettle, the toaster and Dad.",
+        "legendary": "Labelled every shelf in the giant library so well that a lost book was found after fifty years."
+      },
+      "moves": {
+        "signature": "Print Print Print",
+        "legend": "Label Crack",
+        "ultimate": "Sticker Blitz",
+        "kit.ink_splatter": "Smudgy Print",
+        "kit.deadline_panic": "Out of Tape Panic",
+        "kit.coffee_break": "Battery Rest"
+      }
+    },
+    "x_stapler_remover": {
+      "status": "draft",
+      "names": {
+        "common": "Jawsnapper",
+        "uncommon": "Fingerpinch",
+        "rare": "Paperrescuer",
+        "epic": "Staple Rescue Mission",
+        "legendary": "The Jaws of the Office"
+      },
+      "lore": {
+        "common": "Snaps its little jaws like a crocodile on your fingers.",
+        "uncommon": "Pinches the paper and tears a corner off along with the staple.",
+        "rare": "Rescues pages from staples so neatly that the holes vanish.",
+        "epic": "Freed every page from a mountain of stapled reports, and the office looked like a paper snowstorm.",
+        "legendary": "Unstapled a thousand reports in one afternoon and was given a little crown made of staples."
+      },
+      "moves": {
+        "signature": "Bite Bite Bite",
+        "legend": "Jaw Guard",
+        "ultimate": "Staple Snatch",
+        "kit.paper_cut": "Torn Corner Cuts",
+        "kit.ink_splatter": "Smudge Stink",
+        "kit.deadline_panic": "Pinch Panic",
+        "kit.coffee_break": "Desk Rest"
+      }
+    },
+    "x_tape_gun": {
+      "status": "draft",
+      "names": {
+        "common": "Screechtape",
+        "uncommon": "Boxsealer",
+        "rare": "Edgefinder Gun",
+        "epic": "Moving Day Seal",
+        "legendary": "The Tape Gun That Taped the Van"
+      },
+      "lore": {
+        "common": "Screeches so loudly when it's pulled that everyone covers their ears.",
+        "uncommon": "Seals a box in one long noisy swoop.",
+        "rare": "Finds the end of the tape every time, which no human can do.",
+        "epic": "Sealed every box on moving day so well that nobody could open them for a week.",
+        "legendary": "Taped a whole van shut by mistake, with the moving men still inside eating sandwiches."
+      },
+      "moves": {
+        "signature": "Rip Rip Rip",
+        "legend": "Hot Tape Screech",
+        "ultimate": "Tape Wrap",
+        "kit.paper_cut": "Tape Edge Cut",
+        "kit.ink_splatter": "Marker Pong",
+        "kit.deadline_panic": "Tape Screech Startle"
+      }
+    },
+    "x_banknote": {
+      "status": "draft",
+      "names": {
+        "common": "Pocketwasher",
+        "uncommon": "Crumplenote",
+        "rare": "Folderfinder",
+        "epic": "Pocket Money Day",
+        "legendary": "The Note That Came Back"
+      },
+      "lore": {
+        "common": "Gets folded and refolded so many times that the face on it looks like it's winking.",
+        "uncommon": "Gets folded so small that it disappears in the wallet.",
+        "rare": "Turns up in old coat pockets just when someone needs it most.",
+        "epic": "Blew down the high street on a windy day, and twenty people chased it.",
+        "legendary": "Was spent at the market, travelled the country for ten years, and came back to its owner in change."
+      },
+      "moves": {
+        "signature": "Crinkle Crinkle Crinkle",
+        "legend": "Pocket Rest",
+        "ultimate": "Windy Chase",
+        "kit.paper_cut": "Note Edge Cuts",
+        "kit.ink_splatter": "Old Note Stink",
+        "kit.coffee_break": "Wallet Rest"
+      }
+    },
+    "x_banner": {
+      "status": "draft",
+      "names": {
+        "common": "Saggyrope",
+        "uncommon": "Windsailer",
+        "rare": "Welcomeflapper",
+        "epic": "Street Party Flap",
+        "legendary": "The Banner That Lifted Off"
+      },
+      "lore": {
+        "common": "Sags in the middle so the words read WELC... OME.",
+        "uncommon": "Fills with wind like a sail and tries to fly away.",
+        "rare": "Flapped its welcome message so loudly that the guests arrived early.",
+        "epic": "Was hung across the whole street for the party, and every lorry had to drive under it on tiptoe.",
+        "legendary": "Was blown away in a gale and landed across the finish line of a marathon, just in time."
+      },
+      "moves": {
+        "signature": "Flap Flap Flap",
+        "legend": "Welcome Flash",
+        "ultimate": "Banner Wrap",
+        "kit.plot_twist": "Gust Startle",
+        "kit.ink_splash": "Paint Pong",
+        "kit.bookmark_ward": "Rope Guard"
+      }
+    },
+    "x_bible": {
+      "status": "draft",
+      "names": {
+        "common": "Thinpage",
+        "uncommon": "Heavytome",
+        "rare": "Familytree",
+        "epic": "Dusty Shelf Thump",
+        "legendary": "The Great Family Book"
+      },
+      "lore": {
+        "common": "Has pages so thin that they stick together and tear if you rush.",
+        "uncommon": "Is so heavy that it needs two hands and a table.",
+        "rare": "Has every family birthday from a hundred years ago written in the front cover.",
+        "epic": "Fell off the top shelf during spring cleaning and shook every ornament in the room.",
+        "legendary": "Held the names of seven generations in its front pages, and the newest baby was added this year."
+      },
+      "moves": {
+        "signature": "Page Turn Turn",
+        "legend": "Bookmark Rest",
+        "ultimate": "Heavy Cover Drop",
+        "kit.plot_twist": "Pressed Flower Surprise",
+        "kit.ink_splash": "Old Ink Pong",
+        "kit.hardcover_slam": "Heavy Book Slam",
+        "kit.bookmark_ward": "Ribbon Guard"
+      }
+    }
+  }
+}
