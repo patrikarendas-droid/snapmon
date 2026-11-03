@@ -1,0 +1,762 @@
+{
+  "schema": 1,
+  "batch": "w14-garden-and-plants",
+  "entries": {
+    "cactus": {
+      "status": "draft",
+      "names": {
+        "common": "Prickleprod",
+        "uncommon": "Waterforgetter",
+        "rare": "Desertsurvivor",
+        "epic": "Windowsill Prickle Patch",
+        "legendary": "The Cactus That Bloomed Once a Century"
+      },
+      "lore": {
+        "common": "Prods everyone who reaches past it for the window latch.",
+        "uncommon": "Is forgotten for months without water and still looks smug.",
+        "rare": "Stores so much water in its stem that it grows a new arm just to show off.",
+        "epic": "Spread across the whole windowsill with its babies until the curtains couldn't close.",
+        "legendary": "Bloomed one perfect pink flower after a hundred years, and the whole street came to look."
+      },
+      "moves": {
+        "signature": "Prick Prick Prick",
+        "legend": "Sun Soak Boost",
+        "ultimate": "Spine Storm",
+        "kit.pollen_puff": "Spine Flick Distraction",
+        "kit.sap_sip": "Water Store Siphon",
+        "kit.vine_snare": "Spiny Grab",
+        "kit.fresh_growth": "New Arm Rest"
+      }
+    },
+    "x_recycling_box": {
+      "status": "draft",
+      "names": {
+        "common": "Wrongbinner",
+        "uncommon": "Rattlecrate",
+        "rare": "Sortsulker",
+        "epic": "Bin Night Clatter",
+        "legendary": "The Box That Sorted the Street"
+      },
+      "lore": {
+        "common": "Gets the wrong things put in it every single week.",
+        "uncommon": "Rattles with glass bottles all the way to the kerb.",
+        "rare": "Refuses to be collected if one yoghurt pot is unwashed.",
+        "epic": "Clattered so loudly on bin night that the whole street woke up at once.",
+        "legendary": "Sorted the whole street's rubbish so perfectly that the bin lorry crew sent it a thank-you card."
+      },
+      "moves": {
+        "signature": "Rattle Stink",
+        "legend": "Bottle Clink Startle",
+        "ultimate": "Recycling Rattle",
+        "kit.mud_slide": "Soggy Card Crack",
+        "kit.campfire": "Sun Warmed Bottles",
+        "kit.bug_spray": "Sticky Bottle Stink"
+      }
+    },
+    "x_recycling_crate": {
+      "status": "draft",
+      "names": {
+        "common": "Overflowcrate",
+        "uncommon": "Bottlestacker",
+        "rare": "Kerbstopper",
+        "epic": "Glass Bottle Avalanche",
+        "legendary": "The Crate That Carried the Whole Party"
+      },
+      "lore": {
+        "common": "Overflows the morning after every party.",
+        "uncommon": "Stacks bottles so high that they clink in the wind.",
+        "rare": "Sits on the kerb so long that the crisp packets inside start a new life.",
+        "epic": "Toppled off the kerb and sent a hundred bottles rolling down the hill.",
+        "legendary": "Carried every bottle from the street party to the recycling centre in one trip."
+      },
+      "moves": {
+        "signature": "Clink Clink Clink",
+        "legend": "Sunny Kerb Heat",
+        "ultimate": "Bottle Avalanche",
+        "kit.mud_slide": "Wet Crate Crack",
+        "kit.campfire": "Warm Plastic",
+        "kit.rough_terrain": "Sturdy Crate Guard",
+        "kit.bug_spray": "Stale Bottle Stink"
+      }
+    },
+    "flower": {
+      "status": "draft",
+      "names": {
+        "common": "Sneezemaker",
+        "uncommon": "Beemagnet",
+        "rare": "Sunfollower",
+        "epic": "Meadow Bloom Burst",
+        "legendary": "The Flower That Bloomed in Winter"
+      },
+      "lore": {
+        "common": "Makes everyone with hay fever sneeze three times in a row.",
+        "uncommon": "Has a bee on it every single time you lean in to smell it.",
+        "rare": "Turns its head to follow the sun all day long.",
+        "epic": "Bloomed with a thousand friends on the same morning, and the meadow turned completely pink.",
+        "legendary": "Bloomed in the middle of winter through the snow, and the whole village came to see it."
+      },
+      "moves": {
+        "signature": "Pollen Puff",
+        "legend": "Sweet Scent Stink",
+        "ultimate": "Petal Storm",
+        "kit.pollen_puff": "Pollen Cloud Distraction",
+        "kit.vine_snare": "Stem Snare"
+      }
+    },
+    "i_mountain_tent": {
+      "status": "draft",
+      "names": {
+        "common": "Polemissing",
+        "uncommon": "Flysheetflap",
+        "rare": "Windbender",
+        "epic": "Campsite Collapse",
+        "legendary": "The Tent That Survived the Summit"
+      },
+      "lore": {
+        "common": "Always has one pole missing when you get to the campsite.",
+        "uncommon": "Flaps its flysheet all night so loudly that nobody sleeps.",
+        "rare": "Bends in the wind so far that it almost touches the ground, then springs back.",
+        "epic": "Collapsed on the whole camping group in the middle of the night, and everyone woke up wearing it.",
+        "legendary": "Stood firm on a mountain top through a storm that blew every other tent away."
+      },
+      "moves": {
+        "signature": "Flap Flap Flap",
+        "legend": "Tent Pole Smack",
+        "ultimate": "Tent Collapse",
+        "kit.mud_slide": "Muddy Groundsheet Crack",
+        "kit.campfire": "Stove Warmth",
+        "kit.rough_terrain": "Storm Guard",
+        "kit.bug_spray": "Midge Net Stink"
+      }
+    },
+    "i_paddlewheel": {
+      "status": "draft",
+      "names": {
+        "common": "Splashwheel",
+        "uncommon": "Riverchurner",
+        "rare": "Steamboatpaddle",
+        "epic": "River Steamer Splash",
+        "legendary": "The Wheel That Churned the River"
+      },
+      "lore": {
+        "common": "Splashes everyone standing too close to the side of the boat.",
+        "uncommon": "Churns the river into white foam behind it.",
+        "rare": "Turns so fast that the boat overtakes the ducks.",
+        "epic": "Splashed every passenger on the river cruise, and the whole boat came back soaked.",
+        "legendary": "Has turned on the same river steamer for a hundred years and still carries passengers every summer."
+      },
+      "moves": {
+        "signature": "Paddle Ram",
+        "legend": "Splash Startle",
+        "ultimate": "Wheel Churn",
+        "kit.campfire": "Boiler Heat",
+        "kit.rough_terrain": "Hull Guard Paddle",
+        "kit.bug_spray": "River Mist Stink"
+      }
+    },
+    "x_apron": {
+      "status": "draft",
+      "names": {
+        "common": "Flourpocket",
+        "uncommon": "Stringtangle",
+        "rare": "Messcatcher",
+        "epic": "Bake Sale Splatter",
+        "legendary": "Granny Flourworth of the Kitchen"
+      },
+      "lore": {
+        "common": "Gets flour in its pocket that puffs out every time you reach in.",
+        "uncommon": "Has strings that tie themselves into a knot behind your back.",
+        "rare": "Catches every splash of gravy, so its owner always looks spotless.",
+        "epic": "Was worn by every baker at the bake sale, and the hall was covered in icing sugar.",
+        "legendary": "Has been worn for every family feast for forty years and still has the first cake stain."
+      },
+      "moves": {
+        "signature": "Flour Flour Flour",
+        "legend": "Oven Heat",
+        "ultimate": "Splatter Shield",
+        "kit.mud_slide": "Batter Splash Crack",
+        "kit.campfire": "Hot Oven Burn",
+        "kit.bug_spray": "Onion Stink"
+      }
+    },
+    "x_apron_dress": {
+      "status": "draft",
+      "names": {
+        "common": "Pinafore",
+        "uncommon": "Bowtier",
+        "rare": "Pocketpatcher",
+        "epic": "Garden Party Pinafore",
+        "legendary": "The Pinafore That Picked Strawberries"
+      },
+      "lore": {
+        "common": "Has a big bow at the back that keeps coming undone.",
+        "uncommon": "Is worn over everything and covered in little flowers.",
+        "rare": "Has pockets so deep that it carries a whole picnic.",
+        "epic": "Was worn by every helper at the garden party, and the lawn looked like a field of flowers.",
+        "legendary": "Picked every strawberry on the farm in one morning, all into its deep front pocket."
+      },
+      "moves": {
+        "signature": "Pocket Snatch",
+        "legend": "Pinafore Guard",
+        "ultimate": "Bow Undone Daze",
+        "kit.campfire": "Summer Sun Warmth",
+        "kit.rough_terrain": "Pinafore Layer Guard",
+        "kit.bug_spray": "Strawberry Stain Stink"
+      }
+    },
+    "x_life_jacket": {
+      "status": "draft",
+      "names": {
+        "common": "Bulkyfloat",
+        "uncommon": "Whistletag",
+        "rare": "Bobbingorange",
+        "epic": "Lake Safety Drill",
+        "legendary": "The Jacket That Floated a Whole Crew"
+      },
+      "lore": {
+        "common": "Is so bulky that its wearer can't put their arms down.",
+        "uncommon": "Has a little whistle attached that everyone blows on the first day.",
+        "rare": "Bobs its wearer so high in the water that they look like a cork.",
+        "epic": "Was worn by every child at the lake camp, and the water looked full of bobbing oranges.",
+        "legendary": "Kept a whole sailing crew floating until the lifeboat arrived, and everyone came home safe."
+      },
+      "moves": {
+        "signature": "Bob Bob Bob",
+        "legend": "Whistle Startle",
+        "ultimate": "Big Bob Up",
+        "kit.mud_slide": "Soggy Strap Crack",
+        "kit.campfire": "Sun Warmed Foam",
+        "kit.bug_spray": "Lake Water Stink"
+      }
+    },
+    "x_bird_feeder": {
+      "status": "draft",
+      "names": {
+        "common": "Squirrelraider",
+        "uncommon": "Seedspiller",
+        "rare": "Birdbuffet",
+        "epic": "Garden Bird Rush",
+        "legendary": "The Feeder Every Bird Knew"
+      },
+      "lore": {
+        "common": "Is raided by the squirrel within an hour of being filled.",
+        "uncommon": "Spills seeds all over the lawn, which grow into weeds.",
+        "rare": "Attracts so many birds that the garden sounds like a choir.",
+        "epic": "Brought every bird in the town to one garden on the coldest morning of winter.",
+        "legendary": "Fed a robin that came back every day for ten years to sit on the kitchen windowsill."
+      },
+      "moves": {
+        "signature": "Peck Peck Peck",
+        "legend": "Seed Seed Seed",
+        "ultimate": "Bird Swarm",
+        "kit.campfire": "Sunny Feeder",
+        "kit.rough_terrain": "Squirrel Baffle Guard",
+        "kit.bug_spray": "Old Seed Stink"
+      }
+    },
+    "x_birdhouse": {
+      "status": "draft",
+      "names": {
+        "common": "Emptyhouse",
+        "uncommon": "Holebrisk",
+        "rare": "Chirpbox",
+        "epic": "Spring Nesting Rush",
+        "legendary": "The House That Raised a Hundred Chicks"
+      },
+      "lore": {
+        "common": "Sits empty all spring while the birds nest in the hedge instead.",
+        "uncommon": "Has a little round hole that only the right-sized bird can fit through.",
+        "rare": "Chirps from inside so loudly that the cat sits underneath and stares.",
+        "epic": "Was moved into by a family of blue tits, and the whole garden came to watch them grow.",
+        "legendary": "Has raised a hundred chicks over twenty springs, and every one fledged safely."
+      },
+      "moves": {
+        "signature": "Chirp Chirp Chirp",
+        "legend": "Roof Bonk",
+        "ultimate": "Fledgling Flurry",
+        "kit.campfire": "Sunny Box Warmth",
+        "kit.rough_terrain": "Wooden Roof Guard"
+      }
+    },
+    "x_letterbox_flap": {
+      "status": "draft",
+      "names": {
+        "common": "Fingersnapper Flap",
+        "uncommon": "Winterwhistle",
+        "rare": "Postgobbler",
+        "epic": "Morning Post Snap",
+        "legendary": "The Flap That Ate the Post"
+      },
+      "lore": {
+        "common": "Snaps shut on the postman's fingers every single morning.",
+        "uncommon": "Lets in a cold draught all winter long.",
+        "rare": "Swallows the post and spits it onto the mat face down.",
+        "epic": "Snapped shut on a whole stack of birthday cards, and they scattered across the hall.",
+        "legendary": "Has let a million letters through the same front door for a hundred years."
+      },
+      "moves": {
+        "signature": "Snap Crack",
+        "legend": "Flap Startle",
+        "ultimate": "Post Flood",
+        "kit.mud_slide": "Muddy Mat Crack",
+        "kit.rough_terrain": "Brush Seal Guard",
+        "kit.bug_spray": "Junk Mail Stink"
+      }
+    },
+    "mushroom": {
+      "status": "draft",
+      "names": {
+        "common": "Overnightpopper",
+        "uncommon": "Fairyring",
+        "rare": "Lookdontpick",
+        "epic": "Mushroom Ring Mystery",
+        "legendary": "The Mushroom Ring of the Old Wood"
+      },
+      "lore": {
+        "common": "Pops up overnight in the middle of the lawn, where it wasn't yesterday.",
+        "uncommon": "Grows in a perfect circle that people call a fairy ring.",
+        "rare": "Changes colour when touched, so everyone learns to look and not pick.",
+        "epic": "Sprouted all over the football pitch after the rain, and the match was moved to the car park.",
+        "legendary": "Has grown in the same ring in the same wood for three hundred years, getting a little wider each autumn."
+      },
+      "moves": {
+        "signature": "Spore Puff",
+        "legend": "Spore Snatch",
+        "ultimate": "Spore Cloud",
+        "kit.pollen_puff": "Spore Puff Distraction",
+        "kit.sap_sip": "Damp Soil Siphon",
+        "kit.vine_snare": "Root Snare",
+        "kit.fresh_growth": "Overnight Growth"
+      }
+    },
+    "x_flower_pot_saucer": {
+      "status": "draft",
+      "names": {
+        "common": "Overflowsaucer",
+        "uncommon": "Hiddenpuddle",
+        "rare": "Slugshelter",
+        "epic": "Windowsill Flood",
+        "legendary": "The Saucer That Saved the Carpet"
+      },
+      "lore": {
+        "common": "Overflows every time the plant is watered.",
+        "uncommon": "Hides a puddle under the pot that nobody notices for weeks.",
+        "rare": "Becomes a hotel for every slug in the garden.",
+        "epic": "Overflowed under every plant on the windowsill, and the carpet got a big wet stripe.",
+        "legendary": "Saved a precious carpet from a hundred waterings without a single drip."
+      },
+      "moves": {
+        "signature": "Drip Drip Drip",
+        "legend": "Puddle Crack",
+        "ultimate": "Saucer Flood",
+        "kit.mud_slide": "Muddy Water Crack",
+        "kit.rough_terrain": "Saucer Rim Guard",
+        "kit.bug_spray": "Slug Slime Stink"
+      }
+    },
+    "x_planter": {
+      "status": "draft",
+      "names": {
+        "common": "Weedcatcher",
+        "uncommon": "Heavypot",
+        "rare": "Herbgarden",
+        "epic": "Patio Herb Jungle",
+        "legendary": "The Planter That Fed a Family"
+      },
+      "lore": {
+        "common": "Grows more weeds than flowers.",
+        "uncommon": "Is so heavy when full of soil that nobody can move it.",
+        "rare": "Grows every herb the kitchen needs all summer.",
+        "epic": "Grew so many tomatoes that the family gave them to every neighbour on the street.",
+        "legendary": "Grew enough vegetables in one summer to feed a whole family every evening."
+      },
+      "moves": {
+        "signature": "Grow Grow Grow",
+        "legend": "Fresh Soil Rest",
+        "ultimate": "Planter Burst",
+        "kit.mud_slide": "Soil Spill Crack",
+        "kit.campfire": "Sunny Patio Heat",
+        "kit.rough_terrain": "Terracotta Guard",
+        "kit.bug_spray": "Compost Stink"
+      }
+    },
+    "rose": {
+      "status": "draft",
+      "names": {
+        "common": "Thornpricker",
+        "uncommon": "Petaldropper",
+        "rare": "Perfumecloud",
+        "epic": "Rose Garden Bloom",
+        "legendary": "The Rose That Climbed the Tower"
+      },
+      "lore": {
+        "common": "Pricks your finger with a thorn every time you try to smell it.",
+        "uncommon": "Drops its petals all over the table the day after you pick it.",
+        "rare": "Smells so strong that bees come from three gardens away.",
+        "epic": "Bloomed all over the garden wall at once, and the whole street smelled of roses.",
+        "legendary": "Climbed all the way up the old tower and bloomed at the very top."
+      },
+      "moves": {
+        "signature": "Thorn Prick",
+        "legend": "Thorny Guard",
+        "ultimate": "Petal Swirl",
+        "kit.pollen_puff": "Rose Scent Distraction",
+        "kit.sap_sip": "Sap Snatch",
+        "kit.vine_snare": "Thorny Vine Snare",
+        "kit.fresh_growth": "New Bud Rest"
+      }
+    },
+    "i_bobsled": {
+      "status": "draft",
+      "names": {
+        "common": "Iceclatter",
+        "uncommon": "Corkscrewbend",
+        "rare": "Speedbump Sled",
+        "epic": "Ice Track Dash",
+        "legendary": "The Sled That Broke the Record"
+      },
+      "lore": {
+        "common": "Clatters down the ice track so loudly that the spectators cover their ears.",
+        "uncommon": "Takes the bends so tightly that its crew nearly touch the walls.",
+        "rare": "Goes so fast that the spectators only hear a whoosh.",
+        "epic": "Raced down the ice track in record time, and the crowd's hats blew off.",
+        "legendary": "Won the championship by a hundredth of a second and was kept in the museum."
+      },
+      "moves": {
+        "signature": "Ice Rush",
+        "legend": "Bend Crack",
+        "ultimate": "Finish Line Dash",
+        "kit.mud_slide": "Ice Spray Crack",
+        "kit.campfire": "Friction Heat",
+        "kit.rough_terrain": "Steel Runner Guard"
+      }
+    },
+    "i_dogsled": {
+      "status": "draft",
+      "names": {
+        "common": "Barkpulled",
+        "uncommon": "Snowsprayer",
+        "rare": "Trailblazer Sled",
+        "epic": "Husky Trail Race",
+        "legendary": "The Sled That Crossed the Snow"
+      },
+      "lore": {
+        "common": "Gets pulled by dogs who bark the whole way.",
+        "uncommon": "Sprays snow up behind it like a little white storm.",
+        "rare": "Finds trails through snow that no map shows.",
+        "epic": "Raced across the frozen lake with twenty dogs pulling, and the whole village cheered.",
+        "legendary": "Crossed a whole snowy wilderness to deliver medicine to a far-away village."
+      },
+      "moves": {
+        "signature": "Sled Rush",
+        "legend": "Runner Heat",
+        "ultimate": "Husky Charge",
+        "kit.mud_slide": "Snow Spray Crack",
+        "kit.campfire": "Runner Friction Heat",
+        "kit.rough_terrain": "Sled Frame Guard",
+        "kit.bug_spray": "Wet Dog Stink"
+      }
+    },
+    "x_electric_skateboard": {
+      "status": "draft",
+      "names": {
+        "common": "Remotezoomer",
+        "uncommon": "Batteryfade",
+        "rare": "Pigeonsneaker",
+        "epic": "Riverside Board Blitz",
+        "legendary": "The Board That Rode Itself Home"
+      },
+      "lore": {
+        "common": "Zooms off before its rider has finished standing on it.",
+        "uncommon": "Runs out of battery just at the bottom of the biggest hill.",
+        "rare": "Rolls so silently that pigeons don't notice it until too late.",
+        "epic": "Zoomed through the whole park so fast that the joggers felt like they were standing still.",
+        "legendary": "Rode itself home after its owner fell off, and waited at the front door."
+      },
+      "moves": {
+        "signature": "Board Rush",
+        "legend": "Battery Boost",
+        "ultimate": "Hot Motor Zoom",
+        "kit.mud_slide": "Puddle Splash Crack",
+        "kit.campfire": "Warm Battery Burn",
+        "kit.bug_spray": "Hot Rubber Stink"
+      }
+    },
+    "x_hoverboard": {
+      "status": "draft",
+      "names": {
+        "common": "Wobblestand",
+        "uncommon": "Spinaround",
+        "rare": "Glidefloor",
+        "epic": "Living Room Spin",
+        "legendary": "The Board That Spun Round the House"
+      },
+      "lore": {
+        "common": "Wobbles under its rider until they wave their arms like a windmill.",
+        "uncommon": "Spins round in circles when its rider leans the wrong way.",
+        "rare": "Carries its rider sideways into the kitchen when they only meant to go forwards.",
+        "epic": "Spun round the whole living room and knocked over every lamp.",
+        "legendary": "Was ridden round every room in the house without touching a single wall."
+      },
+      "moves": {
+        "signature": "Glide Ram",
+        "legend": "Wobbly Fumes",
+        "ultimate": "Spin Out",
+        "kit.campfire": "Hot Wheel Spin",
+        "kit.rough_terrain": "Balance Guard",
+        "kit.bug_spray": "Battery Whiff"
+      }
+    },
+    "x_jet_ski": {
+      "status": "draft",
+      "names": {
+        "common": "Wavejumper",
+        "uncommon": "Spraymaker Ski",
+        "rare": "Splashstarter",
+        "epic": "Bay Wave Jump",
+        "legendary": "The Jet Ski That Raced the Dolphins"
+      },
+      "lore": {
+        "common": "Jumps every wave so hard that its rider lands with a bump.",
+        "uncommon": "Sprays water over everyone on the beach.",
+        "rare": "Starts with such a roar that every swimmer turns round.",
+        "epic": "Jumped every wave in the bay in one afternoon, and the beach was soaked.",
+        "legendary": "Raced a pod of dolphins across the bay and came second, very happily."
+      },
+      "moves": {
+        "signature": "Wave Rush",
+        "legend": "Hull Guard Ski",
+        "ultimate": "Wave Jump",
+        "kit.mud_slide": "Spray Crack",
+        "kit.campfire": "Engine Heat",
+        "kit.rough_terrain": "Rough Water Guard"
+      }
+    },
+    "x_ski": {
+      "status": "draft",
+      "names": {
+        "common": "Crossedskis",
+        "uncommon": "Liftdropper",
+        "rare": "Snowplougher",
+        "epic": "Ski Slope Tumble",
+        "legendary": "The Ski That Won the Slalom"
+      },
+      "lore": {
+        "common": "Crosses over the other ski and sends its skier face first into the snow.",
+        "uncommon": "Falls off the ski lift and has to be fetched from the bottom.",
+        "rare": "Ploughs through snow so deep that it leaves a trench.",
+        "epic": "Tumbled down the slope with every beginner in the ski school, and they all landed in one pile.",
+        "legendary": "Won the slalom race by a whisker after crossing the finish line backwards."
+      },
+      "moves": {
+        "signature": "Glide Glide Glide",
+        "legend": "Downhill Boost",
+        "ultimate": "Slalom Swoop",
+        "kit.mud_slide": "Snow Spray Crack Ski",
+        "kit.campfire": "Friction Burn",
+        "kit.rough_terrain": "Edge Guard",
+        "kit.bug_spray": "Wax Stink"
+      }
+    },
+    "x_sled": {
+      "status": "draft",
+      "names": {
+        "common": "Treebumper",
+        "uncommon": "Rope Puller",
+        "rare": "Hillracer",
+        "epic": "Snow Day Hill Race",
+        "legendary": "The Sled That Flew Over the Bump"
+      },
+      "lore": {
+        "common": "Bumps into every tree on the way down the hill.",
+        "uncommon": "Is pulled up the hill by its rope, which always feels heavier than going down.",
+        "rare": "Races down the hill so fast that its rider screams with joy.",
+        "epic": "Raced down the hill with every sled in the village on the first snowy day.",
+        "legendary": "Flew over the big bump at the bottom of the hill and landed in a snowdrift with a cheer."
+      },
+      "moves": {
+        "signature": "Slide Slide Slide",
+        "legend": "Runner Guard",
+        "ultimate": "Hill Race Dash",
+        "kit.campfire": "Cocoa Break Heat",
+        "kit.rough_terrain": "Sturdy Sled Guard",
+        "kit.bug_spray": "Wet Wool Stink"
+      }
+    },
+    "x_snowboard": {
+      "status": "draft",
+      "names": {
+        "common": "Bindingfumble",
+        "uncommon": "Bumslider",
+        "rare": "Halfpiper",
+        "epic": "Half-Pipe Trick Show",
+        "legendary": "The Board That Did a Triple Spin"
+      },
+      "lore": {
+        "common": "Takes ten minutes to strap into, then falls over straight away.",
+        "uncommon": "Spends more time on its rider's bottom than on the snow.",
+        "rare": "Flies up the half-pipe so high that its rider waves to the ski lift.",
+        "epic": "Did a trick in the half-pipe that every snowboarder on the mountain tried to copy.",
+        "legendary": "Spun three times in the air and landed perfectly in the final."
+      },
+      "moves": {
+        "signature": "Carve Carve Carve",
+        "legend": "Wax Fume Puff",
+        "ultimate": "Half-Pipe Spin",
+        "kit.mud_slide": "Slush Spray Crack",
+        "kit.campfire": "Edge Friction Heat",
+        "kit.bug_spray": "Wet Glove Stink"
+      }
+    },
+    "x_surfboard": {
+      "status": "draft",
+      "names": {
+        "common": "Wipeoutboard",
+        "uncommon": "Waxsticker",
+        "rare": "Wavecatcher Board",
+        "epic": "Big Wave Day",
+        "legendary": "The Board That Rode the Giant Wave"
+      },
+      "lore": {
+        "common": "Wipes out its rider on every second wave.",
+        "uncommon": "Is covered in wax that sticks to everyone's feet.",
+        "rare": "Catches waves that nobody else can even see coming.",
+        "epic": "Caught the biggest wave of the day with every surfer on the beach watching.",
+        "legendary": "Rode the biggest wave of the year all the way to the beach, and the whole town cheered."
+      },
+      "moves": {
+        "signature": "Surf Surf Surf",
+        "legend": "Wave Snatch",
+        "ultimate": "Giant Wave Ride",
+        "kit.mud_slide": "Wipeout Crack",
+        "kit.campfire": "Sunbaked Board",
+        "kit.rough_terrain": "Fin Guard",
+        "kit.bug_spray": "Seaweed Stink"
+      }
+    },
+    "x_air_mattress": {
+      "status": "draft",
+      "names": {
+        "common": "Slowleaker",
+        "uncommon": "Pumpforever",
+        "rare": "Floatdrifter",
+        "epic": "Camping Night Sinker",
+        "legendary": "The Mattress That Floated to the Island"
+      },
+      "lore": {
+        "common": "Slowly leaks overnight so you wake up on the floor.",
+        "uncommon": "Takes an hour of pumping before it's even half full.",
+        "rare": "Floats on the lake so gently that its rider falls asleep.",
+        "epic": "Leaked under every camper on the same night, and the whole tent woke up on the ground.",
+        "legendary": "Floated a sleeping holidaymaker all the way across the bay to a tiny island."
+      },
+      "moves": {
+        "signature": "Bounce Startle",
+        "legend": "Slow Leak Leak Leak",
+        "ultimate": "Big Deflate",
+        "kit.campfire": "Sun Warmed Float",
+        "kit.bug_spray": "Rubber Stink"
+      }
+    },
+    "x_camping_mattress": {
+      "status": "draft",
+      "names": {
+        "common": "Rollupfight",
+        "uncommon": "Thinfoam",
+        "rare": "Rockfinder",
+        "epic": "Campsite Night",
+        "legendary": "The Mat That Found Every Stone"
+      },
+      "lore": {
+        "common": "Fights back every time you try to roll it up.",
+        "uncommon": "Is so thin that you feel every pebble under your back.",
+        "rare": "Finds the one stone under the tent and puts it right under your hip.",
+        "epic": "Was rolled out by every camper at the scout camp, and the hall floor disappeared.",
+        "legendary": "Has camped on every mountain in the country and still rolls up tightly."
+      },
+      "moves": {
+        "signature": "Lumpy Bump",
+        "legend": "Comfy Boost",
+        "ultimate": "Roll Up Spring",
+        "kit.mud_slide": "Damp Mat Crack",
+        "kit.campfire": "Campfire Warmth Mat",
+        "kit.rough_terrain": "Foam Layer Guard"
+      }
+    },
+    "x_sleeping_mat": {
+      "status": "draft",
+      "names": {
+        "common": "Slipslide",
+        "uncommon": "Crinklemat",
+        "rare": "Dewcatcher",
+        "epic": "Stargazing Night",
+        "legendary": "The Mat Under the Stars"
+      },
+      "lore": {
+        "common": "Slips across the tent floor all night so you end up by the door.",
+        "uncommon": "Crinkles every time you turn over.",
+        "rare": "Catches the morning dew so the sleeping bag stays dry.",
+        "epic": "Was laid out by everyone for the stargazing night, and the field looked like a patchwork.",
+        "legendary": "Lay under a shooting star shower so bright that its sleeper made a hundred wishes."
+      },
+      "moves": {
+        "signature": "Slide Slide Slide Slide",
+        "legend": "Mat Guard",
+        "ultimate": "Starry Night Roll",
+        "kit.mud_slide": "Wet Grass Crack",
+        "kit.campfire": "Warm Ground Heat",
+        "kit.rough_terrain": "Ground Guard Mat"
+      }
+    },
+    "sunflower": {
+      "status": "draft",
+      "names": {
+        "common": "Seedhead",
+        "uncommon": "Bendingneck",
+        "rare": "Suntracker",
+        "epic": "Sunflower Field Bloom",
+        "legendary": "The Tallest Sunflower in the Village"
+      },
+      "lore": {
+        "common": "Droops its heavy head so low that it looks sad.",
+        "uncommon": "Turns to face the sun all day, so every photo is from behind.",
+        "rare": "Grows a centimetre taller every time someone measures it.",
+        "epic": "Bloomed in a field so huge that the whole hill turned yellow.",
+        "legendary": "Grew taller than the village church roof, and the birds held a feast on its seeds."
+      },
+      "moves": {
+        "signature": "Seed Spit",
+        "legend": "Pollen Shower",
+        "ultimate": "Sunflower Sway",
+        "kit.pollen_puff": "Big Pollen Puff",
+        "kit.sap_sip": "Sunlight Siphon",
+        "kit.fresh_growth": "Grow Tall Rest"
+      }
+    },
+    "x_compost_bin": {
+      "status": "draft",
+      "names": {
+        "common": "Lidcreak",
+        "uncommon": "Wormbin",
+        "rare": "Steamybin",
+        "epic": "Garden Compost Rush",
+        "legendary": "The Bin That Fed the Garden"
+      },
+      "lore": {
+        "common": "Creaks its lid open and lets out a smell that clears the garden.",
+        "uncommon": "Is home to a thousand wriggling worms.",
+        "rare": "Turns banana skins into soil so fast that the gardener suspects magic.",
+        "epic": "Turned a whole summer of garden clippings into soil, and the vegetables grew huge.",
+        "legendary": "Fed a whole allotment with its soil for twenty years."
+      },
+      "moves": {
+        "signature": "Worm Wriggle Wriggle",
+        "legend": "Lid Creak Startle",
+        "ultimate": "Compost Heap Steam",
+        "kit.mud_slide": "Soggy Lid Crack",
+        "kit.rough_terrain": "Plastic Bin Guard",
+        "kit.bug_spray": "Fruit Fly Stink"
+      }
+    }
+  }
+}
