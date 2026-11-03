@@ -49,7 +49,8 @@
 | w17-furniture-and-bedding | 100 | 100 | pending | self-fixes | x_church_pew written as a hall bench (no religious content); wheelchair written as empowering/fast |
 | w18-music-and-instruments | 56 | 56 | pending | self-fixes | x_church_bell written as a village tower bell (no religious content) |
 | w19-kitchen-and-cookware | 112 | 112 | pending | self-fixes | knife, deep fryer, heaters written with grown-up/safety framing |
-| w20–w22 | 310 | 0 | — | — | not started |
+| w20-fridges-taps-and-tableware | 93 | 93 | pending | self-fixes | drinkware written alcohol-free (champagne flute, martini glass, shot glass, tankard, wine tumbler, cocktail shaker, beer stein hold juice/milkshake) |
+| w21–w22 | 217 | 0 | — | — | not started |
 
 ## Lessons from editor passes (apply while writing)
 - One DIFFERENT trait per rarity (don't scale one habit over 4–5 rarities). Check neighbours: no shared premises between
