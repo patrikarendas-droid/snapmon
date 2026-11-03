@@ -1,0 +1,866 @@
+{
+  "schema": 1,
+  "batch": "w12-house-odds-and-ends",
+  "entries": {
+    "hourglass": {
+      "status": "draft",
+      "names": {
+        "common": "Sandwatcher",
+        "uncommon": "Flipforgetter",
+        "rare": "Slowtrickle",
+        "epic": "Board Game Timeout",
+        "legendary": "The Glass That Stopped Time"
+      },
+      "lore": {
+        "common": "Gets stared at by everyone during the board game instead of the board.",
+        "uncommon": "Is turned over so late that the timer has already run out.",
+        "rare": "Slows its sand down whenever someone is losing, and speeds up when they're winning.",
+        "epic": "Ran out mid-answer at the family quiz, and the whole room shouted at a little glass of sand.",
+        "legendary": "Was turned over at the start of a picnic and the sand stopped halfway, so the afternoon lasted all summer."
+      },
+      "moves": {
+        "signature": "Last Grain Flash",
+        "legend": "Glass Bulb Guard",
+        "ultimate": "Time's Up",
+        "kit.alarm_ring": "Sand Rattle Startle",
+        "kit.tick_tock": "Trickle Trickle Trickle",
+        "kit.deadline": "Time Out Crack"
+      }
+    },
+    "i_band_aid": {
+      "status": "draft",
+      "names": {
+        "common": "Ouchpeeler",
+        "uncommon": "Cartoonpatch",
+        "rare": "Ouchfixer",
+        "epic": "Playground Patch-Up",
+        "legendary": "Captain Stickybrave of the First Aid Box"
+      },
+      "lore": {
+        "common": "Pulls out every little hair when it's peeled off.",
+        "uncommon": "Has cartoon animals printed on it, so children ask for one even without a scratch.",
+        "rare": "Makes every scraped knee stop hurting the moment it's stuck on, or so everyone agrees.",
+        "epic": "Patched up every knee at sports day, and the first aid box ran out by lunch.",
+        "legendary": "Was stuck on a teddy's paw after a fall from the bunk bed, and teddy made a full recovery."
+      },
+      "moves": {
+        "signature": "Stick Stick Stick",
+        "legend": "Patch Up Rest",
+        "ultimate": "Big Rip Off",
+        "kit.quick_fix": "Kiss Better Rest",
+        "kit.iodine_sting": "Antiseptic Sting",
+        "kit.check_up": "Peel Corner Crack",
+        "kit.bed_rest": "Snug Plaster Guard"
+      }
+    },
+    "i_barometer": {
+      "status": "draft",
+      "names": {
+        "common": "Needlenudger",
+        "uncommon": "Brassface",
+        "rare": "Stormsayer",
+        "epic": "Weather Warning",
+        "legendary": "The Glass That Called Every Storm"
+      },
+      "lore": {
+        "common": "Gets tapped on the glass every morning to make its needle move.",
+        "uncommon": "Hangs in the hall with a shiny brass face and words like Fair and Stormy.",
+        "rare": "Drops its needle to Stormy just before the picnic, and is always right.",
+        "epic": "Warned the whole village of the storm, and everyone tied down their washing just in time.",
+        "legendary": "Has predicted every big storm for a hundred years, and the fishermen won't sail without checking it."
+      },
+      "moves": {
+        "signature": "Needle Flick Flash",
+        "legend": "Fair Weather Rest",
+        "ultimate": "Storm Warning",
+        "kit.tick_tock": "Tap Tap Tap",
+        "kit.rewind": "Pressure Rise Rest",
+        "kit.deadline": "Falling Needle Crack"
+      }
+    },
+    "i_car_mirror": {
+      "status": "draft",
+      "names": {
+        "common": "Foldbacker",
+        "uncommon": "Objectsnearer",
+        "rare": "Backseatspy",
+        "epic": "Reversing Panic",
+        "legendary": "The Mirror That Saw Everything Behind"
+      },
+      "lore": {
+        "common": "Folds itself back when brushed by a passing cyclist.",
+        "uncommon": "Shows objects closer than they appear, which makes parking a nightmare.",
+        "rare": "Spies on the back seat so well that no argument goes unnoticed.",
+        "epic": "Got knocked by every car in the narrow lane, and the whole street had their mirrors folded.",
+        "legendary": "Saw a lost dog trotting behind the car for three streets, and reunited it with its family."
+      },
+      "moves": {
+        "signature": "Glass Glare Crack",
+        "legend": "Rear View Snatch",
+        "ultimate": "Blind Spot Swerve",
+        "kit.shatter": "Shatter Shatter Shatter",
+        "kit.mirror_image": "Reflection Guard",
+        "kit.vanity": "Mirror Check Boost"
+      }
+    },
+    "i_fire_screen": {
+      "status": "draft",
+      "names": {
+        "common": "Sparkstopper",
+        "uncommon": "Brassguard",
+        "rare": "Firetoes",
+        "epic": "Fireside Glow",
+        "legendary": "The Screen That Guarded the Hearth"
+      },
+      "lore": {
+        "common": "Gets knocked over by the cat chasing its own tail.",
+        "uncommon": "Has brass legs that get too hot to touch.",
+        "rare": "Catches every spark that jumps out of the fire before it hits the rug.",
+        "epic": "Glowed so warmly in front of the fire that the whole family sat round it all winter.",
+        "legendary": "Has guarded the same fireplace for two hundred years without letting a single spark land on the rug."
+      },
+      "moves": {
+        "signature": "Brass Glint Crack",
+        "legend": "Spark Snatch",
+        "ultimate": "Hearth Guard Slam",
+        "kit.glare_back": "Brass Flash",
+        "kit.shatter": "Mesh Rattle Rattle",
+        "kit.mirror_image": "Mesh Guard",
+        "kit.vanity": "Polished Boost"
+      }
+    },
+    "i_matchstick": {
+      "status": "draft",
+      "names": {
+        "common": "Bentstick",
+        "uncommon": "Snapflare",
+        "rare": "Modelbuilder",
+        "epic": "Matchstick Model Village",
+        "legendary": "The Match That Lit the Lantern"
+      },
+      "lore": {
+        "common": "Snaps in half the first time it's struck.",
+        "uncommon": "Flares up with a fizz that makes everyone step back.",
+        "rare": "Is glued with thousands of others into models that look like real houses.",
+        "epic": "Was built into a whole model village, with a church tower, a school and a tiny bus stop.",
+        "legendary": "Lit the lantern that guided a whole hiking group back down the mountain."
+      },
+      "moves": {
+        "signature": "Strike Flare",
+        "legend": "Fizz Startle",
+        "ultimate": "Model Village Spark",
+        "kit.wax_drip": "Hot Tip",
+        "kit.smoke_screen": "Smoke Puff Crack",
+        "kit.flare_up": "Flare Boost",
+        "kit.melt": "Glow Siphon"
+      }
+    },
+    "i_odometer": {
+      "status": "draft",
+      "names": {
+        "common": "Clickmiles",
+        "uncommon": "Numberroller",
+        "rare": "Milestone",
+        "epic": "Road Trip Rollover",
+        "legendary": "The Dial That Counted to the Moon"
+      },
+      "lore": {
+        "common": "Clicks its numbers so slowly that the children count with it.",
+        "uncommon": "Rolls its little numbers over like a tiny slot machine.",
+        "rare": "Turns round to a big round number just as the family is watching.",
+        "epic": "Rolled over to all zeros on the motorway, and the whole family cheered at once.",
+        "legendary": "Counted enough miles to drive to the moon and back, all in one old family car."
+      },
+      "moves": {
+        "signature": "Number Flash",
+        "legend": "Mileage Crack",
+        "ultimate": "Big Rollover",
+        "kit.tick_tock": "Click Click Click",
+        "kit.rewind": "Trip Reset",
+        "kit.deadline": "Service Due Crack"
+      }
+    },
+    "i_plunger": {
+      "status": "draft",
+      "names": {
+        "common": "Suckerpop",
+        "uncommon": "Sinkthumper",
+        "rare": "Unblocker",
+        "epic": "Bathroom Rescue",
+        "legendary": "Sir Plungeworth the Fearless"
+      },
+      "lore": {
+        "common": "Pops off with a loud slurp at exactly the wrong moment.",
+        "uncommon": "Thumps up and down in the sink until something gurgles.",
+        "rare": "Unblocks drains so fast that the plumber asks how it did it.",
+        "epic": "Unblocked every sink in the house on the morning of the big party, and the guests never knew.",
+        "legendary": "Rescued a lost wedding ring from the drain with one mighty pull."
+      },
+      "moves": {
+        "signature": "Plunge Startle",
+        "legend": "Hot Water Plunge",
+        "ultimate": "Big Unblock",
+        "kit.plunger_pull": "Suction Siphon",
+        "kit.bubble_up": "Gurgle Crack",
+        "kit.porcelain_shell": "Rubber Cup Guard",
+        "kit.splash_back": "Splash Back Startle"
+      }
+    },
+    "i_tripod": {
+      "status": "draft",
+      "names": {
+        "common": "Leglength",
+        "uncommon": "Wobbleleg",
+        "rare": "Steadyshot",
+        "epic": "Sunrise Photo Line",
+        "legendary": "The Tripod That Never Shook"
+      },
+      "lore": {
+        "common": "Has one leg that's always shorter than the others.",
+        "uncommon": "Wobbles on the sand so every photo tilts slightly.",
+        "rare": "Holds the camera so still that every star is sharp.",
+        "epic": "Stood in a row with fifty others at sunrise, and the whole beach looked like a photo studio.",
+        "legendary": "Held the camera still for a whole night to photograph the stars spinning round the sky."
+      },
+      "moves": {
+        "signature": "Leg Leg Leg",
+        "legend": "Wobble Crack",
+        "ultimate": "Tripod Topple",
+        "kit.hypothesis": "Steady Boost",
+        "kit.acid_drop": "Rusty Leg Stink",
+        "kit.centrifuge": "Spin Spin Spin"
+      }
+    },
+    "mirror": {
+      "status": "draft",
+      "names": {
+        "common": "Toothpastespot",
+        "uncommon": "Morningface",
+        "rare": "Doublecrowd",
+        "epic": "Dance Studio Wall",
+        "legendary": "The Mirror That Winked Back"
+      },
+      "lore": {
+        "common": "Gets spotted with toothpaste every single morning.",
+        "uncommon": "Shows its owner their morning face, which nobody wants to see.",
+        "rare": "Makes a small room look twice as big, and the cat keeps trying to walk into it.",
+        "epic": "Covered the whole dance studio wall, and every dancer could see what everyone else was doing wrong.",
+        "legendary": "Has reflected the same family's faces for a hundred years and never once cracked."
+      },
+      "moves": {
+        "signature": "Reflection Crack",
+        "legend": "Mirror Image Bash",
+        "ultimate": "Mirror Maze",
+        "kit.glare_back": "Sunlight Bounce",
+        "kit.shatter": "Crack Crack Crack",
+        "kit.mirror_image": "Reflection Double",
+        "kit.vanity": "Hair Check Boost"
+      }
+    },
+    "i_oscilloscope": {
+      "status": "draft",
+      "names": {
+        "common": "Wigglescreen",
+        "uncommon": "Knobfiddler",
+        "rare": "Wavecatcher",
+        "epic": "Science Lab Squiggle",
+        "legendary": "Professor Waveform of the Lab"
+      },
+      "lore": {
+        "common": "Shows a wiggly green line that everyone pretends to understand.",
+        "uncommon": "Has so many knobs that every visitor twists one, and the line jumps off the screen.",
+        "rare": "Catches sound waves and shows them dancing on the screen.",
+        "epic": "Showed every pupil's voice as a squiggle, and the science lab became a singing contest.",
+        "legendary": "Caught the wobble in a broken radio that nobody else could find, and fixed it in one afternoon."
+      },
+      "moves": {
+        "signature": "Wave Flash",
+        "legend": "Hot Circuit Burn",
+        "ultimate": "Signal Spike",
+        "kit.reaction": "Hot Probe",
+        "kit.acid_drop": "Static Stink",
+        "kit.centrifuge": "Wave Wave Wave"
+      }
+    },
+    "plastic_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Treehanger",
+        "uncommon": "Bagforbags",
+        "rare": "Windsailer Bag",
+        "epic": "Supermarket Bag Storm",
+        "legendary": "The Bag That Was Used Forever"
+      },
+      "lore": {
+        "common": "Gets caught in trees and flaps there for months.",
+        "uncommon": "Lives in another bag full of bags under the kitchen sink.",
+        "rare": "Floats away on the wind like a jellyfish and lands on the beach.",
+        "epic": "Blew out of every bin in the car park, and the whole place looked like a ghost town.",
+        "legendary": "Was reused for twenty years and carried a thousand shopping trips before finally being recycled."
+      },
+      "moves": {
+        "signature": "Rustle Stink",
+        "legend": "Shopping Snatch",
+        "ultimate": "Bag Storm",
+        "kit.garbage_toss": "Flap Flap Flap",
+        "kit.lid_slam": "Full Bag Slam",
+        "kit.scavenge": "Bag Grab"
+      }
+    },
+    "smartwatch": {
+      "status": "draft",
+      "names": {
+        "common": "Wristbuzz",
+        "uncommon": "Stepnagger",
+        "rare": "Sleepsnitch",
+        "epic": "Office Wrist Buzz",
+        "legendary": "The Watch That Knew Everything"
+      },
+      "lore": {
+        "common": "Buzzes your wrist every five minutes about something you don't care about.",
+        "uncommon": "Tells you to stand up every time you sit down.",
+        "rare": "Tells everyone at breakfast how badly you slept.",
+        "epic": "Buzzed on every wrist in the meeting at once, and everyone checked them at the same moment.",
+        "legendary": "Noticed its owner's heart beating oddly and sent her to the doctor just in time."
+      },
+      "moves": {
+        "signature": "Buzz Flash",
+        "legend": "Step Goal Smash",
+        "ultimate": "Notification Storm",
+        "kit.alarm_ring": "Wrist Alarm",
+        "kit.tick_tock": "Buzz Buzz Buzz",
+        "kit.rewind": "Charging Rest"
+      }
+    },
+    "toilet_paper": {
+      "status": "draft",
+      "names": {
+        "common": "Lastsheet",
+        "uncommon": "Wrongwayround Roll",
+        "rare": "Unroller",
+        "epic": "Garden Toilet Roll Chaos",
+        "legendary": "The Roll That Never Ran Out"
+      },
+      "lore": {
+        "common": "Runs out exactly when you need it most.",
+        "uncommon": "Is always hung the wrong way round, according to someone in the house.",
+        "rare": "Unrolls itself across the bathroom whenever the cat walks past.",
+        "epic": "Was unrolled by the puppy through the whole house, out the door and round the garden.",
+        "legendary": "Lasted a whole month in a family of six, which nobody can explain."
+      },
+      "moves": {
+        "signature": "Unroll Startle",
+        "legend": "Warm Radiator Roll",
+        "ultimate": "Paper Trail",
+        "kit.plunger_pull": "Last Sheet Snatch",
+        "kit.bubble_up": "Soggy Roll Crack",
+        "kit.porcelain_shell": "Double Ply Guard",
+        "kit.splash_back": "Flapping Sheet Startle"
+      }
+    },
+    "trash_can": {
+      "status": "draft",
+      "names": {
+        "common": "Lidbanger",
+        "uncommon": "Smellbox",
+        "rare": "Foxraided",
+        "epic": "Bin Day Rampage",
+        "legendary": "The Bin That Ate the Street"
+      },
+      "lore": {
+        "common": "Bangs its lid at night when the wind blows.",
+        "uncommon": "Smells so bad on hot days that the flies queue up.",
+        "rare": "Gets knocked over by the fox every night, and the rubbish ends up in the garden.",
+        "epic": "Rolled down the hill on bin day and knocked over every other bin on the street.",
+        "legendary": "Swallowed so much rubbish at the street party that it needed two bin lorries to empty."
+      },
+      "moves": {
+        "signature": "Bin Stink",
+        "legend": "Lid Clang Crack",
+        "ultimate": "Wheelie Bin Roll",
+        "kit.garbage_toss": "Toss Toss Toss",
+        "kit.rot": "Rotten Banana",
+        "kit.lid_slam": "Lid Slam",
+        "kit.scavenge": "Fox Grab"
+      }
+    },
+    "wall_clock": {
+      "status": "draft",
+      "names": {
+        "common": "Ticklouder",
+        "uncommon": "Fiveminutesfast",
+        "rare": "Clockwatcher",
+        "epic": "Last Lesson Countdown",
+        "legendary": "The Clock That Ran Backwards"
+      },
+      "lore": {
+        "common": "Ticks so loudly at night that nobody can sleep.",
+        "uncommon": "Runs five minutes fast, so the whole family is always early.",
+        "rare": "Slows down during the last lesson of the day so it lasts forever.",
+        "epic": "Was stared at by the whole school during the last lesson before the holidays.",
+        "legendary": "Ran backwards for one afternoon, and the whole class got an extra hour of art."
+      },
+      "moves": {
+        "signature": "Tick Flash",
+        "legend": "Clockwork Boost",
+        "ultimate": "Bell Strike",
+        "kit.alarm_ring": "Chime Ring",
+        "kit.tick_tock": "Tick Tock Tick",
+        "kit.rewind": "Wind Back Rest",
+        "kit.deadline": "Last Minute Crack"
+      }
+    },
+    "x_blinds": {
+      "status": "draft",
+      "names": {
+        "common": "Slattangle",
+        "uncommon": "Halfupstuck",
+        "rare": "Lightstriper",
+        "epic": "Sunday Lie-In Fail",
+        "legendary": "The Blind That Never Closed Fully"
+      },
+      "lore": {
+        "common": "Gets its slats tangled so half point up and half point down.",
+        "uncommon": "Gets stuck halfway up so you have to duck under it.",
+        "rare": "Lets the morning sun stripe across your face at five in the morning.",
+        "epic": "Snapped up with a bang at the sleepover, and every child woke up at once.",
+        "legendary": "Has been stuck at half-mast for twenty years, and the family now calls it a feature."
+      },
+      "moves": {
+        "signature": "Slat Snap Crack",
+        "legend": "Tangle Crack",
+        "ultimate": "Light Stripe Daze",
+        "kit.slam_shut": "Snap Down Slam",
+        "kit.creak": "Cord Rattle Startle",
+        "kit.draught": "Gap Draught Crack",
+        "kit.deadbolt": "Closed Slat Guard"
+      }
+    },
+    "x_curtain": {
+      "status": "draft",
+      "names": {
+        "common": "Hookslipper",
+        "uncommon": "Hidingspot",
+        "rare": "Lightleaker",
+        "epic": "Theatre Curtain Call",
+        "legendary": "The Curtain That Hid Every Child"
+      },
+      "lore": {
+        "common": "Slips off one hook so it droops at the corner.",
+        "uncommon": "Is the first place every child hides during hide and seek, with their feet showing.",
+        "rare": "Leaks a stripe of light right onto your pillow at dawn.",
+        "epic": "Hid every child at the party at once, and the grown-ups pretended not to see the line of shoes.",
+        "legendary": "Has hidden three generations of children during hide and seek, and has never once given them away."
+      },
+      "moves": {
+        "signature": "Hook Slip Crack",
+        "legend": "Hiding Boost",
+        "ultimate": "Curtain Call",
+        "kit.slam_shut": "Curtain Swish",
+        "kit.creak": "Rail Squeak Startle"
+      }
+    },
+    "x_french_door": {
+      "status": "draft",
+      "names": {
+        "common": "Handlestick",
+        "uncommon": "Gardenletter",
+        "rare": "Breezeswinger",
+        "epic": "Summer Party Swing",
+        "legendary": "The Doors That Opened Summer"
+      },
+      "lore": {
+        "common": "Has a handle that sticks every winter.",
+        "uncommon": "Lets the garden in, along with every fly in it.",
+        "rare": "Swings open in the breeze and knocks over the plant pot.",
+        "epic": "Was flung open for the summer party, and the whole garden came inside.",
+        "legendary": "Has been opened on the first warm day of spring for a hundred years, and summer always follows."
+      },
+      "moves": {
+        "signature": "Glass Pane Crack",
+        "legend": "Breeze Startle",
+        "ultimate": "Garden Party Gust",
+        "kit.slam_shut": "Double Door Slam",
+        "kit.draught": "Gap Breeze Crack",
+        "kit.deadbolt": "Latch Guard"
+      }
+    },
+    "x_front_door": {
+      "status": "draft",
+      "names": {
+        "common": "Letterboxsnap",
+        "uncommon": "Keysticker",
+        "rare": "Doorbellmate",
+        "epic": "Holiday Homecoming",
+        "legendary": "The Door That Welcomed Everyone"
+      },
+      "lore": {
+        "common": "Snaps its letterbox on your fingers when you post a card.",
+        "uncommon": "Needs its key jiggled just right before it opens.",
+        "rare": "Swings open just as you knock, so you fall into the hall.",
+        "epic": "Was opened by every guest at the party at once, and the hall turned into a traffic jam.",
+        "legendary": "Has welcomed every member of the family home for a hundred years."
+      },
+      "moves": {
+        "signature": "Letterbox Snap",
+        "legend": "Welcome Mat Rest",
+        "ultimate": "Draughty Hall Pong",
+        "kit.creak": "Creak Creak",
+        "kit.draught": "Letterbox Draught",
+        "kit.deadbolt": "Chain Guard"
+      }
+    },
+    "x_garage_door": {
+      "status": "draft",
+      "names": {
+        "common": "Rumblelift",
+        "uncommon": "Halfwayjam",
+        "rare": "Basketballhoop",
+        "epic": "Garage Band Reveal",
+        "legendary": "The Door That Revealed the Band"
+      },
+      "lore": {
+        "common": "Rumbles so loudly when opening that the whole street hears it.",
+        "uncommon": "Jams halfway up, so you have to crawl under it.",
+        "rare": "Has a basketball hoop above it that rattles every time it opens.",
+        "epic": "Lifted up to reveal the garage band, and the whole street came to listen.",
+        "legendary": "Has opened on the same family car for forty years and only jammed once, on the morning of a wedding."
+      },
+      "moves": {
+        "signature": "Rumble Crack",
+        "legend": "Bounce Bounce Bounce",
+        "ultimate": "Roller Door Rumble",
+        "kit.slam_shut": "Roller Door Slam",
+        "kit.creak": "Spring Twang",
+        "kit.deadbolt": "Padlock Guard"
+      }
+    },
+    "x_glass_door": {
+      "status": "draft",
+      "names": {
+        "common": "Birdbumper",
+        "uncommon": "Smudgeprint",
+        "rare": "Walkintoer",
+        "epic": "Shopping Centre Bump",
+        "legendary": "The Glass That Nobody Saw"
+      },
+      "lore": {
+        "common": "Gets walked into by people who think it's open.",
+        "uncommon": "Is covered in nose and hand prints at exactly toddler height.",
+        "rare": "Looks so clean that a pigeon tries to fly through it every day.",
+        "epic": "Was walked into by half the shoppers on the first day of the sale.",
+        "legendary": "Has been cleaned so perfectly for fifty years that a whole family thinks it's not there."
+      },
+      "moves": {
+        "signature": "Glass Bump Crack",
+        "legend": "Clean Glass Boost",
+        "ultimate": "Glass Smack Crack",
+        "kit.slam_shut": "Glass Slam",
+        "kit.creak": "Hinge Squeak",
+        "kit.deadbolt": "Glass Guard"
+      }
+    },
+    "x_shower_curtain": {
+      "status": "draft",
+      "names": {
+        "common": "Clingwrap",
+        "uncommon": "Mouldyhem",
+        "rare": "Floodlet",
+        "epic": "Bathroom Flood",
+        "legendary": "The Curtain With a Hundred Ducks"
+      },
+      "lore": {
+        "common": "Clings to your legs while you shower like a wet ghost.",
+        "uncommon": "Grows a little black line at the bottom that nobody can scrub off.",
+        "rare": "Lets the water spray out the side and flood the floor.",
+        "epic": "Let so much water out during one shower that the bathroom floor became a paddling pool.",
+        "legendary": "Has a hundred ducks printed on it, and the toddler has named every single one."
+      },
+      "moves": {
+        "signature": "Cling Cling Cling",
+        "legend": "Ring Hook Guard",
+        "ultimate": "Flood Spray",
+        "kit.slam_shut": "Wet Curtain Slap",
+        "kit.creak": "Rail Screech",
+        "kit.draught": "Cold Draught Crack"
+      }
+    },
+    "x_shutter": {
+      "status": "draft",
+      "names": {
+        "common": "Bangshutter",
+        "uncommon": "Stormslammer",
+        "rare": "Paintpeeler",
+        "epic": "Storm Shutter Slam",
+        "legendary": "The Shutters of the Seaside House"
+      },
+      "lore": {
+        "common": "Creaks open by itself at dawn, letting a stripe of sunlight onto the sleeping cat.",
+        "uncommon": "Slams shut in a storm so loudly that everyone jumps.",
+        "rare": "Peels its paint in the sun, so it's a different colour every year.",
+        "epic": "Slammed shut on every house on the seafront when the storm came in.",
+        "legendary": "Has kept the same seaside house safe through a hundred storms."
+      },
+      "moves": {
+        "signature": "Bang Crack",
+        "legend": "Storm Guard",
+        "ultimate": "Storm Slam Startle",
+        "kit.slam_shut": "Shutter Slam",
+        "kit.draught": "Gap Draught",
+        "kit.deadbolt": "Hook Latch Guard"
+      }
+    },
+    "x_skylight": {
+      "status": "draft",
+      "names": {
+        "common": "Rainpatter",
+        "uncommon": "Stargazer",
+        "rare": "Leafcollector",
+        "epic": "Starry Night View",
+        "legendary": "The Window to the Sky"
+      },
+      "lore": {
+        "common": "Patters so loudly in the rain that nobody can sleep.",
+        "uncommon": "Shows the stars from bed on a clear night.",
+        "rare": "Collects leaves in autumn until the room goes dark.",
+        "epic": "Showed a whole meteor shower to a family lying on the bedroom floor.",
+        "legendary": "Has shown the same attic room the stars every clear night for fifty years."
+      },
+      "moves": {
+        "signature": "Glass Crack",
+        "legend": "Leaf Mould Stink",
+        "ultimate": "Sky Pane Shatter",
+        "kit.slam_shut": "Lid Slam Down",
+        "kit.creak": "Frame Creak",
+        "kit.draught": "Cold Draught Down"
+      }
+    },
+    "window": {
+      "status": "draft",
+      "names": {
+        "common": "Breathdrawer",
+        "uncommon": "Flyfinder",
+        "rare": "Viewblocker",
+        "epic": "Snow Day Stare",
+        "legendary": "The Window That Watched the Street"
+      },
+      "lore": {
+        "common": "Fogs up every morning so you have to draw on it.",
+        "uncommon": "Lets in every fly in summer and won't let them out.",
+        "rare": "Makes everyone in class look outside instead of at the board.",
+        "epic": "Was looked out of by every pupil at once when snow started, and the lesson stopped.",
+        "legendary": "Has watched the same street for a hundred years and seen every child grow up."
+      },
+      "moves": {
+        "signature": "Pane Crack",
+        "legend": "Daydream Crack",
+        "ultimate": "Window Shatter",
+        "kit.glare_back": "Sun Glare",
+        "kit.shatter": "Crack Crack Crack Crack",
+        "kit.mirror_image": "Reflection Guard Window",
+        "kit.vanity": "Clean Glass Boost"
+      }
+    },
+    "x_window_pane": {
+      "status": "draft",
+      "names": {
+        "common": "Rattlepane",
+        "uncommon": "Condensedrip",
+        "rare": "Draughtletter",
+        "epic": "Hailstorm Hammering",
+        "legendary": "The Oldest Pane in the House"
+      },
+      "lore": {
+        "common": "Rattles in its frame every time a lorry goes by.",
+        "uncommon": "Drips condensation down onto the windowsill every morning.",
+        "rare": "Lets in a thin draught that blows out every candle.",
+        "epic": "Was hammered by a hailstorm, and every child in the house came to watch it hold.",
+        "legendary": "Has been in the same window for two hundred years and is a tiny bit thicker at the bottom."
+      },
+      "moves": {
+        "signature": "Rattle Crack",
+        "legend": "Draught Snatch",
+        "ultimate": "Hail Hammer",
+        "kit.slam_shut": "Sash Slam",
+        "kit.creak": "Rattle Startle",
+        "kit.draught": "Window Draught",
+        "kit.deadbolt": "Window Latch Guard"
+      }
+    },
+    "x_bandage": {
+      "status": "draft",
+      "names": {
+        "common": "Unraveller",
+        "uncommon": "Overwrapped",
+        "rare": "Mummymaker",
+        "epic": "Hospital Dress-Up",
+        "legendary": "The Bandage That Made a Mummy"
+      },
+      "lore": {
+        "common": "Unravels down the corridor as you walk.",
+        "uncommon": "Is wrapped so many times round a tiny cut that the finger looks like a sausage.",
+        "rare": "Turns any child into a mummy in under a minute.",
+        "epic": "Wrapped up every child at the fancy dress party, and there were twenty mummies.",
+        "legendary": "Wrapped a whole teddy bear hospital's worth of patients in one afternoon."
+      },
+      "moves": {
+        "signature": "Wrap Wrap Wrap",
+        "legend": "Bandage Snatch",
+        "ultimate": "Mummy Wrap",
+        "kit.quick_fix": "Wrap Up Rest",
+        "kit.check_up": "Unravel Crack",
+        "kit.bed_rest": "Bandage Guard"
+      }
+    },
+    "x_bathroom_mirror": {
+      "status": "draft",
+      "names": {
+        "common": "Steamfogger",
+        "uncommon": "Doodlewall",
+        "rare": "Medicinedoor",
+        "epic": "Morning Mirror Queue",
+        "legendary": "The Mirror That Heard Every Song"
+      },
+      "lore": {
+        "common": "Fogs up so completely after a shower that you see nothing at all.",
+        "uncommon": "Gets messages written in the steam that appear again next time.",
+        "rare": "Opens into a cupboard full of old plasters and toothpaste tubes.",
+        "epic": "Had the whole family queuing in front of it on the first morning of the holiday.",
+        "legendary": "Has heard every family member sing in the shower for thirty years and never told."
+      },
+      "moves": {
+        "signature": "Steam Crack",
+        "legend": "Steam Message Snatch",
+        "ultimate": "Steam Fog Blast",
+        "kit.shatter": "Crack Crack Mirror",
+        "kit.mirror_image": "Reflection Double Guard"
+      }
+    },
+    "x_beaker": {
+      "status": "draft",
+      "names": {
+        "common": "Spillover",
+        "uncommon": "Measurefib",
+        "rare": "Fizzbubbler",
+        "epic": "Science Lab Fizz",
+        "legendary": "Professor Bubblesworth of the Lab"
+      },
+      "lore": {
+        "common": "Spills over the moment it's filled to the top.",
+        "uncommon": "Has measurements on the side that are never quite right.",
+        "rare": "Fizzes so much when things are mixed that it bubbles out of the top.",
+        "epic": "Bubbled over in the science lab, and the whole class had foam up to their knees.",
+        "legendary": "Mixed the first ever science experiment of a girl who grew up to be a famous inventor."
+      },
+      "moves": {
+        "signature": "Pour Pour Pour",
+        "legend": "Fizz Startle",
+        "ultimate": "Foam Overflow",
+        "kit.reaction": "Hot Reaction",
+        "kit.acid_drop": "Acid Drop Drop",
+        "kit.centrifuge": "Swirl Swirl Swirl"
+      }
+    },
+    "x_bidet_seat": {
+      "status": "draft",
+      "names": {
+        "common": "Buttonmystery",
+        "uncommon": "Surprisespray",
+        "rare": "Warmseat",
+        "epic": "Bathroom Button Panic",
+        "legendary": "The Seat With Too Many Buttons"
+      },
+      "lore": {
+        "common": "Has buttons that nobody dares press.",
+        "uncommon": "Sprays water when you least expect it.",
+        "rare": "Warms itself up so nicely that nobody wants to leave the bathroom.",
+        "epic": "Sprayed every visitor at the hotel who pressed the wrong button.",
+        "legendary": "Has a remote control with thirty buttons, and only one person in the family knows them all."
+      },
+      "moves": {
+        "signature": "Spray Startle",
+        "legend": "Squirt Squirt Squirt",
+        "ultimate": "Button Surprise",
+        "kit.plunger_pull": "Water Siphon",
+        "kit.bubble_up": "Gurgle Crack Seat",
+        "kit.porcelain_shell": "Heated Seat Guard"
+      }
+    },
+    "x_bin_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Drippybag",
+        "uncommon": "Splitbottom Bag",
+        "rare": "Foxtarget",
+        "epic": "Bin Day Split",
+        "legendary": "The Bag That Made It to the Lorry"
+      },
+      "lore": {
+        "common": "Drips something mysterious down your leg on the way to the bin.",
+        "uncommon": "Is tied so full that the knot won't close, so it wears its rubbish like a hat.",
+        "rare": "Gets ripped open by a fox every night it's left outside.",
+        "epic": "Split open on bin day and covered the whole pavement in yoghurt pots.",
+        "legendary": "Made it from the kitchen to the bin lorry without a single tear, which no bag has ever done."
+      },
+      "moves": {
+        "signature": "Drip Stink",
+        "legend": "Tie Knot Rest",
+        "ultimate": "Split Bag Startle",
+        "kit.garbage_toss": "Swing Swing Swing",
+        "kit.rot": "Rubbish Rot",
+        "kit.scavenge": "Fox Snatch"
+      }
+    },
+    "x_binocular_strap": {
+      "status": "draft",
+      "names": {
+        "common": "Neckrub",
+        "uncommon": "Tangleloop",
+        "rare": "Strapsafe",
+        "epic": "Birdwatch Tangle",
+        "legendary": "The Strap That Saved the Binoculars"
+      },
+      "lore": {
+        "common": "Rubs the back of your neck until it's red.",
+        "uncommon": "Tangles itself into a knot in the bottom of the bag.",
+        "rare": "Caught the binoculars as they slipped over the side of the boat.",
+        "epic": "Tangled with every other strap in the hide, and the birdwatchers were tied together all morning.",
+        "legendary": "Saved its binoculars from falling off a cliff, and the owner still tells everyone about it."
+      },
+      "moves": {
+        "signature": "Strap Snap Snap",
+        "legend": "Tangle Startle",
+        "ultimate": "Strap Whip",
+        "kit.reaction": "Rub Burn",
+        "kit.hypothesis": "Secure Boost",
+        "kit.acid_drop": "Sweaty Strap Stink"
+      }
+    },
+    "x_binoculars_stand": {
+      "status": "draft",
+      "names": {
+        "common": "Coinviewer",
+        "uncommon": "Seasidelook",
+        "rare": "Lookoutpost",
+        "epic": "Pier Telescope Queue",
+        "legendary": "The Viewer on the Clifftop"
+      },
+      "lore": {
+        "common": "Swallows your coin and gives you ten seconds of looking.",
+        "uncommon": "Points at the sea, the sky and the same seagull every time.",
+        "rare": "Showed a seal on the rocks that nobody else could see.",
+        "epic": "Had a queue all summer on the pier, and everyone saw the same boat.",
+        "legendary": "Has stood on the same clifftop for eighty years and shown a million people the lighthouse."
+      },
+      "moves": {
+        "signature": "Lens Flash",
+        "legend": "Coin Slot Crack",
+        "ultimate": "Long View",
+        "kit.reaction": "Hot Metal Eyepiece",
+        "kit.hypothesis": "Zoom Boost Stand",
+        "kit.acid_drop": "Rusty Coin Stink",
+        "kit.centrifuge": "Swivel Swivel Swivel"
+      }
+    }
+  }
+}
