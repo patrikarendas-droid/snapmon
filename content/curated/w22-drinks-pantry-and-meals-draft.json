@@ -925,6 +925,930 @@
         "legend": "Wasabi Heat",
         "ultimate": "Sushi Conveyor"
       }
+    },
+    "thermos": {
+      "status": "draft",
+      "names": {
+        "common": "Flaskhug",
+        "uncommon": "Hotkeeper",
+        "rare": "Screwcupper",
+        "epic": "Picnic Steam Surprise",
+        "legendary": "The Flask Still Hot After a Week"
+      },
+      "lore": {
+        "common": "Keeps soup hot all morning and pours a little cup from its own lid.",
+        "uncommon": "Has a lid that unscrews into a cup and then refuses to screw back on.",
+        "rare": "Keeps drinks so hot that the first sip at lunch still makes eyes water.",
+        "epic": "Was opened on a snowy hilltop picnic, and the steam fogged everyone's goggles.",
+        "legendary": "Was forgotten in a rucksack for a week and poured out tea that was still too hot to drink."
+      },
+      "moves": {
+        "signature": "Lid Twist Crack",
+        "legend": "Heat Siphon",
+        "ultimate": "Steam Surprise"
+      }
+    },
+    "vase": {
+      "status": "draft",
+      "names": {
+        "common": "Flowerholder",
+        "uncommon": "Tipsyvase",
+        "rare": "Stemstand",
+        "epic": "Mothers Day Bouquet",
+        "legendary": "The Vase That Survived the Football"
+      },
+      "lore": {
+        "common": "Holds flowers on the windowsill and leaves a ring of water on the wood.",
+        "uncommon": "Tips over whenever the window is opened on a windy day.",
+        "rare": "Wobbles so dangerously when anyone walks past that the whole room holds its breath.",
+        "epic": "Was knocked by a football in the lounge and wobbled for ten seconds before deciding to stay up.",
+        "legendary": "Survived three footballs, two cats and a toddler, and still holds the flowers every Sunday."
+      },
+      "moves": {
+        "signature": "Wobble Crack",
+        "legend": "Water Siphon",
+        "ultimate": "Wobbly Bouquet"
+      }
+    },
+    "wine_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Corkneck",
+        "uncommon": "Glassgreen",
+        "rare": "Labelpeeler",
+        "epic": "Bottle Bank Clatter",
+        "legendary": "The Bottle That Became a Candle Holder"
+      },
+      "lore": {
+        "common": "Is tall and dark green with a long neck and a label that peels in the damp.",
+        "uncommon": "Clinks loudly in the recycling bag all the way to the bottle bank.",
+        "rare": "Rolls off the table so slowly that everyone has time to watch and nobody catches it.",
+        "epic": "Was dropped into the bottle bank so loudly that the pigeons flew off the car park.",
+        "legendary": "Was turned into a candle holder and held a candle every evening for twenty years."
+      },
+      "moves": {
+        "signature": "Bottle Neck Crack",
+        "legend": "Clink Clink Clink",
+        "ultimate": "Bottle Bank Clatter"
+      }
+    },
+    "x_aerosol": {
+      "status": "draft",
+      "names": {
+        "common": "Pssttin",
+        "uncommon": "Shakecan",
+        "rare": "Clouder",
+        "epic": "Spray Can Fog",
+        "legendary": "The Can That Sprayed Its Last"
+      },
+      "lore": {
+        "common": "Psssts when it's pressed and is kept on a high shelf away from small hands.",
+        "uncommon": "Sputters out its last puff in a sad little cough and then pretends it is still full.",
+        "rare": "Sprays such a big cloud that the whole room goes misty.",
+        "epic": "Sprayed so much in one go that the bathroom fogged up like a cloud.",
+        "legendary": "Lasted so long that it was shaken, sprayed and rattled for a whole year before it was empty."
+      },
+      "moves": {
+        "signature": "Rattle Crack",
+        "legend": "Spray Cloud Crack",
+        "ultimate": "Spray Fog"
+      }
+    },
+    "x_air_freshener": {
+      "status": "draft",
+      "names": {
+        "common": "Pinescent",
+        "uncommon": "Plugpuffer",
+        "rare": "Freshcloud",
+        "epic": "Bathroom Flower Cloud",
+        "legendary": "The Spray That Made It Smell Like Spring"
+      },
+      "lore": {
+        "common": "Puffs out a smell of pine trees whenever somebody walks past.",
+        "uncommon": "Puffs at the exact moment someone is walking past, making them jump.",
+        "rare": "Smells so strong that the whole house smells like a forest.",
+        "epic": "Puffed so much in a small bathroom that visitors thought they were in a flower shop.",
+        "legendary": "Made a whole house smell like spring in the middle of winter."
+      },
+      "moves": {
+        "signature": "Puff Crack",
+        "legend": "Strong Scent Distraction",
+        "ultimate": "Flower Cloud"
+      }
+    },
+    "x_almond": {
+      "status": "draft",
+      "names": {
+        "common": "Teardropnut",
+        "uncommon": "Shellcrack Pip",
+        "rare": "Crunchalmond",
+        "epic": "Trail Mix Treasure",
+        "legendary": "The Almond That Crossed the Sea"
+      },
+      "lore": {
+        "common": "Is a teardrop-shaped nut with a crunchy bite.",
+        "uncommon": "Gets stuck between teeth after every handful.",
+        "rare": "Hides in the bottom of the cereal bag and waits for the moment a spoon gets bored.",
+        "epic": "Was found in a trail mix as the very last nut, and everyone wanted it.",
+        "legendary": "Was grown in a sunny orchard far away and crossed the sea to land in a lunchbox."
+      },
+      "moves": {
+        "signature": "Crunch Stink",
+        "legend": "Nut Rest",
+        "ultimate": "Trail Mix"
+      }
+    },
+    "x_bacon": {
+      "status": "draft",
+      "names": {
+        "common": "Sizzlestrip",
+        "uncommon": "Crispslice",
+        "rare": "Breakfastsmell",
+        "epic": "Saturday Fry-Up",
+        "legendary": "The Bacon That Woke the Whole House"
+      },
+      "lore": {
+        "common": "Sizzles in the pan and spits a little hot fat at the cook.",
+        "uncommon": "Spits a speck of hot fat at the cook's wrist the moment they lean in to check.",
+        "rare": "Smells so good that every person in the house appears in the kitchen.",
+        "epic": "Sizzled on a Saturday morning, and the whole street woke up hungry.",
+        "legendary": "Woke the whole house with its smell, and every person came down in their pyjamas."
+      },
+      "moves": {
+        "signature": "Sizzle Heat",
+        "legend": "Breakfast Boost",
+        "ultimate": "Saturday Fry-Up"
+      }
+    },
+    "x_beer": {
+      "status": "draft",
+      "names": {
+        "common": "Frothhead",
+        "uncommon": "Foamglass",
+        "rare": "Tallpint",
+        "epic": "Harvest Festival Froth",
+        "legendary": "The Froth That Never Went Flat"
+      },
+      "lore": {
+        "common": "Has a thick head of foam that leaves a moustache on grown-ups.",
+        "uncommon": "Spills its foam over the side when it's poured too fast.",
+        "rare": "Froths so much that the glass is half foam and half drink.",
+        "epic": "Overflowed its foam all over a harvest festival table, and the tablecloth bubbled.",
+        "legendary": "Had a head of foam so tall that it stood above the glass like a cloud."
+      },
+      "moves": {
+        "signature": "Froth Heat",
+        "legend": "Foam Stink",
+        "ultimate": "Foam Overflow"
+      }
+    },
+    "x_bleach": {
+      "status": "draft",
+      "names": {
+        "common": "Undersinker",
+        "uncommon": "Capclicker",
+        "rare": "Whitener",
+        "epic": "Spring Clean Sparkle",
+        "legendary": "The Bottle That Made the Bathroom Shine"
+      },
+      "lore": {
+        "common": "Lives under the sink with a child-proof cap and a strong smell.",
+        "uncommon": "Has a cap that clicks so loudly that everyone knows the bathroom is being cleaned.",
+        "rare": "Makes a bathroom so clean that the tiles sparkle like a mirror.",
+        "epic": "Scrubbed the grout so white before a visit that the visitors asked if the bathroom was new.",
+        "legendary": "Made the bathroom so sparkling that a grandma said it was the cleanest she had ever seen."
+      },
+      "moves": {
+        "signature": "Cap Click Crack",
+        "legend": "Clean Boost",
+        "ultimate": "Spring Clean"
+      }
+    },
+    "x_body_wash": {
+      "status": "draft",
+      "names": {
+        "common": "Bubblebottle",
+        "uncommon": "Squeezegel",
+        "rare": "Showerscent",
+        "epic": "Shower Bubble Cloud",
+        "legendary": "The Wash That Made a Mountain of Bubbles"
+      },
+      "lore": {
+        "common": "Squeezes out a blob of gel that smells of fruit or flowers.",
+        "uncommon": "Squeezes out far too much when the bottle is nearly empty.",
+        "rare": "Makes so many bubbles that the shower is full of foam.",
+        "epic": "Was squeezed too hard, and the whole shower turned into a bubble bath.",
+        "legendary": "Made a mountain of bubbles so big that it reached the ceiling."
+      },
+      "moves": {
+        "signature": "Squeeze Crack",
+        "legend": "Bubble Guard",
+        "ultimate": "Bubble Cloud"
+      }
+    },
+    "x_bottle_cap": {
+      "status": "draft",
+      "names": {
+        "common": "Twistcap",
+        "uncommon": "Plasticlid",
+        "rare": "Lostcap",
+        "epic": "Lost Cap Hunt",
+        "legendary": "The Cap That Was Always Found"
+      },
+      "lore": {
+        "common": "Twists off a bottle and rolls under the sofa straight away.",
+        "uncommon": "Pings off the counter when twisted too hard and lands in the dog's water bowl.",
+        "rare": "Rolls so far when dropped that nobody can find it.",
+        "epic": "Rolled under the fridge, and the whole family got down on the floor to look.",
+        "legendary": "Was lost a hundred times and found every time, which is a record."
+      },
+      "moves": {
+        "signature": "Twist Crack",
+        "legend": "Lost Cap Distraction",
+        "ultimate": "Cap Hunt"
+      }
+    },
+    "x_bubble_tea": {
+      "status": "draft",
+      "names": {
+        "common": "Pearlsip",
+        "uncommon": "Tapiocacup",
+        "rare": "Strawpopper",
+        "epic": "Boba Straw Slurp",
+        "legendary": "The Tea With the Most Pearls"
+      },
+      "lore": {
+        "common": "Has chewy pearls at the bottom that shoot up the big straw.",
+        "uncommon": "Has its pearls get stuck in the straw on the last sip.",
+        "rare": "Shoots pearls up the straw so fast that its drinker gets a surprise.",
+        "epic": "Was slurped so hard that a pearl shot out of the straw and landed on the table.",
+        "legendary": "Had so many pearls that it was more pearl than tea."
+      },
+      "moves": {
+        "signature": "Pearl Heat",
+        "legend": "Big Slurp",
+        "ultimate": "Straw Slurp"
+      }
+    },
+    "x_candle_jar": {
+      "status": "draft",
+      "names": {
+        "common": "Scentjar",
+        "uncommon": "Waxpool",
+        "rare": "Flickerjar",
+        "epic": "Cosy Evening Glow",
+        "legendary": "The Candle That Burned a Whole Winter"
+      },
+      "lore": {
+        "common": "Flickers in its glass jar and fills the room with a cosy smell.",
+        "uncommon": "Tunnels down the middle and leaves wax round the edges.",
+        "rare": "Makes a whole evening feel slower and softer, until somebody blows it out and the spell breaks.",
+        "epic": "Made a whole evening so cosy that nobody wanted to go to bed.",
+        "legendary": "Burned slowly through a whole winter, and the house smelled lovely every night."
+      },
+      "moves": {
+        "signature": "Flicker Crack",
+        "legend": "Glow Startle",
+        "ultimate": "Cosy Glow"
+      }
+    },
+    "x_cashew": {
+      "status": "draft",
+      "names": {
+        "common": "Curvenut",
+        "uncommon": "Snackbowl Nut",
+        "rare": "Crescentcrunch",
+        "epic": "Party Bowl Pick",
+        "legendary": "The Cashew That Was Picked First"
+      },
+      "lore": {
+        "common": "Is curved like a little moon and is always picked first from the mixed nuts.",
+        "uncommon": "Disappears from the bowl so fast that only peanuts are left.",
+        "rare": "Is so popular that everyone hunts for it in the bowl.",
+        "epic": "Was picked out of a party bowl so fast that the bowl was all peanuts in a minute.",
+        "legendary": "Was the first nut picked from every bowl at every party for twenty years."
+      },
+      "moves": {
+        "signature": "Crunch Stink",
+        "legend": "Snack Boost",
+        "ultimate": "Party Bowl"
+      }
+    },
+    "x_chestnut": {
+      "status": "draft",
+      "names": {
+        "common": "Shinybrown",
+        "uncommon": "Roastchestnut",
+        "rare": "Burrhusk",
+        "epic": "Winter Market Roast",
+        "legendary": "The Chestnut Roasted on a Snowy Night"
+      },
+      "lore": {
+        "common": "Is shiny and brown and comes out of a spiky green shell.",
+        "uncommon": "Pops in the fire if nobody remembers to cut a cross in it.",
+        "rare": "Smells so good when it's roasting that everyone stops at the stall.",
+        "epic": "Was roasted at a winter market, and the queue went round the square.",
+        "legendary": "Was roasted on a snowy night, and the whole street gathered round the fire."
+      },
+      "moves": {
+        "signature": "Shell Stink",
+        "legend": "Spiky Husk Stink",
+        "ultimate": "Chestnut Pop"
+      }
+    },
+    "x_chicken_wing": {
+      "status": "draft",
+      "names": {
+        "common": "Saucywing",
+        "uncommon": "Fingerlicker",
+        "rare": "Bonepile",
+        "epic": "Game Night Platter",
+        "legendary": "The Wing That Needed Ten Napkins"
+      },
+      "lore": {
+        "common": "Is covered in sticky sauce that ends up on every finger.",
+        "uncommon": "Leaves a pile of bones on the plate that grows all evening.",
+        "rare": "Is so saucy that its eater needs a whole pack of napkins.",
+        "epic": "Was eaten at a game night, and the sofa got a coat of sauce.",
+        "legendary": "Needed ten napkins and a shower to eat, and was worth every one."
+      },
+      "moves": {
+        "signature": "Hot Sauce Heat",
+        "legend": "Sauce Snatch",
+        "ultimate": "Game Night"
+      }
+    },
+    "x_chickpeas": {
+      "status": "draft",
+      "names": {
+        "common": "Peabean",
+        "uncommon": "Tinchickpea",
+        "rare": "Rollerpea",
+        "epic": "Kitchen Floor Roll",
+        "legendary": "The Chickpeas That Rolled Everywhere"
+      },
+      "lore": {
+        "common": "Are little round beans that roll across the counter when spilled.",
+        "uncommon": "Roll off the plate and under the table at every meal.",
+        "rare": "Roll so far when dropped that they're found weeks later.",
+        "epic": "Were spilled on the kitchen floor and rolled under every cupboard.",
+        "legendary": "Rolled so far across the floor that one was found in the garden the next spring."
+      },
+      "moves": {
+        "signature": "Roll Stink",
+        "legend": "Bean Rest",
+        "ultimate": "Floor Roll"
+      }
+    },
+    "x_cleaning_spray": {
+      "status": "draft",
+      "names": {
+        "common": "Triggerclean",
+        "uncommon": "Sprayshine",
+        "rare": "Wipeaway",
+        "epic": "Kitchen Wipe-Down",
+        "legendary": "The Spray That Cleaned the Whole House"
+      },
+      "lore": {
+        "common": "Sprays a fresh-smelling mist and lives up high where only grown-ups can reach.",
+        "uncommon": "Sprays sideways when the nozzle isn't turned the right way.",
+        "rare": "Makes the counter so clean that the dog slips on it.",
+        "epic": "Cleaned the whole kitchen before a party, and the counter shone like ice.",
+        "legendary": "Cleaned a whole house in an afternoon, and the windows sparkled in the sun."
+      },
+      "moves": {
+        "signature": "Trigger Crack",
+        "legend": "Clean Rest",
+        "ultimate": "Wipe Down"
+      }
+    },
+    "x_cocoa": {
+      "status": "draft",
+      "names": {
+        "common": "Cocoapowder",
+        "uncommon": "Chocdust",
+        "rare": "Sneezepowder",
+        "epic": "Hot Chocolate Making",
+        "legendary": "The Cocoa That Made Every Winter Better"
+      },
+      "lore": {
+        "common": "Is a brown powder that turns milk into hot chocolate.",
+        "uncommon": "Puffs up a little cloud whenever its tin is opened.",
+        "rare": "Makes everyone sneeze when it's spooned too quickly.",
+        "epic": "Was spooned too fast, and the whole kitchen got a dusting of cocoa.",
+        "legendary": "Made every winter better for a whole family, one mug at a time."
+      },
+      "moves": {
+        "signature": "Cocoa Heat",
+        "legend": "Cocoa Guard",
+        "ultimate": "Hot Chocolate Night"
+      }
+    },
+    "x_coffee_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Beanbag Brew",
+        "uncommon": "Groundpouch",
+        "rare": "Valveburp",
+        "epic": "Morning Brew Smell",
+        "legendary": "The Bag That Smelled Like Morning"
+      },
+      "lore": {
+        "common": "Has a little valve that puffs out coffee smell when it's squeezed.",
+        "uncommon": "Spills grounds on the counter every time it's opened.",
+        "rare": "Puffs its rich smell through the valve every time the cupboard door bumps it.",
+        "epic": "Was spilled on the floor, and the kitchen smelled like a cafe for a week.",
+        "legendary": "Smelled so good that it woke up a whole family before their alarms."
+      },
+      "moves": {
+        "signature": "Brew Heat",
+        "legend": "Roast Heat",
+        "ultimate": "Morning Brew Smell"
+      }
+    },
+    "x_coffee_beans": {
+      "status": "draft",
+      "names": {
+        "common": "Beanroast",
+        "uncommon": "Grinderfood",
+        "rare": "Brownbean",
+        "epic": "Coffee Bean Spill",
+        "legendary": "The Beans That Woke Up the Office"
+      },
+      "lore": {
+        "common": "Are shiny brown beans that smell like a cafe.",
+        "uncommon": "Spill across the counter when the bag is opened too quickly.",
+        "rare": "Smell so strong that just walking past makes people feel awake.",
+        "epic": "Were spilled across the office kitchen, and everyone stepped on them for a week.",
+        "legendary": "Woke up a whole office just by being opened at nine in the morning."
+      },
+      "moves": {
+        "signature": "Roasted Heat",
+        "legend": "Bean Guard",
+        "ultimate": "Hot Bean Heat"
+      }
+    },
+    "x_conditioner": {
+      "status": "draft",
+      "names": {
+        "common": "Smoothsqueeze",
+        "uncommon": "Detangler",
+        "rare": "Silkbottle",
+        "epic": "Shower Hair Smooth",
+        "legendary": "The Bottle That Untangled Everything"
+      },
+      "lore": {
+        "common": "Makes hair smooth and soft, if it's rinsed out properly.",
+        "uncommon": "Gets forgotten in the shower, so the hair goes frizzy.",
+        "rare": "Makes hair so slippery that a hairband slides right off.",
+        "epic": "Untangled a whole week of knots in one wash.",
+        "legendary": "Untangled hair so well that a brush went through it in one stroke."
+      },
+      "moves": {
+        "signature": "Squeeze Crack",
+        "legend": "Slippery Startle",
+        "ultimate": "Smooth Hair"
+      }
+    },
+    "x_cork": {
+      "status": "draft",
+      "names": {
+        "common": "Popstopper",
+        "uncommon": "Floatcork",
+        "rare": "Bottleplug",
+        "epic": "Cork Pop Surprise",
+        "legendary": "The Cork That Flew the Furthest"
+      },
+      "lore": {
+        "common": "Plugs up a bottle and pops out with a satisfying sound.",
+        "uncommon": "Breaks in half when it's pulled out, leaving the rest stuck in the bottle.",
+        "rare": "Pops out so hard that it flies across the room.",
+        "epic": "Popped out at a party so hard that it hit the ceiling and bounced into a cake.",
+        "legendary": "Flew so far when it popped that it landed in the next garden."
+      },
+      "moves": {
+        "signature": "Pop Crack",
+        "legend": "Pop Heat",
+        "ultimate": "Cork Flight"
+      }
+    },
+    "x_detergent_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Washsquirt",
+        "uncommon": "Laundryglug",
+        "rare": "Capmeasurer",
+        "epic": "Laundry Day Bubbles",
+        "legendary": "The Bottle That Washed Every Sock"
+      },
+      "lore": {
+        "common": "Glugs into the washing machine and makes the laundry smell fresh.",
+        "uncommon": "Drips down its side so the bottle is always sticky.",
+        "rare": "Makes so many bubbles that the washing machine fills with foam.",
+        "epic": "Was poured too much, and the washing machine foamed all over the kitchen floor.",
+        "legendary": "Washed every sock in a family of six for a year without running out."
+      },
+      "moves": {
+        "signature": "Glug Crack",
+        "legend": "Sticky Bottle Crack",
+        "ultimate": "Laundry Bubbles"
+      }
+    },
+    "x_dish_soap": {
+      "status": "draft",
+      "names": {
+        "common": "Bubbleglug",
+        "uncommon": "Squeezysoap",
+        "rare": "Suddyhands",
+        "epic": "Washing Up Bubbles",
+        "legendary": "The Soap That Lasted All Year"
+      },
+      "lore": {
+        "common": "Squeezes into the washing up bowl and makes a mountain of bubbles.",
+        "uncommon": "Stands on the windowsill with a crust of dried bubbles round its lid.",
+        "rare": "Makes so many bubbles that the plates disappear underneath.",
+        "epic": "Made so many bubbles that the washing up turned into a bubble party.",
+        "legendary": "Lasted a whole year of washing up, and the family thought it was magic."
+      },
+      "moves": {
+        "signature": "Squeeze Crack",
+        "legend": "Bubble Bubble Bubble",
+        "ultimate": "Washing Up Bubbles"
+      }
+    },
+    "x_drumstick_chicken": {
+      "status": "draft",
+      "names": {
+        "common": "Legbite",
+        "uncommon": "Bonehandle",
+        "rare": "Picnicleg",
+        "epic": "Picnic Drumstick",
+        "legendary": "The Drumstick Every Picnic Fought Over"
+      },
+      "lore": {
+        "common": "Has a handy bone handle and a crispy coating.",
+        "uncommon": "Leaves its eater with greasy fingers and a big smile.",
+        "rare": "Is so tasty that everyone at the picnic wants the last one.",
+        "epic": "Was dropped at a picnic, bounced once on the blanket and was caught by the dog in mid-air.",
+        "legendary": "Was fought over at every family picnic for twenty years."
+      },
+      "moves": {
+        "signature": "Crispy Heat",
+        "legend": "Picnic Guard",
+        "ultimate": "Picnic Drumstick"
+      }
+    },
+    "x_essential_oil_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Dropperbottle",
+        "uncommon": "Scentdrop",
+        "rare": "Tinyamber",
+        "epic": "Calming Room Scent",
+        "legendary": "The Bottle That Filled the House"
+      },
+      "lore": {
+        "common": "Is a tiny brown bottle with a dropper that lets out one drop at a time.",
+        "uncommon": "Lets out three drops when only one was wanted.",
+        "rare": "Smells so strong that one drop fills a whole room.",
+        "epic": "Was spilled by accident, and the whole house smelled like lavender for a month.",
+        "legendary": "Filled a whole house with a calm scent from just one drop."
+      },
+      "moves": {
+        "signature": "Drop Crack",
+        "legend": "Big Scent",
+        "ultimate": "Room Scent"
+      }
+    },
+    "x_fish_and_chips": {
+      "status": "draft",
+      "names": {
+        "common": "Paperparcel",
+        "uncommon": "Vinegarshake",
+        "rare": "Seasidesupper",
+        "epic": "Friday Chip Shop",
+        "legendary": "The Supper Eaten on the Seafront"
+      },
+      "lore": {
+        "common": "Comes wrapped in paper with chips and a fish in crispy batter.",
+        "uncommon": "Gets its chips stolen by seagulls on the seafront.",
+        "rare": "Smells so good that the whole street wants some.",
+        "epic": "Was eaten on the seafront while seagulls lined up like a queue.",
+        "legendary": "Was eaten on the seafront every Friday for forty years by the same happy family."
+      },
+      "moves": {
+        "signature": "Hot Batter Heat",
+        "legend": "Vinegar Stink",
+        "ultimate": "Chip Shop Friday"
+      }
+    },
+    "x_fish_fillet": {
+      "status": "draft",
+      "names": {
+        "common": "Flakyfish",
+        "uncommon": "Batterfish",
+        "rare": "Lemonsqueeze",
+        "epic": "Dinner Fish Flake",
+        "legendary": "The Fillet That Flaked Perfectly"
+      },
+      "lore": {
+        "common": "Is a flat piece of fish that flakes when it's touched with a fork.",
+        "uncommon": "Breaks apart in the pan when it's turned.",
+        "rare": "Flakes so perfectly that it falls apart on the fork.",
+        "epic": "Was cooked for a family dinner, and every flake was eaten.",
+        "legendary": "Flaked so perfectly that the chef was given a round of applause."
+      },
+      "moves": {
+        "signature": "Hot Fish Heat",
+        "legend": "Flake Distraction",
+        "ultimate": "Fish Dinner"
+      }
+    },
+    "x_flour": {
+      "status": "draft",
+      "names": {
+        "common": "Floursack",
+        "uncommon": "Whitepuff",
+        "rare": "Baking Powderpuff",
+        "epic": "Baking Day Flour Cloud",
+        "legendary": "The Flour That Coated the Kitchen"
+      },
+      "lore": {
+        "common": "Gets measured out with a mug because the scales are always somewhere else.",
+        "uncommon": "Leaves white handprints on everything in the kitchen.",
+        "rare": "Makes such a big cloud when dropped that the whole kitchen turns white.",
+        "epic": "Was dropped on baking day, and everyone looked like ghosts.",
+        "legendary": "Coated a whole kitchen in white, and the family baked a cake in the mess."
+      },
+      "moves": {
+        "signature": "Hot Flour Heat",
+        "legend": "Flour Startle",
+        "ultimate": "White Kitchen Storm"
+      }
+    },
+    "x_fried_chicken": {
+      "status": "draft",
+      "names": {
+        "common": "Crispbucket",
+        "uncommon": "Crunchcoat",
+        "rare": "Greasyfinger",
+        "epic": "Bucket Feast",
+        "legendary": "The Chicken That Crunched the Loudest"
+      },
+      "lore": {
+        "common": "Has a crunchy coat that flakes off with every bite.",
+        "uncommon": "Leaves its eater with greasy fingers and a crispy crumb on their chin.",
+        "rare": "Is so crunchy that the whole room hears every bite.",
+        "epic": "Was shared out of a bucket at a party, and the bucket was empty in minutes.",
+        "legendary": "Crunched so loudly at a family dinner that the neighbours came round to see."
+      },
+      "moves": {
+        "signature": "Hot Crunch Heat",
+        "legend": "Crispy Snatch",
+        "ultimate": "Bucket Feast"
+      }
+    },
+    "x_gas_can": {
+      "status": "draft",
+      "names": {
+        "common": "Fuelcan",
+        "uncommon": "Spoutcap",
+        "rare": "Shedcan",
+        "epic": "Mower Day Refill",
+        "legendary": "The Can That Filled Every Mower"
+      },
+      "lore": {
+        "common": "Sits in the shed with a long spout and a strong smell, well away from anything hot.",
+        "uncommon": "Is always nearly empty when the lawnmower needs filling.",
+        "rare": "Has a spout so long that it's hard to aim straight.",
+        "epic": "Filled the lawnmower on a sunny Saturday, and the whole street mowed their lawns.",
+        "legendary": "Kept every lawnmower in the street running for a whole summer."
+      },
+      "moves": {
+        "signature": "Spout Crack",
+        "legend": "Refill Rest",
+        "ultimate": "Mower Day"
+      }
+    },
+    "x_gas_cylinder": {
+      "status": "draft",
+      "names": {
+        "common": "Gasbottle",
+        "uncommon": "Heavytank",
+        "rare": "Hissingvalve",
+        "epic": "Barbecue Gas Swap",
+        "legendary": "The Cylinder That Fed Every Barbecue"
+      },
+      "lore": {
+        "common": "Stands outside by the barbecue, heavy and painted bright orange.",
+        "uncommon": "Runs out just as the sausages are halfway cooked.",
+        "rare": "Is so heavy that it takes two people to carry it.",
+        "epic": "Ran out at a barbecue, and the whole party waited for the new one.",
+        "legendary": "Fed every barbecue for a whole summer, and the grill cooked a thousand sausages."
+      },
+      "moves": {
+        "signature": "Valve Crack",
+        "legend": "Heavy Lift",
+        "ultimate": "Barbecue Swap"
+      }
+    },
+    "x_glass_cleaner": {
+      "status": "draft",
+      "names": {
+        "common": "Streakfree",
+        "uncommon": "Windowshine",
+        "rare": "Squeakspray",
+        "epic": "Window Cleaning Day",
+        "legendary": "The Spray That Made Windows Vanish"
+      },
+      "lore": {
+        "common": "Sprays blue liquid on windows and squeaks when it's wiped off.",
+        "uncommon": "Leaves streaks on the window that only show in the sunshine.",
+        "rare": "Makes windows so clean that birds fly into them.",
+        "epic": "Cleaned the windows so well that the family walked into the patio door.",
+        "legendary": "Made the windows so clean that the family thought they had been taken out."
+      },
+      "moves": {
+        "signature": "Squeak Crack",
+        "legend": "Shine Guard",
+        "ultimate": "Window Day"
+      }
+    },
+    "x_hand_soap": {
+      "status": "draft",
+      "names": {
+        "common": "Pumpsoap",
+        "uncommon": "Foamhand",
+        "rare": "Washhelper",
+        "epic": "Hand Washing Song",
+        "legendary": "The Soap That Washed a Million Hands"
+      },
+      "lore": {
+        "common": "Pumps out foam that smells of flowers when it's pressed.",
+        "uncommon": "Squirts across the sink when it's pumped too hard.",
+        "rare": "Makes so much foam that hands disappear under it.",
+        "epic": "Was pumped so many times at a party that the bathroom smelled like a flower shop.",
+        "legendary": "Has washed so many hands that it now sings a little song with every pump."
+      },
+      "moves": {
+        "signature": "Pump Crack",
+        "legend": "Warm Water Heat",
+        "ultimate": "Hand Wash"
+      }
+    },
+    "x_hazelnut": {
+      "status": "draft",
+      "names": {
+        "common": "Roundnut",
+        "uncommon": "Shellcracker Nut",
+        "rare": "Woodnut",
+        "epic": "Squirrel Store",
+        "legendary": "The Nut That Fooled a Squirrel"
+      },
+      "lore": {
+        "common": "Is small and round and hides inside a hard brown shell.",
+        "uncommon": "Gets buried in the garden by a squirrel that forgets where it put it.",
+        "rare": "Is so hard to crack that it needs a nutcracker and a strong hand.",
+        "epic": "Was buried by a squirrel and grew into a tree the next spring.",
+        "legendary": "Fooled a squirrel into burying it three times in three different gardens."
+      },
+      "moves": {
+        "signature": "Shell Stink",
+        "legend": "Nut Nut Nut",
+        "ultimate": "Squirrel Store"
+      }
+    },
+    "x_hot_sauce": {
+      "status": "draft",
+      "names": {
+        "common": "Fireflask",
+        "uncommon": "Dropperhot",
+        "rare": "Chillibottle",
+        "epic": "Spicy Challenge",
+        "legendary": "The Sauce Only the Bravest Tried"
+      },
+      "lore": {
+        "common": "Comes in a tiny bottle with a warning on the label.",
+        "uncommon": "Comes out in a big splash when only one drop was wanted.",
+        "rare": "Is so hot that one drop makes eyes water.",
+        "epic": "Was tried at a spicy challenge, and everyone drank a glass of milk.",
+        "legendary": "Was so hot that only one person in the whole town was brave enough to try it."
+      },
+      "moves": {
+        "signature": "Spicy Heat",
+        "legend": "Spicy Boost",
+        "ultimate": "Spicy Heat Challenge"
+      }
+    },
+    "x_ink_bottle": {
+      "status": "draft",
+      "names": {
+        "common": "Inkpot",
+        "uncommon": "Bluefinger",
+        "rare": "Dipwell",
+        "epic": "Calligraphy Class",
+        "legendary": "The Pot That Wrote a Thousand Letters"
+      },
+      "lore": {
+        "common": "Holds dark blue ink and a little glass well for dipping a pen.",
+        "uncommon": "Leaves blue fingers on whoever opens it.",
+        "rare": "Spills so easily that every desk has a blue stain.",
+        "epic": "Was spilled in a calligraphy class, and every student made a beautiful blot.",
+        "legendary": "Wrote a thousand letters before it was empty, and every one was posted."
+      },
+      "moves": {
+        "signature": "Blot Crack",
+        "legend": "Ink Heat",
+        "ultimate": "Blue Blot"
+      }
+    },
+    "x_jerry_can": {
+      "status": "draft",
+      "names": {
+        "common": "Fuelbox",
+        "uncommon": "Handlecan",
+        "rare": "Spoutbox",
+        "epic": "Road Trip Spare",
+        "legendary": "The Can That Saved a Road Trip"
+      },
+      "lore": {
+        "common": "Is a square can with a handle that sits in the back of the car for emergencies.",
+        "uncommon": "Clunks around in the boot on every bumpy road.",
+        "rare": "Makes a car smell so strongly of fuel that the windows stay open the whole drive.",
+        "epic": "Saved a family road trip when the car ran low in the middle of nowhere.",
+        "legendary": "Saved a road trip, a camping holiday and a stranded tractor all in one summer."
+      },
+      "moves": {
+        "signature": "Clunk Crack",
+        "legend": "Heavy Clunk",
+        "ultimate": "Road Trip Spare"
+      }
+    },
+    "x_juice": {
+      "status": "draft",
+      "names": {
+        "common": "Fruitpour",
+        "uncommon": "Orangesplash",
+        "rare": "Pulpdrink",
+        "epic": "Breakfast Juice",
+        "legendary": "The Juice That Tasted Like Sunshine"
+      },
+      "lore": {
+        "common": "Pours bright orange into a glass and has bits that some people don't like.",
+        "uncommon": "Splashes on the table when it's poured too fast.",
+        "rare": "Is so fresh that it makes everyone feel like it's summer.",
+        "epic": "Was spilled at breakfast, and the cat got an orange stripe.",
+        "legendary": "Tasted so much like sunshine that a whole family felt warmer on a rainy day."
+      },
+      "moves": {
+        "signature": "Fruity Heat",
+        "legend": "Juice Glug",
+        "ultimate": "Breakfast Juice"
+      }
+    },
+    "x_kebab": {
+      "status": "draft",
+      "names": {
+        "common": "Skewerstack",
+        "uncommon": "Grillspear",
+        "rare": "Barbecuestick",
+        "epic": "Barbecue Skewer",
+        "legendary": "The Skewer That Fed a Barbecue"
+      },
+      "lore": {
+        "common": "Has chunks of meat and vegetables stacked on a long stick.",
+        "uncommon": "Spins on the grill so the same side always gets burnt.",
+        "rare": "Is so tasty that everyone grabs one straight off the grill.",
+        "epic": "Was grilled at a barbecue, and the queue stretched to the garden gate.",
+        "legendary": "Held so many chunks on one skewer that it needed two cooks to turn it, one at each end."
+      },
+      "moves": {
+        "signature": "Hot Grill Heat",
+        "legend": "Skewer Guard",
+        "ultimate": "Barbecue Skewer"
+      }
+    },
+    "x_ketchup": {
+      "status": "draft",
+      "names": {
+        "common": "Splattertop",
+        "uncommon": "Bottleslapper",
+        "rare": "Redsquirt",
+        "epic": "Chip Night Splat",
+        "legendary": "The Sauce That Came Out Just Right"
+      },
+      "lore": {
+        "common": "Sits upside down in the fridge waiting for chips.",
+        "uncommon": "Refuses to come out until someone slaps the bottom of the bottle.",
+        "rare": "Comes out all at once in a giant splat.",
+        "epic": "Splattered all over the table at chip night, and everyone laughed.",
+        "legendary": "Came out exactly the right amount, which no bottle has ever done."
+      },
+      "moves": {
+        "signature": "Splat Heat",
+        "legend": "Splat Snatch",
+        "ultimate": "Chip Night Splat"
+      }
     }
   }
 }
