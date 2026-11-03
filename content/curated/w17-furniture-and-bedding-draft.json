@@ -661,6 +661,776 @@
         "legend": "Ruler Distraction",
         "ultimate": "Blueprint Slide"
       }
+    },
+    "x_kitchen_counter": {
+      "status": "draft",
+      "names": {
+        "common": "Crumbtop",
+        "uncommon": "Toastcatcher",
+        "rare": "Clutterledge",
+        "epic": "Breakfast Rush Hour",
+        "legendary": "The Counter That Fed Five Families"
+      },
+      "lore": {
+        "common": "Collects crumbs from every slice of toast made on it, and a few from yesterday too.",
+        "uncommon": "Has one corner where the post, the keys and a lonely onion always end up.",
+        "rare": "Fills up so fast in the morning that the kettle has to balance on the bread bin.",
+        "epic": "Held a whole birthday feast at once, and the cake had to wait its turn on the windowsill.",
+        "legendary": "Has had so many breakfasts made on it that it knows every family member by the sound of their toast."
+      },
+      "moves": {
+        "signature": "Crumb Startle",
+        "legend": "Teatime Rest",
+        "ultimate": "Morning Rush"
+      }
+    },
+    "x_kitchen_island": {
+      "status": "draft",
+      "names": {
+        "common": "Stoolgatherer",
+        "uncommon": "Middlemaker",
+        "rare": "Chopblock",
+        "epic": "Homework Headquarters",
+        "legendary": "The Island Everyone Gathers Round"
+      },
+      "lore": {
+        "common": "Stands in the middle of the kitchen so everyone has to walk round it to reach the fridge.",
+        "uncommon": "Gathers the whole family round it at teatime, even when there is a proper table next door.",
+        "rare": "Pulls snacks off the plate towards whoever is leaning on it, so nobody notices them going.",
+        "epic": "Hosted homework, a cake bake and a family argument all at once, and the cake won.",
+        "legendary": "Became so popular that the dining table in the next room has not seen a dinner in three years."
+      },
+      "moves": {
+        "signature": "Countertop Startle",
+        "legend": "Snack Snatch",
+        "ultimate": "Island Hop"
+      }
+    },
+    "x_nesting_tables": {
+      "status": "draft",
+      "names": {
+        "common": "Tuckaway",
+        "uncommon": "Threetiers",
+        "rare": "Stackbaby",
+        "epic": "Surprise Extra Table",
+        "legendary": "The Tables That Hid Inside Each Other"
+      },
+      "lore": {
+        "common": "Hides two smaller tables under itself, like a family hiding from visitors.",
+        "uncommon": "Gets pulled apart for guests and never quite pushed back together again.",
+        "rare": "Lets the smallest table escape at parties and wander off to a different room.",
+        "epic": "Produced exactly enough tables for a surprise party, then one more nobody knew existed.",
+        "legendary": "Has hidden inside itself so neatly for forty years that the grandchildren only found the third one last week."
+      },
+      "moves": {
+        "signature": "Tuck Startle",
+        "legend": "Biscuit Snatch",
+        "ultimate": "Pull Apart"
+      }
+    },
+    "x_sawhorse": {
+      "status": "draft",
+      "names": {
+        "common": "Plankprop",
+        "uncommon": "Woodsteed",
+        "rare": "Saweasel",
+        "epic": "Shed Day Stallion",
+        "legendary": "The Sawhorse That Was Ridden Like a Pony"
+      },
+      "lore": {
+        "common": "Stands in the shed on four splayed legs, waiting for a plank to hold.",
+        "uncommon": "Has so many saw marks along its back that it looks like a ruler.",
+        "rare": "Wobbles at the exact moment a cut is halfway through, so nothing is ever straight.",
+        "epic": "Held a plank so steady that the whole shed was built in a single weekend.",
+        "legendary": "Was mistaken for a pony by a small child who rode it into the garden every morning for a whole summer."
+      },
+      "moves": {
+        "signature": "Plank Prop Startle",
+        "legend": "Tea Break Rest",
+        "ultimate": "Shed Day Gallop"
+      }
+    },
+    "x_secretary_desk": {
+      "status": "draft",
+      "names": {
+        "common": "Flapfront",
+        "uncommon": "Cubbypigeon",
+        "rare": "Drawerwriter",
+        "epic": "Secret Letter Keeper",
+        "legendary": "The Desk With a Hidden Drawer"
+      },
+      "lore": {
+        "common": "Folds its writing flap down only when someone has a letter to write.",
+        "uncommon": "Has a dozen tiny cubbyholes, each holding one stamp, one key or one mystery.",
+        "rare": "Locks its little drawers by itself and never tells anyone where the key is.",
+        "epic": "Revealed a hidden drawer one rainy day, full of old postcards that took a whole afternoon to read.",
+        "legendary": "Kept a love letter safe in its secret drawer for sixty years until it was finally posted."
+      },
+      "moves": {
+        "signature": "Writing Flap Startle",
+        "legend": "Ink and Rest",
+        "ultimate": "Secret Drawer"
+      }
+    },
+    "x_sit_stand_desk": {
+      "status": "draft",
+      "names": {
+        "common": "Updowner",
+        "uncommon": "Buttonlifter",
+        "rare": "Heighthopper",
+        "epic": "Office Elevator",
+        "legendary": "The Desk That Rose Above It All"
+      },
+      "lore": {
+        "common": "Hums quietly while it rises, as if it is proud of standing up.",
+        "uncommon": "Stops a little bit too low or a little too high, never quite right.",
+        "rare": "Raises itself in the middle of a video call, so the camera suddenly shows only a belly.",
+        "epic": "Went up and down so often one afternoon that the whole office got exercise without trying.",
+        "legendary": "Rose so high one day that its owner could see over every partition in the building."
+      },
+      "moves": {
+        "signature": "Hum Startle",
+        "legend": "Motor Heat",
+        "ultimate": "Up and Down"
+      }
+    },
+    "x_standing_desk": {
+      "status": "draft",
+      "names": {
+        "common": "Tallworker",
+        "uncommon": "Legacher",
+        "rare": "Footshifter",
+        "epic": "Standing Ovation",
+        "legendary": "The Desk That Never Let Anyone Sit"
+      },
+      "lore": {
+        "common": "Makes its owner stand up tall all day and shift from foot to foot.",
+        "uncommon": "Is always a bit too high for the tea, so mugs are held in both hands.",
+        "rare": "Makes everyone who uses it so restless that they pace the office during every call.",
+        "epic": "Kept a whole team on their feet for a week, and the chairs grew lonely in the corner.",
+        "legendary": "Made one worker stand so proudly that the office threw a party when they finally sat down."
+      },
+      "moves": {
+        "signature": "Upright Startle",
+        "legend": "Stand Tall Boost",
+        "ultimate": "Leg Stretcher"
+      }
+    },
+    "x_workbench": {
+      "status": "draft",
+      "names": {
+        "common": "Vicegrip",
+        "uncommon": "Shavingbed",
+        "rare": "Sawdust Sam",
+        "epic": "Weekend Project Altar",
+        "legendary": "The Bench That Built Everything"
+      },
+      "lore": {
+        "common": "Is covered in sawdust, scratches and pencil marks from every project ever started.",
+        "uncommon": "Hides the tape measure under a pile of offcuts every single weekend.",
+        "rare": "Makes every small job turn into a whole weekend, with three trips to the shop.",
+        "epic": "Built a birdhouse, a shelf and a go-kart in one weekend, and the birds got the best deal.",
+        "legendary": "Has built so many things that half the furniture in the house was born on it."
+      },
+      "moves": {
+        "signature": "Vice Startle",
+        "legend": "Sawdust Distraction",
+        "ultimate": "Weekend Project"
+      }
+    },
+    "dining_chair": {
+      "status": "draft",
+      "names": {
+        "common": "Tablemate",
+        "uncommon": "Legtipper",
+        "rare": "Scrapechair",
+        "epic": "Sunday Lunch Scrape",
+        "legendary": "The Chair at the Head of the Table"
+      },
+      "lore": {
+        "common": "Tucks itself under the table and waits for someone to say dinner is ready.",
+        "uncommon": "Scrapes so loudly across the floor that the neighbours know when it is mealtime.",
+        "rare": "Tips back on two legs whenever a child leans, and comes down with a bang.",
+        "epic": "Was rocked back so far at Sunday lunch that the gravy went everywhere except the plates.",
+        "legendary": "Has sat at the head of the table for so many family dinners that nobody else dares to take it."
+      },
+      "moves": {
+        "signature": "Scrape Startle",
+        "legend": "Gravy Distraction",
+        "ultimate": "Two Leg Tip"
+      }
+    },
+    "dining_table": {
+      "status": "draft",
+      "names": {
+        "common": "Feastboard",
+        "uncommon": "Leafhider",
+        "rare": "Elbowtable",
+        "epic": "Big Family Feast",
+        "legendary": "The Table That Seated Everybody"
+      },
+      "lore": {
+        "common": "Gets cleared of homework, post and a lunchbox just before every meal.",
+        "uncommon": "Has an extra leaf hidden inside it that nobody remembers how to pull out.",
+        "rare": "Grows a new wobble every time it is set for an important dinner.",
+        "epic": "Was extended for a family feast until it reached the garden door and the dog sat at the end.",
+        "legendary": "Seated thirty relatives at once, with every one of them claiming the best seat."
+      },
+      "moves": {
+        "signature": "Elbow Startle",
+        "legend": "Plates Plates Plates",
+        "ultimate": "Feast Day"
+      }
+    },
+    "x_bureau": {
+      "status": "draft",
+      "names": {
+        "common": "Pigeonhole",
+        "uncommon": "Rolltopper",
+        "rare": "Inkstainer",
+        "epic": "Paperwork Cave",
+        "legendary": "The Bureau Full of Old Receipts"
+      },
+      "lore": {
+        "common": "Keeps envelopes, stamps and a bottle of ink in its little wooden pigeonholes.",
+        "uncommon": "Rolls its top shut with a loud clatter whenever someone gets close to the bills.",
+        "rare": "Hides the one important letter behind fifty old ones until the deadline has passed.",
+        "epic": "Rolled shut on a whole afternoon of tidying, and the papers were in a worse muddle afterwards.",
+        "legendary": "Kept so many old receipts that it could tell the story of every shopping trip since 1970."
+      },
+      "moves": {
+        "signature": "Rolltop Startle",
+        "legend": "Paperwork Distraction",
+        "ultimate": "Pigeonhole Shuffle"
+      }
+    },
+    "dresser": {
+      "status": "draft",
+      "names": {
+        "common": "Drawerstuck",
+        "uncommon": "Sockhoarder",
+        "rare": "Mirrortop",
+        "epic": "Morning Rummage",
+        "legendary": "The Dresser That Never Lost a Sock"
+      },
+      "lore": {
+        "common": "Has one drawer that sticks, and it is always the one with the clean socks.",
+        "uncommon": "Keeps every jumper folded until someone rummages for the one at the bottom.",
+        "rare": "Slams a drawer shut on its own the moment someone looks away.",
+        "epic": "Jammed every drawer at once on a school morning, and the whole family went out in pyjamas.",
+        "legendary": "Kept every pair of socks matched for twenty years without a single lonely one."
+      },
+      "moves": {
+        "signature": "Drawer Slam Startle",
+        "legend": "Sock Flash",
+        "ultimate": "Drawer Crack"
+      }
+    },
+    "x_credenza": {
+      "status": "draft",
+      "names": {
+        "common": "Longboard",
+        "uncommon": "Platehider",
+        "rare": "Lowcupboard",
+        "epic": "Office Snack Stash",
+        "legendary": "The Credenza Full of Good China"
+      },
+      "lore": {
+        "common": "Stands low and long against the wall, with a lamp and a bowl of keys on top.",
+        "uncommon": "Hides the good plates so well that nobody uses them, even at birthdays.",
+        "rare": "Lets biscuits vanish from its drawer one by one, with no crumbs left behind.",
+        "epic": "Held a secret snack stash for the whole office until somebody found the chocolate drawer.",
+        "legendary": "Kept the best china safe for fifty years and finally let it out for a perfect tea party."
+      },
+      "moves": {
+        "signature": "Lowboard Startle",
+        "legend": "Biscuit Siphon",
+        "ultimate": "Best China"
+      }
+    },
+    "x_hutch": {
+      "status": "draft",
+      "names": {
+        "common": "Platedisplayer",
+        "uncommon": "Cupshelfer",
+        "rare": "Topcabinet",
+        "epic": "Kitchen Showcase",
+        "legendary": "The Hutch Full of Grandma's Cups"
+      },
+      "lore": {
+        "common": "Shows off its plates on the shelves above, standing them up like proud soldiers.",
+        "uncommon": "Rattles its cups gently whenever a lorry rumbles past outside.",
+        "rare": "Keeps its best cups so far up that nobody can reach them without a chair.",
+        "epic": "Shook so hard during a dance in the kitchen that every plate saluted at once.",
+        "legendary": "Has kept the same row of cups so perfectly that nobody has ever had the nerve to drink from them."
+      },
+      "moves": {
+        "signature": "Rattling Cup Startle",
+        "legend": "Shelf Guard",
+        "ultimate": "Plate Parade"
+      }
+    },
+    "x_sideboard_unit": {
+      "status": "draft",
+      "names": {
+        "common": "Longdrawer",
+        "uncommon": "Coasterkeeper",
+        "rare": "Napkinstore",
+        "epic": "Party Spread",
+        "legendary": "The Sideboard That Held Every Feast"
+      },
+      "lore": {
+        "common": "Keeps napkins, coasters and candles in drawers nobody opens except at parties.",
+        "uncommon": "Has one drawer full of takeaway menus from shops that closed years ago.",
+        "rare": "Fills up with buffet dishes until nobody can tell where it ends and the food begins.",
+        "epic": "Held the whole party buffet so proudly that the guests applauded it before eating.",
+        "legendary": "Has carried so many celebration spreads that it now hums a little tune whenever the cake arrives."
+      },
+      "moves": {
+        "signature": "Drawer Pull Startle",
+        "legend": "Party Boost",
+        "ultimate": "Buffet Spread"
+      }
+    },
+    "filing_cabinet": {
+      "status": "draft",
+      "names": {
+        "common": "Folderfile",
+        "uncommon": "Drawerclang",
+        "rare": "Paperstuffer",
+        "epic": "Office Jam",
+        "legendary": "The Cabinet That Filed Everything"
+      },
+      "lore": {
+        "common": "Keeps papers in alphabetical order, apart from the ones it doesn't like.",
+        "uncommon": "Clangs loudly whenever a drawer is slammed shut after a long meeting.",
+        "rare": "Hides the one file everyone needs in the wrong drawer under the wrong letter.",
+        "epic": "Jammed all four drawers at once on deadline day, and the office worked from the floor.",
+        "legendary": "Filed every paper in the building so perfectly that the office threw it a retirement party."
+      },
+      "moves": {
+        "signature": "Clang Startle",
+        "legend": "Paper Jam Distraction",
+        "ultimate": "Drawer Clang"
+      }
+    },
+    "folding_chair": {
+      "status": "draft",
+      "names": {
+        "common": "Snapfold",
+        "uncommon": "Picnicseat",
+        "rare": "Fingerclap",
+        "epic": "Garden Party Pinch",
+        "legendary": "The Chair That Folded at the Right Time"
+      },
+      "lore": {
+        "common": "Lives flat behind the door until there are more guests than chairs.",
+        "uncommon": "Pinches the fingers of anyone who tries to fold it too quickly.",
+        "rare": "Folds itself shut halfway through a speech, sitting the speaker down suddenly.",
+        "epic": "Collapsed with a loud snap at a garden party, and the guests thought it was a firework.",
+        "legendary": "Folded at exactly the right moment to stop a dull speech, and the whole party cheered."
+      },
+      "moves": {
+        "signature": "Snap Startle",
+        "legend": "Picnic Rest",
+        "ultimate": "Sudden Fold"
+      }
+    },
+    "four_poster": {
+      "status": "draft",
+      "names": {
+        "common": "Canopybed",
+        "uncommon": "Curtainpost",
+        "rare": "Grandsleeper",
+        "epic": "Royal Nap",
+        "legendary": "Lady Velvet of the Four Posts"
+      },
+      "lore": {
+        "common": "Hides its sleeper behind curtains and pretends it is a castle every night.",
+        "uncommon": "Rattles its curtains when the window is open, like a ghost that forgot its lines.",
+        "rare": "Draws its curtains so tightly that nobody inside notices it is morning.",
+        "epic": "Kept a whole family asleep until lunchtime on a holiday, and nobody complained.",
+        "legendary": "Has seen so many bedtime stories read inside it that its curtains tell them back in whispers."
+      },
+      "moves": {
+        "signature": "Curtain Startle",
+        "legend": "Royal Rest",
+        "ultimate": "Curtain Call"
+      }
+    },
+    "high_chair": {
+      "status": "draft",
+      "names": {
+        "common": "Spoonflinger",
+        "uncommon": "Traytapper",
+        "rare": "Peaslinger",
+        "epic": "Mealtime Mayhem",
+        "legendary": "Sir Splat of the Kitchen"
+      },
+      "lore": {
+        "common": "Holds a hungry baby and a spoon that gets dropped on the floor every minute.",
+        "uncommon": "Gets a coat of mashed carrot on its tray at every lunch.",
+        "rare": "Turns every bowl of food into a game of catch that only the dog wins.",
+        "epic": "Launched a whole bowl of peas across the kitchen and painted the fridge green.",
+        "legendary": "Fed a toddler their first ever spoonful of cake and became the happiest chair in the house."
+      },
+      "moves": {
+        "signature": "Tray Tap Startle",
+        "legend": "Pea Shooter",
+        "ultimate": "Spoon Fling"
+      }
+    },
+    "x_rocking_horse": {
+      "status": "draft",
+      "names": {
+        "common": "Gallopwood",
+        "uncommon": "Creakmane",
+        "rare": "Rockingsteed",
+        "epic": "Nursery Derby",
+        "legendary": "The Horse That Won Every Race"
+      },
+      "lore": {
+        "common": "Rocks back and forth quietly in the corner, waiting for a small rider.",
+        "uncommon": "Has a mane that has been brushed so much that only a few hairs are left.",
+        "rare": "Rocks so fast with a giggling rider that it slowly gallops across the room.",
+        "epic": "Rocked so wildly at a birthday party that it galloped right out into the garden.",
+        "legendary": "Has carried three generations of children on adventures across seven imaginary oceans."
+      },
+      "moves": {
+        "signature": "Rocking Startle",
+        "legend": "Saddle Guard",
+        "ultimate": "Nursery Gallop"
+      }
+    },
+    "i_mosquito_net": {
+      "status": "draft",
+      "names": {
+        "common": "Buzzbarrier",
+        "uncommon": "Netcanopy",
+        "rare": "Hummguard",
+        "epic": "Summer Night Shield",
+        "legendary": "The Net That Kept Every Bite Away"
+      },
+      "lore": {
+        "common": "Hangs over the bed like a soft white tent that keeps the buzzing outside.",
+        "uncommon": "Always has one tiny hole that a single mosquito finds by midnight.",
+        "rare": "Traps a buzzing insect inside with its sleeper, which is worse than having no net at all.",
+        "epic": "Kept a whole family safe on a hot summer night, and the mosquitoes gave up and went home.",
+        "legendary": "Held off so many buzzing insects on one trip that they started following someone else's tent."
+      },
+      "moves": {
+        "signature": "Net Startle",
+        "legend": "Bite Blocker",
+        "ultimate": "Summer Night"
+      }
+    },
+    "x_towel_rail": {
+      "status": "draft",
+      "names": {
+        "common": "Warmhanger",
+        "uncommon": "Damphook",
+        "rare": "Fluffrail",
+        "epic": "Bathroom Steam Bath",
+        "legendary": "The Rail That Warmed Every Towel"
+      },
+      "lore": {
+        "common": "Keeps the towels warm and slightly damp in the corner of the bathroom.",
+        "uncommon": "Always has one towel hanging at a slant that slides off in the night.",
+        "rare": "Gets so hot that the towels on it smell like toast by the morning.",
+        "epic": "Warmed every towel in the house before a bath night, and nobody wanted to get out.",
+        "legendary": "Has warmed so many towels that it is the most loved thing in the house on a cold winter morning."
+      },
+      "moves": {
+        "signature": "Towel Flick Startle",
+        "legend": "Warm Towel Wrap",
+        "ultimate": "Steamy Bath"
+      }
+    },
+    "locker": {
+      "status": "draft",
+      "names": {
+        "common": "Clangdoor",
+        "uncommon": "Codelock",
+        "rare": "Sockvault",
+        "epic": "School Corridor Echo",
+        "legendary": "The Locker That Opened First Try"
+      },
+      "lore": {
+        "common": "Clangs loudly every time its door is slammed between lessons.",
+        "uncommon": "Hides a gym kit in its bottom that nobody has washed since September.",
+        "rare": "Forgets its combination every Monday, so its owner must ask the caretaker.",
+        "epic": "Jammed with every book in it on exam morning, and the whole corridor helped pull it open.",
+        "legendary": "Opened first time every day for five years and was given a thank-you card on leaving day."
+      },
+      "moves": {
+        "signature": "Locker Slam Startle",
+        "legend": "Locker Lunge",
+        "ultimate": "Corridor Clang"
+      }
+    },
+    "nightstand": {
+      "status": "draft",
+      "names": {
+        "common": "Lampholder",
+        "uncommon": "Glassminder",
+        "rare": "Drawerdreamer",
+        "epic": "Midnight Alarm",
+        "legendary": "The Table by Every Bed"
+      },
+      "lore": {
+        "common": "Holds a lamp, a glass of water and a book that has been half read for months.",
+        "uncommon": "Knocks over the water glass whenever a hand reaches for the alarm clock.",
+        "rare": "Hides the phone charger so well that nobody can find it in the dark.",
+        "epic": "Woke the whole house when its alarm went off at three in the morning by mistake.",
+        "legendary": "Has held so many bedtime glasses of water that it never spilled one, not even during a storm."
+      },
+      "moves": {
+        "signature": "Lamp Startle",
+        "legend": "Alarm Distraction",
+        "ultimate": "Bedside Knock"
+      }
+    },
+    "picnic_table": {
+      "status": "draft",
+      "names": {
+        "common": "Splinterseat",
+        "uncommon": "Benchstep",
+        "rare": "Wasptable",
+        "epic": "Summer Barbecue",
+        "legendary": "The Table at Every Picnic"
+      },
+      "lore": {
+        "common": "Has a bench on each side and a sticky patch that never quite comes off.",
+        "uncommon": "Leaves a splinter in someone's leg every summer, no matter who sits where.",
+        "rare": "Attracts every wasp in the park the moment a jam sandwich comes out.",
+        "epic": "Held a family barbecue so big that sausages were served on the benches too.",
+        "legendary": "Has hosted so many summer picnics that the ants queue politely for crumbs."
+      },
+      "moves": {
+        "signature": "Bench Startle",
+        "legend": "Jam and Wasp Stink",
+        "ultimate": "Picnic Party"
+      }
+    },
+    "pool_table": {
+      "status": "draft",
+      "names": {
+        "common": "Chalkcue",
+        "uncommon": "Pocketgulper",
+        "rare": "Feltroller",
+        "epic": "Cue Ball Chaos",
+        "legendary": "The Table That Played a Perfect Game"
+      },
+      "lore": {
+        "common": "Sits in the games room waiting for someone to rack up the balls.",
+        "uncommon": "Leaves blue chalk dust on every shirt that leans against it.",
+        "rare": "Rolls every ball just past the pocket when somebody is about to win.",
+        "epic": "Sent the white ball flying off the table during a big game and into the fish tank.",
+        "legendary": "Once played a perfect game by itself, potting every ball with one shot."
+      },
+      "moves": {
+        "signature": "Cue Ball Startle",
+        "legend": "Felt Guard",
+        "ultimate": "Pocket Rattle"
+      }
+    },
+    "rocking_chair": {
+      "status": "draft",
+      "names": {
+        "common": "Porchrocker",
+        "uncommon": "Creakback",
+        "rare": "Tockchair",
+        "epic": "Front Porch Lullaby",
+        "legendary": "The Chair That Rocked a Century"
+      },
+      "lore": {
+        "common": "Rocks gently on the porch even when nobody is sitting in it.",
+        "uncommon": "Creaks in perfect time with every story that grandad tells.",
+        "rare": "Rocks anyone who sits in it so gently that they fall asleep mid-sentence.",
+        "epic": "Rocked so peacefully at a barbecue that the whole party took a nap in the sun.",
+        "legendary": "Has rocked through a hundred years of stories, and still knows how they all end."
+      },
+      "moves": {
+        "signature": "Rocking Back Startle",
+        "legend": "Porch Rest",
+        "ultimate": "Lullaby Rock"
+      }
+    },
+    "safe": {
+      "status": "draft",
+      "names": {
+        "common": "Clickdial",
+        "uncommon": "Strongbox",
+        "rare": "Lockjaw",
+        "epic": "Combination Mystery",
+        "legendary": "The Safe Nobody Could Open"
+      },
+      "lore": {
+        "common": "Sits heavy in the corner with a dial that clicks satisfyingly when turned.",
+        "uncommon": "Forgets its own combination after a long holiday, which is very inconvenient.",
+        "rare": "Hides important papers so well that even their owner needs a detective to find them.",
+        "epic": "Locked itself on the day of the house sale, and the estate agent spent an hour on the dial.",
+        "legendary": "Kept a grandmother's birthday surprise so safe that it was only opened at her hundredth birthday."
+      },
+      "moves": {
+        "signature": "Dial Click Startle",
+        "legend": "Code Crack",
+        "ultimate": "Combination Lock"
+      }
+    },
+    "sleeping_bag": {
+      "status": "draft",
+      "names": {
+        "common": "Zipcocoon",
+        "uncommon": "Tentroll",
+        "rare": "Snugsack",
+        "epic": "Campfire Caterpillar",
+        "legendary": "The Bag That Never Rolled Back Up"
+      },
+      "lore": {
+        "common": "Rolls up neatly in the shop and never fits back into its bag again.",
+        "uncommon": "Catches its zip on the lining every time someone tries to get out in a hurry.",
+        "rare": "Turns anyone inside it into a caterpillar that wriggles across the tent floor.",
+        "epic": "Kept a scout so snug during a storm that they slept through the tent blowing away.",
+        "legendary": "Has been on so many camping trips that it still smells of every campfire it ever saw."
+      },
+      "moves": {
+        "signature": "Zip Startle",
+        "legend": "Snug Distraction",
+        "ultimate": "Caterpillar Wriggle"
+      }
+    },
+    "stool": {
+      "status": "draft",
+      "names": {
+        "common": "Threeleg",
+        "uncommon": "Barperch",
+        "rare": "Tippyperch",
+        "epic": "Kitchen Counter Climb",
+        "legendary": "The Stool That Reached the Top Shelf"
+      },
+      "lore": {
+        "common": "Sits at the counter on three legs and wobbles like it is nervous.",
+        "uncommon": "Spins a quarter turn every time someone sits down on it.",
+        "rare": "Wobbles at the exact moment someone stands on it to reach a high cupboard.",
+        "epic": "Spun so fast with a toddler on it that the kitchen became a merry-go-round.",
+        "legendary": "Helped someone reach the very top shelf and rescue a cake tin lost for ten years."
+      },
+      "moves": {
+        "signature": "Wobble Startle",
+        "legend": "Top Shelf Distraction",
+        "ultimate": "Stool Spin"
+      }
+    },
+    "throne": {
+      "status": "draft",
+      "names": {
+        "common": "Velvetseat",
+        "uncommon": "Goldenarm",
+        "rare": "Crownperch",
+        "epic": "Royal Tea Party",
+        "legendary": "Her Majesty of the Dressing-Up Box"
+      },
+      "lore": {
+        "common": "Is far too grand for the room it is in, and everybody knows it.",
+        "uncommon": "Makes anyone who sits in it sit up straight and use their best manners.",
+        "rare": "Turns whoever sits on it bossy, until they start ordering tea for the whole room.",
+        "epic": "Was sat on by a toddler at a party, and the whole family had to bow before cake.",
+        "legendary": "Made a small child queen for a day, and she ruled the garden with a wooden spoon and kindness."
+      },
+      "moves": {
+        "signature": "Royal Startle",
+        "legend": "Golden Armrest Heat",
+        "ultimate": "Court Is in Session"
+      }
+    },
+    "wardrobe": {
+      "status": "draft",
+      "names": {
+        "common": "Coathanger",
+        "uncommon": "Doorcreaker",
+        "rare": "Clotheshider",
+        "epic": "Monster Cupboard",
+        "legendary": "The Wardrobe With a Hidden Corner"
+      },
+      "lore": {
+        "common": "Keeps clothes on hangers and drops one jumper on the floor every week.",
+        "uncommon": "Creaks its doors at night so that small children check for monsters.",
+        "rare": "Swallows whole outfits at the back until they come back in fashion again.",
+        "epic": "Hid a child so well in a game of hide-and-seek that the family made tea and waited.",
+        "legendary": "Has a corner so deep that it once gave back a coat missing since the 1990s, with a ticket still in the pocket."
+      },
+      "moves": {
+        "signature": "Creaking Door Startle",
+        "legend": "Hanger Distraction",
+        "ultimate": "Hide and Seek"
+      }
+    },
+    "wheelchair": {
+      "status": "draft",
+      "names": {
+        "common": "Rollstride",
+        "uncommon": "Spokewheel",
+        "rare": "Rampracer",
+        "epic": "Corridor Champion",
+        "legendary": "The Chair That Raced the Marathon"
+      },
+      "lore": {
+        "common": "Rolls smoothly along the pavement with its rider steering the way.",
+        "uncommon": "Clicks its brakes on and off with a satisfying snap at every kerb.",
+        "rare": "Takes ramps so fast that the people walking beside it have to jog to keep up.",
+        "epic": "Zoomed down the school corridor so quickly that the bell rang late to catch up.",
+        "legendary": "Carried its rider through a whole marathon, with the crowd cheering every single mile."
+      },
+      "moves": {
+        "signature": "Spoke Flash",
+        "legend": "Steady Guard",
+        "ultimate": "Ramp Racer"
+      }
+    },
+    "x_bedspread": {
+      "status": "draft",
+      "names": {
+        "common": "Coverall",
+        "uncommon": "Tasselhem",
+        "rare": "Quiltkeeper",
+        "epic": "Weekend Lie-In",
+        "legendary": "The Bedspread That Covered the Whole Bed"
+      },
+      "lore": {
+        "common": "Covers the bed neatly and hides the messy sheets underneath.",
+        "uncommon": "Slides off onto the floor in the night, one corner at a time.",
+        "rare": "Makes any bed look so tidy that nobody guesses it was made in ten seconds.",
+        "epic": "Covered a whole pile of laundry so well that guests thought it was a very lumpy bed.",
+        "legendary": "Has covered four generations of beds and still has every tassel it was made with."
+      },
+      "moves": {
+        "signature": "Tassel Startle",
+        "legend": "Cosy Boost",
+        "ultimate": "Quilt Cover"
+      }
+    },
+    "x_bench_seat": {
+      "status": "draft",
+      "names": {
+        "common": "Windowsitter",
+        "uncommon": "Cushionbench",
+        "rare": "Liftlid",
+        "epic": "Bay Window Reader",
+        "legendary": "The Seat With a Secret Store"
+      },
+      "lore": {
+        "common": "Sits under the window with a cushion and a view of the whole street.",
+        "uncommon": "Hides wellies, board games and a lost cat toy under its lifting lid.",
+        "rare": "Makes anyone sitting on it forget their chores and watch the clouds instead.",
+        "epic": "Hid every board game in the house under its lid, and the rainy day was saved.",
+        "legendary": "Has been sat on by so many readers that it knows the end of every book on the shelf."
+      },
+      "moves": {
+        "signature": "Lid Lift Startle",
+        "legend": "Window Flash",
+        "ultimate": "Bay Window"
+      }
     }
   }
 }
