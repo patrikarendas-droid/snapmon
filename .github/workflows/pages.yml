@@ -45,6 +45,7 @@ jobs:
           node tests/curated-pipeline.js
           node tests/curated-refresh.js
           node tests/mapping-audit.js
+          node tests/catalogue-model.js
           node tools/curated.js validate
       - name: Browser tests (gameplay, recognition engine with the real worker, Back navigation)
         run: |
@@ -60,6 +61,7 @@ jobs:
           node tests/e2e-v044.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
           node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
           node tests/e2e-curated.js http://localhost:8765/index.html shots
+          node tests/e2e-catalogue-local.js http://localhost:8765/ shots
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -76,6 +78,7 @@ jobs:
         run: |
           mkdir -p _site
           cp -r index.html manifest.webmanifest icon.svg src dist _site/
+          cp -r catalogue _site/   # developer review catalogue (static; review data lives only in Firebase / the browser)
       # The standard Hybrid engine needs every file below; tools/check-site.js stops the deploy if one is missing.
       - name: Detector and classifier models
         run: node tools/fetch-models.js _site/models

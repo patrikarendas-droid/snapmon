@@ -17,5 +17,8 @@
    Never regenerate, bulk-rewrite or "improve" approved text on your own; never set `"reviewed"` yourself on new
    drafts; never add drafts to `src/curated-data.js`. Style: `docs/SNAPMON_WRITING_BIBLE.md`. Counts:
    `node tools/campaign.js status`; coverage: `docs/review/COVERAGE.md`. Saved monsters refresh their text once per
-   content revision (`tests/curated-refresh.js`). Next agreed task: a developer catalogue (journal section 4) — only
-   when explicitly started.
+   content revision (`tests/curated-refresh.js`).
+7. **Developer catalogue** (`catalogue/`, `docs/CATALOGUE.md`): review-only, owner-only Firebase sync at
+   `catalogue/{uid}/reviews/{objectId}`. Never let it write game saves, curated data or sprites; never weaken the
+   Firestore rules or add credentials/admin SDK. Owner feedback (exported JSON) is applied only after explicit approval
+   via "Correcting live writing".

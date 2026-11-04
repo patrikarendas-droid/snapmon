@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-03, release v0.5.0 (full curated writing live for all 2,308 objects).
+Last updated: 2026-11-04, release v0.5.1 (developer catalogue with Firebase sync; game unchanged since v0.5.0).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -75,12 +75,29 @@ Last updated: 2026-11-03, release v0.5.0 (full curated writing live for all 2,30
 | v0.4.7 | 51f3c50 | 2026-10-31 | Developer God Mode for Quick Monster Test Mode battles. |
 | v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
 | v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test.
-| v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. | |
+| v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. |
+| v0.5.1 | (see RELEASING.md) | 2026-11-04 | Developer catalogue at /catalogue/ (all 2,308 objects, real sprites/writing/moves, per-field review proposals, Firebase owner-only sync, export/import). Game unchanged. | |
 
 ## 4. Current state and next priorities
 
-- **Live: v0.5.0** (merge 6ecd64f on production `claude/snapmon-game-dev-7o667u`, Pages run 24 green, tag v0.5.0).
-  Save format 3 (unchanged since v0.3.0). Feature branch: `content/full-writing-rollout`.
+- **Live: v0.5.1** (production `claude/snapmon-game-dev-7o667u`; game identical to v0.5.0 apart from the version
+  label). Save format 3 (unchanged since v0.3.0). v0.5.0 (merge 6ecd64f): full curated writing; the owner completed all
+  **seven real Android smoke checks of v0.5.0 successfully on 2026-11-04**.
+- **Developer catalogue (v0.5.1):** <https://patrikarendas-droid.github.io/snapmon/catalogue/> — `catalogue/`, docs
+  `docs/CATALOGUE.md`.
+  - Shows all 2,308 objects with real sprites (5 rarities × Normal/Spectral/Mutated/Prismatic, fixed seed, neutral
+    colours), live names, flavour text and real moves with their numbers.
+  - Per-field review status, notes and proposals that map 1:1 to the `content/curated` keys.
+  - Firebase project `snapmon-catalogue` (Spark plan): owner-only email/password sign-in; one document per reviewed
+    object at `catalogue/{uid}/reviews/{objectId}`; access is enforced by the owner's published Firestore rules
+    (reference copy `catalogue/firestore.rules`).
+  - Sync: durable local queue first, then transactional three-way merge; same-field edits become explicit conflicts.
+    Firebase blocked → local-only, clearly labelled NOT synced. JSON export/import includes patch-ready proposals.
+  - The catalogue never edits the game, saves, writing or sprites.
+  - Tested: CI (`catalogue-model`, `e2e-catalogue-local`), plus locally with the real 13.2.0 SDK against the Firebase
+    emulators (`tests/e2e-catalogue.js`: rules, two devices, offline, conflicts).
+  - **Not yet tested: sign-in against the real Firebase project.** That is the owner's acceptance test in
+    `docs/CATALOGUE.md`.
 - **Curated writing is live for all 2,308 objects** (names, flavour text, move display names; 5 rarities each):
   - previously approved: Pilot 01 (10 objects, v0.4.6; names added in v0.5.0) and Pilot 02 (50 objects, v0.4.8);
   - campaign: 22 batches w01–w22 (2,248 objects), developer-approved for release AS IS on 2026-11-03 (imperfect lines
@@ -102,14 +119,15 @@ Last updated: 2026-11-03, release v0.5.0 (full curated writing live for all 2,30
   existing monsters refresh once. Live entries are guarded: `ingest` never regenerates them and `patch` refuses them
   without `--approved-edit`; `node tools/campaign.js immutable` (CI-friendly) flags any unrecorded change. Details:
   `docs/CONTENT_WRITING_GUIDE.md` ("Correcting live writing").
-- **Not done / untested:** no real Android phone playtest of v0.5.0 (browser checks at 412 px only); no APK.
+- **Not done:** no APK.
 
-**Next priorities (agreed 2026-11-03):**
-1. Phone playtest of v0.5.0 when convenient (postponed; not blocking).
-2. Separate, mobile-friendly **developer catalogue** of all 2,308 objects: actual rendered sprites (rarities and
-   variants), monster names, flavour text, move names and mechanics, persistent review notes and exportable per-field
-   corrections that map 1:1 to the source records above. **Out of scope until explicitly started.**
-3. Later: name/flavour UI refinements (postponed redesign), targeted sprite and writing fixes from catalogue feedback.
+**Next priorities (2026-11-04):**
+1. Owner acceptance test of the catalogue with the real Firebase account (phone + PC sign-in, sync, export).
+2. Owner reviews objects in the catalogue over weeks and months; nothing is applied automatically.
+3. Later, after the owner exports feedback and approves it: small batches of corrections through
+   `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and mapping notes become design or
+   recognition tasks.
+4. Later: name/flavour UI refinements (postponed redesign); APK.
 
 ## 5. Open issues / known limitations
 

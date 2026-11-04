@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>SnapMon Catalogue (developer)</title>
+<link rel="icon" href="../icon.svg">
+<style>
+:root{--bg:#120e1c;--panel:#1b1529;--panel2:#231b36;--line:#33294d;--text:#efeaff;--muted:#a99fc4;--ecto:#7dffb2;--violet:#b48cff;--ok:#5fd38a;--fix:#ff7a6b;--part:#ffc857;--r:12px}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+code{font-size:.85em;color:#d9ccff;word-break:break-all}.small{font-size:12.5px}.muted{color:var(--muted)}.pad{padding:12px}.warn{color:var(--fix)}
+.btn{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font:inherit;cursor:pointer;min-height:44px}
+.btn.sm{padding:6px 10px;min-height:38px;font-size:13.5px}.btn.primary{background:#3c2a6b;border-color:var(--violet)}.btn.on{outline:2px solid var(--violet)}.btn.block{width:100%;margin:8px 0}
+.btn:focus-visible,.row:focus-visible,.rcell:focus-visible{outline:3px solid var(--ecto)}
+header{position:sticky;top:0;z-index:5;background:#16112a;border-bottom:1px solid var(--line);padding:8px 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+header h1{font-size:16px;margin:0;color:var(--ecto);letter-spacing:.06em}header .grow{flex:1}
+.sync{font-size:12.5px;padding:5px 9px;border-radius:99px;border:1px solid var(--line)}.k-synced{color:var(--ok)}.k-pending,.k-syncing{color:var(--part)}.k-offline,.k-error,.k-local{color:var(--fix)}
+.banner{background:#3a1622;color:#ffd7d1;padding:8px 12px;font-size:13.5px;border-bottom:1px solid #6b2b3b}.banner.info{background:#1f2a1f;color:#d8ffd9;border-color:#2f5b37}
+.tools{display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.tools input,.tools select,.field input,.field textarea,dialog input{background:#0e0a17;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:inherit;min-height:44px}
+.tools input{flex:1 1 200px}#prog{padding:6px 12px;font-size:13px;color:var(--muted)}
+main{display:block}#listwrap{padding:0 8px 40px}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:9px 8px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px}
+.row:hover,.row.on{background:var(--panel)}.rt{min-width:0;flex:1}.rt b{overflow-wrap:anywhere}.th{display:flex;gap:2px;flex:none;min-width:150px;min-height:28px;justify-content:flex-end}
+canvas{image-rendering:pixelated;display:block}canvas.mini{width:28px;height:28px;background:var(--panel2);border-radius:4px}
+.badge{font-size:11px;padding:2px 7px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}.s-ok{color:var(--ok)}.s-fix{color:var(--fix)}.s-partial{color:var(--part)}.s-todo{color:var(--muted)}
+#detail{display:none;padding:12px 14px 60px}#detail.open{display:block}
+body.dopen #listwrap,body.dopen .tools,body.dopen #prog{display:none}
+.dhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;position:sticky;top:57px;background:var(--bg);padding:6px 0;z-index:3}.nav{display:flex;gap:6px;flex-wrap:wrap}
+h2{margin:8px 0 2px;font-size:20px;overflow-wrap:anywhere}h3{margin:18px 0 8px;font-size:15px;color:var(--violet)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.seg{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.rars{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.rcell{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 2px;color:var(--text);font:inherit;font-size:11.5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.rcell canvas{width:100%;max-width:96px;height:auto;aspect-ratio:1}.rcell.on{border-color:var(--rc);box-shadow:0 0 0 2px var(--rc) inset}.rcell span{color:var(--rc)}
+.mon{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--rc);border-radius:var(--r);padding:12px;margin-top:10px}
+.big canvas{width:150px;height:150px;background:var(--panel2);border-radius:10px}.rname{font-size:19px;font-weight:700;color:var(--rc);overflow-wrap:anywhere;hyphens:auto}.lore{margin:8px 0 0}
+table.moves{width:100%;border-collapse:collapse;font-size:13.5px}table.moves th,table.moves td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}.tag{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:0 5px}
+.field{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:10px;margin:10px 0}.field.st-ok{border-color:#2f6b44}.field.st-fix{border-color:#8a3b33}
+.field textarea,.field input{width:100%;margin-top:6px}.live{margin-top:6px;padding:8px;background:#0e0a17;border-radius:8px;overflow-wrap:anywhere}
+.seg .on.s-ok{outline-color:var(--ok)}.seg .on.s-fix{outline-color:var(--fix)}.conflict{margin-top:8px;padding:8px;border:1px dashed var(--fix);border-radius:8px;font-size:13.5px}
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;max-width:520px;width:calc(100% - 24px)}dialog::backdrop{background:#000a}
+.stack{display:flex;flex-direction:column;gap:10px}.stack label{display:flex;flex-direction:column;gap:4px}.row1{flex-direction:row!important;align-items:center;gap:8px!important}.dbtn{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+#toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#2b2142;border:1px solid var(--violet);padding:10px 14px;border-radius:10px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20;max-width:90vw}#toast.show{opacity:1}
+@media (max-width:520px){.mon{grid-template-columns:1fr}.big canvas{width:120px;height:120px}table.moves th:nth-child(2),table.moves td:nth-child(2){display:none}}
+@media (min-width:980px){main{display:grid;grid-template-columns:420px 1fr;height:calc(100vh - 57px)}#side{overflow:auto;border-right:1px solid var(--line)}
+  #detail{display:block;overflow:auto;height:100%;padding:12px 24px 60px}body.dopen #listwrap,body.dopen .tools,body.dopen #prog{display:block}body.dopen .tools{display:flex}
+  .dhead [data-a="close"]{visibility:hidden}.dhead{top:0}#detail:not(.open)::before{content:"Choose an object on the left.";color:var(--muted)}}
+@media (min-width:1500px){main{grid-template-columns:480px 1fr}#detail{max-width:1100px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>SNAPMON CATALOGUE</h1><span class="small muted">developer review · <span id="count">…</span> objects</span>
+  <span class="grow"></span>
+  <span id="sync" class="sync k-local" role="status" aria-live="polite">Local only — NOT synced</span>
+  <span id="acct"></span>
+  <button class="btn sm" data-a="export">Export JSON</button><button class="btn sm" data-a="summary">Summary</button><button class="btn sm" data-a="import">Import</button>
+  <input id="file" type="file" accept="application/json,.json" hidden>
+</header>
+<div id="localwarn" class="banner">Local only: reviews are saved in this browser and are NOT synced. Sign in to sync with Firebase. A company browser may clear site data — export a JSON backup regularly.</div>
+<div id="localmerge" class="banner info" hidden></div>
+<div id="conf" class="banner" hidden></div>
+<main>
+  <div id="side">
+    <div class="tools">
+      <input id="q" type="search" placeholder="Search name, id or label" aria-label="Search">
+      <select id="cat" aria-label="Category"></select>
+      <select id="st" aria-label="Review status"><option value="all">All</option><option value="todo">Unreviewed</option><option value="open">Not approved yet</option><option value="partial">In progress</option><option value="ok">Approved</option><option value="fix">Needs fix</option></select>
+      <span id="found" class="small muted"></span>
+    </div>
+    <div id="prog"></div>
+    <div id="listwrap"><div id="list"></div><p class="small muted pad">Changes in this catalogue are review proposals only. They never change the game, saves or writing. <button class="btn sm" data-a="clearlocal">Clear this browser's copy</button></p></div>
+  </div>
+  <section id="detail" aria-live="polite"></section>
+</main>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status"></div>
+<!-- the REAL game data and sprite code, unchanged (no ui.js, camera, recognition or models) -->
+<script src="../src/data.js"></script>
+<script src="../src/sprites.js"></script>
+<script src="../src/parts.js"></script>
+<script src="../src/objects.js"></script>
+<script src="../src/labels.js"></script>
+<script src="../src/lore.js"></script>
+<script src="../src/game.js"></script>
+<script src="../src/curated.js"></script>
+<script src="../src/curated-data.js"></script>
+<script src="review-model.js"></script>
+<script src="sources.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+// Reference copy of the Firestore rules the owner published in the Firebase console for project snapmon-catalogue.
+// The catalogue does NOT deploy rules. Only the owner (signed in) may read or write catalogue/{uid}/** for their uid.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /catalogue/{userId}/{document=**} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == userId
+        && request.auth.uid == "AaFbfMYZryW21xXczxKQCsdTEsv2";
+    }
+  }
+}
