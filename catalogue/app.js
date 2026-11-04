@@ -199,6 +199,73 @@
       [['Import', () => { const p = applyEntries(r.entries, 'import'); UI.toast(`Imported: ${p.add} added, ${p.conflicts} conflicts`); }]]);
   }
 
+  /* ---------- AI writing review batches (names + flavour only; docs/CATALOGUE.md) ---------- */
+  // Export is read-only: it never changes a review, advances a cursor or writes Firestore.
+  function batchDialog() {
+    const sel = UI.sel, opts = UI._batch = UI._batch || { size: 50, scope: 'all', from: 'start', open: true };
+    const pick = () => {
+      const ordered = opts.scope === 'list' ? UI.filtered() : IDS;
+      return RM.selectWritingBatch(ordered, id => Store.fields(id), { size: +opts.size, startId: opts.from === 'selected' ? sel : null, onlyOpen: opts.open });
+    };
+    const render = () => {
+      const ids = pick(), first = ids[0], last = ids[ids.length - 1];
+      UI.dialog('Export AI writing batch', `<p class="small">A JSON file with the <b>live monster names and flavour texts</b> (all five rarities) and your existing reviews of them, plus instructions for the AI. No sprites, moves, stats or account data. Exporting changes nothing.</p>
+        <div class="stack">
+          <label>Batch size <select id="bsz">${[25, 50, 100].map(n => `<option ${+opts.size === n ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
+          <label>Objects from <select id="bsc"><option value="all" ${opts.scope === 'all' ? 'selected' : ''}>the whole catalogue (A–Z)</option><option value="list" ${opts.scope === 'list' ? 'selected' : ''}>the current list (search / filters)</option></select></label>
+          <label>Start at <select id="bfr"><option value="start" ${opts.from === 'start' ? 'selected' : ''}>the beginning</option><option value="selected" ${opts.from === 'selected' ? 'selected' : ''} ${sel ? '' : 'disabled'}>the selected object${sel ? ' (' + esc(OBJECTS[sel].name) + ')' : ''}</option></select></label>
+          <label class="row1"><input id="bop" type="checkbox" ${opts.open ? 'checked' : ''}> Only objects whose names and flavour texts are not all reviewed yet</label>
+        </div>
+        <p><b>${ids.length}</b> object(s)${ids.length ? `: ${esc(OBJECTS[first].name)} … ${esc(OBJECTS[last].name)}` : ''}</p>
+        <p class="small muted" style="max-height:7em;overflow:auto">${ids.map(esc).join(', ')}</p>`,
+        ids.length ? [[`Download batch (${ids.length})`, () => downloadBatch(ids)]] : []);
+      for (const [k, el] of [['size', '#bsz'], ['scope', '#bsc'], ['from', '#bfr']]) $(el).onchange = () => { opts[k] = $(el).value; render(); };
+      $('#bop').onchange = () => { opts.open = $('#bop').checked; render(); };
+    };
+    render();
+  }
+  function downloadBatch(ids) {
+    const b = RM.buildWritingBatch(ids, { limits: CURATED_LIMITS, fieldsOf: id => Store.fields(id), nameOf: id => OBJECTS[id].name, categoryOf: id => (CATEGORY[OBJECTS[id].cat] && CATEGORY[OBJECTS[id].cat].name) || OBJECTS[id].cat,
+      sourceOf: id => SOURCE[id] || null, liveValue, game: GAME_VERSION, revision: CURATED.revision, now: Date.now() });
+    download(`snapmon-ai-writing-batch-${b.exportedAt.slice(0, 10)}-${ids[0]}-${ids.length}.json`, JSON.stringify(b, null, 2), 'application/json');
+    UI.toast(`Downloaded ${ids.length} objects. Give this file to the AI; import its answer with "Import AI writing reviews".`);
+  }
+  // hard rules of the game's validator (src/curated.js) for a proposed name or flavour text; null = fine
+  function checkProposal(id, path, t) {
+    const [g, r] = path.split('.'), L = CURATED_LIMITS;
+    if (g === 'names') {
+      const max = r === 'legendary' ? L.legendNameMax : L.nameMax;
+      if (t !== t.trim() || /\s{2,}/.test(t)) return 'name has extra spaces';
+      if (t.length < L.nameMin || t.length > max) return `name is ${t.length} characters (${L.nameMin}-${max})`;
+      if (!/^[A-Z][A-Za-z0-9 '\-,.!&]*$/.test(t) || CURATED_PLACEHOLDER.test(t)) return 'name must start with a capital letter and use letters, digits, spaces and \' - , . ! & only';
+    } else {
+      if (t.trim().length < L.loreMin || t.length > L.loreMax) return `text is ${t.length} characters (${L.loreMin}-${L.loreMax})`;
+      if (CURATED_PLACEHOLDER.test(t)) return 'text contains a placeholder';
+    }
+    return null;
+  }
+  function nameWarnings(entries) { // names already used elsewhere in the game (would fail the later patch step)
+    const used = new Map(); for (const [oid, e] of Object.entries(CURATED.data)) for (const [r, n] of Object.entries(e.names || {})) used.set(n.toLowerCase(), oid + ' ' + r);
+    const out = [];
+    for (const [id, fl] of Object.entries(entries)) for (const [p, f] of Object.entries(fl)) if (p.startsWith('names.') && f.proposal) { const u = used.get(f.proposal.toLowerCase()); if (u && u !== id + ' ' + p.slice(6)) out.push(`${id} ${p}: "${f.proposal}" is already used by ${u}`); }
+    return out;
+  }
+  function doAIImport(text) {
+    const r = RM.parseAIImport(text, id => !!OBJECTS[id], checkProposal), n = Object.keys(r.entries).length;
+    const errs = [...r.errors, ...r.skipped];
+    if (!n) return UI.dialog('Import AI writing reviews', `<p>Nothing to import.</p>${errs.length ? `<ul>${errs.slice(0, 8).map(e => `<li>${esc(e)}</li>`).join('')}</ul>` : ''}${r.dropped ? `<p class="small">${r.dropped} non-writing field(s) were ignored.</p>` : ''}`);
+    const current = {}; for (const id of Object.keys(r.entries)) current[id] = Store.fields(id);
+    const plan = RM.planImport(r.entries, current), warn = nameWarnings(r.entries);
+    const byStatus = s => plan.items.filter(i => i.kind === 'add' && i.incoming.status === s).length;
+    UI.dialog('Import AI writing reviews', `<p class="small">Review <b>suggestions</b> for names and flavour texts only. They are saved as your review proposals${Sync.uid ? ' and synced' : ' (local only: NOT synced)'}; the game is never changed.</p>
+      <p>${n} object(s): <b>${plan.add}</b> field(s) will be added (${byStatus('fix')} needs fix, ${byStatus('ok')} looks good), ${plan.same} already identical,
+      <b>${plan.conflicts}</b> differ from your existing reviews and become conflicts for you to choose (nothing is overwritten).</p>
+      ${r.dropped ? `<p class="small">${r.dropped} non-writing field(s) (moves, sprites, mapping …) were ignored.</p>` : ''}
+      ${errs.length ? `<p class="warn small">${errs.length} skipped: ${esc(errs.slice(0, 4).join('; '))}${errs.length > 4 ? ' …' : ''}</p>` : ''}
+      ${warn.length ? `<p class="warn small">Name warnings (kept, but the name is already used in the game): ${esc(warn.slice(0, 4).join('; '))}${warn.length > 4 ? ' …' : ''}</p>` : ''}`,
+      [['Import', () => { const p = applyEntries(r.entries, 'ai-import'); UI.toast(`AI reviews imported: ${p.add} added, ${p.conflicts} conflicts`); }]]);
+  }
+
   /* ---------- UI ---------- */
   const prefs = ls.get('prefs', { q: '', cat: '', st: 'all', id: null, rarity: 'common', variant: 'normal' });
   const savePrefs = () => ls.set('prefs', prefs);
@@ -215,6 +282,7 @@
       $('#list').addEventListener('click', e => { const r = e.target.closest('.row[data-id]'); if (r) this.select(r.dataset.id); });
       window.addEventListener('keydown', e => { if (e.target.closest('input,textarea,select')) return; if (e.key === 'j') this.step(1); if (e.key === 'k') this.step(-1); if (e.key === 'Escape') this.close(); });
       $('#file').onchange = e => { const f = e.target.files[0]; if (!f) return; f.text().then(doImport); e.target.value = ''; };
+      $('#aifile').onchange = e => { const f = e.target.files[0]; if (!f) return; f.text().then(doAIImport); e.target.value = ''; };
       $('#count').textContent = IDS.length;
       this.list();
       if (prefs.id && OBJECTS[prefs.id] && window.innerWidth >= 980) this.select(prefs.id, prefs.rarity, prefs.variant);
@@ -270,6 +338,7 @@
       else if (a === 'undo') undoLast();
       else if (a === 'keep') resolve(d.id, d.p, d.k);
       else if (a === 'export') doExport(); else if (a === 'summary') doSummary(); else if (a === 'import') $('#file').click();
+      else if (a === 'aibatch') batchDialog(); else if (a === 'aiimport') $('#aifile').click();
       else if (a === 'signin') this.signin(); else if (a === 'signout') this.signout();
       else if (a === 'mergelocal') { const loc = ls.get('store.local', { objects: {} }), ent = {}; for (const [id, o] of Object.entries(loc.objects)) if (OBJECTS[id] && Object.keys(o.local || {}).length) ent[id] = o.local; const p = applyEntries(ent, 'local-only'); ls.del('store.local'); this.toast(`Merged: ${p.add} added, ${p.conflicts} conflicts`); this.status(); }
       else if (a === 'clearlocal') { if (Store.pending().length) return this.toast('Not cleared: there are unsynced changes'); ls.del('store.' + Store.ns); Store.open(Store.ns); this.refresh(); this.toast('This browser\'s copy was cleared (cloud reviews are untouched)'); }
@@ -357,7 +426,7 @@
       <div class="seg">${RM.STATUSES.map(s => `<button class="btn sm ${f.status === s ? 'on s-' + s : ''}" data-a="st" data-id="${esc(id)}" data-p="${esc(path)}" data-s="${s}">${SLABEL[s]}</button>`).join('')}</div>
       ${inp('note', 'Note: what is wrong or what you want (optional)', f.note, true)}
       ${live != null ? inp('proposal', 'Proposed replacement text (optional)', f.proposal, path.startsWith('lore.')) : ''}
-      ${c ? `<div class="conflict"><b>Conflict${c.source === 'import' ? ' with an imported review' : c.source === 'local-only' ? ' with a local-only review' : ' with another device'}:</b>
+      ${c ? `<div class="conflict"><b>Conflict${c.source === 'ai-import' ? ' with an AI writing review' : c.source === 'import' ? ' with an imported review' : c.source === 'local-only' ? ' with a local-only review' : ' with another device'}:</b>
         <div>A (${c.source === 'device' ? 'this device, not uploaded' : c.source}): ${fmt(c.mine)}</div><div>B (current${c.source === 'device' ? ' in the cloud' : ''}): ${fmt(c.theirs)}</div>
         <button class="btn sm" data-a="keep" data-id="${esc(id)}" data-p="${esc(path)}" data-k="mine">Keep A</button> <button class="btn sm" data-a="keep" data-id="${esc(id)}" data-p="${esc(path)}" data-k="theirs">Keep B</button></div>` : ''}
     </div>`;
@@ -396,5 +465,5 @@
       if (user) await Sync.start(user); else { Sync.stop(); Store.open('local'); UI.refresh(); }
     });
   }).catch(e => { Sync.cloudError = 'Firebase could not be loaded: network or firewall'; UI.status(); console.warn('catalogue: cloud unavailable', e); });
-  window.__catalogue = { Store, Sync, UI, sample, moveSlots, required, liveValue, exportData, applyEntries, device, IDS }; // for tests and debugging
+  window.__catalogue = { Store, Sync, UI, sample, moveSlots, required, liveValue, exportData, applyEntries, device, IDS, checkProposal }; // for tests and debugging
 })();

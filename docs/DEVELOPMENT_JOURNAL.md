@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-04, release v0.5.1 (developer catalogue with Firebase sync; game unchanged since v0.5.0).
+Last updated: 2026-11-04, release v0.5.2 (catalogue AI writing review batches; game unchanged since v0.5.0).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -76,6 +76,7 @@ Last updated: 2026-11-04, release v0.5.1 (developer catalogue with Firebase sync
 | v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
 | v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test.
 | v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. |
+| v0.5.2 | (see RELEASING.md) | 2026-11-04 | Catalogue: "Export AI writing batch" (25/50/100 objects, all ten live names + flavour texts, read-only) and "Import AI writing reviews" (only those ten fields; conflicts instead of overwrites). Game unchanged. |
 | v0.5.1 | 9c23c39 | 2026-11-04 | Developer catalogue at /catalogue/ (all 2,308 objects, real sprites/writing/moves, per-field review proposals, Firebase owner-only sync, export/import). Game unchanged. | |
 
 ## 4. Current state and next priorities
@@ -97,7 +98,12 @@ Last updated: 2026-11-04, release v0.5.1 (developer catalogue with Firebase sync
   - Tested: CI (`catalogue-model`, `e2e-catalogue-local`), plus locally with the real 13.2.0 SDK against the Firebase
     emulators (`tests/e2e-catalogue.js`: rules, two devices, offline, conflicts).
   - **Not yet tested: sign-in against the real Firebase project.** That is the owner's acceptance test in
-    `docs/CATALOGUE.md`.
+    `docs/CATALOGUE.md`. The owner reports that it works well so far.
+  - **v0.5.2: AI writing review batches** (`docs/CATALOGUE.md`). "Export AI writing batch" writes a read-only JSON
+    batch (`snapmon-ai-writing-batch/1`) of the ten live names and flavour texts per object, the owner's existing
+    reviews, and instructions with the real validator limits. "Import AI writing reviews" accepts the AI's answer in
+    the normal import schema, keeps only the ten writing fields, skips invalid proposals and warns on duplicate names.
+    Existing reviews become conflicts, never overwrites. Sync is the normal path. No AI API or login.
 - **Curated writing is live for all 2,308 objects** (names, flavour text, move display names; 5 rarities each):
   - previously approved: Pilot 01 (10 objects, v0.4.6; names added in v0.5.0) and Pilot 02 (50 objects, v0.4.8);
   - campaign: 22 batches w01–w22 (2,248 objects), developer-approved for release AS IS on 2026-11-03 (imperfect lines

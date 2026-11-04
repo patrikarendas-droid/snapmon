@@ -108,6 +108,50 @@ owner's Firebase sign-in, and the Firestore rules enforce that (see Security).
   - identical fields are skipped;
   - a different existing review becomes a conflict, never an overwrite.
 
+## AI writing review batches (names + flavour text only)
+
+An outside AI chat (for example ChatGPT) can review **monster names and flavour texts** in batches. You move the files
+by hand: there is no AI login, API key or cloud AI service. Sprites, moves, mechanics and mapping are never part of
+this; you review them yourself.
+
+1. **Export AI writing batch** (header button). Choose:
+   - **Batch size:** 25, 50 or 100.
+   - **Objects from:** the whole catalogue (A–Z) or the current list (search / filters).
+   - **Start at:** the beginning or the selected object.
+   - **Only objects whose names and flavour texts are not all reviewed yet** (on by default). Sprite and move reviews
+     don't count here.
+
+   The dialog shows the count and the object IDs. **Download batch (N)** saves a UTF-8 JSON file
+   (`snapmon-ai-writing-batch/1`) containing:
+   - per object: ID, name, category, source file, all **ten live texts** (`names.*` and `lore.*` for the five
+     rarities), and your existing reviews of those ten fields;
+   - the game version and content revision;
+   - instructions for the AI, with the real validator limits.
+
+   **Exporting changes nothing**: no review, no cursor, no Firestore write.
+2. **Give the file to the AI** (upload it to ChatGPT) and say: "Follow the instructions in this file and give me the
+   answer as a downloadable JSON file."
+3. **Download the AI's JSON answer.** It must use the normal import schema `snapmon-catalogue-export/1`, with only the
+   ten `names.<rarity>` / `lore.<rarity>` fields; omitted fields mean no change.
+4. **Import AI writing reviews** (header button), then choose the AI's file. The preview shows:
+   - the fields to add (how many "needs fix" and how many "looks good");
+   - the fields that are already identical;
+   - **conflicts** with your existing reviews, which are never overwritten (choose "Keep A" or "Keep B" per field);
+   - ignored non-writing fields (moves, sprites, mapping);
+   - proposals that break the game's rules, which are skipped.
+
+   It also warns about proposed names already used elsewhere in the game. **Import** applies the rest.
+5. Wait for **Synced** in the header. The reviews are then in Firestore at `catalogue/{uid}/reviews/{objectId}`, the
+   same path as your own reviews. Check a few objects, adjust or resolve conflicts, and continue with the next batch.
+
+**Rules the AI is told** (from `src/curated.js`):
+- **Names:** 3–24 characters (Legendary 3–40). Start with a capital letter; only letters, digits, spaces and
+  `' - , . ! &`; no extra spaces or placeholders. The five names of an object must differ, and names should be unique
+  across the game.
+- **Flavour text:** 12–220 characters, with no placeholders.
+
+Imported reviews are **suggestions** like your own: nothing reaches the game until a later, approved patch.
+
 ## From feedback to the game (later, always approved)
 
 The catalogue **never** edits production writing or sprites. After an export, the owner and Claude choose small
@@ -149,7 +193,8 @@ Sprite (`visual`) and mapping notes are inputs for design or recognition tasks, 
 
 ## Testing
 
-**In CI (every deploy):**
+**In CI (every deploy):** `tests/e2e-catalogue-ai.js` checks the AI writing batch export and import at phone and
+desktop widths. Also:
 - `tests/catalogue-model.js`: merge, approval, export/import, the source map, and static isolation (no game storage,
   camera or models).
 - `tests/e2e-catalogue-local.js`: phone and desktop, Firebase blocked, real sprites and writing, reload, export/import,
