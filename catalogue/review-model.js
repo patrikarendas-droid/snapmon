@@ -149,7 +149,67 @@
     return plan;
   }
 
+  /* ---------- AI writing review batches (names + flavour text only) ----------
+     The owner exports a batch, gives it to an outside AI chat by hand, and imports the AI's answer. The answer must be a
+     normal catalogue import (EXPORT_SCHEMA) limited to the ten WRITING_PATHS; everything else is ignored on import. */
+  const BATCH_SCHEMA = 'snapmon-ai-writing-batch/1';
+  const WRITING_PATHS = [...RARITIES.map(r => 'names.' + r), ...RARITIES.map(r => 'lore.' + r)];
+  const isWritingPath = p => WRITING_PATHS.includes(p);
+  // an object's writing is "complete" when all ten name/lore fields carry an owner decision (ok or fix)
+  const writingDone = fields => WRITING_PATHS.every(p => fields && fields[p] && (fields[p].status === 'ok' || fields[p].status === 'fix'));
+  // deterministic selection: walk `ordered` (catalogue order or the current filtered list), optionally from `startId`,
+  // and take the first `size` objects (only those whose writing is not complete, unless onlyOpen is false). Pure: no state.
+  function selectWritingBatch(ordered, fieldsOf, { size = 50, startId = null, onlyOpen = true } = {}) {
+    let i = startId ? ordered.indexOf(startId) : 0; if (i < 0) i = 0;
+    const out = [];
+    for (; i < ordered.length && out.length < size; i++) if (!onlyOpen || !writingDone(fieldsOf(ordered[i]))) out.push(ordered[i]);
+    return out;
+  }
+  function batchInstructions(L) {
+    return {
+      task: 'Review the monster NAMES and FLAVOUR texts only, across all five rarities, for every object in "objects". Keep strong existing writing. Correct weak, generic, repetitive, nonsensical, non-object-specific or overlong text. Common and Uncommon may be small everyday tricks; Rare should be noticeably powerful and unusual; Epic should create dramatic, consequential and often funny chaos; Legendary should be extraordinary, mythic, consequential and object-specific, without repetitive world-ending cliches. Family-friendly. Do not touch sprites, recognition mapping, moves, damage, stats or mechanics (they are not in this file and must not be in your answer).',
+      ownerReviews: 'An object\'s "review" holds the owner\'s earlier decisions for these fields. Respect them: if a field has status "fix", the owner already wants it changed: keep "fix", take the note seriously and propose a replacement; never mark it "ok". Do not repeat a field unchanged if you agree with the owner\'s existing review (omit it).',
+      rules: {
+        names: `3-${L.nameMax} characters (Legendary: 3-${L.legendNameMax}); start with a capital letter; only letters, digits, spaces and ' - , . ! & ; no spaces at the start/end and no double spaces; no placeholders (TODO, [..], {..}, <..>, "..."); the five names of one object must all differ; must not just repeat the object's own name; names should be unique across the whole game (the importer warns about names already in use).`,
+        lore: `${L.loreMin}-${L.loreMax} characters; one or two sentences about THIS real object; no placeholders (TODO, [..], {..}, <..>, a trailing "..."); plain text.`,
+      },
+      answer: 'Return ONE downloadable JSON file (no prose, no code, no markdown) in exactly the shape of "responseFormat": schema "snapmon-catalogue-export/1"; "objects" keyed by the exact object id; per object "fields" keyed by names.<rarity> or lore.<rarity> (rarity = common, uncommon, rare, epic, legendary). Each field: {"status": "ok" | "fix", "note": "short reason", "proposal": "replacement text (for fix; empty for ok)"}. "ok" = reviewed and good. "fix" = needs correction; give a proposal whenever possible. OMIT any field you leave unchanged and any object without changes. Never mark everything ok by default: examine each field individually.',
+      allowedFields: WRITING_PATHS,
+    };
+  }
+  function buildWritingBatch(ids, ctx) {
+    const L = ctx.limits;
+    const objects = ids.map(id => {
+      const f = ctx.fieldsOf(id) || {}, review = {};
+      for (const p of WRITING_PATHS) if (f[p] && !isEmpty(f[p])) { const { status, note, proposal } = clean(f[p]); review[p] = { status, note, proposal }; }
+      return { id, name: ctx.nameOf(id), category: ctx.categoryOf(id), source: ctx.sourceOf(id),
+        live: { names: Object.fromEntries(RARITIES.map(r => [r, ctx.liveValue(id, 'names.' + r)])), lore: Object.fromEntries(RARITIES.map(r => [r, ctx.liveValue(id, 'lore.' + r)])) },
+        ...(Object.keys(review).length ? { review } : {}) };
+    });
+    return { schema: BATCH_SCHEMA, purpose: 'SnapMon monster writing review batch (names + flavour text). Suggestions only: nothing here changes the game.',
+      game: ctx.game, contentRevision: ctx.revision, exportedAt: new Date(ctx.now).toISOString(), count: objects.length,
+      instructions: batchInstructions(L),
+      responseFormat: { schema: EXPORT_SCHEMA, objects: { '<exact object id from this file>': { fields: { 'lore.legendary': { status: 'fix', note: 'Too mundane for a Legendary', proposal: '<replacement text>' }, 'names.rare': { status: 'ok', note: 'Fits the Rare text', proposal: '' } } } } },
+      objects };
+  }
+  // AI answer → import entries limited to the ten writing fields; non-writing fields are dropped (counted), and a
+  // proposal that breaks a hard rule is skipped with a reason (checkProposal returns an error string or null).
+  function parseAIImport(text, isObject, checkProposal) {
+    let data; try { data = typeof text === 'string' ? JSON.parse(text) : text; } catch (e) { return { ok: false, errors: ['not valid JSON: ' + e.message], entries: {}, dropped: 0 }; }
+    if (data && data.schema === BATCH_SCHEMA) return { ok: false, errors: ['this is the batch you exported, not the AI\'s answer (schema ' + EXPORT_SCHEMA + ')'], entries: {}, dropped: 0 };
+    let dropped = 0; const trimmed = data && typeof data.objects === 'object' ? {} : null;
+    if (trimmed) for (const [id, o] of Object.entries(data.objects)) { const fl = {}; for (const [p, f] of Object.entries((o && o.fields) || {})) { if (isWritingPath(p)) fl[p] = { status: f && f.status, note: (f && f.note) || '', proposal: (f && f.proposal) || '' }; else dropped++; } trimmed[id] = { fields: fl }; }
+    const r = parseImport(trimmed ? { ...data, objects: trimmed } : data, isObject); r.dropped = dropped; r.skipped = [];
+    for (const [id, fl] of Object.entries(r.entries)) for (const [p, f] of Object.entries(fl)) {
+      const err = f.proposal && checkProposal ? checkProposal(id, p, f.proposal) : null;
+      if (err) { r.skipped.push(`${id} ${p}: ${err}`); delete fl[p]; }
+      if (!Object.keys(fl).length) delete r.entries[id];
+    }
+    return r;
+  }
+
   const api = { SCHEMA, EXPORT_SCHEMA, RARITIES, VARIANTS, STATUSES, LIMITS, isPath, isTextPath, isReviewPath, encKey, decKey, clean, isEmpty, same,
-    setField, objectState, approveAll, merge, toRemote, fromRemote, buildExport, summaryText, parseImport, planImport };
+    setField, objectState, approveAll, merge, toRemote, fromRemote, buildExport, summaryText, parseImport, planImport,
+    BATCH_SCHEMA, WRITING_PATHS, isWritingPath, writingDone, selectWritingBatch, buildWritingBatch, parseAIImport };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.ReviewModel = api;
 })(typeof window !== 'undefined' ? window : globalThis);

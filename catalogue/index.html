@@ -18,7 +18,7 @@ header h1{font-size:16px;margin:0;color:var(--ecto);letter-spacing:.06em}header 
 .sync{font-size:12.5px;padding:5px 9px;border-radius:99px;border:1px solid var(--line)}.k-synced{color:var(--ok)}.k-pending,.k-syncing{color:var(--part)}.k-offline,.k-error,.k-local{color:var(--fix)}
 .banner{background:#3a1622;color:#ffd7d1;padding:8px 12px;font-size:13.5px;border-bottom:1px solid #6b2b3b}.banner.info{background:#1f2a1f;color:#d8ffd9;border-color:#2f5b37}
 .tools{display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
-.tools input,.tools select,.field input,.field textarea,dialog input{background:#0e0a17;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:inherit;min-height:44px}
+.tools input,.tools select,.field input,.field textarea,dialog input,dialog select{background:#0e0a17;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:inherit;min-height:44px}
 .tools input{flex:1 1 200px}#prog{padding:6px 12px;font-size:13px;color:var(--muted)}
 main{display:block}#listwrap{padding:0 8px 40px}
 .row{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:9px 8px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px}
@@ -56,6 +56,8 @@ dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);bo
   <span id="acct"></span>
   <button class="btn sm" data-a="export">Export JSON</button><button class="btn sm" data-a="summary">Summary</button><button class="btn sm" data-a="import">Import</button>
   <input id="file" type="file" accept="application/json,.json" hidden>
+  <button class="btn sm" data-a="aibatch">Export AI writing batch</button><button class="btn sm" data-a="aiimport">Import AI writing reviews</button>
+  <input id="aifile" type="file" accept="application/json,.json,text/plain" hidden>
 </header>
 <div id="localwarn" class="banner">Local only: reviews are saved in this browser and are NOT synced. Sign in to sync with Firebase. A company browser may clear site data — export a JSON backup regularly.</div>
 <div id="localmerge" class="banner info" hidden></div>

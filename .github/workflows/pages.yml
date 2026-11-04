@@ -62,6 +62,7 @@ jobs:
           node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
           node tests/e2e-curated.js http://localhost:8765/index.html shots
           node tests/e2e-catalogue-local.js http://localhost:8765/ shots
+          node tests/e2e-catalogue-ai.js http://localhost:8765/ shots
   deploy:
     needs: test
     runs-on: ubuntu-latest

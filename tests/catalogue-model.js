@@ -42,6 +42,27 @@ ok(RM.decKey(RM.encKey('moves.kit.cold_storage')) === 'moves.kit.cold_storage' &
   ok(plan.conflicts === 1 && plan.add === 1 && plan.same === 0, 'import plan: new fields added, a different existing review becomes a conflict (never overwritten)');
   ok(RM.planImport(r.entries, r.entries).same === 2, 'importing identical data changes nothing'); }
 
+// AI writing batches (names + flavour only)
+{ const ordered = ['a', 'b', 'c', 'd', 'e'], all10 = Object.fromEntries(RM.WRITING_PATHS.map(p => [p, F('ok')]));
+  const fields = { b: all10, d: { 'names.rare': F('fix', 'x') }, c: { 'moves.legend': F('ok'), visual: F('ok') } }, fo = id => fields[id] || {};
+  ok(JSON.stringify(RM.selectWritingBatch(ordered, fo, { size: 3 })) === '["a","c","d"]', 'batch: next objects whose names/lore are not all reviewed (moves/sprite reviews do not count), deterministic order');
+  ok(JSON.stringify(RM.selectWritingBatch(ordered, fo, { size: 2, startId: 'c' })) === '["c","d"]' && RM.selectWritingBatch(ordered, fo, { size: 9, onlyOpen: false }).length === 5, 'batch: from the selected object; "only open" can be switched off');
+  const before = JSON.stringify(fields);
+  const b = RM.buildWritingBatch(['d', 'c'], { limits: { nameMin: 3, nameMax: 24, legendNameMax: 40, loreMin: 12, loreMax: 220 }, fieldsOf: fo, nameOf: id => 'Name ' + id, categoryOf: () => 'Cat', sourceOf: () => 'content/curated/w01.json',
+    liveValue: (id, p) => `${id}:${p}:` + 'x'.repeat(200), game: '0.5.2', revision: 'r1', now: 0 });
+  const o = b.objects[0];
+  ok(b.schema === RM.BATCH_SCHEMA && b.objects.map(x => x.id).join() === 'd,c' && Object.keys(o.live.names).length === 5 && Object.keys(o.live.lore).length === 5 && o.live.lore.epic.length > 200 && o.review['names.rare'].note === 'x' && !b.objects[1].review,
+    'batch file: exact ids in order, all 10 live texts untruncated, existing owner reviews of those 10 fields only');
+  ok(!/moves|visual|mapping|uid|email|token/i.test(JSON.stringify(b.objects)) && /40/.test(b.instructions.rules.names) && /12-220/.test(b.instructions.rules.lore) && b.responseFormat.schema === RM.EXPORT_SCHEMA, 'batch file: no moves/sprites/mapping/account data; rules state the real limits; answer format = catalogue import schema');
+  ok(JSON.stringify(fields) === before, 'building a batch changes no review');
+  const ai = { schema: RM.EXPORT_SCHEMA, objects: { d: { fields: { 'names.common': { status: 'fix', note: 'generic', proposal: 'Grumblewick' }, 'lore.epic': { status: 'fix', note: 'flat', proposal: 'Too short' + '' }, 'moves.legend': { status: 'fix', note: 'no', proposal: 'Zap' }, visual: { status: 'fix', note: 'no' }, 'names.legendary': { status: 'fix', note: 'long', proposal: 'x'.repeat(50) } } }, zzz: { fields: { 'lore.rare': { status: 'ok' } } } } };
+  const chk = (id, p, t) => (p.startsWith('names.') && (t.length > (p.endsWith('legendary') ? 40 : 24) || !/^[A-Z]/.test(t))) ? 'bad name' : null;
+  const r = RM.parseAIImport(JSON.stringify(ai), id => id !== 'zzz', chk);
+  ok(r.dropped === 2 && r.entries.d['names.common'].proposal === 'Grumblewick' && !r.entries.d['moves.legend'] && !r.entries.d.visual && !r.entries.d['names.legendary'] && r.skipped.length === 1 && /unknown object id zzz/.test(r.errors[0]),
+    'AI import: only the 10 writing fields are accepted; moves/visual dropped; invalid proposals skipped with a reason; unknown ids rejected');
+  ok(!RM.parseAIImport(JSON.stringify(b), () => true).ok, 'AI import refuses the exported batch itself (clear message)');
+}
+
 // generated source map is current; the catalogue never touches the game
 { let c = ''; try { c = execFileSync('node', [path.join(ROOT, 'tools/catalogue-sources.js'), '--check'], { encoding: 'utf8' }); } catch (e) { c = String(e.stdout); }
   ok(/up to date/.test(c), 'catalogue/sources.js is up to date (id → content/curated source file)');
