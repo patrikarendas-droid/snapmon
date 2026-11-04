@@ -76,11 +76,11 @@ Last updated: 2026-11-04, release v0.5.1 (developer catalogue with Firebase sync
 | v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
 | v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test.
 | v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. |
-| v0.5.1 | (see RELEASING.md) | 2026-11-04 | Developer catalogue at /catalogue/ (all 2,308 objects, real sprites/writing/moves, per-field review proposals, Firebase owner-only sync, export/import). Game unchanged. | |
+| v0.5.1 | 9c23c39 | 2026-11-04 | Developer catalogue at /catalogue/ (all 2,308 objects, real sprites/writing/moves, per-field review proposals, Firebase owner-only sync, export/import). Game unchanged. | |
 
 ## 4. Current state and next priorities
 
-- **Live: v0.5.1** (production `claude/snapmon-game-dev-7o667u`; game identical to v0.5.0 apart from the version
+- **Live: v0.5.1** (merge 9c23c39, Pages run 26 green, tag v0.5.1; production `claude/snapmon-game-dev-7o667u`; game identical to v0.5.0 apart from the version
   label). Save format 3 (unchanged since v0.3.0). v0.5.0 (merge 6ecd64f): full curated writing; the owner completed all
   **seven real Android smoke checks of v0.5.0 successfully on 2026-11-04**.
 - **Developer catalogue (v0.5.1):** <https://patrikarendas-droid.github.io/snapmon/catalogue/> — `catalogue/`, docs
