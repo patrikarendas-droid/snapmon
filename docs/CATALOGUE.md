@@ -59,8 +59,14 @@ owner's Firebase sign-in, and the Firestore rules enforce that (see Security).
 
 ## Saving, sync and the status indicator
 
-- Every edit is saved **on this device first**, under its own namespaced keys (`snapmon-catalogue.v1.*`), never the
-  game's.
+- Every edit is saved **on this device first**, never under the game's keys:
+  - since v0.5.5, reviews are in the browser's **IndexedDB** database `snapmon-catalogue.v1` (one record per object; a
+    save writes only the objects that changed). Up to v0.5.4 they were one `localStorage` value, which a full review
+    outgrew (about 7.6 million characters against a browser limit of about 5 million), so saves failed. The old copy is
+    moved into IndexedDB automatically the first time v0.5.5 opens, then freed.
+  - small settings (`snapmon-catalogue.v1.prefs`, the unsaved-keystroke draft) stay in `localStorage`.
+  - **if a save ever fails**, a red banner says **Not saved on this device**, retries every 5 seconds and offers
+    **Try again**. Until it clears, do not reload the page, and export a JSON backup.
   - Note and proposal keystrokes are saved even before the 0.6 s autosave.
 - Signed in, changed objects are uploaded about 2 seconds after the last change.
 
@@ -72,7 +78,7 @@ owner's Firebase sign-in, and the Firestore rules enforce that (see Security).
 | Syncing N… | An upload transaction is running. |
 | Synced HH:MM | The server **acknowledged** every change. |
 | Reconnecting to the cloud… | Signed in, but the live connection is not up (yet); not synced. |
-| Firebase daily quota reached … / Cloud connection lost … | The live connection failed (v0.5.3: restarted automatically with backoff). The list shows this device's saved copy, which may be incomplete. |
+| Firebase daily quota reached … / Cloud connection lost … | The live connection failed (v0.5.3: restarted automatically with backoff). The list shows this device's saved copy, which may be incomplete. The free quota resets at midnight US Pacific time (about 09:00 in Central Europe). |
 | Offline / pending · N not uploaded | Uploads failed (no connection). They are kept and retried (backoff, and on reconnect). |
 | Access denied by Firestore… | Check the rules and authorized domains (see Security). Edits stay on this device. |
 
@@ -82,6 +88,11 @@ owner's Firebase sign-in, and the Firestore rules enforce that (see Security).
 - **What a document holds:** schema, object ID, revision, update time, device, and the review fields. It holds no game
   text and no sprites.
 - **Live updates:** one live subscription delivers changes from the other device, with no polling.
+- **Cheap reads (v0.5.5):** Firestore bills one read per document delivered, and the free Spark plan allows 50,000 reads
+  a day. Before v0.5.5 every page load and every reconnect re-read all ~2,300 review documents, so a day of reloads on
+  two devices could use up the quota. Now a device reads everything **once** (first sign-in on that device). After
+  that, it asks only for documents updated since its newest cloud version **minus one day** (covers clock differences
+  between devices). **Re-download** (next to Sign out) reads everything again once, if a device ever looks incomplete.
 - **Uploads:** each upload is a **transaction** that reads the server copy and does a **three-way merge**, comparing
   the base (the last version this device saw acknowledged), this device's edits and the server copy:
   - Changes to *different* fields merge.
@@ -89,7 +100,8 @@ owner's Firebase sign-in, and the Firestore rules enforce that (see Security).
     kept as a **conflict** (banner and per-field box, "Keep A" / "Keep B"); nothing is silently dropped.
 - **Caching:** Firestore uses an in-memory cache only. There is no silent persistent cache on a work PC; the
   catalogue's own local queue covers outages and reloads.
-- **Clearing site data:** a company browser may clear site data, so export a backup regularly.
+- **Clearing site data:** a company browser may clear site data, so export a backup regularly. A device whose copy was
+  cleared reads everything from the cloud again on its next sign-in.
 - **Local-only reviews:** reviews made in local-only mode are offered for merging into the cloud after signing in. The
   merge uses the same conflict rules.
 
@@ -240,6 +252,10 @@ desktop widths. Also:
   camera or models).
 - `tests/e2e-catalogue-local.js`: phone and desktop, Firebase blocked, real sprites and writing, reload, export/import,
   game save untouched.
+
+Also in CI: `tests/e2e-catalogue-sync.js` (listener failure and restart) and `tests/e2e-catalogue-storage.js` (v0.5.5:
+an owner-sized store that no longer fits `localStorage` saves to IndexedDB and survives a reload; migration from the
+v0.5.4 copy; the "Not saved" banner and retry; the incremental cloud listener and Re-download).
 
 **Locally, with the real SDK and the Firebase emulators:** `tests/e2e-catalogue.js` checks:
 - the rules: only the owner can read or write; unauthenticated users and other accounts are denied;

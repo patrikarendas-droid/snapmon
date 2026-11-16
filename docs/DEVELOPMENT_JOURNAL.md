@@ -172,10 +172,26 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
 
     The catalogue's Firebase conflict markers are NOT cleared by this; the owner resolves them manually ("Keep A/B").
 
+- **v0.5.5 (2026-11-16): catalogue saving fixed.** The owner reported both devices "offline" and "not saving".
+  - Cause 1 (the data loss): the whole review store was one `localStorage` value. With 2,260 reviewed objects (notes
+    and proposals, base + local) it reached ~7.6M characters, over the ~5M browser limit, so every save failed (only
+    a short toast). An unsynced session's reviews then lived only in the open page; a reload lost a few hundred sprite
+    checks on the phone. A PC session's 73 sprite fixes (464 reviewed, up to "Cocktail glass drink") survive only as the
+    owner's `sprite_fixes.json` export: to be merged with the final phone export.
+  - Cause 2 (likely the "offline"): every load/reconnect re-read all ~2,300 review docs; the Spark plan allows 50,000
+    reads/day. Not proven (the exact status text was not captured).
+  - Fix: reviews in IndexedDB (one record per object, automatic one-time migration from localStorage); a red
+    "Not saved on this device" banner with retry; the cloud listener reads everything once per device, then only docs
+    updated since its newest cloud version minus a day; a "Re-download" button. Game unchanged apart from the version.
+  - Tests: `tests/e2e-catalogue-storage.js` (CI); `tests/e2e-catalogue.js` with the real SDK + emulators passes
+    (its stale 40-character-name check now picks the longest live Legendary name).
+
 **Next priorities (2026-11-16):**
 1. Owner: phone check of v0.5.4. Resolve the 4 catalogue conflict markers (accordion, i_academic_gown, x_3d_printer,
    x_acorn_cap) with Keep A/B; the live game already has the chosen text.
-2. Owner reviews all 2,308 sprites in Sprite review mode, then exports sprite fixes once, for a separate design session.
+2. Owner reviews all 2,308 sprites in Sprite review mode (from "Cocktail glass drink" on; the first 440 are in the PC
+   export), then exports sprite fixes once, for a separate design session. A fix flag without a note means "too
+   generic: give it the real object's shape".
 3. Later approved batches through `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and
    mapping notes become design or recognition tasks.
 4. Later: name/flavour UI refinements (postponed redesign); APK.
@@ -230,6 +246,9 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
   per-category seed from the family's 3 moves. Now title, legend move and Ultimate carry the object's name; legendary
   lines always name the object; test checks all ~2,300 objects. Every rarity draws moves from its own object's kit. v0.4.5.
 
+- **Catalogue stopped saving on every device (store over the localStorage limit)** – one ~7.6M-character value vs
+  ~5M allowed; reviews moved to IndexedDB with a visible "Not saved" banner; cloud reads made incremental. v0.5.5.
+
 ## 7. Testing and verification
 
 - **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `gameplay-baseline`, `ability-keys`, `generator-snapshot`, `curated`, `curated-pipeline`, `curated-refresh`, `god-mode`, `guide`, `lore`, `identity`, `devtest`,
@@ -242,6 +261,9 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
 
 ## 8. Consequential technical decisions
 
+- **Catalogue storage and reads (v0.5.5)** – reviews in IndexedDB (no practical size limit) rather than localStorage;
+  cheap cloud reads by an incremental `updatedAt > newest − 1 day` query instead of Firestore's persistent cache, so
+  the Firebase SDK still keeps nothing on disk on a work PC. A save failure is a banner, never only a toast.
 - **TinyCLIP on WASM for everyone (v0.4.1)** – WebGPU changed outcomes on ~4.5% of photos; consistency chosen over
   speed. Phone timing ~1.15 s per analysed region, judged acceptable by the developer. `docs/RECOGNITION.md`.
 - **No timer on identifications (v0.4.3)** – the developer prefers explicit confirmation.

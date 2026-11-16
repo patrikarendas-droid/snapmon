@@ -602,6 +602,8 @@
     const t = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 15000));
     return (await Promise.race([import('./cloud.js'), t])).backend;
   }
+  // ask the browser not to evict the review database when the device is low on space (Chrome decides silently)
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persisted().then(p => p || navigator.storage.persist()).catch(() => {}); } catch (e) { /* ignore */ }
   const opened = Store.open('local').then(() => UI.init());
   Promise.all([loadBackend(), opened]).then(([b]) => {
     Sync.backend = b; UI.cloudReady = true; UI.status();
