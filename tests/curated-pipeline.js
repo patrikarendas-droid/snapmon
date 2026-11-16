@@ -15,14 +15,15 @@ const T = load(), W = require('../tools/curated-workflow');
 const readDoc = f => ({ rel: f, doc: JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')) });
 
 // 1. live content untouched
-// v0.5.0: Pilot 01 gained its 50 approved names (content/campaign/PILOT01_NAMES_INTEGRATION.md); with the names removed
-// it is exactly the v0.4.6 approved content, so lore, moves and status are untouched
+// Live writing files are protected by the recorded baseline (content/campaign/manifest.json): any change must be a
+// deliberate, developer-approved edit recorded with `node tools/campaign.js rebaseline "<reason>"` (v0.5.0: Pilot 01
+// names; v0.5.3: the owner's catalogue writing review, which also touched 9 Pilot 01/02 objects).
 { const p01 = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/curated/pilot-01-approved.json'), 'utf8')), es = Object.values(p01.entries);
-  ok(sha('content/curated/pilot-01-approved.json') === 'a8186977dd2e33b52de51942116f824f40c58962a289370d2a07b4f4007010e1', 'Pilot 01 approved file is the v0.5.0 version (names added)');
   ok(es.length === 10 && es.every(e => e.names && Object.keys(e.names).length === 5), 'Pilot 01: 10 objects with 5 approved names each');
-  es.forEach(e => delete e.names);
-  ok(crypto.createHash('sha256').update(JSON.stringify(p01)).digest('hex') === 'cbe9034e0db5b588458fd2ad7b047906d48db9b6d076834f4095931621e0c46a', 'Pilot 01 without the names is exactly the v0.4.6 approved content (lore, moves, status)'); }
-ok(sha('content/curated/pilot-02-approved.json').startsWith('592b6ddfb9c7'), 'Pilot 02 approved file is byte-identical to v0.4.8');
+  const mf = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/campaign/manifest.json'), 'utf8'));
+  const files = fs.readdirSync(path.join(ROOT, 'content/curated')).filter(f => f.endsWith('.json') && !f.endsWith('-draft.json')).map(f => 'content/curated/' + f);
+  ok(files.length === 24 && files.every(f => mf.baseline[f] === sha(f)), 'every live writing file (Pilot 01/02 + 22 batches) matches the recorded baseline');
+  ok((mf.baselineLog || []).length >= 3 && mf.baselineLog.every(l => l.reason && l.reason.length > 40 && l.date), `every baseline change is recorded with a date and reason (${mf.baselineLog.length} entries; latest ${mf.baselineLog[mf.baselineLog.length - 1].date})`); }
 {
   const live = T.CURATED.data, ids = Object.keys(live), withNames = ids.filter(id => live[id].names);
   ok(ids.length === T.OBJECT_LIST.length && ids.length === 2308 && ids.every(id => live[id].status === 'reviewed' && T.OBJECTS[id]), `live src/curated-data.js: ${ids.length} reviewed objects (every registry object, v0.5.0)`);
