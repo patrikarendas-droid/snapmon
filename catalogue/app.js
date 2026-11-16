@@ -70,25 +70,46 @@
   /* ---------- sync engine (backend-agnostic; Firebase in cloud.js, a mock in the tests) ---------- */
   const Sync = {
     backend: null, uid: null, email: '', ready: false, unsub: null, timer: null, busy: false, state: 'local', msg: '', last: 0, backoff: 0, cloudError: '',
+    live: false, listenErr: '', cloudIds: new Set(), resubTimer: null, resubDelay: 0,   // live = the Firestore listener is connected
     status() {
       const p = Store.pending().length;
       if (!this.uid) return { k: 'local', t: this.cloudError ? 'Local only — NOT synced (' + this.cloudError + ')' : 'Local only — NOT synced' };
       if (this.state === 'error') return { k: 'error', t: this.msg };
-      if (!this.ready) return { k: 'syncing', t: 'Loading cloud reviews…' };
+      // a dead listener is never "Synced": the list then shows this device's saved copy, which may be incomplete
+      if (this.listenErr) return { k: 'offline', t: `${this.listenErr} Showing this device's saved copy (may be incomplete); retrying…` + (p ? ` · ${p} not uploaded` : '') };
+      if (!this.ready) return { k: 'syncing', t: 'Loading cloud reviews… (showing this device\'s saved copy until then)' };
       if (this.state === 'syncing') return { k: 'syncing', t: `Syncing ${p}…` };
       if (this.state === 'offline' && p) return { k: 'offline', t: `Offline / pending · ${p} not uploaded` };
       if (p) return { k: 'pending', t: `Saved locally · ${p} pending` };
+      if (!this.live) return { k: 'syncing', t: 'Reconnecting to the cloud…' };
       return { k: 'synced', t: 'Synced' + (this.last ? ' ' + new Date(this.last).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '') };
     },
     async start(user) {
       this.stop(); this.uid = user.uid; this.email = user.email; this.ready = false; this.state = 'syncing'; this.msg = '';
       Store.open(user.uid); UI.refresh();
       // remote FIRST: pending local edits are only merged after the first snapshot arrived (never upload over the cloud)
-      this.unsub = this.backend.subscribe(user.uid, ch => this.onRemote(ch), e => this.fail(e));
+      this.cloudIds = new Set(); this.listenErr = ''; this.resubDelay = 0; this.listen();
     },
-    stop() { if (this.unsub) try { this.unsub(); } catch (e) { /* ignore */ } this.unsub = null; this.uid = null; this.ready = false; this.state = 'local'; clearTimeout(this.timer); },
+    // Firestore listener. If it fails (quota, a proxy dropping the stream, network), it is restarted with backoff; the
+    // restarted listener first delivers every cloud document again, so the device reconciles completely.
+    listen() {
+      if (this.unsub) try { this.unsub(); } catch (e) { /* ignore */ }
+      this.live = false;
+      this.unsub = this.backend.subscribe(this.uid, ch => { this.live = true; this.listenErr = ''; this.resubDelay = 0; this.onRemote(ch); }, e => this.listenFail(e));
+    },
+    listenFail(e) {
+      const code = (e && (e.code || e.name)) || '', msg = (e && e.message) || String(e);
+      if (/permission-denied|PERMISSION_DENIED|unauthenticated/i.test(code + msg)) return this.fail(e);
+      this.live = false; this.unsub = null;
+      this.listenErr = /resource-exhausted|quota/i.test(code + msg) ? 'Firebase daily quota reached (free Spark plan): cloud reviews paused until it resets.' : 'Cloud connection lost (network or company firewall).';
+      this.resubDelay = this.resubDelay ? Math.min(300000, this.resubDelay * 2) : 5000; clearTimeout(this.resubTimer);
+      const uid = this.uid; this.resubTimer = setTimeout(() => { if (this.uid === uid) this.listen(); }, this.resubDelay);
+      UI.refresh();
+    },
+    stop() { if (this.unsub) try { this.unsub(); } catch (e) { /* ignore */ } this.unsub = null; this.uid = null; this.ready = false; this.state = 'local'; this.live = false; this.listenErr = ''; clearTimeout(this.timer); clearTimeout(this.resubTimer); },
     onRemote(changes) {
       for (const { id, data } of changes) {
+        if (data) this.cloudIds.add(id); else this.cloudIds.delete(id);
         if (!OBJECTS[id]) continue;
         const o = Store.obj(id), fields = RM.fromRemote(data);
         // A device with unsynced edits keeps BOTH its edits and its merge base (the last version it acknowledged): the
@@ -312,7 +333,8 @@
     thumbs(el) { const id = el.dataset.id; for (const r of RAR) { const cv = document.createElement('canvas'); renderSprite(cv, sample(id, r, 'normal').dna, 1); cv.title = r; cv.className = 'mini'; el.append(cv); } },
     progress() {
       let ok = 0, fix = 0, part = 0; for (const id of Store.reviewedIds()) { const s = this.stateOf(id); if (s === 'ok') ok++; else if (s === 'fix') fix++; else if (s === 'partial') part++; }
-      $('#prog').innerHTML = `<b>${ok}</b> approved · <b>${fix}</b> need fix · ${part} in progress · ${IDS.length - ok - fix - part} unreviewed`;
+      const cloud = !Sync.uid ? '' : Sync.live ? ` · cloud: <b>${Sync.cloudIds.size}</b> reviewed objects` : ' · <span class="warn">cloud not connected: counts are this device\'s copy</span>';
+      $('#prog').innerHTML = `<b>${ok}</b> approved · <b>${fix}</b> need fix · ${part} in progress · ${IDS.length - ok - fix - part} unreviewed${cloud}`;
     },
     status() {
       const s = Sync.status(), el = $('#sync'); el.className = 'sync k-' + s.k; el.textContent = s.t;

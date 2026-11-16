@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-04, release v0.5.2 (catalogue AI writing review batches; game unchanged since v0.5.0).
+Last updated: 2026-11-16, release v0.5.3 (owner-approved writing review applied: 22,228 names/flavour texts).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -76,6 +76,7 @@ Last updated: 2026-11-04, release v0.5.2 (catalogue AI writing review batches; g
 | v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
 | v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test.
 | v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. |
+| v0.5.3 | (see RELEASING.md) | 2026-11-16 | Owner's catalogue writing review applied: 11,103 monster names + 11,125 flavour texts on 2,254 objects; catalogue cloud listener restarts after errors and never shows "Synced" while disconnected. No mechanics/sprite/move changes. |
 | v0.5.2 | 73023bb | 2026-11-04 | Catalogue: "Export AI writing batch" (25/50/100 objects, all ten live names + flavour texts, read-only) and "Import AI writing reviews" (only those ten fields; conflicts instead of overwrites). Game unchanged. |
 | v0.5.1 | 9c23c39 | 2026-11-04 | Developer catalogue at /catalogue/ (all 2,308 objects, real sprites/writing/moves, per-field review proposals, Firebase owner-only sync, export/import). Game unchanged. | |
 
@@ -127,12 +128,38 @@ Last updated: 2026-11-04, release v0.5.2 (catalogue AI writing review batches; g
   `docs/CONTENT_WRITING_GUIDE.md` ("Correcting live writing").
 - **Not done:** no APK.
 
-**Next priorities (2026-11-04):**
-1. Owner acceptance test of the catalogue with the real Firebase account (phone + PC sign-in, sync, export).
-2. Owner reviews objects in the catalogue over weeks and months; nothing is applied automatically.
-3. Later, after the owner exports feedback and approves it: small batches of corrections through
-   `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and mapping notes become design or
-   recognition tasks.
+- **v0.5.3 writing review rollout (2026-11-16).** Source: the owner's ordinary catalogue export from the phone
+  (2026-11-16 07:51, signed in, content c214d7f396e0). It is kept privately; review data is never in git.
+  - The export: 2,260 objects reviewed; 2,254 with any "Needs fix" (all of them writing fixes; only 31 move or sprite
+    review fields exist); 22,235 writing fields marked fix (22,233 with a proposal), 172 marked ok; 4 objects with
+    unresolved conflicts (36 fields).
+  - 48 objects have no review at all, all Pilot 01/02 objects.
+  - Applied: **22,228** fields (11,103 names, 11,125 flavour texts) to 2,254 objects in all 24 source files, including
+    23 fields on 9 Pilot 01/02 objects that the owner marked "Needs fix".
+  - Left unchanged and listed for the owner:
+    - the 4 conflicted fields that hold "fix" (accordion, i_academic_gown, x_3d_printer, x_acorn_cap; 36 conflict
+      fields in total, including 2 fixes without a proposal);
+    - 3 proposed names already live on other objects: x_hearing_aid "Whistlepip" (kettle), x_ficus "Leafdropper"
+      (potted plant), x_croc "Squeakjaw" (alligator toy).
+  - Applied with `campaign.js patch --approved-edit` where it accepted; 15 files were edited directly with the same field
+    writes, because the patch tool refuses name swaps between objects (intermediate collisions). Verified: exactly
+    22,228 values changed, all equal to approved proposals; 11,540 unique names; validator 0 errors.
+  - Content revision 380233f86175 (`src/curated-data.js` ≈ 2.2 MB); rebaselined with a reason.
+  - Catalogue review flags were NOT changed; nothing was written to Firebase.
+- **Phone ≈ 2,254 vs PC ≈ 600 "need fix".** The phone export is internally complete. Cause on the PC, found in the
+  code:
+  - the catalogue never restarted a Firestore listener after a non-permission error (Spark daily read quota,
+    "resource-exhausted", or a proxy dropping the stream);
+  - it then kept showing that device's older saved copy, and could still say "Synced" when nothing was pending.
+
+  v0.5.3 fixes this: automatic re-subscribe with backoff, an honest status, and a "cloud: N reviewed objects" count
+  (`tests/e2e-catalogue-sync.js`). Not verified on the owner's PC; the owner's check is in the v0.5.3 report.
+
+**Next priorities (2026-11-16):**
+1. Owner: phone check of v0.5.3 (new names and flavour on old and new monsters); PC catalogue check (cloud count).
+2. Owner's own sprite and move reviews in the catalogue; resolve the 4 conflicted objects and the 3 duplicate names.
+3. Later approved batches through `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and
+   mapping notes become design or recognition tasks.
 4. Later: name/flavour UI refinements (postponed redesign); APK.
 
 ## 5. Open issues / known limitations

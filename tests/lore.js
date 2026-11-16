@@ -5,12 +5,12 @@ let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } e
 const RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
 const ids = Object.keys(G.OBJECTS);
 // 1) every object × rarity (several seeds, with and without a photo colour) yields clean text
-//    (a/an check: 'a one-pram band', 'a unicorn', 'a useful', 'a euro' are correct English)
+//    (a/an check: 'a one-pram band', 'a unicorn', 'a unanimous', 'a useful', 'a euro' are correct English)
 let problems = [], n = 0;
 for (const id of ids) for (const r of RAR) for (const seed of [1, 77, 4242]) {
   const pal = seed === 77 ? { conf: 'confident', primary: [seed % 360, 60, 50] } : null;
   const t = G.monsterLore({ obj: id, rarity: r, seed, photo: pal ? { pal } : null, fam: 'food', name: 'X, the Eternal Feast' }); n++;
-  if (!t || /[{}]|undefined|\bnull\b|\bNaN\b|\s{2}|\b[Aa] (?!one\b|once\b|uni|use|eu)[aeiouAEIOU]/.test(t) || t.length > 260) problems.push(id + '/' + r + ': ' + t);
+  if (!t || /[{}]|undefined|\bnull\b|\bNaN\b|\s{2}|\b[Aa] (?!one\b|once\b|uni|unan|use|usu|uti|ura|uro|eu)[aeiouAEIOU]/.test(t) || t.length > 260) problems.push(id + '/' + r + ': ' + t);
 }
 ok(!problems.length, `${n} texts for ${ids.length} objects × 5 rarities have no unfilled or broken parts${problems.length ? ': ' + problems.slice(0, 3).join(' | ') : ''}`);
 // 2) deterministic and rarity-specific

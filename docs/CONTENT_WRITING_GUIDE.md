@@ -208,6 +208,13 @@ name for the highest rarity seen, otherwise the name first seen. Tests: `tests/c
 
 ## Correcting live writing (one object, one field)
 
+> **Many fields at once** (v0.5.3, owner's catalogue review): `campaign.js patch` checks each new name against the
+> names live *now*. It therefore refuses a batch in which two objects swap or pass on a name, even when the final state
+> is unique. In that case:
+> 1. Apply the same field writes directly (the JSON round-trips byte-identically with `JSON.stringify(doc, null, 2)`).
+> 2. Prove the final state: only the approved values changed, names are unique game-wide, and `validate` passes.
+> 3. Then `build --enable` and `rebaseline`.
+
 The source of truth is the JSON in `content/curated/`, keyed by object id: `names.<rarity>`, `lore.<rarity>` and
 `moves.<slot>` (`signature`, `legend`, `ultimate`, `kit.<slot>`; slots of an object: `node tools/campaign.js brief <batch>
 <index> 1` or the inventory). A future catalogue's suggestions map 1:1 to these keys. Every correction is approved by

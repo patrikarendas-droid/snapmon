@@ -71,6 +71,8 @@ owner's Firebase sign-in, and the Firestore rules enforce that (see Security).
 | Saved locally · N pending | Edits are on this device and are about to be uploaded. |
 | Syncing N… | An upload transaction is running. |
 | Synced HH:MM | The server **acknowledged** every change. |
+| Reconnecting to the cloud… | Signed in, but the live connection is not up (yet); not synced. |
+| Firebase daily quota reached … / Cloud connection lost … | The live connection failed (v0.5.3: restarted automatically with backoff). The list shows this device's saved copy, which may be incomplete. |
 | Offline / pending · N not uploaded | Uploads failed (no connection). They are kept and retried (backoff, and on reconnect). |
 | Access denied by Firestore… | Check the rules and authorized domains (see Security). Edits stay on this device. |
 
@@ -90,6 +92,10 @@ owner's Firebase sign-in, and the Firestore rules enforce that (see Security).
 - **Clearing site data:** a company browser may clear site data, so export a backup regularly.
 - **Local-only reviews:** reviews made in local-only mode are offered for merging into the cloud after signing in. The
   merge uses the same conflict rules.
+
+The progress line also shows **cloud: N reviewed objects** while connected: compare this number between devices.
+(v0.5.3: before, a failed listener was never restarted and the header could still say "Synced"; a device could then
+show an old, smaller set.)
 
 ## Export / import
 
