@@ -57,9 +57,10 @@ async function signIn(p, email, pw, expectErr) {
   await A.click('[data-a="rar"][data-r="legendary"]'); await A.click('[data-a="var"][data-v="spectral"]');
   const L = await A.evaluate(() => ({ name: document.querySelector('.rname').textContent, mv: [...document.querySelectorAll('table.moves tr td:first-child b')].map(x => x.textContent), eff: [...document.querySelectorAll('table.moves tr td:nth-child(3)')].map(x => x.textContent) }));
   ok(L.mv.length >= 3 && L.eff.some(e => /% power/.test(e)), `Legendary Spectral sample: "${L.name}" with ${L.mv.length} moves and real numbers (${L.eff.join(' | ')})`);
-  await open(A, 'i_band_aid'); await A.click('[data-a="rar"][data-r="legendary"]');
+  const longest = await A.evaluate(() => Object.entries(CURATED.data).map(([id, e]) => [id, ((e.names || {}).legendary || '')]).sort((x, y) => y[1].length - x[1].length)[0]);
+  await open(A, longest[0]); await A.click('[data-a="rar"][data-r="legendary"]');
   const ln = await A.evaluate(() => { const e = document.querySelector('.rname'); return { t: e.textContent, fits: e.scrollWidth <= e.clientWidth + 1 }; });
-  ok(ln.t.length === 40 && ln.fits, `the longest Legendary name (40 characters) is shown in full: "${ln.t}"`);
+  ok(ln.t === longest[1] && ln.t.length >= 38 && ln.fits, `the longest Legendary name (${longest[1].length} characters) is shown in full: "${ln.t}"`);
   await A.screenshot({ path: path.join(outDir, 'cat-A-phone-legendary.png') });
 
   // --- local-only review survives a reload ---

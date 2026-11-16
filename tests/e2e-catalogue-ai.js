@@ -16,9 +16,9 @@ let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } e
     await p.goto(base + 'catalogue/'); await p.waitForSelector('.row');
     // existing owner reviews: a move + sprite review (must never be touched) and a name review (must not be overwritten)
     const ids = await p.evaluate(() => __catalogue.IDS.slice(0, 3));
-    await p.evaluate(([a, b2]) => { const S = __catalogue.Store;
+    await p.evaluate(async ([a, b2]) => { const S = __catalogue.Store;
       S.obj(a).local = { 'moves.signature': { status: 'fix', note: 'owner move note', proposal: 'Owner Move' }, visual: { status: 'ok', note: '', proposal: '' }, mapping: { status: 'fix', note: 'owner mapping', proposal: '' } };
-      S.obj(b2).local = { 'names.rare': { status: 'fix', note: 'owner: too plain', proposal: 'Owner Name' } }; S.persist(true); }, ids);
+      S.obj(b2).local = { 'names.rare': { status: 'fix', note: 'owner: too plain', proposal: 'Owner Name' } }; await S.persist(true); }, ids);
     const snap = () => p.evaluate(() => JSON.stringify(__catalogue.Store.data));
     const before = await snap();
     const exportBatch = async () => { await p.click('[data-a="aibatch"]'); await p.waitForSelector('#dlg[open] #bsz'); const [dl] = await Promise.all([p.waitForEvent('download'), p.click('#dlg [data-i="0"]')]); return JSON.parse(fs.readFileSync(await dl.path(), 'utf8')); };

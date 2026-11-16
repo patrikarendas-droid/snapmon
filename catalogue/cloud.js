@@ -8,7 +8,7 @@
    (no silent persistent cache on a shared/work PC); the catalogue keeps its own owner-scoped local queue instead. */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js';
 import { getAuth, connectAuthEmulator, signInWithEmailAndPassword, signOut, onAuthStateChanged, setPersistence, browserSessionPersistence, browserLocalPersistence } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js';
-import { initializeFirestore, connectFirestoreEmulator, memoryLocalCache, collection, doc, onSnapshot, runTransaction } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js';
+import { initializeFirestore, connectFirestoreEmulator, memoryLocalCache, collection, doc, query, where, onSnapshot, runTransaction } from 'https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyA_MZYu0ISwpmRwJxXSlUdD0geqj2Xxh3g',
@@ -40,9 +40,12 @@ export const backend = {
     return { uid: c.user.uid, email: c.user.email || '' };
   },
   signOut: () => signOut(auth),
-  // live subscription: first call delivers every existing review doc (only reviewed objects exist), later calls only changes
-  subscribe(uid, onChanges, onError) {
-    return onSnapshot(reviews(uid), { includeMetadataChanges: false }, snap => {
+  // live subscription: the first snapshot delivers every review doc updated after `since` (0 = all of them; only
+  // reviewed objects have a doc), later snapshots only changes. Firestore bills one read per delivered doc, so an
+  // incremental `since` keeps reloads and reconnects cheap on the free plan. updatedAt is a number on every doc.
+  subscribe(uid, onChanges, onError, since = 0) {
+    const src = since > 0 ? query(reviews(uid), where('updatedAt', '>', since)) : reviews(uid);
+    return onSnapshot(src, { includeMetadataChanges: false }, snap => {
       onChanges(snap.docChanges().map(ch => ({ id: ch.doc.id, data: ch.type === 'removed' ? null : ch.doc.data() })));
     }, e => onError(e));
   },
