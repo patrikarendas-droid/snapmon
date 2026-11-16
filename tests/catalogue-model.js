@@ -63,6 +63,24 @@ ok(RM.decKey(RM.encKey('moves.kit.cold_storage')) === 'moves.kit.cold_storage' &
   ok(!RM.parseAIImport(JSON.stringify(b), () => true).ok, 'AI import refuses the exported batch itself (clear message)');
 }
 
+// sprite review (v0.5.4): sprite-only state, counts and export
+{ const W = RM.WRITING_PATHS.reduce((o, p) => (o[p] = F('fix', 'writing'), o), {});
+  const docs = { a: { ...W }, b: { ...W, visual: F('ok') }, c: { visual: F('ok'), 'visual.rare.spectral': F('fix', 'spectral rare looks like a shark') }, d: { visual: F('fix', 'wombat looks like a bear'), 'moves.legend': F('fix') }, e: { mapping: F('fix'), 'moves.signature': F('fix') } };
+  const fo = id => docs[id] || {}, ids = ['a', 'b', 'c', 'd', 'e', 'f'];
+  ok(RM.spriteState(docs.a) === 'todo' && RM.spriteState(docs.e) === 'todo' && RM.spriteState({}) === 'todo', 'sprite state: writing, move and mapping fixes alone never make a sprite "needs fix" (and no review is never "good")');
+  ok(RM.spriteState(docs.b) === 'ok' && RM.spriteState(docs.c) === 'fix' && RM.spriteState(docs.d) === 'fix', 'sprite state: overall visual ok = good; any visual or visual.<r>.<v> fix = needs fix even if the overall sprite is ok');
+  const c = RM.spriteCounts(ids, fo);
+  ok(c.total === 6 && c.reviewed === 3 && c.ok === 1 && c.fix === 2 && c.remaining === 3, `sprite counts: ${JSON.stringify(c)}`);
+  const ctx = n => ({ fieldsOf: fo, nameOf: id => 'N' + id, categoryOf: () => 'Cat', designOf: () => ({ tier: 'composed', drawnLike: null, body: 'obj' }), game: '0.5.4', revision: 'r', now: 0, dataSource: 'test' });
+  const e = RM.buildSpriteExport(ids, ctx());
+  ok(e.schema === RM.SPRITE_SCHEMA && e.count === 2 && e.objects.map(o => o.id).join() === 'c,d' && e.objects[0].fixes['visual.rare.spectral'].note === 'spectral rare looks like a shark' && e.objects[0].fixes['visual.rare.spectral'].variant === 'spectral' && !e.objects[0].fixes.visual && e.objects[1].fixes.visual.note === 'wombat looks like a bear',
+    'sprite export: only flagged sprite fields with notes, rarity and variant (an "ok" overall sprite is not listed)');
+  ok(!/names\.|lore\.|moves\.|mapping|writing/.test(JSON.stringify(e.objects)) && e.coverage.remaining === 3 && e.coverage.complete === false, 'sprite export: no names/lore/moves/mapping data; incomplete audit is marked as such');
+  const none = RM.buildSpriteExport(['a', 'b'], { ...ctx(), fieldsOf: id => ({ a: { visual: F('ok') }, b: { visual: F('ok') } })[id] });
+  ok(none.count === 0 && none.coverage.complete === true && none.coverage.reviewed === 2, 'sprite export with 0 fixes after a complete audit is valid and distinguishable (complete: true)');
+  ok(JSON.stringify(docs.a) === JSON.stringify({ ...W }), 'exporting and counting change no review');
+}
+
 // generated source map is current; the catalogue never touches the game
 { let c = ''; try { c = execFileSync('node', [path.join(ROOT, 'tools/catalogue-sources.js'), '--check'], { encoding: 'utf8' }); } catch (e) { c = String(e.stdout); }
   ok(/up to date/.test(c), 'catalogue/sources.js is up to date (id → content/curated source file)');

@@ -37,7 +37,8 @@ h2{margin:8px 0 2px;font-size:20px;overflow-wrap:anywhere}h3{margin:18px 0 8px;f
 table.moves{width:100%;border-collapse:collapse;font-size:13.5px}table.moves th,table.moves td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}.tag{font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:0 5px}
 .field{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:10px;margin:10px 0}.field.st-ok{border-color:#2f6b44}.field.st-fix{border-color:#8a3b33}
 .field textarea,.field input{width:100%;margin-top:6px}.live{margin-top:6px;padding:8px;background:#0e0a17;border-radius:8px;overflow-wrap:anywhere}
-.seg .on.s-ok{outline-color:var(--ok)}.seg .on.s-fix{outline-color:var(--fix)}.conflict{margin-top:8px;padding:8px;border:1px dashed var(--fix);border-radius:8px;font-size:13.5px}
+.seg .on.s-ok{outline-color:var(--ok)}.seg .on.s-fix{outline-color:var(--fix)}body.spritemode .writing-off{display:none}.fixbtn{border-color:var(--fix);color:#ffd7d1}
+.conflict{margin-top:8px;padding:8px;border:1px dashed var(--fix);border-radius:8px;font-size:13.5px}
 dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;max-width:520px;width:calc(100% - 24px)}dialog::backdrop{background:#000a}
 .stack{display:flex;flex-direction:column;gap:10px}.stack label{display:flex;flex-direction:column;gap:4px}.row1{flex-direction:row!important;align-items:center;gap:8px!important}.dbtn{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 #toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:#2b2142;border:1px solid var(--violet);padding:10px 14px;border-radius:10px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20;max-width:90vw}#toast.show{opacity:1}
@@ -68,6 +69,8 @@ dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);bo
       <input id="q" type="search" placeholder="Search name, id or label" aria-label="Search">
       <select id="cat" aria-label="Category"></select>
       <select id="st" aria-label="Review status"><option value="all">All</option><option value="todo">Unreviewed</option><option value="open">Not approved yet</option><option value="partial">In progress</option><option value="ok">Approved</option><option value="fix">Needs fix</option></select>
+      <div class="seg" role="group" aria-label="Review mode"><button class="btn sm" data-a="mode" data-m="all">All reviews</button><button class="btn sm" data-a="mode" data-m="sprite">Sprite review</button></div>
+      <button id="spriteexport" class="btn sm primary" data-a="spriteexport" hidden>Export sprite fixes</button>
       <span id="found" class="small muted"></span>
     </div>
     <div id="prog"></div>
