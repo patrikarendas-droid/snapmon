@@ -114,6 +114,41 @@ show an old, smaller set.)
   - identical fields are skipped;
   - a different existing review becomes a conflict, never an overwrite.
 
+## Sprite review mode (v0.5.4)
+
+Review every object's sprite on its own, separately from the writing review.
+
+1. **Switch mode.** Next to the filters, tap **Sprite review**. **All reviews** switches back.
+   - The choice is remembered on this device only; switching never writes or changes a review.
+   - Progress, badges, status filters and **Next unreviewed** then count **only sprite reviews**:
+     - `visual` for the whole object;
+     - `visual.<rarity>.<variant>` for one rarity and variant (variants: normal, spectral, mutated, shiny =
+       Prismatic).
+   - Writing, move and mapping flags never count here.
+   - An object counts as reviewed when its overall sprite has a decision, or when it has a flagged rarity/variant
+     sprite.
+2. **Review every object.**
+   - Check the five rarity sprites and, if you like, the variants. Then tap **Sprite looks good** or **Sprite needs
+     fix** and write what is wrong in the note.
+   - To flag one rarity and variant, select it and use the "Sprite: <rarity> · <variant> only" field.
+   - **Sprite looks good** sets only the overall `visual` field. It never touches names, texts, moves, mapping or
+     rarity/variant flags, and it asks first before overriding a sprite already flagged "Needs fix".
+   - A flagged rarity/variant keeps the object in "needs fix" even when the overall sprite is good.
+   - Everything saves and syncs exactly like other reviews (`catalogue/{uid}/reviews/{objectId}`). The progress line
+     shows `Sprites: reviewed (good · need fix) · remaining of 2308`.
+3. **Export sprite fixes** (button shown in sprite mode). It downloads one JSON (`snapmon-sprite-fixes/1`):
+   - `game`, `contentRevision`, `exportedAt`, and `dataSource`: cloud, or this device's copy when not fully synced;
+   - `coverage {total, reviewed, ok, fix, remaining, complete}`;
+   - `objects[]` with `id`, `name`, `category`, `design {tier, drawnLike, body}` and
+     `fixes { "visual" | "visual.<rarity>.<variant>": {note, rarity?, variant?} }`.
+
+   It contains only objects with a flagged sprite, and no writing, moves, mapping, credentials, saves or images.
+   - Before downloading, it warns how many objects have no sprite review yet, and when the data is not fully synced.
+   - An export with 0 fixes and `complete: true` means a finished audit with nothing to fix.
+   - Exporting changes nothing.
+   - This file is for a later sprite/design task (src/objects.js, src/parts.js, src/sprites.js), **not** for
+     `campaign.js patch`.
+
 ## AI writing review batches (names + flavour text only)
 
 An outside AI chat (for example ChatGPT) can review **monster names and flavour texts** in batches. You move the files
@@ -199,7 +234,7 @@ Sprite (`visual`) and mapping notes are inputs for design or recognition tasks, 
 
 ## Testing
 
-**In CI (every deploy):** `tests/e2e-catalogue-ai.js` checks the AI writing batch export and import at phone and
+**In CI (every deploy):** `tests/e2e-catalogue-sprite.js` checks sprite review mode at phone and desktop widths. Also: `tests/e2e-catalogue-ai.js` checks the AI writing batch export and import at phone and
 desktop widths. Also:
 - `tests/catalogue-model.js`: merge, approval, export/import, the source map, and static isolation (no game storage,
   camera or models).

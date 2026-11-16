@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-16, release v0.5.3 (owner-approved writing review applied: 22,228 names/flavour texts).
+Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferred writing cases resolved).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -76,6 +76,7 @@ Last updated: 2026-11-16, release v0.5.3 (owner-approved writing review applied:
 | v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
 | v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test.
 | v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. |
+| v0.5.4 | (see RELEASING.md) | 2026-11-16 | Catalogue Sprite review mode + Export sprite fixes; the 7 writing cases deferred from v0.5.3 resolved (35 fields). No mechanics/sprite changes. |
 | v0.5.3 | 9148ca7 | 2026-11-16 | Owner's catalogue writing review applied: 11,103 monster names + 11,125 flavour texts on 2,254 objects; catalogue cloud listener restarts after errors and never shows "Synced" while disconnected. No mechanics/sprite/move changes. |
 | v0.5.2 | 73023bb | 2026-11-04 | Catalogue: "Export AI writing batch" (25/50/100 objects, all ten live names + flavour texts, read-only) and "Import AI writing reviews" (only those ten fields; conflicts instead of overwrites). Game unchanged. |
 | v0.5.1 | 9c23c39 | 2026-11-04 | Developer catalogue at /catalogue/ (all 2,308 objects, real sprites/writing/moves, per-field review proposals, Firebase owner-only sync, export/import). Game unchanged. | |
@@ -155,9 +156,26 @@ Last updated: 2026-11-16, release v0.5.3 (owner-approved writing review applied:
   v0.5.3 fixes this: automatic re-subscribe with backoff, an honest status, and a "cloud: N reviewed objects" count
   (`tests/e2e-catalogue-sync.js`). Not verified on the owner's PC; the owner's check is in the v0.5.3 report.
 
+- **After v0.5.3:** the owner confirmed that the phone and PC catalogue counts agree.
+- **v0.5.4 (2026-11-16):**
+  - **Catalogue "Sprite review" mode** (`docs/CATALOGUE.md`):
+    - sprite-only progress, filters and Next unreviewed;
+    - "Sprite looks good / needs fix", which sets only `visual`;
+    - "Export sprite fixes" (`snapmon-sprite-fixes/1`, flagged sprite fields + notes, coverage, data source).
+
+    Historical writing reviews (22,228 fields) and the existing sprite/move/mapping reviews are untouched.
+  - **The 7 writing cases deferred from v0.5.3** were resolved from the owner's private export: 35 fields on 7 objects,
+    content revision 98db63510034.
+    - The 4 conflicts (accordion, i_academic_gown, x_3d_printer, x_acorn_cap) were decided per field: 32 AI
+      alternatives (one edited to drop a politics joke) and 4 live texts kept.
+    - 3 blocked names replaced: x_hearing_aid **Whisprickle**, x_ficus **Figglefrond**, x_croc **Clogodile**.
+
+    The catalogue's Firebase conflict markers are NOT cleared by this; the owner resolves them manually ("Keep A/B").
+
 **Next priorities (2026-11-16):**
-1. Owner: phone check of v0.5.3 (new names and flavour on old and new monsters); PC catalogue check (cloud count).
-2. Owner's own sprite and move reviews in the catalogue; resolve the 4 conflicted objects and the 3 duplicate names.
+1. Owner: phone check of v0.5.4. Resolve the 4 catalogue conflict markers (accordion, i_academic_gown, x_3d_printer,
+   x_acorn_cap) with Keep A/B; the live game already has the chosen text.
+2. Owner reviews all 2,308 sprites in Sprite review mode, then exports sprite fixes once, for a separate design session.
 3. Later approved batches through `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and
    mapping notes become design or recognition tasks.
 4. Later: name/flavour UI refinements (postponed redesign); APK.

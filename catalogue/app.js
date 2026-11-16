@@ -287,8 +287,40 @@
       [['Import', () => { const p = applyEntries(r.entries, 'ai-import'); UI.toast(`AI reviews imported: ${p.add} added, ${p.conflicts} conflicts`); }]]);
   }
 
+  /* ---------- sprite review (v0.5.4) ---------- */
+  // sprite-only actions: touch ONLY the overall `visual` field (never names/lore/moves/mapping or visual.<r>.<v>)
+  function spriteOk(id) {
+    const cur = Store.fields(id).visual;
+    if (cur && cur.status === 'fix') return UI.dialog('Sprite looks good?', `<p>This sprite is flagged <b>Needs fix</b>${cur.note ? `: “${esc(cur.note)}”` : ''}.</p><p class="small">Mark the overall sprite as good? The note is kept; rarity/variant flags are not changed.</p>`,
+      [['Mark as good', () => { edit(id, 'visual', { status: 'ok' }); UI.select(id, null, null, true); UI.list(); }]]);
+    edit(id, 'visual', { status: 'ok' }); UI.select(id, null, null, true); UI.list();
+  }
+  function spriteFix(id) {
+    edit(id, 'visual', { status: 'fix' }); UI.select(id, null, null, true); UI.list();
+    const n = document.querySelector('.field[data-path="visual"] [data-k="note"]'); if (n) { n.focus(); n.placeholder = 'What is wrong with the sprite? e.g. "The wombat looks like a bear"'; }
+  }
+  function spriteExportData() {
+    const live = !!(Sync.uid && Sync.live && !Store.pending().length);
+    return RM.buildSpriteExport(IDS.slice().sort(), { fieldsOf: id => Store.fields(id), nameOf: id => OBJECTS[id].name, categoryOf: id => (CATEGORY[OBJECTS[id].cat] && CATEGORY[OBJECTS[id].cat].name) || OBJECTS[id].cat,
+      designOf: id => { const o = OBJECTS[id], src = visualSource(o), d = sample(id, 'common', 'normal').dna; return { tier: objectTier(o), drawnLike: src !== o ? src.id : null, body: d.shape + (d.sub ? ':' + d.sub : '') }; },
+      game: GAME_VERSION, revision: CURATED.revision, now: Date.now(),
+      dataSource: live ? 'cloud (signed in, live connection, nothing pending)' : Sync.uid ? 'this device\'s copy (not fully synced with the cloud)' : 'this device only (local mode, NOT synced)' });
+  }
+  function spriteExportDialog() {
+    const e = spriteExportData(), c = e.coverage, synced = /^cloud/.test(e.dataSource);
+    UI.dialog('Export sprite fixes', `<p><b>${e.count}</b> object(s) with sprite fixes. Sprites reviewed: <b>${c.reviewed}</b> of ${c.total} (${c.ok} look good, ${c.fix} need fix).</p>
+      ${c.remaining ? `<p class="warn"><b>${c.remaining} object(s) have no sprite review yet.</b> This export is not a complete audit.</p>` : '<p>Every object has a sprite review.</p>'}
+      ${synced ? '' : `<p class="warn">The export reflects ${esc(e.dataSource)}.</p>`}
+      <p class="small">Only flagged sprite fields (<code>visual</code>, <code>visual.&lt;rarity&gt;.&lt;variant&gt;</code>) and their notes. Exporting changes nothing.</p>`,
+      [[`Download sprite fixes (${e.count})`, () => { download(`snapmon-sprite-fixes-${e.exportedAt.slice(0, 10)}-${e.count}.json`, JSON.stringify(e, null, 2), 'application/json'); UI.toast(`Exported ${e.count} sprite fix object(s)`); }]]);
+  }
+
   /* ---------- UI ---------- */
   const prefs = ls.get('prefs', { q: '', cat: '', st: 'all', id: null, rarity: 'common', variant: 'normal' });
+  if (prefs.mode !== 'sprite') prefs.mode = 'all';   // review mode is a per-device view preference; never stored as a review
+  const SPRITE = () => prefs.mode === 'sprite';
+  const SPRITE_LABEL = { todo: 'Sprite unreviewed', ok: 'Sprite looks good', fix: 'Sprite needs fix' };
+  const label = s => (SPRITE() ? SPRITE_LABEL : STATE_LABEL)[s] || s;
   const savePrefs = () => ls.set('prefs', prefs);
   const UI = {
     page: 40, shown: 40, sel: null, rarity: prefs.rarity || 'common', variant: prefs.variant || 'normal', io: null,
@@ -309,7 +341,7 @@
       if (prefs.id && OBJECTS[prefs.id] && window.innerWidth >= 980) this.select(prefs.id, prefs.rarity, prefs.variant);
       this.status();
     },
-    stateOf(id) { const f = Store.fields(id); return Object.keys(f).length ? RM.objectState(f, required(id)) : 'todo'; },
+    stateOf(id) { const f = Store.fields(id); if (SPRITE()) return RM.spriteState(f); return Object.keys(f).length ? RM.objectState(f, required(id)) : 'todo'; },
     filtered() {
       const q = (prefs.q || '').trim().toLowerCase(), cat = prefs.cat, st = prefs.st;
       return IDS.filter(id => {
@@ -324,7 +356,7 @@
       const ids = this.filtered(), slice = ids.slice(0, this.shown);
       $('#list').innerHTML = slice.map(id => {
         const o = OBJECTS[id], s = this.stateOf(id), c = Object.keys((Store.data.objects[id] || {}).conflicts || {}).length;
-        return `<div class="row ${this.sel === id ? 'on' : ''}" data-id="${esc(id)}" role="button" tabindex="0"><div class="rt"><b>${esc(o.name)}</b> <span class="badge s-${s}">${STATE_LABEL[s]}</span>${c ? ' <span class="badge s-fix">conflict</span>' : ''}<br><small>${esc(id)} · ${esc(o.cat)}</small></div><div class="th" data-id="${esc(id)}"></div></div>`;
+        return `<div class="row ${this.sel === id ? 'on' : ''}" data-id="${esc(id)}" role="button" tabindex="0"><div class="rt"><b>${esc(o.name)}</b> <span class="badge s-${s}">${label(s)}</span>${c && !SPRITE() ? ' <span class="badge s-fix">conflict</span>' : ''}<br><small>${esc(id)} · ${esc(o.cat)}</small></div><div class="th" data-id="${esc(id)}"></div></div>`;
       }).join('') + (ids.length > this.shown ? `<button class="btn block" data-a="more">Show more (${ids.length - this.shown} left)</button>` : '') + (!ids.length ? '<p class="muted pad">No objects match.</p>' : '');
       $('#found').textContent = `${ids.length} shown`;
       for (const el of $('#list').querySelectorAll('.th')) this.io.observe(el);
@@ -332,6 +364,9 @@
     },
     thumbs(el) { const id = el.dataset.id; for (const r of RAR) { const cv = document.createElement('canvas'); renderSprite(cv, sample(id, r, 'normal').dna, 1); cv.title = r; cv.className = 'mini'; el.append(cv); } },
     progress() {
+      this.modeUI();
+      if (SPRITE()) { const c = RM.spriteCounts(IDS, id => Store.fields(id)), cloud = !Sync.uid ? ' · <span class="warn">local only (not synced)</span>' : Sync.live && !Store.pending().length ? '' : ' · <span class="warn">not fully synced: counts are this device\'s copy</span>';
+        $('#prog').innerHTML = `Sprites: <b>${c.reviewed}</b> reviewed (${c.ok} look good · <b>${c.fix}</b> need fix) · <b>${c.remaining}</b> remaining of ${c.total}${cloud}`; return; }
       let ok = 0, fix = 0, part = 0; for (const id of Store.reviewedIds()) { const s = this.stateOf(id); if (s === 'ok') ok++; else if (s === 'fix') fix++; else if (s === 'partial') part++; }
       const cloud = !Sync.uid ? '' : Sync.live ? ` · cloud: <b>${Sync.cloudIds.size}</b> reviewed objects` : ' · <span class="warn">cloud not connected: counts are this device\'s copy</span>';
       $('#prog').innerHTML = `<b>${ok}</b> approved · <b>${fix}</b> need fix · ${part} in progress · ${IDS.length - ok - fix - part} unreviewed${cloud}`;
@@ -360,6 +395,8 @@
       else if (a === 'undo') undoLast();
       else if (a === 'keep') resolve(d.id, d.p, d.k);
       else if (a === 'export') doExport(); else if (a === 'summary') doSummary(); else if (a === 'import') $('#file').click();
+      else if (a === 'mode') { if (prefs.mode !== d.m) { prefs.mode = d.m; savePrefs(); this.shown = this.page; this.refresh(); } }
+      else if (a === 'spriteok') spriteOk(d.id); else if (a === 'spritefix') spriteFix(d.id); else if (a === 'spriteexport') spriteExportDialog();
       else if (a === 'aibatch') batchDialog(); else if (a === 'aiimport') $('#aifile').click();
       else if (a === 'signin') this.signin(); else if (a === 'signout') this.signout();
       else if (a === 'mergelocal') { const loc = ls.get('store.local', { objects: {} }), ent = {}; for (const [id, o] of Object.entries(loc.objects)) if (OBJECTS[id] && Object.keys(o.local || {}).length) ent[id] = o.local; const p = applyEntries(ent, 'local-only'); ls.del('store.local'); this.toast(`Merged: ${p.add} added, ${p.conflicts} conflicts`); this.status(); }
@@ -367,7 +404,8 @@
       else if (a === 'dlgclose') $('#dlg').close();
     },
     step(dir) { const ids = this.filtered(); if (!ids.length) return; const i = ids.indexOf(this.sel); this.select(ids[(i + dir + ids.length) % ids.length]); },
-    nextOpen() { const ids = IDS, i = Math.max(0, ids.indexOf(this.sel)); for (let k = 1; k <= ids.length; k++) { const id = ids[(i + k) % ids.length], s = this.stateOf(id); if (s === 'todo' || s === 'partial') return this.select(id); } this.toast('Everything is reviewed'); },
+    nextOpen() { const ids = IDS, i = Math.max(0, ids.indexOf(this.sel)); for (let k = 1; k <= ids.length; k++) { const id = ids[(i + k) % ids.length], s = this.stateOf(id); if (s === 'todo' || (!SPRITE() && s === 'partial')) return this.select(id); } this.toast(SPRITE() ? 'Every sprite is reviewed' : 'Everything is reviewed'); },
+    modeUI() { const sp = SPRITE(); document.body.classList.toggle('spritemode', sp); for (const b of document.querySelectorAll('[data-a="mode"]')) b.classList.toggle('on', b.dataset.m === prefs.mode); const ex = $('#spriteexport'); if (ex) ex.hidden = !sp; },
     close() { $('#detail').classList.remove('open'); document.body.classList.remove('dopen'); },
     select(id, rarity, variant, keepScroll) {
       if (!id || !OBJECTS[id]) return;
@@ -378,11 +416,14 @@
       const html = `
         <div class="dhead"><button class="btn sm" data-a="close" aria-label="Back to list">← List</button>
           <div class="nav"><button class="btn sm" data-a="prev" aria-label="Previous">‹ Prev</button><button class="btn sm" data-a="next" aria-label="Next">Next ›</button><button class="btn sm" data-a="nextopen">Next unreviewed</button></div></div>
-        <h2>${esc(o.name)} <span class="badge s-${st}">${STATE_LABEL[st]}</span></h2>
+        <h2>${esc(o.name)} <span class="badge s-${st}">${label(st)}</span></h2>
         <p class="small muted">id <code>${esc(id)}</code> · category ${esc((CATEGORY[o.cat] && CATEGORY[o.cat].name) || o.cat)} · design: ${esc(objectTier(o))}${src !== o ? ' (drawn like ' + esc(src.name) + ')' : ''} · body ${esc(m.dna.shape)}${m.dna.sub ? ':' + esc(m.dna.sub) : ''}<br>
           labels: ${esc((o.al || []).slice(0, 8).join(', ') || '—')} · source <code>${esc(SOURCE[id] || '—')}</code></p>
-        <div class="actions"><button class="btn primary" data-a="good" data-id="${esc(id)}">Everything looks good</button> <button class="btn" data-a="undo">Undo</button>
-          <span class="small muted">Marks every not-yet-reviewed field of this object as good; "Needs fix" items and notes are kept.</span></div>
+        ${SPRITE() ? `<div class="actions"><button class="btn primary" data-a="spriteok" data-id="${esc(id)}">Sprite looks good</button> <button class="btn fixbtn" data-a="spritefix" data-id="${esc(id)}">Sprite needs fix</button> <button class="btn" data-a="undo">Undo</button>
+          <span class="small muted">Sets only this object's overall sprite review (<code>visual</code>). Names, texts, moves and rarity/variant sprite flags are not changed.</span></div>
+          ${Object.entries(f).some(([p, x]) => p.startsWith('visual.') && x.status === 'fix') ? '<p class="warn small">A rarity/variant sprite is flagged "Needs fix", so this object counts as needing a sprite fix.</p>' : ''}`
+        : `<div class="actions"><button class="btn primary" data-a="good" data-id="${esc(id)}">Everything looks good</button> <button class="btn" data-a="undo">Undo</button>
+          <span class="small muted">Marks every not-yet-reviewed field of this object as good; "Needs fix" items and notes are kept.</span></div>`}
         <div class="seg" role="group" aria-label="Variant">${VARS.map(x => `<button class="btn sm ${x === v ? 'on' : ''}" data-a="var" data-v="${x}">${VLABEL[x]}</button>`).join('')}</div>
         <div class="rars">${RAR.map(x => `<button class="rcell ${x === r ? 'on' : ''}" data-a="rar" data-r="${x}" style="--rc:${RARITY[x].color}"><canvas data-k="${esc(id)}|${x}|${v}"></canvas><span>${RARITY[x].name}</span></button>`).join('')}</div>
         <p class="small muted">Sample: ${RARITY[r].name} · ${VLABEL[v]} · fixed seed, neutral colours (no photo). Real captures differ in colour and details (photo colours and individual seeds).</p>
@@ -391,6 +432,8 @@
           <div><div class="rname">${esc(m.name)}</div><div class="small muted">${RARITY[r].name}${v !== 'normal' ? ' · ' + VLABEL[v] : ''} · ${esc((FAMILIES[m.fam] || {}).name || m.fam)} · sample Lv ${m.level} · HP ${m.stats.hp} ATK ${m.stats.atk} DEF ${m.stats.def} SPD ${m.stats.spd}</div>
             <p class="lore">${esc(m.lore)}</p></div>
         </section>
+        ${SPRITE() ? `<h3>Sprite review</h3>${field(id, 'visual', 'Sprite / design (whole object)', f, obj, true)}${field(id, 'visual.' + r + '.' + v, 'Sprite: ' + RARITY[r].name + ' · ' + VLABEL[v] + ' only (optional)', f, obj, true)}
+          ${Object.keys(f).filter(p => /^visual\./.test(p) && p !== 'visual.' + r + '.' + v).map(p => field(id, p, 'Sprite: ' + p.split('.')[1] + ' · ' + VLABEL[p.split('.')[2]], f, obj, true)).join('')}<div class="writing-off">` : ''}
         <h3>Moves of this ${RARITY[r].name}${v !== 'normal' ? ' ' + VLABEL[v] : ''}</h3>
         <table class="moves"><thead><tr><th>Move</th><th>Slot (field)</th><th>Effect</th><th>CD</th></tr></thead><tbody>
           ${m.abilities.map(a => `<tr><td><b>${esc(a.name)}</b>${(e.moves || {})[a.key] ? '' : ' <span class="tag">generated name</span>'}${a.legend ? ' <span class="tag">legend</span>' : ''}${a.ultimate ? ' <span class="tag">Ultimate</span>' : ''}</td><td><code>moves.${esc(a.key)}</code></td><td>${esc(effectText(a))}</td><td>${a.cd || 0}</td></tr>`).join('')}
@@ -398,12 +441,12 @@
         <h3>Review — ${RARITY[r].name}</h3>
         ${field(id, 'names.' + r, 'Monster name (' + RARITY[r].name + ')', f, obj)}
         ${field(id, 'lore.' + r, 'Flavour text (' + RARITY[r].name + ')', f, obj)}
-        ${field(id, 'visual.' + r + '.' + v, 'Sprite: ' + RARITY[r].name + ' · ' + VLABEL[v] + ' (optional)', f, obj, true)}
+        ${SPRITE() ? '' : field(id, 'visual.' + r + '.' + v, 'Sprite: ' + RARITY[r].name + ' · ' + VLABEL[v] + ' (optional)', f, obj, true)}
         <h3>Review — whole object</h3>
-        ${field(id, 'visual', 'Sprite / design (object)', f, obj, true)}
+        ${SPRITE() ? '' : field(id, 'visual', 'Sprite / design (object)', f, obj, true)}
         ${slots.map(s => field(id, 'moves.' + s.key, 'Move name · ' + s.key + ' (' + s.rarities.map(x => RARITY[x].name).join(', ') + ')', f, obj)).join('')}
         ${field(id, 'mapping', 'Recogniser mapping (optional)', f, obj, true)}
-        <p class="small muted">Edits here are PROPOSALS for later, approved source patches (content/curated). They never change the game.</p>`;
+        <p class="small muted">Edits here are PROPOSALS for later, approved source patches (content/curated). They never change the game.</p>${SPRITE() ? '</div>' : ''}`;
       const d = $('#detail'); const sc = d.scrollTop; d.innerHTML = html; d.classList.add('open'); document.body.classList.add('dopen'); if (keepScroll) d.scrollTop = sc; else d.scrollTop = 0;
       for (const cv of d.querySelectorAll('canvas[data-k]')) { const [i, rr, vv] = cv.dataset.k.split('|'); renderSprite(cv, sample(i, rr, vv).dna, +(cv.dataset.s || 2)); }
       for (const el of d.querySelectorAll('[data-in]')) el.addEventListener('input', () => inputEdit(el));
@@ -487,5 +530,5 @@
       if (user) await Sync.start(user); else { Sync.stop(); Store.open('local'); UI.refresh(); }
     });
   }).catch(e => { Sync.cloudError = 'Firebase could not be loaded: network or firewall'; UI.status(); console.warn('catalogue: cloud unavailable', e); });
-  window.__catalogue = { Store, Sync, UI, sample, moveSlots, required, liveValue, exportData, applyEntries, device, IDS, checkProposal }; // for tests and debugging
+  window.__catalogue = { Store, Sync, UI, sample, moveSlots, required, liveValue, exportData, applyEntries, device, IDS, checkProposal, spriteExportData, prefs }; // for tests and debugging
 })();

@@ -64,6 +64,7 @@ jobs:
           node tests/e2e-catalogue-local.js http://localhost:8765/ shots
           node tests/e2e-catalogue-ai.js http://localhost:8765/ shots
           node tests/e2e-catalogue-sync.js http://localhost:8765/
+          node tests/e2e-catalogue-sprite.js http://localhost:8765/ shots
   deploy:
     needs: test
     runs-on: ubuntu-latest

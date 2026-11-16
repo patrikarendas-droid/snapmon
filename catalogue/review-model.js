@@ -208,8 +208,42 @@
     return r;
   }
 
+  /* ---------- sprite review (v0.5.4): sprite-only state and export; names/lore/moves/mapping never count ---------- */
+  const SPRITE_SCHEMA = 'snapmon-sprite-fixes/1';
+  const isSpritePath = p => p === 'visual' || /^visual\.(common|uncommon|rare|epic|legendary)\.(normal|spectral|mutated|shiny)$/.test(p);
+  // 'fix' if the overall sprite OR any rarity/variant sprite is flagged; 'ok' if the overall sprite was assessed good;
+  // otherwise 'todo' (a missing review is never "good"). A writing or move fix alone never makes a sprite need a fix.
+  function spriteState(fields) {
+    const f = fields || {};
+    if (Object.entries(f).some(([p, v]) => isSpritePath(p) && v && v.status === 'fix')) return 'fix';
+    return f.visual && f.visual.status === 'ok' ? 'ok' : 'todo';
+  }
+  function spriteCounts(ids, fieldsOf) {
+    const c = { total: ids.length, reviewed: 0, ok: 0, fix: 0, remaining: 0 };
+    for (const id of ids) { const s = spriteState(fieldsOf(id)); if (s === 'todo') c.remaining++; else { c.reviewed++; c[s]++; } }
+    return c;
+  }
+  // read-only export of every flagged sprite field (status fix) with notes; nothing else
+  function buildSpriteExport(ids, ctx) {
+    const objects = [];
+    for (const id of ids) {
+      const f = ctx.fieldsOf(id) || {}, flagged = {};
+      for (const [p, v] of Object.entries(f)) if (isSpritePath(p) && v && v.status === 'fix') {
+        const [, r, variant] = p.split('.'); flagged[p] = { note: v.note || '', ...(r ? { rarity: r, variant } : {}) };
+      }
+      if (Object.keys(flagged).length) objects.push({ id, name: ctx.nameOf(id), category: ctx.categoryOf(id), design: ctx.designOf(id), fixes: flagged });
+    }
+    const coverage = spriteCounts(ids, ctx.fieldsOf);
+    return { schema: SPRITE_SCHEMA, purpose: 'Sprite corrections flagged by the owner in the developer catalogue. For a later design task (src/objects.js, src/parts.js, src/sprites.js); NOT a writing patch.',
+      game: ctx.game, contentRevision: ctx.revision, exportedAt: new Date(ctx.now).toISOString(),
+      dataSource: ctx.dataSource, coverage: { ...coverage, complete: coverage.remaining === 0 },
+      fieldKeys: '"visual" = the whole object; "visual.<rarity>.<variant>" = one rarity and variant (variant: normal, spectral, mutated, shiny = Prismatic)',
+      count: objects.length, objects };
+  }
+
   const api = { SCHEMA, EXPORT_SCHEMA, RARITIES, VARIANTS, STATUSES, LIMITS, isPath, isTextPath, isReviewPath, encKey, decKey, clean, isEmpty, same,
     setField, objectState, approveAll, merge, toRemote, fromRemote, buildExport, summaryText, parseImport, planImport,
-    BATCH_SCHEMA, WRITING_PATHS, isWritingPath, writingDone, selectWritingBatch, buildWritingBatch, parseAIImport };
+    BATCH_SCHEMA, WRITING_PATHS, isWritingPath, writingDone, selectWritingBatch, buildWritingBatch, parseAIImport,
+    SPRITE_SCHEMA, isSpritePath, spriteState, spriteCounts, buildSpriteExport };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.ReviewModel = api;
 })(typeof window !== 'undefined' ? window : globalThis);
