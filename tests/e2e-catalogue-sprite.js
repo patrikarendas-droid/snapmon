@@ -15,17 +15,17 @@ const F = (status, note = '') => ({ status, note, proposal: '' });
     const p = await ctx.newPage(), errs = []; p.on('pageerror', e => errs.push(e.message));
     await p.goto(base + 'catalogue/'); await p.waitForSelector('.row');
     // seed: writing-only fixes on 2,254 objects; existing sprite + move reviews on a few
-    const ids = await p.evaluate(() => {
+    const ids = await p.evaluate(async () => {
       const F = (status, note = '') => ({ status, note, proposal: '' }), S = __catalogue.Store, all = __catalogue.IDS, W = id => ({ 'names.common': { status: 'fix', note: 'writing', proposal: 'New Name' }, 'lore.rare': { status: 'fix', note: 'writing', proposal: 'A new rare text for this one.' } });
       for (const id of all.slice(0, 2254)) S.obj(id).local = W(id);
       const [a, b2, c] = [all[10], all[20], all[30]];
       S.obj(a).local = { ...W(a), visual: F('fix', 'wombat looks like a bear'), 'moves.legend': F('fix', 'move note') };
       S.obj(b2).local = { ...W(b2), visual: F('ok'), 'visual.rare.spectral': F('fix', 'spectral rare is a blob') };
       S.obj(c).local = { ...W(c), visual: F('ok'), mapping: F('fix', 'map note') };
-      S.persist(true); return { all, a, b2, c, first: all[0] };
+      await S.persist(true); return { all, a, b2, c, first: all[0] };
     });
     await p.reload(); await p.waitForSelector('.row');
-    const snap = () => p.evaluate(() => localStorage.getItem('snapmon-catalogue.v1.store.local'));
+    const snap = () => p.evaluate(() => JSON.stringify(__catalogue.Store.data));
     const allProg = await p.textContent('#prog'), before = await snap();
     ok(/2254 need fix/.test(allProg), `${w}px: "All reviews" view unchanged (${allProg.trim().slice(0, 60)}…)`);
     await p.click('[data-a="mode"][data-m="sprite"]');
@@ -75,7 +75,7 @@ const F = (status, note = '') => ({ status, note, proposal: '' });
   // a complete audit with 0 fixes is distinguishable from an incomplete one
   { const ctx = await b.newContext({ acceptDownloads: true }); await ctx.route(/gstatic\.com/, r => r.abort()); const p = await ctx.newPage();
     await p.goto(base + 'catalogue/'); await p.waitForSelector('.row');
-    await p.evaluate(() => { for (const id of __catalogue.IDS) __catalogue.Store.obj(id).local = { visual: { status: 'ok', note: '', proposal: '' } }; __catalogue.Store.persist(true); __catalogue.prefs.mode = 'sprite'; localStorage.setItem('snapmon-catalogue.v1.prefs', JSON.stringify(__catalogue.prefs)); });
+    await p.evaluate(async () => { for (const id of __catalogue.IDS) __catalogue.Store.obj(id).local = { visual: { status: 'ok', note: '', proposal: '' } }; await __catalogue.Store.persist(true); __catalogue.prefs.mode = 'sprite'; localStorage.setItem('snapmon-catalogue.v1.prefs', JSON.stringify(__catalogue.prefs)); });
     await p.reload(); await p.waitForSelector('.row'); await p.click('#spriteexport'); await p.waitForSelector('#dlg[open]');
     const [dl] = await Promise.all([p.waitForEvent('download'), p.click('#dlg [data-i="0"]')]); const e = JSON.parse(fs.readFileSync(await dl.path(), 'utf8'));
     ok(e.count === 0 && e.coverage.complete === true && e.coverage.reviewed === 2308, 'complete audit with 0 sprite fixes: valid export, coverage complete'); await ctx.close(); }

@@ -27,7 +27,8 @@ let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } e
     const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[data-a="export"]')]); const file = path.join(out, `cat-local-${w}.json`); fs.copyFileSync(await dl.path(), file);
     const exp = JSON.parse(fs.readFileSync(file, 'utf8'));
     ok(exp.objects.kettle.fields['lore.epic'].note === 'needs a real consequence' && exp.objects.kettle.source && /local only/.test(exp.syncedAccount), `${w}px: export holds the review with its source file and says it was local-only`);
-    await p.evaluate(() => { localStorage.removeItem('snapmon-catalogue.v1.store.local'); }); await p.reload(); await p.waitForSelector('.row');
+    await p.evaluate(() => __catalogue.Store.clearNS('local')); await p.reload(); await p.waitForSelector('.row');
+    ok(!(await p.evaluate(() => __catalogue.Store.fields('kettle')['lore.epic'])), `${w}px: clearing this browser's copy removes the review (so the import below really restores it)`);
     await p.setInputFiles('#file', file); await p.waitForSelector('#dlg[open]'); await p.click('#dlg [data-i="0"]'); await p.waitForTimeout(300);
     ok((await p.evaluate(() => __catalogue.Store.fields('kettle')['lore.epic'].note)) === 'needs a real consequence', `${w}px: import restores the review`);
     ok(await p.evaluate(() => localStorage.getItem('snapmon.save.v1')) === 'SENTINEL' && !errs.length, `${w}px: game save untouched, no page errors${errs.length ? ': ' + errs[0] : ''}`);

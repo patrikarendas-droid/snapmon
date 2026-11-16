@@ -11,8 +11,34 @@
   const NS = 'snapmon-catalogue.v1.';                       // never a game key
   const $ = s => document.querySelector(s), esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const ls = { get(k, d) { try { const v = localStorage.getItem(NS + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
-    set(k, v) { try { localStorage.setItem(NS + k, JSON.stringify(v)); return true; } catch (e) { UI.toast('Could not save on this device (storage full or blocked)'); return false; } },
+    set(k, v, quiet) { try { localStorage.setItem(NS + k, JSON.stringify(v)); return true; } catch (e) { if (!quiet) UI.toast('Could not save on this device (storage full or blocked)'); return false; } },
     del(k) { try { localStorage.removeItem(NS + k); } catch (e) { /* ignore */ } } };
+  // Reviews live in IndexedDB (hundreds of MB). Up to v0.5.4 they were one localStorage value, which a full review of
+  // 2,308 objects outgrew (~7.6M characters vs the ~5M browser limit), so saves failed silently. One record per object
+  // (key o|<ns>|<id>), so a save writes only the objects that changed. localStorage keeps only small keys (prefs, draft).
+  const idb = (() => {
+    let dbp = null;
+    const open = () => dbp || (dbp = new Promise((res, rej) => {
+      if (!window.indexedDB) return rej(new Error('IndexedDB unavailable'));
+      const r = indexedDB.open('snapmon-catalogue.v1', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error || new Error('IndexedDB open failed')); r.onblocked = () => rej(new Error('IndexedDB blocked'));
+    }).catch(e => { dbp = null; throw e; }));
+    const run = (mode, fn) => open().then(db => new Promise((res, rej) => {
+      const t = db.transaction('kv', mode), out = fn(t.objectStore('kv'));
+      t.oncomplete = () => res(out); t.onerror = () => rej(t.error || new Error('IndexedDB write failed')); t.onabort = () => rej(t.error || new Error('IndexedDB write aborted (storage full?)'));
+    }));
+    const range = ns => IDBKeyRange.bound('o|' + ns + '|', 'o|' + ns + '|\uffff');
+    return {
+      open,
+      async load(ns) {
+        let keys, vals; await run('readonly', s => { const k = s.getAllKeys(range(ns)), v = s.getAll(range(ns)); k.onsuccess = () => { keys = k.result; }; v.onsuccess = () => { vals = v.result; }; });
+        const objects = {}; keys.forEach((k, i) => { objects[k.slice(3 + ns.length)] = vals[i]; }); return objects;
+      },
+      put: (ns, entries) => run('readwrite', s => { for (const [id, o] of entries) if (o) s.put(o, 'o|' + ns + '|' + id); else s.delete('o|' + ns + '|' + id); }),
+      clear: ns => run('readwrite', s => { s.delete(range(ns)); }),
+    };
+  })();
   const device = ls.get('device') || (() => { const d = 'dev-' + Math.random().toString(36).slice(2, 10); ls.set('device', d); return d; })();
   const VLABEL = { normal: 'Normal', spectral: 'Spectral', mutated: 'Mutated', shiny: 'Prismatic' };
   const SLABEL = { todo: 'Not reviewed', ok: 'Looks good', fix: 'Needs fix' };
@@ -56,16 +82,56 @@
   /* ---------- owner-scoped local store: drafts + pending cloud queue ---------- */
   // store.objects[id] = { base: fields last ACKNOWLEDGED by the server (null in local-only mode), rev, local: fields,
   //                       dirty: local differs from base and is queued for sync, conflicts: { path: {mine, theirs, source} } }
+  // o.t = updatedAt of the newest cloud version this device received (drives the incremental cloud listener)
   const Store = {
-    ns: 'local', data: { objects: {} }, saveTimer: null,
-    open(ns) { this.ns = ns; this.data = ls.get('store.' + ns, { objects: {} }); restoreDraft(ns); },
-    obj(id) { return this.data.objects[id] || (this.data.objects[id] = { base: null, rev: 0, local: {}, dirty: false, conflicts: {} }); },
+    ns: 'local', data: { objects: {} }, saveTimer: null, retryTimer: null, touched: new Set(), gen: 0, loading: false,
+    mode: 'idb', saveError: '', savedAt: 0,
+    async open(ns) {
+      const g = ++this.gen; this.loading = true; await this.flush();
+      const objects = await loadNS(ns); if (g !== this.gen) return;
+      this.ns = ns; this.data = { objects }; this.touched = new Set(); this.loading = false; restoreDraft(ns);
+    },
+    obj(id) { this.touched.add(id); return this.data.objects[id] || (this.data.objects[id] = { base: null, rev: 0, local: {}, dirty: false, conflicts: {} }); },
     fields(id) { const o = this.data.objects[id]; return (o && o.local) || {}; },
-    persist(now) { clearTimeout(this.saveTimer); const go = () => ls.set('store.' + this.ns, this.data); if (now) go(); else this.saveTimer = setTimeout(go, 250); },
+    persist(now) { clearTimeout(this.saveTimer); if (now) return this.flush(); this.saveTimer = setTimeout(() => this.flush(), 250); return Promise.resolve(true); },
+    async flush() {
+      clearTimeout(this.saveTimer); if (this.loading && !this.touched.size) return true;
+      const ns = this.ns, objs = this.data.objects, ids = [...this.touched]; this.touched = new Set();
+      let err = '';
+      if (this.mode === 'idb') {
+        if (!ids.length) return !this.saveError;
+        try { await idb.put(ns, ids.map(id => [id, objs[id]])); } catch (e) { err = (e && (e.name || e.message)) || 'unknown error'; if (this.ns === ns) for (const id of ids) this.touched.add(id); }
+      } else if (!ls.set('store.' + ns, { objects: objs }, true)) err = 'browser storage full or blocked';
+      this.setSaveError(err); if (!err) this.savedAt = Date.now();
+      return !err;
+    },
+    setSaveError(err) {
+      const was = this.saveError; this.saveError = err; clearTimeout(this.retryTimer);
+      if (err) this.retryTimer = setTimeout(() => this.flush(), 5000);   // keep retrying; the banner stays until a save works
+      if (was !== err && typeof UI !== 'undefined' && UI.status) UI.status();
+    },
+    // in-memory copy is emptied first, so a pending or unload save can never write the cleared reviews back
+    async clearNS(ns) { if (ns === this.ns) { clearTimeout(this.saveTimer); this.touched = new Set(); this.data = { objects: {} }; } ls.del('store.' + ns); if (this.mode === 'idb') try { await idb.clear(ns); } catch (e) { /* ignore */ } },
     pending() { return Object.entries(this.data.objects).filter(([, o]) => o.dirty).map(([id]) => id); },
     conflictCount() { return Object.values(this.data.objects).reduce((n, o) => n + Object.keys(o.conflicts || {}).length, 0); },
     reviewedIds() { return Object.keys(this.data.objects).filter(id => Object.keys(this.data.objects[id].local || {}).length); },
+    // incremental cloud listener start: newest cloud version received minus a day (covers clock differences between
+    // devices); 0 = download everything (first sign-in on this device, or "Re-download from cloud")
+    cursor() { let t = 0; for (const o of Object.values(this.data.objects)) if (o.t > t) t = o.t; return t ? t - 86400000 : 0; },
   };
+  // load one namespace; the first time, move the old localStorage copy (<= v0.5.4) into IndexedDB, then free it
+  async function loadNS(ns) {
+    if (Store.mode === 'idb') try {
+      const objects = await idb.load(ns), legacy = ls.get('store.' + ns, null);
+      if (legacy && legacy.objects) {
+        const add = Object.entries(legacy.objects).filter(([id]) => !objects[id]);
+        await idb.put(ns, add); for (const [id, o] of add) objects[id] = o;
+        ls.del('store.' + ns);
+      }
+      return objects;
+    } catch (e) { Store.mode = 'ls'; console.warn('catalogue: IndexedDB unavailable, falling back to localStorage', e); }
+    return ls.get('store.' + ns, { objects: {} }).objects || {};
+  }
 
   /* ---------- sync engine (backend-agnostic; Firebase in cloud.js, a mock in the tests) ---------- */
   const Sync = {
@@ -86,22 +152,29 @@
     },
     async start(user) {
       this.stop(); this.uid = user.uid; this.email = user.email; this.ready = false; this.state = 'syncing'; this.msg = '';
-      Store.open(user.uid); UI.refresh();
+      await Store.open(user.uid); if (this.uid !== user.uid) return; UI.refresh();
+      loadNS('local').then(o => { Store.localOther = o; UI.status(); });
       // remote FIRST: pending local edits are only merged after the first snapshot arrived (never upload over the cloud)
-      this.cloudIds = new Set(); this.listenErr = ''; this.resubDelay = 0; this.listen();
+      this.cloudIds = new Set(Object.keys(Store.data.objects).filter(id => Store.data.objects[id].rev > 0));
+      this.listenErr = ''; this.resubDelay = 0; this.listen();
     },
-    // Firestore listener. If it fails (quota, a proxy dropping the stream, network), it is restarted with backoff; the
-    // restarted listener first delivers every cloud document again, so the device reconciles completely.
+    // "Re-download everything from the cloud": one full read (2,308 reads of the free 50,000/day)
+    refetch() { if (!this.uid) return; this.full = true; this.ready = false; this.listen(); UI.refresh(); },
+    // Firestore listener. If it fails (quota, a proxy dropping the stream, network), it is restarted with backoff.
+    // Incremental (v0.5.5): it asks only for review docs updated since this device's newest cloud version (minus a day),
+    // so a reload or reconnect reads a handful of docs instead of all 2,308 (the free plan allows 50,000 reads/day).
+    // A device with no cloud copy yet (or after "Re-download") reads everything once.
     listen() {
       if (this.unsub) try { this.unsub(); } catch (e) { /* ignore */ }
       this.live = false;
-      this.unsub = this.backend.subscribe(this.uid, ch => { this.live = true; this.listenErr = ''; this.resubDelay = 0; this.onRemote(ch); }, e => this.listenFail(e));
+      const since = this.full ? 0 : Store.cursor(); this.since = since;
+      this.unsub = this.backend.subscribe(this.uid, ch => { this.live = true; this.listenErr = ''; this.resubDelay = 0; this.full = false; this.onRemote(ch); }, e => this.listenFail(e), since);
     },
     listenFail(e) {
       const code = (e && (e.code || e.name)) || '', msg = (e && e.message) || String(e);
       if (/permission-denied|PERMISSION_DENIED|unauthenticated/i.test(code + msg)) return this.fail(e);
       this.live = false; this.unsub = null;
-      this.listenErr = /resource-exhausted|quota/i.test(code + msg) ? 'Firebase daily quota reached (free Spark plan): cloud reviews paused until it resets.' : 'Cloud connection lost (network or company firewall).';
+      this.listenErr = /resource-exhausted|quota/i.test(code + msg) ? 'Firebase daily quota reached (free Spark plan): cloud sync paused until it resets (midnight US Pacific time, about 09:00 in Central Europe). Reviews are still saved on this device.' : 'Cloud connection lost (network or company firewall).';
       this.resubDelay = this.resubDelay ? Math.min(300000, this.resubDelay * 2) : 5000; clearTimeout(this.resubTimer);
       const uid = this.uid; this.resubTimer = setTimeout(() => { if (this.uid === uid) this.listen(); }, this.resubDelay);
       UI.refresh();
@@ -116,7 +189,7 @@
         // sync transaction reads the newest server version itself and three-way merges against that base. Moving the
         // base forward here would hide the other device's change and let a stale edit overwrite it.
         if (o.dirty) continue;
-        o.base = fields; o.local = fields; o.rev = data ? data.rev || 0 : 0;
+        o.base = fields; o.local = fields; o.rev = data ? data.rev || 0 : 0; if (data && data.updatedAt > (o.t || 0)) o.t = data.updatedAt;
       }
       const first = !this.ready; this.ready = true; if (this.state !== 'error') this.state = 'idle';
       Store.persist(true); UI.refresh(); if (first) this.schedule(0);
@@ -144,7 +217,7 @@
       // acknowledged by the server: rebase keystrokes typed while the commit was in flight onto the merged result
       const now = o.local, rebased = { ...merged.fields };
       for (const p of new Set([...Object.keys(now), ...Object.keys(start)])) if (!RM.same(now[p], start[p])) { if (now[p]) rebased[p] = now[p]; else delete rebased[p]; }
-      o.base = merged.fields; o.rev = res.rev; o.local = rebased;
+      o.base = merged.fields; o.rev = res.rev; o.local = rebased; if (res.doc && res.doc.updatedAt > (o.t || 0)) o.t = res.doc.updatedAt;
       for (const [p, c] of Object.entries(merged.conflicts)) o.conflicts[p] = { ...c, source: 'device' };
       o.dirty = Object.keys({ ...rebased, ...merged.fields }).some(p => !RM.same(rebased[p], merged.fields[p]));
     },
@@ -161,6 +234,7 @@
   /* ---------- review edits ---------- */
   const undo = [];
   function edit(id, path, patch, { record = true } = {}) {
+    if (Store.loading) return UI.toast('Still loading this device\'s reviews… try again in a moment');
     const o = Store.obj(id), prev = o.local[path] ? { ...o.local[path] } : null;
     o.local = RM.setField(o.local, path, patch, device, Date.now());
     if (record) undo.push({ id, path, prev }); if (undo.length > 200) undo.shift();
@@ -173,6 +247,7 @@
     markDirty(u.id); Store.persist(); Sync.schedule(); UI.select(u.id, null, null, true); UI.toast('Undone: ' + u.path);
   }
   function approveAll(id) {
+    if (Store.loading) return UI.toast('Still loading this device\'s reviews… try again in a moment');
     const o = Store.obj(id), before = o.local, req = required(id);
     o.local = RM.approveAll(o.local, req, device, Date.now());
     for (const p of req) if (!RM.same(before[p], o.local[p])) undo.push({ id, path: p, prev: before[p] || null });
@@ -373,14 +448,16 @@
     },
     status() {
       const s = Sync.status(), el = $('#sync'); el.className = 'sync k-' + s.k; el.textContent = s.t;
-      $('#acct').innerHTML = Sync.uid ? `<span class="small">${esc(Sync.email)}</span> <button class="btn sm" data-a="signout">Sign out</button>` : (UI.cloudReady ? '<button class="btn sm primary" data-a="signin">Sign in</button>' : '<span class="small muted">cloud unavailable</span>');
+      $('#acct').innerHTML = Sync.uid ? `<span class="small">${esc(Sync.email)}</span> <button class="btn sm" data-a="refetch" title="Read every review from the cloud again (uses about 2,300 of the 50,000 free daily reads)">Re-download</button> <button class="btn sm" data-a="signout">Sign out</button>` : (UI.cloudReady ? '<button class="btn sm primary" data-a="signin">Sign in</button>' : '<span class="small muted">cloud unavailable</span>');
       $('#localwarn').hidden = !!Sync.uid;
+      const sw = $('#savewarn'); sw.hidden = !Store.saveError;
+      if (Store.saveError) sw.innerHTML = `<b>Not saved on this device</b> (${esc(Store.saveError)}). ${Sync.uid && Sync.live ? 'Your reviews still upload to the cloud.' : '<b>Do not reload or close this page</b> — the latest reviews exist only in this open page.'} Tap <b>Export JSON</b> now to keep a copy. <button class="btn sm" data-a="retrysave">Try again</button>`;
       const c = Store.conflictCount(); $('#conf').hidden = !c; $('#conf').textContent = `${c} conflict(s) to resolve`;
       this.localMergeOffer();
     },
     localMergeOffer() {
       const el = $('#localmerge'); if (!Sync.uid || !Sync.ready) { el.hidden = true; return; }
-      const loc = ls.get('store.local', { objects: {} }), n = Object.values(loc.objects).filter(o => Object.keys(o.local || {}).length).length;
+      const loc = Store.localOther || {}, n = Object.values(loc).filter(o => o && Object.keys(o.local || {}).length).length;
       el.hidden = !n; el.innerHTML = n ? `${n} object(s) were reviewed in local-only mode on this device. <button class="btn sm" data-a="mergelocal">Merge into my cloud reviews</button>` : '';
     },
     refresh() { this.list(); if (this.sel) this.select(this.sel, null, null, true); this.status(); },
@@ -399,8 +476,10 @@
       else if (a === 'spriteok') spriteOk(d.id); else if (a === 'spritefix') spriteFix(d.id); else if (a === 'spriteexport') spriteExportDialog();
       else if (a === 'aibatch') batchDialog(); else if (a === 'aiimport') $('#aifile').click();
       else if (a === 'signin') this.signin(); else if (a === 'signout') this.signout();
-      else if (a === 'mergelocal') { const loc = ls.get('store.local', { objects: {} }), ent = {}; for (const [id, o] of Object.entries(loc.objects)) if (OBJECTS[id] && Object.keys(o.local || {}).length) ent[id] = o.local; const p = applyEntries(ent, 'local-only'); ls.del('store.local'); this.toast(`Merged: ${p.add} added, ${p.conflicts} conflicts`); this.status(); }
-      else if (a === 'clearlocal') { if (Store.pending().length) return this.toast('Not cleared: there are unsynced changes'); ls.del('store.' + Store.ns); Store.open(Store.ns); this.refresh(); this.toast('This browser\'s copy was cleared (cloud reviews are untouched)'); }
+      else if (a === 'mergelocal') { const loc = Store.localOther || {}, ent = {}; for (const [id, o] of Object.entries(loc)) if (OBJECTS[id] && o && Object.keys(o.local || {}).length) ent[id] = o.local; const p = applyEntries(ent, 'local-only'); Store.localOther = {}; Store.clearNS('local'); this.toast(`Merged: ${p.add} added, ${p.conflicts} conflicts`); this.status(); }
+      else if (a === 'clearlocal') { if (Store.pending().length) return this.toast('Not cleared: there are unsynced changes'); const ns = Store.ns; Store.clearNS(ns).then(() => Store.open(ns)).then(() => { if (Sync.uid) Sync.refetch(); this.refresh(); this.toast('This browser\'s copy was cleared (cloud reviews are untouched)'); }); }
+      else if (a === 'refetch') { Sync.refetch(); this.toast('Re-downloading all reviews from the cloud…'); }
+      else if (a === 'retrysave') { Store.flush().then(ok => this.toast(ok ? 'Saved on this device' : 'Still could not save on this device')); }
       else if (a === 'dlgclose') $('#dlg').close();
     },
     step(dir) { const ids = this.filtered(); if (!ids.length) return; const i = ids.indexOf(this.sel); this.select(ids[(i + dir + ids.length) % ids.length]); },
@@ -467,7 +546,7 @@
       const p = Store.pending().length;
       this.dialog('Sign out', `<p>${p ? `<b>${p} object(s) are not uploaded yet.</b> They stay saved on this device and are synced the next time you sign in here.` : 'Everything is synced. Your cloud reviews are not affected by signing out.'}</p>
         ${p ? '' : '<p class="small">On a shared or work PC you can also remove this browser\'s copy of the reviews (the cloud copy stays).</p>'}`,
-        [['Sign out', async () => { await Sync.backend.signOut(); }], ...(p ? [] : [['Sign out and clear this browser', async () => { const ns = Store.ns; await Sync.backend.signOut(); ls.del('store.' + ns); }]])]);
+        [['Sign out', async () => { await Sync.backend.signOut(); }], ...(p ? [] : [['Sign out and clear this browser', async () => { const ns = Store.ns; await Sync.backend.signOut(); await Store.clearNS(ns); }]])]);
     },
     dialog(title, body, buttons = []) {
       const d = $('#dlg'); d.innerHTML = `<h3>${esc(title)}</h3><div>${body}</div><div class="dbtn">${buttons.map((b, i) => `<button class="btn ${i ? '' : 'primary'}" data-i="${i}">${esc(b[0])}</button>`).join('')}<button class="btn" data-a="dlgclose">Close</button></div>`;
@@ -513,22 +592,25 @@
     if (/unauthorized-domain|operation-not-allowed/.test(c)) return 'Firebase refused this site: check Authentication → Settings → Authorized domains (patrikarendas-droid.github.io) and that Email/Password sign-in is enabled.';
     return 'Sign-in failed: ' + ((e && e.message) || c || 'unknown error');
   }
-  window.addEventListener('beforeunload', () => { Store.persist(true); });
+  window.addEventListener('beforeunload', () => { Store.flush(); });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') Store.flush(); });
 
   /* ---------- boot: UI first (local), then the cloud via a guarded dynamic import ---------- */
   UI.cloudReady = false;
-  Store.open('local'); UI.init();
   async function loadBackend() {
     if (window.__CATALOGUE_TEST_BACKEND) return window.__CATALOGUE_TEST_BACKEND; // tests only (mock Firebase)
     const t = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 15000));
     return (await Promise.race([import('./cloud.js'), t])).backend;
   }
-  loadBackend().then(b => {
+  // ask the browser not to evict the review database when the device is low on space (Chrome decides silently)
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persisted().then(p => p || navigator.storage.persist()).catch(() => {}); } catch (e) { /* ignore */ }
+  const opened = Store.open('local').then(() => UI.init());
+  Promise.all([loadBackend(), opened]).then(([b]) => {
     Sync.backend = b; UI.cloudReady = true; UI.status();
     b.onAuth(async user => {
-      if (user && user.uid !== b.ownerUid) { await b.signOut(); Sync.stop(); Store.open('local'); UI.refresh(); return UI.dialog('Not allowed', '<p>This account is not the catalogue owner. Only the owner\'s account can use cloud review sync.</p>'); }
-      if (user) await Sync.start(user); else { Sync.stop(); Store.open('local'); UI.refresh(); }
+      if (user && user.uid !== b.ownerUid) { await b.signOut(); Sync.stop(); await Store.open('local'); UI.refresh(); return UI.dialog('Not allowed', '<p>This account is not the catalogue owner. Only the owner\'s account can use cloud review sync.</p>'); }
+      if (user) await Sync.start(user); else { Sync.stop(); await Store.open('local'); UI.refresh(); }
     });
   }).catch(e => { Sync.cloudError = 'Firebase could not be loaded: network or firewall'; UI.status(); console.warn('catalogue: cloud unavailable', e); });
-  window.__catalogue = { Store, Sync, UI, sample, moveSlots, required, liveValue, exportData, applyEntries, device, IDS, checkProposal, spriteExportData, prefs }; // for tests and debugging
+  window.__catalogue = { idb, opened, Store, Sync, UI, sample, moveSlots, required, liveValue, exportData, applyEntries, device, IDS, checkProposal, spriteExportData, prefs }; // for tests and debugging
 })();
