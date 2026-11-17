@@ -208,6 +208,8 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
     `gameplay-baseline record-art` (refuses unless rules, mechanics, recognition, encounters and battles are unchanged).
     `identity.js`/`mapping-audit.js` checks of old borrowed designs now read `visPrev`.
 
+- **After v0.6.0:** the owner confirmed the release (2026-11-17).
+
 **Next priorities (2026-11-17):**
 0. Owner: re-check the 672 new sprites (catalogue → Sprite review → "Redesigned · to re-check"), export sprite fixes
    for a follow-up round.
