@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferred writing cases resolved).
+Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner's sprite review).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -76,6 +76,7 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
 | v0.4.8 | 4fa85a6 | 2026-11-02 | Pilot 02 curated writing (50 objects, with monster names); automatic refresh of saved monsters; encyclopedia names. |
 | v0.4.9 | 996d52b | 2026-11-02 | Recognition → identity → visual audit: sea urchin fixed, 40+ labels to their correct object, 5 new objects, honest bodies, whole-word design rules; mapping-audit tooling and CI test.
 | v0.5.0 | 6ecd64f | 2026-11-03 | Full curated writing live: monster names, flavour text and move names for all 2,308 objects (60 previously approved + 2,248 campaign); Pilot 01 gains names; saved monsters refresh their text once. |
+| v0.6.0 | f847b06 | 2026-11-17 | Object-specific sprites for the 672 objects flagged in the owner's sprite review (visual only; saved monsters keep their look until "Update its look"); catalogue "Redesigned · to re-check" filter. |
 | v0.5.5 | 46cc655 | 2026-11-16 | Catalogue saving fixed: reviews in IndexedDB (a full review had outgrown localStorage), "Not saved" banner, incremental cloud reads + Re-download. Game unchanged. |
 | v0.5.4 | 90099ae | 2026-11-16 | Catalogue Sprite review mode + Export sprite fixes; the 7 writing cases deferred from v0.5.3 resolved (35 fields). No mechanics/sprite changes. |
 | v0.5.3 | 9148ca7 | 2026-11-16 | Owner's catalogue writing review applied: 11,103 monster names + 11,125 flavour texts on 2,254 objects; catalogue cloud listener restarts after errors and never shows "Synced" while disconnected. No mechanics/sprite/move changes. |
@@ -84,7 +85,7 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
 
 ## 4. Current state and next priorities
 
-- **Live: v0.5.5** (merge 46cc655, Pages run 34 green, tag v0.5.5; v0.5.4 = merge 90099ae; v0.5.3 = merge 9148ca7; v0.5.2 = merge 73023bb; v0.5.1 = merge 9c23c39; production `claude/snapmon-game-dev-7o667u`; game identical to v0.5.0 apart from the version
+- **Live: v0.6.0** (merge f847b06, Pages run 36 green, tag v0.6.0; v0.5.5 = merge 46cc655; v0.5.4 = merge 90099ae; v0.5.3 = merge 9148ca7; v0.5.2 = merge 73023bb; v0.5.1 = merge 9c23c39; production `claude/snapmon-game-dev-7o667u`; game identical to v0.5.0 apart from the version
   label). Save format 3 (unchanged since v0.3.0). v0.5.0 (merge 6ecd64f): full curated writing; the owner completed all
   **seven real Android smoke checks of v0.5.0 successfully on 2026-11-04**.
 - **Developer catalogue (v0.5.1):** <https://patrikarendas-droid.github.io/snapmon/catalogue/> — `catalogue/`, docs
