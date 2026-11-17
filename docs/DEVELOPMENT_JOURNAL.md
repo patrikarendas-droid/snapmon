@@ -212,8 +212,8 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
   all sprites satisfactory for now (2026-11-17). No sprite work pending.
 
 **Next priorities (2026-11-17):**
-1. Owner: phone check of v0.5.4. Resolve the 4 catalogue conflict markers (accordion, i_academic_gown, x_3d_printer,
-   x_acorn_cap) with Keep A/B; the live game already has the chosen text.
+1. Catalogue conflict markers (accordion, i_academic_gown, x_3d_printer, x_acorn_cap): closed 2026-11-17. The owner
+   found no conflict box (all fields show "Looks good"); catalogue-only, the live game already has the chosen text.
 2. Sprite review: done (v0.6.0 redesign of 672 sprites, owner satisfied). New sprite notes, if any, go through the
    same flow: Sprite review → Export sprite fixes.
 3. Later approved batches through `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and
