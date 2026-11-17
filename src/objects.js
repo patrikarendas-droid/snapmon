@@ -866,7 +866,7 @@ const CAT_DEFAULT_OBJECT = {
    with the old body (dna.shape 'obj', or a category shape) still renders exactly as before; new monsters get shape
    'obj2'. An object that borrows (LIKE) a redesigned object keeps the borrowed OLD design unless it was redesigned
    itself. `rev` = the design revision to resolve (default: the object's current one). */
-function visView(o, rev) { return o && o.visRev && rev < o.visRev ? { ...o, vis: o.visPrev, neutral: o.neutralPrev, visRev: 0 } : o; }
+function visView(o, rev) { return o && o.visRev && rev < o.visRev ? { ...o, ...o.prevLook, vis: o.visPrev, neutral: o.neutralPrev, visRev: 0 } : o; }
 function visualSource(o, rev) {
   if (!o) return o; const r = rev || o.visRev || 1, v = visView(o, r);
   return v.vis && v.vis.like && OBJECTS[v.vis.like] ? visView(OBJECTS[v.vis.like], r) : v;
@@ -1580,7 +1580,8 @@ function applyRedesign(strict) {
     const o = OBJECTS[id]; if (!PARTS.X[id]) throw new Error('redesign: missing builder ' + id);
     if (!o) { if (strict) throw new Error('redesign: missing object ' + id); continue; }
     if (o.visRev) continue;
-    o.visPrev = o.vis; o.neutralPrev = o.neutral; o.visRev = 2; o.vis = 'X'; delete o.neutral; o.redesigned = '0.6.0';
+    // the previous colours are kept too, so objects that borrow this design keep their exact look
+    o.visPrev = o.vis; o.neutralPrev = o.neutral; o.prevLook = { h: o.h, s: o.s, l: o.l, sec: o.sec }; o.visRev = 2; o.vis = 'X'; delete o.neutral; o.redesigned = '0.6.0';
     if (r.col) [o.h, o.s, o.l] = r.col;
     if (r.sec) o.sec = r.sec;
   }
