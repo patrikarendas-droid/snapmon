@@ -72,6 +72,20 @@ const F = (status, note = '') => ({ status, note, proposal: '' });
     ok(!errs.length, `${w}px: no page errors${errs.length ? ': ' + errs[0] : ''}`);
     await p.screenshot({ path: path.join(out, `cat-sprite-${w}.png`) }); await ctx.close();
   }
+  // v0.6.0: redesigned sprites — "Redesigned · to re-check" lists the objects whose Needs fix predates the redesign
+  { const ctx = await b.newContext({ viewport: { width: 412, height: 900 }, isMobile: true, hasTouch: true }); await ctx.route(/gstatic\.com/, r => r.abort()); const p = await ctx.newPage(), errs = []; p.on('pageerror', e => errs.push(e.message));
+    await p.goto(base + 'catalogue/'); await p.waitForSelector('.row');
+    const r = await p.evaluate(async () => { const S = __catalogue.Store, ids = __catalogue.IDS.filter(id => OBJECTS[id].redesigned), old = Date.parse('2026-11-16T10:00:00Z');
+      S.obj(ids[0]).local = { visual: { status: 'fix', note: 'too generic', proposal: '', t: old } }; S.obj(ids[1]).local = { visual: { status: 'ok', note: '', proposal: '', t: Date.now() } };
+      await S.persist(true); __catalogue.prefs.mode = 'sprite'; __catalogue.prefs.st = 'recheck'; localStorage.setItem('snapmon-catalogue.v1.prefs', JSON.stringify(__catalogue.prefs)); return { n: ids.length, a: ids[0], b2: ids[1] }; });
+    await p.reload(); await p.waitForSelector('.row');
+    const shown = await p.$$eval('.row', rs => rs.map(x => x.dataset.id)), prog = await p.textContent('#prog');
+    ok(r.n === 672 && shown.includes(r.a) && !shown.includes(r.b2) && /new sprites \(v0\.6\.0\): 671 of 672 to re-check/.test(prog), `"Redesigned · to re-check" lists redesigned sprites not yet re-checked (${prog.match(/new sprites[^·]*/) || prog})`);
+    await p.click(`.row[data-id="${r.a}"]`); await p.waitForSelector('[data-a="spriteok"]');
+    ok(/New sprite in v0\.6\.0/.test(await p.textContent('#detail')) && /new sprite/.test(await p.textContent('#list').catch(() => 'new sprite')), 'the detail page says the sprite is new and the old flag was about the old sprite');
+    await p.click('[data-a="spriteok"]'); await p.waitForTimeout(200);
+    ok(!(await p.isVisible('#dlg[open]')) && (await p.evaluate(id => __catalogue.Store.fields(id).visual.status, r.a)) === 'ok', 'marking a redesigned sprite good needs no confirmation when the old flag predates the redesign');
+    ok(!errs.length, 'no page errors' + (errs.length ? ': ' + errs[0] : '')); await ctx.close(); }
   // a complete audit with 0 fixes is distinguishable from an incomplete one
   { const ctx = await b.newContext({ acceptDownloads: true }); await ctx.route(/gstatic\.com/, r => r.abort()); const p = await ctx.newPage();
     await p.goto(base + 'catalogue/'); await p.waitForSelector('.row');

@@ -187,7 +187,29 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
   - Tests: `tests/e2e-catalogue-storage.js` (CI); `tests/e2e-catalogue.js` with the real SDK + emulators passes
     (its stale 40-character-name check now picks the longest live Legendary name).
 
-**Next priorities (2026-11-16):**
+- **v0.6.0 (2026-11-17): object-specific sprites for the 672 objects the owner flagged** in the catalogue's Sprite
+  review (part 1 = PC export, 73 flags up to "Cocktail glass drink", 42 of them only in that file; part 2 = phone/cloud
+  export, 630 flags; union 672; one specific note: the catfish's barbels).
+  - Each object has its own builder (`PARTS.X[id]` in `src/parts.js`, shared helpers per group: side-view quadrupeds,
+    upright animals, fish, birds, reptiles, insects, garments, shoes, cars, boats, bottles, bowls, glasses, plants…)
+    and, where the category colour misled (wood was green, a Dalmatian random), a natural colour (`REDESIGN` in
+    `src/objects.js`, 203 objects). Visual only: category, family, stats, moves and texts unchanged.
+  - Design revision 2: new monsters get body shape `obj2`; the old design and colours are kept (`visPrev`,
+    `prevLook`), so saved monsters render pixel-identically until the player taps "Update its look" (undoable);
+    objects that borrow (LIKE) a redesigned object keep the old borrowed look. `applyRedesign()` runs at the end of
+    `objects.js` and of the generated `labels.js` (ImageNet-only `i_…` objects).
+  - Catalogue: "Redesigned · to re-check" filter, "new sprite" badge, quiet "Sprite looks good" for flags that predate
+    the redesign; the sprite export marks redesigned objects.
+  - Tests: new `tests/sprite-redesign.js` (CI) against a fixture recorded with the v0.5.5 sources: all 672 render in
+    every rarity × variant and differ from the old body; v0.5.5 monsters of these objects render identically; every
+    other object has the same DNA and pixels as v0.5.5; "Update its look" + undo. Baselines re-recorded with guarded
+    modes only: `generator-snapshot record-visual` (refuses unless every name/stat/move/text is unchanged) and the new
+    `gameplay-baseline record-art` (refuses unless rules, mechanics, recognition, encounters and battles are unchanged).
+    `identity.js`/`mapping-audit.js` checks of old borrowed designs now read `visPrev`.
+
+**Next priorities (2026-11-17):**
+0. Owner: re-check the 672 new sprites (catalogue → Sprite review → "Redesigned · to re-check"), export sprite fixes
+   for a follow-up round.
 1. Owner: phone check of v0.5.4. Resolve the 4 catalogue conflict markers (accordion, i_academic_gown, x_3d_printer,
    x_acorn_cap) with Keep A/B; the live game already has the chosen text.
 2. Owner reviews all 2,308 sprites in Sprite review mode (from "Cocktail glass drink" on; the first 440 are in the PC
@@ -250,6 +272,9 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
 - **Catalogue stopped saving on every device (store over the localStorage limit)** – one ~7.6M-character value vs
   ~5M allowed; reviews moved to IndexedDB with a visible "Not saved" banner; cloud reads made incremental. v0.5.5.
 
+- **672 sprites looked nothing like their object** (owner's sprite review: generic family bodies such as one fish for
+  every fish, a candle for a bonfire, a hat for a bearskin) – each got its own design. v0.6.0.
+
 ## 7. Testing and verification
 
 - **Automated (CI on every deploy, `pages.yml`):** logic (`sim`, `rules-trace`, `gameplay-baseline`, `ability-keys`, `generator-snapshot`, `curated`, `curated-pipeline`, `curated-refresh`, `god-mode`, `guide`, `lore`, `identity`, `devtest`,
@@ -262,6 +287,9 @@ Last updated: 2026-11-16, release v0.5.4 (catalogue Sprite review mode; 7 deferr
 
 ## 8. Consequential technical decisions
 
+- **Design revisions instead of in-place redesigns (v0.6.0)** – an object's previous design stays available (`visPrev`)
+  and new monsters carry body shape `obj2`, so captured monsters never change look silently; "Update its look" moves
+  them on request. Chosen over changing the shared builders, which would have redrawn saved monsters and borrowers.
 - **Catalogue storage and reads (v0.5.5)** – reviews in IndexedDB (no practical size limit) rather than localStorage;
   cheap cloud reads by an incremental `updatedAt > newest − 1 day` query instead of Firestore's persistent cache, so
   the Firebase SDK still keeps nothing on disk on a work PC. A save failure is a banner, never only a toast.

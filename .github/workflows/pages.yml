@@ -29,6 +29,7 @@ jobs:
           node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json
           node tests/sprites-v3.js
           node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
+          node tests/sprite-redesign.js
           node tests/migrate.js
           node tests/clip-fusion.js
           node tests/color.js

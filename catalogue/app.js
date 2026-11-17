@@ -364,9 +364,15 @@
 
   /* ---------- sprite review (v0.5.4) ---------- */
   // sprite-only actions: touch ONLY the overall `visual` field (never names/lore/moves/mapping or visual.<r>.<v>)
+  /* v0.6.0: the 672 sprites the owner flagged were redesigned. A "Needs fix" set before the redesign was about the OLD
+     sprite: such objects are "to re-check", and marking them good needs no confirmation. */
+  const REDESIGN_AT = Date.parse('2026-11-17T11:00:00Z');
+  const redesigned = id => !!(OBJECTS[id] && OBJECTS[id].redesigned);
+  const oldFlag = id => { const v = Store.fields(id).visual; return !!(v && v.status === 'fix' && !(v.t > REDESIGN_AT)); };
+  const toRecheck = id => redesigned(id) && (!Store.fields(id).visual || oldFlag(id));
   function spriteOk(id) {
     const cur = Store.fields(id).visual;
-    if (cur && cur.status === 'fix') return UI.dialog('Sprite looks good?', `<p>This sprite is flagged <b>Needs fix</b>${cur.note ? `: “${esc(cur.note)}”` : ''}.</p><p class="small">Mark the overall sprite as good? The note is kept; rarity/variant flags are not changed.</p>`,
+    if (cur && cur.status === 'fix' && !(redesigned(id) && oldFlag(id))) return UI.dialog('Sprite looks good?', `<p>This sprite is flagged <b>Needs fix</b>${cur.note ? `: “${esc(cur.note)}”` : ''}.</p><p class="small">Mark the overall sprite as good? The note is kept; rarity/variant flags are not changed.</p>`,
       [['Mark as good', () => { edit(id, 'visual', { status: 'ok' }); UI.select(id, null, null, true); UI.list(); }]]);
     edit(id, 'visual', { status: 'ok' }); UI.select(id, null, null, true); UI.list();
   }
@@ -377,7 +383,7 @@
   function spriteExportData() {
     const live = !!(Sync.uid && Sync.live && !Store.pending().length);
     return RM.buildSpriteExport(IDS.slice().sort(), { fieldsOf: id => Store.fields(id), nameOf: id => OBJECTS[id].name, categoryOf: id => (CATEGORY[OBJECTS[id].cat] && CATEGORY[OBJECTS[id].cat].name) || OBJECTS[id].cat,
-      designOf: id => { const o = OBJECTS[id], src = visualSource(o), d = sample(id, 'common', 'normal').dna; return { tier: objectTier(o), drawnLike: src !== o ? src.id : null, body: d.shape + (d.sub ? ':' + d.sub : '') }; },
+      designOf: id => { const o = OBJECTS[id], src = visualSource(o), d = sample(id, 'common', 'normal').dna; return { tier: objectTier(o), drawnLike: src !== o ? src.id : null, body: d.shape + (d.sub ? ':' + d.sub : ''), ...(o.redesigned ? { redesigned: o.redesigned, flaggedBeforeRedesign: oldFlag(id) } : {}) }; },
       game: GAME_VERSION, revision: CURATED.revision, now: Date.now(),
       dataSource: live ? 'cloud (signed in, live connection, nothing pending)' : Sync.uid ? 'this device\'s copy (not fully synced with the cloud)' : 'this device only (local mode, NOT synced)' });
   }
@@ -423,7 +429,9 @@
         const o = OBJECTS[id];
         if (cat && o.cat !== cat) return false;
         if (q && !(id.includes(q) || o.name.toLowerCase().includes(q) || (o.al || []).some(a => a.toLowerCase().includes(q)) || Object.values(curated(id).names || {}).some(n => n.toLowerCase().includes(q)))) return false;
-        if (st !== 'all') { const s = this.stateOf(id); if (st === 'todo' ? s !== 'todo' : st === 'open' ? s === 'ok' : s !== st) return false; }
+        if (st === 'redesigned') { if (!redesigned(id)) return false; }
+        else if (st === 'recheck') { if (!toRecheck(id)) return false; }
+        else if (st !== 'all') { const s = this.stateOf(id); if (st === 'todo' ? s !== 'todo' : st === 'open' ? s === 'ok' : s !== st) return false; }
         return true;
       }).sort((a, b) => { if (!q) return 0; const r = id => { const n = OBJECTS[id].name.toLowerCase(); return id === q || n === q ? 0 : n.startsWith(q) ? 1 : 2; }; return r(a) - r(b); });
     },
@@ -431,7 +439,7 @@
       const ids = this.filtered(), slice = ids.slice(0, this.shown);
       $('#list').innerHTML = slice.map(id => {
         const o = OBJECTS[id], s = this.stateOf(id), c = Object.keys((Store.data.objects[id] || {}).conflicts || {}).length;
-        return `<div class="row ${this.sel === id ? 'on' : ''}" data-id="${esc(id)}" role="button" tabindex="0"><div class="rt"><b>${esc(o.name)}</b> <span class="badge s-${s}">${label(s)}</span>${c && !SPRITE() ? ' <span class="badge s-fix">conflict</span>' : ''}<br><small>${esc(id)} · ${esc(o.cat)}</small></div><div class="th" data-id="${esc(id)}"></div></div>`;
+        return `<div class="row ${this.sel === id ? 'on' : ''}" data-id="${esc(id)}" role="button" tabindex="0"><div class="rt"><b>${esc(o.name)}</b> <span class="badge s-${s}">${label(s)}</span>${redesigned(id) && SPRITE() ? ` <span class="badge s-new">${toRecheck(id) ? 'new sprite · re-check' : 'new sprite'}</span>` : ''}${c && !SPRITE() ? ' <span class="badge s-fix">conflict</span>' : ''}<br><small>${esc(id)} · ${esc(o.cat)}</small></div><div class="th" data-id="${esc(id)}"></div></div>`;
       }).join('') + (ids.length > this.shown ? `<button class="btn block" data-a="more">Show more (${ids.length - this.shown} left)</button>` : '') + (!ids.length ? '<p class="muted pad">No objects match.</p>' : '');
       $('#found').textContent = `${ids.length} shown`;
       for (const el of $('#list').querySelectorAll('.th')) this.io.observe(el);
@@ -441,7 +449,8 @@
     progress() {
       this.modeUI();
       if (SPRITE()) { const c = RM.spriteCounts(IDS, id => Store.fields(id)), cloud = !Sync.uid ? ' · <span class="warn">local only (not synced)</span>' : Sync.live && !Store.pending().length ? '' : ' · <span class="warn">not fully synced: counts are this device\'s copy</span>';
-        $('#prog').innerHTML = `Sprites: <b>${c.reviewed}</b> reviewed (${c.ok} look good · <b>${c.fix}</b> need fix) · <b>${c.remaining}</b> remaining of ${c.total}${cloud}`; return; }
+        const rd = IDS.filter(redesigned), rc = rd.filter(toRecheck).length;
+        $('#prog').innerHTML = `Sprites: <b>${c.reviewed}</b> reviewed (${c.ok} look good · <b>${c.fix}</b> need fix) · <b>${c.remaining}</b> remaining of ${c.total}${rd.length ? ` · new sprites (v0.6.0): <b>${rc}</b> of ${rd.length} to re-check` : ''}${cloud}`; return; }
       let ok = 0, fix = 0, part = 0; for (const id of Store.reviewedIds()) { const s = this.stateOf(id); if (s === 'ok') ok++; else if (s === 'fix') fix++; else if (s === 'partial') part++; }
       const cloud = !Sync.uid ? '' : Sync.live ? ` · cloud: <b>${Sync.cloudIds.size}</b> reviewed objects` : ' · <span class="warn">cloud not connected: counts are this device\'s copy</span>';
       $('#prog').innerHTML = `<b>${ok}</b> approved · <b>${fix}</b> need fix · ${part} in progress · ${IDS.length - ok - fix - part} unreviewed${cloud}`;
@@ -498,6 +507,7 @@
         <h2>${esc(o.name)} <span class="badge s-${st}">${label(st)}</span></h2>
         <p class="small muted">id <code>${esc(id)}</code> · category ${esc((CATEGORY[o.cat] && CATEGORY[o.cat].name) || o.cat)} · design: ${esc(objectTier(o))}${src !== o ? ' (drawn like ' + esc(src.name) + ')' : ''} · body ${esc(m.dna.shape)}${m.dna.sub ? ':' + esc(m.dna.sub) : ''}<br>
           labels: ${esc((o.al || []).slice(0, 8).join(', ') || '—')} · source <code>${esc(SOURCE[id] || '—')}</code></p>
+        ${SPRITE() && redesigned(id) ? `<p class="small banner info">New sprite in v0.6.0 (redesigned after your sprite review).${oldFlag(id) ? ' Your “Needs fix” was about the OLD sprite: check the new one and mark it good or flag it again.' : ''}</p>` : ''}
         ${SPRITE() ? `<div class="actions"><button class="btn primary" data-a="spriteok" data-id="${esc(id)}">Sprite looks good</button> <button class="btn fixbtn" data-a="spritefix" data-id="${esc(id)}">Sprite needs fix</button> <button class="btn" data-a="undo">Undo</button>
           <span class="small muted">Sets only this object's overall sprite review (<code>visual</code>). Names, texts, moves and rarity/variant sprite flags are not changed.</span></div>
           ${Object.entries(f).some(([p, x]) => p.startsWith('visual.') && x.status === 'fix') ? '<p class="warn small">A rarity/variant sprite is flagged "Needs fix", so this object counts as needing a sprite fix.</p>' : ''}`

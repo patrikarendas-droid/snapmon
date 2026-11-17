@@ -24,7 +24,7 @@ main{display:block}#listwrap{padding:0 8px 40px}
 .row{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:9px 8px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:8px}
 .row:hover,.row.on{background:var(--panel)}.rt{min-width:0;flex:1}.rt b{overflow-wrap:anywhere}.th{display:flex;gap:2px;flex:none;min-width:150px;min-height:28px;justify-content:flex-end}
 canvas{image-rendering:pixelated;display:block}canvas.mini{width:28px;height:28px;background:var(--panel2);border-radius:4px}
-.badge{font-size:11px;padding:2px 7px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}.s-ok{color:var(--ok)}.s-fix{color:var(--fix)}.s-partial{color:var(--part)}.s-todo{color:var(--muted)}
+.badge{font-size:11px;padding:2px 7px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}.badge.s-new{border-color:#5fd0ff;color:#5fd0ff}.s-ok{color:var(--ok)}.s-fix{color:var(--fix)}.s-partial{color:var(--part)}.s-todo{color:var(--muted)}
 #detail{display:none;padding:12px 14px 60px}#detail.open{display:block}
 body.dopen #listwrap,body.dopen .tools,body.dopen #prog{display:none}
 .dhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;position:sticky;top:57px;background:var(--bg);padding:6px 0;z-index:3}.nav{display:flex;gap:6px;flex-wrap:wrap}
@@ -69,7 +69,7 @@ dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);bo
     <div class="tools">
       <input id="q" type="search" placeholder="Search name, id or label" aria-label="Search">
       <select id="cat" aria-label="Category"></select>
-      <select id="st" aria-label="Review status"><option value="all">All</option><option value="todo">Unreviewed</option><option value="open">Not approved yet</option><option value="partial">In progress</option><option value="ok">Approved</option><option value="fix">Needs fix</option></select>
+      <select id="st" aria-label="Review status"><option value="all">All</option><option value="todo">Unreviewed</option><option value="open">Not approved yet</option><option value="partial">In progress</option><option value="ok">Approved</option><option value="fix">Needs fix</option><option value="recheck">Redesigned · to re-check</option><option value="redesigned">Redesigned (v0.6.0)</option></select>
       <div class="seg" role="group" aria-label="Review mode"><button class="btn sm" data-a="mode" data-m="all">All reviews</button><button class="btn sm" data-a="mode" data-m="sprite">Sprite review</button></div>
       <button id="spriteexport" class="btn sm primary" data-a="spriteexport" hidden>Export sprite fixes</button>
       <span id="found" class="small muted"></span>
