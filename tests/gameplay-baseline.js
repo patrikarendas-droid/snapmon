@@ -11,6 +11,8 @@
 // Recognition audit (2026-11): re-recorded ON PURPOSE for artwork and label mapping only — `monsters` and `sprites`
 // (35 objects get an honest design: DNA shape changes, nothing else) and `recognition` (sea urchin, drum, dice, shopping
 // cart, flowerpot, corgi, carpenter's plane). `rules`, `mechanics`, `encounters` and `battles` are unchanged.
+// v0.6.0 (owner's sprite review, 672 objects redesigned): re-recorded with "record-art" — `monsters` (DNA shape/colours)
+// and `sprites` only; rules, mechanics, recognition, encounters and battles are unchanged (the mode refuses otherwise).
 // Round 2 (deferred-flag cleanup): `mechanics` re-recorded ON PURPOSE for exactly 15 objects whose design rule matched
 // inside another word (weasel → easel, motherboard → oar …; see generator-snapshot.js): their move kit follows the
 // corrected lore group. Rule tables, move numbers and every other object are unchanged.
@@ -109,6 +111,14 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
     const sum = T.finishBattle(S, B, rng); h.update(JSON.stringify([sum.result, sum.rewards, sum.drops, S.coins, S.hp, S.xp, S.level]));
   }
   parts.battles = dig(h); parts.battleCount = battles;
+}
+// "record-art" (v0.6.0 sprite redesign): artwork changed ON PURPOSE. Refuses unless every part except the artwork hashes
+// (`monsters` = stats + moves + DNA, `sprites` = rendered pixels) is identical, so rules, mechanics (stats and moves of
+// every object, without artwork), recognition, encounters and battles are proven unchanged.
+if (process.argv[2] === 'record-art') {
+  const prev = JSON.parse(fs.readFileSync(FIX, 'utf8')), other = Object.keys({ ...prev, ...parts }).filter(k => !['monsters', 'sprites'].includes(k) && JSON.stringify(prev[k]) !== JSON.stringify(parts[k]));
+  if (other.length) { console.log('FAIL: refusing — not only artwork changed: ' + other.join(', ')); process.exit(1); }
+  fs.writeFileSync(FIX, JSON.stringify(parts, null, 1)); console.log('recorded (artwork only: monsters, sprites)'); process.exit(0);
 }
 if (process.argv[2] === 'record') { fs.writeFileSync(FIX, JSON.stringify(parts, null, 1)); console.log('recorded', JSON.stringify(parts)); process.exit(0); }
 const want = JSON.parse(fs.readFileSync(FIX, 'utf8')), diff = Object.keys(want).filter(k => want[k] !== parts[k]);

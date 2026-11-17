@@ -180,6 +180,7 @@ const LABEL_OBJECTS = {
   extra: ${JSON.stringify([...extra.values()])},
 };
 for (const [id, name, cat, like] of LABEL_OBJECTS.extra) if (!OBJECTS[id]) { const o = OBJ(id, name, cat, like ? { like } : null, { al: [name.toLowerCase()], vocab: false }); if (!like && typeof applyDesignRules === 'function') applyDesignRules(o); }
+if (typeof applyRedesign === 'function') applyRedesign(true); // v0.6.0 redesigned sprites, now that every object exists
 `;
 fs.writeFileSync(path.join(__dirname, '../src/labels.js'), out);
 console.log(`ImageNet: ${report.specific} classes → registry objects, ${report.related} → own identity with a related design (e.g. dog breeds), ${report.family.length} → family-tier objects, ${report.excluded} excluded. COCO: ${COCO.length} mapped.`);

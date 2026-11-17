@@ -80,10 +80,12 @@ const filled = g => g.px.filter(v => v).length;
 }
 // 5b. design rules match whole words: a weasel is not an easel, a motherboard not an oar (round 2)
 {
+  // v0.6.0: objects redesigned after the owner's sprite review keep the rule's design as `visPrev` (saved monsters still use it)
+  const pre = o => (o.visRev ? { ...o, vis: o.visPrev } : o);
   const want = { x_weasel: o => o.lore !== 'art' && !(o.vis && o.vis.kind === 'easel'), x_motherboard: o => o.vis && o.vis.kind === 'chip', x_chess_board: o => o.vis && o.vis.like === 'puzzle',
     x_headboard: o => o.vis && o.vis.like === 'bed', x_vinyl_record: o => o.vis && o.vis.kind === 'disc', x_windbreaker: o => o.lore !== 'electric', x_champagne_flute: o => o.vis && o.vis.like === 'glass',
     x_honeycomb: o => o.lore !== 'gadget', x_combine_harvester: o => o.lore !== 'gadget', x_gingerbread_man: o => o.lore !== 'veg', i_bobsled: o => !!o.rule, i_dogsled: o => !!o.rule };
-  const badR = Object.entries(want).filter(([id, f]) => !f(T.OBJECTS[id])).map(([id]) => id);
+  const badR = Object.entries(want).filter(([id, f]) => !f(pre(T.OBJECTS[id]))).map(([id]) => id);
   ok(!badR.length, `design rules match whole words only (weasel ≠ easel, motherboard ≠ oar, honeycomb ≠ comb …; sleds still sleds)${badR.length ? ': ' + badR : ''}`);
   const ids = { whale: 'whale', dolphin: 'dolphin', wombat: 'wombat', 'piggy bank': 'piggy_bank', binoculars: 'binoculars' }, badI = [];
   for (const [l, id] of Object.entries(ids)) { seeded(2); const m = T.createMonster(T.freshState(), { obj: T.objectForLabel(l), rarity: 'rare', word: l });

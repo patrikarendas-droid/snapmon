@@ -15,6 +15,8 @@
 // `textFrozen` proves names, stats, moves and texts of every v0.4.8 object are unchanged, curated on and off.
 // v0.5.0 (full writing activation, all 2,308 objects curated): re-recorded with "record-curated" — curated-on hashes only;
 // curated-off output (`withoutCurated`, `textFrozen.off`) is unchanged and still checked.
+// v0.6.0 (sprite redesign of the 672 objects the owner flagged): re-recorded with "record-visual" — DNA (shape 'obj2',
+// natural colours) only; `textFrozen` proves every name, stat, move and text is unchanged, curated on and off.
 const crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/generator-snapshot.json');
 const G = require('./load')();

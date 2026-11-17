@@ -1025,15 +1025,17 @@ function makeDNA3(m) {
 // which body an object gets: its legacy sprite, an object builder ('obj'), or (no design) its category's shape
 function designOf(own, m = {}) {
   const o = visualSource(own), vis = o.vis, cat = CATEGORY[own.cat];
-  const shape = vis && vis.legacy ? vis.legacy : vis ? 'obj' : (cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : 'blob'));
+  const shape = vis && vis.legacy ? vis.legacy : vis ? (own.visRev >= 2 ? 'obj2' : 'obj') : (cat.shape || (m.aspect ? (m.aspect > 1.35 ? 'tall' : m.aspect < 0.75 ? 'wide' : 'blob') : 'blob'));
   const sub = vis && vis.legacy ? vis.sub || null : (!vis ? m.sub || null : null);
   return { shape, sub };
 }
 const D_BUILDER_ALIAS = { fan: 'electric_fan', vacuum: 'vacuum_cleaner', smartwatch: 'wristwatch', robot_toy: 'robot' };
 function objectBuilder(dna) {
-  const o = typeof OBJECTS !== 'undefined' && OBJECTS[dna.obj] && visualSource(OBJECTS[dna.obj]);
+  if (dna.shape !== 'obj' && dna.shape !== 'obj2') return null; // saved before this object had a design: keeps the look it was found with
+  // 'obj' = the design before the v0.6.0 redesign (revision 1), 'obj2' = revision 2
+  const o = typeof OBJECTS !== 'undefined' && OBJECTS[dna.obj] && visualSource(OBJECTS[dna.obj], dna.shape === 'obj2' ? 2 : 1);
   if (!o || !o.vis) return null; // family tier: falls through to the category's legacy shape
-  if (dna.shape !== 'obj') return null; // saved before this object had a design: keeps the look it was found with
+  if (o.vis === 'X') return PARTS.X[o.id] ? (g, R, d) => PARTS.X[o.id](g, R, d) : null; // v0.6.0 object-specific design
   if (o.vis === 'D') { const k = D_BUILDER_ALIAS[o.id] || o.id; return PARTS.D[k] ? (g, R, d) => PARTS.D[k](g, R, d) : null; }
   if (o.vis.legacy) return null;    // original sprite: shape/sub already stored in the dna
   if (o.vis.t && PARTS.T[o.vis.t]) return (g, R, d) => PARTS.T[o.vis.t](g, o.vis, d.var || 0, R);

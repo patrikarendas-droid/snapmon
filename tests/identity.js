@@ -56,7 +56,7 @@ for (const o of T.OBJECT_LIST) {
 }
 ok(!wrong.length, `no object borrows the toolbox, key, fridge, laptop or TV body unless it is one (${wrong.slice(0, 6).join(', ') || 'none'})`);
 const camNames = T.OBJECT_LIST.filter(o => /camera|webcam|dashcam|cctv|camcorder/.test(o.name.toLowerCase()) && !/bag/.test(o.name.toLowerCase()));
-ok(camNames.every(o => { const v = T.visualSource(o); return v.id === 'camera' || (v.vis && v.vis.t === 'cctv') || v.id === 'monitor'; }), `every camera (${camNames.length}) gets a camera design`);
+ok(camNames.every(o => { const v = T.visualSource(o); return (o.redesigned && /camera/.test(o.name.toLowerCase())) || v.id === 'camera' || (v.vis && v.vis.t === 'cctv') || v.id === 'monitor'; }), `every camera (${camNames.length}) gets a camera design`);
 const elec = T.OBJECT_LIST.filter(o => /switch|socket|outlet|thermostat|doorbell|intercom|smoke detector|fire alarm/.test(o.name.toLowerCase()) && o.id.startsWith('x_'));
 ok(elec.every(o => T.visualSource(o).vis && T.visualSource(o).vis.t === 'wallplate'), `every wall fitting (${elec.length}) gets the wall-plate design`);
 ok(T.DESIGN_RULES.every(([, vis]) => !vis.like || T.OBJECTS[vis.like]), 'every "drawn like" rule points at a real design');
@@ -93,9 +93,11 @@ const burgerGrid = grid(T.makeDNA({ obj: 'burger', cat: 'food', rarity: 'common'
   ok(ms.every(m => m.abilities[0].name === 'Wake-Up Call' && m.abilities[0].power === 1.0 && m.abilities[0].effect === 'burn' && m.abilities.every(a => !/grease/i.test(a.name))), `energy drink: drink moves (${ms[2].abilities.map(a => a.name).join(', ')})`);
   ok(!loreSeeds(o.id, /takeaway|grease|crumbs/i).length, 'energy drink: no meal lore (takeaway box, grease, crumbs) in any flavour text');
 }
+// v0.6.0: these drinks have their own glass/cup sprite (owner's sprite review) instead of a borrowed vessel body
+const REDRAWN_DRINKS = new Set(['x_wine', 'x_cocoa', 'x_tea_bag']);
 const DRINK = /\b(drink|soda|cola|juice|smoothie|milkshake|lemonade|beer|wine|cocktail|tea|hot chocolate|bubble tea|kombucha)\b/;
 const drinks = T.OBJECT_LIST.filter(o => ['food', 'cake', 'fruit', 'bottle'].includes(o.cat) && DRINK.test(o.name.toLowerCase()) && !/bag|beans|bottle cap|cooler|stein|glass bottle|wine bottle|beer bottle/.test(o.name.toLowerCase()));
-ok(drinks.length >= 15 && drinks.every(o => { const v = T.visualSource(o); return v.cat === 'mug' || v.cat === 'bottle' || (o.vis && o.vis.t === 'vessel'); }), `every drink (${drinks.length}) has a cup, glass, can or bottle body`);
+ok(drinks.length >= 15 && drinks.every(o => { const v = T.visualSource(o); return REDRAWN_DRINKS.has(o.id) || v.cat === 'mug' || v.cat === 'bottle' || (o.vis && o.vis.t === 'vessel'); }), `every drink (${drinks.length}) has a cup, glass, can or bottle body`);
 const foodFamily = T.OBJECT_LIST.filter(o => ['food', 'fruit'].includes(o.cat) && T.objectTier(o) === 'family');
 ok(!foodFamily.length, `every food, fruit and vegetable has its own or a related design${foodFamily.length ? ': ' + foodFamily.slice(0, 5).map(o => o.name).join(', ') : ''}`);
 const groups = {}; for (const o of T.OBJECT_LIST) if (['food', 'fruit'].includes(o.cat) && o.lore) groups[o.lore] = (groups[o.lore] || 0) + 1;
