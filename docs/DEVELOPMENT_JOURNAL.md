@@ -208,16 +208,14 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
     `gameplay-baseline record-art` (refuses unless rules, mechanics, recognition, encounters and battles are unchanged).
     `identity.js`/`mapping-audit.js` checks of old borrowed designs now read `visPrev`.
 
-- **After v0.6.0:** the owner confirmed the release (2026-11-17).
+- **After v0.6.0:** the owner confirmed the release and re-checked the redesigned sprites: the sprite review is complete,
+  all sprites satisfactory for now (2026-11-17). No sprite work pending.
 
 **Next priorities (2026-11-17):**
-0. Owner: re-check the 672 new sprites (catalogue → Sprite review → "Redesigned · to re-check"), export sprite fixes
-   for a follow-up round.
 1. Owner: phone check of v0.5.4. Resolve the 4 catalogue conflict markers (accordion, i_academic_gown, x_3d_printer,
    x_acorn_cap) with Keep A/B; the live game already has the chosen text.
-2. Owner reviews all 2,308 sprites in Sprite review mode (from "Cocktail glass drink" on; the first 440 are in the PC
-   export), then exports sprite fixes once, for a separate design session. A fix flag without a note means "too
-   generic: give it the real object's shape".
+2. Sprite review: done (v0.6.0 redesign of 672 sprites, owner satisfied). New sprite notes, if any, go through the
+   same flow: Sprite review → Export sprite fixes.
 3. Later approved batches through `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and
    mapping notes become design or recognition tasks.
 4. Later: name/flavour UI refinements (postponed redesign); APK.
