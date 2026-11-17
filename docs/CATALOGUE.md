@@ -126,6 +126,20 @@ show an old, smaller set.)
   - identical fields are skipped;
   - a different existing review becomes a conflict, never an overwrite.
 
+## Re-checking the redesigned sprites (v0.6.0)
+
+All 672 sprites flagged **Needs fix** in the sprite review were redesigned in v0.6.0: every one now has its own design,
+in every rarity and variant (Normal, Spectral, Mutated, Prismatic).
+1. In **Sprite review**, set the status filter to **Redesigned · to re-check**. It lists every redesigned object that has
+   no sprite review yet or whose "Needs fix" was set before the redesign, i.e. about the OLD sprite. Rows carry a
+   **new sprite** badge; the progress line counts "new sprites (v0.6.0): N of 672 to re-check".
+2. Open each one: **Sprite looks good** (no confirmation is asked when the old flag predates the redesign) or **Sprite
+   needs fix** again (a note is only needed when something specific is wrong). Re-checked objects leave the filter.
+3. When done, **Export sprite fixes**: it now lists only the new designs that still need work. Each object's `design`
+   says `redesigned: "0.6.0"` and whether its flag predates the redesign.
+
+**Redesigned (v0.6.0)** shows all 672, re-checked or not.
+
 ## Sprite review mode (v0.5.4)
 
 Review every object's sprite on its own, separately from the writing review.
