@@ -32,12 +32,21 @@ const shot = name => { try { fs.writeFileSync(path.join(outDir, name + '.png'), 
 const versionCode = () => +((adb(`shell dumpsys package ${PKG}`).match(/versionCode=(\d+)/) || [])[1] || 0);
 
 let device;
+// (re)start the app and attach to its WebView; after the app closed itself, the first handle can still be the old,
+// dying WebView, so retry until a live page answers
 async function launch() {
-  adb(`shell am start -W -n ${PKG}/${ACT}`);
-  const webview = await device.webView({ pkg: PKG }, { timeout: 90000 });
-  const page = await webview.page();
-  await page.waitForFunction(() => window.__snapmon && window.SNAPMON_NATIVE && window.SnapmonNav, null, { timeout: 120000 });
-  return page;
+  let last;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      adb(`shell am start -W -n ${PKG}/${ACT}`);
+      await sleep(attempt ? 2000 : 300);
+      const webview = await device.webView({ pkg: PKG }, { timeout: 90000 });
+      const page = await webview.page();
+      await page.waitForFunction(() => window.__snapmon && window.SNAPMON_NATIVE && window.SnapmonNav, null, { timeout: 120000 });
+      return page;
+    } catch (e) { last = e; await sleep(1500); }
+  }
+  throw last;
 }
 async function stop() { adb(`shell am force-stop ${PKG}`); await sleep(1500); }
 const state = page => page.evaluate(() => { const s = window.__snapmon.S; return { level: s.level, coins: s.coins, monsters: s.monsters.length, storage: window.SNAPMON_NATIVE.storage.status() }; });
