@@ -72,10 +72,11 @@ async function tapPermission(ids, timeoutMs = 15000) {
   return false;
 }
 // Android's "isn't responding" (ANR) dialog would swallow key presses: report it as a failure and dismiss it (Wait)
-async function anrCheck(where) {
+async function anrCheck(where, fatal = true) {
   const xml = tryAdb('shell uiautomator dump /sdcard/ui.xml') && tryAdb('shell cat /sdcard/ui.xml');
   if (/isn.t responding|aerr_wait/.test(xml)) {
-    ok(false, `Android showed "SnapMon Dev isn't responding" (${where})`); shot('emulator-anr-' + where.replace(/\W+/g, '-'));
+    const msg = `Android showed "SnapMon Dev isn't responding" (${where})`;
+    fatal ? ok(false, msg) : note(msg); shot('emulator-anr-' + where.replace(/\W+/g, '-'));
     const m = xml.match(/resource-id="android:id\/aerr_wait"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"/);
     if (m) adb(`shell input tap ${(+m[1] + +m[3]) >> 1} ${(+m[2] + +m[4]) >> 1}`);
     await sleep(1000); return true;
@@ -120,6 +121,8 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   // the detector/classifier therefore use TF.js's CPU backend (the developer "Force CPU" switch: the same weights; the
   // engine's own fallback when WebGL fails). The WebGL path is checked on the phone. TinyCLIP is WASM either way.
   await page.evaluate(() => { const S0 = window.__snapmon.S; S0.settings.devUnlocked = true; S0.settings.forceCPU = true; persist(true); return window.SNAPMON_NATIVE.storage.flush(); });
+  // an ANR left over from the first launch's automatic engine start on the software GPU is an emulator observation
+  await anrCheck('first launch: automatic engine start on the emulator\'s software WebGL — watch the first start on the phone', false);
   await stop();
   page = await launch();
   ok(await page.evaluate(() => Lens.CFG.forceCPU === true), 'emulator: detector/classifier on the TF.js CPU backend (same weights; the emulator GPU is software-only — WebGL is a phone check)');
@@ -184,6 +187,8 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   adb('shell input keyevent KEYCODE_BACK'); await sleep(2500);
   if (first !== 'armed') note('first Back on Hunt returned ' + first);
   ok(!new RegExp(`(mResumedActivity|topResumedActivity)[^\\n]*${PKG.replace(/\./g, '\\.')}`).test(tryAdb('shell dumpsys activity activities')), 'double Back on Hunt leaves the app');
+  // Android keeps the finished app's process (and its old WebView handle) alive: stop it, then reopen
+  await stop();
   page = await launch();
   ok((await state(page)).coins === 4242, 'progress kept after leaving with double Back and reopening');
   await stop();
