@@ -106,6 +106,15 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   ok(await page.evaluate(() => !document.querySelector('[data-act="engineDownload"]') && snapState() !== 'download'), 'no download notice');
   shot('emulator-1-start');
 
+  // The emulator has no real GPU: TF.js's WebGL backend runs on SwiftShader (software) and compiles its shaders on the
+  // page's main thread, which took > 3 min and triggered Android's "isn't responding" in CI run 4. For the emulator
+  // the detector/classifier therefore use TF.js's CPU backend (the developer "Force CPU" switch: the same weights; the
+  // engine's own fallback when WebGL fails). The WebGL path is checked on the phone. TinyCLIP is WASM either way.
+  await page.evaluate(() => { const S0 = window.__snapmon.S; S0.settings.devUnlocked = true; S0.settings.forceCPU = true; persist(true); return window.SNAPMON_NATIVE.storage.flush(); });
+  await stop();
+  page = await launch();
+  ok(await page.evaluate(() => Lens.CFG.forceCPU === true), 'emulator: detector/classifier on the TF.js CPU backend (same weights; the emulator GPU is software-only — WebGL is a phone check)');
+
   // 2. the full Hybrid engine from the APK, offline
   const t0 = Date.now();
   const eng = await ready(page);
