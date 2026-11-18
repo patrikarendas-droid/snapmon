@@ -160,7 +160,10 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
   - Owner's phone test of build 9: installs and the Spirit Lens reaches ready, but the HUD covered the top of every
     screen (Shop unreachable). Cause: sticky `.topbar` offset by the status-bar inset (edge-to-edge app) without the
     layout reserving it. Fixed in shared CSS (`#app` padding-top = inset; sheets capped below it; 0 in a browser tab, so
-    the website is unchanged) + `tests/e2e-layout.js` and emulator layout checks.
+    the website is unchanged) + `tests/e2e-layout.js` and emulator layout checks. Capacitor only draws under the system
+    bars with WebView ≥ 140 (the phone); the CI emulator has WebView 113, so its layout test also emulates the phone's
+    insets in the real WebView. Build 12 (run 12, commit `27c5ed8`, versionCode 1012, same certificate) all green —
+    to be re-checked on the phone.
   - **Not yet tested on a real phone** (camera, WebView performance, recognition speed). Owner checklist in
     `docs/ANDROID.md`.
 
