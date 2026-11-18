@@ -105,13 +105,33 @@ jobs:
       - name: Android project dependencies (pinned, package-lock.json)
         working-directory: android-app
         run: npm ci --no-audit --no-fund
-      - name: Assemble and verify the packaged game (development build, DEV_TOOLS on)
-        run: node tools/android/build-web.js --engine "$RUNNER_TEMP/engine" --dev-tools --version-name "$SNAPMON_VERSION_NAME"
-      - name: Packaged game in Chromium (real engine, fake native bridge)
+      - name: Chromium for the packaged-game tests
         run: |
           npm i --no-save --silent playwright@1.48.2
           npx playwright install --with-deps chromium > /dev/null
-          node tests/e2e-android-web.js android-app/www shots
+      # ---- release configuration (never shipped from here): proves developer tools can be excluded ----
+      - name: "Release configuration: packaged game with DEV_TOOLS off"
+        run: |
+          node tools/android/build-web.js --engine "$RUNNER_TEMP/engine" --version-name "$SNAPMON_VERSION_NAME-release-check"
+          node tools/android/check-web.js android-app/www --expect-release
+          node tests/e2e-android-web.js android-app/www shots/release | tee e2e-release.txt
+      - name: "Release configuration: unsigned release APK builds and contains no developer tools"
+        run: |
+          (cd android-app && npx cap sync android)
+          (cd android-app/android && ./gradlew assembleRelease --no-daemon -q)
+          node tools/android/check-apk.js android-app/android/app/build/outputs/apk/release/app-release-unsigned.apk --expect-release
+          rm -rf android-app/android/app/build/outputs/apk/release
+      - name: "Release configuration: a release build with DEV_TOOLS on is refused"
+        run: |
+          node tools/android/build-web.js --engine "$RUNNER_TEMP/engine" --dev-tools --no-check
+          (cd android-app && npx cap copy android)
+          if (cd android-app/android && ./gradlew assembleRelease --no-daemon -q > ../../refused.txt 2>&1); then echo "release build with DEV_TOOLS was NOT refused"; exit 1; fi
+          grep -q "Refusing a RELEASE build" refused.txt && echo "refused as expected"
+      # ---- the development APK (the one you install) ----
+      - name: Assemble and verify the packaged game (development build, DEV_TOOLS on)
+        run: node tools/android/build-web.js --engine "$RUNNER_TEMP/engine" --dev-tools --version-name "$SNAPMON_VERSION_NAME"
+      - name: Packaged game in Chromium (real engine, fake native bridge)
+        run: node tests/e2e-android-web.js android-app/www shots | tee e2e-debug.txt
       # ---- the native app ----
       - name: Copy the game into the Android project
         working-directory: android-app
@@ -130,6 +150,12 @@ jobs:
       - name: Gradle build (assembleDebug)
         working-directory: android-app/android
         run: ./gradlew assembleDebug --no-daemon --stacktrace
+      - name: Update-test build (same APK, versionCode + 1; only for the emulator's update test, never for install)
+        run: |
+          mkdir -p update && cp android-app/android/app/build/outputs/apk/debug/app-debug.apk update/base.apk
+          (cd android-app/android && SNAPMON_VERSION_CODE=$((SNAPMON_VERSION_CODE + 1)) ./gradlew assembleDebug --no-daemon -q)
+          cp android-app/android/app/build/outputs/apk/debug/app-debug.apk update/newer.apk
+          cp update/base.apk android-app/android/app/build/outputs/apk/debug/app-debug.apk
       - name: Remove the signing key
         if: always()
         run: rm -f "$RUNNER_TEMP/dev.p12"
@@ -145,9 +171,9 @@ jobs:
           PERMS=$(grep "^uses-permission:" badging.txt | grep -v "DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" | sed "s/.*name='\([^']*\)'.*/\1/")
           echo "permissions: $PERMS"
           [ "$PERMS" = "android.permission.CAMERA" ] || { echo "unexpected permissions: $PERMS"; exit 1; }
-          unzip -l "$APK" | grep -q "assets/public/models/clip/$CLIP_VARIANT/vision.onnx"
-          unzip -l "$APK" | grep -q "assets/public/vendor/ort/ort-wasm-simd-threaded.wasm"
-          if unzip -l "$APK" | grep -q "assets/public/catalogue/"; then echo "catalogue must not be packaged"; exit 1; fi
+          node tools/android/check-apk.js "$APK" | tee apk-check.txt
+          "$BT/apksigner" verify --print-certs update/newer.apk | grep "certificate SHA-256" > newer-cert.txt
+          grep "certificate SHA-256" signing.txt | head -1 | diff - newer-cert.txt && echo "update-test APK has the same signing certificate"
           {
             echo "## SnapMon Dev APK"
             echo "| | |"; echo "|---|---|"
@@ -159,6 +185,18 @@ jobs:
             echo "| Permissions | $PERMS |"
             echo "| Signing | $SIGNING — $(grep -o 'certificate SHA-256 digest: .*' signing.txt | head -1) |"
             echo "| APK SHA-256 | $(sha256sum "$APK" | cut -d' ' -f1) |"
+            echo ""
+            echo "### Tests in this run"
+            echo "| Kind | What ran | Result |"
+            echo "|---|---|---|"
+            echo "| Executed (CI, Node + headless Chromium) | the website's full regression suite: logic, sprites, gameplay/balance trace, curated writing, saves, engine with the real TinyCLIP worker, Back navigation, catalogue | passed (job *tests*) |"
+            echo "| Static | \`tests/android-packaging.js\`: same engine/tests as Pages, Pages independent, only CAMERA, no INTERNET/backup, release refuses DEV_TOOLS, no keys committed | passed (job *tests*) |"
+            echo "| Executed (integrity) | \`check-apk.js\` on the built APK: $(grep -o '[0-9]* engine files verified' apk-check.txt) by SHA-256, no network URLs, no catalogue | passed |"
+            echo "| Mocked native bridge (Chromium, REAL engine) | \`e2e-android-web.js\`, development build: $(grep -c '^ok' e2e-debug.txt) checks | passed |"
+            echo "| Mocked native bridge (Chromium, REAL engine) | release configuration: $(grep -c '^ok' e2e-release.txt) checks incl. developer tools / test mode / God Mode unreachable | passed |"
+            echo "| Executed (Gradle) | release build with DEV_TOOLS refused; release-safe unsigned release APK builds and verifies | passed |"
+            echo "| Emulator | see the *emulator* job summary | — |"
+            echo "| Needs the physical phone | real camera sensor + zoom, real-device recognition speed/accuracy, GPU (WebGL) detector, memory/heat, long background recovery | not automated |"
             if [ "$SIGNING" != stable ]; then
               echo ""; echo "> **Warning:** the ANDROID_DEV_SIGNING_SEED secret is not set, so this APK is signed with a throw-away key."
               echo "> It installs, but the NEXT build cannot update it: Android would require uninstalling, which deletes the app's saved progress."
@@ -172,6 +210,12 @@ jobs:
           retention-days: 30
           compression-level: 0
       - uses: actions/upload-artifact@v4
+        with:
+          name: emulator-update-test-apks
+          path: update/
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: android-web-test-screenshots
@@ -179,7 +223,7 @@ jobs:
           retention-days: 7
 
   emulator:
-    name: Emulator smoke test (not a phone test)
+    name: Emulator test (real APK; not a phone test)
     needs: apk
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -190,7 +234,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.apk.outputs.artifact }}
+          name: emulator-update-test-apks
           path: apk
       - name: Enable KVM
         run: |
@@ -208,7 +252,11 @@ jobs:
           disk-size: 6G
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back emulated
           disable-animations: true
-          script: node tools/android/emulator-smoke.js apk/${{ needs.apk.outputs.apk }} shots
+          script: node tools/android/emulator-smoke.js apk/base.apk apk/newer.apk shots
+      - name: Emulator report
+        if: always()
+        run: |
+          { echo "## Emulator test (Android 14 emulator, real APK, airplane mode) — not a phone test"; cat shots/emulator-report.md 2>/dev/null || echo "no report"; } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -113,8 +113,12 @@ window.Capacitor = { isNativePlatform: () => true, registerPlugin: name => {
   s = await S(page); await flush(page);
   ok(s.coins === 888 && savedCoins() === 888, `newer localStorage save kept and copied back to the files (${s.coins} / ${savedCoins()})`);
   //    files newer than localStorage (e.g. localStorage restored from an old state)
+  // (inject while the app is closed: a running app may still write its own pending saves, e.g. after the engine loads)
+  await page.waitForFunction(() => Engine.status.state !== 'loading', null, { timeout: 60000 }).catch(() => {});
+  await page.evaluate(() => window.SNAPMON_NATIVE.storage.flush());
+  await page.goto('about:blank');
   const e = store.get('snapmon.save.v1'); const v = JSON.parse(e.value); v.coins = 999; store.set('snapmon.save.v1', { rev: e.rev + 50, value: JSON.stringify(v) });
-  await page.reload(); await page.waitForFunction(() => window.__snapmon && window.__app.listeners.backButton);
+  await page.goto(base + 'index.html'); await page.waitForFunction(() => window.__snapmon && window.__app.listeners.backButton);
   ok((await S(page)).coins === 999, 'newer file copy wins over an older localStorage copy');
   const rev = await page.evaluate(() => { window.__snapmon.S.coins = 1000; persist(true); return window.SNAPMON_NATIVE.storage.flush().then(() => 0); });
   ok(store.get('snapmon.save.v1').rev > e.rev + 50 && savedCoins() === 1000, 'revision numbers continue above the restored copy');
@@ -155,6 +159,21 @@ window.Capacitor = { isNativePlatform: () => true, registerPlugin: name => {
   await page.evaluate(() => window.__snapmon.actions.licences());
   await page.waitForFunction(() => /Capacitor/.test(document.querySelector('#sheet').innerText), null, { timeout: 5000 }).catch(() => {});
   ok(await page.evaluate(() => /TinyCLIP/.test(document.querySelector('#sheet').innerText) && /Capacitor/.test(document.querySelector('#sheet').innerText)), 'Settings → Open-source licences shows the packaged notices');
+
+  // 7. developer tools: available only in a --dev-tools build; a release-safe build cannot reach them at all,
+  //    even with a save that has them switched on (e.g. a backup code from a development build)
+  const dev = await page.evaluate(() => {
+    const S0 = window.__snapmon.S; S0.settings.devUnlocked = false; window.__snapmon.ui.devTaps = 0;
+    for (let i = 0; i < 7; i++) window.__snapmon.actions.devTap();
+    const unlockedByTaps = !!S0.settings.devUnlocked;
+    S0.settings.devUnlocked = true; S0.settings.quickTest = true; S0.settings.godMode = true; // forced, as from an old save
+    const r = { DEV_TOOLS, unlockedByTaps, devOn: devOn(), quickTest: quickTest(), god: enableGodMode({ m: { test: true } }),
+      menu: (settingsSheet(), !!developerHTML() && /Developer &(amp;)? ?testing/.test(document.querySelector('#sheet').textContent)) };
+    S0.settings.devUnlocked = false; S0.settings.quickTest = false; S0.settings.godMode = false; closeSheet();
+    return r;
+  });
+  if (dev.DEV_TOOLS) ok(dev.unlockedByTaps && dev.devOn && dev.menu, 'development build: 7 taps unlock the developer tools (Quick Monster Test Mode, God Mode, Force CPU)');
+  else ok(!dev.unlockedByTaps && !dev.devOn && !dev.quickTest && !dev.god && !dev.menu, `release-safe build: developer tools, Quick Monster Test Mode and God Mode unreachable, even with them forced on in the save (${JSON.stringify(dev)})`);
   await ctx.close();
 
   ok(external.length === 0, `nothing requested from the network (${external.slice(0, 3).join(', ')})`);
