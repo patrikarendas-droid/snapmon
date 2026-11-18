@@ -60,9 +60,10 @@ recognition rules are not modified for Android. Platform-only differences:
 
 Known wording limitation: a few Settings texts still say "in this browser" (they are correct on the website).
 
-**Layout with system bars (fixed after the owner's phone test of build 9).** The app is edge-to-edge (target SDK 36), so
-the page extends under Android's status and navigation bars and Capacitor reports their sizes as
-`--safe-area-inset-*` (CSS px). The sticky HUD (`.topbar`, `top: env(safe-area-inset-top)`) was offset by the status
+**Layout with system bars (fixed after the owner's phone test of build 9).** With Android System WebView ≥ 140 (the
+owner's phone) Capacitor 8 draws the page under Android's status and navigation bars and reports their sizes as
+`--safe-area-inset-*` (CSS px); with an older WebView it pads the WebView below the bars instead (insets 0) — that is
+why the CI emulator (WebView 113) could not show the bug, and why its layout test also emulates the phone's insets. The sticky HUD (`.topbar`, `top: env(safe-area-inset-top)`) was offset by the status
 bar height while nothing reserved that space, so at scroll 0 the HUD was pushed down over the top of every screen
 (Gear's Arsenal / Bag / Shop & Craft could not be tapped). Fix in the shared CSS: `#app` has
 `padding-top: env(safe-area-inset-top)` (the HUD's normal position now equals its sticky offset), and sheets are capped

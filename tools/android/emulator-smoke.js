@@ -189,13 +189,23 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
     const geo = await page.evaluate(() => ({ top: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top')) || 0,
       bottom: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0, w: innerWidth, h: innerHeight, dpr: devicePixelRatio }));
     note(`WebView ${geo.w}x${geo.h} CSS px at ${geo.dpr}x; Android status bar ${geo.top} px, navigation bar ${geo.bottom} px (Capacitor insets)`);
-    // Android 15+ draws apps edge-to-edge (target SDK 36), like the owner's phone; older Android does not
-    const api = +tryAdb('shell getprop ro.build.version.sdk') || 0;
-    if (api >= 35) ok(geo.top > 0, `Android ${api}: edge-to-edge, the status bar inset reaches the page (${geo.top} px) — the condition of the phone bug`);
-    else note(`Android API ${api} is not edge-to-edge (inset ${geo.top} px): the phone's status-bar condition is not reproduced here`);
-    const res = await checkScreens(page, 'emulator', geo.top, 800, name => (name === 'gear-arsenal' || name === 'hunt') && shot('emulator-layout-' + name));
-    const bad = res.filter(r => !r[0]);
-    ok(!bad.length, `layout on every main tab and sub-page (${res.length} checks${bad.length ? '; failed: ' + bad.slice(0, 3).map(r => r[1]).join(' | ') : ''})`);
+    // Capacitor draws the page under the system bars and passes their sizes as --safe-area-inset-* only with Android
+    // System WebView >= 140 (the owner's phone). With an older WebView (the emulator image ships 113) it pads the
+    // WebView below the bars instead and the insets are 0, so the phone's condition is ALSO checked with the phone's
+    // insets emulated in this real WebView (set exactly as Capacitor sets them).
+    const wvMajor = +((tryAdb('shell dumpsys package com.google.android.webview').match(/versionName=(\d+)/) || [])[1] || 0);
+    if (wvMajor >= 140) ok(geo.top > 0, `WebView ${wvMajor}: edge-to-edge, the status bar inset reaches the page (${geo.top} px) — the phone's condition`);
+    else note(`WebView ${wvMajor} < 140: Capacitor keeps the page below the system bars here (inset ${geo.top} px); the phone's insets are emulated below`);
+    const layout = async (tag, insetTop) => {
+      const res = await checkScreens(page, tag, insetTop, 800, name => (name === 'gear-arsenal' || name === 'hunt') && shot(`emulator-layout-${tag}-${name}`));
+      const bad = res.filter(r => !r[0]);
+      ok(!bad.length, `${tag}: layout on every main tab and sub-page (${res.length} checks${bad.length ? '; failed: ' + bad.slice(0, 3).map(r => r[1]).join(' | ') : ''})`);
+    };
+    await layout('real-insets', geo.top);
+    if (geo.top === 0) {
+      await page.evaluate(() => { const d = document.documentElement.style; d.setProperty('--safe-area-inset-top', '48px'); d.setProperty('--safe-area-inset-bottom', '24px'); });
+      await layout('emulated-phone-insets-48-24', 48);
+    }
     await page.evaluate(() => { window.__snapmon.actions.tab('gear'); window.__snapmon.actions.gearTab('arsenal'); window.scrollTo(0, 0); });
     await sleep(800);
     const g = await page.evaluate(() => { const r = e => e.getBoundingClientRect(); const hud = r(document.querySelector('.topbar')), b = r(document.querySelector('[data-act="gearTab"][data-arg="shop"]'));
