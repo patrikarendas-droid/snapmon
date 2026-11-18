@@ -1,5 +1,10 @@
 # SnapMon on Android
 
+**Status (2026-11-18): first development APK — CI run 7 green** (commit `bda485a`: website regression suite, packaged
+game with the real engine, release-configuration checks, APK build + integrity, Android 14 emulator test). APK size
+**72.3 MB** (72,294,674 bytes; engine files 85.5 MB uncompressed). Signing: until the `ANDROID_DEV_SIGNING_SEED`
+secret is set, builds are named `…-UNSTABLE-SIGNING`.
+
 **Status (2026-11-18): first development APK.** A Capacitor 8 app (Android System WebView) packages the current game
 with the complete bundled recognition engine. It is a private **debug** build ("SnapMon Dev"), built by GitHub
 Actions; it is **not** a Play release. Automated checks (CI, Chromium, Android emulator) pass; **nothing has been
@@ -192,7 +197,7 @@ engine start time, seconds per photo, anything odd.
   upload key (GitHub secret), enrolled in Play App Signing. Check the then-current target-SDK requirement (Play has
   required the latest-but-one Android version for new apps and updates each August; 36 is current here).
 - The APK/AAB contains no native libraries (`lib/`), so the 16 KB page-size rule does not apply to it today.
-- Base download: about the size of the engine (≈ 64 MB packaged; see the CI summary for the measured APK size),
+- Base download: the debug APK measures 72.3 MB (CI run 7),
   well under Play's 200 MB base-module limit; an install-time asset pack is the fallback if needed.
 - Store listing needs a privacy policy: photos are processed on-device and never uploaded; no network access; no
   data collection. Declare the camera use; Data safety: no data collected/shared.
