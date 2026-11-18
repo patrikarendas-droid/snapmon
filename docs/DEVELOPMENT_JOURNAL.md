@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner's sprite review).
+Last updated: 2026-11-18, live release v0.6.0; first Android development APK on a feature branch (not merged).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -16,8 +16,9 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
   on-device AI recognises the object; a monster based on that specific object may appear; the player fights,
   captures and collects monsters, upgrades gear and does research.
 - **Strategy:** Android first. Today it is a browser game (Android Chrome) served by GitHub Pages:
-  <https://patrikarendas-droid.github.io/snapmon/>. A native APK is planned by wrapping the same web code (e.g.
-  Capacitor); no APK work has started. iOS is a low-priority possibility only (notes in `docs/ANDROID.md`).
+  <https://patrikarendas-droid.github.io/snapmon/>. A first private **development APK** (Capacitor 8 wrapping the same
+  web code, bundled engine, offline, separate saves) exists on a feature branch since 2026-11-18, built by GitHub
+  Actions (`docs/ANDROID.md`); not merged, not on Play. iOS is a low-priority possibility only (notes in `docs/ANDROID.md`).
 - **Code:** plain JavaScript, no framework, no build step for development. `index.html` holds all CSS; `src/` holds
   the game. `tools/build.js` also produces single-file builds in `dist/` (one is published as a claude.ai Artifact).
 - **Architecture (short):**
@@ -129,7 +130,24 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
   existing monsters refresh once. Live entries are guarded: `ingest` never regenerates them and `patch` refuses them
   without `--approved-edit`; `node tools/campaign.js immutable` (CI-friendly) flags any unrecorded change. Details:
   `docs/CONTENT_WRITING_GUIDE.md` ("Correcting live writing").
-- **Not done:** no APK.
+- **Android development APK (2026-11-18, branch `ccr-6eaf78d0-vj87lh`, NOT merged, no tag).** Details:
+  `docs/ANDROID.md`.
+  - `android-app/` Capacitor 8.6.2 shell: debug app "SnapMon Dev" `io.github.patrikarendas.snapmon.dev` (release id
+    without `.dev`), minSdk 24, target/compile 36; CAMERA is the only permission (INTERNET removed); no Android
+    backup/device transfer (fresh install = new player); the game served from the APK, never from the website.
+  - Saves: separate from Chrome (never imported); localStorage + `SnapmonSaveStore` plugin (AtomicFile per key,
+    revision numbers, newest copy wins at boot, `android-app/native/boot.js`); Back/pause/resume wired natively.
+  - Engine: same `hybrid-1` files as Pages (same pinned versions, checked by `tests/android-packaging.js`), minus the
+    developer-only WebGPU runtime; no download notice, no second cache copy; SHA-256-checked packaging.
+  - Shared code changes are native-only branches behind `window.SNAPMON_NATIVE` (website behaviour unchanged, full
+    website regression suite green locally); Settings shows the Android build + Open-source licences (app only).
+  - `DEV_TOOLS`: on in the debug APK; packaging defaults to off and a release build refuses a dev-tools game.
+  - CI `.github/workflows/android-apk.yml` (separate from Pages, read-only): website tests → engine → packaged-game
+    checks (real engine in Chromium) → Gradle → APK checks → artifact → emulator smoke test.
+  - Signing: stable dev key derived from the secret `ANDROID_DEV_SIGNING_SEED` (`tools/android/dev-keystore.py`);
+    **the owner must add that secret once**, otherwise builds are "UNSTABLE-SIGNING" (cannot update each other).
+  - **Not yet tested on a real phone** (camera, WebView performance, recognition speed). Owner checklist in
+    `docs/ANDROID.md`.
 
 - **v0.5.3 writing review rollout (2026-11-16).** Source: the owner's ordinary catalogue export from the phone
   (2026-11-16 07:51, signed in, content c214d7f396e0). It is kept privately; review data is never in git.
@@ -211,14 +229,18 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
 - **After v0.6.0:** the owner confirmed the release and re-checked the redesigned sprites: the sprite review is complete,
   all sprites satisfactory for now (2026-11-17). No sprite work pending.
 
-**Next priorities (2026-11-17):**
+**Next priorities (2026-11-18):**
+0. Android dev APK: owner adds `ANDROID_DEV_SIGNING_SEED`, installs the APK from the Actions artifact and runs the
+   phone checklist (`docs/ANDROID.md`); then decide whether to merge the Android branch into production (adds the
+   workflow's "Run workflow" button; the website itself is unaffected).
+
 1. Catalogue conflict markers (accordion, i_academic_gown, x_3d_printer, x_acorn_cap): closed 2026-11-17. The owner
    found no conflict box (all fields show "Looks good"); catalogue-only, the live game already has the chosen text.
 2. Sprite review: done (v0.6.0 redesign of 672 sprites, owner satisfied). New sprite notes, if any, go through the
    same flow: Sprite review → Export sprite fixes.
 3. Later approved batches through `node tools/campaign.js patch <batch> <file> --approved-edit` (writing). Sprite and
    mapping notes become design or recognition tasks.
-4. Later: name/flavour UI refinements (postponed redesign); APK.
+4. Later: name/flavour UI refinements (postponed redesign); Android: low-memory/device testing, then a Play release plan.
 
 ## 5. Open issues / known limitations
 
@@ -236,6 +258,9 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
 | Some borrowed designs are approximate (drone → helicopter, microscope basic) | Known | `docs/identity-designs-*.png` | Improve when found in QA. |
 | Hardware camera zoom untested on a real phone | Open | `src/platform.js` zoom; digital zoom fallback tested in browser. | Phone test. |
 | Real GPU (WebGL) detector vs CPU differences on phones | Unmeasured | Measured only on a software GPU (≤ 0.0001). `docs/RECOGNITION.md`. | Optional lab work. |
+| Android dev APK not yet tested on a real phone | Open (2026-11-18) | Automated: CI tests, Chromium with fake bridge, Android 14 emulator. Camera prompt/preview, real WebView GPU/WASM speed, memory and heat unverified. | Owner phone checklist, `docs/ANDROID.md`. |
+| APK updates need the stable signing secret | Open, owner action | Without `ANDROID_DEV_SIGNING_SEED` each CI build has a different key and cannot update the last one (uninstall = saves lost). | Add the secret once (`docs/ANDROID.md` → Signing). |
+| A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
 | Rolling back below v0.4.3 shows redesigned new monsters as blobs | Known, documented | `docs/RELEASING.md` | None unless rolling back. |
 
 ## 6. Resolved issues (with the release that fixed them)
@@ -283,6 +308,11 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
   camera (`e2e`, `e2e-engine` with the real TinyCLIP worker and a tiny test model, `e2e-nav`, `e2e-qol`, `e2e-v044`, `e2e-godmode`, `e2e-curated`).
 - **Real-model lab (`lab.yml`):** runs the real models on ~150 labelled Wikimedia photos when engine/lab files change
   (GPU vs CPU equivalence). Results in `docs/RECOGNITION.md`.
+- **Android app (`android-apk.yml`, feature branch):** the full website suite (`tools/android/run-tests.sh`) +
+  `tests/android-packaging.js`, `tools/android/check-web.js` (SHA-256 of every packaged engine file), `tests/e2e-android-web.js`
+  (packaged game with the real engine and a fake native bridge in Chromium), APK checks (package, permissions,
+  signature) and `tools/android/emulator-smoke.js` (real APK on an Android 14 emulator: saves across force-stop,
+  wiped WebView storage and update install; engine + recognition; Back). Emulator ≠ phone.
 - **Manual:** only the developer's Android phone. Anything not tested there is marked "needs phone check" in reports.
   Headless tests cannot reproduce Android graphics glitches or real camera hardware (zoom, permissions UI).
 
@@ -304,6 +334,14 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
 - **Developer tools behind `DEV_TOOLS` + 7 taps on the version line** – `DEV_TOOLS` must be set to `false` for a
   public/release build; this removes the developer menu, Force CPU, field tests, Quick Monster Test Mode and God Mode
   (the engine itself refuses God Mode without DEV_TOOLS). The hidden menu is not security in a public web build.
+- **Android = Capacitor 8 + Android System WebView, game served from the APK (2026-11-18)** – one shared codebase;
+  native-only behaviour behind `window.SNAPMON_NATIVE`/`Platform`; the Pages build untouched. Rejected: loading the
+  website in a WebView (breaks offline, ties the app to the site).
+- **App saves separate from Chrome; native file mirror (2026-11-18)** – owner's decision: no import of browser
+  progress; localStorage kept as the synchronous store (no change to the `Platform.storage` contract) with an atomic
+  native copy and newest-wins restore, instead of an async Preferences store that would have required reworking saves.
+- **Deterministic dev signing key from one secret (2026-11-18)** – stable updates without committing or uploading a
+  keystore; the Play upload key will be separate.
 - **Quick Monster Test Mode stores test monsters outside the save** (`snapmon.testroster.v1`), never in the backup
   code; test battles restore the save afterwards. Chosen over marking monsters in the real collection.
 - **Detector stays on TF.js in the main thread** (v0.4.4) – a worker would remove the Force CPU freeze entirely but

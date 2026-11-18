@@ -72,6 +72,14 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
    deploys if they pass.
 4. Check the Actions run is green and the site loads, then tag the release.
 
+## Android development APK
+
+Separate from the website release: `.github/workflows/android-apk.yml` builds the private debug APK ("SnapMon Dev") from
+feature branches (or **Run workflow** once the file is on production). It never deploys, tags or pushes; `pages.yml`
+does not depend on it. Merging the Android branch into production changes nothing on the website (the shared-code
+changes are native-only branches) but makes the manual "Run workflow" button available. Details, signing secret and
+phone checklist: `docs/ANDROID.md`.
+
 ## Rolling back
 
 Pick one; neither rewrites history.
