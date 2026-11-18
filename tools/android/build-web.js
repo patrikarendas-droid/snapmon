@@ -69,6 +69,21 @@ if (ENGINE) {
   }
 }
 
+/* ---- TF.js weight shards get a ".bin" name ----
+   Capacitor's local server cannot serve a file whose name has no "." (it returns nothing, or index.html with
+   html5mode), and tools/fetch-models.js stores the shards as "group1-shardNofM". Renaming the files and their entries
+   in model.json changes no byte of the weights (still SHA-256-checked against models/manifest.json). */
+const walkFiles = d => fs.readdirSync(d).flatMap(f => { const p = path.join(d, f); return fs.statSync(p).isDirectory() ? walkFiles(p) : [p]; });
+if (ENGINE) for (const mj of walkFiles(path.join(OUT, 'models')).filter(f => f.endsWith('model.json'))) {
+  const model = JSON.parse(fs.readFileSync(mj, 'utf8')); let renamed = 0;
+  for (const g of model.weightsManifest || []) g.paths = g.paths.map(p => {
+    const base = path.basename(p); if (base.includes('.')) return p;
+    fs.renameSync(path.join(path.dirname(mj), base), path.join(path.dirname(mj), base + '.bin')); renamed++;
+    return p + '.bin';
+  });
+  if (renamed) { fs.writeFileSync(mj, JSON.stringify(model)); console.log(`build-web: ${path.relative(OUT, mj)}: ${renamed} weight shards served as .bin`); }
+}
+
 /* ---- fonts (bundled; same families and weights as the website's Google Fonts link) ---- */
 const FONTS = { 'pixelify-sans': [500, 700], 'chakra-petch': [400, 500, 600, 700] };
 let css = '/* Bundled UI fonts (fontsource, SIL Open Font License 1.1): the Android app needs no network. */\n';

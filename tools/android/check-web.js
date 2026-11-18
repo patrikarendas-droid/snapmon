@@ -32,6 +32,10 @@ for (const f of ['index.html', 'fonts/fonts.css', 'native/boot.js']) {
 if (/fonts\.googleapis|fonts\.gstatic/.test(html)) problems.push('index.html still references Google Fonts');
 for (const m of read('fonts/fonts.css').matchAll(/url\(([^)]+)\)/g)) if (!exists('fonts/' + m[1])) problems.push('font file missing: ' + m[1]);
 
+// Capacitor's local server cannot serve a file without "." in its name (TF.js shards were the case)
+const allFiles = walk('').map(f => f.replace(/^\//, ''));
+for (const f of allFiles) if (!path.basename(f).includes('.')) problems.push('file without an extension (Capacitor cannot serve it): ' + f);
+
 // not part of the player APK
 if (fs.existsSync(path.join(dir, 'catalogue'))) problems.push('developer catalogue must not be packaged');
 for (const f of walk('vendor')) if (/ort\.webgpu|\.jsep\./.test(f)) problems.push('developer-only WebGPU runtime packaged: ' + f);
