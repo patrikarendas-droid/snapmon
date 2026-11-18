@@ -2,8 +2,10 @@
 
 **Status (2026-11-18): first development APK — CI run 7 green** (commit `bda485a`: website regression suite, packaged
 game with the real engine, release-configuration checks, APK build + integrity, Android 14 emulator test). APK size
-**72.3 MB** (72,294,674 bytes; engine files 85.5 MB uncompressed). Signing: until the `ANDROID_DEV_SIGNING_SEED`
-secret is set, builds are named `…-UNSTABLE-SIGNING`.
+**72.3 MB** (72,294,674 bytes; engine files 85.5 MB uncompressed). Signing: **stable since build 8** (secret
+`ANDROID_DEV_SIGNING_SEED` set 2026-11-18): certificate `CN=SnapMon Development, O=SnapMon`, SHA-256
+`73a7e01f8ca2b716889309fea6a76be76b4b233b30cd381c233b592b72ffe161` — identical in builds 8 and 9. First APK handed to the
+owner for the phone test: **build 9** (run 9, commit `8fa8c4a`, all jobs green).
 
 A Capacitor 8 app (Android System WebView) packages the current game
 with the complete bundled recognition engine. It is a private **debug** build ("SnapMon Dev"), built by GitHub
