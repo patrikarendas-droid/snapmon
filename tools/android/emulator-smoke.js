@@ -18,6 +18,7 @@
 const { _android: android } = require('playwright');
 const { execSync } = require('child_process');
 const fs = require('fs'), path = require('path');
+const { checkScreens, seed } = require('../../tests/layout-checks');
 const args = process.argv.slice(2);
 const outDir = args[args.length - 1], apk = args[0], newer = args.length > 2 ? args[1] : null;
 const PKG = 'io.github.patrikarendas.snapmon.dev', ACT = 'io.github.patrikarendas.snapmon.MainActivity';
@@ -177,7 +178,33 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   await pressBack(page);
   ok(await page.evaluate(() => window.__snapmon.ui.tab === 'hunt'), 'Back on another tab returns to Hunt');
 
-  // 6. saves
+  // 6. layout in the real WebView with the real Android status/navigation bars (phone bug of build 9: the HUD covered
+  //    the top of every screen). Every main tab and sub-page: nothing under the HUD, every control hittable, page end
+  //    clears the tab bar; then a REAL touch (adb input tap) on "Shop & Craft", the control that was unreachable.
+  {
+    const coinsBefore = await page.evaluate(() => window.__snapmon.S.coins);
+    await page.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; closeSheet(); });
+    await page.evaluate(seed); // five test monsters so the monster grid / sheet exist (emulator test install only)
+    const geo = await page.evaluate(() => ({ top: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top')) || 0,
+      bottom: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0, w: innerWidth, h: innerHeight, dpr: devicePixelRatio }));
+    note(`WebView ${geo.w}x${geo.h} CSS px at ${geo.dpr}x; Android status bar ${geo.top} px, navigation bar ${geo.bottom} px (Capacitor insets)`);
+    ok(geo.top > 0, `edge-to-edge: the status bar inset reaches the page (${geo.top} px)`);
+    const res = await checkScreens(page, 'emulator', geo.top, 800, name => (name === 'gear-arsenal' || name === 'hunt') && shot('emulator-layout-' + name));
+    const bad = res.filter(r => !r[0]);
+    ok(!bad.length, `layout on every main tab and sub-page (${res.length} checks${bad.length ? '; failed: ' + bad.slice(0, 3).map(r => r[1]).join(' | ') : ''})`);
+    await page.evaluate(() => { window.__snapmon.actions.tab('gear'); window.__snapmon.actions.gearTab('arsenal'); window.scrollTo(0, 0); });
+    await sleep(800);
+    const g = await page.evaluate(() => { const r = e => e.getBoundingClientRect(); const hud = r(document.querySelector('.topbar')), b = r(document.querySelector('[data-act="gearTab"][data-arg="shop"]'));
+      return { hudBottom: hud.bottom, top: b.top, x: b.left + b.width / 2, y: b.top + b.height / 2, dpr: devicePixelRatio }; });
+    ok(g.top >= g.hudBottom - 0.5, `"Shop & Craft" lies below the HUD at scroll 0 (button top ${Math.round(g.top)}, HUD bottom ${Math.round(g.hudBottom)} CSS px)`);
+    // the WebView fills the screen (edge-to-edge), so CSS px x devicePixelRatio = screen px
+    adb(`shell input tap ${Math.round(g.x * g.dpr)} ${Math.round(g.y * g.dpr)}`); await sleep(1000);
+    ok(await page.evaluate(() => window.__snapmon.ui.gearTab === 'shop'), 'a real touch on "Shop & Craft" at scroll 0 opens the shop');
+    shot('emulator-layout-gear-shop');
+    await page.evaluate(c => { window.__snapmon.S.coins = c; window.__snapmon.actions.tab('hunt'); }, coinsBefore);
+  }
+
+  // 7. saves
   await page.evaluate(() => { window.__snapmon.S.coins = 4242; persist(true); return window.SNAPMON_NATIVE.storage.flush(); });
   s = await state(page);
   ok(s.storage.written > 0 && s.storage.failures === 0, `saves written to the app's files (${s.storage.written} written, ${s.storage.failures} failed)`);

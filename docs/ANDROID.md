@@ -60,6 +60,16 @@ recognition rules are not modified for Android. Platform-only differences:
 
 Known wording limitation: a few Settings texts still say "in this browser" (they are correct on the website).
 
+**Layout with system bars (fixed after the owner's phone test of build 9).** The app is edge-to-edge (target SDK 36), so
+the page extends under Android's status and navigation bars and Capacitor reports their sizes as
+`--safe-area-inset-*` (CSS px). The sticky HUD (`.topbar`, `top: env(safe-area-inset-top)`) was offset by the status
+bar height while nothing reserved that space, so at scroll 0 the HUD was pushed down over the top of every screen
+(Gear's Arsenal / Bag / Shop & Craft could not be tapped). Fix in the shared CSS: `#app` has
+`padding-top: env(safe-area-inset-top)` (the HUD's normal position now equals its sticky offset), and sheets are capped
+below the status bar. Both are exactly 0 in a browser tab, so the website is unchanged. Guarded by
+`tests/e2e-layout.js` (Chromium: 3 sizes × 4 inset sets × 11 screens; fails on the old CSS with the phone's symptoms)
+and the emulator test (same checks in the real WebView with the real system bars + a real `adb` tap on Shop & Craft).
+
 ## Saves in the Android app
 
 - **Separate from Chrome.** The app runs at its own origin (`https://localhost` inside the APK). It never reads the
@@ -151,6 +161,7 @@ real game and engine in Chromium with a FAKE native bridge; **emulator** = the r
 | static | `tests/android-packaging.js` | same engine versions, file list, TinyCLIP export and tests as Pages; `pages.yml` independent of Android; only CAMERA; INTERNET removed; no backup; release refuses DEV_TOOLS; no keys committed; pinned deps; website `Platform` unchanged without `SNAPMON_NATIVE` (executed in a Node VM) |
 | executed | `tools/android/check-web.js` (packaged folder) and `tools/android/check-apk.js` (unpacked **built APK**) | every model, vocabulary, WASM/JS runtime file present and matching its SHA-256 in `models/manifest.json`; TinyCLIP calibrated; nothing loads from the network; no catalogue/WebGPU build; packaged Capacitor config serves the game from the APK over https |
 | mocked | `tests/e2e-android-web.js` — development build **and** release configuration, **real** models in CI | fresh install = new player; no network requests; bundled fonts; engine from the package (no download notice, no cache copy) + a recognition; save mirroring, restore after lost storage, newer copy wins both ways; Back / double-Back exit after saves flushed; pause stops the camera and saves; denied-camera text; build label; licences; dev build: tools unlock; release build: developer tools, Quick Monster Test Mode and God Mode unreachable even if forced on in a save |
+| executed | `tests/e2e-layout.js` (Chromium; website at inset 0, packaged game with emulated status/navigation bars 0–48 px at 360×640, 412×915, 600×960) | on all 4 tabs and their sub-pages, Settings and the monster sheet: the HUD starts below the status bar, no control or text under it at scroll 0, every control hittable at its centre after scrolling, the page end clears the tab bar, sheets stay below the status bar; a real tap on Shop & Craft at scroll 0 opens the shop |
 | executed | Gradle in CI | a release build with DEV_TOOLS is refused; a release-safe unsigned release APK builds and passes `check-apk.js --expect-release`; debug APK signed (v2+v3), permissions = CAMERA only; the update-test build carries the same certificate |
 | emulator | `tools/android/emulator-smoke.js` (Android 14 x86_64 emulator, KVM, **airplane mode**; detector/classifier on TF.js's CPU backend because the emulator GPU is software-only) | Capacitor bridge; brand-new player; no network; full engine from the APK + a recognition; Android's **real permission dialog**: "Don't allow" → explanation, "Allow" → preview (virtual camera, if the image provides one); Home with the camera open → stopped, resume → engine still works; Back closes camera/sheet/tab; double Back exits; save files in private storage; progress survives double-Back exit, force-stop, a wiped WebView storage (restored from the files) and an **update to versionCode + 1**; uninstall + install = clean start. Report in the run summary. |
 | static/structural | browser vs app save isolation | the app is a separate Android app with its own sandbox and origin; no code reads website data; the website suite proves the website's saves logic unchanged; the emulator proves a fresh install has no data |

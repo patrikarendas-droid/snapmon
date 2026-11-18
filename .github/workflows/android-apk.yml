@@ -132,6 +132,11 @@ jobs:
         run: node tools/android/build-web.js --engine "$RUNNER_TEMP/engine" --dev-tools --version-name "$SNAPMON_VERSION_NAME"
       - name: Packaged game in Chromium (real engine, fake native bridge)
         run: node tests/e2e-android-web.js android-app/www shots | tee e2e-debug.txt
+      - name: Layout with Android status/navigation bar insets (Chromium, 3 sizes x 4 inset sets x 11 screens)
+        run: |
+          (cd android-app/www && python3 -m http.server 8790 > /dev/null 2>&1 &)
+          sleep 1
+          node tests/e2e-layout.js http://localhost:8790/index.html shots/layout --insets | tee e2e-layout.txt
       # ---- the native app ----
       - name: Copy the game into the Android project
         working-directory: android-app
@@ -194,6 +199,7 @@ jobs:
             echo "| Executed (integrity) | \`check-apk.js\` on the built APK: $(grep -o '[0-9]* engine files verified' apk-check.txt) by SHA-256, no network URLs, no catalogue | passed |"
             echo "| Mocked native bridge (Chromium, REAL engine) | \`e2e-android-web.js\`, development build: $(grep -c '^ok' e2e-debug.txt) checks | passed |"
             echo "| Mocked native bridge (Chromium, REAL engine) | release configuration: $(grep -c '^ok' e2e-release.txt) checks incl. developer tools / test mode / God Mode unreachable | passed |"
+            echo "| Executed (Chromium, emulated Android insets) | \`e2e-layout.js\`: HUD/tab bar never cover content, every control tappable, real tap on Shop & Craft — $(tail -1 e2e-layout.txt) | passed |"
             echo "| Executed (Gradle) | release build with DEV_TOOLS refused; release-safe unsigned release APK builds and verifies | passed |"
             echo "| Emulator | see the *emulator* job summary | — |"
             echo "| Needs the physical phone | real camera sensor + zoom, real-device recognition speed/accuracy, GPU (WebGL) detector, memory/heat, long background recovery | not automated |"

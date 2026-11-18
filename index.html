@@ -38,7 +38,10 @@ h3 { font-family: var(--font-body); letter-spacing: 0; }
 .small { font-size: 12.5px; }
 .num { font-variant-numeric: tabular-nums; }
 
-#app { max-width: 520px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; position: relative;
+/* padding-top reserves the status-bar area that the sticky .topbar is offset by (top: env(safe-area-inset-top)); without
+   it the HUD is pushed down over the first content whenever the inset is not 0 (edge-to-edge Android app / installed
+   PWA). In a normal browser tab the inset is 0, so nothing changes there. */
+#app { max-width: 520px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; position: relative; padding-top: env(safe-area-inset-top, 0px);
   background: radial-gradient(120% 60% at 50% -10%, #2a1f4d 0%, transparent 60%), var(--ink); }
 
 /* ---- top status bar ---- */
@@ -321,7 +324,7 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 
 /* sheets & toasts */
 .sheet-wrap { position: fixed; inset: 0; z-index: 30; background: rgba(5,3,10,.7); display: flex; align-items: flex-end; justify-content: center; animation: fadeIn .18s; }
-.sheet { width: 100%; max-width: 520px; max-height: 88%; overflow-y: auto; background: var(--panel); border: 1px solid var(--line); border-bottom: 0; border-radius: 22px 22px 0 0;
+.sheet { width: 100%; max-width: 520px; max-height: min(88%, calc(100% - env(safe-area-inset-top, 0px) - 8px)); overflow-y: auto; background: var(--panel); border: 1px solid var(--line); border-bottom: 0; border-radius: 22px 22px 0 0;
   padding-block: 10px max(18px, env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   animation: sheetUp .25s cubic-bezier(.2,.9,.3,1); display: flex; flex-direction: column; gap: 12px; }
 @keyframes sheetUp { from { transform: translateY(40%); } }

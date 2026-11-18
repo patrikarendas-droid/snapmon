@@ -46,4 +46,5 @@ if [ "$part" = browser ] || [ "$part" = all ]; then
   node tests/e2e-catalogue-sync.js http://localhost:8765/
   node tests/e2e-catalogue-sprite.js http://localhost:8765/ shots
   node tests/e2e-catalogue-storage.js http://localhost:8765/
+  node tests/e2e-layout.js http://localhost:8765/index.html shots   # HUD / tab bar never cover content (website, inset 0)
 fi

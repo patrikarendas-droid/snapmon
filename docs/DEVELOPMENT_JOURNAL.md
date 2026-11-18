@@ -157,6 +157,10 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
   - 2026-11-18: owner set `ANDROID_DEV_SIGNING_SEED`; builds 8 and 9 carry the same certificate (SHA-256
     `73a7e01f…ffe161`). Build 9 (run 9, commit `8fa8c4a`, all jobs incl. emulator green) given to the owner for the
     phone test.
+  - Owner's phone test of build 9: installs and the Spirit Lens reaches ready, but the HUD covered the top of every
+    screen (Shop unreachable). Cause: sticky `.topbar` offset by the status-bar inset (edge-to-edge app) without the
+    layout reserving it. Fixed in shared CSS (`#app` padding-top = inset; sheets capped below it; 0 in a browser tab, so
+    the website is unchanged) + `tests/e2e-layout.js` and emulator layout checks.
   - **Not yet tested on a real phone** (camera, WebView performance, recognition speed). Owner checklist in
     `docs/ANDROID.md`.
 
@@ -271,6 +275,7 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
 | Real GPU (WebGL) detector vs CPU differences on phones | Unmeasured | Measured only on a software GPU (≤ 0.0001). `docs/RECOGNITION.md`. | Optional lab work. |
 | Android dev APK not yet tested on a real phone | Open (2026-11-18) | Automated: CI tests, Chromium with fake bridge, Android 14 emulator. Camera prompt/preview, real WebView GPU/WASM speed, memory and heat unverified. | Owner phone checklist, `docs/ANDROID.md`. |
 | APK updates need the stable signing secret | Resolved 2026-11-18 (secret set; builds 8 and 9 same certificate) | Without `ANDROID_DEV_SIGNING_SEED` each CI build has a different key and cannot update the last one (uninstall = saves lost). | Add the secret once (`docs/ANDROID.md` → Signing). |
+| HUD covered the top of every screen in the Android app (build 9) | Fixed on the Android branch (layout reserves the status-bar inset) | `index.html` `#app`/`.sheet`; `tests/e2e-layout.js` | Owner re-checks on the phone with the next build. |
 | A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
 | Rolling back below v0.4.3 shows redesigned new monsters as blobs | Known, documented | `docs/RELEASING.md` | None unless rolling back. |
 
