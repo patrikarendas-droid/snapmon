@@ -62,6 +62,25 @@ async function tapPermission(ids, timeoutMs = 15000) {
   }
   return false;
 }
+// Android's "isn't responding" (ANR) dialog would swallow key presses: report it as a failure and dismiss it (Wait)
+async function anrCheck(where) {
+  const xml = tryAdb('shell uiautomator dump /sdcard/ui.xml') && tryAdb('shell cat /sdcard/ui.xml');
+  if (/isn.t responding|aerr_wait/.test(xml)) {
+    ok(false, `Android showed "SnapMon Dev isn't responding" (${where})`); shot('emulator-anr-' + where.replace(/\W+/g, '-'));
+    const m = xml.match(/resource-id="android:id\/aerr_wait"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"/);
+    if (m) adb(`shell input tap ${(+m[1] + +m[3]) >> 1} ${(+m[2] + +m[4]) >> 1}`);
+    await sleep(1000); return true;
+  }
+  return false;
+}
+const focus = () => (tryAdb('shell dumpsys window').match(/mCurrentFocus=[^\n]*/) || ['?'])[0];
+async function pressBack(page, wait = 700) {
+  const before = await page.evaluate(() => window.SNAPMON_NATIVE.storage.status().backPresses).catch(() => -1);
+  adb('shell input keyevent KEYCODE_BACK'); await sleep(wait);
+  const after = await page.evaluate(() => window.SNAPMON_NATIVE.storage.status()).catch(() => null);
+  if (!after || after.backPresses <= before) note(`Back press did not reach the game (${before} → ${after && after.backPresses}); focus: ${focus()}`);
+  return after && after.lastBack;
+}
 const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document.body.innerText), re.source);
 
 (async () => {
@@ -90,6 +109,7 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   // 2. the full Hybrid engine from the APK, offline
   const t0 = Date.now();
   const eng = await ready(page);
+  await anrCheck('after engine load');
   ok(eng.r && eng.st === 'ready', `recognition engine ready offline in ${((Date.now() - t0) / 1000).toFixed(1)} s (${JSON.stringify(eng.backends)}) ${eng.err || ''}`);
   ok(eng.clip && eng.clip.backend === 'wasm' && eng.clip.threads === 1 && eng.clip.labels > 2000, `TinyCLIP: WASM, 1 thread, ${eng.clip && eng.clip.labels} labels, ${eng.clip && eng.clip.modelBytes} model bytes`);
   ok(eng.lens && eng.lens.classifier === 'app' && eng.lens.detector === 'app', 'detector + classifier loaded from the APK');
@@ -128,11 +148,12 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   } else note('no camera preview in this emulator image (virtual camera unavailable): preview, Home-with-camera and Back-closes-camera need the phone');
 
   // 5. hardware Back navigation
+  await anrCheck('before Back tests');
   await page.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; render(); window.__snapmon.actions.settings(); });
-  adb('shell input keyevent KEYCODE_BACK'); await sleep(700);
+  await pressBack(page);
   ok(await page.evaluate(() => !document.querySelector('#sheet').innerHTML), 'Back closes an open sheet (Settings)');
   await page.evaluate(() => window.__snapmon.actions.tab('dex'));
-  adb('shell input keyevent KEYCODE_BACK'); await sleep(700);
+  await pressBack(page);
   ok(await page.evaluate(() => window.__snapmon.ui.tab === 'hunt'), 'Back on another tab returns to Hunt');
 
   // 6. saves
@@ -141,8 +162,9 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   ok(s.storage.written > 0 && s.storage.failures === 0, `saves written to the app's files (${s.storage.written} written, ${s.storage.failures} failed)`);
   const files = tryAdb(`shell run-as ${PKG} ls files/snapmon-store`);
   ok(/k_[0-9a-f]+\.json/.test(files), `save files exist in the app's private storage (${files.split(/\s+/).filter(Boolean).length} files)`);
-  adb('shell input keyevent KEYCODE_BACK'); await sleep(400);
+  const first = await pressBack(page, 400);
   adb('shell input keyevent KEYCODE_BACK'); await sleep(2500);
+  if (first !== 'armed') note('first Back on Hunt returned ' + first);
   ok(!new RegExp(`(mResumedActivity|topResumedActivity)[^\\n]*${PKG.replace(/\./g, '\\.')}`).test(tryAdb('shell dumpsys activity activities')), 'double Back on Hunt leaves the app');
   page = await launch();
   ok((await state(page)).coins === 4242, 'progress kept after leaving with double Back and reopening');
@@ -150,7 +172,11 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   page = await launch();
   ok((await state(page)).coins === 4242, 'progress kept after force-stop');
   await stop();
-  tryAdb(`shell run-as ${PKG} rm -rf "app_webview/Default/Local Storage" "app_webview/Default/Session Storage"`);
+  // wipe ALL of the WebView's own data (localStorage, IndexedDB, caches); the app's files/ directory stays
+  const wvBefore = tryAdb(`shell run-as ${PKG} ls app_webview/Default`).split(/\s+/).filter(Boolean);
+  tryAdb(`shell run-as ${PKG} rm -rf app_webview`);
+  const wvAfter = tryAdb(`shell run-as ${PKG} ls app_webview`);
+  ok(wvBefore.length > 0 && !wvAfter, `WebView data wiped (had: ${wvBefore.slice(0, 6).join(', ')})`);
   page = await launch();
   s = await state(page);
   ok(s.coins === 4242 && s.storage.restored > 0, `progress restored from the app's files after the WebView storage was wiped (${s.coins} coins, ${s.storage.restored} keys restored)`);

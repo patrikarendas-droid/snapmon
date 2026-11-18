@@ -60,6 +60,7 @@ ok(/preReleaseBuild[\s\S]*checkWebBuild\(true\)/.test(gradle) && /DEV_TOOLS enab
 ok(/^const DEV_TOOLS = (true|false);$/m.test(R('src/game.js')), 'src/game.js keeps the single DEV_TOOLS line the build flips');
 ok(/^const DEV = flag\('--dev-tools'\);$/m.test(R('tools/android/build-web.js')), 'packaged game has DEV_TOOLS off unless --dev-tools is passed');
 ok(cap.server && cap.server.androidScheme === 'https' && !cap.server.url, 'game served from the APK (https://localhost), never from a website URL');
+ok(cap.server && cap.server.html5mode === false, 'server.html5mode is off: extensionless files (TF.js weight shards) are served as files, not as index.html');
 
 // secrets and pinning
 let tracked = '';

@@ -30,7 +30,7 @@
   var counter = +(lget(REV) || 0) || 0;
   var queued = {};                         // key → latest value waiting to be written (writes to one key coalesce)
   var chain = Promise.resolve();
-  var stats = { pending: 0, written: 0, failures: 0, lastError: '', restored: 0, pushed: 0, nativeKeys: 0, hydrateError: '' };
+  var stats = { pending: 0, written: 0, failures: 0, lastError: '', restored: 0, pushed: 0, nativeKeys: 0, hydrateError: '', backPresses: 0, lastBack: '' };
 
   function nextRev() { counter += 1; lset(REV, String(counter)); return counter; }
   function enqueue(key, task) {
@@ -119,6 +119,7 @@
     App.addListener('backButton', function () {
       if (exiting) return;
       var r = window.SnapmonNav ? window.SnapmonNav.back() : 'exit';
+      stats.backPresses++; stats.lastBack = r;              // diagnostics (emulator test, Settings)
       if (r === 'exit') { exiting = true; storage.flush(4000).then(function () { App.exitApp(); }); }
     });
     App.addListener('pause', function () {

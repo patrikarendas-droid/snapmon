@@ -17,6 +17,7 @@ try {
   const cfg = JSON.parse(fs.readFileSync(path.join(tmp, 'assets/capacitor.config.json'), 'utf8'));
   if (cfg.server && cfg.server.url) problems.push('Capacitor server.url is set (the app would load a website): ' + cfg.server.url);
   if (!cfg.server || cfg.server.androidScheme !== 'https') problems.push('androidScheme is not https (secure context needed for the camera)');
+  if (!cfg.server || cfg.server.html5mode !== false) problems.push('server.html5mode is on: Capacitor would answer extensionless model files with index.html');
   const plugins = JSON.parse(fs.readFileSync(path.join(tmp, 'assets/capacitor.plugins.json'), 'utf8')).map(p => p.pkg);
   if (!plugins.includes('@capacitor/app')) problems.push('@capacitor/app plugin not registered (hardware Back, lifecycle)');
   if (!problems.length) {

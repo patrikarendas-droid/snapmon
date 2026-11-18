@@ -29,9 +29,13 @@ window.Capacitor = { isNativePlatform: () => true, registerPlugin: name => {
 } };`;
 
 (async () => {
+  // like Capacitor's WebViewLocalServer: with server.html5mode (Capacitor's default) every path whose last segment has
+  // no "." is answered with index.html — which once broke the extensionless TF.js weight shards in the real app
+  const capCfg = JSON.parse(fs.readFileSync(path.join(__dirname, '../android-app/capacitor.config.json'), 'utf8'));
+  const html5mode = !(capCfg.server && capCfg.server.html5mode === false);
   const server = http.createServer((req, res) => {
     const u = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-    const f = path.join(WWW, u.endsWith('/') ? u + 'index.html' : u);
+    const f = path.join(WWW, u.endsWith('/') || (html5mode && !u.split('/').pop().includes('.')) ? (u.endsWith('/') ? u : '/') + 'index.html' : u);
     if (!f.startsWith(WWW) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end(); }
     res.writeHead(200, { 'content-type': MIME[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res);
   }).listen(0);
