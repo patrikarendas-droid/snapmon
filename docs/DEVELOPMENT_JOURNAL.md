@@ -151,6 +151,9 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
     the detector only broke in the app. Fixed in packaging: shards renamed `.bin` (+ `model.json` paths), weights
     byte-identical; html5mode off; guarded by `check-web.js`/`check-apk.js`, `android-packaging.js` and a Chromium mock
     that copies Capacitor's behaviour.
+  - CI run 7 (commit `bda485a`) fully green incl. the Android 14 emulator test (offline engine 13.9 s on CPU,
+    recognition, real permission dialog, virtual camera, Home/resume, Back, saves across exit/force-stop/WebView wipe/
+    update, clean reinstall). APK 72.3 MB. Emulator-only: software-GPU WebGL first start ~2 min (ANR in runs 4/6).
   - **Not yet tested on a real phone** (camera, WebView performance, recognition speed). Owner checklist in
     `docs/ANDROID.md`.
 

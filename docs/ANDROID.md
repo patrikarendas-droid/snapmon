@@ -5,7 +5,7 @@ game with the real engine, release-configuration checks, APK build + integrity, 
 **72.3 MB** (72,294,674 bytes; engine files 85.5 MB uncompressed). Signing: until the `ANDROID_DEV_SIGNING_SEED`
 secret is set, builds are named `…-UNSTABLE-SIGNING`.
 
-**Status (2026-11-18): first development APK.** A Capacitor 8 app (Android System WebView) packages the current game
+A Capacitor 8 app (Android System WebView) packages the current game
 with the complete bundled recognition engine. It is a private **debug** build ("SnapMon Dev"), built by GitHub
 Actions; it is **not** a Play release. Automated checks (CI, Chromium, Android emulator) pass; **nothing has been
 confirmed on a real phone yet** (camera, real WebView performance, recognition speed) until the owner's phone test
@@ -153,6 +153,15 @@ real game and engine in Chromium with a FAKE native bridge; **emulator** = the r
 | emulator | `tools/android/emulator-smoke.js` (Android 14 x86_64 emulator, KVM, **airplane mode**; detector/classifier on TF.js's CPU backend because the emulator GPU is software-only) | Capacitor bridge; brand-new player; no network; full engine from the APK + a recognition; Android's **real permission dialog**: "Don't allow" → explanation, "Allow" → preview (virtual camera, if the image provides one); Home with the camera open → stopped, resume → engine still works; Back closes camera/sheet/tab; double Back exits; save files in private storage; progress survives double-Back exit, force-stop, a wiped WebView storage (restored from the files) and an **update to versionCode + 1**; uninstall + install = clean start. Report in the run summary. |
 | static/structural | browser vs app save isolation | the app is a separate Android app with its own sandbox and origin; no code reads website data; the website suite proves the website's saves logic unchanged; the emulator proves a fresh install has no data |
 | phone | owner's checklist below | real camera sensor, zoom, permission UI on the phone, real recognition speed/accuracy, GPU (WebGL) detector, memory, heat, long background periods, the actual install/update flow from GitHub |
+
+**Emulator results, CI run 7 (Android 14, WebView 113, x86_64, airplane mode):** all checks passed — Capacitor bridge,
+fresh install = new player, no network, engine ready from the APK in 13.9 s (TF.js CPU + TinyCLIP WASM, 1 thread, 2941
+labels, 40.7 MB model) and a recognition in 7.3 s, real permission dialog (deny → explanation, "While using the app" →
+virtual camera preview 960×1280, digital zoom), Home with camera open → stopped, resume → recognition still works
+(8.0 s), Back on camera/sheet/tab, double-Back exit, saves in private files, progress after exit, force-stop, wiped
+WebView data (3 keys restored from the files) and update 1007 → 1008; uninstall + install starts clean. Seen only on the
+emulator: the first launch's automatic engine start on its software WebGL blocked the page for ~2 min (CI runs 4 and 6
+also showed an "isn't responding" dialog) — **time the first engine start on the phone.**
 
 ## Phone: download and install the APK
 
