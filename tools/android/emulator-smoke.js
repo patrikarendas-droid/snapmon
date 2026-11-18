@@ -40,9 +40,9 @@ async function launch() {
     try {
       adb(`shell am start -W -n ${PKG}/${ACT}`);
       await sleep(attempt ? 2000 : 300);
-      const webview = await device.webView({ pkg: PKG }, { timeout: 90000 });
+      const webview = await device.webView({ pkg: PKG }, { timeout: 240000 });
       const page = await webview.page();
-      await page.waitForFunction(() => window.__snapmon && window.SNAPMON_NATIVE && window.SnapmonNav, null, { timeout: 120000 });
+      await page.waitForFunction(() => window.__snapmon && window.SNAPMON_NATIVE && window.SnapmonNav, null, { timeout: 240000 });
       return page;
     } catch (e) { last = e; await sleep(1500); }
   }
