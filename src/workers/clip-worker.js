@@ -21,9 +21,9 @@ async function sha256(buf) {
   return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('');
 }
 // Cache API keeps model files on the phone after the first complete download.
-async function cachedFetch(url, file, expect) {
+async function cachedFetch(url, file, expect, useCache = true) {
   let cache = null;
-  try { cache = await caches.open(CACHE); } catch (e) { /* storage blocked: plain download every time */ }
+  if (useCache) try { cache = await caches.open(CACHE); } catch (e) { /* storage blocked: plain download every time */ }
   if (cache) {
     const hit = await cache.match(url);
     if (hit) { const buf = await hit.arrayBuffer(); progress(file, buf.byteLength, buf.byteLength); return { buf, cached: true }; }
@@ -71,7 +71,8 @@ async function makeSession(modelBuf, which) {
 }
 
 // test: { failGPU, failCPU } lets automated tests simulate backend failures; never set by the game itself
-async function init({ base, ortBase, backend: want = 'wasm', expect = {}, test = {} }) {
+// cache: false in the Android app, whose files are read straight from the APK (still size- and SHA-256-checked)
+async function init({ base, ortBase, backend: want = 'wasm', expect = {}, test = {}, cache: useCache = true }) {
   const t0 = performance.now();
   let gpu = false;
   if (want === 'webgpu') {
@@ -84,9 +85,9 @@ async function init({ base, ortBase, backend: want = 'wasm', expect = {}, test =
   // one thread on every device: the same WASM binary, the same operation order, the same result
   ort.env.wasm.numThreads = 1;
   const urls = { meta: base + 'vocab.json', vocab: base + 'vocab.bin' };
-  meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'])).buf));
+  meta = JSON.parse(new TextDecoder().decode((await cachedFetch(urls.meta, 'vocab.json', expect['vocab.json'], useCache)).buf));
   urls.model = base + meta.model;
-  const [m, v] = await Promise.all([cachedFetch(urls.model, meta.model, expect[meta.model]), cachedFetch(urls.vocab, 'vocab.bin', expect['vocab.bin'])]);
+  const [m, v] = await Promise.all([cachedFetch(urls.model, meta.model, expect[meta.model], useCache), cachedFetch(urls.vocab, 'vocab.bin', expect['vocab.bin'], useCache)]);
   dim = meta.dim; nLabels = meta.labels.length;
   vocab = f16ToF32(new Uint16Array(v.buf));
   if (vocab.length !== dim * nLabels) { await purge(Object.values(urls)); throw Object.assign(new Error('vocabulary file does not match the model'), { kind: 'download' }); }

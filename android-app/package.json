@@ -1,0 +1,20 @@
+{
+  "name": "snapmon-android",
+  "private": true,
+  "description": "Native Android shell (Capacitor) for SnapMon. The game itself lives in ../src and ../index.html; see docs/ANDROID.md.",
+  "scripts": {
+    "web": "node ../tools/android/build-web.js",
+    "sync": "npx cap sync android",
+    "apk": "cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.6.2",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/cli": "8.6.2",
+    "@capacitor/core": "8.6.2"
+  },
+  "devDependencies": {
+    "@fontsource/chakra-petch": "5.3.0",
+    "@fontsource/pixelify-sans": "5.3.0"
+  }
+}

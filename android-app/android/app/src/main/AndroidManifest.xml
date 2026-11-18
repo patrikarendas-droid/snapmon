@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- SnapMon's only permission. Asked at runtime the first time the player opens the camera (SNAP).
+         Live camera only: no photo/media/storage access, no microphone, no location. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="true" />
+    <!-- CAMERA would otherwise imply a required REAR camera; any camera works (the game asks for the rear one first). -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <!-- Offline by design: the game, the recognition models and their runtimes are all inside the APK, so the app
+         needs no network access. Capacitor's template adds INTERNET; it is removed here on purpose. -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+
+    <!-- allowBackup=false + dataExtractionRules: saved progress is never copied to Google backup or to a new phone
+         behind the player's back, so a fresh install always starts as a brand-new player. Updates keep the data. -->
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+
+        <activity
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBarLaunch"
+            android:launchMode="singleTask"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+    </application>
+</manifest>

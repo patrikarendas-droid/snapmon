@@ -1,7 +1,8 @@
 # Third-party software, models and assets
 
 SNAPMON's own code: see the repository. Everything below is served from the deployed site itself (vendored, pinned
-versions) and is intended to be bundled in a future Android app.
+versions) and is bundled inside the Android app (APK), which also shows this list in Settings → Open-source licences.
+The Android app does not include the developer-only WebGPU build of ONNX Runtime Web.
 
 | Component | Use | Licence | Source |
 |---|---|---|---|
@@ -12,7 +13,9 @@ versions) and is intended to be bundled in a future Android app.
 | SSDLite MobileNet v2 weights (COCO) | production detector | Apache-2.0 | storage.googleapis.com/tfjs-models |
 | ONNX Runtime Web 1.20.1 | runtime for the TinyCLIP part of the recognition engine | MIT | https://github.com/microsoft/onnxruntime |
 | TinyCLIP ViT-39M/16 (Microsoft) weights | vocabulary model of the standard recognition engine | MIT | https://github.com/microsoft/Cream/tree/main/TinyCLIP, https://huggingface.co/wkcn |
-| Google Fonts: Silkscreen, Space Grotesk | UI fonts | SIL Open Font License 1.1 | fonts.google.com |
+| Fonts: Pixelify Sans, Chakra Petch | UI fonts (website: Google Fonts; Android app: bundled woff2 files from fontsource 5.3.0, licence files included) | SIL Open Font License 1.1 | fonts.google.com, https://fontsource.org |
+| Capacitor 8.6.2 (@capacitor/core, /android, /app 8.1.2) | Android app shell: Android System WebView host, local file server, hardware Back / app lifecycle | MIT | https://github.com/ionic-team/capacitor |
+| AndroidX (AppCompat, Core, CoordinatorLayout, SplashScreen, WebKit, Activity, Fragment) | Android app shell libraries pulled in by Capacitor | Apache-2.0 | https://developer.android.com/jetpack/androidx |
 
 Evaluated but **not shipped**: Apple MobileCLIP / MobileCLIP2 (Apple ML research licence, non-commercial),
 MetaCLIP (CC-BY-NC), OpenAI CLIP ViT-B/32 (used only as an accuracy reference in the lab; its model card discourages

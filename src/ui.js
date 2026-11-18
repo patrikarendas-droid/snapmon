@@ -207,6 +207,20 @@ function camSnap() {
   beginIdentify(canvas, canvas.toDataURL('image/jpeg', 0.85), tSnap);
 }
 
+// Android app only: which APK this is (the website shows nothing here)
+function nativeBuildLine() {
+  const n = window.SNAPMON_NATIVE; if (!n || !n.build) return '';
+  const b = n.build, st = n.storage && n.storage.status ? n.storage.status() : null;
+  return `<p class="small muted">Android app ${esc(b.versionName || '')}${b.devTools ? ' · DEVELOPMENT BUILD' : ''}${st && st.failures ? ` · ${st.failures} save copies failed (${esc(st.lastError)})` : ''}</p>
+    <button class="btn small ghost" data-act="licences">Open-source licences</button>`;
+}
+// Android app only: the third-party notices packaged with the APK (THIRD_PARTY_NOTICES.md + font licences)
+async function showLicences() {
+  let text = 'The licence list could not be read.';
+  try { text = await (await fetch('THIRD_PARTY_NOTICES.md')).text(); } catch (e) {}
+  openSheet(`<div class="sheet-head"><h2>Licences</h2><button class="btn small ghost" data-act="settings">Back</button></div>
+    <pre class="small" style="white-space:pre-wrap;word-break:break-word;margin:0">${esc(text)}</pre>`);
+}
 /* ---------- the recognition engine: one-time notice, progress, status ---------- */
 const MB = b => Math.max(1, Math.round(b / 1048576));
 async function showEngineNotice() {
@@ -239,6 +253,7 @@ function engineStatusLine() {
   if (E.state === 'ready') return `Ready · ${E.backends.lens === 'webgl' ? 'GPU' : 'CPU'} detector, ${E.backends.clip === 'webgpu' ? 'GPU' : 'CPU'} vocabulary model.`;
   if (E.state === 'loading') return `Loading: ${esc(E.stage)}${E.total ? ` (${MB(E.loaded)} / ${MB(E.total)} MB)` : ''}.`;
   if (E.state === 'failed') return `Could not start: ${esc(E.error)}.`;
+  if (Platform.assets.bundled) return 'Built into the app; starts when you open the game.';
   return S.settings.engineCached ? 'Saved on this phone; starts when you open the game.' : 'Not downloaded yet.';
 }
 /* SNAP only works when the Spirit Lens (the recognition engine) is ready. While it loads, wakes up, re-checks itself
@@ -248,7 +263,7 @@ function snapState() {
   const E = Engine.status;
   if (Engine.ready()) return 'ready';
   if (E.state === 'failed') return 'failed';
-  if (E.state === 'idle' && !S.settings.engineCached) return 'download';
+  if (E.state === 'idle' && !S.settings.engineCached && !Platform.assets.bundled) return 'download'; // the Android app has it built in
   return 'waking';
 }
 function snapButtonHTML() {
@@ -1199,7 +1214,7 @@ function settingsSheet() {
       <div class="row"><input class="search grow" id="resetBox" placeholder="RESET" autocomplete="off"><button class="btn danger" data-act="reset">Erase</button></div></div>
     ${developerHTML()}
     <p class="small muted">SNAPMON never uploads your photos. There are no accounts, ads or purchases. Camera access is requested only when you tap SNAP, and the camera stops the moment you take the shot or leave the app.</p>
-    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>`, 'settings');
+    <p class="small muted" data-act="devTap">SNAPMON v${GAME_VERSION} · save format ${SAVE_VERSION} · engine ${Engine.ID}</p>${nativeBuildLine()}`, 'settings');
 }
 
 // Developer tools are hidden (tap the version line 7 times). They never change how hunting recognises objects:
@@ -1255,7 +1270,7 @@ const actions = {
   mute() { S.settings.muted = !S.settings.muted; SFX.setMuted(S.settings.muted); persist(); renderTop(); const sw = $('#sheet .switch[data-act="mute"]'); if (sw) setSwitch(sw, !S.settings.muted); },
   settings: settingsSheet, closeSheet,
   sheetBg(_, el, ev) { if (ev.target === el) closeSheet(); },
-  openCamera, camClose: closeCamera, camSnap,
+  openCamera, camClose: closeCamera, camSnap, licences: () => showLicences(),
   camZoom(dir) { const z = ui.camZoom; if (z) z.apply(z.value + (dir === '+' ? 1 : -1) * Math.max(z.info.step, (z.info.max - z.info.min) / 10)); },
   cancelPhoto,
   guide() { openSheet(Guide.html(ui.guideOpen), 'guide'); },
@@ -1283,7 +1298,7 @@ const actions = {
     TestRoster.clear(); toast('Test monsters cleared.'); settingsSheet();
   },
   toggleForceCPU(_, el) { S.settings.forceCPU = !S.settings.forceCPU; persist(); setSwitch(el, S.settings.forceCPU); Engine.setForceCPU(S.settings.forceCPU); Engine.load(); },
-  toggleClipGPU(_, el) { S.settings.clipGPU = !S.settings.clipGPU; persist(); setSwitch(el, S.settings.clipGPU); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); },
+  toggleClipGPU(_, el) { if (!Platform.assets.webgpu && !S.settings.clipGPU) { toast('Not available in the Android app (the WebGPU runtime is not packaged).'); return; } S.settings.clipGPU = !S.settings.clipGPU; persist(); setSwitch(el, S.settings.clipGPU); Engine.setClipGPU(S.settings.clipGPU); Engine.load(); },
   perfExport() {
     const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), timings: Engine.perfLog() });
     try { navigator.clipboard.writeText(text).then(() => toast('Timings copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
@@ -1442,5 +1457,5 @@ if (migratedFrom) setTimeout(() => toast(`Save upgraded from format ${migratedFr
 // v0.4: Hybrid is the only recogniser; the old developer switch between recognisers is gone
 delete S.settings.expLens;
 if (S.settings.forceCPU && devOn()) Engine.setForceCPU(true);
-if (S.settings.clipGPU && devOn()) Engine.setClipGPU(true);
-if (S.settings.engineCached) setTimeout(() => Engine.load(), 300); // engine saved on this phone: wake it right away (SNAP unlocks when ready)
+if (S.settings.clipGPU && devOn() && Platform.assets.webgpu) Engine.setClipGPU(true);
+if (S.settings.engineCached || Platform.assets.bundled) setTimeout(() => Engine.load(), 300); // engine saved on this phone (or built into the app): wake it right away (SNAP unlocks when ready)

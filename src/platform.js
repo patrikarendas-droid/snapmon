@@ -6,10 +6,16 @@
                       zoomInfo() / setZoom(value, video) / visibleRect(video)
    Platform.storage : get(key) / set(key, value) / remove(key)   (synchronous; returns false when storage is blocked)
    Platform.device  : online() / webgl() / webgpu() / wasm()
-   Platform.assets  : url(path) → where packaged model/runtime files live (site on the web, APK assets natively)   */
+   Platform.assets  : url(path) → where packaged model/runtime files live (site on the web, APK assets natively)
+                      bundled → true in the Android app (every engine file ships inside the APK: no download, no cache)
+
+   The Android app (android-app/, docs/ANDROID.md) loads these same files. Before any game script runs, its boot script
+   sets window.SNAPMON_NATIVE = { platform: 'android', storage: { mirror(key, value), remove(key) } }. Everything below
+   behaves exactly as in the browser when SNAPMON_NATIVE is absent (the website).   */
 'use strict';
 
 const Platform = (() => {
+  const native = (typeof window !== 'undefined' && window.SNAPMON_NATIVE) || null;
   /* ---------- camera: live rear camera only (no gallery / file upload) ---------- */
   let stream = null, digital = 1;
   const DIGITAL_MAX = 3; // software zoom limit: beyond 3× a 1280 px stream leaves too few pixels for recognition
@@ -84,23 +90,39 @@ const Platform = (() => {
     describe(e) {
       const kind = e && (e.kind || ({ NotAllowedError: 'denied', SecurityError: 'denied', NotFoundError: 'none', OverconstrainedError: 'none', NotReadableError: 'busy', AbortError: 'busy', TimeoutError: 'timeout' })[e.name]) || 'unknown';
       const text = {
-        denied: ['Camera permission is off', 'SNAPMON needs the camera to find monsters. Allow camera access for this site (tap the lock icon next to the address, then Permissions → Camera), then try again.'],
+        denied: ['Camera permission is off', native
+          ? 'SnapMon needs the camera to find monsters. Tap SNAP again and choose Allow. If Android no longer asks, open Android Settings → Apps → SnapMon → Permissions → Camera, allow it, then try again.'
+          : 'SNAPMON needs the camera to find monsters. Allow camera access for this site (tap the lock icon next to the address, then Permissions → Camera), then try again.'],
         none: ['No camera found', 'This device does not seem to have a usable camera.'],
         busy: ['Camera is busy', 'Another app is using the camera. Close it and try again.'],
         timeout: ['Camera did not start', 'The camera took too long to start. Try again.'],
         insecure: ['Camera needs a secure page', 'Open SNAPMON from its https:// address to use the camera.'],
-        unsupported: ['Camera not supported here', 'This browser cannot open a live camera. Use a recent version of Chrome on Android.'],
+        unsupported: ['Camera not supported here', native ? 'This phone\'s Android System WebView cannot open a live camera. Update "Android System WebView" in the Play Store, then try again.' : 'This browser cannot open a live camera. Use a recent version of Chrome on Android.'],
         unknown: ['Camera problem', 'The camera could not be opened. Try again.'],
       }[kind];
       return { kind, title: text[0], text: text[1] };
     },
   };
 
-  /* ---------- storage ---------- */
+  /* ---------- storage ----------
+     Synchronous everywhere (the game saves with a plain return value). In the Android app localStorage stays the fast
+     synchronous copy and every write is ALSO mirrored to app-private files by the native SaveStore (atomic writes);
+     the boot script restores from those files before the game loads (android-app/native/boot.js). */
+  const mirror = native && native.storage;
   const storage = {
     get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
-    set(key, value) { try { localStorage.setItem(key, value); return true; } catch (e) { return false; } },
-    remove(key) { try { localStorage.removeItem(key); return true; } catch (e) { return false; } },
+    set(key, value) {
+      let ok;
+      try { localStorage.setItem(key, value); ok = true; } catch (e) { ok = false; }
+      if (mirror) { try { ok = mirror.mirror(key, value) || ok; } catch (e) {} } // native file copy also counts as saved
+      return ok;
+    },
+    remove(key) {
+      let ok;
+      try { localStorage.removeItem(key); ok = true; } catch (e) { ok = false; }
+      if (mirror) { try { mirror.remove(key); } catch (e) {} }
+      return ok;
+    },
   };
 
   /* ---------- packaged assets ----------
@@ -109,6 +131,8 @@ const Platform = (() => {
      bundled asset folder, so the same code loads the same files from the app package instead of the network. */
   const assets = {
     base: (typeof window !== 'undefined' && window.SNAPMON_ASSET_BASE) || '',
+    bundled: !!native,        // Android app: models ship in the APK (no download notice, no second copy in a browser cache)
+    webgpu: !native,          // the developer-only WebGPU runtime build is not packaged in the APK
     url(path) { return new URL(assets.base + path, location.href).href; },
   };
 
@@ -120,5 +144,5 @@ const Platform = (() => {
     wasm: () => typeof WebAssembly === 'object',
   };
 
-  return { name: 'web', camera, storage, device, assets };
+  return { name: native ? native.platform : 'web', native: !!native, camera, storage, device, assets };
 })();

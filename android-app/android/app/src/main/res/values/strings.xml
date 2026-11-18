@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <!-- app_name comes from build.gradle (resValue): "SnapMon" for release, "SnapMon Dev" for the debug APK -->
+    <string name="package_name">io.github.patrikarendas.snapmon</string>
+    <string name="custom_url_scheme">io.github.patrikarendas.snapmon</string>
+</resources>

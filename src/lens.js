@@ -54,7 +54,7 @@ const Lens = (() => {
       try {
         const m = await fn();
         st.sources[kind] = source;
-        if (source !== 'cache') { try { await m.model.save(CFG.cacheKeys[kind]); } catch (e) { /* storage full or blocked: fine, HTTP cache still helps */ } }
+        if (source === 'site') { try { await m.model.save(CFG.cacheKeys[kind]); } catch (e) { /* storage full or blocked: fine, HTTP cache still helps */ } }
         return m;
       } catch (e) { errs.push(source + ': ' + (e.message || e)); }
     }
@@ -82,11 +82,12 @@ const Lens = (() => {
         st.progress = 'Loading recognition models…'; emit();
         const mnLocal = Platform.assets.url(CFG.localUrls.classifier), coLocal = Platform.assets.url(CFG.localUrls.detector);
         const [cls, det] = await Promise.allSettled([
-          withTimeout(loadModel('classifier', [
+          // the Android app ships the very same files inside the APK: read them from there, never keep a second copy
+          withTimeout(loadModel('classifier', Platform.assets.bundled ? [['app', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: mnLocal, inputRange: [0, 1] })]] : [
             ['cache', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: CFG.cacheKeys.classifier, inputRange: [0, 1] })],
             ['site', () => mobilenet.load({ version: 2, alpha: 1.0, modelUrl: mnLocal, inputRange: [0, 1] })],
           ]), 180000, 'classifier'),
-          withTimeout(loadModel('detector', [
+          withTimeout(loadModel('detector', Platform.assets.bundled ? [['app', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: coLocal })]] : [
             ['cache', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: CFG.cacheKeys.detector })],
             ['site', () => cocoSsd.load({ base: 'lite_mobilenet_v2', modelUrl: coLocal })],
           ]), 180000, 'detector'),

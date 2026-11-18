@@ -46,7 +46,7 @@ const ClipLens = (() => {
         };
         // the worker process itself can die (Android reclaiming memory): reject whatever was waiting
         st.worker.onerror = e => { for (const p of st.pending.values()) p.reject(Object.assign(new Error('recognition worker stopped: ' + (e.message || 'unknown')), { kind: 'crash' })); st.pending.clear(); st.state = 'failed'; };
-        const ready = await call('init', { type: 'init', base, ortBase, backend: CFG.backend, expect: CFG.expect || {}, test: CFG.test || {} }, 240000);
+        const ready = await call('init', { type: 'init', base, ortBase, backend: CFG.backend, expect: CFG.expect || {}, test: CFG.test || {}, cache: !Platform.assets.bundled }, 240000);
         st.info = ready.info;
         st.meta = await (await fetch(base + 'vocab.json')).json(); // served from the HTTP/Cache copy the worker just verified
         st.state = 'ready';

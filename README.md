@@ -3,6 +3,8 @@
 A mobile-first browser game. The real world is full of monsters disguised as everyday objects — photograph things around you with your phone camera, fight what you find in turn-based battles, capture weakened monsters, and complete the encyclopedia.
 
 Runs in Chrome on Android with nothing to install: no APK, no account, no ads, no purchases, no server.
+A private Android development app (APK, same game and recognition engine, offline, separate saves) is built by
+GitHub Actions — see `docs/ANDROID.md`; the website stays the main way to play.
 
 ## Play
 

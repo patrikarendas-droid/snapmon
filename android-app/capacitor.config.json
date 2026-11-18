@@ -1,0 +1,21 @@
+{
+  "appId": "io.github.patrikarendas.snapmon",
+  "appName": "SnapMon",
+  "webDir": "www",
+  "loggingBehavior": "debug",
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": false,
+    "adjustMarginsForEdgeToEdge": "disable"
+  },
+  "server": {
+    "androidScheme": "https",
+    "hostname": "localhost"
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "css",
+      "style": "DARK"
+    }
+  }
+}

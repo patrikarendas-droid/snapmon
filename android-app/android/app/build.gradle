@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+
+/* SnapMon Android app. The web game is NOT kept here: tools/android/build-web.js assembles it (with every model and
+   runtime) into ../www, and `npx cap sync android` copies that into the APK (app/src/main/assets/public).
+
+   Versions (passed by .github/workflows/android-apk.yml; local builds fall back to 1 / "dev"):
+     SNAPMON_VERSION_CODE  must grow with every build that should install over the previous one (Android refuses
+                           to install a lower versionCode over a higher one)
+     SNAPMON_VERSION_NAME  shown in Android's app info and in the game's Settings
+   Signing of the debug APK (stable across CI runs, so updates keep the saves): see docs/ANDROID.md → "Signing".
+     SNAPMON_DEV_KEYSTORE / SNAPMON_DEV_KEYSTORE_PASSWORD / SNAPMON_DEV_KEY_ALIAS — when absent, Android's ordinary
+     per-machine debug key is used (installable, but a later build signed differently cannot update it). */
+def envOr = { String name, String fallback -> def v = System.getenv(name); (v != null && !v.isEmpty()) ? v : fallback }
+def devKeystore = envOr('SNAPMON_DEV_KEYSTORE', '')
+
+android {
+    namespace = "io.github.patrikarendas.snapmon"
+    compileSdk = rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "io.github.patrikarendas.snapmon"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode Integer.parseInt(envOr('SNAPMON_VERSION_CODE', '1'))
+        versionName envOr('SNAPMON_VERSION_NAME', 'dev')
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        if (devKeystore) {
+            snapmonDev {
+                storeFile file(devKeystore)
+                storePassword envOr('SNAPMON_DEV_KEYSTORE_PASSWORD', '')
+                keyAlias envOr('SNAPMON_DEV_KEY_ALIAS', 'snapmon-dev')
+                keyPassword envOr('SNAPMON_DEV_KEYSTORE_PASSWORD', '')
+                enableV1Signing false   // minSdk 24: APK Signature Scheme v2/v3 only
+                enableV2Signing true
+                enableV3Signing true
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            // a separate app ("SnapMon Dev", …snapmon.dev): a future Play release installs next to it, never over it
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "SnapMon Dev"
+            if (devKeystore) signingConfig signingConfigs.snapmonDev
+        }
+        release {
+            resValue "string", "app_name", "SnapMon"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // no signing config here on purpose: Play release signing is set up separately (docs/ANDROID.md)
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+}
+
+apply from: 'capacitor.build.gradle'
+
+/* Release safety: a release build must never contain the developer tools (Quick Monster Test Mode, God Mode, Force CPU,
+   …). tools/android/build-web.js records in native/build-info.json whether the packaged game has DEV_TOOLS on; any
+   release task refuses to run unless the packaged web game was built in release mode. */
+def checkWebBuild = { boolean release ->
+    def info = file('src/main/assets/public/native/build-info.json')
+    if (!info.exists()) throw new GradleException("No packaged web game. Run: node tools/android/build-web.js … && npx cap sync android")
+    def json = new groovy.json.JsonSlurper().parse(info)
+    if (release && json.devTools != false) throw new GradleException("Refusing a RELEASE build: the packaged game has DEV_TOOLS enabled. Rebuild the web game without --dev-tools.")
+}
+tasks.matching { it.name == 'preReleaseBuild' }.configureEach { doFirst { checkWebBuild(true) } }
+tasks.matching { it.name == 'preDebugBuild' }.configureEach { doFirst { checkWebBuild(false) } }
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}

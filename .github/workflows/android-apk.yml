@@ -1,0 +1,217 @@
+name: Android debug APK
+# Builds the private development APK ("SnapMon Dev", io.github.patrikarendas.snapmon.dev) of the CURRENT game with
+# the complete bundled recognition engine, tests it, and uploads it as a downloadable artifact. It never deploys,
+# never touches GitHub Pages or the website, never pushes, tags or publishes anything (read-only permissions).
+# Phone how-to, signing and the smoke-test checklist: docs/ANDROID.md.
+on:
+  workflow_dispatch:          # "Run workflow" button (appears once this file is on the default branch)
+  push:
+    branches: ['feature/android-**', 'ccr-6eaf78d0-vj87lh']
+    paths:
+      - 'android-app/**'
+      - 'src/**'
+      - 'index.html'
+      - 'icon.svg'
+      - 'tools/**'
+      - 'tests/**'
+      - 'lab/**'
+      - 'THIRD_PARTY_NOTICES.md'
+      - '.github/workflows/android-apk.yml'
+permissions:
+  contents: read
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  # same TinyCLIP part of the standard Hybrid engine as the website (tests/android-packaging.js checks this)
+  CLIP_VARIANT: tinyclip-39m16
+  CLIP_HF: wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M
+  NODE_VERSION: '22'
+  JAVA_VERSION: '21'
+  ANDROID_PLATFORM: 'platforms;android-36'
+  ANDROID_BUILD_TOOLS: '36.0.0'
+jobs:
+  tests:
+    name: Game regression tests (same as the website)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Logic, label, sprite, save and packaging tests
+        run: tools/android/run-tests.sh logic
+      - name: Browser tests (gameplay, recognition engine, Back navigation, catalogue)
+        run: |
+          npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1
+          npx playwright install --with-deps chromium > /dev/null
+          python3 -m http.server 8765 > /dev/null 2>&1 &
+          sleep 1
+          tools/android/run-tests.sh browser
+
+  apk:
+    name: Build the debug APK
+    needs: tests
+    runs-on: ubuntu-latest
+    outputs:
+      artifact: ${{ steps.meta.outputs.artifact }}
+      apk: ${{ steps.meta.outputs.apk }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+      - name: Android SDK packages (pinned)
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "$ANDROID_PLATFORM" "build-tools;$ANDROID_BUILD_TOOLS" "platform-tools" > /dev/null
+      - id: meta
+        name: Version
+        env:
+          HAS_SEED: ${{ secrets.ANDROID_DEV_SIGNING_SEED != '' }}
+        run: |
+          GAME=$(sed -n "s/^const GAME_VERSION = '\([^']*\)'.*/\1/p" src/game.js)
+          CODE=$((1000 + GITHUB_RUN_NUMBER))
+          NAME="$GAME-dev.$GITHUB_RUN_NUMBER+${GITHUB_SHA::7}"
+          echo "SNAPMON_VERSION_CODE=$CODE" >> "$GITHUB_ENV"
+          echo "SNAPMON_VERSION_NAME=$NAME" >> "$GITHUB_ENV"
+          if [ "$HAS_SEED" = true ]; then SIGN=stable; else SIGN=UNSTABLE-SIGNING; fi
+          echo "SIGNING=$SIGN" >> "$GITHUB_ENV"
+          echo "apk=snapmon-dev-$GAME-dev.$GITHUB_RUN_NUMBER-${GITHUB_SHA::7}.apk" >> "$GITHUB_OUTPUT"
+          echo "artifact=SnapMon-Dev-APK-$GAME-build-$GITHUB_RUN_NUMBER$([ $SIGN = stable ] || echo -UNSTABLE-SIGNING)" >> "$GITHUB_OUTPUT"
+      # ---- the recognition engine: exactly what the website deploys ----
+      - id: clipcache
+        uses: actions/cache@v4
+        with:
+          path: models/clip/${{ env.CLIP_VARIANT }}
+          key: clip-${{ env.CLIP_VARIANT }}-${{ hashFiles('lab/export_clip.py', 'lab/vocab-labels.json', 'lab/calib/*.json') }}
+      - uses: actions/setup-python@v5
+        if: steps.clipcache.outputs.cache-hit != 'true'
+        with:
+          python-version: '3.11'
+      - name: Export TinyCLIP model
+        if: steps.clipcache.outputs.cache-hit != 'true'
+        run: |
+          pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --quiet transformers onnx onnxruntime onnxscript
+          python lab/export_clip.py $CLIP_HF $CLIP_VARIANT lab/vocab-labels.json models/clip lab/calib/$CLIP_VARIANT.json
+      - name: Detector, classifier and runtimes (pinned, same as the website)
+        run: tools/android/fetch-engine.sh "$RUNNER_TEMP/engine"
+      # ---- the packaged web game ----
+      - name: Android project dependencies (pinned, package-lock.json)
+        working-directory: android-app
+        run: npm ci --no-audit --no-fund
+      - name: Assemble and verify the packaged game (development build, DEV_TOOLS on)
+        run: node tools/android/build-web.js --engine "$RUNNER_TEMP/engine" --dev-tools --version-name "$SNAPMON_VERSION_NAME"
+      - name: Packaged game in Chromium (real engine, fake native bridge)
+        run: |
+          npm i --no-save --silent playwright@1.48.2
+          npx playwright install --with-deps chromium > /dev/null
+          node tests/e2e-android-web.js android-app/www shots
+      # ---- the native app ----
+      - name: Copy the game into the Android project
+        working-directory: android-app
+        run: npx cap sync android
+      - name: Stable development signing key (from the ANDROID_DEV_SIGNING_SEED secret)
+        if: env.SIGNING == 'stable'
+        env:
+          SEED: ${{ secrets.ANDROID_DEV_SIGNING_SEED }}
+        run: |
+          pip install --quiet cryptography==50.0.1
+          PW=$(openssl rand -hex 24)
+          echo "::add-mask::$PW"
+          python3 tools/android/dev-keystore.py "$RUNNER_TEMP/dev.p12" "$PW" | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "SNAPMON_DEV_KEYSTORE=$RUNNER_TEMP/dev.p12" >> "$GITHUB_ENV"
+          echo "SNAPMON_DEV_KEYSTORE_PASSWORD=$PW" >> "$GITHUB_ENV"
+      - name: Gradle build (assembleDebug)
+        working-directory: android-app/android
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+      - name: Remove the signing key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/dev.p12"
+      - name: Verify the APK
+        run: |
+          BT="$ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS"
+          SRC=android-app/android/app/build/outputs/apk/debug/app-debug.apk
+          mkdir -p out && cp "$SRC" "out/${{ steps.meta.outputs.apk }}"
+          APK="out/${{ steps.meta.outputs.apk }}"
+          "$BT/apksigner" verify --print-certs "$APK" | tee signing.txt
+          "$BT/aapt2" dump badging "$APK" > badging.txt
+          grep -q "package: name='io.github.patrikarendas.snapmon.dev' versionCode='$SNAPMON_VERSION_CODE'" badging.txt
+          PERMS=$(grep "^uses-permission:" badging.txt | grep -v "DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" | sed "s/.*name='\([^']*\)'.*/\1/")
+          echo "permissions: $PERMS"
+          [ "$PERMS" = "android.permission.CAMERA" ] || { echo "unexpected permissions: $PERMS"; exit 1; }
+          unzip -l "$APK" | grep -q "assets/public/models/clip/$CLIP_VARIANT/vision.onnx"
+          unzip -l "$APK" | grep -q "assets/public/vendor/ort/ort-wasm-simd-threaded.wasm"
+          if unzip -l "$APK" | grep -q "assets/public/catalogue/"; then echo "catalogue must not be packaged"; exit 1; fi
+          {
+            echo "## SnapMon Dev APK"
+            echo "| | |"; echo "|---|---|"
+            echo "| File | \`${{ steps.meta.outputs.apk }}\` (inside the artifact **${{ steps.meta.outputs.artifact }}**) |"
+            echo "| Size | $(du -h "$APK" | cut -f1) ($(stat -c %s "$APK") bytes) |"
+            echo "| Package | io.github.patrikarendas.snapmon.dev |"
+            echo "| Version | $SNAPMON_VERSION_NAME (versionCode $SNAPMON_VERSION_CODE) |"
+            echo "| SDK | $(grep -o "minSdkVersion:'[0-9]*'" badging.txt) $(grep -o "targetSdkVersion:'[0-9]*'" badging.txt) |"
+            echo "| Permissions | $PERMS |"
+            echo "| Signing | $SIGNING — $(grep -o 'certificate SHA-256 digest: .*' signing.txt | head -1) |"
+            echo "| APK SHA-256 | $(sha256sum "$APK" | cut -d' ' -f1) |"
+            if [ "$SIGNING" != stable ]; then
+              echo ""; echo "> **Warning:** the ANDROID_DEV_SIGNING_SEED secret is not set, so this APK is signed with a throw-away key."
+              echo "> It installs, but the NEXT build cannot update it: Android would require uninstalling, which deletes the app's saved progress."
+              echo "> Set the secret once (docs/ANDROID.md → Signing) before relying on saves."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.meta.outputs.artifact }}
+          path: out/${{ steps.meta.outputs.apk }}
+          retention-days: 30
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-web-test-screenshots
+          path: shots/
+          retention-days: 7
+
+  emulator:
+    name: Emulator smoke test (not a phone test)
+    needs: apk
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.apk.outputs.artifact }}
+          path: apk
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - run: npm i --no-save --silent playwright@1.48.2
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          ram-size: 4096M
+          disk-size: 6G
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back emulated
+          disable-animations: true
+          script: node tools/android/emulator-smoke.js apk/${{ needs.apk.outputs.apk }} shots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: emulator-screenshots
+          path: shots/
+          retention-days: 7
