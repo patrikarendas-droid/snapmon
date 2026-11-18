@@ -146,9 +146,11 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
     checks (real engine in Chromium) → Gradle → APK checks → artifact → emulator smoke test.
   - Signing: stable dev key derived from the secret `ANDROID_DEV_SIGNING_SEED` (`tools/android/dev-keystore.py`);
     **the owner must add that secret once**, otherwise builds are "UNSTABLE-SIGNING" (cannot update each other).
-  - Found by the emulator test (CI run 2): Capacitor's default `html5mode` served `index.html` for the extensionless
-    TF.js weight shards → detector failed in the app only. Fixed by `server.html5mode: false` (model files unchanged);
-    guarded by `android-packaging.js`, `check-apk.js` and a Chromium mock that copies Capacitor's behaviour.
+  - Found by the emulator test (CI runs 2–3): Capacitor's local server cannot serve files without `.` in the name
+    (`index.html` with its default html5mode, nothing without) → the TF.js weight shards `group1-shardNofM` failed and
+    the detector only broke in the app. Fixed in packaging: shards renamed `.bin` (+ `model.json` paths), weights
+    byte-identical; html5mode off; guarded by `check-web.js`/`check-apk.js`, `android-packaging.js` and a Chromium mock
+    that copies Capacitor's behaviour.
   - **Not yet tested on a real phone** (camera, WebView performance, recognition speed). Owner checklist in
     `docs/ANDROID.md`.
 
