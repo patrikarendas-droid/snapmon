@@ -131,16 +131,21 @@ Monster Test Mode, God Mode, Force CPU and the other developer switches cannot r
 
 ## Tests
 
-| Test | Where | What it proves |
-|---|---|---|
-| Website regression suite (all `pages.yml` tests) | CI `tests` job | shared code still passes everything (gameplay baseline, rules trace, sprites, curated writing, saves, engine, nav, catalogue) |
-| `tests/android-packaging.js` | CI + locally | same engine versions/tests as Pages; Pages independent; only CAMERA; INTERNET removed; no backup; release refuses DEV_TOOLS; no keys committed; pinned deps; website Platform unchanged |
-| `tools/android/check-web.js` | every packaging | engine complete and calibrated, SHA-256 of every file, no network URLs, no catalogue / WebGPU build |
-| `tests/e2e-android-web.js` | CI (real engine) + locally (test model) | in Chromium with a fake native bridge: fresh install = new player; nothing requested from the network; bundled fonts; engine from the package without a cache copy; save mirroring, restore after lost storage, newer-wins both ways, revision continuity; Back / double-Back exit after flush; pause closes the camera and saves; denied-camera text; build label; licences |
-| `tools/android/emulator-smoke.js` | CI emulator | the real APK on Android 14 (emulator): fresh start, no network access, full engine from the APK + a recognition, saves survive force-stop, a wiped WebView storage (restored from the app's files) and an update install; Back closes the camera; double-Back leaves the app; virtual camera reported if available |
+Every APK build runs all of these (`.github/workflows/android-apk.yml`); the run summary lists them by kind. Kinds:
+**executed** = real code really ran; **static** = files/config inspected without running the app; **mocked** = the
+real game and engine in Chromium with a FAKE native bridge; **emulator** = the real APK on an Android emulator;
+**phone** = only the owner's device can show it.
 
-**Not covered by automation:** a real phone camera, real-device WebView/GPU behaviour, speed, memory, heat — see the
-phone checklist.
+| Kind | Test | What it proves |
+|---|---|---|
+| executed | website regression suite (`tools/android/run-tests.sh` = every `pages.yml` test; CI job *tests*) | the Chrome game is unaffected: gameplay/balance trace, sprites, curated writing, saves/migrations, engine with the real TinyCLIP worker, Back navigation, catalogue |
+| static | `tests/android-packaging.js` | same engine versions, file list, TinyCLIP export and tests as Pages; `pages.yml` independent of Android; only CAMERA; INTERNET removed; no backup; release refuses DEV_TOOLS; no keys committed; pinned deps; website `Platform` unchanged without `SNAPMON_NATIVE` (executed in a Node VM) |
+| executed | `tools/android/check-web.js` (packaged folder) and `tools/android/check-apk.js` (unpacked **built APK**) | every model, vocabulary, WASM/JS runtime file present and matching its SHA-256 in `models/manifest.json`; TinyCLIP calibrated; nothing loads from the network; no catalogue/WebGPU build; packaged Capacitor config serves the game from the APK over https |
+| mocked | `tests/e2e-android-web.js` — development build **and** release configuration, **real** models in CI | fresh install = new player; no network requests; bundled fonts; engine from the package (no download notice, no cache copy) + a recognition; save mirroring, restore after lost storage, newer copy wins both ways; Back / double-Back exit after saves flushed; pause stops the camera and saves; denied-camera text; build label; licences; dev build: tools unlock; release build: developer tools, Quick Monster Test Mode and God Mode unreachable even if forced on in a save |
+| executed | Gradle in CI | a release build with DEV_TOOLS is refused; a release-safe unsigned release APK builds and passes `check-apk.js --expect-release`; debug APK signed (v2+v3), permissions = CAMERA only; the update-test build carries the same certificate |
+| emulator | `tools/android/emulator-smoke.js` (Android 14 x86_64 emulator, KVM, **airplane mode**) | Capacitor bridge; brand-new player; no network; full engine from the APK + a recognition; Android's **real permission dialog**: "Don't allow" → explanation, "Allow" → preview (virtual camera, if the image provides one); Home with the camera open → stopped, resume → engine still works; Back closes camera/sheet/tab; double Back exits; save files in private storage; progress survives double-Back exit, force-stop, a wiped WebView storage (restored from the files) and an **update to versionCode + 1**; uninstall + install = clean start. Report in the run summary. |
+| static/structural | browser vs app save isolation | the app is a separate Android app with its own sandbox and origin; no code reads website data; the website suite proves the website's saves logic unchanged; the emulator proves a fresh install has no data |
+| phone | owner's checklist below | real camera sensor, zoom, permission UI on the phone, real recognition speed/accuracy, GPU (WebGL) detector, memory, heat, long background periods, the actual install/update flow from GitHub |
 
 ## Phone: download and install the APK
 
