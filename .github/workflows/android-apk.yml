@@ -250,7 +250,7 @@ jobs:
       - run: npm i --no-save --silent playwright@1.48.2
       - uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
+          api-level: 35        # Android 15: edge-to-edge like the owner's phone (status bar overlaps the page)
           target: google_apis
           arch: x86_64
           profile: pixel_6
@@ -263,7 +263,7 @@ jobs:
       - name: Emulator report
         if: always()
         run: |
-          { echo "## Emulator test (Android 14 emulator, real APK, airplane mode) — not a phone test"; cat shots/emulator-report.md 2>/dev/null || echo "no report"; } >> "$GITHUB_STEP_SUMMARY"
+          { echo "## Emulator test (Android 15 emulator, real APK, airplane mode) — not a phone test"; cat shots/emulator-report.md 2>/dev/null || echo "no report"; } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
