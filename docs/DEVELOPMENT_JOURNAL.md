@@ -327,6 +327,13 @@ Last updated: 2026-11-24. **SnapMon is an Android game** (owner decision 2026-11
   - Milestones: `.github/workflows/android-milestone.yml` (manual, verify by default, publish only with mode=publish +
     exact approval sentence; original artifact, hash-checked; pre-release + tag `android-dev-b<N>`; usable once on the
     default branch) + manual web route; `tools/android/verify-apk.js`. Nothing tagged or released.
+  - **Build 15** (run 45405907369, commit `1b9aa89`, versionCode 1015, `0.6.0-dev.15+1b9aa89`): all jobs green on the
+    FIRST attempt. APK SHA-256 `8220a0f885a6f2521b43ec065abf64dc8c6e7948a97cdfac3abb5a3bbbeca719` (72,304,934 bytes),
+    same certificate 73a7e01f…, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-15` (id 14925198672, zip
+    fc5f035b…) **expires_at 2027-02-22 = 90 days (effective, read from the API)**. Emulator: all previous checks + the
+    drill (1015 → 1016 update, recovery 4207571 at 1017 kept every field, 1018 current got everything back, downgrade
+    refused with INSTALL_FAILED_VERSION_DOWNGRADE, backup code restored the save after uninstall). Game code identical
+    to build 14 (infrastructure/tests/docs only). CI-green, NOT yet phone-verified.
 
 **Next priorities (2026-11-24):**
 - Owner: download build 14 (expires 2026-12-24) and the new build; decide whether to archive build 14 as a milestone;

@@ -4,7 +4,9 @@
 browser game gets no releases and no feature parity, and Android features never need a Chrome fallback. The shared
 JavaScript in `src/` stays: the app's WebView runs it, and the developer catalogue uses part of it. Rollback, backups
 and long-term APK archives: [`docs/RECOVERY.md`](RECOVERY.md). **Current owner-verified build: 14** (commit `4207571`,
-versionCode 1014).
+versionCode 1014). Latest CI build: **15** (run 45405907369, commit `1b9aa89`, versionCode 1015, APK SHA-256
+`8220a0f8…beca719`, same certificate, all jobs incl. emulator + recovery drill green on the first attempt; artifact kept
+until 2027-02-22). Its game code is identical to build 14.
 
 **Status (2026-11-18): first development APK — CI run 7 green** (commit `bda485a`: website regression suite, packaged
 game with the real engine, release-configuration checks, APK build + integrity, Android 14 emulator test). APK size
