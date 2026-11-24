@@ -5,8 +5,9 @@ game with the real engine, release-configuration checks, APK build + integrity, 
 **72.3 MB** (72,294,674 bytes; engine files 85.5 MB uncompressed). Signing: **stable since build 8** (secret
 `ANDROID_DEV_SIGNING_SEED` set 2026-11-18): certificate `CN=SnapMon Development, O=SnapMon`, SHA-256
 `73a7e01f8ca2b716889309fea6a76be76b4b233b30cd381c233b592b72ffe161` — identical in builds 8 and 9. First APK handed to the
-owner for the phone test: **build 9** (run 9, commit `8fa8c4a`, all jobs green). **Current: build 12** (run 12, commit
-`27c5ed8`, versionCode 1012, same certificate, all jobs green): HUD layout fix for edge-to-edge phones.
+owner for the phone test: **build 9** (run 9, commit `8fa8c4a`, all jobs green). **Current: build 13** (run 13, commit
+`98066bf`, versionCode 1013, same certificate, all jobs green): quiet objects, text-only recognition choices, no
+renaming, lore under the name; build 12 = HUD layout fix.
 
 A Capacitor 8 app (Android System WebView) packages the current game
 with the complete bundled recognition engine. It is a private **debug** build ("SnapMon Dev"), built by GitHub

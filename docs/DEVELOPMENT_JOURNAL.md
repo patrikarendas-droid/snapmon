@@ -276,6 +276,8 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
     advance a fake clock 21 min per scan, so no lock is active there: their frozen recordings are byte-identical,
     proving odds and RNG unchanged outside the rule; `generator-snapshot` leaves the additive `enc.quiet` out of the
     hashed export (as with ability keys). `e2e.js`/`e2e-curated.js` assert the nickname removal and name/lore order.
+  - Build 13 (run 13, commit `98066bf`, versionCode 1013, same certificate as builds 9/12): all CI jobs green incl.
+    the emulator; local website suite green (logic + 320 browser checks). To be validated on the phone.
 
 **Next priorities (2026-11-18):**
 0. Android dev APK: owner adds `ANDROID_DEV_SIGNING_SEED`, installs the APK from the Actions artifact and runs the
