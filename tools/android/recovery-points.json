@@ -1,0 +1,30 @@
+{
+  "_about": "Known-good recovery points for SnapMon Dev (Android). Facts only; no secrets. Read by tests/save-compat.js (save compatibility with every listed commit) and by the APK workflow's recovery drill (an APK built from 'drill' with a HIGHER versionCode must install as an update over the current build and keep a synthetic save). Add a build here only after the OWNER has verified it on the phone. docs/RECOVERY.md explains how to use them.",
+  "package": "io.github.patrikarendas.snapmon.dev",
+  "certificateSha256": "73a7e01f8ca2b716889309fea6a76be76b4b233b30cd381c233b592b72ffe161",
+  "drill": "4207571b72fca82c72b29b6a6651d33dfc0ec346",
+  "ownerVerified": [
+    {
+      "build": 14,
+      "commit": "4207571b72fca82c72b29b6a6651d33dfc0ec346",
+      "branch": "ccr-6eaf78d0-vj87lh",
+      "versionCode": 1014,
+      "versionName": "0.6.0-dev.14+4207571",
+      "run": "https://github.com/patrikarendas-droid/snapmon/actions/runs/45379221209",
+      "runAttemptThatBuiltTheApk": 1,
+      "artifact": "SnapMon-Dev-APK-0.6.0-build-14",
+      "artifactId": 14913996282,
+      "artifactZipSha256": "659844e29146490f178d941d66e0a57b3602e37ed05899a8b114173f2ea171ea",
+      "artifactExpires": "2026-12-24T11:07:53Z",
+      "apkFile": "snapmon-dev-0.6.0-dev.14-4207571.apk",
+      "apkSha256": "shown in the run summary (row 'APK SHA-256'); not in the job log for this build, so not copied here",
+      "verified": "owner's phone test, reported 2026-11-24 (combat log, hunter name, encounter lock and the earlier changes work)"
+    }
+  ],
+  "compatibilityRefs": [
+    { "ref": "f847b067147ebb301b80bcad601925f3d6bab7af", "what": "v0.6.0, the live website code (production branch content of the game)" },
+    { "ref": "8fa8c4a", "what": "build 9, the first APK installed on the owner's phone" },
+    { "ref": "98066bf", "what": "build 13 (quiet objects, no renaming)" },
+    { "ref": "4207571b72fca82c72b29b6a6651d33dfc0ec346", "what": "build 14, owner-verified on the phone" }
+  ]
+}
