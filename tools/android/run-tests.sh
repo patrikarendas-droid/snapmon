@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-# The website's full regression suite (the same commands as the "test" job of .github/workflows/pages.yml;
-# tests/android-packaging.js fails if a Pages test is missing here), run by the Android APK workflow so an APK is only
-# built from a commit that would also pass the website's checks. Needs playwright + onnxruntime-web in node_modules
-# and a static server on :8765 for the browser part. Usage: tools/android/run-tests.sh [logic|browser|all]
+# The FAST regression suite of the current Android source (Node logic tests + headless Chromium tests of the shared
+# game code, the catalogue and the staged catalogue-only site). Android is the only supported playable platform: these
+# tests protect the Android game and the catalogue; they do NOT keep a browser game in step with the app. When an
+# Android-only feature makes a browser-level test meaningless, replace it with an equivalent test at the right layer
+# (unit, mocked native bridge in tests/e2e-android-web.js, emulator in tools/android/emulator-smoke.js) — never just
+# delete it. tests/android-packaging.js fails if a test file is neither run here / in android-apk.yml nor listed with a
+# reason. Needs playwright + onnxruntime-web in node_modules and a static server on :8765 for the browser part.
+# Usage: tools/android/run-tests.sh [logic|browser|all]
 set -euo pipefail
 part="${1:-all}"
 if [ "$part" = logic ] || [ "$part" = all ]; then
@@ -34,6 +38,7 @@ if [ "$part" = logic ] || [ "$part" = all ]; then
   node tests/quiet-objects.js       # a missed object stays quiet (hidden period); fake clock + RNG
   node tests/encounter-lock.js      # an object that produced a monster is locked (hidden period); hunter name rules
   node tests/combat-log.js          # the combat log reports exactly what the battle engine did
+  node tests/save-compat.js         # today's save in the game code of older verified builds and back (needs git history)
 fi
 if [ "$part" = browser ] || [ "$part" = all ]; then
   mkdir -p shots
@@ -52,4 +57,15 @@ if [ "$part" = browser ] || [ "$part" = all ]; then
   node tests/e2e-layout.js http://localhost:8765/index.html shots   # HUD / tab bar never cover content (website, inset 0)
   node tests/e2e-quiet.js http://localhost:8765/index.html shots    # quiet objects in the real UI; text-only recognition choices
   node tests/e2e-combat-log.js http://localhost:8765/index.html shots   # combat log sheet, hunter name, Recently disturbed
+  # the STAGED catalogue-only Pages site (not deployed), served under /snapmon/ like the real site
+  node tools/catalogue/build-site.js shots/catalogue-site
+  node tests/e2e-catalogue-preview.js shots/catalogue-site 8799 shots
+  node tools/catalogue/serve.js shots/catalogue-site 8798 > /dev/null & CAT=$!
+  sleep 1
+  node tests/e2e-catalogue-local.js http://localhost:8798/snapmon/ shots
+  node tests/e2e-catalogue-ai.js http://localhost:8798/snapmon/ shots
+  node tests/e2e-catalogue-sync.js http://localhost:8798/snapmon/
+  node tests/e2e-catalogue-sprite.js http://localhost:8798/snapmon/ shots
+  node tests/e2e-catalogue-storage.js http://localhost:8798/snapmon/
+  kill $CAT
 fi

@@ -1,12 +1,13 @@
-// Android packaging guard (Node only, no Android SDK needed). Fails when the Android build could drift from the
-// website or break a product rule:
-//   • the APK workflow must assemble the SAME engine (pinned runtime versions, file list, TinyCLIP variant/export and
-//     cache key) and run the SAME regression tests as the Pages deploy
-//   • the Pages deploy must not depend on the Android project
-//   • the app may only ask for the CAMERA permission (no network, media, storage, microphone or location),
-//     must not be backed up/restored behind the player's back, and a release build must refuse DEV_TOOLS
-//   • no signing key may ever be committed; dependency versions are pinned exactly
-//   • on the website (no SNAPMON_NATIVE) the Platform layer behaves exactly as before
+// Android packaging guard (Node only, no Android SDK needed). Android is the only supported playable platform: this
+// guards the Android build itself, it does NOT require the APK to mirror the website. Fails when:
+//   • the bundled engine drifts from its pins (runtime versions + file list, TinyCLIP variant/export, cache key) —
+//     the engine stays the single standard Hybrid recogniser and an older commit stays rebuildable (docs/RECOVERY.md)
+//   • a test file is neither run by the Android workflow nor listed below with the reason it is not (no silent loss of
+//     coverage); the Pages deploy must not depend on the Android project
+//   • the app could ask for more than CAMERA, be backed up behind the player's back, or ship DEV_TOOLS in a release
+//   • a signing key is committed; dependency versions are not pinned exactly
+//   • the APK artifact is not kept 90 days, or the milestone workflow could publish without the owner's approval
+//   • on the website (no SNAPMON_NATIVE) the Platform layer would behave differently (the catalogue still uses src/)
 // Usage: node tests/android-packaging.js
 'use strict';
 const fs = require('fs'), path = require('path'), vm = require('vm'), { execSync } = require('child_process');
@@ -17,33 +18,64 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
 const pages = R('.github/workflows/pages.yml'), apk = R('.github/workflows/android-apk.yml');
 const fetchEngine = R('tools/android/fetch-engine.sh'), runTests = R('tools/android/run-tests.sh');
 
-// same engine as the website
+// the engine pins (tools/android/fetch-engine.sh + the workflow env); changing them is an engine change on purpose
+const PIN = {
+  npm: '@tensorflow/tfjs@4.22.0 @tensorflow-models/mobilenet@2.1.1 @tensorflow-models/coco-ssd@2.2.3 onnxruntime-web@1.20.1',
+  ort: 'ort.min.js,ort.webgpu.min.js,ort-wasm-simd-threaded.mjs,ort-wasm-simd-threaded.wasm,ort-wasm-simd-threaded.jsep.mjs,ort-wasm-simd-threaded.jsep.wasm',
+  CLIP_VARIANT: 'tinyclip-39m16', CLIP_HF: 'wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M',
+  cacheKey: "clip-${{ env.CLIP_VARIANT }}-${{ hashFiles('lab/export_clip.py', 'lab/vocab-labels.json', 'lab/calib/*.json') }}",
+  exportCmd: 'python lab/export_clip.py $CLIP_HF $CLIP_VARIANT lab/vocab-labels.json models/clip lab/calib/$CLIP_VARIANT.json',
+};
 const npmLine = s => (s.match(/npm i --no-save --silent (@tensorflow\/tfjs@[^\n)]+)/) || [])[1];
-ok(npmLine(pages) && npmLine(pages).trim() === npmLine(fetchEngine).trim(), `runtime versions identical to Pages (${npmLine(pages)})`);
+ok((npmLine(fetchEngine) || '').trim() === PIN.npm, `engine runtime versions pinned (${npmLine(fetchEngine)})`);
 const ortList = s => (s.match(/onnxruntime-web\/dist\/\{([^}]+)\}/) || [])[1];
-ok(ortList(pages) && ortList(pages) === ortList(fetchEngine), 'ONNX Runtime file list identical to Pages');
-ok(/node tools\/fetch-models\.js/.test(fetchEngine), 'detector/classifier weights fetched by the same tools/fetch-models.js');
+ok(ortList(fetchEngine) === PIN.ort, 'ONNX Runtime file list pinned');
+ok(/node tools\/fetch-models\.js/.test(fetchEngine), 'detector/classifier weights fetched by tools/fetch-models.js');
 for (const k of ['CLIP_VARIANT', 'CLIP_HF']) {
-  const v = s => (s.match(new RegExp(`${k}: (\\S+)`)) || [])[1];
-  ok(v(pages) && v(pages) === v(apk), `${k} identical to Pages (${v(pages)})`);
+  const v = (apk.match(new RegExp(`${k}: (\\S+)`)) || [])[1];
+  ok(v === PIN[k], `${k} pinned (${v})`);
 }
-const cacheKey = s => (s.match(/key: (clip-\$\{\{[^\n]+)/) || [])[1];
-ok(cacheKey(pages) && cacheKey(pages) === cacheKey(apk), 'TinyCLIP export cache key identical to Pages');
-const exportCmd = s => (s.match(/python lab\/export_clip\.py [^\n]+/) || [])[0];
-ok(exportCmd(pages) && exportCmd(pages) === exportCmd(apk), 'TinyCLIP export command identical to Pages');
+ok((apk.match(/key: (clip-\$\{\{[^\n]+)/) || [])[1] === PIN.cacheKey, 'TinyCLIP export cache key pinned to the export script, vocabulary and calibration');
+ok((apk.match(/python lab\/export_clip\.py [^\n]+/) || [])[0] === PIN.exportCmd, 'TinyCLIP export command pinned');
+ok(fs.existsSync(path.join(__dirname, '../models/manifest.json')) || /models\/manifest\.json/.test(R('tools/android/check-web.js')), 'packaged engine files are checked against models/manifest.json (SHA-256)');
 
-// same regression tests as the website
-const testJob = pages.split(/\n  deploy:/)[0];
-const pagesTests = [...testJob.matchAll(/^\s+(node (?:tests|tools)\/[^\n]+?)\s*$/gm)].map(m => m[1].replace(/\s*>\s*\/dev\/null$/, '').trim());
-const missing = pagesTests.filter(t => !runTests.split('\n').some(l => l.trim().replace(/\s*>\s*\/dev\/null$/, '') === t));
-ok(pagesTests.length >= 30 && !missing.length, `all ${pagesTests.length} Pages tests also run before an APK build${missing.length ? ' — missing: ' + missing.join('; ') : ''}`);
-ok(/tools\/android\/run-tests\.sh/.test(apk) && /tests\/e2e-android-web\.js/.test(apk), 'APK workflow runs the regression suite and the Android web test');
+// every test file is run by the Android workflow or listed here with the reason it is not
+const NOT_IN_CI = {
+  'load.js': 'helper (loads src/ into a Node VM)', 'fake-camera.js': 'helper (canvas camera stream)', 'layout-checks.js': 'helper (shared by e2e-layout and the emulator test)',
+  'e2e-catalogue.js': 'real Firebase SDK + local Firebase emulators (Java); run by hand, docs/CATALOGUE.md',
+  'e2e-lens.js': 'real photo set + COCO-SSD; superseded in CI by e2e-engine.js and the real-model lab workflow (lab.yml)',
+};
+const ran = runTests + '\n' + apk;
+const testFiles = fs.readdirSync(path.join(__dirname)).filter(f => f.endsWith('.js'));
+const unaccounted = testFiles.filter(f => !NOT_IN_CI[f] && !new RegExp(`tests/${f.replace(/\./g, '\\.')}\\b`).test(ran));
+ok(testFiles.length >= 40 && !unaccounted.length, `every one of ${testFiles.length} test files runs before an APK is built, or is listed with a reason (${Object.keys(NOT_IN_CI).length})${unaccounted.length ? ' — NOT RUN: ' + unaccounted.join(', ') : ''}`);
+ok(/tools\/android\/run-tests\.sh/.test(apk) && /tests\/e2e-android-web\.js/.test(apk) && /tools\/android\/emulator-smoke\.js/.test(apk), 'APK workflow runs the fast suite, the packaged-game test and the emulator test');
+const longSuite = runTests.split('\n').filter(l => /^\s+node (tests|tools)\//.test(l)).length;
+ok(longSuite >= 45, `the fast suite stays broad (${longSuite} commands in tools/android/run-tests.sh)`);
 
 // the website deploy is independent of the Android project
 ok(!/android/i.test(pages), 'pages.yml does not reference the Android project');
 const triggers = apk.split('\njobs:')[0];
 ok(/workflow_dispatch:/.test(triggers) && !/claude\/snapmon-game-dev-7o667u|main|master/.test((triggers.match(/branches: \[([^\]]*)\]/) || [, ''])[1]), 'APK workflow runs manually or on feature-branch pushes, never on production pushes');
 ok(/permissions:\s*\n\s*contents: read/.test(apk) && !/pages: write|id-token: write|contents: write/.test(apk), 'APK workflow is read-only (cannot deploy or push)');
+ok(!fs.existsSync(path.join(__dirname, '../.github/workflows/pages-catalogue-only.yml')) && fs.existsSync(path.join(__dirname, '../docs/staged/pages-catalogue-only.yml')), 'the catalogue-only Pages workflow is STAGED outside .github/workflows (cannot run)');
+
+// artifact retention and provenance
+const mainUpload = (apk.match(/- id: upload\n\s+uses: actions\/upload-artifact@v4\n[\s\S]*?retention-days: (\d+)/) || [])[1];
+ok(mainUpload === '90', `the main APK artifact is kept 90 days (${mainUpload})`);
+const others = [...apk.matchAll(/retention-days: (\d+)/g)].map(m => +m[1]);
+ok(others.filter(d => d === 90).length === 1 && others.every(d => d === 90 || d <= 7), `diagnostics are kept briefly (${others.join(', ')} days)`);
+ok(/out\/provenance\.json/.test(apk) && /tools\/android\/verify-apk\.js/.test(apk), 'every APK artifact carries provenance.json (hash, version, certificate, commit, run)');
+
+// the milestone (long-term archive) workflow publishes only with explicit approval
+const ms = R('.github/workflows/android-milestone.yml');
+ok(/^on:\n  workflow_dispatch:/m.test(ms) && !/^\s+(push|pull_request|schedule|workflow_run):/m.test(ms), 'milestone workflow: manual only');
+ok(/default: verify/.test(ms) && /if: inputs\.mode == 'publish'/.test(ms) && /"I approve publishing build \$BUILD publicly"/.test(ms), 'milestone workflow: verify by default; publishing needs mode=publish and the exact approval sentence');
+ok(/--prerelease/.test(ms) && /--latest=false/.test(ms) && /refusing to move or replace it/.test(ms) && !/git push[^\n]*(--force|-f\b|--delete)|git tag -f|gh release delete/.test(ms), 'milestone workflow: pre-release only, never "latest", never moves/deletes a tag');
+ok(/--expect-sha256 "\$APK_SHA"/.test(ms) && /actions\/download-artifact@v4/.test(ms) && !/gradlew|build-web/.test(ms), 'milestone workflow archives the ORIGINAL CI binary after checking its hash (never rebuilds)');
+ok(!/pages: write|id-token: write/.test(ms), 'milestone workflow cannot deploy Pages');
+const points = JSON.parse(R('tools/android/recovery-points.json'));
+ok(points.package === 'io.github.patrikarendas.snapmon.dev' && /^[0-9a-f]{64}$/.test(points.certificateSha256) && points.ownerVerified.length >= 1 && /^[0-9a-f]{40}$/.test(points.drill), `recovery points recorded (${points.ownerVerified.map(b => 'build ' + b.build).join(', ')}; drill ${points.drill.slice(0, 7)})`);
 
 // permissions, backup, identity
 const man = R('android-app/android/app/src/main/AndroidManifest.xml');

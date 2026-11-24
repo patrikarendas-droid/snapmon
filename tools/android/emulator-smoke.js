@@ -12,7 +12,12 @@
      → Back closes the camera / returns to Hunt; double Back leaves the app
      → saves: written to the app's private files; survive force-stop; restored from the files after the WebView's own
        storage is wiped; survive an UPDATE to a newer build (higher versionCode, same key); uninstall + install = clean
+     → player data + recovery (when RECOVERY_APK and FORWARD_APK are set): a rich synthetic save; a RECOVERY build made
+       from an older verified commit (higher versionCode, same key) installs as an update and keeps all of it; the old
+       code saves; the current code (FORWARD_APK, higher again) gets everything back; a lower versionCode is refused
+       and the save survives that; after uninstall + clean install the Settings backup code restores everything
    Usage: node tools/android/emulator-smoke.js <apk> [<newer-apk>] <screenshot-dir>
+          (env RECOVERY_APK, FORWARD_APK, RECOVERY_COMMIT for the recovery drill)
    Writes <screenshot-dir>/emulator-report.md (every check with its result). */
 'use strict';
 const { _android: android } = require('playwright');
@@ -93,6 +98,39 @@ async function pressBack(page, wait = 700) {
   return after && after.lastBack;
 }
 const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document.body.innerText), re.source);
+
+// canonical JSON (sorted keys) so saves from different code versions compare field by field
+const canon = v => JSON.stringify(v, (k, x) => x && typeof x === 'object' && !Array.isArray(x) ? Object.keys(x).sort().reduce((o, key) => (o[key] = x[key], o), {}) : x);
+const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return '…' + b.slice(Math.max(0, i - 60), i + 60) + '…'; };
+// in-page helpers (strings: they run inside the app's WebView, also inside OLDER game code during the recovery drill).
+// Fingerprint = the whole save minus what legitimately changes: monster display text (each version refreshes saved
+// monsters to its own curated writing), curatedRev, hp + lastTick (time-based regeneration). Locks are compared
+// separately: an entry may only be missing once it has expired.
+const PAGE_CANON = `const canon = v => JSON.stringify(v, (k, x) => x && typeof x === 'object' && !Array.isArray(x) ? Object.keys(x).sort().reduce((o, key) => (o[key] = x[key], o), {}) : x);
+  const fp = S => { const c = JSON.parse(JSON.stringify(S)); delete c.lastTick; delete c.hp; delete c.curatedRev; delete c.enc.quiet; delete c.enc.disturbed;
+    for (const m of c.monsters) { delete m.name; delete m.lore; for (const a of m.abilities || []) delete a.name; } return canon(c); };`;
+const SEED_RICH = `() => { ${PAGE_CANON}
+  const S = window.__snapmon.S, now = Date.now();
+  Object.assign(S, { level: 9, xp: 777, coins: 12345, rp: 31, equipped: 'pistol', hunterName: 'Zoë Test-Hunter' });
+  S.mats = { scrap: 21, goo: 13, ecto: 8, prism: 3 }; S.items = { potion: 7, greater: 2, strength: 1, defense: 1, antidote: 4, enhancer: 2, trap: 11, smoke: 3 };
+  S.weapons = { sword: 3, pistol: 2, wand: 1, dagger: 0 }; S.charms = { fang: true, battery: true, slipper: true }; S.charmSlots = ['fang', 'battery'];
+  S.research = { capture2: 1, medic: 1, spectral: 1, analysis: 1 }; S.questsClaimed = { q_test: now - 5e6 }; S.achievements = { a_test: now - 4e6 };
+  S.monsters = []; S.dex = {};
+  for (const [obj, rarity, variant] of [['mug', 'common', null], ['apple', 'uncommon', 'spectral'], ['dog', 'rare', 'mutated'], ['lamp', 'epic', 'shiny'], ['cactus', 'legendary', null], ['umbrella', 'common', null]]) {
+    const m = createMonster(S, { obj, rarity, variant, word: obj }); recordSighting(S, m);
+    m.id = 'm' + (S.nextId++); m.caughtAt = now - 3600e3 * S.nextId; m.level = 2 + S.nextId; m.xp = 5 * S.nextId; S.dex[m.species].caught++; S.monsters.push(m);
+  }
+  S.monsters[2].nick = 'Old nickname'; S.companion = S.monsters[3].id;
+  Object.assign(S.stats, { photos: 40, encounters: 19, wins: 9, losses: 2, captures: 6, battles: 18 });
+  S.enc.quiet = { mug: now + 19 * 60e3 }; S.enc.disturbed = { mouse: now + 59 * 60e3, x_light_switch: now + 50 * 60e3 };
+  persist(true);
+  return { fp: fp(S), monsters: S.monsters.length, level: S.level, hunter: S.hunterName, locks: { quiet: S.enc.quiet, disturbed: S.enc.disturbed } }; }`;
+const READ_RICH = `want => { ${PAGE_CANON}
+  const S = window.__snapmon.S, now = Date.now();
+  const same = (w, g) => Object.keys(w).every(k => g && (g[k] === w[k] || (w[k] <= now && !(k in g))));
+  return { fp: fp(S), hunter: S.hunterName, blocked: typeof saveBlocked !== 'undefined' && !!saveBlocked,
+    locksOk: !!want && (same(want.quiet, S.enc.quiet) && same(want.disturbed, S.enc.disturbed)),
+    build: ((window.SNAPMON_NATIVE || {}).build || {}).versionName || '' }; }`;
 
 (async () => {
   tryAdb(`uninstall ${PKG}`);
@@ -272,12 +310,63 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
   ok((await state(page)).coins === 4242, 'progress kept after the update');
   ok(await page.evaluate(() => Engine.load()), 'engine starts after the update');
   shot('emulator-4-after-update');
+
+  // 8. player data and code recovery (docs/RECOVERY.md), synthetic data only
+  const RECOVERY = process.env.RECOVERY_APK, FORWARD = process.env.FORWARD_APK;
+  let backupCode = null, want = null;
+  if (RECOVERY && FORWARD && fs.existsSync(RECOVERY) && fs.existsSync(FORWARD)) {
+    want = await page.evaluate(`(${SEED_RICH})()`);
+    await page.evaluate(() => window.SNAPMON_NATIVE.storage.flush());
+    ok(want.monsters >= 6, `rich synthetic save written (${want.monsters} monsters of every rarity/variant, level ${want.level}, hunter "${want.hunter}", 3 hidden locks)`);
+    // the backup code exactly as the player gets it: Settings → Back up your progress
+    await page.evaluate(() => window.__snapmon.actions.settings());
+    backupCode = await page.$eval('#exportBox', e => e.value);
+    await page.evaluate(() => closeSheet());
+    ok(/^SNAPMON1:/.test(backupCode) && backupCode.length > 2000, `backup code from Settings (${backupCode.length} characters)`);
+    await stop();
+    // RECOVERY: an APK built from an OLDER verified commit with a HIGHER versionCode, same package and key
+    const vc0 = versionCode();
+    adb(`install -r ${RECOVERY}`);
+    ok(versionCode() > vc0, `recovery build (older code ${process.env.RECOVERY_COMMIT || '?'}) installs as an ordinary UPDATE (versionCode ${vc0} → ${versionCode()})`);
+    page = await launch();
+    let got = await page.evaluate(`(${READ_RICH})(${JSON.stringify(want.locks)})`);
+    ok(/recovery-drill/.test(got.build) && !got.blocked, `the recovery build runs (${got.build}) and loads the save (not refused)`);
+    ok(got.fp === want.fp && got.locksOk, `the older code sees every field of the save (collection, encyclopedia, level/XP, coins, items, gear, research, companion, hunter name, locks)${got.fp === want.fp ? '' : ' — differs: ' + firstDiff(want.fp, got.fp)}`);
+    await page.evaluate(() => { window.__snapmon.S.coins += 1; persist(true); return window.SNAPMON_NATIVE.storage.flush(); });
+    await stop();
+    // FORWARD again: the current code (an even higher versionCode)
+    adb(`install -r ${FORWARD}`);
+    page = await launch();
+    got = await page.evaluate(`(${READ_RICH})(${JSON.stringify(want.locks)})`);
+    const wantPlus = JSON.parse(want.fp); wantPlus.coins += 1;
+    ok(!got.blocked && got.fp === canon(wantPlus) && got.locksOk && got.hunter === want.hunter, `back on the current code (versionCode ${versionCode()}): everything kept, incl. the old code's change, hunter name and locks`);
+    await stop();
+    // Android refuses a LOWER versionCode over a newer one; the installed app and its save stay as they were
+    const vcNow = versionCode();
+    let refused = '';
+    try { adb(`install -r ${apk}`); } catch (e) { refused = String(e.stderr || e.message); }
+    ok(/DOWNGRADE/i.test(refused) && versionCode() === vcNow, `installing an OLDER versionCode over it is refused by Android (${(refused.match(/INSTALL_FAILED_\w+/) || ['?'])[0]})`);
+    page = await launch();
+    got = await page.evaluate(`(${READ_RICH})(${JSON.stringify(want.locks)})`);
+    ok(got.fp === canon(wantPlus), 'the refused downgrade changed nothing: the save is intact');
+  } else note('recovery drill skipped: RECOVERY_APK / FORWARD_APK not given');
   await stop();
   adb(`uninstall ${PKG}`);
   adb(`install ${apk}`);
   page = await launch();
   s = await state(page);
   ok(s.coins === 40 && s.level === 1 && s.storage.nativeKeys === 0, `uninstall + install starts clean again (${s.coins} coins, ${s.storage.nativeKeys} save files)`);
+  if (backupCode) {
+    // the last line of defence after an uninstall: the off-device backup code, pasted into Settings → Restore
+    await page.evaluate(() => window.__snapmon.actions.settings());
+    // (evaluate, not fill/click: on a fresh install the emulator's first automatic engine start can keep the page busy)
+    const restored = await page.evaluate(code => { document.querySelector('#importBox').value = code; window.__snapmon.actions.importSave(); return window.SNAPMON_NATIVE.storage.flush().then(() => window.__snapmon.S.monsters.length); }, backupCode);
+    note(`backup code pasted into Settings → Restore on the clean install (${restored} monsters restored)`);
+    await stop();
+    page = await launch();
+    const got = await page.evaluate(`(${READ_RICH})(${JSON.stringify(want.locks)})`);
+    ok(got.fp === want.fp && got.locksOk && got.hunter === want.hunter, `after uninstall + clean install, the backup code (Settings → Restore) brings back the whole save and it survives a restart${got.fp === want.fp ? '' : ' — differs: ' + firstDiff(want.fp, got.fp)}`);
+  }
 
   await device.close();
   tryAdb('shell cmd connectivity airplane-mode disable');

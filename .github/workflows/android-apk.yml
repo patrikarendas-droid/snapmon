@@ -1,8 +1,9 @@
 name: Android debug APK
 # Builds the private development APK ("SnapMon Dev", io.github.patrikarendas.snapmon.dev) of the CURRENT game with
-# the complete bundled recognition engine, tests it, and uploads it as a downloadable artifact. It never deploys,
-# never touches GitHub Pages or the website, never pushes, tags or publishes anything (read-only permissions).
-# Phone how-to, signing and the smoke-test checklist: docs/ANDROID.md.
+# the complete bundled recognition engine, tests it, and uploads it as a downloadable artifact (kept 90 days). Android
+# is the only supported playable platform: these tests protect the Android game, they do not keep a browser game in
+# step. It never deploys, never touches GitHub Pages or the website, never pushes, tags or publishes anything
+# (read-only permissions). Phone how-to and signing: docs/ANDROID.md. Rollback and archiving: docs/RECOVERY.md.
 on:
   workflow_dispatch:          # "Run workflow" button (appears once this file is on the default branch)
   push:
@@ -10,6 +11,8 @@ on:
     paths:
       - 'android-app/**'
       - 'src/**'
+      - 'catalogue/**'
+      - 'content/**'
       - 'index.html'
       - 'icon.svg'
       - 'tools/**'
@@ -17,13 +20,14 @@ on:
       - 'lab/**'
       - 'THIRD_PARTY_NOTICES.md'
       - '.github/workflows/android-apk.yml'
+      - '.github/workflows/android-milestone.yml'
 permissions:
   contents: read
 concurrency:
   group: android-apk-${{ github.ref }}
   cancel-in-progress: true
 env:
-  # same TinyCLIP part of the standard Hybrid engine as the website (tests/android-packaging.js checks this)
+  # TinyCLIP part of the standard Hybrid engine (pinned; tests/android-packaging.js checks these values)
   CLIP_VARIANT: tinyclip-39m16
   CLIP_HF: wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M
   NODE_VERSION: '22'
@@ -32,22 +36,30 @@ env:
   ANDROID_BUILD_TOOLS: '36.0.0'
 jobs:
   tests:
-    name: Game regression tests (same as the website)
+    name: Fast regression tests (Node + headless Chromium, current Android source)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # tests/save-compat.js opens today's save with the game code of older verified builds
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: Logic, label, sprite, save and packaging tests
+      - name: Logic, label, sprite, save-compatibility and packaging tests
         run: tools/android/run-tests.sh logic
-      - name: Browser tests (gameplay, recognition engine, Back navigation, catalogue)
+      - name: Browser tests (gameplay, recognition engine, Back navigation, catalogue, staged catalogue-only site)
         run: |
           npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1
           npx playwright install --with-deps chromium > /dev/null
           python3 -m http.server 8765 > /dev/null 2>&1 &
           sleep 1
           tools/android/run-tests.sh browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: regression-test-screenshots${{ github.run_attempt > 1 && format('-attempt{0}', github.run_attempt) || '' }}
+          path: shots/
+          retention-days: 7
 
   apk:
     name: Build the debug APK
@@ -56,8 +68,12 @@ jobs:
     outputs:
       artifact: ${{ steps.meta.outputs.artifact }}
       apk: ${{ steps.meta.outputs.apk }}
+      updates: ${{ steps.meta.outputs.updates }}
+      drill: ${{ steps.meta.outputs.drill }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the recovery drill builds an APK from an older verified commit
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -81,8 +97,14 @@ jobs:
           echo "SNAPMON_VERSION_NAME=$NAME" >> "$GITHUB_ENV"
           if [ "$HAS_SEED" = true ]; then SIGN=stable; else SIGN=UNSTABLE-SIGNING; fi
           echo "SIGNING=$SIGN" >> "$GITHUB_ENV"
+          # a re-run of THIS job builds a new binary with the same versionCode: its artifact gets an "-attemptN" suffix
+          ATT=$([ "$GITHUB_RUN_ATTEMPT" -gt 1 ] && echo "-attempt$GITHUB_RUN_ATTEMPT" || true)
           echo "apk=snapmon-dev-$GAME-dev.$GITHUB_RUN_NUMBER-${GITHUB_SHA::7}.apk" >> "$GITHUB_OUTPUT"
-          echo "artifact=SnapMon-Dev-APK-$GAME-build-$GITHUB_RUN_NUMBER$([ $SIGN = stable ] || echo -UNSTABLE-SIGNING)" >> "$GITHUB_OUTPUT"
+          echo "artifact=SnapMon-Dev-APK-$GAME-build-$GITHUB_RUN_NUMBER$([ $SIGN = stable ] || echo -UNSTABLE-SIGNING)$ATT" >> "$GITHUB_OUTPUT"
+          echo "updates=emulator-update-test-apks$ATT" >> "$GITHUB_OUTPUT"
+          DRILL=$(jq -r .drill tools/android/recovery-points.json)
+          echo "drill=$DRILL" >> "$GITHUB_OUTPUT"
+          echo "DRILL=$DRILL" >> "$GITHUB_ENV"
       # ---- the recognition engine: exactly what the website deploys ----
       - id: clipcache
         uses: actions/cache@v4
@@ -160,7 +182,21 @@ jobs:
           mkdir -p update && cp android-app/android/app/build/outputs/apk/debug/app-debug.apk update/base.apk
           (cd android-app/android && SNAPMON_VERSION_CODE=$((SNAPMON_VERSION_CODE + 1)) ./gradlew assembleDebug --no-daemon -q)
           cp android-app/android/app/build/outputs/apk/debug/app-debug.apk update/newer.apk
+          (cd android-app/android && SNAPMON_VERSION_CODE=$((SNAPMON_VERSION_CODE + 3)) ./gradlew assembleDebug --no-daemon -q)
+          cp android-app/android/app/build/outputs/apk/debug/app-debug.apk update/forward.apk
           cp update/base.apk android-app/android/app/build/outputs/apk/debug/app-debug.apk
+      - name: "Recovery drill build: the game of an older verified commit, versionCode + 2, same key (emulator only, never for install)"
+        run: |
+          set -euo pipefail
+          W="$RUNNER_TEMP/recovery-src"
+          git worktree add --detach "$W" "$DRILL"
+          (cd "$W/android-app" && npm ci --no-audit --no-fund > /dev/null)
+          (cd "$W" && node tools/android/build-web.js --engine "$RUNNER_TEMP/engine" --dev-tools --version-name "recovery-drill-${DRILL::7}" > /dev/null)
+          (cd "$W/android-app" && npx cap sync android > /dev/null)
+          (cd "$W/android-app/android" && SNAPMON_VERSION_CODE=$((SNAPMON_VERSION_CODE + 2)) SNAPMON_VERSION_NAME="recovery-drill-${DRILL::7}" ./gradlew assembleDebug --no-daemon -q)
+          cp "$W/android-app/android/app/build/outputs/apk/debug/app-debug.apk" update/recovery.apk
+          git worktree remove --force "$W"
+          echo "recovery drill APK from $DRILL built"
       - name: Remove the signing key
         if: always()
         run: rm -f "$RUNNER_TEMP/dev.p12"
@@ -177,27 +213,71 @@ jobs:
           echo "permissions: $PERMS"
           [ "$PERMS" = "android.permission.CAMERA" ] || { echo "unexpected permissions: $PERMS"; exit 1; }
           node tools/android/check-apk.js "$APK" | tee apk-check.txt
-          "$BT/apksigner" verify --print-certs update/newer.apk | grep "certificate SHA-256" > newer-cert.txt
-          grep "certificate SHA-256" signing.txt | head -1 | diff - newer-cert.txt && echo "update-test APK has the same signing certificate"
+          for u in newer forward recovery; do
+            "$BT/apksigner" verify --print-certs update/$u.apk | grep "certificate SHA-256" > $u-cert.txt
+            grep "certificate SHA-256" signing.txt | head -1 | diff - $u-cert.txt && echo "update-test APK $u has the same signing certificate"
+          done
+          # provenance next to the APK in the artifact (also printed to the log, so it can be read through the API later)
+          node tools/android/verify-apk.js "$APK" --build-tools "$BT" --write out/provenance.json --commit "$GITHUB_SHA" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --run-attempt "$GITHUB_RUN_ATTEMPT" --artifact "${{ steps.meta.outputs.artifact }}" $([ "$SIGNING" = stable ] || echo --allow-unstable)
+          (cd out && sha256sum "${{ steps.meta.outputs.apk }}" > SHA256SUMS && cat SHA256SUMS)
+          cat out/provenance.json
+          echo "APK_SHA256=$(sha256sum "$APK" | cut -d' ' -f1)" >> "$GITHUB_ENV"
+          echo "CERT_SHA256=$(grep -o 'certificate SHA-256 digest: .*' signing.txt | head -1 | cut -d' ' -f4)" >> "$GITHUB_ENV"
+          echo "APK_BYTES=$(stat -c %s "$APK")" >> "$GITHUB_ENV"
+          echo "MIN_TARGET=$(grep -o "minSdkVersion:'[0-9]*'" badging.txt) $(grep -o "targetSdkVersion:'[0-9]*'" badging.txt)" >> "$GITHUB_ENV"
+          echo "PERMS=$PERMS" >> "$GITHUB_ENV"
+      # the MAIN artifact (the APK you install): 90 days, the maximum for a public repository
+      - id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.meta.outputs.artifact }}
+          path: |
+            out/${{ steps.meta.outputs.apk }}
+            out/provenance.json
+            out/SHA256SUMS
+          retention-days: 90
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.meta.outputs.updates }}
+          path: update/
+          retention-days: 3
+          compression-level: 0
+      - name: Build summary (what to download)
+        env:
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
+        run: |
+          EXPIRES=$(date -u -d '+90 days' +%Y-%m-%d)
+          echo "main artifact: ${{ steps.meta.outputs.artifact }} ($ARTIFACT_URL), id $ARTIFACT_ID, zip $ARTIFACT_DIGEST, APK SHA-256 $APK_SHA256, expected expiry $EXPIRES"
           {
-            echo "## SnapMon Dev APK"
+            echo "## SnapMon Dev APK — download this"
             echo "| | |"; echo "|---|---|"
-            echo "| File | \`${{ steps.meta.outputs.apk }}\` (inside the artifact **${{ steps.meta.outputs.artifact }}**) |"
-            echo "| Size | $(du -h "$APK" | cut -f1) ($(stat -c %s "$APK") bytes) |"
+            echo "| Artifact | **[${{ steps.meta.outputs.artifact }}]($ARTIFACT_URL)** (direct download link; a .zip with the APK, provenance.json and SHA256SUMS) |"
+            echo "| File inside | \`${{ steps.meta.outputs.apk }}\` ($(numfmt --to=iec "$APK_BYTES"), $APK_BYTES bytes) |"
+            echo "| Kept until | about **$EXPIRES** (90 days, then GitHub deletes the artifact; installed apps and saves are not affected) |"
+            echo "| Run / attempt | run $GITHUB_RUN_NUMBER, attempt $GITHUB_RUN_ATTEMPT (this APK was built in attempt $GITHUB_RUN_ATTEMPT; a later re-run of only the emulator job reuses it) |"
+            echo "| Source commit | \`$GITHUB_SHA\` ($GITHUB_REF_NAME) |"
             echo "| Package | io.github.patrikarendas.snapmon.dev |"
             echo "| Version | $SNAPMON_VERSION_NAME (versionCode $SNAPMON_VERSION_CODE) |"
-            echo "| SDK | $(grep -o "minSdkVersion:'[0-9]*'" badging.txt) $(grep -o "targetSdkVersion:'[0-9]*'" badging.txt) |"
+            echo "| SDK | $MIN_TARGET |"
             echo "| Permissions | $PERMS |"
-            echo "| Signing | $SIGNING — $(grep -o 'certificate SHA-256 digest: .*' signing.txt | head -1) |"
-            echo "| APK SHA-256 | $(sha256sum "$APK" | cut -d' ' -f1) |"
+            echo "| Signing | $SIGNING — certificate SHA-256 \`$CERT_SHA256\` |"
+            echo "| APK SHA-256 | \`$APK_SHA256\` |"
+            echo "| Artifact zip SHA-256 | \`${ARTIFACT_DIGEST#sha256:}\` |"
+            echo ""
+            echo "If the *emulator* job failed but this job is green, the APK itself was built and checked; an emulator failure is often a"
+            echo "boot flake of the CI emulator: use **Re-run failed jobs** (the same APK is tested again, nothing is rebuilt)."
             echo ""
             echo "### Tests in this run"
             echo "| Kind | What ran | Result |"
             echo "|---|---|---|"
-            echo "| Executed (CI, Node + headless Chromium) | the website's full regression suite: logic, sprites, gameplay/balance trace, curated writing, saves, engine with the real TinyCLIP worker, Back navigation, catalogue | passed (job *tests*) |"
-            echo "| Static | \`tests/android-packaging.js\`: same engine/tests as Pages, Pages independent, only CAMERA, no INTERNET/backup, release refuses DEV_TOOLS, no keys committed | passed (job *tests*) |"
+            echo "| Executed (CI, Node + headless Chromium) | fast regression suite of the current source: logic, sprites, gameplay/balance trace, curated writing, saves + save compatibility with older verified builds, engine with the real TinyCLIP worker, Back navigation, catalogue + staged catalogue-only site | passed (job *tests*) |"
+            echo "| Static | \`tests/android-packaging.js\`: pinned engine, every test file accounted for, Pages independent, only CAMERA, no INTERNET/backup, release refuses DEV_TOOLS, no keys committed | passed (job *tests*) |"
             echo "| Executed (integrity) | \`check-apk.js\` on the built APK: $(grep -o '[0-9]* engine files verified' apk-check.txt) by SHA-256, no network URLs, no catalogue | passed |"
-            echo "| Mocked native bridge (Chromium, REAL engine) | \`e2e-android-web.js\`, development build: $(grep -c '^ok' e2e-debug.txt) checks | passed |"
+            echo "| Mocked native bridge (Chromium, REAL engine) | \`e2e-android-web.js\`, development build: $(grep -c '^ok' e2e-debug.txt 2>/dev/null) checks | passed |"
             echo "| Mocked native bridge (Chromium, REAL engine) | release configuration: $(grep -c '^ok' e2e-release.txt) checks incl. developer tools / test mode / God Mode unreachable | passed |"
             echo "| Executed (Chromium, emulated Android insets) | \`e2e-layout.js\`: HUD/tab bar never cover content, every control tappable, real tap on Shop & Craft — $(tail -1 e2e-layout.txt) | passed |"
             echo "| Executed (Gradle) | release build with DEV_TOOLS refused; release-safe unsigned release APK builds and verifies | passed |"
@@ -210,21 +290,9 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.meta.outputs.artifact }}
-          path: out/${{ steps.meta.outputs.apk }}
-          retention-days: 30
-          compression-level: 0
-      - uses: actions/upload-artifact@v4
-        with:
-          name: emulator-update-test-apks
-          path: update/
-          retention-days: 3
-          compression-level: 0
-      - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: android-web-test-screenshots
+          name: android-web-test-screenshots${{ github.run_attempt > 1 && format('-attempt{0}', github.run_attempt) || '' }}
           path: shots/
           retention-days: 7
 
@@ -240,7 +308,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - uses: actions/download-artifact@v4
         with:
-          name: emulator-update-test-apks
+          name: ${{ needs.apk.outputs.updates }}
           path: apk
       - name: Enable KVM
         run: |
@@ -259,14 +327,14 @@ jobs:
           disk-size: 6G
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back emulated
           disable-animations: true
-          script: node tools/android/emulator-smoke.js apk/base.apk apk/newer.apk shots
+          script: RECOVERY_APK=apk/recovery.apk FORWARD_APK=apk/forward.apk RECOVERY_COMMIT=${{ needs.apk.outputs.drill }} node tools/android/emulator-smoke.js apk/base.apk apk/newer.apk shots
       - name: Emulator report
         if: always()
         run: |
-          { echo "## Emulator test (Android 14 emulator, real APK, airplane mode) — not a phone test"; cat shots/emulator-report.md 2>/dev/null || echo "no report"; } >> "$GITHUB_STEP_SUMMARY"
+          { echo "## Emulator test (Android 14 emulator, real APK, airplane mode, attempt $GITHUB_RUN_ATTEMPT) — not a phone test"; cat shots/emulator-report.md 2>/dev/null || echo "no report"; } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: emulator-screenshots
+          name: emulator-screenshots-attempt${{ github.run_attempt }}
           path: shots/
           retention-days: 7
