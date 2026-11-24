@@ -299,6 +299,9 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
   - Tests: `tests/encounter-lock.js`, `tests/combat-log.js`, `tests/e2e-combat-log.js` (412/320 px); emulator: log
     opens in a real battle and hardware Back closes it. Replay baselines use a 61-min-per-scan clock; all frozen
     recordings unchanged; `generator-snapshot` leaves the additive fields out of its hashed export.
+  - Build 14 (run 14, commit `4207571`, versionCode 1014, same certificate as builds 9/12/13): all CI jobs green; the
+    emulator job's first attempt timed out at the very first app launch before any check (emulator boot flake), the
+    re-run of that job on the same APK passed every check. Local: logic suite + 364 browser checks green.
 
 **Next priorities (2026-11-18):**
 0. Android dev APK: owner adds `ANDROID_DEV_SIGNING_SEED`, installs the APK from the Actions artifact and runs the
