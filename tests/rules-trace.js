@@ -11,6 +11,9 @@
 // Pilot 02 integration: curated MONSTER names too (dog, toilet are in this trace), so battle messages are compared by
 // the numbers they contain (damage, healing, chances) rather than their wording.
 const G = require('./load')(), crypto = require('crypto'), fs = require('fs'), path = require('path');
+// the quiet-object rule (a missed object stays quiet for 20 min) is tested in tests/quiet-objects.js; this test replays
+// encounter odds, so its clock moves 21 minutes per reading and no object is ever still quiet
+{ let t = Date.UTC(2026, 0, 1); G.setClock(() => (t += 21 * 60 * 1000)); }
 const FIX = path.join(__dirname, 'fixtures/rules-trace.json');
 let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
 function trace(curatedOn) {

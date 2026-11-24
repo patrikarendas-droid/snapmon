@@ -247,6 +247,36 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
 - **After v0.6.0:** the owner confirmed the release and re-checked the redesigned sprites: the sprite review is complete,
   all sprites satisfactory for now (2026-11-17). No sprite work pending.
 
+- **Shared game changes on the Android branch (2026-11-24, owner-requested after phone tests of build 12; not merged,
+  website not deployed).** Same code for the website and the app once released.
+  1. Captured monster sheet: flavour text directly under the monster name (was at the bottom).
+  2. Encyclopedia species sheet: the curated monster name is the heading, the object name the smaller line.
+  3. Renaming removed (nickname field, Rename button, `rename` action). Monsters always show their official name;
+     an old saved `nick` stays in the save untouched (backup/rollback-compatible) but is never shown.
+  4. Recognition choices are text only: the generic category emoji is gone from the identified card, the choice /
+     second-opinion / disagreement list and the Wrong-object alternatives (badges, text, boxes kept).
+  5. **Quiet objects:** after a confirmed object's encounter roll finds no monster, that object cannot produce a monster
+     for 20 minutes of wall-clock time (`QUIET_MS`, never shown). Key = the canonical registry object id the player
+     confirmed (aliases such as category ids normalised), i.e. the object TYPE — two physical monitors share it; the
+     recogniser cannot tell instances apart, and a photo-hash lock would be bypassed by a new angle. The check runs
+     first in `resolvePhoto`: a blocked scan rolls nothing and changes nothing (no photo/pressure/pity/quest progress,
+     expiry not extended). The genuine miss keeps the existing effects (`enc.miss` +1; a duplicate-photo miss still
+     adds none) and also makes the object quiet. First-hunt guarantee, successful hunts, failed recognition, Wrong
+     object and cancelled photos never create a lock. Stored as `S.enc.quiet` {objectId: expiresAt} in the normal save
+     (format 3, additive; native file mirror and backup codes included); invalid entries dropped, expired ones pruned,
+     max 300, an expiry more than 20 min away (clock turned back) capped to 20 min. UI: "All quiet" keeps its lines;
+     the hint is now "Try another object, or come back to this one later. You never know what might move in while
+     you're gone."; a blocked scan shows "Still quiet" + an in-world line (no timer, no "new angle").
+     Known limit: a new photo of the same physical thing confirmed as a DIFFERENT suggested object (e.g. Workstation
+     instead of Monitor) is a different object and rolls normally.
+  - Tests: `tests/quiet-objects.js` (fake clock + RNG: lock, lucky/max-pity blocks, no state change, other objects,
+    expiry boundary, first hunt, aliases, duplicates, backup/migrate/corrupt/prune, clock rollback);
+    `tests/e2e-quiet.js` (real UI at 412/320 px: quiet/blocked screens, text-only choices and their tap targets,
+    Wrong object/cancel/failed recognition never lock, reload, expiry). Replay baselines (`rules-trace`, `sim`, `lore`)
+    advance a fake clock 21 min per scan, so no lock is active there: their frozen recordings are byte-identical,
+    proving odds and RNG unchanged outside the rule; `generator-snapshot` leaves the additive `enc.quiet` out of the
+    hashed export (as with ability keys). `e2e.js`/`e2e-curated.js` assert the nickname removal and name/lore order.
+
 **Next priorities (2026-11-18):**
 0. Android dev APK: owner adds `ANDROID_DEV_SIGNING_SEED`, installs the APK from the Actions artifact and runs the
    phone checklist (`docs/ANDROID.md`); then decide whether to merge the Android branch into production (adds the
@@ -279,6 +309,7 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
 | Android dev APK not yet tested on a real phone | Open (2026-11-18) | Automated: CI tests, Chromium with fake bridge, Android 14 emulator. Camera prompt/preview, real WebView GPU/WASM speed, memory and heat unverified. | Owner phone checklist, `docs/ANDROID.md`. |
 | APK updates need the stable signing secret | Resolved 2026-11-18 (secret set; builds 8 and 9 same certificate) | Without `ANDROID_DEV_SIGNING_SEED` each CI build has a different key and cannot update the last one (uninstall = saves lost). | Add the secret once (`docs/ANDROID.md` → Signing). |
 | HUD covered the top of every screen in the Android app (build 9) | Fixed on the Android branch (layout reserves the status-bar inset) | `index.html` `#app`/`.sheet`; `tests/e2e-layout.js` | Owner re-checks on the phone with the next build. |
+| Quiet objects: a different suggested object for the same physical thing is not locked | Known (2026-11-24) | The lock is per confirmed object type (`S.enc.quiet`); alternatives the lens itself offers are other objects | Only if the owner wants the lock widened to all suggestions of a missed photo. |
 | A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
 | Rolling back below v0.4.3 shows redesigned new monsters as blobs | Known, documented | `docs/RELEASING.md` | None unless rolling back. |
 

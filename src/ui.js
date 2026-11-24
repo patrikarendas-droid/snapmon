@@ -42,7 +42,9 @@ function spriteHTML(dna, { size = 160, rarity = 'common', variant = null, cls = 
 const rarityChip = r => `<span class="chip r" style="color:${RARITY[r].color}">${RARITY[r].name.toUpperCase()}</span>`;
 const famChip = f => `<span class="chip" style="color:${FAMILIES[f].color}">${FAMILIES[f].glyph} ${FAMILIES[f].name}</span>`;
 const varChip = v => v ? `<span class="chip" style="color:var(--violet)">${variantLabel(v)}</span>` : '';
-function monsterTitle(m) { return m.nick ? esc(m.nick) : esc(m.name); }
+// monsters always show their official (curated) name; a `nick` stored by older versions stays in the save untouched but
+// is no longer shown or editable (renaming was removed)
+function monsterTitle(m) { return esc(m.name); }
 function catLabel(m) { return m.obj && OBJECTS[m.obj] ? esc(OBJECTS[m.obj].name) : m.cat === 'other' && m.word ? `“${esc(m.word)}”` : esc(CATEGORY[m.cat].name); }
 // honest description of how specific a monster's look is (see objectTier in objects.js)
 function designLine(obj) {
@@ -512,7 +514,6 @@ function candLine(c) {
   const score = c.src === 'clip' && /^(5|5b|6|alt)$/.test(String(c.rule)) ? 'second opinion' : Math.round(c.conf * 100) + '%';
   return `<b>${esc(same ? o.name : c.label)}</b> <span class="muted">${same ? '' : '· ' + esc(name) + ' '}· ${score}</span>`;
 }
-const catIcon = c => (CATEGORY[(OBJECTS[c.obj] || c).cat] || CATEGORY.other).icon;
 /* An identification is never committed by itself: the player looks at it as long as they like and then explicitly
    taps "Scan for monsters" (the only way to reach the encounter roll) or "Wrong object". There is no timer. */
 function showIdentified(p, i) {
@@ -521,7 +522,7 @@ function showIdentified(p, i) {
   $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;gap:14px" id="identRoot">
     <div class="sheet-head"><h2>Object identified</h2><button class="btn small ghost" data-act="cancelPhoto">Cancel</button></div>
     <div class="photo-frame" id="lensFrame"></div>
-    <div class="card ident"><span class="e">${catIcon(c)}</span><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
+    <div class="card ident"><div class="grow">${candLine(c)}<div class="bar"><i style="width:${c.conf * 100}%"></i></div></div></div>
     <div class="row"><button class="btn primary grow" data-act="pickCand" data-arg="${i}">Scan for monsters</button><button class="btn" data-act="wrongObject" data-arg="${i}">Wrong object</button></div>
     ${debugHTML(p.rec)}
   </div></div>`;
@@ -555,7 +556,7 @@ function wrongObject(p, rejectedObjs) {
     <p class="muted small" style="margin:0">These are the other possibilities the lens found in this photo. If none of them is right, take another photo.</p>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${alts.map((c, i) => `<button class="list-item cand" data-act="pickAlt" data-arg="${i}" style="text-align:left">
-      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span></button>`).join('')}</div>
     <button class="btn primary block" data-act="retakePhoto">None of these: retake photo</button>
   </div></div>` : `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:14px">
     <div class="photo-frame" id="lensFrame"></div>
@@ -572,7 +573,7 @@ function showChoices(p) {
     <p class="muted small" style="margin:0">${multi ? 'Which one are you hunting?' : 'It is not completely sure. Which of these did you photograph?'} Every option comes from the lens's own analysis of your photo.</p>
     <div class="photo-frame" id="lensFrame"></div>
     <div class="stack">${rec.candidates.map((c, i) => `<button class="list-item cand" data-act="pickCand" data-arg="${i}" style="text-align:left">
-      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span><span class="e">${catIcon(c)}</span></button>`).join('')}</div>
+      <span class="num-badge">${i + 1}</span><span class="grow">${candLine(c)}</span></button>`).join('')}</div>
     <button class="btn block" data-act="wrongObject" data-arg="all">Wrong object: none of these</button>
     ${debugHTML(rec)}
   </div></div>`;
@@ -653,9 +654,9 @@ async function scan(i) {
   if (!result.encounter) {
     SFX.nothing(); persist();
     $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:18px">
-      <h2 style="font-size:28px;color:var(--muted)">${result.dup ? 'Already scanned' : 'All quiet'}</h2>
+      <h2 style="font-size:28px;color:var(--muted)">${result.quiet ? 'Still quiet' : result.dup ? 'Already scanned' : 'All quiet'}</h2>
       <p style="font-size:18px">${esc(result.line)}</p>
-      <p class="small muted">${result.dup ? 'Try a different object or a new angle.' : 'Keep hunting — every quiet snap builds up spirit pressure for the next one.'}</p>
+      <p class="small muted" id="quietHint">Try another object, or come back to this one later. You never know what might move in while you’re gone.</p>
       <button class="btn primary block" data-act="openCamera">Snap another object</button>
       <button class="btn ghost" data-act="closeOverlay">Back</button></div></div>`;
     render(); return;
@@ -1046,9 +1047,9 @@ function monsterSheet(id) {
   const d = S.dex[m.species] || {};
   openSheet(`<div class="grab"></div>
     <div class="stage" style="background:radial-gradient(circle, color-mix(in srgb, ${RARITY[m.rarity].color} 25%, transparent), transparent 65%)">${spriteHTML(m.dna, { size: 190, rarity: m.rarity, variant: m.variant })}<div class="shadow"></div></div>
-    <div class="sheet-head"><div class="grow"><h2>${monsterTitle(m)}</h2>${m.nick ? `<div class="small muted">${esc(m.name)}</div>` : ''}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <div class="sheet-head"><div class="grow"><h2>${monsterTitle(m)}</h2></div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <p class="muted lore lore-${m.rarity}" style="margin:0">${esc(loreOf(m))}</p>
     <div class="row wrap">${rarityChip(m.rarity)}${famChip(m.fam)}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
-    <div class="row"><input class="search grow" id="nickInput" maxlength="20" placeholder="Give it a nickname" value="${esc(m.nick || '')}"><button class="btn" data-act="rename" data-arg="${m.id}">Rename</button></div>
     <div class="stat-grid">${statBars(m.stats)}</div>
     <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>
     <div class="card small stack" style="gap:4px">
@@ -1059,7 +1060,6 @@ function monsterSheet(id) {
       <div><b>Weak to:</b> ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</div>
       ${m.thumb ? `<div class="row"><img src="${m.thumb}" alt="Original photo" style="width:72px;border-radius:8px"><span class="muted">The photo it was found in (kept because you enabled it in settings).</span></div>` : ''}
     </div>
-    <p class="muted small lore lore-${m.rarity}">${esc(loreOf(m))}</p>
     ${identityUpdate(m) ? `<div class="card small stack" style="gap:6px;border-color:var(--ecto)"><b>New ${esc(OBJECTS[m.obj].name.toLowerCase())} look available</b><span class="muted">You found this monster before SNAPMON had a proper design for a ${esc(OBJECTS[m.obj].name.toLowerCase())}. Updating changes its body design, its flavour text and the name of its signature move. Colours, eyes, stats and level stay exactly the same.</span><button class="btn small ecto" data-act="refreshLook" data-arg="${m.id}">Update its look</button></div>` : m.prevIdentity ? `<button class="btn small ghost" data-act="undoLook" data-arg="${m.id}">Restore its original look</button>` : ''}
     <div class="row">
       <button class="btn grow ${S.companion === m.id ? '' : 'ecto'}" data-act="buddy" data-arg="${m.id}">${S.companion === m.id ? 'Dismiss buddy' : 'Make hunting buddy'}</button>
@@ -1073,7 +1073,8 @@ function speciesSheet(key) {
   const top = RARITIES.filter(r => (d.rarities || {})[r.id]).pop() || RARITY.common;
   openSheet(`<div class="grab"></div>
     <div class="stage">${spriteHTML(d.dna, { size: 170, rarity: top.id })}<div class="shadow"></div></div>
-    <div class="sheet-head"><div class="grow"><h2>${esc(d.name)}</h2>${(() => { const mn = typeof curatedDexName === 'function' ? curatedDexName(d, top.id) : d.monsterName; return mn && mn !== d.name ? `<div class="small muted">${esc(mn)}</div>` : ''; })()}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <div class="sheet-head"><div class="grow">${(() => { const mn = (typeof curatedDexName === 'function' ? curatedDexName(d, top.id) : d.monsterName) || d.monsterName || d.name, on = o ? o.name : d.name;
+      return `<h2>${esc(mn)}</h2>${on && on !== mn ? `<div class="small muted">${esc(on)}</div>` : ''}`; })()}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="row wrap">${RARITIES.filter(r => (d.rarities || {})[r.id]).map(r => rarityChip(r.id)).join('')}${famChip(d.fam)}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
     <p class="muted lore lore-${top.id}">${esc(speciesLore(d, top.id))}</p>
     <div class="card small stack" style="gap:4px">
@@ -1333,10 +1334,6 @@ const actions = {
   dexView(v) { ui.dexView = v; render(); }, fR(v) { ui.fR = v; render(); }, fF(v) { ui.fF = v; render(); },
   mon: monsterSheet, species: speciesSheet,
   viewNew(id) { $('#overlay').innerHTML = ''; ui.tab = 'dex'; ui.dexView = 'captured'; render(); monsterSheet(id); },
-  rename(id) {
-    const m = S.monsters.find(x => x.id === id); if (!m) return;
-    m.nick = ($('#nickInput').value || '').trim().slice(0, 20) || null; persist(); toast(m.nick ? `Renamed to ${m.nick}.` : 'Nickname removed.'); render(); monsterSheet(id);
-  },
   buddy(id) { S.companion = S.companion === id ? null : id; S.hp = Math.min(S.hp, hunterStats(S).maxHp); persist(); render(); monsterSheet(id); },
   release(id, el) {
     if (el.dataset.confirm !== '1') { el.dataset.confirm = '1'; el.textContent = 'Tap again to release'; return; }
@@ -1449,7 +1446,7 @@ const Nav = (() => {
 window.SnapmonNav = { back: Nav.back }; // for a native wrapper's hardware Back button
 
 /* test hooks (used by the automated browser tests) */
-window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, setRNG: f => { RNG = f; }, render };
+window.__snapmon = { get S() { return S; }, set S(v) { S = v; }, ui, actions, setRNG: f => { RNG = f; }, setClock: f => { CLOCK = f; }, render };
 
 render();
 persist(true);

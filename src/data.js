@@ -377,4 +377,10 @@ const DUPLICATE_LINES = [
   'You already scanned this exact view. The spirits have scattered.',
   'Same object, same angle. Monsters hate being photographed twice.',
 ];
+// a scan of an object that is still quiet after an unsuccessful hunt (game.js quietUntil): no timer, no "new angle"
+const QUIET_OBJECT_LINES = [
+  'The {obj} is still settling. Nothing has moved back in yet.',
+  'Whatever haunted this {obj} has gone elsewhere. For now.',
+  'Not a flicker. This {obj} is giving off nothing but ordinary vibes.',
+];
 const SCAN_READOUTS = ['EMF', 'ECTO', 'PSI', 'HAUNT', 'GLOOM', 'WEIRD'];

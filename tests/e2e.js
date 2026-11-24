@@ -127,8 +127,10 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await p.evaluate(() => window.__snapmon.setRNG(Math.random));
   await p.click('[data-act="viewNew"]'); await p.waitForTimeout(400); await shot(p, '13-monster-detail');
   ok(await p.$('text=Specific forklift design.'), 'monster sheet states the design tier honestly');
-  await p.fill('#nickInput', 'Sir Leafington'); await p.click('[data-act="rename"]'); await p.waitForTimeout(200);
-  ok((await S()).monsters[0].nick === 'Sir Leafington', 'rename works');
+  // renaming was removed: no nickname field or Rename button; the sheet shows the official name with its lore right under it
+  ok(!(await p.$('#nickInput')) && !(await p.$('[data-act="rename"]')) && !(await p.$('text=Give it a nickname')), 'no nickname field or Rename button');
+  ok(await p.evaluate(() => { const h = document.querySelector('.sheet .sheet-head'), l = document.querySelector('.sheet .lore'), m = window.__snapmon.S.monsters[0];
+    return h.textContent.includes(m.name) && l && l.textContent === m.lore && h.nextElementSibling === l; }), 'monster sheet: flavour text directly under the official name');
   await p.click('[data-act="buddy"]'); ok((await S()).companion === (await S()).monsters[0].id, 'set hunting buddy');
   await p.click('.sheet [data-act="closeSheet"]');
 
@@ -180,7 +182,7 @@ const ok = (c, msg) => { if (!c) { errors.push('ASSERT: ' + msg); console.log('F
   await p.waitForTimeout(400);
   await p.reload(); await p.waitForTimeout(600);
   st = await S();
-  ok(st.monsters.length === 1 && st.monsters[0].nick === 'Sir Leafington' && st.stats.photos === 3, 'progress restored after reload');
+  ok(st.monsters.length === 1 && st.monsters[0].obj === 'forklift' && st.stats.photos === 3, 'progress restored after reload');
   const dnaBefore = st.monsters[0].dna;
   // 5) screens
   await p.click('[data-act="tab"][data-arg="dex"]'); await p.waitForTimeout(300); await shot(p, '14-dex');

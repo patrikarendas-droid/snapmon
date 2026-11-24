@@ -12,6 +12,7 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const randRange = (rng, a, b) => a + rng() * (b - a);
 const randInt = (rng, a, b) => a + Math.floor(rng() * (b - a + 1));
 let RNG = Math.random; // swappable for tests
+let CLOCK = () => Date.now(); // wall-clock ms for the quiet-object rule; swappable for tests
 
 function freshState() {
   return {
@@ -23,7 +24,7 @@ function freshState() {
     questsClaimed: {}, achievements: {},
     stats: { photos: 0, encounters: 0, wins: 0, losses: 0, captures: 0, flees: 0, capByFam: {}, famSeen: {}, catsPhotographed: {}, objsPhotographed: {},
              cleanWins: 0, rareBeaten: 0, epicSeen: 0, legendSeen: 0, shinySeen: 0, upgrades: 0, battles: 0, unrecognized: 0, labelsSeen: {} },
-    enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [], recentObjs: [] },
+    enc: { miss: 0, sinceRare: 0, recentHashes: [], recentCats: [], recentObjs: [], quiet: {} },
     settings: { muted: false, keepPhotos: false, debugLens: false, lensCached: false, engineCached: false, fieldTest: false },
     lastTick: Date.now(), nextId: 1, log: [],
   };
@@ -43,6 +44,7 @@ function migrate(s) {
   if (!out.stats.labelsSeen) out.stats.labelsSeen = {};
   if ((s.v || 1) < 3) migrateV2toV3(out);
   for (const m of out.monsters) assignAbilityKeys(m); // additive: older saves gain stable ability keys, nothing else changes
+  out.enc.quiet = quietClean(out.enc.quiet, CLOCK()); // additive (older saves have none); invalid entries dropped
   return out;
 }
 /* v2 -> v3 (object registry): monsters and the encyclopedia are keyed by specific objects instead of category+rarity.
@@ -216,6 +218,34 @@ const MECH = {
 };
 
 /* ---------- encounters ---------- */
+/* Quiet objects. When a confirmed object is scanned and the encounter roll finds no monster, that object stays quiet
+   for QUIET_MS of real time: scanning it again cannot produce a monster, whatever the odds, pity or luck. The key is the
+   canonical object id the player confirmed (OBJECTS registry), so it covers the object TYPE: every physical object the
+   recogniser identifies as that kind (two different monitors are both "monitor"), from any angle or photo. Recognition
+   cannot tell two physical objects of the same kind apart, so a per-instance lock would only be a photo-hash lock, which
+   a new angle defeats. A blocked scan changes nothing at all: no roll, no photo/pressure/pity/quest progress, and the
+   expiry is not extended. Stored as S.enc.quiet = { objectId: expiresAtMs } in the normal save (format 3, additive).
+   The duration is never shown to the player. */
+const QUIET_MS = 20 * 60 * 1000;
+const QUIET_MAX = 300; // more entries than this are pruned (soonest-expiring first); expired ones always are
+// valid, unexpired entries only; an expiry further away than QUIET_MS (the clock was turned back) is capped at QUIET_MS
+function quietClean(q, now) {
+  const out = {};
+  if (!q || typeof q !== 'object' || Array.isArray(q) || !Number.isFinite(now)) return out;
+  const live = Object.entries(q).filter(([k, v]) => typeof k === 'string' && k && typeof v === 'number' && Number.isFinite(v) && v > now)
+    .map(([k, v]) => [k, Math.min(v, now + QUIET_MS)]).sort((a, b) => b[1] - a[1]).slice(0, QUIET_MAX);
+  for (const [k, v] of live) out[k] = v;
+  return out;
+}
+// expiry (ms) when the object is quiet right now, otherwise 0
+function quietUntil(S, objId, now = CLOCK()) {
+  const q = S.enc && S.enc.quiet; if (!q || typeof q !== 'object') return 0;
+  let u = q[objId];
+  if (typeof u !== 'number' || !Number.isFinite(u) || u <= now) return 0;
+  if (u > now + QUIET_MS) { u = now + QUIET_MS; q[objId] = u; } // clock turned back: never longer than the rule allows
+  return u;
+}
+
 function encounterChance(S, obj, photo) {
   const dup = !!(photo && photo.hash && S.enc.recentHashes.some(h => hamming(h, photo.hash) <= 6));
   const newCat = !S.stats.objsPhotographed[obj];   // exploring new kinds of object is rewarded
@@ -251,6 +281,14 @@ function resolvePhoto(S, objId, photo, obj, rng = RNG) {
   if (!OBJECTS[objId] && CATEGORY[objId]) objId = CAT_DEFAULT_OBJECT[objId] || objId; // a bare category id (older callers/tests)
   const cat = OBJECTS[objId] ? OBJECTS[objId].cat : objId;
   const word = obj.label;
+  // quiet object (see quietUntil): decided before ANY change or roll — no first-hunt guarantee, odds or pity apply
+  const now = CLOCK();
+  if (!S.enc.quiet || typeof S.enc.quiet !== 'object') S.enc.quiet = {};
+  if (quietUntil(S, objId, now)) {
+    const objName = (word || (OBJECTS[objId] ? OBJECTS[objId].name : CATEGORY[cat] ? CATEGORY[cat].name.split(' /')[0] : 'object')).toLowerCase();
+    const line = QUIET_OBJECT_LINES[(S.stats.photos + objId.length) % QUIET_OBJECT_LINES.length]; // no RNG: nothing is rolled
+    return { encounter: false, quiet: true, line: line.replace('{obj}', objName) };
+  }
   if (word) S.stats.labelsSeen[word] = (S.stats.labelsSeen[word] || 0) + 1;
   const first = S.stats.photos === 0 && S.stats.encounters === 0;
   const ch = encounterChance(S, objId, photo);
@@ -262,6 +300,7 @@ function resolvePhoto(S, objId, photo, obj, rng = RNG) {
   const hit = first || rng() < ch.p;
   if (!hit) {
     if (!ch.dup) S.enc.miss++;
+    S.enc.quiet = quietClean({ ...S.enc.quiet, [objId]: now + QUIET_MS }, now); // this object goes quiet (set once per miss)
     const lines = ch.dup ? DUPLICATE_LINES : NO_ENCOUNTER_LINES;
     const objName = (word || CATEGORY[cat].name.split(' /')[0]).toLowerCase();
     return { encounter: false, dup: ch.dup, line: lines[Math.floor(rng() * lines.length)].replace('{obj}', objName), chance: ch };
@@ -496,7 +535,7 @@ function newBattle(S, m) {
   const hs = hunterStats(S);
   const B = {
     m, turn: 1, over: false, result: null, usedPotion: false, enhancer: 0, captureFails: 0, weapon: S.equipped,
-    enemy: { name: m.nick || m.name, hp: m.stats.hp, maxHp: m.stats.hp, atk: m.stats.atk, def: m.stats.def, spd: m.stats.spd, fam: m.fam, status: {}, cds: {} },
+    enemy: { name: m.name, hp: m.stats.hp, maxHp: m.stats.hp, atk: m.stats.atk, def: m.stats.def, spd: m.stats.spd, fam: m.fam, status: {}, cds: {} },
     hero: { name: 'Hunter', hp: Math.max(1, Math.min(S.hp, hs.maxHp)), maxHp: hs.maxHp, atk: hs.atk, def: hs.def, spd: hs.spd, crit: hs.crit,
             energy: MECH.energy.start + (charmOn(S, 'battery') ? MECH.energy.battery : 0), status: {} },
   };
@@ -792,4 +831,4 @@ function matchCategory(text) {
   return best;
 }
 
-if (typeof module !== 'undefined') module.exports = { freshState, migrate, resolvePhoto, recordSighting, createMonster, newBattle, heroStrike, enemyTurn, heroTurnStart, attemptCapture, captureChance, attemptFlee, useItem, finishBattle, hunterStats, encounterChance, matchCategory, exportSave, importSave, unlockWeapon, upgradeWeapon, buyResearch, claimQuest, activeQuests, setRNG: f => { RNG = f; }, xpFor, hamming };
+if (typeof module !== 'undefined') module.exports = { freshState, migrate, resolvePhoto, recordSighting, createMonster, newBattle, heroStrike, enemyTurn, heroTurnStart, attemptCapture, captureChance, attemptFlee, useItem, finishBattle, hunterStats, encounterChance, matchCategory, exportSave, importSave, unlockWeapon, upgradeWeapon, buyResearch, claimQuest, activeQuests, setRNG: f => { RNG = f; }, setClock: f => { CLOCK = f; }, quietUntil, quietClean, QUIET_MS, xpFor, hamming };

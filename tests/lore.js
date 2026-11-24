@@ -1,6 +1,9 @@
 // Rarity-specific flavour text (src/lore.js): deterministic, stored on the monster, different per rarity, never
 // leaves a placeholder unfilled, and old saves get lore without any other change.
 const G = require('./load')();
+// the quiet-object rule (a missed object stays quiet for 20 min) is tested in tests/quiet-objects.js; this test replays
+// encounter odds, so its clock moves 21 minutes per reading and no object is ever still quiet
+{ let t = Date.UTC(2026, 0, 1); G.setClock(() => (t += 21 * 60 * 1000)); }
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
 const RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
 const ids = Object.keys(G.OBJECTS);

@@ -41,7 +41,7 @@ const RAW = JSON.stringify(S0);
   ok(backup === RAW, 'the untouched save is backed up before the refresh');
   ok(s1.curatedRev === rev, `the save is refreshed to content revision ${rev}`);
   ok(s1.monsters.every((m, i) => m.level === S0.monsters[i].level && JSON.stringify(m.stats) === JSON.stringify(S0.monsters[i].stats) && m.rarity === S0.monsters[i].rarity && m.variant === S0.monsters[i].variant && JSON.stringify(m.dna) === JSON.stringify(S0.monsters[i].dna)) && s1.coins === 777 && s1.level === 12, 'levels, stats, rarity, variants, colours/DNA, coins and hunter level unchanged');
-  ok(s1.monsters[1].nick === 'Biscuit', 'nickname kept');
+  ok(s1.monsters[1].nick === 'Biscuit', 'an old saved nickname stays in the save untouched (renaming was removed; it is no longer shown)');
   const named = s1.monsters.filter(m => P02[m.obj]);
   ok(named.length === s1.monsters.length && named.every(m => m.name === P02[m.obj].names[m.rarity] && m.lore === P02[m.obj].lore[m.rarity]), `every saved monster renamed to its approved writing (Pilot 01, Pilot 02, campaign): ${named.map(m => m.name).join(', ')}`);
 
@@ -49,14 +49,14 @@ const RAW = JSON.stringify(S0);
   await p.click('[data-act="tab"][data-arg="dex"]'); await p.waitForTimeout(300);
   await p.evaluate(() => { window.__snapmon.ui.dexView = 'captured'; window.__snapmon.render(); }); await p.waitForTimeout(300);
   const cards = await p.$$eval('.mgrid [data-act="mon"] .nm', els => els.map(e => e.textContent));
-  ok(cards.some(t => t.includes(P02.toaster.names.legendary)) && cards.some(t => t.includes('Biscuit')), `Captured grid shows the curated names and nickname (${cards.length} cards)`);
+  ok(cards.some(t => t.includes(P02.toaster.names.legendary)) && !cards.some(t => t.includes('Biscuit')) && cards.some(t => t.includes(s1.monsters[1].name)), `Captured grid shows the official curated names, never an old nickname (${cards.length} cards)`);
   ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'Captured grid: no horizontal overflow at 412 px');
   await shot('C01-captured');
   for (const [i, nm] of [[0, 'C02-shiny-legendary-toaster'], [1, 'C03-spectral-dog-nickname'], [2, 'C04-mutated-umbrella'], [6, 'C05-longest-legendary'], [7, 'C06-second-longest-legendary']]) {
     if (!s1.monsters[i]) continue;
     await p.evaluate(id => window.__snapmon.actions.mon(id), s1.monsters[i].id); await p.waitForSelector('.sheet .sheet-head h2'); await p.waitForTimeout(250);
     const f = await sheetFits(), body = await p.$eval('.sheet', e => e.textContent), m = s1.monsters[i];
-    ok(f.fits && f.text === (m.nick || m.name) && body.includes(m.lore) && m.abilities.every(a => body.includes(a.name)) && (!m.nick || body.includes(m.name)), `monster sheet ${m.obj}/${m.rarity}/${m.variant || 'normal'}: "${f.text}" fits, curated text and moves shown`);
+    ok(f.fits && f.text === m.name && body.includes(m.lore) && m.abilities.every(a => body.includes(a.name)) && !(m.nick && body.includes(m.nick)), `monster sheet ${m.obj}/${m.rarity}/${m.variant || 'normal'}: "${f.text}" fits, curated text and moves shown`);
     await shot(nm); await p.click('.sheet [data-act="closeSheet"]'); await p.waitForTimeout(200);
   }
 
@@ -65,6 +65,8 @@ const RAW = JSON.stringify(S0);
   await p.evaluate(() => window.__snapmon.actions.species('o:toaster')); await p.waitForSelector('.sheet .sheet-head h2'); await p.waitForTimeout(250);
   const dex = await p.$eval('.sheet', e => e.textContent);
   ok(dex.includes(P02.toaster.names.legendary) && dex.includes(P02.toaster.lore.legendary), `encyclopedia: toaster shows "${P02.toaster.names.legendary}" and its Legendary text`);
+  const head = await p.evaluate(() => ({ h2: document.querySelector('.sheet .sheet-head h2').textContent, sub: (document.querySelector('.sheet .sheet-head .small') || {}).textContent, obj: OBJECTS.toaster.name }));
+  ok(head.h2 === P02.toaster.names.legendary && head.sub === head.obj, `encyclopedia heading is the monster name ("${head.h2}"), the object ("${head.sub}") is the smaller line`);
   await shot('C07-encyclopedia-toaster'); await p.click('.sheet [data-act="closeSheet"]'); await p.waitForTimeout(200);
   await p.evaluate(id => window.__snapmon.actions.species('o:' + id), longest[0]); await p.waitForSelector('.sheet .sheet-head h2'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `encyclopedia: ${longest[0]} (longest Legendary name) without horizontal overflow`);
