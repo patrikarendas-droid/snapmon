@@ -294,3 +294,59 @@ The page talks to the emulators only when served from localhost with `?emulator=
 1. On the phone, open the URL, sign in, review one field ("Needs fix" + note), and wait for **Synced**.
 2. On the PC, open the URL, sign in, and check that you see it. Change another field there, then reload the phone.
 3. Export JSON on either device.
+
+## Keeping the catalogue online after the browser game (STAGED — not deployed)
+
+SnapMon is now an Android game; the playable browser game at `/snapmon/` may be retired later. The catalogue is an
+active tool and must stay at <https://patrikarendas-droid.github.io/snapmon/catalogue/>.
+
+**Dependencies (measured by `tools/catalogue/build-site.js`, which reads them from the catalogue's own tags):**
+- `catalogue/`: `index.html`, `app.js`, `review-model.js`, `sources.js`, `cloud.js`;
+- `../icon.svg`;
+- ten game files from `src/`: `data.js`, `sprites.js`, `parts.js`, `objects.js`, `labels.js`, `lore.js`, `game.js`,
+  `curated.js`, `curated-data.js`;
+- the Firebase SDK 13.2.0 from `www.gstatic.com`, loaded only by `cloud.js`.
+
+It needs no camera, recognition engine, models, `vendor/` runtimes, `src/ui.js` or `dist/`. **Keep these `src/` files
+loadable in a plain browser:** the catalogue draws every sprite and shows every name, text and move with them. Android-
+only code belongs in the native layer or behind `window.SNAPMON_NATIVE`.
+
+**Proposal — the lowest-risk option: keep the same URL and the same origin.**
+- A catalogue-only Pages deploy:
+  - `/snapmon/catalogue/` unchanged, plus the files above;
+  - `/snapmon/` becomes a short notice ("SnapMon is now an Android app") with a link to the catalogue and a read-only
+    "Show my backup code" for anyone who still has old browser-game progress. It never writes or deletes anything.
+- Because the origin and paths stay the same:
+  - the Firebase authorised domain needs no change;
+  - the owner's sign-in works as before;
+  - each browser keeps its review data (IndexedDB `snapmon-catalogue.v1`, small localStorage keys), with no
+    migration.
+- Firebase rules, the project and the review records are not touched.
+
+**What exists now (prepared and tested, nothing deployed):**
+- `tools/catalogue/build-site.js <dir>`: assembles the catalogue-only site and lists its files in
+  `catalogue-site.json`.
+- `tools/catalogue/serve.js <dir> [port]`: a local preview at `http://localhost:<port>/snapmon/`.
+- `tests/e2e-catalogue-preview.js`: the preview served under `/snapmon/`, at phone and desktop widths:
+  - every request answered, with no model or runtime downloads and no camera request;
+  - all 2,308 objects with real sprites; Firebase blocked → "Local only";
+  - the notice page links to the catalogue and offers old progress as a valid code without changing it.
+- The five catalogue suites also run against the preview, in every Android CI run: local, AI, sync (mocked cloud),
+  sprite, storage (IndexedDB, migration).
+- `docs/staged/pages-catalogue-only.yml`: the proposed replacement for `pages.yml`. It sits outside
+  `.github/workflows`, so it cannot run.
+
+**Needs the owner's separate approval:**
+- the actual switch (copy the staged file over `pages.yml` and merge into the Pages branch);
+- retiring the browser game.
+
+Before approving, look at the preview: run it locally, or see the screenshots in the CI artifact
+`regression-test-screenshots` (`catalogue-preview-*.png`).
+
+**Not tested by the automated checks:** the real Firebase sign-in and sync on the new deploy. That is the owner's
+check after the switch (sign in, see the reviewed count).
+
+**Rollback after a switch:**
+- `git revert -m 1 <merge>` on the Pages branch, or re-run the last good Pages deployment. Either brings the full old
+  site back.
+- Nothing in Firebase or in any browser changes either way.
