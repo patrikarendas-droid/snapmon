@@ -279,6 +279,27 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
   - Build 13 (run 13, commit `98066bf`, versionCode 1013, same certificate as builds 9/12): all CI jobs green incl.
     the emulator; local website suite green (logic + 320 browser checks). To be validated on the phone.
 
+- **Combat log, hunter name, encounter lock (2026-11-24, owner request after build 13; Android branch, not merged).**
+  - Combat log (`src/combatlog.js`): built from the engine's existing events (unchanged — the rules trace hashes them);
+    hunter hits carry the equipped weapon's element (what the engine uses), monster moves none (the rules have no
+    monster damage elements; a move merely NAMED "Water…" shows none); HP replayed with the engine's arithmetic and
+    re-checked against the engine after every call (0 desyncs in 4,948 test calls); energy from before/after. Sheet
+    with live updates (keeps the scroll position when reviewing), Close/backdrop/Back return to the battle; also from
+    the result screen. Memory only, 600 entries max. Colour/icon language: Slash, Ballistic, Arcane, Shock, Toxic
+    (elements), Poison (green drop — the poison chip/float turned green to match), Burn, Stun, Defense down, Attack up,
+    Defense up, Immunity, healing (green plus), energy; always with text.
+  - Hunter name: `S.hunterName` (default "Hunter"; additive save field) set in Settings with Save; cleaned (trim, no
+    control chars or < >, max 16, needs a letter/digit); used for the battle hero, battle narration, the log, Gear and
+    the level badge label; escaped everywhere.
+  - Encounter lock: `S.enc.disturbed` {objectId: expiry}; ANY normal encounter (incl. the first-ever one) locks the
+    object type for `ENCOUNTER_LOCK_MS` = 60 min at generation time, saved immediately (`persist(true)`); same key,
+    validation, pruning (300), clock-rollback cap and blocking point as the 20-min quiet lock (`QUIET_MS`); a blocked
+    scan rolls nothing and changes nothing; "Recently disturbed" screen. Quick Monster Test Mode never touches locks.
+    Type-level only: two physical mice share a lock; an object recognised as another type does not.
+  - Tests: `tests/encounter-lock.js`, `tests/combat-log.js`, `tests/e2e-combat-log.js` (412/320 px); emulator: log
+    opens in a real battle and hardware Back closes it. Replay baselines use a 61-min-per-scan clock; all frozen
+    recordings unchanged; `generator-snapshot` leaves the additive fields out of its hashed export.
+
 **Next priorities (2026-11-18):**
 0. Android dev APK: owner adds `ANDROID_DEV_SIGNING_SEED`, installs the APK from the Actions artifact and runs the
    phone checklist (`docs/ANDROID.md`); then decide whether to merge the Android branch into production (adds the

@@ -59,7 +59,7 @@ function renderTop() {
   regen(S);
   const hs = hunterStats(S), need = xpFor(S.level), hpPct = S.hp / hs.maxHp * 100;
   $('#topbar').innerHTML = `
-    <div class="lvl-badge" aria-label="Hunter level ${S.level}"><div><span>LV</span><b>${S.level}</b></div></div>
+    <div class="lvl-badge" aria-label="${esc(hunterName(S))}, level ${S.level}"><div><span>LV</span><b>${S.level}</b></div></div>
     <div class="bars">
       <div class="bar-row"><span class="lbl">HP</span><div class="bar hp ${hpPct > 40 ? 'ok' : ''}"><i style="width:${hpPct}%"></i></div><span class="val">${S.hp}/${hs.maxHp}</span></div>
       <div class="bar-row"><span class="lbl">XP</span><div class="bar xp"><i style="width:${S.xp / need * 100}%"></i></div><span class="val">${S.xp}/${need}</span></div>
@@ -652,9 +652,9 @@ async function scan(i) {
   if (p.url && p.url.startsWith('blob:')) URL.revokeObjectURL(p.url);
   const thumb = p.thumb; ui.pending = null;
   if (!result.encounter) {
-    SFX.nothing(); persist();
+    SFX.nothing(); persist(true); // a new quiet lock is saved at once (force-closing cannot undo it)
     $('#overlay').innerHTML = `<div class="overlay"><div class="overlay-inner" style="justify-content:center;text-align:center;gap:18px">
-      <h2 style="font-size:28px;color:var(--muted)">${result.quiet ? 'Still quiet' : result.dup ? 'Already scanned' : 'All quiet'}</h2>
+      <h2 style="font-size:28px;color:var(--muted)">${result.disturbed ? 'Recently disturbed' : result.quiet ? 'Still quiet' : result.dup ? 'Already scanned' : 'All quiet'}</h2>
       <p style="font-size:18px">${esc(result.line)}</p>
       <p class="small muted" id="quietHint">Try another object, or come back to this one later. You never know what might move in while you’re gone.</p>
       <button class="btn primary block" data-act="openCamera">Snap another object</button>
@@ -664,7 +664,7 @@ async function scan(i) {
   const m = result.monster; if (thumb) m.thumb = thumb;
   if (result.test) return showTestDiscovery(m);
   const seen = recordSighting(S, m);
-  persist();
+  persist(true); // the encounter (and its object lock) is saved before the monster is even shown
   showDiscovery(m, seen);
 }
 
@@ -698,11 +698,32 @@ function showDiscovery(m, seen) {
   if (!m.test) ui.lastSightings = [{ dna: m.dna, name: m.name, rarity: m.rarity, outcome: 'sighted' }, ...ui.lastSightings].slice(0, 8);
 }
 
+/* ---------- combat log (src/combatlog.js) ----------
+   A sheet over the battle (or over the result screen): newest entries visible on open; when new entries arrive while it
+   is open, it only follows them if the player was already at the bottom. Close button, backdrop or Android Back close
+   it and return to the battle. */
+const CL_ICON = '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true" style="vertical-align:-2px"><path d="M3 2h10v12H3zM5 5h6v1.4H5zm0 3h6v1.4H5zm0 3h4v1.4H5z"/></svg>';
+const currentLog = () => (ui.battle && ui.battle.log) || ui.lastLog;
+function combatLogSheet() {
+  const log = currentLog(); if (!log) return;
+  openSheet(`<div class="sheet-head"><h2>Combat log</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
+    <p class="small muted" style="margin:0">Every action of this battle, oldest first. Damage shows the HP lost, the type and its icon; statuses show their name and icon.</p>
+    <ol class="cl-list" id="clList" aria-live="polite">${CombatLog.html(log)}</ol>`, 'combatlog');
+  const sh = $('#sheet .sheet'); if (sh) sh.scrollTop = sh.scrollHeight;
+}
+function refreshCombatLog() {
+  const list = $('#clList'), sh = $('#sheet .sheet'); if (!list || !sh || sh.dataset.key !== 'combatlog') return;
+  const atEnd = sh.scrollHeight - sh.scrollTop - sh.clientHeight < 40;
+  list.innerHTML = CombatLog.html(currentLog());
+  if (atEnd) sh.scrollTop = sh.scrollHeight; // reviewing older entries: stay where the player is
+}
+
 /* ---------- battle ---------- */
 function startBattle(m) {
   if (m.test) ui.testSnapshot = JSON.stringify(S); // test battle: everything it changes (HP, items, rewards) is undone at the end
   const B = newBattle(S, m); ui.battle = B; ui.busy = false;
   if (m.test && godMode()) enableGodMode(B); // never for a real monster (the engine also refuses)
+  CombatLog.create(B, { god: godOn(B) }); ui.lastLog = null; // this battle's own history (memory only)
   B.disp = { hero: B.hero.hp, enemy: B.enemy.hp };
   renderBattle();
   if (B.enemyFirst) { ui.busy = true; setLog(`${B.enemy.name} is faster and strikes first!`); setTimeout(() => runEnemy(), 700); }
@@ -728,13 +749,13 @@ function renderBattle() {
         <div class="st-row" id="est">${statusChips(B.enemy)}</div></div>
       <div class="foe" id="foe">${spriteHTML(m.dna, { size: 400, rarity: m.rarity, variant: m.variant })}<i class="plat"></i></div>
       <div class="hero" id="hero"><img class="hunter px" alt="Your hunter" src="${hunter}">${comp ? `<img class="comp px" alt="" src="${spriteURL(comp.dna, 3)}">` : ''}<i class="plat"></i></div>
-      <div class="hp-card hero-card"><div class="nm"><span>You</span><span class="lv">Lv ${S.level}</span></div>
+      <div class="hp-card hero-card"><div class="nm"><span>${esc(B.hero.name)}</span><span class="lv">Lv ${S.level}</span></div>
         <div class="bar hp ok"><i id="hhp" style="width:${B.disp.hero / B.hero.maxHp * 100}%"></i></div>
         <div class="small muted num" id="hhpTxt">${B.disp.hero}/${B.hero.maxHp} HP</div>
         <div class="bar en" title="Energy"><i id="hen" style="width:${B.hero.energy}%"></i></div>
         <div class="st-row" id="hst">${statusChips(B.hero)}</div></div>
     </div>
-    <div class="battle-log" id="blog">…</div>
+    <div class="battle-log"><span id="blog" class="grow">…</span><button class="btn small ghost cl-open" data-act="combatLog" aria-label="Open the combat log">${CL_ICON} Log</button></div>
     <div class="actions ${ui.busy ? 'busy' : ''}" id="actions">
       <button class="act attack" data-act="bAttack">Attack<small>${esc(W.name.split(' ').slice(-1)[0])} · ${ELEMENTS[W.el].name}</small></button>
       <button class="act special" data-act="bSpecial" ${!god && B.hero.energy < W.special.cost ? 'disabled' : ''}>${esc(W.special.name)}<small>${god ? 'free (God Mode)' : W.special.cost + ' energy'}</small></button>
@@ -811,9 +832,9 @@ async function play(events) {
     if (!ui.battle) return;
     switch (e.t) {
       case 'act': {
-        const actor = e.who === 'hero' ? 'You' : B.enemy.name.split(',')[0];
+        const actor = e.who === 'hero' ? B.hero.name : B.enemy.name.split(',')[0], me = B.hero.name;
         if (e.who === 'hero') {
-          setLog(e.name === 'Attack' ? `You attack with the ${WEAPONS[B.weapon].name}!` : e.name === 'Flee' ? 'You try to run…' : e.fx === 'item' ? `You use ${e.name}.` : e.fx === 'trap' ? 'You hurl a Snap Trap!' : `You unleash ${e.name}!`);
+          setLog(e.name === 'Attack' ? `${me} attacks with the ${WEAPONS[B.weapon].name}!` : e.name === 'Flee' ? `${me} tries to run…` : e.fx === 'item' ? `${me} uses ${e.name}.` : e.fx === 'trap' ? `${me} hurls a Snap Trap!` : `${me} unleashes ${e.name}!`);
           if (e.fx === 'trap') break;
           if (e.fx && e.fx !== 'item') { anim($('#hero'), 'lunge-r'); lastFx = e.fx; await wait(e.special ? 320 : 180); }
           else await wait(350);
@@ -840,10 +861,10 @@ async function play(events) {
         }
         refreshBattleBars(); await wait(380); break;
       }
-      case 'miss': SFX.miss(); floatText(e.who, 'MISS', '', '#a0a0b8'); setLog(e.who === 'enemy' ? 'Missed!' : 'You dodged it!'); await wait(380); break;
+      case 'miss': SFX.miss(); floatText(e.who, 'MISS', '', '#a0a0b8'); setLog(e.who === 'enemy' ? 'Missed!' : `${B.hero.name} dodged it!`); await wait(380); break;
       case 'heal': SFX.heal(); B.disp[e.who] = Math.min(B[e.who].maxHp, B.disp[e.who] + e.amt); floatText(e.who, '+' + e.amt, '', '#7dff9a'); refreshBattleBars(); await wait(380); break;
       case 'status': SFX.status(); floatText(e.who, STATUS_NAME[e.s] || e.s, '', '#d6a2ff'); refreshBattleBars(); await wait(360); break;
-      case 'dot': B.disp[e.who] = Math.max(e.who === 'hero' && godOn(B) ? 1 : 0, B.disp[e.who] - e.dmg); floatText(e.who, e.dmg, '', e.s === 'poison' ? '#c48bff' : '#ffae5c'); setLog(`${e.who === 'hero' ? 'You take' : B.enemy.name.split(',')[0] + ' takes'} ${e.s} damage.`); refreshBattleBars(); await wait(420); break;
+      case 'dot': B.disp[e.who] = Math.max(e.who === 'hero' && godOn(B) ? 1 : 0, B.disp[e.who] - e.dmg); floatText(e.who, e.dmg, '', (CombatLog.FX[e.s] || CombatLog.FX.burn).color); setLog(`${e.who === 'hero' ? B.hero.name : B.enemy.name.split(',')[0]} takes ${e.s} damage.`); refreshBattleBars(); await wait(420); break;
       case 'expire': refreshBattleBars(); break;
       case 'text': setLog(e.msg); await wait(e.stun ? 650 : 520); break;
       case 'capture': await captureAnim(e.ok); break;
@@ -870,12 +891,13 @@ async function captureAnim(ok) {
 
 async function battleAction(kind, arg) {
   const B = ui.battle; if (!B || ui.busy || B.over) return;
-  let ev;
+  let ev; const before = { heroEnergy: B.hero.energy };
   if (kind === 'attack') ev = heroStrike(B, S, false);
   else if (kind === 'special') { if (!godOn(B) && B.hero.energy < WEAPONS[B.weapon].special.cost) return toast('Not enough energy yet — basic attacks charge it.'); ev = heroStrike(B, S, true); }
   else if (kind === 'capture') { const r = attemptCapture(B, S); if (!r.used) return toast('You are out of Snap Traps. Craft or buy more in Gear.', 'bad'); ev = r.ev; }
   else if (kind === 'flee') ev = attemptFlee(B, S);
   else if (kind === 'item') { const r = useItem(B, S, arg); closeSheet(); if (!r.ok) return toast(r.ev[0] ? r.ev[0].msg : 'You cannot use that right now.'); ev = r.ev; }
+  CombatLog.ingest(B, ev, before); refreshCombatLog();
   ui.busy = true; refreshActions();
   await play(ev);
   if (B.over) return endBattle();
@@ -885,20 +907,22 @@ async function runEnemy() {
   const B = ui.battle; if (!B) return;
   ui.busy = true; refreshActions();
   for (let guard = 0; guard < 6; guard++) {
-    await play(enemyTurn(B));
+    const eev = enemyTurn(B); CombatLog.ingest(B, eev); refreshCombatLog();
+    await play(eev);
     if (B.over) return endBattle();
-    const st = heroTurnStart(B);
+    const st = heroTurnStart(B); CombatLog.ingest(B, st.ev); refreshCombatLog();
     await play(st.ev);
     if (B.over) return endBattle();
     if (!st.skip) break;
   }
-  B.turn++; ui.busy = false; refreshActions(); setLog('Your move.');
+  B.turn++; CombatLog.nextTurn(B); refreshCombatLog(); ui.busy = false; refreshActions(); setLog('Your move.');
 }
 async function endBattle() {
   const B = ui.battle;
   await wait(400);
   if (B.result === 'victory') { SFX.victory(); const f = $('#foe img'); if (f) { f.style.transition = 'transform .6s, opacity .6s, filter .6s'; f.style.filter = 'brightness(3)'; f.style.opacity = '0'; f.style.transform = 'translateY(-20px) scale(.6)'; } await wait(650); }
   else if (B.result === 'defeat') { SFX.defeat(); await wait(500); }
+  ui.lastLog = B.log || null; // "View combat log" on the result screen (memory only, replaced by the next battle)
   if (B.m.test) return endTestBattle(B);
   const sum = finishBattle(S, B);
   if (sum.levelUps.length) setTimeout(() => SFX.levelup(), 400);
@@ -923,7 +947,7 @@ function endTestBattle(B) {
     <h1 class="result-title">${caught ? 'Test capture' : 'Test battle over'}</h1>
     ${spriteHTML(B.m.dna, { size: 150, rarity: B.m.rarity, variant: B.m.variant })}
     <p style="max-width:34ch">${caught ? 'Added to the test collection (Settings → Developer &amp; testing).' : 'Result: ' + esc(B.result) + '.'} No rewards were given; your HP, items, coins and progress are exactly as before the fight.</p>
-    <div class="stack" style="width:100%;max-width:340px"><button class="btn primary block" data-act="openCamera">Snap the next object</button><button class="btn ghost block" data-act="closeOverlay">Back to base</button></div></div></div>`;
+    <div class="stack" style="width:100%;max-width:340px"><button class="btn primary block" data-act="openCamera">Snap the next object</button>${ui.lastLog ? `<button class="btn ghost block" data-act="combatLog">${CL_ICON} View combat log</button>` : ''}<button class="btn ghost block" data-act="closeOverlay">Back to base</button></div></div></div>`;
   render();
 }
 function showTestDiscovery(m) {
@@ -972,6 +996,7 @@ function showResult(B, sum) {
     <div class="stack" style="width:100%;max-width:340px;margin-top:6px">
       <button class="btn primary block" data-act="openCamera" style="min-height:54px">Snap the next object</button>
       ${sum.result === 'captured' ? `<button class="btn block" data-act="viewNew" data-arg="${m.id}">View ${esc((m.name).split(',')[0])}</button>` : ''}
+      ${ui.lastLog ? `<button class="btn ghost block" data-act="combatLog">${CL_ICON} View combat log</button>` : ''}
       <button class="btn ghost block" data-act="closeOverlay">Back to base</button>
     </div></div></div>`;
   render();
@@ -1132,7 +1157,7 @@ function arsenalHTML() {
   }).join('');
   return `<div class="card row" style="align-items:flex-start">
       <img class="px" alt="Your hunter" src="${hunter}" style="width:96px">
-      <div class="grow stack" style="gap:6px"><h2 style="font-size:19px">Hunter · Level ${S.level}</h2>
+      <div class="grow stack" style="gap:6px"><h2 style="font-size:19px">${esc(hunterName(S))} · Level ${S.level}</h2>
         <div class="wstats"><span>HP <b>${hs.maxHp}</b></span><span>ATK <b>${hs.atk}</b></span><span>DEF <b>${hs.def}</b></span><span>SPD <b>${hs.spd}</b></span><span>CRIT <b>${Math.round(hs.crit * 100)}%</b></span></div>
         <div class="small muted">${comp ? `Buddy: <b style="color:var(--text)">${monsterTitle(comp)}</b> (+${Math.round(comp.stats.atk * 0.12)} ATK, +${Math.round(comp.stats.def * 0.12)} DEF)` : 'No hunting buddy. Pick one from your captured monsters.'}</div></div></div>
     <div class="section-title"><h2>Weapons</h2><span class="small muted">${Object.keys(S.weapons).length}/5 owned</span></div>
@@ -1200,6 +1225,8 @@ const backendsText = () => Object.entries(Engine.status.backends).map(([k, v]) =
 function settingsSheet() {
   openSheet(`<div class="sheet-head"><h2>Settings & save</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <button class="list-item" data-act="guide" style="text-align:left"><span class="e">📖</span><span class="grow"><b>Guide: how to play</b><br><span class="small muted">Status effects, combat, capture, rarity, items and research explained.</span></span><span class="muted">›</span></button>
+    <div class="card stack"><b>Hunter name</b><p class="small muted" style="margin:0">Your own character's name, used in battles and the combat log. Monsters always keep their official names.</p>
+      <div class="row"><input class="search grow" id="hunterNameInput" maxlength="${HUNTER_NAME_MAX * 2}" autocomplete="off" autocapitalize="words" enterkeyhint="done" aria-label="Hunter name" value="${esc(hunterName(S))}"><button class="btn ecto" data-act="saveHunterName">Save</button></div></div>
     <div class="card" style="padding-block:4px">
       <div class="toggle"><div><b>Sound effects</b><p>Synthesised on your device. Nothing plays until you tap.</p></div><button class="switch ${S.settings.muted ? '' : 'on'}" data-act="mute" aria-label="Toggle sound"></button></div>
       <div class="toggle" id="engineRow">${engineRowHTML()}</div>
@@ -1305,6 +1332,13 @@ const actions = {
     try { navigator.clipboard.writeText(text).then(() => toast('Timings copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }
   },
   perfClear() { Engine.clearPerf(); settingsSheet(); },
+  combatLog: () => combatLogSheet(),
+  saveHunterName() {
+    const el = $('#hunterNameInput'); if (!el) return;
+    const v = cleanHunterName(el.value);
+    if (!v) { toast('Please enter a name with at least one letter or number (up to ' + HUNTER_NAME_MAX + ' characters).', 'bad'); el.value = hunterName(S); return; }
+    S.hunterName = v; persist(true); el.value = v; render(); toast(`Hunter name saved: ${v}.`);
+  },
   rejExport() {
     const text = JSON.stringify({ app: 'snapmon', version: GAME_VERSION, exported: new Date().toISOString(), rejections: rejLog() });
     try { navigator.clipboard.writeText(text).then(() => toast('Reports copied.'), () => toast('Copy failed.', 'bad')); } catch (e) { toast('Copy failed.', 'bad'); }

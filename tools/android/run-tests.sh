@@ -32,6 +32,8 @@ if [ "$part" = logic ] || [ "$part" = all ]; then
   node tools/curated.js validate
   node tests/android-packaging.js
   node tests/quiet-objects.js       # a missed object stays quiet (hidden period); fake clock + RNG
+  node tests/encounter-lock.js      # an object that produced a monster is locked (hidden period); hunter name rules
+  node tests/combat-log.js          # the combat log reports exactly what the battle engine did
 fi
 if [ "$part" = browser ] || [ "$part" = all ]; then
   mkdir -p shots
@@ -49,4 +51,5 @@ if [ "$part" = browser ] || [ "$part" = all ]; then
   node tests/e2e-catalogue-storage.js http://localhost:8765/
   node tests/e2e-layout.js http://localhost:8765/index.html shots   # HUD / tab bar never cover content (website, inset 0)
   node tests/e2e-quiet.js http://localhost:8765/index.html shots    # quiet objects in the real UI; text-only recognition choices
+  node tests/e2e-combat-log.js http://localhost:8765/index.html shots   # combat log sheet, hunter name, Recently disturbed
 fi

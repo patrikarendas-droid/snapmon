@@ -133,7 +133,9 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   ok(await roster() === 0, 'the test collection can be cleared');
   // turning the mode off restores normal hunting
   await p.click('[data-act="toggleQuickTest"]'); await p.click('.sheet [data-act="closeSheet"]');
-  await p.evaluate(() => window.__snapmon.setRNG(() => 0.999));
+  // the earlier normal hunt of this (stubbed) object locked it (60-min encounter / 20-min quiet lock); this check is
+  // about normal hunting, so start it without those locks (the locks have their own tests)
+  await p.evaluate(() => { window.__snapmon.setRNG(() => 0.999); window.__snapmon.S.enc.disturbed = {}; window.__snapmon.S.enc.quiet = {}; });
   s0 = await S();
   await cam.snap(p); await p.waitForSelector('text=Object identified'); await p.click('[data-act="pickCand"]');
   await waitText(/All quiet|Already scanned|Fight!/, 8000);

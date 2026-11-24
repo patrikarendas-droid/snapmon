@@ -17,8 +17,8 @@
 // curated-off output (`withoutCurated`, `textFrozen.off`) is unchanged and still checked.
 // v0.6.0 (sprite redesign of the 672 objects the owner flagged): re-recorded with "record-visual" — DNA (shape 'obj2',
 // natural colours) only; `textFrozen` proves every name, stat, move and text is unchanged, curated on and off.
-// Quiet objects (2026-11-24, enc.quiet in the save: which objects are quiet after a missed hunt) are a deliberate,
-// additive save field like the ability keys: it is left out of the export hashed here (an empty {} in a fresh save) and
+// Quiet/disturbed objects (2026-11-24, enc.quiet / enc.disturbed: object locks after a miss / an encounter) and the
+// player's hunterName are deliberate, additive save fields like the ability keys: it is left out of the export hashed here (an empty {} in a fresh save) and
 // checked by tests/quiet-objects.js, so the recorded values still prove every monster, text and number is unchanged.
 const crypto = require('crypto'), fs = require('fs'), path = require('path');
 const FIX = path.join(__dirname, 'fixtures/generator-snapshot.json');
@@ -40,7 +40,7 @@ function snapshot(curatedOn) {
     if (k === 0 && r === 'rare' && sample.length < 40 && ids.indexOf(id) % 50 === 0) sample.push(m);
   }
   for (const id of ids) for (const r of RAR) { h.update(speciesLore({ key: 'o:' + id, obj: id, cat: OBJECTS[id].cat, fam: null, monsterName: OBJECTS[id].name }, r)); lines.species++; }
-  const S = freshState(); S.monsters = sample.map((m, i) => ({ ...noKeys(m), id: 'm' + i, caughtAt: 1 })); S.created = 1; S.lastTick = 1; S.savedAt = 1; delete S.enc.quiet; // additive field, see the header
+  const S = freshState(); S.monsters = sample.map((m, i) => ({ ...noKeys(m), id: 'm' + i, caughtAt: 1 })); S.created = 1; S.lastTick = 1; S.savedAt = 1; delete S.enc.quiet; delete S.enc.disturbed; delete S.hunterName; // additive fields, see the header
   const exp = exportSave(S); h.update(exp);
   [CURATED.enabled, CURATED.movesEnabled] = live;
   return { ...lines, exportChars: exp.length, sha256: h.digest('hex') };

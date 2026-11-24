@@ -221,6 +221,21 @@ const bodyHas = (page, re) => page.evaluate(src => new RegExp(src).test(document
     await page.evaluate(c => { window.__snapmon.S.coins = c; window.__snapmon.actions.tab('hunt'); }, coinsBefore);
   }
 
+  // 6b. combat log in the real WebView: open it in a battle, hardware Back closes it and the battle continues
+  {
+    await page.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; closeSheet(); window.__snapmon.S.hunterName = 'Alex';
+      const m = createMonster(window.__snapmon.S, { obj: 'mug', rarity: 'common', word: 'mug' }); m.stats.hp = 999; startBattle(m); });
+    await page.waitForFunction(() => window.__snapmon.ui.battle && !window.__snapmon.ui.busy, null, { timeout: 20000 });
+    await page.evaluate(() => window.__snapmon.actions.bAttack());
+    await page.waitForFunction(() => !window.__snapmon.ui.busy, null, { timeout: 30000 });
+    await page.evaluate(() => window.__snapmon.actions.combatLog());
+    const rows = await page.evaluate(() => [...document.querySelectorAll('#clList .cl-row')].map(r => r.textContent));
+    ok(rows.length >= 3 && rows.some(r => /Alex attacks/.test(r)) && rows.some(r => /−\d+ HP/.test(r)), `combat log opens in a real battle (${rows.length} rows, hunter name, signed HP)`);
+    adb('shell input keyevent KEYCODE_BACK'); await sleep(900);
+    ok(!(await page.$('#clList')) && await page.evaluate(() => !!window.__snapmon.ui.battle && !!document.querySelector('#battleRoot')), 'hardware Back closes the combat log and returns to the same battle');
+    await page.evaluate(() => { window.__snapmon.ui.battle = null; document.querySelector('#overlay').innerHTML = ''; window.__snapmon.ui.busy = false; render(); });
+  }
+
   // 7. saves
   await page.evaluate(() => { window.__snapmon.S.coins = 4242; persist(true); return window.SNAPMON_NATIVE.storage.flush(); });
   s = await state(page);

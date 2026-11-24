@@ -76,6 +76,8 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
 }
 // 4. encounter odds: fixed-seed photos of many objects
 {
+  // object locks (tests/quiet-objects.js) are kept inactive: the clock moves 61 minutes per reading
+  { let t = Date.UTC(2026, 0, 1); T.setClock(() => (t += 61 * 60 * 1000)); }
   const h = H(); seed = 777; T.setRNG(rng); const ids = FROZEN;
   for (let g = 0; g < 60; g++) {
     const S = T.freshState(); S.level = 1 + g % 12; S.research = g % 3 ? { lens1: 1, capture1: 1, sensor: 1, lens2: 1, legend: 1 } : {};

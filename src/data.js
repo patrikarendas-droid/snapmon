@@ -383,4 +383,10 @@ const QUIET_OBJECT_LINES = [
   'Whatever haunted this {obj} has gone elsewhere. For now.',
   'Not a flicker. This {obj} is giving off nothing but ordinary vibes.',
 ];
+// a scan of an object type that produced a monster recently (game.js ENCOUNTER_LOCK_MS): no timer, no "new angle"
+const DISTURBED_OBJECT_LINES = [
+  'The spirit has moved on. This {obj} needs time before something else moves in.',
+  'A cold trail and nothing else. Whatever lived in this {obj} has only just left.',
+  'The {obj} still hums with the last encounter. Nothing new has settled in yet.',
+];
 const SCAN_READOUTS = ['EMF', 'ECTO', 'PSI', 'HAUNT', 'GLOOM', 'WEIRD'];
