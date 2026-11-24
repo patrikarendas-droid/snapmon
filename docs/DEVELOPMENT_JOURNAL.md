@@ -4,7 +4,8 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-18, live release v0.6.0; first Android development APK on a feature branch (not merged).
+Last updated: 2026-11-24. **SnapMon is an Android game** (owner decision 2026-11-24). Owner-verified APK: build 14
+(commit `4207571`). The website still serves v0.6.0 (unsupported, not retired yet).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -15,7 +16,9 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
 - **What it is:** a mobile monster-collecting RPG. The player photographs real objects with the live camera; an
   on-device AI recognises the object; a monster based on that specific object may appear; the player fights,
   captures and collects monsters, upgrades gear and does research.
-- **Strategy:** Android first. Today it is a browser game (Android Chrome) served by GitHub Pages:
+- **Strategy (2026-11-24): Android is the ONLY supported playable platform.** No Chrome game releases, no browser
+  parity; Android-only implementations are preferred when better. The repository stays public; no launch date; iOS
+  maybe far later. Rules for sessions: `CLAUDE.md` 3–4, 8. Historic: it started as a browser game served by GitHub Pages:
   <https://patrikarendas-droid.github.io/snapmon/>. A first private **development APK** (Capacitor 8 wrapping the same
   web code, bundled engine, offline, separate saves) exists on a feature branch since 2026-11-18, built by GitHub
   Actions (`docs/ANDROID.md`); not merged, not on Play. iOS is a low-priority possibility only (notes in `docs/ANDROID.md`).
@@ -54,7 +57,8 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
   monsters never change look without the player's consent.
 - **Gameplay loop stays central;** balance, odds and combat numbers change only on purpose (guarded by
   `tests/rules-trace.js`).
-- **Android is the priority test platform.** The developer's Android phone (Chrome) is the only real device used.
+- **Android is the only supported platform** (2026-11-24). The owner's Android phone (SnapMon Dev APK) is the only
+  real device used. Saves must survive updates and rollbacks (`docs/RECOVERY.md`); CAMERA is the only permission.
 
 ## 3. Release history (from Git tags)
 
@@ -303,7 +307,34 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
     emulator job's first attempt timed out at the very first app launch before any check (emulator boot flake), the
     re-run of that job on the same APK passed every check. Local: logic suite + 364 browser checks green.
 
-**Next priorities (2026-11-18):**
+- **Android-only transition, recovery and archiving (2026-11-24, owner request after confirming build 14 on the phone;
+  Android branch, not merged; nothing published or deployed).**
+  - Baseline: build 14 = owner-verified recovery point (`tools/android/recovery-points.json`; run 45379221209, artifact
+    `SnapMon-Dev-APK-0.6.0-build-14`, zip SHA-256 659844e2…, cert 73a7e01f…; its APK SHA-256 is only in the run summary).
+    **Its artifact expires 2026-12-24** (30-day upload) — owner to download/archive.
+  - Policy: CLAUDE.md, README, RELEASING (website process = legacy, approval only), ANDROID.md.
+  - CI: the Android test list no longer mirrors `pages.yml`; `tests/android-packaging.js` pins the engine itself and
+    fails if any test file stops running (5 listed exceptions with reasons). Main APK artifact 90 days (+
+    `provenance.json`, `SHA256SUMS`, summary with direct link, expiry, attempt); attempt-suffixed artifact names.
+  - Saves/recovery: `tests/save-compat.js` (rich synthetic save vs the game code of v0.6.0, builds 9, 13, 14 from git
+    history, both directions, backup codes); emulator recovery drill (recovery APK from `drill` commit at versionCode +2
+    as an update, old code saves, current +3 gets everything back, downgrade refused, backup code restores after
+    uninstall). Procedure: `docs/RECOVERY.md`.
+  - Catalogue: dependency audit (catalogue/ + icon.svg + 9 `src/` files + Firebase CDN); staged catalogue-only site at
+    the SAME URL/origin (`tools/catalogue/`, `docs/staged/pages-catalogue-only.yml`, outside .github/workflows) with a
+    read-only "old browser progress → backup code" notice page; tested by `tests/e2e-catalogue-preview.js` + all
+    catalogue suites against it. Switch and game retirement need owner approval.
+  - Milestones: `.github/workflows/android-milestone.yml` (manual, verify by default, publish only with mode=publish +
+    exact approval sentence; original artifact, hash-checked; pre-release + tag `android-dev-b<N>`; usable once on the
+    default branch) + manual web route; `tools/android/verify-apk.js`. Nothing tagged or released.
+
+**Next priorities (2026-11-24):**
+- Owner: download build 14 (expires 2026-12-24) and the new build; decide whether to archive build 14 as a milestone;
+  look at the catalogue-only preview and decide on the website switch; keep 2 backup codes.
+- Merging the Android branch into the Pages branch still needs the owner's approval (it would also enable the
+  "Run workflow" buttons for the APK and milestone workflows).
+
+**Earlier priorities (2026-11-18, partly superseded):**
 0. Android dev APK: owner adds `ANDROID_DEV_SIGNING_SEED`, installs the APK from the Actions artifact and runs the
    phone checklist (`docs/ANDROID.md`); then decide whether to merge the Android branch into production (adds the
    workflow's "Run workflow" button; the website itself is unaffected).
@@ -337,6 +368,9 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
 | HUD covered the top of every screen in the Android app (build 9) | Fixed on the Android branch (layout reserves the status-bar inset) | `index.html` `#app`/`.sheet`; `tests/e2e-layout.js` | Owner re-checks on the phone with the next build. |
 | Quiet objects: a different suggested object for the same physical thing is not locked | Known (2026-11-24) | The lock is per confirmed object type (`S.enc.quiet`); alternatives the lens itself offers are other objects | Only if the owner wants the lock widened to all suggestions of a missed photo. |
 | A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
+| Build 14 APK artifact expires 2026-12-24 | Open (2026-11-24) | Uploaded with the old 30-day retention; new builds keep 90 days | Owner downloads a copy; optionally milestone archive (`docs/RECOVERY.md` §6). |
+| Browser game still live but unsupported; catalogue-only site staged | Open, needs owner approval | `docs/CATALOGUE.md` "Keeping the catalogue online…", `docs/staged/pages-catalogue-only.yml` | Owner reviews the preview, then approves the switch (or not). |
+| Real Firebase sign-in on a catalogue-only deploy | Untested until a switch | Same origin → no domain change expected | Owner signs in once after an approved switch. |
 | Rolling back below v0.4.3 shows redesigned new monsters as blobs | Known, documented | `docs/RELEASING.md` | None unless rolling back. |
 
 ## 6. Resolved issues (with the release that fixed them)
@@ -389,6 +423,10 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
   (packaged game with the real engine and a fake native bridge in Chromium), APK checks (package, permissions,
   signature) and `tools/android/emulator-smoke.js` (real APK on an Android 14 emulator: saves across force-stop,
   wiped WebView storage and update install; engine + recognition; Back). Emulator ≠ phone.
+- **Android-centric division (2026-11-24):** fast suite (`tools/android/run-tests.sh`: Node + headless Chromium on the
+  current source, incl. `save-compat` and the staged catalogue site) → packaged game with the real engine and a
+  mocked native bridge → Gradle/APK checks → emulator (real APK: storage, update, recovery drill, Back, permission,
+  system bars, offline engine). Phone: camera, speed, heat, device quirks.
 - **Manual:** only the developer's Android phone. Anything not tested there is marked "needs phone check" in reports.
   Headless tests cannot reproduce Android graphics glitches or real camera hardware (zoom, permissions UI).
 
@@ -416,6 +454,11 @@ Last updated: 2026-11-18, live release v0.6.0; first Android development APK on 
 - **App saves separate from Chrome; native file mirror (2026-11-18)** – owner's decision: no import of browser
   progress; localStorage kept as the synchronous store (no change to the `Platform.storage` contract) with an atomic
   native copy and newest-wins restore, instead of an async Preferences store that would have required reworking saves.
+- **Android-only, rollback by forward update (2026-11-24)** – Android refuses lower versionCodes, so a rollback is a
+  new build containing older code (higher versionCode, same key), proven safe for the save by `save-compat` + the
+  emulator drill; milestone archives keep the ORIGINAL CI APK (a rebuild is a different binary). The catalogue keeps
+  its URL/origin (no Firebase domain change) in the staged catalogue-only site. Rejected: separate catalogue repo or
+  domain (Firebase/auth changes, local data stranded), deleting browser files (the WebView and catalogue use them).
 - **Deterministic dev signing key from one secret (2026-11-18)** – stable updates without committing or uploading a
   keystore; the Play upload key will be separate.
 - **Quick Monster Test Mode stores test monsters outside the save** (`snapmon.testroster.v1`), never in the backup

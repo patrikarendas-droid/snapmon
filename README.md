@@ -1,12 +1,14 @@
 # SNAPMON: Monsters Among Us
 
-A mobile-first browser game. The real world is full of monsters disguised as everyday objects — photograph things around you with your phone camera, fight what you find in turn-based battles, capture weakened monsters, and complete the encyclopedia.
+A mobile monster-collecting game for **Android**. The real world is full of monsters disguised as everyday objects — photograph things around you with your phone camera, fight what you find in turn-based battles, capture weakened monsters, and complete the encyclopedia.
 
-Runs in Chrome on Android with nothing to install: no APK, no account, no ads, no purchases, no server.
-A private Android development app (APK, same game and recognition engine, offline, separate saves) is built by
-GitHub Actions — see `docs/ANDROID.md`; the website stays the main way to play.
+**Since 2026-11-24 SnapMon is developed and supported as an Android app only** ("SnapMon Dev" development APK, built
+by GitHub Actions, offline, CAMERA permission only — `docs/ANDROID.md`; rollback and backups — `docs/RECOVERY.md`).
+The browser version described below still runs at the old address but is no longer updated or supported; it is kept
+online until the owner approves its retirement. The developer catalogue (`/snapmon/catalogue/`) stays online
+(`docs/CATALOGUE.md`). No account, no ads, no purchases, no server.
 
-## Play
+## Play (legacy browser version — unsupported)
 
 | Where | How |
 |---|---|

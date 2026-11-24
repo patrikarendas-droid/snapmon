@@ -1,5 +1,11 @@
 # SnapMon on Android
 
+**SnapMon is an Android game (owner decision 2026-11-24).** Android is the only supported playable platform; the old
+browser game gets no releases and no feature parity, and Android features never need a Chrome fallback. The shared
+JavaScript in `src/` stays: the app's WebView runs it, and the developer catalogue uses part of it. Rollback, backups
+and long-term APK archives: [`docs/RECOVERY.md`](RECOVERY.md). **Current owner-verified build: 14** (commit `4207571`,
+versionCode 1014).
+
 **Status (2026-11-18): first development APK — CI run 7 green** (commit `bda485a`: website regression suite, packaged
 game with the real engine, release-configuration checks, APK build + integrity, Android 14 emulator test). APK size
 **72.3 MB** (72,294,674 bytes; engine files 85.5 MB uncompressed). Signing: **stable since build 8** (secret
@@ -92,7 +98,8 @@ and the emulator test (same checks in the real WebView with the real system bars
   Android's `pause` event, and double-Back exit waits (up to 4 s) until queued file writes are on disk.
 - **Updates keep the data** (same package + same signing key + higher versionCode; see "Signing"). Uninstalling, or
   Android Settings → Apps → SnapMon Dev → Storage → Clear storage, deletes it. **Export a backup code first**
-  (Settings → Back up your progress); the code can be imported into the app (or the website) by hand.
+  (Settings → Back up your progress; keep two private copies, `docs/RECOVERY.md`). Deleted/expired Actions artifacts,
+  releases or branches never touch the installed app's data.
 - The save format is unchanged (format 3), so app saves and website saves remain mutually compatible via backup codes.
 
 ## Building the APK (GitHub Actions)
@@ -105,9 +112,27 @@ and the emulator test (same checks in the real WebView with the real system bars
    `build-web.js --dev-tools` + `check-web.js` (every engine file present, every SHA-256 matches the manifest, nothing
    loads from the network, no catalogue) → `tests/e2e-android-web.js` with the **real** engine in Chromium →
    `npx cap sync` → signing key from the secret → `./gradlew assembleDebug` → APK checks (package, versionCode, only
-   CAMERA, engine files inside, no catalogue, signature) → artifact **SnapMon-Dev-APK-…** (kept 30 days) + a summary
-   (size, versions, SDKs, certificate fingerprint).
-3. **emulator**: Android 14 emulator (x86_64) runs `tools/android/emulator-smoke.js` against the built APK.
+   CAMERA, engine files inside, no catalogue, signature) → update-test builds (versionCode + 1 and + 3, current code)
+   and a **recovery-drill** build (the commit in `tools/android/recovery-points.json` → `drill`, versionCode + 2, same
+   key) → artifact **SnapMon-Dev-APK-…** (the APK + `provenance.json` + `SHA256SUMS`, **kept 90 days**) + a summary.
+3. **emulator**: Android 14 emulator (x86_64) runs `tools/android/emulator-smoke.js` against the built APK, including
+   the recovery drill (see Tests).
+
+**Finding and identifying an APK.** The *Build the debug APK* job's summary starts with "SnapMon Dev APK — download
+this": a **direct link** to the artifact, the file name, the expected expiry date, run number and attempt, source
+commit, versionName/versionCode, APK SHA-256, artifact-zip SHA-256 and the certificate fingerprint. The same values are
+in `provenance.json` inside the zip and in the job log. Artifact names: `SnapMon-Dev-APK-<game>-build-<run>`; if that
+job itself is re-run, the new binary is named `…-attemptN` (same versionCode — install only one of them). A red
+*emulator* job with a green *Build the debug APK* job means the APK was built and verified but the emulator test failed
+(often a CI emulator boot flake): **Re-run failed jobs** re-tests the same APK without rebuilding it.
+
+**Retention.** The main APK artifact is kept **90 days** (`retention-days: 90`, the maximum GitHub allows for a public
+repository; verified on the artifact's `expires_at` after the first build with it). Diagnostics are short: update-test
+APKs 3 days, screenshots 7 days. This applies to new uploads only: older artifacts keep the expiry they were uploaded
+with (builds ≤ 14: 30 days; build 14 expires 2026-12-24). An artifact expiring has **no effect** on the installed app
+or its saves. Builds worth keeping longer: owner-approved milestone pre-releases (`docs/RECOVERY.md`). If a repository
+setting ever caps it: GitHub → the repository → **Settings → Actions → General → Artifact and log retention** → 90 →
+Save (the summary's expiry date then shows the real value).
 
 Triggers: every push to `feature/android-**` (and this first session's branch `ccr-6eaf78d0-vj87lh`) that touches the
 game or the app, and **Run workflow** (that button appears in the Actions tab only once the workflow file is on the
@@ -160,13 +185,16 @@ real game and engine in Chromium with a FAKE native bridge; **emulator** = the r
 
 | Kind | Test | What it proves |
 |---|---|---|
-| executed | website regression suite (`tools/android/run-tests.sh` = every `pages.yml` test; CI job *tests*) | the Chrome game is unaffected: gameplay/balance trace, sprites, curated writing, saves/migrations, engine with the real TinyCLIP worker, Back navigation, catalogue |
-| static | `tests/android-packaging.js` | same engine versions, file list, TinyCLIP export and tests as Pages; `pages.yml` independent of Android; only CAMERA; INTERNET removed; no backup; release refuses DEV_TOOLS; no keys committed; pinned deps; website `Platform` unchanged without `SNAPMON_NATIVE` (executed in a Node VM) |
+| executed | fast regression suite (`tools/android/run-tests.sh`; CI job *tests*) — Node + headless Chromium on the current source | the shared game code the APK runs: gameplay/balance trace, sprites, curated writing, saves/migrations, engine with the real TinyCLIP worker, Back navigation, quiet/encounter locks, combat log, catalogue |
+| static | `tests/android-packaging.js` | engine versions, file list and TinyCLIP export pinned; every test file runs (or is listed with a reason); main artifact 90 days + provenance; milestone workflow approval-gated; `pages.yml` independent of Android; only CAMERA; INTERNET removed; no backup; release refuses DEV_TOOLS; no keys committed; pinned deps; website `Platform` unchanged without `SNAPMON_NATIVE` (executed in a Node VM) |
 | executed | `tools/android/check-web.js` (packaged folder) and `tools/android/check-apk.js` (unpacked **built APK**) | every model, vocabulary, WASM/JS runtime file present and matching its SHA-256 in `models/manifest.json`; TinyCLIP calibrated; nothing loads from the network; no catalogue/WebGPU build; packaged Capacitor config serves the game from the APK over https |
 | mocked | `tests/e2e-android-web.js` — development build **and** release configuration, **real** models in CI | fresh install = new player; no network requests; bundled fonts; engine from the package (no download notice, no cache copy) + a recognition; save mirroring, restore after lost storage, newer copy wins both ways; Back / double-Back exit after saves flushed; pause stops the camera and saves; denied-camera text; build label; licences; dev build: tools unlock; release build: developer tools, Quick Monster Test Mode and God Mode unreachable even if forced on in a save |
 | executed | `tests/e2e-layout.js` (Chromium; website at inset 0, packaged game with emulated status/navigation bars 0–48 px at 360×640, 412×915, 600×960) | on all 4 tabs and their sub-pages, Settings and the monster sheet: the HUD starts below the status bar, no control or text under it at scroll 0, every control hittable at its centre after scrolling, the page end clears the tab bar, sheets stay below the status bar; a real tap on Shop & Craft at scroll 0 opens the shop |
 | executed | Gradle in CI | a release build with DEV_TOOLS is refused; a release-safe unsigned release APK builds and passes `check-apk.js --expect-release`; debug APK signed (v2+v3), permissions = CAMERA only; the update-test build carries the same certificate |
 | emulator | `tools/android/emulator-smoke.js` (Android 14 x86_64 emulator, KVM, **airplane mode**; detector/classifier on TF.js's CPU backend because the emulator GPU is software-only) | Capacitor bridge; brand-new player; no network; full engine from the APK + a recognition; Android's **real permission dialog**: "Don't allow" → explanation, "Allow" → preview (virtual camera, if the image provides one); Home with the camera open → stopped, resume → engine still works; Back closes camera/sheet/tab; double Back exits; save files in private storage; progress survives double-Back exit, force-stop, a wiped WebView storage (restored from the files) and an **update to versionCode + 1**; uninstall + install = clean start. Report in the run summary. |
+| executed | `tests/save-compat.js` (Node, synthetic rich save, game code of v0.6.0 / builds 9, 13, 14 from git history) | the older code loads today's save, keeps every field, saves it, and the current code gets it all back (incl. hunter name and locks); backup codes both ways; a save made by the old code loads in the current code (rollback safety, `docs/RECOVERY.md`) |
+| emulator | recovery drill in `emulator-smoke.js` (real APKs) | rich synthetic save → Settings backup code → recovery APK from an older verified commit (versionCode + 2, same key) installs as an update and keeps everything → the old code saves → current code (+ 3) gets it all back → a lower versionCode is refused and changes nothing → after uninstall + clean install the backup code restores the whole save |
+| executed | `tests/e2e-catalogue-preview.js` + the catalogue suites against the staged catalogue-only site (`docs/CATALOGUE.md`) | the catalogue keeps working when the browser game is retired; not deployed |
 | static/structural | browser vs app save isolation | the app is a separate Android app with its own sandbox and origin; no code reads website data; the website suite proves the website's saves logic unchanged; the emulator proves a fresh install has no data |
 | phone | owner's checklist below | real camera sensor, zoom, permission UI on the phone, real recognition speed/accuracy, GPU (WebGL) detector, memory, heat, long background periods, the actual install/update flow from GitHub |
 
@@ -183,8 +211,9 @@ also showed an "isn't responding" dialog) — **time the first engine start on t
 
 1. Open **github.com** in Chrome (signed in) → the repository → **Actions** → **Android debug APK** → the newest
    run with a green tick.
-2. Scroll to **Artifacts** → tap **SnapMon-Dev-APK-…** (not one ending in `UNSTABLE-SIGNING` once the secret is set).
-   A `.zip` downloads.
+2. Open the *Build the debug APK* job summary and tap the **direct link** in "SnapMon Dev APK — download this" (or
+   scroll to **Artifacts** → **SnapMon-Dev-APK-…**; never one ending in `UNSTABLE-SIGNING`). A `.zip` downloads.
+   **Before installing: make a fresh backup code** (Settings → Back up your progress; `docs/RECOVERY.md` section 2).
 3. Open it in **Files** (Downloads) → tap the zip → **Extract** → tap the extracted `snapmon-dev-….apk`.
 4. First time only: Android asks to allow installs from this source (Chrome or Files) → **Settings → Allow** → back →
    **Install**. Play Protect may warn about an unknown developer → **More details → Install anyway**.

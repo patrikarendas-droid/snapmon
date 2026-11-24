@@ -1,5 +1,10 @@
 # Releasing and rolling back SNAPMON
 
+> **Since 2026-11-24 SnapMon is an Android game.** New builds are Android APKs from the *Android debug APK* workflow
+> (`docs/ANDROID.md`); Android rollback, backups and milestone archives are in `docs/RECOVERY.md`. The website release
+> process below is **legacy**: merging into the Pages branch, deploying or tagging happens only with the owner's
+> explicit approval and is not a step for producing an APK. The developer catalogue stays online (`docs/CATALOGUE.md`).
+
 ## Branches
 
 | Branch | Purpose |
