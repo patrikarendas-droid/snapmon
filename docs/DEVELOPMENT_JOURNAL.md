@@ -349,6 +349,9 @@ Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11
     workflows only run from there). Verify run 45572544428 (all checks), publish run 45572984193 → annotated tag
     `android-dev-b15` → commit 1b9aa89, pre-release "SnapMon Dev build 15 (development APK)" with the original APK
     (asset digest = APK SHA-256 8220a0f8…beca719), not marked latest.
+  - Android branch mirror commit `250153f` (no game/app change): CI run 16 all green on the first attempt (fast suite incl.
+    save-compat with 5 older versions and the catalogue-only site, APK, emulator + recovery drill from build 15's code).
+    Build 16 is a CI test build only (versionCode 1016), not released or recommended for install.
 
 **Next priorities (2026-11-25):**
 - Owner: check the live catalogue (sign-in, sync, reviewed-object count) and the notice page.
