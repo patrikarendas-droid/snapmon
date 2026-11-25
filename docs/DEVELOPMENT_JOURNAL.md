@@ -372,8 +372,14 @@ Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11
     `tests/e2e-unique-capture.js` (real UI at 412/320 px). `rules-trace` empties the replay hunter's collection before
     each battle (like its clock trick for the locks), so its frozen recording is unchanged: odds and battle maths are
     identical.
+  - **Build 17** (run 45598178247, commit `4e1331c`, versionCode 1017, `0.6.0-dev.17+4e1331c`): all three jobs green on
+    the FIRST attempt (fast suite, APK + packaged-game checks, emulator incl. recovery drill from build 15's code). APK
+    SHA-256 `c8231f161fd9000ffe045050a504bee3f9986d327757834e6faab9135eca3d77` (72,306,290 bytes), same certificate
+    73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-17` (id 15013309903), expires 2027-02-23.
+    CI-green, NOT yet phone-verified.
 
 **Next priorities (2026-11-25):**
+- Owner: install build 17 as an update over build 15 (backup code first) and run the unique-capture phone checklist.
 - Done 2026-11-25: owner confirmed the live catalogue works and the website shows the "moved to the app" notice.
 - No further releases, deployments or merges without approval.
 
