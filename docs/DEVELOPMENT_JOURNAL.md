@@ -353,6 +353,26 @@ Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11
     save-compat with 5 older versions and the catalogue-only site, APK, emulator + recovery drill from build 15's code).
     Build 16 is a CI test build only (versionCode 1016), not released or recommended for install.
 
+- **Unique capture rule (2026-11-25, owner request; Android branch, not merged, nothing published).** The real collection
+  holds at most ONE monster per canonical object id + rarity + variant (Normal = stored null/absent, Spectral, Mutated,
+  Prismatic = stored `'shiny'`). Level, stats, DNA, photo, colours, names and detection labels do not matter.
+  - `src/game.js`: `collectionKey(m)` (object id; a bare category id maps to its default object; very old object-less
+    monsters fall back to `cat:<cat>[:<word>]`), `ownedCopy(S, m)` (only monsters currently in `S.monsters`, never test
+    monsters), `attemptCapture` refuses an owned slot FIRST (returns `{owned, msg}`; no trap, turn, roll, event or state
+    change — also when out of traps), `finishBattle` never adds a second copy even if a result was forced to
+    "captured" (turns it into "escaped").
+  - Duplicates still spawn with unchanged odds/variants/locks and can be fought for the normal rewards. Encyclopedia
+    history and released monsters never block; releasing frees the slot. No save fields added (format 3 unchanged).
+  - UI: the Capture button of an owned slot is dimmed + dashed, reads "Already owned", `aria-disabled` (not the HTML
+    `disabled` attribute); a tap only shows "You already have a {Variant} {Rarity} {Name} in your collection. Defeat it
+    for rewards, or flee." Guide → Capturing monsters explains it. Quick Monster Test Mode is outside the rule.
+  - Monster levelling / duplicate conversion deliberately NOT added (owner decides later).
+  - Tests: `tests/unique-capture.js` (logic: keys, variants, rarities, release, rewards identical with/without an owned
+    copy, refused tap draws no RNG and changes nothing, save/load + backup code, test-mode isolation) and
+    `tests/e2e-unique-capture.js` (real UI at 412/320 px). `rules-trace` empties the replay hunter's collection before
+    each battle (like its clock trick for the locks), so its frozen recording is unchanged: odds and battle maths are
+    identical.
+
 **Next priorities (2026-11-25):**
 - Done 2026-11-25: owner confirmed the live catalogue works and the website shows the "moved to the app" notice.
 - No further releases, deployments or merges without approval.

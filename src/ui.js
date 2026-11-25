@@ -736,7 +736,7 @@ function statusChips(u) {
 function renderBattle() {
   const B = ui.battle, m = B.m, W = WEAPONS[B.weapon], comp = companionOf(S);
   const cap = captureChance(S, B), analysis = !!S.research.analysis;
-  const god = godOn(B);
+  const god = godOn(B), owned = !!ownedCopy(S, m); // this object + rarity + variant is already in the collection
   const capTxt = god ? '100%' : analysis ? Math.round(cap * 100) + '%' : cap > 0.6 ? 'High' : cap > 0.3 ? 'Medium' : 'Low';
   const hunter = renderHunter(document.createElement('canvas'), B.weapon, 6).toDataURL();
   $('#overlay').innerHTML = `<div class="overlay battle"><div class="overlay-inner" id="battleRoot">
@@ -760,7 +760,8 @@ function renderBattle() {
       <button class="act attack" data-act="bAttack">Attack<small>${esc(W.name.split(' ').slice(-1)[0])} · ${ELEMENTS[W.el].name}</small></button>
       <button class="act special" data-act="bSpecial" ${!god && B.hero.energy < W.special.cost ? 'disabled' : ''}>${esc(W.special.name)}<small>${god ? 'free (God Mode)' : W.special.cost + ' energy'}</small></button>
       <button class="act" data-act="bItems">Items<small>${god ? 'unlimited' : BATTLE_ITEMS.reduce((a, k) => a + (S.items[k] || 0), 0) + ' in bag'}</small></button>
-      <button class="act capture" data-act="bCapture" ${god || S.items.trap ? '' : 'disabled'}>Capture<small>${god ? '∞' : S.items.trap} traps · ${capTxt}</small></button>
+      ${owned ? `<button class="act capture unavail" data-act="bCapture" aria-disabled="true" aria-label="Capture unavailable: already in your collection">Capture<small>Already owned</small></button>`
+        : `<button class="act capture" data-act="bCapture" ${god || S.items.trap ? '' : 'disabled'}>Capture<small>${god ? '∞' : S.items.trap} traps · ${capTxt}</small></button>`}
       <button class="act" data-act="bFlee">Flee<small>${analysis ? Math.round(fleeChance(S, B) * 100) + '%' : 'escape'}</small></button>
       <button class="act" data-act="bInfo">Intel<small>${analysis ? 'full scan' : 'basic'}</small></button>
     </div>
@@ -785,7 +786,8 @@ function refreshActions() {
   const sp = a.querySelector('[data-act="bSpecial"]'); if (sp) sp.disabled = !god && B.hero.energy < WEAPONS[B.weapon].special.cost;
   const cap = captureChance(S, B), analysis = !!S.research.analysis;
   const c = a.querySelector('[data-act="bCapture"]');
-  if (c) { c.disabled = !god && !S.items.trap; c.querySelector('small').textContent = god ? '∞ traps · 100%' : `${S.items.trap} traps · ${analysis ? Math.round(cap * 100) + '%' : cap > 0.6 ? 'High' : cap > 0.3 ? 'Medium' : 'Low'}`; }
+  if (c && c.classList.contains('unavail')) { /* already owned: stays unavailable for the whole battle */ }
+  else if (c) { c.disabled = !god && !S.items.trap; c.querySelector('small').textContent = god ? '∞ traps · 100%' : `${S.items.trap} traps · ${analysis ? Math.round(cap * 100) + '%' : cap > 0.6 ? 'High' : cap > 0.3 ? 'Medium' : 'Low'}`; }
   const it = a.querySelector('[data-act="bItems"] small'); if (it) it.textContent = god ? 'unlimited' : `${BATTLE_ITEMS.reduce((x, k) => x + (S.items[k] || 0), 0)} in bag`;
 }
 function arenaPoint(who) {
@@ -894,7 +896,7 @@ async function battleAction(kind, arg) {
   let ev; const before = { heroEnergy: B.hero.energy };
   if (kind === 'attack') ev = heroStrike(B, S, false);
   else if (kind === 'special') { if (!godOn(B) && B.hero.energy < WEAPONS[B.weapon].special.cost) return toast('Not enough energy yet — basic attacks charge it.'); ev = heroStrike(B, S, true); }
-  else if (kind === 'capture') { const r = attemptCapture(B, S); if (!r.used) return toast('You are out of Snap Traps. Craft or buy more in Gear.', 'bad'); ev = r.ev; }
+  else if (kind === 'capture') { const r = attemptCapture(B, S); if (r.owned) return toast(r.msg); if (!r.used) return toast('You are out of Snap Traps. Craft or buy more in Gear.', 'bad'); ev = r.ev; }
   else if (kind === 'flee') ev = attemptFlee(B, S);
   else if (kind === 'item') { const r = useItem(B, S, arg); closeSheet(); if (!r.ok) return toast(r.ev[0] ? r.ev[0].msg : 'You cannot use that right now.'); ev = r.ev; }
   CombatLog.ingest(B, ev, before); refreshCombatLog();

@@ -693,8 +693,38 @@ function captureChance(S, B) {
   if (m.variant) c *= C.variantMult;
   return clamp(c, C.min, C.max);
 }
+/* Unique collection slots (2026-11-25): the real collection holds at most ONE monster per canonical object id + rarity
+   + variant. Level, stats, DNA, colours, photo and names do not matter. Normal is stored as null/absent and Prismatic
+   as 'shiny' (save format unchanged). Only monsters CURRENTLY in S.monsters count: encyclopedia sightings, past
+   captures and released monsters never block. Quick Monster Test Mode monsters (m.test, their own TestRoster) are
+   outside the rule both ways. Duplicates still spawn and can be fought for the normal rewards; only capturing one is
+   refused, in attemptCapture (the UI just explains it), before anything is consumed, rolled or changed. */
+const variantSlot = v => (v == null || v === '' || v === 'normal') ? 'normal' : String(v); // 'spectral' | 'mutated' | 'shiny'
+function collectionObjId(m) {
+  if (!m) return null;
+  const o = m.obj;
+  if (o && OBJECTS[o]) return o;
+  if (o && CATEGORY[o] && CAT_DEFAULT_OBJECT[o]) return CAT_DEFAULT_OBJECT[o]; // a bare category id stored as object
+  if (o) return String(o);
+  return m.cat ? 'cat:' + m.cat + (m.word ? ':' + m.word : '') : null; // very old monsters without an object id
+}
+function collectionKey(m) {
+  const obj = collectionObjId(m);
+  return obj && m.rarity ? obj + '|' + m.rarity + '|' + variantSlot(m.variant) : null;
+}
+// the monster in the real collection that already fills m's slot, or null (always null for test monsters)
+function ownedCopy(S, m) {
+  if (!m || m.test || !S || !Array.isArray(S.monsters)) return null;
+  const k = collectionKey(m); if (!k) return null;
+  return S.monsters.find(x => x && x !== m && !x.test && collectionKey(x) === k) || null;
+}
+function alreadyOwnedText(m) {
+  const v = variantLabel(m.variant) || 'Normal', r = RARITY[m.rarity] ? RARITY[m.rarity].name : m.rarity;
+  return `You already have a ${v} ${r} ${String(m.name || 'monster').split(',')[0]} in your collection. Defeat it for rewards, or flee.`;
+}
 function attemptCapture(B, S, rng = RNG) {
   const ev = [];
+  if (B && ownedCopy(S, B.m)) return { ev, used: false, owned: true, msg: alreadyOwnedText(B.m) }; // nothing consumed, rolled or changed
   const god = godOn(B);
   if (!god && (S.items.trap || 0) <= 0) { ev.push({ t: 'text', msg: 'You are out of Snap Traps!' }); return { ev, used: false }; }
   const ch = god ? 1 : captureChance(S, B);
@@ -757,6 +787,7 @@ function finishBattle(S, B, rng = RNG) {
   S.hp = Math.max(1, B.hero.hp);
   const shinyX = m.variant === 'shiny' ? 2 : 1;
   const famMat = FAMILIES[m.fam].mat;
+  if (B.result === 'captured' && ownedCopy(S, m)) { B.result = 'escaped'; sum.result = 'escaped'; } // never a second copy of a slot (only reachable by bypassing attemptCapture, which refuses)
   if (B.result === 'victory' || B.result === 'captured') {
     const caught = B.result === 'captured';
     const xp = Math.round((12 + 6 * m.level) * r.xp * (caught ? 0.85 : 1));
@@ -862,4 +893,4 @@ function matchCategory(text) {
   return best;
 }
 
-if (typeof module !== 'undefined') module.exports = { freshState, migrate, resolvePhoto, recordSighting, createMonster, newBattle, heroStrike, enemyTurn, heroTurnStart, attemptCapture, captureChance, attemptFlee, useItem, finishBattle, hunterStats, encounterChance, matchCategory, exportSave, importSave, unlockWeapon, upgradeWeapon, buyResearch, claimQuest, activeQuests, setRNG: f => { RNG = f; }, setClock: f => { CLOCK = f; }, quietUntil, quietClean, QUIET_MS, disturbedUntil, objectLock, lockClean, ENCOUNTER_LOCK_MS, cleanHunterName, hunterName, HUNTER_NAME_MAX, xpFor, hamming };
+if (typeof module !== 'undefined') module.exports = { freshState, migrate, resolvePhoto, recordSighting, createMonster, newBattle, heroStrike, enemyTurn, heroTurnStart, attemptCapture, captureChance, attemptFlee, useItem, finishBattle, hunterStats, encounterChance, matchCategory, exportSave, importSave, unlockWeapon, upgradeWeapon, buyResearch, claimQuest, activeQuests, setRNG: f => { RNG = f; }, setClock: f => { CLOCK = f; }, quietUntil, quietClean, QUIET_MS, disturbedUntil, objectLock, lockClean, ENCOUNTER_LOCK_MS, cleanHunterName, hunterName, HUNTER_NAME_MAX, xpFor, hamming, collectionKey, ownedCopy, releaseMonster };

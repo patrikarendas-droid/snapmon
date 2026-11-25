@@ -298,6 +298,8 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .act.capture { background: #163330; border-color: #2a6b5e; }
 .act:active { transform: scale(.96); }
 .act[disabled] { opacity: .4; }
+.act.unavail { opacity: .4; background: var(--panel); border-style: dashed; }
+.act.unavail:active { transform: none; }
 .busy .act { pointer-events: none; opacity: .55; }
 .float { position: absolute; z-index: 8; font: 700 22px var(--font-display); pointer-events: none; text-shadow: 0 2px 0 #000, 0 0 6px #000; animation: floatUp 1s ease-out forwards; white-space: nowrap; }
 .float.crit { font-size: 30px; color: var(--flash); }

@@ -14,6 +14,9 @@ const G = require('./load')(), crypto = require('crypto'), fs = require('fs'), p
 // the object locks (20 min quiet after a miss, 60 min after an encounter) are tested in tests/quiet-objects.js; this
 // test replays encounter odds, so its clock moves 61 minutes per reading and no object is ever locked
 { let t = Date.UTC(2026, 0, 1); G.setClock(() => (t += 61 * 60 * 1000)); }
+// the one-per-slot collection rule (object + rarity + variant, tests/unique-capture.js) is kept out of this replay the
+// same way: the hunter's collection is emptied before each battle (nothing else here reads it: no buddy), so every
+// recorded capture attempt is rolled exactly as before and the frozen recording proves odds and maths unchanged
 const FIX = path.join(__dirname, 'fixtures/rules-trace.json');
 let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
 function trace(curatedOn) {
@@ -26,6 +29,7 @@ for (let g = 0; g < 300; g++) {
     const r = G.resolvePhoto(S, ['mug', 'apple', 'dog', 'toilet', 'forklift'][k % 5], { hue: 10, sat: .5, lit: .5, hash: (seed >>> 0).toString(16).padStart(16, '0') }, { label: 'x', conf: .8 }, rng);
     out.push(r.encounter ? [r.monster.rarity, r.monster.level, r.monster.variant, r.monster.stats] : 'none');
     if (!r.encounter) continue;
+    S.monsters.length = 0;
     const B = G.newBattle(S, r.monster);
     for (let t = 0; t < 40 && !B.over; t++) {
       const st = G.heroTurnStart(B); out.push(st.ev);

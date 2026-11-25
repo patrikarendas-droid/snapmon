@@ -38,6 +38,7 @@ if [ "$part" = logic ] || [ "$part" = all ]; then
   node tests/quiet-objects.js       # a missed object stays quiet (hidden period); fake clock + RNG
   node tests/encounter-lock.js      # an object that produced a monster is locked (hidden period); hunter name rules
   node tests/combat-log.js          # the combat log reports exactly what the battle engine did
+  node tests/unique-capture.js      # one monster per object + rarity + variant in the real collection
   node tests/save-compat.js         # today's save in the game code of older verified builds and back (needs git history)
 fi
 if [ "$part" = browser ] || [ "$part" = all ]; then
@@ -57,6 +58,7 @@ if [ "$part" = browser ] || [ "$part" = all ]; then
   node tests/e2e-layout.js http://localhost:8765/index.html shots   # HUD / tab bar never cover content (website, inset 0)
   node tests/e2e-quiet.js http://localhost:8765/index.html shots    # quiet objects in the real UI; text-only recognition choices
   node tests/e2e-combat-log.js http://localhost:8765/index.html shots   # combat log sheet, hunter name, Recently disturbed
+  node tests/e2e-unique-capture.js http://localhost:8765/index.html shots   # unavailable Capture button for an owned slot
   # the catalogue-only Pages site (what pages.yml deploys), served under /snapmon/ like the real site
   node tools/catalogue/build-site.js shots/catalogue-site
   node tests/e2e-catalogue-preview.js shots/catalogue-site 8799 shots

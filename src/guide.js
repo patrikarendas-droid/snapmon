@@ -62,6 +62,7 @@ const Guide = (() => {
       <p class="small muted">Each upgrade level in the Arsenal adds 15% to the weapon's attack.</p>` },
     { id: 'capture', title: 'Capturing monsters', body: () => `
       <p>Throw a <b>Snap Trap</b> (uses one trap and your turn). Captured monsters join your collection and can become your hunting buddy.</p>
+      <p><b>One of each:</b> your collection holds one monster per object, rarity and variant (Normal, Spectral, Mutated, Prismatic), whatever its level. If you already own that one, the Capture button is greyed out: defeat it for the usual rewards, or flee. Release yours to make room to catch it again.</p>
       <ul>
         <li>The base chance depends on rarity (below) and <b>rises as the monster's HP falls</b>: at full HP you get only ${pct(1 - C.hpWeight)} of the base chance, near 0 HP almost all of it.</li>
         <li><b>Stunned:</b> +${pct(C.stun)} · <b>poisoned or burning:</b> +${pct(C.dot)} · <b>Capture Enhancer:</b> +${pct(C.enhancer)} for the battle · <b>Reinforced / Quantum Traps</b> research: +${pct(C.research)} each · <b>Spirit Lens Cap</b> charm: +${pct(C.lenscap)}.</li>
