@@ -1,5 +1,11 @@
 # Releasing and rolling back SNAPMON
 
+> **2026-11-25: the website is now the developer catalogue only.** SnapMon is an Android game, developed on the Android
+> branch (`ccr-6eaf78d0-vj87lh`, see `docs/ANDROID.md` and `docs/RECOVERY.md` there). With the owner's approval the
+> playable browser game was retired from GitHub Pages: `.github/workflows/pages.yml` now deploys only the catalogue at
+> `/snapmon/catalogue/` plus a notice page at `/snapmon/` (`docs/CATALOGUE.md` → "The catalogue-only website", incl.
+> rollback). The game release process below is historical; nothing here is a step for producing an APK.
+
 ## Branches
 
 | Branch | Purpose |

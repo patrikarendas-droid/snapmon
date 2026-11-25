@@ -85,6 +85,12 @@ Last updated: 2026-11-17, release v0.6.0 (672 sprites redesigned after the owner
 
 ## 4. Current state and next priorities
 
+- **2026-11-25: website = developer catalogue only** (owner-approved). The playable browser game is retired from
+  GitHub Pages; `/snapmon/catalogue/` unchanged (same origin → same Firebase domain, sign-in and local review data),
+  `/snapmon/` is a notice page with a read-only backup-code export of old browser progress. Rollback: `docs/CATALOGUE.md`.
+  SnapMon is an Android game; the current journal lives on the Android branch `ccr-6eaf78d0-vj87lh`. The milestone
+  workflow (`android-milestone.yml`) is here because GitHub only runs manual workflows from this default branch.
+
 - **Live: v0.6.0** (merge f847b06, Pages run 36 green, tag v0.6.0; v0.5.5 = merge 46cc655; v0.5.4 = merge 90099ae; v0.5.3 = merge 9148ca7; v0.5.2 = merge 73023bb; v0.5.1 = merge 9c23c39; production `claude/snapmon-game-dev-7o667u`; game identical to v0.5.0 apart from the version
   label). Save format 3 (unchanged since v0.3.0). v0.5.0 (merge 6ecd64f): full curated writing; the owner completed all
   **seven real Android smoke checks of v0.5.0 successfully on 2026-11-04**.

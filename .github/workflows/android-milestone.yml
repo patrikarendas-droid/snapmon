@@ -1,0 +1,136 @@
+name: Android milestone archive (owner approval required)
+# Preserves ONE owner-verified SnapMon Dev APK long term as a GitHub PRE-release with the ORIGINAL CI binary (never a
+# rebuild) and an immutable tag android-dev-b<build>. The repository is public, so a release and its APK are public.
+# Default mode only VERIFIES. Publishing needs mode=publish AND the exact approval sentence. Never moves or deletes a
+# tag, never marks a release "latest", never touches Pages, branches or the website. Procedure: docs/RECOVERY.md.
+# "Run workflow" for this file appears in the Actions tab only once it is on the default branch.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Run ID of the "Android debug APK" run that built the approved APK (the number in its URL)'
+        required: true
+      build:
+        description: 'Build number (run number), e.g. 14'
+        required: true
+      apk_sha256:
+        description: 'APK SHA-256 from that run summary (row "APK SHA-256") — the binary the owner verified'
+        required: true
+      mode:
+        description: 'verify = check only, publish = create the tag and the pre-release'
+        type: choice
+        options: [verify, publish]
+        default: verify
+      approval:
+        description: 'For publish: type exactly  I approve publishing build <build> publicly'
+        required: false
+      caveats:
+        description: 'Known caveats for the release notes (optional)'
+        required: false
+permissions:
+  contents: write   # tag + pre-release only (used only in publish mode)
+  actions: read     # read the original artifact and the run's job results
+concurrency:
+  group: android-milestone
+  cancel-in-progress: false
+jobs:
+  milestone:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RUN_ID: ${{ inputs.run_id }}
+      BUILD: ${{ inputs.build }}
+      APK_SHA: ${{ inputs.apk_sha256 }}
+      MODE: ${{ inputs.mode }}
+      APPROVAL: ${{ inputs.approval }}
+      CAVEATS: ${{ inputs.caveats }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: The run is the APK workflow, finished, and every job of its latest attempt passed
+        run: |
+          set -euo pipefail
+          [[ "$RUN_ID" =~ ^[0-9]+$ && "$BUILD" =~ ^[0-9]+$ && "$APK_SHA" =~ ^[0-9a-fA-F]{64}$ ]] || { echo "run_id/build must be numbers, apk_sha256 64 hex digits"; exit 1; }
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID" > run.json
+          jq -e --arg b "$BUILD" '.path == ".github/workflows/android-apk.yml" and .status == "completed" and (.run_number|tostring) == $b' run.json > /dev/null \
+            || { echo "run $RUN_ID is not a finished Android APK run with run number $BUILD"; jq '{path,status,conclusion,run_number}' run.json; exit 1; }
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs?filter=latest" > jobs.json
+          jq -r '.jobs[] | "\(.name) — attempt \(.run_attempt) — \(.conclusion)"' jobs.json | tee job-results.txt
+          jq -e '[.jobs[] | select(.conclusion != "success")] | length == 0' jobs.json > /dev/null || { echo "not every job of the latest attempt passed"; exit 1; }
+          echo "SHA=$(jq -r .head_sha run.json)" >> "$GITHUB_ENV"
+          echo "BRANCH=$(jq -r .head_branch run.json)" >> "$GITHUB_ENV"
+          echo "RUN_URL=$(jq -r .html_url run.json)" >> "$GITHUB_ENV"
+      - name: Exactly one main APK artifact in that run
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/artifacts?per_page=100" > artifacts.json
+          jq -r --arg b "$BUILD" '[.artifacts[] | select((.name|test("^SnapMon-Dev-APK-.*-build-" + $b + "(-attempt[0-9]+)?$")) and (.expired|not))]' artifacts.json > apk-artifacts.json
+          N=$(jq length apk-artifacts.json)
+          [ "$N" = 1 ] || { echo "expected exactly one unexpired SnapMon-Dev-APK artifact for build $BUILD, found $N"; jq -r '.[] | "\(.name) \(.id) \(.created_at)"' apk-artifacts.json; exit 1; }
+          echo "ARTIFACT=$(jq -r '.[0].name' apk-artifacts.json)" >> "$GITHUB_ENV"
+          echo "ARTIFACT_DIGEST=$(jq -r '.[0].digest' apk-artifacts.json)" >> "$GITHUB_ENV"
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT }}
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+          path: original
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify the original binary (hash, package, versionCode, versionName, commit, certificate, permissions)
+        run: |
+          set -euo pipefail
+          APK=$(ls original/*.apk); [ "$(ls original/*.apk | wc -l)" = 1 ]
+          BT="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)"
+          PROV=(); [ -f original/provenance.json ] && PROV=(--provenance original/provenance.json)
+          node tools/android/verify-apk.js "$APK" --build-tools "$BT" --expect-sha256 "$APK_SHA" --expect-version-code $((1000 + BUILD)) --expect-commit "$SHA" "${PROV[@]}" | tee verify.txt
+          echo "APK=$APK" >> "$GITHUB_ENV"
+          echo "VERSION_NAME=$(grep -o 'versionName [^ ]*' verify.txt | head -1 | cut -d' ' -f2)" >> "$GITHUB_ENV"
+      - name: Release notes
+        run: |
+          {
+            echo "**SnapMon Dev — DEVELOPMENT BUILD $BUILD (not a store release).** Owner-verified milestone, archived as the original CI binary."
+            echo ""
+            echo "| | |"; echo "|---|---|"
+            echo "| APK | \`$(basename "$APK")\` |"
+            echo "| APK SHA-256 | \`$APK_SHA\` |"
+            echo "| Package | io.github.patrikarendas.snapmon.dev |"
+            echo "| Version | $VERSION_NAME (versionCode $((1000 + BUILD))) |"
+            echo "| Signing certificate SHA-256 | \`$(jq -r .certificateSha256 tools/android/recovery-points.json)\` |"
+            echo "| Source commit | $SHA (branch $BRANCH) |"
+            echo "| CI run | $RUN_URL (artifact $ARTIFACT, zip $ARTIFACT_DIGEST) |"
+            echo ""
+            echo "CI results of that run (latest attempt):"; sed 's/^/- /' job-results.txt
+            echo ""
+            echo "### Install"
+            echo "1. In SnapMon Dev: Settings → **Back up your progress** → copy the backup code and keep two private copies."
+            echo "2. Download the .apk below → open it → allow installs from this source once → **Update** (never Uninstall)."
+            echo "3. Check the SHA-256 above if you can (\`sha256sum\` / \`certutil -hashfile <file> SHA256\`)."
+            echo ""
+            echo "It installs over any OLDER SnapMon Dev (lower versionCode) as an update and keeps the progress."
+            echo ""
+            echo "### Recovery"
+            echo "- Android refuses this APK if a NEWER SnapMon Dev (higher versionCode) is installed. To get back to this build's"
+            echo "  behaviour, a new recovery build is made from this commit with a higher versionCode, same key, and installed as an"
+            echo "  update (procedure: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/ccr-6eaf78d0-vj87lh/docs/RECOVERY.md)."
+            echo "- Last resort only: uninstall, install this APK, then Settings → Restore from a backup code. Uninstalling deletes"
+            echo "  the progress on the phone; without a backup code it is gone."
+            echo "- This is a development build (developer tools on), not a store release."
+            [ -n "$CAVEATS" ] && { echo ""; echo "Known caveats: $CAVEATS"; }
+            true
+          } > notes.md
+          cat notes.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Publish the tag and pre-release (only with mode=publish and the exact approval sentence)
+        if: inputs.mode == 'publish'
+        run: |
+          set -euo pipefail
+          [ "$APPROVAL" = "I approve publishing build $BUILD publicly" ] || { echo "approval sentence missing or different: nothing published"; exit 1; }
+          TAG="android-dev-b$BUILD"
+          if git rev-parse -q --verify "refs/tags/$TAG" > /dev/null || gh release view "$TAG" > /dev/null 2>&1; then echo "$TAG already exists; refusing to move or replace it"; exit 1; fi
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$SHA" -m "SnapMon Dev build $BUILD (versionCode $((1000 + BUILD))), owner-verified; APK SHA-256 $APK_SHA"
+          git push origin "refs/tags/$TAG"
+          gh release create "$TAG" "$APK" --verify-tag --prerelease --latest=false --title "SnapMon Dev build $BUILD (development APK)" --notes-file notes.md
+          echo "published $TAG" | tee -a "$GITHUB_STEP_SUMMARY"

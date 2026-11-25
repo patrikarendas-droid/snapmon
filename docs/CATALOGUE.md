@@ -294,3 +294,53 @@ The page talks to the emulators only when served from localhost with `?emulator=
 1. On the phone, open the URL, sign in, review one field ("Needs fix" + note), and wait for **Synced**.
 2. On the PC, open the URL, sign in, and check that you see it. Change another field there, then reload the phone.
 3. Export JSON on either device.
+
+## The catalogue-only website (ACTIVE since 2026-11-25)
+
+SnapMon is an Android game. With the owner's approval (2026-11-25) the playable browser game was retired from GitHub
+Pages and the site now serves only the catalogue (`.github/workflows/pages.yml`):
+- <https://patrikarendas-droid.github.io/snapmon/catalogue/>: the catalogue, unchanged. The origin and paths are the
+  same, so the Firebase authorised domain needs no change, sign-in works as before, and each browser keeps its review
+  data (IndexedDB `snapmon-catalogue.v1`, small localStorage keys). There is no migration.
+- <https://patrikarendas-droid.github.io/snapmon/>: a short notice ("SnapMon is now an Android app") with a link to the
+  catalogue and a read-only "Show my backup code" for old browser-game progress. It reads `snapmon.save.v1` and never
+  writes or deletes anything. The old progress stays in that browser and can be restored in the app (Settings →
+  Restore from a backup code).
+- Firebase rules, the project and the review records were not touched.
+
+**Dependencies (read from the catalogue's own tags by `tools/catalogue/build-site.js`):**
+- `catalogue/`: `index.html`, `app.js`, `review-model.js`, `sources.js`, `cloud.js`;
+- `../icon.svg`;
+- nine game files from `src/`: `data.js`, `sprites.js`, `parts.js`, `objects.js`, `labels.js`, `lore.js`, `game.js`,
+  `curated.js`, `curated-data.js`;
+- the Firebase SDK 13.2.0 from `www.gstatic.com`, loaded only by `cloud.js`.
+
+It needs no camera, recognition engine, models, `vendor/` runtimes, `src/ui.js` or `dist/`. **Keep these `src/` files
+loadable in a plain browser:** the catalogue draws every sprite and shows every name, text and move with them.
+Android-only code belongs in the native layer or behind `window.SNAPMON_NATIVE`.
+
+**Which code the live catalogue runs:** the Pages workflow deploys from the production branch
+`claude/snapmon-game-dev-7o667u`. At activation that branch's `src/` was the v0.6.0 game code (curated writing and
+sprites identical to the Android branch); it was deliberately not merged with the Android branch, so the website kept
+exactly the catalogue it had. Updating the catalogue's writing or sprites later means bringing those `src/` files (or
+an approved merge) into the production branch.
+
+**Tests (before every deploy, in `pages.yml`, and in every Android CI run):**
+- `tests/e2e-catalogue-preview.js`: the built site served under `/snapmon/`, at phone and desktop widths:
+  - every request answered, with no model or runtime downloads and no camera request;
+  - all 2,308 objects with real sprites; Firebase blocked → "Local only";
+  - the notice page links to the catalogue and offers old progress as a valid code without changing it.
+- The five catalogue suites against the same site: local, AI, sync (mocked cloud), sprite, storage (IndexedDB,
+  migration).
+- `tests/catalogue-model.js` and `node tools/curated.js validate`.
+- Local preview: `node tools/catalogue/build-site.js /tmp/site && node tools/catalogue/serve.js /tmp/site 8799` →
+  `http://localhost:8799/snapmon/`.
+
+**Not automated:** the real Firebase sign-in and sync on the live site. That is the owner's check: sign in and compare
+the reviewed-object count with before.
+
+**Rollback (website only; nothing in Firebase or in any browser changes either way):**
+1. On `claude/snapmon-game-dev-7o667u`: `git revert -m 1 <merge commit that activated the catalogue-only site>`, then
+   push. The Pages workflow redeploys the full old website (game, models, catalogue) as of `07841aa`.
+2. Or, quicker for a short outage: Actions → *Deploy to GitHub Pages* → the last run before the switch → **Re-run all
+   jobs** (it rebuilds that commit's full site).
