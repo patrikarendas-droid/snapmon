@@ -354,7 +354,7 @@ Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11
     Build 16 is a CI test build only (versionCode 1016), not released or recommended for install.
 
 **Next priorities (2026-11-25):**
-- Owner: check the live catalogue (sign-in, sync, reviewed-object count) and the notice page.
+- Done 2026-11-25: owner confirmed the live catalogue works and the website shows the "moved to the app" notice.
 - No further releases, deployments or merges without approval.
 
 **Previous priorities (2026-11-24):**
@@ -398,7 +398,7 @@ Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11
 | Quiet objects: a different suggested object for the same physical thing is not locked | Known (2026-11-24) | The lock is per confirmed object type (`S.enc.quiet`); alternatives the lens itself offers are other objects | Only if the owner wants the lock widened to all suggestions of a missed photo. |
 | A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
 | Build 14 APK artifact expires 2026-12-24 | Open (historical point; build 15 is archived) | Uploaded with the old 30-day retention | Owner downloads a copy if wanted. |
-| Real Firebase sign-in on the catalogue-only site | Owner check pending (deployed 2026-11-25) | Same origin → no domain change expected | Owner signs in and compares the reviewed count. |
+| Real Firebase sign-in on the catalogue-only site | Resolved 2026-11-25 (owner: catalogue works on the live site) | Same origin, no domain change | None. |
 | Rolling back below v0.4.3 shows redesigned new monsters as blobs | Known, documented | `docs/RELEASING.md` | None unless rolling back. |
 
 ## 6. Resolved issues (with the release that fixed them)
