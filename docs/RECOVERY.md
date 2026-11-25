@@ -49,7 +49,8 @@ Kept up to date in [`tools/android/recovery-points.json`](../tools/android/recov
 
 | Build | Commit | versionCode / versionName | Status |
 |---|---|---|---|
-| **14** | `4207571` (branch `ccr-6eaf78d0-vj87lh`) | 1014 / `0.6.0-dev.14+4207571` | **Owner-verified on the phone** (2026-11-24). Run [45379221209](https://github.com/patrikarendas-droid/snapmon/actions/runs/45379221209), artifact `SnapMon-Dev-APK-0.6.0-build-14` (zip SHA-256 `659844e2…a171ea`), APK `snapmon-dev-0.6.0-dev.14-4207571.apk`; APK SHA-256: see the "APK SHA-256" row of that run's summary. **The artifact expires on 2026-12-24** (it was uploaded with the old 30-day setting): download a copy before then, and archive it (section 6) if you want it kept. |
+| **15 — PRIMARY** | `1b9aa89` (branch `ccr-6eaf78d0-vj87lh`) | 1015 / `0.6.0-dev.15+1b9aa89` | **Owner-verified on the phone** (2026-11-25: installed as an update over build 14, progress intact). **Archived long term:** pre-release [android-dev-b15](https://github.com/patrikarendas-droid/snapmon/releases/tag/android-dev-b15) with the original CI APK `snapmon-dev-0.6.0-dev.15-1b9aa89.apk`, APK SHA-256 `8220a0f885a6f2521b43ec065abf64dc8c6e7948a97cdfac3abb5a3bbbeca719` (checked by milestone runs [45572544428](https://github.com/patrikarendas-droid/snapmon/actions/runs/45572544428) (verify) and [45572984193](https://github.com/patrikarendas-droid/snapmon/actions/runs/45572984193) (publish)). From run [45405907369](https://github.com/patrikarendas-droid/snapmon/actions/runs/45405907369); its Actions artifact `SnapMon-Dev-APK-0.6.0-build-15` lasts until 2027-02-22. The emulator recovery drill now uses this commit. |
+| 14 — historical | `4207571` | 1014 / `0.6.0-dev.14+4207571` | Owner-verified on the phone (2026-11-24). Run [45379221209](https://github.com/patrikarendas-droid/snapmon/actions/runs/45379221209), artifact `SnapMon-Dev-APK-0.6.0-build-14` (zip SHA-256 `659844e2…a171ea`); APK SHA-256 in that run's summary. The artifact expires on 2026-12-24 and is not archived as a release; download it before then if you want a copy. Its code stays in git history (and in `tests/save-compat.js`). |
 
 All dev builds share:
 - package `io.github.patrikarendas.snapmon.dev`;
@@ -123,8 +124,8 @@ This is tested on the emulator in every run. Without a backup code, the progress
 
 ## 6. Keeping selected APKs long term (milestones, owner approval required)
 
-Actions artifacts are kept for **90 days** (since this change; older ones for 30), then GitHub deletes them. To keep an
-important owner-verified build for longer, it can be archived as a GitHub **pre-release** with the **original** CI
+Actions artifacts are kept for **90 days** (since build 15; older ones for 30), then GitHub deletes them.
+**Archived so far: build 15** (`android-dev-b15`, 2026-11-25, owner-approved). To keep an important owner-verified build for longer, it can be archived as a GitHub **pre-release** with the **original** CI
 APK and an immutable tag `android-dev-b<build>`.
 
 - The repository is public, so **a release and its APK are public**. Nothing is archived unless you approve that exact
@@ -133,8 +134,8 @@ APK and an immutable tag `android-dev-b<build>`.
   verified one.
 - Not every build: only owner-verified milestones.
 
-**Route A — the workflow** (`.github/workflows/android-milestone.yml`; its "Run workflow" button appears only once the
-file is on the default branch, so it needs an approved merge first):
+**Route A — the workflow** (`.github/workflows/android-milestone.yml`; it is on the default branch since 2026-11-25, so
+Actions → *Android milestone archive* → **Run workflow** is available; run it from `claude/snapmon-game-dev-7o667u`):
 1. Actions → *Android milestone archive* → **Run workflow**.
 2. Inputs:
    - `run_id` and `build` of the verified run;

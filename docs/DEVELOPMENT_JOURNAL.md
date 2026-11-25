@@ -4,8 +4,8 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-24. **SnapMon is an Android game** (owner decision 2026-11-24). Owner-verified APK: build 14
-(commit `4207571`). The website still serves v0.6.0 (unsupported, not retired yet).
+Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11-24). Primary owner-verified APK: build 15
+(commit `1b9aa89`, archived as pre-release `android-dev-b15`). The website serves only the developer catalogue (browser game retired 2026-11-25).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -335,7 +335,26 @@ Last updated: 2026-11-24. **SnapMon is an Android game** (owner decision 2026-11
     refused with INSTALL_FAILED_VERSION_DOWNGRADE, backup code restored the save after uninstall). Game code identical
     to build 14 (infrastructure/tests/docs only). CI-green, NOT yet phone-verified.
 
-**Next priorities (2026-11-24):**
+- **2026-11-25 (owner-approved): website = catalogue only; build 15 archived.**
+  - Owner verified build 15 on the phone (update over build 14, progress intact) → primary recovery point
+    (`recovery-points.json`; drill commit now `1b9aa89`; build 14 kept as historical).
+  - Pages: production branch merge `5d9e1af` (branch commit `49d9004`, based on `07841aa`, NOT the Android branch):
+    `pages.yml` deploys only `tools/catalogue/build-site.js` output (catalogue unchanged at `/snapmon/catalogue/`, same
+    origin; notice page with read-only backup-code export at `/snapmon/`). Pages run 41: tests green; deploy failed
+    once with GitHub's "Deployment failed, try again later", re-run of that job succeeded. The catalogue runs the
+    production branch's `src/` (v0.6.0, identical writing/sprites). Live site not fetchable from Claude sessions (DNS) —
+    owner checks it. Rollback: `docs/CATALOGUE.md` (revert -m 1 5d9e1af, or re-run Pages run 40 = 07841aa).
+  - The browser game is retired from the website (old browser saves stay in each browser; the notice page exports them).
+  - Milestone: `android-milestone.yml` (+ verify-apk.js, recovery-points.json) also on the default branch (manual
+    workflows only run from there). Verify run 45572544428 (all checks), publish run 45572984193 → annotated tag
+    `android-dev-b15` → commit 1b9aa89, pre-release "SnapMon Dev build 15 (development APK)" with the original APK
+    (asset digest = APK SHA-256 8220a0f8…beca719), not marked latest.
+
+**Next priorities (2026-11-25):**
+- Owner: check the live catalogue (sign-in, sync, reviewed-object count) and the notice page.
+- No further releases, deployments or merges without approval.
+
+**Previous priorities (2026-11-24):**
 - Owner: download build 14 (expires 2026-12-24) and the new build; decide whether to archive build 14 as a milestone;
   look at the catalogue-only preview and decide on the website switch; keep 2 backup codes.
 - Merging the Android branch into the Pages branch still needs the owner's approval (it would also enable the
@@ -375,9 +394,8 @@ Last updated: 2026-11-24. **SnapMon is an Android game** (owner decision 2026-11
 | HUD covered the top of every screen in the Android app (build 9) | Fixed on the Android branch (layout reserves the status-bar inset) | `index.html` `#app`/`.sheet`; `tests/e2e-layout.js` | Owner re-checks on the phone with the next build. |
 | Quiet objects: a different suggested object for the same physical thing is not locked | Known (2026-11-24) | The lock is per confirmed object type (`S.enc.quiet`); alternatives the lens itself offers are other objects | Only if the owner wants the lock widened to all suggestions of a missed photo. |
 | A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
-| Build 14 APK artifact expires 2026-12-24 | Open (2026-11-24) | Uploaded with the old 30-day retention; new builds keep 90 days | Owner downloads a copy; optionally milestone archive (`docs/RECOVERY.md` §6). |
-| Browser game still live but unsupported; catalogue-only site staged | Open, needs owner approval | `docs/CATALOGUE.md` "Keeping the catalogue online…", `docs/staged/pages-catalogue-only.yml` | Owner reviews the preview, then approves the switch (or not). |
-| Real Firebase sign-in on a catalogue-only deploy | Untested until a switch | Same origin → no domain change expected | Owner signs in once after an approved switch. |
+| Build 14 APK artifact expires 2026-12-24 | Open (historical point; build 15 is archived) | Uploaded with the old 30-day retention | Owner downloads a copy if wanted. |
+| Real Firebase sign-in on the catalogue-only site | Owner check pending (deployed 2026-11-25) | Same origin → no domain change expected | Owner signs in and compares the reviewed count. |
 | Rolling back below v0.4.3 shows redesigned new monsters as blobs | Known, documented | `docs/RELEASING.md` | None unless rolling back. |
 
 ## 6. Resolved issues (with the release that fixed them)

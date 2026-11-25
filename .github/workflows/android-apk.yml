@@ -47,7 +47,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - name: Logic, label, sprite, save-compatibility and packaging tests
         run: tools/android/run-tests.sh logic
-      - name: Browser tests (gameplay, recognition engine, Back navigation, catalogue, staged catalogue-only site)
+      - name: Browser tests (gameplay, recognition engine, Back navigation, catalogue, catalogue-only website)
         run: |
           npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1
           npx playwright install --with-deps chromium > /dev/null
@@ -274,7 +274,7 @@ jobs:
             echo "### Tests in this run"
             echo "| Kind | What ran | Result |"
             echo "|---|---|---|"
-            echo "| Executed (CI, Node + headless Chromium) | fast regression suite of the current source: logic, sprites, gameplay/balance trace, curated writing, saves + save compatibility with older verified builds, engine with the real TinyCLIP worker, Back navigation, catalogue + staged catalogue-only site | passed (job *tests*) |"
+            echo "| Executed (CI, Node + headless Chromium) | fast regression suite of the current source: logic, sprites, gameplay/balance trace, curated writing, saves + save compatibility with older verified builds, engine with the real TinyCLIP worker, Back navigation, catalogue + catalogue-only website | passed (job *tests*) |"
             echo "| Static | \`tests/android-packaging.js\`: pinned engine, every test file accounted for, Pages independent, only CAMERA, no INTERNET/backup, release refuses DEV_TOOLS, no keys committed | passed (job *tests*) |"
             echo "| Executed (integrity) | \`check-apk.js\` on the built APK: $(grep -o '[0-9]* engine files verified' apk-check.txt) by SHA-256, no network URLs, no catalogue | passed |"
             echo "| Mocked native bridge (Chromium, REAL engine) | \`e2e-android-web.js\`, development build: $(grep -c '^ok' e2e-debug.txt 2>/dev/null) checks | passed |"

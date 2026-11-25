@@ -104,10 +104,20 @@ jobs:
             echo ""
             echo "CI results of that run (latest attempt):"; sed 's/^/- /' job-results.txt
             echo ""
-            echo "Install (Android): download the .apk below → open it → allow installs from this source once → **Update**."
-            echo "It installs over an older SnapMon Dev as an update and keeps the progress. Android refuses it if a NEWER"
-            echo "SnapMon Dev (higher versionCode) is installed: then use a recovery build instead (docs/RECOVERY.md); never uninstall"
-            echo "without a fresh backup code — uninstalling deletes the progress."
+            echo "### Install"
+            echo "1. In SnapMon Dev: Settings → **Back up your progress** → copy the backup code and keep two private copies."
+            echo "2. Download the .apk below → open it → allow installs from this source once → **Update** (never Uninstall)."
+            echo "3. Check the SHA-256 above if you can (\`sha256sum\` / \`certutil -hashfile <file> SHA256\`)."
+            echo ""
+            echo "It installs over any OLDER SnapMon Dev (lower versionCode) as an update and keeps the progress."
+            echo ""
+            echo "### Recovery"
+            echo "- Android refuses this APK if a NEWER SnapMon Dev (higher versionCode) is installed. To get back to this build's"
+            echo "  behaviour, a new recovery build is made from this commit with a higher versionCode, same key, and installed as an"
+            echo "  update (procedure: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/ccr-6eaf78d0-vj87lh/docs/RECOVERY.md)."
+            echo "- Last resort only: uninstall, install this APK, then Settings → Restore from a backup code. Uninstalling deletes"
+            echo "  the progress on the phone; without a backup code it is gone."
+            echo "- This is a development build (developer tools on), not a store release."
             [ -n "$CAVEATS" ] && { echo ""; echo "Known caveats: $CAVEATS"; }
             true
           } > notes.md

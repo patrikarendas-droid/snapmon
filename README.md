@@ -4,9 +4,9 @@ A mobile monster-collecting game for **Android**. The real world is full of mons
 
 **Since 2026-11-24 SnapMon is developed and supported as an Android app only** ("SnapMon Dev" development APK, built
 by GitHub Actions, offline, CAMERA permission only — `docs/ANDROID.md`; rollback and backups — `docs/RECOVERY.md`).
-The browser version described below still runs at the old address but is no longer updated or supported; it is kept
-online until the owner approves its retirement. The developer catalogue (`/snapmon/catalogue/`) stays online
-(`docs/CATALOGUE.md`). No account, no ads, no purchases, no server.
+Since 2026-11-25 the website serves only the developer catalogue (`/snapmon/catalogue/`, `docs/CATALOGUE.md`); the
+browser version described below was retired from it (history only). The latest archived APK: pre-release
+`android-dev-b15`. No account, no ads, no purchases, no server.
 
 ## Play (legacy browser version — unsupported)
 

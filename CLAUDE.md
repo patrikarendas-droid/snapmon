@@ -13,7 +13,7 @@
    APK* workflow (`.github/workflows/android-apk.yml`) runs the fast suite (`tools/android/run-tests.sh`), builds the
    signed APK (versionCode = 1000 + run number) and runs the emulator test → the owner installs it as an update.
    Merging into the Pages branch `claude/snapmon-game-dev-7o667u` is NOT a step for producing an APK; it changes the
-   live website and needs the owner's explicit approval, like retiring the browser game, Firebase/domain changes,
+   live website and needs the owner's explicit approval, like Pages/website deployments, Firebase/domain changes,
    publishing a release/tag or a milestone (`docs/RECOVERY.md`). Never force-push or rewrite history; never move tags.
 4. **Do not break:** live-camera-only hunting (no gallery, no typed objects), the single standard Hybrid recogniser,
    TinyCLIP on single-thread WASM for everyone, manual confirmation (no countdown), save compatibility (additive
@@ -40,9 +40,10 @@
    drafts; never add drafts to `src/curated-data.js`. Style: `docs/SNAPMON_WRITING_BIBLE.md`. Counts:
    `node tools/campaign.js status`; coverage: `docs/review/COVERAGE.md`. Saved monsters refresh their text once per
    content revision (`tests/curated-refresh.js`).
-7. **Developer catalogue** (`catalogue/`, `docs/CATALOGUE.md`): an ACTIVE tool that must stay online at
-   `/snapmon/catalogue/` even after the browser game is retired (staged catalogue-only site: `tools/catalogue/`,
-   `docs/staged/pages-catalogue-only.yml`; it loads `src/` game data code, so keep that browser-loadable). Review-only, owner-only Firebase sync at
+7. **Developer catalogue** (`catalogue/`, `docs/CATALOGUE.md`): an ACTIVE tool, online at `/snapmon/catalogue/`. Since
+   2026-11-25 GitHub Pages serves ONLY the catalogue + a notice page (browser game retired; `pages.yml` →
+   `tools/catalogue/build-site.js`, deployed from the production branch); it loads `src/` game data code, so keep that
+   browser-loadable. Review-only, owner-only Firebase sync at
    `catalogue/{uid}/reviews/{objectId}`. Never let it write game saves, curated data or sprites; never weaken the
    Firestore rules or add credentials/admin SDK. Owner feedback (exported JSON) is applied only after explicit approval
    via "Correcting live writing".

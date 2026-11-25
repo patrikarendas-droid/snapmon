@@ -58,7 +58,7 @@ ok(!/android/i.test(pages), 'pages.yml does not reference the Android project');
 const triggers = apk.split('\njobs:')[0];
 ok(/workflow_dispatch:/.test(triggers) && !/claude\/snapmon-game-dev-7o667u|main|master/.test((triggers.match(/branches: \[([^\]]*)\]/) || [, ''])[1]), 'APK workflow runs manually or on feature-branch pushes, never on production pushes');
 ok(/permissions:\s*\n\s*contents: read/.test(apk) && !/pages: write|id-token: write|contents: write/.test(apk), 'APK workflow is read-only (cannot deploy or push)');
-ok(!fs.existsSync(path.join(__dirname, '../.github/workflows/pages-catalogue-only.yml')) && fs.existsSync(path.join(__dirname, '../docs/staged/pages-catalogue-only.yml')), 'the catalogue-only Pages workflow is STAGED outside .github/workflows (cannot run)');
+ok(/node tools\/catalogue\/build-site\.js _site/.test(pages) && /tests\/e2e-catalogue-preview\.js/.test(pages) && !/fetch-models|vendor\/|cp -r index\.html|tools\/build\.js/.test(pages), 'pages.yml deploys the catalogue-only site (tested first), never the playable game or the engine');
 
 // artifact retention and provenance
 const mainUpload = (apk.match(/- id: upload\n\s+uses: actions\/upload-artifact@v4\n[\s\S]*?retention-days: (\d+)/) || [])[1];

@@ -3,8 +3,8 @@
 **SnapMon is an Android game (owner decision 2026-11-24).** Android is the only supported playable platform; the old
 browser game gets no releases and no feature parity, and Android features never need a Chrome fallback. The shared
 JavaScript in `src/` stays: the app's WebView runs it, and the developer catalogue uses part of it. Rollback, backups
-and long-term APK archives: [`docs/RECOVERY.md`](RECOVERY.md). **Current owner-verified build: 14** (commit `4207571`,
-versionCode 1014). Latest CI build: **15** (run 45405907369, commit `1b9aa89`, versionCode 1015, APK SHA-256
+and long-term APK archives: [`docs/RECOVERY.md`](RECOVERY.md). **Primary owner-verified build: 15** (commit `1b9aa89`,
+versionCode 1015; archived as pre-release `android-dev-b15`; build 14 = historical). Build **15** (run 45405907369, commit `1b9aa89`, versionCode 1015, APK SHA-256
 `8220a0f8…beca719`, same certificate, all jobs incl. emulator + recovery drill green on the first attempt; artifact kept
 until 2027-02-22). Its game code is identical to build 14.
 
@@ -196,7 +196,7 @@ real game and engine in Chromium with a FAKE native bridge; **emulator** = the r
 | emulator | `tools/android/emulator-smoke.js` (Android 14 x86_64 emulator, KVM, **airplane mode**; detector/classifier on TF.js's CPU backend because the emulator GPU is software-only) | Capacitor bridge; brand-new player; no network; full engine from the APK + a recognition; Android's **real permission dialog**: "Don't allow" → explanation, "Allow" → preview (virtual camera, if the image provides one); Home with the camera open → stopped, resume → engine still works; Back closes camera/sheet/tab; double Back exits; save files in private storage; progress survives double-Back exit, force-stop, a wiped WebView storage (restored from the files) and an **update to versionCode + 1**; uninstall + install = clean start. Report in the run summary. |
 | executed | `tests/save-compat.js` (Node, synthetic rich save, game code of v0.6.0 / builds 9, 13, 14 from git history) | the older code loads today's save, keeps every field, saves it, and the current code gets it all back (incl. hunter name and locks); backup codes both ways; a save made by the old code loads in the current code (rollback safety, `docs/RECOVERY.md`) |
 | emulator | recovery drill in `emulator-smoke.js` (real APKs) | rich synthetic save → Settings backup code → recovery APK from an older verified commit (versionCode + 2, same key) installs as an update and keeps everything → the old code saves → current code (+ 3) gets it all back → a lower versionCode is refused and changes nothing → after uninstall + clean install the backup code restores the whole save |
-| executed | `tests/e2e-catalogue-preview.js` + the catalogue suites against the staged catalogue-only site (`docs/CATALOGUE.md`) | the catalogue keeps working when the browser game is retired; not deployed |
+| executed | `tests/e2e-catalogue-preview.js` + the catalogue suites against the catalogue-only website (`docs/CATALOGUE.md`) | exactly what GitHub Pages deploys since 2026-11-25 keeps working |
 | static/structural | browser vs app save isolation | the app is a separate Android app with its own sandbox and origin; no code reads website data; the website suite proves the website's saves logic unchanged; the emulator proves a fresh install has no data |
 | phone | owner's checklist below | real camera sensor, zoom, permission UI on the phone, real recognition speed/accuracy, GPU (WebGL) detector, memory, heat, long background periods, the actual install/update flow from GitHub |
 

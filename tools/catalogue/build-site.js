@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-/* STAGED (not deployed): assembles the catalogue-only GitHub Pages site that could replace the playable browser game
-   once the owner approves (docs/CATALOGUE.md → "Keeping the catalogue online after the browser game"). Nothing here
-   deploys: it only writes a folder. The live site is still assembled by .github/workflows/pages.yml.
+/* Assembles the catalogue-only GitHub Pages site (ACTIVE since 2026-11-25, owner-approved; deployed by
+   .github/workflows/pages.yml from the production branch). The playable browser game is retired from the website;
+   docs/CATALOGUE.md → "The catalogue-only website" (incl. rollback). This script only writes a folder.
 
    Layout (served at https://patrikarendas-droid.github.io/snapmon/ — same origin and paths as today, so the Firebase
    authorised domain, the owner's sign-in and the catalogue's IndexedDB/localStorage data stay exactly where they are):
@@ -73,5 +73,5 @@ textarea{width:100%;box-sizing:border-box;min-height:110px;background:#0e0a17;co
 
 const list = [];
 (function walk(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : list.push(path.relative(OUT, p)); } })(OUT);
-fs.writeFileSync(path.join(OUT, 'catalogue-site.json'), JSON.stringify({ about: 'catalogue-only Pages site (staged); files and the catalogue dependencies outside its folder', dependencies: outside.sort(), files: list.sort() }, null, 1) + '\n');
+fs.writeFileSync(path.join(OUT, 'catalogue-site.json'), JSON.stringify({ about: 'catalogue-only Pages site; files and the catalogue dependencies outside its folder', dependencies: outside.sort(), files: list.sort() }, null, 1) + '\n');
 console.log(`catalogue-only site in ${OUT}: ${list.length} files; dependencies outside catalogue/: ${outside.sort().join(', ')}`);

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # The FAST regression suite of the current Android source (Node logic tests + headless Chromium tests of the shared
-# game code, the catalogue and the staged catalogue-only site). Android is the only supported playable platform: these
+# game code, the catalogue and the catalogue-only website). Android is the only supported playable platform: these
 # tests protect the Android game and the catalogue; they do NOT keep a browser game in step with the app. When an
 # Android-only feature makes a browser-level test meaningless, replace it with an equivalent test at the right layer
 # (unit, mocked native bridge in tests/e2e-android-web.js, emulator in tools/android/emulator-smoke.js) — never just
@@ -57,7 +57,7 @@ if [ "$part" = browser ] || [ "$part" = all ]; then
   node tests/e2e-layout.js http://localhost:8765/index.html shots   # HUD / tab bar never cover content (website, inset 0)
   node tests/e2e-quiet.js http://localhost:8765/index.html shots    # quiet objects in the real UI; text-only recognition choices
   node tests/e2e-combat-log.js http://localhost:8765/index.html shots   # combat log sheet, hunter name, Recently disturbed
-  # the STAGED catalogue-only Pages site (not deployed), served under /snapmon/ like the real site
+  # the catalogue-only Pages site (what pages.yml deploys), served under /snapmon/ like the real site
   node tools/catalogue/build-site.js shots/catalogue-site
   node tests/e2e-catalogue-preview.js shots/catalogue-site 8799 shots
   node tools/catalogue/serve.js shots/catalogue-site 8798 > /dev/null & CAT=$!

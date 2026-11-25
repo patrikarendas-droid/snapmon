@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Local preview server for the staged catalogue-only site: serves <dir> under /snapmon/ (the same paths as
+/* Local preview server for the catalogue-only site: serves <dir> under /snapmon/ (the same paths as
    https://patrikarendas-droid.github.io/snapmon/). Usage: node tools/catalogue/serve.js <dir> [<port>] */
 'use strict';
 const http = require('http'), fs = require('fs'), path = require('path');

@@ -1,4 +1,4 @@
-// STAGED catalogue-only Pages site (tools/catalogue/build-site.js), tested as it would be served:
+// The catalogue-only Pages site (tools/catalogue/build-site.js), tested as it would be served:
 // under /snapmon/ on one origin, exactly like https://patrikarendas-droid.github.io/snapmon/.
 //   • contents: the catalogue + only the files its page references; no game UI, camera, engine, models or runtimes
 //   • the catalogue page: every request answered (no 404), nothing fetched from models/ or vendor/, the camera never
