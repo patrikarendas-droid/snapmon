@@ -1,3 +1,12 @@
+# GitHub Pages = the developer CATALOGUE only (activated 2026-11-25 with the owner's approval). The playable browser
+# game was retired from the website (the game itself lives on as the mobile app). The site keeps the same origin and paths:
+#   https://patrikarendas-droid.github.io/snapmon/catalogue/  the catalogue, unchanged (same Firebase authorised domain,
+#                                                            sign-in and per-browser review data)
+#   https://patrikarendas-droid.github.io/snapmon/            a notice page with a READ-ONLY "show my backup code" for
+#                                                            old browser-game progress (it never writes or deletes)
+# Contents: tools/catalogue/build-site.js (the catalogue + only the files its page loads), nothing else.
+# Rollback to the full old website (game included): `git revert -m 1 <the merge that activated this>` on
+# claude/snapmon-game-dev-7o667u (redeploys the website as of 07841aa, game included); details docs/CATALOGUE.md.
 name: Deploy to GitHub Pages
 on:
   push:
@@ -10,10 +19,6 @@ permissions:
 concurrency:
   group: pages
   cancel-in-progress: true
-env:
-  # TinyCLIP part of the standard Hybrid engine; chosen from the lab benchmark, see docs/RECOGNITION.md
-  CLIP_VARIANT: tinyclip-39m16
-  CLIP_HF: wkcn/TinyCLIP-ViT-39M-16-Text-19M-YFCC15M
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,52 +26,25 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - name: Logic, label, sprite and save tests
+          node-version: 22
+      - name: Catalogue data and writing checks
         run: |
-          node tests/sim.js > /dev/null
-          node tests/labels.js
-          node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json
-          node tests/sprites-v3.js
-          node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
-          node tests/sprite-redesign.js
-          node tests/migrate.js
-          node tests/clip-fusion.js
-          node tests/color.js
-          node tests/lore.js
-          node tests/guide.js
-          node tests/rules-trace.js
-          node tests/identity.js
-          node tests/devtest.js
-          node tests/generator-snapshot.js
-          node tests/gameplay-baseline.js
-          node tests/ability-keys.js
-          node tests/god-mode.js
-          node tests/curated.js
-          node tests/curated-pipeline.js
-          node tests/curated-refresh.js
-          node tests/mapping-audit.js
           node tests/catalogue-model.js
           node tools/curated.js validate
-      - name: Browser tests (gameplay, recognition engine with the real worker, Back navigation)
+      - name: Catalogue-only site, tested as served under /snapmon/
         run: |
-          npm i --no-save --silent playwright@1.48.2 onnxruntime-web@1.20.1
+          npm i --no-save --silent playwright@1.48.2
           npx playwright install --with-deps chromium > /dev/null
-          python3 -m http.server 8765 > /dev/null 2>&1 &
-          sleep 1
           mkdir -p shots
-          node tests/e2e.js http://localhost:8765/index.html tests/fixtures shots
-          node tests/e2e-engine.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
-          node tests/e2e-nav.js http://localhost:8765/index.html shots
-          node tests/e2e-qol.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
-          node tests/e2e-v044.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
-          node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
-          node tests/e2e-curated.js http://localhost:8765/index.html shots
-          node tests/e2e-catalogue-local.js http://localhost:8765/ shots
-          node tests/e2e-catalogue-ai.js http://localhost:8765/ shots
-          node tests/e2e-catalogue-sync.js http://localhost:8765/
-          node tests/e2e-catalogue-sprite.js http://localhost:8765/ shots
-          node tests/e2e-catalogue-storage.js http://localhost:8765/
+          node tools/catalogue/build-site.js _site
+          node tests/e2e-catalogue-preview.js _site 8799 shots
+          node tools/catalogue/serve.js _site 8798 &
+          sleep 1
+          node tests/e2e-catalogue-local.js http://localhost:8798/snapmon/ shots
+          node tests/e2e-catalogue-ai.js http://localhost:8798/snapmon/ shots
+          node tests/e2e-catalogue-sync.js http://localhost:8798/snapmon/
+          node tests/e2e-catalogue-sprite.js http://localhost:8798/snapmon/ shots
+          node tests/e2e-catalogue-storage.js http://localhost:8798/snapmon/
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -77,45 +55,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: node tools/build.js
-      - name: Assemble site
-        run: |
-          mkdir -p _site
-          cp -r index.html manifest.webmanifest icon.svg src dist _site/
-          cp -r catalogue _site/   # developer review catalogue (static; review data lives only in Firebase / the browser)
-      # The standard Hybrid engine needs every file below; tools/check-site.js stops the deploy if one is missing.
-      - name: Detector and classifier models
-        run: node tools/fetch-models.js _site/models
-      - name: Runtime libraries (TF.js, ONNX Runtime Web), pinned versions
-        run: |
-          npm i --no-save --silent @tensorflow/tfjs@4.22.0 @tensorflow-models/mobilenet@2.1.1 @tensorflow-models/coco-ssd@2.2.3 onnxruntime-web@1.20.1
-          mkdir -p _site/vendor/tfjs
-          cp node_modules/@tensorflow/tfjs/dist/tf.min.js node_modules/@tensorflow-models/mobilenet/dist/mobilenet.min.js node_modules/@tensorflow-models/coco-ssd/dist/coco-ssd.min.js _site/vendor/tfjs/
-          mkdir -p _site/vendor/ort
-          cp node_modules/onnxruntime-web/dist/{ort.min.js,ort.webgpu.min.js,ort-wasm-simd-threaded.mjs,ort-wasm-simd-threaded.wasm,ort-wasm-simd-threaded.jsep.mjs,ort-wasm-simd-threaded.jsep.wasm} _site/vendor/ort/
-          cp node_modules/onnxruntime-web/LICENSE _site/vendor/ort/LICENSE.txt || true
-      - id: clipcache
-        uses: actions/cache@v4
-        with:
-          path: models/clip/${{ env.CLIP_VARIANT }}
-          key: clip-${{ env.CLIP_VARIANT }}-${{ hashFiles('lab/export_clip.py', 'lab/vocab-labels.json', 'lab/calib/*.json') }}
-      - uses: actions/setup-python@v5
-        if: steps.clipcache.outputs.cache-hit != 'true'
-        with:
-          python-version: '3.11'
-      - name: Export TinyCLIP model
-        if: steps.clipcache.outputs.cache-hit != 'true'
-        run: |
-          pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
-          pip install --quiet transformers onnx onnxruntime onnxscript
-          python lab/export_clip.py $CLIP_HF $CLIP_VARIANT lab/vocab-labels.json models/clip lab/calib/$CLIP_VARIANT.json
-      - name: Add TinyCLIP model, manifest and site check
-        run: |
-          mkdir -p _site/models/clip/$CLIP_VARIANT
-          cp models/clip/$CLIP_VARIANT/{vision.onnx,vocab.bin,vocab.json} _site/models/clip/$CLIP_VARIANT/
-          node tools/make-manifest.js _site
-          node tools/check-site.js _site
+          node-version: 22
+      - run: node tools/catalogue/build-site.js _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
       - id: deployment
