@@ -412,9 +412,15 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     valid; `rules-trace`/`gameplay-baseline` recordings unchanged (battle maths identical with God Mode off).
   - Known limit: a custom spawn counts as a sighting, so on a brand-new save it would use up the first-hunt guarantee
     (not relevant to the owner's save).
+  - **Build 18** (run 45788403813, commit `45dbff1`, versionCode 1018, `0.6.0-dev.18+45dbff1`): all three jobs green on
+    the FIRST attempt (fast suite, APK + all release-configuration checks incl. direct developer-action calls refused,
+    emulator incl. recovery drill from build 15's code). APK SHA-256
+    `2fa3ff390b5f73f3e8ad4809f3df72b8033c487135322e3b007c2f57bf452672` (72,307,966 bytes), same certificate
+    73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-18` (id 15101249478), expires 2027-02-24.
+    CI-green, NOT yet phone-verified.
 
 **Next priorities (2026-11-26):**
-- Owner: install the developer-tools build (next CI build after 17) as an update, and run its phone checklist.
+- Owner: install build 18 (developer tools) as an update over build 17/15 (backup code first) and run its phone checklist.
 - No further releases, deployments or merges without approval.
 
 **Previous priorities (2026-11-25):**
