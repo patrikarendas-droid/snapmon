@@ -495,9 +495,16 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     power range without the removed tables), ability-keys (variant key; the same-name cooldown case now in all three
     forms of the pin cushion), curated-pipeline (legend/Ultimate no longer differ by variant; inventory regenerated),
     save-compat (forward check allows exactly the rebuilt combat fields and verifies them). family-variant rewritten.
+  - **Build 20** (run 45849271839, commit `4349de8`, versionCode 1020, `0.6.0-dev.20+4349de8`): all three jobs green on
+    the FIRST attempt (fast suite, APK + release-configuration checks, emulator incl. recovery drill from build 15's code
+    and the new step 6c: canvas blur supported by the emulator's WebView 113, halo alpha 1→3→7→17→34→72 before the
+    crisp rim; screenshots in artifact `emulator-screenshots-attempt1`). APK SHA-256
+    `8867b3a5b14ee37d23f45bdfb504c20628ee9913376f5dc99d051d418a6c097c` (72,314,826 bytes), same certificate
+    73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-20` (id 15133732712), expires 2027-02-24.
+    CI-green, NOT yet phone-verified.
 
 **Next priorities (2026-11-26, latest):**
-- Owner: install the combat-model build as an update over build 19 (backup code first; no reset needed) and run its
+- Owner: install build 20 (combat model 2 + glow) as an update over build 19 (backup code first; no reset needed) and run its
   phone checklist; judge the glow on the phone.
 - No further releases, deployments or merges without approval.
 
