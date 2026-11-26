@@ -1071,68 +1071,74 @@ function buildGrid(dna) {
 
 const _spriteCache = new Map();
 function spriteKey(dna) { return JSON.stringify(dna); }
-/* Special-variant finish (2026-11-26). Painted on the pixel grid AFTER buildGrid/buildPalette, which stay exactly as
-   they were (sprite baselines; the Mutated pixel rewrite untouched): whole grid cells only, no blur. Spectral: a strong
-   cyan rim + a dithered halo, body slightly see-through with faint ghost scanlines. Mutated: a mottled acid-green rim
-   + two or three faint pixel stink wisps. Prismatic: a rainbow rim, a two-stripe diagonal glint and three pixel
-   sparkles. Normal monsters are painted exactly as before. Only the game's renderer asks for it (spriteURL, fx); the
-   catalogue's direct renderSprite calls are unchanged. A variant sprite gets a VFX_PAD-cell transparent margin so the
-   rim is never cut at the grid edge; the page scales such images (class vfx) so the monster keeps its size. */
-const VFX_PAD = 2;
+/* Special-variant finish (build 20, 2026-11-26). Layers, back to front: a soft coloured HALO (the silhouette + rim
+   blurred twice: a tight bright glow and a wide faint one, fading into transparency), a crisp 2-cell RIM hugging the
+   silhouette, the monster's own pixels (unchanged and crisp; Spectral slightly see-through with ghost scanlines), then
+   crisp extras (Prismatic glint + sparkles, Mutated stink wisps). The grid and palette (buildGrid/buildPalette) are
+   untouched, so the sprite baselines and the Mutated pixel rewrite stay exactly as they are; Normal sprites are painted
+   exactly as before. Only the game's renderer asks for it (spriteURL, fx); the catalogue's direct renderSprite calls
+   are unchanged. A variant image carries a VFX_PAD-cell transparent margin for the halo; the page scales such images
+   (CSS img.vfx) so the monster keeps the size of a Normal one. Rendered once per sprite and cached as a data URL. */
+const VFX_PAD = 6;
 const hasVfx = dna => !!dna && (dna.variant === 'spectral' || dna.variant === 'mutated' || dna.variant === 'shiny');
+const VFX = {
+  spectral: { rim: ['#d6feff', '#46e4ff'], halo: '#25d4ff', haloA: [0.95, 0.75] },
+  mutated:  { rim: ['#dcff52', '#74ec1c'], halo: '#6cff12', haloA: [0.9, 0.7] },
+  shiny:    { rim: null, halo: null, haloA: [1, 1] },
+};
 function variantFx(g, dna) {
-  const W = GW + 2 * VFX_PAD, H = GH + 2 * VFX_PAD, pad = VFX_PAD;
-  const solid = new Uint8Array(W * H);
-  let x0 = W, y0 = H, x1 = -1, y1 = -1;
+  const pad = VFX_PAD, W = GW + 2 * pad, H = GH + 2 * pad, N = W * H;
+  const dist = new Uint8Array(N).fill(255); // 0 = silhouette, 1..4 = cells away from it (4-neighbour steps)
+  let x0 = W, y0 = H, x1 = -1, y1 = -1, q = [];
   for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
     const c = g.px[y * GW + x]; if (!c || c === P.STEAM) continue;
-    const X = x + pad, Y = y + pad; solid[Y * W + X] = 1;
+    const X = x + pad, Y = y + pad, i = Y * W + X; dist[i] = 0; q.push(i);
     x0 = Math.min(x0, X); y0 = Math.min(y0, Y); x1 = Math.max(x1, X); y1 = Math.max(y1, Y);
   }
-  const isS = (x, y) => x >= 0 && y >= 0 && x < W && y < H && solid[y * W + x] === 1;
-  const ring = new Uint8Array(W * H); // 1: touches the silhouette (4-neighbour), 2: one cell further out
-  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (!solid[y * W + x] && (isS(x - 1, y) || isS(x + 1, y) || isS(x, y - 1) || isS(x, y + 1))) ring[y * W + x] = 1;
-  const r1 = (x, y) => x >= 0 && y >= 0 && x < W && y < H && ring[y * W + x] === 1;
-  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (!solid[y * W + x] && !ring[y * W + x] && (r1(x - 1, y) || r1(x + 1, y) || r1(x, y - 1) || r1(x, y + 1))) ring[y * W + x] = 2;
-  const free = (x, y) => x >= 0 && y >= 0 && x < W && y < H && !solid[y * W + x] && ring[y * W + x] !== 1;
-  const R = mulberry((dna.featSeed || 1) + 41);
-  const under = [], over = []; // [x, y, colour] in padded cells: under = behind the body, over = on top of it
+  for (let d = 1; d <= 4; d++) { const nq = []; for (const i of q) { const x = i % W, y = (i / W) | 0; for (const [a, b] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const X = x + a, Y = y + b; if (X < 0 || Y < 0 || X >= W || Y >= H) continue; const j = Y * W + X; if (dist[j] === 255) { dist[j] = d; nq.push(j); } } } q = nq; }
+  const D = (x, y) => (x < 0 || y < 0 || x >= W || y >= H) ? 255 : dist[y * W + x];
+  const R = mulberry((dna.featSeed || 1) + 41), cfg = VFX[dna.variant], shift = (dna.featSeed || 0) % 360;
+  const rainbow = (x, y, l) => hsl(shift + (x * 2 + y * 3) * 9, 100, l);
+  const rim = [], halo = [], over = []; // [x, y, colour] in padded cells
   let bodyAlpha = 1, scan = null;
-  if (dna.variant === 'spectral') {
-    bodyAlpha = 0.84; scan = '#bff8ff';
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-      const r = ring[y * W + x];
-      if (r === 1) under.push([x, y, '#8ff4ff']);
-      else if (r === 2 && (x + y) % 2 === 0) under.push([x, y, 'rgba(79,216,255,0.42)']);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const d = dist[y * W + x];
+    if (d === 1 || d === 2) {
+      let c;
+      if (dna.variant === 'shiny') c = rainbow(x, y, d === 1 ? 74 : 60);
+      else if (dna.variant === 'mutated') c = hashStr('mu' + x + ',' + y) % 5 === 0 ? '#4fb514' : cfg.rim[d - 1];
+      else c = cfg.rim[d - 1];
+      rim.push([x, y, c]);
     }
-  } else if (dna.variant === 'mutated') {
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (ring[y * W + x] === 1) under.push([x, y, hashStr('mu' + x + ',' + y) % 5 === 0 ? '#5fae1c' : '#a6f53c']);
-    // stink wisps: two or three short wavy 1-cell trails rising from just outside the upper half of the silhouette
-    // (above it, or beside it when the sprite reaches the top), fading upwards
+    if (d <= 2 || (d === 3 && dna.variant === 'shiny')) halo.push([x, y, dna.variant === 'shiny' ? rainbow(x, y, 64) : cfg.halo]); // Prismatic: the widest, brightest halo
+  }
+  if (dna.variant === 'spectral') { bodyAlpha = 0.86; scan = '#c8fbff'; }
+  if (dna.variant === 'mutated') {
+    // two or three faint pixel stink wisps rising from just outside the rim (upper half), fading upwards
     const cand = [];
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (ring[y * W + x] === 2 && y <= y0 + (y1 - y0) * 0.55) cand.push([x, y]);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (dist[y * W + x] === 3 && y <= y0 + (y1 - y0) * 0.55) cand.push([x, y]);
     const want = dna.tier >= 2 ? 3 : 2, wave = [0, 1, 1, 0, -1, -1], used = [];
     for (let tries = 0; tries < 60 && used.length < want && cand.length; tries++) {
       const [sx, sy] = cand[Math.floor(R() * cand.length)];
       if (used.some(([ux, uy]) => Math.abs(ux - sx) + Math.abs(uy - sy) < 8)) continue;
       const cells = [];
-      for (let k = 0; k < 5; k++) { const x = sx + wave[(k + used.length * 2) % wave.length], y = sy - k; if (!free(x, y)) break; cells.push([x, y]); }
+      for (let k = 0; k < 5; k++) { const x = sx + wave[(k + used.length * 2) % wave.length], y = sy - k; if (D(x, y) < 3) break; cells.push([x, y]); }
       if (cells.length < 3) continue;
       used.push([sx, sy]);
-      cells.forEach(([x, y], k) => under.push([x, y, `rgba(196,240,128,${(0.72 - k * 0.12).toFixed(2)})`]));
+      cells.forEach(([x, y], k) => over.push([x, y, `rgba(214,255,150,${(0.85 - k * 0.15).toFixed(2)})`]));
     }
-  } else if (dna.variant === 'shiny') {
-    const shift = (dna.featSeed || 0) % 360;
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (ring[y * W + x] === 1) under.push([x, y, hsl(shift + (x * 2 + y * 3) * 9, 95, 70)]);
+  }
+  if (dna.variant === 'shiny') {
     // a diagonal glint across the body: one 2-cell and one 1-cell stripe
     const d0 = x0 + y0 + Math.round((x1 - x0 + y1 - y0) * 0.32);
     for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
       const d = x + y - d0, c = g.px[(y - pad) * GW + (x - pad)];
-      if (!solid[y * W + x] || c === P.OUT || c === P.PUPIL || c === P.MOUTH) continue;
+      if (dist[y * W + x] !== 0 || c === P.OUT || c === P.PUPIL || c === P.MOUTH) continue;
       if (d === 0 || d === 1) over.push([x, y, 'rgba(255,255,255,0.42)']); else if (d === 4) over.push([x, y, 'rgba(255,255,255,0.3)']);
     }
-    // three plus-shaped pixel sparkles in free space next to the silhouette (top-right, left, bottom-right)
-    const spots = [[x1 - 1, y0 + 1], [x0 + 1, Math.round((y0 + y1) / 2)], [x1 - 2, y1 - 3]], tints = ['#fff6a8', '#ffc4f2', '#b8f6ff'];
+    // three plus-shaped pixel sparkles just outside the rim (top-right, left, bottom-right)
+    const spots = [[x1 + 1, y0 + 1], [x0 - 2, Math.round((y0 + y1) / 2)], [x1, y1 - 2]], tints = ['#fff6a8', '#ffc4f2', '#b8f6ff'];
+    const free = (x, y) => x >= 0 && y >= 0 && x < W && y < H && dist[y * W + x] >= 3; // outside the rim (255 = far)
     spots.forEach(([sx, sy], i) => {
       let best = null;
       for (let rr = 0; rr < 9 && !best; rr++) for (let dy = -rr; dy <= rr && !best; dy++) for (let dx = -rr; dx <= rr && !best; dx++) {
@@ -1144,7 +1150,21 @@ function variantFx(g, dna) {
       over.push([x, y, '#ffffff'], [x + 1, y, tints[i]], [x - 1, y, tints[i]], [x, y + 1, tints[i]], [x, y - 1, tints[i]]);
     });
   }
-  return { W, H, under, over, bodyAlpha, scan };
+  return { W, H, rim, halo, over, bodyAlpha, scan, haloA: cfg.haloA };
+}
+// a soft glow: the halo cells blurred (canvas filter; shadowBlur where filter is unsupported), drawn behind the sprite
+function paintHalo(ctx, fx, scale) {
+  const off = document.createElement('canvas'); off.width = fx.W * scale; off.height = fx.H * scale;
+  const o = off.getContext('2d');
+  for (const [x, y, c] of fx.halo) { o.fillStyle = c; o.fillRect(x * scale, y * scale, scale, scale); }
+  const passes = [[2.4 * scale, fx.haloA[1]], [0.9 * scale, fx.haloA[0]]]; // wide and faint, then tight and bright
+  ctx.save();
+  for (const [blur, alpha] of passes) {
+    ctx.globalAlpha = alpha;
+    if ('filter' in ctx) { ctx.filter = `blur(${blur}px)`; ctx.drawImage(off, 0, 0); ctx.filter = 'none'; }
+    else { ctx.shadowColor = fx.halo[0] ? fx.halo[0][2] : '#fff'; ctx.shadowBlur = blur * 2; ctx.shadowOffsetX = off.width * 2; ctx.drawImage(off, -off.width * 2, 0); ctx.shadowOffsetX = 0; ctx.shadowBlur = 0; }
+  }
+  ctx.restore();
 }
 function renderSprite(canvas, dna, scale = 5, opt = {}) {
   const g = buildGrid(dna), pal = buildPalette(dna);
@@ -1154,8 +1174,15 @@ function renderSprite(canvas, dna, scale = 5, opt = {}) {
   ctx.imageSmoothingEnabled = false;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const cells = list => { for (const [x, y, c] of list) { ctx.fillStyle = c; ctx.fillRect(x * scale, y * scale, scale, scale); } };
-  if (fx) cells(fx.under);
-  if (fx) ctx.globalAlpha = fx.bodyAlpha;
+  if (fx) {
+    paintHalo(ctx, fx, scale);
+    if (fx.bodyAlpha < 1) { // see-through body: clear most of the glow under it so the sprite is not washed out
+      ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.globalAlpha = 0.85; ctx.fillStyle = '#000';
+      for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) { const c = g.px[y * GW + x]; if (c && c !== P.STEAM) ctx.fillRect(o + x * scale, o + y * scale, scale, scale); }
+      ctx.restore();
+    }
+    cells(fx.rim); ctx.globalAlpha = fx.bodyAlpha;
+  }
   for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
     const c = g.px[y * GW + x]; if (!c) continue;
     ctx.fillStyle = pal[c]; ctx.fillRect(o + x * scale, o + y * scale, scale, scale);

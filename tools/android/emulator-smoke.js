@@ -274,6 +274,35 @@ const READ_RICH = `want => { ${PAGE_CANON}
     await page.evaluate(() => { window.__snapmon.ui.battle = null; document.querySelector('#overlay').innerHTML = ''; window.__snapmon.ui.busy = false; render(); });
   }
 
+  // 6c. special-variant glow in the real Android WebView (build 20): canvas blur support, a halo that fades into
+  //     transparency around a crisp sprite, and screenshots of collection cards and a battle with all four variants
+  {
+    const fx = await page.evaluate(async () => {
+      const S = window.__snapmon.S, add = [];
+      for (const obj of ['toilet', 'phone']) for (const v of [null, 'spectral', 'mutated', 'shiny']) { const m = createMonster(S, { obj, rarity: 'rare', variant: v, word: obj }); m.id = 'vfx_' + obj + '_' + (v || 'normal'); S.monsters.push(m); add.push(m.id); }
+      const filter = 'filter' in document.createElement('canvas').getContext('2d');
+      const m = S.monsters.find(x => x.id === 'vfx_toilet_spectral');
+      const img = new Image(); img.src = spriteURL(m.dna, 3); await img.decode();
+      const c = document.createElement('canvas'); c.width = img.width; c.height = img.height; const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+      const d = g.getImageData(0, 0, c.width, c.height).data; let soft = 0, solid = 0;
+      for (let i = 3; i < d.length; i += 4) { if (d[i] >= 250) solid++; else if (d[i] >= 8) soft++; }
+      // alpha along the middle row from the left edge towards the sprite: the halo must rise gradually
+      const y = c.height >> 1, row = []; for (let x = 0; x < c.width >> 1; x += 3) row.push(d[(y * c.width + x) * 4 + 3]);
+      return { add, filter, w: img.width, soft, solid, row };
+    });
+    note(`canvas filter (blur) supported by this Android WebView: ${fx.filter}; Spectral image ${fx.w}px, ${fx.soft} soft glow pixels, ${fx.solid} solid pixels; edge-to-sprite alpha ${fx.row.slice(0, 14).join(',')}`);
+    const rise = fx.row.findIndex(a => a > 0), firstSolid = fx.row.findIndex(a => a >= 250);
+    ok(fx.w === 156 && fx.soft > 800 && rise >= 0 && firstSolid > rise + 1, 'variant glow in the real WebView: a soft halo fades in before the crisp rim (not a hard-edged border)');
+    await page.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; closeSheet(); window.__snapmon.actions.tab('dex'); window.__snapmon.actions.dexView('captured'); window.scrollTo(0, 0); });
+    await sleep(1200); shot('emulator-variants-collection');
+    await page.evaluate(() => { window.scrollTo(0, 500); }); await sleep(700); shot('emulator-variants-collection-2');
+    await page.evaluate(() => { startBattle(window.__snapmon.S.monsters.find(x => x.id === 'vfx_phone_shiny')); });
+    await page.waitForFunction(() => window.__snapmon.ui.battle && !window.__snapmon.ui.busy, null, { timeout: 20000 }); await sleep(900);
+    shot('emulator-variants-battle-prismatic');
+    await page.evaluate(ids => { window.__snapmon.ui.battle = null; document.querySelector('#overlay').innerHTML = ''; window.__snapmon.ui.busy = false;
+      const S = window.__snapmon.S; S.monsters = S.monsters.filter(m => !ids.includes(m.id)); window.__snapmon.actions.tab('hunt'); render(); }, fx.add);
+  }
+
   // 7. saves
   await page.evaluate(() => { window.__snapmon.S.coins = 4242; persist(true); return window.SNAPMON_NATIVE.storage.flush(); });
   s = await state(page);

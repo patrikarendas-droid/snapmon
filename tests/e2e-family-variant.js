@@ -5,7 +5,7 @@
 //   • a save with monsters whose stored fam is 'spectral'/'mutated' (Spectral spoon, Mutated teddy, Normal book,
 //     Prismatic baby bottle) shows only real families after a reload; the family filter lists exactly the six real
 //     families (no Spectral / Mutated chip) in Captured and Encyclopedia, and filters by the real family
-//   • variant sprites carry the vfx class (rim margin) and render at the same on-screen size as Normal ones;
+//   • variant sprites carry the vfx class (glow margin) and render at the same on-screen size as Normal ones;
 //     Normal sprites have no vfx class
 //   • no horizontal overflow at 320 px
 // Usage: node tests/e2e-family-variant.js <url> <screenshot-dir>
@@ -39,8 +39,8 @@ const REAL = ['Organic', 'Mechanical', 'Elemental', 'Household', 'Food', 'Botani
       S.settings.devUnlocked = true; S.settings.devOpen = true; persist(true);
     });
     await p.reload(); await p.waitForFunction(() => window.__snapmon && window.__snapmon.actions);
-    const stored = await p.evaluate(() => window.__snapmon.S.monsters.map(m => m.fam));
-    ok(stored.join() === 'mutated,spectral,mutated,spectral,food', `${tag}: test save holds build-18-style stored natures (${stored.join(', ')})`);
+    const stored = await p.evaluate(() => window.__snapmon.S.monsters.map(m => m.fam + '/' + m.cv));
+    ok(stored.join() === 'household/2,household/2,household/2,household/2,food/2', `${tag}: every monster fights by its real family (combat model 2): ${stored.join(', ')}`);
 
     // 1. discovery of the owner's case through the custom encounter
     await p.click('[data-act="settings"]'); await p.waitForSelector('#devObjInput');
@@ -61,7 +61,7 @@ const REAL = ['Organic', 'Mechanical', 'Elemental', 'Household', 'Food', 'Botani
     ok(await noOverflow(), `${tag}: battle screen fits`);
     await p.click('[data-act="bInfo"]'); await p.waitForSelector('.sheet');
     const intel = await p.evaluate(() => ({ chips: [...document.querySelectorAll('.sheet .chip')].map(c => c.textContent.trim()), text: document.querySelector('.sheet').textContent }));
-    ok(intel.chips.some(c => /Household/.test(c)) && intel.chips.some(c => /Prismatic/.test(c)) && !intel.chips.some(c => /Mutated/.test(c)) && /Weak to:/.test(intel.text), `${tag}: Intel sheet chips [${intel.chips.join(' | ')}], weaknesses still listed`);
+    ok(intel.chips.some(c => /Household/.test(c)) && intel.chips.some(c => /Prismatic/.test(c)) && !intel.chips.some(c => /Mutated/.test(c)) && /Weak to: Slash · Resists: Ballistic/.test(intel.text) && /Prismatic variant:/.test(intel.text), `${tag}: Intel sheet chips [${intel.chips.join(' | ')}]; weaknesses are the Household family's (Slash / resists Ballistic) and the Prismatic variant line is shown`);
     await p.click('.sheet [data-act="closeSheet"]');
     await p.evaluate(() => { const B = window.__snapmon.ui.battle; B.enemy.hp = 0; }); // end the battle quickly: flee
     await p.evaluate(() => { window.__snapmon.setRNG(() => 0.001); });
@@ -76,9 +76,9 @@ const REAL = ['Organic', 'Mechanical', 'Elemental', 'Household', 'Food', 'Botani
     ok(chips.join() === ['All families', ...REAL].join(), `${tag}: Captured family filter = ${chips.join(', ')} (no Spectral/Mutated)`);
     const sizes = await p.$$eval('.mcard img', a => a.map(i => ({ vfx: i.classList.contains('vfx'), w: i.getBoundingClientRect().width, nat: i.naturalWidth })));
     const nrm = sizes.filter(s => !s.vfx), vf = sizes.filter(s => s.vfx);
-    ok(vf.length === 3 && nrm.length === 2 && vf.every(s => s.nat === 132) && nrm.every(s => s.nat === 120), `${tag}: 3 variant cards carry the rim margin (132 px image), 2 Normal cards unchanged (120 px)`);
-    // on-screen monster size: a variant's 40-cell body spans 40/44 of its image, its on-screen box is scaled ×1.1 (getBoundingClientRect includes it) → same body size as a Normal image
-    ok(vf.every(s => Math.abs(s.w * 40 / 44 - nrm[0].w) < 1.5), `${tag}: variant monsters are drawn at the same size as Normal ones in the collection`);
+    ok(vf.length === 3 && nrm.length === 2 && vf.every(s => s.nat === 156) && nrm.every(s => s.nat === 120), `${tag}: 3 variant cards carry the glow margin (156 px image = 52 cells), 2 Normal cards unchanged (120 px)`);
+    // on-screen monster size: a variant's 40-cell body spans 40/52 of its image, its on-screen box is scaled ×1.3 (getBoundingClientRect includes it) → same body size as a Normal image
+    ok(vf.every(s => Math.abs(s.w * 40 / 52 - nrm[0].w) < 1.5), `${tag}: variant monsters are drawn at the same size as Normal ones in the collection`);
     await shot('family-captured-all');
     await p.click('[data-act="fF"][data-arg="household"]');
     const hh = await p.$$eval('.mcard[data-act="mon"]', a => a.map(x => x.dataset.arg).sort());

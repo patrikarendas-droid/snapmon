@@ -459,11 +459,46 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     the FIRST attempt (fast suite incl. the new tests, APK + release-configuration checks, emulator incl. recovery drill
     from build 15's code). APK SHA-256 `28f854475943d168adefbaf6be379405bcb71c86adb9bfe5ef36bdf7d407b6aa` (72,312,542
     bytes), same certificate 73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-19` (id 15125547176),
-    expires 2027-02-24. CI-green, NOT yet phone-verified.
+    expires 2027-02-24. **Owner phone-tested build 19 (2026-11-26): families show properly**; recorded in
+    `recovery-points.json`.
 
-**Next priorities (2026-11-26, later):**
-- Owner: install build 19 (families vs variants, variant sprite finish) as an update over build 18 (backup code first) and run its phone checklist.
-- Owner decision (optional): should the 381 Spectral/Mutated-natured objects also FIGHT like their real family? (balance change)
+- **Combat model 2 + glowing variant outlines (2026-11-26, owner request; Android branch, not merged, nothing
+  published).** The owner asked that families truly decide combat and that the variant outlines glow.
+  - Model: OBJECT → one family (6 only; `FAMILIES` lost its Spectral/Mutated tables; the eight categories now carry
+    their real family in `CATEGORIES`) → base stat multipliers, weaknesses/resistances, family moves, family material.
+    RARITY scales as before. VARIANT (`VARIANTS`, `src/data.js`) adds on top, never replacing the family: Spectral HP −8%
+    ATK +5% SPD +15% + move Soul Siphon (drain) + 2 Ectoplasm; Mutated HP +8% ATK +12% DEF −5% + Acid Spew (poison 55%)
+    + 3 Goo (kept); Prismatic +8% all stats (kept) + double coins (kept) + 1 Prism Shard at every rarity (before: only
+    Rare+). Capture ×0.85 for variants, odds, cooldowns, unique slots, dev tools unchanged. Object signature/kit/legend
+    moves unchanged; every variant of an object now draws the same kit moves (the family used to change with the
+    variant). Variant move key `variant` (not a curated slot).
+  - Old vs new numbers: `docs/review/COMBAT_MODEL_2.md` (`node tools/combat-report.js 17bb241`). Normal monsters of
+    every other object are identical to build 19 (rules-trace unchanged; tests/family-variant.js compares 19,270).
+    Simulated level-6 battles: Spectral used to be trivial with the Pistol (99.7% wins) and hard with the Sword (61%);
+    now ~79–83% either way; the eight categories' Normal monsters follow their family's weaknesses (Sword stronger
+    against them, Pistol weaker).
+  - Saves: format 3 unchanged; monsters stamped `cv: 2`. `migrate()` rebuilds every unstamped monster (build ≤19, old
+    backup code, caught after a rollback) via `rebuildCombat` (same object/rarity/variant/level/seed → current family,
+    stats, moves, curated move names; look, name, lore, level, XP, id, nickname kept), sets encyclopedia families and
+    drops 'spectral'/'mutated' statistic keys. No mixed records after any load path; older builds still open the save.
+    The owner's save needs NO reset. Lost by design: the old first-hunt −20% nerf on a rebuilt first monster.
+  - UI/Guide: Guide weakness table = 6 families (+ material), new Variants table (stats, move, reward); misleading
+    "some objects fight like Spectral" text removed. Intel: family hint again + a variant line; "VARIANT MOVE" tag.
+    Results: "<Variant> bonus included: …" listed separately. Gear material text generated from the data.
+  - Glow (`src/sprites.js` `variantFx`/`paintHalo`): 2-cell crisp rim + two blurred halo passes (canvas `filter: blur`,
+    shadowBlur fallback) fading outward; Spectral body 86% opaque with the halo cleared underneath (not washed out);
+    Prismatic rainbow halo widest; Mutated wisps outside the rim. Image margin 6 cells (52×52), CSS `img.vfx { scale:
+    1.3 }`; variant cards may spill the glow into the grid gap (`.mcard:has(img.vfx) { overflow: visible }`). Before/
+    after sheet: `docs/review/variant-glow-before-after.png`. Emulator step 6c renders all variants in the real Android
+    WebView, checks blur support and the fading halo, and screenshots cards + a Prismatic battle.
+  - Tests adapted on purpose (comments in each): gameplay-baseline + generator-snapshot re-recorded; identity (kit
+    power range without the removed tables), ability-keys (variant key; the same-name cooldown case now in all three
+    forms of the pin cushion), curated-pipeline (legend/Ultimate no longer differ by variant; inventory regenerated),
+    save-compat (forward check allows exactly the rebuilt combat fields and verifies them). family-variant rewritten.
+
+**Next priorities (2026-11-26, latest):**
+- Owner: install the combat-model build as an update over build 19 (backup code first; no reset needed) and run its
+  phone checklist; judge the glow on the phone.
 - No further releases, deployments or merges without approval.
 
 **Previous priorities (2026-11-25):**
@@ -510,7 +545,6 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
 | APK updates need the stable signing secret | Resolved 2026-11-18 (secret set; builds 8 and 9 same certificate) | Without `ANDROID_DEV_SIGNING_SEED` each CI build has a different key and cannot update the last one (uninstall = saves lost). | Add the secret once (`docs/ANDROID.md` → Signing). |
 | HUD covered the top of every screen in the Android app (build 9) | Fixed on the Android branch (layout reserves the status-bar inset) | `index.html` `#app`/`.sheet`; `tests/e2e-layout.js` | Owner re-checks on the phone with the next build. |
 | Quiet objects: a different suggested object for the same physical thing is not locked | Known (2026-11-24) | The lock is per confirmed object type (`S.enc.quiet`); alternatives the lens itself offers are other objects | Only if the owner wants the lock widened to all suggestions of a missed photo. |
-| Spectral/Mutated-natured objects (books, clothes, mirrors, clocks, instruments; toys, trash, bugs) fight with the Spectral/Mutated tables although their family is Household/Organic/Mechanical | Known, by decision (2026-11-26) | Combat preserved on purpose when family and nature were split (`familyOf` vs stored `m.fam`); Guide explains it | Owner decides whether to rebalance them to their real family. |
 | A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
 | Build 14 APK artifact expires 2026-12-24 | Open (historical point; build 15 is archived) | Uploaded with the old 30-day retention | Owner downloads a copy if wanted. |
 | Real Firebase sign-in on the catalogue-only site | Resolved 2026-11-25 (owner: catalogue works on the live site) | Same origin, no domain change | None. |
@@ -518,6 +552,9 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
 
 ## 6. Resolved issues (with the release that fixed them)
 
+- **Spectral/Mutated shown and used as families** – a Prismatic baby bottle showed "Mutated"; eight categories and the
+  Spectral/Mutated variants fought with Spectral/Mutated tables. Labels fixed in build 19; combat model 2 (families
+  decide combat, variants layered on top, saved monsters rebuilt) in the build after 19 (Android branch, 2026-11-26).
 - **"Starting camera…" stayed on screen** – CSS `display:grid` overrode `hidden`; now removed once frames show. v0.4.2.
 - **"Recognition engine could not run" after the app was in the background** – lost GPU context/stopped worker left
   the engine "ready"; now self-check on resume, automatic reload from cache, Retry reinitialises. v0.4.2.

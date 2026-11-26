@@ -50,6 +50,8 @@ Kept up to date in [`tools/android/recovery-points.json`](../tools/android/recov
 | Build | Commit | versionCode / versionName | Status |
 |---|---|---|---|
 | **15 — PRIMARY** | `1b9aa89` (branch `ccr-6eaf78d0-vj87lh`) | 1015 / `0.6.0-dev.15+1b9aa89` | **Owner-verified on the phone** (2026-11-25: installed as an update over build 14, progress intact). **Archived long term:** pre-release [android-dev-b15](https://github.com/patrikarendas-droid/snapmon/releases/tag/android-dev-b15) with the original CI APK `snapmon-dev-0.6.0-dev.15-1b9aa89.apk`, APK SHA-256 `8220a0f885a6f2521b43ec065abf64dc8c6e7948a97cdfac3abb5a3bbbeca719` (checked by milestone runs [45572544428](https://github.com/patrikarendas-droid/snapmon/actions/runs/45572544428) (verify) and [45572984193](https://github.com/patrikarendas-droid/snapmon/actions/runs/45572984193) (publish)). From run [45405907369](https://github.com/patrikarendas-droid/snapmon/actions/runs/45405907369); its Actions artifact `SnapMon-Dev-APK-0.6.0-build-15` lasts until 2027-02-22. The emulator recovery drill now uses this commit. |
+| 19 | `b8feda3` | 1019 / `0.6.0-dev.19+b8feda3` | Owner-verified on the phone (2026-11-26: real family labels). Run [45834171150](https://github.com/patrikarendas-droid/snapmon/actions/runs/45834171150), artifact `SnapMon-Dev-APK-0.6.0-build-19` until 2027-02-24, APK SHA-256 `28f85447…d407b6aa`. Last build before combat model 2 (see below). |
+| 18 | `45dbff1` | 1018 / `0.6.0-dev.18+45dbff1` | Owner-verified on the phone (2026-11-26: developer tools). Artifact `SnapMon-Dev-APK-0.6.0-build-18` until 2027-02-24. |
 | 14 — historical | `4207571` | 1014 / `0.6.0-dev.14+4207571` | Owner-verified on the phone (2026-11-24). Run [45379221209](https://github.com/patrikarendas-droid/snapmon/actions/runs/45379221209), artifact `SnapMon-Dev-APK-0.6.0-build-14` (zip SHA-256 `659844e2…a171ea`); APK SHA-256 in that run's summary. The artifact expires on 2026-12-24 and is not archived as a release; download it before then if you want a copy. Its code stays in git history (and in `tests/save-compat.js`). |
 
 All dev builds share:
@@ -57,6 +59,13 @@ All dev builds share:
 - signing certificate SHA-256 `73a7e01f8ca2b716889309fea6a76be76b4b233b30cd381c233b592b72ffe161`.
 
 A build that is only CI-green is **not** a recovery point until you have checked it on the phone.
+
+**Combat model 2 (build 20 onwards, 2026-11-26).** Families decide combat; Spectral/Mutated/Prismatic are variants on
+top. Saved monsters made by build 19 or older carry no `cv: 2` stamp and are **rebuilt on load and on backup-code
+import** (family, stats, moves recomputed for the same object, rarity, variant, level and seed; look, name, level, XP,
+id kept). The save format stays 3, so a rollback to build 19 or older still opens the save: the old code simply uses the
+rebuilt numbers. Monsters caught in an older build after such a rollback are rebuilt again when you update forward.
+`tests/save-compat.js` and `tests/family-variant.js` check both directions.
 
 ## 4. Recovering from a broken build (the normal way)
 

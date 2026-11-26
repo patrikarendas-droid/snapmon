@@ -187,11 +187,13 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 @keyframes auraPulse { 50% { transform: scale(1.12); opacity: .75; } }
 .sprite .spark { position: absolute; width: 6px; height: 6px; background: var(--rc); z-index: 2; animation: sparkle 2.4s ease-in-out infinite; box-shadow: 0 0 8px var(--rc); }
 @keyframes sparkle { 0%, 100% { opacity: 0; transform: translateY(10px) scale(.3); } 50% { opacity: 1; transform: translateY(-14px) scale(1); } }
-/* special variants (2026-11-26): their rim, translucency, wisps and glint are painted into the pixel sprite itself
-   (sprites.js variantFx), crisp at every size. Such images carry a transparent margin: .vfx scales them back so the
-   monster keeps the size of a Normal one (the .sprite idle origin sits at 90%, hence the small shift down). */
-img.vfx { scale: 1.1; }
-.sprite img.vfx { translate: 0 4.1%; }
+/* special variants: the halo, rim, translucency, wisps and glint are painted into the sprite image itself (sprites.js
+   variantFx), the monster's pixels stay crisp. Such images carry a 6-cell transparent margin (52 instead of 40 cells):
+   .vfx scales them ×1.3 so the monster keeps the size of a Normal one (the .sprite idle origin sits at 90%, hence the
+   shift down by 12%). */
+img.vfx { scale: 1.3; }
+.sprite img.vfx { translate: 0 12%; }
+.mcard:has(img.vfx) { overflow: visible; } /* the halo may spill into the gap between cards instead of being cut off */
 .sprite .spark.px4 { width: 5px; height: 5px; background: #fff; box-shadow: 5px 0 0 var(--sc), -5px 0 0 var(--sc), 0 5px 0 var(--sc), 0 -5px 0 var(--sc); animation: twinkle 2.2s steps(1, end) infinite; }
 .sprite .spark.t0 { --sc: #ffe76a; } .sprite .spark.t1 { --sc: #ff9be8; } .sprite .spark.t2 { --sc: #8ff4ff; }
 @keyframes twinkle { 0%, 55%, 100% { opacity: 0; } 15%, 40% { opacity: 1; } 25% { opacity: .55; } }
