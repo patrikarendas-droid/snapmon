@@ -455,9 +455,14 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     identical to build-18 generator output; old-save cases; build-18 backup code; battle weaknesses; stats keys) and
     `tests/e2e-family-variant.js` (412/320 px: discovery, battle header, Intel, Captured, detail, Encyclopedia, filters,
     vfx sizes). rules-trace, gameplay-baseline, generator-snapshot, sprite baselines unchanged.
+  - **Build 19** (run 45834171150, commit `b8feda3`, versionCode 1019, `0.6.0-dev.19+b8feda3`): all three jobs green on
+    the FIRST attempt (fast suite incl. the new tests, APK + release-configuration checks, emulator incl. recovery drill
+    from build 15's code). APK SHA-256 `28f854475943d168adefbaf6be379405bcb71c86adb9bfe5ef36bdf7d407b6aa` (72,312,542
+    bytes), same certificate 73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-19` (id 15125547176),
+    expires 2027-02-24. CI-green, NOT yet phone-verified.
 
 **Next priorities (2026-11-26, later):**
-- Owner: install the family/variant build as an update over build 18 (backup code first) and run its phone checklist.
+- Owner: install build 19 (families vs variants, variant sprite finish) as an update over build 18 (backup code first) and run its phone checklist.
 - Owner decision (optional): should the 381 Spectral/Mutated-natured objects also FIGHT like their real family? (balance change)
 - No further releases, deployments or merges without approval.
 
