@@ -942,6 +942,7 @@ function showResult(B, sum) {
     ${sum.result === 'defeat' ? '' : spriteHTML(m.dna, { size: 150, rarity: m.rarity, variant: m.variant })}
     <p style="max-width:34ch">${lines[sum.result]}</p>
     ${rewards ? `<div class="rewards">${rewards}</div>` : ''}
+    ${rewards && m.variant && sum.variantBonus && Object.keys(sum.variantBonus).length ? `<div class="small muted">${esc(variantLabel(m.variant))} bonus included: ${Object.entries(sum.variantBonus).map(([k, v]) => '+' + esc(rewardLabel(k, v))).join(', ')}${VARIANTS[m.variant].coinsX ? ' · coins ×' + VARIANTS[m.variant].coinsX : ''}</div>` : ''}
     ${sum.levelUps.map(l => `<div class="levelup" style="width:100%"><h2>LEVEL ${l}!</h2><div class="small">Full heal · +1 Research Point · stronger hits${l === 5 ? ' · second charm slot' : ''}${Object.entries(WEAPONS).filter(([, w]) => w.unlock && w.unlock.lvl === l).map(([, w]) => ' · ' + esc(w.name) + ' can now be forged').join('')}</div></div>`).join('')}
     ${drops}
     ${(sum.achievements || []).map(a => `<div class="card" style="width:100%;border-color:var(--flash)"><b style="color:var(--flash)">Achievement: ${esc(a.name)}</b><div class="small muted">${esc(a.desc)} · ${Object.entries(a.reward).map(([k, v]) => esc(rewardLabel(k, v))).join(', ')}</div></div>`).join('')}
@@ -963,7 +964,7 @@ function itemsSheet() {
   openSheet(`<div class="sheet-head"><h2>Items</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div><p class="small muted">Using an item takes your turn.</p>${list}`);
 }
 function infoSheet() {
-  const B = ui.battle, m = B.m, analysis = !!S.research.analysis, f = FAMILIES[m.fam]; // f: its combat nature (weaknesses), not its family
+  const B = ui.battle, m = B.m, analysis = !!S.research.analysis, f = FAMILIES[m.fam], v = VARIANTS[m.variant]; // f: its family (weaknesses); v: its variant's extras
   openSheet(`<div class="sheet-head"><h2>${esc(m.name.split(',')[0])}</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <div class="row wrap">${rarityChip(m.rarity)}${famChip(familyOf(m))}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
     <p class="muted lore lore-${m.rarity}">${esc(loreOf(m))}</p>
@@ -972,7 +973,8 @@ function infoSheet() {
       <div class="small"><b>Your weapon:</b> ${ELEMENTS[WEAPONS[B.weapon].el].name} — ${effMult(m.fam, WEAPONS[B.weapon].el) > 1 ? '<span style="color:var(--good)">super effective</span>' : effMult(m.fam, WEAPONS[B.weapon].el) < 1 ? '<span style="color:var(--danger)">resisted</span>' : 'normal damage'}</div>
       <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>`
     : `<div class="notice">Research <b>Monster Analysis</b> in the Lab to see stats, weaknesses, abilities and exact capture odds.</div>
-       <div class="small"><b>Weakness hint:</b> it is weak to ${f.weak.map(e => ELEMENTS[e].name).join(' and ')} weapons.</div>`}
+       <div class="small"><b>Family hint:</b> ${f.name} monsters are weak to ${f.weak.map(e => ELEMENTS[e].name).join(' and ')} weapons.</div>`}
+    ${v ? `<div class="small"><b style="color:${v.color}">${v.glyph} ${v.name} variant:</b> ${esc(v.blurb)}. Same weaknesses as its family; harder to capture.</div>` : ''}
     <div class="small muted">Capture odds rise as its HP falls, and when it is stunned, poisoned or burning.</div>`);
 }
 
@@ -991,7 +993,7 @@ function abilityDesc(a) {
   }
   return parts.join(' · ') + ` · recharge ${a.cd} turns`;
 }
-function abilityHTML(a) { return `<div class="ability"><b>${esc(a.name)}${a.ultimate ? ' <span style="color:var(--r-legendary)">★ ULTIMATE</span>' : ''}</b><span class="muted">${esc(abilityDesc(a))}</span></div>`; }
+function abilityHTML(a) { return `<div class="ability"><b>${esc(a.name)}${a.ultimate ? ' <span style="color:var(--r-legendary)">★ ULTIMATE</span>' : ''}${a.variant ? ' <span style="color:var(--violet)">VARIANT MOVE</span>' : ''}</b><span class="muted">${esc(abilityDesc(a))}</span></div>`; }
 
 /* ---------- DEX / collection ---------- */
 function dexScreen() {
@@ -1125,7 +1127,7 @@ function bagHTML() {
       ${usable ? `<button class="btn small ecto" data-act="useOut" data-arg="${id}">Use</button>` : '<span></span>'}</div>`;
   }).join('');
   return `<div class="section-title"><h2>Materials</h2></div>${matsHTML()}
-    <p class="small muted">Every defeated monster drops Scrap, Goo or Ectoplasm, depending on what it is made of (Spectral variants leave Ectoplasm, Mutated ones Goo). Rare and rarer monsters drop Prism Shards.</p>
+    <p class="small muted">Each family leaves its own material: ${FAMILY_IDS.map(f => FAMILIES[f].name + ' → ' + MATERIALS[FAMILIES[f].mat].name).join(', ')}. Variants add their own: ${Object.values(VARIANTS).map(v => v.name + ' +' + Object.entries(v.bonus).map(([k, n]) => rewardLabel(k, n)).join(', ')).join(' · ')}. Rare and rarer monsters drop Prism Shards.</p>
     <div class="section-title"><h2>Items</h2></div><div class="stack">${items}</div>`;
 }
 function shopHTML() {

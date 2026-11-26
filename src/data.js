@@ -32,19 +32,27 @@ const FAMILIES = {
                 abilities: [ { name: 'Sour Spit', power: 0.9, effect: 'poison', chance: 0.5 }, { name: 'Sugar Rush', power: 0, effect: 'atkup', self: true }, { name: 'Greasy Slap', power: 1.15 } ] },
   botanical:  { name: 'Botanical',  color: '#7fdc6a', glyph: '❦', hp: 1.10, atk: 0.95, def: 1.00, spd: 0.95, weak: ['slash'], resist: ['toxic'], mat: 'goo',
                 abilities: [ { name: 'Thorn Whip', power: 1.0, effect: 'poison', chance: 0.4 }, { name: 'Photosynthesis', power: 0, effect: 'heal', self: true }, { name: 'Root Bind', power: 0.7, effect: 'stun', chance: 0.3 } ] },
-  spectral:   { name: 'Spectral',   color: '#b9a6ff', glyph: '☾', hp: 0.90, atk: 1.10, def: 0.95, spd: 1.15, weak: ['ballistic', 'arcane'], resist: ['slash', 'toxic'], mat: 'ecto',
-                abilities: [ { name: 'Haunt', power: 1.0, effect: 'defdown', chance: 0.4 }, { name: 'Banshee Wail', power: 0.8, effect: 'stun', chance: 0.25 }, { name: 'Soul Siphon', power: 0.9, effect: 'drain' } ] },
-  mutated:    { name: 'Mutated',    color: '#c3ff4f', glyph: '☣', hp: 1.10, atk: 1.15, def: 0.90, spd: 0.95, weak: ['arcane', 'shock'], resist: ['toxic'], mat: 'goo',
-                abilities: [ { name: 'Acid Spew', power: 0.95, effect: 'poison', chance: 0.55 }, { name: 'Tentacle Flurry', power: 0.45, hits: 3 }, { name: 'Unstable Growth', power: 0, effect: 'atkup', self: true } ] },
 };
-const NATIVE_FAMILIES = ['organic', 'mechanical', 'elemental', 'household', 'food', 'botanical', 'spectral', 'mutated'];
-/* Families vs variants (2026-11-26). Spectral and Mutated are VARIANTS (like Prismatic), never families. Their FAMILIES
-   entries stay as combat natures only: a monster's stored `fam` is its combat nature (stat multipliers, weaknesses,
-   family moves, material) and is 'spectral'/'mutated' for those variants and for the eight categories below, exactly
-   as before (no balance or save change). The family SHOWN to the player always comes from the object and is one of
-   FAMILY_IDS (familyOf in game.js); CATEGORY_FAMILY gives those eight categories their real family. */
-const FAMILY_IDS = ['organic', 'mechanical', 'elemental', 'household', 'food', 'botanical'];
-const CATEGORY_FAMILY = { book: 'household', mirror: 'household', instrument: 'household', toy: 'household', trash: 'household', clock: 'mechanical', cloth: 'organic', bug: 'organic' };
+const NATIVE_FAMILIES = ['organic', 'mechanical', 'elemental', 'household', 'food', 'botanical'];
+/* Families vs variants (combat model 2, 2026-11-26). The six FAMILIES above are the only families: an object has
+   exactly one (its category's, or its object group's), shared by every rarity and variant, and that family alone
+   decides base stat multipliers, weaknesses/resistances, family moves and the family material. Spectral, Mutated
+   and Prismatic are VARIANTS layered on top: stat modifiers (applied after the family/rarity stats), one extra move
+   (Spectral, Mutated) and extra rewards. They never change the family, its weaknesses or its resistances. Until
+   build 19 the Spectral/Mutated variants REPLACED the family with Spectral/Mutated tables, and books, clothing,
+   mirrors, clocks, instruments, toys, trash and bugs used those tables as their family (see the journal). */
+const FAMILY_IDS = NATIVE_FAMILIES;
+const VARIANTS = {
+  spectral: { name: 'Spectral', glyph: '☾', color: '#7fefff', stats: { hp: 0.92, atk: 1.05, def: 1, spd: 1.15 },
+              move: { name: 'Soul Siphon', power: 0.9, effect: 'drain' }, bonus: { ecto: 2 },
+              blurb: 'ghostly and fast but frail; drains your HP with Soul Siphon' },
+  mutated:  { name: 'Mutated', glyph: '☣', color: '#b6ff3b', stats: { hp: 1.08, atk: 1.12, def: 0.95, spd: 1 },
+              move: { name: 'Acid Spew', power: 0.95, effect: 'poison', chance: 0.55 }, bonus: { goo: 3 },
+              blurb: 'tougher and harder-hitting, a little softer; poisons with Acid Spew' },
+  shiny:    { name: 'Prismatic', glyph: '✧', color: '#ffc4f2', stats: { hp: 1.08, atk: 1.08, def: 1.08, spd: 1.08 },
+              move: null, bonus: { prism: 1 }, coinsX: 2,
+              blurb: 'stronger in every stat; double coins and an extra Prism Shard' },
+};
 
 /* Object categories. hue: base body hue (deg), sat/lit tweak; shape: sprite builder id. kw: keywords matched against
    typed names and (optional) AI-lens labels. sig: the category's signature ability. */
@@ -67,7 +75,7 @@ const CATEGORIES = [
     sig: { name: 'Notification Spam', power: 0.42, hits: 3 }, flavor: 'Feeds on your attention span. It is very, very well fed.' },
   { id: 'bottle',  name: 'Bottle',         icon: '🍾', fam: 'elemental',  shape: 'bottle',  hue: 190, sat: 60, lit: 60, acc: 0, names: ['Fizz', 'Splash', 'Gulp', 'Cap', 'Aqua'], kw: ['bottle', 'water', 'flask', 'can', 'jar', 'jug', 'thermos', 'soda', 'beer', 'wine', 'pop bottle', 'water bottle', 'pill bottle'],
     sig: { name: 'Pressure Burst', power: 1.15, effect: 'defdown', chance: 0.5 }, flavor: 'Shake it once and it remembers you forever.' },
-  { id: 'book',    name: 'Book / Paper',   icon: '📕', fam: 'spectral',   shape: 'book',    hue: -1,  sat: 45, lit: 38, acc: 45, names: ['Tome', 'Grim', 'Page', 'Codex', 'Inkwyrm'], kw: ['book', 'paper', 'notebook', 'magazine', 'newspaper', 'comic', 'binder', 'letter', 'envelope', 'book jacket', 'menu'],
+  { id: 'book',    name: 'Book / Paper',   icon: '📕', fam: 'household',   shape: 'book',    hue: -1,  sat: 45, lit: 38, acc: 45, names: ['Tome', 'Grim', 'Page', 'Codex', 'Inkwyrm'], kw: ['book', 'paper', 'notebook', 'magazine', 'newspaper', 'comic', 'binder', 'letter', 'envelope', 'book jacket', 'menu'],
     sig: { name: 'Papercut Storm', power: 0.4, hits: 3 }, flavor: 'Overdue library books eventually become this. Return yours.' },
   { id: 'lamp',    name: 'Lamp / Light',   icon: '💡', fam: 'elemental',  shape: 'lamp',    hue: 45,  sat: 70, lit: 62, acc: 50, names: ['Lumen', 'Glare', 'Bulb', 'Shade', 'Flick'], kw: ['lamp', 'light', 'bulb', 'lantern', 'lampshade', 'torch', 'flashlight', 'spotlight', 'chandelier'],
     sig: { name: 'Blinding Glare', power: 0.8, effect: 'stun', chance: 0.35 }, flavor: 'Moths worship it. That should have been your first warning.' },
@@ -83,21 +91,21 @@ const CATEGORIES = [
     sig: { name: 'Grease Fire', power: 1.0, effect: 'burn', chance: 0.5 }, flavor: 'Wants to be eaten. Specifically, it wants to eat you first.' },
   { id: 'fruit',   name: 'Fruit / Veg',    icon: '🍎', fam: 'food',       shape: 'fruit',   hue: -1,  sat: 75, lit: 50, acc: 110, names: ['Apple', 'Pulp', 'Rind', 'Pip', 'Jam'], kw: ['apple', 'orange', 'lemon', 'fruit', 'pear', 'peach', 'grape', 'strawberry', 'tomato', 'potato', 'onion', 'carrot', 'pepper', 'vegetable', 'melon', 'pineapple', 'avocado', 'cucumber', 'broccoli', 'cabbage', 'pumpkin', 'egg'],
     sig: { name: 'Rotten Core', power: 0.95, effect: 'poison', chance: 0.6 }, flavor: 'One bad apple spoils the bunch. This is the bad apple.' },
-  { id: 'cloth',   name: 'Clothing',       icon: '👕', fam: 'spectral',   shape: 'cloth',   hue: -1,  sat: 50, lit: 58, acc: 0, names: ['Sock', 'Hoodie', 'Lint', 'Sleeve', 'Drape'], kw: ['shirt', 'clothing', 'clothes', 'sock', 'hoodie', 'jacket', 'coat', 'dress', 'pants', 'jeans', 'hat', 'cap', 'scarf', 'towel', 'blanket', 'curtain', 'jersey', 'sweatshirt', 'cardigan', 'glove', 'tie', 'sombrero', 'cowboy hat'],
+  { id: 'cloth',   name: 'Clothing',       icon: '👕', fam: 'organic',   shape: 'cloth',   hue: -1,  sat: 50, lit: 58, acc: 0, names: ['Sock', 'Hoodie', 'Lint', 'Sleeve', 'Drape'], kw: ['shirt', 'clothing', 'clothes', 'sock', 'hoodie', 'jacket', 'coat', 'dress', 'pants', 'jeans', 'hat', 'cap', 'scarf', 'towel', 'blanket', 'curtain', 'jersey', 'sweatshirt', 'cardigan', 'glove', 'tie', 'sombrero', 'cowboy hat'],
     sig: { name: 'Smother', power: 0.9, effect: 'drain' }, flavor: 'Floats out of the laundry pile at 3 a.m. looking for its missing half.' },
   { id: 'tool',    name: 'Tool',           icon: '🔧', fam: 'mechanical', shape: 'tool',    hue: 0,   sat: 70, lit: 45, acc: 210, names: ['Wrench', 'Bolt', 'Clamp', 'Rivet', 'Drill'], kw: ['tool', 'wrench', 'hammer', 'screwdriver', 'drill', 'saw', 'pliers', 'scissors', 'knife', 'toolbox', 'nail', 'screw', 'tape', 'broom', 'mop', 'shovel', 'rake', 'spatula', 'ladle', 'fork', 'spoon', 'pan', 'pot ', 'frying pan', 'wok'],
     sig: { name: 'Nail Gun', power: 0.45, hits: 3 }, flavor: 'Fixes nothing. Breaks everything. Takes its time doing both.' },
-  { id: 'toy',     name: 'Toy / Game',     icon: '🧸', fam: 'mutated',    shape: 'toy',     hue: 28,  sat: 50, lit: 55, acc: 330, names: ['Teddy', 'Plush', 'Squeaky', 'Button', 'Dolly'], kw: ['toy', 'teddy', 'doll', 'plush', 'ball', 'lego', 'game', 'puzzle', 'balloon', 'action figure', 'robot', 'kite', 'controller', 'joystick', 'dice', 'cards', 'teddy bear'],
+  { id: 'toy',     name: 'Toy / Game',     icon: '🧸', fam: 'household',    shape: 'toy',     hue: 28,  sat: 50, lit: 55, acc: 330, names: ['Teddy', 'Plush', 'Squeaky', 'Button', 'Dolly'], kw: ['toy', 'teddy', 'doll', 'plush', 'ball', 'lego', 'game', 'puzzle', 'balloon', 'action figure', 'robot', 'kite', 'controller', 'joystick', 'dice', 'cards', 'teddy bear'],
     sig: { name: 'Stuffing Burst', power: 0.8, effect: 'defdown', chance: 0.65 }, flavor: 'Its button eyes moved. They definitely moved.' },
-  { id: 'trash',   name: 'Trash / Bin',    icon: '🗑️', fam: 'mutated',    shape: 'bin',     hue: 140, sat: 18, lit: 40, acc: 85, names: ['Rubb', 'Grime', 'Bin', 'Litter', 'Muck'], kw: ['trash', 'bin', 'garbage', 'waste', 'rubbish', 'dumpster', 'recycling', 'bag', 'plastic bag', 'ashcan', 'trash can'],
+  { id: 'trash',   name: 'Trash / Bin',    icon: '🗑️', fam: 'household',    shape: 'bin',     hue: 140, sat: 18, lit: 40, acc: 85, names: ['Rubb', 'Grime', 'Bin', 'Litter', 'Muck'], kw: ['trash', 'bin', 'garbage', 'waste', 'rubbish', 'dumpster', 'recycling', 'bag', 'plastic bag', 'ashcan', 'trash can'],
     sig: { name: 'Stench Cloud', power: 0.75, effect: 'poison', chance: 0.75 }, flavor: 'Raccoons fear it. You should too.' },
-  { id: 'mirror',  name: 'Mirror / Window', icon: '🪞', fam: 'spectral',  shape: 'mirror',  hue: 200, sat: 30, lit: 72, acc: 45, names: ['Mirr', 'Glint', 'Visage', 'Echo', 'Vanity'], kw: ['mirror', 'window', 'glass', 'reflection', 'screen door', 'window shade', 'frame', 'picture', 'painting', 'photo'],
+  { id: 'mirror',  name: 'Mirror / Window', icon: '🪞', fam: 'household',  shape: 'mirror',  hue: 200, sat: 30, lit: 72, acc: 45, names: ['Mirr', 'Glint', 'Visage', 'Echo', 'Vanity'], kw: ['mirror', 'window', 'glass', 'reflection', 'screen door', 'window shade', 'frame', 'picture', 'painting', 'photo'],
     sig: { name: 'Cursed Reflection', power: 0.95, effect: 'defdown', chance: 0.6 }, flavor: 'Your reflection blinked first. That was not you.' },
   { id: 'fridge',  name: 'Fridge / Appliance', icon: '🧊', fam: 'elemental', shape: 'fridge', hue: 195, sat: 25, lit: 80, acc: 190, names: ['Frost', 'Chill', 'Fridj', 'Rime', 'Icebox'], kw: ['fridge', 'refrigerator', 'freezer', 'microwave', 'oven', 'stove', 'washer', 'washing machine', 'dishwasher', 'toaster', 'kettle', 'blender', 'appliance', 'heater', 'fan', 'air conditioner', 'vacuum', 'iron', 'dryer', 'ice'],
     sig: { name: 'Deep Freeze', power: 0.85, effect: 'stun', chance: 0.35 }, flavor: 'The light inside does not turn off when the door closes. It watches.' },
   { id: 'candle',  name: 'Candle / Fire',  icon: '🕯️', fam: 'elemental',  shape: 'candle',  hue: 20,  sat: 70, lit: 75, acc: 25, names: ['Wick', 'Ember', 'Wax', 'Pyre', 'Cinder'], kw: ['candle', 'fire', 'flame', 'match', 'lighter', 'fireplace', 'bonfire', 'campfire', 'grill', 'bbq'],
     sig: { name: 'Wax Inferno', power: 1.0, effect: 'burn', chance: 0.65 }, flavor: 'Blow it out and it simply relights itself, angrier.' },
-  { id: 'clock',   name: 'Clock / Watch',  icon: '⏰', fam: 'spectral',   shape: 'clock',   hue: 40,  sat: 55, lit: 55, acc: 0, names: ['Tick', 'Tock', 'Chrono', 'Cuckoo', 'Dial'], kw: ['clock', 'watch', 'timer', 'alarm', 'stopwatch', 'hourglass', 'sundial', 'wall clock', 'digital clock', 'analog clock'],
+  { id: 'clock',   name: 'Clock / Watch',  icon: '⏰', fam: 'mechanical',   shape: 'clock',   hue: 40,  sat: 55, lit: 55, acc: 0, names: ['Tick', 'Tock', 'Chrono', 'Cuckoo', 'Dial'], kw: ['clock', 'watch', 'timer', 'alarm', 'stopwatch', 'hourglass', 'sundial', 'wall clock', 'digital clock', 'analog clock'],
     sig: { name: 'Time Skip', power: 0.9, effect: 'stun', chance: 0.35 }, flavor: 'Steals five minutes from every morning. It has been saving up.' },
   { id: 'keys',    name: 'Keys / Small item', icon: '🔑', fam: 'mechanical', shape: 'key',  hue: 45,  sat: 65, lit: 55, acc: 0, names: ['Jingle', 'Lock', 'Skelly', 'Latch', 'Keyring'], kw: ['key', 'keys', 'lock', 'padlock', 'coin', 'wallet', 'ring', 'jewelry', 'necklace', 'pen', 'pencil', 'battery', 'charger', 'cable', 'headphones', 'earbuds', 'glasses', 'sunglasses', 'lipstick', 'comb', 'brush', 'toothbrush'],
     sig: { name: 'Jingle Jab', power: 0.45, hits: 3 }, flavor: 'Hides itself whenever you are late. Every single time.' },
@@ -113,13 +121,13 @@ const CATEGORIES = [
     sig: { name: 'Dive Bomb', power: 1.35 }, flavor: 'It is not singing at dawn. It is summoning.' },
   { id: 'fish',    name: 'Fish / Sea life', icon: '🐟', fam: 'elemental', shape: 'fish',    hue: -1,  sat: 60, lit: 55, acc: 200, names: ['Gill', 'Fin', 'Splosh', 'Scale', 'Gulp'], kw: ['fish', 'shark', 'goldfish', 'whale', 'jellyfish', 'starfish', 'aquarium'],
     sig: { name: 'Tidal Slap', power: 1.0, effect: 'defdown', chance: 0.45 }, flavor: 'The goldfish has been plotting for three seconds at a time, forever.' },
-  { id: 'bug',     name: 'Bug / Critter',  icon: '🐞', fam: 'mutated',    shape: 'bug',     hue: -1,  sat: 60, lit: 42, acc: 0, names: ['Skitter', 'Buzz', 'Crawl', 'Mandi', 'Chitin'], kw: ['bug', 'insect', 'beetle', 'spider', 'ant', 'bee', 'butterfly', 'crab', 'snail', 'ladybug'],
+  { id: 'bug',     name: 'Bug / Critter',  icon: '🐞', fam: 'organic',    shape: 'bug',     hue: -1,  sat: 60, lit: 42, acc: 0, names: ['Skitter', 'Buzz', 'Crawl', 'Mandi', 'Chitin'], kw: ['bug', 'insect', 'beetle', 'spider', 'ant', 'bee', 'butterfly', 'crab', 'snail', 'ladybug'],
     sig: { name: 'Venom Nip', power: 0.9, effect: 'poison', chance: 0.6 }, flavor: 'For every human there are a million of these. They have noticed.' },
   { id: 'reptile', name: 'Reptile / Frog', icon: '🦎', fam: 'organic',    shape: 'reptile', hue: 110, sat: 50, lit: 42, acc: 60, names: ['Scaly', 'Croak', 'Hiss', 'Slither', 'Shell'], kw: ['lizard', 'snake', 'frog', 'turtle', 'tortoise', 'gecko', 'toad', 'crocodile'],
     sig: { name: 'Cold-Blooded Bite', power: 1.1, effect: 'poison', chance: 0.35 }, flavor: 'Basks under your desk lamp. Dreams of when it was a dinosaur.' },
   { id: 'umbrella', name: 'Umbrella',      icon: '☂️', fam: 'household',  shape: 'umbrella', hue: -1, sat: 65, lit: 48, acc: 30, names: ['Brolly', 'Canopy', 'Drizzle', 'Parasol', 'Spoke'], kw: ['umbrella', 'parasol', 'parachute'],
     sig: { name: 'Spoke Jab', power: 0.45, hits: 3 }, flavor: 'Opens indoors on purpose. That is where the bad luck comes from.' },
-  { id: 'instrument', name: 'Instrument',  icon: '🎸', fam: 'spectral',   shape: 'instrument', hue: 28, sat: 60, lit: 45, acc: 45, names: ['Strum', 'Tuba', 'Chord', 'Drumm', 'Sonata'], kw: ['guitar', 'piano', 'drum', 'violin', 'trumpet', 'flute', 'saxophone', 'instrument', 'harp', 'ukulele'],
+  { id: 'instrument', name: 'Instrument',  icon: '🎸', fam: 'household',   shape: 'instrument', hue: 28, sat: 60, lit: 45, acc: 45, names: ['Strum', 'Tuba', 'Chord', 'Drumm', 'Sonata'], kw: ['guitar', 'piano', 'drum', 'violin', 'trumpet', 'flute', 'saxophone', 'instrument', 'harp', 'ukulele'],
     sig: { name: 'Haunting Chord', power: 0.85, effect: 'stun', chance: 0.35 }, flavor: 'Plays itself at midnight. Always slightly out of tune.' },
   { id: 'ball',    name: 'Ball',           icon: '⚽', fam: 'household',  shape: 'ball',    hue: -1,  sat: 70, lit: 52, acc: 0, names: ['Bounce', 'Dribbl', 'Spinn', 'Kick', 'Lob'], kw: ['ball', 'football', 'soccer', 'basketball', 'tennis ball', 'baseball', 'volleyball', 'golf ball'],
     sig: { name: 'Ricochet', power: 0.5, hits: 3 }, flavor: 'Rolls under the sofa on purpose. It likes the dark down there.' },

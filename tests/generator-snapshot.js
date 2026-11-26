@@ -25,7 +25,11 @@ const FIX = path.join(__dirname, 'fixtures/generator-snapshot.json');
 const G = require('./load')();
 const { OBJECTS, createMonster, freshState, speciesLore, exportSave, setRNG, CURATED } = G;
 const RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
-const noKeys = m => ({ ...m, abilities: m.abilities.map(({ key, cdWith, ...a }) => a) });
+// combat model 2 (2026-11-26): `cv` (the monster's combat-model stamp) is an additive internal field like the ability
+// keys and is left out of the hash; the model change itself was re-recorded ON PURPOSE with "record-text": the 381
+// objects of book/cloth/mirror/clock/instrument/toy/trash/bug now fight with their real family (stats, kit picks).
+// tests/family-variant.js proves every OTHER object's Normal monster is identical to build 19.
+const noKeys = m => { const { cv, ...rest } = m; return { ...rest, abilities: m.abilities.map(({ key, cdWith, variant, ...a }) => a) }; };
 function snapshot(curatedOn) {
   const live = [CURATED.enabled, CURATED.movesEnabled]; CURATED.enabled = CURATED.movesEnabled = curatedOn;
   let seed = 4242; setRNG(() => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; });

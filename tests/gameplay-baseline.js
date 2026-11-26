@@ -118,6 +118,10 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
   }
   parts.battles = dig(h); parts.battleCount = battles;
 }
+// Combat model 2 (2026-11-26): re-recorded ON PURPOSE with "record": families decide combat, variants are layered on
+// top (data.js VARIANTS); the eight formerly Spectral/Mutated-natured categories use their real family. rules,
+// monsters, mechanics, encounters and battles changed; sprites and recognition did not. Old-vs-new numbers:
+// docs/review/COMBAT_MODEL_2.md (tools/combat-report.js). rules-trace (5 objects, no variants) is unchanged.
 // "record-art" (v0.6.0 sprite redesign): artwork changed ON PURPOSE. Refuses unless every part except the artwork hashes
 // (`monsters` = stats + moves + DNA, `sprites` = rendered pixels) is identical, so rules, mechanics (stats and moves of
 // every object, without artwork), recognition, encounters and battles are proven unchanged.

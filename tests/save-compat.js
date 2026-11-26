@@ -30,7 +30,9 @@ function game(read, tag) {
   vm.createContext(ctx);
   const src = FILES.map(f => read(f)).filter(s => s != null).join('\n');
   vm.runInContext(src + `\n;globalThis.__api = { freshState, migrate, exportSave, importSave, saveState, loadState, createMonster, recordSighting,
-    newBattle, finishBattle, SAVE_KEY, SAVE_VERSION, GAME_VERSION, blocked: () => saveBlocked, setRNG: f => { RNG = f; } };`, ctx, { filename: tag });
+    newBattle, finishBattle, SAVE_KEY, SAVE_VERSION, GAME_VERSION, blocked: () => saveBlocked, setRNG: f => { RNG = f; },
+    COMBAT_MODEL: typeof COMBAT_MODEL !== 'undefined' ? COMBAT_MODEL : 1, objectFamily: typeof objectFamily === 'function' ? objectFamily : null,
+    monsterStats: typeof monsterStats === 'function' ? monsterStats : null };`, ctx, { filename: tag });
   return { api: ctx.__api, store };
 }
 const current = () => game(f => { const p = path.join(ROOT, 'src', f); return fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : null; }, 'current');
@@ -132,9 +134,16 @@ for (const ref of refs) {
   P.api.saveState(PS);
   const F = current(); F.store[C.api.SAVE_KEY] = P.store[C.api.SAVE_KEY];
   const FL = F.api.loadState();
-  const added = diff(J(PS), J(FL)).filter(p => !/^hunterName$|^enc\.quiet$|^enc\.disturbed$/.test(p));
+  // Combat model 2 (2026-11-26) is an intentional change: a monster made by older code gets its combat data (family,
+  // stats, moves, stamp `cv`) rebuilt on load; old 'spectral'/'mutated' statistic keys are dropped. Those paths are
+  // allowed here ONLY because the rebuilt values are verified right below against the current model.
+  const COMBAT = /^monsters\.\d+\.(fam|cv|stats(\.\w+)?|abilities(\.\d+(\.\w+)?)?)$|^dex\.[^.]+\.fam$|^stats\.(famSeen|capByFam)\.(spectral|mutated)$/;
+  const added = diff(J(PS), J(FL)).filter(p => !/^hunterName$|^enc\.quiet$|^enc\.disturbed$/.test(p) && !COMBAT.test(p));
   ok(!F.api.blocked() && PS.monsters.length === 2 && FL.monsters.length === 2 && !added.length,
-    `${tag}: a save made and played by the old code (2 captures) loads in the current code unchanged apart from additive defaults${added.length ? ' — differs: ' + added.slice(0, 6).join(', ') : ''}`);
+    `${tag}: a save made and played by the old code (2 captures) loads in the current code unchanged apart from additive defaults and the combat-model rebuild${added.length ? ' — differs: ' + added.slice(0, 6).join(', ') : ''}`);
+  const A = F.api, rebuilt = FL.monsters.every((m, i) => { const o = PS.monsters[i], fam = A.objectFamily(o.obj);
+    return m.cv === A.COMBAT_MODEL && m.fam === fam && JSON.stringify(m.stats) === JSON.stringify(A.monsterStats(o.rarity, fam, o.level, o.seed, o.variant || null)) && m.level === o.level && JSON.stringify(m.dna) === JSON.stringify(o.dna) && m.id === o.id; });
+  ok(rebuilt, `${tag}: its monsters are rebuilt to combat model ${A.COMBAT_MODEL} (real family, current stats) with level, look and id kept`);
 }
 
 console.log(errors.length ? `\n${errors.length} FAILED` : `\nsave compatibility: all checks passed (${refs.length} older versions)`);

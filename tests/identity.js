@@ -116,8 +116,11 @@ for (const [label, kind] of [['steak', 'meat'], ['bacon', 'meat'], ['celery', 'v
 // move kits: four moves each, numbers only from the shared archetypes (the same ranges as the family moves)
 const kitBad = Object.entries(T.MOVE_KITS).filter(([, k]) => { const mv = k.split(',').map(x => x.split(':').map(t => t.trim())); return mv.length !== 4 || mv.some(([n, a]) => !n || !T.MOVE_ARCH[a]) || new Set(mv.map(x => x[0])).size !== 4; });
 ok(!kitBad.length && Object.keys(T.CATEGORY).every(c => T.MOVE_KITS[c]), `${Object.keys(T.MOVE_KITS).length} move kits, four valid moves each, one per category at least${kitBad.length ? ': ' + kitBad.map(x => x[0]).join(', ') : ''}`);
-const famPow = Object.values(T.FAMILIES).flatMap(f => f.abilities.map(a => a.power)), archPow = Object.values(T.MOVE_ARCH).map(a => a.power);
-ok(Math.max(...archPow) <= Math.max(...famPow) && archPow.every(p => p === 0 || p >= Math.min(...famPow.filter(Boolean))), 'kit move power stays within the family moves\' range');
+// combat model 2: the Spectral/Mutated family tables are gone (their 0.45×3 Tentacle Flurry set the old minimum), so a
+// multi-hit archetype is judged by its total power per turn; single hits must stay within the family moves' range
+const famPow = Object.values(T.FAMILIES).flatMap(f => f.abilities.map(a => a.power)), arch = Object.values(T.MOVE_ARCH);
+const minFam = Math.min(...famPow.filter(Boolean)), archOut = arch.filter(a => a.power && (a.power * (a.hits || 1) < minFam || a.power > Math.max(...famPow)));
+ok(!archOut.length, `kit move power stays within the family moves' range (${minFam}–${Math.max(...famPow)}; multi-hit moves by total)${archOut.length ? ': ' + JSON.stringify(archOut) : ''}`);
 // repertoire variety: rare and epic monsters of one category no longer share one move set
 for (const cat of ['tool', 'keys', 'laptop', 'food']) {
   const sets = new Set(T.OBJECT_LIST.filter(o => o.cat === cat).slice(0, 60).map(o => mk(o.id, 'epic').abilities.slice(1).map(a => a.name).sort().join('+')));

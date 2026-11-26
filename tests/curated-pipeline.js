@@ -53,7 +53,8 @@ ok(rows.length === T.OBJECT_LIST.length && new Set(ids).size === ids.length && i
 ok(rows.every(r => W.RAR.every(x => typeof r.names[x] === 'string' && typeof r.lore[x] === 'string') && ['signature', 'legend', 'ultimate'].every(k => r.moves.some(m => m.key === k))), 'every row has 5 current names, 5 procedural texts and signature/legend/ultimate slots');
 const apple = rows.find(r => r.id === 'apple'), ped = rows.find(r => r.id === 'toaster');
 ok(apple.curated.lore.status === 'reviewed' && apple.curated.lore.rarities.length === 5 && apple.curated.names.status === 'reviewed' && ped.curated.status === 'reviewed' && ped.curated.names.status === 'reviewed' && ped.curated.names.rarities.length === 5 && rows.every(r => r.curated.lore.status === 'reviewed' && r.curated.names.status === 'reviewed'), 'coverage per layer: every object has reviewed lore and names (Pilot 01 names since v0.5.0)');
-ok(rows.find(r => r.id === 'x_energy_drink').moves.find(m => m.key === 'ultimate').variantsDiffer === true, 'inventory records when an Ultimate effect differs by variant');
+// combat model 2: the variant never changes the family, so no legend move or Ultimate differs by variant any more
+ok(rows.every(r => r.moves.every(m => m.variantsDiffer !== true)) && rows.find(r => r.id === 'x_energy_drink').moves.find(m => m.key === 'ultimate').variantsDiffer === false, 'inventory: no Ultimate or legend move differs by variant (model 2; the field is still recorded)');
 
 // 3. draft monster names: schema
 const v = e => T.validateCurated({ schema: 1, entries: { toaster: e } }, { file: 't' });
@@ -119,7 +120,10 @@ ok(!v({ status: 'needs-revision', names: { common: 'Crumbit' } }).errors.length,
   ok(has('toaster', 'duplicate-name') && has('kettle', 'duplicate-name'), 'lint: duplicate monster name');
   ok(has('toaster', 'generic-filler'), 'lint: generic myth filler');
   ok(has('toaster', 'move-effect'), 'lint: move name promising an effect the move does not have');
-  ok(has('toaster', 'ultimate-variants'), 'lint: Ultimate name tied to one effect although variants differ');
+  // combat model 2 (2026-11-26): a variant no longer changes the family, so a Legendary's legend move and Ultimate are
+  // identical in every variant and the 'ultimate-variants' rule has nothing left to flag (it stays in the linter)
+  const ult = v => JSON.stringify(T.createMonster(T.freshState(), { obj: 'toaster', rarity: 'legendary', variant: v }).abilities.filter(a => a.legend || a.ultimate).map(a => [a.key, a.power, a.effect, a.chance]));
+  ok(!has('toaster', 'ultimate-variants') && ult(null) === ult('spectral') && ult(null) === ult('mutated') && ult(null) === ult('shiny'), 'lint: Ultimate effects no longer differ by variant (model 2), so nothing is flagged as variant-dependent');
 }
 
 console.log(bad ? `\n${bad} PROBLEM(S)` : '\nALL CURATED-PIPELINE CHECKS PASSED');

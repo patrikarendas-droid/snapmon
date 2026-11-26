@@ -1,14 +1,16 @@
-// Families vs variants (2026-11-26). Spectral, Mutated and Prismatic are VARIANTS, never families.
-//   • every registry object has a real family (one of FAMILY_IDS); every rarity × variant of it shows that same family
-//     (exhaustive: all objects × 5 rarities × 4 variants), incl. the owner's Prismatic Common baby bottle (Household)
-//   • the combat nature (stored m.fam: stats, weaknesses, family moves, material) is EXACTLY as before: compared with
-//     monsters made by the build-18 game code (git 45dbff1) for every object × rarity × variant
-//   • old saves: monsters/encyclopedia entries stored with fam 'spectral'/'mutated' (variant or native), object-less
-//     legacy monsters, an older family of an object (a Mechanical spoon), a bare category id — all show a real family
-//     after load + backup code; the stored fam, stats and moves are untouched; nothing is written to the save
-//   • a build-18 save (made by the build-18 code) loads with identical monsters and real families
-//   • battle type interactions use the unchanged nature; the family filter list holds only real families
-//   • new statistics/quests count real families; older 'spectral'/'mutated' statistic keys are kept
+// Combat model 2 (2026-11-26): families decide combat; Spectral, Mutated and Prismatic are VARIANTS layered on top.
+//   1. taxonomy: exactly six families; no variant is a family; every category and object has a real family
+//   2. every registry object × 5 rarities × 4 variants (46,160 monsters): the stored family = the object's family =
+//      the shown family; it drives the battle's weaknesses; the monster carries the current combat-model stamp
+//   3. the variant layer, checked against the Normal form of the same monster: exact stat modifiers, the same
+//      family weaknesses/resistances, the same moves plus exactly the variant move (none for Prismatic)
+//   4. nothing unintended changed: every Normal and Prismatic monster of the objects OUTSIDE the eight re-familied
+//      categories is identical to build 19 (git 17bb241): family, stats, moves, DNA
+//   5. rewards: family material from the family, the variant bonus on top and reported separately; release
+//   6. saves: monsters made by build 19 (stored 'spectral'/'mutated' families, old stats) are rebuilt on load and on
+//      backup-code import to exactly the current model (same object, rarity, variant, level, seed), keeping look,
+//      name, flavour text, level, XP, id, nickname; idempotent; encyclopedia and statistics hold only real families;
+//      no mixed old/new monsters after any load path
 // Usage: node tests/family-variant.js
 'use strict';
 const fs = require('fs'), path = require('path'), vm = require('vm'), { execSync } = require('child_process');
@@ -16,50 +18,68 @@ const G = require('./load')();
 const errors = [];
 const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); } else console.log('ok  ', msg); };
 const RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'], VAR = [null, 'spectral', 'mutated', 'shiny'];
-const NOT_FAMILIES = ['spectral', 'mutated', 'shiny', 'prismatic', 'normal'];
+const EIGHT = { book: 'household', cloth: 'organic', mirror: 'household', clock: 'mechanical', instrument: 'household', toy: 'household', trash: 'household', bug: 'organic' };
+const ELS = ['slash', 'ballistic', 'arcane', 'shock', 'toxic'];
 const seeded = seed => { let s = seed >>> 0 || 1; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; };
 const snap = x => JSON.stringify(x);
+const mech = a => [a.power, a.hits || 0, a.effect || '', a.chance || 0, !!a.self, a.cd, !!a.ultimate, !!a.legend, !!a.variant];
+const mk = (A, id, r, v, n) => A.createMonster(A.freshState(), { obj: id, cat: A.OBJECTS[id].cat, rarity: r, variant: v, word: A.OBJECTS[id].name, photo: null, first: false, rng: seeded(n) });
 
-// 1. the taxonomy
-ok(snap(G.FAMILY_IDS) === snap(['organic', 'mechanical', 'elemental', 'household', 'food', 'botanical']), 'real families: Organic, Mechanical, Elemental, Household, Food, Botanical');
-ok(G.FAMILY_IDS.every(f => G.FAMILIES[f]) && !G.FAMILY_IDS.some(f => NOT_FAMILIES.includes(f)), 'no variant (Spectral, Mutated, Prismatic) is a family');
-ok(snap(G.NATIVE_FAMILIES.slice(0, 6)) === snap(G.FAMILY_IDS), 'object-less "other" monsters (hash % 6 of NATIVE_FAMILIES) only ever get real families');
-ok(Object.values(G.CATEGORY_FAMILY).every(f => G.FAMILY_IDS.includes(f)), 'every replacement family is a real family');
-const naturedCats = G.CATEGORIES.filter(c => c.fam && !G.FAMILY_IDS.includes(c.fam)).map(c => c.id).sort();
-ok(snap(naturedCats) === snap(Object.keys(G.CATEGORY_FAMILY).sort()), `the categories with a Spectral/Mutated nature (${naturedCats.join(', ')}) each have a real family`);
+// 1. taxonomy
+ok(snap(Object.keys(G.FAMILIES)) === snap(G.FAMILY_IDS) && G.FAMILY_IDS.length === 6, `exactly six families: ${G.FAMILY_IDS.join(', ')}`);
+ok(!G.FAMILIES.spectral && !G.FAMILIES.mutated && !G.FAMILIES.shiny && snap(Object.keys(G.VARIANTS)) === snap(['spectral', 'mutated', 'shiny']), 'Spectral, Mutated and Prismatic are variants only (no family tables of their own)');
+ok(G.CATEGORIES.every(c => c.id === 'other' ? !c.fam : G.FAMILY_IDS.includes(c.fam)), 'every category has a real family');
+ok(Object.entries(EIGHT).every(([c, f]) => G.CATEGORIES.find(x => x.id === c).fam === f), 'books, mirrors, instruments, toys, trash → Household; clocks → Mechanical; clothing, bugs → Organic');
 
-// 2. every registry object: one real family, identical for every rarity and variant
-const ids = Object.keys(G.OBJECTS);
-const bad = [], perFam = {};
-for (const id of ids) { const f = G.objectFamily(id); perFam[f] = (perFam[f] || 0) + 1; if (!G.FAMILY_IDS.includes(f)) bad.push(id + '=' + f); }
-ok(ids.length >= 2308 && !bad.length, `all ${ids.length} registry objects have a real family (${Object.entries(perFam).map(([f, n]) => f + ' ' + n).join(', ')})${bad.length ? ' — bad: ' + bad.slice(0, 5) : ''}`);
-const S0 = G.freshState(), mismatch = [];
-let made = 0;
-G.setRNG(seeded(3));
+// 2. every object × rarity × variant
+const ids = Object.keys(G.OBJECTS), bad = [], perFam = {};
 const sample = {};
-for (const id of ids) for (const r of RAR) for (const v of VAR) {
-  const m = G.createMonster(S0, { obj: id, cat: G.OBJECTS[id].cat, rarity: r, variant: v, word: G.OBJECTS[id].name, photo: null, first: false, rng: seeded(made + 1) });
-  made++;
-  const f = G.familyOf(m);
-  if (f !== G.objectFamily(id) || NOT_FAMILIES.includes(f)) mismatch.push(`${id}/${r}/${v}: ${f}`);
-  if (v === 'spectral' && m.fam !== 'spectral' || v === 'mutated' && m.fam !== 'mutated') mismatch.push(`${id}/${r}/${v}: nature ${m.fam}`);
-  sample[id + '|' + r + '|' + v] = m;
+let n = 0;
+for (const id of ids) {
+  const fam = G.objectFamily(id); perFam[fam] = (perFam[fam] || 0) + 1;
+  for (const r of RAR) for (const v of VAR) {
+    const m = mk(G, id, r, v, ++n); sample[`${id}|${r}|${v}`] = m;
+    const B = G.newBattle(G.freshState(), m);
+    if (m.fam !== fam || G.familyOf(m) !== fam || !G.FAMILY_IDS.includes(fam) || B.enemy.fam !== fam || m.cv !== G.COMBAT_MODEL) bad.push(`${id}/${r}/${v}: ${m.fam}/${G.familyOf(m)}/${B.enemy.fam}`);
+  }
 }
-ok(made === ids.length * 20 && !mismatch.length, `${made} monsters (every object × 5 rarities × 4 variants) show their object's family; Spectral/Mutated stay combat natures only${mismatch.length ? ' — ' + mismatch.slice(0, 5) : ''}`);
+ok(n === ids.length * 20 && !bad.length, `${n} monsters (all ${ids.length} objects × 5 rarities × 4 variants): stored family = object family = shown family = battle family, model ${G.COMBAT_MODEL}${bad.length ? ' — ' + bad.slice(0, 4) : ''}`);
+ok(Object.keys(perFam).every(f => G.FAMILY_IDS.includes(f)), `families of the registry: ${Object.entries(perFam).map(([f, k]) => f + ' ' + k).join(', ')}`);
 {
   const bb = sample['x_baby_bottle|common|shiny'];
-  ok(bb && bb.variant === 'shiny' && G.familyOf(bb) === 'household' && G.variantLabel(bb.variant) === 'Prismatic', `owner's screenshot: Prismatic Common baby bottle → family Household, variant Prismatic (combat nature ${bb.fam}, as in build 18)`);
-  const all = VAR.flatMap(v => RAR.map(r => G.familyOf(sample[`x_baby_bottle|${r}|${v}`])));
-  ok(all.every(f => f === 'household'), 'baby bottle: all 20 rarity × variant forms are Household');
-  ok(G.familyOf(sample['cutlery_spoon|rare|spectral']) === 'household' && sample['cutlery_spoon|rare|spectral'].fam === 'spectral', 'a Spectral spoon is a Household monster that fights with the Spectral table');
-  ok(G.familyOf(sample['book|epic|null']) === 'household' && sample['book|epic|null'].fam === 'spectral', 'a Normal book: family Household, combat nature unchanged (Spectral table)');
-  ok(G.familyOf(sample['beetle|common|mutated']) === 'organic' && G.familyOf(sample['clock|common|null']) === 'mechanical' && G.familyOf(sample['shirt|common|null']) === 'organic', 'bugs are Organic, clocks Mechanical, clothing Organic');
+  ok(bb.fam === 'household' && G.familyOf(bb) === 'household' && ELS.every(e => G.effMult('household', e) === G.effMult(bb.fam, e)), "owner's case: the Prismatic Common baby bottle IS a Household monster (stats and weaknesses)");
+  const eightBad = ids.filter(id => EIGHT[G.OBJECTS[id].cat] && !G.OBJECTS[id].fam && sample[`${id}|rare|null`].fam !== EIGHT[G.OBJECTS[id].cat]);
+  ok(!eightBad.length, `all objects of the eight categories fight with their category's real family (${ids.filter(id => EIGHT[G.OBJECTS[id].cat]).length} objects)`);
 }
 
-// 3. combat natures, stats, moves and DNA are EXACTLY those of build 18 (same generator input → same monster)
-const REF = '45dbff1';
+// 3. the variant layer on top of the Normal form (same object, rarity, level, seed)
+{
+  const statBad = [], weakBad = [], moveBad = [];
+  let k = 0;
+  for (const id of ids) for (const r of RAR) {
+    k++;
+    const base = mk(G, id, r, null, 900000 + k);
+    for (const v of ['spectral', 'mutated', 'shiny']) {
+      const m = mk(G, id, r, v, 900000 + k), vs = G.VARIANTS[v].stats;
+      const want = Object.fromEntries(Object.entries(base.stats).map(([s, x]) => [s, vs[s] !== 1 ? Math.round(x * vs[s]) : x]));
+      if (m.level !== base.level || snap(m.stats) !== snap(want)) statBad.push(`${id}/${r}/${v}`);
+      if (m.fam !== base.fam) weakBad.push(`${id}/${r}/${v}`);
+      const extra = m.abilities.filter(a => a.variant), rest = m.abilities.filter(a => !a.variant);
+      const vm = G.VARIANTS[v].move;
+      if (snap(rest.map(mech)) !== snap(base.abilities.map(mech)) || extra.length !== (vm ? 1 : 0) || (vm && (extra[0].power !== vm.power || extra[0].effect !== vm.effect || extra[0].key !== 'variant'))) moveBad.push(`${id}/${r}/${v}`);
+    }
+  }
+  ok(!statBad.length, `variant stats = the Normal form × the variant's modifiers (Spectral HP −8% ATK +5% SPD +15%; Mutated HP +8% ATK +12% DEF −5%; Prismatic +8% all)${statBad.length ? ' — ' + statBad.slice(0, 4) : ''}`);
+  ok(!weakBad.length, 'every variant keeps its family, so its weaknesses and resistances are exactly the Normal form\'s');
+  ok(!moveBad.length, `variant moves = the Normal form's moves + exactly one variant move (Spectral: Soul Siphon, Mutated: Acid Spew, Prismatic: none)${moveBad.length ? ' — ' + moveBad.slice(0, 4) : ''}`);
+  const leg = sample['x_baby_bottle|legendary|spectral'].abilities.map(a => a.key);
+  ok(leg.indexOf('variant') < leg.indexOf('legend') && leg.indexOf('legend') < leg.indexOf('ultimate'), `the variant move sits before a Legendary's legend move and Ultimate (${leg.join(', ')})`);
+}
+
+// 4. vs build 19: nothing unintended changed
+const REF = '17bb241';
 const hasRef = (() => { try { execSync(`git cat-file -e ${REF}^{commit}`, { stdio: 'ignore' }); return true; } catch (e) { return false; } })();
-ok(hasRef, `build 18 code (${REF}) is in the git history (CI: fetch-depth 0)`);
+ok(hasRef, `build 19 code (${REF}) is in the git history (CI: fetch-depth 0)`);
 let OLD = null;
 if (hasRef) {
   const FILES = ['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'combatlog.js', 'curated.js', 'curated-data.js'];
@@ -67,90 +87,80 @@ if (hasRef) {
   const ctx = { console: { log() {}, warn() {}, error() {} }, Math, Date, JSON, escape, unescape, btoa: s => Buffer.from(s, 'binary').toString('base64'), atob: s => Buffer.from(s, 'base64').toString('binary'),
     localStorage: { getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; } } };
   vm.createContext(ctx);
-  const src = FILES.map(f => execSync(`git show ${REF}:src/${f}`, { maxBuffer: 64 << 20 }).toString()).join('\n');
-  vm.runInContext(src + ';globalThis.__api={createMonster,freshState,saveState,exportSave,recordSighting,newBattle,setRNG:f=>{RNG=f}}', ctx);
+  vm.runInContext(FILES.map(f => execSync(`git show ${REF}:src/${f}`, { maxBuffer: 64 << 20 }).toString()).join('\n') + ';globalThis.__api={OBJECTS,createMonster,freshState,saveState,exportSave,recordSighting,newBattle,finishBattle,SAVE_KEY,setRNG:f=>{RNG=f}}', ctx);
   OLD = { api: ctx.__api, store };
-  const So = OLD.api.freshState(), diff = [];
-  let n = 0;
-  for (const id of ids) for (const r of RAR) for (const v of VAR) {
-    const a = OLD.api.createMonster(So, { obj: id, cat: G.OBJECTS[id].cat, rarity: r, variant: v, word: G.OBJECTS[id].name, photo: null, first: false, rng: seeded(n + 1) });
-    const b = sample[id + '|' + r + '|' + v]; n++;
-    const strip = m => snap({ ...m, caughtAt: 0, seenAt: 0 });
-    if (strip(a) !== strip(b)) diff.push(`${id}/${r}/${v}`);
+  const diff = []; let cmp = 0, k = 0;
+  for (const id of ids) for (const r of RAR) for (const v of [null, 'shiny']) {
+    k++;
+    if (EIGHT[G.OBJECTS[id].cat] && !G.OBJECTS[id].fam) continue; // re-familied on purpose
+    const a = mk(OLD.api, id, r, v, 700000 + k), b = mk(G, id, r, v, 700000 + k); cmp++;
+    if (snap([a.fam, a.level, a.stats, a.abilities.map(mech), a.dna, a.name]) !== snap([b.fam, b.level, b.stats, b.abilities.map(mech), b.dna, b.name])) diff.push(`${id}/${r}/${v}`);
   }
-  ok(n === made && !diff.length, `all ${n} generated monsters are identical to build 18 (combat nature, stats, moves, DNA, names)${diff.length ? ' — differ: ' + diff.slice(0, 5) : ''}`);
+  ok(cmp > 19000 && !diff.length, `${cmp} Normal and Prismatic monsters of every other object are identical to build 19 (family, level, stats, move numbers, look, name)${diff.length ? ' — differ: ' + diff.slice(0, 5) : ''}`);
 }
 
-// 4. type interactions: the battle uses the stored nature, unchanged
+// 5. rewards: family material + separate variant bonus
 {
-  const S = G.freshState(); S.level = 5;
-  for (const key of ['book|common|null', 'cutlery_spoon|rare|spectral', 'teddy|rare|mutated', 'mug|common|shiny', 'x_baby_bottle|common|shiny']) {
-    const m = sample[key], B = G.newBattle(S, m);
-    ok(B.enemy.fam === m.fam && ['slash', 'ballistic', 'arcane', 'shock', 'toxic'].every(el => G.effMult(B.enemy.fam, el) === G.effMult(m.fam, el)), `${key}: battle weaknesses/resistances use its unchanged nature (${m.fam}), family shown ${G.familyOf(m)}`);
+  const fight = (m, caught, seed) => {
+    const S = G.freshState(); S.level = 6; const before = { ...S.mats, coins: S.coins };
+    G.recordSighting(S, m); const B = G.newBattle(S, m); B.over = true; B.result = caught ? 'captured' : 'victory';
+    const sum = G.finishBattle(S, B, seeded(seed));
+    return { sum, got: Object.fromEntries(['scrap', 'goo', 'ecto', 'prism', 'coins'].map(x => [x, (x === 'coins' ? S.coins : S.mats[x] || 0) - (before[x] || 0)])) };
+  };
+  const matOf = { household: 'scrap', mechanical: 'scrap', organic: 'goo', food: 'goo', botanical: 'goo', elemental: 'ecto' };
+  ok(G.FAMILY_IDS.every(f => G.FAMILIES[f].mat === matOf[f]), 'family materials: Household/Mechanical → Scrap, Organic/Food/Botanical → Goo, Elemental → Ectoplasm');
+  for (const [key, v, extra] of [['book|rare|spectral', 'spectral', { ecto: 2 }], ['teddy|rare|mutated', 'mutated', { goo: 3 }], ['x_baby_bottle|common|shiny', 'shiny', { prism: 1 }]]) {
+    const m = sample[key], base = sample[key.replace(/\|[a-z]+$/, '|null')];
+    const a = fight(m, false, 5), b = fight({ ...base, variant: null }, false, 5);
+    const famMat = G.FAMILIES[m.fam].mat;
+    const okBonus = Object.entries(extra).every(([x, n]) => a.got[x] - b.got[x] === n) && snap(a.sum.variantBonus) === snap(extra);
+    ok(okBonus && a.got[famMat] >= b.got[famMat], `${key}: family material ${famMat} as for its Normal form, plus the ${G.variantLabel(v)} bonus ${snap(extra)} reported separately`);
   }
+  const sh = fight(mk(G, 'mug', 'rare', 'shiny', 77), false, 9), no = fight(mk(G, 'mug', 'rare', null, 77), false, 9);
+  const coins = x => (x.sum.rewards.find(r => r.k === 'coins') || {}).v;
+  ok(coins(sh) === coins(no) * 2, `Prismatic: double battle coins (${coins(no)} → ${coins(sh)})`);
+  const S = G.freshState(); const m = { ...sample['book|epic|spectral'], id: 'r1' }; S.monsters.push(m);
+  const rel = G.releaseMonster(S, 'r1');
+  ok(rel && rel.scrap > 0 && !rel.ecto, 'releasing a Spectral book returns its family material (Scrap), not Ectoplasm');
 }
 
-// 5. old saves: stored 'spectral'/'mutated' families, object-less monsters, older object families, bare category ids
-{
-  const S = G.freshState();
-  const mk = (o) => ({ id: 'm' + (S.monsters.length + 1), name: 'Old', level: 3, xp: 0, rarity: 'common', variant: null, seed: 7, stats: { hp: 30, atk: 9, def: 8, spd: 7 }, abilities: [{ name: 'Gnash', power: 1.25 }], dna: sample['mug|common|null'].dna, caughtAt: 1, ...o });
-  const cases = [
-    [mk({ obj: 'x_baby_bottle', cat: 'toy', fam: 'mutated', variant: 'shiny' }), 'household', 'build-18 Prismatic baby bottle (stored fam "mutated")'],
-    [mk({ obj: 'cutlery_spoon', cat: 'tool', fam: 'spectral', variant: 'spectral' }), 'household', 'Spectral spoon (stored fam "spectral")'],
-    [mk({ obj: 'cutlery_spoon', cat: 'tool', fam: 'mechanical' }), 'household', 'pre-v0.4.5 Mechanical spoon (older family of its object)'],
-    [mk({ obj: 'teddy', cat: 'toy', fam: 'mutated', variant: 'mutated' }), 'household', 'Mutated teddy'],
-    [mk({ obj: 'book', cat: 'book', fam: 'spectral' }), 'household', 'Normal book (native Spectral nature)'],
-    [mk({ obj: 'toy', cat: 'toy', fam: 'mutated' }), 'household', 'bare category id "toy" stored as object'],
-    [mk({ obj: null, cat: 'bug', fam: 'mutated' }), 'organic', 'object-less legacy bug'],
-    [mk({ obj: null, cat: 'mug', fam: 'spectral', variant: 'spectral' }), 'food', 'object-less legacy Spectral mug'],
-    [mk({ obj: null, cat: 'other', word: 'gizmo', fam: 'elemental' }), 'elemental', 'object-less "other" monster keeps its stored real family'],
-    [mk({ obj: null, cat: 'other', word: 'gizmo', fam: 'mutated', variant: 'mutated' }), G.FAMILY_IDS, 'object-less "other" Mutated monster gets a real family'],
-    [mk({ obj: 'no_longer_exists', cat: 'clock', fam: 'spectral' }), 'mechanical', 'unknown object id falls back to its category'],
-  ];
-  for (const [m] of cases) S.monsters.push(m);
-  S.dex['o:x_baby_bottle'] = { key: 'o:x_baby_bottle', obj: 'x_baby_bottle', name: 'Baby bottle', cat: 'toy', fam: 'mutated', seen: 2, caught: 1, rarities: { common: true }, variants: { shiny: true }, dna: sample['mug|common|null'].dna };
-  S.dex['o:cutlery_spoon'] = { key: 'o:cutlery_spoon', obj: 'cutlery_spoon', name: 'Spoon', cat: 'tool', fam: 'spectral', seen: 1, caught: 0, rarities: { rare: true }, variants: { spectral: true }, dna: sample['mug|common|null'].dna };
-  S.stats.famSeen = { spectral: 2, mutated: 1, food: 1 };
-  const before = snap(S.monsters);
-  G.saveState(S); const L = G.loadState(), R = G.importSave(G.exportSave(S));
-  for (const X of [L, R]) {
-    const tag = X === L ? 'after save + load' : 'after backup code';
-    cases.forEach(([m, want, what], i) => { const got = G.familyOf(X.monsters[i]); ok(Array.isArray(want) ? want.includes(got) : got === want, `${tag}: ${what} → ${got}`); });
-    // move display names are refreshed to the curated writing by design (tests/curated-refresh.js): compare the numbers
-    const mech = m => [m.fam, m.stats, m.abilities.map(a => snap({ ...a, name: 0, key: 0 })), m.variant, m.rarity, m.obj, m.level, m.seed];
-    ok(snap(X.monsters.map(mech)) === snap(S.monsters.map(mech)), `${tag}: stored natures, stats, move numbers, variants unchanged`);
-    ok(G.familyOf(X.dex['o:x_baby_bottle']) === 'household' && G.familyOf(X.dex['o:cutlery_spoon']) === 'household', `${tag}: encyclopedia entries stored with "mutated"/"spectral" show Household`);
-    ok(X.stats.famSeen.spectral === 2 && X.stats.famSeen.mutated === 1, `${tag}: older statistic keys kept (no progress taken away)`);
-  }
-  ok(snap(S.monsters) === before && !/familyOf|realFam|"family"/.test(snap(S)), 'familyOf is derived: nothing is written to the save (format unchanged)');
-  ok(snap(L.monsters.map(G.collectionKey)) === snap(S.monsters.map(G.collectionKey)), 'unique-capture slots unchanged by the family fix');
-}
-
-// 6. a save written by the build-18 code loads in the current code with real families and identical monsters
+// 6. saves: build-19 monsters are rebuilt to the current model, nothing else changes
 if (OLD) {
-  const So = OLD.api.freshState(); So.level = 4; let n = 0;
-  for (const [id, r, v] of [['x_baby_bottle', 'common', 'shiny'], ['book', 'rare', null], ['cutlery_spoon', 'epic', 'spectral'], ['teddy', 'common', 'mutated'], ['beetle', 'legendary', 'mutated'], ['mug', 'uncommon', 'spectral']]) {
-    const m = OLD.api.createMonster(So, { obj: id, cat: G.OBJECTS[id].cat, rarity: r, variant: v, word: G.OBJECTS[id].name, photo: null, first: false, rng: seeded(++n) });
-    m.id = 'b18_' + n; OLD.api.recordSighting(So, m); So.monsters.push(m);
-  }
-  OLD.api.saveState(So);
-  const code = OLD.api.exportSave(So);
-  const R = G.importSave(code);
-  ok(R && snap(R.monsters.map(m => [m.fam, m.stats, m.abilities, m.dna, m.variant])) === snap(So.monsters.map(m => [m.fam, m.stats, m.abilities, m.dna, m.variant])), 'build-18 backup code: monsters (natures, stats, moves, look, variants) identical in the current code');
-  const fams = R.monsters.map(G.familyOf);
-  ok(snap(fams) === snap(['household', 'household', 'household', 'household', 'organic', 'food']), `build-18 monsters show real families: ${fams.join(', ')}`);
-  ok(Object.values(R.dex).every(d => G.FAMILY_IDS.includes(G.familyOf(d))), 'build-18 encyclopedia entries all show real families');
+  const A = OLD.api; A.setRNG(seeded(31));
+  const So = A.freshState(); So.level = 7; So.coins = 4321; So.items.trap = 13; So.research = { spectral: 1, mutagen: 1, chroma: 1 };
+  const kinds = [['x_baby_bottle', 'common', 'shiny'], ['book', 'rare', null], ['cutlery_spoon', 'epic', 'spectral'], ['teddy', 'common', 'mutated'], ['beetle', 'legendary', 'mutated'], ['mug', 'uncommon', 'spectral'], ['mug', 'rare', null], ['clock', 'legendary', 'spectral']];
+  kinds.forEach(([id, r, v], i) => { const m = A.createMonster(So, { obj: id, cat: G.OBJECTS[id].cat, rarity: r, variant: v, word: G.OBJECTS[id].name }); m.id = 'old' + i; m.xp = 3 * i; m.caughtAt = 1e12 + i; A.recordSighting(So, m); So.monsters.push(m); });
+  So.monsters[1].nick = 'Old nickname'; So.companion = 'old2';
+  So.stats.famSeen = { spectral: 3, mutated: 2, food: 1 }; So.stats.capByFam = { mutated: 1, household: 1 };
+  const oldMons = JSON.parse(snap(So.monsters));
+  ok(oldMons.some(m => m.fam === 'spectral') && oldMons.some(m => m.fam === 'mutated'), 'build-19 save holds monsters with stored "spectral"/"mutated" families');
+  const check = (X, tag) => {
+    const wrong = [];
+    X.monsters.forEach((m, i) => {
+      const o = oldMons[i], fam = G.objectFamily(o.obj), fresh = mk(G, o.obj, o.rarity, o.variant || null, 1);
+      const stats = G.monsterStats(o.rarity, fam, o.level, o.seed, o.variant || null);
+      if (m.fam !== fam || m.cv !== G.COMBAT_MODEL || snap(m.stats) !== snap(stats) || snap(m.abilities.map(mech)) !== snap(fresh.abilities.map(mech)) || snap(m.abilities.map(a => a.key)) !== snap(fresh.abilities.map(a => a.key))) wrong.push(`${o.obj}: combat`);
+      if (snap(m.dna) !== snap(o.dna) || m.level !== o.level || m.xp !== o.xp || m.id !== o.id || m.seed !== o.seed || m.variant !== o.variant || m.rarity !== o.rarity || m.lore !== o.lore || m.caughtAt !== o.caughtAt || m.nick !== o.nick) wrong.push(`${o.obj}: kept fields`);
+    });
+    ok(X.monsters.length === oldMons.length && !wrong.length, `${tag}: all ${oldMons.length} build-19 monsters rebuilt to model ${G.COMBAT_MODEL} (family, stats, moves) with look, level, XP, id, name/flavour, nickname kept${wrong.length ? ' — ' + wrong.slice(0, 4) : ''}`);
+    ok(X.monsters.every(m => m.cv === G.COMBAT_MODEL && G.FAMILY_IDS.includes(m.fam)), `${tag}: no old-model monster left (no mix)`);
+    ok(Object.values(X.dex).every(d => G.FAMILY_IDS.includes(d.fam)) && Object.keys(X.stats.famSeen).every(k => G.FAMILY_IDS.includes(k)) && Object.keys(X.stats.capByFam).every(k => G.FAMILY_IDS.includes(k)), `${tag}: encyclopedia and statistics hold only real families (legacy "spectral"/"mutated" keys dropped)`);
+    ok(X.coins === 4321 && X.items.trap === 13 && X.level === 7 && X.companion === 'old2' && X.research.chroma === 1, `${tag}: hunter, coins, items, research and buddy kept`);
+  };
+  const L = G.migrate(JSON.parse(snap(So)));
+  check(L, 'load (migrate)');
+  const again = G.migrate(JSON.parse(snap(L)));
+  ok(snap(again.monsters) === snap(L.monsters), 'the rebuild is idempotent: loading the rebuilt save again changes nothing');
+  check(G.importSave(A.exportSave(So)), 'build-19 backup code import');
+  A.saveState(So); G.setRNG(Math.random);
+  // loadState in the current code with the build-19 save in storage
+  const store = {}; const ctx2 = { console: { log() {}, warn() {}, error() {} }, Math, Date, JSON, escape, unescape, btoa: s => Buffer.from(s, 'binary').toString('base64'), atob: s => Buffer.from(s, 'base64').toString('binary'),
+    localStorage: { getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; } } };
+  vm.createContext(ctx2);
+  vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'combatlog.js', 'curated.js', 'curated-data.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') + ';globalThis.__api={loadState,SAVE_KEY}', ctx2);
+  Object.assign(store, OLD.store);
+  check(ctx2.__api.loadState(), 'app start with the build-19 save in storage');
 }
 
-// 7. statistics and family quests count real families from now on
-{
-  const S = G.freshState(); S.level = 6; S.items.trap = 9;
-  G.recordSighting(S, sample['teddy|common|mutated']); G.recordSighting(S, sample['book|rare|spectral']); G.recordSighting(S, sample['beetle|common|null']);
-  ok(snap(S.stats.famSeen) === snap({ household: 2, organic: 1 }), `sightings are counted by real family (${snap(S.stats.famSeen)})`);
-  const m = sample['x_baby_bottle|common|shiny'], B = G.newBattle(S, m); B.enemy.hp = 1; G.attemptCapture(B, S, () => 0);
-  if (B.result === 'captured') G.finishBattle(S, B, seeded(1));
-  ok(B.result === 'captured' && S.stats.capByFam.household === 1 && !S.stats.capByFam.mutated, 'a captured Prismatic baby bottle counts for "Household Pest Control", not as Mutated');
-}
-
-console.log(errors.length ? `\n${errors.length} FAILED` : '\nALL FAMILY/VARIANT CHECKS PASSED');
+console.log(errors.length ? `\n${errors.length} FAILED` : '\nALL FAMILY/VARIANT (COMBAT MODEL 2) CHECKS PASSED');
 process.exit(errors.length ? 1 : 0);

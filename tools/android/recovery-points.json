@@ -5,6 +5,23 @@
   "drill": "1b9aa897c0bde95d00cc0770553f7b8807d63c40",
   "ownerVerified": [
     {
+      "build": 19,
+      "role": "latest owner-verified build (phone-tested, reported 2026-11-26); build 15 stays the PRIMARY recovery milestone",
+      "commit": "b8feda35ad3d383645727e6ed5c5e9208a14db48",
+      "branch": "ccr-6eaf78d0-vj87lh",
+      "versionCode": 1019,
+      "versionName": "0.6.0-dev.19+b8feda3",
+      "run": "https://github.com/patrikarendas-droid/snapmon/actions/runs/45834171150",
+      "runAttemptThatBuiltTheApk": 1,
+      "artifact": "SnapMon-Dev-APK-0.6.0-build-19",
+      "artifactId": 15125547176,
+      "artifactZipSha256": "a2c825e2947ae23d299ffb3a6c90d03e143d863a18f6f11a31545bb0cb629b8f",
+      "artifactExpires": "2027-02-24",
+      "apkSha256": "28f854475943d168adefbaf6be379405bcb71c86adb9bfe5ef36bdf7d407b6aa",
+      "apkBytes": 72312542,
+      "verified": "owner's phone test, reported 2026-11-26 (families show properly in the monster catalogue); last build before combat model 2"
+    },
+    {
       "build": 18,
       "role": "latest owner-verified build (phone-tested, reported 2026-11-26); build 15 stays the PRIMARY recovery milestone",
       "commit": "45dbff1a5d32b90a2f4850c0013681efcc676630",
@@ -81,6 +98,10 @@
     {
       "ref": "45dbff1a5d32b90a2f4850c0013681efcc676630",
       "what": "build 18, owner-verified on the phone (developer tools); the save the owner has installed"
+    },
+    {
+      "ref": "b8feda35ad3d383645727e6ed5c5e9208a14db48",
+      "what": "build 19, owner-verified on the phone (real family labels); last build before combat model 2"
     }
   ]
 }

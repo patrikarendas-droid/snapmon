@@ -15,12 +15,17 @@ for (const id of Object.keys(T.OBJECTS)) for (const r of RAR) for (const v of [n
   const keys = m.abilities.map(a => a.key);
   if (new Set(keys).size !== keys.length || keys.some(k => !k)) dupKeys.push(`${id}/${r}/${v}: ${keys}`);
   const slots = T.curatedMoveSlots(id);
-  if (keys[0] !== 'signature' || keys.some(k => !(k in slots)) || (r === 'legendary') !== keys.includes('ultimate') || (r === 'legendary') !== keys.includes('legend')) slotBad.push(`${id}/${r}/${v}: ${keys}`);
+  // combat model 2: Spectral/Mutated monsters have exactly one extra 'variant' move (a fixed variant move, not a curated slot)
+  if (keys.filter(k => k === 'variant').length !== (v ? 1 : 0)) slotBad.push(`${id}/${r}/${v}: variant move count`);
+  if (keys[0] !== 'signature' || keys.some(k => k !== 'variant' && !(k in slots)) || (r === 'legendary') !== keys.includes('ultimate') || (r === 'legendary') !== keys.includes('legend')) slotBad.push(`${id}/${r}/${v}: ${keys}`);
   if (m.abilities.some(a => a.cdWith)) shared.push(`${id}/${r}/${v}`);
 }
 ok(!dupKeys.length, `all ${n} possible monsters: every ability has its own key${dupKeys.length ? ': ' + dupKeys.slice(0, 3).join(' | ') : ''}`);
 ok(!slotBad.length, `keys are signature / kit.<move> / legend / ultimate and match the curated move slots${slotBad.length ? ': ' + slotBad.slice(0, 3).join(' | ') : ''}`);
-ok(shared.length === 4 && shared.every(s => /^(bee|x_pin_cushion)\//.test(s)), `same-name moves keep their shared cooldown via cdWith in exactly the 4 known cases: ${shared.join(', ')}`);
+// combat model 2: every variant of an object now draws the same kit moves (the family no longer changes with the
+// variant), so the known same-name case (pin cushion, Rare) appears identically in all three forms and the old
+// Mutated-only bee case is gone
+ok(shared.length === 3 && shared.every(s => /^x_pin_cushion\/rare\//.test(s)), `same-name moves keep their shared cooldown via cdWith in exactly the known cases: ${shared.join(', ')}`);
 
 // 2. renaming moves never changes a battle (event stream identical apart from the names)
 const battle = (m, seed0) => {

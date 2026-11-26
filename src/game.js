@@ -45,6 +45,9 @@ function migrate(s) {
   if (!out.stats.labelsSeen) out.stats.labelsSeen = {};
   if ((s.v || 1) < 3) migrateV2toV3(out);
   for (const m of out.monsters) assignAbilityKeys(m); // additive: older saves gain stable ability keys, nothing else changes
+  for (const m of out.monsters) rebuildCombat(m); // combat model 2: pre-model-2 monsters fight by their real family
+  for (const d of Object.values(out.dex || {})) if (d && !FAMILY_IDS.includes(d.fam)) d.fam = familyOf(d);
+  for (const st of [out.stats.famSeen, out.stats.capByFam]) for (const k of Object.keys(st)) if (!FAMILY_IDS.includes(k)) delete st[k]; // 'spectral'/'mutated' were never families
   out.enc.quiet = quietClean(out.enc.quiet, CLOCK()); // additive (older saves have none); invalid entries dropped
   out.enc.disturbed = lockClean(out.enc.disturbed, CLOCK(), ENCOUNTER_LOCK_MS);
   out.hunterName = cleanHunterName(out.hunterName) || 'Hunter';
@@ -412,7 +415,7 @@ function assignAbilityKeys(m) {
   for (const a of m.abilities) if (a && a.key) byName[a.name] = byName[a.name] || a.cdWith || a.key;
   m.abilities.forEach((a, i) => {
     if (!a || a.key) return;
-    const base = i === 0 ? 'signature' : a.ultimate ? 'ultimate' : a.legend ? 'legend' : kit.has(a.name) ? 'kit.' + abilitySlug(a.name) : fam.has(a.name) ? 'fam.' + abilitySlug(a.name) : 'move.' + abilitySlug(a.name);
+    const base = i === 0 ? 'signature' : a.variant ? 'variant' : a.ultimate ? 'ultimate' : a.legend ? 'legend' : kit.has(a.name) ? 'kit.' + abilitySlug(a.name) : fam.has(a.name) ? 'fam.' + abilitySlug(a.name) : 'move.' + abilitySlug(a.name);
     let k = base, n = 2; while (used.has(k)) k = base + '.' + n++;
     a.key = k; used.add(k);
     if (byName[a.name]) a.cdWith = byName[a.name]; else byName[a.name] = k;
@@ -441,25 +444,18 @@ function speciesName(cat, rarity, word, fam) {
   if (rarity === 'legendary') name += ', ' + (word ? legendTitle({ id: 'w:' + word, name: word }, fam) : LEGEND_TITLES[fam]);
   return name;
 }
-// the monster's COMBAT NATURE (stored as m.fam: stats, weaknesses, family moves, material). Unchanged rules: the
-// Spectral/Mutated variants fight with the Spectral/Mutated tables. Never shown as a family (see familyOf).
+/* Combat model 2 (2026-11-26): the monster's family (stored as m.fam) comes from its object alone — never from its
+   variant — and drives its stats, weaknesses, resistances, family moves and family material. See VARIANTS (data.js)
+   for what a variant adds on top. `variant` is accepted for the old call shape and deliberately ignored. */
 function monsterFamily(cat, word, variant, o) {
-  if (variant === 'spectral') return 'spectral';
-  if (variant === 'mutated') return 'mutated';
-  return nativeNature(cat, word, o);
-}
-function nativeNature(cat, word, o) {
-  if (o && o.fam) return o.fam; // v0.4.5: the object's own nature (a spoon is Household, not Mechanical like its "tool" category)
+  if (o && o.fam) return o.fam; // v0.4.5: the object's own family (a spoon is Household, not Mechanical like its "tool" category)
   return CATEGORY[cat].fam || NATIVE_FAMILIES[hashStr(word || 'x') % 6];
 }
-// a nature -> the real family (one of FAMILY_IDS): the eight Spectral/Mutated-natured categories get CATEGORY_FAMILY
-const realFamily = (f, cat) => FAMILY_IDS.includes(f) ? f : (CATEGORY_FAMILY[cat] || 'household');
-// the player-facing FAMILY of a registry object: identical for every rarity and variant of that object
-function objectFamily(objId) { const o = OBJECTS[objId]; return o ? realFamily(nativeNature(o.cat, o.name, o), o.cat) : null; }
-/* The family shown to the player for a monster or an encyclopedia entry ({obj, cat, word, fam}). Derived, never
-   stored, so old saves (incl. monsters whose stored fam is 'spectral'/'mutated', or an older family of their object)
-   show their real family without any migration. Object -> its family; an object-less legacy monster -> its stored
-   fam if that is a real family, else its category's real family. Always one of FAMILY_IDS. */
+// the FAMILY of a registry object: identical for every rarity and variant of that object
+function objectFamily(objId) { const o = OBJECTS[objId]; return o ? monsterFamily(o.cat, o.name, null, o) : null; }
+/* The family of a monster or an encyclopedia entry ({obj, cat, word, fam}): its object's family; an object-less
+   legacy monster keeps a stored real family, else its category's. Always one of FAMILY_IDS. After the combat-model
+   migration (rebuildCombat) a saved monster's m.fam equals familyOf(m). */
 function familyOf(m) {
   if (!m) return 'household';
   const id = collectionObjId(m);
@@ -467,8 +463,7 @@ function familyOf(m) {
   if (FAMILY_IDS.includes(m.fam)) return m.fam;
   const cat = CATEGORY[m.cat] ? m.cat : null;
   if (!cat) return 'household';
-  if (cat === 'other') return NATIVE_FAMILIES[hashStr(m.word || 'x') % 6];
-  return realFamily(CATEGORY[cat].fam, cat);
+  return monsterFamily(cat, m.word, null, null);
 }
 function cdFor(ab) { return ab.self ? 3 : (ab.power >= 1.3 || ab.hits) ? 3 : ab.effect ? 2 : 2; }
 // the object's display name for move names and titles ("Energy Drink", "Padlock")
@@ -477,7 +472,16 @@ function moveKit(cat, o) {
   const g = o && o.lore, src = (g && (MOVE_KITS[g] || MOVE_KITS[MOVE_KIT_ALIAS[g]])) || MOVE_KITS[cat] || MOVE_KITS.other;
   return src.split(',').map(s => { const [name, arch] = s.split(':').map(t => t.trim()); return { name, ...MOVE_ARCH[arch] }; });
 }
-function monsterAbilities(cat, rarity, fam, word, o) {
+function monsterAbilities(cat, rarity, fam, word, o, variant = null) {
+  const list = baseAbilities(cat, rarity, fam, word, o);
+  const vm = VARIANTS[variant] && VARIANTS[variant].move;
+  if (vm) { // the variant's own move, after the kit/family moves and before a Legendary's legend move and Ultimate
+    const at = list.findIndex(a => a.legend || a.ultimate);
+    list.splice(at < 0 ? list.length : at, 0, { ...vm, variant: true, cd: cdFor(vm) });
+  }
+  return list;
+}
+function baseAbilities(cat, rarity, fam, word, o) {
   const tier = RARITY[rarity].tier;
   // objects get their own seed, so two objects of one category do not share a repertoire
   const SR = mulberry(hashStr('abil:' + cat + rarity + fam + (word || '') + (o ? '|' + o.id : '')));
@@ -510,8 +514,8 @@ function monsterStats(rarity, fam, L, seed, variant) {
     def: Math.round((2 + 0.9 * L) * r.mult * f.def * v()),
     spd: Math.round((8 + 0.8 * L) * f.spd * v()),
   };
-  if (variant === 'shiny') for (const k in st) st[k] = Math.round(st[k] * 1.08);
-  if (variant === 'mutated') st.atk = Math.round(st.atk * 1.1);
+  const vs = VARIANTS[variant] && VARIANTS[variant].stats; // the variant's modifiers on top of family + rarity
+  if (vs) for (const k in st) if (vs[k] !== 1) st[k] = Math.round(st[k] * vs[k]);
   return st;
 }
 function speciesName3(objId, rarity, fam) {
@@ -524,6 +528,34 @@ function speciesName3(objId, rarity, fam) {
 }
 // v0.4.5: "the Unbroken Padlock", "the Bottomless Energy Drink": one title per object, never shared
 function legendTitle(o, fam) { const adj = LEGEND_ADJ[fam] || LEGEND_ADJ.household; return 'the ' + adj[hashStr('title|' + o.id) % adj.length] + ' ' + objNoun(o); }
+function combatAbilities(cat, rarity, fam, word, o, variant) {
+  const abilities = monsterAbilities(cat, rarity, fam, word, o, variant);
+  if (o && o.sig) abilities[0] = { ...o.sig, cd: cdFor(o.sig) }; // object-specific signature move
+  else if (o && o.sigName) abilities[0] = { ...abilities[0], name: o.sigName }; // same numbers, a name that fits the object
+  return abilities;
+}
+/* Combat-model migration (model 2, 2026-11-26). A saved monster whose combat data predates model 2 (no `cv: 2`:
+   made by build 19 or older, restored from such a backup code, or caught in an older build after a rollback) gets
+   its family, stats and moves rebuilt EXACTLY as a new monster of the same object, rarity, variant, level and seed
+   would get them now. Its look (DNA), name, flavour text, level, XP, id, nickname and capture date stay. Every
+   monster in a loaded or restored save is therefore of the current model: no mix of old and new combat records.
+   Additive field, save format 3 unchanged, so older builds still open the save (they read the stored values). */
+const COMBAT_MODEL = 2;
+function rebuildCombat(m) {
+  if (!m || m.cv === COMBAT_MODEL) return false;
+  const id = collectionObjId(m), o = id && OBJECTS[id];
+  const cat = o ? o.cat : m.cat;
+  if (!CATEGORY[cat] || !RARITY[m.rarity]) return false;
+  const fam = o ? objectFamily(id) : familyOf(m);
+  const seed = (m.seed >>> 0) || hashStr(String(m.id || m.name || 'm'));
+  m.fam = fam;
+  m.stats = monsterStats(m.rarity, fam, Math.max(1, m.level | 0), seed, m.variant || null);
+  m.abilities = combatAbilities(cat, m.rarity, fam, m.word || null, o || null, m.variant || null);
+  assignAbilityKeys(m);
+  if (typeof curatedMoveName === 'function' && o) for (const a of m.abilities) { const n = curatedMoveName(o.id, a.key); if (n) a.name = n; }
+  m.cv = COMBAT_MODEL;
+  return true;
+}
 function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
   if (!obj) obj = CAT_DEFAULT_OBJECT[cat] || null;
   if (obj && OBJECTS[obj]) cat = OBJECTS[obj].cat;
@@ -535,11 +567,9 @@ function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first
   const seed = Math.floor(rng() * 4294967295) >>> 0;
   const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}), ...(photo.engine ? { engine: photo.engine } : {}) } : null; // engine: which recogniser identified it
   const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };
-  const abilities = monsterAbilities(cat, rarity, fam, base.word, o);
-  if (o && o.sig) abilities[0] = { ...o.sig, cd: cdFor(o.sig) }; // object-specific signature move
-  else if (o && o.sigName) abilities[0] = { ...abilities[0], name: o.sigName }; // same numbers, a name that fits the object
+  const abilities = combatAbilities(cat, rarity, fam, base.word, o, variant);
   const m = {
-    ...base, id: null, fam, level,
+    ...base, id: null, fam, level, cv: COMBAT_MODEL,
     name: o ? speciesName3(obj, rarity, fam) : speciesName(cat, rarity, base.word, fam),
     stats: monsterStats(rarity, fam, level, seed, variant),
     abilities,
@@ -587,7 +617,7 @@ function variantLabel(v) { return v === 'spectral' ? 'Spectral' : v === 'mutated
 /* Register a sighting in the encyclopedia. Returns {isNew, rp} */
 function recordSighting(S, m) {
   S.stats.encounters++;
-  const fam = familyOf(m); S.stats.famSeen[fam] = (S.stats.famSeen[fam] || 0) + 1; // real families (older saves may hold 'spectral'/'mutated' keys: kept)
+  const fam = familyOf(m); S.stats.famSeen[fam] = (S.stats.famSeen[fam] || 0) + 1;
   if (m.rarity === 'epic') S.stats.epicSeen++;
   if (m.rarity === 'legendary') S.stats.legendSeen++;
   if (m.variant === 'shiny') S.stats.shinySeen++;
@@ -612,7 +642,7 @@ function newBattle(S, m) {
   const hs = hunterStats(S);
   const B = {
     m, turn: 1, over: false, result: null, usedPotion: false, enhancer: 0, captureFails: 0, weapon: S.equipped,
-    enemy: { name: m.name, hp: m.stats.hp, maxHp: m.stats.hp, atk: m.stats.atk, def: m.stats.def, spd: m.stats.spd, fam: m.fam, status: {}, cds: {} },
+    enemy: { name: m.name, hp: m.stats.hp, maxHp: m.stats.hp, atk: m.stats.atk, def: m.stats.def, spd: m.stats.spd, fam: FAMILIES[m.fam] ? m.fam : familyOf(m), status: {}, cds: {} },
     hero: { name: hunterName(S), hp: Math.max(1, Math.min(S.hp, hs.maxHp)), maxHp: hs.maxHp, atk: hs.atk, def: hs.def, spd: hs.spd, crit: hs.crit,
             energy: MECH.energy.start + (charmOn(S, 'battery') ? MECH.energy.battery : 0), status: {} },
   };
@@ -824,12 +854,14 @@ function useItem(B, S, id) {
 }
 
 /* Apply battle outcome to the save. Returns summary for the results screen. */
+// a variant's extra drop for defeating or capturing it (Spectral +2 Ectoplasm, Mutated +3 Goo, Prismatic +1 Prism Shard)
+const variantBonus = m => ({ ...((VARIANTS[m && m.variant] || {}).bonus || {}) });
 function finishBattle(S, B, rng = RNG) {
   const m = B.m, r = RARITY[m.rarity], tier = r.tier, sum = { result: B.result, rewards: [], levelUps: [], drops: [], newCapture: false };
   S.stats.battles++;
   S.hp = Math.max(1, B.hero.hp);
-  const shinyX = m.variant === 'shiny' ? 2 : 1;
-  const famMat = FAMILIES[m.fam].mat;
+  const shinyX = (VARIANTS[m.variant] && VARIANTS[m.variant].coinsX) || 1;
+  const famMat = FAMILIES[familyOf(m)].mat;
   if (B.result === 'captured' && ownedCopy(S, m)) { B.result = 'escaped'; sum.result = 'escaped'; } // never a second copy of a slot (only reachable by bypassing attemptCapture, which refuses)
   if (B.result === 'victory' || B.result === 'captured') {
     const caught = B.result === 'captured';
@@ -838,11 +870,13 @@ function finishBattle(S, B, rng = RNG) {
     reward[famMat] = Math.round((randInt(rng, 2, 4) + tier) * (caught ? 0.5 : 1)) || 1;
     const other = ['scrap', 'goo', 'ecto'][randInt(rng, 0, 2)];
     reward[other] = (reward[other] || 0) + 1;
-    if (tier >= 2) reward.prism = tier - 1 + (m.variant === 'shiny' ? 1 : 0);
-    if (m.variant === 'mutated') reward.goo = (reward.goo || 0) + 3;
+    if (tier >= 2) reward.prism = tier - 1;
+    const vb = variantBonus(m); // the variant's own extra drop, on top of the family material (listed separately)
+    for (const [k, v] of Object.entries(vb)) reward[k] = (reward[k] || 0) + v;
     if (!caught && rng() < 0.25) reward[rng() < 0.6 ? 'potion' : 'trap'] = 1;
     const out = grant(S, reward);
     sum.rewards = out.filter(o => o.k);
+    sum.variantBonus = variantBonus(m);
     sum.levelUps = out.filter(o => o.levelUp).map(o => o.levelUp);
     if (!caught) {
       S.stats.wins++;
@@ -920,7 +954,7 @@ function releaseMonster(S, id) {
   const i = S.monsters.findIndex(m => m.id === id); if (i < 0) return null;
   const m = S.monsters[i]; S.monsters.splice(i, 1);
   if (S.companion === id) S.companion = null;
-  const reward = { [FAMILIES[m.fam].mat]: 2 + RARITY[m.rarity].tier * 2, coins: 10 + 10 * RARITY[m.rarity].tier };
+  const reward = { [FAMILIES[familyOf(m)].mat]: 2 + RARITY[m.rarity].tier * 2, coins: 10 + 10 * RARITY[m.rarity].tier };
   grant(S, reward); S.hp = Math.min(S.hp, hunterStats(S).maxHp);
   return reward;
 }
