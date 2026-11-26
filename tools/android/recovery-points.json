@@ -5,6 +5,22 @@
   "drill": "1b9aa897c0bde95d00cc0770553f7b8807d63c40",
   "ownerVerified": [
     {
+      "build": 18,
+      "role": "latest owner-verified build (phone-tested, reported 2026-11-26); build 15 stays the PRIMARY recovery milestone",
+      "commit": "45dbff1a5d32b90a2f4850c0013681efcc676630",
+      "branch": "ccr-6eaf78d0-vj87lh",
+      "versionCode": 1018,
+      "versionName": "0.6.0-dev.18+45dbff1",
+      "run": "https://github.com/patrikarendas-droid/snapmon/actions/runs/45788403813",
+      "runAttemptThatBuiltTheApk": 1,
+      "artifact": "SnapMon-Dev-APK-0.6.0-build-18",
+      "artifactId": 15101249478,
+      "artifactExpires": "2027-02-24",
+      "apkSha256": "2fa3ff390b5f73f3e8ad4809f3df72b8033c487135322e3b007c2f57bf452672",
+      "apkBytes": 72307966,
+      "verified": "owner's phone test, reported 2026-11-26 (custom encounter, object search/spawn, capture, item granting and God Mode work); reported a family/variant label bug fixed in the next build"
+    },
+    {
       "build": 15,
       "role": "PRIMARY recovery milestone (owner-approved 2026-11-25)",
       "commit": "1b9aa897c0bde95d00cc0770553f7b8807d63c40",
@@ -61,6 +77,10 @@
     {
       "ref": "1b9aa897c0bde95d00cc0770553f7b8807d63c40",
       "what": "build 15, owner-verified on the phone (primary recovery milestone)"
+    },
+    {
+      "ref": "45dbff1a5d32b90a2f4850c0013681efcc676630",
+      "what": "build 18, owner-verified on the phone (developer tools); the save the owner has installed"
     }
   ]
 }

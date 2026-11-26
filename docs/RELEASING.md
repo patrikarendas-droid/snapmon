@@ -65,6 +65,7 @@ GitHub → **Actions** → *Tag a release* → **Run workflow** (branch: product
    node tests/mapping-audit.js      # recognised labels reach the right object and an honest body (tools/audit-mapping.js)
    node tests/god-mode.js && node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist /tmp/shots   # developer God Mode (HP only)
    node tests/e2e-devtools.js http://localhost:8765/index.html /tmp/shots   # developer Custom encounter + Give items
+   node tests/family-variant.js && node tests/e2e-family-variant.js http://localhost:8765/index.html /tmp/shots   # Spectral/Mutated/Prismatic are variants, never families
    node tests/sprite-regress.js check tests/fixtures/sprite-baseline-v1.json && node tests/sprite-regress-v3.js check tests/fixtures/sprite-baseline-v3.json
    python3 -m http.server 8765 &
    node tests/e2e.js http://localhost:8765/index.html tests/fixtures /tmp/shots

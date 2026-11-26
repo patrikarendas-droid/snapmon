@@ -1071,19 +1071,104 @@ function buildGrid(dna) {
 
 const _spriteCache = new Map();
 function spriteKey(dna) { return JSON.stringify(dna); }
-function renderSprite(canvas, dna, scale = 5) {
+/* Special-variant finish (2026-11-26). Painted on the pixel grid AFTER buildGrid/buildPalette, which stay exactly as
+   they were (sprite baselines; the Mutated pixel rewrite untouched): whole grid cells only, no blur. Spectral: a strong
+   cyan rim + a dithered halo, body slightly see-through with faint ghost scanlines. Mutated: a mottled acid-green rim
+   + two or three faint pixel stink wisps. Prismatic: a rainbow rim, a two-stripe diagonal glint and three pixel
+   sparkles. Normal monsters are painted exactly as before. Only the game's renderer asks for it (spriteURL, fx); the
+   catalogue's direct renderSprite calls are unchanged. A variant sprite gets a VFX_PAD-cell transparent margin so the
+   rim is never cut at the grid edge; the page scales such images (class vfx) so the monster keeps its size. */
+const VFX_PAD = 2;
+const hasVfx = dna => !!dna && (dna.variant === 'spectral' || dna.variant === 'mutated' || dna.variant === 'shiny');
+function variantFx(g, dna) {
+  const W = GW + 2 * VFX_PAD, H = GH + 2 * VFX_PAD, pad = VFX_PAD;
+  const solid = new Uint8Array(W * H);
+  let x0 = W, y0 = H, x1 = -1, y1 = -1;
+  for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
+    const c = g.px[y * GW + x]; if (!c || c === P.STEAM) continue;
+    const X = x + pad, Y = y + pad; solid[Y * W + X] = 1;
+    x0 = Math.min(x0, X); y0 = Math.min(y0, Y); x1 = Math.max(x1, X); y1 = Math.max(y1, Y);
+  }
+  const isS = (x, y) => x >= 0 && y >= 0 && x < W && y < H && solid[y * W + x] === 1;
+  const ring = new Uint8Array(W * H); // 1: touches the silhouette (4-neighbour), 2: one cell further out
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (!solid[y * W + x] && (isS(x - 1, y) || isS(x + 1, y) || isS(x, y - 1) || isS(x, y + 1))) ring[y * W + x] = 1;
+  const r1 = (x, y) => x >= 0 && y >= 0 && x < W && y < H && ring[y * W + x] === 1;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (!solid[y * W + x] && !ring[y * W + x] && (r1(x - 1, y) || r1(x + 1, y) || r1(x, y - 1) || r1(x, y + 1))) ring[y * W + x] = 2;
+  const free = (x, y) => x >= 0 && y >= 0 && x < W && y < H && !solid[y * W + x] && ring[y * W + x] !== 1;
+  const R = mulberry((dna.featSeed || 1) + 41);
+  const under = [], over = []; // [x, y, colour] in padded cells: under = behind the body, over = on top of it
+  let bodyAlpha = 1, scan = null;
+  if (dna.variant === 'spectral') {
+    bodyAlpha = 0.84; scan = '#bff8ff';
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const r = ring[y * W + x];
+      if (r === 1) under.push([x, y, '#8ff4ff']);
+      else if (r === 2 && (x + y) % 2 === 0) under.push([x, y, 'rgba(79,216,255,0.42)']);
+    }
+  } else if (dna.variant === 'mutated') {
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (ring[y * W + x] === 1) under.push([x, y, hashStr('mu' + x + ',' + y) % 5 === 0 ? '#5fae1c' : '#a6f53c']);
+    // stink wisps: two or three short wavy 1-cell trails rising from just outside the upper half of the silhouette
+    // (above it, or beside it when the sprite reaches the top), fading upwards
+    const cand = [];
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (ring[y * W + x] === 2 && y <= y0 + (y1 - y0) * 0.55) cand.push([x, y]);
+    const want = dna.tier >= 2 ? 3 : 2, wave = [0, 1, 1, 0, -1, -1], used = [];
+    for (let tries = 0; tries < 60 && used.length < want && cand.length; tries++) {
+      const [sx, sy] = cand[Math.floor(R() * cand.length)];
+      if (used.some(([ux, uy]) => Math.abs(ux - sx) + Math.abs(uy - sy) < 8)) continue;
+      const cells = [];
+      for (let k = 0; k < 5; k++) { const x = sx + wave[(k + used.length * 2) % wave.length], y = sy - k; if (!free(x, y)) break; cells.push([x, y]); }
+      if (cells.length < 3) continue;
+      used.push([sx, sy]);
+      cells.forEach(([x, y], k) => under.push([x, y, `rgba(196,240,128,${(0.72 - k * 0.12).toFixed(2)})`]));
+    }
+  } else if (dna.variant === 'shiny') {
+    const shift = (dna.featSeed || 0) % 360;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (ring[y * W + x] === 1) under.push([x, y, hsl(shift + (x * 2 + y * 3) * 9, 95, 70)]);
+    // a diagonal glint across the body: one 2-cell and one 1-cell stripe
+    const d0 = x0 + y0 + Math.round((x1 - x0 + y1 - y0) * 0.32);
+    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) {
+      const d = x + y - d0, c = g.px[(y - pad) * GW + (x - pad)];
+      if (!solid[y * W + x] || c === P.OUT || c === P.PUPIL || c === P.MOUTH) continue;
+      if (d === 0 || d === 1) over.push([x, y, 'rgba(255,255,255,0.42)']); else if (d === 4) over.push([x, y, 'rgba(255,255,255,0.3)']);
+    }
+    // three plus-shaped pixel sparkles in free space next to the silhouette (top-right, left, bottom-right)
+    const spots = [[x1 - 1, y0 + 1], [x0 + 1, Math.round((y0 + y1) / 2)], [x1 - 2, y1 - 3]], tints = ['#fff6a8', '#ffc4f2', '#b8f6ff'];
+    spots.forEach(([sx, sy], i) => {
+      let best = null;
+      for (let rr = 0; rr < 9 && !best; rr++) for (let dy = -rr; dy <= rr && !best; dy++) for (let dx = -rr; dx <= rr && !best; dx++) {
+        const x = sx + dx, y = sy + dy;
+        if ([[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].every(([a, b]) => free(x + a, y + b))) best = [x, y];
+      }
+      if (!best) return;
+      const [x, y] = best;
+      over.push([x, y, '#ffffff'], [x + 1, y, tints[i]], [x - 1, y, tints[i]], [x, y + 1, tints[i]], [x, y - 1, tints[i]]);
+    });
+  }
+  return { W, H, under, over, bodyAlpha, scan };
+}
+function renderSprite(canvas, dna, scale = 5, opt = {}) {
   const g = buildGrid(dna), pal = buildPalette(dna);
-  canvas.width = GW * scale; canvas.height = GH * scale;
+  const fx = opt.fx && hasVfx(dna) ? variantFx(g, dna) : null, o = fx ? VFX_PAD * scale : 0;
+  canvas.width = (fx ? fx.W : GW) * scale; canvas.height = (fx ? fx.H : GH) * scale;
   const ctx = canvas.getContext('2d');
   ctx.imageSmoothingEnabled = false;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const cells = list => { for (const [x, y, c] of list) { ctx.fillStyle = c; ctx.fillRect(x * scale, y * scale, scale, scale); } };
+  if (fx) cells(fx.under);
+  if (fx) ctx.globalAlpha = fx.bodyAlpha;
   for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) {
     const c = g.px[y * GW + x]; if (!c) continue;
-    ctx.fillStyle = pal[c]; ctx.fillRect(x * scale, y * scale, scale, scale);
+    ctx.fillStyle = pal[c]; ctx.fillRect(o + x * scale, o + y * scale, scale, scale);
   }
+  if (fx && fx.scan) { // faint ghost scanlines on every third row of the body (whole cells, so it stays pixel art)
+    ctx.globalAlpha = 0.16; ctx.fillStyle = fx.scan;
+    for (let y = 0; y < GH; y += 3) for (let x = 0; x < GW; x++) { const c = g.px[y * GW + x]; if (c && c !== P.OUT && c !== P.PUPIL && c !== P.STEAM) ctx.fillRect(o + x * scale, o + y * scale, scale, scale); }
+  }
+  ctx.globalAlpha = 1;
+  if (fx) cells(fx.over);
   if (dna.glowEyes || dna.tier >= 4 || dna.glow) { // soft bloom over glowing pixels
     ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.shadowColor = pal[P.GLOW]; ctx.shadowBlur = scale * 3; ctx.globalAlpha = 0.55;
-    for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) if (g.px[y * GW + x] === P.GLOW) { ctx.fillStyle = pal[P.GLOW]; ctx.fillRect(x * scale, y * scale, scale, scale); }
+    for (let y = 0; y < GH; y++) for (let x = 0; x < GW; x++) if (g.px[y * GW + x] === P.GLOW) { ctx.fillStyle = pal[P.GLOW]; ctx.fillRect(o + x * scale, o + y * scale, scale, scale); }
     ctx.restore();
   }
   return canvas;
@@ -1091,7 +1176,7 @@ function renderSprite(canvas, dna, scale = 5) {
 function spriteURL(dna, scale = 4) {
   const key = scale + spriteKey(dna);
   if (_spriteCache.has(key)) return _spriteCache.get(key);
-  const url = renderSprite(document.createElement('canvas'), dna, scale).toDataURL();
+  const url = renderSprite(document.createElement('canvas'), dna, scale, { fx: true }).toDataURL();
   if (_spriteCache.size > 300) _spriteCache.clear();
   _spriteCache.set(key, url);
   return url;

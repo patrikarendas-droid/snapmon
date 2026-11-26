@@ -39,6 +39,7 @@ if [ "$part" = logic ] || [ "$part" = all ]; then
   node tests/encounter-lock.js      # an object that produced a monster is locked (hidden period); hunter name rules
   node tests/combat-log.js          # the combat log reports exactly what the battle engine did
   node tests/unique-capture.js      # one monster per object + rarity + variant in the real collection
+  node tests/family-variant.js      # Spectral/Mutated/Prismatic are variants, never families (all objects × rarities × variants)
   node tests/save-compat.js         # today's save in the game code of older verified builds and back (needs git history)
 fi
 if [ "$part" = browser ] || [ "$part" = all ]; then
@@ -50,6 +51,7 @@ if [ "$part" = browser ] || [ "$part" = all ]; then
   node tests/e2e-v044.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
   node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
   node tests/e2e-devtools.js http://localhost:8765/index.html shots   # Custom encounter + Give items on the real save (412/320 px)
+  node tests/e2e-family-variant.js http://localhost:8765/index.html shots   # real families on every screen; variant sprite finish (412/320 px)
   node tests/e2e-curated.js http://localhost:8765/index.html shots
   node tests/e2e-catalogue-local.js http://localhost:8765/ shots
   node tests/e2e-catalogue-ai.js http://localhost:8765/ shots

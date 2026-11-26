@@ -441,11 +441,34 @@ function speciesName(cat, rarity, word, fam) {
   if (rarity === 'legendary') name += ', ' + (word ? legendTitle({ id: 'w:' + word, name: word }, fam) : LEGEND_TITLES[fam]);
   return name;
 }
+// the monster's COMBAT NATURE (stored as m.fam: stats, weaknesses, family moves, material). Unchanged rules: the
+// Spectral/Mutated variants fight with the Spectral/Mutated tables. Never shown as a family (see familyOf).
 function monsterFamily(cat, word, variant, o) {
   if (variant === 'spectral') return 'spectral';
   if (variant === 'mutated') return 'mutated';
+  return nativeNature(cat, word, o);
+}
+function nativeNature(cat, word, o) {
   if (o && o.fam) return o.fam; // v0.4.5: the object's own nature (a spoon is Household, not Mechanical like its "tool" category)
   return CATEGORY[cat].fam || NATIVE_FAMILIES[hashStr(word || 'x') % 6];
+}
+// a nature -> the real family (one of FAMILY_IDS): the eight Spectral/Mutated-natured categories get CATEGORY_FAMILY
+const realFamily = (f, cat) => FAMILY_IDS.includes(f) ? f : (CATEGORY_FAMILY[cat] || 'household');
+// the player-facing FAMILY of a registry object: identical for every rarity and variant of that object
+function objectFamily(objId) { const o = OBJECTS[objId]; return o ? realFamily(nativeNature(o.cat, o.name, o), o.cat) : null; }
+/* The family shown to the player for a monster or an encyclopedia entry ({obj, cat, word, fam}). Derived, never
+   stored, so old saves (incl. monsters whose stored fam is 'spectral'/'mutated', or an older family of their object)
+   show their real family without any migration. Object -> its family; an object-less legacy monster -> its stored
+   fam if that is a real family, else its category's real family. Always one of FAMILY_IDS. */
+function familyOf(m) {
+  if (!m) return 'household';
+  const id = collectionObjId(m);
+  if (id && OBJECTS[id]) return objectFamily(id);
+  if (FAMILY_IDS.includes(m.fam)) return m.fam;
+  const cat = CATEGORY[m.cat] ? m.cat : null;
+  if (!cat) return 'household';
+  if (cat === 'other') return NATIVE_FAMILIES[hashStr(m.word || 'x') % 6];
+  return realFamily(CATEGORY[cat].fam, cat);
 }
 function cdFor(ab) { return ab.self ? 3 : (ab.power >= 1.3 || ab.hits) ? 3 : ab.effect ? 2 : 2; }
 // the object's display name for move names and titles ("Energy Drink", "Padlock")
@@ -564,7 +587,7 @@ function variantLabel(v) { return v === 'spectral' ? 'Spectral' : v === 'mutated
 /* Register a sighting in the encyclopedia. Returns {isNew, rp} */
 function recordSighting(S, m) {
   S.stats.encounters++;
-  S.stats.famSeen[m.fam] = (S.stats.famSeen[m.fam] || 0) + 1;
+  const fam = familyOf(m); S.stats.famSeen[fam] = (S.stats.famSeen[fam] || 0) + 1; // real families (older saves may hold 'spectral'/'mutated' keys: kept)
   if (m.rarity === 'epic') S.stats.epicSeen++;
   if (m.rarity === 'legendary') S.stats.legendSeen++;
   if (m.variant === 'shiny') S.stats.shinySeen++;
@@ -832,7 +855,7 @@ function finishBattle(S, B, rng = RNG) {
     if (tier >= 2) S.stats.rareBeaten++;
     if (caught) {
       S.stats.captures++;
-      S.stats.capByFam[m.fam] = (S.stats.capByFam[m.fam] || 0) + 1;
+      S.stats.capByFam[familyOf(m)] = (S.stats.capByFam[familyOf(m)] || 0) + 1;
       const d = S.dex[m.species];
       if (d && !d.caught) { S.rp += 3; sum.rewards.push({ k: 'rp', v: 3, why: 'first capture of this species' }); sum.newCapture = true; }
       if (d) d.caught++;

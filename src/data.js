@@ -38,6 +38,13 @@ const FAMILIES = {
                 abilities: [ { name: 'Acid Spew', power: 0.95, effect: 'poison', chance: 0.55 }, { name: 'Tentacle Flurry', power: 0.45, hits: 3 }, { name: 'Unstable Growth', power: 0, effect: 'atkup', self: true } ] },
 };
 const NATIVE_FAMILIES = ['organic', 'mechanical', 'elemental', 'household', 'food', 'botanical', 'spectral', 'mutated'];
+/* Families vs variants (2026-11-26). Spectral and Mutated are VARIANTS (like Prismatic), never families. Their FAMILIES
+   entries stay as combat natures only: a monster's stored `fam` is its combat nature (stat multipliers, weaknesses,
+   family moves, material) and is 'spectral'/'mutated' for those variants and for the eight categories below, exactly
+   as before (no balance or save change). The family SHOWN to the player always comes from the object and is one of
+   FAMILY_IDS (familyOf in game.js); CATEGORY_FAMILY gives those eight categories their real family. */
+const FAMILY_IDS = ['organic', 'mechanical', 'elemental', 'household', 'food', 'botanical'];
+const CATEGORY_FAMILY = { book: 'household', mirror: 'household', instrument: 'household', toy: 'household', trash: 'household', clock: 'mechanical', cloth: 'organic', bug: 'organic' };
 
 /* Object categories. hue: base body hue (deg), sat/lit tweak; shape: sprite builder id. kw: keywords matched against
    typed names and (optional) AI-lens labels. sig: the category's signature ability. */

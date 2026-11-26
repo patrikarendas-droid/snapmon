@@ -12,6 +12,7 @@ const Guide = (() => {
   const turns = n => n + (n === 1 ? ' turn' : ' turns');
   const el = id => `<span style="color:${ELEMENTS[id].color}">${ELEMENTS[id].name}</span>`;
   const famName = f => `<span style="color:${FAMILIES[f].color}">${FAMILIES[f].glyph} ${FAMILIES[f].name}</span>`;
+  const natured = f => { const n = CATEGORIES.filter(c => c.fam === f).map(c => c.name.toLowerCase().replace(' / ', '/')); return n.slice(0, -1).join(', ') + ' and ' + n[n.length - 1]; };
   const weaponsWith = test => WEAPON_ORDER.filter(w => test(WEAPONS[w])).map(w => WEAPONS[w].name);
   // v0.4.5: monsters draw moves from their object's kit, so any kind of monster may use an effect: show example moves
   const kitMoves = Object.values(MOVE_KITS).flatMap(k => k.split(',').map(x => x.split(':').map(t => t.trim())));
@@ -39,10 +40,12 @@ const Guide = (() => {
         <li><b>Monster abilities:</b> each monster has a signature move plus more moves from its object's own move set the rarer it is (a drink fights like a drink, a spoon like kitchenware). Every Legendary is unique: its title, a legend move and its Ultimate carry its object's name. After use, a move needs a few turns to recharge. A monster that can heal does so when below ${pct(MECH.enemy.healBelow)} HP.</li>
       </ul>` },
     { id: 'types', title: 'Damage types, weaknesses & resistances', body: () => `
-      <p>Every weapon deals one damage type. Hitting a weakness does <b>×${MECH.weak}</b> damage ("super effective"); a resistance takes only <b>×${MECH.resist}</b>. A monster's family decides its weaknesses.</p>
-      <div class="guide-table"><table><tr><th>Family</th><th>Weak to (×${MECH.weak})</th><th>Resists (×${MECH.resist})</th></tr>
-      ${Object.keys(FAMILIES).map(f => `<tr><td>${famName(f)}</td><td>${FAMILIES[f].weak.map(el).join(', ')}</td><td>${FAMILIES[f].resist.map(el).join(', ') || '–'}</td></tr>`).join('')}</table></div>
-      <p class="small muted">Weapons: ${WEAPON_ORDER.map(w => `${WEAPONS[w].name} = ${el(WEAPONS[w].el)}`).join(' · ')}. The family is shown next to every monster's name.</p>` },
+      <p>Every weapon deals one damage type. Hitting a weakness does <b>×${MECH.weak}</b> damage ("super effective"); a resistance takes only <b>×${MECH.resist}</b>. A monster's family decides its weaknesses, except for Spectral and Mutated variants, which use their variant's row.</p>
+      <div class="guide-table"><table><tr><th>Family / variant</th><th>Weak to (×${MECH.weak})</th><th>Resists (×${MECH.resist})</th></tr>
+      ${FAMILY_IDS.map(f => `<tr><td>${famName(f)}</td><td>${FAMILIES[f].weak.map(el).join(', ')}</td><td>${FAMILIES[f].resist.map(el).join(', ') || '–'}</td></tr>`).join('')}
+      ${['spectral', 'mutated'].map(f => `<tr><td>${famName(f)} variant</td><td>${FAMILIES[f].weak.map(el).join(', ')}</td><td>${FAMILIES[f].resist.map(el).join(', ') || '–'}</td></tr>`).join('')}</table></div>
+      <p class="small muted">Some objects have a ghostly or unstable nature and always fight like a variant, whatever their family: ${natured('spectral')} like Spectral ones; ${natured('mutated')} like Mutated ones.</p>
+      <p class="small muted">Weapons: ${WEAPON_ORDER.map(w => `${WEAPONS[w].name} = ${el(WEAPONS[w].el)}`).join(' · ')}. The family is shown next to every monster's name; Monster Analysis shows each monster's exact weaknesses.</p>` },
     { id: 'status', title: 'Status effects', body: () => `
       <p>Effects tick and count down at the <b>start of the affected creature's turn</b>; "Lasts" below says what that means in practice. The same effect does not stack: applying it again only resets its timer (to the longer of the two). Different effects can be active at the same time.</p>
       <div class="guide-cards">
@@ -76,7 +79,7 @@ const Guide = (() => {
       ${RARITIES.map(r => `<tr><td style="color:${r.color}"><b>${r.name}</b></td><td>${pct1(r.weight / totalWeight)}</td><td>×${r.mult} (HP ×${r.hpMult})</td><td>${pct(r.capture)}</td><td>${r.lvl[0] === r.lvl[1] ? (r.lvl[0] ? '+' + r.lvl[0] : 'same') : `+${r.lvl[0]} to +${r.lvl[1]}`}</td><td>×${r.xp}</td></tr>`).join('')}</table></div>
       <ul class="small"><li>Research: the Ectoplasmic Lens makes Rare, Epic and Legendary 40% more likely; the Legend Tracker doubles Legendary odds.</li>
         <li>Rarer monsters know more abilities; each Legendary also has its own unique title, legend move and Ultimate.</li>
-        <li>Variants (unlocked by research): Spectral and Mutated forms (9% each) change the monster's family; Prismatic colours (1 in 12) give +8% stats and double coins.</li></ul>` },
+        <li>Variants (unlocked by research): Spectral and Mutated forms (9% each) change how the monster fights (stats, weaknesses, moves), never its family; Prismatic colours (1 in 12) give +8% stats and double coins.</li></ul>` },
     { id: 'levels', title: 'Levels & scaling', body: () => `
       <ul>
         <li>Win or capture to earn XP. Each hunter level: <b>+12 max HP, +2 attack, +1 defence, +1 speed</b>. A second charm slot opens at level 5.</li>

@@ -32,11 +32,15 @@ function toast(msg, kind = '') {
 }
 
 /* ---------- helpers for sprites ---------- */
+// variant sprites carry a transparent margin for their rim (sprites.js VFX_PAD); class vfx scales them back to size
+const pxCls = dna => 'px' + (hasVfx(dna) ? ' vfx' : '');
 function spriteHTML(dna, { size = 160, rarity = 'common', variant = null, cls = '' } = {}) {
   const tier = RARITY[rarity].tier;
-  const sparks = tier >= 3 || variant === 'shiny' ? [0, 1, 2, 3, 4].map(i => `<i class="spark" style="left:${10 + i * 19}%;top:${20 + (i % 3) * 22}%;animation-delay:${i * 0.45}s"></i>`).join('') : '';
+  // Prismatic: crisp pixel sparkles in rainbow tints that twinkle in steps (no blur); otherwise the rarity sparks
+  const sparks = variant === 'shiny' ? [0, 1, 2, 3, 4, 5].map(i => `<i class="spark px4 t${i % 3}" style="left:${[6, 84, 14, 78, 46, 90][i]}%;top:${[12, 20, 58, 66, 4, 44][i]}%;animation-delay:${(i * 0.37).toFixed(2)}s"></i>`).join('')
+    : tier >= 3 ? [0, 1, 2, 3, 4].map(i => `<i class="spark" style="left:${10 + i * 19}%;top:${20 + (i % 3) * 22}%;animation-delay:${i * 0.45}s"></i>`).join('') : '';
   return `<div class="sprite ${variant || ''} ${dna.shape === 'cloth' || dna.shape === 'key' || variant === 'spectral' ? 'hover' : ''} ${cls}" style="--rc:${RARITY[rarity].color};width:${size}px;max-width:100%">
-    ${tier >= 2 || variant ? '<i class="aura"></i>' : ''}${sparks}<img class="px" alt="" src="${spriteURL(dna, 5)}" style="width:100%"></div>`;
+    ${tier >= 2 || variant ? '<i class="aura"></i>' : ''}${sparks}<img class="${pxCls(dna)}" alt="" src="${spriteURL(dna, 5)}" style="width:100%"></div>`;
 }
 const rarityChip = r => `<span class="chip r" style="color:${RARITY[r].color}">${RARITY[r].name.toUpperCase()}</span>`;
 const famChip = f => `<span class="chip" style="color:${FAMILIES[f].color}">${FAMILIES[f].glyph} ${FAMILIES[f].name}</span>`;
@@ -92,7 +96,7 @@ function huntScreen() {
   return `${saveBlockedHTML()}
   <section class="viewfinder" id="vf">
     ${live ? '<video id="liveVideo" autoplay playsinline muted></video>' : ''}
-    ${ghost && !live ? `<img class="vf-ghost px" alt="" src="${spriteURL(ghost, 3)}">` : ''}
+    ${ghost && !live ? `<img class="vf-ghost ${pxCls(ghost)}" alt="" src="${spriteURL(ghost, 3)}">` : ''}
     <i class="vf-corner tl"></i><i class="vf-corner tr"></i><i class="vf-corner bl"></i><i class="vf-corner br"></i><i class="vf-sweep"></i>
     ${live ? '' : `<div class="vf-center"><div><h1>Monsters hide <em>in plain sight</em></h1>
       <p>${S.stats.photos === 0 ? 'Photograph a real object near you — a mug, a shoe, a plant — and the Spirit Lens will reveal what lives inside it.' : 'Explore. Unusual objects hide unusual monsters.'}</p></div></div>`}
@@ -112,7 +116,7 @@ function huntScreen() {
     ${quests.length ? quests.map(questHTML).join('') : '<p class="muted">Every order is complete. You are a legend of the hunt.</p>'}
   </section>
   ${ui.lastSightings.length ? `<section class="stack"><div class="section-title"><h2>Recent sightings</h2></div>
-    <div class="sightings">${ui.lastSightings.map(s => `<div class="sighting"><img class="px" alt="" src="${spriteURL(s.dna, 3)}">${esc(s.name.split(',')[0])}<br><span style="color:${RARITY[s.rarity].color}">${s.outcome}</span></div>`).join('')}</div></section>` : ''}
+    <div class="sightings">${ui.lastSightings.map(s => `<div class="sighting"><img class="${pxCls(s.dna)}" alt="" src="${spriteURL(s.dna, 3)}">${esc(s.name.split(',')[0])}<br><span style="color:${RARITY[s.rarity].color}">${s.outcome}</span></div>`).join('')}</div></section>` : ''}
   <p class="notice">Your photos stay on this phone. The Spirit Lens recognises objects on-device, then the image is thrown away.</p>`;
 }
 function saveBlockedHTML() {
@@ -676,7 +680,7 @@ function showDiscovery(m, seen) {
       <div class="disc-sprite">${spriteHTML(m.dna, { size: 220, rarity: m.rarity, variant: m.variant })}</div>
       <div class="rarity-banner" style="color:${r.color}">${r.name.toUpperCase()}${m.variant ? ' · ' + variantLabel(m.variant).toUpperCase() : ''}</div>
       <h1 class="disc-name">${esc(m.name)}</h1>
-      <div class="row wrap" style="justify-content:center">${famChip(m.fam)}<span class="chip">Lv ${m.level}</span><span class="chip">from ${m.label ? esc(m.label) : catLabel(m)}</span></div>
+      <div class="row wrap" style="justify-content:center">${famChip(familyOf(m))}<span class="chip">Lv ${m.level}</span><span class="chip">from ${m.label ? esc(m.label) : catLabel(m)}</span></div>
       ${seen.isNew ? `<span class="new-tag">NEW SPECIES · +${seen.rp} RP</span>` : ''}
       <p class="muted lore lore-${m.rarity}" style="max-width:36ch">${esc(loreOf(m))}</p>
       ${analysis ? `<p class="small muted num">HP ${m.stats.hp} · ATK ${m.stats.atk} · DEF ${m.stats.def} · SPD ${m.stats.spd} · weak to ${FAMILIES[m.fam].weak.map(e => ELEMENTS[e].name).join(', ')}</p>` : ''}
@@ -733,12 +737,12 @@ function renderBattle() {
     ${god ? '<p class="test-banner" id="godBanner" style="text-align:center;margin:0">GOD MODE · HP PROTECTED</p>' : ''}
     <div class="arena" id="arena" style="--fc:${FAMILIES[m.fam].color}">
       <div class="hp-card foe-card"><div class="nm"><span>${esc(B.enemy.name.split(',')[0])}</span><span class="lv">Lv ${m.level}</span></div>
-        <div class="row" style="gap:6px"><span class="chip r" style="color:${RARITY[m.rarity].color};font-size:9.5px;padding:1px 6px">${RARITY[m.rarity].name.toUpperCase()}</span><span class="small" style="color:${FAMILIES[m.fam].color}">${FAMILIES[m.fam].glyph} ${FAMILIES[m.fam].name}</span></div>
+        <div class="row" style="gap:2px 6px;flex-wrap:wrap"><span class="chip r" style="color:${RARITY[m.rarity].color};font-size:9.5px;padding:1px 6px">${RARITY[m.rarity].name.toUpperCase()}</span><span class="small" style="color:${FAMILIES[familyOf(m)].color};white-space:nowrap">${FAMILIES[familyOf(m)].glyph} ${FAMILIES[familyOf(m)].name}</span>${m.variant ? `<span class="small" style="color:var(--violet);white-space:nowrap">${variantLabel(m.variant)}</span>` : ''}</div>
         <div class="bar hp ok"><i id="ehp" style="width:${B.disp.enemy / B.enemy.maxHp * 100}%"></i></div>
         ${analysis ? `<div class="small muted num" id="ehpTxt">${B.disp.enemy}/${B.enemy.maxHp}</div>` : ''}
         <div class="st-row" id="est">${statusChips(B.enemy)}</div></div>
       <div class="foe" id="foe">${spriteHTML(m.dna, { size: 400, rarity: m.rarity, variant: m.variant })}<i class="plat"></i></div>
-      <div class="hero" id="hero"><img class="hunter px" alt="Your hunter" src="${hunter}">${comp ? `<img class="comp px" alt="" src="${spriteURL(comp.dna, 3)}">` : ''}<i class="plat"></i></div>
+      <div class="hero" id="hero"><img class="hunter px" alt="Your hunter" src="${hunter}">${comp ? `<img class="comp ${pxCls(comp.dna)}" alt="" src="${spriteURL(comp.dna, 3)}">` : ''}<i class="plat"></i></div>
       <div class="hp-card hero-card"><div class="nm"><span>${esc(B.hero.name)}</span><span class="lv">Lv ${S.level}</span></div>
         <div class="bar hp ok"><i id="hhp" style="width:${B.disp.hero / B.hero.maxHp * 100}%"></i></div>
         <div class="small muted num" id="hhpTxt">${B.disp.hero}/${B.hero.maxHp} HP</div>
@@ -959,16 +963,16 @@ function itemsSheet() {
   openSheet(`<div class="sheet-head"><h2>Items</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div><p class="small muted">Using an item takes your turn.</p>${list}`);
 }
 function infoSheet() {
-  const B = ui.battle, m = B.m, analysis = !!S.research.analysis, f = FAMILIES[m.fam];
+  const B = ui.battle, m = B.m, analysis = !!S.research.analysis, f = FAMILIES[m.fam]; // f: its combat nature (weaknesses), not its family
   openSheet(`<div class="sheet-head"><h2>${esc(m.name.split(',')[0])}</h2><button class="btn small ghost" data-act="closeSheet">Close</button></div>
-    <div class="row wrap">${rarityChip(m.rarity)}${famChip(m.fam)}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
+    <div class="row wrap">${rarityChip(m.rarity)}${famChip(familyOf(m))}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
     <p class="muted lore lore-${m.rarity}">${esc(loreOf(m))}</p>
     ${analysis ? `<div class="stat-grid">${statBars(m.stats)}</div>
       <div class="small"><b>Weak to:</b> ${f.weak.map(e => ELEMENTS[e].name).join(', ')} · <b>Resists:</b> ${f.resist.map(e => ELEMENTS[e].name).join(', ') || 'nothing'}</div>
       <div class="small"><b>Your weapon:</b> ${ELEMENTS[WEAPONS[B.weapon].el].name} — ${effMult(m.fam, WEAPONS[B.weapon].el) > 1 ? '<span style="color:var(--good)">super effective</span>' : effMult(m.fam, WEAPONS[B.weapon].el) < 1 ? '<span style="color:var(--danger)">resisted</span>' : 'normal damage'}</div>
       <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>`
     : `<div class="notice">Research <b>Monster Analysis</b> in the Lab to see stats, weaknesses, abilities and exact capture odds.</div>
-       <div class="small"><b>Family hint:</b> ${f.name} monsters are weak to ${f.weak.map(e => ELEMENTS[e].name).join(' and ')} weapons.</div>`}
+       <div class="small"><b>Weakness hint:</b> it is weak to ${f.weak.map(e => ELEMENTS[e].name).join(' and ')} weapons.</div>`}
     <div class="small muted">Capture odds rise as its HP falls, and when it is stunned, poisoned or burning.</div>`);
 }
 
@@ -993,22 +997,23 @@ function abilityHTML(a) { return `<div class="ability"><b>${esc(a.name)}${a.ulti
 function dexScreen() {
   const seg = `<div class="seg"><button class="${ui.dexView === 'captured' ? 'on' : ''}" data-act="dexView" data-arg="captured">Captured (${S.monsters.length})</button><button class="${ui.dexView === 'encyclopedia' ? 'on' : ''}" data-act="dexView" data-arg="encyclopedia">Encyclopedia (${Object.keys(S.dex).length})</button></div>`;
   const rf = `<div class="chips-scroll">${['all', ...RARITIES.map(r => r.id)].map(r => `<button class="fchip ${ui.fR === r ? 'on' : ''}" data-act="fR" data-arg="${r}" ${r !== 'all' ? `style="${ui.fR === r ? '' : 'color:' + RARITY[r].color}"` : ''}>${r === 'all' ? 'All rarities' : RARITY[r].name}</button>`).join('')}</div>`;
-  const ff = `<div class="chips-scroll">${['all', ...Object.keys(FAMILIES)].map(f => `<button class="fchip ${ui.fF === f ? 'on' : ''}" data-act="fF" data-arg="${f}">${f === 'all' ? 'All families' : FAMILIES[f].glyph + ' ' + FAMILIES[f].name}</button>`).join('')}</div>`;
+  const fF = FAMILY_IDS.includes(ui.fF) ? ui.fF : 'all'; // family filter: real families only (Spectral/Mutated are variants)
+  const ff = `<div class="chips-scroll">${['all', ...FAMILY_IDS].map(f => `<button class="fchip ${fF === f ? 'on' : ''}" data-act="fF" data-arg="${f}">${f === 'all' ? 'All families' : FAMILIES[f].glyph + ' ' + FAMILIES[f].name}</button>`).join('')}</div>`;
   if (ui.dexView === 'captured') {
-    const list = S.monsters.filter(m => (ui.fR === 'all' || m.rarity === ui.fR) && (ui.fF === 'all' || m.fam === ui.fF)).slice().reverse();
+    const list = S.monsters.filter(m => (ui.fR === 'all' || m.rarity === ui.fR) && (fF === 'all' || familyOf(m) === fF)).slice().reverse();
     const grid = list.length ? `<div class="mgrid">${list.map(m => `<button class="mcard r-${m.rarity}" style="--rc:${RARITY[m.rarity].color}" data-act="mon" data-arg="${m.id}">
         ${S.companion === m.id ? '<span class="badge">BUDDY</span>' : ''}${m.variant ? `<span class="vbadge">${variantLabel(m.variant)[0]}</span>` : ''}
-        <img class="px" alt="" src="${spriteURL(m.dna, 3)}"><div class="nm">${monsterTitle(m)}</div><div class="sub">Lv ${m.level} · <span style="color:${RARITY[m.rarity].color}">${RARITY[m.rarity].name}</span></div></button>`).join('')}</div>`
+        <img class="${pxCls(m.dna)}" alt="" src="${spriteURL(m.dna, 3)}"><div class="nm">${monsterTitle(m)}</div><div class="sub">Lv ${m.level} · <span style="color:${RARITY[m.rarity].color}">${RARITY[m.rarity].name}</span></div></button>`).join('')}</div>`
       : `<div class="card empty"><h3>${S.monsters.length ? 'Nothing matches these filters' : 'No monsters captured yet'}</h3><p>${S.monsters.length ? 'Try another rarity or family.' : 'Weaken a monster in battle, then throw a Snap Trap. The lower its HP, the better your odds.'}</p></div>`;
     return `${seg}${rf}${ff}${grid}`;
   }
-  const entries = Object.values(S.dex).filter(d => (ui.fR === 'all' || (d.rarities || {})[ui.fR]) && (ui.fF === 'all' || d.fam === ui.fF));
+  const entries = Object.values(S.dex).filter(d => (ui.fR === 'all' || (d.rarities || {})[ui.fR]) && (fF === 'all' || familyOf(d) === fF));
   const done = Object.keys(S.dex).length;
   const byCat = new Map();
   for (const d of entries.sort((x, y) => x.name.localeCompare(y.name))) { const c = (OBJECTS[d.obj] || d).cat || 'other'; if (!byCat.has(c)) byCat.set(c, []); byCat.get(c).push(d); }
   const groups = [...byCat.entries()].sort((x, y) => y[1].length - x[1].length).map(([c, list]) => `<section class="stack" style="gap:6px">
     <div class="section-title"><h2 style="font-size:16px">${CATEGORY[c].icon} ${esc(CATEGORY[c].name.split(' /')[0])}</h2><span class="small muted">${list.length}</span></div>
-    <div class="mgrid">${list.map(d => `<button class="mcard ${d.caught ? '' : 'seen'}" data-act="species" data-arg="${esc(d.key)}"><img class="px" alt="" src="${spriteURL(d.dna, 3)}"><div class="nm">${esc(d.name)}</div>
+    <div class="mgrid">${list.map(d => `<button class="mcard ${d.caught ? '' : 'seen'}" data-act="species" data-arg="${esc(d.key)}"><img class="${pxCls(d.dna)}" alt="" src="${spriteURL(d.dna, 3)}"><div class="nm">${esc(d.name)}</div>
       <div class="sub">${RARITIES.map(r => `<i class="rdot" title="${r.name}" style="background:${(d.rarities || {})[r.id] ? r.color : 'transparent'};border-color:${r.color}"></i>`).join('')}</div></button>`).join('')}</div></section>`).join('');
   const milestones = [5, 15, 40, 80, 150, 300].map(n => `<span class="chip" style="${done >= n ? 'color:var(--ecto);border-color:var(--ecto)' : ''}">${n}</span>`).join('');
   return `${seg}<div class="card stack"><b>${done} kinds of object documented</b><div class="small muted">Every kind of object hides its own monster. Each dot is a rarity you have met.</div>
@@ -1021,7 +1026,7 @@ function monsterSheet(id) {
     <div class="stage" style="background:radial-gradient(circle, color-mix(in srgb, ${RARITY[m.rarity].color} 25%, transparent), transparent 65%)">${spriteHTML(m.dna, { size: 190, rarity: m.rarity, variant: m.variant })}<div class="shadow"></div></div>
     <div class="sheet-head"><div class="grow"><h2>${monsterTitle(m)}</h2></div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
     <p class="muted lore lore-${m.rarity}" style="margin:0">${esc(loreOf(m))}</p>
-    <div class="row wrap">${rarityChip(m.rarity)}${famChip(m.fam)}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
+    <div class="row wrap">${rarityChip(m.rarity)}${famChip(familyOf(m))}${varChip(m.variant)}<span class="chip">Lv ${m.level}</span></div>
     <div class="stat-grid">${statBars(m.stats)}</div>
     <div class="stack">${m.abilities.map(abilityHTML).join('')}</div>
     <div class="card small stack" style="gap:4px">
@@ -1047,7 +1052,7 @@ function speciesSheet(key) {
     <div class="stage">${spriteHTML(d.dna, { size: 170, rarity: top.id })}<div class="shadow"></div></div>
     <div class="sheet-head"><div class="grow">${(() => { const mn = (typeof curatedDexName === 'function' ? curatedDexName(d, top.id) : d.monsterName) || d.monsterName || d.name, on = o ? o.name : d.name;
       return `<h2>${esc(mn)}</h2>${on && on !== mn ? `<div class="small muted">${esc(on)}</div>` : ''}`; })()}</div><button class="btn small ghost" data-act="closeSheet">Close</button></div>
-    <div class="row wrap">${RARITIES.filter(r => (d.rarities || {})[r.id]).map(r => rarityChip(r.id)).join('')}${famChip(d.fam)}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
+    <div class="row wrap">${RARITIES.filter(r => (d.rarities || {})[r.id]).map(r => rarityChip(r.id)).join('')}${famChip(familyOf(d))}${Object.keys(d.variants || {}).map(varChip).join('')}</div>
     <p class="muted lore lore-${top.id}">${esc(speciesLore(d, top.id))}</p>
     <div class="card small stack" style="gap:4px">
       <div><b>Hides in:</b> ${o ? esc(o.name) : d.word ? '“' + esc(d.word) + '”' : esc(c.name)} <span class="muted">(${esc(c.name.split(' /')[0])})</span></div>
@@ -1056,7 +1061,7 @@ function speciesSheet(key) {
       <div><b>Encounters:</b> ${d.seen} · <b>Captures:</b> ${d.caught}</div>
       <div><b>Signature move:</b> ${esc(((o && o.sig) || c.sig).name)}</div>
     </div>
-    ${owned.length ? `<div class="mgrid">${owned.map(m => `<button class="mcard r-${m.rarity}" style="--rc:${RARITY[m.rarity].color}" data-act="mon" data-arg="${m.id}"><img class="px" alt="" src="${spriteURL(m.dna, 3)}"><div class="nm">${monsterTitle(m)}</div><div class="sub">Lv ${m.level}</div></button>`).join('')}</div>` : '<p class="small muted">You have not captured one of these yet.</p>'}`);
+    ${owned.length ? `<div class="mgrid">${owned.map(m => `<button class="mcard r-${m.rarity}" style="--rc:${RARITY[m.rarity].color}" data-act="mon" data-arg="${m.id}"><img class="${pxCls(m.dna)}" alt="" src="${spriteURL(m.dna, 3)}"><div class="nm">${monsterTitle(m)}</div><div class="sub">Lv ${m.level}</div></button>`).join('')}</div>` : '<p class="small muted">You have not captured one of these yet.</p>'}`);
 }
 
 /* ---------- GEAR ---------- */
@@ -1120,7 +1125,7 @@ function bagHTML() {
       ${usable ? `<button class="btn small ecto" data-act="useOut" data-arg="${id}">Use</button>` : '<span></span>'}</div>`;
   }).join('');
   return `<div class="section-title"><h2>Materials</h2></div>${matsHTML()}
-    <p class="small muted">Monsters drop materials based on their family: mechanical and household foes leave Scrap, organic ones Goo, spectral and elemental ones Ectoplasm. Rare and rarer monsters drop Prism Shards.</p>
+    <p class="small muted">Every defeated monster drops Scrap, Goo or Ectoplasm, depending on what it is made of (Spectral variants leave Ectoplasm, Mutated ones Goo). Rare and rarer monsters drop Prism Shards.</p>
     <div class="section-title"><h2>Items</h2></div><div class="stack">${items}</div>`;
 }
 function shopHTML() {

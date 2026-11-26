@@ -417,10 +417,48 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     emulator incl. recovery drill from build 15's code). APK SHA-256
     `2fa3ff390b5f73f3e8ad4809f3df72b8033c487135322e3b007c2f57bf452672` (72,307,966 bytes), same certificate
     73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-18` (id 15101249478), expires 2027-02-24.
-    CI-green, NOT yet phone-verified.
+    **Owner phone-tested build 18 on 2026-11-26** (custom encounter, search/spawn, capture, items, God Mode OK); added to
+    `tools/android/recovery-points.json` (ownerVerified + save-compat ref). Build 15 stays the primary milestone/drill.
 
-**Next priorities (2026-11-26):**
-- Owner: install build 18 (developer tools) as an update over build 17/15 (backup code first) and run its phone checklist.
+- **Families vs variants + special-variant sprite finish (2026-11-26, owner request; Android branch, not merged, nothing
+  published).** Owner's screenshots: a Prismatic Common baby bottle showed a "Mutated" family chip; the family filters
+  listed Spectral and Mutated.
+  - Root cause (two parts): (1) `monsterFamily` overwrote `m.fam` with 'spectral'/'mutated' for those variants; (2) eight
+    categories had the Spectral/Mutated tables as their native family (book, cloth, mirror, clock, instrument →
+    Spectral, 229 objects; toy, trash, bug → Mutated, 152 objects) — the baby bottle is a toy. One field (`m.fam`) did
+    two jobs: player-facing family and combat nature (stat multipliers, weaknesses, family moves, material).
+  - Fix (smallest safe split, no balance or save change): stored `m.fam` = combat NATURE, unchanged for new and old
+    monsters. The shown family is derived, never stored: `familyOf(m)` / `objectFamily(id)` (`src/game.js`) from the
+    object (identical for every rarity × variant), always one of `FAMILY_IDS` (6 real families, `src/data.js`). No new
+    family: `CATEGORY_FAMILY` maps book/mirror/instrument/toy/trash → Household, clock → Mechanical, cloth/bug → Organic
+    (shoe and bag were already Organic). Object-less legacy monsters: stored fam if real, else category family.
+  - UI: family chips (discovery, Intel, detail, encyclopedia entry), battle header (family + variant), family filters
+    (6 real families, stale filter → all) in Captured/Encyclopedia; Guide weakness table = 6 families + "Spectral
+    variant"/"Mutated variant" rows + a note that books, clothes, mirrors, clocks, instruments fight like Spectral and
+    toys, trash, bugs like Mutated whatever their family; battle "Weakness hint" no longer names a family; Gear material
+    text reworded. No variant filter added (owner: avoid new UI).
+  - Consequences, stated to the owner: those 381 objects and Spectral/Mutated variants keep their previous weaknesses,
+    moves and stats, so a Household book is weak to what Spectral monsters are weak to. Aligning their combat with the
+    real family would be a separate, owner-approved balance change. Statistics `famSeen`/`capByFam` (quests "Family
+    Reunion", "Household Pest Control") now count real families for new sightings/captures; older 'spectral'/'mutated'
+    keys stay (no progress removed). The catalogue (unchanged, not deployed) still prints the nature as "family".
+  - Sprites (`src/sprites.js` `variantFx`, `renderSprite(…, { fx })`, used by `spriteURL` only): painted on whole grid
+    cells after `buildGrid`/`buildPalette` (both unchanged → sprite baselines identical; Mutated pixel rewrite
+    untouched; Normal sprites byte-identical). Spectral: solid cyan rim + dithered halo, body at 84% opacity + faint
+    scanlines (old blurry CSS drop-shadow/opacity removed). Mutated: mottled acid-green rim + 2–3 faint pixel stink
+    wisps. Prismatic: rainbow rim, two-stripe diagonal glint, three pixel sparkles in the image; on large sprites six
+    crisp CSS plus-sparkles twinkle (steps, off under reduced motion; old blurry glow removed — the discovery reveal
+    animation had been cancelling it anyway). Variant images get a 2-cell transparent margin; CSS `img.vfx { scale:
+    1.1 }` keeps the monster the same size as a Normal one (`pxCls` in `src/ui.js`). Static, cached per DNA: no
+    per-frame work. Catalogue calls `renderSprite` without fx → unchanged.
+  - Tests: new `tests/family-variant.js` (all 2,308 objects × 5 rarities × 4 variants = 46,160 monsters: real family,
+    identical to build-18 generator output; old-save cases; build-18 backup code; battle weaknesses; stats keys) and
+    `tests/e2e-family-variant.js` (412/320 px: discovery, battle header, Intel, Captured, detail, Encyclopedia, filters,
+    vfx sizes). rules-trace, gameplay-baseline, generator-snapshot, sprite baselines unchanged.
+
+**Next priorities (2026-11-26, later):**
+- Owner: install the family/variant build as an update over build 18 (backup code first) and run its phone checklist.
+- Owner decision (optional): should the 381 Spectral/Mutated-natured objects also FIGHT like their real family? (balance change)
 - No further releases, deployments or merges without approval.
 
 **Previous priorities (2026-11-25):**
@@ -467,6 +505,7 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
 | APK updates need the stable signing secret | Resolved 2026-11-18 (secret set; builds 8 and 9 same certificate) | Without `ANDROID_DEV_SIGNING_SEED` each CI build has a different key and cannot update the last one (uninstall = saves lost). | Add the secret once (`docs/ANDROID.md` → Signing). |
 | HUD covered the top of every screen in the Android app (build 9) | Fixed on the Android branch (layout reserves the status-bar inset) | `index.html` `#app`/`.sheet`; `tests/e2e-layout.js` | Owner re-checks on the phone with the next build. |
 | Quiet objects: a different suggested object for the same physical thing is not locked | Known (2026-11-24) | The lock is per confirmed object type (`S.enc.quiet`); alternatives the lens itself offers are other objects | Only if the owner wants the lock widened to all suggestions of a missed photo. |
+| Spectral/Mutated-natured objects (books, clothes, mirrors, clocks, instruments; toys, trash, bugs) fight with the Spectral/Mutated tables although their family is Household/Organic/Mechanical | Known, by decision (2026-11-26) | Combat preserved on purpose when family and nature were split (`familyOf` vs stored `m.fam`); Guide explains it | Owner decides whether to rebalance them to their real family. |
 | A few Settings texts say "in this browser" inside the Android app | Known, cosmetic | Website wording; correct there. | Adjust wording when the app is closer to release. |
 | Build 14 APK artifact expires 2026-12-24 | Open (historical point; build 15 is archived) | Uploaded with the old 30-day retention | Owner downloads a copy if wanted. |
 | Real Firebase sign-in on the catalogue-only site | Resolved 2026-11-25 (owner: catalogue works on the live site) | Same origin, no domain change | None. |
