@@ -218,6 +218,13 @@ main#screen { flex: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); 
 .guide-status .st { justify-self: start; }
 .shutter[disabled], .shutter.waiting { opacity: .45; filter: grayscale(.6); cursor: default; } .shutter[disabled]::after { animation: none; opacity: 0; }
 .shutter .waking { font-size: 11px; letter-spacing: .1em; }
+.dev-tool label { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.dev-row label { min-width: 120px; flex: 1 1 120px; }
+.dev-tool select.search, .dev-tool input.search { width: 100%; min-width: 0; min-height: 44px; }
+.dev-results { display: flex; flex-direction: column; gap: 6px; }
+.dev-results:empty { display: none; }
+.btn.dev-pick { justify-content: flex-start; text-align: left; white-space: normal; overflow-wrap: anywhere; min-height: 44px; }
+.dev-tool code { overflow-wrap: anywhere; }
 .test-banner { font: 700 11px var(--font-body); letter-spacing: .14em; color: #1b1206; background: repeating-linear-gradient(45deg, #ffcf5a 0 10px, #ffb13b 10px 20px); padding: 4px 10px; border-radius: 6px; margin: 0; }
 .zoom-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
 .zoom-row input[type=range] { flex: 1; max-width: 240px; accent-color: var(--ecto); }

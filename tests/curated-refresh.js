@@ -13,7 +13,7 @@ const load = (withData = true, store = {}) => {
     localStorage: { _d: store, getItem(k) { return k in this._d ? this._d[k] : null; }, setItem(k, v) { this._d[k] = String(v); } } };
   vm.createContext(ctx);
   vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js'].concat(withData ? ['curated-data.js'] : []).map(SRC).join('\n') +
-    ';globalThis.T={OBJECTS,CURATED,SAVE_KEY,createMonster,freshState,recordSighting,loadState,saveState,exportSave,importSave,migrate,TestRoster,curatedRefresh,curatedApply,curatedDexName,speciesLore,newBattle,enemyTurn,heroStrike,setRNG:f=>{RNG=f}}', ctx);
+    ';globalThis.T={OBJECTS,CURATED,SAVE_KEY,createMonster,freshState,recordSighting,loadState,saveState,exportSave,importSave,migrate,curatedRefresh,devSpawnEncounter,curatedApply,curatedDexName,speciesLore,newBattle,enemyTurn,heroStrike,setRNG:f=>{RNG=f}}', ctx);
   if (withData && ctx.T.CURATED.data) for (const id of WITHHELD) delete ctx.T.CURATED.data[id];
   return ctx.T;
 };
@@ -131,11 +131,11 @@ ok(LIVE.CURATED.enabled && LIVE.CURATED.namesEnabled && /^[0-9a-f]{12}$/.test(RE
   ok(!G.curatedApply({ name: 'x' }) && !G.curatedApply(null), 'monsters without an object (or nothing) are ignored');
 }
 
-// 9. Quick Monster Test Mode roster shows the latest writing too
+// 9. a developer custom encounter carries the live reviewed writing like any new monster
 {
-  const store = {}, G = load(true, store), m = make(PLAIN, 'kettle', 'epic', 'mutated'); m.id = 't1';
-  store['snapmon.testroster.v1'] = JSON.stringify([{ ...m, test: true }]);
-  const l = G.TestRoster.list(); ok(l[0].name === P02.kettle.names.epic && noText({ ...l[0], test: 0 }) === noText({ ...m, test: 0 }), `test roster: kettle shows "${l[0].name}", everything else identical`);
+  const G = load(true, {}), S = G.freshState(); S.settings.devUnlocked = true; seeded(G);
+  const r = G.devSpawnEncounter(S, 'kettle', 'epic', 'mutated');
+  ok(r.ok && r.monster.name === P02.kettle.names.epic && r.monster.lore === P02.kettle.lore.epic, `custom encounter: kettle shows "${r.ok && r.monster.name}" and its reviewed flavour text`);
 }
 
 // 10. battles with a refreshed monster are identical to the old one (names never drive rules)

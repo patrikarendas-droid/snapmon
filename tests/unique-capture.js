@@ -1,8 +1,8 @@
 // Unique collection slots (game.js collectionKey / ownedCopy / attemptCapture): the real collection holds at most ONE
 // monster per canonical object id + rarity + variant (Normal = null, Spectral, Mutated, Prismatic = 'shiny'). Level, DNA,
 // stats, photo and names do not matter; only monsters currently owned count. Duplicates still spawn and can be fought
-// for the normal rewards; capturing one is refused before anything is consumed, rolled or changed. Test monsters
-// (Quick Monster Test Mode) are outside the rule. Deterministic: seeded RNG.
+// for the normal rewards; capturing one is refused before anything is consumed, rolled or changed. Developer custom
+// encounters follow the rule exactly (section 8). Deterministic: seeded RNG.
 // Usage: node tests/unique-capture.js
 'use strict';
 const G = require('./load')();
@@ -136,20 +136,22 @@ const snap = x => JSON.stringify(x);
   ok(snap(S) === json && !/collectionKey|ownedSlot|uniq/.test(json), '7: the rule stores nothing new in the save (format unchanged)');
 }
 
-// 8. developer test mode stays isolated
+// 8. developer custom encounters follow the rule exactly like a hunt, including after a release
 {
-  const S = veteran(); own(S, make(S, 'mouse', 'common'));
-  G.TestRoster.clear();
-  const t = G.createTestMonster(S, 'mouse', null, { label: 'mouse' }, rng);
-  t.rarity = 'common'; t.variant = null;
-  ok(!G.ownedCopy(S, t), '8: a test monster of an owned slot is not treated as a duplicate');
-  const B = G.newBattle(S, t); B.enemy.hp = 1; const r = G.attemptCapture(B, S, () => 0);
-  ok(r.used && !r.owned && B.result === 'captured', '8: a test battle can still capture it (the test collection has its own rules)');
-  G.TestRoster.add({ ...t }); G.TestRoster.add({ ...t, id: t.id + 'b', rarity: 'epic' });
-  ok(!G.ownedCopy(S, make(S, 'mouse', 'epic')), '8: test-collection monsters never block a real capture');
+  const S = veteran(); S.settings.devUnlocked = true;
+  const spawn = (obj, r, v) => { const x = G.devSpawnEncounter(S, obj, r, v, rng); if (!x.ok) throw new Error(x.error); return x.monster; };
+  const first = spawn('mouse', 'rare', 'prismatic');
+  ok(!first.test && first.variant === 'shiny' && G.collectionKey(first) === 'mouse|rare|shiny', '8: a custom Prismatic Rare mouse is an ordinary monster in slot mouse|rare|shiny');
+  ok(own(S, first) && S.monsters.length === 1 && /^m\d+$/.test(S.monsters[0].id), '8: it is captured into the real collection with a normal id');
+  const dup = spawn('mouse', 'rare', 'prismatic'), traps = S.items.trap, calls = rngCalls;
+  const B = G.newBattle(S, dup); B.enemy.hp = 1; const r = G.attemptCapture(B, S, rng);
+  ok(r.owned && !r.used && S.items.trap === traps && rngCalls === calls && !B.over && /already have a Prismatic Rare/.test(r.msg), '8: a second custom spawn of the owned slot is refused: no trap, roll or turn');
+  ok(!G.ownedCopy(S, spawn('mouse', 'rare', 'normal')) && !G.ownedCopy(S, spawn('mouse', 'epic', 'prismatic')), '8: other variants/rarities of the same object are free');
+  G.releaseMonster(S, S.monsters[0].id);
+  const again = spawn('mouse', 'rare', 'prismatic');
+  ok(!G.ownedCopy(S, again) && own(S, again) && S.monsters.length === 1, '8: after releasing it, the slot is free and a custom spawn can be captured again');
   const S2 = veteran(); S2.monsters.push({ ...make(S2, 'mouse', 'rare'), test: true, id: 'test-x' });
-  ok(!G.ownedCopy(S2, make(S2, 'mouse', 'rare')), '8: even a stray test monster in a real collection does not count');
-  G.TestRoster.clear();
+  ok(!G.ownedCopy(S2, make(S2, 'mouse', 'rare')), '8: a stray monster of the retired test mode in a real collection does not count');
 }
 
 if (errors.length) { console.log(`\n${errors.length} UNIQUE-CAPTURE CHECK(S) FAILED`); process.exit(1); }

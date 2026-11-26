@@ -349,28 +349,51 @@ function resolvePhoto(S, objId, photo, obj, rng = RNG) {
   return { encounter: true, monster: m, first, chance: ch };
 }
 
-/* ---------- developer Quick Monster Test Mode (v0.4.4) ----------
-   For checking monster designs, names, colours and flavour text quickly. Only reachable from the hidden developer
-   tools, and only while DEV_TOOLS is true (set it to false for a public/release build: the developer menu and this
-   mode then disappear). A test monster is made by the normal generator from the REAL recognised object and photo, with
-   test-only rarity odds, and never touches the player's save: no encounter roll, pity, photo count, encyclopedia entry,
-   reward or item use. Test monsters live in their own storage key (TestRoster), are marked test:true, are not part of
-   the save or the backup code, and can be cleared at any time. */
+/* ---------- developer tools (2026-11-26) ----------
+   DEV_TOOLS is the single build switch: true only in the private debug APK; tools/android/build-web.js flips it to false
+   for a release-safe build and a release build refuses a dev-tools game. Every developer ACTION below checks it AND the
+   hidden "Developer & testing" unlock (S.settings.devUnlocked) itself, so nothing depends on the UI hiding a button.
+   The tools work on the REAL save: a spawned encounter is an ordinary monster from the normal generator (no test flag,
+   no separate roster) and goes through the normal discovery, battle, capture, reward and collection code; a grant adds
+   to the real bag. The old Quick Monster Test Mode, its TestRoster (storage key snapmon.testroster.v1, left untouched
+   and unread) and Instant capture are retired. */
 const DEV_TOOLS = true;
-const TEST_RARITY_WEIGHTS = { common: 20, uncommon: 20, rare: 25, epic: 20, legendary: 15 }; // real weights: RARITIES (46/28/20/5/1)
-function createTestMonster(S, objId, photo, obj = {}, rng = RNG) {
-  const cat = OBJECTS[objId] ? OBJECTS[objId].cat : 'other';
-  const m = createMonster(S, { obj: objId, cat, rarity: pickWeighted(TEST_RARITY_WEIGHTS, rng), word: obj.label, photo, rng, aspect: obj.aspect, conf: obj.conf });
-  m.test = true; m.id = 'test-' + Date.now().toString(36) + '-' + Math.floor(rng() * 1e6).toString(36); m.caughtAt = Date.now();
-  return m;
+const devToolsOn = S => DEV_TOOLS === true && !!(S && S.settings && S.settings.devUnlocked === true);
+// God Mode: its own setting key (the retired test-battle switch S.settings.godMode is ignored, so an old "on" never
+// carries over into real battles). Default off.
+const godModeOn = S => devToolsOn(S) && S.settings.devGodMode === true;
+// user-facing variant -> stored value (Normal = null, Prismatic = 'shiny', as everywhere in the save)
+const DEV_VARIANTS = { normal: null, spectral: 'spectral', mutated: 'mutated', prismatic: 'shiny' };
+const own = (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
+/* Custom encounter: a real monster of exactly this registry object, rarity and variant. It bypasses only the camera,
+   recognition, the encounter roll, rarity/variant rolls, the first-hunt rules and the object locks; it neither reads
+   nor writes S.enc (locks, pity, recent objects) or the photo statistics, so regular hunting is unaffected. No photo:
+   the generator's own neutral colouring is used. The caller records the sighting and shows the ordinary discovery. */
+function devSpawnEncounter(S, objId, rarity, variant, rng = RNG) {
+  if (!devToolsOn(S)) return { ok: false, error: 'Developer tools are not available.' };
+  if (!own(OBJECTS, objId) || !OBJECTS[objId] || OBJECTS[objId].id !== objId) return { ok: false, error: 'Unknown object id.' };
+  if (!own(RARITY, rarity)) return { ok: false, error: 'Unknown rarity.' };
+  if (!own(DEV_VARIANTS, variant)) return { ok: false, error: 'Unknown variant.' };
+  const o = OBJECTS[objId];
+  const m = createMonster(S, { obj: objId, cat: o.cat, rarity, variant: DEV_VARIANTS[variant], word: o.name, photo: null, first: false, rng });
+  return { ok: true, monster: m };
 }
-const TestRoster = {
-  KEY: 'snapmon.testroster.v1', MAX: 300,
-  list() { try { const l = JSON.parse(STORE.get(this.KEY) || '[]'); if (typeof curatedApply === 'function') for (const m of l) curatedApply(m); return l; } catch (e) { return []; } }, // shown with the latest reviewed writing
-  add(m) { const l = this.list(); l.push({ ...m, test: true }); return STORE.set(this.KEY, JSON.stringify(l.slice(-this.MAX))); },
-  remove(id) { STORE.set(this.KEY, JSON.stringify(this.list().filter(m => m.id !== id))); },
-  clear() { STORE.set(this.KEY, '[]'); },
-};
+/* Give items: Snap Traps, potions and the other bag items, and the crafting materials (not coins, XP or research
+   points). A positive whole number up to DEV_GRANT_MAX per grant; the resulting total may not pass DEV_GRANT_TOTAL. */
+const DEV_GRANT_MAX = 999, DEV_GRANT_TOTAL = 99999;
+const DEV_GRANT_MATS = ['scrap', 'goo', 'ecto', 'prism'];
+const devGrantable = () => [...ITEM_ORDER.map(id => ({ id, kind: 'item', name: ITEMS[id].name })), ...DEV_GRANT_MATS.map(id => ({ id, kind: 'mat', name: MATERIALS[id].name }))];
+function devGrantItem(S, id, qty) {
+  if (!devToolsOn(S)) return { ok: false, error: 'Developer tools are not available.' };
+  const kind = own(ITEMS, id) ? 'item' : DEV_GRANT_MATS.includes(id) ? 'mat' : null;
+  if (!kind) return { ok: false, error: 'Unknown item.' };
+  const n = typeof qty === 'number' ? qty : typeof qty === 'string' && /^\s*\d{1,6}\s*$/.test(qty) ? Number(qty) : NaN;
+  if (!Number.isSafeInteger(n) || n < 1 || n > DEV_GRANT_MAX) return { ok: false, error: `Enter a whole number from 1 to ${DEV_GRANT_MAX}.` };
+  const box = kind === 'item' ? S.items : S.mats, cur = Number.isSafeInteger(box[id]) && box[id] > 0 ? box[id] : 0;
+  if (cur + n > DEV_GRANT_TOTAL) return { ok: false, error: `That would pass ${DEV_GRANT_TOTAL} in total.` };
+  box[id] = cur + n;
+  return { ok: true, id, kind, total: box[id] };
+}
 
 /* ---------- stable ability keys ----------
    Every ability carries `key`, a stable internal id unique within its monster: 'signature' (the first move),
@@ -562,7 +585,7 @@ function recordSighting(S, m) {
 /* ---------- combat ---------- */
 const NEG = ['poison', 'burn', 'stun', 'defdown'];
 function newBattle(S, m) {
-  assignAbilityKeys(m); // monsters from any source (test collection, very old saves) fight by key
+  assignAbilityKeys(m); // monsters from any source (very old saves) fight by key
   const hs = hunterStats(S);
   const B = {
     m, turn: 1, over: false, result: null, usedPotion: false, enhancer: 0, captureFails: 0, weapon: S.equipped,
@@ -571,18 +594,16 @@ function newBattle(S, m) {
             energy: MECH.energy.start + (charmOn(S, 'battery') ? MECH.energy.battery : 0), status: {} },
   };
   B.enemyFirst = m.stats.spd > hs.spd * MECH.firstStrike;
+  if (godModeOn(S)) { B.god = true; B.godHp = B.hero.hp; } // developer God Mode (HP protection only), fixed for this battle
   return B;
 }
-/* ---------- developer God Mode (test battles only) ----------
-   A flag on ONE battle object, set only by enableGodMode() for a Quick Monster Test Mode monster (m.test) in a build
-   with DEV_TOOLS. It is never stored in the save and never set for a normal battle; every check below also re-verifies
-   m.test and DEV_TOOLS. In such a battle: the hunter cannot fall below 1 HP and is restored at the start of each of its
-   turns (hits, damage numbers and statuses still happen), specials cost no energy, Snap Traps and items are neither
-   required nor used up, and a capture attempt always succeeds. The monster, its moves, AI, statuses and cooldowns are
-   untouched. When it is off, none of these lines changes anything. */
-function enableGodMode(B) { if (!DEV_TOOLS || !B || !B.m || !B.m.test) return false; B.god = true; return true; }
-const godOn = B => !!(B && B.god && B.m && B.m.test && DEV_TOOLS);
-const godFloor = B => { if (godOn(B) && B.hero.hp < 1) B.hero.hp = 1; };
+/* ---------- developer God Mode (HP protection only) ----------
+   Decided once per battle in newBattle from godModeOn(S) (developer build + unlocked tools + the switch). In such a
+   battle the hunter's HP never goes DOWN: enemy hits and poison/burn are rolled exactly as usual (same random numbers,
+   statuses, drain, events) but take no HP; the events carry dmg 0, god: true and the blocked amount. Nothing else
+   changes: specials cost energy, items and Snap Traps are used up, capture chances, the owned-slot rule, rewards and
+   the enemy are all normal. godOn re-checks DEV_TOOLS, so a release build ignores even a forced flag. */
+const godOn = B => !!(DEV_TOOLS === true && B && B.god === true);
 
 function effMult(fam, el) { const f = FAMILIES[fam]; return f.weak.includes(el) ? MECH.weak : f.resist.includes(el) ? MECH.resist : 1; }
 function addStatus(tgt, s, turns, ev, who) {
@@ -599,9 +620,10 @@ function tickStatuses(B, who, ev) { // start of `who`'s turn. returns true if th
   const u = B[who];
   let skip = false;
   const X = MECH.status;
-  if (u.status.poison) { const d = Math.max(X.poisonMin, Math.round(u.maxHp * X.poisonPct)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'poison' }); }
-  if (u.status.burn) { const d = Math.max(X.burnMin, Math.round(u.maxHp * X.burnPct + X.burnFlat)); u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s: 'burn' }); }
-  if (who === 'hero') godFloor(B);
+  const shield = who === 'hero' && godOn(B); // God Mode: the damage is worked out as usual but not taken
+  const dot = (d, s) => { if (shield) ev.push({ t: 'dot', who, dmg: 0, s, god: true, blocked: d }); else { u.hp = Math.max(0, u.hp - d); ev.push({ t: 'dot', who, dmg: d, s }); } };
+  if (u.status.poison) dot(Math.max(X.poisonMin, Math.round(u.maxHp * X.poisonPct)), 'poison');
+  if (u.status.burn) dot(Math.max(X.burnMin, Math.round(u.maxHp * X.burnPct + X.burnFlat)), 'burn');
   if (u.status.stun) { skip = true; ev.push({ t: 'text', msg: `${u.name === 'Hunter' ? 'You are' : u.name + ' is'} stunned and can't move!`, who, stun: true }); }
   for (const k of Object.keys(u.status)) { u.status[k].t--; if (u.status[k].t <= 0) { delete u.status[k]; ev.push({ t: 'expire', who, s: k }); } }
   if (who === 'enemy') for (const k of Object.keys(B.enemy.cds)) if (B.enemy.cds[k] > 0) B.enemy.cds[k]--;
@@ -638,7 +660,7 @@ function heroStrike(B, S, special, rng = RNG) {
   if (charmOn(S, 'fang') && total > 0) { const heal = Math.max(1, Math.round(total * MECH.fang)); h.hp = Math.min(h.maxHp, h.hp + heal); ev.push({ t: 'heal', who: 'hero', amt: heal }); }
   if (eff > 1 && total) ev.push({ t: 'text', msg: "It's super effective!" });
   else if (eff < 1 && total) ev.push({ t: 'text', msg: 'It resists your weapon...' });
-  h.energy = clamp(h.energy + (sp ? (godOn(B) ? 0 : -sp.cost) : MECH.energy.perAttack), 0, MECH.energy.max);
+  h.energy = clamp(h.energy + (sp ? -sp.cost : MECH.energy.perAttack), 0, MECH.energy.max);
   checkEnd(B, ev);
   return ev;
 }
@@ -669,8 +691,8 @@ function enemyTurn(B, rng = RNG) {
     let dmg = dmgCalc(effAtk(e), ab.power, effDef(h), rng);
     const crit = rng() < MECH.enemy.crit; if (crit) dmg *= MECH.enemy.critX;
     dmg = Math.max(1, Math.round(dmg));
-    h.hp = Math.max(0, h.hp - dmg); godFloor(B);
-    ev.push({ t: 'hit', who: 'hero', dmg, crit });
+    if (godOn(B)) ev.push({ t: 'hit', who: 'hero', dmg: 0, crit, god: true, blocked: dmg }); // God Mode: no HP lost
+    else { h.hp = Math.max(0, h.hp - dmg); ev.push({ t: 'hit', who: 'hero', dmg, crit }); }
     if (ab.effect === 'drain') { const amt = Math.round(dmg * 0.5); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
     else if (ab.effect && rng() < (ab.chance || 1) && h.hp > 0) addStatus(h, ab.effect, STATUS_TURNS[ab.effect], ev, 'hero');
   }
@@ -679,7 +701,6 @@ function enemyTurn(B, rng = RNG) {
 }
 function heroTurnStart(B) {
   const ev = []; const skip = tickStatuses(B, 'hero', ev);
-  if (godOn(B) && !B.over && B.hero.hp < B.hero.maxHp) { const amt = B.hero.maxHp - B.hero.hp; B.hero.hp = B.hero.maxHp; ev.push({ t: 'heal', who: 'hero', amt, god: true }); }
   return { ev, skip };
 }
 
@@ -696,8 +717,9 @@ function captureChance(S, B) {
 /* Unique collection slots (2026-11-25): the real collection holds at most ONE monster per canonical object id + rarity
    + variant. Level, stats, DNA, colours, photo and names do not matter. Normal is stored as null/absent and Prismatic
    as 'shiny' (save format unchanged). Only monsters CURRENTLY in S.monsters count: encyclopedia sightings, past
-   captures and released monsters never block. Quick Monster Test Mode monsters (m.test, their own TestRoster) are
-   outside the rule both ways. Duplicates still spawn and can be fought for the normal rewards; only capturing one is
+   captures and released monsters never block. Developer-spawned encounters are ordinary monsters and follow the rule
+   exactly (the m.test checks below only concern monsters of the retired Quick Monster Test Mode, which can no longer
+   be created). Duplicates still spawn and can be fought for the normal rewards; only capturing one is
    refused, in attemptCapture (the UI just explains it), before anything is consumed, rolled or changed. */
 const variantSlot = v => (v == null || v === '' || v === 'normal') ? 'normal' : String(v); // 'spectral' | 'mutated' | 'shiny'
 function collectionObjId(m) {
@@ -712,7 +734,7 @@ function collectionKey(m) {
   const obj = collectionObjId(m);
   return obj && m.rarity ? obj + '|' + m.rarity + '|' + variantSlot(m.variant) : null;
 }
-// the monster in the real collection that already fills m's slot, or null (always null for test monsters)
+// the monster in the real collection that already fills m's slot, or null
 function ownedCopy(S, m) {
   if (!m || m.test || !S || !Array.isArray(S.monsters)) return null;
   const k = collectionKey(m); if (!k) return null;
@@ -725,10 +747,9 @@ function alreadyOwnedText(m) {
 function attemptCapture(B, S, rng = RNG) {
   const ev = [];
   if (B && ownedCopy(S, B.m)) return { ev, used: false, owned: true, msg: alreadyOwnedText(B.m) }; // nothing consumed, rolled or changed
-  const god = godOn(B);
-  if (!god && (S.items.trap || 0) <= 0) { ev.push({ t: 'text', msg: 'You are out of Snap Traps!' }); return { ev, used: false }; }
-  const ch = god ? 1 : captureChance(S, B);
-  if (!god) S.items.trap--;
+  if ((S.items.trap || 0) <= 0) { ev.push({ t: 'text', msg: 'You are out of Snap Traps!' }); return { ev, used: false }; }
+  const ch = captureChance(S, B);
+  S.items.trap--;
   ev.push({ t: 'act', who: 'hero', name: 'Snap Trap', fx: 'trap' });
   if (rng() < ch) { B.over = true; B.result = 'captured'; ev.push({ t: 'capture', ok: true }); ev.push({ t: 'end', result: 'captured' }); return { ev, used: true }; }
   B.captureFails++;
@@ -750,8 +771,7 @@ function attemptFlee(B, S, rng = RNG) {
 }
 function useItem(B, S, id) {
   const ev = [], h = B ? B.hero : null;
-  const god = godOn(B);
-  if (!god && (S.items[id] || 0) <= 0) return { ev, ok: false };
+  if ((S.items[id] || 0) <= 0) return { ev, ok: false };
   const medic = has(S, 'medic') ? 1.3 : 1;
   const maxHp = h ? h.maxHp : hunterStats(S).maxHp;
   const curHp = h ? h.hp : S.hp;
@@ -775,7 +795,7 @@ function useItem(B, S, id) {
     case 'smoke': if (!B) return { ev, ok: false }; B.over = true; B.result = 'fled'; ev.push({ t: 'text', msg: 'Poof! You vanish in a cloud of smoke.' }); ev.push({ t: 'end', result: 'fled' }); break;
     default: return { ev, ok: false };
   }
-  if (!god) S.items[id]--;
+  S.items[id]--;
   if (B) ev.unshift({ t: 'act', who: 'hero', name: ITEMS[id].name, fx: 'item' });
   return { ev, ok: true };
 }
@@ -829,6 +849,7 @@ function finishBattle(S, B, rng = RNG) {
   } else if (B.result === 'fled' || B.result === 'escaped') {
     S.stats.flees++;
   }
+  if (godOn(B) && Number.isFinite(B.godHp) && S.hp < B.godHp) S.hp = B.godHp; // God Mode: never save less HP than at the start
   S.lastTick = Date.now();
   sum.achievements = checkAchievements(S);
   return sum;
@@ -893,4 +914,4 @@ function matchCategory(text) {
   return best;
 }
 
-if (typeof module !== 'undefined') module.exports = { freshState, migrate, resolvePhoto, recordSighting, createMonster, newBattle, heroStrike, enemyTurn, heroTurnStart, attemptCapture, captureChance, attemptFlee, useItem, finishBattle, hunterStats, encounterChance, matchCategory, exportSave, importSave, unlockWeapon, upgradeWeapon, buyResearch, claimQuest, activeQuests, setRNG: f => { RNG = f; }, setClock: f => { CLOCK = f; }, quietUntil, quietClean, QUIET_MS, disturbedUntil, objectLock, lockClean, ENCOUNTER_LOCK_MS, cleanHunterName, hunterName, HUNTER_NAME_MAX, xpFor, hamming, collectionKey, ownedCopy, releaseMonster };
+if (typeof module !== 'undefined') module.exports = { freshState, migrate, resolvePhoto, recordSighting, createMonster, newBattle, heroStrike, enemyTurn, heroTurnStart, attemptCapture, captureChance, attemptFlee, useItem, finishBattle, hunterStats, encounterChance, matchCategory, exportSave, importSave, unlockWeapon, upgradeWeapon, buyResearch, claimQuest, activeQuests, setRNG: f => { RNG = f; }, setClock: f => { CLOCK = f; }, quietUntil, quietClean, QUIET_MS, disturbedUntil, objectLock, lockClean, ENCOUNTER_LOCK_MS, cleanHunterName, hunterName, HUNTER_NAME_MAX, xpFor, hamming, collectionKey, ownedCopy, releaseMonster, DEV_TOOLS, devToolsOn, godModeOn, godOn, devSpawnEncounter, devGrantItem, devGrantable, DEV_VARIANTS, DEV_GRANT_MAX, DEV_GRANT_TOTAL };

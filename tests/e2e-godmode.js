@@ -1,8 +1,10 @@
-// Developer God Mode in the real page: the Settings switch and its state line, that it never touches a normal battle,
-// that it only works in Quick Monster Test Mode with Instant capture off, the battle indicator, specials at 0 energy,
-// traps/items with an EMPTY bag (the UI must not block them), survival against a very strong monster with its moves and
-// statuses still shown, 100% capture into the test collection, the real save unchanged, and normal test battles again
-// once it is switched off. Usage: node tests/e2e-godmode.js <url> <ort-dist-dir> <screenshot-dir>
+// Developer God Mode (2026-11-26) in the real page: HP protection ONLY, in every real battle — a camera hunt (fake camera
+// + stubbed recogniser) and a developer custom encounter. Checks: hidden until the developer section is unlocked; off by
+// default; remembered after a reload; a Hunt-screen reminder and a battle indicator while on; against a very strong
+// monster the hunter's HP never drops (hits and poison/burn are shown as BLOCKED; the monster still acts and applies
+// statuses); NO free specials, items, traps or captures (empty bag and 0 energy stay disabled, a capture attempt uses a
+// trap at the normal odds); the saved HP after the battle is not lower; switched off, the next battle takes damage.
+// Usage: node tests/e2e-godmode.js <url> <ort-dist-dir> <screenshot-dir>
 const { chromium } = require('playwright');
 const path = require('path');
 const cam = require('./fake-camera');
@@ -23,7 +25,6 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   p.on('pageerror', e => { errors.push('pageerror: ' + e.message); console.log('PAGEERROR', e.message); });
   const shot = n => p.screenshot({ path: `${outDir}/${n}.png` });
   const S = () => p.evaluate(() => JSON.parse(JSON.stringify(window.__snapmon.S)));
-  const roster = () => p.evaluate(() => TestRoster.list().length);
   const waitText = (re, timeout = 10000) => p.waitForFunction(src => new RegExp(src).test(document.querySelector('#overlay').textContent), re.source, { timeout });
   const idle = () => p.waitForFunction(() => !window.__snapmon.ui.busy || !window.__snapmon.ui.battle, null, { timeout: 20000 });
   const setup = async obj => {
@@ -37,90 +38,97 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
     }, obj);
     await p.evaluate(async () => { window.__snapmon.S.settings.engineCached = true; await Engine.load(); });
   };
-  const encounter = async () => { await cam.snap(p); await p.waitForSelector('text=Object identified'); await p.click('[data-act="pickCand"]'); await waitText(/Fight!|Test fight/, 8000); await p.click('[data-act="fight"]'); await p.waitForSelector('#actions'); await idle(); };
-  const godText = () => p.$eval('#godState', e => e.textContent);
+  const cameraEncounter = async () => {
+    await p.evaluate(() => { const S = window.__snapmon.S; S.enc.disturbed = {}; S.enc.quiet = {}; window.__snapmon.setRNG(() => 0.01); }); // a fresh object, a sure encounter
+    await cam.snap(p); await p.waitForSelector('text=Object identified'); await p.click('[data-act="pickCand"]'); await waitText(/Fight!/, 8000);
+    await p.click('[data-act="fight"]'); await p.waitForSelector('#actions'); await idle();
+  };
+  const customEncounter = async () => {
+    await p.click('[data-act="settings"]'); await p.waitForSelector('#devObjInput');
+    await p.fill('#devObjInput', 'apple'); await p.selectOption('#devRarity', 'legendary'); await p.selectOption('#devVariant', 'normal');
+    await p.click('[data-act="devSpawn"]'); await p.waitForSelector('[data-act="fight"]'); await p.click('[data-act="fight"]'); await p.waitForSelector('#actions'); await idle();
+  };
+  const godSwitch = () => p.$eval('[data-act="toggleGodMode"]', e => e.classList.contains('on'));
+  // a monster ×25 stronger, very sturdy, that likes to poison/burn; record what the battle shows
+  const brutalise = () => p.evaluate(() => {
+    window.__snapmon.setRNG(Math.random);
+    const B = window.__snapmon.ui.battle; B.enemy.atk *= 25; B.enemy.hp = B.enemy.maxHp = 99999; B.disp.enemy = 99999; B.hero.status.poison = { t: 9 }; B.hero.status.burn = { t: 9 };
+    window.__seen = { floats: new Set(), st: new Set(), log: new Set(), hp: [] };
+    new MutationObserver(() => { const l = document.querySelector('#blog'), h = document.querySelector('#hst'), t = document.querySelector('#hhpTxt');
+      for (const f of document.querySelectorAll('.float')) window.__seen.floats.add(f.textContent);
+      if (l) window.__seen.log.add(l.textContent); if (h) for (const c of h.querySelectorAll('.st')) window.__seen.st.add(c.textContent); if (t) window.__seen.hp.push(parseInt(t.textContent, 10)); })
+      .observe(document.querySelector('#overlay'), { childList: true, subtree: true, characterData: true });
+    return B.hero.hp;
+  });
   await p.goto(url); await p.waitForTimeout(400);
   await setup('mug'); // the tiny test model behind the stub settles on a mug
 
-  /* 1) the switch: off by default, explains when it is inactive, changes no other setting, no scroll jump */
-  await p.evaluate(() => { window.__snapmon.S.settings.devUnlocked = true; window.__snapmon.S.settings.devOpen = true; });
-  await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="toggleGodMode"]');
-  ok(!(await p.$eval('[data-act="toggleGodMode"]', e => e.classList.contains('on'))) && await godText() === 'Off.', 'God Mode is off by default');
-  await p.$eval('[data-act="toggleGodMode"]', e => e.scrollIntoView({ block: 'center' })); await p.waitForTimeout(800); // let any smooth scrolling finish
-  const before = await S(), scroll0 = await p.evaluate(() => document.querySelector('.sheet').scrollTop);
-  await p.click('[data-act="toggleGodMode"]'); await p.waitForTimeout(800);
-  const after = await S(), scroll1 = await p.evaluate(() => document.querySelector('.sheet').scrollTop);
-  ok(await godText() === 'On, but inactive: needs Quick Monster Test Mode on and Instant capture off.', `switched on with test mode off: "${await godText()}"`);
-  ok(after.settings.quickTest === before.settings.quickTest && after.settings.instantCapture === before.settings.instantCapture && Math.abs(scroll1 - scroll0) < 2, 'switching it does not change the other test switches and does not move the Settings page');
-  await shot('G01-settings-inactive');
+  /* 1) the switch: hidden while locked, off by default, remembered, a Hunt-screen reminder while on */
+  await p.click('[data-act="settings"]'); await p.waitForSelector('.sheet');
+  ok(!(await p.$('[data-act="toggleGodMode"]')), 'God Mode is not offered while the developer section is locked');
   await p.click('.sheet [data-act="closeSheet"]');
+  await p.evaluate(() => { const st = window.__snapmon.S.settings; st.devUnlocked = true; st.devOpen = true; st.godMode = true; }); // an old save's retired test-battle switch
+  await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="toggleGodMode"]');
+  ok(!(await godSwitch()) && !(await S()).settings.devGodMode, 'God Mode is off by default (an old save\'s retired test-battle switch does not count)');
+  await p.$eval('[data-act="toggleGodMode"]', e => e.scrollIntoView({ block: 'center' })); await p.waitForTimeout(600);
+  const scroll0 = await p.evaluate(() => document.querySelector('.sheet').scrollTop);
+  await p.click('[data-act="toggleGodMode"]'); await p.waitForTimeout(400);
+  ok(await godSwitch() && (await S()).settings.devGodMode === true && Math.abs(await p.evaluate(() => document.querySelector('.sheet').scrollTop) - scroll0) < 2, 'switched on in place (no jump in Settings)');
+  await shot('G01-settings-god-on');
+  await p.click('.sheet [data-act="closeSheet"]');
+  await p.reload(); await p.waitForTimeout(500); await setup('mug');
+  await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="toggleGodMode"]');
+  ok(await godSwitch(), 'the switch is remembered after a reload');
+  await p.click('.sheet [data-act="closeSheet"]');
+  ok(/GOD MODE IS ON/.test(await p.textContent('#app')), 'the Hunt screen reminds you that God Mode is on');
 
-  /* 2) a NORMAL battle with the God switch on: no God Mode at all */
-  await p.evaluate(() => { const S = window.__snapmon.S; S.items.trap = 0; window.__snapmon.setRNG(() => 0.01); });
-  await encounter();
-  ok(await p.evaluate(() => !window.__snapmon.ui.battle.god && !godOn(window.__snapmon.ui.battle)) && !(await p.$('#godBanner')), 'normal battle: God Mode not active, no indicator');
-  ok(await p.$eval('[data-act="bCapture"]', e => e.disabled) && /0 traps/.test(await p.$eval('[data-act="bCapture"]', e => e.textContent)), 'normal battle with 0 traps: Capture stays disabled as before');
-  for (let i = 0; i < 30 && await p.evaluate(() => !!window.__snapmon.ui.battle); i++) { await p.evaluate(() => { const B = window.__snapmon.ui.battle; if (B) { B.enemy.hp = 1; B.disp.enemy = 1; } }); await p.click('[data-act="bAttack"]').catch(() => {}); await idle(); }
-  await waitText(/Victory|defeated|won|escaped|Continue/i, 15000).catch(() => {});
+  /* 2) a normal CAMERA hunt with God Mode on, an empty bag and 0 energy */
+  await p.evaluate(() => { const S = window.__snapmon.S; S.items = { trap: 0 }; S.stats.photos = Math.max(S.stats.photos, 3); });
+  await cameraEncounter();
+  ok(await p.evaluate(() => godOn(window.__snapmon.ui.battle)) && (await p.$eval('#godBanner', e => e.textContent)) === 'GOD MODE · HP PROTECTED', 'camera hunt battle: God Mode active, "GOD MODE · HP PROTECTED" shown');
+  await p.evaluate(() => { const B = window.__snapmon.ui.battle; B.hero.energy = 0; refreshActions(); });
+  ok(await p.$eval('[data-act="bSpecial"]', e => e.disabled) && await p.$eval('[data-act="bCapture"]', e => e.disabled) && /0 traps/.test(await p.$eval('[data-act="bCapture"]', e => e.textContent)), 'no free specials or traps: Special disabled at 0 energy, Capture disabled with 0 traps');
+  await p.click('[data-act="bItems"]'); await p.waitForSelector('[data-act="bUse"]');
+  ok(await p.$$eval('[data-act="bUse"]', bs => bs.every(x => x.disabled)), 'no free items: with an empty bag every item is disabled');
+  await p.click('.sheet [data-act="closeSheet"]');
+  const hp0 = await brutalise();
+  for (let i = 0; i < 10 && await p.evaluate(() => !!window.__snapmon.ui.battle); i++) { await p.click('[data-act="bAttack"]').catch(() => {}); await idle(); }
+  const seen = await p.evaluate(() => ({ floats: [...window.__seen.floats], st: [...window.__seen.st], log: [...window.__seen.log], hp: window.__seen.hp }));
+  const hpNow = await p.evaluate(() => window.__snapmon.ui.battle && window.__snapmon.ui.battle.hero.hp);
+  ok(hpNow === hp0 && seen.hp.every(h => h >= hp0) && await p.evaluate(() => !window.__snapmon.ui.battle.over), `10 rounds against a ×25 monster with poison and burn: HP stayed ${hp0} (lowest shown ${Math.min(...seen.hp)})`);
+  ok(seen.floats.includes('BLOCKED') && seen.log.some(l => /attacks!|uses /.test(l)) && seen.log.some(l => /God Mode blocks the (poison|burn) damage/.test(l)), 'enemy hits and damage ticks are shown as BLOCKED; the monster still attacks');
+  ok(seen.st.length >= 1, `status chips are still shown (${seen.st.join(', ')})`);
+  await p.click('[data-act="combatLog"]'); await p.waitForSelector('#clList');
+  ok(/blocked by God Mode/.test(await p.textContent('#clList')) && /God Mode \(developer\)/.test(await p.textContent('#clList')), 'the combat log records the blocked damage');
+  await shot('G02-god-battle-log'); await p.click('.sheet [data-act="closeSheet"]');
+  await shot('G03-god-battle');
+  // a capture attempt uses a real trap at the normal odds (not 100 %)
+  await p.evaluate(() => { window.__snapmon.S.items.trap = 1; window.__snapmon.setRNG(() => 0.999); refreshActions(); });
+  ok(!/100%/.test(await p.$eval('[data-act="bCapture"]', e => e.textContent)), `the capture odds are the normal ones ("${await p.$eval('[data-act="bCapture"] small', e => e.textContent)}")`);
+  await p.click('[data-act="bCapture"]'); await idle();
+  ok((await S()).items.trap === 0 && await p.evaluate(() => !!window.__snapmon.ui.battle && window.__snapmon.ui.battle.result !== 'captured'), 'a capture attempt used the Snap Trap and, with an unlucky roll, failed as usual');
+  const savedBefore = (await S()).hp;
+  for (let i = 0; i < 40 && await p.evaluate(() => !!window.__snapmon.ui.battle); i++) { await p.evaluate(() => window.__snapmon.setRNG(() => 0.001)); await p.click('[data-act="bFlee"]').catch(() => {}); await idle(); }
+  await waitText(/Got away/, 15000);
+  ok((await S()).hp >= savedBefore && (await S()).hp >= hp0, `after the battle the saved HP is not lower (${(await S()).hp})`);
+  await p.click('[data-act="closeOverlay"]').catch(() => {});
+
+  /* 3) a developer CUSTOM encounter with God Mode on */
+  await customEncounter();
+  const hp1 = await brutalise();
+  for (let i = 0; i < 8 && await p.evaluate(() => !!window.__snapmon.ui.battle); i++) { await p.click('[data-act="bAttack"]').catch(() => {}); await idle(); }
+  ok(await p.evaluate(h => window.__snapmon.ui.battle.hero.hp === h, hp1) && !!(await p.$('#godBanner')), `custom encounter: HP stayed ${hp1} against the same ×25 monster`);
   await p.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; window.__snapmon.ui.battle = null; window.__snapmon.render(); });
 
-  /* 3) active only with Quick Monster Test Mode on AND Instant capture off; remembered after a reload */
-  await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="toggleQuickTest"]');
-  await p.click('[data-act="toggleQuickTest"]');
-  ok(await godText() === 'On, but inactive: needs Instant capture off.', `test mode on, instant capture on: "${await godText()}"`);
-  await p.click('[data-act="toggleInstantCapture"]');
-  ok(await godText() === 'ACTIVE in test battles.', `test mode on, instant capture off: "${await godText()}"`);
-  await p.$eval('[data-act="toggleGodMode"]', e => e.scrollIntoView({ block: 'center' })); await shot('G02-settings-active');
-  await p.click('.sheet [data-act="closeSheet"]');
-  await p.reload(); await p.waitForTimeout(500); await setup('mug'); // the tiny test model behind the stub settles on a mug
-  await p.click('[data-act="settings"]'); await p.waitForSelector('#godState');
-  ok(await godText() === 'ACTIVE in test battles.' && await p.$eval('[data-act="toggleGodMode"]', e => e.classList.contains('on')), 'the God Mode switch is remembered after a reload');
-  await p.click('.sheet [data-act="closeSheet"]');
-
-  /* 4) God Mode test battle with an EMPTY bag and 0 energy against a Pilot 01 Legendary */
-  await p.evaluate(() => { const S = window.__snapmon.S; S.items = {}; S.settings.testOdds = undefined; window.__snapmon.setRNG(() => 0.999); }); // 0.999 -> Legendary in test odds
-  const s0 = await S(), r0 = await roster();
-  await encounter();
-  const B0 = await p.evaluate(() => { const B = window.__snapmon.ui.battle; return { god: godOn(B), rarity: B.m.rarity, obj: B.m.obj, names: B.m.abilities.map(a => a.name) }; });
-  ok(B0.god && (await p.$eval('#godBanner', e => e.textContent)) === 'GOD MODE · TEST BATTLE', `test battle: God Mode active with the "GOD MODE · TEST BATTLE" indicator (${B0.rarity} ${B0.obj}: ${B0.names.join(', ')})`);
-  await p.waitForTimeout(1500); await shot('G03-god-battle');
-  await p.evaluate(() => { window.__snapmon.setRNG(Math.random); const B = window.__snapmon.ui.battle; B.hero.energy = 0; B.enemy.atk *= 25; B.enemy.hp = B.enemy.maxHp = 99999; B.disp.enemy = 99999; refreshActions(); });
-  ok(!(await p.$eval('[data-act="bSpecial"]', e => e.disabled)) && !(await p.$eval('[data-act="bCapture"]', e => e.disabled)), 'with 0 energy and 0 traps, Special and Capture are enabled');
-  // collect what the battle shows: the log and the hunter's status chips
-  await p.evaluate(() => { window.__seen = { log: new Set(), st: new Set(), minHp: Infinity }; new MutationObserver(() => { const l = document.querySelector('#blog'), h = document.querySelector('#hst'), t = document.querySelector('#hhpTxt'); if (l) window.__seen.log.add(l.textContent); if (h) for (const c of h.querySelectorAll('.st')) window.__seen.st.add(c.textContent); if (t) window.__seen.minHp = Math.min(window.__seen.minHp, parseInt(t.textContent, 10)); }).observe(document.querySelector('#overlay'), { childList: true, subtree: true, characterData: true }); });
-  await p.click('[data-act="bSpecial"]'); await idle();
-  const en = await p.evaluate(() => window.__snapmon.ui.battle.hero.energy);
-  ok(en === 0, `the special cost no energy (energy now ${en})`);
-  await p.click('[data-act="bItems"]'); await p.waitForSelector('[data-act="bUse"][data-arg="strength"]');
-  ok(await p.$$eval('[data-act="bUse"]', bs => bs.every(x => !x.disabled)) && /not used up/.test(await p.$eval('.sheet', e => e.textContent)), 'Items: every item is usable with an empty bag');
-  await p.click('[data-act="bUse"][data-arg="strength"]'); await idle();
-  const afterItem = await p.evaluate(() => ({ st: Object.keys(window.__snapmon.ui.battle.hero.status), items: window.__snapmon.S.items }));
-  ok(afterItem.st.includes('atkup') && JSON.stringify(afterItem.items) === '{}', 'Strength potion works (ATK↑) and nothing is taken from the bag');
-  let minHp = Infinity;
-  for (let i = 0; i < 12 && await p.evaluate(() => !!window.__snapmon.ui.battle); i++) { await p.click('[data-act="bAttack"]').catch(() => {}); await idle(); minHp = Math.min(minHp, await p.evaluate(() => window.__snapmon.ui.battle ? window.__snapmon.ui.battle.hero.hp : -1)); }
-  const seen = await p.evaluate(() => ({ log: [...window.__seen.log], st: [...window.__seen.st], minHp: window.__seen.minHp }));
-  minHp = Math.min(minHp, seen.minHp);
-  const used = B0.names.filter(n => seen.log.some(l => l.includes(n)));
-  ok(await p.evaluate(() => !!window.__snapmon.ui.battle && !window.__snapmon.ui.battle.over) && minHp >= 1, `12 rounds against a ×25-strength monster: still standing (lowest HP shown ${minHp})`);
-  ok(seen.log.some(l => /attacks!|uses /.test(l)) && used.length >= 1, `the monster's attacks and move names are shown in the battle log (${used.join(', ')})`);
-  ok(seen.st.length >= 1, `status chips are shown (${seen.st.join(', ')})`);
-  await p.click('[data-act="bCapture"]'); await waitText(/Test capture/, 20000); await shot('G04-god-capture');
-  ok(await roster() === r0 + 1, 'one capture attempt with 0 traps caught the full-HP monster; it went to the test collection');
-  const s1 = await S(), strip = s => JSON.stringify({ ...s, lastTick: 0, settings: 0 });
-  ok(strip(s1) === strip(s0) && JSON.stringify(s1.items) === '{}', 'the real save is exactly as before the test battle (HP, items, coins, XP, stats)');
-  ok(await p.evaluate(() => !localStorage.getItem('snapmon.save.v1').includes('test-')), 'no test monster reaches the stored save');
-  await p.click('[data-act="closeOverlay"]');
-
-  /* 5) God Mode off again: test battles are normal (empty bag blocks capture, specials need energy) */
+  /* 4) switched off: the next battle takes damage normally */
   await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="toggleGodMode"]'); await p.click('[data-act="toggleGodMode"]');
-  ok(await godText() === 'Off.', 'switched off');
+  ok(!(await godSwitch()) && (await S()).settings.devGodMode === false, 'switched off');
   await p.click('.sheet [data-act="closeSheet"]');
-  await encounter();
-  await p.evaluate(() => { const B = window.__snapmon.ui.battle; B.hero.energy = 0; refreshActions(); });
-  ok(await p.evaluate(() => !godOn(window.__snapmon.ui.battle)) && !(await p.$('#godBanner')) && await p.$eval('[data-act="bCapture"]', e => e.disabled) && await p.$eval('[data-act="bSpecial"]', e => e.disabled), 'God Mode off: no indicator, Capture disabled with 0 traps, Special disabled at 0 energy');
-  for (let i = 0; i < 30 && await p.evaluate(() => !!window.__snapmon.ui.battle); i++) { await p.evaluate(() => { const B = window.__snapmon.ui.battle; if (B) { B.enemy.hp = 1; B.disp.enemy = 1; } }); await p.click('[data-act="bAttack"]').catch(() => {}); await idle(); }
-  await waitText(/Test battle over/, 15000);
-  ok(await roster() === r0 + 1, 'a won (not captured) test battle adds nothing to the test collection');
+  ok(!/GOD MODE IS ON/.test(await p.textContent('#app')), 'the Hunt-screen reminder is gone');
+  await customEncounter();
+  const hp2 = await brutalise();
+  for (let i = 0; i < 3 && await p.evaluate(() => !!window.__snapmon.ui.battle && !window.__snapmon.ui.battle.over); i++) { await p.click('[data-act="bAttack"]').catch(() => {}); await idle(); }
+  ok(!(await p.$('#godBanner')) && await p.evaluate(h => !window.__snapmon.ui.battle || window.__snapmon.ui.battle.hero.hp < h || window.__snapmon.ui.battle.result === 'defeat', hp2), 'God Mode off: no indicator and the hunter takes damage again');
 
   await b.close();
   console.log(errors.length ? `\n${errors.length} PROBLEM(S)` : '\nALL GOD MODE BROWSER CHECKS PASSED');

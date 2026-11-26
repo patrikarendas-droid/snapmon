@@ -56,16 +56,15 @@ for (let g = 0; g < 420; g++) {
   S.items = { potion: 4, greater: 1, strength: 1, defense: 1, antidote: 2, enhancer: 1, trap: 4, smoke: g % 9 === 0 ? 1 : 0 };
   S.charmSlots = g % 3 === 0 ? ['fang', 'battery'] : ['slipper', 'lenscap']; S.research = g % 2 ? { capture2: 1, medic: 1, analysis: 1 } : {};
   S.hp = G.hunterStats(S).maxHp - (g % 5) * 7;
+  if (g % 25 === 1) { S.settings.devUnlocked = true; S.settings.devGodMode = true; } // developer God Mode (HP protection) in a real battle
   const m = G.createMonster(S, { obj: OBJS[g % OBJS.length], rarity: RAR[(g * 3) % 5], word: 'x' });
   if (g % 13 === 0) m.name = 'Evil <img src=x onerror=alert(1)>, Lord of "Quotes"';
-  if (g % 50 === 1) { m.test = true; } // God Mode in a test battle (DEV_TOOLS builds)
   const B = G.newBattle(S, m);
-  if (m.test) G.enableGodMode(B);
   CL.create(B, { god: !!B.god });
   for (let turn = 0; turn < 60 && !B.over; turn++) {
     if (turn > 0 || !B.enemyFirst) {
       const a = rng(), before = { heroEnergy: B.hero.energy };
-      if (a < 0.1 && (S.items.trap || B.god)) call(B, S, () => G.attemptCapture(B, S, rng).ev, before);
+      if (a < 0.1 && S.items.trap) call(B, S, () => G.attemptCapture(B, S, rng).ev, before);
       else if (a < 0.2) { const id = ['potion', 'strength', 'defense', 'antidote', 'enhancer', 'greater', 'smoke'][turn % 7]; call(B, S, () => { const r = G.useItem(B, S, id); if (r.ok) saw('item'); return r.ok ? r.ev : []; }, before); }
       else if (a < 0.24) call(B, S, () => G.attemptFlee(B, S, rng), before);
       else call(B, S, () => G.heroStrike(B, S, B.hero.energy >= G.WEAPONS[B.weapon].special.cost && a > 0.7, rng), before);
@@ -80,8 +79,9 @@ for (let g = 0; g < 420; g++) {
     CL.nextTurn(B);
   }
   // names and escaping
+  // the Smoke Bomb's own engine line ("Poof! You vanish…") is the one existing second-person message; it is allowed
   const html = CL.html(B.log), txt = B.log.entries.map(e => CL.text(B.log, e)).join('\n');
-  if (!txt.includes(S.hunterName) || /\bHunter\b(?! Sword)|\bYou\b/.test(txt.replace(S.hunterName, ''))) nameBad.push(`battle ${g}: hunter name not used consistently`);
+  if (!txt.includes(S.hunterName) || /\bHunter\b(?! Sword)|\bYou\b/.test(txt.replace(S.hunterName, '').replace(/Poof! You vanish in a cloud of smoke\./g, ''))) nameBad.push(`battle ${g}: hunter name not used consistently`);
   if (/<img|<b>|"Q"/.test(html) || (m.name.includes('<img') && !html.includes('&lt;img'))) nameBad.push(`battle ${g}: unescaped markup`);
   // no invented element/status: every coloured effect is one the rules have (a move may still be NAMED e.g. "Water Store Siphon")
   for (const e of B.log.entries) for (const p of e.parts) if (p.fx && (!CL.FX[p.fx] || /water|bleed/i.test(p.fx + ' ' + (p.label || '')))) nameBad.push(`battle ${g}: invented effect ${p.fx}`);

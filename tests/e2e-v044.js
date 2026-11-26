@@ -1,6 +1,6 @@
 // v0.4.4: (1) the Analysing screen is painted before CPU-heavy recognition starts (the Force CPU shutter freeze),
-// (2) developer Quick Monster Test Mode: guaranteed test monsters only after an accepted identification, isolated from
-// the real save, instant capture without rewards, test battles undone afterwards.
+// (2) the developer Quick Monster Test Mode is retired (2026-11-26; replaced by the real-save developer tools, tested in
+// tests/e2e-devtools.js): no test-mode switches remain, hunts are always normal hunts, Wrong object / unknown come first.
 // A headless browser cannot show the Android graphics glitch itself; this checks the order of events that caused it.
 // Usage: node tests/e2e-v044.js <url> <ort-dist-dir> <screenshot-dir>
 const { chromium } = require('playwright');
@@ -23,7 +23,6 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   p.on('pageerror', e => { errors.push('pageerror: ' + e.message); console.log('PAGEERROR', e.message); });
   const shot = n => p.screenshot({ path: `${outDir}/${n}.png` });
   const S = () => p.evaluate(() => JSON.parse(JSON.stringify(window.__snapmon.S)));
-  const roster = () => p.evaluate(() => TestRoster.list().length);
   const waitText = (re, timeout = 10000) => p.waitForFunction(src => new RegExp(src).test(document.querySelector('#overlay').textContent), re.source, { timeout });
   await p.goto(url); await p.waitForTimeout(400);
   // detector/classifier stub; `cpuBusyMs` blocks the main thread synchronously like TF.js on the CPU backend
@@ -66,37 +65,25 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   await p.evaluate(async () => { Engine.setForceCPU(false); await Engine.load(); });
   await stubLens([{ label: 'light switch', obj: 'x_light_switch', conf: 0.95, box: null }]);
 
-  /* ---- 2) Quick Monster Test Mode ---- */
-  ok(!(await S()).settings.quickTest && !(await p.$('.test-banner')), 'Quick Monster Test Mode is off by default');
-  // off: the normal encounter roll applies (RNG forced high -> no monster)
+  /* ---- 2) Quick Monster Test Mode is retired (2026-11-26): no test-mode switches, hunts are always normal hunts ---- */
+  await p.evaluate(() => { const st = window.__snapmon.S.settings; st.devUnlocked = true; st.devOpen = true; st.quickTest = true; st.instantCapture = true; }); // an old save's stored switches
+  await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="devSpawn"]');
+  ok(!(await p.$('[data-act="toggleQuickTest"]')) && !(await p.$('[data-act="toggleInstantCapture"]')) && !(await p.$('[data-act="testCollection"]')) && !(await p.$('[data-act="testClear"]')), 'the developer menu no longer has Quick Monster Test Mode, Instant capture or the test collection');
+  ok(!!(await p.$('[data-act="toggleFieldTest"]')) && !!(await p.$('[data-act="toggleDebug"]')), 'Field-test mode and recognition debug info are still there');
+  await p.click('.sheet [data-act="closeSheet"]');
+  ok(!(await p.$('.test-banner')), 'no test-mode banner on the Hunt screen, even with an old save\'s quickTest switch still stored');
+  // the stored old switch has no effect: a forced "no encounter" roll finds nothing, and the photo is counted
   await p.evaluate(() => window.__snapmon.setRNG(() => 0.999));
   let s0 = await S();
   await cam.snap(p); await p.waitForSelector('text=Object identified'); await p.click('[data-act="pickCand"]');
   await waitText(/All quiet|Already scanned|Fight!/, 8000); // (the very first photo of a save always finds a monster)
-  ok((await S()).stats.photos === s0.stats.photos + 1 && await roster() === 0, 'with the mode off a hunt is a normal hunt (counted, normal odds), nothing goes to the test roster');
+  const s1 = await S();
+  ok(s1.stats.photos === s0.stats.photos + 1 && !(await p.evaluate(() => /TEST MONSTER|test collection/i.test(document.querySelector('#overlay').textContent))), 'a hunt is a normal hunt: counted, the normal roll, no test monster');
+  ok(await p.evaluate(() => localStorage.getItem('snapmon.testroster.v1') === null), 'nothing is written to the retired test-roster storage');
   if (await p.$('[data-act="ignore"]')) await p.click('[data-act="ignore"]'); else await p.click('[data-act="closeOverlay"]');
-  // turn it on from the developer menu
-  await p.evaluate(() => { window.__snapmon.S.settings.devUnlocked = true; window.__snapmon.S.settings.devOpen = true; });
-  await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="toggleQuickTest"]');
-  await p.click('[data-act="toggleQuickTest"]');
-  ok(await p.$eval('[data-act="toggleInstantCapture"]', e => e.classList.contains('on')), 'instant capture is on by default inside test mode');
-  await p.$eval('[data-act="toggleQuickTest"]', e => e.scrollIntoView()); await shot('T01-dev-test-mode');
-  await p.click('.sheet [data-act="closeSheet"]');
-  ok(!!(await p.$('.test-banner')), 'the Hunt screen shows that Quick Monster Test Mode is on');
-  // guaranteed monster after an accepted identification, even with the RNG forced to "no encounter"
-  s0 = await S();
-  await cam.snap(p); await p.waitForSelector('text=Object identified');
-  const accepted = await p.evaluate(() => window.__snapmon.ui.pending.rec.candidates[0].obj);
-  await p.click('[data-act="pickCand"]');
-  await waitText(/Added to the test collection/, 8000); await p.waitForTimeout(1300); await shot('T02-test-monster');
-  let s1 = await S();
-  const strip = s => JSON.stringify({ ...s, lastTick: 0, settings: 0 });
-  ok(await roster() === 1 && strip(s1) === strip(s0), 'accepted photo -> guaranteed test monster in the test collection; the real save is unchanged (photos, pity, dex, coins, items)');
-  const tm = await p.evaluate(() => TestRoster.list()[0]);
-  ok(tm.test && tm.obj === accepted && tm.dna.obj === accepted && tm.lore && tm.lore === tm.lore.trim(), `the test monster is made from the accepted object with the real design, name and lore (${accepted} -> ${tm.name})`);
   // Wrong object and unknown still come first: no monster
-  await p.click('[data-act="testCollection"]').catch(() => {}); await p.waitForTimeout(200); await p.click('.sheet [data-act="closeSheet"]').catch(() => {});
-  await p.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; window.__snapmon.render(); });
+  await p.evaluate(() => { window.__snapmon.S.enc.disturbed = {}; window.__snapmon.S.enc.quiet = {}; window.__snapmon.setRNG(() => 0.01); });
+  s0 = await S();
   await cam.snap(p); await p.waitForSelector('text=Object identified');
   await p.click('[data-act="wrongObject"]'); await waitText(/Which one is it|couldn't identify/, 5000);
   await p.click('[data-act="cancelPhoto"]').catch(() => {});
@@ -104,42 +91,7 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
   await cam.snap(p); await waitText(/Unknown object|Could it be|few ideas|Object identified|disagree/, 8000);
   await p.waitForTimeout(3000); // whatever the engine shows, nothing happens until the player accepts something
   await p.click('[data-act="cancelPhoto"]');
-  ok(await roster() === 1, 'rejected (Wrong object) and unknown photos create no test monster');
-  // instant capture off: a test battle; everything is undone afterwards, a capture goes to the test roster
-  await stubLens([{ label: 'security camera', obj: 'x_security_camera', conf: 0.95, box: null }]);
-  await p.evaluate(() => { window.__snapmon.S.settings.instantCapture = false; });
-  await p.evaluate(() => window.__snapmon.setRNG(() => 0.01));
-  s0 = await S();
-  await cam.snap(p); await p.waitForSelector('text=Object identified'); await p.click('[data-act="pickCand"]');
-  await waitText(/Test fight/, 8000);
-  await p.click('[data-act="fight"]'); await p.waitForSelector('#actions');
-  for (let i = 0; i < 25 && await p.evaluate(() => !!window.__snapmon.ui.battle); i++) {
-    await p.evaluate(() => { const B = window.__snapmon.ui.battle; if (B) { B.enemy.hp = 1; B.disp.enemy = 1; } });
-    await p.click('[data-act="bCapture"]').catch(() => {});
-    await p.waitForFunction(() => !window.__snapmon.ui.busy || !window.__snapmon.ui.battle, null, { timeout: 15000 });
-  }
-  await waitText(/Test capture|Test battle over/, 15000); await shot('T03-test-battle');
-  s1 = await S();
-  ok(strip(s1) === strip(s0) && s1.items.trap === s0.items.trap && s1.hp === s0.hp, 'after a test battle the real save is exactly as before (traps, HP, coins, XP, stats)');
-  ok(await roster() === 2, 'the monster captured in the test battle went to the test collection, not the real one');
-  ok(await p.evaluate(() => { const raw = localStorage.getItem('snapmon.save.v1'); return !raw.includes('test-'); }), 'no test monster ever reaches the stored save');
-  await p.click('[data-act="closeOverlay"]');
-  // the test collection can be viewed and cleared
-  await p.click('[data-act="settings"]'); await p.click('[data-act="testCollection"]'); await p.waitForSelector('[data-act="testView"]');
-  await p.click('[data-act="testView"]'); await p.waitForSelector('text=TEST MONSTER · NOT PART OF YOUR COLLECTION'); await shot('T04-test-monster-sheet');
-  await p.click('.sheet [data-act="testCollection"]'); await p.click('.sheet [data-act="closeSheet"]');
-  await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="testClear"]');
-  await p.click('[data-act="testClear"]'); await p.click('[data-act="testClear"]');
-  ok(await roster() === 0, 'the test collection can be cleared');
-  // turning the mode off restores normal hunting
-  await p.click('[data-act="toggleQuickTest"]'); await p.click('.sheet [data-act="closeSheet"]');
-  // the earlier normal hunt of this (stubbed) object locked it (60-min encounter / 20-min quiet lock); this check is
-  // about normal hunting, so start it without those locks (the locks have their own tests)
-  await p.evaluate(() => { window.__snapmon.setRNG(() => 0.999); window.__snapmon.S.enc.disturbed = {}; window.__snapmon.S.enc.quiet = {}; });
-  s0 = await S();
-  await cam.snap(p); await p.waitForSelector('text=Object identified'); await p.click('[data-act="pickCand"]');
-  await waitText(/All quiet|Already scanned|Fight!/, 8000);
-  ok(!(await p.$('.test-banner')) && (await S()).stats.photos === s0.stats.photos + 1 && await roster() === 0, 'turning the mode off returns to normal hunts (counted, normal odds, nothing in the test roster)');
+  ok((await S()).stats.encounters === s0.stats.encounters, 'rejected (Wrong object) and unknown photos create no encounter');
 
   await b.close();
   console.log(errors.length ? `\n${errors.length} PROBLEM(S)` : '\nALL v0.4.4 CHECKS PASSED');

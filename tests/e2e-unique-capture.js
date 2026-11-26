@@ -4,7 +4,7 @@
 //     monster, rarity and variant — no trap, turn, roll, log entry, animation or save/battle change
 //   • the duplicate can still be defeated for the normal rewards; it is never added to the collection
 //   • another rarity / variant is capturable as usual; releasing the owned monster frees its slot
-//   • the rule survives a reload; Quick Monster Test Mode battles are not affected
+//   • the rule survives a reload; developer custom encounters follow it exactly like camera hunts
 // Usage: node tests/e2e-unique-capture.js <url> <screenshot-dir>
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
@@ -25,10 +25,10 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
     const shot = async n => { if (width === 412) { await p.waitForTimeout(450); await p.screenshot({ path: path.join(outDir, n + '.png') }); } };
     const idle = () => p.waitForFunction(() => !window.__snapmon.ui.busy, null, { timeout: 20000 });
     // a battle against a Common mouse of the given variant (rarity 'common' unless given); returns nothing
-    const fight = (variant, rarity = 'common', test = false) => p.evaluate(([variant, rarity, test]) => {
+    const fight = (variant, rarity = 'common') => p.evaluate(([variant, rarity]) => {
       document.querySelector('#overlay').innerHTML = '';
       const S = window.__snapmon.S; const m = createMonster(S, { obj: 'mouse', rarity, variant, word: 'mouse' });
-      m.stats.spd = 1; if (test) { m.test = true; m.id = 'test-x'; } startBattle(m); }, [variant, rarity, test]);
+      m.stats.spd = 1; startBattle(m); }, [variant, rarity]);
     const capBtn = () => p.$eval('[data-act="bCapture"]', e => ({ cls: e.className, disabled: e.disabled, hasDisabledAttr: e.hasAttribute('disabled'), aria: e.getAttribute('aria-disabled'), label: e.getAttribute('aria-label') || '', small: e.querySelector('small').textContent, opacity: +getComputedStyle(e).opacity }));
     const state = () => p.evaluate(() => { const B = window.__snapmon.ui.battle; return JSON.stringify({ S: { ...window.__snapmon.S, lastTick: 0 }, B: { turn: B.turn, over: B.over, result: B.result, fails: B.captureFails, enemy: B.enemy, hero: B.hero, enh: B.enhancer }, log: (B.log && B.log.entries ? B.log.entries.length : JSON.stringify(B.log || '').length) }); });
 
@@ -94,9 +94,12 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
     await fight(null); await p.waitForSelector('[data-act="bCapture"]'); await idle();
     ok(/unavail/.test((await capBtn()).cls), `${tag}: the Normal Common slot is still owned`);
 
-    // 6. a Quick Monster Test Mode battle is not affected by the real collection
-    await fight(null, 'common', true); await p.waitForSelector('[data-act="bCapture"]'); await idle();
-    ok(!/unavail/.test((await capBtn()).cls), `${tag}: a test monster of an owned slot can still be trapped in a test battle`);
+    // 6. a developer custom encounter of an owned slot (Settings → Developer & testing → Custom encounter) is refused too
+    await p.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; window.__snapmon.ui.battle = null; const S = window.__snapmon.S; S.settings.devUnlocked = true; S.settings.devOpen = true; window.__snapmon.ui.devSel.obj = 'mouse'; window.__snapmon.ui.devSel.rarity = 'common'; window.__snapmon.ui.devSel.variant = 'normal'; });
+    await p.click('[data-act="settings"]'); await p.waitForSelector('[data-act="devSpawn"]'); await p.click('[data-act="devSpawn"]');
+    await p.waitForSelector('[data-act="fight"]'); await p.click('[data-act="fight"]'); await p.waitForSelector('[data-act="bCapture"]'); await idle();
+    c = await capBtn();
+    ok(/unavail/.test(c.cls) && c.small === 'Already owned', `${tag}: a custom encounter of the owned Normal Common mouse shows "Already owned"`);
     await p.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; window.__snapmon.ui.battle = null; });
     await ctx.close();
   }

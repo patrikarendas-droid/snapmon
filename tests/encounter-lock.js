@@ -93,10 +93,11 @@ ok(r.disturbed && S.enc.disturbed.clock === now + H, 'clock turned back 5 h: sti
 now += H; r = scan(S, 'clock', '5555555555555557');
 ok(!r.disturbed, '…and eligible again 60 minutes later');
 
-// 9. developer test monsters never touch the locks
-S = veteran(); const q0 = snap(S.enc);
-G.createTestMonster(S, 'mouse', { hue: 1, sat: .5, lit: .5, hash: '6666666666666666' }, { label: 'mouse' });
-ok(snap(S.enc) === q0, 'Quick Monster Test Mode monsters create no lock and change no encounter state');
+// 9. developer custom encounters never touch the locks (not even a locked object's), and the locks still hold afterwards
+S = veteran(); S.settings.devUnlocked = true; rngValue = 0; scan(S, 'mouse', '6666666666666666'); const q0 = snap(S.enc), st0 = snap(S.stats);
+for (let i = 0; i < 3; i++) { const sp = G.devSpawnEncounter(S, 'mouse', 'rare', 'normal'); ok(sp.ok && sp.monster.obj === 'mouse', `custom encounter ${i + 1} of a locked object works`); }
+ok(snap(S.enc) === q0 && snap(S.stats) === st0, 'custom encounters create, reset or extend no lock and change no encounter state or photo statistics');
+ok(scan(S, 'mouse', '6666666666666667').disturbed, '…and a normal hunt of that object is still blocked by its lock');
 
 // 10. hunter name
 const C = G.cleanHunterName;

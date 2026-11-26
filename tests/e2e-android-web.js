@@ -167,20 +167,32 @@ window.Capacitor = { isNativePlatform: () => true, registerPlugin: name => {
   await page.waitForFunction(() => /Capacitor/.test(document.querySelector('#sheet').innerText), null, { timeout: 5000 }).catch(() => {});
   ok(await page.evaluate(() => /TinyCLIP/.test(document.querySelector('#sheet').innerText) && /Capacitor/.test(document.querySelector('#sheet').innerText)), 'Settings → Open-source licences shows the packaged notices');
 
-  // 7. developer tools: available only in a --dev-tools build; a release-safe build cannot reach them at all,
-  //    even with a save that has them switched on (e.g. a backup code from a development build)
+  // 7. developer tools: available only in a --dev-tools build; a release-safe build cannot reach them at all, not in the
+  //    UI and not through direct action calls, even with a save that has them switched on (e.g. a backup code from a
+  //    development build): Custom encounter, Give items and God Mode refuse at the game-logic level.
   const dev = await page.evaluate(() => {
     const S0 = window.__snapmon.S; S0.settings.devUnlocked = false; window.__snapmon.ui.devTaps = 0;
     for (let i = 0; i < 7; i++) window.__snapmon.actions.devTap();
     const unlockedByTaps = !!S0.settings.devUnlocked;
-    S0.settings.devUnlocked = true; S0.settings.quickTest = true; S0.settings.godMode = true; // forced, as from an old save
-    const r = { DEV_TOOLS, unlockedByTaps, devOn: devOn(), quickTest: quickTest(), god: enableGodMode({ m: { test: true } }),
-      menu: (settingsSheet(), !!developerHTML() && /Developer &(amp;)? ?testing/.test(document.querySelector('#sheet').textContent)) };
-    S0.settings.devUnlocked = false; S0.settings.quickTest = false; S0.settings.godMode = false; closeSheet();
+    S0.settings.devUnlocked = true; S0.settings.devGodMode = true; S0.settings.devOpen = true; // forced, as from a development build's save
+    const before = JSON.stringify({ ...S0, lastTick: 0 });
+    const spawn = devSpawnEncounter(S0, 'mug', 'legendary', 'prismatic'), grant = devGrantItem(S0, 'trap', 50);
+    const m = createMonster(S0, { obj: 'mug', rarity: 'common' }), B = newBattle(S0, m); B.enemy.atk *= 30;
+    let lost = false; for (let i = 0; i < 20 && !B.over; i++) { const h = B.hero.hp; enemyTurn(B); if (B.hero.hp < h) lost = true; }
+    const forced = newBattle(S0, m); forced.god = true;
+    // the UI actions themselves (as a tap would call them)
+    const ui0 = document.querySelector('#overlay').innerHTML;
+    window.__snapmon.actions.devSpawn(); window.__snapmon.actions.devGrant();
+    const r = { DEV_TOOLS, unlockedByTaps, devOn: devOn(), godModeOn: godModeOn(S0), battleGod: !!B.god || godOn(forced), lost,
+      spawn: spawn.ok, grant: grant.ok, unchanged: JSON.stringify({ ...S0, lastTick: 0 }) === before, overlay: document.querySelector('#overlay').innerHTML === ui0,
+      menu: (settingsSheet(), !!developerHTML() && /Developer &(amp;)? ?testing/.test(document.querySelector('#sheet').textContent)),
+      tools: !!document.querySelector('[data-act="devSpawn"], [data-act="devGrant"], [data-act="toggleGodMode"]') };
+    S0.settings.devUnlocked = false; S0.settings.devGodMode = false; S0.settings.devOpen = false; closeSheet();
     return r;
   });
-  if (dev.DEV_TOOLS) ok(dev.unlockedByTaps && dev.devOn && dev.menu, 'development build: 7 taps unlock the developer tools (Quick Monster Test Mode, God Mode, Force CPU)');
-  else ok(!dev.unlockedByTaps && !dev.devOn && !dev.quickTest && !dev.god && !dev.menu, `release-safe build: developer tools, Quick Monster Test Mode and God Mode unreachable, even with them forced on in the save (${JSON.stringify(dev)})`);
+  if (dev.DEV_TOOLS) ok(dev.unlockedByTaps && dev.devOn && dev.menu && dev.tools && dev.spawn && dev.grant && dev.godModeOn && dev.battleGod && !dev.lost, 'development build: 7 taps unlock the developer tools; Custom encounter, Give items and God Mode work');
+  else ok(!dev.unlockedByTaps && !dev.devOn && !dev.menu && !dev.tools && !dev.spawn && !dev.grant && !dev.godModeOn && !dev.battleGod && dev.lost && dev.unchanged && dev.overlay,
+    `release-safe build: no developer menu; Custom encounter, Give items and God Mode refuse even when called directly with them forced on in the save; damage is taken normally (${JSON.stringify(dev)})`);
   await ctx.close();
 
   ok(external.length === 0, `nothing requested from the network (${external.slice(0, 3).join(', ')})`);

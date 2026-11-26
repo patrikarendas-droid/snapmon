@@ -4,7 +4,7 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11-24). Primary owner-verified APK: build 15
+Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11-24). Primary owner-verified APK: build 15
 (commit `1b9aa89`, archived as pre-release `android-dev-b15`). The website serves only the developer catalogue (browser game retired 2026-11-25).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
@@ -378,7 +378,46 @@ Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11
     73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-17` (id 15013309903), expires 2027-02-23.
     CI-green, NOT yet phone-verified.
 
-**Next priorities (2026-11-25):**
+- **Developer tools on the real save (2026-11-26, owner request; Android branch, not merged, nothing published).** The
+  owner is the only tester. Settings → Developer & testing (still hidden behind 7 taps on the version line) now has:
+  - **Custom encounter:** exact registry object id (or a search by display name that must resolve to exactly one object;
+    nothing is substituted), rarity (5) and variant (Normal = null, Spectral, Mutated, Prismatic = `'shiny'`) → "Spawn
+    encounter" → `devSpawnEncounter` (`src/game.js`) makes an ordinary monster with the normal generator (word = object
+    name, no photo → the generator's neutral colours, as the catalogue does) → normal `recordSighting` → ordinary
+    discovery → ordinary battle/capture/rewards/collection. No `m.test`, no TestRoster. Bypasses only the camera,
+    recognition, encounter/rarity/variant rolls, first-hunt rules and object locks; it never reads or writes `S.enc`
+    (locks, pity) or photo statistics. The one-per-slot capture rule applies unchanged. Repeatable.
+  - **Give items:** the 8 bag items and 4 crafting materials (not coins/XP/RP); positive whole number 1–999 per grant,
+    resulting total ≤ 99,999; immediate save (`devGrantItem`).
+  - **God Mode (HP protection only):** new setting key `S.settings.devGodMode` (default off; the retired test-battle key
+    `settings.godMode` is ignored, so an old "on" does not carry over). Decided once per battle in `newBattle`; applies to
+    every real battle (camera hunts and custom encounters). Enemy hits and poison/burn are rolled exactly as before (same
+    RNG use, statuses, drain) but the events carry `dmg: 0, god: true, blocked: N` and no HP is taken; `finishBattle`
+    never saves less HP than at the start. No free specials, items, traps or captures any more. UI: "GOD MODE · HP
+    PROTECTED" in battle, "BLOCKED" floats, combat-log notes, a Hunt-screen reminder while on.
+  - Guards in the game logic: `devToolsOn(S)` = `DEV_TOOLS === true` AND `S.settings.devUnlocked === true`; every action
+    re-checks it, and `godOn(B)` re-checks `DEV_TOOLS`, so a release build ignores even a forced flag.
+  - Retired: Quick Monster Test Mode, Instant capture, the test collection UI and test-battle save restore, the old God
+    Mode. The old storage key `snapmon.testroster.v1` is left untouched and unread (nothing imported, nothing deleted);
+    old `quickTest`/`instantCapture`/`godMode` settings stay inert in saves. Save format 3 unchanged (one additive
+    setting). Field-test mode and recognition diagnostics kept.
+  - Tests: `tests/devtest.js` (rewritten: validation of ids/rarities/variants, all 2,308 objects spawn as themselves,
+    real flow + reload + backup code, identical rewards, locks untouched, grants and limits, release + locked refusals),
+    `tests/god-mode.js` (rewritten: HP never drops incl. status damage, identical RNG/events otherwise, no free
+    items/specials/traps/captures, saved HP, off again, release refusal), new `tests/e2e-devtools.js` (412/320 px),
+    rewritten `tests/e2e-godmode.js` (camera hunt + custom encounter), `tests/e2e-android-web.js` (release configuration
+    calls the actions directly), adapted `e2e-v044`, `unique-capture`, `e2e-unique-capture`, `encounter-lock`,
+    `curated-refresh`, `combat-log` (God Mode battles now real battles; the one second-person engine line "Poof! You
+    vanish…" whitelisted). `gameplay-baseline` hashes the historic test-odds constant so its frozen recording stays
+    valid; `rules-trace`/`gameplay-baseline` recordings unchanged (battle maths identical with God Mode off).
+  - Known limit: a custom spawn counts as a sighting, so on a brand-new save it would use up the first-hunt guarantee
+    (not relevant to the owner's save).
+
+**Next priorities (2026-11-26):**
+- Owner: install the developer-tools build (next CI build after 17) as an update, and run its phone checklist.
+- No further releases, deployments or merges without approval.
+
+**Previous priorities (2026-11-25):**
 - Owner: install build 17 as an update over build 15 (backup code first) and run the unique-capture phone checklist.
 - Done 2026-11-25: owner confirmed the live catalogue works and the website shows the "moved to the app" notice.
 - No further releases, deployments or merges without approval.
@@ -413,7 +452,7 @@ Last updated: 2026-11-25. **SnapMon is an Android game** (owner decision 2026-11
 | "Sausage" is recognised as the hot-dog object | Known (v0.4.5) | The recogniser vocabulary maps the label to `hotdog`; since v0.4.5 that object has meat lore/moves. A separate sausage needs a vocabulary change (engine change + lab run). | Only if requested. |
 | Approximate bodies kept (seals, stingray, mobile toy, mouthguard) and ImageNet name collisions (kite, crane) | Audited, kept with reasons (v0.4.9 branch) | `docs/review/MAPPING_AUDIT.md`, `docs/review/audit-sheets/04-review-queue.png` | Design work / new identities later; ImageNet "kite"/"crane" collide by name. |
 | Starfish caught from "sea urchin" photos before the audit | Known | Stored `m.label` = "sea urchin" would allow a migration | Proposed separately; not automatic (could alter genuine starfish if labels were noisy). |
-| Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change family, moves' numbers or stats without consent (since the Pilot 02 integration their curated TEXT — name, lore, move names — is refreshed automatically, see section 4); "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. Test-collection monsters are never updated. | None. |
+| Existing monsters keep their old family/moves (e.g. a Mechanical spoon) | By design | Saved monsters never change family, moves' numbers or stats without consent (since the Pilot 02 integration their curated TEXT — name, lore, move names — is refreshed automatically, see section 4); "Update its look" offers the new body/text for redesigned objects (energy drink), not family or stats. (The retired test collection is no longer shown.) | None. |
 | Legendary moves: only the legend move and Ultimate are unique | Known (v0.4.5) | Signature + one kit move can repeat within the object's group; numbers come from shared archetypes (balance). | Hand-written legendary moves only if requested. |
 | Some borrowed designs are approximate (drone → helicopter, microscope basic) | Known | `docs/identity-designs-*.png` | Improve when found in QA. |
 | Hardware camera zoom untested on a real phone | Open | `src/platform.js` zoom; digital zoom fallback tested in browser. | Phone test. |

@@ -69,7 +69,7 @@ const CombatLog = (() => {
       names: { hero: B.hero.name, enemy: short(B.enemy.name) } };
     add(log, { kind: 'start', who: 'enemy', parts: [n(log, 'enemy'), t(` (${RARITY[B.m.rarity].name}${B.m.variant ? ' ' + B.m.variant : ''}, Lv ${B.m.level}) appears! `), n(log, 'hero'), t(` faces it with ${B.hero.hp}/${B.hero.maxHp} HP.`)] });
     if (B.enemyFirst) add(log, { kind: 'note', who: 'enemy', parts: [n(log, 'enemy'), t(' is faster and strikes first.')] });
-    if (opts.god) add(log, { kind: 'note', who: 'sys', parts: [t('God Mode test battle (developer).')] });
+    if (opts.god) add(log, { kind: 'note', who: 'sys', parts: [t('God Mode (developer): your HP cannot drop in this battle.')] });
     B.log = log; return log;
   }
   // parts: {t: text} | {n: 'hero'|'enemy'} | {amt, fx, unit} | {fx, label}
@@ -84,7 +84,6 @@ const CombatLog = (() => {
   function ingest(B, ev, before = {}) {
     const log = B.log || create(B);
     let actor = null, move = null, ability = null, hitNo = 0, actEntry = null;
-    const god = !!B.god;
     const hpTxt = who => ` (${log.hp[who]}/${B[who].maxHp})`;
     for (const e of ev || []) {
       switch (e.t) {
@@ -106,7 +105,7 @@ const CombatLog = (() => {
         case 'hit': {
           hitNo++;
           const tgt = e.who, loss = Math.min(log.hp[tgt], e.dmg);
-          log.hp[tgt] -= loss; if (tgt === 'hero' && god && log.hp.hero < 1) log.hp.hero = 1;
+          log.hp[tgt] -= loss; // God Mode: the engine sends dmg 0 for the hunter
           const el = actor === 'hero' ? WEAPONS[B.weapon].el : null; // only weapons have damage elements
           const parts = [];
           const many = ev.filter(x => x.t === 'hit' || x.t === 'miss').length > 1;
@@ -115,6 +114,7 @@ const CombatLog = (() => {
           if (e.crit) parts.push({ fx: 'crit', label: 'critical hit' });
           if (e.eff > 1) parts.push(t(' · super effective')); else if (e.eff < 1) parts.push(t(' · resisted'));
           if (loss < e.dmg) parts.push(t(` (hit for ${e.dmg})`));
+          if (e.god) parts.push(t(` (${e.blocked} blocked by God Mode)`));
           parts.push(t(hpTxt(tgt)));
           add(log, { kind: 'hit', who: tgt, by: actor, move, amount: -loss, el, crit: !!e.crit, sub: true, parts });
           break;
@@ -128,11 +128,10 @@ const CombatLog = (() => {
         case 'heal': {
           const who = e.who, gain = Math.min(B[who].maxHp - log.hp[who], e.amt);
           log.hp[who] += Math.max(0, gain);
-          // who caused it, from the engine's own paths: God Mode restore, a monster's drain or healing move, the hunter's
+          // who caused it, from the engine's own paths: a monster's drain or healing move, the hunter's
           // Vampire Fang charm (heals after the hunter's attack), or an item (the action row above names it)
           let why = '';
-          if (e.god) why = ' is restored (God Mode)';
-          else if (who === 'enemy') why = ability && ability.effect === 'drain' ? ' drains life' : ' recovers';
+          if (who === 'enemy') why = ability && ability.effect === 'drain' ? ' drains life' : ' recovers';
           else if (actor === 'hero' && (move === 'Attack' || WEAPONS[B.weapon].special.name === move)) why = ` (${CHARMS.fang.name})`;
           const parts = [n(log, who), t(why), { amt: Math.max(0, gain), fx: 'heal', unit: 'HP', label: '' }];
           if (gain < e.amt) parts.push(t(` (capped at max HP)`));
@@ -147,8 +146,8 @@ const CombatLog = (() => {
         }
         case 'dot': {
           const loss = Math.min(log.hp[e.who], e.dmg);
-          log.hp[e.who] -= loss; if (e.who === 'hero' && god && log.hp.hero < 1) log.hp.hero = 1;
-          add(log, { kind: 'dot', who: e.who, s: e.s, amount: -loss, parts: [n(log, e.who), t(' suffers'), { amt: -loss, fx: e.s, unit: 'HP', label: FX[e.s].label }, t(hpTxt(e.who))] });
+          log.hp[e.who] -= loss;
+          add(log, { kind: 'dot', who: e.who, s: e.s, amount: -loss, parts: [n(log, e.who), t(' suffers'), { amt: -loss, fx: e.s, unit: 'HP', label: FX[e.s].label }, ...(e.god ? [t(` (${e.blocked} blocked by God Mode)`)] : []), t(hpTxt(e.who))] });
           break;
         }
         case 'expire':

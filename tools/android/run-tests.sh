@@ -23,11 +23,11 @@ if [ "$part" = logic ] || [ "$part" = all ]; then
   node tests/guide.js
   node tests/rules-trace.js
   node tests/identity.js
-  node tests/devtest.js
+  node tests/devtest.js            # developer Custom encounter + Give items (real save; refused in a release build)
   node tests/generator-snapshot.js
   node tests/gameplay-baseline.js
   node tests/ability-keys.js
-  node tests/god-mode.js
+  node tests/god-mode.js           # developer God Mode: HP protection only, in every real battle
   node tests/curated.js
   node tests/curated-pipeline.js
   node tests/curated-refresh.js
@@ -49,6 +49,7 @@ if [ "$part" = browser ] || [ "$part" = all ]; then
   node tests/e2e-qol.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
   node tests/e2e-v044.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
   node tests/e2e-godmode.js http://localhost:8765/index.html node_modules/onnxruntime-web/dist shots
+  node tests/e2e-devtools.js http://localhost:8765/index.html shots   # Custom encounter + Give items on the real save (412/320 px)
   node tests/e2e-curated.js http://localhost:8765/index.html shots
   node tests/e2e-catalogue-local.js http://localhost:8765/ shots
   node tests/e2e-catalogue-ai.js http://localhost:8765/ shots

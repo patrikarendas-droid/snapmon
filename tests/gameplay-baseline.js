@@ -21,8 +21,12 @@ const FIX = path.join(__dirname, 'fixtures/gameplay-baseline.json');
 const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape, localStorage: { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } } };
 vm.createContext(ctx);
 vm.runInContext(['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js', 'curated-data.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n') +
-  ';globalThis.T={RARITIES,FAMILIES,MOVE_ARCH,MOVE_KITS,CATEGORIES,WEAPONS,ITEMS,CHARMS,MECH,STATUS_TURNS,TEST_RARITY_WEIGHTS,OBJECTS,objectForLabel,createMonster,freshState,makeDNA,buildGrid,buildPalette,resolvePhoto,newBattle,heroTurnStart,heroStrike,enemyTurn,attemptCapture,captureChance,attemptFlee,useItem,finishBattle,hunterStats,setClock:f=>{CLOCK=f},setRNG:f=>{RNG=f}}', ctx);
+  ';globalThis.T={RARITIES,FAMILIES,MOVE_ARCH,MOVE_KITS,CATEGORIES,WEAPONS,ITEMS,CHARMS,MECH,STATUS_TURNS,OBJECTS,objectForLabel,createMonster,freshState,makeDNA,buildGrid,buildPalette,resolvePhoto,newBattle,heroTurnStart,heroStrike,enemyTurn,attemptCapture,captureChance,attemptFlee,useItem,finishBattle,hunterStats,setClock:f=>{CLOCK=f},setRNG:f=>{RNG=f}}', ctx);
 const T = ctx.T;
+// The retired Quick Monster Test Mode's odds (TEST_RARITY_WEIGHTS, removed from the game on 2026-11-26 with the test
+// mode itself) were part of the recorded rule hash; the historic value is fed in here so the frozen recording stays
+// valid. No real rule depends on it.
+const RETIRED_TEST_ODDS = { common: 20, uncommon: 20, rare: 25, epic: 20, legendary: 15 };
 const parts = {}, H = () => crypto.createHash('sha256'), dig = h => h.digest('hex');
 // the v0.4.8 object ids (tests/fixtures/registry-ids-v0.4.8.json): the samplers below iterate this frozen list, so
 // objects added later (recognition audit 2026-11: i_cardigan, i_plane) never shift which objects are sampled
@@ -33,7 +37,7 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
 // 1. rule tables (numbers only)
 {
   const h = H();
-  h.update(JSON.stringify(T.RARITIES)); h.update(JSON.stringify(T.MECH)); h.update(JSON.stringify(T.STATUS_TURNS)); h.update(JSON.stringify(T.TEST_RARITY_WEIGHTS));
+  h.update(JSON.stringify(T.RARITIES)); h.update(JSON.stringify(T.MECH)); h.update(JSON.stringify(T.STATUS_TURNS)); h.update(JSON.stringify(RETIRED_TEST_ODDS));
   h.update(JSON.stringify(Object.entries(T.FAMILIES).map(([k, f]) => [k, f.hp, f.atk, f.def, f.spd, f.weak, f.resist, f.mat, f.abilities.map(a => mech({ ...a, cd: 0 }))])));
   h.update(JSON.stringify(T.MOVE_ARCH)); h.update(JSON.stringify(Object.entries(T.MOVE_KITS).map(([k, v]) => [k, v.split(',').map(x => x.split(':')[1].trim())])));
   h.update(JSON.stringify(T.CATEGORIES.map(c => [c.id, c.fam, mech({ ...c.sig, cd: 0 })])));

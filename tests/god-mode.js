@@ -1,89 +1,97 @@
-// Developer God Mode (test battles only): the engine part. It can only be switched on for a Quick Monster Test Mode
-// monster in a build with DEV_TOOLS; in such a battle the hunter survives anything, specials need no energy, traps and
-// items are unlimited and not used up, and a capture attempt always succeeds — while the monster fights exactly as
-// normal. With it off (or in any normal battle) nothing changes (also guarded by tests/gameplay-baseline.js).
-const fs = require('fs'), vm = require('vm'), path = require('path');
+// Developer God Mode (2026-11-26), engine level: HP protection ONLY, in every real battle (camera hunts and custom
+// encounters). On = DEV_TOOLS build + unlocked Developer & testing + S.settings.devGodMode === true, decided once per
+// battle by newBattle. The hunter's HP never goes down (enemy hits, poison, burn), and no lower HP is saved at the end;
+// everything else is exactly as normal: the same random numbers, enemy moves and statuses, energy costs, item and trap
+// use, capture chances, the owned-slot rule and rewards. Release builds ignore it even with a forced flag. Replaces the
+// retired test-battle God Mode (infinite items, free specials, guaranteed captures). Usage: node tests/god-mode.js
+'use strict';
+const load = require('./load');
+const T = load(), R = load({ devTools: false });
 let bad = 0; const ok = (c, m) => { if (!c) { bad++; console.log('FAIL', m); } else console.log('ok  ', m); };
-const load = (devTools = true) => {
-  const ctx = { console, Math, JSON, Date, btoa: x => Buffer.from(x, 'binary').toString('base64'), atob: x => Buffer.from(x, 'base64').toString('binary'), escape, unescape, localStorage: { _d: {}, getItem(k) { return this._d[k] ?? null; }, setItem(k, v) { this._d[k] = String(v); } } };
-  vm.createContext(ctx);
-  let src = ['data.js', 'sprites.js', 'parts.js', 'objects.js', 'labels.js', 'lore.js', 'game.js', 'curated.js', 'curated-data.js'].map(f => fs.readFileSync(path.join(__dirname, '../src', f), 'utf8')).join('\n');
-  if (!devTools) { if (!/const DEV_TOOLS = true;/.test(src)) throw new Error('DEV_TOOLS line not found'); src = src.replace('const DEV_TOOLS = true;', 'const DEV_TOOLS = false;'); }
-  vm.runInContext(src + ';globalThis.T={createMonster,createTestMonster,freshState,newBattle,enableGodMode,godOn,heroTurnStart,heroStrike,enemyTurn,attemptCapture,attemptFlee,useItem,captureChance,hunterStats,WEAPONS,BATTLE_ITEMS:typeof BATTLE_ITEMS!=="undefined"?BATTLE_ITEMS:["potion","greater","strength","defense","antidote","enhancer","smoke"],setRNG:f=>{RNG=f}}', ctx);
-  return ctx.T;
-};
-const T = load();
 let seed = 1; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
-T.setRNG(rng);
-const state = () => { const S = T.freshState(); S.level = 1; S.hp = 5; S.items = {}; return S; }; // weak hunter, empty bag
-const testMon = (S, obj, rarity) => { const m = T.createMonster(S, { obj, rarity }); m.test = true; return m; };
+T.setRNG(rng); R.setRNG(rng);
+const snap = x => JSON.stringify(x);
+const hunter = (TT = T, god = true) => { const S = TT.freshState(); S.level = 3; S.hp = 50; S.items = { trap: 4, potion: 2, strength: 1, antidote: 1, enhancer: 1, smoke: 1 }; S.settings.devUnlocked = true; if (god) S.settings.devGodMode = true; return S; };
+const mon = (TT, S, obj = 'apple', rarity = 'legendary') => TT.createMonster(S, { obj, rarity, rng });
+// strip what God Mode is allowed to change from a list of events: the damage taken by the hunter
+const neutral = evs => JSON.stringify(evs, (k, v) => (k === 'god' || k === 'blocked' ? undefined : v)).replace(/"dmg":\d+/g, '"dmg":_');
 
-// 1. it can only be switched on for a test monster, in a developer build
+// 1. who can turn it on
 {
-  const S = state(), real = T.createMonster(S, { obj: 'apple', rarity: 'legendary' }), B = T.newBattle(S, real);
-  ok(T.enableGodMode(B) === false && !B.god && !T.godOn(B), 'cannot be enabled for a normal (non-test) monster');
-  B.god = true; ok(!T.godOn(B), 'even a forced flag on a normal battle is ignored by the engine');
-  const P = load(false), S2 = P.freshState(), m2 = P.createMonster(S2, { obj: 'apple', rarity: 'legendary' }); m2.test = true;
-  const B2 = P.newBattle(S2, m2);
-  ok(P.enableGodMode(B2) === false && !P.godOn(B2) && (B2.god = true) && !P.godOn(B2), 'a build with DEV_TOOLS=false can never activate it, even with a test monster and a forced flag');
+  ok(!T.godModeOn(T.freshState()), 'off in a new save (default off)');
+  const old = T.migrate({ ...T.freshState(), settings: { devUnlocked: true, godMode: true, quickTest: true, instantCapture: false } });
+  ok(!T.godModeOn(old) && !T.newBattle(old, mon(T, old)).god, 'the retired test-battle switch (settings.godMode = true in an old save) does NOT turn on the new God Mode');
+  const L = hunter(); L.settings.devUnlocked = false; ok(!T.godModeOn(L) && !T.newBattle(L, mon(T, L)).god, 'locked developer section: off even with the switch set');
+  const S = hunter(R), B = R.newBattle(S, mon(R, S)); B.enemy.atk *= 30;
+  ok(!R.godModeOn(S) && !B.god, 'release build (DEV_TOOLS false): never on, even with devUnlocked + devGodMode set');
+  B.god = true; let lost = false; for (let i = 0; i < 40 && !B.over; i++) { const h = B.hero.hp; R.enemyTurn(B); if (B.hero.hp < h) lost = true; }
+  ok(!R.godOn(B) && lost, 'release build: a forced battle flag is ignored by the engine and damage is taken normally');
 }
-// 2. a normal battle with a forced flag plays exactly like one without it (the engine ignores it)
+
+// 2. HP never decreases: ×20 hits, poison and burn, many turns; the enemy still acts and applies statuses
 {
-  const run = force => { seed = 77; const S = state(); S.hp = 60; S.items = { trap: 2, potion: 1 }; const m = T.createMonster(S, { obj: 'padlock', rarity: 'epic' }); const B = T.newBattle(S, m); if (force) B.god = true; const out = [];
-    for (let t = 0; t < 25 && !B.over; t++) { out.push(T.heroTurnStart(B).ev); if (B.over) break; out.push(t % 7 === 3 ? T.attemptCapture(B, S).ev : T.heroStrike(B, S, t % 5 === 4)); if (!B.over) out.push(T.enemyTurn(B)); }
-    return JSON.stringify([out, B.result, B.hero.hp, S.items]); };
-  ok(run(false) === run(true), 'normal battle: identical events, result, HP and items with or without a forced God flag');
-}
-// 3. God Mode test battles
-const godBattle = (obj, rarity) => { const S = state(), m = testMon(S, obj, rarity), B = T.newBattle(S, m); ok(T.enableGodMode(B), `God Mode on for a test ${rarity} ${obj}`); return { S, m, B }; };
-{
-  const { S, B, m } = godBattle('apple', 'legendary'); B.enemy.atk *= 20; // a monster that would kill a level-1 hunter at once
-  let minHp = Infinity, hits = 0, statuses = 0, names = new Set(), heals = 0, defeat = false;
-  for (let t = 0; t < 120; t++) {
-    const st = T.heroTurnStart(B); heals += st.ev.filter(e => e.t === 'heal' && e.god).length; if (B.over) { defeat = B.result === 'defeat'; break; }
-    const ev = T.enemyTurn(B); for (const e of ev) { if (e.t === 'hit' && e.who === 'hero') hits++; if (e.t === 'status' && e.who === 'hero') statuses++; if (e.t === 'act') names.add(e.name); }
-    minHp = Math.min(minHp, B.hero.hp); if (B.over) { defeat = B.result === 'defeat'; break; }
+  const S = hunter(), m = mon(T, S), B = T.newBattle(S, m); B.enemy.atk *= 20;
+  ok(B.god && T.godOn(B), 'unlocked + switch on: this real battle has God Mode');
+  const start = B.hero.hp; let drops = 0, blocked = 0, dots = 0, hits = 0, statuses = new Set(), acts = new Set();
+  for (let t = 0; t < 150 && !B.over; t++) {
+    let h = B.hero.hp; const st = T.heroTurnStart(B);
+    for (const e of st.ev) if (e.t === 'dot' && e.who === 'hero') { dots++; if (e.god && e.dmg === 0 && e.blocked > 0) blocked++; }
+    if (B.hero.hp < h) drops++;
+    if (t % 4 === 0) { B.hero.status.poison = { t: 3 }; B.hero.status.burn = { t: 3 }; } // keep damaging statuses on the hunter
+    h = B.hero.hp; const ev = T.enemyTurn(B);
+    for (const e of ev) { if (e.t === 'hit' && e.who === 'hero') { hits++; if (e.god && e.dmg === 0 && e.blocked > 0) blocked++; } if (e.t === 'status' && e.who === 'hero') statuses.add(e.s); if (e.t === 'act') acts.add(e.name); }
+    if (B.hero.hp < h) drops++;
   }
-  ok(!defeat && !B.over && minHp >= 1, `the hunter survives 120 turns of ×20-strength hits and damaging statuses (lowest HP ${minHp}, ${hits} hits, ${statuses} statuses on the hunter)`);
-  ok(hits > 50 && heals > 10, 'enemy hits still land and are shown; HP is restored at the start of each of your turns');
-  const curated = m.abilities.map(a => a.name);
-  ok(curated.every(n => names.has(n)) && curated.includes('Apple-ocalypse'), `the monster still uses all its own moves, with their (Pilot 01) names: ${[...names].join(', ')}`);
-  ok(JSON.stringify(S.items) === '{}', 'nothing was taken from the (empty) bag');
+  ok(drops === 0 && B.hero.hp >= start && !B.over, `150 turns of ×20 hits + poison + burn: HP never dropped (${start} → ${B.hero.hp}), no defeat`);
+  ok(hits > 60 && dots > 60 && blocked === hits + dots, `every enemy hit (${hits}) and damage tick (${dots}) is rolled and reported as blocked`);
+  ok(acts.size >= 2 && m.abilities.some(a => acts.has(a.name)), `the enemy still acts with its own moves (${[...acts].join(', ')})`);
+  ok(statuses.size >= 1, `statuses still land on the hunter (${[...statuses].join(', ')})`);
 }
+
+// 3. identical battle except the hunter's HP: same random numbers, events, enemy behaviour (God Mode on vs off)
 {
-  const { S, B } = godBattle('forklift', 'epic'); B.hero.energy = 0;
-  const ev = T.heroStrike(B, S, true);
-  ok(ev.some(e => e.t === 'act' && e.special) && ev.some(e => e.t === 'hit' || e.t === 'miss') && B.hero.energy === 0, `special attack at 0 energy works and costs nothing (${T.WEAPONS[B.weapon].special.name})`);
-  T.heroStrike(B, S, false); ok(B.hero.energy > 0, 'basic attacks still charge energy as usual');
+  const run = god => { seed = 4242; const S = hunter(T, god); S.hp = 999; const m = mon(T, S, 'padlock', 'epic'); const B = T.newBattle(S, m); B.hero.hp = B.hero.maxHp = 5000; const out = []; // both hunters survive, so the streams are comparable
+    for (let t = 0; t < 12 && !B.over; t++) { out.push(T.heroTurnStart(B).ev); if (B.over) break; out.push(T.heroStrike(B, S, t % 4 === 3)); if (!B.over) out.push(T.enemyTurn(B)); }
+    return { ev: neutral(out), energy: B.hero.energy, enemy: B.enemy.hp, hp: B.hero.hp, seed }; };
+  const a = run(true), b = run(false);
+  ok(a.ev === b.ev && a.enemy === b.enemy && a.energy === b.energy && a.seed === b.seed, 'on vs off: identical events, enemy HP, energy and random-number use (only the hunter\'s damage differs)');
+  ok(a.hp > b.hp, `…and only the hunter keeps their HP (${a.hp} vs ${b.hp})`);
 }
+
+// 4. no free specials, items, traps or captures
 {
-  let caught = 0; const objs = ['apple', 'padlock', 'x_light_switch', 'book', 'sock', 'microwave', 'rubber_duck', 'forklift', 'x_energy_drink', 'x_security_camera'];
-  for (const o of objs) { const { S, B } = godBattle(o, 'legendary'); const r = T.attemptCapture(B, S); if (r.used && B.over && B.result === 'captured' && !S.items.trap) caught++; }
-  ok(caught === objs.length, `a capture attempt with 0 Snap Traps succeeds every time, even against Legendaries (${caught}/${objs.length}), and uses no trap`);
+  const S = hunter(), B = T.newBattle(S, mon(T, S)); const W = T.WEAPONS[B.weapon];
+  B.hero.energy = 100; T.heroStrike(B, S, true); ok(B.hero.energy === 100 - W.special.cost, `a special costs its normal ${W.special.cost} energy`);
+  const p0 = S.items.potion; B.hero.hp = 1; T.useItem(B, S, 'potion'); ok(S.items.potion === p0 - 1, 'a potion is used up');
+  S.items.strength = 0; ok(!T.useItem(B, S, 'strength').ok, 'an item you do not have cannot be used');
+  const t0 = S.items.trap, ch = T.captureChance(S, B); T.attemptCapture(B, S, () => 0.9999);
+  ok(S.items.trap === t0 - 1 && ch < 1 && B.result !== 'captured', `a Snap Trap is used and the normal capture chance applies (${Math.round(ch * 100)}%, a high roll fails)`);
+  S.items.trap = 0; const r = T.attemptCapture(B, S, () => 0); ok(!r.used && B.result !== 'captured', 'with no Snap Traps there is no capture attempt');
+  const cmp = god => { seed = 7; const S = hunter(T, god); S.items.trap = 6; const B = T.newBattle(S, mon(T, S, 'sock', 'rare')); const res = []; for (let i = 0; i < 6 && !B.over; i++) res.push(T.attemptCapture(B, S, rng).used + ':' + B.result); return snap([res, S.items]); };
+  ok(cmp(true) === cmp(false), 'capture attempts and trap use are identical with God Mode on and off');
+  const O = hunter(); O.items.trap = 3; const owned = mon(T, O, 'mug', 'rare'); O.monsters.push({ ...owned, id: 'm1' });
+  const OB = T.newBattle(O, mon(T, O, 'mug', 'rare')); const orr = T.attemptCapture(OB, O, () => 0);
+  ok(OB.god && orr.owned && !orr.used && O.items.trap === 3, 'the one-per-slot rule still refuses an owned slot (no trap used)');
 }
+
+// 5. the end of the battle never saves less HP, rewards are normal, max HP and monster stats untouched
 {
-  const { S, B } = godBattle('book', 'rare'); const used = [];
-  B.hero.hp = 3; // potions only work when hurt
-  for (const id of ['potion', 'greater', 'strength', 'defense', 'antidote', 'enhancer']) { if (id === 'greater') B.hero.hp = 3; const r = T.useItem(B, S, id); if (r.ok && r.ev[0].t === 'act') used.push(id); }
-  ok(used.length === 6 && Object.values(S.items).every(n => !n), `items work with an empty bag and are not used up: ${used.join(', ')}`);
-  ok(B.hero.status.atkup && B.hero.status.defup && B.hero.status.immune && B.enhancer > 0, 'item effects still apply (ATK↑, DEF↑, immunity, capture amplifier)');
-  const sm = T.useItem(B, S, 'smoke'); ok(sm.ok && B.over && B.result === 'fled', 'Smoke Bomb still ends the fight normally');
+  const S = hunter(), maxHp = T.hunterStats(S).maxHp, m = mon(T, S, 'book', 'rare'), stats = snap(m.stats);
+  const B = T.newBattle(S, m); B.enemy.atk *= 20; for (let i = 0; i < 10; i++) { T.enemyTurn(B); T.heroTurnStart(B); }
+  B.hero.hp = 1; // even if something lowered it
+  T.attemptFlee(B, S, () => 0); T.finishBattle(S, B, rng);
+  ok(B.result === 'fled' && S.hp === 50, `fled after 10 strong enemy turns: HP saved ${S.hp} (never lower than the 50 at the start)`);
+  ok(T.hunterStats(S).maxHp === maxHp && snap(m.stats) === stats, 'maximum HP and the monster\'s stats are unchanged');
+  const win = god => { seed = 31; const S = hunter(T, god); S.hp = 999; const m = mon(T, S, 'book', 'epic'); const B = T.newBattle(S, m); B.enemy.hp = 1; T.heroStrike(B, S, false, () => 0.5); const sum = T.finishBattle(S, B, rng); return snap([sum.result, sum.rewards, S.xp, S.coins, S.mats, S.items]); };
+  ok(win(true) === win(false), 'victory rewards (XP, coins, materials, drops) are exactly the same with God Mode on');
 }
+
+// 6. switched off again: normal damage resumes in the next battle
 {
-  const { S, B } = godBattle('sock', 'common'); let fled = false; for (let i = 0; i < 40 && !B.over; i++) { T.attemptFlee(B, S); fled = B.result === 'fled'; }
-  ok(fled, 'fleeing still works');
-  const g = godBattle('mug', 'common'); for (let i = 0; i < 60 && !g.B.over; i++) T.heroStrike(g.B, g.S, i % 3 === 0);
-  ok(g.B.over && g.B.result === 'victory', 'the monster can still be defeated: the enemy is not invincible');
-}
-// 4. a test battle with God Mode OFF behaves exactly like before (no trap: no capture, energy needed, can lose)
-{
-  const S = state(), m = testMon(S, 'apple', 'legendary'), B = T.newBattle(S, m); B.hero.energy = 0;
-  const cap = T.attemptCapture(B, S), it = T.useItem(B, S, 'strength'); T.heroStrike(B, S, true);
-  ok(!cap.used && !it.ok && B.hero.energy === 0 && !T.godOn(B), 'test battle, God Mode off: empty bag blocks traps/items, specials still cost energy');
-  const run = test => { seed = 5; const S = state(); S.hp = 40; S.items = { trap: 3 }; const mm = T.createMonster(S, { obj: 'book', rarity: 'epic' }); if (test) mm.test = true; const BB = T.newBattle(S, mm), out = [];
-    for (let t = 0; t < 30 && !BB.over; t++) { out.push(T.heroTurnStart(BB).ev); if (BB.over) break; out.push(t % 6 === 2 ? T.attemptCapture(BB, S).ev : T.heroStrike(BB, S, false)); if (!BB.over) out.push(T.enemyTurn(BB)); }
-    return JSON.stringify([out, BB.result, S.items]); };
-  ok(run(true) === run(false), 'test battle with God Mode off plays exactly like a normal battle (same events, result, items)');
+  const S = hunter(); ok(T.newBattle(S, mon(T, S)).god, 'on');
+  S.settings.devGodMode = false; const B = T.newBattle(S, mon(T, S)); B.enemy.atk *= 20;
+  let lost = false; for (let i = 0; i < 30 && !B.over; i++) { const h = B.hero.hp; T.enemyTurn(B); if (B.hero.hp < h) lost = true; }
+  ok(!B.god && !T.godOn(B) && lost, 'off: the next battle takes damage normally');
 }
 
 console.log(bad ? `\n${bad} PROBLEM(S)` : '\nALL GOD MODE CHECKS PASSED');
