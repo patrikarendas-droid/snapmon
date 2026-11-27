@@ -553,10 +553,15 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     reload, one-per-slot ignores level, release build refuses / ignores), e2e-devtools 2b (412/320 px).
   - Next milestone prepared: `docs/milestones/NEXT-MILESTONE.md` (contents, evidence, recovery). Publication only after
     the owner phone-tests that exact build and approves it.
+  - **Build 22** (run 46000181733, commit `0681beb`, versionCode 1022, `0.6.0-dev.22+0681beb`): all three jobs green on
+    the FIRST attempt. APK SHA-256 `450721e1ad9da7ea867fb41f57b1d8dee4921436789fd6edcccd5e6d267d8000` (72,317,142 bytes),
+    certificate 73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-22` (id 15198622185), expires
+    2027-02-25. **Milestone VERIFY run 46004930826 passed** on the original artifact (publish skipped). Proposed tag
+    `android-dev-b22`. CI-green, NOT yet phone-verified; nothing published.
 
 **Next priorities (2026-11-27, latest):**
-- Owner: install the two-tweaks build over build 21 (backup code first) and phone-test it; then, if happy, approve the
-  milestone publication of THAT build in the same session ("I approve publishing build N publicly").
+- Owner: install build 22 (the two tweaks) over build 21 (backup code first) and phone-test it; then, if happy, approve the
+  milestone publication of THAT build in the same session ("I approve publishing build 22 publicly").
 
 **Previous priorities (2026-11-27):**
 - Owner: install build 21 (battle polish) as an update over build 20 (backup code first) and re-check the flash, log and
