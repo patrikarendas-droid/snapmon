@@ -14,7 +14,9 @@ const snap = x => JSON.stringify(x);
 const hunter = (TT = T, god = true) => { const S = TT.freshState(); S.level = 3; S.hp = 50; S.items = { trap: 4, potion: 2, strength: 1, antidote: 1, enhancer: 1, smoke: 1 }; S.settings.devUnlocked = true; if (god) S.settings.devGodMode = true; return S; };
 const mon = (TT, S, obj = 'apple', rarity = 'legendary') => TT.createMonster(S, { obj, rarity, rng });
 // strip what God Mode is allowed to change from a list of events: the damage taken by the hunter
-const neutral = evs => JSON.stringify(evs, (k, v) => (k === 'god' || k === 'blocked' ? undefined : v)).replace(/"dmg":\d+/g, '"dmg":_');
+// build 21: hit events also carry `lost` (HP actually taken) — like dmg it is the hunter's damage, the one thing that
+// differs with God Mode, so it is masked the same way (enemy HP is compared separately below)
+const neutral = evs => JSON.stringify(evs, (k, v) => (k === 'god' || k === 'blocked' ? undefined : v)).replace(/"(dmg|lost)":\d+/g, '"$1":_');
 
 // 1. who can turn it on
 {
