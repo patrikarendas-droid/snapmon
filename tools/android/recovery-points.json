@@ -5,6 +5,23 @@
   "drill": "1b9aa897c0bde95d00cc0770553f7b8807d63c40",
   "ownerVerified": [
     {
+      "build": 21,
+      "role": "latest owner-verified build (phone-tested, reported 2026-11-27); build 15 stays the PRIMARY recovery milestone until the next milestone is approved",
+      "commit": "9f20042d1abdfe4c6d467abc5712a6188abcb95a",
+      "branch": "ccr-6eaf78d0-vj87lh",
+      "versionCode": 1021,
+      "versionName": "0.6.0-dev.21+9f20042",
+      "run": "https://github.com/patrikarendas-droid/snapmon/actions/runs/45985217164",
+      "runAttemptThatBuiltTheApk": 1,
+      "artifact": "SnapMon-Dev-APK-0.6.0-build-21",
+      "artifactId": 15192375825,
+      "artifactZipSha256": "c7639236443790443e0fe2936c2abdc5f153adb9f499d82dcc0efe5b62c6295b",
+      "artifactExpires": "2027-02-25",
+      "apkSha256": "840d6c5eadd1de15eb8701701073f2e4d708fc1142784c7b2053546533d36c4b",
+      "apkBytes": 72316178,
+      "verified": "owner's phone test, reported 2026-11-27 (combat-log damage breakdown, energy number, battle-screen flash fix all work)"
+    },
+    {
       "build": 20,
       "role": "latest owner-verified build (phone-tested, reported 2026-11-27); build 15 stays the PRIMARY recovery milestone",
       "commit": "4349de8841342667bf5c7cdb2e42ed050578ed9f",
@@ -123,6 +140,10 @@
     {
       "ref": "4349de8841342667bf5c7cdb2e42ed050578ed9f",
       "what": "build 20, owner-verified on the phone (combat model 2, glowing variants)"
+    },
+    {
+      "ref": "9f20042d1abdfe4c6d467abc5712a6188abcb95a",
+      "what": "build 21, owner-verified on the phone (flash fix, damage breakdown, energy number)"
     }
   ]
 }

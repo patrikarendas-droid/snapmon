@@ -77,6 +77,32 @@ const ok = (c, msg) => { if (!c) { errors.push(msg); console.log('FAIL', msg); }
     ok(s1.stats.photos === 10 && Object.keys(s1.enc.disturbed).join() === 'mug' && !Object.keys(s1.enc.quiet || {}).length, `${tag}: 5 spawns of a locked object: no photo counted, the lock neither reset nor extended, no new lock`);
     ok(!net.some(u => /models|vendor/.test(u)), `${tag}: no recognition model or runtime was requested`);
 
+    // 2b. monster level (build 22): empty = Auto; a typed level is spawned exactly; invalid input is refused; the choices
+    //     stay in place for the next spawn; the row fits the screen
+    {
+      if (!(await p.$('#devObjInput'))) { await openSettings(); await p.waitForSelector('#devObjInput'); }
+      ok(await p.inputValue('#devLevel') === '' && (await p.getAttribute('#devLevel', 'placeholder')) === 'Auto', `${tag}: the Monster level field starts empty (= Auto)`);
+      for (const badL of ['0', '101', 'abc', '2.5']) {
+        await p.fill('#devObjInput', 'mug'); await p.fill('#devLevel', badL); await p.click('[data-act="devSpawn"]');
+        const t = await toastText();
+        ok(/whole number from 1 to 100/.test(t) && !(await p.$('[data-act="fight"]')), `${tag}: level "${badL}" is refused ("${t}")`);
+      }
+      await p.fill('#devObjInput', 'x_baby_bottle'); await p.selectOption('#devRarity', 'legendary'); await p.selectOption('#devVariant', 'spectral'); await p.fill('#devLevel', '42');
+      ok(await noOverflow(), `${tag}: object, rarity, variant and level controls fit the screen`);
+      if (width === 412) { await p.$eval('#devSpawnCard', e => e.scrollIntoView({ block: 'start' })); await shot('devtools-level-field'); }
+      await p.click('[data-act="devSpawn"]'); await p.waitForSelector('[data-act="fight"]');
+      const d = await p.evaluate(() => ({ m: window.__snapmon.ui.discovered, text: document.querySelector('#overlay').textContent }));
+      ok(d.m.level === 42 && d.m.rarity === 'legendary' && d.m.variant === 'spectral' && /Lv 42/.test(d.text), `${tag}: spawned exactly at level 42 (discovery shows "Lv 42")`);
+      await p.click('[data-act="ignore"]'); await p.evaluate(() => { document.querySelector('#toasts').innerHTML = ''; });
+      await openSettings(); await p.waitForSelector('#devLevel');
+      ok(await p.inputValue('#devLevel') === '42' && await p.inputValue('#devObjInput') === 'x_baby_bottle' && await p.inputValue('#devRarity') === 'legendary', `${tag}: the chosen object, rarity and level are kept for the next spawn`);
+      await p.fill('#devLevel', ''); await p.selectOption('#devRarity', 'common'); await p.selectOption('#devVariant', 'normal');
+      await p.click('[data-act="devSpawn"]'); await p.waitForSelector('[data-act="fight"]');
+      const a = await p.evaluate(() => ({ lv: window.__snapmon.ui.discovered.level, hl: window.__snapmon.S.level }));
+      ok(a.lv >= a.hl - 1 && a.lv <= a.hl, `${tag}: empty level = Auto: a Common monster at the hunter's level (Lv ${a.lv}, hunter ${a.hl})`);
+      await p.click('[data-act="ignore"]'); await p.evaluate(() => { document.querySelector('#toasts').innerHTML = ''; });
+    }
+
     // 3. ordinary battle → capture with a real trap → real collection, after reload
     await openSettings(); await p.waitForSelector('#devObjInput');
     await p.fill('#devObjInput', 'x_light_switch'); await p.selectOption('#devRarity', 'rare'); await p.selectOption('#devVariant', 'prismatic');

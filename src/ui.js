@@ -1232,7 +1232,7 @@ function developerHTML() {
    They act on the REAL save through devSpawnEncounter / devGrantItem / godModeOn in game.js, which refuse on their own
    when DEV_TOOLS is false or the tools are locked. Spawned monsters use the ordinary sighting, discovery, battle,
    capture and reward code. The chosen object/rarity/variant are remembered for this session only (repeat spawns). */
-ui.devSel = ui.devSel || { obj: '', rarity: 'common', variant: 'normal', item: 'trap', qty: '10' };
+ui.devSel = ui.devSel || { obj: '', rarity: 'common', variant: 'normal', level: '', item: 'trap', qty: '10' }; // level '' = Auto
 const devNorm = v => String(v == null ? '' : v).trim().toLowerCase();
 // the exact registry object for what was typed: a canonical id, or a display name that names exactly one object; else null
 function devResolveObj(v) {
@@ -1273,7 +1273,9 @@ function devToolsHTML() {
       <div class="small muted" id="devObjStatus" aria-live="polite">${devObjStatusHTML(d.obj)}</div>
       <div class="dev-results" id="devObjResults"></div>
       <div class="row wrap dev-row"><label class="small grow">Rarity<select id="devRarity" class="search">${RARITIES.map(r => `<option value="${r.id}"${sel(r.id, d.rarity)}>${esc(r.name)}</option>`).join('')}</select></label>
-        <label class="small grow">Variant<select id="devVariant" class="search">${[['normal', 'Normal'], ['spectral', 'Spectral'], ['mutated', 'Mutated'], ['prismatic', 'Prismatic']].map(([v, n]) => `<option value="${v}"${sel(v, d.variant)}>${n}</option>`).join('')}</select></label></div>
+        <label class="small grow">Variant<select id="devVariant" class="search">${[['normal', 'Normal'], ['spectral', 'Spectral'], ['mutated', 'Mutated'], ['prismatic', 'Prismatic']].map(([v, n]) => `<option value="${v}"${sel(v, d.variant)}>${n}</option>`).join('')}</select></label>
+        <label class="small dev-level">Monster level<input id="devLevel" class="search" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" placeholder="Auto" aria-describedby="devLevelHelp" value="${esc(d.level || '')}"></label></div>
+      <div class="small muted" id="devLevelHelp">Monster level ${DEV_LEVEL_MIN}–${DEV_LEVEL_MAX}, or empty for Auto (your hunter level + the rarity's usual bonus, as in a camera hunt).</div>
       <button class="btn ecto block" data-act="devSpawn">Spawn encounter</button></div>
     <div class="card stack dev-tool" id="devGrantCard"><b>Give items</b>
       <p class="small muted" style="margin:0">Adds to your real bag and saves at once (1–${DEV_GRANT_MAX} per tap). Prices and crafting costs are unchanged.</p>
@@ -1287,8 +1289,9 @@ function devSpawnAction() {
   const inp = $('#devObjInput'), rar = $('#devRarity'), vr = $('#devVariant'); if (!inp || !rar || !vr) return;
   const id = devResolveObj(inp.value);
   if (!id) { devObjChanged(); return toast('Choose an exact object from the list first.', 'bad'); }
-  ui.devSel = { ...ui.devSel, obj: id, rarity: rar.value, variant: vr.value };
-  const r = devSpawnEncounter(S, id, rar.value, vr.value);
+  const lvEl = $('#devLevel'), level = lvEl ? lvEl.value : '';
+  ui.devSel = { ...ui.devSel, obj: id, rarity: rar.value, variant: vr.value, level };
+  const r = devSpawnEncounter(S, id, rar.value, vr.value, RNG, level);
   if (!r.ok) return toast(r.error, 'bad');
   closeSheet(); if (Platform.camera.isOpen()) closeCamera();
   const m = r.monster, seen = recordSighting(S, m); // the ordinary sighting: encyclopedia, counters, research points
@@ -1306,11 +1309,11 @@ function devGrantAction() {
   const box = $('#exportBox'); if (box) box.value = exportSave(S);
   renderTop(); toast(`Added ${Number(q.value)} × ${devGrantable().find(x => x.id === it.value).name}. You now have ${r.total}.`);
 }
-document.addEventListener('input', ev => { if (ev.target && ev.target.id === 'devObjInput') devObjChanged(); });
+document.addEventListener('input', ev => { if (ev.target && ev.target.id === 'devObjInput') devObjChanged(); else if (ev.target && ev.target.id === 'devLevel') ui.devSel.level = ev.target.value; });
 document.addEventListener('change', ev => {
   const t = ev.target; if (!t || !t.id) return;
   if (t.id === 'devItem') { ui.devSel.item = t.value; const st = $('#devStock'); if (st) st.textContent = devStockText(t.value); }
-  else if (t.id === 'devRarity') ui.devSel.rarity = t.value; else if (t.id === 'devVariant') ui.devSel.variant = t.value;
+  else if (t.id === 'devRarity') ui.devSel.rarity = t.value; else if (t.id === 'devVariant') ui.devSel.variant = t.value; else if (t.id === 'devLevel') ui.devSel.level = t.value;
 });
 
 /* ---------- sheets ---------- */

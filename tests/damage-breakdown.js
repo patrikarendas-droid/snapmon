@@ -15,6 +15,18 @@ const seq = seed => { let s = seed >>> 0 || 1; const f = () => { s = (s * 16807)
 const neutralFam = el => G.FAMILY_IDS.find(f => G.effMult(f, el) === 1);
 const clone = B => { const c = JSON.parse(JSON.stringify({ ...B, m: null, log: null })); c.m = B.m; return c; };
 const W = ['sword', 'pistol', 'dagger', 'wand', 'hammer'];
+// crit wording (build 22): pair every hit event with the log line it produced
+const critBad = []; let critLines = 0, enemyCrits = 0, specialCrits = 0, multiCrits = 0;
+function checkCrit(B, ev, n0, ctx) {
+  const hs = ev.filter(e => e.t === 'hit'), rows = B.log.entries.slice(n0).filter(x => x.kind === 'hit');
+  hs.forEach((e, i) => { const row = rows[i]; if (!row) return; const line = G.CombatLog.text(B.log, row), dmg = e.god ? e.blocked : e.dmg;
+    if (/critical hit \+\d+|critical bonus: \+\d+ HP/.test(line)) critBad.push(`${ctx}: old HP-like crit wording: ${line}`);
+    if (!e.crit) { if (/critical/.test(line)) critBad.push(`${ctx}: crit text on a normal hit`); return; }
+    critLines++; if (e.who === 'hero') enemyCrits++; if (ctx.includes('special')) specialCrits++; if (hs.length > 1) multiCrits++;
+    const bonus = dmg - e.noCrit;
+    if (bonus > 0 ? !line.includes(`critical bonus: +${bonus} damage`) : !/critical hit \(no extra damage after rounding\)/.test(line)) critBad.push(`${ctx}: bonus ${bonus}: ${line}`);
+  });
+}
 let hits = 0, resisted = 0, weak = 0, crits = 0, overkill = 0, multi = 0, zeroDiff = 0;
 const bad = [];
 const logTexts = [];
@@ -32,7 +44,7 @@ for (let g = 0; g < 400; g++) {
     if (B.over) break;
     if (!st.skip) {
       const special = B.hero.energy >= 60 && t % 2 === 0, before = clone(B), hp0 = B.enemy.hp, s0 = rng.state();
-      const ev = G.heroStrike(B, S, special, rng), s1 = rng.state(); G.CombatLog.ingest(B, ev);
+      const n0 = B.log.entries.length, ev = G.heroStrike(B, S, special, rng), s1 = rng.state(); G.CombatLog.ingest(B, ev); checkCrit(B, ev, n0, `battle ${g}${special ? ' special' : ''}`);
       const hs = ev.filter(e => e.t === 'hit');
       if (hs.length > 1) multi++;
       // reconcile lost with the real HP change
@@ -56,7 +68,7 @@ for (let g = 0; g < 400; g++) {
       }
       rng.set(s1); // the replays moved the generator: continue from where the real strike left off
     }
-    if (!B.over) { const ev = G.enemyTurn(B, rng); G.CombatLog.ingest(B, ev); for (const e of ev.filter(x => x.t === 'hit')) if (e.who === 'hero' && e.lost == null) bad.push('enemy hit without lost'); }
+    if (!B.over) { const n0 = B.log.entries.length, ev = G.enemyTurn(B, rng); G.CombatLog.ingest(B, ev); checkCrit(B, ev, n0, `battle ${g} enemy`); for (const e of ev.filter(x => x.t === 'hit')) if (e.who === 'hero' && e.lost == null) bad.push('enemy hit without lost'); }
   }
   for (const x of (B.log ? B.log.entries : [])) if (x.kind === 'hit') logTexts.push(G.CombatLog.text(B.log, x));
 }
@@ -70,6 +82,17 @@ ok(resisted > 50 && weak > 50 && crits > 20 && overkill > 5, `covered: ${resiste
   ok(res.length > 20 && wk.length > 20 && recon, `log lines show the exact amount and reconcile, e.g. "${(res[0] || '').replace(/\s+/g, ' ').slice(0, 90)}"`);
   ok(!logTexts.some(x => /resisted −0|effective \+0/.test(x)), 'no "−0"/"+0" amount is ever printed (a zero difference says "no HP difference after rounding")');
   ok(logTexts.some(x => /hit for \d+, only \d+ HP left to take/.test(x)), 'overkill: calculated damage and HP actually lost are both shown');
+}
+
+ok(!critBad.length && critLines > 100 && enemyCrits > 10 && specialCrits > 5 && multiCrits > 10, `crit wording: ${critLines} critical hits (${enemyCrits} by monsters, ${specialCrits} specials, ${multiCrits} in multi-hits) read "critical bonus: +N damage" with N = the engine's exact extra damage${critBad.length ? ' — ' + critBad.slice(0, 3).join(' | ') : ''}`);
+// a critical hit that adds no whole point of damage (both round to the minimum of 1): no invented bonus
+{
+  const S = G.freshState(); S.level = 1; S.equipped = 'sword'; S.weapons = { sword: 0 };
+  const m = G.createMonster(S, { obj: 'mug', rarity: 'common', word: 'mug', photo: null, first: false, rng: seq(5) });
+  const B = G.newBattle(S, m); B.enemy.def = 1e6; B.hero.crit = 1; B.enemy.spd = 0; G.CombatLog.create(B, { god: false });
+  const ev = G.heroStrike(B, S, false, seq(9)); G.CombatLog.ingest(B, ev);
+  const h = ev.find(e => e.t === 'hit'), line = G.CombatLog.text(B.log, B.log.entries.find(x => x.kind === 'hit'));
+  ok(h && h.crit && h.dmg === 1 && h.noCrit === 1 && /critical hit \(no extra damage after rounding\)/.test(line) && !/bonus/.test(line), `zero-bonus critical: "${line.trim()}"`);
 }
 
 // a resisted hit whose whole-HP difference is zero (both round to the minimum of 1): no invented amount
@@ -90,7 +113,7 @@ ok(resisted > 50 && weak > 50 && crits > 20 && overkill > 5, `covered: ${resiste
   const m = G.createMonster(S, { obj: 'teddy', rarity: 'epic', variant: 'mutated', word: 'teddy', photo: null, first: false, rng });
   const B = G.newBattle(S, m); G.CombatLog.create(B, { god: G.godOn(B) });
   const lines = [];
-  for (let t = 0; t < 25 && !B.over; t++) { const st = G.heroTurnStart(B); G.CombatLog.ingest(B, st.ev); if (B.over) break; if (!st.skip) G.CombatLog.ingest(B, G.heroStrike(B, S, false, rng)); if (!B.over) { const ev = G.enemyTurn(B, rng); G.CombatLog.ingest(B, ev); } }
+  for (let t = 0; t < 25 && !B.over; t++) { const st = G.heroTurnStart(B); G.CombatLog.ingest(B, st.ev); if (B.over) break; if (!st.skip) G.CombatLog.ingest(B, G.heroStrike(B, S, false, rng)); if (!B.over) { const n0 = B.log.entries.length, ev = G.enemyTurn(B, rng); G.CombatLog.ingest(B, ev); checkCrit(B, ev, n0, 'god enemy'); } }
   for (const x of B.log.entries) if (x.who === 'hero' && (x.kind === 'hit' || x.kind === 'dot')) lines.push(G.CombatLog.text(B.log, x));
   ok(G.godOn(B) && lines.length > 3 && lines.every(l => !/resisted/.test(l)) && lines.some(l => /blocked by God Mode/.test(l)), `God Mode: ${lines.length} enemy hits/ticks on the hunter say "blocked by God Mode", never "resisted"`);
 }

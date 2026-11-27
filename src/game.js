@@ -372,13 +372,25 @@ const own = (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.c
    recognition, the encounter roll, rarity/variant rolls, the first-hunt rules and the object locks; it neither reads
    nor writes S.enc (locks, pity, recent objects) or the photo statistics, so regular hunting is unaffected. No photo:
    the generator's own neutral colouring is used. The caller records the sighting and shows the ordinary discovery. */
-function devSpawnEncounter(S, objId, rarity, variant, rng = RNG) {
+/* Monster level (build 22): 'auto' (the default; also empty/null) keeps the normal rule — the hunter's level plus the
+   rarity's bonus — exactly as a camera hunt; or a whole number DEV_LEVEL_MIN..DEV_LEVEL_MAX, used DURING generation
+   (createMonster `level`), so stats come from the generator for that level, family, rarity, variant and seed. 100 is
+   far beyond normal play (hunters reach the low teens) yet keeps every number small and finite. */
+const DEV_LEVEL_MIN = 1, DEV_LEVEL_MAX = 100;
+function devParseLevel(level) {
+  if (level == null || level === 'auto' || (typeof level === 'string' && !level.trim())) return { ok: true, level: null };
+  const n = typeof level === 'number' ? level : typeof level === 'string' && /^\s*\d{1,4}\s*$/.test(level) ? Number(level) : NaN;
+  if (!Number.isInteger(n) || n < DEV_LEVEL_MIN || n > DEV_LEVEL_MAX) return { ok: false, error: `Monster level must be a whole number from ${DEV_LEVEL_MIN} to ${DEV_LEVEL_MAX} (or empty for Auto).` };
+  return { ok: true, level: n };
+}
+function devSpawnEncounter(S, objId, rarity, variant, rng = RNG, level = 'auto') {
   if (!devToolsOn(S)) return { ok: false, error: 'Developer tools are not available.' };
   if (!own(OBJECTS, objId) || !OBJECTS[objId] || OBJECTS[objId].id !== objId) return { ok: false, error: 'Unknown object id.' };
   if (!own(RARITY, rarity)) return { ok: false, error: 'Unknown rarity.' };
   if (!own(DEV_VARIANTS, variant)) return { ok: false, error: 'Unknown variant.' };
+  const lv = devParseLevel(level); if (!lv.ok) return lv;
   const o = OBJECTS[objId];
-  const m = createMonster(S, { obj: objId, cat: o.cat, rarity, variant: DEV_VARIANTS[variant], word: o.name, photo: null, first: false, rng });
+  const m = createMonster(S, { obj: objId, cat: o.cat, rarity, variant: DEV_VARIANTS[variant], word: o.name, photo: null, first: false, rng, level: lv.level });
   return { ok: true, monster: m };
 }
 /* Give items: Snap Traps, potions and the other bag items, and the crafting materials (not coins, XP or research
@@ -556,14 +568,18 @@ function rebuildCombat(m) {
   m.cv = COMBAT_MODEL;
   return true;
 }
-function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null }) {
+// `level` (developer custom encounters only): a fixed monster level used for the stats below; honoured only in a
+// developer build (DEV_TOOLS), otherwise ignored, so a release build can never create a forced-level monster. Without
+// it every rule — and every random draw — is exactly as before.
+function createMonster(S, { obj = null, cat, rarity, variant, word, photo, first, rng = RNG, sub = null, aspect = null, conf = null, level: fixedLevel = null }) {
   if (!obj) obj = CAT_DEFAULT_OBJECT[cat] || null;
   if (obj && OBJECTS[obj]) cat = OBJECTS[obj].cat;
   const o = obj && OBJECTS[obj];
   const fam = monsterFamily(cat, word, variant, o);
   const r = RARITY[rarity];
   const lo = S.level < 3 ? 0 : r.lvl[0], hi = S.level < 3 ? Math.min(1, r.lvl[1]) : r.lvl[1];
-  let level = first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
+  const forced = DEV_TOOLS === true && Number.isInteger(fixedLevel) && fixedLevel >= DEV_LEVEL_MIN && fixedLevel <= DEV_LEVEL_MAX;
+  let level = forced ? fixedLevel : first ? 1 : Math.max(1, S.level + randInt(rng, lo, hi) - (rarity === 'common' && rng() < 0.35 ? 1 : 0));
   const seed = Math.floor(rng() * 4294967295) >>> 0;
   const ph = photo ? { hue: photo.hue, sat: photo.sat, lit: photo.lit, ...(photo.pal ? { pal: photo.pal } : {}), ...(photo.engine ? { engine: photo.engine } : {}) } : null; // engine: which recogniser identified it
   const base = { obj, cat, rarity, variant, word: cat === 'other' ? (word || '').toLowerCase().slice(0, 24) : null, seed, photo: ph, sub: sub || null, aspect: aspect ? +(+aspect).toFixed(2) : null };

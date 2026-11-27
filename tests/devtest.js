@@ -117,5 +117,55 @@ const dev = (T = G) => { const S = T.freshState(); S.stats.photos = 12; S.stats.
   ok(prices === snap(Object.values(load().ITEMS).map(i => [i.price, i.craft])), 'prices and crafting costs are unchanged');
 }
 
+// 8. monster level (build 22): Auto (default) = the normal rule; a fixed level 1–100 is used DURING generation
+{
+  const RAR = ['common', 'uncommon', 'rare', 'epic', 'legendary'], VAR = ['normal', 'spectral', 'mutated', 'prismatic'];
+  ok(G.DEV_LEVEL_MIN === 1 && G.DEV_LEVEL_MAX === 100, 'level range 1–100');
+  // Auto = exactly the previous behaviour (same random draws, same monster)
+  const seq = n => { let s = n; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; };
+  const a = G.devSpawnEncounter(dev(), 'mug', 'rare', 'spectral', seq(5)).monster, b = G.devSpawnEncounter(dev(), 'mug', 'rare', 'spectral', seq(5), 'auto').monster, c = G.devSpawnEncounter(dev(), 'mug', 'rare', 'spectral', seq(5), '').monster;
+  const strip = m => snap({ ...m, seenAt: 0 });
+  ok(strip(a) === strip(b) && strip(a) === strip(c), 'Auto (default, "auto" or empty) gives exactly the monster of the previous behaviour');
+  // fixed levels: stats are the generator's for that level (family, rarity, variant, seed) — not patched afterwards
+  const wrong = []; let n = 0;
+  for (const lv of [1, 2, 7, 25, 50, 99, 100]) for (const r of RAR) for (const v of VAR) for (const obj of ['mug', 'book', 'x_baby_bottle', 'beetle']) {
+    const S = dev(); const m = G.devSpawnEncounter(S, obj, r, v, seq(100 + n++), String(lv)).monster;
+    const want = G.monsterStats(r, m.fam, lv, m.seed, m.variant);
+    const fresh = G.createMonster(G.freshState(), { obj, rarity: r, variant: m.variant, word: obj, photo: null, first: false, rng: seq(7) });
+    if (m.level !== lv || snap(m.stats) !== snap(want) || m.fam !== G.objectFamily(obj) || m.rarity !== r || snap(m.abilities.map(x => [x.key, x.power, x.effect])) !== snap(fresh.abilities.map(x => [x.key, x.power, x.effect])) || G.collectionKey(m) !== G.collectionKey(fresh)) wrong.push(`${obj}/${r}/${v}/L${lv}`);
+    if (!Object.values(m.stats).every(x => Number.isFinite(x) && x > 0)) wrong.push(`${obj}/${r}/${v}/L${lv}: stats ${snap(m.stats)}`);
+  }
+  ok(!wrong.length, `${n} fixed-level spawns (levels 1–100 × 5 rarities × 4 variants × 4 objects): exact level, stats = generator(level, family, rarity, variant, seed), same moves and collection slot as any monster of that object${wrong.length ? ' — ' + wrong.slice(0, 4).join(', ') : ''}`);
+  const lo = G.devSpawnEncounter(dev(), 'mug', 'common', 'normal', seq(3), 1).monster, hi = G.devSpawnEncounter(dev(), 'mug', 'common', 'normal', seq(3), 100).monster;
+  ok(hi.stats.hp > lo.stats.hp * 10 && hi.stats.atk > lo.stats.atk * 10, `level scales the stats: L1 HP ${lo.stats.hp} ATK ${lo.stats.atk} → L100 HP ${hi.stats.hp} ATK ${hi.stats.atk}`);
+  // invalid levels are refused with a clear message, nothing changes
+  for (const badL of ['0', '101', '-3', '2.5', '1e2', 'abc', '12a', 0, 101, 2.5, -1, NaN, Infinity, {}, [5], true]) {
+    const S = dev(), before = snap(S), r = G.devSpawnEncounter(S, 'mug', 'rare', 'normal', rng, badL);
+    if (r.ok || !/whole number from 1 to 100/.test(r.error) || snap(S) !== before) ok(false, `level ${JSON.stringify(badL)} must be refused`);
+  }
+  ok(true, 'invalid levels (0, 101, -3, 2.5, 1e2, "abc", "12a", NaN, Infinity, objects, true) are refused with "whole number from 1 to 100"; the save is unchanged');
+  ok(G.devSpawnEncounter(dev(), 'mug', 'rare', 'normal', rng, ' 42 ').monster.level === 42, 'a typed level with spaces ("42") is accepted');
+  // real flow with a fixed level: battle → capture → save/load; the one-per-slot rule ignores the level
+  { const S = dev(); S.items.trap = 5;
+    const m = G.devSpawnEncounter(S, 'clock', 'epic', 'mutated', rng, 60).monster; G.recordSighting(S, m);
+    const B = G.newBattle(S, m); ok(B.enemy.maxHp === m.stats.hp && B.enemy.atk === m.stats.atk, 'the battle uses the level-60 stats');
+    B.enemy.hp = 1; G.attemptCapture(B, S, () => 0); G.finishBattle(S, B, rng);
+    G.saveState(S); const L = G.loadState();
+    ok(L.monsters.length === 1 && L.monsters[0].level === 60 && snap(L.monsters[0].stats) === snap(m.stats), 'captured level-60 monster persists after a reload with its level and stats');
+    const m2 = G.devSpawnEncounter(L, 'clock', 'epic', 'mutated', rng, 3).monster, B2 = G.newBattle(L, m2), c2 = G.attemptCapture(B2, L, () => 0);
+    ok(c2.owned && !c2.used, 'a level-3 copy of the same object + rarity + variant is "Already owned" (level ignored)');
+    const m3 = G.devSpawnEncounter(L, 'clock', 'epic', 'normal', rng, 3).monster, B3 = G.newBattle(L, m3); B3.enemy.hp = 1; const c3 = G.attemptCapture(B3, L, () => 0);
+    ok(!c3.owned && c3.used, 'another variant of it is still free'); }
+  // release build: forced levels are impossible, also directly through the generator
+  { const S = dev(R), before = snap(S), r = R.devSpawnEncounter(S, 'mug', 'rare', 'normal', rng, 50);
+    ok(!r.ok && snap(S) === before, 'release build: a level-50 custom encounter is refused even with devUnlocked set');
+    const RS = R.freshState(); RS.level = 4; const rm = R.createMonster(RS, { obj: 'mug', rarity: 'common', word: 'mug', photo: null, first: false, rng: seq(9), level: 90 });
+    const rn = R.createMonster(RS, { obj: 'mug', rarity: 'common', word: 'mug', photo: null, first: false, rng: seq(9) });
+    ok(rm.level !== 90 && rm.level <= 5 && strip(rm) === strip(rn), `release build: createMonster ignores a forced level (got L${rm.level}, identical to a normal monster)`); }
+  // camera hunts are unchanged: createMonster without a level draws exactly as before
+  { const S = G.freshState(); S.level = 6; const x = G.createMonster(S, { obj: 'apple', rarity: 'epic', word: 'apple', photo: null, first: false, rng: seq(42) }), y = G.createMonster(S, { obj: 'apple', rarity: 'epic', word: 'apple', photo: null, first: false, rng: seq(42), level: null });
+    ok(strip(x) === strip(y) && x.level >= 6, 'normal generation (no level) is unchanged and still follows the hunter level'); }
+}
+
 console.log(bad ? `\n${bad} PROBLEM(S)` : '\nALL DEVELOPER-TOOL CHECKS PASSED');
 process.exit(bad ? 1 : 0);

@@ -114,7 +114,8 @@ const CombatLog = (() => {
           // exact breakdown from the engine (build 21): `neutral` = this hit at ×1 effectiveness, `noCrit` = this hit
           // without its critical, both with the game's rounding; differences are whole HP and never invented
           const raw = e.god ? e.blocked : e.dmg;
-          if (e.crit) parts.push({ fx: 'crit', label: e.noCrit != null && raw - e.noCrit > 0 ? `critical hit +${raw - e.noCrit} HP` : 'critical hit' });
+          // a critical's EXTRA DAMAGE, worded so it never reads like healing (owner, build 22); no whole-point bonus → no number
+          if (e.crit) parts.push({ fx: 'crit', label: e.noCrit != null && raw - e.noCrit > 0 ? `critical bonus: +${raw - e.noCrit} damage` : 'critical hit (no extra damage after rounding)' });
           const delta = e.neutral != null ? raw - e.neutral : null;
           if (e.eff > 1) parts.push(t(delta > 0 ? ` · super effective +${delta} HP (${e.neutral} → ${raw})` : ' · super effective (no HP difference after rounding)'));
           else if (e.eff < 1) parts.push(t(delta < 0 ? ` · resisted −${-delta} HP (${e.neutral} → ${raw})` : ' · resisted (no HP difference after rounding)'));

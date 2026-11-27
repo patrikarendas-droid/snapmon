@@ -536,7 +536,29 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-21` (id 15192375825), expires 2027-02-25.
     CI-green, NOT yet phone-verified. Not archived (milestone only after the owner's approval).
 
-**Next priorities (2026-11-27):**
+- **Owner phone-tested build 21 (2026-11-27): all features work** (damage breakdown, energy number, flash fix);
+  recorded in `recovery-points.json`, RECOVERY.md and save-compat (9 older versions now).
+
+- **Two tweaks before the next milestone (2026-11-27, owner request; Android branch, nothing published).**
+  - Combat log: a critical's extra damage reads "critical bonus: +N damage" (was "critical hit +N HP", which looked like
+    healing); a critical with no whole-point bonus reads "critical hit (no extra damage after rounding)". Same numbers
+    as build 21 (engine `noCrit`). `tests/damage-breakdown.js` pairs every hit event with its log line (hunter and
+    monster crits, specials, multi-hits, God Mode) and checks the exact bonus; a forced zero-bonus crit is covered.
+  - Developer Custom encounter: **Monster level** field (empty = Auto = the previous rule: hunter level + rarity bonus;
+    or a whole number 1–100). The level goes into `createMonster({ level })` BEFORE the seed and stats are drawn, so
+    the stats are the generator's for that level/family/rarity/variant/seed; Auto and camera hunts draw exactly as
+    before (rules-trace unchanged). `createMonster` honours a fixed level only when DEV_TOOLS is true; `devSpawnEncounter`
+    still requires unlocked developer tools and validates the level ("whole number from 1 to 100"). Selection kept in
+    `ui.devSel` for repeated spawns. Tests: devtest section 8 (560 fixed-level spawns, invalid inputs, real capture +
+    reload, one-per-slot ignores level, release build refuses / ignores), e2e-devtools 2b (412/320 px).
+  - Next milestone prepared: `docs/milestones/NEXT-MILESTONE.md` (contents, evidence, recovery). Publication only after
+    the owner phone-tests that exact build and approves it.
+
+**Next priorities (2026-11-27, latest):**
+- Owner: install the two-tweaks build over build 21 (backup code first) and phone-test it; then, if happy, approve the
+  milestone publication of THAT build in the same session ("I approve publishing build N publicly").
+
+**Previous priorities (2026-11-27):**
 - Owner: install build 21 (battle polish) as an update over build 20 (backup code first) and re-check the flash, log and
   energy on the phone. Archiving a milestone only after the owner's explicit approval (build 15 stays primary).
 
