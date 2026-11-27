@@ -528,9 +528,16 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     match their recordings exactly: no damage, odds or outcome changed.
   - **Energy number:** "N/100 energy" under the hunter's energy bar (`energyText`, updated with the bars after every
     action); the bar width is now energy / MECH.energy.max (max 100, unchanged).
+  - **Build 21** (run 45985217164, commit `9f20042`, versionCode 1021, `0.6.0-dev.21+9f20042`): all three jobs green on
+    the FIRST attempt (fast suite incl. damage-breakdown and e2e-battle-polish, APK + release-configuration checks,
+    emulator incl. recovery drill from build 15's code; step 6d in the real Android WebView 113: 170 frames, 12 critical
+    hits, minimum overlay opacity 1; energy number matches). APK SHA-256
+    `840d6c5eadd1de15eb8701701073f2e4d708fc1142784c7b2053546533d36c4b` (72,316,178 bytes), same certificate
+    73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-21` (id 15192375825), expires 2027-02-25.
+    CI-green, NOT yet phone-verified. Not archived (milestone only after the owner's approval).
 
 **Next priorities (2026-11-27):**
-- Owner: install the battle-polish build as an update over build 20 (backup code first) and re-check the flash, log and
+- Owner: install build 21 (battle polish) as an update over build 20 (backup code first) and re-check the flash, log and
   energy on the phone. Archiving a milestone only after the owner's explicit approval (build 15 stays primary).
 
 **Previous priorities (2026-11-26, latest):**
