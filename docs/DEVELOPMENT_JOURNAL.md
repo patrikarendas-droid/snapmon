@@ -4,8 +4,8 @@ The durable hand-off between development sessions. A new Claude Code session doe
 conversations: this file, the other docs and the Git history are the memory. Read it first; update it after every
 meaningful change (see "How to keep this journal" at the end). Detailed specifications live in the linked docs, not here.
 
-Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11-24). Primary owner-verified APK: build 15
-(commit `1b9aa89`, archived as pre-release `android-dev-b15`). The website serves only the developer catalogue (browser game retired 2026-11-25).
+Last updated: 2026-11-27. **SnapMon is an Android game** (owner decision 2026-11-24). Primary owner-verified APK: build 22
+(commit `0681beb`, archived as pre-release `android-dev-b22`; build 15 / `android-dev-b15` = historical milestone). The website serves only the developer catalogue (browser game retired 2026-11-25).
 
 **A fresh session: read section 4 (current state + next priorities) first. Section 10 is history only.**
 
@@ -558,10 +558,15 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     certificate 73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-22` (id 15198622185), expires
     2027-02-25. **Milestone VERIFY run 46004930826 passed** on the original artifact (publish skipped). Proposed tag
     `android-dev-b22`. CI-green, NOT yet phone-verified; nothing published.
+  - **2026-11-27: owner phone-verified build 22 and approved it** ("I approve publishing build 22 publicly"). Milestone
+    PUBLISH run 46013514833 (default branch workflow, original CI artifact re-verified) → annotated tag `android-dev-b22`
+    on `0681beb` + GitHub PRE-release with `snapmon-dev-0.6.0-dev.22-0681beb.apk`. Build 22 = PRIMARY recovery
+    milestone and the emulator drill commit (`recovery-points.json`); build 15 = historical milestone, archive kept. No
+    website merge, no Pages deployment.
 
-**Next priorities (2026-11-27, latest):**
-- Owner: install build 22 (the two tweaks) over build 21 (backup code first) and phone-test it; then, if happy, approve the
-  milestone publication of THAT build in the same session ("I approve publishing build 22 publicly").
+**Next priorities (2026-11-27, after the milestone):**
+- Build 22 is the primary milestone (`android-dev-b22`). Keep a private copy of its APK + provenance outside GitHub.
+- No further releases, deployments or merges without approval.
 
 **Previous priorities (2026-11-27):**
 - Owner: install build 21 (battle polish) as an update over build 20 (backup code first) and re-check the flash, log and

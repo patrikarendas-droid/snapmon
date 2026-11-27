@@ -2,11 +2,30 @@
   "_about": "Known-good recovery points for SnapMon Dev (Android). Facts only; no secrets. Read by tests/save-compat.js (save compatibility with every listed commit) and by the APK workflow's recovery drill (an APK built from 'drill' with a HIGHER versionCode must install as an update over the current build and keep a synthetic save). Add a build here only after the OWNER has verified it on the phone. docs/RECOVERY.md explains how to use them.",
   "package": "io.github.patrikarendas.snapmon.dev",
   "certificateSha256": "73a7e01f8ca2b716889309fea6a76be76b4b233b30cd381c233b592b72ffe161",
-  "drill": "1b9aa897c0bde95d00cc0770553f7b8807d63c40",
+  "drill": "0681bebb6ad56393e2d6b6a1583e50ad980806e0",
   "ownerVerified": [
     {
+      "build": 22,
+      "role": "PRIMARY recovery milestone (owner-approved 2026-11-27)",
+      "commit": "0681bebb6ad56393e2d6b6a1583e50ad980806e0",
+      "branch": "ccr-6eaf78d0-vj87lh",
+      "versionCode": 1022,
+      "versionName": "0.6.0-dev.22+0681beb",
+      "run": "https://github.com/patrikarendas-droid/snapmon/actions/runs/46000181733",
+      "runAttemptThatBuiltTheApk": 1,
+      "artifact": "SnapMon-Dev-APK-0.6.0-build-22",
+      "artifactId": 15198622185,
+      "artifactZipSha256": "c0bc65d6d96ae5aad3e59d1c1386f3ebbbad51866f280597b0ca41c19db76df1",
+      "artifactExpires": "2027-02-25",
+      "apkFile": "snapmon-dev-0.6.0-dev.22-0681beb.apk",
+      "apkSha256": "450721e1ad9da7ea867fb41f57b1d8dee4921436789fd6edcccd5e6d267d8000",
+      "apkBytes": 72317142,
+      "milestoneTag": "android-dev-b22",
+      "verified": "owner's phone test, reported 2026-11-27 (crit wording, custom monster level, existing gameplay; progress intact); milestone verify run 46004930826"
+    },
+    {
       "build": 21,
-      "role": "latest owner-verified build (phone-tested, reported 2026-11-27); build 15 stays the PRIMARY recovery milestone until the next milestone is approved",
+      "role": "owner-verified build (phone-tested 2026-11-27)",
       "commit": "9f20042d1abdfe4c6d467abc5712a6188abcb95a",
       "branch": "ccr-6eaf78d0-vj87lh",
       "versionCode": 1021,
@@ -73,7 +92,7 @@
     },
     {
       "build": 15,
-      "role": "PRIMARY recovery milestone (owner-approved 2026-11-25)",
+      "role": "historical recovery milestone (archived as android-dev-b15; primary 2026-11-25 to 2026-11-27, superseded by build 22)",
       "commit": "1b9aa897c0bde95d00cc0770553f7b8807d63c40",
       "branch": "ccr-6eaf78d0-vj87lh",
       "versionCode": 1015,
@@ -144,6 +163,10 @@
     {
       "ref": "9f20042d1abdfe4c6d467abc5712a6188abcb95a",
       "what": "build 21, owner-verified on the phone (flash fix, damage breakdown, energy number)"
+    },
+    {
+      "ref": "0681bebb6ad56393e2d6b6a1583e50ad980806e0",
+      "what": "build 22, PRIMARY recovery milestone (android-dev-b22)"
     }
   ]
 }

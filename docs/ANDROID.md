@@ -3,8 +3,8 @@
 **SnapMon is an Android game (owner decision 2026-11-24).** Android is the only supported playable platform; the old
 browser game gets no releases and no feature parity, and Android features never need a Chrome fallback. The shared
 JavaScript in `src/` stays: the app's WebView runs it, and the developer catalogue uses part of it. Rollback, backups
-and long-term APK archives: [`docs/RECOVERY.md`](RECOVERY.md). **Primary owner-verified build: 15** (commit `1b9aa89`,
-versionCode 1015; archived as pre-release `android-dev-b15`; build 14 = historical). Build **15** (run 45405907369, commit `1b9aa89`, versionCode 1015, APK SHA-256
+and long-term APK archives: [`docs/RECOVERY.md`](RECOVERY.md). **Primary owner-verified build: 22** (commit `0681beb`,
+versionCode 1022; archived as pre-release `android-dev-b22`, 2026-11-27; build 15 = historical milestone `android-dev-b15`). Build **15** (run 45405907369, commit `1b9aa89`, versionCode 1015, APK SHA-256
 `8220a0f8…beca719`, same certificate, all jobs incl. emulator + recovery drill green on the first attempt; artifact kept
 until 2027-02-22). Its game code is identical to build 14.
 
