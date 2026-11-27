@@ -274,6 +274,10 @@ img.vfx { scale: 1.3; }
 
 /* battle */
 .battle .overlay-inner { padding-left: 0; padding-right: 0; gap: 0; overflow: hidden; }
+/* the battle covers the whole screen with its own opaque background: nothing of the Hunt screen behind it can show
+   through (it used to be the translucent, blurred overlay background); no backdrop blur needed behind an opaque layer */
+.overlay.battle { background: #0b0814; backdrop-filter: none; animation: none; } /* and no fade-in from transparent: it replaces the
+   full-screen discovery scene directly, so the Hunt screen is never exposed between the two */
 .arena { position: relative; flex: 1; min-height: 300px; overflow: hidden; background: linear-gradient(180deg, color-mix(in srgb, var(--fc) 30%, #120d22) 0%, #120d22 58%, #1a1430 58.2%, #0e0b18 100%); }
 .arena::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); pointer-events: none; }
 .plat { position: absolute; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.55), rgba(0,0,0,0)); }

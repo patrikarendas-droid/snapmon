@@ -700,12 +700,20 @@ function heroStrike(B, S, special, rng = RNG) {
     const acc = (sp && sp.sure) || W.acc >= 1 ? 1 : W.acc - Math.max(0, e.spd - h.spd) * MECH.enemy.missPerSpd + (e.status.stun ? MECH.status.stunAcc : 0);
     if (rng() > acc) { ev.push({ t: 'miss', who: 'enemy' }); continue; }
     const def = effDef(e) * (1 - (W.pierce || 0));
-    let dmg = dmgCalc(effAtk(h), pow, def, rng) * eff;
+    const raw = dmgCalc(effAtk(h), pow, def, rng); // attack, power, defence, status effects and the 0.9–1.1 roll
+    let dmg = raw * eff;
     const crit = rng() < h.crit;
     if (crit) dmg *= W.critX;
     dmg = Math.max(1, Math.round(dmg));
+    const hp0 = e.hp;
     e.hp = Math.max(0, e.hp - dmg); total += dmg;
-    ev.push({ t: 'hit', who: 'enemy', dmg, crit, eff, fx: W.fx });
+    // breakdown for the combat log (no extra random numbers; the damage itself is computed exactly as before):
+    // neutral = this very hit at ×1 effectiveness (same roll, same crit), noCrit = this hit without the critical,
+    // both rounded with the game's own rule; lost = the HP actually taken (less than dmg on an overkill)
+    const hit = { t: 'hit', who: 'enemy', dmg, crit, eff, fx: W.fx, lost: hp0 - e.hp };
+    if (eff !== 1) hit.neutral = Math.max(1, Math.round(raw * (crit ? W.critX : 1)));
+    if (crit) hit.noCrit = Math.max(1, Math.round(raw * eff));
+    ev.push(hit);
     if (!sp && W.poison && rng() < W.poison && !e.status.poison) addStatus(e, 'poison', STATUS_TURNS.poison, ev, 'enemy');
     if (!sp && W.stun && rng() < W.stun && e.hp > 0) addStatus(e, 'stun', 1, ev, 'enemy');
     if (sp && sp.effect && rng() < (sp.chance || 1) && e.hp > 0) addStatus(e, sp.effect, STATUS_TURNS[sp.effect], ev, 'enemy');
@@ -741,11 +749,13 @@ function enemyTurn(B, rng = RNG) {
   for (let i = 0; i < hits && !B.over; i++) {
     const dodge = clamp(MECH.enemy.dodgeBase + (h.spd - e.spd) * MECH.enemy.dodgePerSpd, 0, MECH.enemy.dodgeMax);
     if (rng() < dodge) { ev.push({ t: 'miss', who: 'hero' }); continue; }
-    let dmg = dmgCalc(effAtk(e), ab.power, effDef(h), rng);
+    const raw = dmgCalc(effAtk(e), ab.power, effDef(h), rng);
+    let dmg = raw;
     const crit = rng() < MECH.enemy.crit; if (crit) dmg *= MECH.enemy.critX;
     dmg = Math.max(1, Math.round(dmg));
-    if (godOn(B)) ev.push({ t: 'hit', who: 'hero', dmg: 0, crit, god: true, blocked: dmg }); // God Mode: no HP lost
-    else { h.hp = Math.max(0, h.hp - dmg); ev.push({ t: 'hit', who: 'hero', dmg, crit }); }
+    const noCrit = crit ? { noCrit: Math.max(1, Math.round(raw)) } : {}; // the same hit without the critical (log only)
+    if (godOn(B)) ev.push({ t: 'hit', who: 'hero', dmg: 0, crit, god: true, blocked: dmg, lost: 0, ...noCrit }); // God Mode: no HP lost
+    else { const hp0 = h.hp; h.hp = Math.max(0, h.hp - dmg); ev.push({ t: 'hit', who: 'hero', dmg, crit, lost: hp0 - h.hp, ...noCrit }); }
     if (ab.effect === 'drain') { const amt = Math.round(dmg * 0.5); e.hp = Math.min(e.maxHp, e.hp + amt); ev.push({ t: 'heal', who: 'enemy', amt }); }
     else if (ab.effect && rng() < (ab.chance || 1) && h.hp > 0) addStatus(h, ab.effect, STATUS_TURNS[ab.effect], ev, 'hero');
   }

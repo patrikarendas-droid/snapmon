@@ -67,7 +67,7 @@ const CombatLog = (() => {
   function create(B, opts = {}) {
     const log = { entries: [], turn: 1, hp: { hero: B.hero.hp, enemy: B.enemy.hp }, desyncs: 0, dropped: 0,
       names: { hero: B.hero.name, enemy: short(B.enemy.name) } };
-    add(log, { kind: 'start', who: 'enemy', parts: [n(log, 'enemy'), t(` (${RARITY[B.m.rarity].name}${B.m.variant ? ' ' + B.m.variant : ''}, Lv ${B.m.level}) appears! `), n(log, 'hero'), t(` faces it with ${B.hero.hp}/${B.hero.maxHp} HP.`)] });
+    add(log, { kind: 'start', who: 'enemy', parts: [n(log, 'enemy'), t(` (${RARITY[B.m.rarity].name}${B.m.variant ? ' ' + variantLabel(B.m.variant) : ''}, Lv ${B.m.level}) appears! `), n(log, 'hero'), t(` faces it with ${B.hero.hp}/${B.hero.maxHp} HP.`)] });
     if (B.enemyFirst) add(log, { kind: 'note', who: 'enemy', parts: [n(log, 'enemy'), t(' is faster and strikes first.')] });
     if (opts.god) add(log, { kind: 'note', who: 'sys', parts: [t('God Mode (developer): your HP cannot drop in this battle.')] });
     B.log = log; return log;
@@ -104,16 +104,21 @@ const CombatLog = (() => {
         }
         case 'hit': {
           hitNo++;
-          const tgt = e.who, loss = Math.min(log.hp[tgt], e.dmg);
+          const tgt = e.who, loss = e.lost != null ? e.lost : Math.min(log.hp[tgt], e.dmg); // the engine's own HP change
           log.hp[tgt] -= loss; // God Mode: the engine sends dmg 0 for the hunter
           const el = actor === 'hero' ? WEAPONS[B.weapon].el : null; // only weapons have damage elements
           const parts = [];
           const many = ev.filter(x => x.t === 'hit' || x.t === 'miss').length > 1;
           if (many) parts.push(t(`Hit ${hitNo}: `));
           parts.push(n(log, tgt), { amt: -loss, fx: el || 'hit', unit: 'HP', label: el ? FX[el].label : '' });
-          if (e.crit) parts.push({ fx: 'crit', label: 'critical hit' });
-          if (e.eff > 1) parts.push(t(' · super effective')); else if (e.eff < 1) parts.push(t(' · resisted'));
-          if (loss < e.dmg) parts.push(t(` (hit for ${e.dmg})`));
+          // exact breakdown from the engine (build 21): `neutral` = this hit at ×1 effectiveness, `noCrit` = this hit
+          // without its critical, both with the game's rounding; differences are whole HP and never invented
+          const raw = e.god ? e.blocked : e.dmg;
+          if (e.crit) parts.push({ fx: 'crit', label: e.noCrit != null && raw - e.noCrit > 0 ? `critical hit +${raw - e.noCrit} HP` : 'critical hit' });
+          const delta = e.neutral != null ? raw - e.neutral : null;
+          if (e.eff > 1) parts.push(t(delta > 0 ? ` · super effective +${delta} HP (${e.neutral} → ${raw})` : ' · super effective (no HP difference after rounding)'));
+          else if (e.eff < 1) parts.push(t(delta < 0 ? ` · resisted −${-delta} HP (${e.neutral} → ${raw})` : ' · resisted (no HP difference after rounding)'));
+          if (!e.god && loss < e.dmg) parts.push(t(` (hit for ${e.dmg}, only ${loss} HP left to take)`));
           if (e.god) parts.push(t(` (${e.blocked} blocked by God Mode)`));
           parts.push(t(hpTxt(tgt)));
           add(log, { kind: 'hit', who: tgt, by: actor, move, amount: -loss, el, crit: !!e.crit, sub: true, parts });

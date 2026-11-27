@@ -503,7 +503,37 @@ Last updated: 2026-11-26. **SnapMon is an Android game** (owner decision 2026-11
     73a7e01f…ffe161, CAMERA only; artifact `SnapMon-Dev-APK-0.6.0-build-20` (id 15133732712), expires 2027-02-24.
     CI-green, NOT yet phone-verified.
 
-**Next priorities (2026-11-26, latest):**
+- **Owner phone-tested build 20 (2026-11-27): passes; the variant glow looks right.**
+
+- **Battle polish before the next milestone (2026-11-27, owner request; Android branch, nothing published).**
+  - **Battle-screen flash (root cause reproduced):** `.overlay` has `animation: fadeIn .2s` (opacity 0 → 1). Critical
+    hits and Ultimates called `anim($('.overlay'), 'shake')`: `.shake` replaced the overlay's animation and, when the
+    class was removed 700 ms later, Chromium started `fadeIn` again on the same element → the whole battle went to
+    opacity 0 and back over ~0.2 s and the Hunt screen showed through (owner's phone video). Measured in Chromium on
+    build 20's code: overlay opacity 0 at ~1.1 s after a forced crit. Fix: the shake targets the overlay's inner content
+    (`shakeTarget()`, also for the discovery shake); `.overlay.battle` has its own opaque background, no backdrop blur
+    and no fade-in from transparent (it replaces the full-screen discovery scene directly). Tests sample the overlay's
+    opacity on every animation frame through sustained battles: `tests/e2e-battle-polish.js` (Chromium, 412/360/320 px,
+    ~1,800 frames each, min opacity 1) and emulator step 6d (real Android WebView). Remaining risk: phone-specific
+    WebView compositing cannot be proven by CI; the owner re-checks on the phone.
+  - **Combat log amounts:** hit events carry read-only fields from the engine's own calculation (no extra random
+    numbers): `lost` (HP actually taken, overkill-aware), `neutral` (the same hit at ×1 effectiveness, same roll and
+    crit, game rounding) and `noCrit` (the same hit without its critical). The log shows e.g. "−6 HP · Ballistic ·
+    resisted −2 HP (8 → 6)", "critical hit +4 HP", "super effective +3 HP (9 → 12)", "(hit for 38, only 36 HP left to
+    take)", and "resisted (no HP difference after rounding)" when the minimum-1 rule makes them equal. God Mode stays
+    "N blocked by God Mode", never "resisted". Defence and ATK/DEF statuses remain part of the base damage (not broken
+    out). The log's start line now says "Prismatic"/"Spectral" (was the raw stored id). `tests/damage-breakdown.js`
+    verifies `neutral`/`noCrit` by replaying each of ~1,360 strikes with identical random numbers against a neutral
+    target / with the crit roll failing. rules-trace and gameplay-baseline leave out only these three fields and still
+    match their recordings exactly: no damage, odds or outcome changed.
+  - **Energy number:** "N/100 energy" under the hunter's energy bar (`energyText`, updated with the bars after every
+    action); the bar width is now energy / MECH.energy.max (max 100, unchanged).
+
+**Next priorities (2026-11-27):**
+- Owner: install the battle-polish build as an update over build 20 (backup code first) and re-check the flash, log and
+  energy on the phone. Archiving a milestone only after the owner's explicit approval (build 15 stays primary).
+
+**Previous priorities (2026-11-26, latest):**
 - Owner: install build 20 (combat model 2 + glow) as an update over build 19 (backup code first; no reset needed) and run its
   phone checklist; judge the glow on the phone.
 - No further releases, deployments or merges without approval.

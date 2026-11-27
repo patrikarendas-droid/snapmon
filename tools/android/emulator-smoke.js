@@ -303,6 +303,29 @@ const READ_RICH = `want => { ${PAGE_CANON}
       const S = window.__snapmon.S; S.monsters = S.monsters.filter(m => !ids.includes(m.id)); window.__snapmon.actions.tab('hunt'); render(); }, fx.add);
   }
 
+  // 6d. battle-screen flash (build 21 fix) in the real Android WebView: a sustained battle with forced critical hits
+  //     (screen shakes) and multi-hit attacks; the battle overlay's opacity is sampled on every animation frame and
+  //     must stay 1 (build 20: the shake restarted the overlay's fade-in, opacity fell to 0 for ~0.2 s)
+  {
+    await page.evaluate(() => { document.querySelector('#overlay').innerHTML = ''; closeSheet();
+      const S = window.__snapmon.S; S.weapons = { ...S.weapons, pistol: 1 }; S.equipped = 'pistol';
+      const m = createMonster(S, { obj: 'teddy', rarity: 'legendary', variant: 'shiny', word: 'teddy' }); m.stats.hp = 5000; startBattle(m); window.__snapmon.ui.busy = false;
+      const ov = document.querySelector('#overlay .overlay'); window.__fl = { ov, min: 1, n: 0, replaced: 0, run: true };
+      (function tick() { const F = window.__fl, cur = document.querySelector('#overlay .overlay'); if (cur !== F.ov) F.replaced++; if (cur) { F.min = Math.min(F.min, +getComputedStyle(cur).opacity); F.n++; } if (F.run) requestAnimationFrame(tick); })(); });
+    for (let i = 0; i < 6; i++) {
+      await page.evaluate(() => { window.__snapmon.setRNG(() => 0.01); window.__snapmon.actions.bAttack(); });
+      await page.waitForFunction(() => !window.__snapmon.ui.busy || !window.__snapmon.ui.battle, null, { timeout: 30000 });
+      if (i === 2) shot('emulator-battle-after-crits');
+    }
+    await sleep(1000);
+    const F = await page.evaluate(() => { const F = window.__fl; F.run = false; const B = window.__snapmon.ui.battle;
+      return { min: F.min, n: F.n, replaced: F.replaced, crits: B ? B.log.entries.filter(e => e.crit).length : -1, energy: (document.querySelector('#henTxt') || {}).textContent, want: B ? `${B.hero.energy}/${MECH.energy.max} energy` : '' }; });
+    note(`battle flash check: ${F.n} frames sampled, ${F.crits} critical hits, minimum overlay opacity ${F.min}`);
+    ok(F.n > 100 && F.crits > 0 && F.min === 1 && F.replaced === 0, 'no battle-screen flash in the real WebView: overlay opacity stays 1 on every frame through critical-hit shakes');
+    ok(F.energy === F.want, `the energy number matches the engine in the real WebView (${F.energy})`);
+    await page.evaluate(() => { window.__snapmon.ui.battle = null; document.querySelector('#overlay').innerHTML = ''; window.__snapmon.ui.busy = false; window.__snapmon.actions.tab('hunt'); render(); });
+  }
+
   // 7. saves
   await page.evaluate(() => { window.__snapmon.S.coins = 4242; persist(true); return window.SNAPMON_NATIVE.storage.flush(); });
   s = await state(page);

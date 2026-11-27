@@ -97,7 +97,8 @@ let seed; const rng = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return
 {
   const h = H(); seed = 4242; T.setRNG(rng); const ids = FROZEN;
   const sample = ids.filter((_, i) => i % 9 === 0).concat(['bee', 'x_pin_cushion', 'x_energy_drink', 'padlock', 'cutlery_spoon', 'apple', 'forklift']);
-  const clean = (ev, m) => JSON.parse(JSON.stringify(ev, (k, v) => (k === 'msg' ? undefined : k === 'name' && typeof v === 'string' ? (v === 'Attack' || v === 'Flee' ? v : m.abilities.findIndex(a => a.name === v)) : v)));
+  // build 21: lost/neutral/noCrit are read-only combat-log breakdown fields (tests/damage-breakdown.js); left out here
+  const clean = (ev, m) => JSON.parse(JSON.stringify(ev, (k, v) => (k === 'msg' || k === 'lost' || k === 'neutral' || k === 'noCrit' ? undefined : k === 'name' && typeof v === 'string' ? (v === 'Attack' || v === 'Flee' ? v : m.abilities.findIndex(a => a.name === v)) : v)));
   let battles = 0;
   for (const id of sample) for (const r of ['common', 'rare', 'epic', 'legendary']) {
     const S = T.freshState(); S.level = 6; S.hp = T.hunterStats(S).maxHp; S.items = { potion: 3, greater: 1, strength: 1, defense: 1, antidote: 2, enhancer: 1, trap: 4, smoke: 1 };

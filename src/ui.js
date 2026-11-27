@@ -689,7 +689,7 @@ function showDiscovery(m, seen) {
         <button class="btn ghost block" data-act="ignore">Let it slip away</button>
       </div>
     </div></div>`;
-  if (tier >= 3) { const o = $('.overlay'); o.classList.add('shake'); }
+  if (tier >= 3) { const o = shakeTarget(); if (o) o.classList.add('shake'); }
   ui.discovered = m;
   ui.lastSightings = [{ dna: m.dna, name: m.name, rarity: m.rarity, outcome: 'sighted' }, ...ui.lastSightings].slice(0, 8);
 }
@@ -746,7 +746,8 @@ function renderBattle() {
       <div class="hp-card hero-card"><div class="nm"><span>${esc(B.hero.name)}</span><span class="lv">Lv ${S.level}</span></div>
         <div class="bar hp ok"><i id="hhp" style="width:${B.disp.hero / B.hero.maxHp * 100}%"></i></div>
         <div class="small muted num" id="hhpTxt">${B.disp.hero}/${B.hero.maxHp} HP</div>
-        <div class="bar en" title="Energy"><i id="hen" style="width:${B.hero.energy}%"></i></div>
+        <div class="bar en" title="Energy"><i id="hen" style="width:${B.hero.energy / MECH.energy.max * 100}%"></i></div>
+        <div class="small muted num" id="henTxt">${energyText(B)}</div>
         <div class="st-row" id="hst">${statusChips(B.hero)}</div></div>
     </div>
     <div class="battle-log"><span id="blog" class="grow">…</span><button class="btn small ghost cl-open" data-act="combatLog" aria-label="Open the combat log">${CL_ICON} Log</button></div>
@@ -761,6 +762,8 @@ function renderBattle() {
     </div>
   </div></div>`;
 }
+// the hunter's energy as the engine holds it (whole numbers, clamped 0..max by the engine; specials cost from it)
+const energyText = B => `${Math.round(B.hero.energy)}/${MECH.energy.max} energy`;
 function setLog(msg) { const el = $('#blog'); if (el) el.textContent = msg; }
 function refreshBattleBars() {
   const B = ui.battle; if (!B) return;
@@ -769,7 +772,8 @@ function refreshBattleBars() {
   if (h) { h.style.width = (B.disp.hero / B.hero.maxHp * 100) + '%'; h.parentElement.classList.toggle('ok', B.disp.hero > B.hero.maxHp * 0.35); }
   if (ht) ht.textContent = `${B.disp.hero}/${B.hero.maxHp} HP`;
   if (et) et.textContent = `${B.disp.enemy}/${B.enemy.maxHp}`;
-  if (en) en.style.width = B.hero.energy + '%';
+  if (en) en.style.width = (B.hero.energy / MECH.energy.max * 100) + '%';
+  const ent = $('#henTxt'); if (ent) ent.textContent = energyText(B);
   const es = $('#est'), hs = $('#hst'); if (es) es.innerHTML = statusChips(B.enemy); if (hs) hs.innerHTML = statusChips(B.hero);
 }
 function refreshActions() {
@@ -817,6 +821,11 @@ function heroImpact() {
   const p = arenaPoint('hero'), el = document.createElement('div'); el.className = 'fx impact';
   el.style.left = (p.x - 35) + 'px'; el.style.top = (p.y - 35) + 'px'; ar.appendChild(el); setTimeout(() => el.remove(), 400);
 }
+/* Screen shake target (build 21 fix): ALWAYS the overlay's inner content, never the .overlay element itself. The
+   .overlay carries its own one-off `fadeIn` (opacity 0 → 1). Adding .shake replaced that animation, and removing .shake
+   700 ms later made Chromium start `fadeIn` again: the whole battle went transparent for ~0.2 s and the Hunt screen
+   flashed through (owner's phone video, build 20; reproduced in Chromium by sampling the overlay's opacity). */
+const shakeTarget = () => document.querySelector('#overlay .overlay > .overlay-inner');
 function anim(el, cls) { if (!el) return; el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), 700); }
 const STATUS_NAME = { poison: 'Poisoned', burn: 'Burning', stun: 'Stunned', defdown: 'Defense down', atkup: 'Attack up', defup: 'Defense up', immune: 'Immune' };
 
@@ -835,7 +844,7 @@ async function play(events) {
           else await wait(350);
         } else {
           setLog(e.ability ? `${actor} uses ${e.name}!` : `${actor} attacks!`);
-          if (e.ultimate) { const o = $('.overlay'); anim(o, 'shake'); }
+          if (e.ultimate) anim(shakeTarget(), 'shake');
           anim($('#foe'), 'lunge-l'); await wait(e.ability ? 420 : 260);
         }
         break;
@@ -846,13 +855,13 @@ async function play(events) {
           B.disp.enemy = Math.max(0, B.disp.enemy - e.dmg);
           anim($('#foe img'), 'hitflash');
           floatText('enemy', (e.crit ? 'CRIT ' : '') + e.dmg, e.crit ? 'crit' : '', e.eff > 1 ? '#ffe55c' : e.eff < 1 ? '#a0a0b8' : '#fff');
-          if (e.crit) anim($('.overlay'), 'shake');
+          if (e.crit) anim(shakeTarget(), 'shake');
         } else {
           heroImpact(); SFX.hurt();
           B.disp.hero = Math.max(0, B.disp.hero - e.dmg); // God Mode: dmg 0, nothing is lost
           anim($('#hero img'), 'hitflash');
           floatText('hero', e.god ? 'BLOCKED' : (e.crit ? 'CRIT ' : '') + e.dmg, e.crit ? 'crit' : '', e.god ? '#ffcf5a' : '#ff8a9a');
-          if (e.crit) anim($('.overlay'), 'shake');
+          if (e.crit) anim(shakeTarget(), 'shake');
         }
         refreshBattleBars(); await wait(380); break;
       }

@@ -53,7 +53,11 @@ const out = trace(false), onOut = trace(true);
 G.CURATED.enabled = live.enabled; G.CURATED.movesEnabled = live.moves;
 const noNames = o => JSON.stringify(o, (k, v) => (k === 'name' ? undefined : k === 'msg' && typeof v === 'string' ? v.replace(/[^0-9.]/g, '') : v));
 if (noNames(out) !== noNames(onOut)) { console.log('FAIL: with curated text on, the battles differ beyond monster and move names'); process.exit(1); }
-const hash = crypto.createHash('sha256').update(JSON.stringify(out)).digest('hex');
+// build 21: hit events carry three READ-ONLY breakdown fields for the combat log (lost, neutral, noCrit), derived from
+// numbers the engine already computed, with no extra random numbers. They are left out here, so the recorded hash
+// still proves every roll, damage, status, reward and outcome is exactly as before.
+const INFO = new Set(['lost', 'neutral', 'noCrit']);
+const hash = crypto.createHash('sha256').update(JSON.stringify(out, (k, v) => (INFO.has(k) ? undefined : v))).digest('hex');
 if (process.argv[2] === 'record') { fs.writeFileSync(FIX, JSON.stringify({ steps: out.length, sha256: hash }, null, 1)); console.log('recorded', out.length, hash); process.exit(0); }
 const want = JSON.parse(fs.readFileSync(FIX, 'utf8'));
 if (want.sha256 === hash && want.steps === out.length) { console.log(`ok: game rules unchanged (${out.length} fixed-seed steps)`); process.exit(0); }
